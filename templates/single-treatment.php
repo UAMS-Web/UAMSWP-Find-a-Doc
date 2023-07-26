@@ -226,7 +226,7 @@ $condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : u
 	$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
 	$condition_ids = $condition_query_vars['condition_ids']; // int[]
 	$condition_count = $condition_query_vars['condition_count']; // int
-	$condition_treatment_schema = $condition_query_vars['condition_treatment_schema']; // string
+	$schema_medical_specialty = $condition_query_vars['schema_medical_specialty']; // array
 
 // Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
 $regions = isset($regions) ? $regions : array();

@@ -57,11 +57,11 @@
  * 		$treatment_section_intro // Text to use for the treatments subsection intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
  * 
  * Return:
- * 	var $condition_treatment_schema; // string
+ * 	var $schema_medical_specialty; // array
  * 	html <section />
  */
 
-global $condition_treatment_schema;
+global $schema_medical_specialty;
 
 // Check/define variables
 
@@ -385,15 +385,6 @@ if ( $condition_treatment_section_show ) {
 					<div class="row">
 						<?php
 
-						// Set the iteration variable for MedicalSpecialty schema data
-						$i = 0;
-
-						// Count conditions and treatments for MedicalSpecialty schema data
-						$schema_construct_item_count = ( $condition_section_show ? $condition_count : 0 ) + ( $treatment_section_show ? $treatment_count : 0 );
-
-						// Define the top-level MedicalSpecialty schema data attribute label
-						$condition_treatment_schema_attr = 'medicalSpecialty';
-
 						// Begin Conditions Section
 						if ( $condition_section_show ) { ?>
 							<div class="col-12<?php echo $condition_section_class ? ' ' . $condition_section_class : '' ?> list-container list-container-rows"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '"' : '' ?>>
@@ -423,15 +414,22 @@ if ( $condition_treatment_section_show ) {
 											if ( $condition_treatment_section_link_item ) {
 												$condition_url = get_the_permalink($page_id);
 												$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
+											} else {
+												$condition_url = '';
+												$condition_aria_label = '';
 											}
 
-											// Define the MedicalSpecialty schema data attribute-value pairs
-											$schema_construct_arr = ( isset($schema_construct_arr) && is_array($schema_construct_arr) ) ? $schema_construct_arr : array();
-											$schema_construct_arr[] = array(
-												'@type' => 'MedicalSpecialty',
-												'name' => $condition_title_attr,
-												'url' => ( $condition_treatment_section_link_item ? $condition_url : '' )
-											);
+											// MedicalSpecialty Schema Data
+										
+												// Check/define the main medicalSpecialty schema array
+												$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+										
+												// Add this location's details to the main medicalSpecialty schema array
+												$schema_medical_specialty = uamswp_schema_medical_specialty(
+													$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+													$condition_title_attr, // string (optional) // The name of the item.
+													$condition_url // string (optional) // URL of the item.
+												);
 
 											?>
 											<li>
@@ -447,8 +445,6 @@ if ( $condition_treatment_section_show ) {
 												?>
 											</li>
 											<?php
-
-											$i++;
 
 										} // endwhile ( $condition_cpt_query->have_posts() )
 
@@ -496,15 +492,22 @@ if ( $condition_treatment_section_show ) {
 											if ( $condition_treatment_section_link_item ) {
 												$treatment_url = get_the_permalink($page_id);
 												$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
+											} else {
+												$treatment_url = '';
+												$treatment_aria_label = '';
 											}
 
-											// Define the MedicalSpecialty schema data attribute-value pairs
-											$schema_construct_arr = ( isset($schema_construct_arr) && is_array($schema_construct_arr) ) ? $schema_construct_arr : array();
-											$schema_construct_arr[] = array(
-												'@type' => 'MedicalSpecialty',
-												'name' => $treatment_title_attr,
-												'url' => ( $condition_treatment_section_link_item ? $treatment_url : '' )
-											);
+											// MedicalSpecialty Schema Data
+										
+												// Check/define the main medicalSpecialty schema array
+												$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+										
+												// Add this location's details to the main medicalSpecialty schema array
+												$schema_medical_specialty = uamswp_schema_medical_specialty(
+													$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+													$treatment_title_attr, // string (optional) // The name of the item.
+													$treatment_url // string (optional) // URL of the item.
+												);
 
 											?>
 											<li>
@@ -520,8 +523,6 @@ if ( $condition_treatment_section_show ) {
 												?>
 											</li>
 											<?php
-
-											$i++;
 
 										} // endwhile ( $treatment_cpt_query->have_posts() )
 
@@ -548,12 +549,5 @@ if ( $condition_treatment_section_show ) {
 	</section>
 <?php 
 } // endif ( $treatment_section_show )
-
-// Construct the MedicalSpecialty schema data
-$condition_treatment_schema = uamswp_schema_construct(
-	$schema_construct_arr, // array
-	$schema_construct_item_count, // int // Number of items (curly bracket groups)
-	'MedicalSpecialty'
-);
 
 ?>

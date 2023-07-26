@@ -40,9 +40,7 @@
  * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
  * 
  * Return:
- * 	var $condition_treatment_schema; // string
- * 	var $condition_treatment_schema_i // int
- * 	var $condition_treatment_schema_count // int
+ * 	var $schema_medical_specialty // array
  * 	html <section />
  */
 
@@ -79,15 +77,6 @@
 if ( $condition_section_show ) {
 
 	// Check/define variables
-
-		// Schema data
-		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-
-		// Iteration variable for schema data
-		$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-
-		// Item count for schema data
-		$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
 
 		// Query for whether item is ontology type vs. content type
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
@@ -223,27 +212,6 @@ if ( $condition_section_show ) {
 						<ul class="list">
 							<?php
 
-							// Set the iteration variable for MedicalSpecialty schema data
-							// Reuse iteration from treatments list if it comes before this one
-							global $condition_treatment_schema_i;
-							$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-							$i = $condition_treatment_schema_i;
-
-							// Count conditions and treatments for MedicalSpecialty schema data
-							// Reuse count from treatments list if it comes before this one
-							global $condition_treatment_schema_count;
-							if ( !isset($condition_treatment_schema_count) ) {
-								global $treatment_section_show;
-								global $treatment_count;
-								$condition_treatment_schema_count = ( $condition_section_show ? $condition_count : 0 ) + ( $treatment_section_show ? $treatment_count : 0 );
-								$schema_construct_item_count = $condition_treatment_schema_count;
-							}
-
-							// Define the top-level MedicalSpecialty schema data attribute label
-							global $condition_treatment_schema_attr;
-							$condition_treatment_schema_attr = isset($condition_treatment_schema_attr) ? $condition_treatment_schema_attr : 'medicalSpecialty';
-							$schema_construct_attr = $condition_treatment_schema_attr;
-
 							if ( $condition_count > 0 ) {
 
 								while ( $condition_cpt_query->have_posts() ) {
@@ -254,23 +222,22 @@ if ( $condition_section_show ) {
 									if ( $condition_treatment_section_link_item ) {
 										$condition_url = get_the_permalink($page_id);
 										$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
+									} else {
+										$condition_url = '';
+										$condition_aria_label = '';
 									}
 
-									// Define the MedicalSpecialty schema data attribute-value pairs
-									$schema_construct_arr = array();
-									$schema_construct_arr['@type'] = 'MedicalSpecialty';
-									$schema_construct_arr['name'] = $condition_title_attr;
-									if ( $condition_treatment_section_link_item ) {
-										$schema_construct_arr['url'] = $condition_url;
-									}
-
-									// Construct the MedicalSpecialty schema data
-									global $condition_treatment_schema;
-									$condition_treatment_schema .= uamswp_schema_construct(
-										$schema_construct_arr, // array
-										$schema_construct_item_count, // int // Number of items (curly bracket groups)
-										$schema_construct_attr // string (optional) // Top-level schema attribute label
-									);
+									// MedicalSpecialty Schema Data
+								
+										// Check/define the main medicalSpecialty schema array
+										$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+								
+										// Add this location's details to the main medicalSpecialty schema array
+										$schema_medical_specialty = uamswp_schema_medical_specialty(
+											$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+											$condition_title_attr, // string (optional) // The name of the item.
+											$condition_url // string (optional) // URL of the item.
+										);
 
 									?>
 									<li>
@@ -292,8 +259,6 @@ if ( $condition_section_show ) {
 								} // endwhile ( $condition_cpt_query->have_posts() )
 
 							} // endif ( $condition_count > 0 )
-
-							$condition_treatment_schema_i = $i; // Make iteration available to treatments list MedicalSpecialty schema data if it comes later
 
 							wp_reset_postdata();
 

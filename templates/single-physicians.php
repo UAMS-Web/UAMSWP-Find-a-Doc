@@ -346,7 +346,7 @@ $condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : u
 	$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
 	$condition_ids = $condition_query_vars['condition_ids']; // int[]
 	$condition_count = $condition_query_vars['condition_count']; // int
-	$condition_treatment_schema = $condition_query_vars['condition_treatment_schema']; // string
+	$schema_medical_specialty = $condition_query_vars['schema_medical_specialty']; // array
 
 // Query for whether related treatments content section should be displayed on ontology pages/subsections
 $treatments = get_field('physician_treatments');
@@ -363,7 +363,7 @@ $treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : u
 	$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
 	$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
 	$treatment_count = $treatment_query_vars['treatment_count']; // int
-	$condition_treatment_schema = $treatment_query_vars['condition_treatment_schema']; // string
+	$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
 
 // Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
 $regions = get_field('physician_region',$post->ID);
@@ -1440,19 +1440,49 @@ while ( have_posts() ) : the_post();
 	</main>
 </div>
 <?php
+
 // Schema Data
-$schema_type = 'Physician'; // string
-$schema_name = $full_name_attr; // string
-$schema_url = $page_url; // string
-$schema_image = isset($schema_image) ? $schema_image : ''; // string
-$schema_description = isset($schema_description) ? $schema_description : ''; // string
-$schema_medical_specialty = $condition_treatment_schema; // array (optional)
-$schema_address = $location_schema; // array (optional)
-$schema_aggregate_rating = $rating_valid; // bool (optional)
-$schema_aggregate_rating_value = $avg_rating; // string (optional)
-$schema_aggregate_rating_count = $review_count; // int (optional)
-$schema_aggregate_rating_review_count = $comment_count; // int (optional)
-include( UAMS_FAD_PATH . '/templates/parts/schema.php' );
+
+	// Set the values
+
+		// Required for Google Structured Data
+		// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+			// Type: Physician
+			$schema_type = 'Physician'; // string
+
+			// Property: name
+			$schema_name = $full_name_attr; // string
+
+			// Property: address
+			$schema_address = isset($schema_address) ? $schema_address : ''; // array
+
+		// Recommended by Google Structured Data
+		// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+
+			// Property: url
+			$schema_url = $page_url; // string
+
+			// Property: aggregateRating
+			$schema_aggregate_rating = $rating_valid; // bool
+			$schema_aggregate_rating_value = $avg_rating; // string
+			$schema_aggregate_rating_count = $review_count; // int
+			$schema_aggregate_rating_review_count = $comment_count; // int
+		
+		// Additional Selected Properties
+
+			// Property: description
+			$schema_description = isset($schema_description) ? $schema_description : ''; // string
+
+			// Property: image
+			$schema_image = isset($schema_image) ? $schema_image : ''; // string
+
+			// Property: medicalSpecialty
+			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array(); // array
+
+	// Construct the schema script tag
+
+		include( UAMS_FAD_PATH . '/templates/parts/schema.php' );
 
 endwhile; // end of the loop.
 

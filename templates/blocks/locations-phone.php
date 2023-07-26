@@ -28,14 +28,10 @@
  */
 
 
-// Phone Number Schema Data
+// Telephone Schema Data
 
-	// Define the top-level schema attribute label
-	$schema_construct_attr = 'telephone';
-
-	// Define the schema data attribute-value pairs
-	$schema_construct_arr = array();
-
+	// Check/define the main telephone schema array
+	$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
 
 // Check if this is an Arkansas Children's location
 $location_ac_query = get_field('location_ac_query', $phone_output_id);
@@ -168,8 +164,14 @@ if ( $phone_output == 'location_profile' ) { ?>
 			<dd><?php echo !empty($location_phone_link) ? $location_phone_link : $location_phone; ?></dd>
 			<?php
 
-			// Add phone number to schema construction array
-			$schema_construct_arr[] = $location_phone_format_dash;
+			// Check/define the main telephone schema array
+			$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+
+			// Add this location's details to the main telephone schema array
+			$schema_telephone = uamswp_schema_telephone(
+				$schema_telephone, // array (optional) // Main telephone schema array
+				$location_phone_format_dash // string (optional) // The telephone number.
+			);
 
 		} // endif ( !empty($location_phone) )
 
@@ -181,8 +183,14 @@ if ( $phone_output == 'location_profile' ) { ?>
 				<dd><?php echo !empty($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : $location_new_appointments_phone; ?><?php echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : ''; ?></dd>
 				<?php
 
-				// Add phone number to schema construction array
-				$schema_construct_arr[] = $location_new_appointments_phone_format_dash;
+				// Check/define the main telephone schema array
+				$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+
+				// Add this location's details to the main telephone schema array
+				$schema_telephone = uamswp_schema_telephone(
+					$schema_telephone, // array (optional) // Main telephone schema array
+					$location_new_appointments_phone_format_dash // string (optional) // The telephone number.
+				);
 
 			} // endif ( !empty($location_new_appointments_phone) )
 
@@ -190,8 +198,14 @@ if ( $phone_output == 'location_profile' ) { ?>
 				<dd><?php echo !empty($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : $location_return_appointments_phone; ?><br/><span class="subtitle">Returning Patients</span></dd>
 				<?php
 
-				// Add phone number to schema construction array
-				$schema_construct_arr[] = $location_return_appointments_phone_format_dash;
+				// Check/define the main telephone schema array
+				$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+
+				// Add this location's details to the main telephone schema array
+				$schema_telephone = uamswp_schema_telephone(
+					$schema_telephone, // array (optional) // Main telephone schema array
+					$location_return_appointments_phone_format_dash // string (optional) // The telephone number.
+				);
 
 			} // endif ( !empty($location_return_appointments_phone) && $location_appointment_phone_query )
 
@@ -203,8 +217,14 @@ if ( $phone_output == 'location_profile' ) { ?>
 				<dd><?php echo !empty($location_ac_appointments_primary_link) ? $location_ac_appointments_primary_link : $location_ac_appointments_primary; ?><br/><span class="subtitle">Primary Care</span></dd>
 				<?php
 
-				// Add phone number to schema construction array
-				$schema_construct_arr[] = $location_ac_appointments_primary_format_dash;
+				// Check/define the main telephone schema array
+				$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+
+				// Add this location's details to the main telephone schema array
+				$schema_telephone = uamswp_schema_telephone(
+					$schema_telephone, // array (optional) // Main telephone schema array
+					$location_ac_appointments_primary_format_dash // string (optional) // The telephone number.
+				);
 
 			} // endif ( !empty($location_ac_appointments_primary) )
 
@@ -212,8 +232,14 @@ if ( $phone_output == 'location_profile' ) { ?>
 				<dd><?php echo !empty($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : $location_ac_appointments_specialty; ?><br/><span class="subtitle">Specialty Care</span></dd>
 				<?php
 
-				// Add phone number to schema construction array
-				$schema_construct_arr[] = $location_ac_appointments_specialty_format_dash;
+				// Check/define the main telephone schema array
+				$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+
+				// Add this location's details to the main telephone schema array
+				$schema_telephone = uamswp_schema_telephone(
+					$schema_telephone, // array (optional) // Main telephone schema array
+					$location_ac_appointments_specialty_format_dash // string (optional) // The telephone number.
+				);
 
 			} // endif ( !empty($location_ac_appointments_specialty) )
 
@@ -248,7 +274,16 @@ if ( $phone_output == 'location_profile' ) { ?>
 
 				// Add phone number to schema construction array
 				if ( isset($phone) && !empty($phone) ) {
-					$schema_construct_arr[] = $phone_format_dash;
+
+					// Check/define the main telephone schema array
+					$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+	
+					// Add this location's details to the main telephone schema array
+					$schema_telephone = uamswp_schema_telephone(
+						$schema_telephone, // array (optional) // Main telephone schema array
+						$phone_format_dash // string (optional) // The telephone number.
+					);
+
 				}
 
 			} // endwhile ( have_rows('field_location_phone_numbers') )

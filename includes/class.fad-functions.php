@@ -1994,7 +1994,7 @@ function uamswp_fad_post_title(
 		}
 
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 		// Create and return an array to be used on the templates and template parts
 
@@ -2004,7 +2004,7 @@ function uamswp_fad_post_title(
 				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
 				'condition_ids'						=> $condition_ids, // int[]
 				'condition_count'					=> $condition_count, // int
-				'condition_treatment_schema'		=> $condition_treatment_schema, // string
+				'schema_medical_specialty'			=> $schema_medical_specialty, // array
 				'jump_link_count'					=> $jump_link_count // int
 			);
 			return $condition_query_vars;
@@ -2048,7 +2048,7 @@ function uamswp_fad_post_title(
 		}
 
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 		// Create and return an array to be used on the templates and template parts
 
@@ -2058,7 +2058,7 @@ function uamswp_fad_post_title(
 				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
 				'treatment_ids'						=> $treatment_ids, // int[]
 				'treatment_count'					=> $treatment_count, // int
-				'condition_treatment_schema'		=> $condition_treatment_schema, // string
+				'schema_medical_specialty'			=> $schema_medical_specialty, // array
 				'jump_link_count'					=> $jump_link_count // int
 			);
 			return $treatment_query_vars;
@@ -7087,8 +7087,6 @@ function uamswp_fad_section_provider(
 	// $provider_descendants = '', // int[] (optional) // List of this provider item's descendant items
 	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// $provider_schema = '', // string (optional) // Schema data
-	// $provider_schema_i = 0, // int (optional) // Iteration variable for schema data
-	// $provider_schema_count = 0, // int (optional) // Item count for schema data
 	// $provider_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$provider_section_show = false, // bool (optional) // Query for whether to show the provider section (or $provider_desecendant_section_show, Query for whether to show the descendant provider section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7126,9 +7124,8 @@ function uamswp_fad_section_location(
 	// $location_section_more_link_value, // string
 	// $location_descendants = '', // int[] (optional) // List of this location item's descendant items
 	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-	// $location_schema = '', // string (optional) // Schema data
-	// $location_schema_i = 0, // int (optional) // Iteration variable for schema data
-	// $location_schema_count = 0, // int (optional) // Item count for schema data
+	// $schema_address = '', // string (optional) // Address schema data
+	// $schema_telephone = '', // string (optional) // Telephone schema data
 	$location_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$location_section_show = false, // bool (optional) // Query for whether to show the location section (or $location_desecendant_section_show, Query for whether to show the descendant location section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7167,8 +7164,6 @@ function uamswp_fad_section_expertise(
 	// $expertise_descendants = '', // int[] (optional) // List of this area of expertise item's descendant items
 	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// $expertise_schema = '', // string (optional) // Schema data
-	// $expertise_schema_i = 0, // int (optional) // Iteration variable for schema data
-	// $expertise_schema_count = 0, // int (optional) // Item count for schema data
 	// $expertise_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$expertise_section_show = false, // bool (optional) // Query for whether to show the area of expertise section (or $expertise_desecendant_section_show, Query for whether to show the descendant area of expertise section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7207,10 +7202,8 @@ function uamswp_fad_section_clinical_resource(
 	// $clinical_resource_descendants = '', // int[] (optional) // List of this clinical resource item's descendant items
 	// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
 	// $clinical_resource_schema = '', // string (optional) // Schema data
-	// $clinical_resource_schema_i = 0, // int (optional) // Iteration variable for schema data
-	// $clinical_resource_schema_count = 0, // int (optional) // Item count for schema data
 	// $clinical_resource_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
-	$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section (or $clinical_resource_desecendant_section_show, Query for whether to show the descendant clinical resource section)
+	$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section (or $clinical_resource_descendant_section_show, Query for whether to show the descendant clinical resource section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
 	// $clinical_resource_descendant_list = false, // bool (optional) // Query for whether this is a list of child location items within a location item
 	// $content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
@@ -7247,9 +7240,7 @@ function uamswp_fad_section_condition(
 	// $condition_section_more_link_value, // string
 	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
 	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-	$condition_treatment_schema = '', // string (optional) // Schema data
-	$condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
-	$condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
+	$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
 	// $condition_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$condition_section_show = false, // bool (optional) // Query for whether to show the conditions section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7274,16 +7265,12 @@ function uamswp_fad_section_condition(
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
 
-	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+	$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 	// Create and return an array to be used on the templates and template parts
 
 		$section_condition_vars = array(
-			'condition_treatment_schema'		=> $condition_treatment_schema, // string
-			'condition_treatment_schema_i'		=> $condition_treatment_schema_i, // int
-			'condition_treatment_schema_count'	=> $condition_treatment_schema_count // int
+			'schema_medical_specialty'	=> $schema_medical_specialty // array
 		);
 		return $section_condition_vars;
 
@@ -7300,9 +7287,7 @@ function uamswp_fad_section_treatment(
 	// $treatment_section_more_link_value, // string
 	// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
 	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-	$condition_treatment_schema = '', // string (optional) // Schema data
-	$condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
-	$condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
+	$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
 	// $treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section (or $treatment_desecendant_section_show, Query for whether to show the descendant treatment section)
 	$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7327,16 +7312,12 @@ function uamswp_fad_section_treatment(
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
 
-	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
-	$condition_treatment_schema_i = isset($condition_treatment_schema_i) ? $condition_treatment_schema_i : 0;
-	$condition_treatment_schema_count = isset($condition_treatment_schema_count) ? $condition_treatment_schema_count : 0;
+	$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 	// Create and return an array to be used on the templates and template parts
 
 		$section_treatment_vars = array(
-			'condition_treatment_schema'		=> $condition_treatment_schema, // string
-			'condition_treatment_schema_i'		=> $condition_treatment_schema_i, // int
-			'condition_treatment_schema_count'	=> $condition_treatment_schema_count // int
+			'schema_medical_specialty'	=> $schema_medical_specialty // array
 		);
 		return $section_treatment_vars;
 
@@ -7355,9 +7336,7 @@ function uamswp_fad_section_condition_treatment(
 	// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
 	// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
 	$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-	// $condition_treatment_schema = '', // string (optional) // Schema data
-	// $condition_treatment_schema_i = 0, // int (optional) // Iteration variable for schema data
-	// $condition_treatment_schema_count = 0, // int (optional) // Item count for schema data
+	// $schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
 	// $condition_treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 	$condition_treatment_section_show = false, // bool (optional) // Query for whether to show the combined conditions and treatments section
 	$condition_section_show = false, // bool (optional) // Query for whether to show the condition section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)
@@ -7394,166 +7373,376 @@ function uamswp_fad_section_condition_treatment(
 
 	include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
 
-	$condition_treatment_schema = isset($condition_treatment_schema) ? $condition_treatment_schema : '';
+	$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 	// Create and return an array to be used on the templates and template parts
 
 		$section_condition_treatment_vars = array(
-			'condition_treatment_schema'	=> $condition_treatment_schema // string
+			'schema_medical_specialty'	=> $schema_medical_specialty // array
 		);
 		return $section_condition_treatment_vars;
 
 }
 
-// Define a schema block
-function uamswp_schema_construct(
-	$schema_construct_arr, // array
-	$schema_construct_item_count, // int // Number of items (curly bracket groups)
-	$schema_construct_attr = '', // string (optional) // Top-level schema attribute label
-	$i = 0 // int (optional)
+// Add data to an array defining schema data for address
+function uamswp_schema_address(
+	$schema_address = '', // array (optional) // Main address schema array
+	$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+	$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
+	$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+	$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+	$postal_code = '', // string (optional) // The postal code. For example, 94043.
+	$address_country = '', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+	$telephone = '' // string (optional) // The telephone number.
 ) {
 
-	/* 
-	 * Before the while loop...
+	/* Example use:
 	 * 
-	 * 	Define '$i = 0;'
+	 * 	// Address Schema Data
 	 * 
+	 * 		// Check/define the main address schema array
+	 * 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 	 * 
-	 * Within the while loop...
-	 * 
-	 * 	Define $schema_construct_arr as an associative array.
-	 * 		* Key = Item Property
-	 * 		* Value = Value
-	 * 
-	 * 		Example:
-	 * 			$schema_construct_arr = array();
-	 * 			$schema_construct_arr['@type'] = 'MedicalSpecialty';
-	 * 			$schema_construct_arr['name'] = $condition_title_attr;
-	 * 			$schema_construct_arr['url'] = $condition_url;
-	 * 
-	 * 	Define the relevant schema variable using this function.
-	 * 
-	 * 		Example:
-	 * 			$condition_treatment_schema .= uamswp_schema_construct(
-	 * 				$schema_construct_arr, // array
-	 * 				$schema_construct_item_count, // int // Number of items (curly bracket groups)
-	 * 				$schema_construct_attr, // string (optional) // Top-level schema attribute label
-	 * 			);
-	 * 
-	 * 		Example:
-	 * 			$phone_schema = uamswp_schema_construct(
-	 * 				$schema_construct_arr, // array
-	 * 				$schema_construct_item_count, // int // Number of items (curly bracket groups)
-	 * 				$schema_construct_attr, // string (optional) // Top-level schema attribute label
-	 * 			);
-	 * 
-	 * 
-	 * At the end of the while loop...
-	 * 
-	 * 	Define '$i++;'.
+	 * 		// Add this location's details to the main address schema array
+	 * 		$schema_address = uamswp_schema_address(
+	 * 			$schema_address, // array (optional) // Main address schema array
+	 * 			'PostalAddress', // string (optional) // Schema type
+	 * 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+	 * 			'', // string (optional) // The post office box number for PO box addresses.
+	 * 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+	 * 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+	 * 			$location_zip, // string (optional) // The postal code. For example, 94043.
+	 * 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+	 * 			$location_phone_format_dash // string (optional) // The telephone number.
+	 * 		);
 	 */
 
 	// Check/define variables
-	$i = isset($i) ? $i : 0;
-	$chr_newline = PHP_EOL;
-	$chr_tab = chr(9);
-	$schema_construct = isset($schema_construct) ? $schema_construct : '';
-	$schema_construct_square = ( $schema_construct_item_count > 1 ) ? true : false;
-	$schema_construct_arr_list = array_is_list($schema_construct_arr);
-	if ( $schema_construct_square ) {
-		$chr_tab_base_count = 2;
-		$chr_tab_base = str_repeat( $chr_tab, $chr_tab_base_count );
-	} else {
-		$chr_tab_base_count = 1;
-		$chr_tab_base = str_repeat( $chr_tab, $chr_tab_base_count );
-	}
-	$schema_construct_square_open = '[';
-	$schema_construct_square_close = ']';
-	$schema_construct_curly_open = '{';
-	$schema_construct_curly_close = '}';
+		
+		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+		$street_address = isset($street_address) ? $street_address : '';
+		$post_office_box_number = isset($post_office_box_number) ? $post_office_box_number : '';
+		$address_locality = isset($address_locality) ? $address_locality : '';
+		$address_region = isset($address_region) ? $address_region : '';
+		$postal_code = isset($postal_code) ? $postal_code : '';
+		$address_country = ( isset($address_country) && !empty($address_country) ) ? $address_country : 'USA';
+		$telephone = isset($telephone) ? $telephone : '';
 
-	// Create the return variable
-	if ( $i > 0 ) {
+	// Create an array for this item
 
-		// If this is not the first iteration...
+		$schema = array();
 
-		// Add a comma
-		$schema_construct .= ',';
+	// Add values to the array
 
-	} elseif ( $schema_construct_square ) {
-
-		// If this is the first iteration...
-		// and if the schema should be nested in a pair of square brackets...
-
-		// Start the construct with the relevant characters
-		$schema_construct = '"' . $schema_construct_attr . '": ' . $schema_construct_square_open;
-
-	} else {
-
-		// If this is the first iteration...
-
-		// Start an empty construct
-		$schema_construct = '"' . $schema_construct_attr . '": ';
-
-	}
-
-	// Count the number of attribute-value pairs
-	$schema_construct_attr_count = count($schema_construct_arr);
-
-	// Loop through the attribute-value pairs
-	$p = 0;
-	if ( $schema_construct_attr_count > 0 ) {
-
-		$schema_construct .= ( $i > 0 || $schema_construct_square ) ? $chr_newline : '';
-
-		if ( $schema_construct_arr_list ) {
-
-			// If array is a list (its keys consist of consecutive numbers from 0) ...
-
-			foreach( $schema_construct_arr as $value) {
-				$schema_construct .= ( $p > 0 ) ? $chr_newline : '';
-				$schema_construct .= $chr_tab_base . '"' . $value . '"';
-				$p++;
-				$schema_construct .= $p < $schema_construct_attr_count ? ',' : '';
-			}
-			$schema_construct .= $chr_newline . str_repeat( $chr_tab, ( $chr_tab_base_count - 1 ) ) . $schema_construct_square_close;
-
-		} else {
-
-			// If array is not a list (i.e., an associative array)...
-
-			if ( $schema_construct_item_count > 1 ) {
-				$schema_construct .= $chr_tab_base . $schema_construct_curly_open;
-			} else {
-				$schema_construct .= $schema_construct_curly_open;
-			}
-
-			foreach( $schema_construct_arr as $property => $value) {
-				if ( is_array($value) ) {
-					$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": ' . $schema_construct_square_open . 
-						$chr_newline . $chr_tab_base . str_repeat( $chr_tab, 2 ) . '"' . 
-						implode('",' . $chr_newline . $chr_tab_base . str_repeat( $chr_tab, 2 ) . '"', $value) . '"' . 
-						$chr_newline . $chr_tab_base . $chr_tab . $schema_construct_square_close . '';
-				} else {
-					$schema_construct .= $chr_newline . $chr_tab_base . $chr_tab . '"' . $property . '": "' . $value . '"';
-				}
-				$p++;
-				$schema_construct .= $p < $schema_construct_attr_count ? ',' : '';
-			}
-			$schema_construct .= $chr_newline . $chr_tab_base . $schema_construct_curly_close;
-			if (
-				$schema_construct_square
-				&&
-				( $i + 1 ) == $schema_construct_item_count
-				) {
-				$schema_construct .= $chr_newline . str_repeat( $chr_tab, ( $chr_tab_base_count - 1 ) ) . $schema_construct_square_close;
-			}
-
+		if ( $street_address ) {
+			$schema['streetAddress'] = $street_address;
+		}
+		
+		if ( $post_office_box_number ) {
+			$schema['postOfficeBoxNumber'] = $post_office_box_number;
+		}
+		
+		if ( $address_locality ) {
+			$schema['addressLocality'] = $address_locality;
+		}
+		
+		if ( $address_region ) {
+			$schema['addressRegion'] = $address_region;
+		}
+		
+		if ( $postal_code ) {
+			$schema['postalCode'] = $postal_code;
+		}
+		
+		if ( $address_country ) {
+			$schema['addressCountry'] = $address_country;
+		}
+		
+		if ( $telephone ) {
+			$schema['telephone'] = $telephone;
 		}
 
-	}
+		if ( !empty($schema) ) {
+			$schema = array('@type' => 'PostalAddress') + $schema;
+		}
 
-	return $schema_construct;
+	// Add this item's array to the main address schema array
+
+		if ( !empty($schema) ) {
+			$schema_address[] = $schema;
+		}
+
+	// Return the main address schema array
+
+		return $schema_address;
+
+}
+
+// Add data to an array defining schema data for medicalSpecialty
+function uamswp_schema_medical_specialty(
+	$schema_medical_specialty = '', // array (optional) // Main medicalSpecialty schema array
+	$name = '', // string (optional) // The name of the item.
+	$url = '', // string (optional) // URL of the item.
+	$alternate_name = '' // string (optional) // An alias for the item.
+) {
+
+	/* Example use:
+	 * 
+	 * 	// MedicalSpecialty Schema Data
+	 * 
+	 * 		// Check/define the main medicalSpecialty schema array
+	 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+	 * 
+	 * 		// Add this location's details to the main medicalSpecialty schema array
+	 * 		$schema_medical_specialty = uamswp_schema_medical_specialty(
+	 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+	 * 			$condition_title_attr, // string (optional) // The name of the item.
+	 * 			$condition_url // string (optional) // URL of the item.
+	 * 		);
+	 */
+
+	// Check/define variables
+
+		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+		$name = isset($name) ? $name : '';
+		$url = isset($url) ? $url : '';
+		$alternate_name = isset($alternate_name) ? $alternate_name : '';
+
+	// Create an array for this item
+
+		$schema = array();
+
+	// Add values to the array
+
+		if ( $name ) {
+			$schema['name'] = $name;
+		}
+		
+		if ( $url ) {
+			$schema['url'] = $url;
+		}
+		
+		if ( $alternate_name ) {
+			$schema['alternateName'] = $alternate_name;
+		}
+
+		if ( !empty($schema) ) {
+			$schema = array('@type' => 'MedicalSpecialty') + $schema;
+		}
+
+	// Add this item's array to the main address schema array
+
+		if ( !empty($schema) ) {
+			$schema_medical_specialty[] = $schema;
+		}
+
+	// Return the main address schema array
+
+		return $schema_medical_specialty;
+
+}
+
+// Add data to an array defining schema data for medicalSpecialty
+function uamswp_schema_telephone(
+	$schema_telephone = '', // array (optional) // Main telephone schema array
+	$telephone_number = '' // string (optional) // The telephone number.
+) {
+
+	/* Example use:
+	 * 
+	 * 	// Telephone Schema Data
+	 * 
+	 * 		// Check/define the main telephone schema array
+	 * 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+	 * 
+	 * 		// Add this location's details to the main telephone schema array
+	 * 		$schema_telephone = uamswp_schema_telephone(
+	 * 			$schema_telephone, // array (optional) // Main telephone schema array
+	 * 			$telephone_number // string (optional) // The telephone number.
+	 * 		);
+	 */
+
+	// Check/define variables
+
+		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+		$telephone_number = isset($telephone_number) ? $telephone_number : '';
+
+	// Add values to the main telephone schema array
+
+		if ( $telephone_number ) {
+			$schema_telephone[] = $telephone_number;
+		}
+
+	// Return the main telephone schema array
+
+		return $schema_telephone;
+
+}
+
+// Add data to an array defining schema data for OpeningHoursSpecification
+function uamswp_schema_opening_hours_specification(
+	$schema_opening_hours_specification = '', // array (optional) // Main OpeningHoursSpecification schema array
+	$day_of_week = '', // array|string (optional) // The day of the week for which these opening hours are valid.
+	$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	$closes = '', // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	$valid_from = '', // string (optional) // The date when the item becomes valid.
+	$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+) {
+
+	/* Example use:
+	 * 
+	 * 	// OpeningHoursSpecification Schema Data
+	 * 
+	 * 		// Check/define the main OpeningHoursSpecification schema array
+	 * 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
+	 * 
+	 * 		// Add this location's details to the main OpeningHoursSpecification schema array
+	 * 
+	 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
+	 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+	 * 
+	 * 			// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+	 * 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
+	 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
+	 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
+	 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+	 * 			// 	);
+	 * 
+	 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
+	 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+	 * 
+	 * 				foreach ( $schema_day_of_week as $day) {
+	 * 					$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+	 * 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
+	 * 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
+	 * 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
+	 * 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+	 * 					);
+	 * 				}
+	 */
+
+	// Check/define variables
+
+		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
+		$day_of_week = isset($day_of_week) ? $day_of_week : array();
+		$opens = isset($opens) ? $opens : '';
+		$closes = isset($closes) ? $closes : '';
+		$valid_from = isset($valid_from) ? $valid_from : '';
+		$valid_through = isset($valid_through) ? $valid_through : '';
+
+	// Create an array for this item
+
+		$schema = array();
+
+	// Add values to the array
+
+		if ( $day_of_week ) {
+			$schema['dayOfWeek'] = $day_of_week;
+		}
+		
+		if ( $opens ) {
+			$schema['opens'] = $opens;
+		}
+		
+		if ( $closes ) {
+			$schema['closes'] = $closes;
+		}
+		
+		if ( $valid_from ) {
+			$schema['validFrom'] = $valid_from;
+		}
+		
+		if ( $valid_through ) {
+			$schema['validThrough'] = $valid_through;
+		}
+
+		if ( !empty($schema) ) {
+			$schema = array('@type' => 'OpeningHoursSpecification') + $schema;
+		}
+
+	// Add this item's array to the main openingHoursSpecification schema array
+
+		if ( !empty($schema) ) {
+			$schema_opening_hours_specification[] = $schema;
+		}
+
+	// Return the main address schema array
+
+		return $schema_opening_hours_specification;
+
+}
+
+// Add data to an array defining schema data for OpeningHours
+function uamswp_schema_opening_hours(
+	$schema_opening_hours = '', // array (optional) // Main OpeningHours schema array
+	$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+	$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+) {
+
+	/* Example use:
+	 * 
+	 * 	// OpeningHours Schema Data
+	 * 
+	 * 		// Check/define the main OpeningHours schema array
+	 * 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
+	 * 
+	 * 		// Add this location's details to the main OpeningHours schema array
+	 * 
+	 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
+	 * 			// // as documented by Schema.org at https://schema.org/openingHours (https://archive.is/XDQS6)
+	 * 
+	 * 			// 	$schema_opening_hours = uamswp_schema_opening_hours(
+	 * 			// 		$schema_opening_hours, // array (optional) // Main OpeningHours schema array
+	 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+	 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
+	 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+	 * 			// 	);
+	 * 
+	 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
+	 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+	 * 
+	 * 				foreach ( $schema_day_of_week as $day) {
+	 * 					$schema_opening_hours = uamswp_schema_opening_hours(
+	 * 						$schema_opening_hours, // array (optional) // Main OpeningHours schema array
+	 * 						$day, // array|string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+	 * 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+	 * 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
+	 * 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+	 * 					);
+	 * 				}
+	 */
+
+	// Check/define variables
+
+		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
+		$day_of_week = isset($day_of_week) ? $day_of_week : '';
+		$opens = isset($opens) ? $opens : '';
+		$closes = isset($closes) ? $closes : '';
+
+	// Add values to the array
+
+		if (
+			$day_of_week
+			&&
+			$opens
+			&&
+			$closes
+		) {
+			$schema_opening_hours[] = $day_of_week . ' ' . $opens . '-' . $closes;
+		}
+
+	// Return the main address schema array
+
+		return $schema_opening_hours;
+
 }
 
 // Create array_is_list function that is available in PHP 8

@@ -295,13 +295,6 @@ if ( $location_section_show ) {
 						<div class="card-list card-list-locations">
 							<?php
 
-								if ( $location_section_schema_query ) {
-
-									// Set the iteration variable for schema
-									$i = 0;
-
-								}
-
 								if ( $location_count > 0 ) {
 									$title_list = $location_section_filter_title ? array() : '';
 									while ( $location_query->have_posts() ) {
@@ -312,36 +305,23 @@ if ( $location_section_show ) {
 											$title_list[] = get_field('location_title', $page_id);
 										}
 
-										// Schema data
+										// Address Schema Data
 										if ( $location_section_schema_query ) {
 
-											// Count locations for schema
-											$schema_construct_item_count = $location_count;
+											// Check/define the main address schema array
+											$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 
-											// Define the top-level schema attribute label
-											$schema_construct_attr = 'address';
-
-											// Define the schema data attribute-value pairs
-											$schema_address_arr = array();
-											$schema_address_arr['@type'] = 'PostalAddress';
-											$schema_address_arr['streetAddress'] = $location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' );
-											$schema_address_arr['addressLocality'] = $location_city;
-											$schema_address_arr['addressRegion'] = $location_state;
-											$schema_address_arr['postalCode'] = $location_zip;
-											$schema_address_arr['telephone'] = format_phone_dash( $location_phone );
-
-											// Define number of tabs at start of schema data block being created here
-											$chr_tab_base_count = 2;
-
-											// Construct the schema data
-											$location_schema = isset($location_schema) ? $location_schema : '';
-											$location_schema .= uamswp_schema_construct(
-												$schema_address_arr, // array
-												$schema_construct_item_count, // int // Number of items (curly bracket groups)
-												$schema_construct_attr // string (optional) // Top-level schema attribute label
+											// Add this location's details to the main address schema array
+											$schema_address = uamswp_schema_address(
+												$schema_address, // array (optional) // Main address schema array
+												$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+												'', // string (optional) // The post office box number for PO box addresses.
+												$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+												$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+												$location_zip, // string (optional) // The postal code. For example, 94043.
+												'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+												$location_phone_format_dash // string (optional) // The telephone number.
 											);
-
-											$i++;
 										}
 									} // endwhile
 									if ( $location_section_filter ) {
