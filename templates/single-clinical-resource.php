@@ -337,26 +337,28 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	$entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
 	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
 	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
-	function uamswp_fad_post_title__template() {
-		global $entry_title_text; 
-		global $entry_header_style;
-		global $entry_title_text_supertitle;
-		global $entry_title_text_subtitle;
-		global $entry_title_text_body;
-		global $entry_title_image_desktop;
-		global $entry_title_image_mobile;
 
+	$uamswp_fad_post_title_args = array(
+		'entry_title_text'				=> $entry_title_text, // Entry title text
+		'entry_header_style'			=> $entry_header_style, // Entry header style
+		'entry_title_text_supertitle'	=> $entry_title_text_supertitle, // Entry supertitle text
+		'entry_title_text_subtitle'		=> $entry_title_text_subtitle, // Entry subtitle text
+		'entry_title_text_body'			=> $entry_title_text_body, // Entry header lead paragraph text
+		'entry_title_image_desktop'		=> $entry_title_image_desktop, // Entry header background image for desktop breakpoints
+		'entry_title_image_mobile'		=> $entry_title_image_mobile // Entry header background image for mobile breakpoints
+	);
+
+	add_action( 'genesis_entry_header', function() use ($uamswp_fad_post_title_args) {
 		uamswp_fad_post_title(
-			$entry_title_text, // string // Entry title text
-			$entry_header_style, // string // Entry header style
-			$entry_title_text_supertitle, // string (optional) // Entry supertitle text
-			$entry_title_text_subtitle, // string (optional) // Entry subtitle text
-			$entry_title_text_body, // string (optional) // Entry header lead paragraph text
-			$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
-			$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+			$uamswp_fad_post_title_args['entry_title_text'], // string // Entry title text
+			$uamswp_fad_post_title_args['entry_header_style'], // string // Entry header style
+			$uamswp_fad_post_title_args['entry_title_text_supertitle'], // string (optional) // Entry supertitle text
+			$uamswp_fad_post_title_args['entry_title_text_subtitle'], // string (optional) // Entry subtitle text
+			$uamswp_fad_post_title_args['entry_title_text_body'], // string (optional) // Entry header lead paragraph text
+			$uamswp_fad_post_title_args['entry_title_image_desktop'], // int (optional) // Entry header background image for desktop breakpoints
+			$uamswp_fad_post_title_args['entry_title_image_mobile'] // int (optional) // Entry header background image for mobile breakpoints
 		);
-	}
-	add_action( 'genesis_entry_header', 'uamswp_fad_post_title__template' );
+	} );
 
 // Construct page content
 
@@ -385,32 +387,34 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$clinical_resource_section_title = $clinical_resource_fpage_title_clinical_resource; // Text to use for the section title
 		$clinical_resource_section_intro = $clinical_resource_fpage_intro_clinical_resource; // Text to use for the section intro text
 		$clinical_resource_section_more_show = false; // Query for whether to show the section that links to more items
-		function uamswp_fad_section_clinical_resource__template() {
-			global $clinical_resources;
-			global $page_titles;
-			global $clinical_resource_section_more_link_key;
-			global $clinical_resource_section_more_link_value;
-			global $clinical_resource_section_show;
-			global $ontology_type;
-			global $clinical_resource_section_title;
-			global $clinical_resource_section_intro;
-			global $clinical_resource_posts_per_page;
-			global $clinical_resource_section_more_show;
 
+		$uamswp_fad_section_clinical_resource_args = array(
+			'clinical_resources'						=> $clinical_resources, // Value of the related clinical resources input
+			'page_titles'								=> $page_titles,
+			'clinical_resource_section_more_link_key'	=> $clinical_resource_section_more_link_key,
+			'clinical_resource_section_more_link_value'	=> $clinical_resource_section_more_link_value,
+			'clinical_resource_section_show'			=> $clinical_resource_section_show, // Query for whether to show the clinical resource section
+			'ontology_type'								=> $ontology_type, // Query for whether item is ontology type vs. content type
+			'clinical_resource_section_title'			=> $clinical_resource_section_title, // Text to use for the section title
+			'clinical_resource_section_intro'			=> $clinical_resource_section_intro, // Text to use for the section intro text
+			'clinical_resource_posts_per_page'			=> $clinical_resource_posts_per_page, // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
+			'clinical_resource_section_more_show'		=> $clinical_resource_section_more_show, // Query for whether to show the section that links to more items
+		);
+
+		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_clinical_resource_args) {
 			uamswp_fad_section_clinical_resource(
-				$clinical_resources, // int[] // Value of the related clinical resources input
-				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$clinical_resource_section_more_link_key, // string
-				$clinical_resource_section_more_link_value, // string
-				$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
-				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
-				$clinical_resource_section_title, // string (optional) // Text to use for the section title
-				$clinical_resource_section_intro, // string (optional) // Text to use for the section intro text
-				$clinical_resource_posts_per_page, // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
-				$clinical_resource_section_more_show, // bool (optional) // Query for whether to show the section that links to more items
+				$uamswp_fad_section_clinical_resource_args['clinical_resources'], // int[] // Value of the related clinical resources input
+				$uamswp_fad_section_clinical_resource_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_more_link_key'], // string
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_more_link_value'], // string
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_show'], // bool (optional) // Query for whether to show the clinical resource section
+				$uamswp_fad_section_clinical_resource_args['ontology_type'], // bool (optional) // Query for whether item is ontology type vs. content type
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_title'], // string (optional) // Text to use for the section title
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_intro'], // string (optional) // Text to use for the section intro text
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_posts_per_page'], // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
+				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_more_show'], // bool (optional) // Query for whether to show the section that links to more items
 			);
-		}
-		add_action( 'genesis_after_entry', 'uamswp_fad_section_clinical_resource__template', 10 );
+		}, 10 );
 
 	// Construct Combined Conditions and Treatments Section
 
