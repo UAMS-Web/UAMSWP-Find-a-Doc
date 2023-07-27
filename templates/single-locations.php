@@ -2346,6 +2346,9 @@ while ( have_posts() ) : the_post(); ?>
 			// Property: description
 			$schema_description = isset($schema_description) ? $schema_description : ''; // string
 
+			// Property: faxNumber
+			$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array(); // array
+
 			// Property: medicalSpecialty
 			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array(); // array
 

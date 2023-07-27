@@ -135,7 +135,7 @@
 			// Expected Type: Text
 			// Description: The fax number.
 
-			$schema_fax_number = isset($schema_fax_number) ? $schema_fax_number : '';
+			$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array(); // array
 
 		// Property: description
 			// 	Expected Type: Text or TextObject
@@ -770,6 +770,29 @@ if ( $schema_geo ) {
 		$schema_block['telephone'] = $schema_telephone; // Add the relevant 'telephone' value
 
 	}
+
+// Add faxNumber
+
+if ( $schema_fax_number ) {
+
+	// If the faxNumber schema array only contains one top-level item/array, flatten the faxNumber schema array
+	if ( is_array($schema_fax_number) ) {
+
+		if ( 1 == count($schema_fax_number) && is_array($schema_fax_number[0]) ) {
+
+			$schema_fax_number = array_reduce( $schema_fax_number, 'array_merge', array() );
+
+		} elseif ( 1 == count($schema_fax_number) && !is_array($schema_fax_number[0]) ) {
+
+			$schema_fax_number = $schema_fax_number[0];
+
+		}
+
+	}
+
+	$schema_block['faxNumber'] = $schema_fax_number; // Add the relevant 'faxNumber' value
+
+}
 
 // Add aggregateRating
 

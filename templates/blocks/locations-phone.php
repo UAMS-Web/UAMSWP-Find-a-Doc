@@ -250,6 +250,18 @@ if ( $phone_output == 'location_profile' ) { ?>
 			<dt>Fax Number</dt>
 			<dd><?php echo $location_fax_format_dash; ?></dd>
 		<?php
+
+			// FaxNumber Schema Data
+			
+				// Check/define the main faxNumber schema array
+				$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
+			
+				// Add this location's details to the main faxNumber schema array
+				$schema_fax_number = uamswp_schema_fax_number(
+					$schema_fax_number, // array (optional) // Main faxNumber schema array
+					$location_fax_format_dash // string (optional) // The fax number.
+				);
+
 		} // endif ( !empty($location_fax)
 
 		if ( $location_phone_numbers ) {

@@ -7558,6 +7558,43 @@ function uamswp_fad_section_condition_treatment(
 
 	}
 
+	// Add data to an array defining schema data for faxNumber
+	function uamswp_schema_fax_number(
+		$schema_fax_number = '', // array (optional) // Main faxNumber schema array
+		$fax_number = '' // string (optional) // The fax number.
+	) {
+
+		/* Example use:
+		* 
+		* 	// FaxNumber Schema Data
+		* 
+		* 		// Check/define the main faxNumber schema array
+		* 		$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
+		* 
+		* 		// Add this location's details to the main faxNumber schema array
+		* 		$schema_fax_number = uamswp_schema_fax_number(
+		* 			$schema_fax_number, // array (optional) // Main faxNumber schema array
+		* 			$location_fax_format_dash // string (optional) // The fax number.
+		* 		);
+		*/
+
+		// Check/define variables
+
+			$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
+			$fax_number = isset($fax_number) ? $fax_number : '';
+
+		// Add values to the main faxNumber schema array
+
+			if ( $fax_number ) {
+				$schema_fax_number[] = $fax_number;
+			}
+
+		// Return the main faxNumber schema array
+
+			return $schema_fax_number;
+
+	}
+
 	// Add data to an array defining schema data for telephone
 	function uamswp_schema_telephone(
 		$schema_telephone = '', // array (optional) // Main telephone schema array
