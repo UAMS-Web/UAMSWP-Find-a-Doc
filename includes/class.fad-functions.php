@@ -1281,6 +1281,10 @@ function uamswp_attr_conversion($input) {
 	if ( empty($input_attr) ) {
 		return '';
 	}
+	$input_attr = str_replace('&#8220;', '\'', $input_attr); // Replace left double quotation mark with normal space
+	$input_attr = str_replace('&#8221;', '\'', $input_attr); // Replace right double quotation mark with normal space
+	$input_attr = str_replace('&#8216;', '\'', $input_attr); // Replace left single quotation mark with normal space
+	$input_attr = str_replace('&#8217;', '\'', $input_attr); // Replace right single quotation mark with normal space
 	$input_attr = str_replace('"', '\'', $input_attr); // Replace double quotes with single quote
 	$input_attr = htmlentities($input_attr, false, 'UTF-8'); // Convert all applicable characters to HTML entities
 	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Convert non-breaking space with normal space
