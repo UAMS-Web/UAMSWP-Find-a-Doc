@@ -470,10 +470,6 @@
 					// Expected Type: Place or PostalAddress or Text or VirtualLocation
 					// Description: The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
 
-				// Property: logo
-					// Expected Type: ImageObject or URL
-					// Description: An associated logo.
-
 				// Property: makesOffer
 					// Expected Type: Offer
 					// Description: A pointer to products or services offered by the organization or person. Inverse property: offeredBy
