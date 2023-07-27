@@ -1287,7 +1287,7 @@ function uamswp_attr_conversion($input) {
 	$input_attr = str_replace('&#8217;', '\'', $input_attr); // Replace right single quotation mark with normal space
 	$input_attr = str_replace('"', '\'', $input_attr); // Replace double quotes with single quote
 	$input_attr = htmlentities($input_attr, false, 'UTF-8'); // Convert all applicable characters to HTML entities
-	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Convert non-breaking space with normal space
+	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Replace non-breaking space with normal space
 	$input_attr = html_entity_decode($input_attr); // Convert HTML entities to their corresponding characters
 	return $input_attr;
 }
