@@ -178,6 +178,7 @@
 	// Filter meta title
 	// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 	function uamswp_fad_title($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_title; // Defined in uamswp_fad_labels_clinical_resource()
 
@@ -185,6 +186,7 @@
 		$html = $meta_title;
 
 		return $html;
+
 	}
 
 // Override the theme's method of defining the meta tag values for Open Graph
@@ -195,6 +197,7 @@
 	// Filter hook function for 'seopress_social_og_type'
 	add_filter('seopress_social_og_type','uamswp_sp_social_og_type');
 	function uamswp_sp_social_og_type($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_type;
 			// music.song
@@ -321,7 +324,8 @@
 	// Filter Open Graph updated time meta (og:updated_time)
 	// Filter hook function for 'seopress_titles_og_updated_time'
 	// add_filter('seopress_titles_og_updated_time', 'uamswp_sp_titles_og_updated_time');
-	function uamswp_sp_titles_og_updated_time($html) { 
+	function uamswp_sp_titles_og_updated_time($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_updated_time;
 
@@ -332,13 +336,15 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Open Graph Author (article:author) / Publisher (article:publisher)
 		// Covered in the filter hook function for 'seopress_social_og_type'
 	// Filter hook function for 'seopress_social_og_author'
 	// add_filter('seopress_social_og_author', 'uamswp_sp_social_og_author');
-	function uamswp_sp_social_og_author($html) { 
+	function uamswp_sp_social_og_author($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_article_author; // profile array // Writers of the article.
 		global $meta_article_publisher; // profile array // Publishers of the article.
@@ -353,6 +359,7 @@
 		$html = $html_meta_article_author . $html_meta_article_publisher;
 
 		return $html;
+
 	}
 
 	// Filter locale Open Graph (og:locale)
@@ -361,7 +368,8 @@
 		// Default is en_US.
 	// Filter hook function for 'seopress_social_og_locale'
 	// add_filter('seopress_social_og_locale', 'uamswp_sp_social_og_locale');
-	function uamswp_sp_social_og_locale($html) { 
+	function uamswp_sp_social_og_locale($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_locale;
 
@@ -374,6 +382,7 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Open Graph URL (og:url)
@@ -381,6 +390,7 @@
 	// Filter hook function for 'seopress_social_og_url'
 	// add_filter('seopress_social_og_url', 'uamswp_sp_social_og_url');
 	function uamswp_sp_social_og_url($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_url;
 
@@ -390,13 +400,15 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Open Graph title (og:title)
 		// The title of your object as it should appear within the graph (e.g., "The Rock").
 	// Filter hook function for 'seopress_social_og_title'
 	// add_filter('seopress_social_og_title', 'uamswp_sp_social_og_title');
-	function uamswp_sp_social_og_title($html) { 
+	function uamswp_sp_social_og_title($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_title;
 
@@ -406,6 +418,7 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Open Graph thumbnail (og:image)
@@ -413,7 +426,8 @@
 	// Also "og:image:width" and "og:image:height"
 	// Filter hook function for 'seopress_social_og_thumb'
 	// add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb');
-	function uamswp_sp_social_og_thumb($html) { 
+	function uamswp_sp_social_og_thumb($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_image;
 		global $meta_og_image_width;
@@ -430,13 +444,15 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Open Graph sitename (og:site_name)
 		// If your object is part of a larger web site, the name which should be displayed for the overall site (e.g., "IMDb").
 	// Filter hook function for 'seopress_social_og_site_name'
 	// add_filter('seopress_social_og_site_name', 'uamswp_sp_social_og_site_name');
-	function uamswp_sp_social_og_site_name($html) { 
+	function uamswp_sp_social_og_site_name($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_site_name;
 
@@ -446,13 +462,15 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Open Graph description (og:description)
 		// A one to two sentence description of your object.
 	// Filter hook function for 'seopress_social_og_desc'
 	// add_filter('seopress_social_og_desc', 'uamswp_sp_social_og_desc');
-	function uamswp_sp_social_og_desc($html) { 
+	function uamswp_sp_social_og_desc($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_og_description;
 
@@ -462,6 +480,7 @@
 		}
 
 		return $html;
+
 	}
 
 // Override the theme's method of defining the meta tag values for Oembed
@@ -486,6 +505,7 @@
 	// Filter hook function for 'seopress_oembed_thumbnail_size'
 	// add_filter('seopress_oembed_thumbnail_size','uamswp_sp_oembed_thumbnail_size');
 	function uamswp_sp_oembed_thumbnail_size($size) {
+
 		// Bring in variables from outside of the function
 		global $meta_oembed_thumbnail_size;
 
@@ -498,12 +518,14 @@
 		}
 
 		return $size;
+
 	}
 
 	// Filter post thumbnail in Oembed
 	// Filter hook function for 'seopress_oembed_thumbnail'
 	// add_filter('seopress_oembed_thumbnail','uamswp_sp_oembed_thumbnail');
 	function uamswp_sp_oembed_thumbnail($thumbnail) {
+
 		// Bring in variables from outside of the function
 		global $meta_oembed_thumbnail;
 		global $meta_oembed_thumbnail_width;
@@ -521,6 +543,7 @@
 		}
 
 		return $thumbnail;
+
 	}
 
 // Override the theme's method of defining the Twitter Card summary (twitter:card)
@@ -530,7 +553,8 @@
 		// Used with all cards
 	// Filter hook function for 'seopress_social_twitter_card_summary'
 	add_filter('seopress_social_twitter_card_summary', 'uamswp_sp_social_twitter_card_summary');
-	function uamswp_sp_social_twitter_card_summary($html) { 
+	function uamswp_sp_social_twitter_card_summary($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_twitter_card_content;
 
@@ -544,6 +568,7 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Twitter Card site (twitter:site)
@@ -551,7 +576,8 @@
 		// Used with summary, summary_large_image, app, player cards (twitter:card)
 	// Filter hook function for 'seopress_social_twitter_card_site'
 	// add_filter('seopress_social_twitter_card_site', 'uamswp_sp_social_twitter_card_site');
-	function uamswp_sp_social_twitter_card_site($html) { 
+	function uamswp_sp_social_twitter_card_site($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_twitter_site;
 
@@ -561,6 +587,7 @@
 		}
 
 		return $html;
+
 	}
 
 	// Filter Twitter Card creator (twitter:creator)
@@ -568,7 +595,8 @@
 		// Used with summary_large_image cards (twitter:card)
 	// Filter hook function for 'seopress_social_twitter_card_creator'
 	// add_filter('seopress_social_twitter_card_creator', 'uamswp_sp_social_twitter_card_creator');
-	function uamswp_sp_social_twitter_card_creator($html) { 
+	function uamswp_sp_social_twitter_card_creator($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_twitter_creator;
 
@@ -585,16 +613,17 @@
 		// Used with summary, summary_large_image, player cards (twitter:card)
 	// Filter hook function for 'seopress_social_twitter_card_desc'
 	// add_filter('seopress_social_twitter_card_desc', 'uamswp_sp_social_twitter_card_desc');
-	function uamswp_sp_social_twitter_card_desc($html) { 
+	function uamswp_sp_social_twitter_card_desc($html) {
 		// Bring in variables from outside of the function
 		global $meta_twitter_description;
 
 		// Do stuff
 		if ( $meta_twitter_description ) {
-			$html = '<meta name="twitter:description" content="' . $meta_twitter_description . '" />'; 
+			$html = '<meta name="twitter:description" content="' . $meta_twitter_description . '" />';
 		}
 
 		return $html;
+
 	}
 
 	// Filter Twitter Card title (twitter:title)
@@ -602,16 +631,18 @@
 		// Used with summary, summary_large_image, player cards (twitter:card)
 	// Filter hook function for 'seopress_social_twitter_card_title'
 	// add_filter('seopress_social_twitter_card_title', 'uamswp_sp_social_twitter_card_title');
-	function uamswp_sp_social_twitter_card_title($html) { 
+	function uamswp_sp_social_twitter_card_title($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_twitter_title;
 
 		// Do stuff
 		if ( $meta_twitter_title ) {
-			$html = '<meta name="twitter:title" content="' . $meta_twitter_title . '" />'; 
+			$html = '<meta name="twitter:title" content="' . $meta_twitter_title . '" />';
 		}
 
 		return $html;
+
 	}
 
 	// Filter Twitter Card thumbnail (twitter:image)
@@ -626,19 +657,21 @@
 		// Used with summary, summary_large_image, player cards
 	// Filter hook function for 'seopress_social_twitter_card_thumb'
 	// add_filter('seopress_social_twitter_card_thumb', 'uamswp_sp_social_twitter_card_thumb');
-	function uamswp_sp_social_twitter_card_thumb($html) { 
+	function uamswp_sp_social_twitter_card_thumb($html) {
+
 		// Bring in variables from outside of the function
 		global $meta_twitter_image;
 		global $meta_twitter_image_alt;
 
 		// Do stuff
 		if ( $meta_twitter_image ) {
-			$html = '<meta name="twitter:image" content="' . $meta_twitter_image . '" />'; 
+			$html = '<meta name="twitter:image" content="' . $meta_twitter_image . '" />';
 
 			if ($meta_twitter_image_alt) {
-				$html .= '<meta name="twitter:image:alt" content="' . $meta_twitter_image_alt . '" />'; 
+				$html .= '<meta name="twitter:image:alt" content="' . $meta_twitter_image_alt . '" />';
 			}
 		}
 
 		return $html;
+
 	}
