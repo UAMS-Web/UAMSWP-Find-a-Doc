@@ -7386,9 +7386,9 @@ function uamswp_fad_section_condition_treatment(
 
 // Collect Values For Schema Data Properties
 
-	// Add data to an array defining schema data for address
+	// Add data to an array defining schema data for address or location
 	function uamswp_schema_address(
-		$schema_address = '', // array (optional) // Main address schema array
+		$schema_address = '', // array (optional) // Main address or location schema array
 		$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
 		$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
 		$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
@@ -7404,12 +7404,12 @@ function uamswp_fad_section_condition_treatment(
 		* 
 		* 	// Address Schema Data
 		* 
-		* 		// Check/define the main address schema array
+		* 		// Check/define the main address or location schema array
 		* 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 		* 
-		* 		// Add this location's details to the main address schema array
+		* 		// Add this location's details to the main address or location schema array
 		* 		$schema_address = uamswp_schema_address(
-		* 			$schema_address, // array (optional) // Main address schema array
+		* 			$schema_address, // array (optional) // Main address or location schema array
 		* 			'PostalAddress', // string (optional) // Schema type
 		* 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
 		* 			'', // string (optional) // The post office box number for PO box addresses.
@@ -7482,13 +7482,13 @@ function uamswp_fad_section_condition_treatment(
 				$schema = array('@type' => 'PostalAddress') + $schema;
 			}
 
-		// Add this item's array to the main address schema array
+		// Add this item's array to the main address or location schema array
 
 			if ( !empty($schema) ) {
 				$schema_address[] = $schema;
 			}
 
-		// Return the main address schema array
+		// Return the main address or location schema array
 
 			return $schema_address;
 
