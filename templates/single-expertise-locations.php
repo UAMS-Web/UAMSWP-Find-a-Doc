@@ -494,16 +494,17 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	add_action( 'genesis_entry_content', 'uamswp_fad_section_location__template', 22 );
 
 	// Display references to other archive pages
-	$text_image_overlay_id = isset($text_image_overlay_id) ? $text_image_overlay_id : '';
 	function uamswp_fad_fpage_text_image_overlay__template() {
 		global $page_id;
 		global $page_titles;
-		global $text_image_overlay_id;
+		global $current_fpage;
+		global $ontology_type;
 
 		uamswp_fad_fpage_text_image_overlay(
 			$page_id, // int
 			$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-			$text_image_overlay_id // string (optional)
+			$current_fpage, // string (optional) // Fake subpage slug
+			$ontology_type // bool (optional)
 		);
 	}
 	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay__template', 25 );
