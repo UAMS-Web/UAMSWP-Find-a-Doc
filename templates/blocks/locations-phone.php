@@ -135,7 +135,6 @@ if ( !$location_ac_query ) {
 	// IF this is not an Arkansas Children's location...
 	$location_fax = get_field('location_fax', $phone_output_id); // Get the fax number
 	$location_fax_format_dash = format_phone_dash( $location_fax );
-	echo '<p>$location_fax_format_dash = ' . $location_fax_format_dash . '</p>'; // test
 	$location_fax_link = '<a href="tel:' . $location_fax_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Clinic Fax Number">' . $location_fax_format_dash . '</a>'; // Build the anchor element for the fax number
 } else {
 	$location_fax = '';
