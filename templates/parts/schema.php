@@ -133,9 +133,6 @@
 		// Property: description
 			// 	Expected Type: Text or TextObject
 			// 	Description: A description of the item.
-			// 
-			// Google Structured Data Documentation:
-			// 	- 
 
 			$schema_description = isset($schema_description) ? $schema_description : '';
 
@@ -155,25 +152,22 @@
 			// 	Description: An associated logo.
 			// 
 			// Google Structured Data Documentation:
-			// 	- 
+			// 	- A logo that is representative of the organization.
+			// 	- The image must be 112x112px, at minimum.
+			// 	- Make sure the image looks how you intend it to look on a purely white background (for example, if the logo is mostly white or gray, it may not look how you want it to look when displayed on a white background).
+			// 	- If you use the ImageObject type, make sure that it has a valid contentUrl property or url property that follows the same guidelines as a URL type.
 
 			$schema_logo = get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png';
 
 		// Property: medicalSpecialty
 			// 	Expected Type: MedicalSpecialty
 			// 	Description: A medical specialty of the provider.
-			// 
-			// Google Structured Data Documentation:
-			// 	- 
 
 			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 		// Property: openingHours
 			// 	Expected Type: Text
 			// 	Description: The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas ',' separating each day. Day or time ranges are specified using a hyphen '-'.
-			// 
-			// Google Structured Data Documentation:
-			// 	- 
 
 			$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
 
