@@ -1463,9 +1463,12 @@ while ( have_posts() ) : the_post();
 
 			// Property: aggregateRating
 			$schema_aggregate_rating = $rating_valid; // bool
-			$schema_aggregate_rating_value = $avg_rating; // string
-			$schema_aggregate_rating_count = $review_count; // int
-			$schema_aggregate_rating_review_count = $comment_count; // int
+
+			if ( $schema_aggregate_rating ) {
+				$schema_aggregate_rating_value = $avg_rating; // string
+				$schema_aggregate_rating_count = $review_count; // int
+				$schema_aggregate_rating_review_count = $comment_count; // int
+			}
 		
 			// Property: geo
 			$schema_geo = isset($schema_geo) ? $schema_geo : '';
