@@ -7395,6 +7395,7 @@ function uamswp_fad_section_condition_treatment(
 		$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 		$postal_code = '', // string (optional) // The postal code. For example, 94043.
 		$address_country = '', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+		$name = '', // string (optional) // The name of the item.
 		$telephone = '' // string (optional) // The telephone number.
 	) {
 
@@ -7415,6 +7416,7 @@ function uamswp_fad_section_condition_treatment(
 		* 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 		* 			$location_zip, // string (optional) // The postal code. For example, 94043.
 		* 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+		* 			$location_title, // string (optional) // The name of the item.
 		* 			$location_phone_format_dash // string (optional) // The telephone number.
 		* 		);
 		*/
@@ -7428,6 +7430,7 @@ function uamswp_fad_section_condition_treatment(
 			$address_region = isset($address_region) ? $address_region : '';
 			$postal_code = isset($postal_code) ? $postal_code : '';
 			$address_country = ( isset($address_country) && !empty($address_country) ) ? $address_country : 'USA';
+			$name = isset($name) ? $name : '';
 			$telephone = isset($telephone) ? $telephone : '';
 
 		// Create an array for this item
@@ -7435,6 +7438,10 @@ function uamswp_fad_section_condition_treatment(
 			$schema = array();
 
 		// Add values to the array
+
+			if ( $name ) {
+				$schema['name'] = $name;
+			}
 
 			if ( $street_address ) {
 				$schema['streetAddress'] = $street_address;
