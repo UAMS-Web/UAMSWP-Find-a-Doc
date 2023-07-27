@@ -10,6 +10,7 @@
  * 	$schema_address // array
  * 
  * Optional vars:
+ * 	$schema_address_property // string
  * 	$schema_aggregate_rating; // bool
  * 	$schema_aggregate_rating_value; // string
  * 	$schema_aggregate_rating_count; // int
@@ -49,6 +50,7 @@
 			// 	- Include as many properties as possible. The more properties you provide, the higher quality the result is to users.
 
 			$schema_address = ( isset($schema_address) && is_array($schema_address) && !empty($schema_address) ) ? $schema_address : array();
+			$schema_address_property = isset($schema_address_property) && !empty($schema_address_property) ? $schema_address_property : 'address';
 
 	// Recommended by Google Structured Data
 	// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
@@ -656,11 +658,11 @@
 
 	}
 
-// Add address
+// Add address/location
 
 	if ( $schema_address ) {
 
-		// If the address schema array only contains one top-level item/array, flatten the address schema array
+		// If the address/location schema array only contains one top-level item/array, flatten the address/location schema array
 		if ( is_array($schema_address) ) {
 
 			if ( 1 == count($schema_address) && is_array($schema_address[0]) ) {
@@ -675,7 +677,7 @@
 
 		}
 
-		$schema_block['address'] = $schema_address; // Add the relevant 'address' value
+		$schema_block[$schema_address_property] = $schema_address; // Add the relevant 'address' or 'location' value
 
 	}
 
