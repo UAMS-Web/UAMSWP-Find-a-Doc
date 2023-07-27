@@ -431,7 +431,7 @@ while ( have_posts() ) : the_post(); ?>
 		. ( $location_suite ? $location_suite : '' );
 	$location_address_2_schema =
 		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-		. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
 		. ( $location_suite ? $location_suite : '' );
 
 	$location_address_2_deprecated = get_field('location_address_2', $post_id );
