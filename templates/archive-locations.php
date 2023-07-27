@@ -75,7 +75,7 @@ $archive_text_location_vars = isset($archive_text_location_vars) ? $archive_text
 
 // Get the page title
 $page_title = $location_archive_headline; // string
-// $page_title_attr = uamswp_attr_conversion($page_title);
+$page_title_attr = uamswp_attr_conversion($page_title);
 
 // Array for page titles and section titles
 $page_titles = array(
@@ -94,7 +94,11 @@ $page_image_id = $location_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $location_plural_name_attr; // Word or phrase to use to form base meta title
-$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+	$page_title, // string
+	$page_title_attr, // string (optional)
+	$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+);
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 

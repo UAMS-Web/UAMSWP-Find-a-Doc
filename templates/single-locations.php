@@ -394,14 +394,22 @@ add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 // Override theme's method of defining the meta page title
 $location_city = get_field('location_city', $post_id); // Get the location's city
 $location_city_attr = uamswp_attr_conversion($location_city);
-$meta_title_enhanced_addition = $location_city_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 if ( $parent_title_attr ) {
 	$meta_title_enhanced_addition = $parent_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 	$meta_title_enhanced_x2_addition = $location_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
 } else {
 	$meta_title_enhanced_addition = $location_city_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+	$meta_title_enhanced_x2_addition = ''; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
 }
-$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+	$page_title, // string
+	$page_title_attr, // string (optional)
+	'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+	'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+	$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+	'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
+	$meta_title_enhanced_x2_addition // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+);
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 

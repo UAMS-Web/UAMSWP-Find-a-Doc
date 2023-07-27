@@ -407,7 +407,18 @@ $meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inje
 $meta_title_enhanced_x2_addition = $primary_appointment_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title
 $meta_title_enhanced_x3_addition = $expertise_primary_name_attr; // Third word or phrase to inject into base meta title to form enhanced meta title
 $meta_title_enhanced_x3_order = array( $page_title_attr, $meta_title_enhanced_addition, $meta_title_enhanced_x3_addition, $meta_title_enhanced_x2_addition ); // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values
-$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(); // Defines universal variables related to the setting the meta title
+$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+	$page_title, // string
+	$page_title_attr, // string (optional)
+	'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+	'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+	$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+	'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
+	$meta_title_enhanced_x2_addition, // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+	'', // array (optional) // Pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
+	$meta_title_enhanced_x3_addition, // string (optional) // Third word or phrase to inject into base meta title to form enhanced meta title level 3
+	$meta_title_enhanced_x3_order // array (optional) // Pre-defined array for name order of enhanced meta title level 3 // Expects four values but will accommodate any number
+);
 	$meta_title = $meta_title_vars['meta_title']; // string
 // add_filter('seopress_titles_title', 'uamswp_fad_title', 20, 2);
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
