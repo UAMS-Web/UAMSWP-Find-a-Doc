@@ -7396,7 +7396,8 @@ function uamswp_fad_section_condition_treatment(
 		$postal_code = '', // string (optional) // The postal code. For example, 94043.
 		$address_country = '', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
 		$name = '', // string (optional) // The name of the item.
-		$telephone = '' // string (optional) // The telephone number.
+		$telephone = '', // string (optional) // The telephone number.
+		$fax_number = '' // string (optional) // The fax number.
 	) {
 
 		/* Example use:
@@ -7417,7 +7418,8 @@ function uamswp_fad_section_condition_treatment(
 		* 			$location_zip, // string (optional) // The postal code. For example, 94043.
 		* 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
 		* 			$location_title, // string (optional) // The name of the item.
-		* 			$location_phone_format_dash // string (optional) // The telephone number.
+		* 			$location_phone_format_dash, // string (optional) // The telephone number.
+		* 			$location_fax_format_dash // string (optional) // The fax number.
 		* 		);
 		*/
 
@@ -7432,6 +7434,7 @@ function uamswp_fad_section_condition_treatment(
 			$address_country = ( isset($address_country) && !empty($address_country) ) ? $address_country : 'USA';
 			$name = isset($name) ? $name : '';
 			$telephone = isset($telephone) ? $telephone : '';
+			$fax_number = isset($fax_number) ? $fax_number : '';
 
 		// Create an array for this item
 
@@ -7469,6 +7472,10 @@ function uamswp_fad_section_condition_treatment(
 			
 			if ( $telephone ) {
 				$schema['telephone'] = $telephone;
+			}
+			
+			if ( $fax_number ) {
+				$schema['faxNumber'] = $fax_number;
 			}
 
 			if ( !empty($schema) ) {

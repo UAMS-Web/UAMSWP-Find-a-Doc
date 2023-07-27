@@ -323,7 +323,8 @@ if ( $location_section_show ) {
 													$location_zip, // string (optional) // The postal code. For example, 94043.
 													'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
 													$location_title, // string (optional) // The name of the item.
-													$location_phone_format_dash // string (optional) // The telephone number.
+													$location_phone_format_dash, // string (optional) // The telephone number.
+													$location_fax_format_dash // string (optional) // The fax number.
 												);
 
 											// Geo Schema Data

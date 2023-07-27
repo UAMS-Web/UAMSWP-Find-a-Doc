@@ -18,6 +18,7 @@
  * 	$schema_opening_hours_specification // array
  * 	$schema_telephone // array
  * 	$schema_url // string
+ * 	$schema_fax_number // string
  * 	$schema_description // string
  * 	$schema_image // string|array
  * 	$schema_medical_specialty // array
@@ -130,6 +131,12 @@
 
 	// Additional Selected Properties
 
+		// Property: faxNumber
+			// Expected Type: Text
+			// Description: The fax number.
+
+			$schema_fax_number = isset($schema_fax_number) ? $schema_fax_number : '';
+
 		// Property: description
 			// 	Expected Type: Text or TextObject
 			// 	Description: A description of the item.
@@ -226,10 +233,6 @@
 				// Property: event
 					// Expected Type: Event
 					// Description: Upcoming or past event associated with this place, organization, or action. Supersedes events.
-
-				// Property: faxNumber
-					// Expected Type: Text
-					// Description: The fax number.
 
 				// Property: geoContains
 					// Expected Type: GeospatialGeometry or Place
@@ -388,10 +391,6 @@
 				// Property: event
 					// Expected Type: Event
 					// Description: Upcoming or past event associated with this place, organization, or action. Supersedes events.
-
-				// Property: faxNumber
-					// Expected Type: Text
-					// Description: The fax number.
 
 				// Property: founder
 					// Expected Type: Person

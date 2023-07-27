@@ -129,28 +129,28 @@ if ( $location_appointment_phone_query || $location_ac_appointments_query ) {
 	$location_phone_appointments_multiple_query = true;
 }
 
-// Set variable values only if the output is a Location profile's contact information section
-$location_fax = '';
-$location_fax_format_dash = '';
-$location_fax_link = '';
-$location_phone_numbers = '';
-if ( $phone_output == 'location_profile' ) {
-	// Fax number
-	if ( !$location_ac_query ) {
-		// IF this is not an Arkansas Children's location...
-		$location_fax = get_field('location_fax', $phone_output_id); // Get the fax number
-		$location_fax_format_dash = format_phone_dash( $location_fax );
-		$location_fax_link = '<a href="tel:' . $location_fax_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Clinic Fax Number">' . $location_fax_format_dash . '</a>'; // Build the anchor element for the fax number
-	}
+// Fax number
 
-	// Additional phone numbers
+if ( !$location_ac_query ) {
+	// IF this is not an Arkansas Children's location...
+	$location_fax = get_field('location_fax', $phone_output_id); // Get the fax number
+	$location_fax_format_dash = format_phone_dash( $location_fax );
+	echo '<p>$location_fax_format_dash = ' . $location_fax_format_dash . '</p>'; // test
+	$location_fax_link = '<a href="tel:' . $location_fax_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Clinic Fax Number">' . $location_fax_format_dash . '</a>'; // Build the anchor element for the fax number
+} else {
+	$location_fax = '';
+	$location_fax_format_dash = '';
+	$location_fax_link = '';
+}
+
+// Additional phone numbers
+// Set variable values only if the output is a Location profile
+if ( $phone_output == 'location_profile' ) {
 	if ( !$location_ac_query ) {
 		// IF this is not an Arkansas Children's location...
 		$location_phone_numbers = get_field('field_location_phone_numbers', $phone_output_id); // Get the repeater for additional phone numbers
 	}
 } else {
-	$location_fax = '';
-	$location_fax_link = '';
 	$location_phone_numbers = '';
 }
 
