@@ -1456,7 +1456,6 @@ while ( have_posts() ) : the_post();
 
 			// Property: address
 			$schema_address = isset($schema_address) ? $schema_address : ''; // array
-			$schema_address_property = 'location'; // string // Optional change from 'address' to 'location'
 
 		// Recommended by Google Structured Data
 		// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
