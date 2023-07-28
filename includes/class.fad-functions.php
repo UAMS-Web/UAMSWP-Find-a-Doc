@@ -2011,6 +2011,7 @@ function uamswp_fad_post_title(
 			}
 
 		if ( $clinical_resources ) {
+
 			$args = array(
 				'post__in' => $clinical_resources,
 				'post_type' => 'clinical-resource',
@@ -2019,10 +2020,15 @@ function uamswp_fad_post_title(
 				'order' => 'DESC',
 				'orderby' => 'post_date',
 			);
+
 			$clinical_resource_query = new WP_Query( $args );
 
 			// Check if Clinical Resources section should be displayed
-			if( ( $clinical_resources && $clinical_resource_query->have_posts() ) ) {
+			if (
+				$clinical_resources
+				&&
+				$clinical_resource_query->have_posts()
+			) {
 
 				$clinical_resource_section_show = true;
 				$clinical_resource_ids = $clinical_resource_query->posts;
@@ -2032,10 +2038,15 @@ function uamswp_fad_post_title(
 				// Count valid clinical resource items
 
 					$clinical_resource_count = 0;
+
 					foreach( $clinical_resources as $resource ) {
+
 						if ( get_post_status ( $resource ) == 'publish' ) {
+
 							$clinical_resource_count++;
+
 						}
+
 					}
 
 			} else {
@@ -2046,10 +2057,12 @@ function uamswp_fad_post_title(
 
 			}
 		} else {
+
 			$clinical_resource_query = '';
 			$clinical_resource_section_show = false;
 			$clinical_resource_ids = '';
 			$clinical_resource_count = 0;
+
 		}
 
 		// Create and return an array to be used on the templates and template parts
