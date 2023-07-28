@@ -4611,64 +4611,75 @@ function uamswp_fad_fpage_text_replace(
 					$expertise_page_header_hero = ''; // Hero Header Style Options
 
 					// Set the page header text element values
-					if ( $expertise_page_title_options == 'graphic' ) {
 
-						// Get Graphic Header Style Options
-						$expertise_page_header_graphic = get_field('expertise_page_title_graphic')['page_header_graphic'];
+						// Define empty variables to prevent PHP errors
+						
+							$expertise_page_header_graphic = '';
+							$expertise_page_header_landingpage = '';
+							$expertise_page_title = '';
+							$expertise_page_intro = '';
+							$expertise_page_image = '';
+							$expertise_page_image_mobile = '';
+							$expertise_page_header_hero = '';
 
-						// Set the standard page title as the title value
-						$expertise_page_title = $page_title;
+						if ( $expertise_page_title_options == 'graphic' ) {
 
-						// Get the intro text value
-						$expertise_page_intro = $expertise_page_header_graphic['page_header_graphic_intro']; // Intro text
+							// Get Graphic Header Style Options
+							$expertise_page_header_graphic = get_field('expertise_page_title_graphic')['page_header_graphic'];
 
-						// Get the background image value
-						$expertise_page_image = $expertise_page_header_graphic['page_header_graphic_image']; // Background image (mobile)
+							// Set the standard page title as the title value
+							$expertise_page_title = $page_title;
 
-					} elseif ( $expertise_page_title_options == 'landingpage' ) {
+							// Get the intro text value
+							$expertise_page_intro = $expertise_page_header_graphic['page_header_graphic_intro']; // Intro text
 
-						// Get Marketing Landing Page Header Style Options
-						$expertise_page_header_landingpage = get_field('expertise_page_title_landingpage')['page_header_landingpage'];
+							// Get the background image value
+							$expertise_page_image = $expertise_page_header_graphic['page_header_graphic_image']; // Background image (mobile)
 
-						// Get the title value
-						$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; 
+						} elseif ( $expertise_page_title_options == 'landingpage' ) {
 
-						// If the title is not set or is empty, use the standard page title as the fallback value
-						$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title;
+							// Get Marketing Landing Page Header Style Options
+							$expertise_page_header_landingpage = get_field('expertise_page_title_landingpage')['page_header_landingpage'];
 
-						// Get the intro text value
-						$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro'];
+							// Get the title value
+							$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; 
 
-						// Get the background image values
-						$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image (desktop)
-						$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Background image (mobile)
+							// If the title is not set or is empty, use the standard page title as the fallback value
+							$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title;
 
-						// If the ontology item's desktop background image is not set or is empty, use the featured image as the fallback value
-						if ( ( !isset($expertise_page_image) || empty($expertise_page_image) ) && $ontology_type ) {
-							$expertise_page_image = get_post_thumbnail_id($page_id); // Background image (desktop)
-							$expertise_page_image_mobile = ''; // Background image (mobile)
+							// Get the intro text value
+							$expertise_page_intro = $expertise_page_header_landingpage['page_header_landingpage_intro'];
+
+							// Get the background image values
+							$expertise_page_image = $expertise_page_header_landingpage['page_header_landingpage_image']; // Background image (desktop)
+							$expertise_page_image_mobile = $expertise_page_header_landingpage['page_header_landingpage_image_mobile']; // Background image (mobile)
+
+							// If the ontology item's desktop background image is not set or is empty, use the featured image as the fallback value
+							if ( ( !isset($expertise_page_image) || empty($expertise_page_image) ) && $ontology_type ) {
+								$expertise_page_image = get_post_thumbnail_id($page_id); // Background image (desktop)
+								$expertise_page_image_mobile = ''; // Background image (mobile)
+							}
+
+						} elseif ( $expertise_page_title_options == 'hero' ) {
+
+							// Get Hero Header Style Options
+							$expertise_page_header_hero = get_field('expertise_page_title_hero')['page_header_hero']; // Hero Header Style Options
+
+							// Set the standard page title as the title value
+							$expertise_page_title = $page_title;
+
+							// Set the intro text value
+							$expertise_page_intro = '';
+
+						} else {
+
+							// Set the standard page title as the title value
+							$expertise_page_title = $page_title;
+
+							// Set the intro text value
+							$expertise_page_intro = '';
+
 						}
-
-					} elseif ( $expertise_page_title_options == 'hero' ) {
-
-						// Get Hero Header Style Options
-						$expertise_page_header_hero = get_field('expertise_page_title_hero')['page_header_hero']; // Hero Header Style Options
-
-						// Set the standard page title as the title value
-						$expertise_page_title = $page_title;
-
-						// Set the intro text value
-						$expertise_page_intro = '';
-
-					} else {
-
-						// Set the standard page title as the title value
-						$expertise_page_title = $page_title;
-
-						// Set the intro text value
-						$expertise_page_intro = '';
-
-					}
 
 				// Set the short description / meta description value
 
