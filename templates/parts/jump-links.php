@@ -109,8 +109,9 @@
 		 * requirements and options as for the third-level keys.
 		 */
 
-		$jump_links_items = array(
-			'provider' => array(
+		if ( $post_type == 'provider' ) {
+			$jump_links_item_key = 'provider';
+			$jump_links_items = array(
 				'appointment' => array(
 					'text'	=> 'Make an Appointment',
 					'href'	=> 'appointment-info-1',
@@ -161,8 +162,10 @@
 					'href'	=> 'ratings',
 					'label'	=> ''
 				)
-			),
-			'location' => array(
+			);
+		} elseif ( $post_type == 'location' ) {
+			$jump_links_item_key = 'location';
+			$jump_links_items = array(
 				'location_alert' => array(
 					'text'	=> $location_alert_title ? $location_alert_title : 'Alert',
 					'href'	=> 'location-alert',
@@ -228,7 +231,7 @@
 				'condition_treatment' => array(
 					'text'	=> $condition_treatment_plural_name,
 					'href'	=> 'conditions-treatments',
-					'label'	=> 'Jump to the section of this page about ' . $condition_treatment_plural_name
+					'label'	=> 'Jump to the section of this page about ' . $condition_treatment_plural_name_attr
 				),
 				'expertise' => array(
 					'text'	=> $expertise_plural_name,
@@ -245,8 +248,46 @@
 					'href'	=> 'related-resources',
 					'label'	=> 'Jump to the section of this page about ' . $clinical_resource_plural_name_attr
 				)
-			)
-		);
+			);
+		} elseif ( $post_type == 'clinical-resource' ) {
+			$jump_links_item_key = 'clinical_resource';
+			$jump_links_items = array(
+				'clinical_resource' => array(
+					'text'	=> 'Related ' . $clinical_resource_plural_name,
+					'href'	=> 'related-resources',
+					'label'	=> 'Jump to the section of this page about related ' . $clinical_resource_plural_name_attr
+				),
+				'condition_treatment' => array(
+					'text'	=> $condition_treatment_plural_name,
+					'href'	=> 'conditions-treatments',
+					'label'	=> 'Jump to the section of this page about related ' . $condition_treatment_plural_name_attr
+				),
+				'provider' => array(
+					'text'	=> $provider_plural_name,
+					'href'	=> 'providers',
+					'label'	=> 'Jump to the section of this page about related ' . $provider_plural_name_attr
+				),
+				'location' => array(
+					'text'	=> $location_plural_name,
+					'href'	=> 'locations',
+					'label'	=> 'Jump to the section of this page about related ' . $location_plural_name_attr
+				),
+				'expertise' => array(
+					'text'	=> $expertise_plural_name,
+					'href'	=> 'expertise',
+					'label'	=> 'Jump to the section of this page about related ' . $expertise_plural_name_attr
+				),
+				'appointment' => array(
+					'text'	=> 'Make an Appointment',
+					'href'	=> 'appointment-info',
+					'label'	=> 'Jump to the section of this page about making an appointment'
+				)
+			);
+		} else {
+			$jump_links_item_key = '';
+			$jump_links_items = array();
+			$jump_links_section_show = false;
+		}
 
 // Construct jump links section
 
@@ -260,7 +301,8 @@
 				<ul class="nav navbar-nav">
 					<?php
 
-					foreach( $jump_links_items[$jump_links_key] as $key => $item ) {
+					foreach( $jump_links_items as $key => $item ) {
+
 						$item_text = ( isset($item['text']) && !empty($item['text']) ) ? $item['text'] : '';
 						$item_href = ( isset($item['href']) && !empty($item['href']) ) ? '#' . $item['href'] : '';
 						$item_label = ( isset($item['label']) && !empty($item['label']) ) ? $item['label'] : '';
