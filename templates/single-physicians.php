@@ -226,12 +226,7 @@ $fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provi
 	$condition_treatment_fpage_title_provider = $fpage_text_provider_vars['condition_treatment_fpage_title_provider']; // string
 	$condition_treatment_fpage_intro_provider = $fpage_text_provider_vars['condition_treatment_fpage_intro_provider']; // string
 
-// Get system settings for jump links (a.k.a. anchor links)
-$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
-	$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
-
-// Set logic for displaying jump links and sections
-$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+// Start count for jump links
 $jump_link_count = 0;
 
 // Get resident values
@@ -627,12 +622,6 @@ while ( have_posts() ) : the_post();
 		$ratings_section_show = false;
 	}
 
-	// Check if Jump Links section should be displayed
-	if ( $jump_link_count >= $jump_link_count_min ) {
-		$jump_links_section_show = true;
-	} else {
-		$jump_links_section_show = false;
-	}
 ?>
 
 <div class="content-sidebar-wrap">
@@ -903,87 +892,9 @@ while ( have_posts() ) : the_post();
 			</div>
 		</section>
 		<?php
+		
 		// Begin Jump Links Section
-		if ( $jump_links_section_show ) { ?>
-			<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-				<h2><?php echo $fad_jump_links_title; ?></h2>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
-					<ul class="nav navbar-nav">
-						<?php
-						if ( $appointment_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#appointment-info-1">Make an Appointment</a>
-							</li>
-						<?php
-						} // endif
-						if ( $clinical_bio_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#clinical-info">About</a>
-							</li>
-						<?php
-						} // endif 
-						if ( $podcast_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#podcast">Podcast</a>
-							</li>
-						<?php
-						} // endif 
-						if ( $clinical_resource_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
-							</li>
-						<?php
-						} // endif 
-						if ($academic_section_show) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#academic-info">Academic Background</a>
-							</li>
-						<?php
-						} // endif 
-						if ($research_section_show) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#research-info">Research</a>
-							</li>
-						<?php
-						} // endif 
-						if ( $condition_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#conditions"><?php echo $condition_plural_name; ?></a>
-							</li>
-						<?php
-						} // endif 
-						if ( $treatment_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#treatments"><?php echo $treatment_plural_name; ?></a>
-							</li>
-						<?php
-						} // endif 
-						if ( $expertise_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#expertise"><?php echo $expertise_plural_name; ?></a>
-							</li>
-						<?php
-						} // endif 
-						if ( $location_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#locations"><?php echo $location_plural_name; ?></a>
-							</li>
-						<?php
-						} // endif 
-						if ( $ratings_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#ratings">Ratings &amp; Reviews</a>
-							</li>
-						<?php
-						} // endif ?>
-					</ul>
-				</div>
-			</nav>
-		<?php
-		} // endif
+		include( UAMS_FAD_PATH . '/templates/parts/jump-links.php' );
 		// End Jump Links Section
 
 		if ( $appointment_section_show ) {

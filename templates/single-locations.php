@@ -167,10 +167,6 @@ $fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_locat
 	$condition_treatment_fpage_title_location = $fpage_text_location_vars['condition_treatment_fpage_title_location']; // string
 	$condition_treatment_fpage_intro_location = $fpage_text_location_vars['condition_treatment_fpage_intro_location']; // string
 
-// Get system settings for jump links (a.k.a. anchor links)
-$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
-	$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
-
 $excerpt = get_field('location_short_desc');
 $about_loc = get_field('location_about');
 if (empty($excerpt)){
@@ -357,22 +353,37 @@ if ( $location_closing ) {
 // Set prescription values
 
 $prescription_query = get_field('location_prescription_query'); // Display prescription information
-$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
-$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
-$prescription = ''; // Eliminate PHP errors
 
-if ($prescription_query) {
+if ( $prescription_query ) {
+
 	$prescription_info_type = get_field('location_prescription_type'); // Which preset or custom text?
+
 	if ( $prescription_info_type == 'clinic' ) {
+
+		$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
 		$prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
+
 	} elseif ( $prescription_info_type == 'pharm' ) {
+		
+		$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
 		$prescription = $prescription_pharm_sys; // Text from location (a.k.a. local)
+
 	} else {
+
 		$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
+
 	}
-	if ($prescription_query && !$prescription) { // If no prescription text
-		$prescription_query = false; // Deactivate prescription section
-	}
+
+	$prescription_section_show = $prescription ? true : false; // Query on whether to display the section
+
+} else {
+
+	// Eliminate PHP errors
+
+		$prescription = '';
+		$prescription_info_type = '';
+		$prescription_section_show = false;
+
 }
 
 // Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
@@ -454,8 +465,7 @@ while ( have_posts() ) : the_post(); ?>
 	$location_web_name = get_field('location_web_name');
 	$location_url = get_field('location_url');
 
-	// Set logic for displaying jump links and sections
-	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
+	// Start count for jump links
 	$jump_link_count = 0;
 
 		// Check if Location Alert section should be displayed
@@ -486,34 +496,69 @@ while ( have_posts() ) : the_post(); ?>
 
 		// Check if About section should be displayed
 		$location_about = get_field('location_about');
+		$location_about_section_show = $location_about ? true : false;
 		$location_affiliation = get_field('location_affiliation');
+		$location_affiliation_section_show = $location_affiliation ? true : false; // Query on whether to display the section
 		$location_youtube_link = get_field('location_youtube_link');
-		$about_section_title = '';
-		$about_section_title_short = '';
-		$about_section_submenu = false;
-		$about_section_label = 'Jump to the section of this page with the ' . strtolower($location_single_name) . ' description';
+		$location_about_section_title = '';
+		$location_about_section_title_short = '';
+		$location_about_section_submenu = false; // Query on whether to include the submenu under this item in the jump links item submenu
+		$location_about_section_label = 'Jump to the section of this page with the ' . strtolower($location_single_name) . ' description';
 
-		if ( $location_about || $location_affiliation || $prescription ) {
-			$about_section_show = true;
+		if (
+			$location_about_section_show
+			||
+			$location_affiliation_section_show
+			||
+			$prescription_section_show
+		) {
+
+			$location_about_section_show = true;
 			$jump_link_count++;
-			if ( $location_about || $location_youtube_link || ( !$location_about && $location_affiliation && $prescription ) ) {
-				$about_section_title = 'About ' . $page_title_phrase;
-				$about_section_title_short = 'About';
 
-				if ($location_affiliation || $prescription) {
-					$about_section_submenu = true;
+			if (
+				$location_about_section_show
+				||
+				$location_youtube_link
+				||
+				(
+					!$location_about_section_show
+					&&
+					$location_affiliation_section_show
+					&&
+					$prescription_section_show
+				)
+			) {
+				$location_about_section_title = 'About ' . $page_title_phrase;
+				$location_about_section_title_short = 'About';
+
+				if (
+					$location_affiliation_section_show
+					||
+					$prescription_section_show
+				) {
+
+					$location_about_section_submenu = true; // Query on whether to include the item in the jump links item submenu
+
 				}
-			} elseif ( $location_affiliation ) {
-				$about_section_title = 'Affiliation';
-				$about_section_title_short = $about_section_title;
-				$about_section_label = 'Jump to the section of this page about ' . $about_section_title;
-			} elseif ( $prescription ) {
-				$about_section_title = 'Prescription Information';
-				$about_section_title_short = $about_section_title;
-				$about_section_label = 'Jump to the section of this page about ' . $about_section_title;
+
+			} elseif ( $location_affiliation_section_show ) {
+
+				$location_about_section_title = 'Affiliation';
+				$location_about_section_title_short = $location_about_section_title;
+				$location_about_section_label = 'Jump to the section of this page about ' . $location_about_section_title;
+
+			} elseif ( $prescription_section_show ) {
+
+				$location_about_section_title = 'Prescription Information';
+				$location_about_section_title_short = $location_about_section_title;
+				$location_about_section_label = 'Jump to the section of this page about ' . $location_about_section_title;
+
 			}
 		} else {
-			$about_section_show = false;
+
+			$location_about_section_show = false;
+
 		}
 
 		// Check if Parking and Directions section should be displayed
@@ -707,12 +752,6 @@ while ( have_posts() ) : the_post(); ?>
 			$treatment_count = $treatment_query_vars['treatment_count']; // int
 			$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
 
-		// Check if Jump Links section should be displayed
-		if ( $jump_link_count >= $jump_link_count_min ) {
-			$jump_links_section_show = true;
-		} else {
-			$jump_links_section_show = false;
-		}
 ?>
 <div class="content-sidebar-wrap">
 <main class="location-item" id="genesis-content">
@@ -1625,102 +1664,7 @@ while ( have_posts() ) : the_post(); ?>
 	<?php
 
 	// Begin Jump Links Section
-	if ( $jump_links_section_show ) { ?>
-		<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-			<h2><?php echo $fad_jump_links_title; ?></h2>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
-				<ul class="nav navbar-nav">
-					<?php if ( $location_alert_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#location-alert" title="Jump to the section of this page with the alert regarding this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_alert_title ? $location_alert_title : 'Alert'; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $closing_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#closing-info" title="Jump to the section of this page with the closing information">Closing Information</a>
-						</li>
-					<?php } ?>
-					<?php if ( $about_section_show ) { ?>
-						<li class="nav-item<?php echo $about_section_submenu ? ' dropdown' : '' ?>">
-							<a class="nav-link" href="#description" title="<?php echo $about_section_label; ?>"><?php echo $about_section_title_short; ?></a>
-							<?php if ( $about_section_submenu ) { ?>
-								<ul class="dropdown-menu">
-								<?php if ( $location_affiliation ) { ?>
-									<li class="nav-item">
-										<a class="nav-link" href="#affiliation" title="Jump to the section of this page about Affiliation">Affiliation</a>
-									</li>
-								<?php }
-								if ( $prescription ) { ?>
-									<li class="Prescription Information">
-										<a class="nav-link" href="#prescription-info" title="Jump to the section of this page about Prescription Information">Prescription Information</a>
-									</li>
-								<?php } ?>
-								</ul>
-							<?php }?>
-						</li>
-					<?php } ?>
-					<?php if ( $parking_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#parking-info" title="Jump to the section of this page about Parking Information">Parking Information</a>
-						</li>
-					<?php } ?>
-					<?php if ( $appointment_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about Appointment Information">Appointment Information</a>
-						</li>
-					<?php } ?>
-					<?php if ( $mychart_scheduling_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#scheduling" title="Jump to the section of this page about scheduling an appointment in MyChart"><?php echo $location_scheduling_title; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $telemedicine_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#telemedicine-info" title="Jump to the section of this page about Telemedicine Information">Telemedicine</a>
-						</li>
-					<?php } ?>
-					<?php if ( $portal_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#portal-info" title="Jump to the section of this page about the Patient Portal">Patient Portal</a>
-						</li>
-					<?php } ?>
-					<?php if ( $provider_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $condition_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#conditions" title="Jump to the section of this page about <?php echo $condition_plural_name_attr; ?>"><?php echo $condition_plural_name; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $treatment_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo strtolower($treatment_plural_name_attr); ?>"><?php echo $treatment_plural_name; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $expertise_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $location_descendant_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#sub-clinics" title="Jump to the section of this page about <?php echo strtolower($location_descendant_plural_name_attr); ?> within this <?php echo strtolower($location_single_name_attr); ?>"><?php echo $location_descendant_plural_name; ?> Within This <?php echo $location_single_name; ?></a>
-						</li>
-					<?php } ?>
-					<?php if ( $clinical_resource_section_show ) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
-						</li>
-					<?php } ?>
-				</ul>
-			</div>
-		</nav>
-	<?php } // endif
+	include( UAMS_FAD_PATH . '/templates/parts/jump-links.php' );
 	// End Jump Links Section
 
 	// Begin Location Alert Section
@@ -1756,38 +1700,68 @@ while ( have_posts() ) : the_post(); ?>
 	// End Closing Information Section
 
 	// Begin About Section
-	if ( $about_section_show ) {
+	if ( $location_about_section_show ) {
 	?>
 		<section class="uams-module bg-auto" id="description">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12">
-						<h2 class="module-title"><span class="title"><?php echo $about_section_title; ?></span></h2>
+						<h2 class="module-title"><span class="title"><?php echo $location_about_section_title; ?></span></h2>
 						<div class="module-body">
-							<?php echo $location_about ? $location_about : ''; ?>
-							<?php if($location_youtube_link) { ?>
-								<?php if(function_exists('lyte_preparse')) {
+							<?php
+							
+							echo $location_about_section_show ? $location_about : '';
+							
+							if ( $location_youtube_link ) {
+								
+								if ( function_exists('lyte_preparse') ) {
+
 									echo '<div class="alignwide">';
 									echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $location_youtube_link ) );
 									echo '</div>';
+
 								} else {
+
 									echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
 									echo wp_oembed_get( $location_youtube_link );
 									echo '</div>';
-								} ?>
-							<?php }
-							if ( $location_affiliation) { 
-								if ( $location_about || $prescription ) { 
-									echo '<h3 id="affiliation">Affiliation</h3>';
+
 								}
-								echo $location_affiliation;
 							}
-							if ( $prescription) { 
-								if ( $location_about || $location_affiliation ) { 
-									echo '<h3 id="prescription-info">Prescription Information</h3>';
+
+							if ( $location_affiliation_section_show ) { 
+
+								if (
+									$location_about_section_show
+									||
+									$prescription_section_show
+								) { 
+
+									echo '<h3 id="affiliation">Affiliation</h3>';
+
 								}
+
+								echo $location_affiliation;
+
+							}
+
+							if ( $prescription_section_show ) { 
+
+								if (
+									$location_about_section_show
+									||
+									$location_affiliation_section_show
+								) { 
+
+									echo '<h3 id="prescription-info">Prescription Information</h3>';
+
+								}
+
 								echo $prescription;
-							} ?>
+
+							}
+							
+							?>
 						</div>
 					</div>
 				</div>
