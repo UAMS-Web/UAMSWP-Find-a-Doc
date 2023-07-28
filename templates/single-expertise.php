@@ -367,20 +367,22 @@ add_action('wp_head','uamswp_keyword_hook_header');
 	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 
 	// Add ontology subsection site header
-	function uamswp_fad_ontology_header__template() {
-		global $page_id;
-		global $ontology_type;
-		global $page_title;
-		global $page_url;
 
-		uamswp_fad_ontology_header(
-			$page_id, // int // ID of the post
-			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-			$page_title, // string (optional) // Title of the post
-			$page_url // string (optional) // Permalink of the post
+		$uamswp_fad_ontology_header_args = array(
+			'page_id'		=> $page_id, // int // ID of the post
+			'ontology_type'	=> $ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+			'page_title'	=> $page_title, // string (optional) // Title of the post
+			'page_url'		=> $page_url // string (optional) // Permalink of the post
 		);
-	}
-	add_action( 'genesis_header', 'uamswp_fad_ontology_header__template', 5 );
+
+		add_action( 'genesis_header', function() use ($uamswp_fad_ontology_header_args) {
+			uamswp_fad_ontology_header(
+				$uamswp_fad_ontology_header_args['page_id'], // int // ID of the post
+				$uamswp_fad_ontology_header_args['ontology_type'], // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+				$uamswp_fad_ontology_header_args['page_title'], // string (optional) // Title of the post
+				$uamswp_fad_ontology_header_args['page_url'] // string (optional) // Permalink of the post
+			);
+		}, 5 );
 
 // Modify primary navigation
 
@@ -389,20 +391,22 @@ add_action('wp_head','uamswp_keyword_hook_header');
 	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 	// Add ontology subsection primary navigation
-	function uamswp_fad_ontology_nav_menu__template() {
-		global $page_id;
-		global $ontology_type;
-		global $page_title;
-		global $page_url;
 
-		uamswp_fad_ontology_nav_menu(
-			$page_id, // int // ID of the post
-			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-			$page_title, // string (optional) // Title of the post
-			$page_url // string (optional) // Permalink of the post
+		$uamswp_fad_ontology_nav_menu_args = array(
+			'page_id'		=> $page_id, // int // ID of the post
+			'ontology_type'	=> $ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+			'page_title'	=> $page_title, // string (optional) // Title of the post
+			'page_url'		=> $page_url // string (optional) // Permalink of the post
 		);
-	}
-	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu__template', 5 );
+
+		add_action( 'genesis_after_header', function() use ($uamswp_fad_ontology_nav_menu_args) {
+			uamswp_fad_ontology_nav_menu(
+				$uamswp_fad_ontology_nav_menu_args['page_id'], // int // ID of the post
+				$uamswp_fad_ontology_nav_menu_args['ontology_type'], // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+				$uamswp_fad_ontology_nav_menu_args['page_title'], // string (optional) // Title of the post
+				$uamswp_fad_ontology_nav_menu_args['page_url'] // string (optional) // Permalink of the post
+			);
+		}, 5 );
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uamswp_page_body_class' );
@@ -419,33 +423,36 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
 	// Construct non-standard post title
-	$entry_header_style = $expertise_page_title_options; // Entry header style
-	$entry_title_text = $expertise_page_title; // Regular title
-	$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
-	$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
-	$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
-	$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
-	$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
-	function uamswp_fad_post_title__template() {
-		global $entry_title_text; 
-		global $entry_header_style;
-		global $entry_title_text_supertitle;
-		global $entry_title_text_subtitle;
-		global $entry_title_text_body;
-		global $entry_title_image_desktop;
-		global $entry_title_image_mobile;
 
-		uamswp_fad_post_title(
-			$entry_title_text, // string // Entry title text
-			$entry_header_style, // string // Entry header style
-			$entry_title_text_supertitle, // string (optional) // Entry supertitle text
-			$entry_title_text_subtitle, // string (optional) // Entry subtitle text
-			$entry_title_text_body, // string (optional) // Entry header lead paragraph text
-			$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
-			$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+		$entry_header_style = $expertise_page_title_options; // Entry header style
+		$entry_title_text = $expertise_page_title; // Regular title
+		$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
+		$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
+		$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
+		$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
+		$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
+
+		$uamswp_fad_post_title_args = array(
+			'entry_title_text'				=> $entry_title_text, // string // Entry title text
+			'entry_header_style'			=> $entry_header_style, // string // Entry header style
+			'entry_title_text_supertitle'	=> $entry_title_text_supertitle, // string (optional) // Entry supertitle text
+			'entry_title_text_subtitle'		=> $entry_title_text_subtitle, // string (optional) // Entry subtitle text
+			'entry_title_text_body'			=> $entry_title_text_body, // string (optional) // Entry header lead paragraph text
+			'entry_title_image_desktop'		=> $entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
+			'entry_title_image_mobile'		=> $entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
 		);
-	}
-	add_action( 'genesis_before_content', 'uamswp_fad_post_title__template' );
+
+		add_action( 'genesis_before_content', function() use ($uamswp_fad_post_title_args) {
+			uamswp_fad_post_title(
+				$uamswp_fad_post_title_args['entry_title_text'], // string // Entry title text
+				$uamswp_fad_post_title_args['entry_header_style'], // string // Entry header style
+				$uamswp_fad_post_title_args['entry_title_text_supertitle'], // string (optional) // Entry supertitle text
+				$uamswp_fad_post_title_args['entry_title_text_subtitle'], // string (optional) // Entry subtitle text
+				$uamswp_fad_post_title_args['entry_title_text_body'], // string (optional) // Entry header lead paragraph text
+				$uamswp_fad_post_title_args['entry_title_image_desktop'], // int (optional) // Entry header background image for desktop breakpoints
+				$uamswp_fad_post_title_args['entry_title_image_mobile'] // int (optional) // Entry header background image for mobile breakpoints
+			);
+		} );
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
@@ -591,22 +598,22 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 		$podcast_filter = 'tag'; // string // Expected values: 'tag' or 'doctor'
 		$podcast_subject = $page_title; // string
-		function uamswp_fad_podcast__template() {
 
-			global $podcast_name;
-			global $podcast_section_show;
-			global $podcast_filter;
-			global $podcast_subject;
+		$uamswp_fad_podcast_args = array(
+			'podcast_name'			=> $podcast_name, // string
+			'podcast_section_show'	=> $podcast_section_show, // bool
+			'podcast_filter'		=> $podcast_filter, // string // Expected values: 'tag' or 'doctor'
+			'podcast_subject'		=> $podcast_subject // string
+		);
 
+		add_action( 'genesis_after_entry', function() use ($uamswp_fad_podcast_args) {
 			uamswp_fad_podcast(
-				$podcast_name, // string
-				$podcast_section_show, // bool
-				$podcast_filter, // string // Expected values: 'tag' or 'doctor'
-				$podcast_subject // string
+				$uamswp_fad_podcast_args['podcast_name'], // string
+				$uamswp_fad_podcast_args['podcast_section_show'], // bool
+				$uamswp_fad_podcast_args['podcast_filter'], // string // Expected values: 'tag' or 'doctor'
+				$uamswp_fad_podcast_args['podcast_subject'] // string
 			);
-
-		}
-		add_action( 'genesis_after_entry', 'uamswp_fad_podcast__template', 10 );
+		}, 10 );
 
 	// Construct Combined Conditions and Treatments Section
 
@@ -617,42 +624,42 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 		$condition_section_intro = $condition_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
 		$treatment_section_title = $treatment_fpage_title_expertise; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 		$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-		function uamswp_fad_section_condition_treatment__template() {
 
-			global $conditions_cpt;
-			global $treatments_cpt;
-			global $page_titles;
-			global $hide_medical_ontology;
-			global $condition_treatment_section_show;
-			global $condition_section_show;
-			global $treatment_section_show;
-			global $ontology_type;
-			global $condition_treatment_section_title;
-			global $condition_treatment_section_intro;
-			global $condition_section_title;
-			global $condition_section_intro;
-			global $treatment_section_title;
-			global $treatment_section_intro;
+		$uamswp_fad_section_condition_treatment_args = array(
+			'conditions_cpt'					=> $conditions_cpt, // int[]
+			'treatments_cpt'					=> $treatments_cpt, // int[]
+			'page_titles'						=> $page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+			'hide_medical_ontology'				=> $hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+			'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
+			'condition_section_show'			=> $condition_section_show, // bool
+			'treatment_section_show'			=> $treatment_section_show, // bool
+			'ontology_type'						=> $ontology_type, // bool
+			'condition_treatment_section_title'	=> $condition_treatment_section_title, // string // Text to use for the section title
+			'condition_treatment_section_intro'	=> $condition_treatment_section_intro, // string // Text to use for the section intro text
+			'condition_section_title'			=> $condition_section_title, // string // Text to use for the conditions subsection title
+			'condition_section_intro'			=> $condition_section_intro, // string // Text to use for the conditions subsection intro text
+			'treatment_section_title'			=> $treatment_section_title, // string // Text to use for the treatments subsection title
+			'treatment_section_intro'			=> $treatment_section_intro // string // Text to use for the treatments subsection intro text
+		);
 
+		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_condition_treatment_args) {
 			uamswp_fad_section_condition_treatment(
-				$conditions_cpt, // int[]
-				$treatments_cpt, // int[]
-				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-				$condition_treatment_section_show, // bool
-				$condition_section_show, // bool
-				$treatment_section_show, // bool
-				$ontology_type, // bool
-				$condition_treatment_section_title, // string // Text to use for the section title
-				$condition_treatment_section_intro, // string // Text to use for the section intro text
-				$condition_section_title, // string // Text to use for the conditions subsection title
-				$condition_section_intro, // string // Text to use for the conditions subsection intro text
-				$treatment_section_title, // string // Text to use for the treatments subsection title
-				$treatment_section_intro // string // Text to use for the treatments subsection intro text
+				$uamswp_fad_section_condition_treatment_args['conditions_cpt'], // int[]
+				$uamswp_fad_section_condition_treatment_args['treatments_cpt'], // int[]
+				$uamswp_fad_section_condition_treatment_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$uamswp_fad_section_condition_treatment_args['hide_medical_ontology'], // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+				$uamswp_fad_section_condition_treatment_args['condition_treatment_section_show'], // bool
+				$uamswp_fad_section_condition_treatment_args['condition_section_show'], // bool
+				$uamswp_fad_section_condition_treatment_args['treatment_section_show'], // bool
+				$uamswp_fad_section_condition_treatment_args['ontology_type'], // bool
+				$uamswp_fad_section_condition_treatment_args['condition_treatment_section_title'], // string // Text to use for the section title
+				$uamswp_fad_section_condition_treatment_args['condition_treatment_section_intro'], // string // Text to use for the section intro text
+				$uamswp_fad_section_condition_treatment_args['condition_section_title'], // string // Text to use for the conditions subsection title
+				$uamswp_fad_section_condition_treatment_args['condition_section_intro'], // string // Text to use for the conditions subsection intro text
+				$uamswp_fad_section_condition_treatment_args['treatment_section_title'], // string // Text to use for the treatments subsection title
+				$uamswp_fad_section_condition_treatment_args['treatment_section_intro'] // string // Text to use for the treatments subsection intro text
 			);
-
-		}
-		add_action( 'genesis_after_entry', 'uamswp_fad_section_condition_treatment__template', 16 );
+		}, 16 );
 
 	// Check if Make an Appointment section should be displayed
 
@@ -660,15 +667,14 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 
 	// Display appointment information
 
-		function uamswp_fad_ontology_appointment__template() {
+		$uamswp_fad_ontology_appointment_args = array(
+			'appointment_section_show'	=> $appointment_section_show
+		);
 
-			global $appointment_section_show;
-
+		add_action( 'genesis_after_entry', function() use ($uamswp_fad_ontology_appointment_args) {
 			uamswp_fad_ontology_appointment(
-				$appointment_section_show
+				$uamswp_fad_ontology_appointment_args['appointment_section_show']
 			);
-
-		}
-		add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment__template', 26 );
+		}, 26 );
 
 genesis();

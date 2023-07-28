@@ -358,20 +358,22 @@ add_action('wp_head','uamswp_keyword_hook_header');
 	remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 
 	// Add ontology subsection site header
-	function uamswp_fad_ontology_header__template() {
-		global $page_id;
-		global $ontology_type;
-		global $page_title;
-		global $page_url;
 
-		uamswp_fad_ontology_header(
-			$page_id, // int // ID of the post
-			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-			$page_title, // string (optional) // Title of the post
-			$page_url // string (optional) // Permalink of the post
+		$uamswp_fad_ontology_header_args = array(
+			'page_id'		=> $page_id, // ID of the post
+			'ontology_type'	=> $ontology_type, // Ontology type of the post (true is ontology type, false is content type)
+			'page_title'	=> $page_title, // Title of the post
+			'page_url'		=> $page_url // Permalink of the post
 		);
-	}
-	add_action( 'genesis_header', 'uamswp_fad_ontology_header__template', 5 );
+
+		add_action( 'genesis_header', function() use ($uamswp_fad_ontology_header_args) {
+			uamswp_fad_ontology_header(
+				$uamswp_fad_ontology_header_args['page_id'], // int // ID of the post
+				$uamswp_fad_ontology_header_args['ontology_type'], // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+				$uamswp_fad_ontology_header_args['page_title'], // string (optional) // Title of the post
+				$uamswp_fad_ontology_header_args['page_url'] // string (optional) // Permalink of the post
+			);
+		}, 5 );
 
 // Modify primary navigation
 
@@ -380,20 +382,22 @@ add_action('wp_head','uamswp_keyword_hook_header');
 	remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 	// Add ontology subsection primary navigation
-	function uamswp_fad_ontology_nav_menu__template() {
-		global $page_id;
-		global $ontology_type;
-		global $page_title;
-		global $page_url;
 
-		uamswp_fad_ontology_nav_menu(
-			$page_id, // int // ID of the post
-			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-			$page_title, // string (optional) // Title of the post
-			$page_url // string (optional) // Permalink of the post
+		$uamswp_fad_ontology_nav_menu_args = array(
+			'page_id'		=> $page_id, // ID of the post
+			'ontology_type'	=> $ontology_type, // Ontology type of the post (true is ontology type, false is content type)
+			'page_title'	=> $page_title, // Title of the post
+			'page_url'		=> $page_url // Permalink of the post
 		);
-	}
-	add_action( 'genesis_after_header', 'uamswp_fad_ontology_nav_menu__template', 5 );
+
+		add_action( 'genesis_after_header', function() use ($uamswp_fad_ontology_nav_menu_args) {
+			uamswp_fad_ontology_nav_menu(
+				$uamswp_fad_ontology_nav_menu_args['page_id'], // int // ID of the post
+				$uamswp_fad_ontology_nav_menu_args['ontology_type'], // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+				$uamswp_fad_ontology_nav_menu_args['page_title'], // string (optional) // Title of the post
+				$uamswp_fad_ontology_nav_menu_args['page_url'] // string (optional) // Permalink of the post
+			);
+		}, 5 );
 
 // Add page template class to body element's classes
 add_filter( 'body_class', 'uamswp_page_body_class' );
@@ -413,33 +417,36 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
 	// Construct non-standard post title
-	$entry_header_style = 'graphic'; // Entry header style
-	$entry_title_text = $fpage_title; // Regular title
-	$entry_title_text_supertitle = ''; // Optional supertitle
-	$entry_title_text_subtitle = ''; // Optional subtitle
-	$entry_title_text_body = $fpage_intro; // Optional lead paragraph
-	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
-	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
-	function uamswp_fad_post_title__template() {
-		global $entry_title_text; 
-		global $entry_header_style;
-		global $entry_title_text_supertitle;
-		global $entry_title_text_subtitle;
-		global $entry_title_text_body;
-		global $entry_title_image_desktop;
-		global $entry_title_image_mobile;
 
-		uamswp_fad_post_title(
-			$entry_title_text, // string // Entry title text
-			$entry_header_style, // string // Entry header style
-			$entry_title_text_supertitle, // string (optional) // Entry supertitle text
-			$entry_title_text_subtitle, // string (optional) // Entry subtitle text
-			$entry_title_text_body, // string (optional) // Entry header lead paragraph text
-			$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
-			$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+		$entry_header_style = 'graphic'; // Entry header style
+		$entry_title_text = $fpage_title; // Regular title
+		$entry_title_text_supertitle = ''; // Optional supertitle
+		$entry_title_text_subtitle = ''; // Optional subtitle
+		$entry_title_text_body = $fpage_intro; // Optional lead paragraph
+		$entry_title_image_desktop = ''; // Desktop breakpoint image ID
+		$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+
+		$uamswp_fad_post_title_args = array(
+			'entry_title_text'				=> $entry_title_text, // Entry title text
+			'entry_header_style'			=> $entry_header_style, // Entry header style
+			'entry_title_text_supertitle'	=> $entry_title_text_supertitle, // Entry supertitle text
+			'entry_title_text_subtitle'		=> $entry_title_text_subtitle, // Entry subtitle text
+			'entry_title_text_body'			=> $entry_title_text_body, // Entry header lead paragraph text
+			'entry_title_image_desktop'		=> $entry_title_image_desktop, // Entry header background image for desktop breakpoints
+			'entry_title_image_mobile'		=> $entry_title_image_mobile // Entry header background image for mobile breakpoints
 		);
-	}
-	add_action( 'genesis_before_content', 'uamswp_fad_post_title__template' );
+
+		add_action( 'genesis_before_content', function() use ($uamswp_fad_post_title_args) {
+			uamswp_fad_post_title(
+				$uamswp_fad_post_title_args['entry_title_text'], // string // Entry title text
+				$uamswp_fad_post_title_args['entry_header_style'], // string // Entry header style
+				$uamswp_fad_post_title_args['entry_title_text_supertitle'], // string (optional) // Entry supertitle text
+				$uamswp_fad_post_title_args['entry_title_text_subtitle'], // string (optional) // Entry subtitle text
+				$uamswp_fad_post_title_args['entry_title_text_body'], // string (optional) // Entry header lead paragraph text
+				$uamswp_fad_post_title_args['entry_title_image_desktop'], // int (optional) // Entry header background image for desktop breakpoints
+				$uamswp_fad_post_title_args['entry_title_image_mobile'] // int (optional) // Entry header background image for mobile breakpoints
+			);
+		} );
 
 // Remove the post info (byline) from the entry header and the entry footer
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
@@ -456,80 +463,83 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 	remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 
 	// Display ontology page content
-	$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false; // Query for whether this is a list of child locations within a location
-	$location_section_title = 'List of ' . $location_plural_name; // Text to use for the section title
-	$location_section_intro = ''; // Text to use for the section intro text
-	$location_section_show_header = false; // Query whether to display the section header
-	$location_section_filter = isset($location_section_filter) ? $location_section_filter : true; // Query for whether to add filter(s)
-	$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true; // Query for whether to add region filter
-	$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : true; // Query for whether to add title filter
-	$location_section_collapse_list = false; // Query whether to collapse the list of locations in the providers section
-	function uamswp_fad_section_location__template() {
 
-		global $locations;
-		global $page_titles;
-		global $location_section_schema_query;
-		global $location_section_show;
-		global $ontology_type;
-		global $location_descendant_list;
-		global $location_section_title;
-		global $location_section_intro;
-		global $location_section_show_header;
-		global $location_section_filter;
-		global $location_section_filter_region;
-		global $location_section_filter_title;
-		global $location_section_collapse_list;
+		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false; // Query for whether this is a list of child locations within a location
+		$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false; // Query for whether this is a list of child locations within a location
+		$location_section_title = 'List of ' . $location_plural_name; // Text to use for the section title
+		$location_section_intro = ''; // Text to use for the section intro text
+		$location_section_show_header = false; // Query whether to display the section header
+		$location_section_filter = isset($location_section_filter) ? $location_section_filter : true; // Query for whether to add filter(s)
+		$location_section_filter_region = isset($location_section_filter_region) ? $location_section_filter_region : true; // Query for whether to add region filter
+		$location_section_filter_title = isset($location_section_filter_title) ? $location_section_filter_title : true; // Query for whether to add title filter
+		$location_section_collapse_list = false; // Query whether to collapse the list of locations in the providers section
 
-		uamswp_fad_section_location(
-			$locations, // int[] // Value of the related locations input
-			$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-			$location_section_schema_query, // bool (optional) // Query for whether to add locations to schema
-			$location_section_show, // bool (optional) // Query for whether to show the location section
-			$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
-			$location_descendant_list, // bool (optional) // Query for whether this is a list of child locations within a location
-			$location_section_title, // string (optional) // Text to use for the section title
-			$location_section_intro, // string (optional) // Text to use for the section intro text
-			$location_section_show_header, // bool (optional) // Query for whether to display the section header
-			$location_section_filter, // bool (optional) // Query for whether to add filter(s)
-			$location_section_filter_region, // bool (optional) // Query for whether to add region filter
-			$location_section_filter_title, // bool (optional) // Query for whether to add title filter
-			$location_section_collapse_list // bool (optional) // Query for whether to collapse the list of locations in the locations section
+		$uamswp_fad_section_location_args = array(
+			'locations'							=> $locations, // Value of the related locations input
+			'page_titles'						=> $page_titles,
+			'location_section_schema_query'		=> $location_section_schema_query, // Query for whether to add locations to schema
+			'location_section_show'				=> $location_section_show, // Query for whether to show the location section
+			'ontology_type'						=> $ontology_type, // Query for whether item is ontology type vs. content type
+			'location_descendant_list'			=> $location_descendant_list, // Query for whether this is a list of child locations within a location
+			'location_section_title'			=> $location_section_title, // Text to use for the section title
+			'location_section_intro'			=> $location_section_intro, // Text to use for the section intro text
+			'location_section_show_header'		=> $location_section_show_header, // Query for whether to display the section header
+			'location_section_filter'			=> $location_section_filter, // Query for whether to add filter(s)
+			'location_section_filter_region'	=> $location_section_filter_region, // Query for whether to add region filter
+			'location_section_filter_title'		=> $location_section_filter_title, // Query for whether to add title filter
+			'location_section_collapse_list'	=> $location_section_collapse_list // Query for whether to collapse the list of locations in the locations section
 		);
 
-	}
-	add_action( 'genesis_entry_content', 'uamswp_fad_section_location__template', 22 );
+		add_action( 'genesis_entry_content', function() use ($uamswp_fad_section_location_args) {
+			uamswp_fad_section_location(
+				$uamswp_fad_section_location_args['locations'], // int[] // Value of the related locations input
+				$uamswp_fad_section_location_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$uamswp_fad_section_location_args['location_section_schema_query'], // bool (optional) // Query for whether to add locations to schema
+				$uamswp_fad_section_location_args['location_section_show'], // bool (optional) // Query for whether to show the location section
+				$uamswp_fad_section_location_args['ontology_type'], // bool (optional) // Query for whether item is ontology type vs. content type
+				$uamswp_fad_section_location_args['location_descendant_list'], // bool (optional) // Query for whether this is a list of child locations within a location
+				$uamswp_fad_section_location_args['location_section_title'], // string (optional) // Text to use for the section title
+				$uamswp_fad_section_location_args['location_section_intro'], // string (optional) // Text to use for the section intro text
+				$uamswp_fad_section_location_args['location_section_show_header'], // bool (optional) // Query for whether to display the section header
+				$uamswp_fad_section_location_args['location_section_filter'], // bool (optional) // Query for whether to add filter(s)
+				$uamswp_fad_section_location_args['location_section_filter_region'], // bool (optional) // Query for whether to add region filter
+				$uamswp_fad_section_location_args['location_section_filter_title'], // bool (optional) // Query for whether to add title filter
+				$uamswp_fad_section_location_args['location_section_collapse_list'] // bool (optional) // Query for whether to collapse the list of locations in the locations section
+			);
+		}, 22 );
 
 	// Display references to other archive pages
-	function uamswp_fad_fpage_text_image_overlay__template() {
-		global $page_id;
-		global $page_titles;
-		global $current_fpage;
-		global $ontology_type;
 
-		uamswp_fad_fpage_text_image_overlay(
-			$page_id, // int
-			$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-			$current_fpage, // string (optional) // Fake subpage slug
-			$ontology_type // bool (optional)
+		$uamswp_fad_fpage_text_image_overlay_args = array(
+			'page_id'		=> $page_id,
+			'page_titles'	=> $page_titles,
+			'current_fpage'	=> $current_fpage, // Fake subpage slug
+			'ontology_type'	=> $ontology_type
 		);
-	}
-	add_action( 'genesis_entry_content', 'uamswp_fad_fpage_text_image_overlay__template', 25 );
+
+		add_action( 'genesis_entry_content', function() use ($uamswp_fad_fpage_text_image_overlay_args) {
+			uamswp_fad_fpage_text_image_overlay(
+				$uamswp_fad_fpage_text_image_overlay_args['page_id'], // int
+				$uamswp_fad_fpage_text_image_overlay_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$uamswp_fad_fpage_text_image_overlay_args['current_fpage'], // string (optional) // Fake subpage slug
+				$uamswp_fad_fpage_text_image_overlay_args['ontology_type'] // bool (optional)
+			);
+		}, 25 );
 
 	// Check if Make an Appointment section should be displayed
 
-	$appointment_section_show = true; // It should always be displayed.
+		$appointment_section_show = true; // It should always be displayed.
 
 	// Display appointment information
 
-		function uamswp_fad_ontology_appointment__template() {
+		$uamswp_fad_ontology_appointment_args = array(
+			'appointment_section_show'	=> $appointment_section_show
+		);
 
-			global $appointment_section_show;
-
+		add_action( 'genesis_after_entry', function() use ($uamswp_fad_ontology_appointment_args) {
 			uamswp_fad_ontology_appointment(
-				$appointment_section_show
+				$uamswp_fad_ontology_appointment_args['appointment_section_show']
 			);
-
-		}
-		add_action( 'genesis_after_entry', 'uamswp_fad_ontology_appointment__template', 26 );
+		}, 26 );
 
 genesis();
