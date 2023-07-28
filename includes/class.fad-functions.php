@@ -2041,6 +2041,8 @@ function uamswp_fad_post_title(
 			} else {
 
 				$clinical_resource_section_show = false;
+				$clinical_resource_ids = array();
+				$clinical_resource_count = 0;
 
 			}
 		} else {
