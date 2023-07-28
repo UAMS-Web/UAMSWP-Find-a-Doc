@@ -10,53 +10,66 @@
 // Adding rewrite rules for the fake subpages under Area of Expertise pages
 function fsp_insertrules($rules) 
 {
+
 	// Define an array of the permalinks and titles for the fake subpages.
 	// Change these to your required subpages.
 	// Key = subpage permalink (slug).
 	// Value = subpage title.
-	$my_fake_pages = array(
-		'providers' => 'Providers',
-		'locations' => 'Locations',
-		'specialties' => 'Specialties',
-		'resources' => 'Clinical Resources',
-		'related' => 'Related Areas of Expertise'
-	);
+
+		$my_fake_pages = array(
+			'providers' => 'Providers',
+			'locations' => 'Locations',
+			'specialties' => 'Specialties',
+			'resources' => 'Clinical Resources',
+			'related' => 'Related Areas of Expertise'
+		);
+
 	// Loop through each of the fake subpages
-	foreach ($my_fake_pages as $slug => $title) {
-		// Add a rewrite rule that transforms a URL structure to a set of query vars
-		add_rewrite_rule('expertise/([^/]+)/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top'); // Top level expertise pages
-		add_rewrite_rule('expertise/(.+?)(?:/([0-9]+))?/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top'); // Child expertise pages
-	}
+
+		foreach ($my_fake_pages as $slug => $title) {
+			// Add a rewrite rule that transforms a URL structure to a set of query vars
+			add_rewrite_rule('expertise/([^/]+)/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top'); // Top level expertise pages
+			add_rewrite_rule('expertise/(.+?)(?:/([0-9]+))?/' . $slug . '/?$', 'index.php?expertise=$matches[1]&fpage=' . $slug, 'top'); // Child expertise pages
+		}
+
 }
 add_action( 'init', 'fsp_insertrules' );
 
 // Tell WordPress to accept our custom query variable
 function fsp_insertqv($vars)
 {
+
 	$vars[] = 'fpage';
+
 	return $vars;
+
 }
 add_filter('query_vars', 'fsp_insertqv');
 
 // Modify SEOPress's standard canonical URL settings
 add_filter('seopress_titles_canonical','uamswp_fad_ontology_canonical');
 function uamswp_fad_ontology_canonical($html) {
+
 	// Bring in variables from outside of the function
-	global $page_id; // Defined on the template
-	global $current_fpage; // Defined on the template
-	global $wp_the_query; // WordPress-specific global variable
+
+		global $page_id; // Defined on the template
+		global $current_fpage; // Defined on the template
+		global $wp_the_query; // WordPress-specific global variable
 
 	// Make sure permalinks for fake subpages are canonical
-	if (
-		!empty($current_fpage) // Is a fake subpage
-		&&
-		is_singular() // Is an existing single post of any post type
-		&&
-		$page_id = $wp_the_query->get_queried_object_id()
-	) {
-		$html = '<link rel="canonical" href="' . trailingslashit(get_permalink($page_id)) . user_trailingslashit($current_fpage) . '" />';
-	}
+
+		if (
+			!empty($current_fpage) // Is a fake subpage
+			&&
+			is_singular() // Is an existing single post of any post type
+			&&
+			$page_id = $wp_the_query->get_queried_object_id()
+		) {
+			$html = '<link rel="canonical" href="' . trailingslashit(get_permalink($page_id)) . user_trailingslashit($current_fpage) . '" />';
+		}
+
 	return $html;
+
 }
 
 // Do not forget to flush your permalinks.
