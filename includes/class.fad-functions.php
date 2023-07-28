@@ -2274,26 +2274,27 @@ function uamswp_fad_ontology_header(
 }
 
 // Construct the meta keywords element
-function uamswp_keyword_hook_header() { 
+function uamswp_keyword_hook_header( $keywords ) { 
 
-	// Bring in variables from outside of the function
+	if ( $keywords ) {
 
-		// Typically defined on the template
-
-			global $keywords;
-
-	if( $keywords ): 
 		$i = 1;
 		$keyword_text = '';
+
 		foreach( $keywords as $keyword ) { 
+
 			if ( 1 < $i ) {
 				$keyword_text .= ', ';
 			}
-			$keyword_text .= str_replace(",", "", $keyword['alternate_text']);
+
+			$keyword_text .= str_replace( ",", "", $keyword['alternate_text'] );
 			$i++;
+
 		}
-		echo '<meta name="keywords" content="'. $keyword_text .'" />';
-	endif;
+
+		echo '<meta name="keywords" content="' . $keyword_text . '" />';
+
+	} // endif ( $keywords )
 
 }
 
@@ -7992,7 +7993,7 @@ if ( !function_exists('array_is_list') ) {
 		return true;
 
 	}
-	
+
 }
 
 // Construct UAMS Text & Image Overlay Block

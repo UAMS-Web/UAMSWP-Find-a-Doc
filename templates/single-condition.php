@@ -122,8 +122,14 @@ $labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_va
 	$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 
 // Construct the meta keywords element
-$keywords = get_field('condition_alternate');
-add_action('wp_head','uamswp_keyword_hook_header');
+
+	$keywords = get_field('condition_alternate');
+
+	add_action( 'wp_head', function() use ($keywords) {
+		uamswp_keyword_hook_header(
+			$keywords // array
+		);
+	} );
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1

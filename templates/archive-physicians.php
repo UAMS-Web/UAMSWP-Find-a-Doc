@@ -97,8 +97,14 @@ $page_image_id = $provider_archive_image; // Image ID // int
 // add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // // Construct the meta keywords element
-// $keywords = '';
-// add_action('wp_head','uamswp_keyword_hook_header');
+// 
+// 	$keywords = '';
+// 
+// 	add_action( 'wp_head', function() use ($keywords) {
+// 		uamswp_keyword_hook_header(
+// 			$keywords // array
+// 		);
+// 	} );
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $provider_plural_name_attr; // Word or phrase to use to form base meta title

@@ -6,7 +6,6 @@
 $term = get_queried_object();
 
 // ACF Fields - get_fields
-$keywords = get_field('condition_alternate', $term);
 $clinical_trials = get_field('condition_clinical_trials', $term);
 $content = get_field( 'condition_content', $term );
 $excerpt = get_field( 'condition_short_desc', $term );
@@ -30,7 +29,14 @@ else {
 }
 
 // Construct the meta keywords element
-add_action('wp_head','uamswp_keyword_hook_header');
+
+	$keywords = get_field('condition_alternate', $term);
+
+	add_action( 'wp_head', function() use ($keywords) {
+		uamswp_keyword_hook_header(
+			$keywords // array
+		);
+	} );
 
 $page_title = single_cat_title( '', false );
 $page_title_attr = uamswp_attr_conversion($page_title);

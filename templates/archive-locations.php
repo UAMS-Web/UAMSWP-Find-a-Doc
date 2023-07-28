@@ -107,8 +107,14 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 // add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // // Construct the meta keywords element
-// $keywords = '';
-// add_action('wp_head','uamswp_keyword_hook_header');
+// 
+// 	$keywords = '';
+// 
+// 	add_action( 'wp_head', function() use ($keywords) {
+// 		uamswp_keyword_hook_header(
+// 			$keywords // array
+// 		);
+// 	} );
 
 // Override the theme's method of defining the social meta tags
 

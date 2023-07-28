@@ -341,8 +341,14 @@ $excerpt = $location_fpage_short_desc_expertise;
 add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 // Construct the meta keywords element
-$keywords = get_field('expertise_alternate_names');
-add_action('wp_head','uamswp_keyword_hook_header');
+
+	$keywords = get_field('expertise_alternate_names');
+
+	add_action( 'wp_head', function() use ($keywords) {
+		uamswp_keyword_hook_header(
+			$keywords // array
+		);
+	} );
 
 // Override the theme's method of defining the social meta tags
 

@@ -8,7 +8,6 @@ $term = get_queried_object();
 // ACF Fields - get_fields
 $page_title = single_cat_title( '', false );
 $page_title_attr = uamswp_attr_conversion($page_title);
-$keywords = get_field('treatment_procedure_alternate', $term);
 $clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
 $content = get_field( 'treatment_procedure_content', $term );
 $excerpt = get_field( 'treatment_procedure_short_desc', $term );
@@ -116,7 +115,14 @@ else {
 }
 
 // Construct the meta keywords element
-add_action('wp_head','uamswp_keyword_hook_header');
+
+	$keywords = get_field('treatment_procedure_alternate', $term);
+
+	add_action( 'wp_head', function() use ($keywords) {
+		uamswp_keyword_hook_header(
+			$keywords // array
+		);
+	} );
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
