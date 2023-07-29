@@ -67,7 +67,7 @@
 
 		if ( $post_type == 'provider' ) {
 
-			// Get labels
+			// Check/define variables
 			
 				// Get system settings for location labels
 				if ( !isset($location_plural_name) || empty($location_plural_name) ) {
@@ -151,13 +151,15 @@
 
 		} elseif ( $post_type == 'location' ) {
 
-			global $location_alert_title;
-			global $location_about_section_title_short;
-			global $location_about_section_label;
-			global $location_scheduling_title;
-
-			// Get labels
+			// Check/define variables
 			
+				// Defined on the template
+
+					$location_alert_title = isset($location_alert_title) ? $location_alert_title : '';
+					$location_about_section_title_short = isset($location_about_section_title_short) ? $location_about_section_title_short : '';
+					$location_about_section_label = isset($location_about_section_label) ? $location_about_section_label : '';
+					$location_scheduling_title = isset($location_scheduling_title) ? $location_scheduling_title : '';
+
 				// Get system settings for provider labels
 
 					if (
