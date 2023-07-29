@@ -8,10 +8,9 @@
  * Must be used inside a loop
  * 
  * Designed for UAMS Health Find-a-Doc
- * 
- * Required vars:
- * 	$page_id
- */
+*/
+
+$page_id = get_the_ID();
 
 $degrees = get_field('physician_degree', $page_id);
 $degree_list = '';
