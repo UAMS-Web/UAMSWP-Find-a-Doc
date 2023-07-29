@@ -30,50 +30,6 @@
 		$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
 			$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 
-	// // Get labels
-	// 
-	// 	// Get system settings for provider labels
-	// 	if ( !isset($provider_plural_name) || empty($provider_plural_name) ) {
-	// 		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
-	// 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-	// 	}
-	// 
-	// 	// Get system settings for location labels
-	// 	if ( !isset($location_plural_name) || empty($location_plural_name) ) {
-	// 		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
-	// 			$location_plural_name = $labels_location_vars['location_plural_name']; // string
-	// 	}
-	// 
-	// 	// Get system settings for location descendant item labels
-	// 	if ( !isset($location_descendant_plural_name) || empty($location_descendant_plural_name) ) {
-	// 		$labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
-	// 			$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
-	// 	}
-	// 
-	// 	// Get system settings for area of expertise labels
-	// 	if ( !isset($expertise_plural_name) || empty($expertise_plural_name) ) {
-	// 		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-	// 			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-	// 	}
-	// 
-	// 	// Get system settings for area of expertise descendant item labels
-	// 	if ( !isset($expertise_descendant_plural_name) || empty($expertise_descendant_plural_name) ) {
-	// 		$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
-	// 			$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
-	// 	}
-	// 
-	// 	// Get system settings for clinical resource labels
-	// 	if ( !isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr) ) {
-	// 		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
-	// 			$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
-	// 	}
-	// 
-	// 	// Get system settings for combined condition and treatment labels
-	// 	if ( !isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name) ) {
-	// 		$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
-	// 			$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
-	// 	}
-
 	// Get post type (or slug of fake subpage)
 
 		$post_type = isset($post_type) ? $post_type : get_post_type();
@@ -110,179 +66,358 @@
 		 */
 
 		if ( $post_type == 'provider' ) {
-			$jump_links_item_key = 'provider';
-			$jump_links_items = array(
-				'appointment' => array(
-					'text'	=> 'Make an Appointment',
-					'href'	=> 'appointment-info-1',
-					'label'	=> ''
-				),
-				'clinical_bio' => array(
-					'text'	=> 'About',
-					'href'	=> 'clinical-info',
-					'label'	=> ''
-				),
-				'podcast' => array(
-					'text'	=> 'Podcast',
-					'href'	=> 'podcast',
-					'label'	=> ''
-				),
-				'clinical_resource' => array(
-					'text'	=> 'Related Resources',
-					'href'	=> 'related-resources',
-					'label'	=> 'Jump to the section of this page about ' . $clinical_resource_plural_name_attr
-				),
-				'academic' => array(
-					'text'	=> 'Academic Background',
-					'href'	=> 'academic-info',
-					'label'	=> ''
-				),
-				'research' => array(
-					'text'	=> 'Research',
-					'href'	=> 'research-info',
-					'label'	=> ''
-				),
-				'condition_treatment' => array(
-					'text'	=> $condition_treatment_plural_name,
-					'href'	=> 'conditions-treatments',
-					'label'	=> ''
-				),
-				'expertise' => array(
-					'text'	=> $expertise_plural_name,
-					'href'	=> 'expertise',
-					'label'	=> ''
-				),
-				'location' => array(
-					'text'	=> $location_plural_name,
-					'href'	=> 'locations',
-					'label'	=> ''
-				),
-				'ratings' => array(
-					'text'	=> 'Ratings &amp; Reviews',
-					'href'	=> 'ratings',
-					'label'	=> ''
-				)
-			);
-		} elseif ( $post_type == 'location' ) {
-			$jump_links_item_key = 'location';
-			$jump_links_items = array(
-				'location_alert' => array(
-					'text'	=> $location_alert_title ? $location_alert_title : 'Alert',
-					'href'	=> 'location-alert',
-					'label'	=> 'Jump to the section of this page with the alert regarding this ' . strtolower($location_single_name_attr)
-				),
-				'closing' => array(
-					'text'	=> 'Closing Information',
-					'href'	=> 'closing-info',
-					'label'	=> 'Jump to the section of this page with the closing information'
-				),
-				'location_about' => array(
-					'text'	=> $location_about_section_title_short,
-					'href'	=> 'description',
-					'label'	=> $location_about_section_label,
-					'submenu' => array(
-						'location_affiliation' => array(
-							'text'	=> 'Affiliation',
-							'href'	=> 'affiliation',
-							'label'	=> 'Jump to the section of this page about Affiliation'
-						),
-						'prescription' => array(
-							'text'	=> 'Prescription Information',
-							'href'	=> 'prescription-info',
-							'label'	=> 'Jump to the section of this page about Prescription Information'
-						)
+
+			// Get labels
+			
+				// Get system settings for location labels
+				if ( !isset($location_plural_name) || empty($location_plural_name) ) {
+					$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+						$location_plural_name = $labels_location_vars['location_plural_name']; // string
+				}
+			
+				// Get system settings for area of expertise labels
+				if ( !isset($expertise_plural_name) || empty($expertise_plural_name) ) {
+					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+				}
+			
+				// Get system settings for clinical resource labels
+				if ( !isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr) ) {
+					$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+						$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
+				}
+			
+				// Get system settings for combined condition and treatment labels
+				if ( !isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name) ) {
+					$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+						$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
+				}
+
+			// Build array
+
+				$jump_links_item_key = 'provider';
+				$jump_links_items = array(
+					'appointment' => array(
+						'text'	=> 'Make an Appointment',
+						'href'	=> 'appointment-info-1',
+						'label'	=> ''
+					),
+					'clinical_bio' => array(
+						'text'	=> 'About',
+						'href'	=> 'clinical-info',
+						'label'	=> ''
+					),
+					'podcast' => array(
+						'text'	=> 'Podcast',
+						'href'	=> 'podcast',
+						'label'	=> ''
+					),
+					'clinical_resource' => array(
+						'text'	=> 'Related Resources',
+						'href'	=> 'related-resources',
+						'label'	=> 'Jump to the section of this page about ' . $clinical_resource_plural_name_attr
+					),
+					'academic' => array(
+						'text'	=> 'Academic Background',
+						'href'	=> 'academic-info',
+						'label'	=> ''
+					),
+					'research' => array(
+						'text'	=> 'Research',
+						'href'	=> 'research-info',
+						'label'	=> ''
+					),
+					'condition_treatment' => array(
+						'text'	=> $condition_treatment_plural_name,
+						'href'	=> 'conditions-treatments',
+						'label'	=> ''
+					),
+					'expertise' => array(
+						'text'	=> $expertise_plural_name,
+						'href'	=> 'expertise',
+						'label'	=> ''
+					),
+					'location' => array(
+						'text'	=> $location_plural_name,
+						'href'	=> 'locations',
+						'label'	=> ''
+					),
+					'ratings' => array(
+						'text'	=> 'Ratings &amp; Reviews',
+						'href'	=> 'ratings',
+						'label'	=> ''
 					)
-				),
-				'parking' => array(
-					'text'	=> 'Parking Information',
-					'href'	=> 'parking-info',
-					'label'	=> 'Jump to the section of this page about Parking Information'
-				),
-				'appointment' => array(
-					'text'	=> 'Appointment Information',
-					'href'	=> 'appointment-info',
-					'label'	=> 'Jump to the section of this page about Appointment Information'
-				),
-				'mychart_scheduling' => array(
-					'text'	=> $location_scheduling_title,
-					'href'	=> 'scheduling',
-					'label'	=> 'Jump to the section of this page about scheduling an appointment in MyChart'
-				),
-				'telemedicine' => array(
-					'text'	=> 'Telemedicine',
-					'href'	=> 'telemedicine-info',
-					'label'	=> 'Jump to the section of this page about Telemedicine Information'
-				),
-				'portal' => array(
-					'text'	=> 'Telemedicine',
-					'href'	=> 'telemedicine-info',
-					'label'	=> 'Jump to the section of this page about Telemedicine Information'
-				),
-				'portal' => array(
-					'text'	=> 'Patient Portal',
-					'href'	=> 'portal',
-					'label'	=> 'Jump to the section of this page about the Patient Portal'
-				),
-				'provider' => array(
-					'text'	=> $provider_plural_name,
-					'href'	=> 'providers',
-					'label'	=> 'Jump to the section of this page about ' . $provider_plural_name_attr
-				),
-				'condition_treatment' => array(
-					'text'	=> $condition_treatment_plural_name,
-					'href'	=> 'conditions-treatments',
-					'label'	=> 'Jump to the section of this page about ' . $condition_treatment_plural_name_attr
-				),
-				'expertise' => array(
-					'text'	=> $expertise_plural_name,
-					'href'	=> 'expertise',
-					'label'	=> 'Jump to the section of this page about ' . $expertise_plural_name_attr
-				),
-				'location_descendant' => array(
-					'text'	=> $location_descendant_plural_name . ' Within This ' . $location_single_name,
-					'href'	=> 'sub-clinics',
-					'label'	=> 'Jump to the section of this page about ' . $location_descendant_plural_name_attr . ' within this ' . strtolower($location_single_name_attr)
-				),
-				'clinical_resource' => array(
-					'text'	=> $clinical_resource_plural_name,
-					'href'	=> 'related-resources',
-					'label'	=> 'Jump to the section of this page about ' . $clinical_resource_plural_name_attr
-				)
-			);
+				);
+
+		} elseif ( $post_type == 'location' ) {
+
+			global $location_alert_title;
+			global $location_about_section_title_short;
+			global $location_about_section_label;
+			global $location_scheduling_title;
+
+			// Get labels
+			
+				// Get system settings for provider labels
+
+					if (
+						!isset($provider_plural_name) || empty($provider_plural_name)
+						||
+						!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
+					) {
+						$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
+					}
+			
+				// Get system settings for location labels
+
+					if (
+						!isset($location_single_name) || empty($location_single_name)
+						||
+						!isset($location_single_name_attr) || empty($location_single_name_attr)
+					) {
+						$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+							$location_single_name = $labels_location_vars['location_single_name']; // string
+							$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
+					}
+			
+				// Get system settings for location descendant item labels
+
+					if (
+						!isset($location_descendant_plural_name) || empty($location_descendant_plural_name)
+						||
+						!isset($location_descendant_plural_name_attr) || empty($location_descendant_plural_name_attr)
+					) {
+						$labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
+							$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
+							$location_descendant_plural_name_attr = $labels_location_descendant_vars['location_descendant_plural_name_attr']; // string
+					}
+			
+				// Get system settings for area of expertise labels
+
+					if (
+						!isset($expertise_plural_name) || empty($expertise_plural_name)
+						||
+						!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
+					) {
+						$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+					}
+			
+				// Get system settings for clinical resource labels
+
+					if (
+						!isset($clinical_resource_plural_name) || empty($clinical_resource_plural_name)
+						||
+						!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
+					) {
+						$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
+							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
+					}
+			
+				// Get system settings for combined condition and treatment labels
+
+					if (
+						!isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name)
+						||
+						!isset($condition_treatment_plural_name_attr) || empty($condition_treatment_plural_name_attr)
+					) {
+						$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+							$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
+							$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
+					}
+
+			// Build array
+
+				$jump_links_item_key = 'location';
+				$jump_links_items = array(
+					'location_alert' => array(
+						'text'	=> $location_alert_title ? $location_alert_title : 'Alert',
+						'href'	=> 'location-alert',
+						'label'	=> 'Jump to the section of this page with the alert regarding this ' . strtolower($location_single_name_attr)
+					),
+					'closing' => array(
+						'text'	=> 'Closing Information',
+						'href'	=> 'closing-info',
+						'label'	=> 'Jump to the section of this page with the closing information'
+					),
+					'location_about' => array(
+						'text'	=> $location_about_section_title_short,
+						'href'	=> 'description',
+						'label'	=> $location_about_section_label,
+						'submenu' => array(
+							'location_affiliation' => array(
+								'text'	=> 'Affiliation',
+								'href'	=> 'affiliation',
+								'label'	=> 'Jump to the section of this page about Affiliation'
+							),
+							'prescription' => array(
+								'text'	=> 'Prescription Information',
+								'href'	=> 'prescription-info',
+								'label'	=> 'Jump to the section of this page about Prescription Information'
+							)
+						)
+					),
+					'parking' => array(
+						'text'	=> 'Parking Information',
+						'href'	=> 'parking-info',
+						'label'	=> 'Jump to the section of this page about Parking Information'
+					),
+					'appointment' => array(
+						'text'	=> 'Appointment Information',
+						'href'	=> 'appointment-info',
+						'label'	=> 'Jump to the section of this page about Appointment Information'
+					),
+					'mychart_scheduling' => array(
+						'text'	=> $location_scheduling_title,
+						'href'	=> 'scheduling',
+						'label'	=> 'Jump to the section of this page about scheduling an appointment in MyChart'
+					),
+					'telemedicine' => array(
+						'text'	=> 'Telemedicine',
+						'href'	=> 'telemedicine-info',
+						'label'	=> 'Jump to the section of this page about Telemedicine Information'
+					),
+					'portal' => array(
+						'text'	=> 'Telemedicine',
+						'href'	=> 'telemedicine-info',
+						'label'	=> 'Jump to the section of this page about Telemedicine Information'
+					),
+					'portal' => array(
+						'text'	=> 'Patient Portal',
+						'href'	=> 'portal',
+						'label'	=> 'Jump to the section of this page about the Patient Portal'
+					),
+					'provider' => array(
+						'text'	=> $provider_plural_name,
+						'href'	=> 'providers',
+						'label'	=> 'Jump to the section of this page about ' . $provider_plural_name_attr
+					),
+					'condition_treatment' => array(
+						'text'	=> $condition_treatment_plural_name,
+						'href'	=> 'conditions-treatments',
+						'label'	=> 'Jump to the section of this page about ' . $condition_treatment_plural_name_attr
+					),
+					'expertise' => array(
+						'text'	=> $expertise_plural_name,
+						'href'	=> 'expertise',
+						'label'	=> 'Jump to the section of this page about ' . $expertise_plural_name_attr
+					),
+					'location_descendant' => array(
+						'text'	=> $location_descendant_plural_name . ' Within This ' . $location_single_name,
+						'href'	=> 'sub-clinics',
+						'label'	=> 'Jump to the section of this page about ' . $location_descendant_plural_name_attr . ' within this ' . strtolower($location_single_name_attr)
+					),
+					'clinical_resource' => array(
+						'text'	=> $clinical_resource_plural_name,
+						'href'	=> 'related-resources',
+						'label'	=> 'Jump to the section of this page about ' . $clinical_resource_plural_name_attr
+					)
+				);
+
 		} elseif ( $post_type == 'clinical-resource' ) {
-			$jump_links_item_key = 'clinical_resource';
-			$jump_links_items = array(
-				'clinical_resource' => array(
-					'text'	=> 'Related ' . $clinical_resource_plural_name,
-					'href'	=> 'related-resources',
-					'label'	=> 'Jump to the section of this page about related ' . $clinical_resource_plural_name_attr
-				),
-				'condition_treatment' => array(
-					'text'	=> $condition_treatment_plural_name,
-					'href'	=> 'conditions-treatments',
-					'label'	=> 'Jump to the section of this page about related ' . $condition_treatment_plural_name_attr
-				),
-				'provider' => array(
-					'text'	=> $provider_plural_name,
-					'href'	=> 'providers',
-					'label'	=> 'Jump to the section of this page about related ' . $provider_plural_name_attr
-				),
-				'location' => array(
-					'text'	=> $location_plural_name,
-					'href'	=> 'locations',
-					'label'	=> 'Jump to the section of this page about related ' . $location_plural_name_attr
-				),
-				'expertise' => array(
-					'text'	=> $expertise_plural_name,
-					'href'	=> 'expertise',
-					'label'	=> 'Jump to the section of this page about related ' . $expertise_plural_name_attr
-				),
-				'appointment' => array(
-					'text'	=> 'Make an Appointment',
-					'href'	=> 'appointment-info',
-					'label'	=> 'Jump to the section of this page about making an appointment'
-				)
-			);
+
+			// Get labels
+			
+				// Get system settings for provider labels
+
+					if (
+						!isset($provider_plural_name) || empty($provider_plural_name)
+						||
+						!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
+					) {
+						$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
+					}
+			
+				// Get system settings for location labels
+
+					if (
+						!isset($location_plural_name) || empty($location_plural_name)
+						||
+						!isset($location_plural_name_attr) || empty($location_plural_name_attr)
+					) {
+						$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+							$location_plural_name = $labels_location_vars['location_plural_name']; // string
+							$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
+					}
+			
+				// Get system settings for area of expertise labels
+
+					if (
+						!isset($expertise_plural_name) || empty($expertise_plural_name)
+						||
+						!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
+					) {
+						$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
+							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+					}
+			
+				// Get system settings for clinical resource labels
+
+					if (
+						!isset($clinical_resource_plural_name) || empty($clinical_resource_plural_name)
+						||
+						!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
+					) {
+						$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
+							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
+					}
+			
+				// Get system settings for combined condition and treatment labels
+
+					if (
+						!isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name)
+						||
+						!isset($condition_treatment_plural_name_attr) || empty($condition_treatment_plural_name_attr)
+					) {
+						$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+							$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
+							$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
+					}
+
+			// Build array
+
+				$jump_links_item_key = 'clinical_resource';
+				$jump_links_items = array(
+					'clinical_resource' => array(
+						'text'	=> 'Related ' . $clinical_resource_plural_name,
+						'href'	=> 'related-resources',
+						'label'	=> 'Jump to the section of this page about related ' . $clinical_resource_plural_name_attr
+					),
+					'condition_treatment' => array(
+						'text'	=> $condition_treatment_plural_name,
+						'href'	=> 'conditions-treatments',
+						'label'	=> 'Jump to the section of this page about related ' . $condition_treatment_plural_name_attr
+					),
+					'provider' => array(
+						'text'	=> $provider_plural_name,
+						'href'	=> 'providers',
+						'label'	=> 'Jump to the section of this page about related ' . $provider_plural_name_attr
+					),
+					'location' => array(
+						'text'	=> $location_plural_name,
+						'href'	=> 'locations',
+						'label'	=> 'Jump to the section of this page about related ' . $location_plural_name_attr
+					),
+					'expertise' => array(
+						'text'	=> $expertise_plural_name,
+						'href'	=> 'expertise',
+						'label'	=> 'Jump to the section of this page about related ' . $expertise_plural_name_attr
+					),
+					'appointment' => array(
+						'text'	=> 'Make an Appointment',
+						'href'	=> 'appointment-info',
+						'label'	=> 'Jump to the section of this page about making an appointment'
+					)
+				);
+
 		} else {
 			$jump_links_item_key = '';
 			$jump_links_items = array();
