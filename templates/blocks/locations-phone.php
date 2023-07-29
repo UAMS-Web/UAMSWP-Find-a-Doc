@@ -149,13 +149,12 @@ if ( !$location_ac_query ) {
 
 // Additional phone numbers
 // Set variable values only if the output is a Location profile
+$location_phone_numbers = '';
 if ( $phone_output == 'location_profile' ) {
 	if ( !$location_ac_query ) {
 		// IF this is not an Arkansas Children's location...
 		$location_phone_numbers = get_field('field_location_phone_numbers', $phone_output_id); // Get the repeater for additional phone numbers
 	}
-} else {
-	$location_phone_numbers = '';
 }
 
 // Display phone numbers on location profile's contact information section 
