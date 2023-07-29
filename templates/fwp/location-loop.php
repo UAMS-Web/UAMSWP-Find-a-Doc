@@ -13,16 +13,33 @@
  * 	Baptist Health Cancer Care	('baptist_health_cancer_care')
  */
 
-// Bring in variables from outside of the function
-global $location_single_name; // Defined in uamswp_fad_labels_location()
-global $location_single_name_attr; // Defined in uamswp_fad_labels_location()
-global $location_plural_name; // Defined in uamswp_fad_labels_location()
+// Check/define variables
 
-if ( have_posts() ) : while ( have_posts() ) : the_post();
+	// Find-a-Doc Settings values for location labels
 
-$page_id = get_the_ID();
-include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+		if (
+			!isset($location_plural_name) || empty($location_plural_name)
+		) {
+			$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+				$location_plural_name = $labels_location_vars['location_plural_name']; // string
+		}
 
-endwhile; else : ?>
-	<p><?php _e( 'Sorry, no ' . strtolower($location_plural_name) . ' matched your criteria.' ); ?></p>
-<?php endif; ?>
+if ( have_posts() ) {
+	
+	while ( have_posts() ) {
+
+		the_post();
+		$page_id = get_the_ID();
+		include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+
+	} // endwhile
+
+} else {
+
+		?>
+		<p><?php _e( 'Sorry, no ' . strtolower($location_plural_name) . ' matched your criteria.' ); ?></p>
+		<?php
+
+} // endif
+
+?>
