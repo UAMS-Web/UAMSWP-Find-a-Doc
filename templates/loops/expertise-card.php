@@ -49,19 +49,19 @@
 
 			// Query on whether the current item has a parent
 			$expertise_has_parent = $expertise_parent_id ? true : false;
-		
+
 			// Get the parent post object
 			if ( $expertise_has_parent && $expertise_parent_id ) {
 				$parent_expertise = get_post($expertise_parent_id);
 			}
-		
+
 			if ( $parent_expertise ) {
 
 				// If the parent post object exists...
 
 				// Parent ID
 				$parent_id = $parent_expertise->ID;
-				
+
 				// Parent title
 
 					$parent_title = $parent_expertise->post_title;
@@ -104,41 +104,41 @@
 <div class="card">
 	<a href="<?php echo get_permalink($page_id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Photo" data-itemtitle="<?php echo $expertise_title_attr; ?>">
 		<?php
-		
+
 		if ( has_post_thumbnail($page_id) ) {
-			
+
 			echo get_the_post_thumbnail($page_id, 'aspect-16-9-small', ['class' => 'card-img-top', 'loading' => 'lazy']);
-			
+
 		} else {
-			
+
 			?>
 			<picture>
 				<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" media="(min-width: 1px)">
 				<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.jpg" alt="" role="presentation" class="card-img-top" loading="lazy" />
 			</picture>
 			<?php
-		
+
 		} // endif ( has_post_thumbnail($page_id) ) else
-		
+
 		?>
 	</a>
 	<div class="card-body">
 		<h3 class="card-title h5">
 			<span class="name"><a href="<?php echo get_permalink($page_id); ?>" target="_self" aria-label="<?php echo $expertise_label; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $expertise_title; ?></a></span>
 			<?php
-			
+
 			if (
 				$parent_expertise
 				&&
 				!$expertise_descendant_list
 			) {
-				
+
 				?>
 				<span class="subtitle"><span class="sr-only">(</span>Part of <a href="<?php echo $parent_url; ?>" aria-label="Go to <?php echo $expertise_single_name_attr; ?> page for <?php echo $parent_title_attr; ?>" data-categorytitle="Parent Name" data-itemtitle="<?php echo $expertise_title_attr; ?>"><?php echo $parent_title; ?></a><span class="sr-only">)</span></span>
 				<?php
-			
+
 			} // endif
-			
+
 			?>
 		</h3>
 		<p class="card-text"><?php echo $expertise_excerpt; ?></p>
