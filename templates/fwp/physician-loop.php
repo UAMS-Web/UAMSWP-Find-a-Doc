@@ -11,21 +11,37 @@
  * 	Physician	('physician')
  */
 
-// Bring in variables from outside of the function
-
-	// Defined in uamswp_fad_labels_provider()
-
-		global $provider_single_name;
-		global $provider_single_name_attr;
-		global $provider_plural_name;
-		global $provider_plural_name_attr;
-
-	// Defined in uamswp_fad_labels_location()
-
-		global $location_plural_name;
- 
 if ( have_posts() ) {
 	
+	// Check/define variables
+
+		// Find-a-Doc Settings values for provider labels
+
+			if (
+				!isset($provider_single_name) || empty($provider_single_name)
+				||
+				!isset($provider_single_name_attr) || empty($provider_single_name_attr)
+				||
+				!isset($provider_plural_name) || empty($provider_plural_name)
+				||
+				!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
+			) {
+				$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+					$provider_single_name = $labels_provider_vars['provider_single_name']; // string
+					$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
+					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
+					$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
+			}
+
+		// Find-a-Doc Settings values for location labels
+
+			if (
+				!isset($location_plural_name) || empty($location_plural_name)
+			) {
+				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+					$location_plural_name = $labels_location_vars['location_plural_name']; // string
+			}
+ 
 	while ( have_posts() ) {
 		
 		the_post();
