@@ -426,8 +426,12 @@ $meta_profile_gender = strtolower($gender_attr); // enum(male, female) // Their 
 $meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)
 
 function uamswp_remove_title_from_single_crumb( $crumb, $args ) {
+
 	// Bring in variables from outside of the function
-	global $full_name; // Defined on the template
+
+		// Defined on the template
+
+			global $full_name;
 
 	return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
 }
@@ -435,13 +439,18 @@ add_filter( 'genesis_single_crumb', 'uamswp_remove_title_from_single_crumb', 10,
 
 // SEOPress Breadcrumbs Fix
 function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
+
 	// Bring in variables from outside of the function
-	global $full_name; // Defined on the template
+
+		// Defined on the template
+
+			global $full_name;
 
 	$crumb = array_pop($crumbs);
 	$provider_name = array($full_name, get_permalink());
 	array_push($crumbs, $provider_name);
 	return $crumbs;
+
 }
 add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_crumb', 20);
 
