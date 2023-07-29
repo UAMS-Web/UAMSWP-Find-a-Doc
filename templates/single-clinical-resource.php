@@ -561,36 +561,17 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 	// Construct jump links section
 
-		function uamswp_resource_jump_links() {
-			// Bring in variables from outside of the function
-			global $jump_link_count;
-			global $provider_plural_name; // Defined in uamswp_fad_labels_provider()
-			global $provider_plural_name_attr; // Defined in uamswp_fad_labels_provider()
-			global $location_plural_name; // Defined in uamswp_fad_labels_location()
-			global $location_plural_name_attr; // Defined in uamswp_fad_labels_location()
-			global $expertise_plural_name; // Defined in uamswp_fad_labels_expertise()
-			global $expertise_plural_name_attr; // Defined in uamswp_fad_labels_expertise()
-			global $clinical_resource_plural_name; // Defined in uamswp_fad_labels_clinical_resource()
-			global $clinical_resource_plural_name_attr; // Defined in uamswp_fad_labels_clinical_resource()
-			global $condition_plural_name; // Defined in uamswp_fad_labels_condition()
-			global $condition_plural_name_attr; // Defined in uamswp_fad_labels_condition()
-			global $treatment_plural_name; // Defined in uamswp_fad_labels_treatment()
-			global $treatment_plural_name_attr; // Defined in uamswp_fad_labels_treatment()
-			global $fad_jump_links_title; // Defined in uamswp_fad_labels_jump_links()
-			global $page_title; // Defined on the template
-			global $condition_treatment_plural_name; // Defined on the template
-			global $condition_treatment_plural_name_attr; // Defined on the template
-			global $provider_section_show; // Defined on the template
-			global $location_section_show; // Defined on the template
-			global $expertise_section_show; // Defined on the template
-			global $clinical_resource_section_show; // Defined on the template
-			global $condition_treatment_section_show; // Defined on the template
-			global $appointment_section_show; // Defined on the template
-
-			// Begin Jump Links Section
+		add_action( 'genesis_after_entry', function() use(
+			$jump_link_count,
+			$provider_section_show,
+			$location_section_show,
+			$expertise_section_show,
+			$clinical_resource_section_show,
+			$condition_treatment_section_show,
+			$appointment_section_show
+		) {
 			include( UAMS_FAD_PATH . '/templates/parts/jump-links.php' );
-		}
-		add_action( 'genesis_after_entry', 'uamswp_resource_jump_links', 8 );
+		}, 8 );
 
 	// Construct related clinical resources section
 
