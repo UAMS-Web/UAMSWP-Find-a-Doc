@@ -89,7 +89,7 @@
 	// Define the values of the card elements
 
 		// Link accessible label
-		$expertise_label = 'View ' . $expertise_single_name_attr . ' page for' . $expertise_title_attr;
+		$expertise_label = 'View ' . $expertise_single_name_attr . ' page for ' . $expertise_title_attr;
 
 		// Excerpt
 
