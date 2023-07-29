@@ -425,13 +425,13 @@ $meta_profile_last_name = $last_name_attr; // string // A name inherited from a 
 $meta_profile_gender = strtolower($gender_attr); // enum(male, female) // Their gender.
 $meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)
 
-function be_remove_title_from_single_crumb( $crumb, $args ) { // Because BE is the man
+function uamswp_remove_title_from_single_crumb( $crumb, $args ) {
 	// Bring in variables from outside of the function
 	global $full_name; // Defined on the template
 
 	return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
 }
-add_filter( 'genesis_single_crumb', 'be_remove_title_from_single_crumb', 10, 2 );
+add_filter( 'genesis_single_crumb', 'uamswp_remove_title_from_single_crumb', 10, 2 );
 
 // SEOPress Breadcrumbs Fix
 function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
