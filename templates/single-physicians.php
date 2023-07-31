@@ -425,34 +425,33 @@ $meta_profile_last_name = $last_name_attr; // string // A name inherited from a 
 $meta_profile_gender = strtolower($gender_attr); // enum(male, female) // Their gender.
 $meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)
 
-function uamswp_remove_title_from_single_crumb( $crumb, $args ) {
+// Override the theme's method of defining the breadcrumbs
 
-	// Bring in variables from outside of the function
+	// Genesis Breadcrumbs Fix
 
-		// Defined on the template
+		add_filter( 'genesis_single_crumb', function( $crumb, $args ) use ( $full_name ) {
 
-			global $full_name;
+			// Replace the last item in the breadcrumbs with the provider name
+			return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
 
-	return substr( $crumb, 0, strrpos( $crumb, $args['sep'] ) ) . $args['sep'] . $full_name;
-}
-add_filter( 'genesis_single_crumb', 'uamswp_remove_title_from_single_crumb', 10, 2 );
+		}, 10, 2 );
 
-// SEOPress Breadcrumbs Fix
-function sp_change_title_from_provider_crumb( $crumbs ) { // SEOPress
+	// SEOPress Breadcrumbs Fix
 
-	// Bring in variables from outside of the function
+		add_filter('seopress_pro_breadcrumbs_crumbs', function( $crumbs ) use ( $full_name ) {
 
-		// Defined on the template
+			// Get the last value in the breadcrumbs array
+			$crumb = array_pop($crumbs);
 
-			global $full_name;
+			// Get the provider name and its URL
+			$provider_name = array($full_name, get_permalink());
 
-	$crumb = array_pop($crumbs);
-	$provider_name = array($full_name, get_permalink());
-	array_push($crumbs, $provider_name);
-	return $crumbs;
+			// Add the provider details to the breadcrumbs array
+			array_push($crumbs, $provider_name);
 
-}
-add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_change_title_from_provider_crumb', 20);
+			return $crumbs;
+
+		}, 20);
 
 get_header();
 
