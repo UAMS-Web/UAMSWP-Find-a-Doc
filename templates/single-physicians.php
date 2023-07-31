@@ -449,12 +449,63 @@ if ( $regions || $service_lines ) {
 
 		}, 15, 2 );
 
-// Override the theme's method of defining the social meta tags
-$meta_og_type = 'profile';
-$meta_profile_first_name = $first_name_attr; // string // A name normally given to an individual by a parent or self-chosen.
-$meta_profile_last_name = $last_name_attr; // string // A name inherited from a family or marriage and by which the individual is commonly known.
-$meta_profile_gender = strtolower($gender_attr); // enum(male, female) // Their gender.
-$meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)
+// Override the theme's method of defining the social media meta tags
+
+	// Define Open Graph type (og:type) values
+
+		$meta_og_type = 'profile';
+
+	// Define the Open Graph profile property array (profile:*)
+
+		$meta_og_type_property = array();
+
+		// Profile first name
+
+			if (
+				isset($first_name_attr)
+				&&
+				!empty($first_name_attr)
+			) {
+				$meta_og_type_property['profile:first_name'] = $first_name_attr; // string // A name normally given to an individual by a parent or self-chosen.
+			}
+
+		// Profile last name
+
+			if (
+				isset($last_name_attr)
+				&&
+				!empty($last_name_attr)
+			) {
+				$meta_og_type_property['profile:last_name'] = $last_name_attr; // string // A name inherited from a family or marriage and by which the individual is commonly known.
+			}
+
+		// Profile username
+
+			$meta_og_profile_username = '';
+			$meta_og_profile_username_attr = $meta_og_profile_username ? uamswp_attr_conversion($meta_og_profile_username) : '';
+			if (
+				isset($meta_og_profile_username_attr)
+				&&
+				!empty($meta_og_profile_username_attr)
+			) {
+				$meta_og_type_property['profile:username'] = $meta_og_profile_username_attr; // string // A short unique string to identify them.
+			}
+
+		// Profile gender
+
+			$meta_profile_gender = strtolower($gender_attr); // enum(male, female) // Their gender.
+			$meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)
+			if (
+				isset($meta_profile_gender)
+				&&
+				!empty($meta_profile_gender)
+			) {
+				$meta_og_type_property['profile:gender'] = $meta_profile_gender; // string // A name inherited from a family or marriage and by which the individual is commonly known.
+			}
+
+	// Filter hooks
+	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+
 
 // Override the theme's method of defining the breadcrumbs
 
