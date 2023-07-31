@@ -185,6 +185,14 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 	// Get the content
 
+		// Avoid PHP errors
+
+			$content = '';
+			$text = '';
+			$infographic_descr = '';
+			$video_descr = '';
+			$document_descr = '';
+
 		if ( 'text' == $resource_type_value ) {
 
 			// Resource type: article
@@ -416,7 +424,13 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 	// Construct main clinical resource content section
 
-		add_action( 'genesis_entry_content', function() use ($resource_type_value) {
+		add_action( 'genesis_entry_content', function() use (
+			$resource_type_value,
+			$text,
+			$infographic_descr,
+			$video_descr,
+			$document_descr
+		) {
 
 			if ( 'text' == $resource_type_value ) {
 
