@@ -33,6 +33,49 @@
  * 	$meta_twitter_image_alt // string // Alt text of the image in $meta_twitter_image
  */
 
+// Check/define variables
+
+	// Define featured image values
+
+		// Avoid PHP errors
+
+			$meta_image_resize_vars = '';
+			$meta_og_image = '';
+			$meta_og_image_width = '';
+			$meta_og_image_height = '';
+			$meta_twitter_image = '';
+			$meta_twitter_image_width = '';
+			$meta_twitter_image_height = '';
+			$meta_oembed_thumbnail_size = '';
+			$meta_oembed_thumbnail = '';
+			$meta_oembed_thumbnail_width = '';
+			$meta_oembed_thumbnail_height = '';
+			$meta_twitter_image_alt = '';
+
+		if (
+			isset($page_image_id)
+			&&
+			!empty($page_image_id)
+		) {
+
+			// Crop and resize images for Open Graph and Twitter
+				
+				$meta_image_resize_vars = uamswp_meta_image_resize( $page_image_id );
+					$meta_og_image = $meta_image_resize_vars['meta_og_image']; // string
+					$meta_og_image_width = $meta_image_resize_vars['meta_og_image_width']; // int
+					$meta_og_image_height = $meta_image_resize_vars['meta_og_image_height']; // int
+					$meta_twitter_image = $meta_image_resize_vars['meta_twitter_image']; // string
+					$meta_twitter_image_width = $meta_image_resize_vars['meta_twitter_image_width']; // int
+					$meta_twitter_image_height = $meta_image_resize_vars['meta_twitter_image_height']; // int
+
+			$meta_oembed_thumbnail_size = ''; // string // Thumbnail size used in Oembed
+			$meta_oembed_thumbnail = ''; // string // An image URL which should represent your object within Oembed
+			$meta_oembed_thumbnail_width = ''; // int // Width of the image in $meta_oembed_thumbnail
+			$meta_oembed_thumbnail_height = ''; // int // Width of the image in $meta_oembed_thumbnail
+			$meta_twitter_image_alt = get_post_meta( $page_image_id, '_wp_attachment_image_alt', true ); // string // Alt text of the image in $meta_twitter_image
+
+		}
+
 // Filter Open Graph type (og:type) and properties for that type
 
 	// Check/define variables

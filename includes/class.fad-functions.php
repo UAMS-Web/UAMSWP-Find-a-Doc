@@ -7155,6 +7155,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		$meta_twitter_image_height = '';
 	}
 
+
 	// Create and return an array to be used on the templates and template parts
 
 		$meta_image_resize_vars = array(

@@ -15,65 +15,93 @@
 
 	} );
 
-add_filter( 'posts_where', 'title_filter', 10, 2 );
-function title_filter( $where, $query ){
-	// Search for posts with the first letter
+// Filter posts_where
 
-	// Bring in variables from outside of the function
-	global $wpdb; // WordPress-specific global variable
+	add_filter( 'posts_where', 'title_filter', 10, 2 );
+	function title_filter( $where, $query ){
+		// Search for posts with the first letter
 
-	$starts_with = esc_sql( $query->get( 'starts_with' ) );
+		// Bring in variables from outside of the function
+		global $wpdb; // WordPress-specific global variable
 
-	if( !isset( $starts_with ) ){
+		$starts_with = esc_sql( $query->get( 'starts_with' ) );
+
+		if( !isset( $starts_with ) ){
+			return $where;
+		}
+
+		if ( is_numeric($starts_with) ) {
+			$where .= " AND $wpdb->posts.post_title REGEXP '^[0-9]'";
+			// $where .= ' AND ' . $wpdb->prepare( $wpdb->posts . ".post_title REGEXP %s", '^[0-9]' );
+		} else {
+			$where .= " AND $wpdb->posts.post_title LIKE '$starts_with%'";
+		}
 		return $where;
 	}
 
-	if ( is_numeric($starts_with) ) {
-		$where .= " AND $wpdb->posts.post_title REGEXP '^[0-9]'";
-		// $where .= ' AND ' . $wpdb->prepare( $wpdb->posts . ".post_title REGEXP %s", '^[0-9]' );
-	} else {
-		$where .= " AND $wpdb->posts.post_title LIKE '$starts_with%'";
-	}
-	return $where;
-}
+// Filter terms_clauses
 
-// Get system settings for condition labels
-$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
-	$condition_single_name = $labels_condition_vars['condition_single_name']; // string
-	$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
-	$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
-	$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
-	$placeholder_condition_single_name = $labels_condition_vars['placeholder_condition_single_name']; // string
-	$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
+	// Do nothing
 
-// Get system settings for condition archive page text
-$archive_text_condition_vars = isset($archive_text_condition_vars) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
-	$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
-	$condition_archive_headline_attr = $archive_text_condition_vars['condition_archive_headline_attr']; // string
-	$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
-	$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
-	$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
-$condition_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+// Get system settings for ontology item labels
 
-// // Get the page ID
-// $page_id = get_the_ID(); // int
+	// Get system settings for condition labels
+
+		$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
+			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
+			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
+			$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
+			$placeholder_condition_single_name = $labels_condition_vars['placeholder_condition_single_name']; // string
+			$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
+
+	// Get system settings for condition archive page text
+
+		$archive_text_condition_vars = isset($archive_text_condition_vars) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
+			$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
+			$condition_archive_headline_attr = $archive_text_condition_vars['condition_archive_headline_attr']; // string
+			$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
+			$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
+			$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
+		$condition_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+
+// Get system settings for this archive page's text
+
+	// Do nothing
+
+// Get the page ID
+
+	// $page_id = get_the_ID(); // int
 
 // Get the page title
-$page_title = $condition_archive_headline; // string
-$page_title_attr = uamswp_attr_conversion($page_title);
 
-// Array for page titles and section titles
-$page_titles = array(
-	'page_title'	=> $page_title
-);
+	$page_title = $condition_archive_headline; // string
+	$page_title_attr = uamswp_attr_conversion($page_title);
 
-// // Get the page URL
-// $page_url = user_trailingslashit(get_permalink());
+	// Array for page titles and section titles
 
-$alpha = '';
-if (isset($_GET['alpha'])) {
-	$alpha = $_GET['alpha'];
-}
+		$page_titles = array(
+			'page_title'	=> $page_title
+		);
+
+// Get the page URL
+
+	// $page_url = user_trailingslashit(get_permalink());
+
+// alpha
+
+	$alpha = '';
+	if (isset($_GET['alpha'])) {
+		$alpha = $_GET['alpha'];
+	}
+
+// Get system settings for this archive page's featured image
+
+	// Do nothing
+
+// Get the featured image
+
+	// $page_image_id = ''; // Image ID // int
 
 // Override theme's method of defining the meta page title
 
@@ -97,7 +125,50 @@ if (isset($_GET['alpha'])) {
 
 		}, 15, 2 );
 
+// Set the schema description and the meta description
+
+	// // Get excerpt
+	// 
+	// 	$excerpt = get_the_excerpt();
+	// 	$excerpt_user = true;
+	// 
+	// 	if ( empty( $excerpt ) ) {
+	// 
+	// 		$excerpt_user = false;
+	// 
+	// 	}
+	// 
+	// // Set schema description
+	// 
+	// 	$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+	// 
+	// // Override theme's method of defining the meta description
+	// 
+	// 	add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+	// 
+	// 		$html = $excerpt;
+	// 
+	// 		return $html;
+	// 
+	// 	} );
+
+// Construct the meta keywords element
+
+	// $keywords = '';
+	// 
+	// add_action( 'wp_head', function() use ($keywords) {
+	// 	uamswp_keyword_hook_header(
+	// 		$keywords // array
+	// 	);
+	// } );
+
+// Override the theme's method of defining the social media meta tags
+
+	// Filter hooks
+	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+
 get_header();
+
 ?>
 <div class="content-sidebar-wrap">
 	<main id="genesis-content">

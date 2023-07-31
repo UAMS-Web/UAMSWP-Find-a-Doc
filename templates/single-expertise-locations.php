@@ -182,13 +182,6 @@ $fpage_image_expertise_vars = isset($fpage_image_expertise_vars) ? $fpage_image_
 
 // Get the featured image / post thumbnail
 $page_image_id = $location_fpage_featured_image_expertise; // Image ID
-$meta_image_resize_vars = uamswp_meta_image_resize( $page_image_id );
-	$meta_og_image = $meta_image_resize_vars['meta_og_image']; // string
-	$meta_og_image_width = $meta_image_resize_vars['meta_og_image_width']; // int
-	$meta_og_image_height = $meta_image_resize_vars['meta_og_image_height']; // int
-	$meta_twitter_image = $meta_image_resize_vars['meta_twitter_image']; // string
-	$meta_twitter_image_width = $meta_image_resize_vars['meta_twitter_image_width']; // int
-	$meta_twitter_image_height = $meta_image_resize_vars['meta_twitter_image_height']; // int
 
 // Set general variables for fake subpage
 $fpage_name = $location_plural_name; // Name of ontology item type represented by this fake subpage
@@ -404,13 +397,10 @@ $ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_
 		);
 	} );
 
-// Override the theme's method of defining the social meta tags
+// Override the theme's method of defining the social media meta tags
 
-	// Open Graph meta tags
-	add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb'); // Filter Open Graph thumbnail (og:image)
-
-	// Twitter Card meta tags
-	add_filter('seopress_social_twitter_card_thumb', 'uamswp_sp_social_twitter_card_thumb'); // Filter Twitter Card thumbnail (twitter:image:src)
+	// Filter hooks
+	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
 
 // Modify site header
 
