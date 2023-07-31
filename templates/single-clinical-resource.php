@@ -315,25 +315,23 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 	$entry_title_image_desktop = ''; // Desktop breakpoint image ID
 	$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
 
-	$uamswp_fad_post_title_args = array(
-		'entry_title_text'				=> $entry_title_text, // Entry title text
-		'entry_header_style'			=> $entry_header_style, // Entry header style
-		'entry_title_text_supertitle'	=> $entry_title_text_supertitle, // Entry supertitle text
-		'entry_title_text_subtitle'		=> $entry_title_text_subtitle, // Entry subtitle text
-		'entry_title_text_body'			=> $entry_title_text_body, // Entry header lead paragraph text
-		'entry_title_image_desktop'		=> $entry_title_image_desktop, // Entry header background image for desktop breakpoints
-		'entry_title_image_mobile'		=> $entry_title_image_mobile // Entry header background image for mobile breakpoints
-	);
-
-	add_action( 'genesis_entry_header', function() use ($uamswp_fad_post_title_args) {
+	add_action( 'genesis_entry_header', function() use (
+		$entry_title_text,
+		$entry_header_style,
+		$entry_title_text_supertitle,
+		$entry_title_text_subtitle,
+		$entry_title_text_body,
+		$entry_title_image_desktop,
+		$entry_title_image_mobile
+	) {
 		uamswp_fad_post_title(
-			$uamswp_fad_post_title_args['entry_title_text'], // string // Entry title text
-			$uamswp_fad_post_title_args['entry_header_style'], // string // Entry header style
-			$uamswp_fad_post_title_args['entry_title_text_supertitle'], // string (optional) // Entry supertitle text
-			$uamswp_fad_post_title_args['entry_title_text_subtitle'], // string (optional) // Entry subtitle text
-			$uamswp_fad_post_title_args['entry_title_text_body'], // string (optional) // Entry header lead paragraph text
-			$uamswp_fad_post_title_args['entry_title_image_desktop'], // int (optional) // Entry header background image for desktop breakpoints
-			$uamswp_fad_post_title_args['entry_title_image_mobile'] // int (optional) // Entry header background image for mobile breakpoints
+			$entry_title_text, // string // Entry title text
+			$entry_header_style, // string // Entry header style
+			$entry_title_text_supertitle, // string (optional) // Entry supertitle text
+			$entry_title_text_subtitle, // string (optional) // Entry subtitle text
+			$entry_title_text_body, // string (optional) // Entry header lead paragraph text
+			$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
+			$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
 		);
 	} );
 
@@ -581,31 +579,29 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$clinical_resource_section_intro = $clinical_resource_fpage_intro_clinical_resource; // Text to use for the section intro text
 		$clinical_resource_section_more_show = false; // Query for whether to show the section that links to more items
 
-		$uamswp_fad_section_clinical_resource_args = array(
-			'clinical_resources'						=> $clinical_resources, // Value of the related clinical resources input
-			'page_titles'								=> $page_titles,
-			'clinical_resource_section_more_link_key'	=> $clinical_resource_section_more_link_key,
-			'clinical_resource_section_more_link_value'	=> $clinical_resource_section_more_link_value,
-			'clinical_resource_section_show'			=> $clinical_resource_section_show, // Query for whether to show the clinical resource section
-			'ontology_type'								=> $ontology_type, // Query for whether item is ontology type vs. content type
-			'clinical_resource_section_title'			=> $clinical_resource_section_title, // Text to use for the section title
-			'clinical_resource_section_intro'			=> $clinical_resource_section_intro, // Text to use for the section intro text
-			'clinical_resource_posts_per_page'			=> $clinical_resource_posts_per_page, // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
-			'clinical_resource_section_more_show'		=> $clinical_resource_section_more_show, // Query for whether to show the section that links to more items
-		);
-
-		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_clinical_resource_args) {
+		add_action( 'genesis_after_entry', function() use (
+			$clinical_resources,
+			$page_titles,
+			$clinical_resource_section_more_link_key,
+			$clinical_resource_section_more_link_value,
+			$clinical_resource_section_show,
+			$ontology_type,
+			$clinical_resource_section_title,
+			$clinical_resource_section_intro,
+			$clinical_resource_posts_per_page,
+			$clinical_resource_section_more_show
+		) {
 			uamswp_fad_section_clinical_resource(
-				$uamswp_fad_section_clinical_resource_args['clinical_resources'], // int[] // Value of the related clinical resources input
-				$uamswp_fad_section_clinical_resource_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_more_link_key'], // string
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_more_link_value'], // string
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_show'], // bool (optional) // Query for whether to show the clinical resource section
-				$uamswp_fad_section_clinical_resource_args['ontology_type'], // bool (optional) // Query for whether item is ontology type vs. content type
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_title'], // string (optional) // Text to use for the section title
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_intro'], // string (optional) // Text to use for the section intro text
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_posts_per_page'], // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
-				$uamswp_fad_section_clinical_resource_args['clinical_resource_section_more_show'], // bool (optional) // Query for whether to show the section that links to more items
+				$clinical_resources, // int[] // Value of the related clinical resources input
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$clinical_resource_section_more_link_key, // string
+				$clinical_resource_section_more_link_value, // string
+				$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$clinical_resource_section_title, // string (optional) // Text to use for the section title
+				$clinical_resource_section_intro, // string (optional) // Text to use for the section intro text
+				$clinical_resource_posts_per_page, // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
+				$clinical_resource_section_more_show // bool (optional) // Query for whether to show the section that links to more items
 			);
 		}, 10 );
 
@@ -619,39 +615,37 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$treatment_section_title = $treatment_fpage_title_clinical_resource; // Text to use for the section title
 		$treatment_section_intro = $treatment_fpage_intro_clinical_resource; // Text to use for the section intro text
 
-		$uamswp_fad_section_condition_treatment_args = array(
-			'conditions_cpt'					=> $conditions_cpt,
-			'treatments_cpt'					=> $treatments_cpt,
-			'page_titles'						=> $page_titles,
-			'hide_medical_ontology'				=> $hide_medical_ontology, // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-			'condition_treatment_section_show'	=> $condition_treatment_section_show,
-			'condition_section_show'			=> $condition_section_show,
-			'treatment_section_show'			=> $treatment_section_show,
-			'ontology_type'						=> $ontology_type,
-			'condition_treatment_section_title'	=> $condition_treatment_section_title, // Text to use for the section title
-			'condition_treatment_section_intro'	=> $condition_treatment_section_intro, // Text to use for the section intro text
-			'condition_section_title'			=> $condition_section_title, // Text to use for the conditions subsection title
-			'condition_section_intro'			=> $condition_section_intro, // Text to use for the conditions subsection intro text
-			'treatment_section_title'			=> $treatment_section_title, // Text to use for the treatments subsection title
-			'treatment_section_intro'			=> $treatment_section_intro // Text to use for the treatments subsection intro text
-		);
-
-		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_condition_treatment_args) {
+		add_action( 'genesis_after_entry', function() use (
+			$conditions_cpt,
+			$treatments_cpt,
+			$page_titles,
+			$hide_medical_ontology,
+			$condition_treatment_section_show,
+			$condition_section_show,
+			$treatment_section_show,
+			$ontology_type,
+			$condition_treatment_section_title,
+			$condition_treatment_section_intro,
+			$condition_section_title,
+			$condition_section_intro,
+			$treatment_section_title,
+			$treatment_section_intro
+		) {
 			uamswp_fad_section_condition_treatment(
-				$uamswp_fad_section_condition_treatment_args['conditions_cpt'], // int[]
-				$uamswp_fad_section_condition_treatment_args['treatments_cpt'], // int[]
-				$uamswp_fad_section_condition_treatment_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$uamswp_fad_section_condition_treatment_args['hide_medical_ontology'], // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-				$uamswp_fad_section_condition_treatment_args['condition_treatment_section_show'], // bool
-				$uamswp_fad_section_condition_treatment_args['condition_section_show'], // bool
-				$uamswp_fad_section_condition_treatment_args['treatment_section_show'], // bool
-				$uamswp_fad_section_condition_treatment_args['ontology_type'], // bool
-				$uamswp_fad_section_condition_treatment_args['condition_treatment_section_title'], // string // Text to use for the section title
-				$uamswp_fad_section_condition_treatment_args['condition_treatment_section_intro'], // string // Text to use for the section intro text
-				$uamswp_fad_section_condition_treatment_args['condition_section_title'], // string // Text to use for the conditions subsection title
-				$uamswp_fad_section_condition_treatment_args['condition_section_intro'], // string // Text to use for the conditions subsection intro text
-				$uamswp_fad_section_condition_treatment_args['treatment_section_title'], // string // Text to use for the treatments subsection title
-				$uamswp_fad_section_condition_treatment_args['treatment_section_intro'] // string // Text to use for the treatments subsection intro text
+				$conditions_cpt, // int[]
+				$treatments_cpt, // int[]
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+				$condition_treatment_section_show, // bool
+				$condition_section_show, // bool
+				$treatment_section_show, // bool
+				$ontology_type, // bool
+				$condition_treatment_section_title, // string // Text to use for the section title
+				$condition_treatment_section_intro, // string // Text to use for the section intro text
+				$condition_section_title, // string // Text to use for the conditions subsection title
+				$condition_section_intro, // string // Text to use for the conditions subsection intro text
+				$treatment_section_title, // string // Text to use for the treatments subsection title
+				$treatment_section_intro // string // Text to use for the treatments subsection intro text
 			);
 		}, 12 );
 
@@ -662,27 +656,25 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true; // Query for whether to display the section header
 		$provider_section_filter = false; // Query for whether to add filter(s) // bool (default: true)
 
-		$uamswp_fad_section_provider_args = array(
-			'providers'						=> $providers, // Value of the related providers input
-			'page_titles'					=> $page_titles,
-			'provider_section_show'			=> $provider_section_show, // Query for whether to show the provider section
-			'ontology_type'					=> $ontology_type, // Query for whether item is ontology type vs. content type
-			'provider_section_title'		=> $provider_section_title, // Text to use for the section title
-			'provider_section_intro'		=> $provider_section_intro, // Text to use for the section intro text
-			'provider_section_show_header'	=> $provider_section_show_header, // Query for whether to display the section header
-			'provider_section_filter'		=> $provider_section_filter // Query for whether to add filter(s)
-		);
-
-		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_provider_args) {
+		add_action( 'genesis_after_entry', function() use (
+			$providers,
+			$page_titles,
+			$provider_section_show,
+			$ontology_type,
+			$provider_section_title,
+			$provider_section_intro,
+			$provider_section_show_header,
+			$provider_section_filter
+		) {
 			uamswp_fad_section_provider(
-				$uamswp_fad_section_provider_args['providers'], // int[] // Value of the related providers input
-				$uamswp_fad_section_provider_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$uamswp_fad_section_provider_args['provider_section_show'], // bool (optional) // Query for whether to show the provider section
-				$uamswp_fad_section_provider_args['ontology_type'], // bool (optional) // Query for whether item is ontology type vs. content type
-				$uamswp_fad_section_provider_args['provider_section_title'], // string (optional) // Text to use for the section title
-				$uamswp_fad_section_provider_args['provider_section_intro'], // string (optional) // Text to use for the section intro text
-				$uamswp_fad_section_provider_args['provider_section_show_header'], // bool (optional) // Query for whether to display the section header
-				$uamswp_fad_section_provider_args['provider_section_filter'] // bool (optional) // Query for whether to add filter(s)
+				$providers, // int[] // Value of the related providers input
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$provider_section_show, // bool (optional) // Query for whether to show the provider section
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$provider_section_title, // string (optional) // Text to use for the section title
+				$provider_section_intro, // string (optional) // Text to use for the section intro text
+				$provider_section_show_header, // bool (optional) // Query for whether to display the section header
+				$provider_section_filter // bool (optional) // Query for whether to add filter(s)
 			);
 		}, 16 );
 
@@ -698,37 +690,35 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$location_section_filter_title = false; // Query for whether to add title filter
 		$location_section_collapse_list = false; // Query for whether to collapse the list of locations in the locations section
 
-		$uamswp_fad_section_location_args = array(
-			'locations'							=> $locations, // Value of the related locations input
-			'page_titles'						=> $page_titles,
-			'location_section_schema_query'		=> $location_section_schema_query, // Query for whether to add locations to schema
-			'location_section_show'				=> $location_section_show, // Query for whether to show the location section
-			'ontology_type'						=> $ontology_type, // Query for whether item is ontology type vs. content type
-			'location_descendant_list'			=> $location_descendant_list, // Query for whether this is a list of child locations within a location
-			'location_section_title'			=> $location_section_title, // Text to use for the section title
-			'location_section_intro'			=> $location_section_intro, // Text to use for the section intro text
-			'location_section_show_header'		=> $location_section_show_header, // Query for whether to display the section header
-			'location_section_filter'			=> $location_section_filter, // Query for whether to add filter(s)
-			'location_section_filter_region'	=> $location_section_filter_region, // Query for whether to add region filter
-			'location_section_filter_title'		=> $location_section_filter_title, // Query for whether to add title filter
-			'location_section_collapse_list'	=> $location_section_collapse_list // Query for whether to collapse the list of locations in the locations section
-		);
-
-		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_location_args) {
+		add_action( 'genesis_after_entry', function() use (
+			$locations,
+			$page_titles,
+			$location_section_schema_query,
+			$location_section_show,
+			$ontology_type,
+			$location_descendant_list,
+			$location_section_title,
+			$location_section_intro,
+			$location_section_show_header,
+			$location_section_filter,
+			$location_section_filter_region,
+			$location_section_filter_title,
+			$location_section_collapse_list
+		) {
 			uamswp_fad_section_location(
-				$uamswp_fad_section_location_args['locations'], // int[] // Value of the related locations input
-				$uamswp_fad_section_location_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$uamswp_fad_section_location_args['location_section_schema_query'], // bool (optional) // Query for whether to add locations to schema
-				$uamswp_fad_section_location_args['location_section_show'], // bool (optional) // Query for whether to show the location section
-				$uamswp_fad_section_location_args['ontology_type'], // bool (optional) // Query for whether item is ontology type vs. content type
-				$uamswp_fad_section_location_args['location_descendant_list'], // bool (optional) // Query for whether this is a list of child locations within a location
-				$uamswp_fad_section_location_args['location_section_title'], // string (optional) // Text to use for the section title
-				$uamswp_fad_section_location_args['location_section_intro'], // string (optional) // Text to use for the section intro text
-				$uamswp_fad_section_location_args['location_section_show_header'], // bool (optional) // Query for whether to display the section header
-				$uamswp_fad_section_location_args['location_section_filter'], // bool (optional) // Query for whether to add filter(s)
-				$uamswp_fad_section_location_args['location_section_filter_region'], // bool (optional) // Query for whether to add region filter
-				$uamswp_fad_section_location_args['location_section_filter_title'], // bool (optional) // Query for whether to add title filter
-				$uamswp_fad_section_location_args['location_section_collapse_list'] // bool (optional) // Query for whether to collapse the list of locations in the locations section
+				$locations, // int[] // Value of the related locations input
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$location_section_schema_query, // bool (optional) // Query for whether to add locations to schema
+				$location_section_show, // bool (optional) // Query for whether to show the location section
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$location_descendant_list, // bool (optional) // Query for whether this is a list of child locations within a location
+				$location_section_title, // string (optional) // Text to use for the section title
+				$location_section_intro, // string (optional) // Text to use for the section intro text
+				$location_section_show_header, // bool (optional) // Query for whether to display the section header
+				$location_section_filter, // bool (optional) // Query for whether to add filter(s)
+				$location_section_filter_region, // bool (optional) // Query for whether to add region filter
+				$location_section_filter_title, // bool (optional) // Query for whether to add title filter
+				$location_section_collapse_list // bool (optional) // Query for whether to collapse the list of locations in the locations section
 			);
 		}, 18 );
 
@@ -739,31 +729,29 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 		$expertise_section_title = $expertise_fpage_title_clinical_resource; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
 		$expertise_section_intro = $expertise_fpage_intro_clinical_resource; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
 
-		$uamswp_fad_section_expertise_args = array(
-			'expertises'				=> $expertises, // Value of the related areas of expertise input (or 'expertise_descendants'	=> $expertise_descendants, List of this area of expertise item's descendant items)
-			'page_titles'				=> $page_titles,
-			'hide_medical_ontology'		=> $hide_medical_ontology, // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-			'expertise_section_show'	=> $expertise_section_show, // Query for whether to show the area of expertise section
-			'ontology_type'				=> $ontology_type, // Query for whether item is ontology type vs. content type
-			'expertise_descendant_list'	=> $expertise_descendant_list, // Query for whether this is a list of child areas of expertise within an area of expertise
-			'content_placement'			=> $content_placement, // string (optional) // Expected values: 'subsection' or 'profile'
-			'site_nav_id'				=> $site_nav_id, // ID of post that defines the subsection
-			'expertise_section_title'	=> $expertise_section_title, // Text to use for the section title
-			'expertise_section_intro'	=> $expertise_section_intro, // Text to use for the section intro text
-		);
-
-		add_action( 'genesis_after_entry', function() use ($uamswp_fad_section_expertise_args) {
+		add_action( 'genesis_after_entry', function() use (
+			$expertises,
+			$page_titles,
+			$hide_medical_ontology,
+			$expertise_section_show,
+			$ontology_type,
+			$expertise_descendant_list,
+			$content_placement,
+			$site_nav_id,
+			$expertise_section_title,
+			$expertise_section_intro
+		) {
 			uamswp_fad_section_expertise(
-				$uamswp_fad_section_expertise_args['expertises'], // int[] // Value of the related areas of expertise input (or $uamswp_fad_section_expertise_args['expertise_descendants'], List of this area of expertise item's descendant items)
-				$uamswp_fad_section_expertise_args['page_titles'], // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$uamswp_fad_section_expertise_args['hide_medical_ontology'], // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-				$uamswp_fad_section_expertise_args['expertise_section_show'], // bool // Query for whether to show the area of expertise section
-				$uamswp_fad_section_expertise_args['ontology_type'], // bool (optional) // Query for whether item is ontology type vs. content type
-				$uamswp_fad_section_expertise_args['expertise_descendant_list'], // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
-				$uamswp_fad_section_expertise_args['content_placement'], // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
-				$uamswp_fad_section_expertise_args['site_nav_id'], // int (optional) // ID of post that defines the subsection
-				$uamswp_fad_section_expertise_args['expertise_section_title'], // string (optional) // Text to use for the section title
-				$uamswp_fad_section_expertise_args['expertise_section_intro'], // string (optional) // Text to use for the section intro text
+				$expertises, // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
+				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+				$expertise_section_show, // bool // Query for whether to show the area of expertise section
+				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+				$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+				$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+				$site_nav_id, // int (optional) // ID of post that defines the subsection
+				$expertise_section_title, // string (optional) // Text to use for the section title
+				$expertise_section_intro // string (optional) // Text to use for the section intro text
 			);
 		}, 20 );
 
