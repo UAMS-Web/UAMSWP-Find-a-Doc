@@ -46,31 +46,5 @@ function fsp_insertqv($vars)
 }
 add_filter('query_vars', 'fsp_insertqv');
 
-// Modify SEOPress's standard canonical URL settings
-add_filter('seopress_titles_canonical','uamswp_fad_ontology_canonical');
-function uamswp_fad_ontology_canonical($html) {
-
-	// Bring in variables from outside of the function
-
-		global $page_id; // Defined on the template
-		global $current_fpage; // Defined on the template
-		global $wp_the_query; // WordPress-specific global variable
-
-	// Make sure permalinks for fake subpages are canonical
-
-		if (
-			!empty($current_fpage) // Is a fake subpage
-			&&
-			is_singular() // Is an existing single post of any post type
-			&&
-			$page_id = $wp_the_query->get_queried_object_id()
-		) {
-			$html = '<link rel="canonical" href="' . trailingslashit(get_permalink($page_id)) . user_trailingslashit($current_fpage) . '" />';
-		}
-
-	return $html;
-
-}
-
 // Do not forget to flush your permalinks.
 // To flush, go to Settings > Permalinks > Save

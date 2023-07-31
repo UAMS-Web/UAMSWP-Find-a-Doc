@@ -8358,20 +8358,3 @@ function uamswp_prevent_orphan($string) {
 	return $string;
 
 }
-
-// Set canonical URL
-function uamswp_fad_canonical($html) {
-
-	// Bring in variables from outside of the function
-
-		// Defined on the template
-
-			global $canonical_url;
-
-	if ( $canonical_url ) {
-		$html = '<link rel="canonical" href="' . htmlspecialchars( urldecode( $canonical_url ) ) . '" />';
-	}
-
-	return $html;
-
-}

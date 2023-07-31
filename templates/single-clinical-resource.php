@@ -253,10 +253,42 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 		} );
 
-// Modify SEOPress's standard canonical URL settings
-$syndicated = get_field('clinical_resource_syndicated');
-$canonical_url = $syndicated ? get_field('clinical_resource_syndication_url') : '';
-add_filter('seopress_titles_canonical','uamswp_fad_canonical');
+// Override theme's method of defining the canonical URL
+
+	// Query for whether this clinical resource is syndicated from another source
+	$syndicated = get_field('clinical_resource_syndicated');
+
+	// Get syndication URL
+
+		if ( $syndicated ) {
+
+			$canonical_url = user_trailingslashit(
+				htmlspecialchars(
+					urldecode(
+						get_field('clinical_resource_syndication_url')
+					)
+				)
+			);
+		
+		} else {
+
+			$canonical_url = '';
+
+		}
+
+	// Modify SEOPress's standard canonical URL settings
+
+		add_filter( 'seopress_titles_canonical', function( $html ) use ( $canonical_url ) {
+
+			if ( $canonical_url ) {
+
+				$html = '<link rel="canonical" href="' . $canonical_url . '" />';
+
+			}
+
+			return $html;
+		
+		} );
 
 // Add page template class to body element's classes
 

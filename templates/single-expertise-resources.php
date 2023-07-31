@@ -370,6 +370,25 @@ add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 		} );
 
+// Override theme's method of defining the canonical URL
+
+	// Get the canonical URL
+	$canonical_url = $fpage_url;
+
+	// Modify SEOPress's standard canonical URL settings
+
+		add_filter( 'seopress_titles_canonical', function( $html ) use ( $canonical_url ) {
+
+			if ( $canonical_url ) {
+
+				$html = '<link rel="canonical" href="' . $canonical_url . '" />';
+
+			}
+
+			return $html;
+
+		} );
+
 // Construct the meta keywords element
 
 	$keywords = get_field('expertise_alternate_names');
