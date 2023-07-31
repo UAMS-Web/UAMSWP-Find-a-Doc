@@ -412,8 +412,22 @@ add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 add_filter( 'body_class', 'uamswp_page_body_class' );
 $template_type = 'page_landing';
 
-// Add fake subpage to breadcrumbs
-add_filter('seopress_pro_breadcrumbs_crumbs', 'uamswp_fad_fpage_breadcrumbs');
+// Override the theme's method of defining the breadcrumbs
+
+	// Add fake subpage to SEOPress breadcrumbs
+
+		add_filter( 'seopress_pro_breadcrumbs_crumbs', function( $crumbs ) use ( $fpage_name ) {
+
+			// $crumbs is a multidimensional array.
+			//     First array: key=position,
+			//     second array: 0=>page title, 1=>URL, 2=>ID (since version 6.1)
+
+			// Add name of fake subpage to the breadcrumbs array
+			$crumbs[] = array($fpage_name, '');
+
+			return $crumbs;
+
+		} );
 
 // Add bg-white class to article.entry element
 add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
