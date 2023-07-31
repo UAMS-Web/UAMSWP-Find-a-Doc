@@ -66,7 +66,7 @@ $page_titles = array(
 );
 
 // // Get the page URL
-// $page_url = get_permalink();
+// $page_url = user_trailingslashit(get_permalink());
 
 // Override theme's method of defining the meta page title
 $meta_title_base_addition = $treatment_plural_name_attr; // Word or phrase to use to form base meta title

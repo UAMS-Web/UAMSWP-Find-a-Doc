@@ -191,7 +191,7 @@ $content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 	);
 
 	// Get the page URL for the profile
-	$page_url = get_permalink();
+	$page_url = user_trailingslashit(get_permalink());
 
 // Get the provider's gender
 $gender = get_field('physician_gender',$post->ID);

@@ -112,7 +112,7 @@ $page_titles = array(
 );
 
 // Get the page URL
-$page_url = get_permalink();
+$page_url = user_trailingslashit(get_permalink());
 
 // Define the placement for content
 $content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'

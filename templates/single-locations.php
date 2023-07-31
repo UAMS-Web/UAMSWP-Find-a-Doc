@@ -116,7 +116,7 @@ $page_titles = array(
 );
 
 // Get the page URL for the profile
-$page_url = get_permalink();
+$page_url = user_trailingslashit(get_permalink());
 
 // Get the page slug for the location
 $page_slug = $post->post_name;

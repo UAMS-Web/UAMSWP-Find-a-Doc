@@ -68,7 +68,7 @@ $page_titles = array(
 );
 
 // // Get the page URL
-// $page_url = get_permalink();
+// $page_url = user_trailingslashit(get_permalink());
 
 $alpha = '';
 if (isset($_GET['alpha'])) {

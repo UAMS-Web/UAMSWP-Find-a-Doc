@@ -83,7 +83,7 @@ $page_titles = array(
 );
 
 // // Get the page URL
-// $page_url = get_permalink();
+// $page_url = user_trailingslashit(get_permalink());
 
 // Get system settings for the featured image of a Location archive page
 $archive_image_location_vars = isset($archive_image_location_vars) ? $archive_image_location_vars : uamswp_fad_archive_image_location();

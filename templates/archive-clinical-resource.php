@@ -92,7 +92,7 @@ $page_titles = array(
 );
 
 // // Get the page URL
-// $page_url = get_permalink();
+// $page_url = user_trailingslashit(get_permalink());
 
 // Get system settings for the featured image of a Clinical Resource archive page
 $archive_image_clinical_resource_vars = isset($archive_image_clinical_resource_vars) ? $archive_image_clinical_resource_vars : uamswp_fad_archive_image_clinical_resource();

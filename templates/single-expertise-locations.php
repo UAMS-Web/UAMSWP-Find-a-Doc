@@ -95,7 +95,7 @@ $page_titles = array(
 );
 
 // Get the page URL for the 'parent' area of expertise
-$page_url = get_permalink(); // Permalink of the post
+$page_url = user_trailingslashit(get_permalink()); // Permalink of the post
 
 // Define the placement for content
 $content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'
@@ -196,7 +196,7 @@ $fpage_name_attr = uamswp_attr_conversion($fpage_name);
 $fpage_title = $location_fpage_title_expertise; // Fake subpage page title
 $fpage_title_attr = uamswp_attr_conversion($fpage_title);
 $current_fpage = get_query_var('fpage'); // Fake subpage slug
-$fpage_url = !empty($current_fpage) ? $page_url . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
+$fpage_url = !empty($current_fpage) ? trailingslashit($page_url) . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
 $fpage_intro = $location_fpage_intro_expertise; // Fake subpage intro text
 $fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
