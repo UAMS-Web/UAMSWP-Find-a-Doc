@@ -559,10 +559,12 @@ function custom_excerpt_acf() {
 
 	// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 	$excerpt_field_name = array(
-		'expertise' => 'expertise_selected_post_excerpt',
 		'provider' => 'physician_short_clinical_bio',
 		'location' => 'location_short_desc',
+		'expertise' => 'expertise_selected_post_excerpt',
 		'clinical-resource' => 'clinical_resource_excerpt',
+		'condition' => 'condition_short_desc',
+		'treatment' => 'treatment_procedure_short_desc'
 	);
 
 	// Get the post type of the current page/post
