@@ -376,26 +376,46 @@ if ( $regions || $service_lines ) {
 // Set the schema description and the meta description
 
 	// Get excerpt
-	$excerpt = get_field('physician_short_clinical_bio',$post->ID);
+
+		$excerpt = get_field('physician_short_clinical_bio',$post->ID);
+		$excerpt_user = true;
 
 	// Get clinical bio
-	$bio = get_field('physician_clinical_bio',$post->ID);
+
+		$bio = get_field('physician_clinical_bio',$post->ID);
+		$content = $bio;
 
 	// Create excerpt if none exists
-	if ( empty( $excerpt ) ) {
-		if ( $bio ) {
-			$excerpt = mb_strimwidth(wp_strip_all_tags($bio), 0, 155, '...');
-		} else {
-			$fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
-			$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
+
+		if ( empty( $excerpt ) ) {
+
+			$excerpt_user = false;
+
+			if ( $content ) {
+
+				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+
+			} else {
+
+				$fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
+				$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
+
+			}
+			
 		}
-	}
 
 	// Set schema description
 	$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
 
 	// Override theme's method of defining the meta description
-	add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+
+		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+
+			$html = $excerpt;
+
+			return $html;
+
+		} );
 
 // Override theme's method of defining the meta page title
 $meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title

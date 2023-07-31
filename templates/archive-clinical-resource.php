@@ -112,8 +112,17 @@ $meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
 // // Override theme's method of defining the meta description
-// $excerpt = '';
-// add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+// 
+// 	$excerpt = '';
+// 	$excerpt_user = true;
+// 
+// 	add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+// 
+// 		$html = $excerpt;
+// 
+// 		return $html;
+// 
+// 	} );
 
 // // Construct the meta keywords element
 // 

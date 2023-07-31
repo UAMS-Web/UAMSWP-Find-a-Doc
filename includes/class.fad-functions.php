@@ -6974,21 +6974,6 @@ function uamswp_fad_fpage_text_replace(
 	}
 	add_filter( 'allowed_block_types_all', 'uamswp_fad_allowed_block_types', 10, 2 );
 
-// Override theme's method of defining the meta description on fake subpages
-function uamswp_fad_meta_desc($html) {
-
-	// Bring in variables from outside of the function
-
-		// Defined on the template
-
-			global $excerpt;
-
-	$html = $excerpt;
-
-	return $html;
-
-}
-
 // Get the Find-a-Doc Settings values for general patient appointment information
 function uamswp_fad_appointment_patients() {
 

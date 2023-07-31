@@ -176,6 +176,75 @@ $meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
+// Set the schema description and the meta description
+
+	// Get excerpt
+
+		$excerpt = get_the_excerpt(); // get_field( 'clinical_resource_excerpt' );
+		$excerpt_user = true;
+
+	// Get the content
+
+		if ( 'text' == $resource_type_value ) {
+
+			// Resource type: article
+
+			$text = get_field('clinical_resource_text');
+			$content = $text;
+
+		} elseif ( 'infographic' == $resource_type_value ) {
+
+			// Resource type: infographic
+
+			$infographic_descr = get_field('clinical_resource_infographic_descr');
+			$content = $infographic_descr;
+
+
+		} elseif ( 'video' == $resource_type_value ) {
+
+			// Resource type: video
+
+			$video_descr = get_field('clinical_resource_video_descr');
+			$content = $video_descr;
+
+		} elseif ( 'doc' == $resource_type_value ) {
+
+			// Resource type: document
+
+			$document_descr = get_field('clinical_resource_document_descr');
+			$content = $document_descr;
+
+		}
+
+	// Create excerpt if none exists
+
+
+		if ( empty( $excerpt ) ) {
+
+			$excerpt_user = false;
+
+			if ( $content ) {
+
+				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+
+			}
+
+		}
+
+	// Set schema description
+
+		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+
+	// Override theme's method of defining the meta description
+
+		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+
+			$html = $excerpt;
+
+			return $html;
+
+		} );
+
 // Modify SEOPress's standard canonical URL settings
 $syndicated = get_field('clinical_resource_syndicated');
 $canonical_url = $syndicated ? get_field('clinical_resource_syndication_url') : '';
@@ -353,7 +422,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 				// Resource type: article
 
-				$text = get_field('clinical_resource_text');
 				$nci_query = get_field('clinical_resource_text_nci_query');
 				$nci_embed = $nci_query ? get_field('clinical_resource_nci_embed') : '';
 
@@ -371,7 +439,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 				if ( $infographic ) {
 
-					$infographic_descr = get_field('clinical_resource_infographic_descr');
 					$infographic_transcript = get_field('clinical_resource_infographic_transcript');
 					$size = 'content-image-wide';
 
@@ -421,8 +488,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 						}
 
 					// Display video description
-
-						$video_descr = get_field('clinical_resource_video_descr');
 
 						if ( $video_descr ) {
 
@@ -475,8 +540,6 @@ add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 					if ( $documents ) {
 
 						// Display document description
-
-							$document_descr = get_field('clinical_resource_document_descr');
 
 							echo $document_descr;
 

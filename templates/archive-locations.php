@@ -102,9 +102,32 @@ $meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
-// // Override theme's method of defining the meta description
-// $excerpt = '';
-// add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+// // Set the schema description and the meta description
+// 
+// 	// Get excerpt
+// 
+// 		$excerpt = get_the_excerpt();
+// 		$excerpt_user = true;
+// 
+// 		if ( empty( $excerpt ) ) {
+// 
+// 			$excerpt_user = false;
+// 
+// 		}
+// 
+// 	// Set schema description
+// 
+// 		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+// 
+// 	// Override theme's method of defining the meta description
+// 
+// 		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+// 
+// 			$html = $excerpt;
+// 
+// 			return $html;
+// 
+// 		} );
 
 // // Construct the meta keywords element
 // 

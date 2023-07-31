@@ -167,14 +167,6 @@ $fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_locat
 	$condition_treatment_fpage_title_location = $fpage_text_location_vars['condition_treatment_fpage_title_location']; // string
 	$condition_treatment_fpage_intro_location = $fpage_text_location_vars['condition_treatment_fpage_intro_location']; // string
 
-$excerpt = get_field('location_short_desc');
-$about_loc = get_field('location_about');
-if (empty($excerpt)){
-	if ($about_loc){
-		$excerpt = mb_strimwidth(wp_strip_all_tags($about_loc), 0, 155, '...');
-	}
-}
-
 // Parent Location 
 
 $location_has_parent = get_field('location_parent');
@@ -399,8 +391,45 @@ if ( $regions || $service_lines ) {
 	$hide_medical_ontology = false; // bool
 }
 
-// Override theme's method of defining the meta description
-add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+// Set the schema description and the meta description
+
+	// Get excerpt
+
+		$excerpt = get_the_excerpt();
+		$excerpt_user = true;
+
+	// Get location description
+
+		$location_about = get_field('location_about');
+		$content = $location_about;
+
+	// Create excerpt if none exists
+
+		if ( empty( $excerpt ) ) {
+
+			$excerpt_user = false;
+
+			if ( $content ) {
+
+				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+
+			}
+
+		}
+
+	// Set schema description
+
+		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+
+	// Override theme's method of defining the meta description
+
+		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+
+			$html = $excerpt;
+
+			return $html;
+
+		} );
 
 // Override theme's method of defining the meta page title
 $location_city = get_field('location_city', $post_id); // Get the location's city
@@ -495,7 +524,6 @@ while ( have_posts() ) : the_post(); ?>
 		}
 
 		// Check if About section should be displayed
-		$location_about = get_field('location_about');
 		$location_about_section_show = $location_about ? true : false;
 		$location_affiliation = get_field('location_affiliation');
 		$location_affiliation_section_show = $location_affiliation ? true : false; // Query on whether to display the section

@@ -92,9 +92,51 @@ $archive_image_provider_vars = isset($archive_image_provider_vars) ? $archive_im
 // Get the featured image
 $page_image_id = $provider_archive_image; // Image ID // int
 
+// // Set the schema description and the meta description
+// 
+// 	// Get excerpt
+// 
+// 		$excerpt = get_the_excerpt();
+// 		$excerpt_user = true;
+// 
+// 		if ( empty( $excerpt ) ) {
+// 
+// 			$excerpt_user = false;
+// 
+// 		}
+// 
+// 	// Set schema description
+// 
+// 		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+// 
+// 	// Override theme's method of defining the meta description
+// 
+// 		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+// 
+// 			$html = $excerpt;
+// 
+// 			return $html;
+// 
+// 		} );
+
 // // Override theme's method of defining the meta description
-// $excerpt = '';
-// add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+// 
+// 	$excerpt = '';
+// 	$excerpt_user = true;
+// 
+// 	if ( empty( $excerpt ) ) {
+// 
+// 		$excerpt_user = false;
+// 
+// 	}
+// 
+// 	add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+// 
+// 		$html = $excerpt;
+// 
+// 		return $html;
+// 
+// 	} );
 
 // // Construct the meta keywords element
 // 

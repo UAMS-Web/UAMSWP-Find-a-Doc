@@ -143,17 +143,44 @@ $meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
-$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
-$content = get_the_content(); //get_field( 'condition_content' );
-$excerpt_user = true;
-if (empty($excerpt)){
-	$excerpt_user = false;
-	if ($content){
-		$excerpt = mb_strimwidth(wp_strip_all_tags(get_the_content()), 0, 155, '...');
-	}
-}
-// Override theme's method of defining the meta description
-add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+// Set the schema description and the meta description
+
+	// Get excerpt
+
+		$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
+		$excerpt_user = true;
+
+	// Get the content
+
+		$content = get_the_content(); //get_field( 'condition_content' );
+
+	// Create excerpt if none exists
+
+		if ( empty( $excerpt ) ) {
+
+			$excerpt_user = false;
+
+			if ( $content ) {
+
+				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+
+			}
+
+		}
+
+	// Set schema description
+
+		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+
+	// Override theme's method of defining the meta description
+
+		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+
+			$html = $excerpt;
+
+			return $html;
+
+		} );
 
 // Add page template class to body element's classes
 

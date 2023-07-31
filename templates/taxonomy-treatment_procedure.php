@@ -9,9 +9,6 @@ $term = get_queried_object();
 $page_title = single_cat_title( '', false );
 $page_title_attr = uamswp_attr_conversion($page_title);
 $clinical_trials = get_field('treatment_procedure_clinical_trials', $term);
-$content = get_field( 'treatment_procedure_content', $term );
-$excerpt = get_field( 'treatment_procedure_short_desc', $term );
-$excerpt_user = true;
 $video = get_field('treatment_procedure_youtube_link', $term);
 $conditions = get_field('treatment_procedure_conditions', $term);
 $expertise = get_field('treatment_procedure_expertise', $term);
@@ -136,14 +133,44 @@ $meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_
 	$meta_title = $meta_title_vars['meta_title']; // string
 add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
-if (empty($excerpt)){
-	$excerpt_user = false;
-	if ($content){
-		$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
-	}
-}
-// Override theme's method of defining the meta description
-add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+// Set the schema description and the meta description
+
+	// Get excerpt
+
+		$excerpt = get_field( 'treatment_procedure_short_desc', $term );
+		$excerpt_user = true;
+
+	// Get the content
+
+		$content = get_field( 'treatment_procedure_content', $term );
+
+	// Create excerpt if none exists
+
+		if ( empty( $excerpt ) ) {
+
+			$excerpt_user = false;
+
+			if ( $content ) {
+
+				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+
+			}
+
+		}
+
+	// Set schema description
+
+		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+
+	// Override theme's method of defining the meta description
+
+		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+
+			$html = $excerpt;
+
+			return $html;
+
+		} );
 
 get_header();
 
