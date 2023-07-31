@@ -6697,7 +6697,7 @@ function uamswp_fad_fpage_text_replace(
 				// Crop/resize the image
 				if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
 					$expertise_featured_image_url = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_featured_image_url ) {
+				} elseif ( $expertise_featured_image ) {
 					$expertise_featured_image_url = wp_get_attachment_url( $expertise_featured_image, 'aspect-16-9' );
 				} else {
 					$expertise_featured_image_url = '';
