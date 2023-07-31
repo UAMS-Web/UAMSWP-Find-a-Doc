@@ -404,8 +404,16 @@ add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 		}, 5 );
 
 // Add page template class to body element's classes
-add_filter( 'body_class', 'uamswp_page_body_class' );
-$template_type = 'page_landing';
+
+	$template_type = 'page_landing';
+	add_filter( 'body_class', function( $classes ) use ( $template_type ) {
+
+		// Add page template class to body class array
+		$classes[] = 'page-template-' . $template_type;
+
+		return $classes;
+
+	} );
 
 // Override the theme's method of defining the breadcrumbs
 

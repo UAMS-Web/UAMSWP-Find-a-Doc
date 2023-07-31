@@ -182,8 +182,16 @@ $canonical_url = $syndicated ? get_field('clinical_resource_syndication_url') : 
 add_filter('seopress_titles_canonical','uamswp_fad_canonical');
 
 // Add page template class to body element's classes
-add_filter( 'body_class', 'uamswp_page_body_class' );
-$template_type = 'default';
+
+	$template_type = 'default';
+	add_filter( 'body_class', function( $classes ) use ( $template_type ) {
+
+		// Add page template class to body class array
+		$classes[] = 'page-template-' . $template_type;
+
+		return $classes;
+
+	} );
 
 // Start count for jump links
 $jump_link_count = 0;

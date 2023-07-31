@@ -2345,20 +2345,6 @@ function uamswp_fad_ontology_appointment(
 
 }
 
-// Add page template class to body element's classes
-function uamswp_page_body_class( $classes ) {
-
-	// Bring in variables from outside of the function
-
-		// Typically defined on the template
-
-			global $template_type; // Expected values: 'default', 'page_landing' or 'marketing'
-
-	$classes[] = 'page-template-' . $template_type;
-	return $classes;
-
-}
-
 // Add bg-white class to article.entry element
 function uamswp_add_entry_class( $attributes ) {
 
