@@ -175,20 +175,6 @@
 
 	}
 
-	// Filter meta title
-	// add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
-	function uamswp_fad_title($html) {
-
-		// Bring in variables from outside of the function
-		global $meta_title; // Defined in uamswp_fad_labels_clinical_resource()
-
-		// Do stuff
-		$html = $meta_title;
-
-		return $html;
-
-	}
-
 // Override the theme's method of defining the meta tag values for Open Graph
 
 	// Filter Open Graph type (og:type)

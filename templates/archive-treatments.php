@@ -77,14 +77,26 @@ if (isset($_GET['alpha'])) {
 }
 
 // Override theme's method of defining the meta page title
-$meta_title_base_addition = $treatment_plural_name_attr; // Word or phrase to use to form base meta title
-$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-	$page_title, // string
-	$page_title_attr, // string (optional)
-	$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-);
-	$meta_title = $meta_title_vars['meta_title']; // string
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+	// Construct the meta title
+
+		$meta_title_base_addition = $treatment_plural_name_attr; // Word or phrase to use to form base meta title
+		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+			$page_title, // string
+			$page_title_attr, // string (optional)
+			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+		);
+			$meta_title = $meta_title_vars['meta_title']; // string
+	
+	// Modify SEOPress's standard meta title settings
+
+		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
+
+			$html = $meta_title;
+
+			return $html;
+
+		}, 15, 2 );
 
 get_header(); ?>
 

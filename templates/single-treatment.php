@@ -132,16 +132,28 @@ $labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_va
 	} );
 
 // Override theme's method of defining the meta page title
-$meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-	$page_title, // string
-	$page_title_attr, // string (optional)
-	'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-	'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-	$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-);
-	$meta_title = $meta_title_vars['meta_title']; // string
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+	// Construct the meta title
+
+		$meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+			$page_title, // string
+			$page_title_attr, // string (optional)
+			'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+			'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+			$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+		);
+			$meta_title = $meta_title_vars['meta_title']; // string
+	
+	// Modify SEOPress's standard meta title settings
+
+		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
+
+			$html = $meta_title;
+
+			return $html;
+
+		}, 15, 2 );
 
 // Set the schema description and the meta description
 

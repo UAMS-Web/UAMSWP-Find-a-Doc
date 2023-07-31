@@ -323,18 +323,30 @@ $ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_
 	}
 
 // Override theme's method of defining the meta page title
-$meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title
-$meta_title_enhanced_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-$meta_title_base_order = array( $meta_title_base_addition, $meta_title_enhanced_addition ); // Override default base meta title structure to force inclusion of $meta_title_enhanced_addition
-$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-	$page_title, // string
-	$page_title_attr, // string (optional)
-	$meta_title_base_addition, // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-	$meta_title_base_order, // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-	$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-);
-	$meta_title = $meta_title_vars['meta_title']; // string
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
+
+	// Construct the meta title
+
+		$meta_title_base_addition = $fpage_name_attr; // Word or phrase to use to form base meta title
+		$meta_title_enhanced_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+		$meta_title_base_order = array( $meta_title_base_addition, $meta_title_enhanced_addition ); // Override default base meta title structure to force inclusion of $meta_title_enhanced_addition
+		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+			$page_title, // string
+			$page_title_attr, // string (optional)
+			$meta_title_base_addition, // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+			$meta_title_base_order, // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+			$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+		);
+			$meta_title = $meta_title_vars['meta_title']; // string
+	
+	// Modify SEOPress's standard meta title settings
+
+		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
+
+			$html = $meta_title;
+
+			return $html;
+
+		}, 15, 2 );
 
 // Set the schema description and the meta description
 
