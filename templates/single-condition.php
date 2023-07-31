@@ -167,7 +167,7 @@ add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
 
 	} );
 
-	get_header();
+get_header();
 
 // ACF Fields - get_fields
 $clinical_trials = get_field('condition_clinical_trials');
