@@ -7229,7 +7229,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		// $provider_section_more_link_value, // string
 		// $provider_descendants = '', // int[] (optional) // List of this provider item's descendant items
 		// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		// $provider_schema = '', // string (optional) // Schema data
+		// &$provider_schema = '', // string (optional) // Schema data
 		// $provider_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$provider_section_show = false, // bool (optional) // Query for whether to show the provider section (or $provider_desecendant_section_show, Query for whether to show the descendant provider section)
 		$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7267,8 +7267,8 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		// $location_section_more_link_value, // string
 		// $location_descendants = '', // int[] (optional) // List of this location item's descendant items
 		// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		// $schema_address = '', // string (optional) // Address schema data
-		// $schema_telephone = '', // string (optional) // Telephone schema data
+		// &$schema_address = '', // string (optional) // Address schema data
+		// &$schema_telephone = '', // string (optional) // Telephone schema data
 		$location_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$location_section_show = false, // bool (optional) // Query for whether to show the location section (or $location_desecendant_section_show, Query for whether to show the descendant location section)
 		$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7306,7 +7306,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		// $expertise_section_more_link_value, // string
 		// $expertise_descendants = '', // int[] (optional) // List of this area of expertise item's descendant items
 		$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		// $expertise_schema = '', // string (optional) // Schema data
+		// &$expertise_schema = '', // string (optional) // Schema data
 		// $expertise_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$expertise_section_show = false, // bool (optional) // Query for whether to show the area of expertise section (or $expertise_desecendant_section_show, Query for whether to show the descendant area of expertise section)
 		$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7344,7 +7344,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		$clinical_resource_section_more_link_value = '', // string (optional)
 		// $clinical_resource_descendants = '', // int[] (optional) // List of this clinical resource item's descendant items
 		// $hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		// $clinical_resource_schema = '', // string (optional) // Schema data
+		// &$clinical_resource_schema = '', // string (optional) // Schema data
 		// $clinical_resource_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$clinical_resource_section_show = false, // bool (optional) // Query for whether to show the clinical resource section (or $clinical_resource_descendant_section_show, Query for whether to show the descendant clinical resource section)
 		$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7383,7 +7383,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		// $condition_section_more_link_value, // string
 		// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
 		$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
+		&$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
 		// $condition_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$condition_section_show = false, // bool (optional) // Query for whether to show the conditions section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)
 		$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7430,7 +7430,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		// $treatment_section_more_link_value, // string
 		// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
 		$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
+		&$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
 		// $treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$treatment_section_show = false, // bool (optional) // Query for whether to show the treatment section (or $treatment_desecendant_section_show, Query for whether to show the descendant treatment section)
 		$ontology_type = true, // bool (optional) // Query for whether item is ontology type vs. content type
@@ -7479,7 +7479,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		// $condition_descendants = '', // int[] (optional) // List of this condition item's descendant items
 		// $treatment_descendants = '', // int[] (optional) // List of this treatment item's descendant items
 		$hide_medical_ontology = false, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-		// $schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
+		&$schema_medical_specialty = '', // array (optional) // MedicalSpecialty Schema data
 		// $condition_treatment_section_schema_query = false, // bool (optional) // Query for whether to add locations to schema
 		$condition_treatment_section_show = false, // bool (optional) // Query for whether to show the combined conditions and treatments section
 		$condition_section_show = false, // bool (optional) // Query for whether to show the condition section (or $condition_desecendant_section_show, Query for whether to show the descendant condition section)

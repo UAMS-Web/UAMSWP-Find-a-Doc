@@ -61,8 +61,6 @@
  * 	html <section />
  */
 
-global $schema_medical_specialty;
-
 // Check/define variables
 
 	// Query for whether to show the combined conditions and treatments section

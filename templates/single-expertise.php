@@ -628,6 +628,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 			$treatments_cpt,
 			$page_titles,
 			$hide_medical_ontology,
+			&$schema_medical_specialty,
 			$condition_treatment_section_show,
 			$condition_section_show,
 			$treatment_section_show,
@@ -644,6 +645,7 @@ remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 )
 				$treatments_cpt, // int[]
 				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+				$schema_medical_specialty, // array (optional) // MedicalSpecialty Schema data
 				$condition_treatment_section_show, // bool
 				$condition_section_show, // bool
 				$treatment_section_show, // bool
