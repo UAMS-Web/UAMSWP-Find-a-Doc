@@ -331,12 +331,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	uamswp_fad_ontology_header(
-				// 		$page_id, // int // ID of the post
-				// 		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-				// 		$page_title, // string (optional) // Title of the post
-				// 		$page_url // string (optional) // Permalink of the post
-				// 	);
+				// 	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-header.php');
 				// }, 5 );
 
 		// Primary navigation
