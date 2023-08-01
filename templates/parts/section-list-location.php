@@ -276,7 +276,7 @@ if ( $location_section_show ) {
 		$location_count = count($location_query->posts);
 
 	} // endif ( $location_section_filter )
-		
+
 	wp_reset_postdata();
 
 	?>
@@ -309,7 +309,7 @@ if ( $location_section_show ) {
 										if ( $location_section_schema_query ) {
 
 											// Address Schema Data
-											
+
 												// Check/define the main address schema array
 												$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 
@@ -328,12 +328,12 @@ if ( $location_section_show ) {
 												);
 
 											// Geo Schema Data
-											
+
 												// Check/define the main geo schema array
 												$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
-											
+
 												// Add this location's details to the main geo schema array
-											
+
 													$schema_geo = uamswp_schema_geo(
 														$schema_geo, // array (optional) // Main geo schema array
 														$location_map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.

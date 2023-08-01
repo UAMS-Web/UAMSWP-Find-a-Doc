@@ -227,10 +227,10 @@ if ( $treatment_section_show ) {
 									}
 
 									// MedicalSpecialty Schema Data
-								
+
 										// Check/define the main medicalSpecialty schema array
 										$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-								
+
 										// Add this location's details to the main medicalSpecialty schema array
 										$schema_medical_specialty = uamswp_schema_medical_specialty(
 											$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array

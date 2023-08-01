@@ -22,7 +22,8 @@ $term = get_queried_object();
 // Array for page titles and section titles
 
 	$page_titles = array(
-		'page_title'	=> $page_title
+		'page_title'		=> $page_title,
+		'page_title_attr'	=> $page_title_attr
 	);
 
 // Get system settings for ontology item labels

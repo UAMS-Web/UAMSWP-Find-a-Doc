@@ -111,7 +111,8 @@
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'	=> $page_title
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
 		);
 
 // Get the page URL
@@ -129,7 +130,7 @@
 
 // Get the featured image
 
-	$page_image_id = $clinical_resource_archive_image; // Image ID // int
+	$featured_image = $clinical_resource_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
 
@@ -142,7 +143,7 @@
 			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
 		);
 			$meta_title = $meta_title_vars['meta_title']; // string
-	
+
 	// Modify SEOPress's standard meta title settings
 
 		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {

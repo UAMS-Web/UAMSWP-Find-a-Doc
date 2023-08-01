@@ -256,10 +256,10 @@ if ( $phone_output == 'location_profile' ) { ?>
 		<?php
 
 			// FaxNumber Schema Data
-			
+
 				// Check/define the main faxNumber schema array
 				$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
-			
+
 				// Add this location's details to the main faxNumber schema array
 				$schema_fax_number = uamswp_schema_fax_number(
 					$schema_fax_number, // array (optional) // Main faxNumber schema array
@@ -292,7 +292,7 @@ if ( $phone_output == 'location_profile' ) { ?>
 
 					// Check/define the main telephone schema array
 					$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-	
+
 					// Add this location's details to the main telephone schema array
 					$schema_telephone = uamswp_schema_telephone(
 						$schema_telephone, // array (optional) // Main telephone schema array

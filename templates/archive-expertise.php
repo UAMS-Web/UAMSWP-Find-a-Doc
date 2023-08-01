@@ -103,7 +103,8 @@
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'	=> $page_title
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
 		);
 
 // Get the page URL
@@ -121,7 +122,7 @@
 
 // Get the featured image
 
-	$page_image_id = $expertise_archive_image; // Image ID // int
+	$featured_image = $expertise_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
 
@@ -134,7 +135,7 @@
 			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
 		);
 			$meta_title = $meta_title_vars['meta_title']; // string
-	
+
 	// Modify SEOPress's standard meta title settings
 
 		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
@@ -151,13 +152,13 @@
 
 		$excerpt = $expertise_archive_intro_text;
 		$excerpt_user = true;
-	
+
 		if ( empty( $excerpt ) ) {
-	
+
 			$excerpt_user = false;
-	
+
 		}
-	
+
 	// Set schema description
 
 		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value

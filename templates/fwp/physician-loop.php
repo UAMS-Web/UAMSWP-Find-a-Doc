@@ -12,7 +12,7 @@
  */
 
 if ( have_posts() ) {
-	
+
 	// Check/define variables
 
 		// Find-a-Doc Settings values for provider labels
@@ -43,7 +43,7 @@ if ( have_posts() ) {
 			}
  
 	while ( have_posts() ) {
-		
+
 		the_post();
 
 		$degrees = get_field('physician_degree');
@@ -85,13 +85,13 @@ if ( have_posts() ) {
 						<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" class="stretched-link" data-categorytitle="Photo" data-itemtitle="<?php echo $full_name_attr; ?>">
 							<picture>
 								<?php
-								
+
 								if (
 									has_post_thumbnail()
 									&&
 									function_exists( 'fly_add_image_size' )
 								) {
-									
+
 									?>
 									<source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 243, 324, 'center', 'center'); ?>"
 										media="(min-width: 2054px)">
@@ -107,20 +107,20 @@ if ( have_posts() ) {
 										media="(min-width: 1px)">
 									<img src="<?php echo image_sizer(get_post_thumbnail_id(), 184, 245, 'center', 'center'); ?>" alt="<?php echo $full_name_attr; ?>" />
 									<?php
-								
+
 								} elseif ( has_post_thumbnail() ) {
-									
+
 									the_post_thumbnail( 'medium', array( 'itemprop' => 'image' ) );
-									
+
 								} else {
-									
+
 									?>
 									<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg" media="(min-width: 1px)">
 									<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" />
 									<?php
-								
+
 								} // endif
-								
+
 								?>
 							</picture>
 						</a>
@@ -131,17 +131,17 @@ if ( have_posts() ) {
 							<h3 class="h4">
 								<a href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $full_name_attr; ?>"><span class="name"><?php echo $full_name; ?></span></a>
 								<?php
-								
+
 								// Add subtitle for clinical title
 
 									if ( $provider_title_name ) {
-										
+
 										?>
 										<span class="subtitle"><?php echo $provider_title_name; ?></span>
 										<?php
-									
+
 									} // endif
-								
+
 								?>
 							</h3>
 							<?php
@@ -165,7 +165,7 @@ if ( have_posts() ) {
 											echo '</div>';
 
 										} else {
-											
+
 											?>
 											<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></em></p>
 											<?php
@@ -175,7 +175,7 @@ if ( have_posts() ) {
 									}
 
 								} else {
-									
+
 									?>
 									<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" data-categorytitle="Ratings Modal" data-itemtitle="<?php echo $full_name_attr; ?>" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>"><span aria-hidden="true">Why not?</span></a></em></p>
 									<?php
@@ -199,7 +199,7 @@ if ( have_posts() ) {
 
 										$location_valid = true;
 										$break;
-										
+
 									}
 								}
 
@@ -208,20 +208,20 @@ if ( have_posts() ) {
 								&&
 								$location_valid
 							) {
-								
+
 								?>
 								<div class="col-12 secondary">
 									<h4 class="h5"><?php echo $location_plural_name; ?></h4>
 										<ul>
 											<?php
-											
+
 											foreach ( $locations as $location) {
 
 												if ( get_post_status ( $location ) == 'publish' ) {
 
 													$related_location = get_the_title( $location );
 													$related_location_attr = uamswp_attr_conversion($related_location);
-													
+
 													?>
 													<li>
 														<a href="<?php echo get_permalink( $location ); ?>" data-categorytitle="Related Location" data-typetitle="<?php echo $related_location_attr; ?>" data-itemtitle="<?php echo $full_name_attr; ?>">
@@ -233,15 +233,15 @@ if ( have_posts() ) {
 												} // endif
 
 											} // endforeach
-											
+
 											?>
 										</ul>
 									<a class="btn btn-primary" href="<?php echo get_permalink($post->ID); ?>" aria-label="Full profile for <?php echo $full_name_attr; ?>" data-categorytitle="View Full Profile" data-itemtitle="<?php echo $full_name_attr; ?>">Full Profile</a>
 								</div>
 								<?php
-							
+
 							} // endif
-							
+
 							?> 
 						</div>
 					</div>
@@ -259,7 +259,7 @@ if ( have_posts() ) {
 	<?php
 
 } else {
-	
+
 	?>
 	<p><?php _e( 'Sorry, no ' . strtolower($provider_plural_name) . ' matched your criteria.' ); ?></p>
 	<?php

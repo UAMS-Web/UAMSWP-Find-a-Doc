@@ -1,9 +1,6 @@
 <?php
 /*
  * Template Name: Single Condition
- * 
- * 
- * 
  */
 
 // Get system settings for ontology item labels
@@ -160,12 +157,46 @@
 	$page_slug = $post->post_name;
 
 	// Fake subpage
-	
+
 		// Do nothing
+
+// Get site header and site nav values for ontology subsections
+
+	// Do nothing
+
+// Image values
+
+	// Get the featured image ID
+
+		$featured_image = get_post_thumbnail_id(); // int // Featured image ID
+		$featured_image = $featured_image ? $featured_image : '';
 
 // Define the placement for content
 
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
+
+// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
+
+	if (
+		$regions
+		||
+		$service_lines
+		) {
+
+		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
+			$regions, // string|array // Region(s) associated with the item
+			$service_lines // string|array // Service line(s) associated with the item
+		);
+			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+
+	} else {
+
+		$hide_medical_ontology = false; // bool
+
+	}
 
 // HEAD
 
@@ -223,7 +254,7 @@
 			}
 
 		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
-		
+
 		// Set schema description
 
 			$schema_description = $excerpt_attr; // Used for Schema Data. Should ALWAYS have a value
@@ -262,431 +293,594 @@
 		// Filter hooks
 		include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
 
-// Add page template class to body element's classes
+// BODY
 
-	$template_type = 'default';
-	add_filter( 'body_class', function( $classes ) use ( $template_type ) {
+	// Add page template class to body element's classes
 
-		// Add page template class to body class array
-		$classes[] = 'page-template-' . $template_type;
+		$template_type = 'default';
+		add_filter( 'body_class', function( $classes ) use ( $template_type ) {
 
-		return $classes;
+			// Add page template class to body class array
 
-	} );
+				if ( $template_type ) {
 
-// Get system settings for jump links (a.k.a. anchor links)
+					$classes[] = 'page-template-' . $template_type;
 
-	$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
-		$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
+				}
 
-// ACF Fields - get_fields
+			return $classes;
 
-	$clinical_trials = get_field('condition_clinical_trials');
-	$video = get_field('condition_youtube_link');
+		} );
 
-// Medline / Syndication
+	// Header
 
-	$medline_type = get_field('medline_code_type');
-	$medline_code = get_field('medline_code_id');
-	$embed_code = get_field('condition_embed_codes');
-	if (
-		( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
-		|| ( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
-	) {
-		$syndication = true;
-	}
-	else {
-		$syndication = false;
-	}
+		get_header();
 
-// Hard-coded breadcrumbs
+		// Site header
 
-	// $tax = get_term_by("slug", get_query_var("term"), get_query_var("taxonomy") );
+			// Remove the site header set by the theme
 
-// Call-to-action bar repeater
+				// remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 
-	$cta_repeater = get_field('condition_cta');
+			// Add ontology subsection site header
 
-// Query for whether related providers content section should be displayed on ontology pages/subsections
+				// add_action( 'genesis_header', function() use (
+				// 	$page_id,
+				// 	$ontology_type,
+				// 	$page_title,
+				// 	$page_url
+				// ) {
+				// 	uamswp_fad_ontology_header(
+				// 		$page_id, // int // ID of the post
+				// 		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+				// 		$page_title, // string (optional) // Title of the post
+				// 		$page_url // string (optional) // Permalink of the post
+				// 	);
+				// }, 5 );
 
-	$providers = get_field('condition_physicians');
-	$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-		$providers, // int[]
-		$jump_link_count // int
-	);
-		$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-		$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-		$provider_ids = $provider_query_vars['provider_ids']; // int[]
-		$provider_count = $provider_query_vars['provider_count']; // int
-		$jump_link_count = $provider_query_vars['jump_link_count']; // int
+		// Primary navigation
 
-// Query for whether related locations content section should be displayed on a page
+			// Remove the primary navigation set by the theme
 
-	$locations = get_field('condition_locations');
-	$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
-		$locations // int[]
-	);
-		$location_query = $location_query_vars['location_query']; // WP_Post[]
-		$location_section_show = $location_query_vars['location_section_show']; // bool
-		$location_ids = $location_query_vars['location_ids']; // int[]
-		$location_count = $location_query_vars['location_count']; // int
-		$location_valid = $location_query_vars['location_valid']; // bool
+				// remove_action( 'genesis_after_header', 'genesis_do_nav' );
+				// remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
-// Query for whether related areas of expertise content section should be displayed on a page
+			// Add ontology subsection primary navigation
 
-	$expertises = get_field('condition_expertise');
-	$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
-		$expertises // int[]
-	);
-		$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-		$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-		$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-		$expertise_count = $expertise_query_vars['expertise_count']; // int
+				// add_action( 'genesis_after_header', function() use (
+				// 	$page_id,
+				// 	$ontology_type,
+				// 	$page_title,
+				// 	$page_url
+				// ) {
+				// 	uamswp_fad_ontology_nav_menu(
+				// 		$page_id, // int // ID of the post
+				// 		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+				// 		$page_title, // string (optional) // Title of the post
+				// 		$page_url // string (optional) // Permalink of the post
+				// 	);
+				// }, 5 );
 
-// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+	// Breadcrumbs
 
-	$clinical_resources = get_field('condition_clinical_resources');
-	$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-		$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
-	$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
-	$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-	$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-		$clinical_resources,
-		$clinical_resource_posts_per_page,
-		$jump_link_count
-	);
-		$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-		$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-		$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
-		$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
-		$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
+		// Override Genesis standard breadcrumbs settings
 
-// Query for whether related treatments content section should be displayed on ontology pages/subsections
+			// Do nothing
 
-	$treatments_cpt = get_field('condition_treatments');
-	$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-	$ontology_type = isset($ontology_type) ? $ontology_type : true;
-	$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-		$treatments_cpt, // int[]
-		$condition_treatment_section_show, // bool (optional)
-		$ontology_type, // bool (optional)
-	);
-		$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-		$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-		$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-		$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-		$treatment_count = $treatment_query_vars['treatment_count']; // int
-		$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
+		// Override SEOPress standard breadcrumbs settings
 
-// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+			// Do nothing
 
-	$regions = isset($regions) ? $regions : array();
-	$service_lines = isset($service_lines) ? $service_lines : array();
-	if ( $regions || $service_lines ) {
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-			$regions, // string|array // Region(s) associated with the item
-			$service_lines // string|array // Service line(s) associated with the item
-		);
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-	} else {
-		$hide_medical_ontology = false; // bool
-	}
+	// Page Header (before entry element)
 
-// Classes for indicating presence of content
+		// Remove Genesis-standard post title and markup
 
-	$condition_field_classes = '';
-	if ($keywords && array_filter($keywords)) { $condition_field_classes .= ' has-keywords'; } // Alternate names
-	if ($clinical_trials && !empty($clinical_trials)) { $condition_field_classes .= ' has-clinical-trials'; } // Display clinical trials block
-	if ($content && !empty($content)) { $condition_field_classes .= ' has-content'; } // Body content
-	if ($excerpt && $excerpt_user == true ) { $condition_field_classes .= ' has-excerpt'; } // Short Description (Excerpt)
-	if ($syndication ) { $condition_field_classes .= ' has-syndication'; } // Content Syndication
-	if ($video && !empty($video)) { $condition_field_classes .= ' has-video'; } // Video embed
-	if ($treatment_section_show) { $condition_field_classes .= ' has-treatment'; } // Treatments
-	if ($expertise_section_show) { $condition_field_classes .= ' has-expertise'; } // Areas of Expertise
-	if ($location_section_show) { $condition_field_classes .= ' has-location'; } // Locations
-	if ($providers && array_filter($providers)) { $condition_field_classes .= ' has-provider'; } // Providers
+			// remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+			// remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+			// remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+			// remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
 
-// Set logic for displaying jump links and sections
+		// Construct non-standard post title
 
-	$jump_link_count_min = 2; // How many links have to exist before displaying the list of jump links?
-	$jump_link_count = 0;
+			// $entry_header_style = ''; // Entry header style
+			// $entry_title_text = ''; // Regular title
+			// $entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
+			// $entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
+			// $entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
+			// $entry_title_image_desktop = ''; // Desktop breakpoint image ID
+			// $entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+			// 
+			// add_action( 'genesis_before_content', function() use (
+			// 	$entry_title_text,
+			// 	$entry_header_style,
+			// 	$entry_title_text_supertitle,
+			// 	$entry_title_text_subtitle,
+			// 	$entry_title_text_body,
+			// 	$entry_title_image_desktop,
+			// 	$entry_title_image_mobile
+			// ) {
+			// 	uamswp_fad_post_title(
+			// 		$entry_title_text, // string // Entry title text
+			// 		$entry_header_style, // string // Entry header style
+			// 		$entry_title_text_supertitle, // string (optional) // Entry supertitle text
+			// 		$entry_title_text_subtitle, // string (optional) // Entry subtitle text
+			// 		$entry_title_text_body, // string (optional) // Entry header lead paragraph text
+			// 		$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
+			// 		$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+			// 	);
+			// } );
 
-		// Check if UAMS Health Talk podcast section should be displayed
+	// MAIN / ARTICLE
 
-			$podcast_name = get_field('condition_podcast_name');
-			$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
-				$podcast_name, // string
-				$jump_link_count // int (optional)
-			);
-				$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-				$jump_link_count = $podcast_query_vars['jump_link_count']; // int
+		// Add bg-white class to article.entry element
 
-		// Check if Clinical Trials section should be displayed
+			// add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
-			if ( !empty($clinical_trials) ) {
-				$clinical_trials_section_show = true;
-			} else {
-				$clinical_trials_section_show = false;
-			}
+		// Start count for jump links
 
-		// Check if Make an Appointment section should be displayed
+			$jump_link_count = 0;
 
-			// It should always be displayed.
-			$appointment_section_show = true;
-			$jump_link_count++;
+		// Queries for whether each of the sections should be displayed
 
-		// Check if Jump Links section should be displayed
+			// Query for whether related providers content section should be displayed on ontology pages/subsections
 
-			if ( $jump_link_count >= $jump_link_count_min ) {
-				$jump_links_section_show = true;
-			} else {
-				$jump_links_section_show = false;
-			}
+				$providers = get_field('condition_physicians');
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$providers, // int[]
+					$jump_link_count // int
+				);
+					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
+					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
+					$provider_ids = $provider_query_vars['provider_ids']; // int[]
+					$provider_count = $provider_query_vars['provider_count']; // int
+					$jump_link_count = $provider_query_vars['jump_link_count']; // int
 
-get_header();
+			// Query for whether related locations content section should be displayed on a page
+
+				$locations = get_field('condition_locations');
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$locations // int[]
+				);
+					$location_query = $location_query_vars['location_query']; // WP_Post[]
+					$location_section_show = $location_query_vars['location_section_show']; // bool
+					$location_ids = $location_query_vars['location_ids']; // int[]
+					$location_count = $location_query_vars['location_count']; // int
+					$location_valid = $location_query_vars['location_valid']; // bool
+
+			// Query for whether related areas of expertise content section should be displayed on a page
+
+				$expertises = get_field('condition_expertise');
+				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+					$expertises // int[]
+				);
+					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+					$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
+					$expertise_count = $expertise_query_vars['expertise_count']; // int
+
+			// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+
+				$clinical_resources = get_field('condition_clinical_resources');
+				$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
+					$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
+				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
+				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
+				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+					$clinical_resources,
+					$clinical_resource_posts_per_page,
+					$jump_link_count
+				);
+					$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
+					$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
+					$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
+					$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
+					$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
+
+			// Query for whether related treatments content section should be displayed on ontology pages/subsections
+
+				$treatments_cpt = get_field('condition_treatments');
+				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+				$ontology_type = isset($ontology_type) ? $ontology_type : true;
+				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$treatments_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type, // bool (optional)
+				);
+					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
+					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
+					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
+					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
+					$treatment_count = $treatment_query_vars['treatment_count']; // int
+					$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
+
+			// Check if UAMS Health Talk podcast section should be displayed
+
+				$podcast_name = get_field('condition_podcast_name');
+				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
+					$podcast_name, // string
+					$jump_link_count // int (optional)
+				);
+					$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
+					$jump_link_count = $podcast_query_vars['jump_link_count']; // int
+
+			// Check if Clinical Trials section should be displayed
+
+				if ( !empty($clinical_trials) ) {
+					$clinical_trials_section_show = true;
+				} else {
+					$clinical_trials_section_show = false;
+				}
+
+			// Check if Jump Links section should be displayed
+
+				if ( $jump_link_count >= $jump_link_count_min ) {
+					$jump_links_section_show = true;
+				} else {
+					$jump_links_section_show = false;
+				}
+
+			// Query for whether Make an Appointment section should be displayed
+
+				$appointment_section_show = true;// It should always be displayed.
+				$jump_link_count++;
+
+		// Get remaining details about this item
+
+			// Get system settings for jump links (a.k.a. anchor links)
+
+				$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
+				$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
+
+			// Clinical Trials
+
+				$clinical_trials = get_field('condition_clinical_trials');
+
+			// Video
+
+				$video = get_field('condition_youtube_link');
+
+			// Medline / Syndication
+
+				$medline_type = get_field('medline_code_type');
+				$medline_code = get_field('medline_code_id');
+				$embed_code = get_field('condition_embed_codes');
+
+				if (
+					( $medline_type && 'none' != $medline_type && $medline_code && !empty($medline_code) ) // if the medline plus syndication option is filled in
+					||
+					( $embed_code && !empty($embed_code) ) // or if the syndication embed field has a value
+				) {
+
+					$syndication = true;
+
+				}
+				else {
+
+					$syndication = false;
+
+				}
+
+			// Call-to-action bar repeater
+
+				$cta_repeater = get_field('condition_cta');
+
+		// Get remaining details content associated with this item
+
+			// Do nothing
+
+		// Classes for indicating presence of content
+
+			$condition_field_classes = '';
+			$condition_field_classes .= ( $keywords && array_filter($keywords) ) ? ' has-keywords' : ''; // Alternate names
+			$condition_field_classes .= ( $clinical_trials && !empty($clinical_trials) ) ? ' has-clinical-trials' : ''; // Display clinical trials block
+			$condition_field_classes .= ( $content && !empty($content) ) ? ' has-content' : ''; // Body content
+			$condition_field_classes .= ( $excerpt && $excerpt_user == true  ) ? ' has-excerpt' : ''; // Short Description (Excerpt)
+			$condition_field_classes .= ( $syndication  ) ? ' has-syndication' : ''; // Content Syndication
+			$condition_field_classes .= ( $video && !empty($video) ) ? ' has-video' : ''; // Video embed
+			$condition_field_classes .= ( $treatment_section_show ) ? ' has-treatment' : ''; // Treatments
+			$condition_field_classes .= ( $expertise_section_show ) ? ' has-expertise' : ''; // Areas of Expertise
+			$condition_field_classes .= ( $location_section_show ) ? ' has-location' : ''; // Locations
+			$condition_field_classes .= ( $providers && array_filter($providers) ) ? ' has-provider' : ''; // Providers
+
+		// Remove standard post content
+
+			// remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+		// Construct page content
+
+			?>
+			<div class="content-sidebar-wrap">
+				<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
+					<?php
+
+					// Construct main info section 
+
+						?>
+						<section class="archive-description bg-white">
+							<header class="entry-header">
+								<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $condition_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
+							</header>
+							<div class="entry-content clearfix" itemprop="text">
+								<?php 
+									$keyword_text = '';
+									if( $keywords ): 
+										$i = 1;
+										foreach( $keywords as $keyword ) { 
+											if ( 1 < $i ) {
+												$keyword_text .= '; ';
+											}
+											$keyword_text .= $keyword['alternate_text'];
+											$i++;
+										}
+										echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
+									endif;
+								?>
+								<?php the_content(); ?>
+								<?php 
+									if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
+										echo display_medline_api_data( trim($medline_code), $medline_type );
+									}
+								?>
+								<?php 
+									if ( $embed_code ) {
+										echo $embed_code;
+									}
+								?>
+								<?php if( $video ) { ?>
+									<?php if(function_exists('lyte_preparse')) {
+										echo '<div class="alignwide">';
+										echo lyte_parse( str_replace( 'https', 'httpv', $video ) );
+										echo '</div>';
+									} else {
+										echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+										echo wp_oembed_get( $video );
+										echo '</div>';
+									} ?>
+								<?php } ?>
+							</div>
+						</section>
+						<?php
+
+					// Construct CTA Bar(s)
+
+						if ( $cta_repeater ) {
+							$i = 1;
+
+							foreach( $cta_repeater as $cta ) { 
+
+								$cta_heading = $cta['cta_bar_heading'];
+								$cta_body = $cta['cta_bar_body'];
+								$cta_action_type = $cta['cta_bar_action_type'];
+
+								$cta_button_text = '';
+								$cta_button_url = '';
+								$cta_button_target = '';
+								$cta_button_desc = '';
+
+								if ( $cta_action_type == 'url' ) {
+
+									$cta_button_text = $cta['cta_bar_button_text'];
+									$cta_button_url = $cta['cta_bar_button_url'];
+
+									if ( $cta_button_url ) {
+
+										$cta_button_target = $button_url['target'];
+
+									}
+
+									$cta_button_desc = $cta['cta_bar_button_description'];
+
+								}
+
+								$cta_phone_prepend = '';
+								$cta_phone = '';
+								$cta_phone_link = '';
+
+								if ( $cta_action_type == 'phone' ) {
+
+									$cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
+									$cta_phone = $cta['cta_bar_phone'];
+									$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
+
+								}
+
+								$cta_layout = 'cta-bar-centered';
+								$cta_size = 'normal';
+								$cta_use_image = false;
+								$cta_image = '';
+								$cta_background_color = 'bg-auto';
+								$cta_btn_color = 'primary';
+
+								$cta_className = '';
+								$cta_className .= ' ' . $cta_layout;
+								$cta_className .= ' ' . $cta_background_color;
+								$cta_className .= $cta_use_image ? ' bg-image' : '';
+
+								if ( $cta_cta_size == 'small' ) {
+
+									$cta_className .= ' cta-bar-sm';
+
+								} elseif ( $cta_size == 'large' ) {
+
+									$cta_className .= ' extra-padding cta-bar-lg';
+
+								}
+
+								if ( $cta_action_type == 'none' ) {
+
+									$cta_className .= ' no-link';
+
+								}
+
+								echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-12">
+												<div class="inner-container">
+													<div class="cta-heading">
+														<h2>' . $cta_heading . '</h2>
+													</div>
+													<div class="cta-body">
+														<div class="text-container">
+															' . $cta_body . '
+														</div>';
+														echo $cta_action_type == 'url' ?
+														'<div class="btn-container">
+															<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
+														</div>'
+														: '';
+														echo $cta_action_type == 'phone' ?
+														'<div class="btn-container">
+															<a href="tel:' . $cta_phone . '" data-moduletitle="' . $cta_heading . '">' . $cta_phone_prepend . ' <span class="no-break">' . $cta_phone . '</span></a>
+														</div>'
+														: '';
+													echo '</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>';
+								$i++;
+
+							}
+
+						} // endif;
+
+					// Construct Jump Links Section
+
+						if ( $jump_links_section_show ) {
+
+							?>
+							<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
+								<h2><?php echo $fad_jump_links_title; ?></h2>
+								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
+									<ul class="nav navbar-nav">
+										<?php if ( $podcast_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
+											</li>
+										<?php } ?>
+										<?php if ( $clinical_resource_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
+											</li>
+										<?php } ?>
+										<?php if ( $clinical_trials_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
+											</li>
+										<?php } ?>
+										<?php if ( $treatment_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatment_plural_name_attr; ?>"><?php echo $treatment_plural_name; ?></a>
+											</li>
+										<?php } ?>
+										<?php if ( $provider_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
+											</li>
+										<?php } ?>
+										<?php if ( $location_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#locations" title="Jump to the section of this page about <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
+											</li>
+										<?php } ?>
+										<?php if ( $expertise_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
+											</li>
+										<?php } ?>
+										<?php if ( $appointment_section_show ) { ?>
+											<li class="nav-item">
+												<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
+											</li>
+										<?php } ?>
+									</ul>
+								</div>
+							</nav>
+							<?php
+
+						} // endif
+
+					// Construct UAMS Health Talk podcast section
+
+						$podcast_filter = 'tag';
+						$podcast_subject = $page_title;
+						uamswp_fad_podcast(
+							$podcast_name, // string
+							$podcast_section_show, // bool
+							$podcast_filter, // string // Expected values: 'tag' or 'doctor'
+							$podcast_subject // string
+						);
+
+					// Construct Clinical Resources Section
+
+						$clinical_resource_section_more_link_key = '_resource_conditions';
+						$clinical_resource_section_more_link_value = $page_slug;
+						$clinical_resource_section_title = $clinical_resource_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
+						$clinical_resource_section_intro = $clinical_resource_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
+						$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
+						$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
+						$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
+						include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
+
+					// Construct Clinical Trials Section
+
+						if ( $clinical_trials_section_show ) {
+
+							$clinical_trial_title = $page_title;
+							include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
+
+						} // endif
+
+					// Construct Treatments Section
+
+						$treatment_section_title = $treatment_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
+						$treatment_section_intro = $treatment_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+						include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
+
+					// Construct Providers Section
+
+						$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
+						$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatment_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
+						include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
+
+					// Construct Location Section
+
+						$location_section_title = $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title; // Text to use for the section title
+						$location_section_intro = 'Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
+						include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
+
+					// Construct Areas of Expertise Section
+
+						$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
+						$expertise_section_intro = '';
+						include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
+
+					// Construct Appointment Information Section
+
+						if ( $appointment_section_show ) {
+
+							include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+
+						}
+					?>
+				</main>
+			</div>
+			<?php
+
+	// FOOTER
+
+		// Remove the post-related content and markup from the entry footer
+
+			// remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
+			// remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
+			// remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+			// remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
+
+		get_footer();
 
 ?>
-<div class="content-sidebar-wrap">
-	<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
-		<section class="archive-description bg-white">
-			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $condition_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
-			</header>
-			<div class="entry-content clearfix" itemprop="text">
-				<?php 
-					$keyword_text = '';
-					if( $keywords ): 
-						$i = 1;
-						foreach( $keywords as $keyword ) { 
-							if ( 1 < $i ) {
-								$keyword_text .= '; ';
-							}
-							$keyword_text .= $keyword['alternate_text'];
-							$i++;
-						}
-						echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
-					endif;
-				?>
-				<?php the_content(); ?>
-				<?php 
-					if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
-						echo display_medline_api_data( trim($medline_code), $medline_type );
-					}
-				?>
-				<?php 
-					if ( $embed_code ) {
-						echo $embed_code;
-					}
-				?>
-				<?php if( $video ) { ?>
-					<?php if(function_exists('lyte_preparse')) {
-						echo '<div class="alignwide">';
-						echo lyte_parse( str_replace( 'https', 'httpv', $video ) );
-						echo '</div>';
-					} else {
-						echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-						echo wp_oembed_get( $video );
-						echo '</div>';
-					} ?>
-				<?php } ?>
-			</div>
-		</section>
-	<?php // Begin CTA Bar(s)
-			if( $cta_repeater ) {
-				$i = 1;
-				foreach( $cta_repeater as $cta ) { 
-					$cta_heading = $cta['cta_bar_heading'];
-					$cta_body = $cta['cta_bar_body'];
-					$cta_action_type = $cta['cta_bar_action_type'];
-
-					$cta_button_text = '';
-					$cta_button_url = '';
-					$cta_button_target = '';
-					$cta_button_desc = '';
-					if ( $cta_action_type == 'url' ) {
-						$cta_button_text = $cta['cta_bar_button_text'];
-						$cta_button_url = $cta['cta_bar_button_url'];
-						if ( $cta_button_url ) {
-							$cta_button_target = $button_url['target'];
-						}
-						$cta_button_desc = $cta['cta_bar_button_description'];
-					}
-
-					$cta_phone_prepend = '';
-					$cta_phone = '';
-					$cta_phone_link = '';
-					if ( $cta_action_type == 'phone' ) {
-						$cta_phone_prepend = $cta['cta_bar_phone_prepend'] ? $cta['cta_bar_phone_prepend'] : 'Call';
-						$cta_phone = $cta['cta_bar_phone'];
-						$cta_phone_link = '<a href="tel:' . format_phone_dash( $cta_phone ) . '">' . format_phone_us( $cta_phone ) . '</a>';
-					}
-
-					$cta_layout = 'cta-bar-centered';
-					$cta_size = 'normal';
-					$cta_use_image = false;
-					$cta_image = '';
-					$cta_background_color = 'bg-auto';
-					$cta_btn_color = 'primary';
-
-					$cta_className = '';
-					$cta_className .= ' ' . $cta_layout;
-					$cta_className .= ' ' . $cta_background_color;
-					$cta_className .= $cta_use_image ? ' bg-image' : '';
-					if ( $cta_cta_size == 'small' ) {
-						$cta_className .= ' cta-bar-sm';
-					} elseif ( $cta_size == 'large' ) {
-						$cta_className .= ' extra-padding cta-bar-lg';
-					}
-					if ( $cta_action_type == 'none' ) {
-						$cta_className .= ' no-link';
-					}
-
-					echo '<section class="uams-module cta-bar' . $cta_className . '" id="cta-bar-' . $i . '" aria-label="' . $cta_heading . '">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-12">
-									<div class="inner-container">
-										<div class="cta-heading">
-											<h2>' . $cta_heading . '</h2>
-										</div>
-										<div class="cta-body">
-											<div class="text-container">
-												' . $cta_body . '
-											</div>';
-											echo $cta_action_type == 'url' ?
-											'<div class="btn-container">
-												<a href="' . $cta_button_url['url'] . '" aria-label="' . $cta_button_desc . '" class=" btn btn-' . $cta_btn_color . ( $cta_size == 'large' ? ' btn-lg' : '' ) . '"' . ( $cta_button_target ? ' target="'. $cta_button_target . '"' : '' ) . ' data-moduletitle="' . $cta_heading . '">' . $cta_button_text . '</a>
-											</div>'
-											: '';
-											echo $cta_action_type == 'phone' ?
-											'<div class="btn-container">
-												<a href="tel:' . $cta_phone . '" data-moduletitle="' . $cta_heading . '">' . $cta_phone_prepend . ' <span class="no-break">' . $cta_phone . '</span></a>
-											</div>'
-											: '';
-										echo '</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>';
-					$i++;
-				}
-			} // endif;
-			// End CTA Bar(s)
-
-			// Begin Jump Links Section
-		if ( $jump_links_section_show ) { ?>
-			<nav class="uams-module less-padding navbar navbar-dark navbar-expand-xs jump-links" id="jump-links">
-				<h2><?php echo $fad_jump_links_title; ?></h2>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#jump-link-nav" aria-controls="jump-link-nav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse inner-container" id="jump-link-nav">
-					<ul class="nav navbar-nav">
-						<?php if ( $podcast_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#podcast" title="Jump to the section of this page about UAMS Health Talk Podcast">Podcast</a>
-							</li>
-						<?php } ?>
-						<?php if ( $clinical_resource_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#related-resources" title="Jump to the section of this page about <?php echo $clinical_resource_plural_name_attr; ?>"><?php echo $clinical_resource_plural_name; ?></a>
-							</li>
-						<?php } ?>
-						<?php if ( $clinical_trials_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#clinical-trials" title="Jump to the section of this page about Clinical Trials">Clinical Trials</a>
-							</li>
-						<?php } ?>
-						<?php if ( $treatment_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#treatments" title="Jump to the section of this page about <?php echo $treatment_plural_name_attr; ?>"><?php echo $treatment_plural_name; ?></a>
-							</li>
-						<?php } ?>
-						<?php if ( $provider_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#providers" title="Jump to the section of this page about <?php echo $provider_plural_name_attr; ?>"><?php echo $provider_plural_name; ?></a>
-							</li>
-						<?php } ?>
-						<?php if ( $location_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#locations" title="Jump to the section of this page about <?php echo $location_plural_name_attr; ?>"><?php echo $location_plural_name; ?></a>
-							</li>
-						<?php } ?>
-						<?php if ( $expertise_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#expertise" title="Jump to the section of this page about <?php echo $expertise_plural_name_attr; ?>"><?php echo $expertise_plural_name; ?></a>
-							</li>
-						<?php } ?>
-						<?php if ( $appointment_section_show ) { ?>
-							<li class="nav-item">
-								<a class="nav-link" href="#appointment-info" title="Jump to the section of this page about making an appointment">Make an Appointment</a>
-							</li>
-						<?php } ?>
-					</ul>
-				</div>
-			</nav>
-		<?php } // endif
-		// End Jump Links Section
-
-		// Construct UAMS Health Talk podcast section
-		$podcast_filter = 'tag';
-		$podcast_subject = $page_title;
-		uamswp_fad_podcast(
-			$podcast_name, // string
-			$podcast_section_show, // bool
-			$podcast_filter, // string // Expected values: 'tag' or 'doctor'
-			$podcast_subject // string
-		);
-
-		// Begin Clinical Resources Section
-		$clinical_resource_section_more_link_key = '_resource_conditions';
-		$clinical_resource_section_more_link_value = $page_slug;
-		$clinical_resource_section_title = $clinical_resource_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of clinical_resource section title in a general placement)
-		$clinical_resource_section_intro = $clinical_resource_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of clinical_resource section intro text in a general placement)
-		$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
-		$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
-		$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
-		// End Clinical Resources Section
-
-		// Begin Clinical Trials Section
-		if ( $clinical_trials_section_show ) {
-			$clinical_trial_title = $page_title;
-			include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
-		} // endif
-		// End Clinical Trials Section
-
-		// Begin Treatments Section
-		$treatment_section_title = $treatment_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
-		$treatment_section_intro = $treatment_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
-		// End Treatments Section
-
-		// Begin Providers Section
-		$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
-		$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatment_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
-		// End Providers Section
-
-		// Begin Location Section
-		$location_section_title = $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title; // Text to use for the section title
-		$location_section_intro = 'Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
-		// End Location Section
-
-		// Begin Areas of Expertise Section
-		$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
-		$expertise_section_intro = '';
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
-		// End Areas of Expertise Section
-
-		// Begin Appointment Information Section
-		if ( $appointment_section_show ) {
-			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
-		}
-		// End Appointment Information Section
-		?>
-	</main>
-</div>
-<?php get_footer(); ?>

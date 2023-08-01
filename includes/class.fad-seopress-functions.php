@@ -28,7 +28,8 @@
 
 			// Array for page titles and section titles
 			$page_titles = array(
-				'page_title'	=> $page_title
+				'page_title'		=> $page_title,
+				'page_title_attr'	=> $page_title_attr
 			);
 
 			// Meta title

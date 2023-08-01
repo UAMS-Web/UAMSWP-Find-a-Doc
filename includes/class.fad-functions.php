@@ -4706,7 +4706,7 @@ function uamswp_fad_fpage_text_replace(
 					// Set the page header text element values
 
 						// Define empty variables to prevent PHP errors
-						
+
 							$expertise_page_header_graphic = '';
 							$expertise_page_header_landingpage = '';
 							$expertise_page_title = '';
@@ -7109,7 +7109,7 @@ function uamswp_fad_labels_jump_links() {
 }
 
 // Crop and resize images for Open Graph and Twitter
-function uamswp_meta_image_resize( $page_image_id ) {
+function uamswp_meta_image_resize( $featured_image ) {
 
 	// Create multidimensional associative array for defining width and height for each social meta image
 	$image_size = array();
@@ -7132,17 +7132,17 @@ function uamswp_meta_image_resize( $page_image_id ) {
 	// https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
 	$image_size['twitter'] = array( 'width' => 1600, 'height' => 838 );
 
-	if ( $page_image_id && function_exists( 'fly_add_image_size' ) ) {
-		$meta_og_image = image_sizer($page_image_id, $image_size['opengraph']['width'], $image_size['opengraph']['height'], 'center', 'center');
+	if ( $featured_image && function_exists( 'fly_add_image_size' ) ) {
+		$meta_og_image = image_sizer($featured_image, $image_size['opengraph']['width'], $image_size['opengraph']['height'], 'center', 'center');
 		$meta_og_image_width = $image_size['opengraph']['width'];
 		$meta_og_image_height = $image_size['opengraph']['height'];
-		$meta_twitter_image = image_sizer($page_image_id, $image_size['twitter']['width'], $image_size['twitter']['height'], 'center', 'center');
+		$meta_twitter_image = image_sizer($featured_image, $image_size['twitter']['width'], $image_size['twitter']['height'], 'center', 'center');
 		$meta_twitter_image_width = $image_size['twitter']['width'];
 		$meta_twitter_image_height = $image_size['twitter']['height'];
-	} elseif ( $page_image_id ) {
-		$meta_og_image = wp_get_attachment_url( $page_image_id, 'aspect-16-9' );
-		$meta_og_image_width = image_get_intermediate_size( $page_image_id, 'aspect-16-9' )['width'];
-		$meta_og_image_height = image_get_intermediate_size( $page_image_id, 'aspect-16-9' )['height'];
+	} elseif ( $featured_image ) {
+		$meta_og_image = wp_get_attachment_url( $featured_image, 'aspect-16-9' );
+		$meta_og_image_width = image_get_intermediate_size( $featured_image, 'aspect-16-9' )['width'];
+		$meta_og_image_height = image_get_intermediate_size( $featured_image, 'aspect-16-9' )['height'];
 		$meta_twitter_image = $meta_og_image;
 		$meta_twitter_image_width = $meta_og_image_width;
 		$meta_twitter_image_height = $meta_og_image_height;
@@ -7521,7 +7521,7 @@ function uamswp_meta_image_resize( $page_image_id ) {
 		*/
 
 		// Check/define variables
-			
+
 			$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 			$street_address = isset($street_address) ? $street_address : '';
 			$post_office_box_number = isset($post_office_box_number) ? $post_office_box_number : '';
@@ -7546,31 +7546,31 @@ function uamswp_meta_image_resize( $page_image_id ) {
 			if ( $street_address ) {
 				$schema['streetAddress'] = $street_address;
 			}
-			
+
 			if ( $post_office_box_number ) {
 				$schema['postOfficeBoxNumber'] = $post_office_box_number;
 			}
-			
+
 			if ( $address_locality ) {
 				$schema['addressLocality'] = $address_locality;
 			}
-			
+
 			if ( $address_region ) {
 				$schema['addressRegion'] = $address_region;
 			}
-			
+
 			if ( $postal_code ) {
 				$schema['postalCode'] = $postal_code;
 			}
-			
+
 			if ( $address_country ) {
 				$schema['addressCountry'] = $address_country;
 			}
-			
+
 			if ( $telephone ) {
 				$schema['telephone'] = $telephone;
 			}
-			
+
 			if ( $fax_number ) {
 				$schema['faxNumber'] = $fax_number;
 			}
@@ -7630,11 +7630,11 @@ function uamswp_meta_image_resize( $page_image_id ) {
 			if ( $name ) {
 				$schema['name'] = $name;
 			}
-			
+
 			if ( $url ) {
 				$schema['url'] = $url;
 			}
-			
+
 			if ( $alternate_name ) {
 				$schema['alternateName'] = $alternate_name;
 			}
@@ -7793,19 +7793,19 @@ function uamswp_meta_image_resize( $page_image_id ) {
 			if ( $day_of_week ) {
 				$schema['dayOfWeek'] = $day_of_week;
 			}
-			
+
 			if ( $opens ) {
 				$schema['opens'] = $opens;
 			}
-			
+
 			if ( $closes ) {
 				$schema['closes'] = $closes;
 			}
-			
+
 			if ( $valid_from ) {
 				$schema['validFrom'] = $valid_from;
 			}
-			
+
 			if ( $valid_through ) {
 				$schema['validThrough'] = $valid_through;
 			}
@@ -7917,11 +7917,11 @@ function uamswp_meta_image_resize( $page_image_id ) {
 			if ( $latitude ) {
 				$schema['latitude'] = $latitude;
 			}
-			
+
 			if ( $longitude ) {
 				$schema['longitude'] = $longitude;
 			}
-			
+
 			if ( $elevation ) {
 				$schema['elevation'] = $elevation;
 			}
@@ -8054,7 +8054,7 @@ function uamswp_fad_fpage_text_image_overlay(
 						$provider_fpage_ref_top_intro_expertise = $fpage_text_expertise_vars['provider_fpage_ref_top_intro_expertise']; // string
 						$provider_fpage_ref_top_link_expertise = $fpage_text_expertise_vars['provider_fpage_ref_top_link_expertise']; // string
 				}
-				
+
 				// Create array of main archive attributes
 				$text_image_overlay_main_archive = array(
 					'heading'			=> $provider_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str

@@ -48,7 +48,8 @@ $term = get_queried_object();
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'	=> $page_title
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
 		);
 
 // Get system settings for ontology item labels
@@ -150,7 +151,7 @@ $term = get_queried_object();
 			$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
 		);
 			$meta_title = $meta_title_vars['meta_title']; // string
-	
+
 	// Modify SEOPress's standard meta title settings
 
 		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {

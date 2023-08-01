@@ -37,7 +37,7 @@
 		$jump_links_key = $current_fpage ? $current_fpage : $post_type;
 
 	// Create array for order and values of jump links list items
-	
+
 		/*
 		 * The top-level keys should match the post type for the page (or the fake subpage 
 		 * slug if it is a fake subpage)
@@ -68,25 +68,25 @@
 		if ( $post_type == 'provider' ) {
 
 			// Check/define variables
-			
+
 				// Get system settings for location labels
 				if ( !isset($location_plural_name) || empty($location_plural_name) ) {
 					$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
 						$location_plural_name = $labels_location_vars['location_plural_name']; // string
 				}
-			
+
 				// Get system settings for area of expertise labels
 				if ( !isset($expertise_plural_name) || empty($expertise_plural_name) ) {
 					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 						$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 				}
-			
+
 				// Get system settings for clinical resource labels
 				if ( !isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr) ) {
 					$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 						$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 				}
-			
+
 				// Get system settings for combined condition and treatment labels
 				if ( !isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name) ) {
 					$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
@@ -152,7 +152,7 @@
 		} elseif ( $post_type == 'location' ) {
 
 			// Check/define variables
-			
+
 				// Defined on the template
 
 					$location_alert_title = isset($location_alert_title) ? $location_alert_title : '';
@@ -171,7 +171,7 @@
 							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for location labels
 
 					if (
@@ -183,7 +183,7 @@
 							$location_single_name = $labels_location_vars['location_single_name']; // string
 							$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 					}
-			
+
 				// Get system settings for location descendant item labels
 
 					if (
@@ -195,7 +195,7 @@
 							$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
 							$location_descendant_plural_name_attr = $labels_location_descendant_vars['location_descendant_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for area of expertise labels
 
 					if (
@@ -207,7 +207,7 @@
 							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for clinical resource labels
 
 					if (
@@ -219,7 +219,7 @@
 							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for combined condition and treatment labels
 
 					if (
@@ -323,7 +323,7 @@
 		} elseif ( $post_type == 'clinical-resource' ) {
 
 			// Get labels
-			
+
 				// Get system settings for provider labels
 
 					if (
@@ -335,7 +335,7 @@
 							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for location labels
 
 					if (
@@ -347,7 +347,7 @@
 							$location_plural_name = $labels_location_vars['location_plural_name']; // string
 							$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for area of expertise labels
 
 					if (
@@ -359,7 +359,7 @@
 							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for clinical resource labels
 
 					if (
@@ -371,7 +371,7 @@
 							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 					}
-			
+
 				// Get system settings for combined condition and treatment labels
 
 					if (
@@ -457,7 +457,7 @@
 							?>
 							<li class="nav-item<?php echo $item_submenu ? ' dropdown' : ''; ?>">
 								<a class="nav-link" href="<?php echo $item_href; ?>"<?php echo $item_label ? ' title="' . $item_label . '"' : ''; ?>><?php echo $item_text; ?></a><?php
-								
+
 								if (
 									${ $key . '_section_submenu' }
 									&&
@@ -472,7 +472,7 @@
 											$item_text = ( isset($item['text']) && !empty($item['text']) ) ? $item['text'] : '';
 											$item_href = ( isset($item['href']) && !empty($item['href']) ) ? '#' . $item['href'] : '';
 											$item_label = ( isset($item['label']) && !empty($item['label']) ) ? $item['label'] : '';
-	
+
 											if (
 												${ $key . '_section_show' }
 												&& 
@@ -489,7 +489,7 @@
 										<?php
 
 										} // endforeach
-										
+
 										?>
 									</ul>
 									<?php
@@ -501,7 +501,7 @@
 						} // endif
 
 					} // endforeach
-					
+
 					?>
 				</ul>
 			</div>

@@ -1,9 +1,6 @@
 <?php
 /*
  * Template Name: Fake Area of Expertise Specialties Subpage
- * 
- * 
- * 
  */
 
 // Get system settings for ontology item labels
@@ -224,13 +221,68 @@
 		$page_slug = $post->post_name;
 
 	// Fake subpage
-	
+
 		$current_fpage = get_query_var('fpage'); // Fake subpage slug
 		$fpage_url = !empty($current_fpage) ? trailingslashit($page_url) . user_trailingslashit($current_fpage) : $page_url; // Fake subpage URL
+
+// Get site header and site nav values for ontology subsections
+
+	$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+		$page_id, // int // ID of the post
+		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+		$page_title, // string (optional) // Title of the post
+		$page_url // string (optional) // Permalink of the post
+	);
+		$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+		$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
+		$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
+		$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
+		$navbar_subbrand_parent = $ontology_site_values_vars['navbar_subbrand']['parent']['name']; // string
+		$navbar_subbrand_parent_attr = $ontology_site_values_vars['navbar_subbrand']['parent']['attr']; // string
+		$navbar_subbrand_parent_url = $ontology_site_values_vars['navbar_subbrand']['parent']['url']; // string
+		$providers = $ontology_site_values_vars['providers']; // int[]
+		$locations = $ontology_site_values_vars['locations']; // int[]
+		$expertises = $ontology_site_values_vars['expertises']; // int[]
+		$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
+		$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
+		$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[]
+		$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[]
+		$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest'];
+		$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // bool
+
+// Image values
+
+	// Get the featured image ID
+
+		$featured_image = $location_fpage_featured_image_expertise; // Image ID
+		$featured_image = $featured_image ? $featured_image : '';
 
 // Define the placement for content
 
 	$content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'
+
+// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
+
+	if (
+		$regions
+		||
+		$service_lines
+		) {
+
+		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
+			$regions, // string|array // Region(s) associated with the item
+			$service_lines // string|array // Service line(s) associated with the item
+		);
+			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+
+	} else {
+
+		$hide_medical_ontology = false; // bool
+
+	}
 
 // HEAD
 
@@ -276,7 +328,7 @@
 				$excerpt_user = false;
 
 			}
-			
+
 			$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
 
 		// Set schema description
@@ -331,338 +383,340 @@
 
 		// Filter hooks
 		include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+// BODY
 
-// Get the featured image / post thumbnail
+	// Add page template class to body element's classes
 
-	$page_image_id = $location_fpage_featured_image_expertise; // Image ID
+		$template_type = 'page_landing';
+		add_filter( 'body_class', function( $classes ) use ( $template_type ) {
 
-// Get site header and site nav values for ontology subsections
+			// Add page template class to body class array
 
-	$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-		$page_id, // int // ID of the post
-		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-		$page_title, // string (optional) // Title of the post
-		$page_url // string (optional) // Permalink of the post
-	);
-		$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-		$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
-		$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
-		$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
-		$navbar_subbrand_parent = $ontology_site_values_vars['navbar_subbrand']['parent']['name']; // string
-		$navbar_subbrand_parent_attr = $ontology_site_values_vars['navbar_subbrand']['parent']['attr']; // string
-		$navbar_subbrand_parent_url = $ontology_site_values_vars['navbar_subbrand']['parent']['url']; // string
-		$providers = $ontology_site_values_vars['providers']; // int[]
-		$locations = $ontology_site_values_vars['locations']; // int[]
-		$expertises = $ontology_site_values_vars['expertises']; // int[]
-		$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
-		$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
-		$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[]
-		$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[]
-		$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest'];
-		$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // bool
+				if ( $template_type ) {
 
-// Queries for whether each of the associated ontology content sections should be displayed on ontology pages/subsections
+					$classes[] = 'page-template-' . $template_type;
 
-	// Query for whether related providers content section should be displayed on ontology pages/subsections
+				}
 
-		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-			$providers // int[]
-		);
-			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-			$provider_ids = $provider_query_vars['provider_ids']; // int[]
-			$provider_count = $provider_query_vars['provider_count']; // int
-
-	// Query for whether related locations content section should be displayed on ontology pages/subsections
-
-		$location_query_id = $site_nav_id;
-		$location_query_field_name = 'location_expertise';
-		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
-			$locations // int[]
-		);
-			$location_query = $location_query_vars['location_query']; // WP_Post[]
-			$location_section_show = $location_query_vars['location_section_show']; // bool
-			$location_ids = $location_query_vars['location_ids']; // int[]
-			$location_count = $location_query_vars['location_count']; // int
-			$location_valid = $location_query_vars['location_valid']; // bool
-
-	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-
-		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
-			$expertise_descendants, // int[]
-			'subsection', // string (optional) // Expected values: 'subsection' or 'profile'
-			$site_nav_id // int (optional)
-		);
-			$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
-			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
-			$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]
-			$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
-			$expertise_content_query = $expertise_descendant_query_vars['expertise_content_query']; // WP_Post[]
-			$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
-			$expertise_content_ids = $expertise_descendant_query_vars['expertise_content_ids']; // int[]
-			$expertise_content_count = $expertise_descendant_query_vars['expertise_content_count']; // int
-			$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
-
-	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-
-		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
-			$expertises // int[]
-		);
-			$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-			$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-			$expertise_count = $expertise_query_vars['expertise_count']; // int
-
-	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
-
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-			$clinical_resources // int[]
-		);
-			$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-			$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
-			$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
-
-	// Query for whether related conditions content section should be displayed on ontology pages/subsections
-
-		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$ontology_type = isset($ontology_type) ? $ontology_type : true;
-		$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
-			$conditions_cpt, // int[]
-			$condition_treatment_section_show, // bool (optional)
-			$ontology_type // bool (optional)
-		);
-			$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-			$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-			$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
-			$condition_ids = $condition_query_vars['condition_ids']; // int[]
-			$condition_count = $condition_query_vars['condition_count']; // int
-			$schema_medical_specialty = $condition_query_vars['schema_medical_specialty']; // array
-
-	// Query for whether related treatments content section should be displayed on ontology pages/subsections
-
-		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$ontology_type = isset($ontology_type) ? $ontology_type : true;
-		$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-			$treatments_cpt, // int[]
-			$condition_treatment_section_show, // bool (optional)
-			$ontology_type, // bool (optional)
-		);
-			$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-			$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-			$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-			$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-			$treatment_count = $treatment_query_vars['treatment_count']; // int
-			$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
-
-	// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-
-		$regions = isset($regions) ? $regions : array();
-		$service_lines = isset($service_lines) ? $service_lines : array();
-		if ( $regions || $service_lines ) {
-			$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-				$regions, // string|array // Region(s) associated with the item
-				$service_lines // string|array // Service line(s) associated with the item
-			);
-				$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-		} else {
-			$hide_medical_ontology = false; // bool
-		}
-
-// Modify site header
-
-	// Remove the site header set by the theme
-
-		remove_action( 'genesis_header', 'uamswp_site_image', 5 );
-
-	// Add ontology subsection site header
-
-		add_action( 'genesis_header', function() use (
-			$page_id,
-			$ontology_type,
-			$page_title,
-			$page_url
-		) {
-			uamswp_fad_ontology_header(
-				$page_id, // int // ID of the post
-				$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-				$page_title, // string (optional) // Title of the post
-				$page_url // string (optional) // Permalink of the post
-			);
-		}, 5 );
-
-// Modify primary navigation
-
-	// Remove the primary navigation set by the theme
-
-		remove_action( 'genesis_after_header', 'genesis_do_nav' );
-		remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
-
-	// Add ontology subsection primary navigation
-
-		add_action( 'genesis_after_header', function() use (
-			$page_id,
-			$ontology_type,
-			$page_title,
-			$page_url
-		) {
-			uamswp_fad_ontology_nav_menu(
-				$page_id, // int // ID of the post
-				$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-				$page_title, // string (optional) // Title of the post
-				$page_url // string (optional) // Permalink of the post
-			);
-		}, 5 );
-
-// Add page template class to body element's classes
-
-	$template_type = 'page_landing';
-	add_filter( 'body_class', function( $classes ) use ( $template_type ) {
-
-		// Add page template class to body class array
-		$classes[] = 'page-template-' . $template_type;
-
-		return $classes;
-
-	} );
-
-// Override the theme's method of defining the breadcrumbs
-
-	// Add fake subpage to SEOPress breadcrumbs
-
-		add_filter( 'seopress_pro_breadcrumbs_crumbs', function( $crumbs ) use ( $fpage_name ) {
-
-			// $crumbs is a multidimensional array.
-			//     First array: key=position,
-			//     second array: 0=>page title, 1=>URL, 2=>ID (since version 6.1)
-
-			// Add name of fake subpage to the breadcrumbs array
-			$crumbs[] = array($fpage_name, '');
-
-			return $crumbs;
+			return $classes;
 
 		} );
 
-// Add bg-white class to article.entry element
+	// Header
 
-	add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+		// get_header();
 
-// Modify Entry Title
+		// Site header
 
-	// Remove Genesis-standard post title and markup
+			// Remove the site header set by the theme
 
-		remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-		remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-		remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+				remove_action( 'genesis_header', 'uamswp_site_image', 5 );
 
-	// Construct non-standard post title
+			// Add ontology subsection site header
 
-		$entry_header_style = 'graphic'; // Entry header style
-		$entry_title_text = $fpage_title; // Regular title
-		$entry_title_text_supertitle = ''; // Optional supertitle
-		$entry_title_text_subtitle = ''; // Optional subtitle
-		$entry_title_text_body = $fpage_intro; // Optional lead paragraph
-		$entry_title_image_desktop = ''; // Desktop breakpoint image ID
-		$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+				add_action( 'genesis_header', function() use (
+					$page_id,
+					$ontology_type,
+					$page_title,
+					$page_url
+				) {
+					uamswp_fad_ontology_header(
+						$page_id, // int // ID of the post
+						$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+						$page_title, // string (optional) // Title of the post
+						$page_url // string (optional) // Permalink of the post
+					);
+				}, 5 );
 
-		add_action( 'genesis_before_content', function() use (
-			$entry_title_text,
-			$entry_header_style,
-			$entry_title_text_supertitle,
-			$entry_title_text_subtitle,
-			$entry_title_text_body,
-			$entry_title_image_desktop,
-			$entry_title_image_mobile
-		) {
-			uamswp_fad_post_title(
-				$entry_title_text, // string // Entry title text
-				$entry_header_style, // string // Entry header style
-				$entry_title_text_supertitle, // string (optional) // Entry supertitle text
-				$entry_title_text_subtitle, // string (optional) // Entry subtitle text
-				$entry_title_text_body, // string (optional) // Entry header lead paragraph text
-				$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
-				$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
-			);
-		} );
+		// Primary navigation
 
-// Remove the post info (byline) from the entry header and the entry footer
+			// Remove the primary navigation set by the theme
 
-	remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-	remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
+				remove_action( 'genesis_after_header', 'genesis_do_nav' );
+				remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
-// Remove the entry meta (tags) from the entry footer, including markup
+			// Add ontology subsection primary navigation
 
-	remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
-	remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
-	remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
+				add_action( 'genesis_after_header', function() use (
+					$page_id,
+					$ontology_type,
+					$page_title,
+					$page_url
+				) {
+					uamswp_fad_ontology_nav_menu(
+						$page_id, // int // ID of the post
+						$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
+						$page_title, // string (optional) // Title of the post
+						$page_url // string (optional) // Permalink of the post
+					);
+				}, 5 );
 
-// Construct page content
+	// Breadcrumbs
 
-	// Remove content
+		// Override Genesis standard breadcrumbs settings
 
-		remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+			// Do nothing
 
-	// Display ontology page content
+		// Override SEOPress standard breadcrumbs settings
 
-		$expertise_descendant_list = true;
-		$site_nav_id = ''; // ID of post that defines the subsection
-		$expertise_section_id = 'sub-expertise'; // Section ID // string (default: expertise)
-		$expertise_section_show_header = false; // Query whether to display the section header // bool (default: true)
-		$expertise_section_title = 'List of ' . $expertise_descendant_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
-		$expertise_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
+			add_filter( 'seopress_pro_breadcrumbs_crumbs', function( $crumbs ) use ( $fpage_name ) {
 
-		add_action( 'genesis_entry_content', function() use (
-			$expertise_descendants,
-			$page_titles,
-			$hide_medical_ontology,
-			$expertise_descendant_section_show,
-			$ontology_type,
-			$expertise_descendant_list,
-			$content_placement,
-			$site_nav_id,
-			$expertise_section_title,
-			$expertise_section_intro
-		) {
-			uamswp_fad_section_expertise(
-				$expertise_descendants, // int[] // Value of the related (or descendant) areas of expertise input (or list of this area of expertise item's descendant items)
-				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-				$expertise_descendant_section_show, // bool (optional) // Query for whether to show the area of expertise section
-				$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
-				$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
-				$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
-				$site_nav_id, // int (optional) // ID of post that defines the subsection
-				$expertise_section_title, // string (optional) // Text to use for the section title
-				$expertise_section_intro // string (optional) // Text to use for the section intro text
-			);
-		}, 12 );
+				// $crumbs is a multidimensional array.
+				//     First array: key=position,
+				//     second array: 0=>page title, 1=>URL, 2=>ID (since version 6.1)
 
-	// Display references to other archive pages
+				// Add name of fake subpage to the breadcrumbs array
+				$crumbs[] = array($fpage_name, '');
 
-		add_action( 'genesis_entry_content', function() use (
-			$page_id,
-			$page_titles,
-			$current_fpage,
-			$ontology_type
-		) {
-			uamswp_fad_fpage_text_image_overlay(
-				$page_id, // int
-				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$current_fpage, // string (optional) // Fake subpage slug
-				$ontology_type // bool (optional)
-			);
-		}, 25 );
+				return $crumbs;
 
-	// Check if Make an Appointment section should be displayed
+			} );
 
-		$appointment_section_show = true; // It should always be displayed.
+	// Page Header (before entry element)
 
-	// Display appointment information
+		// Remove Genesis-standard post title and markup
 
-		add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
-			uamswp_fad_ontology_appointment(
-				$appointment_section_show
-			);
-		}, 26 );
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+			remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+
+		// Construct non-standard post title
+
+			$entry_header_style = 'graphic'; // Entry header style
+			$entry_title_text = $fpage_title; // Regular title
+			$entry_title_text_supertitle = ''; // Optional supertitle
+			$entry_title_text_subtitle = ''; // Optional subtitle
+			$entry_title_text_body = $fpage_intro; // Optional lead paragraph
+			$entry_title_image_desktop = ''; // Desktop breakpoint image ID
+			$entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
+
+			add_action( 'genesis_before_content', function() use (
+				$entry_title_text,
+				$entry_header_style,
+				$entry_title_text_supertitle,
+				$entry_title_text_subtitle,
+				$entry_title_text_body,
+				$entry_title_image_desktop,
+				$entry_title_image_mobile
+			) {
+				uamswp_fad_post_title(
+					$entry_title_text, // string // Entry title text
+					$entry_header_style, // string // Entry header style
+					$entry_title_text_supertitle, // string (optional) // Entry supertitle text
+					$entry_title_text_subtitle, // string (optional) // Entry subtitle text
+					$entry_title_text_body, // string (optional) // Entry header lead paragraph text
+					$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
+					$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
+				);
+			} );
+
+	// MAIN / ARTICLE
+
+		// Add bg-white class to article.entry element
+
+			add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
+
+		// Start count for jump links
+
+			// $jump_link_count = 0;
+
+		// Queries for whether each of the sections should be displayed
+
+			// Query for whether related providers content section should be displayed on ontology pages/subsections
+
+				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$providers // int[]
+				);
+					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
+					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
+					$provider_ids = $provider_query_vars['provider_ids']; // int[]
+					$provider_count = $provider_query_vars['provider_count']; // int
+
+			// Query for whether related locations content section should be displayed on ontology pages/subsections
+
+				$location_query_id = $site_nav_id;
+				$location_query_field_name = 'location_expertise';
+				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$locations // int[]
+				);
+					$location_query = $location_query_vars['location_query']; // WP_Post[]
+					$location_section_show = $location_query_vars['location_section_show']; // bool
+					$location_ids = $location_query_vars['location_ids']; // int[]
+					$location_count = $location_query_vars['location_count']; // int
+					$location_valid = $location_query_vars['location_valid']; // bool
+
+			// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+
+				$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+					$expertise_descendants, // int[]
+					'subsection', // string (optional) // Expected values: 'subsection' or 'profile'
+					$site_nav_id // int (optional)
+				);
+					$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
+					$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
+					$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]
+					$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
+					$expertise_content_query = $expertise_descendant_query_vars['expertise_content_query']; // WP_Post[]
+					$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
+					$expertise_content_ids = $expertise_descendant_query_vars['expertise_content_ids']; // int[]
+					$expertise_content_count = $expertise_descendant_query_vars['expertise_content_count']; // int
+					$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
+
+			// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
+
+				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+					$expertises // int[]
+				);
+					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
+					$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
+					$expertise_count = $expertise_query_vars['expertise_count']; // int
+
+			// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+
+				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+					$clinical_resources // int[]
+				);
+					$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
+					$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
+					$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
+					$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
+
+			// Query for whether related conditions content section should be displayed on ontology pages/subsections
+
+				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+				$ontology_type = isset($ontology_type) ? $ontology_type : true;
+				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$conditions_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type // bool (optional)
+				);
+					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
+					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
+					$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
+					$condition_ids = $condition_query_vars['condition_ids']; // int[]
+					$condition_count = $condition_query_vars['condition_count']; // int
+					$schema_medical_specialty = $condition_query_vars['schema_medical_specialty']; // array
+
+			// Query for whether related treatments content section should be displayed on ontology pages/subsections
+
+				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+				$ontology_type = isset($ontology_type) ? $ontology_type : true;
+				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$treatments_cpt, // int[]
+					$condition_treatment_section_show, // bool (optional)
+					$ontology_type, // bool (optional)
+				);
+					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
+					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
+					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
+					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
+					$treatment_count = $treatment_query_vars['treatment_count']; // int
+					$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
+
+			// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+
+				$regions = isset($regions) ? $regions : array();
+				$service_lines = isset($service_lines) ? $service_lines : array();
+				if ( $regions || $service_lines ) {
+					$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
+						$regions, // string|array // Region(s) associated with the item
+						$service_lines // string|array // Service line(s) associated with the item
+					);
+						$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+				} else {
+					$hide_medical_ontology = false; // bool
+				}
+
+			// Query for whether Make an Appointment section should be displayed
+
+				$appointment_section_show = true; // It should always be displayed.
+
+		// Get remaining details about this item
+
+			// Do nothing
+
+		// Get remaining details content associated with this item
+
+			// Do nothing
+
+		// Classes for indicating presence of content
+
+			// Do nothing
+
+		// Remove standard post content
+
+			remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+
+		// Construct page content
+
+			// Display ontology page content
+
+				$expertise_descendant_list = true;
+				$site_nav_id = ''; // ID of post that defines the subsection
+				$expertise_section_id = 'sub-expertise'; // Section ID // string (default: expertise)
+				$expertise_section_show_header = false; // Query whether to display the section header // bool (default: true)
+				$expertise_section_title = 'List of ' . $expertise_descendant_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
+				$expertise_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
+
+				add_action( 'genesis_entry_content', function() use (
+					$expertise_descendants,
+					$page_titles,
+					$hide_medical_ontology,
+					$expertise_descendant_section_show,
+					$ontology_type,
+					$expertise_descendant_list,
+					$content_placement,
+					$site_nav_id,
+					$expertise_section_title,
+					$expertise_section_intro
+				) {
+					uamswp_fad_section_expertise(
+						$expertise_descendants, // int[] // Value of the related (or descendant) areas of expertise input (or list of this area of expertise item's descendant items)
+						$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+						$expertise_descendant_section_show, // bool (optional) // Query for whether to show the area of expertise section
+						$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
+						$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
+						$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
+						$site_nav_id, // int (optional) // ID of post that defines the subsection
+						$expertise_section_title, // string (optional) // Text to use for the section title
+						$expertise_section_intro // string (optional) // Text to use for the section intro text
+					);
+				}, 12 );
+
+			// Display references to other archive pages
+
+				add_action( 'genesis_entry_content', function() use (
+					$page_id,
+					$page_titles,
+					$current_fpage,
+					$ontology_type
+				) {
+					uamswp_fad_fpage_text_image_overlay(
+						$page_id, // int
+						$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						$current_fpage, // string (optional) // Fake subpage slug
+						$ontology_type // bool (optional)
+					);
+				}, 25 );
+
+			// Display appointment information
+
+				add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
+					uamswp_fad_ontology_appointment(
+						$appointment_section_show
+					);
+				}, 26 );
+
+	// FOOTER
+
+		// Remove the post-related content and markup from the entry footer
+
+			remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
+			remove_action( 'genesis_entry_footer', 'genesis_post_info', 9 ); // Added from uams-2020/page.php
+			remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
+			remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
 
 genesis();

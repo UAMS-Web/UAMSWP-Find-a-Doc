@@ -54,13 +54,13 @@ $provider_service_line = get_field( 'physician_service_line', $page_id );
 <div class="card">
 	<picture>
 		<?php
-		
+
 		if (
 			has_post_thumbnail()
 			&&
 			function_exists( 'fly_add_image_size' )
 		) {
-			
+
 			?>
 			<source srcset="<?php echo image_sizer( get_post_thumbnail_id( $page_id ), 253, 337, 'center', 'center' ); ?>"
 				media="(min-width: 1px)">
@@ -70,17 +70,17 @@ $provider_service_line = get_field( 'physician_service_line', $page_id );
 		} elseif ( has_post_thumbnail() ) {
 
 			echo get_the_post_thumbnail( $page_id, 'medium', array( 'itemprop' => 'image', 'class' => 'card-img-top', 'loading' => 'lazy' ) );
-			
+
 		} else {
-			
+
 			?>
 			<source srcset="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.svg"
 				media="(min-width: 1px)">
 			<img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_3-4.jpg" alt="" role="presentation" loading="lazy" />
 			<?php
-		
+
 		}
-		
+
 		?>
 	</picture>
 	<div class="card-body">

@@ -101,7 +101,8 @@
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'	=> $page_title
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
 		);
 
 // Get the page URL
@@ -119,7 +120,7 @@
 
 // Get the featured image
 
-	$page_image_id = $provider_archive_image; // Image ID // int
+	$featured_image = $provider_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
 

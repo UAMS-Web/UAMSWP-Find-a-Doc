@@ -275,7 +275,7 @@
 				$location_reopen_date_past = true;
 
 			} // endif
-			
+
 			$location_closing_info = get_field('location_closing_info', $page_id);
 			$location_closing_display = false;
 
@@ -364,37 +364,37 @@
 					&&
 					$telemedicine_modified_start
 				) {
-				
+
 					if ( strtotime($modified_start) <= strtotime($telemedicine_modified_start) ) {
-				
+
 						$location_modified_hours_start = $modified_start;
-				
+
 					} else {
-				
+
 						$location_modified_hours_start = $telemedicine_modified_start;
-				
+
 					} // endif
-			
+
 				} elseif ( $modified_start ) {
-			
+
 					$location_modified_hours_start = $modified_start;
-			
+
 				} elseif ( $telemedicine_modified_start ) {
-			
+
 					$location_modified_hours_start = $telemedicine_modified_start;
-			
+
 				} // endif
 
 				if ( strtotime($location_modified_hours_start) <= $today ) {
-			
+
 					$location_modified_hours_date_past = true;
-			
+
 				} else {
-			
+
 					$location_modified_hours_date_past = false;
-			
+
 				} // endif
-			
+
 			}
 
 		// Create the alert
@@ -414,7 +414,7 @@
 				} elseif ( $location_modified_hours_display ) {
 
 					$alert_label = 'Learn more about the modified hours.';
-					
+
 				} // endif
 
 				$alert_label_attr = uamswp_attr_conversion($alert_label);
@@ -422,41 +422,41 @@
 				?>
 				<div class="alert alert-warning" role="alert">
 					<?php
-					
+
 					if ( $location_closing_display ) {
 
 						if ( $location_closing_date_past ) {
-							
+
 							?>
 							This <?php echo strtolower($location_single_name); ?> is <?php echo $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ; ?> closed.
 							<?php
-						
+
 						} else {
-						
+
 							?>
 							This <?php echo strtolower($location_single_name); ?> will be closing <?php echo $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ; ?> on <?php echo $location_closing_date; ?>.
 							<?php
-							
+
 						} // endif
 
 					} elseif ( $location_modified_hours_display ) {
 
 						if ($location_modified_hours_date_past) {
-							
+
 							?>
 							This <?php echo strtolower($location_single_name); ?>'s hours have been temporarily modified.
 							<?php
-						
+
 						} else {
-						
+
 							?>
 							This <?php echo strtolower($location_single_name); ?>'s hours will be temporarily modified beginning on <?php echo $location_modified_hours_start; ?>.
 							<?php
-							
+
 						} // endif
 
 					} // endif
-					
+
 					?>
 					<p><a href="<?php echo get_permalink($page_id); ?>" aria-label="<?php echo $alert_label_attr; ?>" class="alert-link" data-categorytitle="Alert" data-itemtitle="<?php echo $location_title_attr; ?>">Learn more</a></p>
 				</div><?php // end div.alert

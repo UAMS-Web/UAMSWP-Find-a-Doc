@@ -53,35 +53,35 @@
 
 	if ( $expertise_descendant_list ) {
 		$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile'; // string // Placement of this content // Expected values: 'subsection' or 'profile'
-		$site_nav_id = isset($site_nav_id) ? $site_nav_id : ''; // int		
+		$site_nav_id = isset($site_nav_id) ? $site_nav_id : ''; // int
 	}
 
 	if ( !isset($expertise_section_show) ) {
 
 		if ( $expertise_descendant_list ) {
-	
+
 			if ( !isset($expertise_descendant_section_show) ) {
-	
+
 				$page_id = isset($page_id) ? $page_id : get_the_ID();
-	
+
 				$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
 					$expertises, // int[]
 					$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
 					$site_nav_id // int (optional)
 				);
 					$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_section_show']; // bool
-	
+
 			}
 
 			$expertise_section_show = $expertise_descendant_section_show;
-	
+
 		} else {
-	
+
 			$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
 				$expertises // int[]
 			);
 				$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-	
+
 		}
 
 	}
@@ -188,7 +188,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( !isset($expertise_single_name_attr) ) {
 
 				if ( $expertise_descendant_list ) {
-				
+
 					if ( !isset($expertise_descendant_single_name_attr) ) {
 						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
 							$expertise_descendant_single_name_attr = $labels_expertise_descendant_vars['expertise_descendant_single_name_attr']; // string
@@ -196,7 +196,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 					$expertise_single_name_attr = $expertise_descendant_single_name_attr;
 
 				} else {
-				
+
 					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 						$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
 
@@ -206,7 +206,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( !isset($expertise_plural_name) ) {
 
 				if ( $expertise_descendant_list ) {
-				
+
 					if ( !isset($expertise_descendant_plural_name) ) {
 						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
 							$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
@@ -214,7 +214,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 					$expertise_plural_name = $expertise_descendant_plural_name;
 
 				} else {
-				
+
 					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 						$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 
@@ -224,7 +224,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( !isset($expertise_plural_name_attr) ) {
 
 				if ( $expertise_descendant_list ) {
-				
+
 					if ( !isset($expertise_descendant_plural_name_attr) ) {
 						$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
 							$expertise_descendant_plural_name_attr = $labels_expertise_descendant_vars['expertise_descendant_plural_name_attr']; // string
@@ -232,7 +232,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 					$expertise_plural_name_attr = $expertise_descendant_plural_name_attr;
 
 				} else {
-				
+
 					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 						$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 
@@ -242,7 +242,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( !isset($expertise_fpage_title_general) ) {
 
 				if ( $expertise_descendant_list ) {
-				
+
 					if ( !isset($expertise_descendant_fpage_title_general) ) {
 						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
 							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
@@ -252,7 +252,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 					$expertise_fpage_title_general = $expertise_descendant_fpage_title_general;
 
 				} else {
-				
+
 					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
 						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 					);
@@ -264,7 +264,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 			if ( !isset($expertise_fpage_intro_general) ) {
 
 				if ( $expertise_descendant_list ) {
-				
+
 					if ( !isset($expertise_descendant_fpage_intro_general) ) {
 						$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
 							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
@@ -274,7 +274,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 					$expertise_fpage_intro_general = $expertise_descendant_fpage_intro_general;
 
 				} else {
-				
+
 					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
 						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 					);
@@ -289,7 +289,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 
 					if ( !isset($expertise_descendant_query) ) {
 						$page_id = isset($page_id) ? $page_id : get_the_ID();
-	
+
 						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
 							$expertises, // int[]
 							$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
@@ -297,7 +297,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 						);
 							$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
 					}
-					$expertise_query = $expertise_descendant_query;		
+					$expertise_query = $expertise_descendant_query;
 
 				} else {
 
@@ -315,7 +315,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 
 					if ( !isset($expertise_descendant_section_show) ) {
 						$page_id = isset($page_id) ? $page_id : get_the_ID();
-	
+
 						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
 							$expertises, // int[]
 							$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
@@ -324,7 +324,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 							$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
 					}
 					$expertise_section_show = $expertise_descendant_section_show;
-				
+
 				} else {
 
 					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
@@ -341,7 +341,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 
 					if ( !isset($expertise_descendant_count) ) {
 						$page_id = isset($page_id) ? $page_id : get_the_ID();
-	
+
 						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
 							$expertises, // int[]
 							$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
@@ -350,7 +350,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 							$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
 					}
 					$expertise_count = $expertise_descendant_count;
-			
+
 				} else {
 
 					$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
