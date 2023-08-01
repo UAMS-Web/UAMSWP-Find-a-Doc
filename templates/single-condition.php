@@ -1,6 +1,9 @@
 <?php
 /*
  * Template Name: Single Condition
+ * 
+ * 
+ * 
  */
 
 // Get system settings for ontology item labels
@@ -109,111 +112,155 @@
 	// 	$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
 	// 	$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
 
+// Ontology / Content Type
+
+	$ontology_type = true; // Ontology type of the post (true is ontology type, false is content type)
+
 // Get the page ID
 
 	$page_id = get_the_ID();
 
-// Get the page title for the condition
+// Get the page title
 
 	$page_title = get_the_title();
-	$page_title_attr = uamswp_attr_conversion($page_title);
+	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
 
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'	=> $page_title
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
 		);
 
-// Get the page slug for the condition
+	// Get system settings for elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
 
+		// Text elements
+
+			// Do nothing
+
+		// Image elements
+
+			// Do nothing
+
+	// Name of ontology item type represented by this fake subpage
+
+		// Do nothing
+
+	// Fake subpage page title
+
+		// Do nothing
+
+	// Fake subpage intro text
+
+		// Do nothing
+
+// Get the page URL and slug
+
+	$page_url = user_trailingslashit(get_permalink());
 	$page_slug = $post->post_name;
+
+	// Fake subpage
+	
+		// Do nothing
 
 // Define the placement for content
 
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
-// Get system settings for jump links (a.k.a. anchor links)
+// HEAD
 
-	$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
-		$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
+	// Title tag
 
-// Construct the meta keywords element
+		// Construct the meta title
 
-	$keywords = get_field('condition_alternate');
+			$meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+			$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+				$page_title, // string
+				$page_title_attr, // string (optional)
+				'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+				'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+				$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+			);
+				$meta_title = $meta_title_vars['meta_title']; // string
 
-	add_action( 'wp_head', function() use ($keywords) {
-		uamswp_keyword_hook_header(
-			$keywords // array
-		);
-	} );
+		// Override SEOPress's standard title tag settings
 
-// Override theme's method of defining the meta page title
+			add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
 
-	// Construct the meta title
+				if ( $meta_title ) {
 
-		$meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
-			'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-			'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-			$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		);
-			$meta_title = $meta_title_vars['meta_title']; // string
-	
-	// Modify SEOPress's standard meta title settings
+					$html = $meta_title;
 
-		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
+				}
 
-			$html = $meta_title;
+				return $html;
 
-			return $html;
+			}, 15, 2 );
 
-		}, 15, 2 );
+	// Meta Description and Schema Description
 
-// Set the schema description and the meta description
+		// Get excerpt
 
-	// Get excerpt
+			$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
+			$excerpt_user = true;
 
-		$excerpt = get_the_excerpt(); // get_field( 'condition_short_desc' );
-		$excerpt_user = true;
+		// Get the content
 
-	// Get the content
+			$content = get_the_content(); //get_field( 'condition_content' );
 
-		$content = get_the_content(); //get_field( 'condition_content' );
+		// Create excerpt if none exists
 
-	// Create excerpt if none exists
+			if ( empty( $excerpt ) ) {
 
-		if ( empty( $excerpt ) ) {
+				$excerpt_user = false;
 
-			$excerpt_user = false;
+				if ( $content ) {
 
-			if ( $content ) {
+					$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
 
-				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+				}
 
 			}
 
-		}
+		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		
+		// Set schema description
 
-	// Set schema description
+			$schema_description = $excerpt_attr; // Used for Schema Data. Should ALWAYS have a value
 
-		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+		// Override theme's method of defining the meta description
 
-	// Override theme's method of defining the meta description
+			add_filter('seopress_titles_desc', function( $html ) use ( $excerpt_attr ) {
 
-		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+				if ( $excerpt_attr ) {
 
-			$html = $excerpt;
+					$html = $excerpt_attr;
 
-			return $html;
+				}
+				return $html;
 
-		} );
+			} );
 
-// Override the theme's method of defining the social media meta tags
+	// Meta Keywords
 
-	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+		$keywords = get_field('condition_alternate');
+
+		// Override theme's standard meta keywords settings
+
+			add_action( 'wp_head', function() use ( $keywords ) {
+				uamswp_keyword_hook_header(
+					$keywords // array
+				);
+			} );
+
+	// Canonical URL
+
+		// Do nothing
+
+	// Meta Social Media Tags
+
+		// Filter hooks
+		include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
 
 // Add page template class to body element's classes
 
@@ -227,7 +274,10 @@
 
 	} );
 
-get_header();
+// Get system settings for jump links (a.k.a. anchor links)
+
+	$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
+		$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 
 // ACF Fields - get_fields
 
@@ -392,6 +442,8 @@ get_header();
 			} else {
 				$jump_links_section_show = false;
 			}
+
+get_header();
 
 ?>
 <div class="content-sidebar-wrap">

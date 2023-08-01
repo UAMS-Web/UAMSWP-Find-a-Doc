@@ -104,435 +104,593 @@
 			$placeholder_treatment_single_name = $labels_treatment_vars['placeholder_treatment_single_name']; // string
 			$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
-// Get system settings for location archive page text
+// Get system settings for this post type's archive page text
 
 	// $archive_text_location_vars = isset($archive_text_location_vars) ? $archive_text_location_vars : uamswp_fad_archive_text_location();
 	// 	$location_archive_headline = $archive_text_location_vars['location_archive_headline']; // string
 	// 	$location_archive_headline_attr = $archive_text_location_vars['location_archive_headline_attr']; // string
 	// 	$placeholder_location_archive_headline = $archive_text_location_vars['placeholder_location_archive_headline']; // string
 
+// Ontology / Content Type
+
+	$ontology_type = true; // Ontology type of the post (true is ontology type, false is content type)
+
 // Get the page ID
 
 	$page_id = get_the_ID();
 
-// Get the page title for the location
+	// Parent location ID
+
+		$location_has_parent = get_field('location_parent');
+		$location_parent_id = $location_has_parent ? get_field('location_parent_id') : '';
+		$location_has_parent = $location_parent_id ? true : false;
+
+	// Parent location post object
+	$parent_location = $location_has_parent ? get_post( $location_parent_id ) : '';
+
+	// Relevant ID for determining address and images
+	$post_id = $location_has_parent ? $location_parent_id : $page_id;
+
+// Get the page title and other name values
 
 	$page_title = get_the_title(); // Title of the location
-	$page_title_attr = uamswp_attr_conversion($page_title);
-	$page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the page title for use in phrases
-	$page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
+	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
+	$page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the title for use in phrases
+	$page_title_phrase_attr = $page_title_phrase ? uamswp_attr_conversion($page_title_phrase) : '';
 
+	// Parent location
+	
+		$parent_title = $parent_location ? $parent_location->post_title : '';
+		$parent_title_attr = $parent_title ? uamswp_attr_conversion($parent_title) : '';
+		$parent_title_phrase = ( get_field('location_prepend_the', $location_parent_id ) ? 'the ' : '' ) . $parent_title; // Conditionally prepend "the" to the title for use in phrases
+		$parent_title_phrase_attr = $parent_title_phrase ? uamswp_attr_conversion($parent_title_phrase) : '';
+	
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'		=> $page_title,
-			'page_title_phrase'	=> $page_title_phrase
+			'page_title'				=> $page_title,
+			'page_title_attr'			=> $page_title_attr,
+			'page_title_phrase'			=> $page_title_phrase,
+			'page_title_phrase_attr'	=> $page_title_phrase_attr,
+			'parent_title'				=> $parent_title,
+			'parent_title_attr'			=> $parent_title_attr,
+			'parent_title_phrase'		=> $parent_title_phrase,
+			'parent_title_phrase_attr'	=> $parent_title_phrase_attr
 		);
 
-// Get the page URL for the profile
+	// Get system settings for elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
+
+		// Text elements
+
+			$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location(
+				$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+			);
+				$provider_fpage_title_location = $fpage_text_location_vars['provider_fpage_title_location']; // string
+				$provider_fpage_intro_location = $fpage_text_location_vars['provider_fpage_intro_location']; // string
+				$provider_fpage_ref_main_title_location = $fpage_text_location_vars['provider_fpage_ref_main_title_location']; // string
+				$provider_fpage_ref_main_intro_location = $fpage_text_location_vars['provider_fpage_ref_main_intro_location']; // string
+				$provider_fpage_ref_main_link_location = $fpage_text_location_vars['provider_fpage_ref_main_link_location']; // string
+				$provider_fpage_ref_top_title_location = $fpage_text_location_vars['provider_fpage_ref_top_title_location']; // string
+				$provider_fpage_ref_top_intro_location = $fpage_text_location_vars['provider_fpage_ref_top_intro_location']; // string
+				$provider_fpage_ref_top_link_location = $fpage_text_location_vars['provider_fpage_ref_top_link_location']; // string
+				$location_descendant_fpage_title_location = $fpage_text_location_vars['location_descendant_fpage_title_location']; // string
+				$location_descendant_fpage_intro_location = $fpage_text_location_vars['location_descendant_fpage_intro_location']; // string
+				$location_descendant_fpage_ref_main_title_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_title_location']; // string
+				$location_descendant_fpage_ref_main_intro_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_intro_location']; // string
+				$location_descendant_fpage_ref_main_link_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_link_location']; // string
+				$expertise_fpage_title_location = $fpage_text_location_vars['expertise_fpage_title_location']; // string
+				$expertise_fpage_intro_location = $fpage_text_location_vars['expertise_fpage_intro_location']; // string
+				$expertise_fpage_ref_main_title_location = $fpage_text_location_vars['expertise_fpage_ref_main_title_location']; // string
+				$expertise_fpage_ref_main_intro_location = $fpage_text_location_vars['expertise_fpage_ref_main_intro_location']; // string
+				$expertise_fpage_ref_main_link_location = $fpage_text_location_vars['expertise_fpage_ref_main_link_location']; // string
+				$expertise_fpage_ref_top_title_location = $fpage_text_location_vars['expertise_fpage_ref_top_title_location']; // string
+				$expertise_fpage_ref_top_intro_location = $fpage_text_location_vars['expertise_fpage_ref_top_intro_location']; // string
+				$expertise_fpage_ref_top_link_location = $fpage_text_location_vars['expertise_fpage_ref_top_link_location']; // string
+				$clinical_resource_fpage_title_location = $fpage_text_location_vars['clinical_resource_fpage_title_location']; // string
+				$clinical_resource_fpage_intro_location = $fpage_text_location_vars['clinical_resource_fpage_intro_location']; // string
+				$clinical_resource_fpage_ref_main_title_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_title_location']; // string
+				$clinical_resource_fpage_ref_main_intro_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_intro_location']; // string
+				$clinical_resource_fpage_ref_main_link_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_link_location']; // string
+				$clinical_resource_fpage_ref_top_title_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_title_location']; // string
+				$clinical_resource_fpage_ref_top_intro_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_intro_location']; // string
+				$clinical_resource_fpage_ref_top_link_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_link_location']; // string
+				$clinical_resource_fpage_more_text_location = $fpage_text_location_vars['clinical_resource_fpage_more_text_location']; // string
+				$clinical_resource_fpage_more_link_text_location = $fpage_text_location_vars['clinical_resource_fpage_more_link_text_location']; // string
+				$clinical_resource_fpage_more_link_descr_location = $fpage_text_location_vars['clinical_resource_fpage_more_link_descr_location']; // string
+				$condition_fpage_title_location = $fpage_text_location_vars['condition_fpage_title_location']; // string
+				$condition_fpage_intro_location = $fpage_text_location_vars['condition_fpage_intro_location']; // string
+				$treatment_fpage_title_location = $fpage_text_location_vars['treatment_fpage_title_location']; // string
+				$treatment_fpage_intro_location = $fpage_text_location_vars['treatment_fpage_intro_location']; // string
+				$condition_treatment_fpage_title_location = $fpage_text_location_vars['condition_treatment_fpage_title_location']; // string
+				$condition_treatment_fpage_intro_location = $fpage_text_location_vars['condition_treatment_fpage_intro_location']; // string
+
+		// Image elements
+
+			// Do nothing
+
+	// Name of ontology item type represented by this fake subpage
+
+		// Do nothing
+
+	// Fake subpage page title
+
+		// Do nothing
+
+	// Fake subpage intro text
+
+		// Do nothing
+
+// Get the page URL and slug
 
 	$page_url = user_trailingslashit(get_permalink());
-
-// Get the page slug for the location
-
 	$page_slug = $post->post_name;
+
+	// Parent location
+
+		$parent_url = $location_has_parent ? user_trailingslashit(get_permalink( $location_parent_id )) : '';
+		$parent_slug = $location_has_parent ? $parent_location->post_name : '';
+
+	// Fake subpage
+	
+		// Do nothing
 
 // Define the placement for content
 
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
-// Get system settings for fake subpage (or section) text elements in an Location subsection (or profile)
+// HEAD
 
-	$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location(
-		$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-	);
-		$provider_fpage_title_location = $fpage_text_location_vars['provider_fpage_title_location']; // string
-		$provider_fpage_intro_location = $fpage_text_location_vars['provider_fpage_intro_location']; // string
-		$provider_fpage_ref_main_title_location = $fpage_text_location_vars['provider_fpage_ref_main_title_location']; // string
-		$provider_fpage_ref_main_intro_location = $fpage_text_location_vars['provider_fpage_ref_main_intro_location']; // string
-		$provider_fpage_ref_main_link_location = $fpage_text_location_vars['provider_fpage_ref_main_link_location']; // string
-		$provider_fpage_ref_top_title_location = $fpage_text_location_vars['provider_fpage_ref_top_title_location']; // string
-		$provider_fpage_ref_top_intro_location = $fpage_text_location_vars['provider_fpage_ref_top_intro_location']; // string
-		$provider_fpage_ref_top_link_location = $fpage_text_location_vars['provider_fpage_ref_top_link_location']; // string
-		$location_descendant_fpage_title_location = $fpage_text_location_vars['location_descendant_fpage_title_location']; // string
-		$location_descendant_fpage_intro_location = $fpage_text_location_vars['location_descendant_fpage_intro_location']; // string
-		$location_descendant_fpage_ref_main_title_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_title_location']; // string
-		$location_descendant_fpage_ref_main_intro_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_intro_location']; // string
-		$location_descendant_fpage_ref_main_link_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_link_location']; // string
-		$expertise_fpage_title_location = $fpage_text_location_vars['expertise_fpage_title_location']; // string
-		$expertise_fpage_intro_location = $fpage_text_location_vars['expertise_fpage_intro_location']; // string
-		$expertise_fpage_ref_main_title_location = $fpage_text_location_vars['expertise_fpage_ref_main_title_location']; // string
-		$expertise_fpage_ref_main_intro_location = $fpage_text_location_vars['expertise_fpage_ref_main_intro_location']; // string
-		$expertise_fpage_ref_main_link_location = $fpage_text_location_vars['expertise_fpage_ref_main_link_location']; // string
-		$expertise_fpage_ref_top_title_location = $fpage_text_location_vars['expertise_fpage_ref_top_title_location']; // string
-		$expertise_fpage_ref_top_intro_location = $fpage_text_location_vars['expertise_fpage_ref_top_intro_location']; // string
-		$expertise_fpage_ref_top_link_location = $fpage_text_location_vars['expertise_fpage_ref_top_link_location']; // string
-		$clinical_resource_fpage_title_location = $fpage_text_location_vars['clinical_resource_fpage_title_location']; // string
-		$clinical_resource_fpage_intro_location = $fpage_text_location_vars['clinical_resource_fpage_intro_location']; // string
-		$clinical_resource_fpage_ref_main_title_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_title_location']; // string
-		$clinical_resource_fpage_ref_main_intro_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_intro_location']; // string
-		$clinical_resource_fpage_ref_main_link_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_link_location']; // string
-		$clinical_resource_fpage_ref_top_title_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_title_location']; // string
-		$clinical_resource_fpage_ref_top_intro_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_intro_location']; // string
-		$clinical_resource_fpage_ref_top_link_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_link_location']; // string
-		$clinical_resource_fpage_more_text_location = $fpage_text_location_vars['clinical_resource_fpage_more_text_location']; // string
-		$clinical_resource_fpage_more_link_text_location = $fpage_text_location_vars['clinical_resource_fpage_more_link_text_location']; // string
-		$clinical_resource_fpage_more_link_descr_location = $fpage_text_location_vars['clinical_resource_fpage_more_link_descr_location']; // string
-		$condition_fpage_title_location = $fpage_text_location_vars['condition_fpage_title_location']; // string
-		$condition_fpage_intro_location = $fpage_text_location_vars['condition_fpage_intro_location']; // string
-		$treatment_fpage_title_location = $fpage_text_location_vars['treatment_fpage_title_location']; // string
-		$treatment_fpage_intro_location = $fpage_text_location_vars['treatment_fpage_intro_location']; // string
-		$condition_treatment_fpage_title_location = $fpage_text_location_vars['condition_treatment_fpage_title_location']; // string
-		$condition_treatment_fpage_intro_location = $fpage_text_location_vars['condition_treatment_fpage_intro_location']; // string
+	// Title tag
 
-// Parent Location 
+		// Get relevant values
 
-	$location_has_parent = get_field('location_parent');
-	$location_parent_id = get_field('location_parent_id');
-	$parent_title = ''; // Eliminate PHP errors
-	$parent_title_attr = ''; // Eliminate PHP errors
-	$parent_url = ''; // Eliminate PHP errors
-	$parent_location = ''; // Eliminate PHP errors
-	if ($location_has_parent && $location_parent_id) { 
-		$parent_location = get_post( $location_parent_id );
-	}
-	// Get Post ID for Address & Image fields
-	if ($parent_location) {
-		$post_id = $parent_location->ID;
-		$parent_title = $parent_location->post_title;
-		$parent_title_attr = uamswp_attr_conversion($parent_title);
-		$parent_url = get_permalink( $post_id );
-	} else {
-		$post_id = get_the_ID();
-	}
+			// Get the location's city
+			
+				$location_city = get_field('location_city', $post_id); // Get the location's city
+				$location_city_attr = $location_city ? uamswp_attr_conversion($location_city) : '';
 
+		// Construct the meta title
 
-// Image values
-$override_parent_photo = get_field('location_image_override_parent');
-$override_parent_photo_featured = get_field('location_image_override_parent_featured');
-$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding');
-$override_parent_photo_gallery = get_field('location_image_override_parent_gallery');
-// if ($override_parent_photo && $parent_location) { // If child location & override is true
-if ($override_parent_photo && $parent_location && $override_parent_photo_wayfinding) {
-	$wayfinding_photo = get_field('location_wayfinding_photo');
-} else { // Use parent/standard images
-	$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
-}
-if ($override_parent_photo && $parent_location && $override_parent_photo_gallery) {
-	$photo_gallery = get_field('location_photo_gallery');
-} else { // Use parent/standard images
-	$photo_gallery = get_field('location_photo_gallery', $post_id);
-}
+			if (
+				$parent_title_attr
+				&&
+				$location_city_attr
+			) {
 
-$location_images = array();
-if ($wayfinding_photo && !empty($wayfinding_photo)) {
-	$location_images[] = $wayfinding_photo;
-}
-if ($photo_gallery && !empty($photo_gallery)) {
-	foreach( $photo_gallery as $photo_gallery_image ) {
-		$location_images[] = $photo_gallery_image;
-	}
-}
-$location_images_count = count($location_images);
+				$meta_title_enhanced_addition = $parent_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+				$meta_title_enhanced_x2_addition = $location_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
 
-// Set image for schema
-if ($override_parent_photo && $parent_location && $override_parent_photo_featured) { // If child location & override is true
-	$featured_image = get_post_thumbnail_id();
-} else { // Use parent/standard images
-	$featured_image = get_post_thumbnail_id($post_id);
-}
+			} elseif ( $location_city_attr ) {
 
-$schema_image = '';
-if ($featured_image) {
-	$schema_image = $featured_image;
-} elseif ($location_images) {
-	$schema_image = $location_images[0];
-}
-if ( function_exists( 'fly_add_image_size' ) && !empty($schema_image) ) {
-	$schema_image = image_sizer( $schema_image, 640, 480, 'center', 'center' );
-} else {
-	$schema_image = wp_get_attachment_image_src( $schema_image, 'large' );
-}
+				$meta_title_enhanced_addition = $location_city_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+				$meta_title_enhanced_x2_addition = ''; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
 
-// Set telemedicine values
-// Original Set
-// $telemedicine_query = get_field('field_location_telemed_query'); // Is there telemedicine?
-// $telemedicine_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
-// $telemedicine_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
-// $telemedicine_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
-// $telemedicine_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
-// $telemedicine_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
-// $telemedicine_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
-// $telemedicine_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
-// $telemedicine_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
-// $telemedicine_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
-// Hours Grouping
-$location_hours_group = get_field('location_hours_group');
+			} else {
 
-$telemedicine_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
-$telemedicine_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
-$telemedicine_hours247 = $location_hours_group['location_telemed_24_7']; // typically 24/7?
-$telemedicine_hours = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
-$telemedicine_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
-$telemedicine_modified_reason = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
-$telemedicine_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
-$telemedicine_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
-$telemedicine_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
-$telemedicine_modified_hours247 = $location_hours_group['location_telemed_modified_hours_24_7'];
-// $telemedicine_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
-$telemedicine_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
+				$meta_title_enhanced_addition = ''; // Word or phrase to inject into base meta title to form enhanced meta title
+				$meta_title_enhanced_x2_addition = ''; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
 
-$afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
-$afterhours_system = ( isset($afterhours_system) && !empty($afterhours_system) ) ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
+			}
+			
+			$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+				$page_title, // string
+				$page_title_attr, // string (optional)
+				'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+				'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+				$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+				'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
+				$meta_title_enhanced_x2_addition // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+			);
+				$meta_title = $meta_title_vars['meta_title']; // string
 
-// Set alert values
+		// Override SEOPress's standard title tag settings
 
-$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
-$location_alert_text_sys = get_field('location_alert_body_system', 'option');
-$location_alert_color_sys = get_field('location_alert_color_system', 'option');
+			add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
 
-$location_alert_suppress = get_field('location_alert_suppress');
-$location_alert_modification = get_field('location_alert_modification');
+				if ( $meta_title ) {
 
-$location_alert_title_local = get_field('location_alert_heading');
-$location_alert_text_local = get_field('location_alert_body');
-$location_alert_color_local = get_field('location_alert_color');
+					$html = $meta_title;
 
-$location_alert_title = $location_alert_title_sys;
+				}
 
-if ( !empty($location_alert_title_local) && $location_alert_modification == 'override' ) {
-	$location_alert_title = $location_alert_title_local;
-}
+				return $html;
 
-$location_alert_color = $location_alert_color_sys;
+			}, 15, 2 );
 
-if ( $location_alert_modification == 'override' && $location_alert_color_local != 'inherit' ) {
-	$location_alert_color = $location_alert_color_local;
-}
+	// Meta Description and Schema Description
 
-$location_alert_text = $location_alert_text_sys;
+		// Get excerpt
 
-if ( $location_alert_modification == 'override' && !empty($location_alert_text_local) ) {
-	$location_alert_text = $location_alert_text_local;
-} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
-	$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
-} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
-	$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
-}
+			$excerpt = get_the_excerpt();
+			$excerpt_user = true;
 
-if ( $location_alert_modification == 'suppress' ) {
-	$location_alert_suppress = true;
-	$location_alert_title = '';
-	$location_alert_text = '';
-}
+		// Get location description
 
-$location_closing = get_field('location_closing'); // true or false
-$location_closing_date = '';
-$location_closing_date_past = false;
-$location_closing_length = '';
-$location_reopen_known = '';
-$location_reopen_date = '';
-$location_reopen_date_past = false;
-$location_closing_info = '';
-$location_closing_telemed = '';
-$location_closing_display = false;
+			$location_about = get_field('location_about');
+			$content = $location_about;
 
-if ( $location_closing ) {
-	$location_closing_date = get_field('location_closing_date'); // F j, Y
-	if (new DateTime() >= new DateTime($location_closing_date)) {
-		$location_closing_date_past = true;
-	}
-	$location_closing_length = get_field('location_closing_length');
-	$location_reopen_known = get_field('location_reopen_known');
-	$location_reopen_date = get_field('location_reopen_date'); // F j, Y
-	if (new DateTime() >= new DateTime($location_reopen_date)) {
-		$location_reopen_date_past = true;
-	}
-	$location_closing_info = get_field('location_closing_info');
-	if ($location_closing_length == 'temporary') {
-		$location_closing_telemed = get_field('location_closing_telemed'); // Will telemedicine be available during closure?
-	}
-	if (
-		$location_closing_length == 'permanent'
-		|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
-		) {
-		$location_closing_display = true;
-	}
-}
+		// Create excerpt if none exists
 
-// Set prescription values
+			if ( empty( $excerpt ) ) {
 
-$prescription_query = get_field('location_prescription_query'); // Display prescription information
+				$excerpt_user = false;
 
-if ( $prescription_query ) {
+				if ( $content ) {
 
-	$prescription_info_type = get_field('location_prescription_type'); // Which preset or custom text?
+					$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
 
-	if ( $prescription_info_type == 'clinic' ) {
-
-		$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
-		$prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
-
-	} elseif ( $prescription_info_type == 'pharm' ) {
-		
-		$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
-		$prescription = $prescription_pharm_sys; // Text from location (a.k.a. local)
-
-	} else {
-
-		$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
-
-	}
-
-	$prescription_section_show = $prescription ? true : false; // Query on whether to display the section
-
-} else {
-
-	// Eliminate PHP errors
-
-		$prescription = '';
-		$prescription_info_type = '';
-		$prescription_section_show = false;
-
-}
-
-// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-$regions = get_field('physician_region',$post->ID);
-$service_lines = get_field('physician_service_line',$post->ID);
-if ( $regions || $service_lines ) {
-	$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-		$regions, // string|array // Region(s) associated with the item
-		$service_lines // string|array // Service line(s) associated with the item
-	);
-		$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-} else {
-	$hide_medical_ontology = false; // bool
-}
-
-// Set the schema description and the meta description
-
-	// Get excerpt
-
-		$excerpt = get_the_excerpt();
-		$excerpt_user = true;
-
-	// Get location description
-
-		$location_about = get_field('location_about');
-		$content = $location_about;
-
-	// Create excerpt if none exists
-
-		if ( empty( $excerpt ) ) {
-
-			$excerpt_user = false;
-
-			if ( $content ) {
-
-				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+				}
 
 			}
 
+		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		
+		// Set schema description
+
+			$schema_description = $excerpt_attr; // Used for Schema Data. Should ALWAYS have a value
+
+		// Override theme's method of defining the meta description
+
+			add_filter('seopress_titles_desc', function( $html ) use ( $excerpt_attr ) {
+
+				if ( $excerpt_attr ) {
+
+					$html = $excerpt_attr;
+
+				}
+				return $html;
+
+			} );
+
+
+
+	// Meta Keywords
+
+		// $keywords = '';
+		// 
+		// // Override theme's standard meta keywords settings
+		// 
+		// 	add_action( 'wp_head', function() use ( $keywords ) {
+		// 		uamswp_keyword_hook_header(
+		// 			$keywords // array
+		// 		);
+		// 	} );
+
+	// Canonical URL
+
+		// Do nothing
+
+	// Meta Social Media Tags
+
+		// Filter hooks
+		include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+
+// Image values
+
+	$override_parent_photo = get_field('location_image_override_parent');
+	$override_parent_photo_featured = get_field('location_image_override_parent_featured');
+	$override_parent_photo_wayfinding = get_field('location_image_override_parent_wayfinding');
+	$override_parent_photo_gallery = get_field('location_image_override_parent_gallery');
+
+	if (
+		$override_parent_photo 
+		&& 
+		$parent_location 
+		&& 
+		$override_parent_photo_wayfinding
+	) {
+
+		if ( $override_parent_photo_wayfinding ) {
+
+			$wayfinding_photo = get_field('location_wayfinding_photo');
+
 		}
 
-	// Set schema description
+		if ( $override_parent_photo_gallery ) {
 
-		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+			$photo_gallery = get_field('location_photo_gallery');
 
-	// Override theme's method of defining the meta description
+		}
 
-		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+	} else {
+		
+		// Use parent/standard images
+		$wayfinding_photo = get_field('location_wayfinding_photo', $post_id);
+		$photo_gallery = get_field('location_photo_gallery', $post_id);
 
-			$html = $excerpt;
+	}
 
-			return $html;
+	$location_images = array();
 
-		} );
+	if (
+		isset($wayfinding_photo)
+		&&
+		!empty($wayfinding_photo)
+	) {
 
-// Override the theme's method of defining the social media meta tags
+		$location_images[] = $wayfinding_photo;
 
-	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+	}
 
-// Override theme's method of defining the meta page title
+	if (
+		isset($photo_gallery)
+		&&
+		!empty($photo_gallery)
+	) {
 
-	// Construct the meta title
+		foreach ( $photo_gallery as $photo_gallery_image ) {
 
-		$location_city = get_field('location_city', $post_id); // Get the location's city
-		$location_city_attr = uamswp_attr_conversion($location_city);
-		if ( $parent_title_attr ) {
-			$meta_title_enhanced_addition = $parent_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-			$meta_title_enhanced_x2_addition = $location_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+			$location_images[] = $photo_gallery_image;
+
+		}
+	}
+
+	$location_images_count = count($location_images);
+
+	// Set image for schema
+
+		if (
+			$override_parent_photo 
+			&& 
+			$parent_location 
+			&& 
+			$override_parent_photo_featured
+		) {
+			
+			// If child location & override is true
+
+			$featured_image = get_post_thumbnail_id();
+
 		} else {
-			$meta_title_enhanced_addition = $location_city_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-			$meta_title_enhanced_x2_addition = ''; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+			
+			// Use parent/standard images
+
+			$featured_image = get_post_thumbnail_id($post_id);
+
 		}
-		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
-			'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-			'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-			$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-			'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
-			$meta_title_enhanced_x2_addition // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+
+		$schema_image = '';
+
+		if ( $featured_image ) {
+
+			$schema_image = $featured_image;
+
+		} elseif ( $location_images ) {
+
+			$schema_image = $location_images[0];
+
+		}
+
+		if (
+			function_exists( 'fly_add_image_size' )
+			&&
+			!empty($schema_image)
+		) {
+
+			$schema_image = image_sizer( $schema_image, 640, 480, 'center', 'center' );
+
+		} else {
+
+			$schema_image = wp_get_attachment_image_src( $schema_image, 'large' );
+
+		}
+
+// Set telemedicine values
+
+	// Original Set
+
+		// $telemedicine_query = get_field('field_location_telemed_query'); // Is there telemedicine?
+		// $telemedicine_patients = get_field('field_location_telemed_patients'); // New patients, existing or both?
+		// $telemedicine_hours247 = get_field('field_location_telemed_24_7'); // typically 24/7?
+		// $telemedicine_hours = get_field('location_telemed_hours'); // telemedicine hours repeater
+		// $telemedicine_modified = get_field('field_location_telemed_modified_hours_query'); // Are there modified hours for telemedicine?
+		// $telemedicine_modified_reason = get_field('field_location_telemed_modified_hours_reason'); // Why are there modified hours for telemedicine?
+		// $telemedicine_modified_start = get_field('field_location_telemed_modified_hours_start_date'); // When do the modified telemedicine hours start?
+		// $telemedicine_modified_end = get_field('field_location_telemed_modified_hours_end'); // Do we know when the modified telemedicine hours end?
+		// $telemedicine_modified_end_date = get_field('field_location_telemed_modified_hours_end_date'); // When do the modified telemedicine hours end?
+		// $telemedicine_modified_hours = get_field('field_location_telemed_modified_hours_group'); // modified telemedicine hours repeater
+
+	// Hours Grouping
+
+		$location_hours_group = get_field('location_hours_group');
+
+		$telemedicine_query = $location_hours_group['location_telemed_query']; // Is there telemedicine?
+		$telemedicine_patients = $location_hours_group['location_telemed_patients']; // New patients, existing or both?
+		$telemedicine_hours247 = $location_hours_group['location_telemed_24_7']; // typically 24/7?
+		$telemedicine_hours = $location_hours_group['location_telemed_hours']; // telemedicine hours repeater
+		$telemedicine_modified = $location_hours_group['location_telemed_modified_hours_query']; // Are there modified hours for telemedicine?
+		$telemedicine_modified_reason = $location_hours_group['location_telemed_modified_hours_reason']; // Why are there modified hours for telemedicine?
+		$telemedicine_modified_start = $location_hours_group['location_telemed_modified_hours_start_date']; // When do the modified telemedicine hours start?
+		$telemedicine_modified_end = $location_hours_group['location_telemed_modified_hours_end']; // Do we know when the modified telemedicine hours end?
+		$telemedicine_modified_end_date = $location_hours_group['location_telemed_modified_hours_end_date']; // When do the modified telemedicine hours end?
+		$telemedicine_modified_hours247 = $location_hours_group['location_telemed_modified_hours_24_7'];
+		// $telemedicine_modified_hours = $location_hours_group['location_telemed_modified_hours_group']; // modified telemedicine hours repeater
+		$telemedicine_info = get_field('location_telemed_descr_system', 'option'); // System-wide information about telemedicine at locations
+
+// After hours information
+
+	$afterhours_system = get_field('location_afterhours_descr_system', 'option'); // System-wide information about telemedicine at locations
+	$afterhours_system = ( isset($afterhours_system) && !empty($afterhours_system) ) ? $afterhours_system : '<p>If you are in need of urgent or emergency care, call 911 or go to your nearest emergency department at your local hospital.</p>'; // System-wide information about telemedicine at locations
+
+// Set alert values
+
+	$location_alert_title_sys = get_field('location_alert_heading_system', 'option');
+	$location_alert_text_sys = get_field('location_alert_body_system', 'option');
+	$location_alert_color_sys = get_field('location_alert_color_system', 'option');
+
+	$location_alert_suppress = get_field('location_alert_suppress');
+	$location_alert_modification = get_field('location_alert_modification');
+
+	$location_alert_title_local = get_field('location_alert_heading');
+	$location_alert_text_local = get_field('location_alert_body');
+	$location_alert_color_local = get_field('location_alert_color');
+
+	$location_alert_title = $location_alert_title_sys;
+
+	if ( !empty($location_alert_title_local) && $location_alert_modification == 'override' ) {
+		$location_alert_title = $location_alert_title_local;
+	}
+
+	$location_alert_color = $location_alert_color_sys;
+
+	if ( $location_alert_modification == 'override' && $location_alert_color_local != 'inherit' ) {
+		$location_alert_color = $location_alert_color_local;
+	}
+
+	$location_alert_text = $location_alert_text_sys;
+
+	if ( $location_alert_modification == 'override' && !empty($location_alert_text_local) ) {
+		$location_alert_text = $location_alert_text_local;
+	} elseif ( $location_alert_modification == 'prepend' && !empty($location_alert_text_local) ) {
+		$location_alert_text = $location_alert_text_local . $location_alert_text_sys;
+	} elseif ( $location_alert_modification == 'append' && !empty($location_alert_text_local) ) {
+		$location_alert_text = $location_alert_text_sys . $location_alert_text_local;
+	}
+
+	if ( $location_alert_modification == 'suppress' ) {
+		$location_alert_suppress = true;
+		$location_alert_title = '';
+		$location_alert_text = '';
+	}
+
+// Closing information
+
+	$location_closing = get_field('location_closing'); // true or false
+	$location_closing_date = '';
+	$location_closing_date_past = false;
+	$location_closing_length = '';
+	$location_reopen_known = '';
+	$location_reopen_date = '';
+	$location_reopen_date_past = false;
+	$location_closing_info = '';
+	$location_closing_telemed = '';
+	$location_closing_display = false;
+
+	if ( $location_closing ) {
+		$location_closing_date = get_field('location_closing_date'); // F j, Y
+		if (new DateTime() >= new DateTime($location_closing_date)) {
+			$location_closing_date_past = true;
+		}
+		$location_closing_length = get_field('location_closing_length');
+		$location_reopen_known = get_field('location_reopen_known');
+		$location_reopen_date = get_field('location_reopen_date'); // F j, Y
+		if (new DateTime() >= new DateTime($location_reopen_date)) {
+			$location_reopen_date_past = true;
+		}
+		$location_closing_info = get_field('location_closing_info');
+		if ($location_closing_length == 'temporary') {
+			$location_closing_telemed = get_field('location_closing_telemed'); // Will telemedicine be available during closure?
+		}
+		if (
+			$location_closing_length == 'permanent'
+			|| ($location_closing_length == 'temporary' && !$location_reopen_date_past)
+			) {
+			$location_closing_display = true;
+		}
+	}
+
+// Set prescription values
+
+	$prescription_query = get_field('location_prescription_query'); // Display prescription information
+
+	if ( $prescription_query ) {
+
+		$prescription_info_type = get_field('location_prescription_type'); // Which preset or custom text?
+
+		if ( $prescription_info_type == 'clinic' ) {
+
+			$prescription_clinic_sys = get_field('location_prescription_clinic_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling clinic
+			$prescription = $prescription_clinic_sys; // Text from location (a.k.a. local)
+
+		} elseif ( $prescription_info_type == 'pharm' ) {
+			
+			$prescription_pharm_sys = get_field('location_prescription_pharm_system', 'option'); // Text from Find-a-Doc settings (a.k.a. system) for calling pharmacy
+			$prescription = $prescription_pharm_sys; // Text from location (a.k.a. local)
+
+		} else {
+
+			$prescription = get_field('location_prescription'); // Text from location (a.k.a. local)
+
+		}
+
+		$prescription_section_show = $prescription ? true : false; // Query on whether to display the section
+
+	} else {
+
+		// Eliminate PHP errors
+
+			$prescription = '';
+			$prescription_info_type = '';
+			$prescription_section_show = false;
+
+	}
+
+// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
+
+	$regions = get_field('physician_region',$post->ID);
+	$service_lines = get_field('physician_service_line',$post->ID);
+	if ( $regions || $service_lines ) {
+		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
+			$regions, // string|array // Region(s) associated with the item
+			$service_lines // string|array // Service line(s) associated with the item
 		);
-			$meta_title = $meta_title_vars['meta_title']; // string
-	
-	// Modify SEOPress's standard meta title settings
-
-		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
-
-			$html = $meta_title;
-
-			return $html;
-
-		}, 15, 2 );
+			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
+	} else {
+		$hide_medical_ontology = false; // bool
+	}
 
 get_header();
 
-while ( have_posts() ) : the_post(); ?>
-<?php 
-	$map = get_field('location_map', $post_id );
-	$location_address_1 = get_field('location_address_1', $post_id );
-	$location_building = get_field('location_building', $post_id );
-	if ($location_building) {
-		$building = get_term($location_building, "building");
-		$building_slug = $building->slug;
-		$building_name = $building->name;
-	}
-	$location_floor = get_field_object('location_building_floor', $post_id );
-		$location_floor_value = '';
-		$location_floor_label = '';
-		if ( $location_floor ) {
-			$location_floor_value = $location_floor['value'];
-			$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+while ( have_posts() ) : the_post();
+
+	// Address and physical location information
+
+		$map = get_field('location_map', $post_id );
+		$location_address_1 = get_field('location_address_1', $post_id );
+		$location_building = get_field('location_building', $post_id );
+		if ($location_building) {
+			$building = get_term($location_building, "building");
+			$building_slug = $building->slug;
+			$building_name = $building->name;
 		}
-	$location_suite = get_field('location_suite', $post_id );
-	$location_address_2 =
-		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-		. ( $location_suite ? $location_suite : '' );
-	$location_address_2_schema =
-		( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-		. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-		. ( $location_suite ? $location_suite : '' );
+		$location_floor = get_field_object('location_building_floor', $post_id );
+			$location_floor_value = '';
+			$location_floor_label = '';
+			if ( $location_floor ) {
+				$location_floor_value = $location_floor['value'];
+				$location_floor_label = $location_floor['choices'][ $location_floor_value ];
+			}
+		$location_suite = get_field('location_suite', $post_id );
+		$location_address_2 =
+			( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
+			. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
+			. ( $location_suite ? $location_suite : '' );
+		$location_address_2_schema =
+			( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
+			. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
+			. ( $location_suite ? $location_suite : '' );
 
-	$location_address_2_deprecated = get_field('location_address_2', $post_id );
-	if (!$location_address_2) {
-		$location_address_2 = $location_address_2_deprecated;
-		$location_address_2_schema = $location_address_2_deprecated;
-	}
+		$location_address_2_deprecated = get_field('location_address_2', $post_id );
+		if (!$location_address_2) {
+			$location_address_2 = $location_address_2_deprecated;
+			$location_address_2_schema = $location_address_2_deprecated;
+		}
 
-	$location_city = get_field('location_city', $post_id);
-	$location_state = get_field('location_state', $post_id);
-	$location_zip = get_field('location_zip', $post_id);
-	$location_web_name = get_field('location_web_name');
-	$location_url = get_field('location_url');
+		$location_city = get_field('location_city', $post_id);
+		$location_state = get_field('location_state', $post_id);
+		$location_zip = get_field('location_zip', $post_id);
+
+	// External website
+
+		$location_web_name = get_field('location_web_name');
+		$location_url = get_field('location_url');
 
 	// Start count for jump links
-	$jump_link_count = 0;
 
-		// Check if Location Alert section should be displayed
+		$jump_link_count = 0;
+
+	// Check if Location Alert section should be displayed
+
 		if (
 			(
 				($location_closing && !$location_closing_date_past) // If location closing is toggled, but closing start date is future
@@ -550,7 +708,8 @@ while ( have_posts() ) : the_post(); ?>
 			$location_alert_section_show = false;
 		}
 
-		// Check if Closing Information section should be displayed
+	// Check if Closing Information section should be displayed
+
 		if ( $location_closing_display && !empty($location_closing_info) ) {
 			$closing_section_show = true;
 			$jump_link_count++;
@@ -558,7 +717,8 @@ while ( have_posts() ) : the_post(); ?>
 			$closing_section_show = false;
 		}
 
-		// Check if About section should be displayed
+	// Check if About section should be displayed
+
 		$location_about_section_show = $location_about ? true : false;
 		$location_affiliation = get_field('location_affiliation');
 		$location_affiliation_section_show = $location_affiliation ? true : false; // Query on whether to display the section
@@ -624,7 +784,8 @@ while ( have_posts() ) : the_post(); ?>
 
 		}
 
-		// Check if Parking and Directions section should be displayed
+	// Check if Parking and Directions section should be displayed
+
 		$location_parking = get_field('location_parking', $post_id);
 		$location_direction = get_field('location_direction', $post_id);
 		$parking_map = get_field('location_parking_map', $post_id);
@@ -636,7 +797,8 @@ while ( have_posts() ) : the_post(); ?>
 			$parking_section_show = false;
 		}
 
-		// Check if Appointment Information section should be displayed
+	// Check if Appointment Information section should be displayed
+
 		$location_appointment = get_field('location_appointment');
 		$location_appointment_bring = get_field('location_appointment_bring');
 		$location_appointment_expect = get_field('location_appointment_expect');
@@ -648,22 +810,26 @@ while ( have_posts() ) : the_post(); ?>
 			$appointment_section_show = false;
 		}
 
-		// Check if Appointment Scheduling section should be displayed
+	// Check if Appointment Scheduling section should be displayed
+
 		$mychart_scheduling_query_system = get_field('mychart_scheduling_query_system', 'option');
 		$location_scheduling_query = get_field('location_scheduling_query');
 		$location_scheduling_options = get_field('location_scheduling_options');
 
-			// Set main appointment scheduling section title
+		// Set main appointment scheduling section title
+
 			$location_scheduling_title_default = 'Schedule an Appointment Online'; // Default value for appointment section title
 			$location_scheduling_title_general = get_field('location_scheduling_title_general'); // Get input for general appointment section title
 			$location_scheduling_title = ( isset($location_scheduling_title_general) && !empty($location_scheduling_title_general) ) ? $location_scheduling_title_general : $location_scheduling_title_default; // Set main title from general title input. If general title value is empty, set to default value.
 
-			// Set main appointment scheduling section intro
+		// Set main appointment scheduling section intro
+
 			$location_scheduling_intro_default = 'Use your UAMS Health MyChart account to schedule an appointment at this ' . strtolower($location_single_name) . '. If you are not a MyChart user, you can continue as a guest.'; // Default value for appointment section intro
 			$location_scheduling_intro_general = get_field('location_scheduling_intro_general'); // Get input for general appointment section intro
 			$location_scheduling_intro = ( isset($location_scheduling_intro_general) && !empty($location_scheduling_intro_general) ) ? $location_scheduling_intro_general : $location_scheduling_intro_default; // Set main intro from general intro input. If general intro value is empty, set to default value.
 
-			// Change main appointment scheduling section title and intro if only one scheduling widget
+		// Change main appointment scheduling section title and intro if only one scheduling widget
+
 			if ($location_scheduling_query && (count((array)$location_scheduling_options) < 2)) {
 				$row = $location_scheduling_options[0];
 				$location_scheduling_item_title_main = $row['location_scheduling_title']; // Get input for specific appointment section standalone title
@@ -684,7 +850,8 @@ while ( have_posts() ) : the_post(); ?>
 			$mychart_scheduling_section_show = false;
 		}
 
-		// Check if Telemedicine Information section should be displayed
+	// Check if Telemedicine Information section should be displayed
+
 		if ( $telemedicine_query ) {
 			$telemedicine_section_show = true;
 			$jump_link_count++;
@@ -692,7 +859,8 @@ while ( have_posts() ) : the_post(); ?>
 			$telemedicine_section_show = false;
 		}
 
-		// Check if Portal Information section should be displayed
+	// Check if Portal Information section should be displayed
+
 		$location_portal = get_field('location_portal');
 
 		if ( $location_portal ) {
@@ -717,7 +885,8 @@ while ( have_posts() ) : the_post(); ?>
 			$portal_section_show = false;
 		}
 
-		// Query for whether related providers content section should be displayed on ontology pages/subsections
+	// Query for whether related providers content section should be displayed on ontology pages/subsections
+
 		$providers = get_field('physician_locations');
 		$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
@@ -730,7 +899,8 @@ while ( have_posts() ) : the_post(); ?>
 			$provider_count = $provider_query_vars['provider_count']; // int
 			$jump_link_count = $provider_query_vars['jump_link_count']; // int
 
-		// Query for whether related descendant locations content section should be displayed on a page
+	// Query for whether related descendant locations content section should be displayed on a page
+
 		$current_id = get_the_ID();
 		$location_descendants = get_pages(
 			array(
@@ -755,7 +925,8 @@ while ( have_posts() ) : the_post(); ?>
 		$location_count = $location_descendant_count;
 		$location_valid = $location_descendant_valid;
 
-		// Query for whether related areas of expertise content section should be displayed on a page
+	// Query for whether related areas of expertise content section should be displayed on a page
+	
 		$expertises = get_field('location_expertise');
 		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
 			$expertises // int[]
@@ -765,7 +936,8 @@ while ( have_posts() ) : the_post(); ?>
 			$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
 			$expertise_count = $expertise_query_vars['expertise_count']; // int
 
-		// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+
 		$clinical_resources = get_field('location_clinical_resources');
 		$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
 			$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
@@ -782,7 +954,8 @@ while ( have_posts() ) : the_post(); ?>
 			$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
 			$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
 
-		// Query for whether related conditions content section should be displayed on ontology pages/subsections
+	// Query for whether related conditions content section should be displayed on ontology pages/subsections
+
 		// $conditions = get_field('location_conditions');
 		$conditions_cpt = get_field('location_conditions_cpt');
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
@@ -799,7 +972,8 @@ while ( have_posts() ) : the_post(); ?>
 			$condition_count = $condition_query_vars['condition_count']; // int
 			$schema_medical_specialty = $condition_query_vars['schema_medical_specialty']; // array
 
-		// Query for whether related treatments content section should be displayed on ontology pages/subsections
+	// Query for whether related treatments content section should be displayed on ontology pages/subsections
+
 		$treatments_cpt = get_field('location_treatments_cpt');
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;

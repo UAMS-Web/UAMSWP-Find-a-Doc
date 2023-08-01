@@ -1,6 +1,9 @@
 <?php
 /*
  * Template Name: Single Clinical Resource
+ * 
+ * 
+ * 
  */
 
 // Get system settings for ontology item labels
@@ -30,6 +33,7 @@
 			$placeholder_location_page_title_phrase = $labels_location_vars['placeholder_location_page_title_phrase']; // string
 
 	// Get system settings for location descendant item labels
+
 		// $labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
 		// 	$location_descendant_single_name = $labels_location_descendant_vars['location_descendant_single_name']; // string
 		// 	$location_descendant_single_name_attr = $labels_location_descendant_vars['location_descendant_single_name_attr']; // string
@@ -39,6 +43,7 @@
 		// 	$placeholder_location_descendant_plural_name = $labels_location_descendant_vars['placeholder_location_descendant_plural_name']; // string
 
 	// Get system settings for area of expertise labels
+
 		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 			$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
 			$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
@@ -105,222 +110,276 @@
 	// 	$clinical_resource_archive_headline_attr = $archive_text_clinical_resource_vars['clinical_resource_archive_headline_attr']; // string
 	// 	$placeholder_clinical_resource_archive_headline = $archive_text_clinical_resource_vars['placeholder_clinical_resource_archive_headline']; // string
 
+// Ontology / Content Type
+
+	$ontology_type = true; // Ontology type of the post (true is ontology type, false is content type)
+
 // Get the page ID
 
 	$page_id = get_the_ID();
 
-// Get the page title for the clinical resource
+// Get the page title
 
 	$page_title = get_the_title();
-	$page_title_attr = uamswp_attr_conversion($page_title);
+	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
 
 	// Array for page titles and section titles
 
 		$page_titles = array(
-			'page_title'	=> $page_title
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
 		);
 
-// Get the page slug for the clinical resource
+	// Get system settings for elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
 
+		// Text elements
+
+			$fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource(
+				$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+			);
+				$provider_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_title_clinical_resource']; // string
+				$provider_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_intro_clinical_resource']; // string
+				$provider_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_title_clinical_resource']; // string
+				$provider_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_intro_clinical_resource']; // string
+				$provider_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_link_clinical_resource']; // string
+				$provider_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_title_clinical_resource']; // string
+				$provider_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_intro_clinical_resource']; // string
+				$provider_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_link_clinical_resource']; // string
+				$location_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_title_clinical_resource']; // string
+				$location_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_intro_clinical_resource']; // string
+				$location_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_ref_main_title_clinical_resource']; // string
+				$location_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_ref_main_intro_clinical_resource']; // string
+				$location_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_ref_main_link_clinical_resource']; // string
+				$expertise_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_title_clinical_resource']; // string
+				$expertise_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_intro_clinical_resource']; // string
+				$expertise_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_ref_main_title_clinical_resource']; // string
+				$expertise_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_ref_main_intro_clinical_resource']; // string
+				$expertise_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_ref_main_link_clinical_resource']; // string
+				$clinical_resource_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_title_clinical_resource']; // string
+				$clinical_resource_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_intro_clinical_resource']; // string
+				$clinical_resource_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_title_clinical_resource']; // string
+				$clinical_resource_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_intro_clinical_resource']; // string
+				$clinical_resource_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_link_clinical_resource']; // string
+				$clinical_resource_fpage_more_text_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_more_text_clinical_resource']; // string
+				$clinical_resource_fpage_more_link_text_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_more_link_text_clinical_resource']; // string
+				$clinical_resource_fpage_more_link_descr_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_more_link_descr_clinical_resource']; // string
+				$condition_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['condition_fpage_title_clinical_resource']; // string
+				$condition_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['condition_fpage_intro_clinical_resource']; // string
+				$treatment_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['treatment_fpage_title_clinical_resource']; // string
+				$treatment_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['treatment_fpage_intro_clinical_resource']; // string
+				$condition_treatment_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['condition_treatment_fpage_title_clinical_resource']; // string
+				$condition_treatment_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['condition_treatment_fpage_intro_clinical_resource']; // string
+
+		// Image elements
+
+			// Do nothing
+
+	// Name of ontology item type represented by this fake subpage
+
+		// Do nothing
+
+	// Fake subpage page title
+
+		// Do nothing
+
+	// Fake subpage intro text
+
+		// Do nothing
+
+// Get the page URL and slug
+
+	$page_url = user_trailingslashit(get_permalink());
 	$page_slug = $post->post_name;
+
+	// Fake subpage
+	
+		// Do nothing
 
 // Define the placement for content
 
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
-// Get system settings for text elements on Clinical Resource profile
+// HEAD
 
-	$fpage_text_clinical_resource_vars = isset($fpage_text_clinical_resource_vars) ? $fpage_text_clinical_resource_vars : uamswp_fad_fpage_text_clinical_resource(
-		$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-	);
-		$provider_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_title_clinical_resource']; // string
-		$provider_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_intro_clinical_resource']; // string
-		$provider_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_title_clinical_resource']; // string
-		$provider_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_intro_clinical_resource']; // string
-		$provider_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_link_clinical_resource']; // string
-		$provider_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_title_clinical_resource']; // string
-		$provider_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_intro_clinical_resource']; // string
-		$provider_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['provider_fpage_ref_main_link_clinical_resource']; // string
-		$location_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_title_clinical_resource']; // string
-		$location_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_intro_clinical_resource']; // string
-		$location_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_ref_main_title_clinical_resource']; // string
-		$location_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_ref_main_intro_clinical_resource']; // string
-		$location_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['location_fpage_ref_main_link_clinical_resource']; // string
-		$expertise_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_title_clinical_resource']; // string
-		$expertise_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_intro_clinical_resource']; // string
-		$expertise_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_ref_main_title_clinical_resource']; // string
-		$expertise_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_ref_main_intro_clinical_resource']; // string
-		$expertise_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['expertise_fpage_ref_main_link_clinical_resource']; // string
-		$clinical_resource_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_title_clinical_resource']; // string
-		$clinical_resource_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_intro_clinical_resource']; // string
-		$clinical_resource_fpage_ref_main_title_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_title_clinical_resource']; // string
-		$clinical_resource_fpage_ref_main_intro_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_intro_clinical_resource']; // string
-		$clinical_resource_fpage_ref_main_link_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_ref_main_link_clinical_resource']; // string
-		$clinical_resource_fpage_more_text_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_more_text_clinical_resource']; // string
-		$clinical_resource_fpage_more_link_text_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_more_link_text_clinical_resource']; // string
-		$clinical_resource_fpage_more_link_descr_clinical_resource = $fpage_text_clinical_resource_vars['clinical_resource_fpage_more_link_descr_clinical_resource']; // string
-		$condition_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['condition_fpage_title_clinical_resource']; // string
-		$condition_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['condition_fpage_intro_clinical_resource']; // string
-		$treatment_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['treatment_fpage_title_clinical_resource']; // string
-		$treatment_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['treatment_fpage_intro_clinical_resource']; // string
-		$condition_treatment_fpage_title_clinical_resource = $fpage_text_clinical_resource_vars['condition_treatment_fpage_title_clinical_resource']; // string
-		$condition_treatment_fpage_intro_clinical_resource = $fpage_text_clinical_resource_vars['condition_treatment_fpage_intro_clinical_resource']; // string
+	// Title tag
 
-// Get resource type
+		// Get relevant values
 
-	$resource_type = get_field('clinical_resource_type');
-	$resource_type_value = $resource_type['value'];
-	$resource_type_label = $resource_type['label'];
-	$resource_type_label_attr = uamswp_attr_conversion($resource_type_label);
+			// Get resource type
 
-// Override theme's method of defining the meta page title
+				$resource_type = get_field('clinical_resource_type');
+				$resource_type_value = $resource_type['value'];
+				$resource_type_label = $resource_type['label'];
+				$resource_type_label_attr = $resource_type_label ? uamswp_attr_conversion($resource_type_label) : '';
 
-	// Construct the meta title
+		// Construct the meta title
 
-		$meta_title_base_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		$meta_title_enhanced_addition = $clinical_resource_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		$meta_title_enhanced_x2_addition = $resource_type_label_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
-		$meta_title_enhanced_x2_order = array( $meta_title_base_addition, $meta_title_enhanced_x2_addition, $meta_title_enhanced_addition ); // Optional pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
-		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
-			$meta_title_base_addition, // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-			'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-			$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-			'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
-			$meta_title_enhanced_x2_addition, // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
-			$meta_title_enhanced_x2_order // array (optional) // Pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
-		);
-			$meta_title = $meta_title_vars['meta_title']; // string
-	
-	// Modify SEOPress's standard meta title settings
-
-		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
-
-			$html = $meta_title;
-
-			return $html;
-
-		}, 15, 2 );
-
-// Set the schema description and the meta description
-
-	// Get excerpt
-
-		$excerpt = get_the_excerpt(); // get_field( 'clinical_resource_excerpt' );
-		$excerpt_user = true;
-
-	// Get the content
-
-		// Avoid PHP errors
-
-			$content = '';
-			$text = '';
-			$infographic_descr = '';
-			$video_descr = '';
-			$document_descr = '';
-
-		if ( 'text' == $resource_type_value ) {
-
-			// Resource type: article
-
-			$text = get_field('clinical_resource_text');
-			$content = $text;
-
-		} elseif ( 'infographic' == $resource_type_value ) {
-
-			// Resource type: infographic
-
-			$infographic_descr = get_field('clinical_resource_infographic_descr');
-			$content = $infographic_descr;
-
-
-		} elseif ( 'video' == $resource_type_value ) {
-
-			// Resource type: video
-
-			$video_descr = get_field('clinical_resource_video_descr');
-			$content = $video_descr;
-
-		} elseif ( 'doc' == $resource_type_value ) {
-
-			// Resource type: document
-
-			$document_descr = get_field('clinical_resource_document_descr');
-			$content = $document_descr;
-
-		}
-
-	// Create excerpt if none exists
-
-
-		if ( empty( $excerpt ) ) {
-
-			$excerpt_user = false;
-
-			if ( $content ) {
-
-				$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
-
-			}
-
-		}
-
-	// Set schema description
-
-		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
-
-	// Override theme's method of defining the meta description
-
-		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
-
-			$html = $excerpt;
-
-			return $html;
-
-		} );
-
-// Override the theme's method of defining the social media meta tags
-
-	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
-
-// Override theme's method of defining the canonical URL
-
-	// Query for whether this clinical resource is syndicated from another source
-	$syndicated = get_field('clinical_resource_syndicated');
-
-	// Get syndication URL
-
-		if ( $syndicated ) {
-
-			$canonical_url = user_trailingslashit(
-				htmlspecialchars(
-					urldecode(
-						get_field('clinical_resource_syndication_url')
-					)
-				)
+			$meta_title_base_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+			$meta_title_enhanced_addition = $clinical_resource_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+			$meta_title_enhanced_x2_addition = $resource_type_label_attr; // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+			$meta_title_enhanced_x2_order = array( $meta_title_base_addition, $meta_title_enhanced_x2_addition, $meta_title_enhanced_addition ); // Optional pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
+			$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+				$page_title, // string
+				$page_title_attr, // string (optional)
+				$meta_title_base_addition, // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+				'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
+				$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
+				'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
+				$meta_title_enhanced_x2_addition, // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
+				$meta_title_enhanced_x2_order // array (optional) // Pre-defined array for name order of enhanced meta title level 2 // Expects three values but will accommodate any number
 			);
+				$meta_title = $meta_title_vars['meta_title']; // string
 		
-		} else {
+		// Override SEOPress's standard title tag settings
 
-			$canonical_url = '';
+			add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
 
-		}
+				if ( $meta_title ) {
 
-	// Modify SEOPress's standard canonical URL settings
+					$html = $meta_title;
 
-		add_filter( 'seopress_titles_canonical', function( $html ) use ( $canonical_url ) {
+				}
 
-			if ( $canonical_url ) {
+				return $html;
 
-				$html = '<link rel="canonical" href="' . $canonical_url . '" />';
+			}, 15, 2 );
+
+	// Meta Description and Schema Description
+
+		// Get excerpt
+
+			$excerpt = get_the_excerpt(); // get_field( 'clinical_resource_excerpt' );
+			$excerpt_user = true;
+
+		// Get the content
+
+			// Avoid PHP errors
+
+				$content = '';
+				$text = '';
+				$infographic_descr = '';
+				$video_descr = '';
+				$document_descr = '';
+
+			if ( 'text' == $resource_type_value ) {
+
+				// Resource type: article
+
+				$text = get_field('clinical_resource_text');
+				$content = $text;
+
+			} elseif ( 'infographic' == $resource_type_value ) {
+
+				// Resource type: infographic
+
+				$infographic_descr = get_field('clinical_resource_infographic_descr');
+				$content = $infographic_descr;
+
+
+			} elseif ( 'video' == $resource_type_value ) {
+
+				// Resource type: video
+
+				$video_descr = get_field('clinical_resource_video_descr');
+				$content = $video_descr;
+
+			} elseif ( 'doc' == $resource_type_value ) {
+
+				// Resource type: document
+
+				$document_descr = get_field('clinical_resource_document_descr');
+				$content = $document_descr;
 
 			}
 
-			return $html;
+
+		// Create excerpt if none exists
+
+			if ( empty( $excerpt ) ) {
+
+				$excerpt_user = false;
+
+				if ( $content ) {
+
+					$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+
+				}
+
+			}
+
+		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
 		
-		} );
+		// Set schema description
+
+			$schema_description = $excerpt_attr; // Used for Schema Data. Should ALWAYS have a value
+
+		// Override theme's method of defining the meta description
+
+			add_filter('seopress_titles_desc', function( $html ) use ( $excerpt_attr ) {
+
+				if ( $excerpt_attr ) {
+
+					$html = $excerpt_attr;
+
+				}
+				return $html;
+
+			} );
+
+	// Meta Keywords
+
+		// $keywords = '';
+		// 
+		// // Override theme's standard meta keywords settings
+		// 
+		// 	add_action( 'wp_head', function() use ( $keywords ) {
+		// 		uamswp_keyword_hook_header(
+		// 			$keywords // array
+		// 		);
+		// 	} );
+
+	// Canonical URL
+
+		// Query for whether this clinical resource is syndicated from another source
+
+			$syndicated = get_field('clinical_resource_syndicated');
+
+		// Get syndication URL
+
+			if ( $syndicated ) {
+
+				$canonical_url = user_trailingslashit(
+					htmlspecialchars(
+						urldecode(
+							get_field('clinical_resource_syndication_url')
+						)
+					)
+				);
+			
+			} else {
+
+				$canonical_url = '';
+
+			}
+
+		// Modify SEOPress's standard canonical URL settings
+
+			add_filter( 'seopress_titles_canonical', function( $html ) use ( $canonical_url ) {
+
+				if ( $canonical_url ) {
+
+					$html = '<link rel="canonical" href="' . $canonical_url . '" />';
+
+				}
+
+				return $html;
+			
+			} );
+
+	// Meta Social Media Tags
+
+		// Filter hooks
+		include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
 
 // Add page template class to body element's classes
 
