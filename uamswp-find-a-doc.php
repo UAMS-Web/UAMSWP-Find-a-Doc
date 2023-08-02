@@ -43,6 +43,16 @@ if ( version_compare( PHP_VERSION, '5.3', '<' ) ) {
 
 			define('UAMS_FAD_VERSION', $plugin_version);
 
+		// Find-a-Doc transient names
+
+			// Prefix
+
+				define('UAMS_FAD_TRANSIENT_PREFIX', 'uamswp_fad_');
+
+			// Suffix
+
+				define('UAMS_FAD_TRANSIENT_SUFFIX', '_' . UAMS_FAD_VERSION );
+
 	require_once __DIR__ . '/required-plugins.php';
 	include_once __DIR__ . '/includes/find-a-doc.php';
 
