@@ -5,42 +5,36 @@
  * Description: A template part that displays a list of areas of expertise 
  * associated with the current page.
  * 
- * When this template part is needed for a hook, use the 
- * uamswp_fad_section_expertise() function.
- * 
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	// Vars defined on the template
- * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
- * 	// Vars defined in uamswp_fad_labels_expertise()
- * 		$expertise_single_name // string
- * 		$expertise_single_name_attr // string
- * 		$expertise_plural_name // string
- * 		$expertise_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_fpage_text_expertise_general()
- * 		$expertise_fpage_title_general // string
- * 		$expertise_fpage_intro_general // string
- * 	// Vars defined in uamswp_fad_expertise_query()
- * 		$expertise_section_show // bool
- * 		$expertise_query // WP_Post[]
- * 		$expertise_count // int
- * 	// Vars defined in uamswp_fad_expertise_descendant_query()
- * 		$expertise_descendant_section_show // bool
- * 		$expertise_descendant_query // WP_Post[]
- * 		$expertise_descendant_count // int
+ * 	$expertises // int[] // Value of the related areas of expertise input (or $expertise_descendants, List of this area of expertise item's descendant items)
+ * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
  * Optional vars:
- * 	// Vars defined in uamswp_fad_ontology_hide()
- * 		$hide_medical_ontology // bool
- * 	// Vars defined on the template
- * 		$expertise_section_class // Section class // string (default: 'expertise-list')
- * 		$expertise_section_id // Section ID // string (default: 'expertise')
- * 		$expertise_section_show_header // Query for whether to display the section header // bool (default: true)
- * 		$expertise_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
- * 		$expertise_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
- * 		$expertise_section_collapse_list // Query for whether to collapse the list of locations in the locations section // bool (default: false)
- * 		$expertise_descendant_list // Query for whether this is a list of child areas of expertise within an area of expertise // bool (default: false)
+ * 	$site_nav_id // int (default: '') // ID of post that defines the subsection
+ * 	$ontology_type // bool (default: true) // Query for whether item is ontology type vs. content type
+ * 	$content_placement // enum('subsection', 'profile') (default: 'profile') // Placement of this content
+ * 	$expertise_section_show // bool // Query for whether to show the area of expertise section (or $expertise_descendant_section_show, Query for whether to show the descendant area of expertise section)
+ * 	$expertise_descendant_list // bool (default: false) // Query for whether this is a list of child areas of expertise within an area of expertise
+ * 	$expertise_single_name // string
+ * 	$expertise_single_name_attr // string
+ * 	$expertise_plural_name // string
+ * 	$expertise_plural_name_attr // string
+ * 	$expertise_fpage_title_general // string
+ * 	$expertise_fpage_intro_general // string
+ * 	$expertise_query // WP_Post[]
+ * 	$expertise_count // int
+ * 	$expertise_descendant_section_show // bool
+ * 	$expertise_descendant_query // WP_Post[]
+ * 	$expertise_descendant_count // int
+ * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+ * 	$expertise_section_class // string (default: 'expertise-list') // Section class
+ * 	$expertise_section_id // string (default: 'expertise') // Section ID
+ * 	$expertise_section_show_header // bool (default: true) // Query for whether to display the section header
+ * 	$expertise_section_title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement) // Text to use for the section title
+ * 	$expertise_section_intro // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement) // Text to use for the section intro text
+ * 	$expertise_section_collapse_list // bool (default: false) // Query for whether to collapse the list of locations in the locations section
  * 
  * Return:
  * 	html <section />

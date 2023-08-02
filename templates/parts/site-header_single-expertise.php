@@ -9,6 +9,11 @@
  * replacing the navbar-subbrand title and parent with information specific to the 
  * current area of expertise and its most distant ancestor area of expertise.
  * 
+ * Required vars:
+ * 	$page_id // int // ID of the area of expertise item
+ * 	$ontology_type // bool // Ontology type of the area of expertise item (true is ontology type, false is content type)
+ * 	$page_title // string // Title of the area of expertise item
+ * 	$page_url // string // Permalink of the area of expertise item
  */
 
  

@@ -5,34 +5,31 @@
  * Description: A template part that displays a UAMS Text & Image Overlay Block 
  * from the UAMS 2020 theme.
  * 
- * When this template part is needed for a hook, use the 
- * uamswp_section_text_image_overlay() function.
- * 
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+ * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
  * Optional vars:
- * 	$text_image_overlay_id // Section ID attribute value // string
- * 	$text_image_overlay_row_0 // Values for the first item // array
- * 		['heading'] // Heading text, limited to 65 characters // string
- * 		['body'] // Body text, limited to 280 characters // string
- * 		['button_text'] // Link text, limited to 27 characters // string
- * 		['button_url'] // Full URL // string
+ * 	$text_image_overlay_id // string // Section ID attribute value
+ * 	$text_image_overlay_row_0 // array // Values for the first item
+ * 		['heading'] // string // Heading text, limited to 65 characters
+ * 		['body'] // string // Body text, limited to 280 characters
+ * 		['button_text'] // string // Link text, limited to 27 characters
+ * 		['button_url'] // string // Full URL
  * 		['button_target'] // Query on whether to open the link in a new window/tab // bool
- * 		['button_desc'] // Link ARIA label text // string (default: ['button_text'] . ', ' . ['heading'] )
- * 		['background_color'] // Background color value // string (default: 'blue')
- * 		['image'] // Background image ID // int
- * 	$text_image_overlay_row_1 // Values for the second item // array
- * 		['heading'] // Heading text, limited to 65 characters // string
- * 		['body'] // Body text, limited to 280 characters // string
- * 		['button_text'] // Link text, limited to 27 characters // string
- * 		['button_url'] // Full URL // string
+ * 		['button_desc'] // string (default: ['button_text'] . ', ' . ['heading'] ) // Link ARIA label text
+ * 		['background_color'] // string (default: 'blue') // Background color value
+ * 		['image'] // int // Background image ID
+ * 	$text_image_overlay_row_1 // array // Values for the second item
+ * 		['heading'] // string // Heading text, limited to 65 characters
+ * 		['body'] // string // Body text, limited to 280 characters
+ * 		['button_text'] // string // Link text, limited to 27 characters
+ * 		['button_url'] // string // Full URL
  * 		['button_target'] // Query on whether to open the link in a new window/tab // bool
- * 		['button_desc'] // Link ARIA label text // string (default: ['button_text'] . ', ' . ['heading'] )
- * 		['background_color'] // Background color value // string (default: 'green')
- * 		['image'] // Background image ID // int
+ * 		['button_desc'] // string (default: ['button_text'] . ', ' . ['heading'] ) // Link ARIA label text
+ * 		['background_color'] // string (default: 'green') // Background color value
+ * 		['image'] // int // Background image ID
  * 
  * Return:
  * 	html <section />

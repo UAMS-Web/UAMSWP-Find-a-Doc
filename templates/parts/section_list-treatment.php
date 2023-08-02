@@ -5,40 +5,33 @@
  * Description: A template part that displays a list of treatments associated with 
  * the current page.
  * 
- * When this template part is needed for a hook, use the 
- * uamswp_fad_section_treatment() function.
- * 
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	// Vars defined on the template
- * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
- * 	// Vars defined in uamswp_fad_labels_treatment()
- * 		$treatment_single_name // string
- * 		$treatment_single_name_attr // string
- * 		$treatment_plural_name // string
- * 		$treatment_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_fpage_text_treatment_general()
- * 		$treatment_fpage_title_general // string
- * 		$treatment_fpage_intro_general // string
- * 	// Vars defined in uamswp_fad_treatment_query()
- * 		$treatment_section_show // bool
- * 		$treatment_cpt_query // WP_Post[]
- * 		$treatments_cpt // int[]
- * 		$treatment_ids // int[]
- * 		$treatment_count // int
+ * 	$treatments_cpt // int[]
+ * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
  * Optional vars:
- * 	// Vars defined in uamswp_fad_ontology_hide()
- * 		$hide_medical_ontology // bool
- * 	// Vars defined on the template
- * 		$treatment_section_class // Section class // string (default: 'conditions-treatments')
- * 		$treatment_section_id // Section ID // string (default: 'treatments')
- * 		$treatment_section_show_header // Query for whether to display the section header // bool (default: true)
- * 		$treatment_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of treatment section title in a general placement)
- * 		$treatment_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of treatment section intro text in a general placement)
- * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
- * 
+ * 	$hide_medical_ontology // bool (default: false) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
+ * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
+ * 	$treatment_section_show // bool
+ * 	$ontology_type // bool // Query for whether item is ontology type vs. content type
+ * 	$treatment_section_title // string (default: Find-a-Doc Settings value for areas of treatment section title in a general placement) // Text to use for the section title
+ * 	$treatment_section_intro // string (default: Find-a-Doc Settings value for areas of treatment section intro text in a general placement) // Text to use for the section intro text
+ * 	$condition_treatment_section_link_item // bool (default: false) // Query for whether to link the list items
+ * 	$treatment_section_show_header // bool (default: true) // Query for whether to display the section header
+ * 	$treatment_section_class // string (default: 'conditions-treatments') // Section class
+ * 	$treatment_section_id // string (default: 'treatments') // Section ID
+ * 	$treatment_cpt_query // WP_Post[]
+ * 	$treatment_ids // int[]
+ * 	$treatment_count // int
+ * 	$treatment_single_name // string
+ * 	$treatment_single_name_attr // string
+ * 	$treatment_plural_name // string
+ * 	$treatment_plural_name_attr // string
+ * 	$treatment_fpage_title_general // string
+ * 	$treatment_fpage_intro_general // string
+
  * Return:
  * 	var $schema_medical_specialty; // array
  * 	html <section />
@@ -62,7 +55,7 @@
 		$condition_treatment_section_link_item
 		&&
 		$hide_medical_ontology
-		) {
+	) {
 
 		// If the treatments section should be shown...
 		// and if the condition items should be linked...
@@ -116,84 +109,68 @@ if ( $treatment_section_show ) {
 
 		// Other variables
 
-			if ( !isset($treatment_single_name) ) {
+			if (
+				!isset($treatment_single_name) || empty($treatment_single_name)
+				||
+				!isset($treatment_single_name_attr) || empty($treatment_single_name_attr)
+				||
+				!isset($treatment_plural_name) || empty($treatment_plural_name)
+				||
+				!isset($treatment_plural_name_attr) || empty($treatment_plural_name_attr)
+			) {
+
 				$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 					$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
-			}
-
-			if ( !isset($treatment_single_name_attr) ) {
-				$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 					$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
-			}
-
-			if ( !isset($treatment_plural_name) ) {
-				$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 					$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
-			}
-
-			if ( !isset($treatment_plural_name_attr) ) {
-				$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 					$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
+
 			}
 
-			if ( !isset($treatment_fpage_title_general) ) {
+			if (
+				!isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general)
+				||
+				!isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general)
+			) {
+
 				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
 					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				);
 					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-			}
-
-			if ( !isset($treatment_fpage_intro_general) ) {
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
 					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+
 			}
 
-			if ( !isset($treatments_cpt) ) {
+			if ( !isset($treatments_cpt) || empty($treatments_cpt) ) {
 				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
 					$page_id // int // ID of the post
 				);
 					$treatments_cpt = $ontology_site_values_vars['treatments_cpt'];
 			}
 
-			if ( !isset($treatment_cpt_query) ) {
+			if (
+				!isset($treatment_cpt_query) || empty($treatment_cpt_query)
+				||
+				!isset($treatment_section_show) || empty($treatment_section_show)
+				||
+				!isset($treatment_ids) || empty($treatment_ids)
+				||
+				!isset($treatment_count) || empty($treatment_count)
+			) {
+
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type, // bool (optional)
 				);
 					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-			}
-
-			if ( !isset($treatment_section_show) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
 					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-			}
-
-			if ( !isset($treatment_ids) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
 					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-			}
-
-			if ( !isset($treatment_count) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
 					$treatment_count = $treatment_query_vars['treatment_count']; // int
+
 			}
 
-			if ( !isset($hide_medical_ontology) ) {
+			if ( !isset($hide_medical_ontology) || empty($hide_medical_ontology) ) {
 				$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
 					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
 			}

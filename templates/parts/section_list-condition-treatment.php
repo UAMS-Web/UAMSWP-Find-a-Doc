@@ -9,52 +9,46 @@
  * uamswp_fad_section_condition_treatment() function.
  * 
  * Required vars:
- * // Defined on the template
- * 		$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
- * 	// Vars defined in uamswp_fad_labels_condition()
- * 		$condition_single_name_attr // string
- * 	// Vars defined in uamswp_fad_labels_treatment()
- * 		$treatment_single_name_attr // string
- * 	// Vars defined in uamswp_fad_fpage_text_condition_treatment_general()
- * 		$condition_treatment_fpage_title_general // string
- * 		$condition_treatment_fpage_intro_general // string
- * 	// Vars defined in uamswp_fad_fpage_text_condition_general()
- * 		$condition_fpage_title_general // string
- * 		$condition_fpage_intro_general // string
- * 	// Vars defined in uamswp_fad_fpage_text_treatment_general()
- * 		$treatment_fpage_title_general // string
- * 		$treatment_fpage_intro_general // string
- * 	// Vars defined in uamswp_fad_condition_query() and in uamswp_fad_treatment_query()
-		$condition_treatment_section_show; // bool
- * 	// Vars defined in uamswp_fad_condition_query()
- * 		$condition_section_show // bool
- * 		$condition_cpt_query // WP_Post[]
- * 		$condition_count // int
- * 	// Vars defined in uamswp_fad_treatment_query()
- * 		$treatment_section_show // bool
- * 		$treatment_cpt_query // WP_Post[]
- * 		$treatment_count // int
+ * 	$conditions_cpt // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
+ * 	$treatments_cpt // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
+ * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
  * Optional vars:
- * 	// Vars defined in uamswp_fad_ontology_hide()
- * 		$hide_medical_ontology // bool
- * 	// Vars defined on the template
- * 		$condition_treatment_section_class // Section class // string (default: 'conditions-treatments')
- * 		$condition_treatment_section_id // Section ID // string (default: 'conditions-treatments')
- * 		$condition_treatment_section_show_header // Query for whether to display the section header // bool (default: true)
- * 		$condition_treatment_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement)
- * 		$condition_treatment_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in a general placement)
- * 		$condition_treatment_section_link_item // Query for whether to link the list items // bool (default: false)
- * 		$condition_section_class // Conditions subsection class // string (default: 'conditions')
- * 		$condition_section_id // Conditions subsection ID // string (default: 'conditions')
- * 		$condition_section_show_header // Query for whether to display the conditions subsection header // bool (default: true)
- * 		$condition_section_title // Text to use for the conditions subsection title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement)
- * 		$condition_section_intro // Text to use for the conditions subsection intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
- * 		$treatment_section_class // Treatments subsection class // string (default: 'treatments')
- * 		$treatment_section_id // Treatments subsection ID // string (default: 'treatments')
- * 		$treatment_section_show_header // Query for whether to display the treatments subsection header // bool (default: true)
- * 		$treatment_section_title // Text to use for the treatments subsection title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
- * 		$treatment_section_intro // Text to use for the treatments subsection intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
+ * 	$hide_medical_ontology // bool
+ * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
+ * 	$condition_treatment_section_show // bool
+ * 	$condition_section_show // bool
+ * 	$treatment_section_show // bool
+ * 	$ontology_type // bool (default: true) // Query for whether item is ontology type vs. content type
+ * 	$condition_treatment_section_title // string (default: Find-a-Doc Settings value for combined condition/treatment section title in a general placement) // Text to use for the section title
+ * 	$condition_treatment_section_intro // string (default: Find-a-Doc Settings value for combined condition/treatment section intro text in a general placement) // Text to use for the section intro text
+ * 	$condition_section_title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement) // Text to use for the conditions subsection title
+ * 	$condition_section_intro // string (default: Find-a-Doc Settings value for condition section intro text in a general placement) // Text to use for the conditions subsection intro text
+ * 	$treatment_section_title // string (default: Find-a-Doc Settings value for treatment section title in a general placement) // Text to use for the treatments subsection title
+ * 	$treatment_section_intro // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement) // Text to use for the treatments subsection intro text
+ * 	$condition_treatment_section_link_item // bool (default: false) // Query for whether to link the list items
+ * 	$condition_treatment_section_show_header // bool (default: true) // Query for whether to display the section header
+ * 	$condition_section_show_header // bool (default: true) // Query for whether to display the conditions subsection header
+ * 	$treatment_section_show_header // bool (default: true) // Query for whether to display the treatments subsection header
+ * 	$condition_treatment_section_collapse_list // bool (default: false) // Query for whether to collapse the list of conditions and treatments
+ * 	$condition_treatment_section_class // string (default: 'conditions-treatments') // Section class
+ * 	$condition_treatment_section_id // string (default: 'conditions-treatments') // Section ID
+ * 	$condition_section_class // string (default: 'conditions') // Conditions subsection class
+ * 	$condition_section_id // string (default: 'conditions') // Conditions subsection ID
+ * 	$treatment_section_class // string (default: 'treatments') // Treatments subsection class
+ * 	$treatment_section_id // string (default: 'treatments') // Treatments subsection ID
+ * 	$condition_single_name_attr // string
+ * 	$treatment_single_name_attr // string
+ * 	$condition_treatment_fpage_title_general // string
+ * 	$condition_treatment_fpage_intro_general // string
+ * 	$condition_fpage_title_general // string
+ * 	$condition_fpage_intro_general // string
+ * 	$treatment_fpage_title_general // string
+ * 	$treatment_fpage_intro_general // string
+ * 	$condition_cpt_query // WP_Post[]
+ * 	$condition_count // int
+ * 	$treatment_cpt_query // WP_Post[]
+ * 	$treatment_count // int
  * 
  * Return:
  * 	var $schema_medical_specialty; // array
@@ -169,52 +163,76 @@ if ( $condition_treatment_section_show ) {
 		}
 
 		// Text to use for the conditions subsection title
-		if ( !isset($condition_section_title) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($condition_fpage_title_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
+
+			if ( !isset($condition_section_title) ) {
+
+				// Set the section title using the system settings for the section title in a general placement
+
+					if ( !isset($condition_fpage_title_general) ) {
+						$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
+							$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
+					}
+					
+					$condition_section_title = $condition_fpage_title_general;
+
 			}
-			$condition_section_title = $condition_fpage_title_general;
-		}
 
 		// Text to use for the conditions subsection intro text
-		if ( !isset($condition_section_intro) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
+
+			if ( !isset($condition_section_intro) ) {
+
+				// Set the section title using the system settings for the section title in a general placement
+
+					if ( !isset($condition_fpage_intro_general) ) {
+
+						$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
+							$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
+
+					}
+
+					$condition_section_intro = $condition_fpage_intro_general;
+
 			}
-			$condition_section_intro = $condition_fpage_intro_general;
-		}
 
 		// Text to use for the treatments subsection title
-		if ( !isset($treatment_section_title) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($treatment_fpage_title_general) ) {
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
+
+			if ( !isset($treatment_section_title) ) {
+
+				// Set the section title using the system settings for the section title in a general placement
+
+					if ( !isset($treatment_fpage_title_general) ) {
+						$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
+							$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
+					}
+
+					$treatment_section_title = $treatment_fpage_title_general;
+					
 			}
-			$treatment_section_title = $treatment_fpage_title_general;
-		}
 
 		// Text to use for the treatments subsection intro text
-		if ( !isset($treatment_section_intro) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($treatment_fpage_intro_general) ) {
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+
+			if ( !isset($treatment_section_intro) ) {
+
+				// Set the section title using the system settings for the section title in a general placement
+
+					if ( !isset($treatment_fpage_intro_general) ) {
+
+						$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
+							$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+
+					}
+
+					$treatment_section_intro = $treatment_fpage_intro_general;
+
 			}
-			$treatment_section_intro = $treatment_fpage_intro_general;
-		}
 
 		// Query for whether to display the section header
 		$condition_treatment_section_show_header = isset($condition_treatment_section_show_header) ? $condition_treatment_section_show_header : true;
@@ -242,131 +260,105 @@ if ( $condition_treatment_section_show ) {
 
 		// Other variables
 
-			if ( !isset($condition_single_name_attr) ) {
+			if ( !isset($condition_single_name_attr) || empty($condition_single_name_attr) ) {
+
 				$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
 					$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
+
 			}
 
-			if ( !isset($treatment_single_name_attr) ) {
+			if ( !isset($treatment_single_name_attr) || empty($treatment_single_name_attr) ) {
+
 				$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 					$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
+
 			}
 
-			if ( !isset($condition_treatment_fpage_title_general) ) {
+			if (
+				!isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general)
+				||
+				!isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general)
+			) {
+
 				$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
 					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				);
 					$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-			}
-
-			if ( !isset($condition_treatment_fpage_intro_general) ) {
-				$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
 					$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
+
 			}
 
-			if ( !isset($condition_fpage_title_general) ) {
+			if (
+				!isset($condition_fpage_title_general) || empty($condition_fpage_title_general)
+				||
+				!isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general)
+			) {
+
 				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
 					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				);
 					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-			}
-
-			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
 					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
+
 			}
 
-			if ( !isset($treatment_fpage_title_general) ) {
+			if (
+				!isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general)
+				||
+				!isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general)
+			) {
+
 				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
 					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				);
 					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-			}
-
-			if ( !isset($treatment_fpage_intro_general) ) {
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
 					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+
 			}
 
-			if ( !isset($condition_cpt_query) ) {
+			if (
+				!isset($condition_cpt_query) || empty($condition_cpt_query)
+				||
+				!isset($condition_section_show) || empty($condition_section_show)
+				||
+				!isset($condition_treatment_section_show) || empty($condition_treatment_section_show)
+				||
+				!isset($condition_count) || empty($condition_count)
+			) {
+
 				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type // bool (optional)
 				);
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-			}
-
-			if ( !isset($condition_section_show) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
-					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
-				);
 					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-			}
-
-			if ( !isset($condition_treatment_section_show) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
-					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
-				);
 					$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
-			}
-
-			if ( !isset($condition_count) ) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
-					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
-				);
 					$condition_count = $condition_query_vars['condition_count']; // int
+
 			}
 
-			if ( !isset($treatment_cpt_query) ) {
+			if (
+				!isset($treatment_cpt_query) || empty($treatment_cpt_query)
+				||
+				!isset($treatment_section_show) || empty($treatment_section_show)
+				||
+				!isset($condition_treatment_section_show) || empty($condition_treatment_section_show)
+				||
+				!isset($treatment_count) || empty($treatment_count)
+			) {
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type, // bool (optional)
 				);
 					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-			}
-
-			if ( !isset($treatment_section_show) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
 					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-			}
-
-			if ( !isset($condition_treatment_section_show) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
 					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-			}
-
-			if ( !isset($treatment_count) ) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
 					$treatment_count = $treatment_query_vars['treatment_count']; // int
 			}
 
-			if ( !isset($hide_medical_ontology) ) {
+			if ( !isset($hide_medical_ontology) || empty($hide_medical_ontology) ) {
 				$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
 					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
 			}

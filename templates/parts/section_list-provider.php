@@ -5,40 +5,38 @@
  * Description: A template part that displays a list of providers associated with 
  * the current page.
  * 
- * When this template part is needed for a hook, use the 
- * uamswp_fad_section_provider() function.
- * 
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	// Vars defined on the template
- * 		$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
- * 	// Vars defined in uamswp_fad_labels_provider()
- * 		$provider_plural_name // string
- * 		$provider_plural_name_attr // string
- * 	// Vars defined in uamswp_fad_fpage_text_provider_general()
- * 		$provider_fpage_title_general // string
- * 		$provider_fpage_intro_general // string
- * 	// Vars defined in uamswp_fad_provider_query()
- * 		$provider_section_show // bool
- * 		$provider_query // WP_Post[]
- * 		$providers // int[]
- * 		$provider_ids // int[]
- * 		$provider_count // int
+ * 	$providers // int[]
+ * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
  * Optional vars:
- * 	// Vars defined on the template
- * 		$provider_section_show_header // Query for whether to display the section header // bool (default: true)
- * 		$provider_section_title // Text to use for the section title // string (default: Find-a-Doc Settings value for providers section title in a general placement)
- * 		$provider_section_intro // Text to use for the section intro text // string (default: Find-a-Doc Settings value for providers section intro text in a general placement)
- * 		$provider_section_filter // Query for whether to add filter(s) // bool (default: true)
- * 		$provider_section_filter_region // Query for whether to add region filter // bool (default: true)
- * 		$provider_section_filter_title // Query for whether to add title filter // bool (default: true)
- * 		$provider_section_collapse_list // Query for whether to collapse the list of providers in the providers section // bool (default: true)
+ * 	$provider_section_show // bool (default: false)
+ * 	$ontology_type // bool (default: true) // Query for whether item is ontology type vs. content type
+ * 	$provider_section_title // string (default: Find-a-Doc Settings value for providers section title in a general placement) // Text to use for the section title
+ * 	$provider_section_intro // string (default: Find-a-Doc Settings value for providers section intro text in a general placement) // Text to use for the section intro text
+ * 	$provider_section_show_header // bool (default: true) // Query for whether to display the section header
+ * 	$provider_section_filter // bool (default: true) // Query for whether to add filter(s)
+ * 	$provider_section_filter_region // bool (default: true) // Query for whether to add region filter
+ * 	$provider_section_filter_title // bool (default: true) // Query for whether to add title filter
+ * 	$provider_section_collapse_list // bool (default: true) // Query for whether to collapse the list of providers in the providers section
+ * 	$provider_plural_name // string
+ * 	$provider_plural_name_attr // string
+ * 	$provider_fpage_title_general // string
+ * 	$provider_fpage_intro_general // string
+ * 	$provider_query // WP_Post[]
+ * 	$provider_ids // int[]
+ * 	$provider_count // int
  * 
  * Return:
  * 	html <section />
  */
+
+// Check/define variables
+
+	// Query for whether to show the treatment section
+	$provider_section_show = isset($provider_section_show) ? $provider_section_show : false;
 
 // Do something
 
@@ -50,28 +48,38 @@ if ( $provider_section_show ) {
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 
 		// Text to use for the section title
-		if ( !isset($provider_section_title) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($provider_fpage_title_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+
+			if ( !isset($provider_section_title) ) {
+
+				// Set the section title using the system settings for the section title in a general placement
+
+					if ( !isset($provider_fpage_title_general) ) {
+						$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
+							$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
+					}
+
+					$provider_section_title = $provider_fpage_title_general;
 			}
-			$provider_section_title = $provider_fpage_title_general;
-		}
 
 		// Text to use for the section intro text
-		if ( !isset($provider_section_intro) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($provider_fpage_intro_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+
+			if ( !isset($provider_section_intro) ) {
+
+				// Set the section title using the system settings for the section title in a general placement
+
+					if ( !isset($provider_fpage_intro_general) ) {
+
+						$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
+							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+						);
+							$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+
+					}
+
+					$provider_section_intro = $provider_fpage_intro_general;
 			}
-			$provider_section_intro = $provider_fpage_intro_general;
-		}
 
 		// Query for whether to display the section header
 		$provider_section_show_header = isset($provider_section_show_header) ? $provider_section_show_header : true;
@@ -86,72 +94,69 @@ if ( $provider_section_show ) {
 		$provider_section_filter_title = isset($provider_section_filter_title) ? $provider_section_filter_title : true;
 
 		// Revisit filter queries
-		$provider_section_filter_region = $provider_section_filter ? $provider_section_filter_region : false;
-		$provider_section_filter_title = $provider_section_filter ? $provider_section_filter_title : false;
-		$provider_section_filter = ( $provider_section_filter && ( $provider_section_filter_region || $provider_section_filter_title ) ) ? $provider_section_filter : false; // Set as false if neither of the filter types is true
+
+			$provider_section_filter_region = $provider_section_filter ? $provider_section_filter_region : false;
+			$provider_section_filter_title = $provider_section_filter ? $provider_section_filter_title : false;
+			$provider_section_filter = ( $provider_section_filter && ( $provider_section_filter_region || $provider_section_filter_title ) ) ? $provider_section_filter : false; // Set as false if neither of the filter types is true
 
 		// Query for whether to collapse the list of providers in the providers section
 		$provider_section_collapse_list = isset($provider_section_collapse_list) ? $provider_section_collapse_list : true;
 
 		// Other variables
 
-			if ( !isset($provider_plural_name) ) {
+			if (
+				!isset($provider_plural_name) || empty($provider_plural_name)
+				||
+				!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
+			) {
+
 				$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-			}
-
-			if ( !isset($provider_plural_name_attr) ) {
-				$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 					$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
+
 			}
 
-			if ( !isset($provider_fpage_title_general) ) {
+			if (
+				!isset($provider_fpage_title_general) || empty($provider_fpage_title_general)
+				||
+				!isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general)
+			) {
+
 				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
 					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				);
 					$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
-			}
-
-			if ( !isset($provider_fpage_intro_general) ) {
-				$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
 					$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
+
 			}
 
-			if ( !isset($providers) ) {
+			if ( !isset($providers) || empty($providers) ) {
+
 				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
 					$page_id // int // ID of the post
 				);
 					$providers = $ontology_site_values_vars['providers']; // int[]
+
 			}
 
-			if ( !isset($provider_query) ) {
+			if (
+				!isset($provider_query) || empty($provider_query)
+				||
+				!isset($provider_section_show) || empty($provider_section_show)
+				||
+				!isset($provider_ids) || empty($provider_ids)
+				||
+				!isset($provider_count) || empty($provider_count)
+			) {
+
 				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
 					$providers // int[]
 				);
 					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-			}
-
-			if ( !isset($provider_section_show) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-					$providers // int[]
-				);
 					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-			}
-
-			if ( !isset($provider_ids) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-					$providers // int[]
-				);
 					$provider_ids = $provider_query_vars['provider_ids']; // int[]
-			}
-
-			if ( !isset($provider_count) ) {
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-					$providers // int[]
-				);
 					$provider_count = $provider_query_vars['provider_count']; // int
+
 			}
 
 	// Filter details
