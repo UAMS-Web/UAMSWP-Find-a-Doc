@@ -171,7 +171,6 @@
 		$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[]
 		$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest'];
 		$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // bool
-
 // Image values
 
 	// Get the featured image ID

@@ -174,7 +174,7 @@ if ( $condition_treatment_section_show ) {
 						);
 							$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
 					}
-					
+
 					$condition_section_title = $condition_fpage_title_general;
 
 			}
@@ -212,7 +212,7 @@ if ( $condition_treatment_section_show ) {
 					}
 
 					$treatment_section_title = $treatment_fpage_title_general;
-					
+
 			}
 
 		// Text to use for the treatments subsection intro text

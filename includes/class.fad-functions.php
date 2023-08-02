@@ -1738,68 +1738,24 @@ function uamswp_fad_ontology_site_values(
 
 		// Check/define variables
 
-		$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile';
+			$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile';
 
-		if ( !isset($site_nav_id) || empty($site_nav_id) ) {
-			$page_id = isset($page_id) ? $page_id : get_the_id();
+			if ( !isset($site_nav_id) || empty($site_nav_id) ) {
 
-			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-				$page_id // int // ID of the post
-			);
-				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-		}
+				$page_id = isset($page_id) ? $page_id : get_the_id();
+
+				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+					$page_id // int // ID of the post
+				);
+					$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+
+			}
 
 		if ( $expertise_descendants ) {
 
-			$expertise_descendant_args = array(
-				'post_parent' => $site_nav_id,
-				'post_type' => 'expertise',
-				'post_status' => 'publish',
-				'posts_per_page' => -1, // We do not want to limit the post count
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'meta_query' => array(
-					'relation' => 'AND',
-					array(
-						'relation' => 'OR',
-						array(
-							'key' => 'hide_from_sub_menu',
-							'value' => '1',
-							'compare' => '!=',
-						),
-						array(
-							'key' => 'hide_from_sub_menu',
-							'compare' => 'NOT EXISTS'
-						),
-					),
-					array(
-						'relation' => 'OR',
-						array(
-							'key' => 'expertise_type',
-							'value' => '0',
-							'compare' => '!=',
-						),
-						array(
-							'key' => 'expertise_type',
-							'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
-						),
-					),
-				),
-			);
-			$expertise_descendant_query = new WP_Query( $expertise_descendant_args );
-			if( ( $expertise_descendants && $expertise_descendant_query->have_posts() ) ) {
-				$expertise_descendant_section_show = true;
-				$expertise_descendant_ids = $expertise_descendant_query->posts;
-				$expertise_descendant_count = count($expertise_descendant_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-			} else {
-				$expertise_descendant_section_show = false;
-				$expertise_descendant_ids = '';
-				$expertise_descendant_count = 0;
-			}
+			// Create the query for ontology type
 
-			if ( $content_placement == 'subsection' ) {
-				$expertise_content_args = array(
+				$expertise_descendant_args = array(
 					'post_parent' => $site_nav_id,
 					'post_type' => 'expertise',
 					'post_status' => 'publish',
@@ -1821,40 +1777,119 @@ function uamswp_fad_ontology_site_values(
 							),
 						),
 						array(
-							'key' => 'expertise_type',
-							'value' => '0',
-							'compare' => '=',
+							'relation' => 'OR',
+							array(
+								'key' => 'expertise_type',
+								'value' => '0',
+								'compare' => '!=',
+							),
+							array(
+								'key' => 'expertise_type',
+								'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
+							),
 						),
 					),
 				);
-				$expertise_content_query = new WP_Query( $expertise_content_args );
-				$expertise_content_nav = '';
-				if( ( $expertise_descendants && $expertise_content_query->have_posts() ) ) {
-					$expertise_content_nav_show = true;
-					$expertise_content_ids = $expertise_content_query->posts;
-					$expertise_content_count = count($expertise_content_query->posts);
-					while ( $expertise_content_query->have_posts() ) {
-						$expertise_content_query->the_post();
-						$page_id = get_the_ID();
-						$page_title = get_the_title();
-						$page_title_attr = uamswp_attr_conversion($page_title);
-						$page_url = user_trailingslashit(get_permalink());
-						$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
-					} // endwhile
-					wp_reset_postdata();
+
+				$expertise_descendant_query = new WP_Query( $expertise_descendant_args );
+
+				if (
+					$expertise_descendants
+					&&
+					$expertise_descendant_query->have_posts()
+				) {
+
+					$expertise_descendant_section_show = true;
+					$expertise_descendant_ids = $expertise_descendant_query->posts;
+					$expertise_descendant_count = count($expertise_descendant_query->posts);
+					$jump_link_count = $jump_link_count + 1;
+
 				} else {
+
+					$expertise_descendant_section_show = false;
+					$expertise_descendant_ids = '';
+					$expertise_descendant_count = 0;
+
+				}
+
+			// Create the query for content type
+
+				if ( $content_placement == 'subsection' ) {
+
+					$expertise_content_args = array(
+						'post_parent' => $site_nav_id,
+						'post_type' => 'expertise',
+						'post_status' => 'publish',
+						'posts_per_page' => -1, // We do not want to limit the post count
+						'order' => 'ASC',
+						'orderby' => 'title',
+						'meta_query' => array(
+							'relation' => 'AND',
+							array(
+								'relation' => 'OR',
+								array(
+									'key' => 'hide_from_sub_menu',
+									'value' => '1',
+									'compare' => '!=',
+								),
+								array(
+									'key' => 'hide_from_sub_menu',
+									'compare' => 'NOT EXISTS'
+								),
+							),
+							array(
+								'key' => 'expertise_type',
+								'value' => '0',
+								'compare' => '=',
+							),
+						),
+					);
+
+					$expertise_content_query = new WP_Query( $expertise_content_args );
+					$expertise_content_nav = '';
+
+					if (
+						$expertise_descendants
+						&&
+						$expertise_content_query->have_posts()
+					) {
+
+						$expertise_content_nav_show = true;
+						$expertise_content_ids = $expertise_content_query->posts;
+						$expertise_content_count = count($expertise_content_query->posts);
+
+						while ( $expertise_content_query->have_posts() ) {
+
+							$expertise_content_query->the_post();
+							$page_id = get_the_ID();
+							$page_title = get_the_title();
+							$page_title_attr = uamswp_attr_conversion($page_title);
+							$page_url = user_trailingslashit(get_permalink());
+							$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
+
+						} // endwhile
+
+						wp_reset_postdata();
+
+					} else {
+
+						$expertise_content_nav_show = false;
+						$expertise_content_ids = '';
+						$expertise_content_count = 0;
+
+					}
+				} else {
+
+					$expertise_content_query = '';
 					$expertise_content_nav_show = false;
 					$expertise_content_ids = '';
 					$expertise_content_count = 0;
+					$expertise_content_nav = '';
+
 				}
-			} else {
-				$expertise_content_query = '';
-				$expertise_content_nav_show = false;
-				$expertise_content_ids = '';
-				$expertise_content_count = 0;
-				$expertise_content_nav = '';
-			}
+
 		} else {
+
 			$expertise_descendant_query = '';
 			$expertise_descendant_section_show = false;
 			$expertise_descendant_ids = '';
@@ -1864,6 +1899,7 @@ function uamswp_fad_ontology_site_values(
 			$expertise_content_ids = '';
 			$expertise_content_count = 0;
 			$expertise_content_nav = '';
+
 		}
 
 		// Create and return an array to be used on the templates and template parts
@@ -4520,7 +4556,7 @@ function uamswp_fad_fpage_text_replace(
 				// Get the field values from the current Area of Expertise text elements on the homepage of that Area of Expertise's subsection
 
 					// Get the page header style
-					
+
 						if ( $ontology_type ) {
 
 							// If the page is an ontology item, set the page header style as the Marketing Landing Page Header Style 
@@ -7867,7 +7903,7 @@ function uamswp_fad_fpage_text_image_overlay(
 			$text_image_overlay_row_1 = ''; // Values for the second item
 
 		} else {
-			
+
 			$text_image_overlay_row_0 = ''; // Values for the first item
 			$text_image_overlay_row_1 = ''; // Values for the second item
 

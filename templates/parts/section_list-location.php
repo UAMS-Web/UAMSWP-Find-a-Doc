@@ -81,7 +81,7 @@ if ( $location_section_show ) {
 						$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 
 				}
-				
+
 				$location_section_intro = $location_fpage_intro_general;
 		}
 

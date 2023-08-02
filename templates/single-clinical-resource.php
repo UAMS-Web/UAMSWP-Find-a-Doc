@@ -437,7 +437,7 @@
 				include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
 
 			} );
-	
+
 	// MAIN / ARTICLE
 
 		// Add bg-white class to article.entry element
