@@ -291,7 +291,7 @@ if ( $expertise_section_show && !$hide_medical_ontology ) {
 						$page_id = isset($page_id) ? $page_id : get_the_ID();
 
 						$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
-							$expertises, // int[]
+							$expertise_descendants, // int[]
 							$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
 							$site_nav_id // int (optional)
 						);
