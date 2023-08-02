@@ -1761,9 +1761,16 @@ function uamswp_fad_ontology_site_values(
 				'meta_query' => array(
 					'relation' => 'AND',
 					array(
-						'key' => 'hide_from_sub_menu',
-						'value' => '1',
-						'compare' => '!=',
+						'relation' => 'OR',
+						array(
+							'key' => 'hide_from_sub_menu',
+							'value' => '1',
+							'compare' => '!=',
+						),
+						array(
+							'key' => 'hide_from_sub_menu',
+							'compare' => 'NOT EXISTS'
+						),
 					),
 					array(
 						'relation' => 'OR',
@@ -1802,9 +1809,16 @@ function uamswp_fad_ontology_site_values(
 					'meta_query' => array(
 						'relation' => 'AND',
 						array(
-							'key' => 'hide_from_sub_menu',
-							'value' => '1',
-							'compare' => '!=',
+							'relation' => 'OR',
+							array(
+								'key' => 'hide_from_sub_menu',
+								'value' => '1',
+								'compare' => '!=',
+							),
+							array(
+								'key' => 'hide_from_sub_menu',
+								'compare' => 'NOT EXISTS'
+							),
 						),
 						array(
 							'key' => 'expertise_type',
