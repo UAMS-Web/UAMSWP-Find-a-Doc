@@ -1297,16 +1297,21 @@ function uamswp_fad_ontology_hide(
 ) {
 
 	// Check/define variables
-	$regions = isset($regions) ? $regions : array();
-	$service_lines = isset($service_lines) ? $service_lines : array();
+
+		$regions = isset($regions) ? $regions : array();
+		$service_lines = isset($service_lines) ? $service_lines : array();
 
 	// If variables are strings, convert them to arrays
-	$regions = is_array($regions) ? $regions : array( $regions );
-	$service_lines = is_array($service_lines) ? $service_lines : array( $service_lines );
+
+		$regions = is_array($regions) ? $regions : array( $regions );
+		$service_lines = is_array($service_lines) ? $service_lines : array( $service_lines );
 
 	$hide_medical_ontology = false;
+
 	if ( have_rows('remove_ontology_criteria', 'option') ) {
+
 		while( have_rows('remove_ontology_criteria', 'option') ) {
+
 			the_row();
 			$remove_region = get_sub_field('remove_regions', 'option');
 			$remove_service_line = get_sub_field('remove_service_lines', 'option');
@@ -1320,54 +1325,54 @@ function uamswp_fad_ontology_hide(
 				&&
 				empty($remove_service_line)
 			) { 
+
 				// If the remove region array is not empty
 				// and if all the item's regions are in the remove region array
 				// and if the remove service line array is empty
 				$hide_medical_ontology = true;
+
 				break;
+
 			} elseif (
-				// If the remove region array is empty
-				// and if the remove service line array is not empty
-				// and if all the item's service lines are in the remove service line array
-				empty($remove_region)
+				empty($remove_region) // If the remove region array is empty
 				&&
-				(
-					!empty($remove_service_line)
-					&&
-					empty( array_diff( $service_lines, $remove_service_line ) )
-				)
+				!empty($remove_service_line) // and if the remove service line array is not empty
+				&&
+				empty( array_diff( $service_lines, $remove_service_line ) ) // and if all the item's service lines are in the remove service line array
 			) {
+
 				$hide_medical_ontology = true;
+
 				break;
+
 			} elseif(
-				// If the remove region array is not empty
-				// and if all the item's regions are in the remove region array
-				// and if the remove service line array is not empty
-				// and if all the item's service lines are in the remove service line array
-				(
-					!empty($remove_region)
-					&&
-					empty( array_diff( $regions, $remove_region ) )
-				)
+				!empty($remove_region) // If the remove region array is not empty
 				&&
-				(
-					!empty($remove_service_line)
-					&&
-					empty( array_diff( $service_lines, $remove_service_line ) )
-				)
+				empty( array_diff( $regions, $remove_region ) ) // and if all the item's regions are in the remove region array
+				&&
+				!empty($remove_service_line) // and if the remove service line array is not empty
+				&&
+				empty( array_diff( $service_lines, $remove_service_line ) ) // and if all the item's service lines are in the remove service line array
 			) {
+
 				$hide_medical_ontology = true;
+
 				break;
+
 			}
+
 		} // endwhile
+
 	} // endif
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$ontology_hide_vars = array(
 			'hide_medical_ontology'	=> $hide_medical_ontology // bool
 		);
-		return $ontology_hide_vars;
+
+	// Return the variable
+	return $ontology_hide_vars;
 
 }
 
@@ -1519,7 +1524,7 @@ function uamswp_fad_ontology_site_values(
 		$conditions_cpt = get_field('expertise_conditions_cpt', $site_nav_id);
 		$treatments_cpt = get_field('expertise_treatments_cpt', $site_nav_id);
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$ontology_site_values_vars = array(
 			'site_nav_id'					=> $site_nav_id, // int
@@ -1545,7 +1550,9 @@ function uamswp_fad_ontology_site_values(
 			'ancestors_ontology_farthest'	=> $ancestors_ontology_farthest,
 			'page_top_level_query'			=> $page_top_level_query // bool
 		);
-		return $ontology_site_values_vars;
+
+	// Return the variable
+	return $ontology_site_values_vars;
 
 }
 
@@ -1587,7 +1594,7 @@ function uamswp_fad_ontology_site_values(
 			$provider_count = 0;
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$provider_query_vars = array(
 				'provider_query'		=> $provider_query, // WP_Post[]
@@ -1596,7 +1603,9 @@ function uamswp_fad_ontology_site_values(
 				'provider_count'		=> $provider_count, // int
 				'jump_link_count'		=> $jump_link_count // int
 			);
-			return $provider_query_vars;
+
+		// Return the variable
+		return $provider_query_vars;
 
 	}
 
@@ -1647,7 +1656,7 @@ function uamswp_fad_ontology_site_values(
 			$location_count = 0;
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$location_query_vars = array(
 				'location_query'		=> $location_query, // WP_Post[]
@@ -1657,7 +1666,9 @@ function uamswp_fad_ontology_site_values(
 				'location_valid'		=> $location_valid, // bool
 				'jump_link_count'		=> $jump_link_count // int
 			);
-			return $location_query_vars;
+
+		// Return the variable
+		return $location_query_vars;
 
 	}
 
@@ -1714,7 +1725,7 @@ function uamswp_fad_ontology_site_values(
 			$location_descendant_valid = false;
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$location_descendant_query_vars = array(
 				'location_descendant_query'			=> $location_descendant_query, // WP_Post[]
@@ -1724,7 +1735,9 @@ function uamswp_fad_ontology_site_values(
 				'location_descendant_valid'			=> $location_descendant_valid, // bool
 				'jump_link_count'					=> $jump_link_count // int
 			);
-			return $location_descendant_query_vars;
+
+		// Return the variable
+		return $location_descendant_query_vars;
 
 	}
 
@@ -1902,7 +1915,7 @@ function uamswp_fad_ontology_site_values(
 
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$expertise_descendant_query_vars = array(
 				'expertise_descendant_query'		=> $expertise_descendant_query, // WP_Post[]
@@ -1916,7 +1929,9 @@ function uamswp_fad_ontology_site_values(
 				'expertise_content_nav'				=> $expertise_content_nav, // string
 				'jump_link_count'					=> $jump_link_count // int
 			);
-			return $expertise_descendant_query_vars;
+
+		// Return the variable
+		return $expertise_descendant_query_vars;
 
 	}
 
@@ -1951,7 +1966,7 @@ function uamswp_fad_ontology_site_values(
 			$expertise_count = 0;
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$expertise_query_vars = array(
 				'expertise_query'			=> $expertise_query, // WP_Post[]
@@ -1960,7 +1975,9 @@ function uamswp_fad_ontology_site_values(
 				'expertise_count'			=> $expertise_count, // int
 				'jump_link_count'			=> $jump_link_count // int
 			);
-			return $expertise_query_vars;
+
+		// Return the variable
+		return $expertise_query_vars;
 
 	}
 
@@ -2036,7 +2053,7 @@ function uamswp_fad_ontology_site_values(
 
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$clinical_resource_query_vars = array(
 				'clinical_resource_query'			=> $clinical_resource_query, // WP_Post[]
@@ -2046,7 +2063,9 @@ function uamswp_fad_ontology_site_values(
 				'clinical_resource_posts_per_page'	=> $clinical_resource_posts_per_page, // int
 				'jump_link_count'					=> $jump_link_count // int
 			);
-			return $clinical_resource_query_vars;
+
+		// Return the variable
+		return $clinical_resource_query_vars;
 
 	}
 
@@ -2058,48 +2077,50 @@ function uamswp_fad_ontology_site_values(
 		$jump_link_count = 0 // int (optional)
 	) {
 
-		if ( $conditions_cpt ) {
-			$args = array(
-				'post_type' => 'condition',
-				'post_status' => 'publish',
-				'orderby' => 'title',
-				'order' => 'ASC',
-				'posts_per_page' => -1,
-				'post__in' => $conditions_cpt
-			);
-			$condition_cpt_query = new WP_Query( $args );
-			if( ( $conditions_cpt && $condition_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
-				$condition_section_show = true;
-				$condition_treatment_section_show = true;
-				$condition_ids = $condition_cpt_query->posts;
-				$condition_count = count($condition_cpt_query->posts);
-				$jump_link_count = $jump_link_count + 1;
+			if ( $conditions_cpt ) {
+				$args = array(
+					'post_type' => 'condition',
+					'post_status' => 'publish',
+					'orderby' => 'title',
+					'order' => 'ASC',
+					'posts_per_page' => -1,
+					'post__in' => $conditions_cpt
+				);
+				$condition_cpt_query = new WP_Query( $args );
+				if( ( $conditions_cpt && $condition_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
+					$condition_section_show = true;
+					$condition_treatment_section_show = true;
+					$condition_ids = $condition_cpt_query->posts;
+					$condition_count = count($condition_cpt_query->posts);
+					$jump_link_count = $jump_link_count + 1;
+				} else {
+					$condition_section_show = false;
+					$condition_ids = '';
+					$condition_count = 0;
+				}
 			} else {
+				$condition_cpt_query = '';
 				$condition_section_show = false;
 				$condition_ids = '';
 				$condition_count = 0;
 			}
-		} else {
-			$condition_cpt_query = '';
-			$condition_section_show = false;
-			$condition_ids = '';
-			$condition_count = 0;
-		}
 
-		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+			$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
-		// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
-			$condition_query_vars = array(
-				'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
-				'condition_section_show'			=> $condition_section_show, // bool
-				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
-				'condition_ids'						=> $condition_ids, // int[]
-				'condition_count'					=> $condition_count, // int
-				'schema_medical_specialty'			=> $schema_medical_specialty, // array
-				'jump_link_count'					=> $jump_link_count // int
-			);
+				$condition_query_vars = array(
+					'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
+					'condition_section_show'			=> $condition_section_show, // bool
+					'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
+					'condition_ids'						=> $condition_ids, // int[]
+					'condition_count'					=> $condition_count, // int
+					'schema_medical_specialty'			=> $schema_medical_specialty, // array
+					'jump_link_count'					=> $jump_link_count // int
+				);
+
+			// Return the variable
 			return $condition_query_vars;
 
 	}
@@ -2143,7 +2164,7 @@ function uamswp_fad_ontology_site_values(
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$treatment_query_vars = array(
 				'treatment_cpt_query'				=> $treatment_cpt_query, // WP_Post[]
@@ -2154,7 +2175,9 @@ function uamswp_fad_ontology_site_values(
 				'schema_medical_specialty'			=> $schema_medical_specialty, // array
 				'jump_link_count'					=> $jump_link_count // int
 			);
-			return $treatment_query_vars;
+
+		// Return the variable
+		return $treatment_query_vars;
 
 	}
 
@@ -2238,13 +2261,15 @@ function uamswp_fad_podcast_query(
 		$podcast_section_show = false;
 	}
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$podcast_query_vars = array(
 			'podcast_section_show'	=> $podcast_section_show, // bool
 			'jump_link_count'		=> $jump_link_count // int
 		);
-		return $podcast_query_vars;
+
+	// Return the variable
+	return $podcast_query_vars;
 
 }
 
@@ -2550,338 +2575,598 @@ function uamswp_fad_fpage_text_replace(
 	// Get the Find-a-Doc Settings values for provider labels
 	function uamswp_fad_labels_provider() {
 
-		$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
-		$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
-		$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
-		$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_provider_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_provider_single_name = '[Provider]';
-		$placeholder_provider_plural_name = '[Providers]';
-		$placeholder_provider_short_name = '[Provider Short Name]';
-		$placeholder_provider_short_name_possessive = '[Provider Short Name\'s]';
+		if ( !empty( $labels_provider_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
-
-		// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
-		$facet_labels['resource_provider'] = $provider_plural_name;
-		$facet_labels['resource_provider_attr'] = $provider_plural_name_attr;
-
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_provider_vars = array(
-				'provider_single_name'							=> $provider_single_name, // string
-				'provider_single_name_attr'						=> $provider_single_name_attr, // string
-				'provider_plural_name'							=> $provider_plural_name, // string
-				'provider_plural_name_attr'						=> $provider_plural_name_attr, // string
-				'placeholder_provider_single_name'				=> $placeholder_provider_single_name, // string
-				'placeholder_provider_plural_name'				=> $placeholder_provider_plural_name, // string
-				'placeholder_provider_short_name'				=> $placeholder_provider_short_name, // string
-				'placeholder_provider_short_name_possessive'	=> $placeholder_provider_short_name_possessive, // string
-				'facet_labels'									=> $facet_labels // array
-			);
 			return $labels_provider_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$provider_single_name = get_field('provider_single_name', 'option') ?: 'Provider';
+			$provider_single_name_attr = uamswp_attr_conversion($provider_single_name);
+			$provider_plural_name = get_field('provider_plural_name', 'option') ?: 'Providers';
+			$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_provider_single_name = '[Provider]';
+			$placeholder_provider_plural_name = '[Providers]';
+			$placeholder_provider_short_name = '[Provider Short Name]';
+			$placeholder_provider_short_name_possessive = '[Provider Short Name\'s]';
+
+			// Create array for pairing FacetWP name with label if none exists
+			$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
+			// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
+			$facet_labels['resource_provider'] = $provider_plural_name;
+			$facet_labels['resource_provider_attr'] = $provider_plural_name_attr;
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_provider_vars = array(
+					'provider_single_name'							=> $provider_single_name, // string
+					'provider_single_name_attr'						=> $provider_single_name_attr, // string
+					'provider_plural_name'							=> $provider_plural_name, // string
+					'provider_plural_name_attr'						=> $provider_plural_name_attr, // string
+					'placeholder_provider_single_name'				=> $placeholder_provider_single_name, // string
+					'placeholder_provider_plural_name'				=> $placeholder_provider_plural_name, // string
+					'placeholder_provider_short_name'				=> $placeholder_provider_short_name, // string
+					'placeholder_provider_short_name_possessive'	=> $placeholder_provider_short_name_possessive, // string
+					'facet_labels'									=> $facet_labels // array
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_provider_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_provider_vars;
+	
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for location labels
 	function uamswp_fad_labels_location() {
 
-		$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
-		$location_single_name_attr = uamswp_attr_conversion($location_single_name);
-		$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
-		$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_location_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_location_single_name = '[Location]';
-		$placeholder_location_plural_name = '[Locations]';
-		$placeholder_location_page_title = '[Location Title]';
-		$placeholder_location_page_title_phrase = '[the Location Title]';
+		if ( !empty( $labels_location_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
-
-		// Add item to FacetWP labels array for Locations facet on Providers archive/list
-		$facet_labels['locations'] = $location_plural_name;
-		$facet_labels['locations_attr'] = $location_plural_name_attr;
-
-		// Add item to FacetWP labels array for Locations facet on Clinical Resources archive/list
-		$facet_labels['resource_locations'] = $location_plural_name;
-		$facet_labels['resource_locations_attr'] = $location_plural_name_attr;
-
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_location_vars = array(
-				'location_single_name'						=> $location_single_name, // string
-				'location_single_name_attr'					=> $location_single_name_attr, // string
-				'location_plural_name'						=> $location_plural_name, // string
-				'location_plural_name_attr'					=> $location_plural_name_attr, // string
-				'placeholder_location_single_name'			=> $placeholder_location_single_name, // string
-				'placeholder_location_plural_name'			=> $placeholder_location_plural_name, // string
-				'placeholder_location_page_title'			=> $placeholder_location_page_title, // string
-				'placeholder_location_page_title_phrase'	=> $placeholder_location_page_title_phrase, // string
-				'facet_labels'								=> $facet_labels // array
-			);
 			return $labels_location_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$location_single_name = get_field('location_single_name', 'option') ?: 'Location';
+			$location_single_name_attr = uamswp_attr_conversion($location_single_name);
+			$location_plural_name = get_field('location_plural_name', 'option') ?: 'Locations';
+			$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_location_single_name = '[Location]';
+			$placeholder_location_plural_name = '[Locations]';
+			$placeholder_location_page_title = '[Location Title]';
+			$placeholder_location_page_title_phrase = '[the Location Title]';
+
+			// Create array for pairing FacetWP name with label if none exists
+			$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
+			// Add item to FacetWP labels array for Locations facet on Providers archive/list
+			$facet_labels['locations'] = $location_plural_name;
+			$facet_labels['locations_attr'] = $location_plural_name_attr;
+
+			// Add item to FacetWP labels array for Locations facet on Clinical Resources archive/list
+			$facet_labels['resource_locations'] = $location_plural_name;
+			$facet_labels['resource_locations_attr'] = $location_plural_name_attr;
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_location_vars = array(
+					'location_single_name'						=> $location_single_name, // string
+					'location_single_name_attr'					=> $location_single_name_attr, // string
+					'location_plural_name'						=> $location_plural_name, // string
+					'location_plural_name_attr'					=> $location_plural_name_attr, // string
+					'placeholder_location_single_name'			=> $placeholder_location_single_name, // string
+					'placeholder_location_plural_name'			=> $placeholder_location_plural_name, // string
+					'placeholder_location_page_title'			=> $placeholder_location_page_title, // string
+					'placeholder_location_page_title_phrase'	=> $placeholder_location_page_title_phrase, // string
+					'facet_labels'								=> $facet_labels // array
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_location_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_location_vars;
+	
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for location descendant item labels
 	function uamswp_fad_labels_location_descendant() {
 
-		$location_descendant_single_name = get_field('location_descendant_single_name', 'option') ?: 'Additional Location';
-		$location_descendant_single_name_attr = uamswp_attr_conversion($location_descendant_single_name);
-		$location_descendant_plural_name = get_field('location_descendant_plural_name', 'option') ?: 'Additional Locations';
-		$location_descendant_plural_name_attr = uamswp_attr_conversion($location_descendant_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_location_descendant_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_location_descendant_single_name = '[Descendant Location]';
-		$placeholder_location_descendant_plural_name = '[Descendant Locations]';
+		if ( !empty( $labels_location_descendant_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_location_descendant_vars = array(
-				'location_descendant_single_name' 				=> $location_descendant_single_name, // string
-				'location_descendant_single_name_attr' 			=> $location_descendant_single_name_attr, // string
-				'location_descendant_plural_name' 				=> $location_descendant_plural_name, // string
-				'location_descendant_plural_name_attr'			=> $location_descendant_plural_name_attr, // string
-				'placeholder_location_descendant_single_name'	=> $placeholder_location_descendant_single_name, // string
-				'placeholder_location_descendant_plural_name'	=> $placeholder_location_descendant_plural_name // string
-			);
 			return $labels_location_descendant_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$location_descendant_single_name = get_field('location_descendant_single_name', 'option') ?: 'Additional Location';
+			$location_descendant_single_name_attr = uamswp_attr_conversion($location_descendant_single_name);
+			$location_descendant_plural_name = get_field('location_descendant_plural_name', 'option') ?: 'Additional Locations';
+			$location_descendant_plural_name_attr = uamswp_attr_conversion($location_descendant_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_location_descendant_single_name = '[Descendant Location]';
+			$placeholder_location_descendant_plural_name = '[Descendant Locations]';
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_location_descendant_vars = array(
+					'location_descendant_single_name' 				=> $location_descendant_single_name, // string
+					'location_descendant_single_name_attr' 			=> $location_descendant_single_name_attr, // string
+					'location_descendant_plural_name' 				=> $location_descendant_plural_name, // string
+					'location_descendant_plural_name_attr'			=> $location_descendant_plural_name_attr, // string
+					'placeholder_location_descendant_single_name'	=> $placeholder_location_descendant_single_name, // string
+					'placeholder_location_descendant_plural_name'	=> $placeholder_location_descendant_plural_name // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_location_descendant_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_location_descendant_vars;
+	
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise labels
 	function uamswp_fad_labels_expertise() {
 
-		$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
-		$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
-		$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
-		$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_expertise_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_expertise_single_name = '[Area of Expertise]';
-		$placeholder_expertise_plural_name = '[Areas of Expertise]';
-		$placeholder_expertise_page_title = '[Area of Expertise Title]';
+		if ( !empty( $labels_expertise_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
-
-		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
-		$facet_labels['physician_areas_of_expertise'] = $expertise_plural_name;
-		$facet_labels['physician_areas_of_expertise_attr'] = $expertise_plural_name_attr;
-
-		// Add item to FacetWP labels array for Areas of Expertise facet on Locations archive/list
-		$facet_labels['location_aoe'] = $expertise_plural_name;
-		$facet_labels['location_aoe_attr'] = $expertise_plural_name_attr;
-
-		// Add item to FacetWP labels array for Areas of Expertise facet on Clinical Resources archive/list
-		$facet_labels['resource_aoe'] = $expertise_plural_name;
-		$facet_labels['resource_aoe_attr'] = $expertise_plural_name_attr;
-
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_expertise_vars = array(
-				'expertise_single_name'				=> $expertise_single_name, // string
-				'expertise_single_name_attr'		=> $expertise_single_name_attr, // string
-				'expertise_plural_name'				=> $expertise_plural_name, // string
-				'expertise_plural_name_attr'		=> $expertise_plural_name_attr, // string
-				'placeholder_expertise_single_name'	=> $placeholder_expertise_single_name, // string
-				'placeholder_expertise_plural_name'	=> $placeholder_expertise_plural_name, // string
-				'placeholder_expertise_page_title'	=> $placeholder_expertise_page_title, // string
-				'facet_labels' 						=> $facet_labels // array
-			);
 			return $labels_expertise_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$expertise_single_name = get_field('expertise_single_name', 'option') ?: 'Area of Expertise';
+			$expertise_single_name_attr = uamswp_attr_conversion($expertise_single_name);
+			$expertise_plural_name = get_field('expertise_plural_name', 'option') ?: 'Areas of Expertise';
+			$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_expertise_single_name = '[Area of Expertise]';
+			$placeholder_expertise_plural_name = '[Areas of Expertise]';
+			$placeholder_expertise_page_title = '[Area of Expertise Title]';
+
+			// Create array for pairing FacetWP name with label if none exists
+			$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
+			// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
+			$facet_labels['physician_areas_of_expertise'] = $expertise_plural_name;
+			$facet_labels['physician_areas_of_expertise_attr'] = $expertise_plural_name_attr;
+
+			// Add item to FacetWP labels array for Areas of Expertise facet on Locations archive/list
+			$facet_labels['location_aoe'] = $expertise_plural_name;
+			$facet_labels['location_aoe_attr'] = $expertise_plural_name_attr;
+
+			// Add item to FacetWP labels array for Areas of Expertise facet on Clinical Resources archive/list
+			$facet_labels['resource_aoe'] = $expertise_plural_name;
+			$facet_labels['resource_aoe_attr'] = $expertise_plural_name_attr;
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_expertise_vars = array(
+					'expertise_single_name'				=> $expertise_single_name, // string
+					'expertise_single_name_attr'		=> $expertise_single_name_attr, // string
+					'expertise_plural_name'				=> $expertise_plural_name, // string
+					'expertise_plural_name_attr'		=> $expertise_plural_name_attr, // string
+					'placeholder_expertise_single_name'	=> $placeholder_expertise_single_name, // string
+					'placeholder_expertise_plural_name'	=> $placeholder_expertise_plural_name, // string
+					'placeholder_expertise_page_title'	=> $placeholder_expertise_page_title, // string
+					'facet_labels' 						=> $facet_labels // array
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_expertise_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_expertise_vars;
+	
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise descendant item labels
 	function uamswp_fad_labels_expertise_descendant() {
 
-		$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
-		$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
-		$expertise_descendant_plural_name = get_field('expertise_descendant_plural_name', 'option') ?: 'Specialties';
-		$expertise_descendant_plural_name_attr = uamswp_attr_conversion($expertise_descendant_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_expertise_descendant_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_expertise_descendant_single_name = '[Descendant Area of Expertise]';
-		$placeholder_expertise_descendant_plural_name = '[Descendant Areas of Expertise]';
+		if ( !empty( $labels_expertise_descendant_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_expertise_descendant_vars = array(
-				'expertise_descendant_single_name'				=> $expertise_descendant_single_name, // string
-				'expertise_descendant_single_name_attr'			=> $expertise_descendant_single_name_attr, // string
-				'expertise_descendant_plural_name'				=> $expertise_descendant_plural_name, // string
-				'expertise_descendant_plural_name_attr'			=> $expertise_descendant_plural_name_attr, // string
-				'placeholder_expertise_descendant_single_name'	=> $placeholder_expertise_descendant_single_name, // string
-				'placeholder_expertise_descendant_plural_name'	=> $placeholder_expertise_descendant_plural_name // string
-			);
 			return $labels_expertise_descendant_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$expertise_descendant_single_name = get_field('expertise_descendant_single_name', 'option') ?: 'Specialty';
+			$expertise_descendant_single_name_attr = uamswp_attr_conversion($expertise_descendant_single_name);
+			$expertise_descendant_plural_name = get_field('expertise_descendant_plural_name', 'option') ?: 'Specialties';
+			$expertise_descendant_plural_name_attr = uamswp_attr_conversion($expertise_descendant_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_expertise_descendant_single_name = '[Descendant Area of Expertise]';
+			$placeholder_expertise_descendant_plural_name = '[Descendant Areas of Expertise]';
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_expertise_descendant_vars = array(
+					'expertise_descendant_single_name'				=> $expertise_descendant_single_name, // string
+					'expertise_descendant_single_name_attr'			=> $expertise_descendant_single_name_attr, // string
+					'expertise_descendant_plural_name'				=> $expertise_descendant_plural_name, // string
+					'expertise_descendant_plural_name_attr'			=> $expertise_descendant_plural_name_attr, // string
+					'placeholder_expertise_descendant_single_name'	=> $placeholder_expertise_descendant_single_name, // string
+					'placeholder_expertise_descendant_plural_name'	=> $placeholder_expertise_descendant_plural_name // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_expertise_descendant_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_expertise_descendant_vars;
+	
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for clinical resource labels
 	function uamswp_fad_labels_clinical_resource() {
 
-		$clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
-		$clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
-		$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
-		$clinical_resource_plural_name_attr = uamswp_attr_conversion($clinical_resource_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_clinical_resource_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_clinical_resource_single_name = '[Clinical Resource]';
-		$placeholder_clinical_resource_plural_name = '[Clinical Resources]';
+		if ( !empty( $labels_clinical_resource_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_clinical_resource_vars = array(
-				'clinical_resource_single_name'				=> $clinical_resource_single_name, // string
-				'clinical_resource_single_name_attr'		=> $clinical_resource_single_name_attr, // string
-				'clinical_resource_plural_name'				=> $clinical_resource_plural_name, // string
-				'clinical_resource_plural_name_attr'		=> $clinical_resource_plural_name_attr, // string
-				'placeholder_clinical_resource_single_name'	=> $placeholder_clinical_resource_single_name, // string
-				'placeholder_clinical_resource_plural_name'	=> $placeholder_clinical_resource_plural_name // string
-			);
 			return $labels_clinical_resource_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$clinical_resource_single_name = get_field('clinical_resource_single_name', 'option') ?: 'Clinical Resource';
+			$clinical_resource_single_name_attr = uamswp_attr_conversion($clinical_resource_single_name);
+			$clinical_resource_plural_name = get_field('clinical_resource_plural_name', 'option') ?: 'Clinical Resources';
+			$clinical_resource_plural_name_attr = uamswp_attr_conversion($clinical_resource_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_clinical_resource_single_name = '[Clinical Resource]';
+			$placeholder_clinical_resource_plural_name = '[Clinical Resources]';
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_clinical_resource_vars = array(
+					'clinical_resource_single_name'				=> $clinical_resource_single_name, // string
+					'clinical_resource_single_name_attr'		=> $clinical_resource_single_name_attr, // string
+					'clinical_resource_plural_name'				=> $clinical_resource_plural_name, // string
+					'clinical_resource_plural_name_attr'		=> $clinical_resource_plural_name_attr, // string
+					'placeholder_clinical_resource_single_name'	=> $placeholder_clinical_resource_single_name, // string
+					'placeholder_clinical_resource_plural_name'	=> $placeholder_clinical_resource_plural_name // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_clinical_resource_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_clinical_resource_vars;
+	
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for clinical resource facet labels
 	function uamswp_fad_labels_clinical_resource_facet() {
 
-		$clinical_resource_type_single_name = get_field('clinical_resource_type_single_name', 'option') ?: 'Resource Type';
-		$clinical_resource_type_single_name_attr = uamswp_attr_conversion($clinical_resource_type_single_name);
-		$clinical_resource_type_plural_name = get_field('clinical_resource_type_plural_name', 'option') ?: 'Resource Types';
-		$clinical_resource_type_plural_name_attr = uamswp_attr_conversion($clinical_resource_type_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_clinical_resource_facet_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_clinical_resource_type_single_name = '[Resource Type]';
-		$placeholder_clinical_resource_type_plural_name = '[Resource Types]';
+		if ( !empty( $labels_clinical_resource_facet_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
-
-		// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
-		$facet_labels['resource_type'] = $clinical_resource_type_plural_name;
-		$facet_labels['resource_type_attr'] = $clinical_resource_type_plural_name_attr;
-
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_clinical_resource_facet_vars = array(
-				'clinical_resource_type_single_name'				=> $clinical_resource_type_single_name, // string
-				'clinical_resource_type_single_name_attr'			=> $clinical_resource_type_single_name_attr, // string
-				'clinical_resource_type_plural_name'				=> $clinical_resource_type_plural_name, // string
-				'clinical_resource_type_plural_name_attr'			=> $clinical_resource_type_plural_name_attr, // string
-				'placeholder_clinical_resource_type_single_name'	=> $placeholder_clinical_resource_type_single_name, // string
-				'placeholder_clinical_resource_type_plural_name'	=> $placeholder_clinical_resource_type_plural_name, // string
-				'facet_labels'										=> $facet_labels // string
-			);
 			return $labels_clinical_resource_facet_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$clinical_resource_type_single_name = get_field('clinical_resource_type_single_name', 'option') ?: 'Resource Type';
+			$clinical_resource_type_single_name_attr = uamswp_attr_conversion($clinical_resource_type_single_name);
+			$clinical_resource_type_plural_name = get_field('clinical_resource_type_plural_name', 'option') ?: 'Resource Types';
+			$clinical_resource_type_plural_name_attr = uamswp_attr_conversion($clinical_resource_type_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_clinical_resource_type_single_name = '[Resource Type]';
+			$placeholder_clinical_resource_type_plural_name = '[Resource Types]';
+
+			// Create array for pairing FacetWP name with label if none exists
+			$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
+			// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
+			$facet_labels['resource_type'] = $clinical_resource_type_plural_name;
+			$facet_labels['resource_type_attr'] = $clinical_resource_type_plural_name_attr;
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_clinical_resource_facet_vars = array(
+					'clinical_resource_type_single_name'				=> $clinical_resource_type_single_name, // string
+					'clinical_resource_type_single_name_attr'			=> $clinical_resource_type_single_name_attr, // string
+					'clinical_resource_type_plural_name'				=> $clinical_resource_type_plural_name, // string
+					'clinical_resource_type_plural_name_attr'			=> $clinical_resource_type_plural_name_attr, // string
+					'placeholder_clinical_resource_type_single_name'	=> $placeholder_clinical_resource_type_single_name, // string
+					'placeholder_clinical_resource_type_plural_name'	=> $placeholder_clinical_resource_type_plural_name, // string
+					'facet_labels'										=> $facet_labels // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_clinical_resource_facet_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_clinical_resource_facet_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for combined conditions and treatments labels
 	function uamswp_fad_labels_condition_treatment() {
 
-		$condition_treatment_single_name = get_field('condition_treatment_single_name', 'option') ?: 'Condition or Treatment';
-		$condition_treatment_single_name_attr = uamswp_attr_conversion($condition_treatment_single_name);
-		$condition_treatment_plural_name = get_field('condition_treatment_plural_name', 'option') ?: 'Conditions and Treatments';
-		$condition_treatment_plural_name_attr = uamswp_attr_conversion($condition_treatment_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_condition_treatment_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_condition_treatment_single_name = '[Condition or Treatment]';
-		$placeholder_condition_treatment_plural_name = '[Conditions and Treatments]';
+		if ( !empty( $labels_condition_treatment_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_condition_treatment_vars = array(
-				'condition_treatment_single_name'				=> $condition_treatment_single_name, // string
-				'condition_treatment_single_name_attr'			=> $condition_treatment_single_name_attr, // string
-				'condition_treatment_plural_name'				=> $condition_treatment_plural_name, // string
-				'condition_treatment_plural_name_attr'			=> $condition_treatment_plural_name_attr, // string
-				'placeholder_condition_treatment_single_name'	=> $placeholder_condition_treatment_single_name, // string
-				'placeholder_condition_treatment_plural_name'	=> $placeholder_condition_treatment_plural_name // string
-			);
 			return $labels_condition_treatment_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$condition_treatment_single_name = get_field('condition_treatment_single_name', 'option') ?: 'Condition or Treatment';
+			$condition_treatment_single_name_attr = uamswp_attr_conversion($condition_treatment_single_name);
+			$condition_treatment_plural_name = get_field('condition_treatment_plural_name', 'option') ?: 'Conditions and Treatments';
+			$condition_treatment_plural_name_attr = uamswp_attr_conversion($condition_treatment_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_condition_treatment_single_name = '[Condition or Treatment]';
+			$placeholder_condition_treatment_plural_name = '[Conditions and Treatments]';
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_condition_treatment_vars = array(
+					'condition_treatment_single_name'				=> $condition_treatment_single_name, // string
+					'condition_treatment_single_name_attr'			=> $condition_treatment_single_name_attr, // string
+					'condition_treatment_plural_name'				=> $condition_treatment_plural_name, // string
+					'condition_treatment_plural_name_attr'			=> $condition_treatment_plural_name_attr, // string
+					'placeholder_condition_treatment_single_name'	=> $placeholder_condition_treatment_single_name, // string
+					'placeholder_condition_treatment_plural_name'	=> $placeholder_condition_treatment_plural_name // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_condition_treatment_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_condition_treatment_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for condition labels
 	function uamswp_fad_labels_condition() {
 
-		$condition_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
-		$condition_single_name_attr = uamswp_attr_conversion($condition_single_name);
-		$condition_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
-		$condition_plural_name_attr = uamswp_attr_conversion($condition_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_condition_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_condition_single_name = '[Condition]';
-		$placeholder_condition_plural_name = '[Conditions]';
+		if ( !empty( $labels_condition_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
-
-		// Add item to FacetWP labels array for Conditions facet on Providers archive/list
-		$facet_labels['conditions'] = $condition_plural_name;
-		$facet_labels['conditions_attr'] = $condition_plural_name_attr;
-
-		// Add item to FacetWP labels array for Conditions facet on Clinical Resources archive/list
-		$facet_labels['resource_conditions'] = $condition_plural_name;
-		$facet_labels['resource_conditions_attr'] = $condition_plural_name_attr;
-
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_condition_vars = array(
-				'condition_single_name'				=> $condition_single_name, // string
-				'condition_single_name_attr'		=> $condition_single_name_attr, // string
-				'condition_plural_name'				=> $condition_plural_name, // string
-				'condition_plural_name_attr'		=> $condition_plural_name_attr, // string
-				'placeholder_condition_single_name'	=> $placeholder_condition_single_name, // string
-				'placeholder_condition_plural_name'	=> $placeholder_condition_plural_name, // string
-				'facet_labels'						=> $facet_labels // array
-			);
 			return $labels_condition_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$condition_single_name = get_field('conditions_single_name', 'option') ?: 'Condition';
+			$condition_single_name_attr = uamswp_attr_conversion($condition_single_name);
+			$condition_plural_name = get_field('conditions_plural_name', 'option') ?: 'Conditions';
+			$condition_plural_name_attr = uamswp_attr_conversion($condition_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_condition_single_name = '[Condition]';
+			$placeholder_condition_plural_name = '[Conditions]';
+
+			// Create array for pairing FacetWP name with label if none exists
+			$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
+			// Add item to FacetWP labels array for Conditions facet on Providers archive/list
+			$facet_labels['conditions'] = $condition_plural_name;
+			$facet_labels['conditions_attr'] = $condition_plural_name_attr;
+
+			// Add item to FacetWP labels array for Conditions facet on Clinical Resources archive/list
+			$facet_labels['resource_conditions'] = $condition_plural_name;
+			$facet_labels['resource_conditions_attr'] = $condition_plural_name_attr;
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_condition_vars = array(
+					'condition_single_name'				=> $condition_single_name, // string
+					'condition_single_name_attr'		=> $condition_single_name_attr, // string
+					'condition_plural_name'				=> $condition_plural_name, // string
+					'condition_plural_name_attr'		=> $condition_plural_name_attr, // string
+					'placeholder_condition_single_name'	=> $placeholder_condition_single_name, // string
+					'placeholder_condition_plural_name'	=> $placeholder_condition_plural_name, // string
+					'facet_labels'						=> $facet_labels // array
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_condition_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_condition_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for treatment labels
 	function uamswp_fad_labels_treatment() {
 
-		$treatment_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
-		$treatment_single_name_attr = uamswp_attr_conversion($treatment_single_name);
-		$treatment_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
-		$treatment_plural_name_attr = uamswp_attr_conversion($treatment_plural_name);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $labels_treatment_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_treatment_single_name = '[Treatment]';
-		$placeholder_treatment_plural_name = '[Treatments]';
+		if ( !empty( $labels_treatment_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create array for pairing FacetWP name with label if none exists
-		$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
-
-		// Add item to FacetWP labels array for Treatments facet on Providers archive/list
-		$facet_labels['treatments_procedures'] = $treatment_plural_name;
-		$facet_labels['treatments_procedures_attr'] = $treatment_plural_name_attr;
-
-		// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
-		$facet_labels['resource_treatments'] = $treatment_plural_name;
-		$facet_labels['resource_treatments_attr'] = $treatment_plural_name_attr;
-
-		// Create and return an array to be used on the templates and template parts
-
-			$labels_treatment_vars = array(
-				'treatment_single_name'				=> $treatment_single_name, // string
-				'treatment_single_name_attr'		=> $treatment_single_name_attr, // string
-				'treatment_plural_name'				=> $treatment_plural_name, // string
-				'treatment_plural_name_attr'		=> $treatment_plural_name_attr, // string
-				'placeholder_treatment_single_name'	=> $placeholder_treatment_single_name, // string
-				'placeholder_treatment_plural_name'	=> $placeholder_treatment_plural_name, // string
-				'facet_labels'						=> $facet_labels // array
-			);
 			return $labels_treatment_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$treatment_single_name = get_field('treatments_single_name', 'option') ?: 'Treatment/Procedure';
+			$treatment_single_name_attr = uamswp_attr_conversion($treatment_single_name);
+			$treatment_plural_name = get_field('treatments_plural_name', 'option') ?: 'Treatments and Procedures';
+			$treatment_plural_name_attr = uamswp_attr_conversion($treatment_plural_name);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_treatment_single_name = '[Treatment]';
+			$placeholder_treatment_plural_name = '[Treatments]';
+
+			// Create array for pairing FacetWP name with label if none exists
+			$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
+
+			// Add item to FacetWP labels array for Treatments facet on Providers archive/list
+			$facet_labels['treatments_procedures'] = $treatment_plural_name;
+			$facet_labels['treatments_procedures_attr'] = $treatment_plural_name_attr;
+
+			// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
+			$facet_labels['resource_treatments'] = $treatment_plural_name;
+			$facet_labels['resource_treatments_attr'] = $treatment_plural_name_attr;
+
+			// Create an array to be used on the templates and template parts
+
+				$labels_treatment_vars = array(
+					'treatment_single_name'				=> $treatment_single_name, // string
+					'treatment_single_name_attr'		=> $treatment_single_name_attr, // string
+					'treatment_plural_name'				=> $treatment_plural_name, // string
+					'treatment_plural_name_attr'		=> $treatment_plural_name_attr, // string
+					'placeholder_treatment_single_name'	=> $placeholder_treatment_single_name, // string
+					'placeholder_treatment_plural_name'	=> $placeholder_treatment_plural_name, // string
+					'facet_labels'						=> $facet_labels // array
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $labels_treatment_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $labels_treatment_vars;
+
+		}
 
 	}
 
@@ -2890,132 +3175,288 @@ function uamswp_fad_fpage_text_replace(
 	// Get the Find-a-Doc Settings values for provider archive page text
 	function uamswp_fad_archive_text_provider() {
 
-		$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
-		$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_text_provider_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_provider_archive_headline = '[Provider Archive Title]';
+		if ( !empty( $archive_text_provider_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_text_provider_vars = array(
-				'provider_archive_headline'				=> $provider_archive_headline, // string
-				'provider_archive_headline_attr'		=> $provider_archive_headline_attr, // string
-				'placeholder_provider_archive_headline'	=> $placeholder_provider_archive_headline // string
-			);
 			return $archive_text_provider_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$provider_archive_headline = get_field('provider_archive_headline', 'option') ?: 'UAMS Health Providers';
+			$provider_archive_headline_attr = uamswp_attr_conversion($provider_archive_headline);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_provider_archive_headline = '[Provider Archive Title]';
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_text_provider_vars = array(
+					'provider_archive_headline'				=> $provider_archive_headline, // string
+					'provider_archive_headline_attr'		=> $provider_archive_headline_attr, // string
+					'placeholder_provider_archive_headline'	=> $placeholder_provider_archive_headline // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_text_provider_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_text_provider_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for location archive page text
 	function uamswp_fad_archive_text_location() {
 
-		$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
-		$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_text_location_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_location_archive_headline = '[Location Archive Title]';
+		if ( !empty( $archive_text_location_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_text_location_vars = array(
-				'location_archive_headline' 			=> $location_archive_headline, // string
-				'location_archive_headline_attr'		=> $location_archive_headline_attr, // string
-				'placeholder_location_archive_headline'	=> $placeholder_location_archive_headline // string
-			);
 			return $archive_text_location_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$location_archive_headline = get_field('location_archive_headline', 'option') ?: 'Locations';
+			$location_archive_headline_attr = uamswp_attr_conversion($location_archive_headline);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_location_archive_headline = '[Location Archive Title]';
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_text_location_vars = array(
+					'location_archive_headline' 			=> $location_archive_headline, // string
+					'location_archive_headline_attr'		=> $location_archive_headline_attr, // string
+					'placeholder_location_archive_headline'	=> $placeholder_location_archive_headline // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_text_location_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_text_location_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for area of expertise archive page text
 	function uamswp_fad_archive_text_expertise() {
 
-		$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
-		$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
-		$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_text_expertise_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
-		$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
+		if ( !empty( $archive_text_expertise_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_text_expertise_vars = array(
-				'expertise_archive_headline'				=> $expertise_archive_headline, // string
-				'expertise_archive_headline_attr'			=> $expertise_archive_headline_attr, // string
-				'expertise_archive_intro_text'				=> $expertise_archive_intro_text, // string
-				'placeholder_expertise_archive_headline'	=> $placeholder_expertise_archive_headline, // string
-				'placeholder_expertise_archive_intro_text'	=> $placeholder_expertise_archive_intro_text // string
-			);
 			return $archive_text_expertise_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$expertise_archive_headline = get_field('expertise_archive_headline', 'option') ?: 'Areas of Expertise';
+			$expertise_archive_headline_attr = uamswp_attr_conversion($expertise_archive_headline);
+			$expertise_archive_intro_text = get_field('expertise_archive_intro_text', 'option');
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_expertise_archive_headline = '[Area of Expertise Archive Title]';
+			$placeholder_expertise_archive_intro_text = '[Area of Expertise Archive Intro Text]';
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_text_expertise_vars = array(
+					'expertise_archive_headline'				=> $expertise_archive_headline, // string
+					'expertise_archive_headline_attr'			=> $expertise_archive_headline_attr, // string
+					'expertise_archive_intro_text'				=> $expertise_archive_intro_text, // string
+					'placeholder_expertise_archive_headline'	=> $placeholder_expertise_archive_headline, // string
+					'placeholder_expertise_archive_intro_text'	=> $placeholder_expertise_archive_intro_text // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_text_expertise_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_text_expertise_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for clinical resource archive page text
 	function uamswp_fad_archive_text_clinical_resource() {
 
-		$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
-		$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_text_clinical_resource_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
+		if ( !empty( $archive_text_clinical_resource_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_text_clinical_resource_vars = array(
-				'clinical_resource_archive_headline'				=> $clinical_resource_archive_headline, // string
-				'clinical_resource_archive_headline_attr'			=> $clinical_resource_archive_headline_attr, // string
-				'placeholder_clinical_resource_archive_headline'	=> $placeholder_clinical_resource_archive_headline // string
-			);
 			return $archive_text_clinical_resource_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$clinical_resource_archive_headline = get_field('clinical_resource_archive_headline', 'option') ?: 'Clinical Resources';
+			$clinical_resource_archive_headline_attr = uamswp_attr_conversion($clinical_resource_archive_headline);
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_clinical_resource_archive_headline = '[Clinical Resource Archive Title]';
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_text_clinical_resource_vars = array(
+					'clinical_resource_archive_headline'				=> $clinical_resource_archive_headline, // string
+					'clinical_resource_archive_headline_attr'			=> $clinical_resource_archive_headline_attr, // string
+					'placeholder_clinical_resource_archive_headline'	=> $placeholder_clinical_resource_archive_headline // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_text_clinical_resource_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_text_clinical_resource_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for condition archive page text
 	function uamswp_fad_archive_text_condition() {
 
-		$condition_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
-		$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
-		$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_text_condition_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_condition_archive_headline = '[Condition Archive Title]';
-		$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
+		if ( !empty( $archive_text_condition_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_text_condition_vars = array(
-				'condition_archive_headline'				=> $condition_archive_headline, // string
-				'condition_archive_headline_attr'			=> $condition_archive_headline_attr, // string
-				'condition_archive_intro_text'				=> $condition_archive_intro_text, // string
-				'placeholder_condition_archive_headline'	=> $placeholder_condition_archive_headline, // string
-				'placeholder_condition_archive_intro_text'	=> $placeholder_condition_archive_intro_text // string
-			);
 			return $archive_text_condition_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$condition_archive_headline = get_field('conditions_archive_headline', 'option') ?: 'Conditions';
+			$condition_archive_headline_attr = uamswp_attr_conversion($condition_archive_headline);
+			$condition_archive_intro_text = get_field('conditions_archive_intro_text', 'option');
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_condition_archive_headline = '[Condition Archive Title]';
+			$placeholder_condition_archive_intro_text = '[Condition Archive Intro Text]';
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_text_condition_vars = array(
+					'condition_archive_headline'				=> $condition_archive_headline, // string
+					'condition_archive_headline_attr'			=> $condition_archive_headline_attr, // string
+					'condition_archive_intro_text'				=> $condition_archive_intro_text, // string
+					'placeholder_condition_archive_headline'	=> $placeholder_condition_archive_headline, // string
+					'placeholder_condition_archive_intro_text'	=> $placeholder_condition_archive_intro_text // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_text_condition_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_text_condition_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings values for treatment archive page text
 	function uamswp_fad_archive_text_treatment() {
 
-		$treatment_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
-		$treatment_archive_headline_attr = uamswp_attr_conversion($treatment_archive_headline);
-		$treatment_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_text_treatment_vars, __FUNCTION__ );
 
-		// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		$placeholder_treatment_archive_headline = '[Treatment Archive Title]';
-		$placeholder_treatment_archive_intro_text = '[Treatment Archive Intro Text]';
+		if ( !empty( $archive_text_treatment_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_text_treatment_vars = array(
-				'treatment_archive_headline'				=> $treatment_archive_headline, // string
-				'treatment_archive_headline_attr'			=> $treatment_archive_headline_attr, // string
-				'treatment_archive_intro_text'				=> $treatment_archive_intro_text, // string
-				'placeholder_treatment_archive_headline'	=> $placeholder_treatment_archive_headline, // string
-				'placeholder_treatment_archive_intro_text'	=> $placeholder_treatment_archive_intro_text // string
-			);
 			return $archive_text_treatment_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			$treatment_archive_headline = get_field('treatments_archive_headline', 'option') ?: 'Treatments and Procedures';
+			$treatment_archive_headline_attr = uamswp_attr_conversion($treatment_archive_headline);
+			$treatment_archive_intro_text = get_field('treatments_archive_intro_text', 'option');
+
+			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
+			$placeholder_treatment_archive_headline = '[Treatment Archive Title]';
+			$placeholder_treatment_archive_intro_text = '[Treatment Archive Intro Text]';
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_text_treatment_vars = array(
+					'treatment_archive_headline'				=> $treatment_archive_headline, // string
+					'treatment_archive_headline_attr'			=> $treatment_archive_headline_attr, // string
+					'treatment_archive_intro_text'				=> $treatment_archive_intro_text, // string
+					'placeholder_treatment_archive_headline'	=> $placeholder_treatment_archive_headline, // string
+					'placeholder_treatment_archive_intro_text'	=> $placeholder_treatment_archive_intro_text // string
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_text_treatment_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_text_treatment_vars;
+
+		}
 
 	}
 
@@ -3029,37 +3470,40 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-			$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
-			$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-			$provider_fpage_ref_main_title_general = get_field('provider_fpage_ref_main_title_general', 'option'); // Reference to the main provider archive, title
-			$provider_fpage_ref_main_intro_general = get_field('provider_fpage_ref_main_intro_general', 'option'); // Reference to the main provider archive, body text
-			$provider_fpage_ref_main_link_general = get_field('provider_fpage_ref_main_link_general', 'option'); // Reference to the main provider archive, link text
-			$provider_fpage_ref_top_title_general = get_field('provider_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-			$provider_fpage_ref_top_intro_general = get_field('provider_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-			$provider_fpage_ref_top_link_general = get_field('provider_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+		
+				$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+				$provider_fpage_ref_main_title_general = get_field('provider_fpage_ref_main_title_general', 'option'); // Reference to the main provider archive, title
+				$provider_fpage_ref_main_intro_general = get_field('provider_fpage_ref_main_intro_general', 'option'); // Reference to the main provider archive, body text
+				$provider_fpage_ref_main_link_general = get_field('provider_fpage_ref_main_link_general', 'option'); // Reference to the main provider archive, link text
+				$provider_fpage_ref_top_title_general = get_field('provider_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+				$provider_fpage_ref_top_intro_general = get_field('provider_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+				$provider_fpage_ref_top_link_general = get_field('provider_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-			$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Fake subpage (or section), title
-			$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Fake subpage (or section), intro text
-			$provider_fpage_ref_main_title_general = ( isset($provider_fpage_ref_main_title_general) && !empty($provider_fpage_ref_main_title_general) ) ? $provider_fpage_ref_main_title_general : 'Full List of [Providers]'; // Reference to the main provider archive, title
-			$provider_fpage_ref_main_intro_general = ( isset($provider_fpage_ref_main_intro_general) && !empty($provider_fpage_ref_main_intro_general) ) ? $provider_fpage_ref_main_intro_general : 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.'; // Reference to the main provider archive, body text
-			$provider_fpage_ref_main_link_general = ( isset($provider_fpage_ref_main_link_general) && !empty($provider_fpage_ref_main_link_general) ) ? $provider_fpage_ref_main_link_general : 'View All [Providers]'; // Reference to the main provider archive, link text
-			$provider_fpage_ref_top_title_general = ( isset($provider_fpage_ref_top_title_general) && !empty($provider_fpage_ref_top_title_general) ) ? $provider_fpage_ref_top_title_general : $provider_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-			$provider_fpage_ref_top_intro_general = ( isset($provider_fpage_ref_top_intro_general) && !empty($provider_fpage_ref_top_intro_general) ) ? $provider_fpage_ref_top_intro_general : $provider_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-			$provider_fpage_ref_top_link_general = ( isset($provider_fpage_ref_top_link_general) && !empty($provider_fpage_ref_top_link_general) ) ? $provider_fpage_ref_top_link_general : $provider_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+		
+				$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Fake subpage (or section), title
+				$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Fake subpage (or section), intro text
+				$provider_fpage_ref_main_title_general = ( isset($provider_fpage_ref_main_title_general) && !empty($provider_fpage_ref_main_title_general) ) ? $provider_fpage_ref_main_title_general : 'Full List of [Providers]'; // Reference to the main provider archive, title
+				$provider_fpage_ref_main_intro_general = ( isset($provider_fpage_ref_main_intro_general) && !empty($provider_fpage_ref_main_intro_general) ) ? $provider_fpage_ref_main_intro_general : 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.'; // Reference to the main provider archive, body text
+				$provider_fpage_ref_main_link_general = ( isset($provider_fpage_ref_main_link_general) && !empty($provider_fpage_ref_main_link_general) ) ? $provider_fpage_ref_main_link_general : 'View All [Providers]'; // Reference to the main provider archive, link text
+				$provider_fpage_ref_top_title_general = ( isset($provider_fpage_ref_top_title_general) && !empty($provider_fpage_ref_top_title_general) ) ? $provider_fpage_ref_top_title_general : $provider_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+				$provider_fpage_ref_top_intro_general = ( isset($provider_fpage_ref_top_intro_general) && !empty($provider_fpage_ref_top_intro_general) ) ? $provider_fpage_ref_top_intro_general : $provider_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+				$provider_fpage_ref_top_link_general = ( isset($provider_fpage_ref_top_link_general) && !empty($provider_fpage_ref_top_link_general) ) ? $provider_fpage_ref_top_link_general : $provider_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-			$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-			$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main provider archive, title
-			$provider_fpage_ref_main_intro_general = $provider_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main provider archive, body text
-			$provider_fpage_ref_main_link_general = $provider_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main provider archive, link text
-			$provider_fpage_ref_top_title_general = $provider_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-			$provider_fpage_ref_top_intro_general = $provider_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-			$provider_fpage_ref_top_link_general = $provider_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+			
+				$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+				$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+				$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main provider archive, title
+				$provider_fpage_ref_main_intro_general = $provider_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main provider archive, body text
+				$provider_fpage_ref_main_link_general = $provider_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main provider archive, link text
+				$provider_fpage_ref_top_title_general = $provider_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+				$provider_fpage_ref_top_intro_general = $provider_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+				$provider_fpage_ref_top_link_general = $provider_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_provider_general_vars = array(
 					'provider_fpage_title_general'			=> $provider_fpage_title_general, // string
@@ -3071,7 +3515,10 @@ function uamswp_fad_fpage_text_replace(
 					'provider_fpage_ref_top_intro_general'	=> $provider_fpage_ref_top_intro_general, // string
 					'provider_fpage_ref_top_link_general'	=> $provider_fpage_ref_top_link_general // string
 				);
-				return $fpage_text_provider_general_vars;
+
+			// Return the variable
+			return $fpage_text_provider_general_vars;
+	
 
 		}
 
@@ -3083,70 +3530,76 @@ function uamswp_fad_fpage_text_replace(
 			// Locations
 
 				// Get the Find-a-Doc Settings values for the text elements in general placements
-				$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-				$location_fpage_ref_main_title_general = get_field('location_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
-				$location_fpage_ref_main_intro_general = get_field('location_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
-				$location_fpage_ref_main_link_general = get_field('location_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
-				$location_fpage_ref_top_title_general = get_field('location_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-				$location_fpage_ref_top_intro_general = get_field('location_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-				$location_fpage_ref_top_link_general = get_field('location_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+
+					$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+					$location_fpage_ref_main_title_general = get_field('location_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
+					$location_fpage_ref_main_intro_general = get_field('location_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
+					$location_fpage_ref_main_link_general = get_field('location_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
+					$location_fpage_ref_top_title_general = get_field('location_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+					$location_fpage_ref_top_intro_general = get_field('location_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+					$location_fpage_ref_top_link_general = get_field('location_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-				$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
-				$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
-				$location_fpage_ref_main_title_general = ( isset($location_fpage_ref_main_title_general) && !empty($location_fpage_ref_main_title_general) ) ? $location_fpage_ref_main_title_general : 'Full List of [Locations]'; // Reference to the main location archive, title
-				$location_fpage_ref_main_intro_general = ( isset($location_fpage_ref_main_intro_general) && !empty($location_fpage_ref_main_intro_general) ) ? $location_fpage_ref_main_intro_general : 'Discover our extensive network of [locations], offering exceptional care across specialties within UAMS Health. Explore our diverse [locations] and find the one closest to you.'; // Reference to the main location archive, body text
-				$location_fpage_ref_main_link_general = ( isset($location_fpage_ref_main_link_general) && !empty($location_fpage_ref_main_link_general) ) ? $location_fpage_ref_main_link_general : 'View All [Locations]'; // Reference to the main location archive, link text
-				$location_fpage_ref_top_title_general = ( isset($location_fpage_ref_top_title_general) && !empty($location_fpage_ref_top_title_general) ) ? $location_fpage_ref_top_title_general : $location_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-				$location_fpage_ref_top_intro_general = ( isset($location_fpage_ref_top_intro_general) && !empty($location_fpage_ref_top_intro_general) ) ? $location_fpage_ref_top_intro_general : $location_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-				$location_fpage_ref_top_link_general = ( isset($location_fpage_ref_top_link_general) && !empty($location_fpage_ref_top_link_general) ) ? $location_fpage_ref_top_link_general : $location_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+			
+					$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
+					$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
+					$location_fpage_ref_main_title_general = ( isset($location_fpage_ref_main_title_general) && !empty($location_fpage_ref_main_title_general) ) ? $location_fpage_ref_main_title_general : 'Full List of [Locations]'; // Reference to the main location archive, title
+					$location_fpage_ref_main_intro_general = ( isset($location_fpage_ref_main_intro_general) && !empty($location_fpage_ref_main_intro_general) ) ? $location_fpage_ref_main_intro_general : 'Discover our extensive network of [locations], offering exceptional care across specialties within UAMS Health. Explore our diverse [locations] and find the one closest to you.'; // Reference to the main location archive, body text
+					$location_fpage_ref_main_link_general = ( isset($location_fpage_ref_main_link_general) && !empty($location_fpage_ref_main_link_general) ) ? $location_fpage_ref_main_link_general : 'View All [Locations]'; // Reference to the main location archive, link text
+					$location_fpage_ref_top_title_general = ( isset($location_fpage_ref_top_title_general) && !empty($location_fpage_ref_top_title_general) ) ? $location_fpage_ref_top_title_general : $location_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+					$location_fpage_ref_top_intro_general = ( isset($location_fpage_ref_top_intro_general) && !empty($location_fpage_ref_top_intro_general) ) ? $location_fpage_ref_top_intro_general : $location_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+					$location_fpage_ref_top_link_general = ( isset($location_fpage_ref_top_link_general) && !empty($location_fpage_ref_top_link_general) ) ? $location_fpage_ref_top_link_general : $location_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-				$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-				$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
-				$location_fpage_ref_main_intro_general = $location_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
-				$location_fpage_ref_main_link_general = $location_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
-				$location_fpage_ref_top_title_general = $location_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-				$location_fpage_ref_top_intro_general = $location_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-				$location_fpage_ref_top_link_general = $location_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+			
+					$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+					$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+					$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
+					$location_fpage_ref_main_intro_general = $location_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
+					$location_fpage_ref_main_link_general = $location_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
+					$location_fpage_ref_top_title_general = $location_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+					$location_fpage_ref_top_intro_general = $location_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+					$location_fpage_ref_top_link_general = $location_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
 			// Descendant Locations
 
 				// Get the Find-a-Doc Settings values for the text elements in general placements
-				$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-				$location_descendant_fpage_ref_main_title_general = get_field('location_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
-				$location_descendant_fpage_ref_main_intro_general = get_field('location_descendant_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
-				$location_descendant_fpage_ref_main_link_general = get_field('location_descendant_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
-				$location_descendant_fpage_ref_top_title_general = get_field('location_descendant_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-				$location_descendant_fpage_ref_top_intro_general = get_field('location_descendant_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-				$location_descendant_fpage_ref_top_link_general = get_field('location_descendant_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+			
+					$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+					$location_descendant_fpage_ref_main_title_general = get_field('location_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
+					$location_descendant_fpage_ref_main_intro_general = get_field('location_descendant_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
+					$location_descendant_fpage_ref_main_link_general = get_field('location_descendant_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
+					$location_descendant_fpage_ref_top_title_general = get_field('location_descendant_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+					$location_descendant_fpage_ref_top_intro_general = get_field('location_descendant_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+					$location_descendant_fpage_ref_top_link_general = get_field('location_descendant_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-				$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
-				$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
-				$location_descendant_fpage_ref_main_title_general = ( isset($location_descendant_fpage_ref_main_title_general) && !empty($location_descendant_fpage_ref_main_title_general) ) ? $location_descendant_fpage_ref_main_title_general : $location_fpage_ref_main_title_general; // Reference to the main location archive, title
-				$location_descendant_fpage_ref_main_intro_general = ( isset($location_descendant_fpage_ref_main_intro_general) && !empty($location_descendant_fpage_ref_main_intro_general) ) ? $location_descendant_fpage_ref_main_intro_general : $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
-				$location_descendant_fpage_ref_main_link_general = ( isset($location_descendant_fpage_ref_main_link_general) && !empty($location_descendant_fpage_ref_main_link_general) ) ? $location_descendant_fpage_ref_main_link_general : $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
-				$location_descendant_fpage_ref_top_title_general = ( isset($location_descendant_fpage_ref_top_title_general) && !empty($location_descendant_fpage_ref_top_title_general) ) ? $location_descendant_fpage_ref_top_title_general : $location_descendant_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-				$location_descendant_fpage_ref_top_intro_general = ( isset($location_descendant_fpage_ref_top_intro_general) && !empty($location_descendant_fpage_ref_top_intro_general) ) ? $location_descendant_fpage_ref_top_intro_general : $location_descendant_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-				$location_descendant_fpage_ref_top_link_general = ( isset($location_descendant_fpage_ref_top_link_general) && !empty($location_descendant_fpage_ref_top_link_general) ) ? $location_descendant_fpage_ref_top_link_general : $location_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+			
+					$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
+					$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
+					$location_descendant_fpage_ref_main_title_general = ( isset($location_descendant_fpage_ref_main_title_general) && !empty($location_descendant_fpage_ref_main_title_general) ) ? $location_descendant_fpage_ref_main_title_general : $location_fpage_ref_main_title_general; // Reference to the main location archive, title
+					$location_descendant_fpage_ref_main_intro_general = ( isset($location_descendant_fpage_ref_main_intro_general) && !empty($location_descendant_fpage_ref_main_intro_general) ) ? $location_descendant_fpage_ref_main_intro_general : $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
+					$location_descendant_fpage_ref_main_link_general = ( isset($location_descendant_fpage_ref_main_link_general) && !empty($location_descendant_fpage_ref_main_link_general) ) ? $location_descendant_fpage_ref_main_link_general : $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
+					$location_descendant_fpage_ref_top_title_general = ( isset($location_descendant_fpage_ref_top_title_general) && !empty($location_descendant_fpage_ref_top_title_general) ) ? $location_descendant_fpage_ref_top_title_general : $location_descendant_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+					$location_descendant_fpage_ref_top_intro_general = ( isset($location_descendant_fpage_ref_top_intro_general) && !empty($location_descendant_fpage_ref_top_intro_general) ) ? $location_descendant_fpage_ref_top_intro_general : $location_descendant_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+					$location_descendant_fpage_ref_top_link_general = ( isset($location_descendant_fpage_ref_top_link_general) && !empty($location_descendant_fpage_ref_top_link_general) ) ? $location_descendant_fpage_ref_top_link_general : $location_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-				$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-				$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
-				$location_descendant_fpage_ref_main_intro_general = $location_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
-				$location_descendant_fpage_ref_main_link_general = $location_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
-				$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-				$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-				$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+			
+					$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+					$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+					$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
+					$location_descendant_fpage_ref_main_intro_general = $location_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
+					$location_descendant_fpage_ref_main_link_general = $location_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
+					$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+					$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+					$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_location_general_vars = array(
 					'location_fpage_title_general'						=> $location_fpage_title_general, // string
@@ -3166,7 +3619,9 @@ function uamswp_fad_fpage_text_replace(
 					'location_descendant_fpage_ref_top_intro_general'	=> $location_descendant_fpage_ref_top_intro_general, // string
 					'location_descendant_fpage_ref_top_link_general'	=> $location_descendant_fpage_ref_top_link_general // string
 				);
-				return $fpage_text_location_general_vars;
+
+			// Return the variable
+			return $fpage_text_location_general_vars;
 
 		}
 
@@ -3241,7 +3696,7 @@ function uamswp_fad_fpage_text_replace(
 				$expertise_descendant_fpage_ref_top_intro_general = $expertise_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
 				$expertise_descendant_fpage_ref_top_link_general = $expertise_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_expertise_general_vars = array(
 					'expertise_fpage_title_general'						=> $expertise_fpage_title_general, // string
@@ -3261,7 +3716,9 @@ function uamswp_fad_fpage_text_replace(
 					'expertise_descendant_fpage_ref_top_intro_general'	=> $expertise_descendant_fpage_ref_top_intro_general, // string
 					'expertise_descendant_fpage_ref_top_link_general'	=> $expertise_descendant_fpage_ref_top_link_general // string
 				);
-				return $fpage_text_expertise_general_vars;
+
+			// Return the variable
+			return $fpage_text_expertise_general_vars;
 
 		}
 
@@ -3271,46 +3728,48 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-			$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
-			$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-			$clinical_resource_fpage_ref_main_title_general = get_field('clinical_resource_fpage_ref_main_title_general', 'option'); // Reference to the main clinical resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = get_field('clinical_resource_fpage_ref_main_intro_general', 'option'); // Reference to the main clinical resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = get_field('clinical_resource_fpage_ref_main_link_general', 'option'); // Reference to the main clinical resource archive, link text
-			$clinical_resource_fpage_ref_top_title_general = get_field('clinical_resource_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
-			$clinical_resource_fpage_ref_top_intro_general = get_field('clinical_resource_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
-			$clinical_resource_fpage_ref_top_link_general = get_field('clinical_resource_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
-			$clinical_resource_fpage_more_text_general = get_field('clinical_resource_fpage_more_text_general', 'option'); // Fake subpage (or section), "More", intro text
-			$clinical_resource_fpage_more_link_text_general = get_field('clinical_resource_fpage_more_link_text_general', 'option'); // Fake subpage (or section), "More", link text
-			$clinical_resource_fpage_more_link_descr_general = get_field('clinical_resource_fpage_more_link_descr_general', 'option'); // Fake subpage (or section), "More", link description
+
+				$clinical_resource_fpage_title_general = get_field('clinical_resource_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$clinical_resource_fpage_intro_general = get_field('clinical_resource_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+				$clinical_resource_fpage_ref_main_title_general = get_field('clinical_resource_fpage_ref_main_title_general', 'option'); // Reference to the main clinical resource archive, title
+				$clinical_resource_fpage_ref_main_intro_general = get_field('clinical_resource_fpage_ref_main_intro_general', 'option'); // Reference to the main clinical resource archive, body text
+				$clinical_resource_fpage_ref_main_link_general = get_field('clinical_resource_fpage_ref_main_link_general', 'option'); // Reference to the main clinical resource archive, link text
+				$clinical_resource_fpage_ref_top_title_general = get_field('clinical_resource_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+				$clinical_resource_fpage_ref_top_intro_general = get_field('clinical_resource_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+				$clinical_resource_fpage_ref_top_link_general = get_field('clinical_resource_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
+				$clinical_resource_fpage_more_text_general = get_field('clinical_resource_fpage_more_text_general', 'option'); // Fake subpage (or section), "More", intro text
+				$clinical_resource_fpage_more_link_text_general = get_field('clinical_resource_fpage_more_link_text_general', 'option'); // Fake subpage (or section), "More", link text
+				$clinical_resource_fpage_more_link_descr_general = get_field('clinical_resource_fpage_more_link_descr_general', 'option'); // Fake subpage (or section), "More", link description
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-			$clinical_resource_fpage_title_general = ( isset($clinical_resource_fpage_title_general) && !empty($clinical_resource_fpage_title_general) ) ? $clinical_resource_fpage_title_general : 'Related [Clinical Resources]'; // Fake subpage (or section), title
-			$clinical_resource_fpage_intro_general = ( isset($clinical_resource_fpage_intro_general) && !empty($clinical_resource_fpage_intro_general) ) ? $clinical_resource_fpage_intro_general : ''; // Fake subpage (or section), intro text
-			$clinical_resource_fpage_ref_main_title_general = ( isset($clinical_resource_fpage_ref_main_title_general) && !empty($clinical_resource_fpage_ref_main_title_general) ) ? $clinical_resource_fpage_ref_main_title_general : 'Full List of [Clinical Resources]'; // Reference to the main clinical resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = ( isset($clinical_resource_fpage_ref_main_intro_general) && !empty($clinical_resource_fpage_ref_main_intro_general) ) ? $clinical_resource_fpage_ref_main_intro_general : 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.'; // Reference to the main clinical resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = ( isset($clinical_resource_fpage_ref_main_link_general) && !empty($clinical_resource_fpage_ref_main_link_general) ) ? $clinical_resource_fpage_ref_main_link_general : 'View All [Clinical Resources]'; // Reference to the main clinical resource archive, link text
-			$clinical_resource_fpage_ref_top_title_general = ( isset($clinical_resource_fpage_ref_top_title_general) && !empty($clinical_resource_fpage_ref_top_title_general) ) ? $clinical_resource_fpage_ref_top_title_general : $clinical_resource_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
-			$clinical_resource_fpage_ref_top_intro_general = ( isset($clinical_resource_fpage_ref_top_intro_general) && !empty($clinical_resource_fpage_ref_top_intro_general) ) ? $clinical_resource_fpage_ref_top_intro_general : $clinical_resource_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
-			$clinical_resource_fpage_ref_top_link_general = ( isset($clinical_resource_fpage_ref_top_link_general) && !empty($clinical_resource_fpage_ref_top_link_general) ) ? $clinical_resource_fpage_ref_top_link_general : $clinical_resource_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
-			$clinical_resource_fpage_more_text_general = ( isset($clinical_resource_fpage_more_text_general) && !empty($clinical_resource_fpage_more_text_general) ) ? $clinical_resource_fpage_more_text_general : 'Want to find more related [clinical resources]?'; // Fake subpage (or section), "More", intro text
-			$clinical_resource_fpage_more_link_text_general = ( isset($clinical_resource_fpage_more_link_text_general) && !empty($clinical_resource_fpage_more_link_text_general) ) ? $clinical_resource_fpage_more_link_text_general : 'View the Full List';// Fake subpage (or section), "More", link text
-			$clinical_resource_fpage_more_link_descr_general = ( isset($clinical_resource_fpage_more_link_descr_general) && !empty($clinical_resource_fpage_more_link_descr_general) ) ? $clinical_resource_fpage_more_link_descr_general : 'View the full list of related [clinical resources]'; // Fake subpage (or section), "More", link description
+
+				$clinical_resource_fpage_title_general = ( isset($clinical_resource_fpage_title_general) && !empty($clinical_resource_fpage_title_general) ) ? $clinical_resource_fpage_title_general : 'Related [Clinical Resources]'; // Fake subpage (or section), title
+				$clinical_resource_fpage_intro_general = ( isset($clinical_resource_fpage_intro_general) && !empty($clinical_resource_fpage_intro_general) ) ? $clinical_resource_fpage_intro_general : ''; // Fake subpage (or section), intro text
+				$clinical_resource_fpage_ref_main_title_general = ( isset($clinical_resource_fpage_ref_main_title_general) && !empty($clinical_resource_fpage_ref_main_title_general) ) ? $clinical_resource_fpage_ref_main_title_general : 'Full List of [Clinical Resources]'; // Reference to the main clinical resource archive, title
+				$clinical_resource_fpage_ref_main_intro_general = ( isset($clinical_resource_fpage_ref_main_intro_general) && !empty($clinical_resource_fpage_ref_main_intro_general) ) ? $clinical_resource_fpage_ref_main_intro_general : 'Access a wealth of [clinical resources], including articles, videos, infographics, and documents, covering various specialties within UAMS Health. Expand your knowledge and stay informed.'; // Reference to the main clinical resource archive, body text
+				$clinical_resource_fpage_ref_main_link_general = ( isset($clinical_resource_fpage_ref_main_link_general) && !empty($clinical_resource_fpage_ref_main_link_general) ) ? $clinical_resource_fpage_ref_main_link_general : 'View All [Clinical Resources]'; // Reference to the main clinical resource archive, link text
+				$clinical_resource_fpage_ref_top_title_general = ( isset($clinical_resource_fpage_ref_top_title_general) && !empty($clinical_resource_fpage_ref_top_title_general) ) ? $clinical_resource_fpage_ref_top_title_general : $clinical_resource_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+				$clinical_resource_fpage_ref_top_intro_general = ( isset($clinical_resource_fpage_ref_top_intro_general) && !empty($clinical_resource_fpage_ref_top_intro_general) ) ? $clinical_resource_fpage_ref_top_intro_general : $clinical_resource_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+				$clinical_resource_fpage_ref_top_link_general = ( isset($clinical_resource_fpage_ref_top_link_general) && !empty($clinical_resource_fpage_ref_top_link_general) ) ? $clinical_resource_fpage_ref_top_link_general : $clinical_resource_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
+				$clinical_resource_fpage_more_text_general = ( isset($clinical_resource_fpage_more_text_general) && !empty($clinical_resource_fpage_more_text_general) ) ? $clinical_resource_fpage_more_text_general : 'Want to find more related [clinical resources]?'; // Fake subpage (or section), "More", intro text
+				$clinical_resource_fpage_more_link_text_general = ( isset($clinical_resource_fpage_more_link_text_general) && !empty($clinical_resource_fpage_more_link_text_general) ) ? $clinical_resource_fpage_more_link_text_general : 'View the Full List';// Fake subpage (or section), "More", link text
+				$clinical_resource_fpage_more_link_descr_general = ( isset($clinical_resource_fpage_more_link_descr_general) && !empty($clinical_resource_fpage_more_link_descr_general) ) ? $clinical_resource_fpage_more_link_descr_general : 'View the full list of related [clinical resources]'; // Fake subpage (or section), "More", link description
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-			$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-			$clinical_resource_fpage_ref_main_title_general = $clinical_resource_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main clinical resource archive, title
-			$clinical_resource_fpage_ref_main_intro_general = $clinical_resource_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main clinical resource archive, body text
-			$clinical_resource_fpage_ref_main_link_general = $clinical_resource_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main clinical resource archive, link text
-			$clinical_resource_fpage_ref_top_title_general = $clinical_resource_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
-			$clinical_resource_fpage_ref_top_intro_general = $clinical_resource_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
-			$clinical_resource_fpage_ref_top_link_general = $clinical_resource_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
-			$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general, $page_titles) : ''; // Fake subpage (or section), "More", intro text
-			$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general, $page_titles) : ''; // Fake subpage (or section), "More", link text
-			$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general, $page_titles) : ''; // Fake subpage (or section), "More", link description
+				$clinical_resource_fpage_title_general = $clinical_resource_fpage_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+				$clinical_resource_fpage_intro_general = $clinical_resource_fpage_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+				$clinical_resource_fpage_ref_main_title_general = $clinical_resource_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main clinical resource archive, title
+				$clinical_resource_fpage_ref_main_intro_general = $clinical_resource_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main clinical resource archive, body text
+				$clinical_resource_fpage_ref_main_link_general = $clinical_resource_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main clinical resource archive, link text
+				$clinical_resource_fpage_ref_top_title_general = $clinical_resource_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, title
+				$clinical_resource_fpage_ref_top_intro_general = $clinical_resource_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, body text
+				$clinical_resource_fpage_ref_top_link_general = $clinical_resource_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Clinical Resources, link text
+				$clinical_resource_fpage_more_text_general = $clinical_resource_fpage_more_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_text_general, $page_titles) : ''; // Fake subpage (or section), "More", intro text
+				$clinical_resource_fpage_more_link_text_general = $clinical_resource_fpage_more_link_text_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_text_general, $page_titles) : ''; // Fake subpage (or section), "More", link text
+				$clinical_resource_fpage_more_link_descr_general = $clinical_resource_fpage_more_link_descr_general ? uamswp_fad_fpage_text_replace($clinical_resource_fpage_more_link_descr_general, $page_titles) : ''; // Fake subpage (or section), "More", link description
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_clinical_resource_general_vars = array(
 					'clinical_resource_fpage_title_general'				=> $clinical_resource_fpage_title_general, // string
@@ -3325,7 +3784,9 @@ function uamswp_fad_fpage_text_replace(
 					'clinical_resource_fpage_more_link_text_general'	=> $clinical_resource_fpage_more_link_text_general, // string
 					'clinical_resource_fpage_more_link_descr_general'	=> $clinical_resource_fpage_more_link_descr_general // string
 				);
-				return $fpage_text_clinical_resource_general_vars;
+
+			// Return the variable
+			return $fpage_text_clinical_resource_general_vars;
 
 		}
 
@@ -3347,13 +3808,15 @@ function uamswp_fad_fpage_text_replace(
 			$condition_fpage_title_general = uamswp_fad_fpage_text_replace($condition_fpage_title_general, $page_titles); // Fake subpage (or section), title
 			$condition_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_condition_general_vars = array(
 					'condition_fpage_title_general'	=> $condition_fpage_title_general, // string
 					'condition_fpage_intro_general'	=> $condition_fpage_intro_general // string
 				);
-				return $fpage_text_condition_general_vars;
+
+			// Return the variable
+			return $fpage_text_condition_general_vars;
 
 		}
 
@@ -3363,25 +3826,30 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-			$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
-			$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+		
+				$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-			$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Fake subpage (or section), title
-			$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
+		
+				$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Fake subpage (or section), title
+				$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
-			$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+		
+				$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
+				$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_treatment_general_vars = array(
 					'treatment_fpage_title_general'	=> $treatment_fpage_title_general, // string
 					'treatment_fpage_intro_general'	=> $treatment_fpage_intro_general // string
 				);
-				return $fpage_text_treatment_general_vars;
+
+			// Return the variable
+			return $fpage_text_treatment_general_vars;
 
 		}
 
@@ -3391,25 +3859,30 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-			$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
-			$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+		
+				$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
+				$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-			$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Fake subpage (or section), title
-			$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
+		
+				$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Fake subpage (or section), title
+				$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
-			$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+			
+				$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
+				$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_condition_treatment_general_vars = array(
 					'condition_treatment_fpage_title_general'	=> $condition_treatment_fpage_title_general, // string
 					'condition_treatment_fpage_intro_general'	=> $condition_treatment_fpage_intro_general // string
 				);
-				return $fpage_text_condition_treatment_general_vars;
+
+			// Return the variable
+			return $fpage_text_condition_treatment_general_vars;
 
 		}
 
@@ -3856,7 +4329,7 @@ function uamswp_fad_fpage_text_replace(
 					$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_provider, $page_titles) : ''; // Title
 					$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_provider ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_provider, $page_titles) : ''; // Intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_provider_vars = array(
 					'location_fpage_title_provider'						=> $location_fpage_title_provider, // string
@@ -3884,7 +4357,9 @@ function uamswp_fad_fpage_text_replace(
 					'condition_treatment_fpage_title_provider'			=> $condition_treatment_fpage_title_provider, // string
 					'condition_treatment_fpage_intro_provider'			=> $condition_treatment_fpage_intro_provider, // string
 				);
-				return $fpage_text_provider_vars;
+
+			// Return the variable
+			return $fpage_text_provider_vars;
 
 		}
 
@@ -4494,7 +4969,7 @@ function uamswp_fad_fpage_text_replace(
 					$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_location, $page_titles) : ''; // Title
 					$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_location ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_location, $page_titles) : ''; // Intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_location_vars = array(
 					'provider_fpage_title_location'						=> $provider_fpage_title_location, // string
@@ -4536,7 +5011,9 @@ function uamswp_fad_fpage_text_replace(
 					'condition_treatment_fpage_title_location'			=> $condition_treatment_fpage_title_location, // string
 					'condition_treatment_fpage_intro_location'			=> $condition_treatment_fpage_intro_location // string
 				);
-				return $fpage_text_location_vars;
+
+			// Return the variable
+			return $fpage_text_location_vars;
 
 		}
 
@@ -5597,7 +6074,7 @@ function uamswp_fad_fpage_text_replace(
 					$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_expertise, $page_titles) : ''; // Title
 					$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_expertise ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_expertise, $page_titles) : ''; // Intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_expertise_vars = array(
 					'expertise_page_title_options'							=> $expertise_page_title_options, // string
@@ -5655,7 +6132,9 @@ function uamswp_fad_fpage_text_replace(
 					'condition_treatment_fpage_title_expertise'				=> $condition_treatment_fpage_title_expertise, // string
 					'condition_treatment_fpage_intro_expertise'				=> $condition_treatment_fpage_intro_expertise // string
 				);
-				return $fpage_text_expertise_vars;
+
+			// Return the variable
+			return $fpage_text_expertise_vars;
 
 		}
 
@@ -6189,7 +6668,7 @@ function uamswp_fad_fpage_text_replace(
 					$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_clinical_resource, $page_titles) : ''; // Title
 					$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_clinical_resource ? uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_clinical_resource, $page_titles) : ''; // Intro text
 
-			// Create and return an array to be used on the templates and template parts
+			// Create an array to be used on the templates and template parts
 
 				$fpage_text_clinical_resource_vars = array(
 					'provider_fpage_title_clinical_resource'					=> $provider_fpage_title_clinical_resource, // string
@@ -6225,7 +6704,9 @@ function uamswp_fad_fpage_text_replace(
 					'condition_treatment_fpage_title_clinical_resource'			=> $condition_treatment_fpage_title_clinical_resource, // string
 					'condition_treatment_fpage_intro_clinical_resource'			=> $condition_treatment_fpage_intro_clinical_resource // string
 				);
-				return $fpage_text_clinical_resource_vars;
+
+			// Return the variable
+			return $fpage_text_clinical_resource_vars;
 
 		}
 
@@ -6234,76 +6715,180 @@ function uamswp_fad_fpage_text_replace(
 	// Get the Find-a-Doc Settings value for provider archive page featured image
 	function uamswp_fad_archive_image_provider() {
 
-		// Get the Find-a-Doc Settings value for the featured image of the provider archive
-		$provider_archive_image = get_field('provider_archive_featured_image', 'option'); // Featured image ID
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_image_provider_vars, __FUNCTION__ );
 
-		// If the variable is not set or is empty...
-		// Set a hardcoded fallback value
-		$provider_archive_image = ( isset($provider_archive_image) && !empty($provider_archive_image) ) ? $provider_archive_image : ''; // Featured image
+		if ( !empty( $archive_image_provider_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_image_provider_vars = array(
-				'provider_archive_image'	=> $provider_archive_image // int
-			);
 			return $archive_image_provider_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Get the Find-a-Doc Settings value for the featured image of the provider archive
+			$provider_archive_image = get_field('provider_archive_featured_image', 'option'); // Featured image ID
+
+			// If the variable is not set or is empty...
+			// Set a hardcoded fallback value
+			$provider_archive_image = ( isset($provider_archive_image) && !empty($provider_archive_image) ) ? $provider_archive_image : ''; // Featured image
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_image_provider_vars = array(
+					'provider_archive_image'	=> $provider_archive_image // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_image_provider_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_image_provider_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings value for location archive page featured image
 	function uamswp_fad_archive_image_location() {
 
-		// Get the Find-a-Doc Settings value for the featured image of the location archive
-		$location_archive_image = get_field('location_archive_featured_image', 'option'); // Featured image ID
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_image_location_vars, __FUNCTION__ );
 
-		// If the variable is not set or is empty...
-		// Set a hardcoded fallback value
-		$location_archive_image = ( isset($location_archive_image) && !empty($location_archive_image) ) ? $location_archive_image : ''; // Featured image
+		if ( !empty( $archive_image_location_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_image_location_vars = array(
-				'location_archive_image'	=> $location_archive_image // int
-			);
 			return $archive_image_location_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Get the Find-a-Doc Settings value for the featured image of the location archive
+			$location_archive_image = get_field('location_archive_featured_image', 'option'); // Featured image ID
+
+			// If the variable is not set or is empty...
+			// Set a hardcoded fallback value
+			$location_archive_image = ( isset($location_archive_image) && !empty($location_archive_image) ) ? $location_archive_image : ''; // Featured image
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_image_location_vars = array(
+					'location_archive_image'	=> $location_archive_image // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_image_location_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_image_location_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings value for area of expertise archive page featured image
 	function uamswp_fad_archive_image_expertise() {
 
-		// Get the Find-a-Doc Settings value for the featured image of the expertise archive
-		$expertise_archive_image = get_field('expertise_archive_featured_image', 'option'); // Featured image ID
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_image_expertise_vars, __FUNCTION__ );
 
-		// If the variable is not set or is empty...
-		// Set a hardcoded fallback value
-		$expertise_archive_image = ( isset($expertise_archive_image) && !empty($expertise_archive_image) ) ? $expertise_archive_image : ''; // Featured image
+		if ( !empty( $archive_image_expertise_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_image_expertise_vars = array(
-				'expertise_archive_image'	=> $expertise_archive_image // int
-			);
 			return $archive_image_expertise_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Get the Find-a-Doc Settings value for the featured image of the expertise archive
+			$expertise_archive_image = get_field('expertise_archive_featured_image', 'option'); // Featured image ID
+
+			// If the variable is not set or is empty...
+			// Set a hardcoded fallback value
+			$expertise_archive_image = ( isset($expertise_archive_image) && !empty($expertise_archive_image) ) ? $expertise_archive_image : ''; // Featured image
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_image_expertise_vars = array(
+					'expertise_archive_image'	=> $expertise_archive_image // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_image_expertise_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_image_expertise_vars;
+
+		}
 
 	}
 
 	// Get the Find-a-Doc Settings value for clinical resource archive page featured image
 	function uamswp_fad_archive_image_clinical_resource() {
 
-		// Get the Find-a-Doc Settings value for the featured image of the clinical resource archive
-		$clinical_resource_archive_image = get_field('clinical_resource_archive_featured_image', 'option'); // Featured image ID
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $archive_image_clinical_resource_vars, __FUNCTION__ );
 
-		// If the variable is not set or is empty...
-		// Set a hardcoded fallback value
-		$clinical_resource_archive_image = ( isset($clinical_resource_archive_image) && !empty($clinical_resource_archive_image) ) ? $clinical_resource_archive_image : ''; // Featured image
+		if ( !empty( $archive_image_clinical_resource_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$archive_image_clinical_resource_vars = array(
-				'clinical_resource_archive_image'	=> $clinical_resource_archive_image // int
-			);
 			return $archive_image_clinical_resource_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Get the Find-a-Doc Settings value for the featured image of the clinical resource archive
+			$clinical_resource_archive_image = get_field('clinical_resource_archive_featured_image', 'option'); // Featured image ID
+
+			// If the variable is not set or is empty...
+			// Set a hardcoded fallback value
+			$clinical_resource_archive_image = ( isset($clinical_resource_archive_image) && !empty($clinical_resource_archive_image) ) ? $clinical_resource_archive_image : ''; // Featured image
+
+			// Create an array to be used on the templates and template parts
+
+				$archive_image_clinical_resource_vars = array(
+					'clinical_resource_archive_image'	=> $clinical_resource_archive_image // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $archive_image_clinical_resource_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $archive_image_clinical_resource_vars;
+
+		}
 
 	}
 
@@ -6314,100 +6899,204 @@ function uamswp_fad_fpage_text_replace(
 		// Get the Find-a-Doc Settings value for the featured image of a fake subpage (or section) for Providers in general placements
 		function uamswp_fad_fpage_image_provider_general() {
 
-			// Get the Find-a-Doc Settings value
-			$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image ID
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_provider_general_vars, __FUNCTION__ );
 
-			// If the variable is not set or is empty...
-			// Set a hardcoded fallback value
-			$provider_fpage_image_general = ( isset($provider_fpage_image_general) && !empty($provider_fpage_image_general) ) ? $provider_fpage_image_general : ''; // Featured image
+			if ( !empty( $fpage_image_provider_general_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_provider_general_vars = array(
-					'provider_fpage_image_general'	=> $provider_fpage_image_general // int
-				);
 				return $fpage_image_provider_general_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Get the Find-a-Doc Settings value
+				$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image ID
+
+				// If the variable is not set or is empty...
+				// Set a hardcoded fallback value
+				$provider_fpage_image_general = ( isset($provider_fpage_image_general) && !empty($provider_fpage_image_general) ) ? $provider_fpage_image_general : ''; // Featured image
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_provider_general_vars = array(
+						'provider_fpage_image_general'	=> $provider_fpage_image_general // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_provider_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_image_provider_general_vars;
+
+			}
 
 		}
 
 		// Get the Find-a-Doc Settings values for the featured image of a fake subpage (or section) for Locations in general placements
 		function uamswp_fad_fpage_image_location_general() {
 
-			// Locations
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_location_general_vars, __FUNCTION__ );
 
-				// Get the Find-a-Doc Settings value
-				$location_fpage_image_general = get_field('location_fpage_featured_image_general', 'option'); // Featured image ID
+			if ( !empty( $fpage_image_location_general_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-				// If the variable is not set or is empty...
-				// Set a hardcoded fallback value
-				$location_fpage_image_general = ( isset($location_fpage_image_general) && !empty($location_fpage_image_general) ) ? $location_fpage_image_general : ''; // Featured image ID
-
-			// Descendant Locations
-
-				// Get the Find-a-Doc Settings value
-				$location_descendant_fpage_image_general = get_field('location_descendant_fpage_featured_image_general', 'option'); // Featured image ID
-
-				// If the variable is not set or is empty...
-				// Set a hardcoded fallback value
-				$location_descendant_fpage_image_general = ( isset($location_descendant_fpage_image_general) && !empty($location_descendant_fpage_image_general) ) ? $location_descendant_fpage_image_general : ''; // Featured image ID
-
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_location_general_vars = array(
-					'location_fpage_image_general'				=> $location_fpage_image_general, // int
-					'location_descendant_fpage_image_general'	=> $location_descendant_fpage_image_general // int
-				);
 				return $fpage_image_location_general_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Locations
+
+					// Get the Find-a-Doc Settings value
+					$location_fpage_image_general = get_field('location_fpage_featured_image_general', 'option'); // Featured image ID
+
+					// If the variable is not set or is empty...
+					// Set a hardcoded fallback value
+					$location_fpage_image_general = ( isset($location_fpage_image_general) && !empty($location_fpage_image_general) ) ? $location_fpage_image_general : ''; // Featured image ID
+
+				// Descendant Locations
+
+					// Get the Find-a-Doc Settings value
+					$location_descendant_fpage_image_general = get_field('location_descendant_fpage_featured_image_general', 'option'); // Featured image ID
+
+					// If the variable is not set or is empty...
+					// Set a hardcoded fallback value
+					$location_descendant_fpage_image_general = ( isset($location_descendant_fpage_image_general) && !empty($location_descendant_fpage_image_general) ) ? $location_descendant_fpage_image_general : ''; // Featured image ID
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_location_general_vars = array(
+						'location_fpage_image_general'				=> $location_fpage_image_general, // int
+						'location_descendant_fpage_image_general'	=> $location_descendant_fpage_image_general // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_location_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_image_location_general_vars;
+
+			}
 
 		}
 
 		// Get the Find-a-Doc Settings values for the featured image of a fake subpage (or section) for Areas of Expertise in general placements
 		function uamswp_fad_fpage_image_expertise_general() {
 
-			// Areas of Expertise
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_expertise_general_vars, __FUNCTION__ );
 
-				// Get the Find-a-Doc Settings value
-				$expertise_fpage_image_general = get_field('expertise_fpage_featured_image_general', 'option'); // Featured image ID
+			if ( !empty( $fpage_image_expertise_general_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-				// If the variable is not set or is empty...
-				// Set a hardcoded fallback value
-				$expertise_fpage_image_general = ( isset($expertise_fpage_image_general) && !empty($expertise_fpage_image_general) ) ? $expertise_fpage_image_general : ''; // Featured image ID
-
-			// Descendant Areas of Expertise
-
-				// Get the Find-a-Doc Settings value
-				$expertise_descendant_fpage_image_general = get_field('expertise_descendant_fpage_featured_image_general', 'option'); // Featured image ID
-
-				// If the variable is not set or is empty...
-				// Set a hardcoded fallback value
-				$expertise_descendant_fpage_image_general = ( isset($expertise_descendant_fpage_image_general) && !empty($expertise_descendant_fpage_image_general) ) ? $expertise_descendant_fpage_image_general : ''; // Featured image ID
-
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_expertise_general_vars = array(
-					'expertise_fpage_image_general'				=> $expertise_fpage_image_general, // int
-					'expertise_descendant_fpage_image_general'	=> $expertise_descendant_fpage_image_general // int
-				);
 				return $fpage_image_expertise_general_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Areas of Expertise
+
+					// Get the Find-a-Doc Settings value
+					$expertise_fpage_image_general = get_field('expertise_fpage_featured_image_general', 'option'); // Featured image ID
+
+					// If the variable is not set or is empty...
+					// Set a hardcoded fallback value
+					$expertise_fpage_image_general = ( isset($expertise_fpage_image_general) && !empty($expertise_fpage_image_general) ) ? $expertise_fpage_image_general : ''; // Featured image ID
+
+				// Descendant Areas of Expertise
+
+					// Get the Find-a-Doc Settings value
+					$expertise_descendant_fpage_image_general = get_field('expertise_descendant_fpage_featured_image_general', 'option'); // Featured image ID
+
+					// If the variable is not set or is empty...
+					// Set a hardcoded fallback value
+					$expertise_descendant_fpage_image_general = ( isset($expertise_descendant_fpage_image_general) && !empty($expertise_descendant_fpage_image_general) ) ? $expertise_descendant_fpage_image_general : ''; // Featured image ID
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_expertise_general_vars = array(
+						'expertise_fpage_image_general'				=> $expertise_fpage_image_general, // int
+						'expertise_descendant_fpage_image_general'	=> $expertise_descendant_fpage_image_general // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_expertise_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_image_expertise_general_vars;
+
+			}
 
 		}
 
 		// Get the Find-a-Doc Settings value for the featured image of a fake subpage (or section) for Clinical Resources in general placements
 		function uamswp_fad_fpage_image_clinical_resource_general() {
 
-			// Get the Find-a-Doc Settings value
-			$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image ID
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_clinical_resource_general_vars, __FUNCTION__ );
 
-			// If the variable is not set or is empty...
-			// Set a hardcoded fallback value
-			$clinical_resource_fpage_image_general = ( isset($clinical_resource_fpage_image_general) && !empty($clinical_resource_fpage_image_general) ) ? $clinical_resource_fpage_image_general : ''; // Featured image ID
+			if ( !empty( $fpage_image_clinical_resource_general_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_clinical_resource_general_vars = array(
-					'clinical_resource_fpage_image_general'	=> $clinical_resource_fpage_image_general // int
-				);
 				return $fpage_image_clinical_resource_general_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Get the Find-a-Doc Settings value
+				$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image ID
+
+				// If the variable is not set or is empty...
+				// Set a hardcoded fallback value
+				$clinical_resource_fpage_image_general = ( isset($clinical_resource_fpage_image_general) && !empty($clinical_resource_fpage_image_general) ) ? $clinical_resource_fpage_image_general : ''; // Featured image ID
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_clinical_resource_general_vars = array(
+						'clinical_resource_fpage_image_general'	=> $clinical_resource_fpage_image_general // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_clinical_resource_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_image_clinical_resource_general_vars;
+
+			}
 
 		}
 
@@ -6416,396 +7105,500 @@ function uamswp_fad_fpage_text_replace(
 		// Get field values for the featured image of a fake subpage (or section) in an Provider subsection (or profile)
 		function uamswp_fad_fpage_image_provider() {
 
-			// Locations
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_provider_vars, __FUNCTION__ );
 
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Provider subsection (or profile)
-				$location_fpage_image_provider = get_field('location_fpage_featured_image_provider', 'option');
+			if ( !empty( $fpage_image_provider_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
-					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-						$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-							$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
-					}
-					$location_fpage_image_provider = $location_fpage_image_general; // Featured image
-				}
-
-			// Areas of Expertise
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Provider subsection (or profile)
-				$expertise_fpage_image_provider = get_field('expertise_fpage_featured_image_provider', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
-					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-					}
-					$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
-				}
-
-			// Clinical Resources
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Provider subsection (or profile)
-				$clinical_resource_fpage_image_provider = get_field('clinical_resource_fpage_featured_image_provider', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
-					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-					}
-					$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
-				}
-
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_provider_vars = array(
-					'location_fpage_image_provider'				=> $location_fpage_image_provider, // int
-					'expertise_fpage_image_provider'			=> $expertise_fpage_image_provider, // int
-					'clinical_resource_fpage_image_provider'	=> $clinical_resource_fpage_image_provider // int
-				);
 				return $fpage_image_provider_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Locations
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Provider subsection (or profile)
+					$location_fpage_image_provider = get_field('location_fpage_featured_image_provider', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
+						if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
+							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
+								$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
+						}
+						$location_fpage_image_provider = $location_fpage_image_general; // Featured image
+					}
+
+				// Areas of Expertise
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Provider subsection (or profile)
+					$expertise_fpage_image_provider = get_field('expertise_fpage_featured_image_provider', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
+						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
+								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
+						}
+						$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
+					}
+
+				// Clinical Resources
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Provider subsection (or profile)
+					$clinical_resource_fpage_image_provider = get_field('clinical_resource_fpage_featured_image_provider', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
+						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
+								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
+						}
+						$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
+					}
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_provider_vars = array(
+						'location_fpage_image_provider'				=> $location_fpage_image_provider, // int
+						'expertise_fpage_image_provider'			=> $expertise_fpage_image_provider, // int
+						'clinical_resource_fpage_image_provider'	=> $clinical_resource_fpage_image_provider // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_provider_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_image_provider_vars;
+
+			}
 
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in an Location subsection (or profile)
 		function uamswp_fad_fpage_image_location() {
 
-			// Providers
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_location_vars, __FUNCTION__ );
 
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
-				$provider_fpage_image_location = get_field('provider_fpage_featured_image_location', 'option');
+			if ( !empty( $fpage_image_location_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
-					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-							$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
-					}
-					$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
-				}
-
-			// Descendant Locations
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
-				$location_descendant_fpage_image_location = get_field('location_descendant_fpage_featured_image_location', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
-					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-							$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
-					}
-					$location_descendant_fpage_image_location = $location_descendant_fpage_image_general; // Featured image
-				}
-
-			// Areas of Expertise
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
-				$expertise_fpage_image_location = get_field('expertise_fpage_featured_image_location', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
-					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-					}
-					$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
-				}
-
-			// Clinical Resources
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
-				$clinical_resource_fpage_image_location = get_field('clinical_resource_fpage_featured_image_location', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
-					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-					}
-					$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
-				}
-
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_location_vars = array(
-					'provider_fpage_image_location'				=> $provider_fpage_image_location, // int
-					'location_descendant_fpage_image_location'	=> $location_descendant_fpage_image_location, // int
-					'expertise_fpage_image_location'			=> $expertise_fpage_image_location, // int
-					'clinical_resource_fpage_image_location'	=> $clinical_resource_fpage_image_location // int
-				);
 				return $fpage_image_location_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Providers
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
+					$provider_fpage_image_location = get_field('provider_fpage_featured_image_location', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
+						if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
+							$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
+								$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
+						}
+						$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
+					}
+
+				// Descendant Locations
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
+					$location_descendant_fpage_image_location = get_field('location_descendant_fpage_featured_image_location', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
+						if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
+							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
+								$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
+						}
+						$location_descendant_fpage_image_location = $location_descendant_fpage_image_general; // Featured image
+					}
+
+				// Areas of Expertise
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
+					$expertise_fpage_image_location = get_field('expertise_fpage_featured_image_location', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
+						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
+								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
+						}
+						$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
+					}
+
+				// Clinical Resources
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Location subsection (or profile)
+					$clinical_resource_fpage_image_location = get_field('clinical_resource_fpage_featured_image_location', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
+						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
+								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
+						}
+						$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
+					}
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_location_vars = array(
+						'provider_fpage_image_location'				=> $provider_fpage_image_location, // int
+						'location_descendant_fpage_image_location'	=> $location_descendant_fpage_image_location, // int
+						'expertise_fpage_image_location'			=> $expertise_fpage_image_location, // int
+						'clinical_resource_fpage_image_location'	=> $clinical_resource_fpage_image_location // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_location_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_image_location_vars;
+
+			}
 
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in an Area of Expertise subsection (or profile)
 		function uamswp_fad_fpage_image_expertise() {
 
-			// Overview
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_expertise_vars, __FUNCTION__ );
 
-				// Get the page-level featured image value
-				$expertise_featured_image = get_field('_thumbnail_id');
+			if ( !empty( $fpage_image_expertise_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-				// Crop/resize the image
-				if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_featured_image_url = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_featured_image ) {
-					$expertise_featured_image_url = wp_get_attachment_url( $expertise_featured_image, 'aspect-16-9' );
-				} else {
-					$expertise_featured_image_url = '';
-				}
-
-			// Providers
-
-				// Get the page-level featured image value for this type of fake subpage (or profile)
-				$provider_fpage_featured_image_expertise = get_field('expertise_providers_fpage_featured_image');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile in an Area of Expertise subsection (or profile)
-				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
-					$provider_fpage_featured_image_expertise = get_field('provider_fpage_featured_image_expertise', 'option');
-				}
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
-					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-							$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
-					}
-					$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
-				}
-
-				// Crop/resize the image
-				if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$provider_fpage_featured_image_expertise_url = image_sizer($provider_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
-				} elseif ( $provider_fpage_featured_image_expertise_url ) {
-					$provider_fpage_featured_image_expertise_url = wp_get_attachment_url( $provider_fpage_featured_image_expertise, 'aspect-16-9' );
-				} else {
-					$provider_fpage_featured_image_expertise_url = $expertise_featured_image_url;
-				}
-
-			// Locations
-
-				// Get the page-level featured image value for this type of fake subpage (or profile)
-				$location_fpage_featured_image_expertise = get_field('expertise_locations_fpage_featured_image');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile in an Area of Expertise subsection (or profile)
-				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
-					$location_fpage_featured_image_expertise = get_field('location_fpage_featured_image_expertise', 'option');
-				}
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
-					if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-						$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-							$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
-					}
-					$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
-				}
-
-				// Crop/resize the image
-				if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$location_fpage_featured_image_expertise_url = image_sizer($location_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
-				} elseif ( $location_fpage_featured_image_expertise_url ) {
-					$location_fpage_featured_image_expertise_url = wp_get_attachment_url( $location_fpage_featured_image_expertise, 'aspect-16-9' );
-				} else {
-					$location_fpage_featured_image_expertise_url = $expertise_featured_image_url;
-				}
-
-			// Related Areas of Expertise
-
-				// Get the page-level featured image value for this type of fake subpage (or profile)
-				$expertise_fpage_featured_image_expertise = get_field('expertise_associated_fpage_featured_image');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
-				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
-					$expertise_fpage_featured_image_expertise = get_field('expertise_fpage_featured_image_expertise', 'option');
-				}
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
-					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-					}
-					$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
-				}
-
-				// Crop/resize the image
-				if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_fpage_featured_image_expertise_url = image_sizer($expertise_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_fpage_featured_image_expertise_url ) {
-					$expertise_fpage_featured_image_expertise_url = wp_get_attachment_url( $expertise_fpage_featured_image_expertise, 'aspect-16-9' );
-				} else {
-					$expertise_fpage_featured_image_expertise_url = $expertise_featured_image_url;
-				}
-
-			// Descendant Areas of Expertise
-
-				// Get the page-level featured image value for this type of fake subpage (or profile)
-				$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
-				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
-					$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image_expertise', 'option');
-				}
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
-					if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
-						$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-							$expertise_descendant_fpage_image_general = $fpage_image_expertise_general_vars['expertise_descendant_fpage_image_general']; // int
-					}
-					$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
-				}
-
-				// Crop/resize the image
-				if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$expertise_descendant_fpage_featured_image_expertise_url = image_sizer($expertise_descendant_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
-				} elseif ( $expertise_descendant_fpage_featured_image_expertise ) {
-					$expertise_descendant_fpage_featured_image_expertise_url = wp_get_attachment_url( $expertise_descendant_fpage_featured_image_expertise, 'aspect-16-9' );
-				} else {
-					$expertise_descendant_fpage_featured_image_expertise_url = $expertise_featured_image_url;
-				}
-
-			// Clinical Resources
-
-				// Get the page-level featured image value for this type of fake subpage (or profile)
-				$clinical_resource_fpage_featured_image_expertise = get_field('expertise_clinical_resources_fpage_featured_image');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
-				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
-					$expertise_descendant_fpage_featured_image_expertise = get_field('clinical_resource_fpage_featured_image_expertise', 'option');
-				}
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
-					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-					}
-					$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
-				}
-
-				// Crop/resize the image
-				if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
-					$clinical_resource_fpage_featured_image_expertise_url = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
-				} elseif ( $clinical_resource_fpage_featured_image_expertise ) {
-					$clinical_resource_fpage_featured_image_expertise_url = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise, 'aspect-16-9' );
-				} else {
-					$clinical_resource_fpage_featured_image_expertise_url = $expertise_featured_image_url;
-				}
-
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_expertise_vars = array(
-					'expertise_featured_image'									=> $expertise_featured_image, // int
-					'expertise_featured_image_url'								=> $expertise_featured_image_url, // string
-					'provider_fpage_featured_image_expertise'					=> $provider_fpage_featured_image_expertise, // int
-					'provider_fpage_featured_image_expertise_url'				=> $provider_fpage_featured_image_expertise_url, // string
-					'location_fpage_featured_image_expertise'					=> $location_fpage_featured_image_expertise, // int
-					'location_fpage_featured_image_expertise_url'				=> $location_fpage_featured_image_expertise_url, // string
-					'expertise_fpage_featured_image_expertise'					=> $expertise_fpage_featured_image_expertise, // int
-					'expertise_fpage_featured_image_expertise_url'				=> $expertise_fpage_featured_image_expertise_url, // string
-					'expertise_descendant_fpage_featured_image_expertise'		=> $expertise_descendant_fpage_featured_image_expertise, // int
-					'expertise_descendant_fpage_featured_image_expertise_url'	=> $expertise_descendant_fpage_featured_image_expertise_url, // string
-					'clinical_resource_fpage_featured_image_expertise'			=> $clinical_resource_fpage_featured_image_expertise, // int
-					'clinical_resource_fpage_featured_image_expertise_url'		=> $clinical_resource_fpage_featured_image_expertise_url, // string
-				);
 				return $fpage_image_expertise_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Overview
+
+					// Get the page-level featured image value
+					$expertise_featured_image = get_field('_thumbnail_id');
+
+					// Crop/resize the image
+					if ( $expertise_featured_image && function_exists( 'fly_add_image_size' ) ) {
+						$expertise_featured_image_url = image_sizer($expertise_featured_image, 1600, 900, 'center', 'center');
+					} elseif ( $expertise_featured_image ) {
+						$expertise_featured_image_url = wp_get_attachment_url( $expertise_featured_image, 'aspect-16-9' );
+					} else {
+						$expertise_featured_image_url = '';
+					}
+
+				// Providers
+
+					// Get the page-level featured image value for this type of fake subpage (or profile)
+					$provider_fpage_featured_image_expertise = get_field('expertise_providers_fpage_featured_image');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile in an Area of Expertise subsection (or profile)
+					if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
+						$provider_fpage_featured_image_expertise = get_field('provider_fpage_featured_image_expertise', 'option');
+					}
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
+						if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
+							$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
+								$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
+						}
+						$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
+					}
+
+					// Crop/resize the image
+					if ( $provider_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						$provider_fpage_featured_image_expertise_url = image_sizer($provider_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					} elseif ( $provider_fpage_featured_image_expertise_url ) {
+						$provider_fpage_featured_image_expertise_url = wp_get_attachment_url( $provider_fpage_featured_image_expertise, 'aspect-16-9' );
+					} else {
+						$provider_fpage_featured_image_expertise_url = $expertise_featured_image_url;
+					}
+
+				// Locations
+
+					// Get the page-level featured image value for this type of fake subpage (or profile)
+					$location_fpage_featured_image_expertise = get_field('expertise_locations_fpage_featured_image');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile in an Area of Expertise subsection (or profile)
+					if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
+						$location_fpage_featured_image_expertise = get_field('location_fpage_featured_image_expertise', 'option');
+					}
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
+						if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
+							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
+								$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
+						}
+						$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
+					}
+
+					// Crop/resize the image
+					if ( $location_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						$location_fpage_featured_image_expertise_url = image_sizer($location_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					} elseif ( $location_fpage_featured_image_expertise_url ) {
+						$location_fpage_featured_image_expertise_url = wp_get_attachment_url( $location_fpage_featured_image_expertise, 'aspect-16-9' );
+					} else {
+						$location_fpage_featured_image_expertise_url = $expertise_featured_image_url;
+					}
+
+				// Related Areas of Expertise
+
+					// Get the page-level featured image value for this type of fake subpage (or profile)
+					$expertise_fpage_featured_image_expertise = get_field('expertise_associated_fpage_featured_image');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
+					if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
+						$expertise_fpage_featured_image_expertise = get_field('expertise_fpage_featured_image_expertise', 'option');
+					}
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
+						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
+								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
+						}
+						$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
+					}
+
+					// Crop/resize the image
+					if ( $expertise_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						$expertise_fpage_featured_image_expertise_url = image_sizer($expertise_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					} elseif ( $expertise_fpage_featured_image_expertise_url ) {
+						$expertise_fpage_featured_image_expertise_url = wp_get_attachment_url( $expertise_fpage_featured_image_expertise, 'aspect-16-9' );
+					} else {
+						$expertise_fpage_featured_image_expertise_url = $expertise_featured_image_url;
+					}
+
+				// Descendant Areas of Expertise
+
+					// Get the page-level featured image value for this type of fake subpage (or profile)
+					$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
+					if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
+						$expertise_descendant_fpage_featured_image_expertise = get_field('expertise_descendant_fpage_featured_image_expertise', 'option');
+					}
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
+						if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
+							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
+								$expertise_descendant_fpage_image_general = $fpage_image_expertise_general_vars['expertise_descendant_fpage_image_general']; // int
+						}
+						$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
+					}
+
+					// Crop/resize the image
+					if ( $expertise_descendant_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						$expertise_descendant_fpage_featured_image_expertise_url = image_sizer($expertise_descendant_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					} elseif ( $expertise_descendant_fpage_featured_image_expertise ) {
+						$expertise_descendant_fpage_featured_image_expertise_url = wp_get_attachment_url( $expertise_descendant_fpage_featured_image_expertise, 'aspect-16-9' );
+					} else {
+						$expertise_descendant_fpage_featured_image_expertise_url = $expertise_featured_image_url;
+					}
+
+				// Clinical Resources
+
+					// Get the page-level featured image value for this type of fake subpage (or profile)
+					$clinical_resource_fpage_featured_image_expertise = get_field('expertise_clinical_resources_fpage_featured_image');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in an Area of Expertise subsection (or profile)
+					if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
+						$expertise_descendant_fpage_featured_image_expertise = get_field('clinical_resource_fpage_featured_image_expertise', 'option');
+					}
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
+						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
+								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
+						}
+						$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
+					}
+
+					// Crop/resize the image
+					if ( $clinical_resource_fpage_featured_image_expertise && function_exists( 'fly_add_image_size' ) ) {
+						$clinical_resource_fpage_featured_image_expertise_url = image_sizer($clinical_resource_fpage_featured_image_expertise, 1600, 900, 'center', 'center');
+					} elseif ( $clinical_resource_fpage_featured_image_expertise ) {
+						$clinical_resource_fpage_featured_image_expertise_url = wp_get_attachment_url( $clinical_resource_fpage_featured_image_expertise, 'aspect-16-9' );
+					} else {
+						$clinical_resource_fpage_featured_image_expertise_url = $expertise_featured_image_url;
+					}
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_expertise_vars = array(
+						'expertise_featured_image'									=> $expertise_featured_image, // int
+						'expertise_featured_image_url'								=> $expertise_featured_image_url, // string
+						'provider_fpage_featured_image_expertise'					=> $provider_fpage_featured_image_expertise, // int
+						'provider_fpage_featured_image_expertise_url'				=> $provider_fpage_featured_image_expertise_url, // string
+						'location_fpage_featured_image_expertise'					=> $location_fpage_featured_image_expertise, // int
+						'location_fpage_featured_image_expertise_url'				=> $location_fpage_featured_image_expertise_url, // string
+						'expertise_fpage_featured_image_expertise'					=> $expertise_fpage_featured_image_expertise, // int
+						'expertise_fpage_featured_image_expertise_url'				=> $expertise_fpage_featured_image_expertise_url, // string
+						'expertise_descendant_fpage_featured_image_expertise'		=> $expertise_descendant_fpage_featured_image_expertise, // int
+						'expertise_descendant_fpage_featured_image_expertise_url'	=> $expertise_descendant_fpage_featured_image_expertise_url, // string
+						'clinical_resource_fpage_featured_image_expertise'			=> $clinical_resource_fpage_featured_image_expertise, // int
+						'clinical_resource_fpage_featured_image_expertise_url'		=> $clinical_resource_fpage_featured_image_expertise_url, // string
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_expertise_vars, __FUNCTION__ );
+	
+				// Return the variable
+				return $fpage_image_expertise_vars;
+		
+			}
 
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in a Clinical Resource subsection (or profile)
 		function uamswp_fad_fpage_image_clinical_resource() {
 
-			// Providers
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars', $fpage_image_clinical_resource_vars, __FUNCTION__ );
 
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
-				$provider_fpage_image_clinical_resource = get_field('provider_fpage_featured_image_clinical_resource', 'option');
+			if ( !empty( $fpage_image_clinical_resource_vars ) ) {
+				
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
 
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
-					if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-						$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-							$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
-					}
-					$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
-				}
-
-			// Locations
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
-				$location_fpage_image_clinical_resource = get_field('location_fpage_featured_image_clinical_resource', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
-					if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-						$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-							$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
-					}
-					$location_fpage_image_clinical_resource = $location_fpage_image_general; // Featured image
-				}
-
-			// Areas of Expertise
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
-				$expertise_fpage_image_clinical_resource = get_field('expertise_fpage_featured_image_clinical_resource', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
-					if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-						$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-							$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-					}
-					$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
-				}
-
-			// Related Clinical Resources
-
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
-				$clinical_resource_fpage_image_clinical_resource = get_field('clinical_resource_fpage_featured_image_clinical_resource', 'option');
-
-				// If the variable is not set or is empty...
-				// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
-				if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
-					if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-						$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-							$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-					}
-					$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
-				}
-
-			// Create and return an array to be used on the templates and template parts
-
-				$fpage_image_clinical_resource_vars = array(
-					'provider_fpage_image_clinical_resource'			=> $provider_fpage_image_clinical_resource, // int
-					'location_fpage_image_clinical_resource'			=> $location_fpage_image_clinical_resource, // int
-					'expertise_fpage_image_clinical_resource'			=> $expertise_fpage_image_clinical_resource, // int
-					'clinical_resource_fpage_image_clinical_resource'	=> $clinical_resource_fpage_image_clinical_resource // int
-				);
 				return $fpage_image_clinical_resource_vars;
+
+			} else {
+
+				/* 
+				* The transient does not exist.
+				* Define the variable again.
+				*/
+
+				// Providers
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
+					$provider_fpage_image_clinical_resource = get_field('provider_fpage_featured_image_clinical_resource', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
+						if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
+							$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
+								$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
+						}
+						$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
+					}
+
+				// Locations
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
+					$location_fpage_image_clinical_resource = get_field('location_fpage_featured_image_clinical_resource', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
+						if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
+							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
+								$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
+						}
+						$location_fpage_image_clinical_resource = $location_fpage_image_general; // Featured image
+					}
+
+				// Areas of Expertise
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
+					$expertise_fpage_image_clinical_resource = get_field('expertise_fpage_featured_image_clinical_resource', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
+						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
+							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
+								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
+						}
+						$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
+					}
+
+				// Related Clinical Resources
+
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in a Clinical Resource subsection (or profile)
+					$clinical_resource_fpage_image_clinical_resource = get_field('clinical_resource_fpage_featured_image_clinical_resource', 'option');
+
+					// If the variable is not set or is empty...
+					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
+					if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
+						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
+							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
+								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
+						}
+						$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
+					}
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_image_clinical_resource_vars = array(
+						'provider_fpage_image_clinical_resource'			=> $provider_fpage_image_clinical_resource, // int
+						'location_fpage_image_clinical_resource'			=> $location_fpage_image_clinical_resource, // int
+						'expertise_fpage_image_clinical_resource'			=> $expertise_fpage_image_clinical_resource, // int
+						'clinical_resource_fpage_image_clinical_resource'	=> $clinical_resource_fpage_image_clinical_resource // int
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars', $fpage_image_clinical_resource_vars, __FUNCTION__ );
+	
+				// Return the variable
+				return $fpage_image_clinical_resource_vars;
+		
+			}
 
 		}
 
@@ -6814,19 +7607,45 @@ function uamswp_fad_fpage_text_replace(
 	// Define the general maximum number of items to display on a fake subpage (or section) for Clinical Resource
 	function uamswp_fad_posts_per_page_clinical_resource_general() {
 
-		// General maximum number of clinical resources to display on a fake subpage (-1, 4, 6, 8, 10 or 12)
-		$clinical_resource_posts_per_page_fpage = -1;
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars', $posts_per_page_clinical_resource_general_vars, __FUNCTION__ );
 
-		// General maximum number of clinical resources to display in a section on a single profile (-1, 4, 6, 8, 10 or 12)
-		$clinical_resource_posts_per_page_section = 4;
+		if ( !empty( $posts_per_page_clinical_resource_general_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
 
-		// Create and return an array to be used on the templates and template parts
-
-			$posts_per_page_clinical_resource_general_vars = array(
-				'clinical_resource_posts_per_page_fpage'	=> $clinical_resource_posts_per_page_fpage, // int
-				'clinical_resource_posts_per_page_section'	=> $clinical_resource_posts_per_page_section // int
-			);
 			return $posts_per_page_clinical_resource_general_vars;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// General maximum number of clinical resources to display on a fake subpage (-1, 4, 6, 8, 10 or 12)
+			$clinical_resource_posts_per_page_fpage = -1;
+
+			// General maximum number of clinical resources to display in a section on a single profile (-1, 4, 6, 8, 10 or 12)
+			$clinical_resource_posts_per_page_section = 4;
+
+			// Create an array to be used on the templates and template parts
+
+				$posts_per_page_clinical_resource_general_vars = array(
+					'clinical_resource_posts_per_page_fpage'	=> $clinical_resource_posts_per_page_fpage, // int
+					'clinical_resource_posts_per_page_section'	=> $clinical_resource_posts_per_page_section // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars', $posts_per_page_clinical_resource_general_vars, __FUNCTION__ );
+
+			// Return the variable
+			return $posts_per_page_clinical_resource_general_vars;
+
+		}
 
 	}
 
@@ -6910,7 +7729,7 @@ function uamswp_fad_appointment_patients() {
 		$appointment_patients_web_label_both_attr = uamswp_attr_conversion($appointment_patients_web_label_both);
 		$appointment_patients_web_info_both = get_field('appointment_patients_web_info_both', 'option') ?: '';
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$appointment_patients_vars = array(
 			'appointment_patients_phone_number_new'				=> $appointment_patients_phone_number_new, // string
@@ -6966,7 +7785,7 @@ function uamswp_fad_appointment_refer() {
 		$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
 		$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$appointment_refer_vars = array(
 			'appointment_refer_phone_number'		=> $appointment_refer_phone_number, // string
@@ -6992,7 +7811,7 @@ function uamswp_fad_labels_jump_links() {
 	// Jump Links Section Title
 	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$labels_jump_links_vars = array(
 			'fad_jump_links_title'	=> $fad_jump_links_title // string
@@ -7049,7 +7868,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 	}
 
 
-	// Create and return an array to be used on the templates and template parts
+	// Create an array to be used on the templates and template parts
 
 		$meta_image_resize_vars = array(
 			'meta_og_image'				=> $meta_og_image, // string
@@ -7929,3 +8748,78 @@ function uamswp_prevent_orphan($string) {
 	return $string;
 
 }
+
+// Transients
+
+	// Transient name
+
+		function uamswp_fad_transient_name( $input, $function = '' ) {
+
+			/* 
+			 * Combines various elements to avoid transient name collisions and to make the 
+			 * transients more easily found in a list.
+			 * 
+			 * Include __FUNCTION__ in the $function argument to include the name of the 
+			 * current function in the transient name.
+			 */
+
+			$transient_name = isset($input) ? $input : '';
+
+			if ( empty($transient_name) ) {
+
+				return '';
+
+			}
+
+			// Remove UAMS_FAD_TRANSIENT_PREFIX from beginning of $function value if present
+
+				$function = isset($function) ? $function : '';
+				if (substr($function, 0, strlen(UAMS_FAD_TRANSIENT_PREFIX)) == UAMS_FAD_TRANSIENT_PREFIX) {
+
+					$function = substr( $function, strlen(UAMS_FAD_TRANSIENT_PREFIX) );
+
+				}
+			
+			$transient_name = UAMS_FAD_TRANSIENT_PREFIX . ( $function ? $function . '_' : '' ) . $transient_name . UAMS_FAD_TRANSIENT_SUFFIX;
+
+			return $transient_name;
+
+		}
+
+	// Get transient
+
+		function uamswp_fad_get_transient(  $string, &$var, $function = '' ) {
+
+			/* 
+			 * Combines with the uamswp_fad_transient_name() function to streamline the code.
+			 * 
+			 * Arguments will be identical to those used in the uamswp_fad_set_transient() 
+			 * function.
+			 * 
+			 * Include __FUNCTION__ in the $function argument to include the name of the 
+			 * current function in the transient name.
+			 */
+
+			$var = get_transient( uamswp_fad_transient_name( $string, $function ) );
+
+			return;
+		}
+
+	// Set transient
+
+		function uamswp_fad_set_transient( $string, $value, $function = '' ) {
+
+			/* 
+			 * Combines with the uamswp_fad_transient_name() function to streamline the code.
+			 * 
+			 * Arguments will be identical to those used in the uamswp_fad_get_transient() 
+			 * function.
+			 * 
+			 * Include __FUNCTION__ in the $function argument to include the name of the 
+			 * current function in the transient name.
+			 */
+
+			set_transient( uamswp_fad_transient_name( $string, $function ), $value, DAY_IN_SECONDS );
+
+			return;
+		}
