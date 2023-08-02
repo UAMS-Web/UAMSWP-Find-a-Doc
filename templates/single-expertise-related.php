@@ -6,26 +6,26 @@
 // Define Variables
 
 	// Define variables common to all area of expertise pages and fake subpages
-	include( UAMS_FAD_PATH . '/templates/parts/expertise-vars.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-vars.php' );
 
 	// Define variables common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/expertise-fpage-vars.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-fpage-vars.php' );
 
 // HEAD Elements
 
 	// Construct HEAD elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/expertise-construct-head.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 
 	// Construct HEAD elements common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/expertise-fpage-construct-head.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-fpage-construct-head.php' );
 
 // BODY elements
 
 	// Construct BODY elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/expertise-construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-body.php' );
 
 	// Construct BODY elements common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/expertise-fpage-construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-fpage-construct-body.php' );
 
 	// Construct main ontology page content
 
@@ -52,7 +52,7 @@
 			$expertise_section_collapse_list,
 			$expertise_section_id
 		) {
-			include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
 		}, 24 );
 
 genesis();

@@ -47,10 +47,10 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
 
 // Get system settings for this archive page's text
-include( UAMS_FAD_PATH . '/templates/parts/sys-archive-treatment.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-treatment.php' );
 
 // Get the page ID
 
@@ -149,7 +149,7 @@ include( UAMS_FAD_PATH . '/templates/parts/sys-archive-treatment.php' );
 // Override the theme's method of defining the social media meta tags
 
 	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
 
 get_header();
 

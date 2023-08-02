@@ -18,10 +18,10 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
 
 // Get system settings for this archive page's text
-include( UAMS_FAD_PATH . '/templates/parts/sys-archive-expertise.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-expertise.php' );
 
 // Get the page ID
 
@@ -118,7 +118,7 @@ include( UAMS_FAD_PATH . '/templates/parts/sys-archive-expertise.php' );
 // Override the theme's method of defining the social media meta tags
 
 	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
 
 get_header();
 

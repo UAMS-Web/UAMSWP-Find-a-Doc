@@ -1563,7 +1563,7 @@ function uamswp_fad_post_title(
 	// Check/define variables
 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 
-	include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
+	include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
 
 }
 
@@ -2134,7 +2134,7 @@ function uamswp_fad_ontology_nav_menu(
 	$page_url // string (optional) // Permalink of the post
 ) {
 
-	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-nav.php');
+	include( UAMS_FAD_PATH . '/templates/parts/site-nav_single-expertise.php');
 
 }
 
@@ -2146,7 +2146,7 @@ function uamswp_fad_ontology_header(
 	$page_url // string (optional) // Permalink of the post
 ) {
 
-	include( UAMS_FAD_PATH . '/templates/parts/single-expertise-header.php');
+	include( UAMS_FAD_PATH . '/templates/parts/site-header_single-expertise.php');
 
 }
 
@@ -7068,7 +7068,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		// $provider_section_id = 'providers' // string (optional) // Section ID
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-provider.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
 
 	}
 
@@ -7107,7 +7107,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		// $location_section_id = 'locations' // string (optional) // Section ID
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-location.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
 
 	}
 
@@ -7145,7 +7145,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		$expertise_section_class = 'expertise-list' // string (optional) // Section class
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
 
 	}
 
@@ -7184,7 +7184,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		$clinical_resource_section_id = 'related-resources' // string (optional) // Section ID
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
 
 	}
 
@@ -7222,7 +7222,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		$condition_section_id = 'conditions' // string (optional) // Section ID
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-condition.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-condition.php' );
 
 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
@@ -7269,7 +7269,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		$treatment_section_id = 'treatments' // string (optional) // Section ID
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-treatment.php' );
 
 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
@@ -7330,7 +7330,7 @@ function uamswp_meta_image_resize( $featured_image ) {
 		$treatment_section_id = 'treatments' // string (optional) // Treatments subsection ID
 	) {
 
-		include( UAMS_FAD_PATH . '/templates/parts/section-list-condition-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
 
 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 

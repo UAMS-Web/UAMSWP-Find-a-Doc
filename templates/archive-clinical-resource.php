@@ -18,31 +18,31 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
 
 	// Get system settings for Clinical Resource facet labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-facets-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_facets-clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
 
 // Get system settings for this archive page's text
-include( UAMS_FAD_PATH . '/templates/parts/sys-archive-clinical-resource.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-clinical-resource.php' );
 
 // Get the page ID
 
@@ -139,7 +139,7 @@ include( UAMS_FAD_PATH . '/templates/parts/sys-archive-clinical-resource.php' );
 // Override the theme's method of defining the social media meta tags
 
 	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta-social.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
 
 get_header();
 
