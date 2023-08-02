@@ -49,7 +49,7 @@
 			'page_title_attr'	=> $page_title_attr
 		);
 
-	// Get system settings for elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
+	// Get system settings for elements of a fake subpage (or section) in an Clinical subsection (or profile)
 
 		// Text elements
 

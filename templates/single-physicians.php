@@ -156,7 +156,7 @@
 			'short_name_possessive_attr'	=> $short_name_possessive_attr
 		);
 
-	// Get system settings for elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
+	// Get system settings for elements of a fake subpage (or section) in an Provider subsection (or profile)
 
 		// Text elements
 
