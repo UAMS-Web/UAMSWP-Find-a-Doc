@@ -8176,7 +8176,7 @@ function uamswp_fad_fpage_text_image_overlay(
 				// Add it to the main array
 				$fpage_text_image_overlay[] = $main_archive;
 
-	// Call the main function to construct UAMS Text & Image Overlay Block
+	// Pass the values to the UAMS Text & Image Overlay Block template part
 
 		if (
 			isset($parent_archive) && !empty($parent_archive)
@@ -8184,24 +8184,24 @@ function uamswp_fad_fpage_text_image_overlay(
 			isset($main_archive) && !empty($main_archive)
 		) {
 
-			uamswp_section_text_image_overlay(
-				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$text_image_overlay_id, // Section ID attribute value // string
-				$parent_archive, // Values for the first item // arr
-				$main_archive // Values for the second item // arr
-			);
+			$text_image_overlay_row_0 = $parent_archive; // Values for the first item
+			$text_image_overlay_row_1 = $main_archive; // Values for the second item
 
 		} elseif (
 			isset($main_archive) && !empty($main_archive)
 		) {
 
-			uamswp_section_text_image_overlay(
-				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				$text_image_overlay_id, // Section ID attribute value // string
-				$main_archive // Values for the first item // arr
-			);
+			$text_image_overlay_row_0 = $main_archive; // Values for the first item
+			$text_image_overlay_row_1 = ''; // Values for the second item
+
+		} else {
+			
+			$text_image_overlay_row_0 = ''; // Values for the first item
+			$text_image_overlay_row_1 = ''; // Values for the second item
 
 		}
+
+		include( UAMS_FAD_PATH . '/templates/parts/section_text-image-overlay.php' );
 
 }
 
