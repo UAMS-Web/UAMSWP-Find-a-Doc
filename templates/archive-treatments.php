@@ -46,29 +46,11 @@
 
 // Get system settings for ontology item labels
 
-	// Get system settings for Treatments Labels
-
-		$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
-			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
-			$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
-			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
-			$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
-			$placeholder_treatment_single_name = $labels_treatment_vars['placeholder_treatment_single_name']; // string
-			$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
-
-	// Get system settings for Treatments Archive Page
-
-		$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
-			$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
-			$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
-			$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
-			$placeholder_treatment_archive_headline = $archive_text_treatment_vars['placeholder_treatment_archive_headline']; // string
-			$placeholder_treatment_archive_intro_text = $archive_text_treatment_vars['placeholder_treatment_archive_intro_text']; // string
-		$treatment_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+	// Get system settings for treatment labels
+	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-treatment.php' );
 
 // Get system settings for this archive page's text
-
-	// Do nothing
+include( UAMS_FAD_PATH . '/templates/parts/sys-archive-treatment.php' );
 
 // Get the page ID
 

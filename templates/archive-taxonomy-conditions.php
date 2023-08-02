@@ -44,28 +44,10 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for condition labels
-
-		$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
-			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
-			$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
-			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
-			$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
-			$placeholder_condition_single_name = $labels_condition_vars['placeholder_condition_single_name']; // string
-			$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
-
-	// Get system settings for condition archive page text
-
-		$archive_text_condition_vars = isset($archive_text_condition_vars) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
-			$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
-			$condition_archive_headline_attr = $archive_text_condition_vars['condition_archive_headline_attr']; // string
-			$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
-			$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
-			$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
-		$condition_archive_link = get_post_type_archive_link( get_query_var('post_type') );
+	include( UAMS_FAD_PATH . '/templates/parts/sys-labels-condition.php' );
 
 // Get system settings for this archive page's text
-
-	// Do nothing
+include( UAMS_FAD_PATH . '/templates/parts/sys-archive-condition.php' );
 
 // Get the page ID
 
