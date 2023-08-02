@@ -438,12 +438,7 @@
 					$page_title,
 					$page_url
 				) {
-					uamswp_fad_ontology_nav_menu(
-						$page_id, // int // ID of the post
-						$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-						$page_title, // string (optional) // Title of the post
-						$page_url // string (optional) // Permalink of the post
-					);
+					include( UAMS_FAD_PATH . '/templates/parts/single-expertise-nav.php');
 				}, 5 );
 
 	// Breadcrumbs
@@ -495,15 +490,12 @@
 				$entry_title_image_desktop,
 				$entry_title_image_mobile
 			) {
-				uamswp_fad_post_title(
-					$entry_title_text, // string // Entry title text
-					$entry_header_style, // string // Entry header style
-					$entry_title_text_supertitle, // string (optional) // Entry supertitle text
-					$entry_title_text_subtitle, // string (optional) // Entry subtitle text
-					$entry_title_text_body, // string (optional) // Entry header lead paragraph text
-					$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
-					$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
-				);
+
+				// Check/define variables
+				$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
+
+				include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
+
 			} );
 
 	// MAIN / ARTICLE
@@ -667,18 +659,7 @@
 					$expertise_section_title,
 					$expertise_section_intro
 				) {
-					uamswp_fad_section_expertise(
-						$expertise_descendants, // int[] // Value of the related (or descendant) areas of expertise input (or list of this area of expertise item's descendant items)
-						$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						$hide_medical_ontology, // bool (optional) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
-						$expertise_descendant_section_show, // bool (optional) // Query for whether to show the area of expertise section
-						$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
-						$expertise_descendant_list, // bool (optional) // Query for whether this is a list of child areas of expertise within an area of expertise
-						$content_placement, // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
-						$site_nav_id, // int (optional) // ID of post that defines the subsection
-						$expertise_section_title, // string (optional) // Text to use for the section title
-						$expertise_section_intro // string (optional) // Text to use for the section intro text
-					);
+					include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 				}, 12 );
 
 			// Display references to other archive pages

@@ -1560,69 +1560,8 @@ function uamswp_fad_post_title(
 	$entry_title_image_mobile = '' // int (optional) // Entry header background image for mobile breakpoints
 ) {
 
-	// Add the following (without the commenting) to the relevant template to remove Genesis-standard post title and markup
-	// remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-	// remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-	// remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
-
-	// Add the following (without the commenting) to the relevant template to add this header style
-	// add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
-
-	// Add one of the following variable definitions to the relevant template to indicate which entry header style to use
-
-		// Normal style
-		// $entry_header_style = 'normal';
-
-		// Graphic style
-		// $entry_header_style = 'graphic';
-
-		// Marketing Landing Page style
-		// $entry_header_style = 'landingpage';
-
-	// Define the following variable to indicate the text elements of the entry title
-
-		// Regular title
-		// Graphic style has no character limit on this value
-		// Marketing Landing Page style limits this value to 62 characters
-		// $entry_title_text = '';
-
-		// Optional supertitle, placed above the regular title
-		// This element is only supported by Graphic style
-		// $entry_title_text_supertitle = '';
-
-		// Optional subtitle, placed below the regular title
-		// This element is supported by Graphic style only
-		// $entry_title_text_subtitle = '';
-
-		// Optional lead paragraph, placed below the entry title
-		// Graphic style limits this value to 500 characters
-		// Marketing Landing Page style limits this value to 117 characters
-		// $entry_title_text_body = ''; 
-
-	// Define the following variables to indicate the IDs of the images used in the entry title background
-
-		// Desktop breakpoint image ID
-		// This element is optional for Graphic style
-		// The minimum dimensions for Graphic style are 1920x720
-		// This element is required for Marketing Landing Page style
-		// The minimum dimensions for Graphic style are 1920x600
-		// $entry_title_image_desktop = '';
-
-		// Optional mobile breakpoint image ID
-		// This element is only supported by Marketing Landing Page style
-		// This element is optional for Marketing Landing Page style
-		// The minimum dimensions for Graphic style are 992x806
-		// $entry_title_image_mobile = '';
-
 	// Check/define variables
-
-	$entry_title_text = ( isset($entry_title_text) && !empty($entry_title_text) ) ? $entry_title_text : get_the_title();
 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
-	$entry_title_text_supertitle = isset($entry_title_text_supertitle) ? $entry_title_text_supertitle : '';
-	$entry_title_text_subtitle = isset($entry_title_text_subtitle) ? $entry_title_text_subtitle : '';
-	$entry_title_text_body = isset($entry_title_text_body) ? $entry_title_text_body : '';
-	$entry_title_image_desktop = isset($entry_title_image_desktop) ? $entry_title_image_desktop : '';
-	$entry_title_image_mobile = isset($entry_title_image_mobile) ? $entry_title_image_mobile : '';
 
 	include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
 

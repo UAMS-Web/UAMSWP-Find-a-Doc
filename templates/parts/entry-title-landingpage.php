@@ -13,10 +13,46 @@
  * 
  * The template part expects the "Fly Dynamic Image Resizer" plugin by Junaid 
  * Bhura to be installed.
+ * 
+ * Required vars:
+ * 	$entry_title_text // Regular title
+ * 
+ * Optional vars:
+ * 	$entry_title_text_body // Optional lead paragraph, placed below the entry title
+ * 	$entry_title_image_desktop // Desktop breakpoint image ID
+ * 	$entry_title_image_mobile // Optional mobile breakpoint image ID
+ * 
+ * ----------
+ * 
+ * Add the following to the relevant template to remove Genesis-standard post title and markup:
+ * 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+ * 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+ * 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+ * 
+ * Add the following to the relevant template to add this header style
+ * 	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
+ * 
+ * ----------
+ * 
+ * Required Regular title ($entry_title_text)
+ * 	- Character limits: 62 characters
+ * 
+ * Optional Lead paragraph ($entry_title_text_body)
+ * 	- Character limits: 117 characters
+ * 
+ * Required Desktop breakpoint image ID ($entry_title_text_body)
+ * 	- Minimum dimensions: 1920x600
+ * 
+ * Optional Mobile breakpoint image ID ($entry_title_text_body)
+ * 	- Minimum dimensions: 992x806
  */
 
-// Check if mobile image exists
-$entry_title_image_mobile = $entry_title_image_mobile ?: $entry_title_image_desktop; // Use desktop image if no mobile image exists
+// Check/define variables
+
+	$entry_title_text = ( isset($entry_title_text) && !empty($entry_title_text) ) ? $entry_title_text : get_the_title();
+	$entry_title_text_body = isset($entry_title_text_body) ? $entry_title_text_body : '';
+	$entry_title_image_desktop = isset($entry_title_image_desktop) ? $entry_title_image_desktop : '';
+	$entry_title_image_mobile = isset($entry_title_image_mobile) ? $entry_title_image_mobile : $entry_title_image_desktop;
 
 ?>
 <div class="col-12">

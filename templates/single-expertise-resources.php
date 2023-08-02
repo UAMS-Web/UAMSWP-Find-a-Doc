@@ -439,12 +439,7 @@
 					$page_title,
 					$page_url
 				) {
-					uamswp_fad_ontology_nav_menu(
-						$page_id, // int // ID of the post
-						$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-						$page_title, // string (optional) // Title of the post
-						$page_url // string (optional) // Permalink of the post
-					);
+					include( UAMS_FAD_PATH . '/templates/parts/single-expertise-nav.php');
 				}, 5 );
 
 	// Breadcrumbs
@@ -498,15 +493,12 @@
 				$entry_title_image_desktop,
 				$entry_title_image_mobile
 			) {
-				uamswp_fad_post_title(
-					$entry_title_text, // string // Entry title text
-					$entry_header_style, // string // Entry header style
-					$entry_title_text_supertitle, // string (optional) // Entry supertitle text
-					$entry_title_text_subtitle, // string (optional) // Entry subtitle text
-					$entry_title_text_body, // string (optional) // Entry header lead paragraph text
-					$entry_title_image_desktop, // int (optional) // Entry header background image for desktop breakpoints
-					$entry_title_image_mobile // int (optional) // Entry header background image for mobile breakpoints
-				);
+
+				// Check/define variables
+				$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
+
+				include( UAMS_FAD_PATH . '/templates/parts/entry-title-' . $entry_header_style . '.php');
+
 			} );
 
 	// MAIN / ARTICLE
@@ -681,22 +673,7 @@
 					$clinical_resource_section_more_link_descr,
 					$clinical_resource_section_show_header
 				) {
-					uamswp_fad_section_clinical_resource(
-						$clinical_resources, // int[] // Value of the related clinical resources input
-						$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						$clinical_resource_section_more_link_key, // string (optional)
-						$clinical_resource_section_more_link_value, // string (optional)
-						$clinical_resource_section_show, // bool (optional) // Query for whether to show the clinical resource section
-						$ontology_type, // bool (optional) // Query for whether item is ontology type vs. content type
-						$clinical_resource_section_title, // string (optional) // Text to use for the section title
-						$clinical_resource_section_intro, // string (optional) // Text to use for the section intro text
-						$clinical_resource_posts_per_page, // int (optional) // Maximum number of clinical resources to display (-1, 4, 6, 8, 10 or 12)
-						$clinical_resource_section_more_show, // bool (optional) // Query for whether to show the section that links to more items
-						$clinical_resource_section_more_text, // string (optional) // Text to use for the "more" intro text
-						$clinical_resource_section_more_link_text, // string (optional) // Text to use for the "more" link text
-						$clinical_resource_section_more_link_descr, // string (optional) // Text to use for the "more" link description
-						$clinical_resource_section_show_header // bool (optional) // Query for whether to display the section header
-					);
+					include( UAMS_FAD_PATH . '/templates/parts/section-list-clinical-resource.php' );
 				}, 14 );
 
 			// Display references to other archive pages
