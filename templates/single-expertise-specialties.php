@@ -657,7 +657,8 @@
 					$content_placement,
 					$site_nav_id,
 					$expertise_section_title,
-					$expertise_section_intro
+					$expertise_section_intro,
+					$expertise_section_show_header
 				) {
 					include( UAMS_FAD_PATH . '/templates/parts/section-list-expertise.php' );
 				}, 12 );
