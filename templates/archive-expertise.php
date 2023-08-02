@@ -3,75 +3,128 @@
  * Template Name: Areas of Expertise Archive
  */
 
+// Add page template class to body element's classes
+
+	// Do nothing
+
+// Filter posts_where
+
+	// Do nothing
+
+// Filter terms_clauses
+
+	// Do nothing
+
 // Get system settings for ontology item labels
 
-	// // Get system settings for Provider labels
-	// uamswp_fad_labels_provider();
+	// Get system settings for area of expertise labels
+	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
 
-	// // Get system settings for Location labels
-	// uamswp_fad_labels_location();
+// Get system settings for this archive page's text
+include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-expertise.php' );
 
-	// Get system settings for Area of Expertise labels
-	uamswp_fad_labels_expertise();
+// Get the page ID
 
-	// // Get system settings for Clinical Resource labels
-	// uamswp_fad_labels_clinical_resource();
-
-	// // Get system settings for Condition labels
-	// uamswp_fad_labels_condition();
-
-	// // Get system settings for Treatment labels
-	// uamswp_fad_labels_treatment();
-
-// Get system settings for Areas of Expertise archive page text
-uamswp_fad_archive_text_expertise();
-
-// // Get the page ID
-// $page_id = get_the_ID(); // int
+	// $page_id = get_the_ID(); // int
 
 // Get the page title
-$page_title = $expertise_archive_headline; // string
-// $page_title_attr = uamswp_attr_conversion($page_title);
 
-// // Get the page URL
-// $page_url = get_permalink();
+	$page_title = $expertise_archive_headline; // string
+	$page_title_attr = uamswp_attr_conversion($page_title);
 
-// Get system settings for the featured image of an Area of Expertise archive page
-uamswp_fad_archive_image_expertise();
+	// Array for page titles and section titles
+
+		$page_titles = array(
+			'page_title'		=> $page_title,
+			'page_title_attr'	=> $page_title_attr
+		);
+
+// Get the page URL
+
+	// $page_url = user_trailingslashit(get_permalink());
+
+// alpha
+
+	// Do nothing
+
+// Get system settings for this archive page's featured image
+
+	$archive_image_expertise_vars = isset($archive_image_expertise_vars) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
+		$expertise_archive_image = $archive_image_expertise_vars['expertise_archive_image']; // int
 
 // Get the featured image
-$page_image_id = $expertise_archive_image; // Image ID // int
+
+	$featured_image = $expertise_archive_image; // Image ID // int
 
 // Override theme's method of defining the meta page title
-$meta_title_base_addition = $expertise_plural_name_attr; // Word or phrase to use to form base meta title
-uamswp_fad_title_vars(); // Defines universal variables related to the setting the meta title
-add_filter('seopress_titles_title', 'uamswp_fad_title', 15, 2);
 
-// Override theme's method of defining the meta description
-$excerpt = $expertise_archive_intro_text;
-add_filter('seopress_titles_desc', 'uamswp_fad_meta_desc');
+	// Construct the meta title
 
-// // Construct the meta keywords element
-// $keywords = '';
-// add_action('wp_head','uamswp_keyword_hook_header');
+		$meta_title_base_addition = $expertise_plural_name_attr; // Word or phrase to use to form base meta title
+		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
+			$page_title, // string
+			$page_title_attr, // string (optional)
+			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
+		);
+			$meta_title = $meta_title_vars['meta_title']; // string
 
-// Override the theme's method of defining the social meta tags
+	// Modify SEOPress's standard meta title settings
 
-	// Crop and resize images for Open Graph and Twitter
-	uamswp_meta_image_resize();
+		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
 
-	// Open Graph meta tags
-	add_filter('seopress_social_og_thumb', 'uamswp_sp_social_og_thumb'); // Filter Open Graph thumbnail (og:image)
+			$html = $meta_title;
 
-	// Twitter Card meta tags
-	add_filter('seopress_social_twitter_card_thumb', 'uamswp_sp_social_twitter_card_thumb'); // Filter Twitter Card thumbnail (twitter:image:src)
+			return $html;
+
+		}, 15, 2 );
+
+// Set the schema description and the meta description
+
+	// Get excerpt
+
+		$excerpt = $expertise_archive_intro_text;
+		$excerpt_user = true;
+
+		if ( empty( $excerpt ) ) {
+
+			$excerpt_user = false;
+
+		}
+
+	// Set schema description
+
+		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
+
+	// Override theme's method of defining the meta description
+
+		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
+
+			$html = $excerpt;
+
+			return $html;
+
+		} );
+
+// Construct the meta keywords element
+
+	// $keywords = '';
+	// 
+	// add_action( 'wp_head', function() use ($keywords) {
+	// 	uamswp_keyword_hook_header(
+	// 		$keywords // array
+	// 	);
+	// } );
+
+// Override the theme's method of defining the social media meta tags
+
+	// Filter hooks
+	include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
 
 get_header();
 
 add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
-
 <div class="content-sidebar-wrap">
 	<main id="genesis-content">
 		<section class="archive-description">

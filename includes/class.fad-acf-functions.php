@@ -44,8 +44,8 @@ function set_default_portal( $field ) {
 	// Only if no value set
 	if( empty( $field['value'] ) ){
 		$term = get_term_by('slug', 'uams-mychart', 'portal');
-		$id = $term->term_id;
-		$default = array($id);
+		$term_id = $term->term_id;
+		$default = array($term_id);
 		// Set field to default value
 		$field[ 'value' ] = $default ;
 	}
@@ -60,8 +60,8 @@ function set_default_language($value, $post_id, $field) {
 	}
 
 	$term = get_term_by('slug', 'english', 'language');
-	$id = $term->term_id;
-	$value = array($id);
+	$term_id = $term->term_id;
+	$value = array($term_id);
 	return $value;
 }
 
@@ -73,8 +73,8 @@ function set_default_region($value, $post_id, $field) {
 	}
 
 	$term = get_term_by('slug', 'central', 'region');
-	$id = $term->term_id;
-	$value = array($id);
+	$term_id = $term->term_id;
+	$value = array($term_id);
 	return $value;
 }
 
@@ -243,7 +243,7 @@ function my_taxonomy_query( $args, $field ) {
 		if( empty($_POST['acf']) || ($post_type != 'expertise') ) {
 			return;
 		}
-	
+
 		// Set the featured image value
 		if (
 			!empty($post_id) // If the post ID is not empty ...
@@ -253,7 +253,7 @@ function my_taxonomy_query( $args, $field ) {
 		} else {
 			$post_thumbnail = '';
 		}
-	
+
 		// Update the post with the new thumbnail value
 		if (
 			!empty($post_id) // If the post ID is not empty ...
@@ -559,10 +559,12 @@ function custom_excerpt_acf() {
 
 	// 1. Add post types (key) and corresponding field names (value) to be used to set the excerpt
 	$excerpt_field_name = array(
-		'expertise' => 'expertise_selected_post_excerpt',
 		'provider' => 'physician_short_clinical_bio',
 		'location' => 'location_short_desc',
+		'expertise' => 'expertise_selected_post_excerpt',
 		'clinical-resource' => 'clinical_resource_excerpt',
+		'condition' => 'condition_short_desc',
+		'treatment' => 'treatment_procedure_short_desc'
 	);
 
 	// Get the post type of the current page/post
@@ -982,7 +984,6 @@ add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'p
 	// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
 	add_filter('acf/fields/relationship/query/key=field_clinical_resource_related', 'relationship_exclude_id', 10, 3);
 	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'relationship_exclude_id', 10, 3);
-	add_filter('acf/fields/relationship/query/key=field_expertise_parent_id', 'relationship_exclude_id', 10, 3);
 	// 2. Add the $field and $post arguments.
 	function relationship_exclude_id ( $args, $field, $post_id ) {
 
@@ -997,7 +998,6 @@ add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'p
 	// Filter documentation: https://www.advancedcustomfields.com/resources/acf-fields-relationship-query/
 	// 1. Add a filter for each specific relationship field with key=[NAME_OF_RELATIONSHIP_FIELD].
 	add_filter('acf/fields/relationship/query/key=field_expertise_associated', 'uamswp_fad_relationship_exclude_descendants', 10, 3);
-	add_filter('acf/fields/relationship/query/key=field_expertise_parent_id', 'uamswp_fad_relationship_exclude_descendants', 10, 3);
 	// 2. Add the $field and $post arguments.
 	function uamswp_fad_relationship_exclude_descendants( $args, $field, $post_id ) {
 		// $args (array): The query args. See WP_Query for available args.

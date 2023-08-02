@@ -46,7 +46,7 @@
 					"name": "page_header_landingpage_intro",
 					"type": "textarea",
 					"instructions": "Appears below the page title. Basic description of the page. There is a 117 character limit.",
-					"required": 1,
+					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",

@@ -15,15 +15,15 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
-if ( empty( $id ) && isset($block) ) {
-	$id = $block['id'];
+$block_id = '';
+if ( empty( $block_id ) && isset($block) ) {
+	$block_id = $block['id'];
 }
-if ( empty ($id) ) {
-	$id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+if ( empty ($block_id) ) {
+	$block_id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'locations-' . $id;
+$section_id = 'locations-' . $block_id;
 
 $className = '';
 if( !empty($block['className']) ) {
@@ -126,7 +126,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
 	$location_query = new WP_Query( $args );
 
 	if ( $location_query->have_posts() ) : ?>
-		<section class="uams-module location-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $id; ?>">
+		<section class="uams-module location-list alignfull <?php echo $background_color ? $background_color : 'bg-auto'; ?>" id="<?php echo $section_id; ?>">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -135,7 +135,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
 						<div class="card-list-container location-card-list-container">
 							<div class="card-list">
 							<?php while ( $location_query->have_posts() ) : $location_query->the_post();
-								$id = get_the_ID();
+								$page_id = get_the_ID();
 								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
 							endwhile;
 							wp_reset_postdata();?>
