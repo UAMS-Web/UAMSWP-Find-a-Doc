@@ -8,6 +8,7 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$providers // int[]
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
@@ -150,6 +151,7 @@ if ( $provider_section_show ) {
 			) {
 
 				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$page_id, // int
 					$providers // int[]
 				);
 					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]

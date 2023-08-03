@@ -8,6 +8,7 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$clinical_resources // int[] // Value of the related clinical resources input (or $clinical_resource_descendants, List of this clinical resource item's descendant items)
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 
@@ -56,6 +57,7 @@
 		$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 
 		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+			$page_id, // int
 			$clinical_resources,
 			$clinical_resource_posts_per_page,
 			$jump_link_count
@@ -65,6 +67,7 @@
 	if ( !isset($clinical_resource_section_show) ) {
 
 		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+			$page_id, // int
 			$clinical_resources,
 			$clinical_resource_posts_per_page,
 			$jump_link_count
@@ -87,6 +90,7 @@
 					!isset($clinical_resource_count)
 				) {
 					$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+						$page_id, // int
 						$clinical_resources,
 						$clinical_resource_posts_per_page,
 						$jump_link_count

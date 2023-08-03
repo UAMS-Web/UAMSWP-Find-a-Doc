@@ -8,11 +8,12 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$conditions_cpt // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+ * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
  * 
  * Optional vars:
- * 	$hide_medical_ontology // bool (default: false) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
  * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
  * 	$condition_section_show // bool // Query for whether to show the conditions section (or $condition_descendant_section_show, Query for whether to show the descendant condition section)
  * 	$condition_section_title // string (default: Find-a-Doc Settings value for areas of condition section title in a general placement) // Text to use for the section title
@@ -153,6 +154,7 @@ if ( $condition_section_show ) {
 				!isset($condition_count) || empty($condition_count)
 			) {
 				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$page_id, // int
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type // bool (optional)
@@ -162,9 +164,6 @@ if ( $condition_section_show ) {
 					$condition_ids = $condition_query_vars['condition_ids']; // int[]
 					$condition_count = $condition_query_vars['condition_count']; // int
 			}
-
-			// Query for whether to conditionally suppress ontology sections based on based on region and service line
-			include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 	?>
 	<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>

@@ -96,7 +96,11 @@
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
 // Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
+
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
+
+	include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 // HEAD
 
@@ -313,6 +317,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 				$providers = get_field('condition_physicians');
 				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$page_id, // int
 					$providers, // int[]
 					$jump_link_count // int
 				);
@@ -325,6 +330,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 				$locations = get_field('condition_locations');
 				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$page_id, // int
 					$locations, // int[]
 					$jump_link_count // int
 				);
@@ -338,6 +344,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 				$expertises = get_field('condition_expertise');
 				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+					$page_id, // int
 					$expertises, // int[]
 					$jump_link_count // int
 				);
@@ -354,6 +361,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
 				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+					$page_id, // int
 					$clinical_resources, // int[]
 					$clinical_resource_posts_per_page, // int
 					$jump_link_count // int
@@ -370,6 +378,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool
 					$ontology_type, // bool
@@ -386,6 +395,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 				$podcast_name = get_field('condition_podcast_name');
 				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
+					$page_id, // int
 					$podcast_name, // string
 					$jump_link_count // int
 				);

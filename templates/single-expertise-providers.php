@@ -38,6 +38,7 @@
 		$provider_section_collapse_list = false; // Query whether to collapse the list of providers in the providers section
 
 		add_action( 'genesis_entry_content', function() use (
+			$page_id,
 			$providers,
 			$page_titles,
 			$provider_section_show,

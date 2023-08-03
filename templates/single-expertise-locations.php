@@ -40,6 +40,7 @@
 		$location_section_collapse_list = false; // Query whether to collapse the list of locations in the providers section
 
 		add_action( 'genesis_entry_content', function() use (
+			$page_id,
 			$locations,
 			$page_titles,
 			$location_section_schema_query,

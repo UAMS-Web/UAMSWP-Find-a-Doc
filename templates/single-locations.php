@@ -872,6 +872,7 @@
 				$providers = get_field('physician_locations');
 				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+					$page_id, // int
 					$providers, // int[]
 					$jump_link_count // int
 				);
@@ -908,6 +909,7 @@
 
 				$expertises = get_field('location_expertise');
 				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+					$page_id, // int
 					$expertises, // int[]
 					$jump_link_count, // int
 					$hide_medical_ontology // bool
@@ -925,6 +927,7 @@
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
 				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+					$page_id, // int
 					$clinical_resources, // int[]
 					$clinical_resource_posts_per_page, // bool
 					$jump_link_count, // int
@@ -942,6 +945,7 @@
 				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
 				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$page_id, // int
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool
 					$ontology_type, // bool
@@ -961,6 +965,7 @@
 				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type, // bool

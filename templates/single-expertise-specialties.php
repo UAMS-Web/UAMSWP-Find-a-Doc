@@ -37,6 +37,7 @@
 		$expertise_section_intro = ''; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for areas of expertise section intro text in a general placement)
 
 		add_action( 'genesis_entry_content', function() use (
+			$page_id,
 			$expertise_descendants,
 			$page_titles,
 			$hide_medical_ontology,

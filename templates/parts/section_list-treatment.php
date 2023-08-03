@@ -8,11 +8,12 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$treatments_cpt // int[]
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+ * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
  * 
  * Optional vars:
- * 	$hide_medical_ontology // bool (default: false) // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
  * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
  * 	$treatment_section_show // bool
  * 	$ontology_type // bool // Query for whether item is ontology type vs. content type
@@ -159,6 +160,7 @@ if ( $treatment_section_show ) {
 			) {
 
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type, // bool (optional)
@@ -169,9 +171,6 @@ if ( $treatment_section_show ) {
 					$treatment_count = $treatment_query_vars['treatment_count']; // int
 
 			}
-
-			// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-			include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 	?>
 	<section class="uams-module<?php echo $treatment_section_class ? ' ' . $treatment_section_class : ''; ?> bg-auto<?php echo $treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $treatment_section_id ? ' id="' . $treatment_section_id . '" aria-labelledby="' . $treatment_section_id . '-title"' : ''; ?>>

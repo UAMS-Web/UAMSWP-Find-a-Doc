@@ -146,6 +146,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 
 				$podcast_name = get_field('expertise_podcast_name');
 				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
+					$page_id, // int
 					$podcast_name // string
 				);
 					$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
@@ -180,6 +181,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 				$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
 
 				add_action( 'genesis_after_entry', function() use (
+					$page_id,
 					$conditions_cpt,
 					$treatments_cpt,
 					$page_titles,

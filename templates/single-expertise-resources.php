@@ -42,6 +42,7 @@
 		$clinical_resource_section_show_header = false; // Query for whether to display the section header
 
 		add_action( 'genesis_entry_content', function() use (
+			$page_id,
 			$clinical_resources,
 			$page_titles,
 			$clinical_resource_section_more_link_key,

@@ -15,6 +15,7 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$clinical_resources // int[]
  * 	$clinical_resource_posts_per_page // int
  * 	$resource_more_suppress // bool
@@ -40,29 +41,25 @@
 	// Jump link count
 
 		$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-			$clinical_resources,
-			$clinical_resource_posts_per_page,
-			$jump_link_count
-		);
-		$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
 
-	if ( !isset($clinical_resource_query) ) {
+	if (
+		!isset($clinical_resource_query) || empty($clinical_resource_query)
+		||
+		!isset($clinical_resource_section_show) || empty($clinical_resource_section_show)
+		||
+		!isset($clinical_resource_count) || empty($clinical_resource_count)
+	) {
+
 		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+			$page_id, // int
 			$clinical_resources,
 			$clinical_resource_posts_per_page,
 			$jump_link_count
 		);
 			$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-	}
-
-	if ( !isset($clinical_resource_section_show) ) {
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-			$clinical_resources,
-			$clinical_resource_posts_per_page,
-			$jump_link_count
-		);
 			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
+			$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
+
 	}
 
 if ( $clinical_resource_section_show ) {
@@ -73,17 +70,6 @@ if ( $clinical_resource_section_show ) {
 			$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 				$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 		}
-
-		// Count valid clinical resource items
-
-			if ( !isset($clinical_resource_count) ) {
-				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-					$clinical_resources,
-					$clinical_resource_posts_per_page,
-					$jump_link_count
-				);
-					$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
-			}
 
 		$resource_heading_related_name = isset($resource_heading_related_name) ? $resource_heading_related_name : '';
 

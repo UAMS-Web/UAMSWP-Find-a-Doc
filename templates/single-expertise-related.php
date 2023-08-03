@@ -38,6 +38,7 @@
 		$expertise_section_id = 'related-expertise'; // Section ID
 
 		add_action( 'genesis_entry_content', function() use (
+			$page_id,
 			$expertises,
 			$page_titles,
 			$hide_medical_ontology,

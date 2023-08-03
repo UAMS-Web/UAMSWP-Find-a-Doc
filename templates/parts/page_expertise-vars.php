@@ -242,13 +242,18 @@ $template_type = 'default';
 	$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
 
 // Query for whether to conditionally suppress ontology sections based on based on region and service line
-include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
+
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
+
+	include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 // Queries for whether each of the sections should be displayed
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 
 		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+			$page_id, // int
 			$providers // int[]
 		);
 			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
@@ -259,6 +264,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 	// Query for whether related locations content section should be displayed on ontology pages/subsections
 
 		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+			$page_id, // int
 			$locations // int[]
 		);
 			$location_query = $location_query_vars['location_query']; // WP_Post[]
@@ -270,6 +276,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 
 		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+			$page_id, // int
 			$expertise_descendants, // int[]
 			$content_placement, // string (optional)
 			$site_nav_id // int (optional)
@@ -287,6 +294,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 
 		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+			$page_id, // int
 			$expertises // int[]
 		);
 			$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
@@ -300,6 +308,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 			$clinical_resource_posts_per_page_fpage = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_fpage']; // int
 		$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_fpage;
 		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+			$page_id, // int
 			$clinical_resources, // int[]
 			$clinical_resource_posts_per_page // int
 		);
@@ -313,6 +322,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 		$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+			$page_id, // int
 			$conditions_cpt, // int[]
 			$condition_treatment_section_show, // bool (optional)
 			$ontology_type // bool (optional)
@@ -329,6 +339,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 		$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+			$page_id, // int
 			$treatments_cpt, // int[]
 			$condition_treatment_section_show, // bool (optional)
 			$ontology_type, // bool (optional)

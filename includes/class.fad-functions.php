@@ -1609,12 +1609,11 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query(
+		$page_id, // int
 		$providers, // int[]
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
@@ -1697,12 +1696,11 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether related locations content section should be displayed on a page
 	function uamswp_fad_location_query(
+		$page_id, // int
 		$locations, // int[]
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
@@ -1787,13 +1785,11 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether descendant locations content section should be displayed on a page
 	function uamswp_fad_location_descendant_query(
-		$current_id, // int
+		$page_id, // int
 		$location_descendants, // int[]
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
@@ -1834,7 +1830,7 @@ function uamswp_fad_ontology_site_values(
 				$args = array(
 					'post_type' => 'location',
 					'post_status' => 'publish',
-					'post_parent' => $current_id,
+					'post_parent' => $page_id,
 					'order' => 'ASC',
 					'orderby' => 'title',
 					'posts_per_page' => -1,
@@ -1885,6 +1881,7 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_descendant_query(
+		$page_id, // int
 		$expertise_descendants, // int[]
 		$content_placement = 'profile', // string // Placement of this content // Expected values: 'subsection' or 'profile'
 		$site_nav_id = '', // int 
@@ -1898,13 +1895,11 @@ function uamswp_fad_ontology_site_values(
 			empty($site_nav_id)
 		) {
 
-			$page_id = isset($page_id) ? $page_id : get_the_id();
-
 			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
 				$page_id // int // ID of the post
 			);
 				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-				
+
 		}
 
 		// Retrieve the value of the transient
@@ -2089,12 +2084,11 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_query(
+		$page_id, // int
 		$expertises, // int[]
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
@@ -2172,13 +2166,12 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 	function uamswp_fad_clinical_resource_query(
+		$page_id, // int
 		$clinical_resources, // int[] // Value of the related clinical resources input
 		$clinical_resource_posts_per_page = '', // int (optional)
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
@@ -2287,14 +2280,13 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_condition_query(
+		$page_id, // int
 		$conditions_cpt, // int[]
 		$condition_treatment_section_show = false, // bool
 		$ontology_type = true, // bool
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
@@ -2386,14 +2378,13 @@ function uamswp_fad_ontology_site_values(
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	function uamswp_fad_treatment_query(
+		$page_id, // int
 		$treatments_cpt, // int[]
 		$condition_treatment_section_show = false, // bool
 		$ontology_type = true, // bool
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
-
-		$page_id = isset($page_id) ? $page_id : get_the_id();
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $foo, __FUNCTION__ );
@@ -2550,27 +2541,57 @@ function uamswp_add_entry_class( $attributes ) {
 
 // Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 function uamswp_fad_podcast_query(
+	$page_id, // int
 	$podcast_name, // string
 	$jump_link_count = 0 // int (optional)
 ) {
 
-	// Check if podcast section should be displayed
-	if ( $podcast_name ) {
-		$podcast_section_show = true;
-		$jump_link_count = $jump_link_count + 1;
+	// Retrieve the value of the transient
+	uamswp_fad_get_transient( 'vars_' . $page_id, $podcast_query_vars, __FUNCTION__ );
+
+	if ( !empty( $podcast_query_vars ) ) {
+		
+		/* 
+		 * The transient exists.
+		 * Return the variable.
+		 */
+
+		return $podcast_query_vars;
+
 	} else {
-		$podcast_section_show = false;
+
+		/* 
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
+
+		// Check if podcast section should be displayed
+
+			if ( $podcast_name ) {
+
+				$podcast_section_show = true;
+				$jump_link_count++;
+
+			} else {
+
+				$podcast_section_show = false;
+				
+			}
+
+		// Create an array to be used on the templates and template parts
+
+			$podcast_query_vars = array(
+				'podcast_section_show'	=> $podcast_section_show, // bool
+				'jump_link_count'		=> $jump_link_count // int
+			);
+
+		// Set/update the value of the transient
+		uamswp_fad_set_transient( 'vars_' . $page_id, $podcast_query_vars, __FUNCTION__ );
+
+		// Return the variable
+		return $podcast_query_vars;
+
 	}
-
-	// Create an array to be used on the templates and template parts
-
-		$podcast_query_vars = array(
-			'podcast_section_show'	=> $podcast_section_show, // bool
-			'jump_link_count'		=> $jump_link_count // int
-		);
-
-	// Return the variable
-	return $podcast_query_vars;
 
 }
 

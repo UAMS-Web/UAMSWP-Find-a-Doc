@@ -9,12 +9,13 @@
  * uamswp_fad_section_condition_treatment() function.
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$conditions_cpt // int[] // Value of the related conditions input (or $condition_descendants, List of this condition item's descendant items)
  * 	$treatments_cpt // int[] // Value of the related treatments input (or $treatment_descendants, List of this treatment item's descendant items)
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+ * 	$hide_medical_ontology // bool // Query for whether to suppress this ontology section based on Find-a-Doc Settings configuration
  * 
  * Optional vars:
- * 	$hide_medical_ontology // bool
  * 	$schema_medical_specialty // array // MedicalSpecialty Schema data
  * 	$condition_treatment_section_show // bool
  * 	$condition_section_show // bool
@@ -327,6 +328,7 @@ if ( $condition_treatment_section_show ) {
 			) {
 
 				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+					$page_id, // int
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type // bool (optional)
@@ -348,6 +350,7 @@ if ( $condition_treatment_section_show ) {
 				!isset($treatment_count) || empty($treatment_count)
 			) {
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
 					$ontology_type, // bool (optional)
@@ -357,9 +360,6 @@ if ( $condition_treatment_section_show ) {
 					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
 					$treatment_count = $treatment_query_vars['treatment_count']; // int
 			}
-
-			// Query for whether to conditionally suppress ontology sections based on based on region and service line
-			include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 	?>
 	<section class="uams-module<?php echo $condition_treatment_section_class ? ' ' . $condition_treatment_section_class : ''; ?> bg-auto<?php echo $condition_treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_treatment_section_id ? ' id="' . $condition_treatment_section_id . '" aria-labelledby="' . $condition_treatment_section_id . '-title"' : ''; ?>>

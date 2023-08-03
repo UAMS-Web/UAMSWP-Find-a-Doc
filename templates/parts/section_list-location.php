@@ -8,6 +8,7 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
+ * 	$page_id // int // ID of the current page
  * 	$locations // int[] // Value of the related locations input (or $location_descendants, List of this location item's descendant items)
  * 	$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
  * 	$location_section_show // bool // Query for whether to show the location section (or $location_descendant_section_show, Query for whether to show the descendant location section)
@@ -152,6 +153,7 @@ if ( $location_section_show ) {
 				!isset($location_count) || empty($location_count)
 			) {
 				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$page_id, // int
 					$locations // int[]
 				);
 					$location_query = $location_query_vars['location_query']; // WP_Post[]
