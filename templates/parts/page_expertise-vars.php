@@ -71,7 +71,7 @@
 
 		// Text elements
 
-			$fpage_text_expertise_vars = isset($fpage_text_expertise_vars) ? $fpage_text_expertise_vars : uamswp_fad_fpage_text_expertise(
+			$fpage_text_expertise_vars = uamswp_fad_fpage_text_expertise(
 				$page_id, // int
 				$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 				$ontology_type // bool
@@ -133,7 +133,9 @@
 
 		// Image elements
 
-			$fpage_image_expertise_vars = isset($fpage_image_expertise_vars) ? $fpage_image_expertise_vars : uamswp_fad_fpage_image_expertise();
+			$fpage_image_expertise_vars = uamswp_fad_fpage_image_expertise(
+				$page_id // int
+			);
 				$expertise_featured_image = $fpage_image_expertise_vars['expertise_featured_image']; // int
 				$expertise_featured_image_url = $fpage_image_expertise_vars['expertise_featured_image_url']; // string
 				$provider_fpage_featured_image_expertise = $fpage_image_expertise_vars['provider_fpage_featured_image_expertise']; // int
@@ -149,7 +151,7 @@
 
 // Get site header and site nav values for ontology subsections
 
-	$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+	$ontology_site_values_vars = uamswp_fad_ontology_site_values(
 		$page_id, // int // ID of the post
 		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
 		$page_title, // string (optional) // Title of the post
