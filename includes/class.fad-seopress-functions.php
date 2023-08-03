@@ -167,11 +167,13 @@
 			$meta_title = ( strlen($meta_title_enhanced_x3) <= $meta_title_chars_max ) ? $meta_title_enhanced_x3 : $meta_title;
 		}
 
-		// Create and return an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
 			$meta_title_vars = array(
 				'meta_title'	=> $meta_title, // string
 			);
-			return $meta_title_vars;
+
+		// Return the variable
+		return $meta_title_vars;
 
 	}
