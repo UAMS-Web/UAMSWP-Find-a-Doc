@@ -26,9 +26,6 @@
 	// Get system settings for area of expertise labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
 
-	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
-
 	// Get system settings for condition labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
 

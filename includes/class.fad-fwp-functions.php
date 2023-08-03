@@ -49,23 +49,52 @@ add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 // FacetWP scripts
 function fwp_facet_scripts() {
 
-	$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
-	$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
-	$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-	$labels_clinical_resource_facet_vars = isset($labels_clinical_resource_facet_vars) ? $labels_clinical_resource_facet_vars : uamswp_fad_labels_clinical_resource_facet();
-	$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
-	$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
-
 	$facet_labels = array();
-	$facet_labels = array_merge(
-		$facet_labels,
-		$labels_provider_vars['facet_labels'],
-		$labels_location_vars['facet_labels'],
-		$labels_expertise_vars['facet_labels'],
-		$labels_clinical_resource_facet_vars['facet_labels'],
-		$labels_condition_vars['facet_labels'],
-		$labels_treatment_vars['facet_labels']
-	);
+
+	if ( is_post_type_archive( 'provider' ) ) {
+
+		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+		$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+		$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+
+		$facet_labels = array_merge(
+			$facet_labels,
+			$labels_location_vars['facet_labels_provider'],
+			$labels_expertise_vars['facet_labels_provider'],
+			$labels_condition_vars['facet_labels_provider'],
+			$labels_treatment_vars['facet_labels_provider']
+		);
+
+	} elseif ( is_post_type_archive( 'location' ) ) {
+
+		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+
+		$facet_labels = array_merge(
+			$facet_labels,
+			$labels_expertise_vars['facet_labels_location']
+		);
+
+	} elseif ( is_post_type_archive( 'clinical-resource' ) ) {
+
+		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+		$labels_clinical_resource_facet_vars = isset($labels_clinical_resource_facet_vars) ? $labels_clinical_resource_facet_vars : uamswp_fad_labels_clinical_resource_facet();
+		$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+		$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+
+		$facet_labels = array_merge(
+			$facet_labels,
+			$labels_provider_vars['facet_labels_clinical_resource'],
+			$labels_location_vars['facet_labels_clinical_resource'],
+			$labels_expertise_vars['facet_labels_clinical_resource'],
+			$labels_clinical_resource_facet_vars['facet_labels_clinical_resource'],
+			$labels_condition_vars['facet_labels_clinical_resource'],
+			$labels_treatment_vars['facet_labels_clinical_resource']
+		);
+
+	}
 
 	$classes = get_body_class();
 

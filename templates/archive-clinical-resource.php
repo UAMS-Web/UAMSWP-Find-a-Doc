@@ -32,9 +32,6 @@
 	// Get system settings for Clinical Resource facet labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_facets-clinical-resource.php' );
 
-	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
-
 	// Get system settings for condition labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
 
