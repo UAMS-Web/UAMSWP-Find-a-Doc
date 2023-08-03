@@ -241,28 +241,8 @@ $template_type = 'default';
 	$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
 	$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
 
-// Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-
-	$regions = isset($regions) ? $regions : array();
-	$service_lines = isset($service_lines) ? $service_lines : array();
-
-	if (
-		$regions
-		||
-		$service_lines
-		) {
-
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-			$regions, // string|array // Region(s) associated with the item
-			$service_lines // string|array // Service line(s) associated with the item
-		);
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-
-	} else {
-
-		$hide_medical_ontology = false; // bool
-
-	}
+// Query for whether to conditionally suppress ontology sections based on based on region and service line
+include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 // Queries for whether each of the sections should be displayed
 

@@ -130,27 +130,7 @@
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
 
 // Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
-
-	$regions = isset($regions) ? $regions : array();
-	$service_lines = isset($service_lines) ? $service_lines : array();
-
-	if (
-		$regions
-		||
-		$service_lines
-		) {
-
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-			$regions, // string|array // Region(s) associated with the item
-			$service_lines // string|array // Service line(s) associated with the item
-		);
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-
-	} else {
-
-		$hide_medical_ontology = false; // bool
-
-	}
+include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 // HEAD
 
@@ -462,13 +442,13 @@
 					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
 					$provider_ids = $provider_query_vars['provider_ids']; // int[]
 					$provider_count = $provider_query_vars['provider_count']; // int
-					$jump_link_count = $provider_query_vars['jump_link_count']; // int
 
 			// Query for whether related locations content section should be displayed on a page
 
 				$locations = get_field('clinical_resource_locations');
 				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
-					$locations // int[]
+					$locations, // int[]
+					$jump_link_count // int
 				);
 					$location_query = $location_query_vars['location_query']; // WP_Post[]
 					$location_section_show = $location_query_vars['location_section_show']; // bool
@@ -480,7 +460,8 @@
 
 				$expertises = get_field('clinical_resource_aoe');
 				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
-					$expertises // int[]
+					$expertises, // int[]
+					$jump_link_count // int
 				);
 					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
 					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
@@ -495,9 +476,9 @@
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
 				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-					$clinical_resources,
-					$clinical_resource_posts_per_page,
-					$jump_link_count
+					$clinical_resources, // int[]
+					$clinical_resource_posts_per_page, // int
+					$jump_link_count // int
 				);
 					$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
 					$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
@@ -512,8 +493,9 @@
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
 				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
 					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
+					$condition_treatment_section_show, // bool
+					$ontology_type, // bool
+					$jump_link_count // int
 				);
 					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
 					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
@@ -530,7 +512,8 @@
 				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
+					$ontology_type, // bool
+					$jump_link_count // int
 				);
 					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
 					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool

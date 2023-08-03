@@ -358,10 +358,8 @@ if ( $condition_treatment_section_show ) {
 					$treatment_count = $treatment_query_vars['treatment_count']; // int
 			}
 
-			if ( !isset($hide_medical_ontology) || empty($hide_medical_ontology) ) {
-				$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
-					$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-			}
+			// Query for whether to conditionally suppress ontology sections based on based on region and service line
+			include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 	?>
 	<section class="uams-module<?php echo $condition_treatment_section_class ? ' ' . $condition_treatment_section_class : ''; ?> bg-auto<?php echo $condition_treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_treatment_section_id ? ' id="' . $condition_treatment_section_id . '" aria-labelledby="' . $condition_treatment_section_id . '-title"' : ''; ?>>

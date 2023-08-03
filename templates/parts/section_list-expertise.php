@@ -80,11 +80,8 @@
 
 	}
 
-	if ( !isset($hide_medical_ontology) ) {
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide();
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-	}
-
+	// Query for whether to conditionally suppress ontology sections based on based on region and service line
+	include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
 
 if ( $expertise_section_show && !$hide_medical_ontology ) {
 

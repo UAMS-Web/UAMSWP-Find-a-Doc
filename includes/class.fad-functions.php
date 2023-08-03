@@ -1292,87 +1292,112 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 // Conditionally suppress ontology sections based on Find-a-Doc Settings configuration
 function uamswp_fad_ontology_hide(
+	$page_id, // int // ID of the post
 	$regions = '', // string|array // Region(s) associated with the item
 	$service_lines = '' // string|array // Service line(s) associated with the item
 ) {
 
-	// Check/define variables
+	// Retrieve the value of the transient
+	uamswp_fad_get_transient( 'vars_' . $page_id, $ontology_hide_vars, __FUNCTION__ );
 
-		$regions = isset($regions) ? $regions : array();
-		$service_lines = isset($service_lines) ? $service_lines : array();
+	if ( !empty( $ontology_hide_vars ) ) {
+		
+		/* 
+			* The transient exists.
+			* Return the variable.
+			*/
 
-	// If variables are strings, convert them to arrays
+		return $ontology_hide_vars;
 
-		$regions = is_array($regions) ? $regions : array( $regions );
-		$service_lines = is_array($service_lines) ? $service_lines : array( $service_lines );
+	} else {
 
-	$hide_medical_ontology = false;
+		/* 
+		* The transient does not exist.
+		* Define the variable again.
+		*/
 
-	if ( have_rows('remove_ontology_criteria', 'option') ) {
+		// Check/define variables
 
-		while( have_rows('remove_ontology_criteria', 'option') ) {
+			$regions = isset($regions) ? $regions : array();
+			$service_lines = isset($service_lines) ? $service_lines : array();
 
-			the_row();
-			$remove_region = get_sub_field('remove_regions', 'option');
-			$remove_service_line = get_sub_field('remove_service_lines', 'option');
+		// If variables are strings, convert them to arrays
 
-			if (
-				(
-					!empty($remove_region)
+			$regions = is_array($regions) ? $regions : array( $regions );
+			$service_lines = is_array($service_lines) ? $service_lines : array( $service_lines );
+
+		$hide_medical_ontology = false;
+
+		if ( have_rows('remove_ontology_criteria', 'option') ) {
+
+			while( have_rows('remove_ontology_criteria', 'option') ) {
+
+				the_row();
+				$remove_region = get_sub_field('remove_regions', 'option');
+				$remove_service_line = get_sub_field('remove_service_lines', 'option');
+
+				if (
+					(
+						!empty($remove_region)
+						&&
+						empty( array_diff( $regions, $remove_region ) )
+					)
 					&&
-					empty( array_diff( $regions, $remove_region ) )
-				)
-				&&
-				empty($remove_service_line)
-			) { 
+					empty($remove_service_line)
+				) { 
 
-				// If the remove region array is not empty
-				// and if all the item's regions are in the remove region array
-				// and if the remove service line array is empty
-				$hide_medical_ontology = true;
+					// If the remove region array is not empty
+					// and if all the item's regions are in the remove region array
+					// and if the remove service line array is empty
+					$hide_medical_ontology = true;
 
-				break;
+					break;
 
-			} elseif (
-				empty($remove_region) // If the remove region array is empty
-				&&
-				!empty($remove_service_line) // and if the remove service line array is not empty
-				&&
-				empty( array_diff( $service_lines, $remove_service_line ) ) // and if all the item's service lines are in the remove service line array
-			) {
+				} elseif (
+					empty($remove_region) // If the remove region array is empty
+					&&
+					!empty($remove_service_line) // and if the remove service line array is not empty
+					&&
+					empty( array_diff( $service_lines, $remove_service_line ) ) // and if all the item's service lines are in the remove service line array
+				) {
 
-				$hide_medical_ontology = true;
+					$hide_medical_ontology = true;
 
-				break;
+					break;
 
-			} elseif(
-				!empty($remove_region) // If the remove region array is not empty
-				&&
-				empty( array_diff( $regions, $remove_region ) ) // and if all the item's regions are in the remove region array
-				&&
-				!empty($remove_service_line) // and if the remove service line array is not empty
-				&&
-				empty( array_diff( $service_lines, $remove_service_line ) ) // and if all the item's service lines are in the remove service line array
-			) {
+				} elseif(
+					!empty($remove_region) // If the remove region array is not empty
+					&&
+					empty( array_diff( $regions, $remove_region ) ) // and if all the item's regions are in the remove region array
+					&&
+					!empty($remove_service_line) // and if the remove service line array is not empty
+					&&
+					empty( array_diff( $service_lines, $remove_service_line ) ) // and if all the item's service lines are in the remove service line array
+				) {
 
-				$hide_medical_ontology = true;
+					$hide_medical_ontology = true;
 
-				break;
+					break;
 
-			}
+				}
 
-		} // endwhile
+			} // endwhile
 
-	} // endif
+		} // endif
 
-	// Create an array to be used on the templates and template parts
+		// Create an array to be used on the templates and template parts
 
-		$ontology_hide_vars = array(
-			'hide_medical_ontology'	=> $hide_medical_ontology // bool
-		);
+			$ontology_hide_vars = array(
+				'hide_medical_ontology'	=> $hide_medical_ontology // bool
+			);
 
-	// Return the variable
-	return $ontology_hide_vars;
+		// Set/update the value of the transient
+		uamswp_fad_set_transient( 'vars_' . $page_id, $ontology_hide_vars, __FUNCTION__ );
+
+		// Return the variable
+		return $ontology_hide_vars;
+
+	}
 
 }
 
@@ -1585,114 +1610,178 @@ function uamswp_fad_ontology_site_values(
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query(
 		$providers, // int[]
-		$jump_link_count = 0 // int
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		if ( $providers ) {
-			$args = array(
-				'post__in' => $providers,
-				'post_type' => 'provider',
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
-				'order' => 'ASC',
-				'orderby' => 'title',
-				// 'no_found_rows' => true, // counts posts, remove if pagination required
-				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'fields' => 'ids',
-			);
-			$provider_query = New WP_Query( $args );
-			if( ( $provider_query && $provider_query->have_posts() ) ) {
-				$provider_section_show = true;
-				$provider_ids = $provider_query->posts;
-				$provider_count = count($provider_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-			} else {
-				// wp_redirect( get_the_permalink($site_nav_id), 301 );
-				$provider_section_show = false;
-			}
+		$page_id = isset($page_id) ? $page_id : get_the_id();
+
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
+	
+		if ( !empty( $provider_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $provider_query_vars;
+	
 		} else {
-			$provider_query = '';
-			$provider_section_show = false;
-			$provider_ids = '';
-			$provider_count = 0;
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+					
+			// Eliminate PHP errors
+
+				$provider_query = '';
+				$provider_section_show = false;
+				$provider_ids = array();
+				$provider_count = 0;
+
+			if (
+				!$hide_medical_ontology
+				&&
+				$providers
+			) {
+
+				$args = array(
+
+					'post__in' => $providers,
+					'post_type' => 'provider',
+					'post_status' => 'publish',
+					'posts_per_page' => -1,
+					'order' => 'ASC',
+					'orderby' => 'title',
+					// 'no_found_rows' => true, // counts posts, remove if pagination required
+					'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+					'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+					'fields' => 'ids',
+				);
+
+				$provider_query = New WP_Query( $args );
+
+				if ( $provider_query->have_posts() ) {
+
+					$provider_section_show = true;
+					$provider_ids = $provider_query->posts;
+					$provider_count = count($provider_query->posts);
+					$jump_link_count++;
+
+				}
+
+			}
+
+			// Create an array to be used on the templates and template parts
+
+				$provider_query_vars = array(
+					'provider_query'		=> $provider_query, // WP_Post[]
+					'provider_section_show'	=> $provider_section_show, // bool
+					'provider_ids'			=> $provider_ids, // int[]
+					'provider_count'		=> $provider_count, // int
+					'jump_link_count'		=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $provider_query_vars;
+	
 		}
-
-		// Create an array to be used on the templates and template parts
-
-			$provider_query_vars = array(
-				'provider_query'		=> $provider_query, // WP_Post[]
-				'provider_section_show'	=> $provider_section_show, // bool
-				'provider_ids'			=> $provider_ids, // int[]
-				'provider_count'		=> $provider_count, // int
-				'jump_link_count'		=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $provider_query_vars;
 
 	}
 
 	// Query for whether related locations content section should be displayed on a page
 	function uamswp_fad_location_query(
 		$locations, // int[]
-		$jump_link_count = 0 // int
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		$location_valid = false;
+		$page_id = isset($page_id) ? $page_id : get_the_id();
 
-		if ( $locations ) {
-			$args = array(
-				'post__in' => $locations,
-				'post_type' => 'location',
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'no_found_rows' => true, // counts posts, remove if pagination required
-				'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
-				'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
-				'fields' => 'ids',
-			);
-			$location_query = new WP_Query( $args );
-			if( ( $locations && $location_query->have_posts() ) ) {
-				$location_section_show = true;
-				$location_ids = $location_query->posts;
-				$location_count = count($location_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-			} else {
-				$location_section_show = false;
-			}
-
-			// Check for valid locations
-			if ( $locations && $location_query->have_posts() ) {
-				foreach( $locations as $location ) {
-					if ( get_post_status ( $location ) == 'publish' ) {
-						$location_valid = true;
-						$break;
-					}
-				}
-			}
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
+	
+		if ( !empty( $location_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $location_query_vars;
+	
 		} else {
-			$location_query = '';
-			$location_section_show = false;
-			$location_ids = '';
-			$location_count = 0;
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Eliminate PHP errors
+
+				$location_query = '';
+				$location_section_show = false;
+				$location_valid = false;
+				$location_ids = array();
+				$location_count = 0;
+
+			if (
+				!$hide_medical_ontology
+				&&
+				$locations
+			) {
+
+				$args = array(
+					'post__in' => $locations,
+					'post_type' => 'location',
+					'post_status' => 'publish',
+					'posts_per_page' => -1,
+					'order' => 'ASC',
+					'orderby' => 'title',
+					'no_found_rows' => true, // counts posts, remove if pagination required
+					'update_post_term_cache' => false, // grabs terms, remove if terms required (category, tag...)
+					'update_post_meta_cache' => false, // grabs post meta, remove if post meta required
+					'fields' => 'ids',
+				);
+
+				$location_query = new WP_Query( $args );
+
+				if ( $location_query->have_posts() ) {
+
+					$location_section_show = true;
+					$location_valid = true;
+					$location_ids = $location_query->posts;
+					$location_count = count($location_query->posts);
+					$jump_link_count++;
+
+				}
+
+			}
+
+			// Create an array to be used on the templates and template parts
+
+				$location_query_vars = array(
+					'location_query'		=> $location_query, // WP_Post[]
+					'location_section_show'	=> $location_section_show, // bool
+					'location_ids'			=> $location_ids, // int[]
+					'location_count'		=> $location_count, // int
+					'location_valid'		=> $location_valid, // bool
+					'jump_link_count'		=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $location_query_vars;
+	
 		}
-
-		// Create an array to be used on the templates and template parts
-
-			$location_query_vars = array(
-				'location_query'		=> $location_query, // WP_Post[]
-				'location_section_show'	=> $location_section_show, // bool
-				'location_ids'			=> $location_ids, // int[]
-				'location_count'		=> $location_count, // int
-				'location_valid'		=> $location_valid, // bool
-				'jump_link_count'		=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $location_query_vars;
 
 	}
 
@@ -1700,160 +1789,170 @@ function uamswp_fad_ontology_site_values(
 	function uamswp_fad_location_descendant_query(
 		$current_id, // int
 		$location_descendants, // int[]
-		$jump_link_count = 0 // int
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		$location_descendant_valid = false;
+		$page_id = isset($page_id) ? $page_id : get_the_id();
 
-		if ( $location_descendants && 0 != count($location_descendants) ) {
-			$args = array(
-				'post_type' => 'location',
-				'post_status' => 'publish',
-				'post_parent' => $current_id,
-				'order' => 'ASC',
-				'orderby' => 'title',
-				'posts_per_page' => -1,
-				'fields' => 'ids',
-				'meta_query' => array(
-					array(
-						'key' => 'location_hidden',
-						'value' => '1',
-						'compare' => '!=',
-					)
-				),
-			);
-			$location_descendant_query = new WP_Query( $args );
-			if( ( $location_descendants && $location_descendant_query->have_posts() ) ) {
-				$location_descendant_section_show = true;
-				$location_descendant_ids = $location_descendant_query->posts;
-				$location_descendant_count = count($location_descendant_query->posts);
-				$jump_link_count++;
-			} else {
-				$location_descendant_section_show = false;
-			}
-
-			// Check for valid descendant locations
-			if ( $location_descendants && $location_descendant_query->have_posts() ) {
-				foreach( $location_descendants as $location_descendant ) {
-					if ( get_post_status ( $location_descendant ) == 'publish' ) {
-						$location_descendant_valid = true;
-						$break;
-					}
-				}
-			}
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
+	
+		if ( !empty( $location_descendant_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $location_descendant_query_vars;
+	
 		} else {
-			$location_descendant_query = '';
-			$location_descendant_section_show = false;
-			$location_descendant_ids = '';
-			$location_descendant_count = '';
-			$location_descendant_valid = false;
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+		
+			// Eliminate PHP errors
+
+				$location_descendant_query = '';
+				$location_descendant_section_show = false;
+				$location_descendant_valid = false;
+				$location_descendant_ids = array();
+				$location_descendant_count = '';
+				$location_descendant_valid = false;
+
+			if (
+				!$hide_medical_ontology
+				&&
+				$location_descendants
+				&&
+				0 != count($location_descendants)
+			) {
+
+				$args = array(
+					'post_type' => 'location',
+					'post_status' => 'publish',
+					'post_parent' => $current_id,
+					'order' => 'ASC',
+					'orderby' => 'title',
+					'posts_per_page' => -1,
+					'fields' => 'ids',
+					'meta_query' => array(
+						array(
+							'key' => 'location_hidden',
+							'value' => '1',
+							'compare' => '!=',
+						)
+					),
+				);
+
+				$location_descendant_query = new WP_Query( $args );
+
+				if ( $location_descendant_query->have_posts() ) {
+
+					$location_descendant_section_show = true;
+					$location_descendant_valid = true;
+					$location_descendant_ids = $location_descendant_query->posts;
+					$location_descendant_count = count($location_descendant_query->posts);
+					$jump_link_count++;
+
+				}
+
+			}
+
+			// Create an array to be used on the templates and template parts
+
+				$location_descendant_query_vars = array(
+					'location_descendant_query'			=> $location_descendant_query, // WP_Post[]
+					'location_descendant_section_show'	=> $location_descendant_section_show, // bool
+					'location_descendant_ids'			=> $location_descendant_ids, // int[]
+					'location_descendant_count'			=> $location_descendant_count, // int
+					'location_descendant_valid'			=> $location_descendant_valid, // bool
+					'jump_link_count'					=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $location_descendant_query_vars;
+	
 		}
-
-		// Create an array to be used on the templates and template parts
-
-			$location_descendant_query_vars = array(
-				'location_descendant_query'			=> $location_descendant_query, // WP_Post[]
-				'location_descendant_section_show'	=> $location_descendant_section_show, // bool
-				'location_descendant_ids'			=> $location_descendant_ids, // int[]
-				'location_descendant_count'			=> $location_descendant_count, // int
-				'location_descendant_valid'			=> $location_descendant_valid, // bool
-				'jump_link_count'					=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $location_descendant_query_vars;
 
 	}
 
 	// Query for whether descendant areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_descendant_query(
 		$expertise_descendants, // int[]
-		$content_placement = 'profile', // string (optional) // Placement of this content // Expected values: 'subsection' or 'profile'
-		$site_nav_id = '', // int (optional)
-		$jump_link_count = 0 // int (optional)
+		$content_placement = 'profile', // string // Placement of this content // Expected values: 'subsection' or 'profile'
+		$site_nav_id = '', // int 
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		// Check/define variables
+		if (
+			!isset($site_nav_id)
+			||
+			empty($site_nav_id)
+		) {
 
-			$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile';
+			$page_id = isset($page_id) ? $page_id : get_the_id();
 
-			if ( !isset($site_nav_id) || empty($site_nav_id) ) {
+			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
+				$page_id // int // ID of the post
+			);
+				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+				
+		}
 
-				$page_id = isset($page_id) ? $page_id : get_the_id();
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
+	
+		if ( !empty( $expertise_descendant_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $expertise_descendant_query_vars;
+	
+		} else {
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+		
+			// Check/define variables
 
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-					$page_id // int // ID of the post
-				);
-					$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+				$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile';
 
-			}
+			// Eliminate PHP errors
 
-		if ( $expertise_descendants ) {
+				$expertise_descendant_args = '';
+				$expertise_descendant_query = '';
+				$expertise_descendant_section_show = false;
+				$expertise_descendant_ids = array();
+				$expertise_descendant_count = 0;
+				$expertise_content_args = '';
+				$expertise_content_query = '';
+				$expertise_content_nav_show = false;
+				$expertise_content_ids = array();
+				$expertise_content_count = 0;
+				$expertise_content_nav = '';
 
-			// Create the query for ontology type
+			if (
+				!$hide_medical_ontology
+				&&
+				$expertise_descendants
+			) {
 
-				$expertise_descendant_args = array(
-					'post_parent' => $site_nav_id,
-					'post_type' => 'expertise',
-					'post_status' => 'publish',
-					'posts_per_page' => -1, // We do not want to limit the post count
-					'order' => 'ASC',
-					'orderby' => 'title',
-					'meta_query' => array(
-						'relation' => 'AND',
-						array(
-							'relation' => 'OR',
-							array(
-								'key' => 'hide_from_sub_menu',
-								'value' => '1',
-								'compare' => '!=',
-							),
-							array(
-								'key' => 'hide_from_sub_menu',
-								'compare' => 'NOT EXISTS'
-							),
-						),
-						array(
-							'relation' => 'OR',
-							array(
-								'key' => 'expertise_type',
-								'value' => '0',
-								'compare' => '!=',
-							),
-							array(
-								'key' => 'expertise_type',
-								'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
-							),
-						),
-					),
-				);
+				// Create the query for ontology type
 
-				$expertise_descendant_query = new WP_Query( $expertise_descendant_args );
-
-				if (
-					$expertise_descendants
-					&&
-					$expertise_descendant_query->have_posts()
-				) {
-
-					$expertise_descendant_section_show = true;
-					$expertise_descendant_ids = $expertise_descendant_query->posts;
-					$expertise_descendant_count = count($expertise_descendant_query->posts);
-					$jump_link_count = $jump_link_count + 1;
-
-				} else {
-
-					$expertise_descendant_section_show = false;
-					$expertise_descendant_ids = '';
-					$expertise_descendant_count = 0;
-
-				}
-
-			// Create the query for content type
-
-				if ( $content_placement == 'subsection' ) {
-
-					$expertise_content_args = array(
+					$expertise_descendant_args = array(
 						'post_parent' => $site_nav_id,
 						'post_type' => 'expertise',
 						'post_status' => 'publish',
@@ -1875,133 +1974,199 @@ function uamswp_fad_ontology_site_values(
 								),
 							),
 							array(
-								'key' => 'expertise_type',
-								'value' => '0',
-								'compare' => '=',
+								'relation' => 'OR',
+								array(
+									'key' => 'expertise_type',
+									'value' => '0',
+									'compare' => '!=',
+								),
+								array(
+									'key' => 'expertise_type',
+									'compare' => 'NOT EXISTS' // If the item has not been updated since 'expertise_type' was added
+								),
 							),
 						),
 					);
 
-					$expertise_content_query = new WP_Query( $expertise_content_args );
-					$expertise_content_nav = '';
+					$expertise_descendant_query = new WP_Query( $expertise_descendant_args );
 
 					if (
-						$expertise_descendants
-						&&
-						$expertise_content_query->have_posts()
+						$expertise_descendant_query->have_posts()
 					) {
 
-						$expertise_content_nav_show = true;
-						$expertise_content_ids = $expertise_content_query->posts;
-						$expertise_content_count = count($expertise_content_query->posts);
-
-						while ( $expertise_content_query->have_posts() ) {
-
-							$expertise_content_query->the_post();
-							$page_id = get_the_ID();
-							$page_title = get_the_title();
-							$page_title_attr = uamswp_attr_conversion($page_title);
-							$page_url = user_trailingslashit(get_permalink());
-							$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
-
-						} // endwhile
-
-						wp_reset_postdata();
-
-					} else {
-
-						$expertise_content_nav_show = false;
-						$expertise_content_ids = '';
-						$expertise_content_count = 0;
+						$expertise_descendant_section_show = true;
+						$expertise_descendant_ids = $expertise_descendant_query->posts;
+						$expertise_descendant_count = count($expertise_descendant_query->posts);
+						$jump_link_count++;
 
 					}
-				} else {
 
-					$expertise_content_query = '';
-					$expertise_content_nav_show = false;
-					$expertise_content_ids = '';
-					$expertise_content_count = 0;
-					$expertise_content_nav = '';
+				// Create the query for content type
 
-				}
+					if ( $content_placement == 'subsection' ) {
 
-		} else {
+						$expertise_content_args = array(
+							'post_parent' => $site_nav_id,
+							'post_type' => 'expertise',
+							'post_status' => 'publish',
+							'posts_per_page' => -1, // We do not want to limit the post count
+							'order' => 'ASC',
+							'orderby' => 'title',
+							'meta_query' => array(
+								'relation' => 'AND',
+								array(
+									'relation' => 'OR',
+									array(
+										'key' => 'hide_from_sub_menu',
+										'value' => '1',
+										'compare' => '!=',
+									),
+									array(
+										'key' => 'hide_from_sub_menu',
+										'compare' => 'NOT EXISTS'
+									),
+								),
+								array(
+									'key' => 'expertise_type',
+									'value' => '0',
+									'compare' => '=',
+								),
+							),
+						);
 
-			$expertise_descendant_query = '';
-			$expertise_descendant_section_show = false;
-			$expertise_descendant_ids = '';
-			$expertise_descendant_count = 0;
-			$expertise_content_query = '';
-			$expertise_content_nav_show = false;
-			$expertise_content_ids = '';
-			$expertise_content_count = 0;
-			$expertise_content_nav = '';
+						$expertise_content_query = new WP_Query( $expertise_content_args );
+						$expertise_content_nav = '';
 
+						if ( $expertise_content_query->have_posts() ) {
+
+							$expertise_content_nav_show = true;
+							$expertise_content_ids = $expertise_content_query->posts;
+							$expertise_content_count = count($expertise_content_query->posts);
+
+							while ( $expertise_content_query->have_posts() ) {
+
+								$expertise_content_query->the_post();
+								$page_id = get_the_ID();
+								$page_title = get_the_title();
+								$page_title_attr = uamswp_attr_conversion($page_title);
+								$page_url = user_trailingslashit(get_permalink());
+								$expertise_content_nav .= '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-'. $page_id .' nav-item active"><a title="'. $page_title_attr .'" href="'. $page_url .'" class="nav-link"><span itemprop="name">'. $page_title .'</span></a></li>';
+
+							} // endwhile
+
+							wp_reset_postdata();
+
+						}
+
+					}
+
+			}
+
+			// Create an array to be used on the templates and template parts
+
+				$expertise_descendant_query_vars = array(
+					'expertise_descendant_query'		=> $expertise_descendant_query, // WP_Post[]
+					'expertise_descendant_section_show'	=> $expertise_descendant_section_show, // bool
+					'expertise_descendant_ids'			=> $expertise_descendant_ids, // int[]
+					'expertise_descendant_count'		=> $expertise_descendant_count, // int
+					'expertise_content_query'			=> $expertise_content_query, // WP_Post[]
+					'expertise_content_nav_show'		=> $expertise_content_nav_show, // bool
+					'expertise_content_ids'				=> $expertise_content_ids, // int[]
+					'expertise_content_count'			=> $expertise_content_count, // int
+					'expertise_content_nav'				=> $expertise_content_nav, // string
+					'jump_link_count'					=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $expertise_descendant_query_vars;
+	
 		}
-
-		// Create an array to be used on the templates and template parts
-
-			$expertise_descendant_query_vars = array(
-				'expertise_descendant_query'		=> $expertise_descendant_query, // WP_Post[]
-				'expertise_descendant_section_show'	=> $expertise_descendant_section_show, // bool
-				'expertise_descendant_ids'			=> $expertise_descendant_ids, // int[]
-				'expertise_descendant_count'		=> $expertise_descendant_count, // int
-				'expertise_content_query'			=> $expertise_content_query, // WP_Post[]
-				'expertise_content_nav_show'		=> $expertise_content_nav_show, // bool
-				'expertise_content_ids'				=> $expertise_content_ids, // int[]
-				'expertise_content_count'			=> $expertise_content_count, // int
-				'expertise_content_nav'				=> $expertise_content_nav, // string
-				'jump_link_count'					=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $expertise_descendant_query_vars;
 
 	}
 
 	// Query for whether related areas of expertise content section should be displayed on ontology pages/subsections
 	function uamswp_fad_expertise_query(
 		$expertises, // int[]
-		$jump_link_count = 0 // int
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		if ( $expertises ) {
-			$args = array(
-				'post__in'	=> $expertises,
-				'post_type' => 'expertise',
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
-				'order' => 'ASC',
-				'orderby' => 'title',
-			);
-			$expertise_query = new WP_Query( $args );
-			if ( ( $expertises && $expertise_query->have_posts() ) ) {
-				$expertise_section_show = true;
-				$expertise_ids = $expertise_query->posts;
-				$expertise_count = count($expertise_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-			} else {
-				$expertise_section_show = false;
-			}
+		$page_id = isset($page_id) ? $page_id : get_the_id();
+
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
+
+		if ( !empty( $expertise_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+
+			return $expertise_query_vars;
+
 		} else {
-			$expertise_query = '';
-			$expertise_section_show = false;
-			$expertise_ids = '';
-			$expertise_count = 0;
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Eliminate PHP errors
+
+				$expertise_query = '';
+				$expertise_section_show = false;
+				$expertise_ids = array();
+				$expertise_count = 0;
+			
+			if (
+				!$hide_medical_ontology
+				&&
+				$expertises
+			) {
+
+				$args = array(
+					'post__in'	=> $expertises,
+					'post_type' => 'expertise',
+					'post_status' => 'publish',
+					'posts_per_page' => -1,
+					'order' => 'ASC',
+					'orderby' => 'title',
+				);
+
+				$expertise_query = new WP_Query( $args );
+
+				if ( $expertise_query->have_posts() ) {
+
+					$expertise_section_show = true;
+					$expertise_ids = $expertise_query->posts;
+					$expertise_count = count($expertise_query->posts);
+					$jump_link_count++;
+
+				}
+
+			}
+
+			// Create an array to be used on the templates and template parts
+
+				$expertise_query_vars = array(
+					'expertise_query'			=> $expertise_query, // WP_Post[]
+					'expertise_section_show'	=> $expertise_section_show, // bool
+					'expertise_ids'				=> $expertise_ids, // int[]
+					'expertise_count'			=> $expertise_count, // int
+					'jump_link_count'			=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $expertise_query_vars;
+	
 		}
-
-		// Create an array to be used on the templates and template parts
-
-			$expertise_query_vars = array(
-				'expertise_query'			=> $expertise_query, // WP_Post[]
-				'expertise_section_show'	=> $expertise_section_show, // bool
-				'expertise_ids'				=> $expertise_ids, // int[]
-				'expertise_count'			=> $expertise_count, // int
-				'jump_link_count'			=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $expertise_query_vars;
 
 	}
 
@@ -2009,199 +2174,311 @@ function uamswp_fad_ontology_site_values(
 	function uamswp_fad_clinical_resource_query(
 		$clinical_resources, // int[] // Value of the related clinical resources input
 		$clinical_resource_posts_per_page = '', // int (optional)
-		$jump_link_count = 0 // int
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		// Bring in variables from outside of the function
+		$page_id = isset($page_id) ? $page_id : get_the_id();
 
-			if ( !isset($clinical_resource_posts_per_page) ) {
-				if ( !isset($clinical_resource_posts_per_page_section) ) {
-					$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-						$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
-				}
-				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
-			}
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
+	
+		if ( !empty( $clinical_resource_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $clinical_resource_query_vars;
+	
+		} else {
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+		
+			// Bring in variables from outside of the function
 
-		if ( $clinical_resources ) {
+				if ( !isset($clinical_resource_posts_per_page) ) {
 
-			$args = array(
-				'post__in' => $clinical_resources,
-				'post_type' => 'clinical-resource',
-				'post_status' => 'publish',
-				'posts_per_page' => $clinical_resource_posts_per_page,
-				'order' => 'DESC',
-				'orderby' => 'post_date',
-			);
+					if ( !isset($clinical_resource_posts_per_page_section) ) {
 
-			$clinical_resource_query = new WP_Query( $args );
-
-			// Check if Clinical Resources section should be displayed
-			if (
-				$clinical_resources
-				&&
-				$clinical_resource_query->have_posts()
-			) {
-
-				$clinical_resource_section_show = true;
-				$clinical_resource_ids = $clinical_resource_query->posts;
-				$clinical_resource_count = count($clinical_resource_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-
-				// Count valid clinical resource items
-
-					$clinical_resource_count = 0;
-
-					foreach( $clinical_resources as $resource ) {
-
-						if ( get_post_status ( $resource ) == 'publish' ) {
-
-							$clinical_resource_count++;
-
-						}
+						$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
+							$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
 
 					}
 
-			} else {
+					$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
+				}
 
+			// Eliminate PHP errors
+
+				$clinical_resource_query = '';
 				$clinical_resource_section_show = false;
 				$clinical_resource_ids = array();
 				$clinical_resource_count = 0;
 
+			if (
+				!$hide_medical_ontology
+				&&
+				$clinical_resources
+			) {
+
+				$args = array(
+					'post__in' => $clinical_resources,
+					'post_type' => 'clinical-resource',
+					'post_status' => 'publish',
+					'posts_per_page' => $clinical_resource_posts_per_page,
+					'order' => 'DESC',
+					'orderby' => 'post_date',
+				);
+
+				$clinical_resource_query = new WP_Query( $args );
+
+				// Check if Clinical Resources section should be displayed
+
+					if ( $clinical_resource_query->have_posts() ) {
+
+						$clinical_resource_section_show = true;
+						$clinical_resource_ids = $clinical_resource_query->posts;
+						$clinical_resource_count = count($clinical_resource_query->posts);
+						$jump_link_count++;
+
+						// Count valid clinical resource items
+
+							$clinical_resource_count = 0;
+
+							foreach ( $clinical_resources as $resource ) {
+
+								if ( get_post_status ( $resource ) == 'publish' ) {
+
+									$clinical_resource_count++;
+
+								}
+
+							}
+
+					}
+
 			}
-		} else {
 
-			$clinical_resource_query = '';
-			$clinical_resource_section_show = false;
-			$clinical_resource_ids = '';
-			$clinical_resource_count = 0;
+			// Create an array to be used on the templates and template parts
 
+				$clinical_resource_query_vars = array(
+					'clinical_resource_query'			=> $clinical_resource_query, // WP_Post[]
+					'clinical_resource_section_show'	=> $clinical_resource_section_show, // bool
+					'clinical_resource_ids'				=> $clinical_resource_ids, // int[]
+					'clinical_resource_count'			=> $clinical_resource_count, // int
+					'clinical_resource_posts_per_page'	=> $clinical_resource_posts_per_page, // int
+					'jump_link_count'					=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $clinical_resource_query_vars;
+	
 		}
-
-		// Create an array to be used on the templates and template parts
-
-			$clinical_resource_query_vars = array(
-				'clinical_resource_query'			=> $clinical_resource_query, // WP_Post[]
-				'clinical_resource_section_show'	=> $clinical_resource_section_show, // bool
-				'clinical_resource_ids'				=> $clinical_resource_ids, // int[]
-				'clinical_resource_count'			=> $clinical_resource_count, // int
-				'clinical_resource_posts_per_page'	=> $clinical_resource_posts_per_page, // int
-				'jump_link_count'					=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $clinical_resource_query_vars;
 
 	}
 
 	// Query for whether related conditions content section should be displayed on ontology pages/subsections
 	function uamswp_fad_condition_query(
 		$conditions_cpt, // int[]
-		$condition_treatment_section_show = false, // bool (optional)
-		$ontology_type = true, // bool (optional)
-		$jump_link_count = 0 // int (optional)
+		$condition_treatment_section_show = false, // bool
+		$ontology_type = true, // bool
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		if ( $conditions_cpt ) {
-			$args = array(
-				'post_type' => 'condition',
-				'post_status' => 'publish',
-				'orderby' => 'title',
-				'order' => 'ASC',
-				'posts_per_page' => -1,
-				'post__in' => $conditions_cpt
-			);
-			$condition_cpt_query = new WP_Query( $args );
-			if( ( $conditions_cpt && $condition_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
-				$condition_section_show = true;
-				$condition_treatment_section_show = true;
-				$condition_ids = $condition_cpt_query->posts;
-				$condition_count = count($condition_cpt_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-			} else {
-				$condition_section_show = false;
-				$condition_ids = '';
-				$condition_count = 0;
-			}
+		$page_id = isset($page_id) ? $page_id : get_the_id();
+
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
+	
+		if ( !empty( $condition_query_vars ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $condition_query_vars;
+	
 		} else {
-			$condition_cpt_query = '';
-			$condition_section_show = false;
-			$condition_ids = '';
-			$condition_count = 0;
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+					
+			// Eliminate PHP errors
+
+				$condition_cpt_query = '';
+				$condition_section_show = isset($condition_section_show) ? $condition_section_show : false;
+				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+				$condition_ids = array();
+				$condition_count = 0;
+				
+			if (
+				!$hide_medical_ontology
+				&&
+				$conditions_cpt
+			) {
+
+				$args = array(
+					'post_type' => 'condition',
+					'post_status' => 'publish',
+					'orderby' => 'title',
+					'order' => 'ASC',
+					'posts_per_page' => -1,
+					'post__in' => $conditions_cpt
+				);
+
+				$condition_cpt_query = new WP_Query( $args );
+
+				if (
+					$condition_cpt_query->posts
+					&&
+					(
+						"1" == $ontology_type
+						||
+						!isset($ontology_type)
+					)
+				) {
+
+					$condition_section_show = true;
+					$condition_treatment_section_show = true;
+					$condition_ids = $condition_cpt_query->posts;
+					$condition_count = count($condition_cpt_query->posts);
+					$jump_link_count++;
+
+				}
+
+			}
+
+			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+
+			// Create an array to be used on the templates and template parts
+
+				$condition_query_vars = array(
+					'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
+					'condition_section_show'			=> $condition_section_show, // bool
+					'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
+					'condition_ids'						=> $condition_ids, // int[]
+					'condition_count'					=> $condition_count, // int
+					'schema_medical_specialty'			=> $schema_medical_specialty, // array
+					'jump_link_count'					=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $condition_query_vars;
+	
 		}
-
-		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-
-		// Create an array to be used on the templates and template parts
-
-			$condition_query_vars = array(
-				'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
-				'condition_section_show'			=> $condition_section_show, // bool
-				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
-				'condition_ids'						=> $condition_ids, // int[]
-				'condition_count'					=> $condition_count, // int
-				'schema_medical_specialty'			=> $schema_medical_specialty, // array
-				'jump_link_count'					=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $condition_query_vars;
 
 	}
 
 	// Query for whether related treatments content section should be displayed on ontology pages/subsections
 	function uamswp_fad_treatment_query(
 		$treatments_cpt, // int[]
-		$condition_treatment_section_show = false, // bool (optional)
-		$ontology_type = true, // bool (optional)
-		$jump_link_count = 0 // int (optional)
+		$condition_treatment_section_show = false, // bool
+		$ontology_type = true, // bool
+		&$jump_link_count = 0, // int
+		$hide_medical_ontology = false // bool
 	) {
 
-		if ( $treatments_cpt ) {
-			$args = array(
-				'post_type' => 'treatment',
-				'post_status' => 'publish',
-				'orderby' => 'title',
-				'order' => 'ASC',
-				'posts_per_page' => -1,
-				'post__in' => $treatments_cpt
-			);
-			$treatment_cpt_query = new WP_Query( $args );
-			if( ( $treatments_cpt && $treatment_cpt_query->posts ) && ("1" == $ontology_type || !isset($ontology_type) ) ) {
-				$treatment_section_show = true;
-				$condition_treatment_section_show = true;
-				$treatment_ids = $treatment_cpt_query->posts;
-				$treatment_count = count($treatment_cpt_query->posts);
-				$jump_link_count = $jump_link_count + 1;
-			} else {
-				$treatment_section_show = false;
-				$treatment_ids = '';
-				$treatment_count = 0;
-			}
+		$page_id = isset($page_id) ? $page_id : get_the_id();
+
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'vars_' . $page_id, $foo, __FUNCTION__ );
+	
+		if ( !empty( $foo ) ) {
+			
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+	
+			return $foo;
+	
 		} else {
-			$treatment_cpt_query = '';
-			$treatment_section_show = false;
-			$treatment_ids = '';
-			$treatment_count = 0;
+	
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+		
+			// Eliminate PHP errors
+
+				$treatment_cpt_query = '';
+				$treatment_section_show = false;
+				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
+				$treatment_ids = array();
+				$treatment_count = 0;
+				$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+
+			if (
+				!$hide_medical_ontology
+				&&
+				$treatments_cpt
+			) {
+
+				$args = array(
+					'post_type' => 'treatment',
+					'post_status' => 'publish',
+					'orderby' => 'title',
+					'order' => 'ASC',
+					'posts_per_page' => -1,
+					'post__in' => $treatments_cpt
+				);
+
+				$treatment_cpt_query = new WP_Query( $args );
+
+				if (
+					$treatment_cpt_query->posts
+					&&
+					(
+						"1" == $ontology_type
+						||
+						!isset($ontology_type)
+					)
+				) {
+
+					$treatment_section_show = true;
+					$condition_treatment_section_show = true;
+					$treatment_ids = $treatment_cpt_query->posts;
+					$treatment_count = count($treatment_cpt_query->posts);
+					$jump_link_count++;
+
+				}
+
+			}
+
+			// Create an array to be used on the templates and template parts
+
+				$treatment_query_vars = array(
+					'treatment_cpt_query'				=> $treatment_cpt_query, // WP_Post[]
+					'treatment_section_show'			=> $treatment_section_show, // bool
+					'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
+					'treatment_ids'						=> $treatment_ids, // int[]
+					'treatment_count'					=> $treatment_count, // int
+					'schema_medical_specialty'			=> $schema_medical_specialty, // array
+					'jump_link_count'					=> $jump_link_count // int
+				);
+
+			// Set/update the value of the transient
+			uamswp_fad_set_transient( 'vars_' . $page_id, $treatment_query_vars, __FUNCTION__ );
+	
+			// Return the variable
+			return $treatment_query_vars;
+	
 		}
-
-		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-
-		// Create an array to be used on the templates and template parts
-
-			$treatment_query_vars = array(
-				'treatment_cpt_query'				=> $treatment_cpt_query, // WP_Post[]
-				'treatment_section_show'			=> $treatment_section_show, // bool
-				'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
-				'treatment_ids'						=> $treatment_ids, // int[]
-				'treatment_count'					=> $treatment_count, // int
-				'schema_medical_specialty'			=> $schema_medical_specialty, // array
-				'jump_link_count'					=> $jump_link_count // int
-			);
-
-		// Return the variable
-		return $treatment_query_vars;
 
 	}
 
