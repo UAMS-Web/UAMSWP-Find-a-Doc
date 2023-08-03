@@ -22,27 +22,31 @@ add_filter( 'facetwp_shortcode_html', function( $output, $atts) {
 }, 10, 2 );
 
 function fwp_disable_auto_refresh() {
+
 	if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) ) {
-	?>
-	<script>
-	// (function($) {
-	// 	$(function() {
-	// 		if ('undefined' !== typeof FWP) {
-	// 			FWP.auto_refresh = false;
-	// 		}
-	// 	});
-	// })(jQuery);
-	(function($) {
-		$(document).on('change', '.facetwp-sort .facetwp-sort-select', function() {
-			FWP.extras.sort = $(this).val();
-			FWP.soft_refresh = true;
-			FWP.autoload();
-			FWP.refresh();
-		});
-	})(jQuery);
-	</script>
-<?php
+
+		?>
+		<script>
+		// (function($) {
+		// 	$(function() {
+		// 		if ('undefined' !== typeof FWP) {
+		// 			FWP.auto_refresh = false;
+		// 		}
+		// 	});
+		// })(jQuery);
+		(function($) {
+			$(document).on('change', '.facetwp-sort .facetwp-sort-select', function() {
+				FWP.extras.sort = $(this).val();
+				FWP.soft_refresh = true;
+				FWP.autoload();
+				FWP.refresh();
+			});
+		})(jQuery);
+		</script>
+		<?php
+
 	}
+	
 }
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
@@ -104,7 +108,9 @@ function fwp_facet_scripts() {
 		is_post_type_archive( 'location' )
 		||
 		is_post_type_archive( 'clinical-resource' )
-	) { ?>
+	) {
+		
+		?>
 		<script>
 			(function($) {
 				document.addEventListener('facetwp-loaded', function() {
@@ -140,7 +146,8 @@ function fwp_facet_scripts() {
 				});
 			})(jQuery);
 		</script>
-	<?php } // if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) )
+		<?php
+	} // if ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) || is_post_type_archive( 'clinical-resource' ) )
 
 	if (
 		is_post_type_archive( 'provider' )
@@ -148,6 +155,7 @@ function fwp_facet_scripts() {
 		is_post_type_archive( 'location' )
 	) {
 		$taxonomy_slug = isset(get_queried_object()->slug) ? get_queried_object()->slug : '';
+
 		?>
 		<script>
 			(function($) {
@@ -307,7 +315,11 @@ function fwp_facet_scripts() {
 				}
 			})(jQuery);
 		</script>
-	<?php } elseif ( is_post_type_archive( 'clinical-resource' ) ) { ?>
+		<?php
+	
+	} elseif ( is_post_type_archive( 'clinical-resource' ) ) {
+		
+		?>
 		<script>
 			(function($) {
 				document.addEventListener('facetwp-loaded', function() {
@@ -333,7 +345,10 @@ function fwp_facet_scripts() {
 				});
 			})(jQuery);
 		</script>
-	<?php } // endif ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) elseif ( is_post_type_archive( 'clinical-resource' ) )
+		<?php
+		
+	} // endif ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) elseif ( is_post_type_archive( 'clinical-resource' ) )
+
 } // end function fwp_facet_scripts()
 add_action( 'wp_footer', 'fwp_facet_scripts', 100 );
 
