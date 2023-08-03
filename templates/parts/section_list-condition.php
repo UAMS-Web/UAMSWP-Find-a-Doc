@@ -153,7 +153,7 @@ if ( $condition_section_show ) {
 				||
 				!isset($condition_count) || empty($condition_count)
 			) {
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+				$condition_query_vars = uamswp_fad_condition_query(
 					$page_id, // int
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)

@@ -75,7 +75,7 @@
 
 	if ( !isset($provider_section_show) || empty($provider_section_show) ) {
 
-		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+		$provider_query_vars = uamswp_fad_provider_query(
 			$page_id, // int
 			$providers // int[]
 		);
@@ -85,7 +85,7 @@
 
 	if ( !isset($location_section_show) || empty($location_section_show) ) {
 
-		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+		$location_query_vars = uamswp_fad_location_query(
 			$page_id, // int
 			$locations // int[]
 		);
@@ -95,7 +95,7 @@
 
 	if ( !isset($expertise_section_show) || empty($expertise_section_show) ) {
 
-		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+		$expertise_query_vars = uamswp_fad_expertise_query(
 			$page_id, // int
 			$expertises // int[]
 		);
@@ -105,7 +105,7 @@
 
 	if ( !isset($clinical_resource_section_show) || empty($clinical_resource_section_show) ) {
 
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 			$page_id, // int
 			$clinical_resources // int[]
 		);
@@ -121,7 +121,7 @@
 		!isset($expertise_content_nav) || empty($expertise_content_nav)
 	) {
 
-		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query(
 			$page_id, // int
 			$expertise_descendants, // int[]
 			'subsection', // string (optional) // Expected values: 'subsection' or 'profile'

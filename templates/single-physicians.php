@@ -265,7 +265,7 @@
 
 				// Query for whether related locations content section should be displayed on a page
 
-					$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+					$location_query_vars = uamswp_fad_location_query(
 						$page_id, // int
 						$locations, // int[]
 						$jump_link_count, // int
@@ -312,7 +312,7 @@
 
 					// Query for whether related areas of expertise content section should be displayed on a page
 
-						$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+						$expertise_query_vars = uamswp_fad_expertise_query(
 							$page_id, // int
 							$expertises, // int[]
 							$jump_link_count, // int
@@ -725,7 +725,7 @@
 					$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
 				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+				$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 					$page_id, // int
 					$clinical_resources, // int[]
 					$clinical_resource_posts_per_page, // int
@@ -743,7 +743,7 @@
 				$conditions_cpt = get_field('physician_conditions_cpt');
 				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+				$condition_query_vars = uamswp_fad_condition_query(
 					$page_id, // int
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool
@@ -764,7 +764,7 @@
 				$treatments_cpt = get_field('physician_treatments_cpt');
 				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+				$treatment_query_vars = uamswp_fad_treatment_query(
 					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool
@@ -782,7 +782,7 @@
 			// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 
 				$podcast_name = get_field('physician_podcast_name');
-				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
+				$podcast_query_vars = uamswp_fad_podcast_query(
 					$page_id, // int
 					$podcast_name, // string
 					$jump_link_count // int

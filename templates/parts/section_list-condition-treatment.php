@@ -327,7 +327,7 @@ if ( $condition_treatment_section_show ) {
 				!isset($condition_count) || empty($condition_count)
 			) {
 
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+				$condition_query_vars = uamswp_fad_condition_query(
 					$page_id, // int
 					$conditions_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
@@ -349,7 +349,7 @@ if ( $condition_treatment_section_show ) {
 				||
 				!isset($treatment_count) || empty($treatment_count)
 			) {
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+				$treatment_query_vars = uamswp_fad_treatment_query(
 					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)

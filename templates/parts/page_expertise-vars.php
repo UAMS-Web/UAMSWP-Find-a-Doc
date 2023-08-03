@@ -252,7 +252,7 @@ $template_type = 'default';
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 
-		$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+		$provider_query_vars = uamswp_fad_provider_query(
 			$page_id, // int
 			$providers // int[]
 		);
@@ -263,7 +263,7 @@ $template_type = 'default';
 
 	// Query for whether related locations content section should be displayed on ontology pages/subsections
 
-		$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+		$location_query_vars = uamswp_fad_location_query(
 			$page_id, // int
 			$locations // int[]
 		);
@@ -275,7 +275,7 @@ $template_type = 'default';
 
 	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 
-		$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query(
 			$page_id, // int
 			$expertise_descendants, // int[]
 			$content_placement, // string (optional)
@@ -293,7 +293,7 @@ $template_type = 'default';
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 
-		$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+		$expertise_query_vars = uamswp_fad_expertise_query(
 			$page_id, // int
 			$expertises // int[]
 		);
@@ -307,7 +307,7 @@ $template_type = 'default';
 		$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
 			$clinical_resource_posts_per_page_fpage = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_fpage']; // int
 		$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_fpage;
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 			$page_id, // int
 			$clinical_resources, // int[]
 			$clinical_resource_posts_per_page // int
@@ -321,7 +321,7 @@ $template_type = 'default';
 
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
-		$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
+		$condition_query_vars = uamswp_fad_condition_query(
 			$page_id, // int
 			$conditions_cpt, // int[]
 			$condition_treatment_section_show, // bool (optional)
@@ -338,7 +338,7 @@ $template_type = 'default';
 
 		$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
-		$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+		$treatment_query_vars = uamswp_fad_treatment_query(
 			$page_id, // int
 			$treatments_cpt, // int[]
 			$condition_treatment_section_show, // bool (optional)

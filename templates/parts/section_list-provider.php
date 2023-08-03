@@ -150,7 +150,7 @@ if ( $provider_section_show ) {
 				!isset($provider_count) || empty($provider_count)
 			) {
 
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+				$provider_query_vars = uamswp_fad_provider_query(
 					$page_id, // int
 					$providers // int[]
 				);

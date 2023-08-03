@@ -56,7 +56,7 @@
 
 		$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 			$page_id, // int
 			$clinical_resources,
 			$clinical_resource_posts_per_page,
@@ -66,7 +66,7 @@
 
 	if ( !isset($clinical_resource_section_show) ) {
 
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 			$page_id, // int
 			$clinical_resources,
 			$clinical_resource_posts_per_page,
@@ -89,7 +89,7 @@
 					||
 					!isset($clinical_resource_count)
 				) {
-					$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+					$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 						$page_id, // int
 						$clinical_resources,
 						$clinical_resource_posts_per_page,

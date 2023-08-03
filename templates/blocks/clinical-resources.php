@@ -50,7 +50,7 @@
 		!isset($clinical_resource_count) || empty($clinical_resource_count)
 	) {
 
-		$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
+		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
 			$page_id, // int
 			$clinical_resources,
 			$clinical_resource_posts_per_page,

@@ -152,7 +152,7 @@ if ( $location_section_show ) {
 				||
 				!isset($location_count) || empty($location_count)
 			) {
-				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
+				$location_query_vars = uamswp_fad_location_query(
 					$page_id, // int
 					$locations // int[]
 				);

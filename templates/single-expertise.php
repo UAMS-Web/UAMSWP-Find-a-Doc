@@ -145,7 +145,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 			// Check if podcast section should be displayed
 
 				$podcast_name = get_field('expertise_podcast_name');
-				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
+				$podcast_query_vars = uamswp_fad_podcast_query(
 					$page_id, // int
 					$podcast_name // string
 				);

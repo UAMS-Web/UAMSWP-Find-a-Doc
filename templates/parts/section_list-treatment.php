@@ -159,7 +159,7 @@ if ( $treatment_section_show ) {
 				!isset($treatment_count) || empty($treatment_count)
 			) {
 
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
+				$treatment_query_vars = uamswp_fad_treatment_query(
 					$page_id, // int
 					$treatments_cpt, // int[]
 					$condition_treatment_section_show, // bool (optional)
