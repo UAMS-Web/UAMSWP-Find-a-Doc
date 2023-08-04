@@ -4,15 +4,15 @@
  */
 
 // Define variables common to all area of expertise pages and fake subpages
-include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise-vars.php' );
+include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_vars.php' );
 
 // Construct HEAD elements common to all area of expertise overview pages and all fake area of expertise subpages
-include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise-construct-head.php' );
+include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_construct-head.php' );
 
 // BODY
 
 	// Construct BODY elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise-construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_construct-body.php' );
 
 	// MAIN / ARTICLE
 
