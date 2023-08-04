@@ -1827,7 +1827,7 @@ function uamswp_fad_ontology_site_values(
 				0 != count($location_descendants)
 			) {
 
-				$args = array(
+				$location_descendant_args = array(
 					'post_type' => 'location',
 					'post_status' => 'publish',
 					'post_parent' => $page_id,
@@ -1844,7 +1844,7 @@ function uamswp_fad_ontology_site_values(
 					),
 				);
 
-				$location_descendant_query = new WP_Query( $args );
+				$location_descendant_query = new WP_Query( $location_descendant_args );
 
 				if ( $location_descendant_query->have_posts() ) {
 
@@ -9204,7 +9204,7 @@ function uamswp_prevent_orphan($string) {
 			 * current function in the transient name.
 			 */
 
-			set_transient( uamswp_fad_transient_name( $string, $function ), $value, DAY_IN_SECONDS );
+			set_transient( uamswp_fad_transient_name( $string, $function ), $value, 10 );
 
 			return;
 		}
