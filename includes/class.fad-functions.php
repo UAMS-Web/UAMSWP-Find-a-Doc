@@ -1299,18 +1299,18 @@ function uamswp_fad_ontology_hide(
 	if ( !empty( $ontology_hide_vars ) ) {
 
 		/* 
-			* The transient exists.
-			* Return the variable.
-			*/
+		 * The transient exists.
+		 * Return the variable.
+		 */
 
 		return $ontology_hide_vars;
 
 	} else {
 
 		/* 
-		* The transient does not exist.
-		* Define the variable again.
-		*/
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
 
 		// Check/define variables
 
@@ -1433,18 +1433,18 @@ function uamswp_fad_ontology_site_values(
 	if ( !empty( $ontology_site_values_vars ) ) {
 
 		/* 
-			* The transient exists.
-			* Return the variable.
-			*/
+		 * The transient exists.
+		 * Return the variable.
+		 */
 
 		return $ontology_site_values_vars;
 
 	} else {
 
 		/* 
-		* The transient does not exist.
-		* Define the variable again.
-		*/
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
 
 		// Ancestors
 
@@ -5336,18 +5336,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_text_expertise_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_text_expertise_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				if ( !isset($page_title) ) {
 					$page_title = isset($page_titles['page_title']) ? $page_titles['page_title'] : get_the_title();
@@ -7235,18 +7235,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_provider_general_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_provider_general_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Get the Find-a-Doc Settings value
 				$provider_fpage_image_general = get_field('provider_fpage_featured_image_general', 'option'); // Featured image ID
@@ -7280,18 +7280,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_location_general_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_location_general_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Locations
 
@@ -7337,18 +7337,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_expertise_general_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_expertise_general_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Areas of Expertise
 
@@ -7394,18 +7394,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_clinical_resource_general_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_clinical_resource_general_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Get the Find-a-Doc Settings value
 				$clinical_resource_fpage_image_general = get_field('clinical_resource_fpage_featured_image_general', 'option'); // Featured image ID
@@ -7441,18 +7441,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_provider_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_provider_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Locations
 
@@ -7526,18 +7526,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_location_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_location_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Providers
 
@@ -7627,18 +7627,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_expertise_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_expertise_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Overview
 
@@ -7840,18 +7840,18 @@ function uamswp_fad_fpage_text_replace(
 			if ( !empty( $fpage_image_clinical_resource_vars ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $fpage_image_clinical_resource_vars;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Providers
 
