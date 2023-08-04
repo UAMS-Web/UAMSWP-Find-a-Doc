@@ -67,28 +67,11 @@
 			'page_title_attr'	=> $page_title_attr
 		);
 
-	// Get system settings for elements of a fake subpage (or section) in an Area of Expertise subsection (or profile)
+// Get system settings for area of expertise profile text elements
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
 
-		// Get system settings for area of expertise profile text elements
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
-
-		// Image elements
-
-			$fpage_image_expertise_vars = uamswp_fad_fpage_image_expertise(
-				$page_id // int
-			);
-				$expertise_featured_image = $fpage_image_expertise_vars['expertise_featured_image']; // int
-				$expertise_featured_image_url = $fpage_image_expertise_vars['expertise_featured_image_url']; // string
-				$provider_fpage_featured_image_expertise = $fpage_image_expertise_vars['provider_fpage_featured_image_expertise']; // int
-				$provider_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['provider_fpage_featured_image_expertise_url']; // string
-				$location_fpage_featured_image_expertise = $fpage_image_expertise_vars['location_fpage_featured_image_expertise']; // int
-				$location_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['location_fpage_featured_image_expertise_url']; // string
-				$expertise_fpage_featured_image_expertise = $fpage_image_expertise_vars['expertise_fpage_featured_image_expertise']; // int
-				$expertise_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['expertise_fpage_featured_image_expertise_url']; // string
-				$expertise_descendant_fpage_featured_image_expertise = $fpage_image_expertise_vars['expertise_descendant_fpage_featured_image_expertise']; // int
-				$expertise_descendant_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['expertise_descendant_fpage_featured_image_expertise_url']; // string
-				$clinical_resource_fpage_featured_image_expertise = $fpage_image_expertise_vars['clinical_resource_fpage_featured_image_expertise']; // int
-				$clinical_resource_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['clinical_resource_fpage_featured_image_expertise_url']; // string
+// Get system settings for area of expertise profile image elements
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/expertise.php' );
 
 // Get the ontology subsection values
 include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
