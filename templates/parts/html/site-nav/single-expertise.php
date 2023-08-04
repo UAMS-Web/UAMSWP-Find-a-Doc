@@ -47,15 +47,8 @@
 	// Get the ontology subsection values
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
-	if ( !isset($provider_section_show) || empty($provider_section_show) ) {
-
-		$provider_query_vars = uamswp_fad_provider_query(
-			$page_id, // int
-			$providers // int[]
-		);
-			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-
-	}
+	// Related Providers Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
 	if ( !isset($location_section_show) || empty($location_section_show) ) {
 

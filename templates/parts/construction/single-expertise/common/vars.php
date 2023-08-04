@@ -146,16 +146,8 @@ $template_type = 'default';
 
 // Queries for whether each of the sections should be displayed
 
-	// Query for whether related providers content section should be displayed on ontology pages/subsections
-
-		$provider_query_vars = uamswp_fad_provider_query(
-			$page_id, // int
-			$providers // int[]
-		);
-			$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-			$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-			$provider_ids = $provider_query_vars['provider_ids']; // int[]
-			$provider_count = $provider_query_vars['provider_count']; // int
+	// Related Providers Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
 	// Query for whether related locations content section should be displayed on ontology pages/subsections
 

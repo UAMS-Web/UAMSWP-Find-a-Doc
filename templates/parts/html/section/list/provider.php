@@ -125,26 +125,8 @@ if ( $provider_section_show ) {
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
-			if (
-				!isset($provider_query) || empty($provider_query)
-				||
-				!isset($provider_section_show) || empty($provider_section_show)
-				||
-				!isset($provider_ids) || empty($provider_ids)
-				||
-				!isset($provider_count) || empty($provider_count)
-			) {
-
-				$provider_query_vars = uamswp_fad_provider_query(
-					$page_id, // int
-					$providers // int[]
-				);
-					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-					$provider_ids = $provider_query_vars['provider_ids']; // int[]
-					$provider_count = $provider_query_vars['provider_count']; // int
-
-			}
+			// Related Providers Section Query
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
 	// Filter details
 	if ( $provider_section_filter ) {
