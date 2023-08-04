@@ -46,7 +46,7 @@ function fwp_disable_auto_refresh() {
 		<?php
 
 	}
-	
+
 }
 add_action( 'wp_footer', 'fwp_disable_auto_refresh', 100 );
 
@@ -109,7 +109,7 @@ function fwp_facet_scripts() {
 		||
 		is_post_type_archive( 'clinical-resource' )
 	) {
-		
+
 		?>
 		<script>
 			(function($) {
@@ -316,9 +316,9 @@ function fwp_facet_scripts() {
 			})(jQuery);
 		</script>
 		<?php
-	
+
 	} elseif ( is_post_type_archive( 'clinical-resource' ) ) {
-		
+
 		?>
 		<script>
 			(function($) {
@@ -346,7 +346,7 @@ function fwp_facet_scripts() {
 			})(jQuery);
 		</script>
 		<?php
-		
+
 	} // endif ( is_post_type_archive( 'provider' ) || is_post_type_archive( 'location' ) ) elseif ( is_post_type_archive( 'clinical-resource' ) )
 
 } // end function fwp_facet_scripts()

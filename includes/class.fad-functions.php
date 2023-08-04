@@ -1301,7 +1301,7 @@ function uamswp_fad_ontology_hide(
 	uamswp_fad_get_transient( 'vars_' . $page_id, $ontology_hide_vars, __FUNCTION__ );
 
 	if ( !empty( $ontology_hide_vars ) ) {
-		
+
 		/* 
 			* The transient exists.
 			* Return the variable.
@@ -1435,7 +1435,7 @@ function uamswp_fad_ontology_site_values(
 	uamswp_fad_get_transient( 'vars_' . $page_id, $ontology_site_values_vars, __FUNCTION__ );
 
 	if ( !empty( $ontology_site_values_vars ) ) {
-		
+
 		/* 
 			* The transient exists.
 			* Return the variable.
@@ -1617,23 +1617,23 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
-	
+
 		if ( !empty( $provider_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $provider_query_vars;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
-					
+
 			// Eliminate PHP errors
 
 				$provider_query = '';
@@ -1686,10 +1686,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $provider_query_vars;
-	
+
 		}
 
 	}
@@ -1704,18 +1704,18 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
-	
+
 		if ( !empty( $location_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $location_query_vars;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
@@ -1775,10 +1775,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $location_query_vars;
-	
+
 		}
 
 	}
@@ -1793,23 +1793,23 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
-	
+
 		if ( !empty( $location_descendant_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $location_descendant_query_vars;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
-		
+
 			// Eliminate PHP errors
 
 				$location_descendant_query = '';
@@ -1871,10 +1871,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $location_descendant_query_vars;
-	
+
 		}
 
 	}
@@ -1904,23 +1904,23 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
-	
+
 		if ( !empty( $expertise_descendant_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $expertise_descendant_query_vars;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
-		
+
 			// Check/define variables
 
 				$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : 'profile';
@@ -2074,10 +2074,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $expertise_descendant_query_vars;
-	
+
 		}
 
 	}
@@ -2094,7 +2094,7 @@ function uamswp_fad_ontology_site_values(
 		uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
 
 		if ( !empty( $expertise_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -2115,7 +2115,7 @@ function uamswp_fad_ontology_site_values(
 				$expertise_section_show = false;
 				$expertise_ids = array();
 				$expertise_count = 0;
-			
+
 			if (
 				!$hide_medical_ontology
 				&&
@@ -2156,10 +2156,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $expertise_query_vars;
-	
+
 		}
 
 	}
@@ -2175,23 +2175,23 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
-	
+
 		if ( !empty( $clinical_resource_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $clinical_resource_query_vars;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
-		
+
 			// Bring in variables from outside of the function
 
 				if ( !isset($clinical_resource_posts_per_page) ) {
@@ -2270,10 +2270,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $clinical_resource_query_vars;
-	
+
 		}
 
 	}
@@ -2290,23 +2290,23 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
-	
+
 		if ( !empty( $condition_query_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $condition_query_vars;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
-					
+
 			// Eliminate PHP errors
 
 				$condition_cpt_query = '';
@@ -2314,7 +2314,7 @@ function uamswp_fad_ontology_site_values(
 				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
 				$condition_ids = array();
 				$condition_count = 0;
-				
+
 			if (
 				!$hide_medical_ontology
 				&&
@@ -2368,10 +2368,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $condition_query_vars;
-	
+
 		}
 
 	}
@@ -2388,23 +2388,23 @@ function uamswp_fad_ontology_site_values(
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $page_id, $foo, __FUNCTION__ );
-	
+
 		if ( !empty( $foo ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
-	
+
 			return $foo;
-	
+
 		} else {
-	
+
 			/* 
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
-		
+
 			// Eliminate PHP errors
 
 				$treatment_cpt_query = '';
@@ -2465,10 +2465,10 @@ function uamswp_fad_ontology_site_values(
 
 			// Set/update the value of the transient
 			uamswp_fad_set_transient( 'vars_' . $page_id, $treatment_query_vars, __FUNCTION__ );
-	
+
 			// Return the variable
 			return $treatment_query_vars;
-	
+
 		}
 
 	}
@@ -2550,7 +2550,7 @@ function uamswp_fad_podcast_query(
 	uamswp_fad_get_transient( 'vars_' . $page_id, $podcast_query_vars, __FUNCTION__ );
 
 	if ( !empty( $podcast_query_vars ) ) {
-		
+
 		/* 
 		 * The transient exists.
 		 * Return the variable.
@@ -2575,7 +2575,7 @@ function uamswp_fad_podcast_query(
 			} else {
 
 				$podcast_section_show = false;
-				
+
 			}
 
 		// Create an array to be used on the templates and template parts
@@ -2901,7 +2901,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_provider_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_provider_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -2922,7 +2922,7 @@ function uamswp_fad_fpage_text_replace(
 			$provider_plural_name_attr = uamswp_attr_conversion($provider_plural_name);
 
 			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		
+
 				$placeholder_provider_single_name = '[Provider]';
 				$placeholder_provider_plural_name = '[Providers]';
 				$placeholder_provider_short_name = '[Provider Short Name]';
@@ -2935,7 +2935,7 @@ function uamswp_fad_fpage_text_replace(
 					$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 				// Add item to FacetWP labels array for Providers facet on Clinical Resources archive/list
-				
+
 					$facet_labels['clinical_resource']['resource_provider'] = $provider_plural_name;
 					$facet_labels['clinical_resource']['resource_provider_attr'] = $provider_plural_name_attr;
 
@@ -2958,7 +2958,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $labels_provider_vars;
-	
+
 		}
 
 	}
@@ -2970,7 +2970,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_location_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_location_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -2991,7 +2991,7 @@ function uamswp_fad_fpage_text_replace(
 			$location_plural_name_attr = uamswp_attr_conversion($location_plural_name);
 
 			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		
+
 				$placeholder_location_single_name = '[Location]';
 				$placeholder_location_plural_name = '[Locations]';
 				$placeholder_location_page_title = '[Location Title]';
@@ -3000,16 +3000,16 @@ function uamswp_fad_fpage_text_replace(
 			// FacetWP labels
 
 				// Create array for pairing FacetWP name with label if none exists
-				
+
 					$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 				// Add item to FacetWP labels array for Locations facet on Providers archive/list
-				
+
 					$facet_labels['provider']['locations'] = $location_plural_name;
 					$facet_labels['provider']['locations_attr'] = $location_plural_name_attr;
 
 				// Add item to FacetWP labels array for Locations facet on Clinical Resources archive/list
-				
+
 					$facet_labels['clinical_resource']['resource_locations'] = $location_plural_name;
 					$facet_labels['clinical_resource']['resource_locations_attr'] = $location_plural_name_attr;
 
@@ -3033,7 +3033,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $labels_location_vars;
-	
+
 		}
 
 	}
@@ -3045,7 +3045,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_location_descendant_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_location_descendant_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3085,7 +3085,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $labels_location_descendant_vars;
-	
+
 		}
 
 	}
@@ -3097,7 +3097,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_expertise_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_expertise_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3118,7 +3118,7 @@ function uamswp_fad_fpage_text_replace(
 			$expertise_plural_name_attr = uamswp_attr_conversion($expertise_plural_name);
 
 			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		
+
 				$placeholder_expertise_single_name = '[Area of Expertise]';
 				$placeholder_expertise_plural_name = '[Areas of Expertise]';
 				$placeholder_expertise_page_title = '[Area of Expertise Title]';
@@ -3126,21 +3126,21 @@ function uamswp_fad_fpage_text_replace(
 			// FacetWP labels
 
 				// Create array for pairing FacetWP name with label if none exists
-				
+
 					$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 				// Add item to FacetWP labels array for Areas of Expertise facet on Providers archive/list
-				
+
 					$facet_labels['provider']['physician_areas_of_expertise'] = $expertise_plural_name;
 					$facet_labels['provider']['physician_areas_of_expertise_attr'] = $expertise_plural_name_attr;
 
 				// Add item to FacetWP labels array for Areas of Expertise facet on Locations archive/list
-			
+
 					$facet_labels['location']['location_aoe'] = $expertise_plural_name;
 					$facet_labels['location']['location_aoe_attr'] = $expertise_plural_name_attr;
 
 				// Add item to FacetWP labels array for Areas of Expertise facet on Clinical Resources archive/list
-				
+
 					$facet_labels['clinical_resource']['resource_aoe'] = $expertise_plural_name;
 					$facet_labels['clinical_resource']['resource_aoe_attr'] = $expertise_plural_name_attr;
 
@@ -3164,7 +3164,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $labels_expertise_vars;
-	
+
 		}
 
 	}
@@ -3176,7 +3176,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_expertise_descendant_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_expertise_descendant_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3216,7 +3216,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $labels_expertise_descendant_vars;
-	
+
 		}
 
 	}
@@ -3228,7 +3228,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_clinical_resource_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_clinical_resource_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3268,7 +3268,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $labels_clinical_resource_vars;
-	
+
 		}
 
 	}
@@ -3280,7 +3280,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_clinical_resource_facet_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_clinical_resource_facet_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3301,18 +3301,18 @@ function uamswp_fad_fpage_text_replace(
 			$clinical_resource_type_plural_name_attr = uamswp_attr_conversion($clinical_resource_type_plural_name);
 
 			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-			
+
 				$placeholder_clinical_resource_type_single_name = '[Resource Type]';
 				$placeholder_clinical_resource_type_plural_name = '[Resource Types]';
 
 			// FacetWP labels
 
 				// Create array for pairing FacetWP name with label if none exists
-				
+
 					$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 				// Add item to FacetWP labels array for Clinical Resource Type facet on Clinical Resource archive/list
-					
+
 					$facet_labels['clinical_resource']['resource_type'] = $clinical_resource_type_plural_name;
 					$facet_labels['clinical_resource']['resource_type_attr'] = $clinical_resource_type_plural_name_attr;
 
@@ -3345,7 +3345,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_condition_treatment_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_condition_treatment_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3397,7 +3397,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_condition_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_condition_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3424,16 +3424,16 @@ function uamswp_fad_fpage_text_replace(
 			// FacetWP labels
 
 				// Create array for pairing FacetWP name with label if none exists
-				
+
 					$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 				// Add item to FacetWP labels array for Conditions facet on Providers archive/list
-			
+
 					$facet_labels['provider']['conditions'] = $condition_plural_name;
 					$facet_labels['provider']['conditions_attr'] = $condition_plural_name_attr;
 
 				// Add item to FacetWP labels array for Conditions facet on Clinical Resources archive/list
-			
+
 					$facet_labels['clinical_resource']['resource_conditions'] = $condition_plural_name;
 					$facet_labels['clinical_resource']['resource_conditions_attr'] = $condition_plural_name_attr;
 
@@ -3467,7 +3467,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $labels_treatment_vars, __FUNCTION__ );
 
 		if ( !empty( $labels_treatment_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3488,23 +3488,23 @@ function uamswp_fad_fpage_text_replace(
 			$treatment_plural_name_attr = uamswp_attr_conversion($treatment_plural_name);
 
 			// Define string used to find and replace with Find-a-Doc Settings values in uamswp_fad_fpage_text_replace()
-		
+
 				$placeholder_treatment_single_name = '[Treatment]';
 				$placeholder_treatment_plural_name = '[Treatments]';
 
 			// FacetWP labels
 
 				// Create array for pairing FacetWP name with label if none exists
-			
+
 					$facet_labels = ( isset($facet_labels) && is_array($facet_labels) ) ? $facet_labels : array();
 
 				// Add item to FacetWP labels array for Treatments facet on Providers archive/list
-				
+
 					$facet_labels['provider']['treatments_procedures'] = $treatment_plural_name;
 					$facet_labels['provider']['treatments_procedures_attr'] = $treatment_plural_name_attr;
 
 				// Add item to FacetWP labels array for Treatments facet on Clinical Resources archive/list
-			
+
 					$facet_labels['clinical_resource']['resource_treatments'] = $treatment_plural_name;
 					$facet_labels['clinical_resource']['resource_treatments_attr'] = $treatment_plural_name_attr;
 
@@ -3540,7 +3540,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_text_provider_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_text_provider_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3586,7 +3586,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_text_location_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_text_location_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3632,7 +3632,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_text_expertise_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_text_expertise_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3682,7 +3682,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_text_clinical_resource_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_text_clinical_resource_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3728,7 +3728,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_text_condition_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_text_condition_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3778,7 +3778,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_text_treatment_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_text_treatment_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -3831,7 +3831,7 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-		
+
 				$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 				$provider_fpage_ref_main_title_general = get_field('provider_fpage_ref_main_title_general', 'option'); // Reference to the main provider archive, title
@@ -3843,7 +3843,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-		
+
 				$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Fake subpage (or section), title
 				$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Fake subpage (or section), intro text
 				$provider_fpage_ref_main_title_general = ( isset($provider_fpage_ref_main_title_general) && !empty($provider_fpage_ref_main_title_general) ) ? $provider_fpage_ref_main_title_general : 'Full List of [Providers]'; // Reference to the main provider archive, title
@@ -3854,7 +3854,7 @@ function uamswp_fad_fpage_text_replace(
 				$provider_fpage_ref_top_link_general = ( isset($provider_fpage_ref_top_link_general) && !empty($provider_fpage_ref_top_link_general) ) ? $provider_fpage_ref_top_link_general : $provider_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			
+
 				$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
 				$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
 				$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main provider archive, title
@@ -3879,7 +3879,7 @@ function uamswp_fad_fpage_text_replace(
 
 			// Return the variable
 			return $fpage_text_provider_general_vars;
-	
+
 
 		}
 
@@ -3903,7 +3903,7 @@ function uamswp_fad_fpage_text_replace(
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-			
+
 					$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
 					$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
 					$location_fpage_ref_main_title_general = ( isset($location_fpage_ref_main_title_general) && !empty($location_fpage_ref_main_title_general) ) ? $location_fpage_ref_main_title_general : 'Full List of [Locations]'; // Reference to the main location archive, title
@@ -3914,7 +3914,7 @@ function uamswp_fad_fpage_text_replace(
 					$location_fpage_ref_top_link_general = ( isset($location_fpage_ref_top_link_general) && !empty($location_fpage_ref_top_link_general) ) ? $location_fpage_ref_top_link_general : $location_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-			
+
 					$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
 					$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
 					$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
@@ -3927,7 +3927,7 @@ function uamswp_fad_fpage_text_replace(
 			// Descendant Locations
 
 				// Get the Find-a-Doc Settings values for the text elements in general placements
-			
+
 					$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
 					$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 					$location_descendant_fpage_ref_main_title_general = get_field('location_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
@@ -3939,7 +3939,7 @@ function uamswp_fad_fpage_text_replace(
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-			
+
 					$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
 					$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
 					$location_descendant_fpage_ref_main_title_general = ( isset($location_descendant_fpage_ref_main_title_general) && !empty($location_descendant_fpage_ref_main_title_general) ) ? $location_descendant_fpage_ref_main_title_general : $location_fpage_ref_main_title_general; // Reference to the main location archive, title
@@ -3950,7 +3950,7 @@ function uamswp_fad_fpage_text_replace(
 					$location_descendant_fpage_ref_top_link_general = ( isset($location_descendant_fpage_ref_top_link_general) && !empty($location_descendant_fpage_ref_top_link_general) ) ? $location_descendant_fpage_ref_top_link_general : $location_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-			
+
 					$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
 					$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
 					$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
@@ -4187,18 +4187,18 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-		
+
 				$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-		
+
 				$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Fake subpage (or section), title
 				$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-		
+
 				$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
 				$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
@@ -4220,18 +4220,18 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Get the Find-a-Doc Settings values for the text elements in general placements
-		
+
 				$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
 				$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
 			// If the variable is not set or is empty...
 			// Set a hardcoded fallback value
-		
+
 				$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Fake subpage (or section), title
 				$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
 
 			// Substitute placeholder text for relevant Find-a-Doc Settings value
-			
+
 				$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
 				$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 
@@ -5389,7 +5389,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_expertise_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_text_expertise_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7104,7 +7104,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_image_provider_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_image_provider_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -7149,7 +7149,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_image_location_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_image_location_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -7194,7 +7194,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_image_expertise_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_image_expertise_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -7239,7 +7239,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $archive_image_clinical_resource_vars, __FUNCTION__ );
 
 		if ( !empty( $archive_image_clinical_resource_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -7288,7 +7288,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_provider_general_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_provider_general_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7333,7 +7333,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_location_general_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_location_general_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7390,7 +7390,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_expertise_general_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_expertise_general_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7447,7 +7447,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_clinical_resource_general_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_clinical_resource_general_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7494,7 +7494,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_provider_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_provider_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7579,7 +7579,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_location_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_location_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7680,7 +7680,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_expertise_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_expertise_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7878,10 +7878,10 @@ function uamswp_fad_fpage_text_replace(
 
 				// Set/update the value of the transient
 				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_image_expertise_vars, __FUNCTION__ );
-	
+
 				// Return the variable
 				return $fpage_image_expertise_vars;
-		
+
 			}
 
 		}
@@ -7893,7 +7893,7 @@ function uamswp_fad_fpage_text_replace(
 			uamswp_fad_get_transient( 'vars', $fpage_image_clinical_resource_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_clinical_resource_vars ) ) {
-				
+
 				/* 
 				* The transient exists.
 				* Return the variable.
@@ -7979,10 +7979,10 @@ function uamswp_fad_fpage_text_replace(
 
 				// Set/update the value of the transient
 				uamswp_fad_set_transient( 'vars', $fpage_image_clinical_resource_vars, __FUNCTION__ );
-	
+
 				// Return the variable
 				return $fpage_image_clinical_resource_vars;
-		
+
 			}
 
 		}
@@ -7996,7 +7996,7 @@ function uamswp_fad_fpage_text_replace(
 		uamswp_fad_get_transient( 'vars', $posts_per_page_clinical_resource_general_vars, __FUNCTION__ );
 
 		if ( !empty( $posts_per_page_clinical_resource_general_vars ) ) {
-			
+
 			/* 
 			 * The transient exists.
 			 * Return the variable.
@@ -9164,7 +9164,7 @@ function uamswp_prevent_orphan($string) {
 					$function = substr( $function, strlen(UAMS_FAD_TRANSIENT_PREFIX) );
 
 				}
-			
+
 			$transient_name = UAMS_FAD_TRANSIENT_PREFIX . ( $function ? $function . '_' : '' ) . $transient_name . UAMS_FAD_TRANSIENT_SUFFIX;
 
 			return $transient_name;
