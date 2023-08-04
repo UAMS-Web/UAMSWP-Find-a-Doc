@@ -774,7 +774,7 @@ function gmb_provider_csv_export() {
 							if ($location_parent_location) {
 								$location_post_id = $location_parent_location->ID;
 								$location_parent_title = $location_parent_location->post_title;
-								$location_parent_url = get_permalink( $location_post_id );
+								$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
 							}
 
 							// Create location variables
@@ -1446,7 +1446,7 @@ function gmb_location_csv_export() {
 			if ($location_parent_location) {
 				$location_post_id = $location_parent_location->ID;
 				$location_parent_title = $location_parent_location->post_title;
-				$location_parent_url = get_permalink( $location_post_id );
+				$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
 			}
 
 			// COVID-19 Restrictions
@@ -1910,7 +1910,7 @@ function mychart_csv_export() {
 			$ser_id = get_field('physician_pid',$post_id);
 			$ser_id = ( $ser_id == 0 ) ? '' : $ser_id;
 			$sort_name = get_the_title($post_id);
-			$profile_url = get_the_permalink($post_id);
+			$profile_url = user_trailingslashit(get_the_permalink($post_id));
 
 			// Get slug
 			$profile_slug = get_post_field( 'post_name', $post_id );

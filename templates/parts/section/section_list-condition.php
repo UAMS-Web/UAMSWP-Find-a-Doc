@@ -173,7 +173,7 @@ if ( $condition_section_show ) {
 									$condition_title = get_the_title($page_id);
 									$condition_title_attr = uamswp_attr_conversion($condition_title);
 									if ( $condition_treatment_section_link_item ) {
-										$condition_url = get_the_permalink($page_id);
+										$condition_url = user_trailingslashit(get_the_permalink($page_id));
 										$condition_aria_label = 'Go to ' . $condition_single_name_attr . ' page for ' . $condition_title_attr;
 									} else {
 										$condition_url = '';

@@ -1485,7 +1485,7 @@ function uamswp_fad_ontology_site_values(
 				if ( $ancestors_ontology_farthest_obj ) {
 					$ancestors_ontology_farthest_title = $ancestors_ontology_farthest_obj->post_title;
 					$ancestors_ontology_farthest_title_attr = uamswp_attr_conversion($ancestors_ontology_farthest_title);
-					$ancestors_ontology_farthest_url = get_permalink( $ancestors_ontology_farthest );
+					$ancestors_ontology_farthest_url = user_trailingslashit(get_permalink( $ancestors_ontology_farthest ));
 				}
 
 		// Get the closest ancestor with the ontology type
@@ -1504,7 +1504,7 @@ function uamswp_fad_ontology_site_values(
 				if ( $ancestors_ontology_closest_obj ) {
 					$ancestors_ontology_closest_title = $ancestors_ontology_closest_obj->post_title;
 					$ancestors_ontology_closest_title_attr = uamswp_attr_conversion($ancestors_ontology_closest_title);
-					$ancestors_ontology_closest_url = get_permalink( $ancestors_ontology_closest );
+					$ancestors_ontology_closest_url = user_trailingslashit(get_permalink( $ancestors_ontology_closest ));
 				}
 
 		// Set the values of the navbar-subbrand elements
@@ -1515,7 +1515,7 @@ function uamswp_fad_ontology_site_values(
 				$site_nav_id = $page_id;
 				$navbar_subbrand_title = isset($page_title) ? $page_title : get_the_title();
 				$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-				$navbar_subbrand_title_url = isset($page_url) ? $page_url : get_permalink();
+				$navbar_subbrand_title_url = isset($page_url) ? $page_url : user_trailingslashit(get_permalink());
 				if ( $ancestors_ontology_farthest ) {
 					// If a farthest ancestor with the ontology type exists
 					// Set the navbar-subbrand parent element using the that ancestor's values 
@@ -2507,7 +2507,7 @@ function uamswp_fad_ontology_appointment(
 			$appointment_location_url = '#locations';
 			//$appointment_location_label = 'Go to the list of relevant locations';
 		} else {
-			$appointment_location_url = '/location/';
+			$appointment_location_url = user_trailingslashit('/location/');
 			//$appointment_location_label = 'View a list of UAMS Health locations';
 		} ?>
 		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
@@ -8110,7 +8110,8 @@ function uamswp_fad_appointment_refer() {
 
 	// Webpage Information
 
-		$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option') ?: '';
+		$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option');
+		$appointment_refer_web_url = $appointment_refer_web_url ? user_trailingslashit($appointment_refer_web_url): '';
 		$appointment_refer_web_label = get_field('appointment_refer_web_label', 'option') ?: '';
 		$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
 		$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';

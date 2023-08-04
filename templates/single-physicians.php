@@ -294,7 +294,7 @@
 
 								$primary_appointment_title = get_the_title( $location );
 								$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
-								$primary_appointment_url = get_the_permalink( $location );
+								$primary_appointment_url = user_trailingslashit(get_the_permalink( $location ));
 								$primary_appointment_city = get_field('location_city', $location);
 								$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
 

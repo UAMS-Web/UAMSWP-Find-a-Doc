@@ -2579,7 +2579,7 @@ function get_location_meta($object) {
 	if ($parent_location) {
 		$post_id = $parent_location->ID;
 		$parent_title = $parent_location->post_title;
-		$parent_url = get_permalink( $post_id );
+		$parent_url = user_trailingslashit(get_permalink( $post_id ));
 	} else {
 		$post_id = $postId;
 	}
@@ -3446,9 +3446,9 @@ function get_resource_meta($object) {
 	while( have_rows($document) ): the_row();
 		$document_title = get_sub_field('document_title');
 		$document_file = get_sub_field('document_file');
-		$document_url = $document_file['url'];
+		$document_url = user_trailingslashit($document_file['url']);
 		$data['clinical_resource_document'][$i]['title'] = $document_title;
-		$data['clinical_resource_document'][$i]['url'] = $document_title;
+		$data['clinical_resource_document'][$i]['url'] = $document_url;
 		$i++;
 	endwhile;
 	if( $clinical_resources && $clinical_resource_query->posts ):

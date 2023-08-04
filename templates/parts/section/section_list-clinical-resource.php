@@ -149,7 +149,7 @@
 					$clinical_resource_section_more_link_key = isset($clinical_resource_section_more_link_key) ? $clinical_resource_section_more_link_key : '';
 					$clinical_resource_section_more_link_value = isset($clinical_resource_section_more_link_value) ? $clinical_resource_section_more_link_value : '';
 
-					$clinical_resource_section_more_link_url = '/clinical-resource/';
+					$clinical_resource_section_more_link_url = user_trailingslashit('/clinical-resource/');
 
 					if ( $clinical_resource_section_more_link_key && $clinical_resource_section_more_link_value ) {
 

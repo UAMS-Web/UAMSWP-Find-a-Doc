@@ -83,7 +83,8 @@ if ( $text_image_overlay_rows ) :
 				$heading_attr = uamswp_attr_conversion($heading);
 				$body = $row['body'] ? substr( $row['body'], 0, $text_image_overlay_body_maxlength ) : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas';
 				$button_text = $row['button_text'] ? substr( $row['button_text'], 0, $text_image_overlay_button_text_maxlength ) : 'Learn More';
-				$button_url = $row['button_url'] ?: get_home_url();
+				$button_url = $row['button_url'];
+				$button_url = $button_url ? user_trailingslashit($button_url) : get_home_url();
 				$button_target = $row['button_target'] ?: false;
 				$button_desc = $row['button_desc'] ?: $button_text . ', ' . $heading;
 				$background_color = $row['background_color'] ?: $text_image_overlay_color_auto[$index - 1];

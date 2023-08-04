@@ -269,7 +269,7 @@ function display_provider_image() {
 										if ($location_parent_location) {
 											$location_post_id = $location_parent_location->ID;
 											$location_parent_title = $location_parent_location->post_title;
-											$location_parent_url = get_permalink( $location_post_id );
+											$location_parent_url = user_trailingslashit(get_permalink( $location_post_id ));
 										}
 
 										// Create location variables

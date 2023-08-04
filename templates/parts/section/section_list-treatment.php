@@ -178,7 +178,7 @@ if ( $treatment_section_show ) {
 									$treatment_title = get_the_title($page_id);
 									$treatment_title_attr = uamswp_attr_conversion($treatment_title);
 									if ( $condition_treatment_section_link_item ) {
-										$treatment_url = get_the_permalink($page_id);
+										$treatment_url = user_trailingslashit(get_the_permalink($page_id));
 										$treatment_aria_label = 'Go to ' . $treatment_single_name_attr . ' page for ' . $treatment_title_attr;
 									} else {
 										$treatment_url = '';
