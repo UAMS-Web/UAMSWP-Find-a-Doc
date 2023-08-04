@@ -9204,7 +9204,7 @@ function uamswp_prevent_orphan($string) {
 			 * current function in the transient name.
 			 */
 
-			set_transient( uamswp_fad_transient_name( $string, $function ), $value, 10 );
+			set_transient( uamswp_fad_transient_name( $string, $function ), $value, DAY_IN_SECONDS );
 
 			return;
 		}
