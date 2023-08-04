@@ -44,10 +44,10 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 // Get system settings for condition archive text
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-condition.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/condition.php' );
 
 // Get the page ID
 

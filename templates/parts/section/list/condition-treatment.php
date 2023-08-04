@@ -260,10 +260,10 @@ if ( $condition_treatment_section_show ) {
 		$treatment_section_id = isset($treatment_section_id) ? $treatment_section_id : 'treatments';
 
 		// Get system settings for condition labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 		// Get system settings for treatment labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 		// Other variables
 

@@ -116,7 +116,7 @@
 		}
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	// Get the address attributes of the relevant item
 

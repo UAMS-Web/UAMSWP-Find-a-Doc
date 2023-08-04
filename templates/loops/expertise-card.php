@@ -75,7 +75,7 @@
 		}
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 	// Define the values of the card elements
 

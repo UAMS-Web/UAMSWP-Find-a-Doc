@@ -18,22 +18,22 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 // Get system settings for provider archive text
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-provider.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/provider.php' );
 
 // Get the page ID
 

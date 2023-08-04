@@ -12,7 +12,7 @@
  */
 
 // Get system settings for location labels
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 if ( have_posts() ) { 
 	// Generate a table

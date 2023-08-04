@@ -15,7 +15,7 @@
 	$page_id = get_the_ID();
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 $resource_title = get_the_title($page_id);
 $resource_title_attr = uamswp_attr_conversion($resource_title);

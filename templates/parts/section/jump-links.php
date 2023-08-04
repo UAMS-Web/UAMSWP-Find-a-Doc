@@ -70,16 +70,16 @@
 			// Check/define variables
 
 				// Get system settings for location labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 				// Get system settings for area of expertise labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 				// Get system settings for clinical resource labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 				// Get system settings for combined condition and treatment labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition-treatment.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 			// Build array
 
@@ -149,22 +149,22 @@
 					$location_scheduling_title = isset($location_scheduling_title) ? $location_scheduling_title : '';
 
 				// Get system settings for provider labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 				// Get system settings for location labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 				// Get system settings for descendant location labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location-descendant.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location-descendant.php' );
 
 				// Get system settings for area of expertise labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 				// Get system settings for clinical resource labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 				// Get system settings for combined condition and treatment labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition-treatment.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 			// Build array
 
@@ -259,19 +259,19 @@
 			// Get labels
 
 				// Get system settings for provider labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 				// Get system settings for location labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 				// Get system settings for area of expertise labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 				// Get system settings for clinical resource labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 				// Get system settings for combined condition and treatment labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition-treatment.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 			// Build array
 

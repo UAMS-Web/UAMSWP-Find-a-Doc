@@ -12,7 +12,7 @@
  */
 
 // Get system settings for clinical resource labels
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 

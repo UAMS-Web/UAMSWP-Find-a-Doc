@@ -1096,7 +1096,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 			function location_ajax_filter_callback() {
 
 				// Get system settings for location labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 				$tax_query = array();
 
@@ -2500,7 +2500,7 @@ function uamswp_fad_ontology_appointment(
 ) {
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	if ( $appointment_section_show ) {
 		if ( get_field('location_expertise') ) {
@@ -2598,7 +2598,7 @@ function uamswp_fad_podcast(
 ) {
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 	if ( $podcast_section_show ) {
 		if ( $podcast_filter == 'tag' ) {
@@ -2667,52 +2667,52 @@ function uamswp_fad_fpage_text_replace(
 	// Bring in variables from outside of the function
 
 		// Get system settings for provider labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 		// Get system settings for provider archive text
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-provider.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/provider.php' );
 
 		// Get system settings for location labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 		// Get system settings for descendant location labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location-descendant.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location-descendant.php' );
 
 		// Get system settings for location archive text
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-location.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/location.php' );
 
 		// Get system settings for area of expertise labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 		// Get system settings for descendant area of expertise item labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise-descendant.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise-descendant.php' );
 
 		// Get system settings for area of expertise archive text
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-expertise.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/expertise.php' );
 
 		// Get system settings for clinical resource labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 		// Get system settings for clinical resource archive text
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-clinical-resource.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/clinical-resource.php' );
 
 		// Get system settings for Clinical Resource facet labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_facets-clinical-resource.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/facets/clinical-resource.php' );
 
 		// Get system settings for combined condition and treatment labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 		// Get system settings for condition labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 		// Get system settings for condition archive text
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-condition.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/condition.php' );
 
 		// Get system settings for treatment labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 		// Get system settings for treatment archive text
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/treatment.php' );
 
 	// Check variables
 
