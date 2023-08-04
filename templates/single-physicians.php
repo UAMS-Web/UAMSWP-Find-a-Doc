@@ -294,44 +294,32 @@
 
 				}
 
-			// Get associated areas of expertise
+			// Related Areas of Expertise Section Query
 
 				$expertises = get_field('physician_expertise',$post->ID);
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
-					// Query for whether related areas of expertise content section should be displayed on a page
+			// Get the name of the provider's primary area of expertise
 
-						$expertise_query_vars = uamswp_fad_expertise_query(
-							$page_id, // int
-							$expertises, // int[]
-							$jump_link_count, // int
-							$hide_medical_ontology // bool
-						);
-							$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-							$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-							$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-							$expertise_count = $expertise_query_vars['expertise_count']; // int
+				// Eliminate PHP errors
 
-					// Get the name of the provider's primary location
+					$expertise_primary_name = '';
+					$expertise_primary_name_attr = '';
 
-						// Eliminate PHP errors
+				if ( $expertise_section_show ) {
 
-							$expertise_primary_name = '';
-							$expertise_primary_name_attr = '';
+					foreach ( $expertises as $expertise ) {
 
-						if ( $expertise_section_show ) {
+						if ( get_post_status ( $expertise ) == 'publish' ) {
 
-							foreach ( $expertises as $expertise ) {
+							$expertise_primary_name = get_the_title($expertise);
+							$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
 
-								if ( get_post_status ( $expertise ) == 'publish' ) {
+							break;
 
-									$expertise_primary_name = get_the_title($expertise);
-									$expertise_primary_name_attr = uamswp_attr_conversion($expertise_primary_name);
-
-									break;
-
-								}
-							}
 						}
+					}
+				}
 
 			// Get resident values
 

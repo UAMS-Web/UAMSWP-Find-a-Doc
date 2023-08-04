@@ -155,16 +155,8 @@ $template_type = 'default';
 	// Descendant Areas of Expertise Section Query
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise-descendant.php' );
 
-	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-
-		$expertise_query_vars = uamswp_fad_expertise_query(
-			$page_id, // int
-			$expertises // int[]
-		);
-			$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-			$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-			$expertise_count = $expertise_query_vars['expertise_count']; // int
+	// Related Areas of Expertise Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
 	// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 

@@ -110,15 +110,8 @@
 
 				if ( !$expertise_descendant_list ) {
 
-					// Areas of Expertise
-
-					$expertise_query_vars = uamswp_fad_expertise_query(
-						$page_id, // int
-						$expertises // int[]
-					);
-						$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-						$expertise_count = $expertise_query_vars['expertise_count']; // int
-						$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
+					// Related Areas of Expertise Section Query
+					include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
 				} else {
 

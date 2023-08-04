@@ -316,18 +316,10 @@
 				$locations = get_field('treatment_procedure_locations');
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
-			// Query for whether related areas of expertise content section should be displayed on a page
+			// Related Areas of Expertise Section Query
 
 				$expertises = get_field('treatment_procedure_expertise');
-				$expertise_query_vars = uamswp_fad_expertise_query(
-					$page_id, // int
-					$expertises, // int[]
-					$jump_link_count // int
-				);
-					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-					$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-					$expertise_count = $expertise_query_vars['expertise_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
 			// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
 

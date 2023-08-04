@@ -53,15 +53,8 @@
 	// Related Locations Section Query
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
-	if ( !isset($expertise_section_show) || empty($expertise_section_show) ) {
-
-		$expertise_query_vars = uamswp_fad_expertise_query(
-			$page_id, // int
-			$expertises // int[]
-		);
-			$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-
-	}
+	// Related Areas of Expertise Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
 	if ( !isset($clinical_resource_section_show) || empty($clinical_resource_section_show) ) {
 
