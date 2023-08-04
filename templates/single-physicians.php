@@ -581,7 +581,7 @@
 				}
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/page/common/meta/social.php' );
 
 // BODY
 
