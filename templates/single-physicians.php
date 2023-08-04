@@ -1515,7 +1515,7 @@
 
 						// Construct Jump Links Section
 
-							include( UAMS_FAD_PATH . '/templates/parts/nav_jump-links.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/section/jump-links.php' );
 
 						// Construct first appointment information section
 

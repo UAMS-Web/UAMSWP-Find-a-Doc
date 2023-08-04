@@ -785,7 +785,7 @@
 					$condition_treatment_section_show,
 					$appointment_section_show
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/nav_jump-links.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/jump-links.php' );
 				}, 8 );
 
 			// Construct related clinical resources section
