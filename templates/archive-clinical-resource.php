@@ -135,7 +135,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/clinic
 // Override the theme's method of defining the social media meta tags
 
 	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta/social.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
 
 get_header();
 

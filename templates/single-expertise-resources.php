@@ -6,26 +6,26 @@
 // Define Variables
 
 	// Define variables common to all area of expertise pages and fake subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/vars.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/vars.php' );
 
 	// Define variables common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/vars.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/fpage/vars.php' );
 
 // HEAD Elements
 
 	// Construct HEAD elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/construct-head.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/construct-head.php' );
 
 	// Construct HEAD elements common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/construct-head.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/fpage/construct-head.php' );
 
 // BODY elements
 
 	// Construct BODY elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/construct-body.php' );
 
 	// Construct BODY elements common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/fpage/construct-body.php' );
 
 	// Construct main ontology page content
 
@@ -58,7 +58,7 @@
 			$clinical_resource_section_more_link_descr,
 			$clinical_resource_section_show_header
 		) {
-			include( UAMS_FAD_PATH . '/templates/parts/section/list/clinical-resource.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/html/section/list/clinical-resource.php' );
 		}, 14 );
 
 genesis();

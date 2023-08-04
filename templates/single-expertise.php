@@ -4,15 +4,15 @@
  */
 
 // Define variables common to all area of expertise pages and fake subpages
-include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/vars.php' );
+include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/vars.php' );
 
 // Construct HEAD elements common to all area of expertise overview pages and all fake area of expertise subpages
-include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/construct-head.php' );
+include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/construct-head.php' );
 
 // BODY
 
 	// Construct BODY elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/construct-body.php' );
 
 	// MAIN / ARTICLE
 
@@ -198,7 +198,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page/expertise/common/construct-head.
 					$treatment_section_title,
 					$treatment_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section/list/condition-treatment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/html/section/list/condition-treatment.php' );
 				}, 16 );
 
 genesis();

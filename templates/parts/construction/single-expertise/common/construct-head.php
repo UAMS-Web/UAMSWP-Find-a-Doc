@@ -52,4 +52,4 @@
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/meta/social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );

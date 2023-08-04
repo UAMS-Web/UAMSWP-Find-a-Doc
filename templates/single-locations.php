@@ -381,7 +381,7 @@
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/meta/social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
 
 // BODY
 
@@ -420,7 +420,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	include( UAMS_FAD_PATH . '/templates/parts/site-header/single-expertise.php');
+				// 	include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
 				// }, 5 );
 
 		// Primary navigation
@@ -438,7 +438,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	include( UAMS_FAD_PATH . '/templates/parts/site-nav/single-expertise.php');
+				// 	include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
 				// }, 5 );
 
 	// Breadcrumbs
@@ -483,7 +483,7 @@
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 			// 
-			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title/' . $entry_header_style . '.php');
+			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
 			// 
 			// } );
 
@@ -2036,7 +2036,7 @@
 
 						// Construct Jump Links Section
 
-							include( UAMS_FAD_PATH . '/templates/parts/section/jump-links.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/jump-links.php' );
 
 						// Construct Location Alert Section
 
@@ -2604,7 +2604,7 @@
 							$provider_section_title = $provider_fpage_title_location; // Text to use for the section title
 							$provider_section_intro = $provider_fpage_intro_location; // Text to use for the section intro text
 							$provider_section_filter_region = false; // Query whether to add region filter
-							include( UAMS_FAD_PATH . '/templates/parts/section/list/provider.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/provider.php' );
 
 						// Construct Combined Conditions and Treatments Section
 
@@ -2614,13 +2614,13 @@
 							$condition_section_intro = $condition_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
 							$treatment_section_title = $treatment_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 							$treatment_section_intro = $treatment_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-							include( UAMS_FAD_PATH . '/templates/parts/section/list/condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/condition-treatment.php' );
 
 						// Construct Areas of Expertise Section
 
 							$expertise_section_title = $expertise_fpage_title_location;
 							$expertise_section_intro = $expertise_fpage_intro_location;
-							include( UAMS_FAD_PATH . '/templates/parts/section/list/expertise.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/expertise.php' );
 
 						// Construct Descendant Locations Section
 
@@ -2628,7 +2628,7 @@
 							$location_section_intro = $location_descendant_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for locations section intro text in a general placement)
 							$location_section_filter = false; // Query whether to add filter(s) // bool (default: true)
 							$location_descendant_list = true; // Query whether this is a list of child locations within a location // bool (default: false)
-							include( UAMS_FAD_PATH . '/templates/parts/section/list/location.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/location.php' );
 
 						// Construct Clinical Resources Section
 
@@ -2639,7 +2639,7 @@
 							$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_location;
 							$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_location;
 							$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_location;
-							include( UAMS_FAD_PATH . '/templates/parts/section/list/clinical-resource.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/clinical-resource.php' );
 
 						// Construct News Section
 
@@ -2746,7 +2746,7 @@
 
 					// Construct the schema script tag
 
-						include( UAMS_FAD_PATH . '/templates/parts/script/schema.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
 
 			} // endwhile // end of the loop.
 

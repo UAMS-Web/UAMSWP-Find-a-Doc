@@ -9059,7 +9059,7 @@ function uamswp_fad_fpage_text_image_overlay(
 
 		}
 
-		include( UAMS_FAD_PATH . '/templates/parts/section/text-image-overlay.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/section/text-image-overlay.php' );
 
 }
 

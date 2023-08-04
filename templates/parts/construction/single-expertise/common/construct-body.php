@@ -45,7 +45,7 @@
 					$page_title,
 					$page_url
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/site-header/single-expertise.php');
+					include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
 				}, 5 );
 
 		// Primary navigation
@@ -63,7 +63,7 @@
 					$page_title,
 					$page_url
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/site-nav/single-expertise.php');
+					include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
 				}, 5 );
 
 	// Page Header (before entry element)
@@ -87,7 +87,7 @@
 				$entry_title_image_mobile
 			) {
 
-				include( UAMS_FAD_PATH . '/templates/parts/entry-title/' . $entry_header_style . '.php');
+				include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
 
 			} );
 
