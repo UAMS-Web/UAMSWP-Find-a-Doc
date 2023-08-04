@@ -198,7 +198,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_
 					$treatment_section_title,
 					$treatment_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-condition-treatment.php' );
 				}, 16 );
 
 genesis();

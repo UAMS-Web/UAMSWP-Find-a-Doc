@@ -50,7 +50,7 @@
 			$expertise_section_intro,
 			$expertise_section_show_header
 		) {
-			include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/section/section_list-expertise.php' );
 		}, 12 );
 
 genesis();

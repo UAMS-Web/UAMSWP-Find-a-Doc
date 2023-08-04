@@ -810,7 +810,7 @@
 					$clinical_resource_posts_per_page,
 					$clinical_resource_section_more_show
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-clinical-resource.php' );
 				}, 10 );
 
 			// Construct Combined Conditions and Treatments Section
@@ -841,7 +841,7 @@
 					$treatment_section_title,
 					$treatment_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-condition-treatment.php' );
 				}, 12 );
 
 			// Construct providers section
@@ -862,7 +862,7 @@
 					$provider_section_show_header,
 					$provider_section_filter
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-provider.php' );
 				}, 16 );
 
 			// Construct locations section
@@ -893,7 +893,7 @@
 					$location_section_filter_title,
 					$location_section_collapse_list
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-location.php' );
 				}, 18 );
 
 			// Construct areas of expertise section
@@ -916,7 +916,7 @@
 					$expertise_section_title,
 					$expertise_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-expertise.php' );
 				}, 20 );
 
 			// Construct appointment information section

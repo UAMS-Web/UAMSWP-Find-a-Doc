@@ -58,7 +58,7 @@
 			$clinical_resource_section_more_link_descr,
 			$clinical_resource_section_show_header
 		) {
-			include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/section/section_list-clinical-resource.php' );
 		}, 14 );
 
 genesis();

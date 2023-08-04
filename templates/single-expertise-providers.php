@@ -51,7 +51,7 @@
 			$provider_section_filter_title,
 			$provider_section_collapse_list
 		) {
-			include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/section/section_list-provider.php' );
 		} );
 
 genesis();

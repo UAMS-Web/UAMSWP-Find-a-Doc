@@ -55,7 +55,7 @@
 			$location_section_filter_title,
 			$location_section_collapse_list
 		) {
-			include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/section/section_list-location.php' );
 		}, 22 );
 
 genesis();
