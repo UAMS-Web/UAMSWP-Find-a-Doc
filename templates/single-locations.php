@@ -905,25 +905,10 @@
 				$conditions_cpt = get_field('location_conditions_cpt');
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
-			// Query for whether related treatments content section should be displayed on ontology pages/subsections
+			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('location_treatments_cpt');
-				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-				$treatment_query_vars = uamswp_fad_treatment_query(
-					$page_id, // int
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool
-					$jump_link_count, // int
-					$hide_medical_ontology // bool
-				);
-					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-					$treatment_count = $treatment_query_vars['treatment_count']; // int
-					$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
 
 		// Get remaining details about this item
 

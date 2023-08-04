@@ -130,28 +130,8 @@ if ( $treatment_section_show ) {
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
-			if (
-				!isset($treatment_cpt_query) || empty($treatment_cpt_query)
-				||
-				!isset($treatment_section_show) || empty($treatment_section_show)
-				||
-				!isset($treatment_ids) || empty($treatment_ids)
-				||
-				!isset($treatment_count) || empty($treatment_count)
-			) {
-
-				$treatment_query_vars = uamswp_fad_treatment_query(
-					$page_id, // int
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
-					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-					$treatment_count = $treatment_query_vars['treatment_count']; // int
-
-			}
+			// Related Treatments Section Query
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
 
 	?>
 	<section class="uams-module<?php echo $treatment_section_class ? ' ' . $treatment_section_class : ''; ?> bg-auto<?php echo $treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $treatment_section_id ? ' id="' . $treatment_section_id . '" aria-labelledby="' . $treatment_section_id . '-title"' : ''; ?>>
