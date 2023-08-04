@@ -251,7 +251,7 @@
 	$regions = get_field('physician_region',$post->ID);
 	$service_lines = get_field('physician_service_line',$post->ID);
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/vars_page_ontology-hide.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/ontology-hide.php' );
 
 // HEAD
 
