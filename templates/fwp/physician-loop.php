@@ -26,7 +26,7 @@ if ( have_posts() ) {
 				||
 				!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
 			) {
-				$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+				$labels_provider_vars = uamswp_fad_labels_provider();
 					$provider_single_name = $labels_provider_vars['provider_single_name']; // string
 					$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
 					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
@@ -38,7 +38,7 @@ if ( have_posts() ) {
 			if (
 				!isset($location_plural_name) || empty($location_plural_name)
 			) {
-				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+				$labels_location_vars = uamswp_fad_labels_location();
 					$location_plural_name = $labels_location_vars['location_plural_name']; // string
 			}
  

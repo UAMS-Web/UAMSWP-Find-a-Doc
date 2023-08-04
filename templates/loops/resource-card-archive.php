@@ -19,7 +19,7 @@
 		||
 		!isset($provider_plural_name)
 	) {
-		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+		$labels_provider_vars = uamswp_fad_labels_provider();
 			$provider_single_name = $labels_provider_vars['provider_single_name']; // string
 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 	}
@@ -28,7 +28,7 @@
 		||
 		!isset($location_plural_name)
 	) {
-		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+		$labels_location_vars = uamswp_fad_labels_location();
 			$location_single_name = $labels_location_vars['location_single_name']; // string
 			$location_plural_name = $labels_location_vars['location_plural_name']; // string
 	}
@@ -37,12 +37,12 @@
 		||
 		!isset($expertise_plural_name)
 	) {
-		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
 			$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
 			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 	}
 	if ( !isset($clinical_resource_single_name) ) {
-		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
 	}
 	if (
@@ -50,7 +50,7 @@
 		||
 		!isset($condition_plural_name)
 	) {
-		$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+		$labels_condition_vars = uamswp_fad_labels_condition();
 			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
 			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
 	}
@@ -59,7 +59,7 @@
 		||
 		!isset($treatment_plural_name)
 	) {
-		$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+		$labels_treatment_vars = uamswp_fad_labels_treatment();
 			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
 			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
 	}

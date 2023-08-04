@@ -81,7 +81,7 @@
 			||
 			!isset($expertise_single_name_attr) || empty($expertise_single_name_attr)
 		) {
-			$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+			$labels_expertise_vars = uamswp_fad_labels_expertise();
 				$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
 				$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
 		}

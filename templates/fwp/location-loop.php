@@ -20,7 +20,7 @@
 		if (
 			!isset($location_plural_name) || empty($location_plural_name)
 		) {
-			$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+			$labels_location_vars = uamswp_fad_labels_location();
 				$location_plural_name = $labels_location_vars['location_plural_name']; // string
 		}
 

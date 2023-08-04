@@ -7,7 +7,7 @@
  * 
  */
 
-$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+$labels_treatment_vars = uamswp_fad_labels_treatment();
 	$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
 	$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
 	$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string

@@ -245,7 +245,7 @@
 
 				if ( !isset($clinical_resource_plural_name_attr) ) {
 
-					$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+					$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 						$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 
 				}

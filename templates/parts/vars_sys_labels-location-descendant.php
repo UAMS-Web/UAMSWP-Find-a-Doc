@@ -7,7 +7,7 @@
  * 
  */
 
-$labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
+$labels_location_descendant_vars = uamswp_fad_labels_location_descendant();
 	$location_descendant_single_name = $labels_location_descendant_vars['location_descendant_single_name']; // string
 	$location_descendant_single_name_attr = $labels_location_descendant_vars['location_descendant_single_name_attr']; // string
 	$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string

@@ -36,7 +36,7 @@ if (
 		$service_lines
 	) {
 
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
+		$ontology_hide_vars = uamswp_fad_ontology_hide(
 			$page_id, // int // ID of the post
 			$regions, // string|array // Region(s) associated with the item
 			$service_lines // string|array // Service line(s) associated with the item

@@ -445,7 +445,7 @@
 
 				if ( $jump_links_section_show ) {
 
-					$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
+					$labels_jump_links_vars = uamswp_fad_labels_jump_links();
 						$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 	
 				}

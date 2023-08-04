@@ -139,7 +139,7 @@
 		!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
 	) {
 
-		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+		$labels_provider_vars = uamswp_fad_labels_provider();
 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 			$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 
@@ -151,7 +151,7 @@
 		!isset($location_plural_name_attr) || empty($location_plural_name_attr)
 	) {
 
-		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+		$labels_location_vars = uamswp_fad_labels_location();
 			$location_plural_name = $labels_location_vars['location_plural_name']; // string
 			$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
 
@@ -163,7 +163,7 @@
 		!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
 	) {
 
-		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
 			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 			$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 
@@ -175,7 +175,7 @@
 		!isset($expertise_descendant_plural_name_attr) || empty($expertise_descendant_plural_name_attr)
 	) {
 
-		$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+		$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
 			$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
 			$expertise_descendant_plural_name_attr = $labels_expertise_descendant_vars['expertise_descendant_plural_name_attr']; // string
 
@@ -188,7 +188,7 @@
 		!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
 	) {
 
-		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 			$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 
