@@ -90,30 +90,8 @@
 				$clinical_resource_fpage_featured_image_expertise = $fpage_image_expertise_vars['clinical_resource_fpage_featured_image_expertise']; // int
 				$clinical_resource_fpage_featured_image_expertise_url = $fpage_image_expertise_vars['clinical_resource_fpage_featured_image_expertise_url']; // string
 
-// Get site header and site nav values for ontology subsections
-
-	$ontology_site_values_vars = uamswp_fad_ontology_site_values(
-		$page_id, // int // ID of the post
-		$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-		$page_title, // string (optional) // Title of the post
-		$page_url // string (optional) // Permalink of the post
-	);
-		$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-		$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
-		$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
-		$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string
-		$navbar_subbrand_parent = $ontology_site_values_vars['navbar_subbrand']['parent']['name']; // string
-		$navbar_subbrand_parent_attr = $ontology_site_values_vars['navbar_subbrand']['parent']['attr']; // string
-		$navbar_subbrand_parent_url = $ontology_site_values_vars['navbar_subbrand']['parent']['url']; // string
-		$providers = $ontology_site_values_vars['providers']; // int[]
-		$locations = $ontology_site_values_vars['locations']; // int[]
-		$expertises = $ontology_site_values_vars['expertises']; // int[]
-		$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
-		$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
-		$conditions_cpt = $ontology_site_values_vars['conditions_cpt']; // int[]
-		$treatments_cpt = $ontology_site_values_vars['treatments_cpt']; // int[]
-		$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest'];
-		$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // bool
+// Get the ontology subsection values
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 // Image values
 

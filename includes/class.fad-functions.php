@@ -1885,18 +1885,8 @@ function uamswp_fad_ontology_site_values(
 		$hide_medical_ontology = false // bool
 	) {
 
-		if (
-			!isset($site_nav_id)
-			||
-			empty($site_nav_id)
-		) {
-
-			$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-				$page_id // int // ID of the post
-			);
-				$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-
-		}
+		// Get site header and site nav values for this ontology subsection
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
@@ -8708,19 +8698,8 @@ function uamswp_fad_fpage_text_image_overlay(
 
 	// Check/define variables
 
-		// Get IDs for Site Header
-
-			if (
-				!isset($page_top_level_query) || empty($page_top_level_query)
-				||
-				!isset($ancestors_ontology_farthest) || empty($ancestors_ontology_farthest)
-			) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-					$page_id // int // ID of the post
-				);
-					$page_top_level_query = $ontology_site_values_vars['page_top_level_query']; // Get whether this fake subpage's parent item is the top-level item // bool
-					$ancestors_ontology_farthest = $ontology_site_values_vars['ancestors_ontology_farthest']; // ID of the top-level ontology item ancestor of the current item // int
-			}
+		// Get the ontology subsection values
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 		// Page Title
 

@@ -44,34 +44,8 @@
 
 // Check/define variables
 
-	if (
-		!isset($site_nav_id) || empty($site_nav_id)
-		||
-		!isset($providers) || empty($providers)
-		||
-		!isset($locations) || empty($locations)
-		||
-		!isset($expertises) || empty($expertises)
-		||
-		!isset($expertise_descendants) || empty($expertise_descendants)
-		||
-		!isset($clinical_resources) || empty($clinical_resources)
-	) {
-
-		$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-			$page_id, // int // ID of the post
-			$ontology_type, // bool (optional) // Ontology type of the post (true is ontology type, false is content type)
-			$page_title, // string (optional) // Title of the post
-			$page_url // string (optional) // Permalink of the post
-		);
-			$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
-			$providers = $ontology_site_values_vars['providers']; // int[]
-			$locations = $ontology_site_values_vars['locations']; // int[]
-			$expertises = $ontology_site_values_vars['expertises']; // int[]
-			$expertise_descendants = $ontology_site_values_vars['expertise_descendants'];
-			$clinical_resources = $ontology_site_values_vars['clinical_resources']; // int[]
-
-	}
+	// Get the ontology subsection values
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 	if ( !isset($provider_section_show) || empty($provider_section_show) ) {
 

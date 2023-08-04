@@ -124,12 +124,8 @@ if ( $condition_section_show ) {
 					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
 			}
 
-			if ( !isset($conditions_cpt) || empty($conditions_cpt) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-					$page_id // int // ID of the post
-				);
-					$conditions_cpt = $ontology_site_values_vars['conditions_cpt'];
-			}
+			// Get the ontology subsection values
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 			if (
 				!isset($condition_cpt_query) || empty($condition_cpt_query)

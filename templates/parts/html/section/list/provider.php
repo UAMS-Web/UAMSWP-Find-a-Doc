@@ -122,14 +122,8 @@ if ( $provider_section_show ) {
 
 			}
 
-			if ( !isset($providers) || empty($providers) ) {
-
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-					$page_id // int // ID of the post
-				);
-					$providers = $ontology_site_values_vars['providers']; // int[]
-
-			}
+			// Get the ontology subsection values
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 			if (
 				!isset($provider_query) || empty($provider_query)

@@ -123,12 +123,8 @@ if ( $location_section_show ) {
 					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
 			}
 
-			if ( !isset($locations) ) {
-				$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
-					$page_id // int // ID of the post
-				);
-					$locations = $ontology_site_values_vars['locations']; // int[]
-			}
+			// Get the ontology subsection values
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 			if (
 				!isset($location_query) || empty($location_query)
