@@ -117,7 +117,7 @@ if ( $location_section_show ) {
 				||
 				!isset($location_plural_name_attr) || empty($location_plural_name_attr)
 			) {
-				$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+				$labels_location_vars = uamswp_fad_labels_location();
 					$location_single_name = $labels_location_vars['location_single_name']; // string
 					$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 					$location_plural_name = $labels_location_vars['location_plural_name']; // string

@@ -6,7 +6,7 @@
  * system settings for treatment archive text elements
  */
 
-$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
+$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
 	$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
 	$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
 	$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string

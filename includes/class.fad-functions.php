@@ -1097,7 +1097,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 				// Bring in variables from outside of the function
 
-					$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+					$labels_location_vars = uamswp_fad_labels_location();
 						$location_single_name = $labels_location_vars['location_single_name']; // string
 						$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 						$location_plural_name = $labels_location_vars['location_plural_name']; // string
@@ -2505,7 +2505,7 @@ function uamswp_fad_ontology_appointment(
 
 	// Bring in variables from outside of the function
 
-		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+		$labels_location_vars = uamswp_fad_labels_location();
 			$location_single_name = $labels_location_vars['location_single_name']; // string
 
 	if ( $appointment_section_show ) {
@@ -2605,7 +2605,7 @@ function uamswp_fad_podcast(
 
 	// Bring in variables from outside of the function
 
-		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+		$labels_provider_vars = uamswp_fad_labels_provider();
 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 
 	if ( $podcast_section_show ) {
@@ -2674,7 +2674,7 @@ function uamswp_fad_fpage_text_replace(
 
 	// Bring in variables from outside of the function
 
-		$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+		$labels_provider_vars = uamswp_fad_labels_provider();
 			$provider_single_name = $labels_provider_vars['provider_single_name']; // string
 			$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 			$placeholder_provider_single_name = $labels_provider_vars['placeholder_provider_single_name']; // string
@@ -2682,11 +2682,11 @@ function uamswp_fad_fpage_text_replace(
 			$placeholder_provider_short_name = $labels_provider_vars['placeholder_provider_short_name']; // string
 			$placeholder_provider_short_name_possessive = $labels_provider_vars['placeholder_provider_short_name_possessive']; // string
 
-		$archive_text_provider_vars = isset($archive_text_provider_vars) ? $archive_text_provider_vars : uamswp_fad_archive_text_provider();
+		$archive_text_provider_vars = uamswp_fad_archive_text_provider();
 			$provider_archive_headline = $archive_text_provider_vars['provider_archive_headline']; // string
 			$placeholder_provider_archive_headline = $archive_text_provider_vars['placeholder_provider_archive_headline']; // string
 
-		$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+		$labels_location_vars = uamswp_fad_labels_location();
 			$location_single_name = $labels_location_vars['location_single_name']; // string
 			$location_plural_name = $labels_location_vars['location_plural_name']; // string
 			$placeholder_location_single_name = $labels_location_vars['placeholder_location_single_name']; // string
@@ -2694,76 +2694,76 @@ function uamswp_fad_fpage_text_replace(
 			$placeholder_location_page_title = $labels_location_vars['placeholder_location_page_title']; // string
 			$placeholder_location_page_title_phrase = $labels_location_vars['placeholder_location_page_title_phrase']; // string
 
-		$labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
+		$labels_location_descendant_vars = uamswp_fad_labels_location_descendant();
 			$location_descendant_single_name = $labels_location_descendant_vars['location_descendant_single_name']; // string
 			$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
 			$placeholder_location_descendant_single_name = $labels_location_descendant_vars['placeholder_location_descendant_single_name']; // string
 			$placeholder_location_descendant_plural_name = $labels_location_descendant_vars['placeholder_location_descendant_plural_name']; // string
 
-		$archive_text_location_vars = isset($archive_text_location_vars) ? $archive_text_location_vars : uamswp_fad_archive_text_location();
+		$archive_text_location_vars = uamswp_fad_archive_text_location();
 			$location_archive_headline = $archive_text_location_vars['location_archive_headline']; // string
 			$placeholder_location_archive_headline = $archive_text_location_vars['placeholder_location_archive_headline']; // string
 
-		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
 			$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
 			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 			$placeholder_expertise_single_name = $labels_expertise_vars['placeholder_expertise_single_name']; // string
 			$placeholder_expertise_plural_name = $labels_expertise_vars['placeholder_expertise_plural_name']; // string
 			$placeholder_expertise_page_title = $labels_expertise_vars['placeholder_expertise_page_title']; // string
 
-		$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+		$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
 			$expertise_descendant_single_name = $labels_expertise_descendant_vars['expertise_descendant_single_name']; // string
 			$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
 			$placeholder_expertise_descendant_single_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_single_name']; // string
 			$placeholder_expertise_descendant_plural_name = $labels_expertise_descendant_vars['placeholder_expertise_descendant_plural_name']; // string
 
-		$archive_text_expertise_vars = isset($archive_text_expertise_vars) ? $archive_text_expertise_vars : uamswp_fad_archive_text_expertise();
+		$archive_text_expertise_vars = uamswp_fad_archive_text_expertise();
 			$expertise_archive_headline = $archive_text_expertise_vars['expertise_archive_headline']; // string
 			$expertise_archive_intro_text = $archive_text_expertise_vars['expertise_archive_intro_text']; // string
 			$placeholder_expertise_archive_headline = $archive_text_expertise_vars['placeholder_expertise_archive_headline']; // string
 			$placeholder_expertise_archive_intro_text = $archive_text_expertise_vars['placeholder_expertise_archive_intro_text']; // string
 
-		$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
 			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 			$placeholder_clinical_resource_single_name = $labels_clinical_resource_vars['placeholder_clinical_resource_single_name']; // string
 			$placeholder_clinical_resource_plural_name = $labels_clinical_resource_vars['placeholder_clinical_resource_plural_name']; // string
 
-		$archive_text_clinical_resource_vars = isset($archive_text_clinical_resource_vars) ? $archive_text_clinical_resource_vars : uamswp_fad_archive_text_clinical_resource();
+		$archive_text_clinical_resource_vars = uamswp_fad_archive_text_clinical_resource();
 			$clinical_resource_archive_headline = $archive_text_clinical_resource_vars['clinical_resource_archive_headline']; // string
 			$placeholder_clinical_resource_archive_headline = $archive_text_clinical_resource_vars['placeholder_clinical_resource_archive_headline']; // string
 
-		$labels_clinical_resource_facet_vars = isset($labels_clinical_resource_facet_vars) ? $labels_clinical_resource_facet_vars : uamswp_fad_labels_clinical_resource_facet();
+		$labels_clinical_resource_facet_vars = uamswp_fad_labels_clinical_resource_facet();
 			$clinical_resource_type_single_name = $labels_clinical_resource_facet_vars['clinical_resource_type_single_name']; // string
 			$clinical_resource_type_plural_name = $labels_clinical_resource_facet_vars['clinical_resource_type_plural_name']; // string
 			$placeholder_clinical_resource_type_single_name = $labels_clinical_resource_facet_vars['placeholder_clinical_resource_type_single_name']; // string
 			$placeholder_clinical_resource_type_plural_name = $labels_clinical_resource_facet_vars['placeholder_clinical_resource_type_plural_name']; // string
 
-		$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+		$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
 			$condition_treatment_single_name = $labels_condition_treatment_vars['condition_treatment_single_name']; // string
 			$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
 			$placeholder_condition_treatment_single_name = $labels_condition_treatment_vars['placeholder_condition_treatment_single_name']; // string
 			$placeholder_condition_treatment_plural_name = $labels_condition_treatment_vars['placeholder_condition_treatment_plural_name']; // string
 
-		$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+		$labels_condition_vars = uamswp_fad_labels_condition();
 			$condition_single_name = $labels_condition_vars['condition_single_name']; // string
 			$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
 			$placeholder_condition_single_name = $labels_condition_vars['placeholder_condition_single_name']; // string
 			$placeholder_condition_plural_name = $labels_condition_vars['placeholder_condition_plural_name']; // string
 
-		$archive_text_condition_vars = isset($archive_text_condition_vars) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
+		$archive_text_condition_vars = uamswp_fad_archive_text_condition();
 			$condition_archive_headline = $archive_text_condition_vars['condition_archive_headline']; // string
 			$condition_archive_intro_text = $archive_text_condition_vars['condition_archive_intro_text']; // string
 			$placeholder_condition_archive_headline = $archive_text_condition_vars['placeholder_condition_archive_headline']; // string
 			$placeholder_condition_archive_intro_text = $archive_text_condition_vars['placeholder_condition_archive_intro_text']; // string
 
-		$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+		$labels_treatment_vars = uamswp_fad_labels_treatment();
 			$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
 			$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
 			$placeholder_treatment_single_name = $labels_treatment_vars['placeholder_treatment_single_name']; // string
 			$placeholder_treatment_plural_name = $labels_treatment_vars['placeholder_treatment_plural_name']; // string
 
-		$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
+		$archive_text_treatment_vars = uamswp_fad_archive_text_treatment();
 			$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
 			$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
 			$placeholder_treatment_archive_headline = $archive_text_treatment_vars['placeholder_treatment_archive_headline']; // string
@@ -9113,7 +9113,7 @@ function uamswp_fad_fpage_text_image_overlay(
 
 		}
 
-		include( UAMS_FAD_PATH . '/templates/parts/section_text-image-overlay.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/section/section_text-image-overlay.php' );
 
 }
 

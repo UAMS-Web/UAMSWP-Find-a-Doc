@@ -6,28 +6,28 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
 
 // // Get system settings for this post type's archive page text
-// include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-clinical-resource.php' );
+// include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-clinical-resource.php' );
 
 // Ontology / Content Type
 
@@ -134,7 +134,7 @@
 	$regions = isset($regions) ? $regions : array();
 	$service_lines = isset($service_lines) ? $service_lines : array();
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_page_ontology-hide.php' );
 
 // HEAD
 
@@ -418,7 +418,7 @@
 				// Check/define variables
 				$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 
-				include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
+				include( UAMS_FAD_PATH . '/templates/parts/entry-title/entry-title_' . $entry_header_style . '.php');
 
 			} );
 
@@ -810,7 +810,7 @@
 					$clinical_resource_posts_per_page,
 					$clinical_resource_section_more_show
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-clinical-resource.php' );
 				}, 10 );
 
 			// Construct Combined Conditions and Treatments Section
@@ -841,7 +841,7 @@
 					$treatment_section_title,
 					$treatment_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-condition-treatment.php' );
 				}, 12 );
 
 			// Construct providers section
@@ -862,7 +862,7 @@
 					$provider_section_show_header,
 					$provider_section_filter
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-provider.php' );
 				}, 16 );
 
 			// Construct locations section
@@ -893,7 +893,7 @@
 					$location_section_filter_title,
 					$location_section_collapse_list
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-location.php' );
 				}, 18 );
 
 			// Construct areas of expertise section
@@ -916,7 +916,7 @@
 					$expertise_section_title,
 					$expertise_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/section/section_list-expertise.php' );
 				}, 20 );
 
 			// Construct appointment information section

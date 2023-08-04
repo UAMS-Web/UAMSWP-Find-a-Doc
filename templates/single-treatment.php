@@ -6,28 +6,28 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
 
 // // Get system settings for this post type's archive page text
-// include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-treatment.php' );
+// include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-treatment.php' );
 
 // Ontology / Content Type
 
@@ -100,7 +100,7 @@
 	$regions = isset($regions) ? $regions : array();
 	$service_lines = isset($service_lines) ? $service_lines : array();
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_page_ontology-hide.php' );
 
 // HEAD
 
@@ -297,7 +297,7 @@
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 			// 
-			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
+			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title/entry-title_' . $entry_header_style . '.php');
 			// 
 			// } );
 
@@ -446,7 +446,7 @@
 
 				if ( $jump_links_section_show ) {
 
-					$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
+					$labels_jump_links_vars = uamswp_fad_labels_jump_links();
 						$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 
 				}
@@ -722,7 +722,7 @@
 						$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
 						$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
 						$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-clinical-resource.php' );
 
 					// Construct Clinical Trials Section
 
@@ -737,25 +737,25 @@
 
 						$condition_section_title = $condition_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for condition section title in a general placement)
 						$condition_section_intro = $condition_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-condition.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-condition.php' );
 
 					// Construct Providers Section
 
 						$provider_section_title = $provider_plural_name . ' Performing or Prescribing ' . $page_title;// Text to use for the section title
 						$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe ' . $page_title . ' for all ' . strtolower($condition_plural_name) . ' related to it. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-provider.php' );
 
 					// Construct Locations Section
 
 						$location_section_title = $location_plural_name . ' Providing ' . $page_title; // Text to use for the section title
 						$location_section_intro = 'Note that ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-location.php' );
 
 					// Construct Areas of Expertise Section
 
 						$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
 						$expertise_section_intro = '';
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-expertise.php' );
 
 					// Construct Appointment Information Section
 

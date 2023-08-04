@@ -6,28 +6,28 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
 
 // // Get system settings for this post type's archive page text
-// include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-provider.php' );
+// include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-provider.php' );
 
 // Ontology / Content Type
 
@@ -251,7 +251,7 @@
 	$regions = get_field('physician_region',$post->ID);
 	$service_lines = get_field('physician_service_line',$post->ID);
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars_page_ontology-hide.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_page_ontology-hide.php' );
 
 // HEAD
 
@@ -702,7 +702,7 @@
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 			// 
-			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
+			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title/entry-title_' . $entry_header_style . '.php');
 			// 
 			// } );
 
@@ -1699,7 +1699,7 @@
 							$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_provider;
 							$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_provider;
 							$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_provider;
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/section/section_list-clinical-resource.php' );
 
 						// Construct Academic Bio Section
 
@@ -1914,20 +1914,20 @@
 							$condition_section_intro = $condition_fpage_intro_provider; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
 							$treatment_section_title = $treatment_fpage_title_provider; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 							$treatment_section_intro = $treatment_fpage_intro_provider; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/section/section_list-condition-treatment.php' );
 
 						// Construct Areas of Expertise Section
 
 							$expertise_section_title = $expertise_fpage_title_provider;
 							$expertise_section_intro = $expertise_fpage_intro_provider;
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/section/section_list-expertise.php' );
 
 						// Construct Location Section
 
 							$location_section_title = $location_fpage_title_provider; // Text to use for the section title
 							$location_section_intro = $location_fpage_intro_provider; // Text to use for the section intro text
 							$location_section_schema_query = true; // Query for whether to add locations to schema
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/section/section_list-location.php' );
 
 						// Construct Ratings and Reviews Section
 

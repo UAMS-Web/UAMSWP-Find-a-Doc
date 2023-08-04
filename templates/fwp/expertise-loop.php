@@ -16,7 +16,7 @@
 	if (
 		!isset($expertise_plural_name) || empty($expertise_plural_name)
 	) {
-		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+		$labels_expertise_vars = uamswp_fad_labels_expertise();
 			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 	}
 

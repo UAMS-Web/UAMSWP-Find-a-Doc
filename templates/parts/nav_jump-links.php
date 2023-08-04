@@ -27,7 +27,7 @@
 
 	// Get system settings for jump links (a.k.a. anchor links)
 
-		$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
+		$labels_jump_links_vars = uamswp_fad_labels_jump_links();
 			$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
 
 	// Get post type (or slug of fake subpage)
@@ -71,25 +71,25 @@
 
 				// Get system settings for location labels
 				if ( !isset($location_plural_name) || empty($location_plural_name) ) {
-					$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+					$labels_location_vars = uamswp_fad_labels_location();
 						$location_plural_name = $labels_location_vars['location_plural_name']; // string
 				}
 
 				// Get system settings for area of expertise labels
 				if ( !isset($expertise_plural_name) || empty($expertise_plural_name) ) {
-					$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+					$labels_expertise_vars = uamswp_fad_labels_expertise();
 						$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 				}
 
 				// Get system settings for clinical resource labels
 				if ( !isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr) ) {
-					$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+					$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 						$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 				}
 
 				// Get system settings for combined condition and treatment labels
 				if ( !isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name) ) {
-					$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+					$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
 						$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
 				}
 
@@ -167,7 +167,7 @@
 						||
 						!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
 					) {
-						$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+						$labels_provider_vars = uamswp_fad_labels_provider();
 							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 					}
@@ -179,7 +179,7 @@
 						||
 						!isset($location_single_name_attr) || empty($location_single_name_attr)
 					) {
-						$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+						$labels_location_vars = uamswp_fad_labels_location();
 							$location_single_name = $labels_location_vars['location_single_name']; // string
 							$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
 					}
@@ -191,7 +191,7 @@
 						||
 						!isset($location_descendant_plural_name_attr) || empty($location_descendant_plural_name_attr)
 					) {
-						$labels_location_descendant_vars = isset($labels_location_descendant_vars) ? $labels_location_descendant_vars : uamswp_fad_labels_location_descendant();
+						$labels_location_descendant_vars = uamswp_fad_labels_location_descendant();
 							$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
 							$location_descendant_plural_name_attr = $labels_location_descendant_vars['location_descendant_plural_name_attr']; // string
 					}
@@ -203,7 +203,7 @@
 						||
 						!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
 					) {
-						$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$labels_expertise_vars = uamswp_fad_labels_expertise();
 							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 					}
@@ -215,7 +215,7 @@
 						||
 						!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
 					) {
-						$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+						$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 					}
@@ -227,7 +227,7 @@
 						||
 						!isset($condition_treatment_plural_name_attr) || empty($condition_treatment_plural_name_attr)
 					) {
-						$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+						$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
 							$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
 							$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
 					}
@@ -331,7 +331,7 @@
 						||
 						!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
 					) {
-						$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+						$labels_provider_vars = uamswp_fad_labels_provider();
 							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
 							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
 					}
@@ -343,7 +343,7 @@
 						||
 						!isset($location_plural_name_attr) || empty($location_plural_name_attr)
 					) {
-						$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+						$labels_location_vars = uamswp_fad_labels_location();
 							$location_plural_name = $labels_location_vars['location_plural_name']; // string
 							$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
 					}
@@ -355,7 +355,7 @@
 						||
 						!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
 					) {
-						$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+						$labels_expertise_vars = uamswp_fad_labels_expertise();
 							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
 							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
 					}
@@ -367,7 +367,7 @@
 						||
 						!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
 					) {
-						$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+						$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
 							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
 							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
 					}
@@ -379,7 +379,7 @@
 						||
 						!isset($condition_treatment_plural_name_attr) || empty($condition_treatment_plural_name_attr)
 					) {
-						$labels_condition_treatment_vars = isset($labels_condition_treatment_vars) ? $labels_condition_treatment_vars : uamswp_fad_labels_condition_treatment();
+						$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
 							$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
 							$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
 					}

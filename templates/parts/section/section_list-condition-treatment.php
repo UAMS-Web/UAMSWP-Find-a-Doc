@@ -263,14 +263,14 @@ if ( $condition_treatment_section_show ) {
 
 			if ( !isset($condition_single_name_attr) || empty($condition_single_name_attr) ) {
 
-				$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+				$labels_condition_vars = uamswp_fad_labels_condition();
 					$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
 
 			}
 
 			if ( !isset($treatment_single_name_attr) || empty($treatment_single_name_attr) ) {
 
-				$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+				$labels_treatment_vars = uamswp_fad_labels_treatment();
 					$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
 
 			}
