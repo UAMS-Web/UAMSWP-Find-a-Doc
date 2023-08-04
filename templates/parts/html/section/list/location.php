@@ -126,24 +126,8 @@ if ( $location_section_show ) {
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
-			if (
-				!isset($location_query) || empty($location_query)
-				||
-				!isset($location_section_show) || empty($location_section_show)
-				||
-				!isset($location_ids) || empty($location_ids)
-				||
-				!isset($location_count) || empty($location_count)
-			) {
-				$location_query_vars = uamswp_fad_location_query(
-					$page_id, // int
-					$locations // int[]
-				);
-					$location_query = $location_query_vars['location_query']; // WP_Post[]
-					$location_section_show = $location_query_vars['location_section_show']; // bool
-					$location_ids = $location_query_vars['location_ids']; // int[]
-					$location_count = $location_query_vars['location_count']; // int
-			}
+			// Related Locations Section Query
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
 	// Filter details
 	if ( $location_section_filter ) {

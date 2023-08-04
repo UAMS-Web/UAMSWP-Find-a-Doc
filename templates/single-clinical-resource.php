@@ -429,19 +429,10 @@
 				$providers = get_field('clinical_resource_providers');
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
-			// Query for whether related locations content section should be displayed on a page
+			// Related Locations Section Query
 
 				$locations = get_field('clinical_resource_locations');
-				$location_query_vars = uamswp_fad_location_query(
-					$page_id, // int
-					$locations, // int[]
-					$jump_link_count // int
-				);
-					$location_query = $location_query_vars['location_query']; // WP_Post[]
-					$location_section_show = $location_query_vars['location_section_show']; // bool
-					$location_ids = $location_query_vars['location_ids']; // int[]
-					$location_count = $location_query_vars['location_count']; // int
-					$location_valid = $location_query_vars['location_valid']; // bool
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
 			// Query for whether related areas of expertise content section should be displayed on a page
 

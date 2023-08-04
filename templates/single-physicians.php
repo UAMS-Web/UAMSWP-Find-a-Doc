@@ -259,52 +259,40 @@
 
 		// Get relevant values
 
-			// Get the associated locations
+			// Related Locations Section Query
 
 				$locations = get_field( 'physician_locations', $post->ID ); // array
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
-				// Query for whether related locations content section should be displayed on a page
+			// Get the name of the provider's primary location
 
-					$location_query_vars = uamswp_fad_location_query(
-						$page_id, // int
-						$locations, // int[]
-						$jump_link_count, // int
-					);
-						$location_query = $location_query_vars['location_query']; // WP_Post[]
-						$location_section_show = $location_query_vars['location_section_show']; // bool
-						$location_ids = $location_query_vars['location_ids']; // int[]
-						$location_count = $location_query_vars['location_count']; // int
-						$location_valid = $location_query_vars['location_valid']; // bool
+				// Eliminate PHP errors
 
-				// Get the name of the provider's primary location
+					$primary_appointment_title = '';
+					$primary_appointment_title_attr = '';
+					$primary_appointment_url = '';
+					$primary_appointment_city = '';
+					$primary_appointment_city_attr = '';
 
-					// Eliminate PHP errors
+				if ( $location_section_show ) {
 
-						$primary_appointment_title = '';
-						$primary_appointment_title_attr = '';
-						$primary_appointment_url = '';
-						$primary_appointment_city = '';
-						$primary_appointment_city_attr = '';
+					foreach ( $locations as $location ) {
 
-					if ( $location_section_show ) {
+						if ( get_post_status ( $location ) == 'publish' ) {
 
-						foreach ( $locations as $location ) {
+							$primary_appointment_title = get_the_title( $location );
+							$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
+							$primary_appointment_url = user_trailingslashit(get_the_permalink( $location ));
+							$primary_appointment_city = get_field('location_city', $location);
+							$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
 
-							if ( get_post_status ( $location ) == 'publish' ) {
-
-								$primary_appointment_title = get_the_title( $location );
-								$primary_appointment_title_attr = uamswp_attr_conversion($primary_appointment_title);
-								$primary_appointment_url = user_trailingslashit(get_the_permalink( $location ));
-								$primary_appointment_city = get_field('location_city', $location);
-								$primary_appointment_city_attr = uamswp_attr_conversion($primary_appointment_city);
-
-								break;
-
-							}
+							break;
 
 						}
 
 					}
+
+				}
 
 			// Get associated areas of expertise
 

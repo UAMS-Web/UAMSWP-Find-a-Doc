@@ -50,15 +50,8 @@
 	// Related Providers Section Query
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
-	if ( !isset($location_section_show) || empty($location_section_show) ) {
-
-		$location_query_vars = uamswp_fad_location_query(
-			$page_id, // int
-			$locations // int[]
-		);
-			$location_section_show = $location_query_vars['location_section_show']; // bool
-
-	}
+	// Related Locations Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
 	if ( !isset($expertise_section_show) || empty($expertise_section_show) ) {
 
