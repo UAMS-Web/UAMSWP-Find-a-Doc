@@ -87,7 +87,7 @@
 				$entry_title_image_mobile
 			) {
 
-				include( UAMS_FAD_PATH . '/templates/parts/entry-title/entry-title_' . $entry_header_style . '.php');
+				include( UAMS_FAD_PATH . '/templates/parts/entry-title/' . $entry_header_style . '.php');
 
 			} );
 

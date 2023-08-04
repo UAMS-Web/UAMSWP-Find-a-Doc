@@ -61,7 +61,7 @@ if (
 ) {
 
 	// If the required fields are empty, render the graphic style entry title
-	include( UAMS_FAD_PATH . '/templates/parts/entry-title/entry-title_graphic.php');
+	include( UAMS_FAD_PATH . '/templates/parts/entry-title/graphic.php');
 
 } else {
 
