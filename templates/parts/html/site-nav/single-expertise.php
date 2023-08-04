@@ -73,25 +73,10 @@
 
 	}
 
-	if (
-		!isset($expertise_descendant_section_show) || empty($expertise_descendant_section_show)
-		||
-		!isset($expertise_content_nav_show) || empty($expertise_content_nav_show)
-		||
-		!isset($expertise_content_nav) || empty($expertise_content_nav)
-	) {
+	// Descendant Areas of Expertise Section Query
 
-		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query(
-			$page_id, // int
-			$expertise_descendants, // int[]
-			'subsection', // string (optional) // Expected values: 'subsection' or 'profile'
-			$site_nav_id // int (optional)
-		);
-			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
-			$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
-			$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
-
-	}
+		$content_placement = 'subsection';
+		include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise-descendant.php' );
 
 	// Get system settings for provider labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );

@@ -152,23 +152,8 @@ $template_type = 'default';
 	// Related Locations Section Query
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
-	// Query for whether descendant ontology items (of the same post type) content section should be displayed on ontology pages/subsections
-
-		$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query(
-			$page_id, // int
-			$expertise_descendants, // int[]
-			$content_placement, // string (optional)
-			$site_nav_id // int (optional)
-		);
-			$expertise_descendant_query = $expertise_descendant_query_vars['expertise_descendant_query']; // WP_Post[]
-			$expertise_descendant_section_show = $expertise_descendant_query_vars['expertise_descendant_section_show']; // bool
-			$expertise_descendant_ids = $expertise_descendant_query_vars['expertise_descendant_ids']; // int[]
-			$expertise_descendant_count = $expertise_descendant_query_vars['expertise_descendant_count']; // int
-			$expertise_content_query = $expertise_descendant_query_vars['expertise_content_query']; // WP_Post[]
-			$expertise_content_nav_show = $expertise_descendant_query_vars['expertise_content_nav_show']; // bool
-			$expertise_content_ids = $expertise_descendant_query_vars['expertise_content_ids']; // int[]
-			$expertise_content_count = $expertise_descendant_query_vars['expertise_content_count']; // int
-			$expertise_content_nav = $expertise_descendant_query_vars['expertise_content_nav']; // string
+	// Descendant Areas of Expertise Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise-descendant.php' );
 
 	// Query for whether related ontology items (of the same post type) content section should be displayed on ontology pages/subsections
 
