@@ -1513,9 +1513,9 @@ function uamswp_fad_ontology_site_values(
 				// If the page has the ontology type...
 				// Set the navbar-subbrand title element using the page's values 
 				$site_nav_id = $page_id;
-				$navbar_subbrand_title = isset($page_title) ? $page_title : get_the_title();
+				$navbar_subbrand_title = !empty($page_title) ? $page_title : get_the_title();
 				$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-				$navbar_subbrand_title_url = isset($page_url) ? $page_url : user_trailingslashit(get_permalink());
+				$navbar_subbrand_title_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
 				if ( $ancestors_ontology_farthest ) {
 					// If a farthest ancestor with the ontology type exists
 					// Set the navbar-subbrand parent element using the that ancestor's values 
