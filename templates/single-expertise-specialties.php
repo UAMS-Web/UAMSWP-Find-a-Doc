@@ -30,7 +30,6 @@
 	// Construct main ontology page content
 
 		$expertise_descendant_list = true;
-		$site_nav_id = ''; // ID of post that defines the subsection
 		$expertise_section_id = 'sub-expertise'; // Section ID // string (default: expertise)
 		$expertise_section_show_header = false; // Query whether to display the section header // bool (default: true)
 		$expertise_section_title = 'List of ' . $expertise_descendant_plural_name; // Text to use for the section title // string (default: Find-a-Doc Settings value for areas of expertise section title in a general placement)
