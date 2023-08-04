@@ -53,28 +53,10 @@
 		}
 
 	// Jump link count
+	$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
 
-		$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-
-		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
-			$page_id, // int
-			$clinical_resources,
-			$clinical_resource_posts_per_page,
-			$jump_link_count
-		);
-			$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
-
-	if ( !isset($clinical_resource_section_show) ) {
-
-		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
-			$page_id, // int
-			$clinical_resources,
-			$clinical_resource_posts_per_page,
-			$jump_link_count
-		);
-			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-
-	}
+	// Related Clinical Resources Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
 // Do something
 
@@ -82,22 +64,8 @@
 
 		// Check/define variables
 
-			// List of Clinical Resources
-
-				if (
-					!isset($clinical_resource_query)
-					||
-					!isset($clinical_resource_count)
-				) {
-					$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
-						$page_id, // int
-						$clinical_resources,
-						$clinical_resource_posts_per_page,
-						$jump_link_count
-					);
-						$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-						$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
-				}
+			// Related Clinical Resources Section Query
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
 			// Query for whether item is ontology type vs. content type
 			$ontology_type = isset($ontology_type) ? $ontology_type : true;

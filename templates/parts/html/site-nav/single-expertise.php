@@ -56,15 +56,8 @@
 	// Related Areas of Expertise Section Query
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
-	if ( !isset($clinical_resource_section_show) || empty($clinical_resource_section_show) ) {
-
-		$clinical_resource_query_vars = uamswp_fad_clinical_resource_query(
-			$page_id, // int
-			$clinical_resources // int[]
-		);
-			$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-
-	}
+	// Related Clinical Resources Section Query
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
 	// Descendant Areas of Expertise Section Query
 
