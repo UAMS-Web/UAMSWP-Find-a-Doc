@@ -8,8 +8,7 @@
 	// Variable definition function
 	// Call before setting $meta_title on template
 	function uamswp_fad_meta_title_vars(
-		$page_title, // string
-		$page_title_attr = '', // string (optional)
+		$page_title_attr, // string
 		$meta_title_base_addition = '', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
 		$meta_title_base_order = '', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
 		$meta_title_enhanced_addition = '', // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
@@ -21,16 +20,6 @@
 	) {
 
 		// Check/define variables
-
-			// Page title
-			$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : get_the_title();
-			$page_title_attr = ( isset($page_title_attr) && !empty($page_title_attr) ) ? $page_title_attr : ( function_exists('uamswp_attr_conversion') ? uamswp_attr_conversion($page_title) : $page_title);
-
-			// Array for page titles and section titles
-			$page_titles = array(
-				'page_title'		=> $page_title,
-				'page_title_attr'	=> $page_title_attr
-			);
 
 			// Meta title
 			$meta_title_base_addition = ( isset($meta_title_base_addition) && !empty($meta_title_base_addition) ) ? $meta_title_base_addition : $page_title_attr;

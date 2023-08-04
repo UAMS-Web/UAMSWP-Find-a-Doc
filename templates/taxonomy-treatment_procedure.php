@@ -80,8 +80,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-treatment.php' 
 
 		$meta_title_enhanced_addition = $treatment_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
+			$page_title_attr, // string
 			'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
 			'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
 			$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1

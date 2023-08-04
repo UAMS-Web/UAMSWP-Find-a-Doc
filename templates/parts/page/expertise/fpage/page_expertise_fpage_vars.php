@@ -65,8 +65,7 @@ $template_type = 'page_landing';
 	$meta_title_enhanced_addition = $page_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 	$meta_title_base_order = array( $meta_title_base_addition, $meta_title_enhanced_addition ); // Override default base meta title structure to force inclusion of $meta_title_enhanced_addition
 	$meta_title_vars = uamswp_fad_meta_title_vars(
-		$page_title, // string
-		$page_title_attr, // string (optional)
+		$page_title_attr, // string
 		$meta_title_base_addition, // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
 		$meta_title_base_order, // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
 		$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1

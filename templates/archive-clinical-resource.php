@@ -80,8 +80,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-clinical-resour
 
 		$meta_title_base_addition = $clinical_resource_plural_name_attr; // Word or phrase to use to form base meta title // string
 		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
+			$page_title_attr, // string
 			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
 		);
 			$meta_title = $meta_title_vars['meta_title']; // string
