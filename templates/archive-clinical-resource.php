@@ -79,11 +79,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/clinic
 	// Construct the meta title
 
 		$meta_title_base_addition = $clinical_resource_plural_name_attr; // Word or phrase to use to form base meta title // string
-		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title_attr, // string
-			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-		);
-			$meta_title = $meta_title_vars['meta_title']; // string
+		include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
 
 	// Modify SEOPress's standard meta title settings
 
