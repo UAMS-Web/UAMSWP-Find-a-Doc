@@ -381,7 +381,7 @@
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/page/common/meta/social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/meta/social.php' );
 
 // BODY
 
@@ -2746,7 +2746,7 @@
 
 					// Construct the schema script tag
 
-						include( UAMS_FAD_PATH . '/templates/parts/page/common/script/schema.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/script/schema.php' );
 
 			} // endwhile // end of the loop.
 

@@ -194,7 +194,7 @@
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/page/common/meta/social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/meta/social.php' );
 
 // BODY
 
