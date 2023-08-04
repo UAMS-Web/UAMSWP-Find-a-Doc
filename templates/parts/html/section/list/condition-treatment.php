@@ -309,28 +309,8 @@ if ( $condition_treatment_section_show ) {
 
 			}
 
-			if (
-				!isset($condition_cpt_query) || empty($condition_cpt_query)
-				||
-				!isset($condition_section_show) || empty($condition_section_show)
-				||
-				!isset($condition_treatment_section_show) || empty($condition_treatment_section_show)
-				||
-				!isset($condition_count) || empty($condition_count)
-			) {
-
-				$condition_query_vars = uamswp_fad_condition_query(
-					$page_id, // int
-					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
-				);
-					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-					$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
-					$condition_count = $condition_query_vars['condition_count']; // int
-
-			}
+			// Related Conditions Section Query
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
 			if (
 				!isset($treatment_cpt_query) || empty($treatment_cpt_query)

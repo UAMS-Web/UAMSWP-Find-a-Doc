@@ -2268,7 +2268,7 @@ function uamswp_fad_ontology_site_values(
 	function uamswp_fad_condition_query(
 		$page_id, // int
 		$conditions_cpt, // int[]
-		$condition_treatment_section_show = false, // bool
+		&$condition_treatment_section_show = false, // bool
 		$ontology_type = true, // bool
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
@@ -2345,7 +2345,6 @@ function uamswp_fad_ontology_site_values(
 				$condition_query_vars = array(
 					'condition_cpt_query'				=> $condition_cpt_query, // WP_Post[]
 					'condition_section_show'			=> $condition_section_show, // bool
-					'condition_treatment_section_show'	=> $condition_treatment_section_show, // bool
 					'condition_ids'						=> $condition_ids, // int[]
 					'condition_count'					=> $condition_count, // int
 					'schema_medical_specialty'			=> $schema_medical_specialty, // array
@@ -2366,7 +2365,7 @@ function uamswp_fad_ontology_site_values(
 	function uamswp_fad_treatment_query(
 		$page_id, // int
 		$treatments_cpt, // int[]
-		$condition_treatment_section_show = false, // bool
+		&$condition_treatment_section_show = false, // bool
 		$ontology_type = true, // bool
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool

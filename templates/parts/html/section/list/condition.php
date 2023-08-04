@@ -127,26 +127,8 @@ if ( $condition_section_show ) {
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
-			if (
-				!isset($condition_cpt_query) || empty($condition_cpt_query)
-				||
-				!isset($condition_section_show) || empty($condition_section_show)
-				||
-				!isset($condition_ids) || empty($condition_ids)
-				||
-				!isset($condition_count) || empty($condition_count)
-			) {
-				$condition_query_vars = uamswp_fad_condition_query(
-					$page_id, // int
-					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
-				);
-					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-					$condition_ids = $condition_query_vars['condition_ids']; // int[]
-					$condition_count = $condition_query_vars['condition_count']; // int
-			}
+			// Related Conditions Section Query
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
 	?>
 	<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>
