@@ -6,7 +6,17 @@
  * system settings for provider archive text elements
  */
 
-$archive_text_provider_vars = uamswp_fad_archive_text_provider();
-	$provider_archive_headline = $archive_text_provider_vars['provider_archive_headline']; // string
-	$provider_archive_headline_attr = $archive_text_provider_vars['provider_archive_headline_attr']; // string
-	$placeholder_provider_archive_headline = $archive_text_provider_vars['placeholder_provider_archive_headline']; // string
+ if (
+	!isset($provider_archive_headline) || empty($provider_archive_headline)
+	||
+	!isset($provider_archive_headline_attr) || empty($provider_archive_headline_attr)
+	||
+	!isset($placeholder_provider_archive_headline) || empty($placeholder_provider_archive_headline)
+) {
+
+	$archive_text_provider_vars = uamswp_fad_archive_text_provider();
+		$provider_archive_headline = $archive_text_provider_vars['provider_archive_headline']; // string
+		$provider_archive_headline_attr = $archive_text_provider_vars['provider_archive_headline_attr']; // string
+		$placeholder_provider_archive_headline = $archive_text_provider_vars['placeholder_provider_archive_headline']; // string
+
+}

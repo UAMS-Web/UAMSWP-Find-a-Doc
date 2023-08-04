@@ -19,9 +19,7 @@
 
 
 if (
-	!isset($hide_medical_ontology)
-	||
-	empty($hide_medical_ontology)
+	!isset($hide_medical_ontology) || empty($hide_medical_ontology)
 ) {
 
 	// Check/define variables
