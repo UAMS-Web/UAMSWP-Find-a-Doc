@@ -107,23 +107,10 @@ if ( $condition_section_show ) {
 		// Section ID
 		$condition_section_id = isset($condition_section_id) ? $condition_section_id : 'conditions';
 
-		// Other variables
+		// Get system settings for condition labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
 
-			if (
-				!isset($condition_single_name) || empty($condition_single_name)
-				||
-				!isset($condition_single_name_attr) || empty($condition_single_name_attr)
-				||
-				!isset($condition_plural_name) || empty($condition_plural_name)
-				||
-				!isset($condition_plural_name_attr) || empty($condition_plural_name_attr)
-			) {
-				$labels_condition_vars = uamswp_fad_labels_condition();
-					$condition_single_name = $labels_condition_vars['condition_single_name']; // string
-					$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
-					$condition_plural_name = $labels_condition_vars['condition_plural_name']; // string
-					$condition_plural_name_attr = $labels_condition_vars['condition_plural_name_attr']; // string
-			}
+		// Other variables
 
 			if (
 				!isset($condition_fpage_title_general) || empty($condition_fpage_title_general)

@@ -70,28 +70,16 @@
 			// Check/define variables
 
 				// Get system settings for location labels
-				if ( !isset($location_plural_name) || empty($location_plural_name) ) {
-					$labels_location_vars = uamswp_fad_labels_location();
-						$location_plural_name = $labels_location_vars['location_plural_name']; // string
-				}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
 				// Get system settings for area of expertise labels
-				if ( !isset($expertise_plural_name) || empty($expertise_plural_name) ) {
-					$labels_expertise_vars = uamswp_fad_labels_expertise();
-						$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-				}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 				// Get system settings for clinical resource labels
-				if ( !isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr) ) {
-					$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
-						$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
-				}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 				// Get system settings for combined condition and treatment labels
-				if ( !isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name) ) {
-					$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
-						$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
-				}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
 
 			// Build array
 
@@ -161,76 +149,22 @@
 					$location_scheduling_title = isset($location_scheduling_title) ? $location_scheduling_title : '';
 
 				// Get system settings for provider labels
-
-					if (
-						!isset($provider_plural_name) || empty($provider_plural_name)
-						||
-						!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
-					) {
-						$labels_provider_vars = uamswp_fad_labels_provider();
-							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
 				// Get system settings for location labels
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
-					if (
-						!isset($location_single_name) || empty($location_single_name)
-						||
-						!isset($location_single_name_attr) || empty($location_single_name_attr)
-					) {
-						$labels_location_vars = uamswp_fad_labels_location();
-							$location_single_name = $labels_location_vars['location_single_name']; // string
-							$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
-					}
-
-				// Get system settings for location descendant item labels
-
-					if (
-						!isset($location_descendant_plural_name) || empty($location_descendant_plural_name)
-						||
-						!isset($location_descendant_plural_name_attr) || empty($location_descendant_plural_name_attr)
-					) {
-						$labels_location_descendant_vars = uamswp_fad_labels_location_descendant();
-							$location_descendant_plural_name = $labels_location_descendant_vars['location_descendant_plural_name']; // string
-							$location_descendant_plural_name_attr = $labels_location_descendant_vars['location_descendant_plural_name_attr']; // string
-					}
+				// Get system settings for descendant location labels
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location-descendant.php' );
 
 				// Get system settings for area of expertise labels
-
-					if (
-						!isset($expertise_plural_name) || empty($expertise_plural_name)
-						||
-						!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
-					) {
-						$labels_expertise_vars = uamswp_fad_labels_expertise();
-							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 				// Get system settings for clinical resource labels
-
-					if (
-						!isset($clinical_resource_plural_name) || empty($clinical_resource_plural_name)
-						||
-						!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
-					) {
-						$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
-							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
-							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 				// Get system settings for combined condition and treatment labels
-
-					if (
-						!isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name)
-						||
-						!isset($condition_treatment_plural_name_attr) || empty($condition_treatment_plural_name_attr)
-					) {
-						$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
-							$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
-							$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
 
 			// Build array
 
@@ -325,64 +259,19 @@
 			// Get labels
 
 				// Get system settings for provider labels
-
-					if (
-						!isset($provider_plural_name) || empty($provider_plural_name)
-						||
-						!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
-					) {
-						$labels_provider_vars = uamswp_fad_labels_provider();
-							$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-							$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
 				// Get system settings for location labels
-
-					if (
-						!isset($location_plural_name) || empty($location_plural_name)
-						||
-						!isset($location_plural_name_attr) || empty($location_plural_name_attr)
-					) {
-						$labels_location_vars = uamswp_fad_labels_location();
-							$location_plural_name = $labels_location_vars['location_plural_name']; // string
-							$location_plural_name_attr = $labels_location_vars['location_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
 				// Get system settings for area of expertise labels
-
-					if (
-						!isset($expertise_plural_name) || empty($expertise_plural_name)
-						||
-						!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
-					) {
-						$labels_expertise_vars = uamswp_fad_labels_expertise();
-							$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-							$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 				// Get system settings for clinical resource labels
-
-					if (
-						!isset($clinical_resource_plural_name) || empty($clinical_resource_plural_name)
-						||
-						!isset($clinical_resource_plural_name_attr) || empty($clinical_resource_plural_name_attr)
-					) {
-						$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
-							$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
-							$clinical_resource_plural_name_attr = $labels_clinical_resource_vars['clinical_resource_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 				// Get system settings for combined condition and treatment labels
-
-					if (
-						!isset($condition_treatment_plural_name) || empty($condition_treatment_plural_name)
-						||
-						!isset($condition_treatment_plural_name_attr) || empty($condition_treatment_plural_name_attr)
-					) {
-						$labels_condition_treatment_vars = uamswp_fad_labels_condition_treatment();
-							$condition_treatment_plural_name = $labels_condition_treatment_vars['condition_treatment_plural_name']; // string
-							$condition_treatment_plural_name_attr = $labels_condition_treatment_vars['condition_treatment_plural_name_attr']; // string
-					}
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
 
 			// Build array
 

@@ -74,17 +74,8 @@
 
 		}
 
-	// Find-a-Doc Settings values for area of expertise labels
-
-		if (
-			!isset($expertise_single_name) || empty($expertise_single_name)
-			||
-			!isset($expertise_single_name_attr) || empty($expertise_single_name_attr)
-		) {
-			$labels_expertise_vars = uamswp_fad_labels_expertise();
-				$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
-				$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
-		}
+	// Get system settings for area of expertise labels
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 	// Define the values of the card elements
 

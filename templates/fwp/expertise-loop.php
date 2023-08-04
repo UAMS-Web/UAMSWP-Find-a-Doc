@@ -11,14 +11,8 @@
  * 	Areas of Expertise	('expertise')
  */
 
-// Check/define variables
-
-	if (
-		!isset($expertise_plural_name) || empty($expertise_plural_name)
-	) {
-		$labels_expertise_vars = uamswp_fad_labels_expertise();
-			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-	}
+// Get system settings for area of expertise labels
+include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 if ( have_posts() ) {
 

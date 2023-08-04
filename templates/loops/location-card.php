@@ -115,17 +115,8 @@
 
 		}
 
-	// Find-a-Doc Settings values for location labels
-
-		if (
-			!isset($location_single_name) || empty($location_single_name)
-			||
-			!isset($location_single_name_attr) || empty($location_single_name_attr)
-		) {
-			$labels_location_vars = uamswp_fad_labels_location();
-				$location_single_name = $labels_location_vars['location_single_name']; // string
-				$location_single_name_attr = $labels_location_vars['location_single_name_attr']; // string
-		}
+	// Get system settings for location labels
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
 	// Get the address attributes of the relevant item
 

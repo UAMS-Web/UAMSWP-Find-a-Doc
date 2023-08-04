@@ -14,10 +14,8 @@
 
 	$page_id = get_the_ID();
 
-	if ( !isset($clinical_resource_single_name) ) {
-		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
-			$clinical_resource_single_name = $labels_clinical_resource_vars['clinical_resource_single_name']; // string
-	}
+	// Get system settings for clinical resource labels
+	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 $resource_title = get_the_title($page_id);
 $resource_title_attr = uamswp_attr_conversion($resource_title);

@@ -46,7 +46,7 @@
 	// Get system settings for treatment labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
 
-// Get system settings for this archive page's text
+// Get system settings for treatment archive text
 include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-treatment.php' );
 
 // Get the page ID

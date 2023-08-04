@@ -38,7 +38,7 @@
 	// Get system settings for treatment labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
 
-// Get system settings for this archive page's text
+// Get system settings for clinical resource archive text
 include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-clinical-resource.php' );
 
 // Get the page ID

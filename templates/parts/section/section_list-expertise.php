@@ -280,58 +280,27 @@
 	
 		$expertise_section_id = isset($expertise_section_id) ? $expertise_section_id : 'expertise';
 
-	// uamswp_fad_labels_expertise() / uamswp_fad_labels_expertise_descendant()
+	// Get system settings for area of expertise labels
 
-		if (
-			$expertise_section_show
-			&&
-			(
-				!isset($expertise_single_name) || empty($expertise_single_name)
-				||
-				!isset($expertise_single_name_attr) || empty($expertise_single_name_attr)
-				||
-				!isset($expertise_plural_name) || empty($expertise_plural_name)
-				||
-				!isset($expertise_plural_name_attr) || empty($expertise_plural_name_attr)
-			)
-		) {
+		if ( $expertise_section_show ) {
 
 			if ( !$expertise_descendant_list ) {
 
-				// Areas of Expertise
-
-				$labels_expertise_vars = uamswp_fad_labels_expertise();
-					$expertise_single_name = $labels_expertise_vars['expertise_single_name']; // string
-					$expertise_single_name_attr = $labels_expertise_vars['expertise_single_name_attr']; // string
-					$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-					$expertise_plural_name_attr = $labels_expertise_vars['expertise_plural_name_attr']; // string
+				// Get system settings for area of expertise labels
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
 			} else {
 
-				// Descendant Areas of Expertise
+				// Get system settings for descendant area of expertise item labels
+				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise-descendant.php' );
 
-				if (
-					!isset($expertise_descendant_single_name) || empty($expertise_descendant_single_name)
-					||
-					!isset($expertise_descendant_single_name_attr) || empty($expertise_descendant_single_name_attr)
-					||
-					!isset($expertise_descendant_plural_name) || empty($expertise_descendant_plural_name)
-					||
-					!isset($expertise_descendant_plural_name_attr) || empty($expertise_descendant_plural_name_attr)
-				) {
-
-					$labels_expertise_descendant_vars = uamswp_fad_labels_expertise_descendant();
-						$expertise_descendant_single_name = $labels_expertise_descendant_vars['expertise_descendant_single_name']; // string
-						$expertise_descendant_single_name_attr = $labels_expertise_descendant_vars['expertise_descendant_single_name_attr']; // string
-						$expertise_descendant_plural_name = $labels_expertise_descendant_vars['expertise_descendant_plural_name']; // string
-						$expertise_descendant_plural_name_attr = $labels_expertise_descendant_vars['expertise_descendant_plural_name_attr']; // string
-
-				}
-
-				$expertise_single_name = $expertise_descendant_single_name;
-				$expertise_single_name_attr = $expertise_descendant_single_name_attr;
-				$expertise_plural_name = $expertise_descendant_plural_name;
-				$expertise_plural_name_attr = $expertise_descendant_plural_name_attr;
+				// Override area of expertise labels with descendant area of expertise item labels
+				$expertise_single_name = $expertise_descendant_single_name; // string
+				$expertise_single_name_attr = $expertise_descendant_single_name_attr; // string
+				$expertise_plural_name = $expertise_descendant_plural_name; // string
+				$expertise_plural_name_attr = $expertise_descendant_plural_name_attr; // string
+				$placeholder_expertise_single_name = $placeholder_expertise_descendant_single_name; // string
+				$placeholder_expertise_plural_name = $placeholder_expertise_descendant_plural_name; // string
 
 			}
 

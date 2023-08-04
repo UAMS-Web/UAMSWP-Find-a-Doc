@@ -26,7 +26,7 @@
 	// Get system settings for area of expertise labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
 
-// Get system settings for this archive page's text
+// Get system settings for location archive text
 include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-location.php' );
 
 // Get the page ID

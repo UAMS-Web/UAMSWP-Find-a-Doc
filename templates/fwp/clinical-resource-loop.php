@@ -11,12 +11,8 @@
  * 	Clinical Resources	('clinical_resources')
  */
 
-// Check/define variables
-
-	if ( !isset($clinical_resource_single_name) ) {
-		$labels_clinical_resource_vars = uamswp_fad_labels_clinical_resource();
-			$clinical_resource_plural_name = $labels_clinical_resource_vars['clinical_resource_plural_name']; // string
-	}
+// Get system settings for clinical resource labels
+include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 

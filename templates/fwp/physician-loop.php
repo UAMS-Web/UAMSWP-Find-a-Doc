@@ -15,33 +15,12 @@ if ( have_posts() ) {
 
 	// Check/define variables
 
-		// Find-a-Doc Settings values for provider labels
+		// Get system settings for provider labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
-			if (
-				!isset($provider_single_name) || empty($provider_single_name)
-				||
-				!isset($provider_single_name_attr) || empty($provider_single_name_attr)
-				||
-				!isset($provider_plural_name) || empty($provider_plural_name)
-				||
-				!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
-			) {
-				$labels_provider_vars = uamswp_fad_labels_provider();
-					$provider_single_name = $labels_provider_vars['provider_single_name']; // string
-					$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
-					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-					$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
-			}
+		// Get system settings for location labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
 
-		// Find-a-Doc Settings values for location labels
-
-			if (
-				!isset($location_plural_name) || empty($location_plural_name)
-			) {
-				$labels_location_vars = uamswp_fad_labels_location();
-					$location_plural_name = $labels_location_vars['location_plural_name']; // string
-			}
- 
 	while ( have_posts() ) {
 
 		the_post();

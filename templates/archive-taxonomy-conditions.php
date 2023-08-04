@@ -46,7 +46,7 @@
 	// Get system settings for condition labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
 
-// Get system settings for this archive page's text
+// Get system settings for condition archive text
 include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-condition.php' );
 
 // Get the page ID

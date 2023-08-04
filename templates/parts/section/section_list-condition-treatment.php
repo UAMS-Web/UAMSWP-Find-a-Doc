@@ -259,21 +259,13 @@ if ( $condition_treatment_section_show ) {
 		// Treatments subsection ID
 		$treatment_section_id = isset($treatment_section_id) ? $treatment_section_id : 'treatments';
 
+		// Get system settings for condition labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
+
+		// Get system settings for treatment labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
+
 		// Other variables
-
-			if ( !isset($condition_single_name_attr) || empty($condition_single_name_attr) ) {
-
-				$labels_condition_vars = uamswp_fad_labels_condition();
-					$condition_single_name_attr = $labels_condition_vars['condition_single_name_attr']; // string
-
-			}
-
-			if ( !isset($treatment_single_name_attr) || empty($treatment_single_name_attr) ) {
-
-				$labels_treatment_vars = uamswp_fad_labels_treatment();
-					$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
-
-			}
 
 			if (
 				!isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general)

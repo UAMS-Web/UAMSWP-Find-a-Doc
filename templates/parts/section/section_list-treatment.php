@@ -108,25 +108,10 @@ if ( $treatment_section_show ) {
 		// Section ID
 		$treatment_section_id = isset($treatment_section_id) ? $treatment_section_id : 'treatments';
 
+		// Get system settings for treatment labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
+
 		// Other variables
-
-			if (
-				!isset($treatment_single_name) || empty($treatment_single_name)
-				||
-				!isset($treatment_single_name_attr) || empty($treatment_single_name_attr)
-				||
-				!isset($treatment_plural_name) || empty($treatment_plural_name)
-				||
-				!isset($treatment_plural_name_attr) || empty($treatment_plural_name_attr)
-			) {
-
-				$labels_treatment_vars = uamswp_fad_labels_treatment();
-					$treatment_single_name = $labels_treatment_vars['treatment_single_name']; // string
-					$treatment_single_name_attr = $labels_treatment_vars['treatment_single_name_attr']; // string
-					$treatment_plural_name = $labels_treatment_vars['treatment_plural_name']; // string
-					$treatment_plural_name_attr = $labels_treatment_vars['treatment_plural_name_attr']; // string
-
-			}
 
 			if (
 				!isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general)

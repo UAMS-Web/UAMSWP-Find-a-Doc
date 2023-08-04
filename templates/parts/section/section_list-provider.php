@@ -105,17 +105,8 @@ if ( $provider_section_show ) {
 
 		// Other variables
 
-			if (
-				!isset($provider_plural_name) || empty($provider_plural_name)
-				||
-				!isset($provider_plural_name_attr) || empty($provider_plural_name_attr)
-			) {
-
-				$labels_provider_vars = uamswp_fad_labels_provider();
-					$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string
-					$provider_plural_name_attr = $labels_provider_vars['provider_plural_name_attr']; // string
-
-			}
+			// Get system settings for provider labels
+			include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
 
 			if (
 				!isset($provider_fpage_title_general) || empty($provider_fpage_title_general)
