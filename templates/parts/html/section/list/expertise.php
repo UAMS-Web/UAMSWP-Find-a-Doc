@@ -124,8 +124,8 @@
 					$expertise_query = $expertise_descendant_query;
 
 				}
-	
-			}	
+
+			}
 
 		}
 
@@ -244,19 +244,19 @@
 		}
 
 	// Query whether to display the section header
-	
+
 		$expertise_section_show_header = isset($expertise_section_show_header) ? $expertise_section_show_header : true;
 
 	// Query for whether to collapse the list of locations in the locations section
-	
+
 		$expertise_section_collapse_list = isset($expertise_section_collapse_list) ? $expertise_section_collapse_list : false;
 
 	// Section class
-	
+
 		$expertise_section_class = isset($expertise_section_class) ? $expertise_section_class : 'expertise-list';
 
 	// Section ID
-	
+
 		$expertise_section_id = isset($expertise_section_id) ? $expertise_section_id : 'expertise';
 
 	// Get system settings for area of expertise labels

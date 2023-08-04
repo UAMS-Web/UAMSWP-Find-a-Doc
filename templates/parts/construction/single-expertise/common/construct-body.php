@@ -45,7 +45,9 @@
 					$page_title,
 					$page_url
 				) {
+
 					include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
+
 				}, 5 );
 
 		// Primary navigation
@@ -63,7 +65,9 @@
 					$page_title,
 					$page_url
 				) {
+
 					include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
+
 				}, 5 );
 
 	// Page Header (before entry element)
@@ -102,9 +106,12 @@
 			// Display appointment information
 
 				add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
+
 					uamswp_fad_ontology_appointment(
+
 						$appointment_section_show
 					);
+
 				}, 26 );
 
 	// FOOTER

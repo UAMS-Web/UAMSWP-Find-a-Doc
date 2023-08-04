@@ -35,6 +35,7 @@
 					$html = $excerpt_attr;
 
 				}
+
 				return $html;
 
 			} );
@@ -44,9 +45,13 @@
 		// Override theme's standard meta keywords settings
 
 			add_action( 'wp_head', function() use ( $keywords ) {
+
 				uamswp_keyword_hook_header(
+
 					$keywords // array
+
 				);
+
 			} );
 
 	// Meta Social Media Tags

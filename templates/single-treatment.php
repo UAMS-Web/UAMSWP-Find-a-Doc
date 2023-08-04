@@ -330,7 +330,7 @@
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
 			// Related Conditions Section Query
-			
+
 				$conditions_cpt = get_field('treatment_conditions');
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
