@@ -697,7 +697,7 @@
 			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('physician_treatments_cpt');
-				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 			// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 

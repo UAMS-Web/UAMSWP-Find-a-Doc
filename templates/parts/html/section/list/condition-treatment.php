@@ -313,7 +313,7 @@ if ( $condition_treatment_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
 			// Related Treatments Section Query
-			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 	?>
 	<section class="uams-module<?php echo $condition_treatment_section_class ? ' ' . $condition_treatment_section_class : ''; ?> bg-auto<?php echo $condition_treatment_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_treatment_section_id ? ' id="' . $condition_treatment_section_id . '" aria-labelledby="' . $condition_treatment_section_id . '-title"' : ''; ?>>

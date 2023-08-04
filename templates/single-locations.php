@@ -908,7 +908,7 @@
 			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('location_treatments_cpt');
-				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 		// Get remaining details about this item
 

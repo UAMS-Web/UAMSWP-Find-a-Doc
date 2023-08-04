@@ -331,7 +331,7 @@
 			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('condition_treatments');
-				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 			// Check if UAMS Health Talk podcast section should be displayed
 

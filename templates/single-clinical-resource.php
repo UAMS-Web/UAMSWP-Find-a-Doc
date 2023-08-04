@@ -454,7 +454,7 @@
 			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('clinical_resource_treatments');
-				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 			// Query for whether Make an Appointment section should be displayed
 

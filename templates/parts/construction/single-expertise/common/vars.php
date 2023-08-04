@@ -169,7 +169,7 @@ $template_type = 'default';
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
 	// Related Treatments Section Query
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 	// Query for whether Make an Appointment section should be displayed
 	$appointment_section_show = true; // It should always be displayed.
