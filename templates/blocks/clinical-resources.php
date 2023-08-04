@@ -67,7 +67,7 @@ if ( $clinical_resource_section_show ) {
 	// Check/define variables
 
 		// Get system settings for clinical resource labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
 
 		$resource_heading_related_name = isset($resource_heading_related_name) ? $resource_heading_related_name : '';
 

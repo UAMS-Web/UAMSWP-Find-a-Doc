@@ -6,31 +6,31 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
 
 	// Get system settings for descendant location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location-descendant.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location-descendant.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-treatment.php' );
 
 // // Get system settings for this post type's archive page text
-// include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-location.php' );
+// include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-location.php' );
 
 // Ontology / Content Type
 

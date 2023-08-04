@@ -18,10 +18,10 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
 
 // Get system settings for area of expertise archive text
-include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_archive-expertise.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_archive-expertise.php' );
 
 // Get the page ID
 

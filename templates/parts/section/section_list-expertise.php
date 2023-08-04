@@ -287,12 +287,12 @@
 			if ( !$expertise_descendant_list ) {
 
 				// Get system settings for area of expertise labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
 
 			} else {
 
 				// Get system settings for descendant area of expertise item labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise-descendant.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise-descendant.php' );
 
 				// Override area of expertise labels with descendant area of expertise item labels
 				$expertise_single_name = $expertise_descendant_single_name; // string

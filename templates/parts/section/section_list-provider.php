@@ -106,7 +106,7 @@ if ( $provider_section_show ) {
 		// Other variables
 
 			// Get system settings for provider labels
-			include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
 
 			if (
 				!isset($provider_fpage_title_general) || empty($provider_fpage_title_general)

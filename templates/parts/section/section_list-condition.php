@@ -108,7 +108,7 @@ if ( $condition_section_show ) {
 		$condition_section_id = isset($condition_section_id) ? $condition_section_id : 'conditions';
 
 		// Get system settings for condition labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-condition.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-condition.php' );
 
 		// Other variables
 

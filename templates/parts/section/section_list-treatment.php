@@ -109,7 +109,7 @@ if ( $treatment_section_show ) {
 		$treatment_section_id = isset($treatment_section_id) ? $treatment_section_id : 'treatments';
 
 		// Get system settings for treatment labels
-		include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-treatment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-treatment.php' );
 
 		// Other variables
 

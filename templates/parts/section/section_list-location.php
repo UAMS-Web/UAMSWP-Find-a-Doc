@@ -109,7 +109,7 @@ if ( $location_section_show ) {
 		// Other variables
 
 			// Get system settings for location labels
-			include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
 
 			if (
 				!isset($location_fpage_title_general) || empty($location_fpage_title_general)

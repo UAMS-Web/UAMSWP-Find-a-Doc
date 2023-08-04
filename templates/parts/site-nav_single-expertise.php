@@ -134,19 +134,19 @@
 	}
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise.php' );
 
 	// Get system settings for descendant area of expertise item labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-expertise-descendant.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-expertise-descendant.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/vars_sys_labels-clinical-resource.php' );
 
 require_once( UAMS_FAD_PATH . '/templates/modules/class-wp-bootstrap-pagewalker.php' );
 
