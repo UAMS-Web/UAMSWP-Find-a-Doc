@@ -739,7 +739,7 @@
 						$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
 						$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
 						$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
-						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-clinical-resource.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/list/clinical-resource.php' );
 
 					// Construct Clinical Trials Section
 
@@ -754,25 +754,25 @@
 
 						$treatment_section_title = $treatment_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 						$treatment_section_intro = $treatment_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-treatment.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/list/treatment.php' );
 
 					// Construct Providers Section
 
 						$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
 						$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatment_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
-						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-provider.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/list/provider.php' );
 
 					// Construct Location Section
 
 						$location_section_title = $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title; // Text to use for the section title
 						$location_section_intro = 'Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
-						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-location.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/list/location.php' );
 
 					// Construct Areas of Expertise Section
 
 						$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
 						$expertise_section_intro = '';
-						include( UAMS_FAD_PATH . '/templates/parts/section/section_list-expertise.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/section/list/expertise.php' );
 
 					// Construct Appointment Information Section
 
