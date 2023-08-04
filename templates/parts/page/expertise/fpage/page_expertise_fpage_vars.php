@@ -30,17 +30,17 @@
 	// Name of ontology item type represented by this fake subpage
 
 		$fpage_name = ${ $fpage_var_name . '_plural_name' }; // Name of ontology item type represented by this fake subpage
-		$fpage_name_attr = $fpage_name ? uamswp_attr_conversion($fpage_name) : '';
+		$fpage_name_attr = uamswp_attr_conversion($fpage_name);
 
 	// Fake subpage page title
 
 		$fpage_title = ${ $fpage_var_name . '_fpage_title_expertise' }; // Fake subpage page title
-		$fpage_title_attr = $fpage_title ? uamswp_attr_conversion($fpage_title) : '';
+		$fpage_title_attr = uamswp_attr_conversion($fpage_title);
 
 	 // Fake subpage intro text
 
 		$fpage_intro = ${ $fpage_var_name . '_fpage_intro_expertise' }; // Fake subpage intro text
-		$fpage_intro_attr = $fpage_intro ? uamswp_attr_conversion($fpage_intro) : ''; // Attribute-friendly version of fake subpage intro text
+		$fpage_intro_attr = uamswp_attr_conversion($fpage_intro); // Attribute-friendly version of fake subpage intro text
 
 // Image values
 
@@ -86,7 +86,7 @@ $template_type = 'page_landing';
 
 		}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 	// Set schema description
 

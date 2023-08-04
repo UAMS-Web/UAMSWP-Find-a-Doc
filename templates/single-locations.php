@@ -57,16 +57,16 @@
 // Get the page title and other name values
 
 	$page_title = get_the_title(); // Title of the location
-	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
+	$page_title_attr = uamswp_attr_conversion($page_title);
 	$page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the title for use in phrases
-	$page_title_phrase_attr = $page_title_phrase ? uamswp_attr_conversion($page_title_phrase) : '';
+	$page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 
 	// Parent location
 
 		$parent_title = $parent_location ? $parent_location->post_title : '';
-		$parent_title_attr = $parent_title ? uamswp_attr_conversion($parent_title) : '';
+		$parent_title_attr = uamswp_attr_conversion($parent_title);
 		$parent_title_phrase = ( get_field('location_prepend_the', $location_parent_id ) ? 'the ' : '' ) . $parent_title; // Conditionally prepend "the" to the title for use in phrases
-		$parent_title_phrase_attr = $parent_title_phrase ? uamswp_attr_conversion($parent_title_phrase) : '';
+		$parent_title_phrase_attr = uamswp_attr_conversion($parent_title_phrase);
 
 	// Array for page titles and section titles
 
@@ -266,7 +266,7 @@
 			// Get the location's city
 
 				$location_city = get_field('location_city', $post_id); // Get the location's city
-				$location_city_attr = $location_city ? uamswp_attr_conversion($location_city) : '';
+				$location_city_attr = uamswp_attr_conversion($location_city);
 
 		// Construct the meta title
 
@@ -342,7 +342,7 @@
 
 			}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 		// Set schema description
 

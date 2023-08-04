@@ -44,7 +44,7 @@
 		// First name
 
 			$first_name = get_field('physician_first_name',$post->ID);
-			$first_name_attr = $first_name ? uamswp_attr_conversion($first_name) : '';
+			$first_name_attr = uamswp_attr_conversion($first_name);
 
 		// Middle name
 
@@ -53,7 +53,7 @@
 		// Last name
 
 			$last_name = get_field('physician_last_name',$post->ID);
-			$last_name_attr = $last_name ? uamswp_attr_conversion($last_name) : '';
+			$last_name_attr = uamswp_attr_conversion($last_name);
 
 		// Generational suffix (e.g., Jr.)
 
@@ -94,17 +94,17 @@
 		// Full name (e.g., "Leonard H. McCoy, M.D.")
 
 			$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
-			$full_name_attr = $full_name ? uamswp_attr_conversion($full_name) : '';
+			$full_name_attr = uamswp_attr_conversion($full_name);
 
 		// Medium name (e.g., "Dr. Leonard H. McCoy")
 
 			$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-			$medium_name_attr = $medium_name ? uamswp_attr_conversion($medium_name) : '';
+			$medium_name_attr = uamswp_attr_conversion($medium_name);
 
 		// Short name (e.g., "Dr. McCoy")
 
 			$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-			$short_name_attr = $short_name ? uamswp_attr_conversion($short_name) : '';
+			$short_name_attr = uamswp_attr_conversion($short_name);
 
 		// Short name possessive (e.g., "Dr. McCoy's")
 
@@ -122,7 +122,7 @@
 
 			}
 
-			$short_name_possessive_attr = $short_name_possessive ? uamswp_attr_conversion($short_name_possessive) : '';
+			$short_name_possessive_attr = uamswp_attr_conversion($short_name_possessive);
 
 		// Page title
 
@@ -132,7 +132,7 @@
 		// Sort name (e.g., "McCoy, Leonard H.")
 
 			$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-			$sort_name_attr = $sort_name ? uamswp_attr_conversion($sort_name) : '';
+			$sort_name_attr = uamswp_attr_conversion($sort_name);
 
 		// Sort name parameter (e.g., "mccoy-leonard-h")
 
@@ -364,7 +364,7 @@
 
 				}
 
-				$phys_title_name_attr = $phys_title_name ? uamswp_attr_conversion($phys_title_name) : '';
+				$phys_title_name_attr = uamswp_attr_conversion($phys_title_name);
 
 				// Defines the indefinite article to precede the clinical title (a or an, based on whether clinical title starts with vowel)
 
@@ -488,7 +488,7 @@
 
 			}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 		// Set schema description
 
@@ -556,7 +556,7 @@
 			// Profile username
 
 				$meta_og_profile_username = '';
-				$meta_og_profile_username_attr = $meta_og_profile_username ? uamswp_attr_conversion($meta_og_profile_username) : '';
+				$meta_og_profile_username_attr = uamswp_attr_conversion($meta_og_profile_username);
 				if (
 					isset($meta_og_profile_username_attr)
 					&&
@@ -570,7 +570,7 @@
 				// Get the provider's gender
 
 					$gender = get_field('physician_gender',$post->ID);
-					$gender_attr = $gender ? uamswp_attr_conversion($gender) : '';
+					$gender_attr = uamswp_attr_conversion($gender);
 
 				$meta_profile_gender = $gender_attr ? strtolower($gender_attr) : '';
 				$meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)

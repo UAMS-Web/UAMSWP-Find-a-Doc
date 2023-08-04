@@ -40,7 +40,7 @@
 // Get the page title
 
 	$page_title = get_the_title();
-	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
+	$page_title_attr = uamswp_attr_conversion($page_title);
 
 	// Array for page titles and section titles
 
@@ -157,7 +157,7 @@
 
 			}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 		// Set schema description
 

@@ -40,7 +40,7 @@
 // Get the page title
 
 	$page_title = get_the_title();
-	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
+	$page_title_attr = uamswp_attr_conversion($page_title);
 
 	// Array for page titles and section titles
 
@@ -147,7 +147,7 @@
 				$resource_type = get_field('clinical_resource_type');
 				$resource_type_value = $resource_type['value'];
 				$resource_type_label = $resource_type['label'];
-				$resource_type_label_attr = $resource_type_label ? uamswp_attr_conversion($resource_type_label) : '';
+				$resource_type_label_attr = uamswp_attr_conversion($resource_type_label);
 
 		// Construct the meta title
 
@@ -244,7 +244,7 @@
 
 			}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 		// Set schema description
 
