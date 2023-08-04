@@ -9,7 +9,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_vars.php' );
 
 	// Define variables common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/page_expertise_fpage_vars.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/vars.php' );
 
 // HEAD Elements
 
@@ -17,7 +17,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_construct-head.php' );
 
 	// Construct HEAD elements common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/page_expertise_fpage_construct-head.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/construct-head.php' );
 
 // BODY elements
 
@@ -25,7 +25,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/page_expertise_common_construct-body.php' );
 
 	// Construct BODY elements common to all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/page_expertise_fpage_construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/page/expertise/fpage/construct-body.php' );
 
 	// Construct main ontology page content
 
