@@ -2123,7 +2123,7 @@
 
 					// Construct the schema script tag
 
-						include( UAMS_FAD_PATH . '/templates/parts/script_schema.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/page/common/script/schema.php' );
 
 			} // endwhile // end of the loop
 
