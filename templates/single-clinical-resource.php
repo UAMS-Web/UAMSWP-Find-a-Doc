@@ -418,7 +418,7 @@
 				// Check/define variables
 				$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 
-				include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
+				include( UAMS_FAD_PATH . '/templates/parts/entry-title/entry-title_' . $entry_header_style . '.php');
 
 			} );
 
