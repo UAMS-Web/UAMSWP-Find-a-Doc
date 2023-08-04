@@ -134,7 +134,7 @@
 	$regions = isset($regions) ? $regions : array();
 	$service_lines = isset($service_lines) ? $service_lines : array();
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_page_ontology-hide.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/vars_page_ontology-hide.php' );
 
 // HEAD
 

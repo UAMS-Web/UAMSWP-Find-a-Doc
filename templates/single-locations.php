@@ -255,7 +255,7 @@
 	$regions = get_field('location_region',$post_id);
 	$service_lines = get_field('location_service_line',$page_id);
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars/vars_page_ontology-hide.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/vars_page_ontology-hide.php' );
 
 // HEAD
 
