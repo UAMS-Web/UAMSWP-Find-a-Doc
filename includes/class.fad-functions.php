@@ -3973,68 +3973,74 @@ function uamswp_fad_fpage_text_replace(
 			// Areas of Expertise
 
 				// Get the Find-a-Doc Settings values for the text elements in general placements
-				$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-				$expertise_fpage_ref_main_title_general = get_field('expertise_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
-				$expertise_fpage_ref_main_intro_general = get_field('expertise_fpage_ref_main_intro_general', 'option'); // Reference to the main area of expertise archive, body text
-				$expertise_fpage_ref_main_link_general = get_field('expertise_fpage_ref_main_link_general', 'option'); // Reference to the main area of expertise archive, link text
-				$expertise_fpage_ref_top_title_general = get_field('expertise_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_fpage_ref_top_intro_general = get_field('expertise_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_fpage_ref_top_link_general = get_field('expertise_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+				
+					$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+					$expertise_fpage_ref_main_title_general = get_field('expertise_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
+					$expertise_fpage_ref_main_intro_general = get_field('expertise_fpage_ref_main_intro_general', 'option'); // Reference to the main area of expertise archive, body text
+					$expertise_fpage_ref_main_link_general = get_field('expertise_fpage_ref_main_link_general', 'option'); // Reference to the main area of expertise archive, link text
+					$expertise_fpage_ref_top_title_general = get_field('expertise_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+					$expertise_fpage_ref_top_intro_general = get_field('expertise_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+					$expertise_fpage_ref_top_link_general = get_field('expertise_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-				$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
-				$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Fake subpage (or section), intro text
-				$expertise_fpage_ref_main_title_general = ( isset($expertise_fpage_ref_main_title_general) && !empty($expertise_fpage_ref_main_title_general) ) ? $expertise_fpage_ref_main_title_general : 'Full List of [Areas of Expertise]'; // Reference to the main area of expertise archive, title
-				$expertise_fpage_ref_main_intro_general = ( isset($expertise_fpage_ref_main_intro_general) && !empty($expertise_fpage_ref_main_intro_general) ) ? $expertise_fpage_ref_main_intro_general : 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.'; // Reference to the main area of expertise archive, body text
-				$expertise_fpage_ref_main_link_general = ( isset($expertise_fpage_ref_main_link_general) && !empty($expertise_fpage_ref_main_link_general) ) ? $expertise_fpage_ref_main_link_general : 'View All [Areas of Expertise]'; // Reference to the main area of expertise archive, link text
-				$expertise_fpage_ref_top_title_general = ( isset($expertise_fpage_ref_top_title_general) && !empty($expertise_fpage_ref_top_title_general) ) ? $expertise_fpage_ref_top_title_general : $expertise_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_fpage_ref_top_intro_general = ( isset($expertise_fpage_ref_top_intro_general) && !empty($expertise_fpage_ref_top_intro_general) ) ? $expertise_fpage_ref_top_intro_general : $expertise_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_fpage_ref_top_link_general = ( isset($expertise_fpage_ref_top_link_general) && !empty($expertise_fpage_ref_top_link_general) ) ? $expertise_fpage_ref_top_link_general : $expertise_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+				
+					$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
+					$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Fake subpage (or section), intro text
+					$expertise_fpage_ref_main_title_general = ( isset($expertise_fpage_ref_main_title_general) && !empty($expertise_fpage_ref_main_title_general) ) ? $expertise_fpage_ref_main_title_general : 'Full List of [Areas of Expertise]'; // Reference to the main area of expertise archive, title
+					$expertise_fpage_ref_main_intro_general = ( isset($expertise_fpage_ref_main_intro_general) && !empty($expertise_fpage_ref_main_intro_general) ) ? $expertise_fpage_ref_main_intro_general : 'Explore our extensive range of [areas of expertise], encompassing diverse specialties and cutting-edge medical advancements. Discover the breadth of knowledge and skills within UAMS Health.'; // Reference to the main area of expertise archive, body text
+					$expertise_fpage_ref_main_link_general = ( isset($expertise_fpage_ref_main_link_general) && !empty($expertise_fpage_ref_main_link_general) ) ? $expertise_fpage_ref_main_link_general : 'View All [Areas of Expertise]'; // Reference to the main area of expertise archive, link text
+					$expertise_fpage_ref_top_title_general = ( isset($expertise_fpage_ref_top_title_general) && !empty($expertise_fpage_ref_top_title_general) ) ? $expertise_fpage_ref_top_title_general : $expertise_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+					$expertise_fpage_ref_top_intro_general = ( isset($expertise_fpage_ref_top_intro_general) && !empty($expertise_fpage_ref_top_intro_general) ) ? $expertise_fpage_ref_top_intro_general : $expertise_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+					$expertise_fpage_ref_top_link_general = ( isset($expertise_fpage_ref_top_link_general) && !empty($expertise_fpage_ref_top_link_general) ) ? $expertise_fpage_ref_top_link_general : $expertise_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general, $page_titles); // Fake subpage (or section), title
-				$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
-				$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general, $page_titles); // Reference to the main area of expertise archive, title
-				$expertise_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_general, $page_titles); // Reference to the main area of expertise archive, body text
-				$expertise_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_general, $page_titles); // Reference to the main area of expertise archive, link text
-				$expertise_fpage_ref_top_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_title_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_fpage_ref_top_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_intro_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_fpage_ref_top_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_link_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+				
+					$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general, $page_titles); // Fake subpage (or section), title
+					$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+					$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general, $page_titles); // Reference to the main area of expertise archive, title
+					$expertise_fpage_ref_main_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_intro_general, $page_titles); // Reference to the main area of expertise archive, body text
+					$expertise_fpage_ref_main_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_link_general, $page_titles); // Reference to the main area of expertise archive, link text
+					$expertise_fpage_ref_top_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_title_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+					$expertise_fpage_ref_top_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_intro_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+					$expertise_fpage_ref_top_link_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_top_link_general, $page_titles); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 			// Descendant Areas of Expertise
 
 				// Get the Find-a-Doc Settings values for the text elements in general placements
-				$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-				$expertise_descendant_fpage_ref_main_title_general = get_field('expertise_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
-				$expertise_descendant_fpage_ref_main_intro_general = get_field('expertise_descendant_fpage_ref_main_intro_general', 'option'); // Reference to the main area of expertise archive, body text
-				$expertise_descendant_fpage_ref_main_link_general = get_field('expertise_descendant_fpage_ref_main_link_general', 'option'); // Reference to the main area of expertise archive, link text
-				$expertise_descendant_fpage_ref_top_title_general = get_field('expertise_descendant_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_descendant_fpage_ref_top_intro_general = get_field('expertise_descendant_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_descendant_fpage_ref_top_link_general = get_field('expertise_descendant_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+				
+					$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+					$expertise_descendant_fpage_ref_main_title_general = get_field('expertise_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
+					$expertise_descendant_fpage_ref_main_intro_general = get_field('expertise_descendant_fpage_ref_main_intro_general', 'option'); // Reference to the main area of expertise archive, body text
+					$expertise_descendant_fpage_ref_main_link_general = get_field('expertise_descendant_fpage_ref_main_link_general', 'option'); // Reference to the main area of expertise archive, link text
+					$expertise_descendant_fpage_ref_top_title_general = get_field('expertise_descendant_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+					$expertise_descendant_fpage_ref_top_intro_general = get_field('expertise_descendant_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+					$expertise_descendant_fpage_ref_top_link_general = get_field('expertise_descendant_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 				// If the variable is not set or is empty...
 				// Set a hardcoded fallback value
-				$expertise_descendant_fpage_title_general = ( isset($expertise_descendant_fpage_title_general) && !empty($expertise_descendant_fpage_title_general) ) ? $expertise_descendant_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
-				$expertise_descendant_fpage_intro_general = ( isset($expertise_descendant_fpage_intro_general) && !empty($expertise_descendant_fpage_intro_general) ) ? $expertise_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
-				$expertise_descendant_fpage_ref_main_title_general = ( isset($expertise_descendant_fpage_ref_main_title_general) && !empty($expertise_descendant_fpage_ref_main_title_general) ) ? $expertise_descendant_fpage_ref_main_title_general : $expertise_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
-				$expertise_descendant_fpage_ref_main_intro_general = ( isset($expertise_descendant_fpage_ref_main_intro_general) && !empty($expertise_descendant_fpage_ref_main_intro_general) ) ? $expertise_descendant_fpage_ref_main_intro_general : $expertise_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
-				$expertise_descendant_fpage_ref_main_link_general = ( isset($expertise_descendant_fpage_ref_main_link_general) && !empty($expertise_descendant_fpage_ref_main_link_general) ) ? $expertise_descendant_fpage_ref_main_link_general : $expertise_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
-				$expertise_descendant_fpage_ref_top_title_general = ( isset($expertise_descendant_fpage_ref_top_title_general) && !empty($expertise_descendant_fpage_ref_top_title_general) ) ? $expertise_descendant_fpage_ref_top_title_general : $expertise_descendant_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_descendant_fpage_ref_top_intro_general = ( isset($expertise_descendant_fpage_ref_top_intro_general) && !empty($expertise_descendant_fpage_ref_top_intro_general) ) ? $expertise_descendant_fpage_ref_top_intro_general : $expertise_descendant_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_descendant_fpage_ref_top_link_general = ( isset($expertise_descendant_fpage_ref_top_link_general) && !empty($expertise_descendant_fpage_ref_top_link_general) ) ? $expertise_descendant_fpage_ref_top_link_general : $expertise_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+
+					$expertise_descendant_fpage_title_general = ( isset($expertise_descendant_fpage_title_general) && !empty($expertise_descendant_fpage_title_general) ) ? $expertise_descendant_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
+					$expertise_descendant_fpage_intro_general = ( isset($expertise_descendant_fpage_intro_general) && !empty($expertise_descendant_fpage_intro_general) ) ? $expertise_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
+					$expertise_descendant_fpage_ref_main_title_general = ( isset($expertise_descendant_fpage_ref_main_title_general) && !empty($expertise_descendant_fpage_ref_main_title_general) ) ? $expertise_descendant_fpage_ref_main_title_general : $expertise_fpage_ref_main_title_general; // Reference to the main area of expertise archive, title
+					$expertise_descendant_fpage_ref_main_intro_general = ( isset($expertise_descendant_fpage_ref_main_intro_general) && !empty($expertise_descendant_fpage_ref_main_intro_general) ) ? $expertise_descendant_fpage_ref_main_intro_general : $expertise_fpage_ref_main_intro_general; // Reference to the main area of expertise archive, body text
+					$expertise_descendant_fpage_ref_main_link_general = ( isset($expertise_descendant_fpage_ref_main_link_general) && !empty($expertise_descendant_fpage_ref_main_link_general) ) ? $expertise_descendant_fpage_ref_main_link_general : $expertise_fpage_ref_main_link_general; // Reference to the main area of expertise archive, link text
+					$expertise_descendant_fpage_ref_top_title_general = ( isset($expertise_descendant_fpage_ref_top_title_general) && !empty($expertise_descendant_fpage_ref_top_title_general) ) ? $expertise_descendant_fpage_ref_top_title_general : $expertise_descendant_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+					$expertise_descendant_fpage_ref_top_intro_general = ( isset($expertise_descendant_fpage_ref_top_intro_general) && !empty($expertise_descendant_fpage_ref_top_intro_general) ) ? $expertise_descendant_fpage_ref_top_intro_general : $expertise_descendant_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+					$expertise_descendant_fpage_ref_top_link_general = ( isset($expertise_descendant_fpage_ref_top_link_general) && !empty($expertise_descendant_fpage_ref_top_link_general) ) ? $expertise_descendant_fpage_ref_top_link_general : $expertise_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
-				$expertise_descendant_fpage_title_general = $expertise_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-				$expertise_descendant_fpage_intro_general = $expertise_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-				$expertise_descendant_fpage_ref_main_title_general = $expertise_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main area of expertise archive, title
-				$expertise_descendant_fpage_ref_main_intro_general = $expertise_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main area of expertise archive, body text
-				$expertise_descendant_fpage_ref_main_link_general = $expertise_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main area of expertise archive, link text
-				$expertise_descendant_fpage_ref_top_title_general = $expertise_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
-				$expertise_descendant_fpage_ref_top_intro_general = $expertise_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
-				$expertise_descendant_fpage_ref_top_link_general = $expertise_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
+
+					$expertise_descendant_fpage_title_general = $expertise_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+					$expertise_descendant_fpage_intro_general = $expertise_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+					$expertise_descendant_fpage_ref_main_title_general = $expertise_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main area of expertise archive, title
+					$expertise_descendant_fpage_ref_main_intro_general = $expertise_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main area of expertise archive, body text
+					$expertise_descendant_fpage_ref_main_link_general = $expertise_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main area of expertise archive, link text
+					$expertise_descendant_fpage_ref_top_title_general = $expertise_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, title
+					$expertise_descendant_fpage_ref_top_intro_general = $expertise_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, body text
+					$expertise_descendant_fpage_ref_top_link_general = $expertise_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($expertise_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 			// Create an array to be used on the templates and template parts
 
