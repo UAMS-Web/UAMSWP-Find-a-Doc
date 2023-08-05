@@ -3756,58 +3756,83 @@ function uamswp_fad_fpage_text_replace(
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Providers
 		function uamswp_fad_fpage_text_provider_general(
-			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+			$page_id, // int
+			$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 		) {
 
-			// Get the Find-a-Doc Settings values for the text elements in general placements
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_provider_general_vars, __FUNCTION__ );
 
-				$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-				$provider_fpage_ref_main_title_general = get_field('provider_fpage_ref_main_title_general', 'option'); // Reference to the main provider archive, title
-				$provider_fpage_ref_main_intro_general = get_field('provider_fpage_ref_main_intro_general', 'option'); // Reference to the main provider archive, body text
-				$provider_fpage_ref_main_link_general = get_field('provider_fpage_ref_main_link_general', 'option'); // Reference to the main provider archive, link text
-				$provider_fpage_ref_top_title_general = get_field('provider_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-				$provider_fpage_ref_top_intro_general = get_field('provider_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-				$provider_fpage_ref_top_link_general = get_field('provider_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+			if ( !empty( $fpage_text_provider_general_vars ) ) {
 
-			// If the variable is not set or is empty...
-			// Set a hardcoded fallback value
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
-				$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Fake subpage (or section), title
-				$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Fake subpage (or section), intro text
-				$provider_fpage_ref_main_title_general = ( isset($provider_fpage_ref_main_title_general) && !empty($provider_fpage_ref_main_title_general) ) ? $provider_fpage_ref_main_title_general : 'Full List of [Providers]'; // Reference to the main provider archive, title
-				$provider_fpage_ref_main_intro_general = ( isset($provider_fpage_ref_main_intro_general) && !empty($provider_fpage_ref_main_intro_general) ) ? $provider_fpage_ref_main_intro_general : 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.'; // Reference to the main provider archive, body text
-				$provider_fpage_ref_main_link_general = ( isset($provider_fpage_ref_main_link_general) && !empty($provider_fpage_ref_main_link_general) ) ? $provider_fpage_ref_main_link_general : 'View All [Providers]'; // Reference to the main provider archive, link text
-				$provider_fpage_ref_top_title_general = ( isset($provider_fpage_ref_top_title_general) && !empty($provider_fpage_ref_top_title_general) ) ? $provider_fpage_ref_top_title_general : $provider_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-				$provider_fpage_ref_top_intro_general = ( isset($provider_fpage_ref_top_intro_general) && !empty($provider_fpage_ref_top_intro_general) ) ? $provider_fpage_ref_top_intro_general : $provider_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-				$provider_fpage_ref_top_link_general = ( isset($provider_fpage_ref_top_link_general) && !empty($provider_fpage_ref_top_link_general) ) ? $provider_fpage_ref_top_link_general : $provider_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+				return $fpage_text_provider_general_vars;
 
-			// Substitute placeholder text for relevant Find-a-Doc Settings value
+			} else {
 
-				$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-				$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-				$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main provider archive, title
-				$provider_fpage_ref_main_intro_general = $provider_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main provider archive, body text
-				$provider_fpage_ref_main_link_general = $provider_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main provider archive, link text
-				$provider_fpage_ref_top_title_general = $provider_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
-				$provider_fpage_ref_top_intro_general = $provider_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
-				$provider_fpage_ref_top_link_general = $provider_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
-			// Create an array to be used on the templates and template parts
+				// Get the Find-a-Doc Settings values for the text elements in general placements
 
-				$fpage_text_provider_general_vars = array(
-					'provider_fpage_title_general'			=> $provider_fpage_title_general, // string
-					'provider_fpage_intro_general'			=> $provider_fpage_intro_general, // string
-					'provider_fpage_ref_main_title_general'	=> $provider_fpage_ref_main_title_general, // string
-					'provider_fpage_ref_main_intro_general'	=> $provider_fpage_ref_main_intro_general, // string
-					'provider_fpage_ref_main_link_general'	=> $provider_fpage_ref_main_link_general, // string
-					'provider_fpage_ref_top_title_general'	=> $provider_fpage_ref_top_title_general, // string
-					'provider_fpage_ref_top_intro_general'	=> $provider_fpage_ref_top_intro_general, // string
-					'provider_fpage_ref_top_link_general'	=> $provider_fpage_ref_top_link_general // string
-				);
+					$provider_fpage_title_general = get_field('provider_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$provider_fpage_intro_general = get_field('provider_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+					$provider_fpage_ref_main_title_general = get_field('provider_fpage_ref_main_title_general', 'option'); // Reference to the main provider archive, title
+					$provider_fpage_ref_main_intro_general = get_field('provider_fpage_ref_main_intro_general', 'option'); // Reference to the main provider archive, body text
+					$provider_fpage_ref_main_link_general = get_field('provider_fpage_ref_main_link_general', 'option'); // Reference to the main provider archive, link text
+					$provider_fpage_ref_top_title_general = get_field('provider_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+					$provider_fpage_ref_top_intro_general = get_field('provider_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+					$provider_fpage_ref_top_link_general = get_field('provider_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
 
-			// Return the variable
-			return $fpage_text_provider_general_vars;
+				// If the variable is not set or is empty...
+				// Set a hardcoded fallback value
+
+					$provider_fpage_title_general = ( isset($provider_fpage_title_general) && !empty($provider_fpage_title_general) ) ? $provider_fpage_title_general : 'Related [Providers]'; // Fake subpage (or section), title
+					$provider_fpage_intro_general = ( isset($provider_fpage_intro_general) && !empty($provider_fpage_intro_general) ) ? $provider_fpage_intro_general : ''; // Fake subpage (or section), intro text
+					$provider_fpage_ref_main_title_general = ( isset($provider_fpage_ref_main_title_general) && !empty($provider_fpage_ref_main_title_general) ) ? $provider_fpage_ref_main_title_general : 'Full List of [Providers]'; // Reference to the main provider archive, title
+					$provider_fpage_ref_main_intro_general = ( isset($provider_fpage_ref_main_intro_general) && !empty($provider_fpage_ref_main_intro_general) ) ? $provider_fpage_ref_main_intro_general : 'Discover our comprehensive list of [providers], spanning diverse specialties, who are dedicated to delivering exceptional care at UAMS Health.'; // Reference to the main provider archive, body text
+					$provider_fpage_ref_main_link_general = ( isset($provider_fpage_ref_main_link_general) && !empty($provider_fpage_ref_main_link_general) ) ? $provider_fpage_ref_main_link_general : 'View All [Providers]'; // Reference to the main provider archive, link text
+					$provider_fpage_ref_top_title_general = ( isset($provider_fpage_ref_top_title_general) && !empty($provider_fpage_ref_top_title_general) ) ? $provider_fpage_ref_top_title_general : $provider_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+					$provider_fpage_ref_top_intro_general = ( isset($provider_fpage_ref_top_intro_general) && !empty($provider_fpage_ref_top_intro_general) ) ? $provider_fpage_ref_top_intro_general : $provider_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+					$provider_fpage_ref_top_link_general = ( isset($provider_fpage_ref_top_link_general) && !empty($provider_fpage_ref_top_link_general) ) ? $provider_fpage_ref_top_link_general : $provider_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+
+				// Substitute placeholder text for relevant Find-a-Doc Settings value
+
+					$provider_fpage_title_general = $provider_fpage_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+					$provider_fpage_intro_general = $provider_fpage_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+					$provider_fpage_ref_main_title_general = $provider_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main provider archive, title
+					$provider_fpage_ref_main_intro_general = $provider_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main provider archive, body text
+					$provider_fpage_ref_main_link_general = $provider_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main provider archive, link text
+					$provider_fpage_ref_top_title_general = $provider_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, title
+					$provider_fpage_ref_top_intro_general = $provider_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, body text
+					$provider_fpage_ref_top_link_general = $provider_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($provider_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Providers, link text
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_text_provider_general_vars = array(
+						'provider_fpage_title_general'			=> $provider_fpage_title_general, // string
+						'provider_fpage_intro_general'			=> $provider_fpage_intro_general, // string
+						'provider_fpage_ref_main_title_general'	=> $provider_fpage_ref_main_title_general, // string
+						'provider_fpage_ref_main_intro_general'	=> $provider_fpage_ref_main_intro_general, // string
+						'provider_fpage_ref_main_link_general'	=> $provider_fpage_ref_main_link_general, // string
+						'provider_fpage_ref_top_title_general'	=> $provider_fpage_ref_top_title_general, // string
+						'provider_fpage_ref_top_intro_general'	=> $provider_fpage_ref_top_intro_general, // string
+						'provider_fpage_ref_top_link_general'	=> $provider_fpage_ref_top_link_general // string
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_provider_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_text_provider_general_vars;
+
+			}
 
 
 		}
