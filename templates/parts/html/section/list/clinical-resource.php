@@ -70,13 +70,9 @@
 
 					// Set the section title using the system settings for the section title in a general placement
 
-						if ( !isset($clinical_resource_fpage_title_general) ) {
-							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$clinical_resource_fpage_title_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_title_general']; // string
-						}
-
+						// Get the system settings for general placement of clinical resource item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+	
 						$clinical_resource_section_title = $clinical_resource_fpage_title_general;
 				}
 
@@ -86,15 +82,9 @@
 
 					// Set the section title using the system settings for the section title in a general placement
 
-						if ( !isset($clinical_resource_fpage_intro_general) ) {
-
-							$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$clinical_resource_fpage_intro_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_intro_general']; // string
-
-							}
-
+						// Get the system settings for general placement of clinical resource item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+	
 						$clinical_resource_section_intro = $clinical_resource_fpage_intro_general;
 				}
 
@@ -127,13 +117,9 @@
 
 							// Set the section title using the system settings for the section title in a general placement
 
-								if ( !isset($clinical_resource_fpage_more_text_general) ) {
-									$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
-										$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-									);
-										$clinical_resource_fpage_more_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_text_general']; // string
-								}
-
+								// Get the system settings for general placement of clinical resource item text elements
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+	
 								$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_general;
 						}
 
@@ -143,15 +129,9 @@
 
 							// Set the section title using the system settings for the section title in a general placement
 
-								if ( !isset($clinical_resource_fpage_more_link_text_general) ) {
-
-									$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
-										$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-									);
-										$clinical_resource_fpage_more_link_text_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_text_general']; // string
-
-								}
-
+								// Get the system settings for general placement of clinical resource item text elements
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+	
 								$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
 						}
 
@@ -161,16 +141,10 @@
 
 							// Set the section title using the system settings for the section title in a general placement
 
-							if ( !isset($clinical_resource_fpage_more_link_descr_general) ) {
-
-								$fpage_text_clinical_resource_general_vars = isset($fpage_text_clinical_resource_general_vars) ? $fpage_text_clinical_resource_general_vars : uamswp_fad_fpage_text_clinical_resource_general(
-									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-								);
-									$clinical_resource_fpage_more_link_descr_general = $fpage_text_clinical_resource_general_vars['clinical_resource_fpage_more_link_descr_general']; // string
-
-							}
-
-							$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_general;
+								// Get the system settings for general placement of clinical resource item text elements
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+		
+								$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_general;
 
 						}
 
