@@ -71,7 +71,7 @@
 include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/expertise.php' );
 
 // Get system settings for area of expertise profile image elements
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/expertise.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/specific-placement/expertise.php' );
 
 // Get the ontology subsection values
 include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
