@@ -7952,197 +7952,302 @@ function uamswp_fad_fpage_text_replace(
 // Get the Find-a-Doc Settings values for general patient appointment information
 function uamswp_fad_appointment_patients() {
 
-	// Phone Number Information
+	// Retrieve the value of the transient
+	uamswp_fad_get_transient( 'vars', $appointment_patients_vars, __FUNCTION__ );
 
-		// New Patients Only
-		$appointment_patients_phone_number_new = get_field('appointment_patients_phone_number_new', 'option') ?: '';
-		$appointment_patients_phone_label_new = get_field('appointment_patients_phone_label_new', 'option') ?: '';
-		$appointment_patients_phone_label_new_attr = uamswp_attr_conversion($appointment_patients_phone_label_new);
-		$appointment_patients_phone_info_new = get_field('appointment_patients_phone_info_new', 'option') ?: '';
+	if ( !empty( $appointment_patients_vars ) ) {
 
-		// Existing Patients Only
-		$appointment_patients_phone_number_existing = get_field('appointment_patients_phone_number_existing', 'option') ?: '';
-		$appointment_patients_phone_label_existing = get_field('appointment_patients_phone_label_existing', 'option') ?: '';
-		$appointment_patients_phone_label_existing_attr = uamswp_attr_conversion($appointment_patients_phone_label_existing);
-		$appointment_patients_phone_info_existing = get_field('appointment_patients_phone_info_existing', 'option') ?: '';
+		/* 
+		 * The transient exists.
+		 * Return the variable.
+		 */
 
-		// Both New and Existing Patients
-		$appointment_patients_phone_number_both = get_field('appointment_patients_phone_number_both', 'option') ?: '';
-		$appointment_patients_phone_label_both = get_field('appointment_patients_phone_label_both', 'option') ?: '';
-		$appointment_patients_phone_label_both_attr = uamswp_attr_conversion($appointment_patients_phone_label_both);
-		$appointment_patients_phone_info_both = get_field('appointment_patients_phone_info_both', 'option') ?: '';
-
-	// Webpage Information
-
-		// New Patients Only
-		$appointment_patients_web_url_new = get_field('appointment_patients_web_url_new', 'option') ?: '';
-		$appointment_patients_web_label_new = get_field('appointment_patients_web_label_new', 'option') ?: '';
-		$appointment_patients_web_label_new_attr = uamswp_attr_conversion($appointment_patients_web_label_new);
-		$appointment_patients_web_info_new = get_field('appointment_patients_web_info_new', 'option') ?: '';
-
-		// Existing Patients Only
-		$appointment_patients_web_url_existing = get_field('appointment_patients_web_url_existing', 'option') ?: '';
-		$appointment_patients_web_label_existing = get_field('appointment_patients_web_label_existing', 'option') ?: '';
-		$appointment_patients_web_label_existing_attr = uamswp_attr_conversion($appointment_patients_web_label_existing);
-		$appointment_patients_web_info_existing = get_field('appointment_patients_web_info_existing', 'option') ?: '';
-
-		// Both New and Existing Patients
-		$appointment_patients_web_url_both = get_field('appointment_patients_web_url_both', 'option') ?: '';
-		$appointment_patients_web_label_both = get_field('appointment_patients_web_label_both', 'option') ?: '';
-		$appointment_patients_web_label_both_attr = uamswp_attr_conversion($appointment_patients_web_label_both);
-		$appointment_patients_web_info_both = get_field('appointment_patients_web_info_both', 'option') ?: '';
-
-	// Create an array to be used on the templates and template parts
-
-		$appointment_patients_vars = array(
-			'appointment_patients_phone_number_new'				=> $appointment_patients_phone_number_new, // string
-			'appointment_patients_phone_label_new'				=> $appointment_patients_phone_label_new, // string
-			'appointment_patients_phone_label_new_attr'			=> $appointment_patients_phone_label_new_attr, // string
-			'appointment_patients_phone_info_new'				=> $appointment_patients_phone_info_new, // string
-			'appointment_patients_phone_number_existing'		=> $appointment_patients_phone_number_existing, // string
-			'appointment_patients_phone_label_existing'			=> $appointment_patients_phone_label_existing, // string
-			'appointment_patients_phone_label_existing_attr'	=> $appointment_patients_phone_label_existing_attr, // string
-			'appointment_patients_phone_info_existing'			=> $appointment_patients_phone_info_existing, // string
-			'appointment_patients_phone_number_both'			=> $appointment_patients_phone_number_both, // string
-			'appointment_patients_phone_label_both'				=> $appointment_patients_phone_label_both, // string
-			'appointment_patients_phone_label_both_attr'		=> $appointment_patients_phone_label_both_attr, // string
-			'appointment_patients_phone_info_both'				=> $appointment_patients_phone_info_both, // string
-			'appointment_patients_web_url_new'					=> $appointment_patients_web_url_new, // string
-			'appointment_patients_web_label_new'				=> $appointment_patients_web_label_new, // string
-			'appointment_patients_web_label_new_attr'			=> $appointment_patients_web_label_new_attr, // string
-			'appointment_patients_web_info_new'					=> $appointment_patients_web_info_new, // string
-			'appointment_patients_web_url_existing'				=> $appointment_patients_web_url_existing, // string
-			'appointment_patients_web_label_existing'			=> $appointment_patients_web_label_existing, // string
-			'appointment_patients_web_label_existing_attr'		=> $appointment_patients_web_label_existing_attr, // string
-			'appointment_patients_web_info_existing'			=> $appointment_patients_web_info_existing, // string
-			'appointment_patients_web_url_both'					=> $appointment_patients_web_url_both, // string
-			'appointment_patients_web_label_both'				=> $appointment_patients_web_label_both, // string
-			'appointment_patients_web_label_both_attr'			=> $appointment_patients_web_label_both_attr, // string
-			'appointment_patients_web_info_both'				=> $appointment_patients_web_info_both // string
-		);
 		return $appointment_patients_vars;
+
+	} else {
+
+		/* 
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
+
+		// Phone Number Information
+
+			// New Patients Only
+			$appointment_patients_phone_number_new = get_field('appointment_patients_phone_number_new', 'option') ?: '';
+			$appointment_patients_phone_label_new = get_field('appointment_patients_phone_label_new', 'option') ?: '';
+			$appointment_patients_phone_label_new_attr = uamswp_attr_conversion($appointment_patients_phone_label_new);
+			$appointment_patients_phone_info_new = get_field('appointment_patients_phone_info_new', 'option') ?: '';
+
+			// Existing Patients Only
+			$appointment_patients_phone_number_existing = get_field('appointment_patients_phone_number_existing', 'option') ?: '';
+			$appointment_patients_phone_label_existing = get_field('appointment_patients_phone_label_existing', 'option') ?: '';
+			$appointment_patients_phone_label_existing_attr = uamswp_attr_conversion($appointment_patients_phone_label_existing);
+			$appointment_patients_phone_info_existing = get_field('appointment_patients_phone_info_existing', 'option') ?: '';
+
+			// Both New and Existing Patients
+			$appointment_patients_phone_number_both = get_field('appointment_patients_phone_number_both', 'option') ?: '';
+			$appointment_patients_phone_label_both = get_field('appointment_patients_phone_label_both', 'option') ?: '';
+			$appointment_patients_phone_label_both_attr = uamswp_attr_conversion($appointment_patients_phone_label_both);
+			$appointment_patients_phone_info_both = get_field('appointment_patients_phone_info_both', 'option') ?: '';
+
+		// Webpage Information
+
+			// New Patients Only
+			$appointment_patients_web_url_new = get_field('appointment_patients_web_url_new', 'option') ?: '';
+			$appointment_patients_web_label_new = get_field('appointment_patients_web_label_new', 'option') ?: '';
+			$appointment_patients_web_label_new_attr = uamswp_attr_conversion($appointment_patients_web_label_new);
+			$appointment_patients_web_info_new = get_field('appointment_patients_web_info_new', 'option') ?: '';
+
+			// Existing Patients Only
+			$appointment_patients_web_url_existing = get_field('appointment_patients_web_url_existing', 'option') ?: '';
+			$appointment_patients_web_label_existing = get_field('appointment_patients_web_label_existing', 'option') ?: '';
+			$appointment_patients_web_label_existing_attr = uamswp_attr_conversion($appointment_patients_web_label_existing);
+			$appointment_patients_web_info_existing = get_field('appointment_patients_web_info_existing', 'option') ?: '';
+
+			// Both New and Existing Patients
+			$appointment_patients_web_url_both = get_field('appointment_patients_web_url_both', 'option') ?: '';
+			$appointment_patients_web_label_both = get_field('appointment_patients_web_label_both', 'option') ?: '';
+			$appointment_patients_web_label_both_attr = uamswp_attr_conversion($appointment_patients_web_label_both);
+			$appointment_patients_web_info_both = get_field('appointment_patients_web_info_both', 'option') ?: '';
+
+		// Create an array to be used on the templates and template parts
+
+			$appointment_patients_vars = array(
+				'appointment_patients_phone_number_new'				=> $appointment_patients_phone_number_new, // string
+				'appointment_patients_phone_label_new'				=> $appointment_patients_phone_label_new, // string
+				'appointment_patients_phone_label_new_attr'			=> $appointment_patients_phone_label_new_attr, // string
+				'appointment_patients_phone_info_new'				=> $appointment_patients_phone_info_new, // string
+				'appointment_patients_phone_number_existing'		=> $appointment_patients_phone_number_existing, // string
+				'appointment_patients_phone_label_existing'			=> $appointment_patients_phone_label_existing, // string
+				'appointment_patients_phone_label_existing_attr'	=> $appointment_patients_phone_label_existing_attr, // string
+				'appointment_patients_phone_info_existing'			=> $appointment_patients_phone_info_existing, // string
+				'appointment_patients_phone_number_both'			=> $appointment_patients_phone_number_both, // string
+				'appointment_patients_phone_label_both'				=> $appointment_patients_phone_label_both, // string
+				'appointment_patients_phone_label_both_attr'		=> $appointment_patients_phone_label_both_attr, // string
+				'appointment_patients_phone_info_both'				=> $appointment_patients_phone_info_both, // string
+				'appointment_patients_web_url_new'					=> $appointment_patients_web_url_new, // string
+				'appointment_patients_web_label_new'				=> $appointment_patients_web_label_new, // string
+				'appointment_patients_web_label_new_attr'			=> $appointment_patients_web_label_new_attr, // string
+				'appointment_patients_web_info_new'					=> $appointment_patients_web_info_new, // string
+				'appointment_patients_web_url_existing'				=> $appointment_patients_web_url_existing, // string
+				'appointment_patients_web_label_existing'			=> $appointment_patients_web_label_existing, // string
+				'appointment_patients_web_label_existing_attr'		=> $appointment_patients_web_label_existing_attr, // string
+				'appointment_patients_web_info_existing'			=> $appointment_patients_web_info_existing, // string
+				'appointment_patients_web_url_both'					=> $appointment_patients_web_url_both, // string
+				'appointment_patients_web_label_both'				=> $appointment_patients_web_label_both, // string
+				'appointment_patients_web_label_both_attr'			=> $appointment_patients_web_label_both_attr, // string
+				'appointment_patients_web_info_both'				=> $appointment_patients_web_info_both // string
+			);
+
+		// Set/update the value of the transient
+		uamswp_fad_set_transient( 'vars', $appointment_patients_vars, __FUNCTION__ );
+
+		// Return the variable
+		return $appointment_patients_vars;
+
+	}
 
 }
 
 // Get the Find-a-Doc Settings values for general patient referral information
 function uamswp_fad_appointment_refer() {
 
-	// Phone Number Information
+	// Retrieve the value of the transient
+	uamswp_fad_get_transient( 'vars', $appointment_refer_vars, __FUNCTION__ );
 
-		$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
-		$appointment_refer_phone_label = get_field('appointment_refer_phone_label', 'option') ?: '';
-		$appointment_refer_phone_label_attr = uamswp_attr_conversion($appointment_refer_phone_label);
-		$appointment_refer_phone_info = get_field('appointment_refer_phone_info', 'option') ?: '';
+	if ( !empty( $appointment_refer_vars ) ) {
 
-	// Fax Information
+		/* 
+		 * The transient exists.
+		 * Return the variable.
+		 */
 
-		$appointment_refer_fax_number = get_field('appointment_refer_fax_number', 'option') ?: '';
-		$appointment_refer_fax_label = get_field('appointment_refer_fax_label', 'option') ?: '';
-		$appointment_refer_fax_label_attr = uamswp_attr_conversion($appointment_refer_fax_label);
-		$appointment_refer_fax_info = get_field('appointment_refer_fax_info', 'option') ?: '';
-
-	// Webpage Information
-
-		$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option');
-		$appointment_refer_web_url = $appointment_refer_web_url ? user_trailingslashit($appointment_refer_web_url): '';
-		$appointment_refer_web_label = get_field('appointment_refer_web_label', 'option') ?: '';
-		$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
-		$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
-
-	// Create an array to be used on the templates and template parts
-
-		$appointment_refer_vars = array(
-			'appointment_refer_phone_number'		=> $appointment_refer_phone_number, // string
-			'appointment_refer_phone_label'			=> $appointment_refer_phone_label, // string
-			'appointment_refer_phone_label_attr'	=> $appointment_refer_phone_label_attr, // string
-			'appointment_refer_phone_info'			=> $appointment_refer_phone_info, // string
-			'appointment_refer_fax_number'			=> $appointment_refer_fax_number, // string
-			'appointment_refer_fax_label'			=> $appointment_refer_fax_label, // string
-			'appointment_refer_fax_label_attr'		=> $appointment_refer_fax_label_attr, // string
-			'appointment_refer_fax_info'			=> $appointment_refer_fax_info, // string
-			'appointment_refer_web_url'				=> $appointment_refer_web_url, // string
-			'appointment_refer_web_label'			=> $appointment_refer_web_label, // string
-			'appointment_refer_web_label_attr'		=> $appointment_refer_web_label_attr, // string
-			'appointment_refer_web_info'			=> $appointment_refer_web_info, // string
-		);
 		return $appointment_refer_vars;
+
+	} else {
+
+		/* 
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
+
+		// Phone Number Information
+
+			$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
+			$appointment_refer_phone_label = get_field('appointment_refer_phone_label', 'option') ?: '';
+			$appointment_refer_phone_label_attr = uamswp_attr_conversion($appointment_refer_phone_label);
+			$appointment_refer_phone_info = get_field('appointment_refer_phone_info', 'option') ?: '';
+
+		// Fax Information
+
+			$appointment_refer_fax_number = get_field('appointment_refer_fax_number', 'option') ?: '';
+			$appointment_refer_fax_label = get_field('appointment_refer_fax_label', 'option') ?: '';
+			$appointment_refer_fax_label_attr = uamswp_attr_conversion($appointment_refer_fax_label);
+			$appointment_refer_fax_info = get_field('appointment_refer_fax_info', 'option') ?: '';
+
+		// Webpage Information
+
+			$appointment_refer_web_url = get_field('appointment_refer_web_url', 'option');
+			$appointment_refer_web_url = $appointment_refer_web_url ? user_trailingslashit($appointment_refer_web_url): '';
+			$appointment_refer_web_label = get_field('appointment_refer_web_label', 'option') ?: '';
+			$appointment_refer_web_label_attr = uamswp_attr_conversion($appointment_refer_web_label);
+			$appointment_refer_web_info = get_field('appointment_refer_web_info', 'option') ?: '';
+
+		// Create an array to be used on the templates and template parts
+
+			$appointment_refer_vars = array(
+				'appointment_refer_phone_number'		=> $appointment_refer_phone_number, // string
+				'appointment_refer_phone_label'			=> $appointment_refer_phone_label, // string
+				'appointment_refer_phone_label_attr'	=> $appointment_refer_phone_label_attr, // string
+				'appointment_refer_phone_info'			=> $appointment_refer_phone_info, // string
+				'appointment_refer_fax_number'			=> $appointment_refer_fax_number, // string
+				'appointment_refer_fax_label'			=> $appointment_refer_fax_label, // string
+				'appointment_refer_fax_label_attr'		=> $appointment_refer_fax_label_attr, // string
+				'appointment_refer_fax_info'			=> $appointment_refer_fax_info, // string
+				'appointment_refer_web_url'				=> $appointment_refer_web_url, // string
+				'appointment_refer_web_label'			=> $appointment_refer_web_label, // string
+				'appointment_refer_web_label_attr'		=> $appointment_refer_web_label_attr, // string
+				'appointment_refer_web_info'			=> $appointment_refer_web_info, // string
+			);
+
+		// Set/update the value of the transient
+		uamswp_fad_set_transient( 'vars', $appointment_refer_vars, __FUNCTION__ );
+
+		// Return the variable
+		return $appointment_refer_vars;
+
+	}
 
 }
 
 // Get the Find-a-Doc Settings value for jump links (a.k.a. anchor links)
 function uamswp_fad_labels_jump_links() {
 
-	// Jump Links Section Title
-	$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
+	// Retrieve the value of the transient
+	uamswp_fad_get_transient( 'vars', $labels_jump_links_vars, __FUNCTION__ );
 
-	// Create an array to be used on the templates and template parts
+	if ( !empty( $labels_jump_links_vars ) ) {
 
-		$labels_jump_links_vars = array(
-			'fad_jump_links_title'	=> $fad_jump_links_title // string
-		);
+		/* 
+		 * The transient exists.
+		 * Return the variable.
+		 */
+
 		return $labels_jump_links_vars;
+
+	} else {
+
+		/* 
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
+
+		// Jump Links Section Title
+		$fad_jump_links_title = get_field('fad_jump_links_title', 'option') ?: 'Content';
+
+		// Create an array to be used on the templates and template parts
+
+			$labels_jump_links_vars = array(
+				'fad_jump_links_title'	=> $fad_jump_links_title // string
+			);
+			return $labels_jump_links_vars;
+			
+		// Set/update the value of the transient
+		uamswp_fad_set_transient( 'vars', $labels_jump_links_vars, __FUNCTION__ );
+
+		// Return the variable
+		return $labels_jump_links_vars;
+
+	}
 
 }
 
 // Crop and resize images for Open Graph and Twitter
 function uamswp_meta_image_resize( $featured_image ) {
 
-	// Create multidimensional associative array for defining width and height for each social meta image
-	$image_size = array();
+	// Retrieve the value of the transient
+	uamswp_fad_get_transient( 'vars_' . $featured_image, $meta_image_resize_vars, __FUNCTION__ );
 
-	// Open Graph / Facebook
-	// Timeline photo and post
-	// Aspect ratio: 1.91:1
-	// Minimum dimensions: 600 x 315 pixels
-	// Recommended minimum dimensions: 1200 x 630 pixels
-	// Maximum file size: 8 MB
-	// https://developers.facebook.com/docs/sharing/webmasters/images/
-	$image_size['opengraph'] = array( 'width' => 1600, 'height' => 838 );
+	if ( !empty( $meta_image_resize_vars ) ) {
 
-	// Twitter
-	// Summary Card with Large Image
-	// Aspect ratio: Supports 2:1 (most articles reference 1.91:1)
-	// Minimum dimensions: 300 x 157 pixels
-	// Maximum dimensions: 4096 x 4096 pixels
-	// Maximum file size: 5 MB
-	// https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
-	$image_size['twitter'] = array( 'width' => 1600, 'height' => 838 );
+		/* 
+		 * The transient exists.
+		 * Return the variable.
+		 */
 
-	if ( $featured_image && function_exists( 'fly_add_image_size' ) ) {
-		$meta_og_image = image_sizer($featured_image, $image_size['opengraph']['width'], $image_size['opengraph']['height'], 'center', 'center');
-		$meta_og_image_width = $image_size['opengraph']['width'];
-		$meta_og_image_height = $image_size['opengraph']['height'];
-		$meta_twitter_image = image_sizer($featured_image, $image_size['twitter']['width'], $image_size['twitter']['height'], 'center', 'center');
-		$meta_twitter_image_width = $image_size['twitter']['width'];
-		$meta_twitter_image_height = $image_size['twitter']['height'];
-	} elseif ( $featured_image ) {
-		$meta_og_image = wp_get_attachment_url( $featured_image, 'aspect-16-9' );
-		$meta_og_image_width = image_get_intermediate_size( $featured_image, 'aspect-16-9' )['width'];
-		$meta_og_image_height = image_get_intermediate_size( $featured_image, 'aspect-16-9' )['height'];
-		$meta_twitter_image = $meta_og_image;
-		$meta_twitter_image_width = $meta_og_image_width;
-		$meta_twitter_image_height = $meta_og_image_height;
-	} else {
-		$meta_og_image = '';
-		$meta_og_image_width = '';
-		$meta_og_image_height = '';
-		$meta_twitter_image = '';
-		$meta_twitter_image_width = '';
-		$meta_twitter_image_height = '';
-	}
-
-
-	// Create an array to be used on the templates and template parts
-
-		$meta_image_resize_vars = array(
-			'meta_og_image'				=> $meta_og_image, // string
-			'meta_og_image_width'		=> $meta_og_image_width, // int
-			'meta_og_image_height'		=> $meta_og_image_height, // int
-			'meta_twitter_image'		=> $meta_twitter_image, // string
-			'meta_twitter_image_width'	=> $meta_twitter_image_width, // int
-			'meta_twitter_image_height'	=> $meta_twitter_image_height // int
-		);
 		return $meta_image_resize_vars;
+
+	} else {
+
+		/* 
+		 * The transient does not exist.
+		 * Define the variable again.
+		 */
+
+		// Create multidimensional associative array for defining width and height for each social meta image
+		$image_size = array();
+
+		// Open Graph / Facebook
+		// Timeline photo and post
+		// Aspect ratio: 1.91:1
+		// Minimum dimensions: 600 x 315 pixels
+		// Recommended minimum dimensions: 1200 x 630 pixels
+		// Maximum file size: 8 MB
+		// https://developers.facebook.com/docs/sharing/webmasters/images/
+		$image_size['opengraph'] = array( 'width' => 1600, 'height' => 838 );
+
+		// Twitter
+		// Summary Card with Large Image
+		// Aspect ratio: Supports 2:1 (most articles reference 1.91:1)
+		// Minimum dimensions: 300 x 157 pixels
+		// Maximum dimensions: 4096 x 4096 pixels
+		// Maximum file size: 5 MB
+		// https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
+		$image_size['twitter'] = array( 'width' => 1600, 'height' => 838 );
+
+		if ( $featured_image && function_exists( 'fly_add_image_size' ) ) {
+			$meta_og_image = image_sizer($featured_image, $image_size['opengraph']['width'], $image_size['opengraph']['height'], 'center', 'center');
+			$meta_og_image_width = $image_size['opengraph']['width'];
+			$meta_og_image_height = $image_size['opengraph']['height'];
+			$meta_twitter_image = image_sizer($featured_image, $image_size['twitter']['width'], $image_size['twitter']['height'], 'center', 'center');
+			$meta_twitter_image_width = $image_size['twitter']['width'];
+			$meta_twitter_image_height = $image_size['twitter']['height'];
+		} elseif ( $featured_image ) {
+			$meta_og_image = wp_get_attachment_url( $featured_image, 'aspect-16-9' );
+			$meta_og_image_width = image_get_intermediate_size( $featured_image, 'aspect-16-9' )['width'];
+			$meta_og_image_height = image_get_intermediate_size( $featured_image, 'aspect-16-9' )['height'];
+			$meta_twitter_image = $meta_og_image;
+			$meta_twitter_image_width = $meta_og_image_width;
+			$meta_twitter_image_height = $meta_og_image_height;
+		} else {
+			$meta_og_image = '';
+			$meta_og_image_width = '';
+			$meta_og_image_height = '';
+			$meta_twitter_image = '';
+			$meta_twitter_image_width = '';
+			$meta_twitter_image_height = '';
+		}
+
+
+		// Create an array to be used on the templates and template parts
+
+			$meta_image_resize_vars = array(
+				'meta_og_image'				=> $meta_og_image, // string
+				'meta_og_image_width'		=> $meta_og_image_width, // int
+				'meta_og_image_height'		=> $meta_og_image_height, // int
+				'meta_twitter_image'		=> $meta_twitter_image, // string
+				'meta_twitter_image_width'	=> $meta_twitter_image_width, // int
+				'meta_twitter_image_height'	=> $meta_twitter_image_height // int
+			);
+			
+		// Set/update the value of the transient
+		uamswp_fad_set_transient( 'vars_' . $featured_image, $meta_image_resize_vars, __FUNCTION__ );
+
+		// Return the variable
+		return $meta_image_resize_vars;
+
+	}
 
 }
 
