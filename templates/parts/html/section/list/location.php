@@ -59,12 +59,8 @@ if ( $location_section_show ) {
 
 			// Set the section title using the system settings for the section title in a general placement
 
-				if ( !isset($location_fpage_title_general) ) {
-					$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
-				}
+				// Get the system settings for general placement of location item text elements
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
 
 				$location_section_title = $location_fpage_title_general;
 		}
@@ -74,14 +70,8 @@ if ( $location_section_show ) {
 
 			// Set the section title using the system settings for the section title in a general placement
 
-				if ( !isset($location_fpage_intro_general) ) {
-
-					$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
-
-				}
+				// Get the system settings for general placement of location item text elements
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
 
 				$location_section_intro = $location_fpage_intro_general;
 		}
@@ -111,17 +101,8 @@ if ( $location_section_show ) {
 			// Get system settings for location labels
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
-			if (
-				!isset($location_fpage_title_general) || empty($location_fpage_title_general)
-				||
-				!isset($location_fpage_intro_general) || empty($location_fpage_intro_general)
-			) {
-				$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
-					$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
-			}
+			// Get the system settings for general placement of location item text elements
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
 
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );

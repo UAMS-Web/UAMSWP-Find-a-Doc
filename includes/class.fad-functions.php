@@ -3839,104 +3839,129 @@ function uamswp_fad_fpage_text_replace(
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Locations
 		function uamswp_fad_fpage_text_location_general(
+			$page_id, // int
 			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 		) {
 
-			// Locations
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_location_general_vars, __FUNCTION__ );
 
-				// Get the Find-a-Doc Settings values for the text elements in general placements
+			if ( !empty( $fpage_text_location_general_vars ) ) {
 
-					$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Fake subpage (or section), title
-					$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-					$location_fpage_ref_main_title_general = get_field('location_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
-					$location_fpage_ref_main_intro_general = get_field('location_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
-					$location_fpage_ref_main_link_general = get_field('location_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
-					$location_fpage_ref_top_title_general = get_field('location_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-					$location_fpage_ref_top_intro_general = get_field('location_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-					$location_fpage_ref_top_link_general = get_field('location_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
-				// If the variable is not set or is empty...
-				// Set a hardcoded fallback value
+				return $fpage_text_location_general_vars;
 
-					$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
-					$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
-					$location_fpage_ref_main_title_general = ( isset($location_fpage_ref_main_title_general) && !empty($location_fpage_ref_main_title_general) ) ? $location_fpage_ref_main_title_general : 'Full List of [Locations]'; // Reference to the main location archive, title
-					$location_fpage_ref_main_intro_general = ( isset($location_fpage_ref_main_intro_general) && !empty($location_fpage_ref_main_intro_general) ) ? $location_fpage_ref_main_intro_general : 'Discover our extensive network of [locations], offering exceptional care across specialties within UAMS Health. Explore our diverse [locations] and find the one closest to you.'; // Reference to the main location archive, body text
-					$location_fpage_ref_main_link_general = ( isset($location_fpage_ref_main_link_general) && !empty($location_fpage_ref_main_link_general) ) ? $location_fpage_ref_main_link_general : 'View All [Locations]'; // Reference to the main location archive, link text
-					$location_fpage_ref_top_title_general = ( isset($location_fpage_ref_top_title_general) && !empty($location_fpage_ref_top_title_general) ) ? $location_fpage_ref_top_title_general : $location_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-					$location_fpage_ref_top_intro_general = ( isset($location_fpage_ref_top_intro_general) && !empty($location_fpage_ref_top_intro_general) ) ? $location_fpage_ref_top_intro_general : $location_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-					$location_fpage_ref_top_link_general = ( isset($location_fpage_ref_top_link_general) && !empty($location_fpage_ref_top_link_general) ) ? $location_fpage_ref_top_link_general : $location_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+			} else {
 
-				// Substitute placeholder text for relevant Find-a-Doc Settings value
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
-					$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-					$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-					$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
-					$location_fpage_ref_main_intro_general = $location_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
-					$location_fpage_ref_main_link_general = $location_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
-					$location_fpage_ref_top_title_general = $location_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
-					$location_fpage_ref_top_intro_general = $location_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
-					$location_fpage_ref_top_link_general = $location_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
+				// Locations
 
-			// Descendant Locations
+					// Get the Find-a-Doc Settings values for the text elements in general placements
 
-				// Get the Find-a-Doc Settings values for the text elements in general placements
+						$location_fpage_title_general = get_field('location_fpage_title_general', 'option'); // Fake subpage (or section), title
+						$location_fpage_intro_general = get_field('location_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+						$location_fpage_ref_main_title_general = get_field('location_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
+						$location_fpage_ref_main_intro_general = get_field('location_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
+						$location_fpage_ref_main_link_general = get_field('location_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
+						$location_fpage_ref_top_title_general = get_field('location_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+						$location_fpage_ref_top_intro_general = get_field('location_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+						$location_fpage_ref_top_link_general = get_field('location_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
-					$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
-					$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
-					$location_descendant_fpage_ref_main_title_general = get_field('location_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
-					$location_descendant_fpage_ref_main_intro_general = get_field('location_descendant_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
-					$location_descendant_fpage_ref_main_link_general = get_field('location_descendant_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
-					$location_descendant_fpage_ref_top_title_general = get_field('location_descendant_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-					$location_descendant_fpage_ref_top_intro_general = get_field('location_descendant_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-					$location_descendant_fpage_ref_top_link_general = get_field('location_descendant_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+					// If the variable is not set or is empty...
+					// Set a hardcoded fallback value
 
-				// If the variable is not set or is empty...
-				// Set a hardcoded fallback value
+						$location_fpage_title_general = ( isset($location_fpage_title_general) && !empty($location_fpage_title_general) ) ? $location_fpage_title_general : 'Related [Locations]'; // Fake subpage (or section), title
+						$location_fpage_intro_general = ( isset($location_fpage_intro_general) && !empty($location_fpage_intro_general) ) ? $location_fpage_intro_general : ''; // Fake subpage (or section), intro text
+						$location_fpage_ref_main_title_general = ( isset($location_fpage_ref_main_title_general) && !empty($location_fpage_ref_main_title_general) ) ? $location_fpage_ref_main_title_general : 'Full List of [Locations]'; // Reference to the main location archive, title
+						$location_fpage_ref_main_intro_general = ( isset($location_fpage_ref_main_intro_general) && !empty($location_fpage_ref_main_intro_general) ) ? $location_fpage_ref_main_intro_general : 'Discover our extensive network of [locations], offering exceptional care across specialties within UAMS Health. Explore our diverse [locations] and find the one closest to you.'; // Reference to the main location archive, body text
+						$location_fpage_ref_main_link_general = ( isset($location_fpage_ref_main_link_general) && !empty($location_fpage_ref_main_link_general) ) ? $location_fpage_ref_main_link_general : 'View All [Locations]'; // Reference to the main location archive, link text
+						$location_fpage_ref_top_title_general = ( isset($location_fpage_ref_top_title_general) && !empty($location_fpage_ref_top_title_general) ) ? $location_fpage_ref_top_title_general : $location_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+						$location_fpage_ref_top_intro_general = ( isset($location_fpage_ref_top_intro_general) && !empty($location_fpage_ref_top_intro_general) ) ? $location_fpage_ref_top_intro_general : $location_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+						$location_fpage_ref_top_link_general = ( isset($location_fpage_ref_top_link_general) && !empty($location_fpage_ref_top_link_general) ) ? $location_fpage_ref_top_link_general : $location_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
-					$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
-					$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
-					$location_descendant_fpage_ref_main_title_general = ( isset($location_descendant_fpage_ref_main_title_general) && !empty($location_descendant_fpage_ref_main_title_general) ) ? $location_descendant_fpage_ref_main_title_general : $location_fpage_ref_main_title_general; // Reference to the main location archive, title
-					$location_descendant_fpage_ref_main_intro_general = ( isset($location_descendant_fpage_ref_main_intro_general) && !empty($location_descendant_fpage_ref_main_intro_general) ) ? $location_descendant_fpage_ref_main_intro_general : $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
-					$location_descendant_fpage_ref_main_link_general = ( isset($location_descendant_fpage_ref_main_link_general) && !empty($location_descendant_fpage_ref_main_link_general) ) ? $location_descendant_fpage_ref_main_link_general : $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
-					$location_descendant_fpage_ref_top_title_general = ( isset($location_descendant_fpage_ref_top_title_general) && !empty($location_descendant_fpage_ref_top_title_general) ) ? $location_descendant_fpage_ref_top_title_general : $location_descendant_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-					$location_descendant_fpage_ref_top_intro_general = ( isset($location_descendant_fpage_ref_top_intro_general) && !empty($location_descendant_fpage_ref_top_intro_general) ) ? $location_descendant_fpage_ref_top_intro_general : $location_descendant_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-					$location_descendant_fpage_ref_top_link_general = ( isset($location_descendant_fpage_ref_top_link_general) && !empty($location_descendant_fpage_ref_top_link_general) ) ? $location_descendant_fpage_ref_top_link_general : $location_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+					// Substitute placeholder text for relevant Find-a-Doc Settings value
 
-				// Substitute placeholder text for relevant Find-a-Doc Settings value
+						$location_fpage_title_general = $location_fpage_title_general ? uamswp_fad_fpage_text_replace($location_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+						$location_fpage_intro_general = $location_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+						$location_fpage_ref_main_title_general = $location_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
+						$location_fpage_ref_main_intro_general = $location_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
+						$location_fpage_ref_main_link_general = $location_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
+						$location_fpage_ref_top_title_general = $location_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, title
+						$location_fpage_ref_top_intro_general = $location_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, body text
+						$location_fpage_ref_top_link_general = $location_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Locations, link text
 
-					$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
-					$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
-					$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
-					$location_descendant_fpage_ref_main_intro_general = $location_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
-					$location_descendant_fpage_ref_main_link_general = $location_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
-					$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
-					$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
-					$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+				// Descendant Locations
 
-			// Create an array to be used on the templates and template parts
+					// Get the Find-a-Doc Settings values for the text elements in general placements
 
-				$fpage_text_location_general_vars = array(
-					'location_fpage_title_general'						=> $location_fpage_title_general, // string
-					'location_fpage_intro_general'						=> $location_fpage_intro_general, // string
-					'location_fpage_ref_main_title_general'				=> $location_fpage_ref_main_title_general, // string
-					'location_fpage_ref_main_intro_general'				=> $location_fpage_ref_main_intro_general, // string
-					'location_fpage_ref_main_link_general'				=> $location_fpage_ref_main_link_general, // string
-					'location_fpage_ref_top_title_general'				=> $location_fpage_ref_top_title_general, // string
-					'location_fpage_ref_top_intro_general'				=> $location_fpage_ref_top_intro_general, // string
-					'location_fpage_ref_top_link_general'				=> $location_fpage_ref_top_link_general, // string
-					'location_descendant_fpage_title_general'			=> $location_descendant_fpage_title_general, // string
-					'location_descendant_fpage_intro_general'			=> $location_descendant_fpage_intro_general, // string
-					'location_descendant_fpage_ref_main_title_general'	=> $location_descendant_fpage_ref_main_title_general, // string
-					'location_descendant_fpage_ref_main_intro_general'	=> $location_descendant_fpage_ref_main_intro_general, // string
-					'location_descendant_fpage_ref_main_link_general'	=> $location_descendant_fpage_ref_main_link_general, // string
-					'location_descendant_fpage_ref_top_title_general'	=> $location_descendant_fpage_ref_top_title_general, // string
-					'location_descendant_fpage_ref_top_intro_general'	=> $location_descendant_fpage_ref_top_intro_general, // string
-					'location_descendant_fpage_ref_top_link_general'	=> $location_descendant_fpage_ref_top_link_general // string
-				);
+						$location_descendant_fpage_title_general = get_field('location_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
+						$location_descendant_fpage_intro_general = get_field('location_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+						$location_descendant_fpage_ref_main_title_general = get_field('location_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main location archive, title
+						$location_descendant_fpage_ref_main_intro_general = get_field('location_descendant_fpage_ref_main_intro_general', 'option'); // Reference to the main location archive, body text
+						$location_descendant_fpage_ref_main_link_general = get_field('location_descendant_fpage_ref_main_link_general', 'option'); // Reference to the main location archive, link text
+						$location_descendant_fpage_ref_top_title_general = get_field('location_descendant_fpage_ref_top_title_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+						$location_descendant_fpage_ref_top_intro_general = get_field('location_descendant_fpage_ref_top_intro_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+						$location_descendant_fpage_ref_top_link_general = get_field('location_descendant_fpage_ref_top_link_general', 'option'); // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
 
-			// Return the variable
-			return $fpage_text_location_general_vars;
+					// If the variable is not set or is empty...
+					// Set a hardcoded fallback value
+
+						$location_descendant_fpage_title_general = ( isset($location_descendant_fpage_title_general) && !empty($location_descendant_fpage_title_general) ) ? $location_descendant_fpage_title_general : 'Related [Descendant Locations]'; // Fake subpage (or section), title
+						$location_descendant_fpage_intro_general = ( isset($location_descendant_fpage_intro_general) && !empty($location_descendant_fpage_intro_general) ) ? $location_descendant_fpage_intro_general : ''; // Fake subpage (or section), intro text
+						$location_descendant_fpage_ref_main_title_general = ( isset($location_descendant_fpage_ref_main_title_general) && !empty($location_descendant_fpage_ref_main_title_general) ) ? $location_descendant_fpage_ref_main_title_general : $location_fpage_ref_main_title_general; // Reference to the main location archive, title
+						$location_descendant_fpage_ref_main_intro_general = ( isset($location_descendant_fpage_ref_main_intro_general) && !empty($location_descendant_fpage_ref_main_intro_general) ) ? $location_descendant_fpage_ref_main_intro_general : $location_fpage_ref_main_intro_general; // Reference to the main location archive, body text
+						$location_descendant_fpage_ref_main_link_general = ( isset($location_descendant_fpage_ref_main_link_general) && !empty($location_descendant_fpage_ref_main_link_general) ) ? $location_descendant_fpage_ref_main_link_general : $location_fpage_ref_main_link_general; // Reference to the main location archive, link text
+						$location_descendant_fpage_ref_top_title_general = ( isset($location_descendant_fpage_ref_top_title_general) && !empty($location_descendant_fpage_ref_top_title_general) ) ? $location_descendant_fpage_ref_top_title_general : $location_descendant_fpage_ref_main_title_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+						$location_descendant_fpage_ref_top_intro_general = ( isset($location_descendant_fpage_ref_top_intro_general) && !empty($location_descendant_fpage_ref_top_intro_general) ) ? $location_descendant_fpage_ref_top_intro_general : $location_descendant_fpage_ref_main_intro_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+						$location_descendant_fpage_ref_top_link_general = ( isset($location_descendant_fpage_ref_top_link_general) && !empty($location_descendant_fpage_ref_top_link_general) ) ? $location_descendant_fpage_ref_top_link_general : $location_descendant_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+
+					// Substitute placeholder text for relevant Find-a-Doc Settings value
+
+						$location_descendant_fpage_title_general = $location_descendant_fpage_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_title_general, $page_titles) : ''; // Fake subpage (or section), title
+						$location_descendant_fpage_intro_general = $location_descendant_fpage_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_intro_general, $page_titles) : ''; // Fake subpage (or section), intro text
+						$location_descendant_fpage_ref_main_title_general = $location_descendant_fpage_ref_main_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_title_general, $page_titles) : ''; // Reference to the main location archive, title
+						$location_descendant_fpage_ref_main_intro_general = $location_descendant_fpage_ref_main_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_intro_general, $page_titles) : ''; // Reference to the main location archive, body text
+						$location_descendant_fpage_ref_main_link_general = $location_descendant_fpage_ref_main_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_main_link_general, $page_titles) : ''; // Reference to the main location archive, link text
+						$location_descendant_fpage_ref_top_title_general = $location_descendant_fpage_ref_top_title_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_title_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, title
+						$location_descendant_fpage_ref_top_intro_general = $location_descendant_fpage_ref_top_intro_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_intro_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, body text
+						$location_descendant_fpage_ref_top_link_general = $location_descendant_fpage_ref_top_link_general ? uamswp_fad_fpage_text_replace($location_descendant_fpage_ref_top_link_general, $page_titles) : ''; // Reference to a Top-Level Ontology Item's Fake Subpage for Descendant Locations, link text
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_text_location_general_vars = array(
+						'location_fpage_title_general'						=> $location_fpage_title_general, // string
+						'location_fpage_intro_general'						=> $location_fpage_intro_general, // string
+						'location_fpage_ref_main_title_general'				=> $location_fpage_ref_main_title_general, // string
+						'location_fpage_ref_main_intro_general'				=> $location_fpage_ref_main_intro_general, // string
+						'location_fpage_ref_main_link_general'				=> $location_fpage_ref_main_link_general, // string
+						'location_fpage_ref_top_title_general'				=> $location_fpage_ref_top_title_general, // string
+						'location_fpage_ref_top_intro_general'				=> $location_fpage_ref_top_intro_general, // string
+						'location_fpage_ref_top_link_general'				=> $location_fpage_ref_top_link_general, // string
+						'location_descendant_fpage_title_general'			=> $location_descendant_fpage_title_general, // string
+						'location_descendant_fpage_intro_general'			=> $location_descendant_fpage_intro_general, // string
+						'location_descendant_fpage_ref_main_title_general'	=> $location_descendant_fpage_ref_main_title_general, // string
+						'location_descendant_fpage_ref_main_intro_general'	=> $location_descendant_fpage_ref_main_intro_general, // string
+						'location_descendant_fpage_ref_main_link_general'	=> $location_descendant_fpage_ref_main_link_general, // string
+						'location_descendant_fpage_ref_top_title_general'	=> $location_descendant_fpage_ref_top_title_general, // string
+						'location_descendant_fpage_ref_top_intro_general'	=> $location_descendant_fpage_ref_top_intro_general, // string
+						'location_descendant_fpage_ref_top_link_general'	=> $location_descendant_fpage_ref_top_link_general // string
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_location_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_text_location_general_vars;
+
+			}
 
 		}
 
@@ -4248,31 +4273,13 @@ function uamswp_fad_fpage_text_replace(
 						!isset($location_fpage_ref_main_intro_provider) || empty($location_fpage_ref_main_intro_provider)
 						||
 						!isset($location_fpage_ref_main_link_provider) || empty($location_fpage_ref_main_link_provider)
-						) {
+					) {
+
 						// If any of the variables are not set or are empty...
 
-						// Check for the general placement variables.
-						// If any aren't set or are empty, call the function and set the global variables.
-						if (
-							!isset($location_fpage_title_general) || empty($location_fpage_title_general)
-							||
-							!isset($location_fpage_intro_general) || empty($location_fpage_intro_general)
-							||
-							!isset($location_fpage_ref_main_title_general) || empty($location_fpage_ref_main_title_general)
-							||
-							!isset($location_fpage_ref_main_intro_general) || empty($location_fpage_ref_main_intro_general)
-							||
-							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
-							) {
-							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
-								$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
-								$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
-								$location_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_fpage_ref_main_intro_general']; // string
-								$location_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_fpage_ref_main_link_general']; // string
-						}
+						// Get the system settings for general placement of location item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+
 					}
 					if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
 						$location_fpage_title_provider = $location_fpage_title_general; // Title
@@ -4783,31 +4790,13 @@ function uamswp_fad_fpage_text_replace(
 						!isset($location_descendant_fpage_ref_main_intro_location) || empty($location_descendant_fpage_ref_main_intro_location)
 						||
 						!isset($location_descendant_fpage_ref_main_link_location) || empty($location_descendant_fpage_ref_main_link_location)
-						) {
+					) {
+
 						// If any of the variables are not set or are empty...
 
-						// Check for the general placement variables.
-						// If any aren't set or are empty, call the function and set the global variables.
-						if (
-							!isset($location_descendant_fpage_title_general) || empty($location_descendant_fpage_title_general)
-							||
-							!isset($location_descendant_fpage_intro_general) || empty($location_descendant_fpage_intro_general)
-							||
-							!isset($location_descendant_fpage_ref_main_title_general) || empty($location_descendant_fpage_ref_main_title_general)
-							||
-							!isset($location_descendant_fpage_ref_main_intro_general) || empty($location_descendant_fpage_ref_main_intro_general)
-							||
-							!isset($location_descendant_fpage_ref_main_link_general) || empty($location_descendant_fpage_ref_main_link_general)
-							) {
-							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$location_descendant_fpage_title_general = $fpage_text_location_general_vars['location_descendant_fpage_title_general']; // string
-								$location_descendant_fpage_intro_general = $fpage_text_location_general_vars['location_descendant_fpage_intro_general']; // string
-								$location_descendant_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_title_general']; // string
-								$location_descendant_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_intro_general']; // string
-								$location_descendant_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_descendant_fpage_ref_main_link_general']; // string
-						}
+						// Get the system settings for general placement of location item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+
 					}
 					if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
 						$location_descendant_fpage_title_location = $location_descendant_fpage_title_general; // Title
@@ -5677,40 +5666,13 @@ function uamswp_fad_fpage_text_replace(
 								!isset($location_fpage_ref_top_intro_expertise) || empty($location_fpage_ref_top_intro_expertise)
 								||
 								!isset($location_fpage_ref_top_link_expertise) || empty($location_fpage_ref_top_link_expertise)
-								) {
+							) {
+
 								// If any of the variables are not set or are empty...
 
-								// Check for the general placement variables.
-								// If any aren't set or are empty, call the function and set the global variables.
-								if (
-									!isset($location_fpage_title_general) || empty($location_fpage_title_general)
-									||
-									!isset($location_fpage_intro_general) || empty($location_fpage_intro_general)
-									||
-									!isset($location_fpage_ref_main_title_general) || empty($location_fpage_ref_main_title_general)
-									||
-									!isset($location_fpage_ref_main_intro_general) || empty($location_fpage_ref_main_intro_general)
-									||
-									!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
-									||
-									!isset($location_fpage_ref_top_title_general) || empty($location_fpage_ref_top_title_general)
-									||
-									!isset($location_fpage_ref_top_intro_general) || empty($location_fpage_ref_top_intro_general)
-									||
-									!isset($location_fpage_ref_top_link_general) || empty($location_fpage_ref_top_link_general)
-									) {
-									$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-										$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-									);
-										$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
-										$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
-										$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
-										$location_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_fpage_ref_main_intro_general']; // string
-										$location_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_fpage_ref_main_link_general']; // string
-										$location_fpage_ref_top_title_general = $fpage_text_location_general_vars['location_fpage_ref_top_title_general']; // string
-										$location_fpage_ref_top_intro_general = $fpage_text_location_general_vars['location_fpage_ref_top_intro_general']; // string
-										$location_fpage_ref_top_link_general = $fpage_text_location_general_vars['location_fpage_ref_top_link_general']; // string
-								}
+								// Get the system settings for general placement of location item text elements
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+
 							}
 							if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
 								$location_fpage_title_expertise = $location_fpage_title_general; // Title
@@ -6540,31 +6502,13 @@ function uamswp_fad_fpage_text_replace(
 						!isset($location_fpage_ref_main_intro_clinical_resource) || empty($location_fpage_ref_main_intro_clinical_resource)
 						||
 						!isset($location_fpage_ref_main_link_clinical_resource) || empty($location_fpage_ref_main_link_clinical_resource)
-						) {
+					) {
+
 						// If any of the variables are not set or are empty...
 
-						// Check for the general placement variables.
-						// If any aren't set or are empty, call the function and set the global variables.
-						if (
-							!isset($location_fpage_title_general) || empty($location_fpage_title_general)
-							||
-							!isset($location_fpage_intro_general) || empty($location_fpage_intro_general)
-							||
-							!isset($location_fpage_ref_main_title_general) || empty($location_fpage_ref_main_title_general)
-							||
-							!isset($location_fpage_ref_main_intro_general) || empty($location_fpage_ref_main_intro_general)
-							||
-							!isset($location_fpage_ref_main_link_general) || empty($location_fpage_ref_main_link_general)
-							) {
-							$fpage_text_location_general_vars = isset($fpage_text_location_general_vars) ? $fpage_text_location_general_vars : uamswp_fad_fpage_text_location_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$location_fpage_title_general = $fpage_text_location_general_vars['location_fpage_title_general']; // string
-								$location_fpage_intro_general = $fpage_text_location_general_vars['location_fpage_intro_general']; // string
-								$location_fpage_ref_main_title_general = $fpage_text_location_general_vars['location_fpage_ref_main_title_general']; // string
-								$location_fpage_ref_main_intro_general = $fpage_text_location_general_vars['location_fpage_ref_main_intro_general']; // string
-								$location_fpage_ref_main_link_general = $fpage_text_location_general_vars['location_fpage_ref_main_link_general']; // string
-						}
+						// Get the system settings for general placement of location item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+
 					}
 					if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
 						$location_fpage_title_clinical_resource = $location_fpage_title_general; // Title
