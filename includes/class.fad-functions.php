@@ -7352,10 +7352,10 @@ function uamswp_fad_fpage_text_replace(
 	// Get Find-a-Doc Settings values and page-level values for the featured images of specific subsections (or profiles)
 
 		// Get field values for the featured image of a fake subpage (or section) in an Provider subsection (or profile)
-		function uamswp_fad_fpage_image_provider() {
+		function uamswp_fad_fpage_image_provider( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_provider_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_provider_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_provider_vars ) ) {
 
@@ -7430,7 +7430,7 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_provider_vars, __FUNCTION__ );
+				uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_provider_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $fpage_image_provider_vars;
@@ -7440,10 +7440,10 @@ function uamswp_fad_fpage_text_replace(
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in an Location subsection (or profile)
-		function uamswp_fad_fpage_image_location() {
+		function uamswp_fad_fpage_image_location( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_location_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_location_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_location_vars ) ) {
 
@@ -7534,7 +7534,7 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_location_vars, __FUNCTION__ );
+				uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_location_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $fpage_image_location_vars;
@@ -7761,10 +7761,10 @@ function uamswp_fad_fpage_text_replace(
 		}
 
 		// Get field values for the featured image of a fake subpage (or section) in a Clinical Resource subsection (or profile)
-		function uamswp_fad_fpage_image_clinical_resource() {
+		function uamswp_fad_fpage_image_clinical_resource( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_clinical_resource_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_clinical_resource_vars, __FUNCTION__ );
 
 			if ( !empty( $fpage_image_clinical_resource_vars ) ) {
 
@@ -7856,7 +7856,7 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_clinical_resource_vars, __FUNCTION__ );
+				uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_clinical_resource_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $fpage_image_clinical_resource_vars;
