@@ -8708,7 +8708,7 @@ function uamswp_fad_fpage_text_image_overlay(
 			}
 
 		// Get system settings for area of expertise profile text elements
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+		include( UAMS_FAD_PATH . '//templates/parts/vars/page/text-elements/single/expertise.php' );
 
 		// Values Specific to the Fake Subpage
 

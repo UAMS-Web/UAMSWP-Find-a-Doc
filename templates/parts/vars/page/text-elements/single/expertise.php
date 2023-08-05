@@ -1,9 +1,9 @@
 <?php
 /*
- * Template Name: System settings for area of expertise profile text elements
+ * Template Name: Page-specific settings for area of expertise profile text elements
  * 
  * Description: A template part that defines a series of variables related to the 
- * system settings for area of expertise profile text elements
+ * page-specific settings for area of expertise profile text elements
  * 
  * Required vars:
  * 	$page_id // int

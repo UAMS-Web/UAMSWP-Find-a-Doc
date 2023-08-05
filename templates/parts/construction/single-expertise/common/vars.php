@@ -68,7 +68,7 @@
 		);
 
 // Get system settings for area of expertise profile text elements
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+include( UAMS_FAD_PATH . '//templates/parts/vars/page/text-elements/single/expertise.php' );
 
 // Get system settings for area of expertise profile image elements
 include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/expertise.php' );
@@ -96,6 +96,7 @@ $template_type = 'default';
 	// Get excerpt
 
 		$excerpt = get_the_excerpt(); // 'expertise_selected_post_excerpt'
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 		$excerpt_user = true;
 
 		if ( empty( $excerpt ) ) {
@@ -103,8 +104,6 @@ $template_type = 'default';
 			$excerpt_user = false;
 
 		}
-
-		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 	// Set schema description
 
