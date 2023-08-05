@@ -7381,11 +7381,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($location_fpage_image_provider) || empty($location_fpage_image_provider) ) {
-						if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-								$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of location fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
+
 						$location_fpage_image_provider = $location_fpage_image_general; // Featured image
+
 					}
 
 				// Areas of Expertise
@@ -7396,11 +7397,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($expertise_fpage_image_provider) || empty($expertise_fpage_image_provider) ) {
-						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of area of expertise fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
+
 						$expertise_fpage_image_provider = $expertise_fpage_image_general; // Featured image
+
 					}
 
 				// Clinical Resources
@@ -7411,11 +7413,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider) ) {
-						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of clinical resource fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
+
 						$clinical_resource_fpage_image_provider = $clinical_resource_fpage_image_general; // Featured image
+
 					}
 
 				// Create an array to be used on the templates and template parts
@@ -7466,10 +7469,10 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($provider_fpage_image_location) || empty($provider_fpage_image_location) ) {
-						if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-							$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-								$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of provider fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/provider.php' );
+
 						$provider_fpage_image_location = $provider_fpage_image_general; // Featured image
 					}
 
@@ -7481,11 +7484,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location) ) {
-						if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-								$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of location fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
+
 						$location_descendant_fpage_image_location = $location_descendant_fpage_image_general; // Featured image
+
 					}
 
 				// Areas of Expertise
@@ -7496,11 +7500,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location) ) {
-						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of area of expertise fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
+
 						$expertise_fpage_image_location = $expertise_fpage_image_general; // Featured image
+
 					}
 
 				// Clinical Resources
@@ -7511,11 +7516,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location) ) {
-						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of clinical resource fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
+
 						$clinical_resource_fpage_image_location = $clinical_resource_fpage_image_general; // Featured image
+
 					}
 
 				// Create an array to be used on the templates and template parts
@@ -7587,10 +7593,10 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($provider_fpage_featured_image_expertise) || empty($provider_fpage_featured_image_expertise) ) {
-						if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-							$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-								$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of provider fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/provider.php' );
+
 						$provider_fpage_featured_image_expertise = $provider_fpage_image_general; // Featured image
 					}
 
@@ -7617,11 +7623,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($location_fpage_featured_image_expertise) || empty($location_fpage_featured_image_expertise) ) {
-						if ( !isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general) ) {
-							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-								$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of location fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
+
 						$location_fpage_featured_image_expertise = $location_descendant_fpage_image_general; // Featured image
+
 					}
 
 					// Crop/resize the image
@@ -7647,11 +7654,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($expertise_fpage_featured_image_expertise) || empty($expertise_fpage_featured_image_expertise) ) {
-						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of area of expertise fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
+
 						$expertise_fpage_featured_image_expertise = $expertise_fpage_image_general; // Featured image
+
 					}
 
 					// Crop/resize the image
@@ -7677,11 +7685,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($expertise_descendant_fpage_featured_image_expertise) || empty($expertise_descendant_fpage_featured_image_expertise) ) {
-						if ( !isset($expertise_descendant_fpage_image_general) || empty($expertise_descendant_fpage_image_general) ) {
-							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-								$expertise_descendant_fpage_image_general = $fpage_image_expertise_general_vars['expertise_descendant_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of area of expertise fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
+
 						$expertise_descendant_fpage_featured_image_expertise = $expertise_descendant_fpage_image_general; // Featured image
+
 					}
 
 					// Crop/resize the image
@@ -7707,11 +7716,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($clinical_resource_fpage_featured_image_expertise) || empty($clinical_resource_fpage_featured_image_expertise) ) {
-						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of clinical resource fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
+
 						$clinical_resource_fpage_featured_image_expertise = $clinical_resource_fpage_image_general; // Featured image
+
 					}
 
 					// Crop/resize the image
@@ -7780,11 +7790,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($provider_fpage_image_clinical_resource) || empty($provider_fpage_image_clinical_resource) ) {
-						if ( !isset($provider_fpage_image_general) || empty($provider_fpage_image_general) ) {
-							$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-								$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of provider fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/provider.php' );
+
 						$provider_fpage_image_clinical_resource = $provider_fpage_image_general; // Featured image
+
 					}
 
 				// Locations
@@ -7795,11 +7806,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($location_fpage_image_clinical_resource) || empty($location_fpage_image_clinical_resource) ) {
-						if ( !isset($location_fpage_image_general) || empty($location_fpage_image_general) ) {
-							$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-								$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of location fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/location.php' );
+
 						$location_fpage_image_clinical_resource = $location_fpage_image_general; // Featured image
+
 					}
 
 				// Areas of Expertise
@@ -7810,11 +7822,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($expertise_fpage_image_clinical_resource) || empty($expertise_fpage_image_clinical_resource) ) {
-						if ( !isset($expertise_fpage_image_general) || empty($expertise_fpage_image_general) ) {
-							$fpage_image_expertise_general_vars = isset($fpage_image_expertise_general_vars) ? $fpage_image_expertise_general_vars : uamswp_fad_fpage_image_expertise_general();
-								$expertise_fpage_image_general = $fpage_image_expertise_general_vars['expertise_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of area of expertise fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/expertise.php' );
+
 						$expertise_fpage_image_clinical_resource = $expertise_fpage_image_general; // Featured image
+
 					}
 
 				// Related Clinical Resources
@@ -7825,11 +7838,12 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for the featured image of this type of fake subpage (or profile) in general placements
 					if ( !isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource) ) {
-						if ( !isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general) ) {
-							$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-								$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
-						}
+
+						// System settings for image elements in general placements of clinical resource fake subpages (or sections)
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/general-placement/clinical-resource.php' );
+
 						$clinical_resource_fpage_image_clinical_resource = $clinical_resource_fpage_image_general; // Featured image
+
 					}
 
 				// Create an array to be used on the templates and template parts
