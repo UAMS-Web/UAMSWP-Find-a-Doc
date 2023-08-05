@@ -119,21 +119,17 @@ if ( $condition_treatment_section_show ) {
 
 			}
 
-			// Text to use for the section title
+			if ( !isset($condition_section_title) || empty($condition_section_title) ) {
 
-				if ( !isset($condition_section_title) || empty($condition_section_title) ) {
+				$condition_section_title = $condition_fpage_title_general;
 
-					$condition_section_title = $condition_fpage_title_general;
+			}
 
-				}
+			if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
 
-			// Text to use for the section intro text
-			
-				if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
+				$condition_section_intro = $condition_fpage_intro_general;
 
-					$condition_section_intro = $condition_fpage_intro_general;
-
-				}
+			}
 
 		// Treatments subsection
 
@@ -143,32 +139,22 @@ if ( $condition_treatment_section_show ) {
 				!isset($treatment_section_intro) || empty($treatment_section_intro)
 			) {
 
-				if ( !isset($treatment_fpage_title_general) || !isset($treatment_fpage_intro_general) ) {
-					$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-						$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-
-				}
+				// Get the system settings for general placement of treatment item text elements
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
 
 			}
 
-			// Text to use for the section title
+			if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
 
-				if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
+				$treatment_section_title = $treatment_fpage_title_general;
 
-					$treatment_section_title = $treatment_fpage_title_general;
+			}
 
-				}
+			if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
 
-			// Text to use for the section intro text
-			
-				if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
+				$treatment_section_intro = $treatment_fpage_intro_general;
 
-					$treatment_section_intro = $treatment_fpage_intro_general;
-
-				}
+			}
 
 		// Text to use for the section title and the section intro text
 
@@ -195,21 +181,17 @@ if ( $condition_treatment_section_show ) {
 		
 					}
 
-					// Text to use for the section title
+					if ( !isset($condition_treatment_section_title) || empty($condition_treatment_section_title) ) {
 
-						if ( !isset($condition_treatment_section_title) || empty($condition_treatment_section_title) ) {
+						$condition_treatment_section_title = $condition_treatment_fpage_title_general;
 
-							$condition_treatment_section_title = $condition_treatment_fpage_title_general;
+					}
 
-						}
+					if ( !isset($condition_treatment_section_intro) || empty($condition_treatment_section_intro) ) {
 
-					// Text to use for the section intro text
-					
-						if ( !isset($condition_treatment_section_intro) || empty($condition_treatment_section_intro) ) {
+						$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
 
-							$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
-
-						}
+					}
 
 
 				// Add a split class to the item containers

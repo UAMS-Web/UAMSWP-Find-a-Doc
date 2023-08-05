@@ -87,21 +87,17 @@ if ( $condition_section_show ) {
 
 			}
 
-			// Text to use for the section title
+			if ( !isset($condition_section_title) || empty($condition_section_title) ) {
 
-				if ( !isset($condition_section_title) || empty($condition_section_title) ) {
+				$condition_section_title = $condition_fpage_title_general;
 
-					$condition_section_title = $condition_fpage_title_general;
+			}
 
-				}
+			if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
 
-			// Text to use for the section intro text
-			
-				if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
+				$condition_section_intro = $condition_fpage_intro_general;
 
-					$condition_section_intro = $condition_fpage_intro_general;
-
-				}
+			}
 
 		// Query for whether to display the section header
 		$condition_section_show_header = isset($condition_section_show_header) ? $condition_section_show_header : true;

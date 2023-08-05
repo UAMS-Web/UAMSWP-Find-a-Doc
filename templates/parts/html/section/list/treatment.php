@@ -75,29 +75,34 @@ if ( $treatment_section_show ) {
 		// Query for whether item is ontology type vs. content type
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 
-		// Text to use for the section title
-		if ( !isset($treatment_section_title) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($treatment_fpage_title_general) ) {
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-			}
-			$treatment_section_title = $treatment_fpage_title_general;
-		}
+		// Text elements
+		
+			if (
+				!isset($treatment_section_title) || empty($treatment_section_title)
+				||
+				!isset($treatment_section_intro) || empty($treatment_section_intro)
+			) {
 
-		// Text to use for the section intro text
-		if ( !isset($treatment_section_intro) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($treatment_fpage_intro_general) ) {
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+				// Get the system settings for general placement of treatment item text elements
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+
 			}
-			$treatment_section_intro = $treatment_fpage_intro_general;
-		}
+
+			if (
+				!isset($treatment_section_title) || empty($treatment_section_title)
+			) {
+
+				$treatment_section_title = $treatment_fpage_title_general;
+
+			}
+
+			if (
+				!isset($treatment_section_intro) || empty($treatment_section_intro)
+			) {
+
+				$treatment_section_intro = $treatment_fpage_intro_general;
+
+			}
 
 		// Query for whether to display the section header
 		$treatment_section_show_header = isset($treatment_section_show_header) ? $treatment_section_show_header : true;
@@ -113,19 +118,8 @@ if ( $treatment_section_show ) {
 
 		// Other variables
 
-			if (
-				!isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general)
-				||
-				!isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general)
-			) {
-
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-
-			}
+			// Get the system settings for general placement of treatment item text elements
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
 
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );

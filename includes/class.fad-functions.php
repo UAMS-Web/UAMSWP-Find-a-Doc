@@ -4243,35 +4243,59 @@ function uamswp_fad_fpage_text_replace(
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Treatments
 		function uamswp_fad_fpage_text_treatment_general(
+			$page_id, // int
 			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 		) {
 
-			// Get the Find-a-Doc Settings values for the text elements in general placements
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_treatment_general_vars, __FUNCTION__ );
 
-				$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+			if ( !empty( $fpage_text_treatment_general_vars ) ) {
 
-			// If the variable is not set or is empty...
-			// Set a hardcoded fallback value
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
-				$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Fake subpage (or section), title
-				$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
+				return $fpage_text_treatment_general_vars;
 
-			// Substitute placeholder text for relevant Find-a-Doc Settings value
+			} else {
 
-				$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
-				$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
-			// Create an array to be used on the templates and template parts
+				// Get the Find-a-Doc Settings values for the text elements in general placements
 
-				$fpage_text_treatment_general_vars = array(
-					'treatment_fpage_title_general'	=> $treatment_fpage_title_general, // string
-					'treatment_fpage_intro_general'	=> $treatment_fpage_intro_general // string
-				);
+					$treatment_fpage_title_general = get_field('treatments_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$treatment_fpage_intro_general = get_field('treatments_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
-			// Return the variable
-			return $fpage_text_treatment_general_vars;
+				// If the variable is not set or is empty...
+				// Set a hardcoded fallback value
 
+					$treatment_fpage_title_general = ( isset($treatment_fpage_title_general) && !empty($treatment_fpage_title_general) ) ? $treatment_fpage_title_general : 'Related [Treatments]'; // Fake subpage (or section), title
+					$treatment_fpage_intro_general = ( isset($treatment_fpage_intro_general) && !empty($treatment_fpage_intro_general) ) ? $treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments], some of which may not be listed below.'; // Fake subpage (or section), intro text
+
+				// Substitute placeholder text for relevant Find-a-Doc Settings value
+
+					$treatment_fpage_title_general = uamswp_fad_fpage_text_replace($treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
+					$treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_text_treatment_general_vars = array(
+						'treatment_fpage_title_general'	=> $treatment_fpage_title_general, // string
+						'treatment_fpage_intro_general'	=> $treatment_fpage_intro_general // string
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_treatment_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_text_treatment_general_vars;
+
+			}
 		}
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Conditions and Treatments combined
@@ -4624,23 +4648,27 @@ function uamswp_fad_fpage_text_replace(
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
 
-					if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
-						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-						}
-						$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
+					if (
+						!isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider)
+						||
+						!isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider)
+					) {
+
+						// Get the system settings for general placement of treatment item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+
 					}
+
+					if ( !isset($treatment_fpage_title_provider) || empty($treatment_fpage_title_provider) ) {
+
+						$treatment_fpage_title_provider = $treatment_fpage_title_general; // Title
+
+					}
+
 					if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
-						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-						}
+						
 						$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
+
 					}
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
@@ -5160,23 +5188,27 @@ function uamswp_fad_fpage_text_replace(
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
 
-					if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
-						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-						}
-						$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
+					if (
+						!isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location)
+						||
+						!isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location)
+					) {
+
+						// Get the system settings for general placement of treatment item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+
 					}
+
+					if ( !isset($treatment_fpage_title_location) || empty($treatment_fpage_title_location) ) {
+
+						$treatment_fpage_title_location = $treatment_fpage_title_general; // Title
+
+					}
+
 					if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
-						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-						}
+						
 						$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
+
 					}
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
@@ -6148,23 +6180,27 @@ function uamswp_fad_fpage_text_replace(
 						// If the variable is not set or is empty...
 						// Get the Find-a-Doc Settings value for general placement of a treatments subpage/section
 
-							if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
-								if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-									$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-										$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-									);
-										$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-								}
-								$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
+							if (
+								!isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise)
+								||
+								!isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise)
+							) {
+		
+								// Get the system settings for general placement of treatment item text elements
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+		
 							}
+		
+							if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
+		
+								$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
+		
+							}
+		
 							if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
-								if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-									$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-										$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-									);
-										$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-								}
+								
 								$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
+		
 							}
 
 						// Substitute placeholder text for relevant Find-a-Doc Settings value
@@ -6683,23 +6719,27 @@ function uamswp_fad_fpage_text_replace(
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
 
-					if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
-						if ( !isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-						}
-						$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
+					if (
+						!isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource)
+						||
+						!isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource)
+					) {
+
+						// Get the system settings for general placement of treatment item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+
 					}
+
+					if ( !isset($treatment_fpage_title_clinical_resource) || empty($treatment_fpage_title_clinical_resource) ) {
+
+						$treatment_fpage_title_clinical_resource = $treatment_fpage_title_general; // Title
+
+					}
+
 					if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
-						if ( !isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general) ) {
-							$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-						}
+						
 						$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
+
 					}
 
 				// Substitute placeholder text for relevant Find-a-Doc Settings value
