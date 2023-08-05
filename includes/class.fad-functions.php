@@ -4300,34 +4300,59 @@ function uamswp_fad_fpage_text_replace(
 
 		// Get the Find-a-Doc Settings values for general values of ontology text elements on a fake subpage (or section) for Conditions and Treatments combined
 		function uamswp_fad_fpage_text_condition_treatment_general(
+			$page_id, // int
 			$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 		) {
 
-			// Get the Find-a-Doc Settings values for the text elements in general placements
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_condition_treatment_general_vars, __FUNCTION__ );
 
-				$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
-				$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
+			if ( !empty( $fpage_text_condition_treatment_general_vars ) ) {
 
-			// If the variable is not set or is empty...
-			// Set a hardcoded fallback value
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
-				$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Fake subpage (or section), title
-				$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
+				return $fpage_text_condition_treatment_general_vars;
 
-			// Substitute placeholder text for relevant Find-a-Doc Settings value
+			} else {
 
-				$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
-				$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
-			// Create an array to be used on the templates and template parts
+				// Get the Find-a-Doc Settings values for the text elements in general placements
 
-				$fpage_text_condition_treatment_general_vars = array(
-					'condition_treatment_fpage_title_general'	=> $condition_treatment_fpage_title_general, // string
-					'condition_treatment_fpage_intro_general'	=> $condition_treatment_fpage_intro_general // string
-				);
+					$condition_treatment_fpage_title_general = get_field('condition_treatment_fpage_title_general', 'option'); // Fake subpage (or section), title
+					$condition_treatment_fpage_intro_general = get_field('condition_treatment_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 
-			// Return the variable
-			return $fpage_text_condition_treatment_general_vars;
+				// If the variable is not set or is empty...
+				// Set a hardcoded fallback value
+
+					$condition_treatment_fpage_title_general = ( isset($condition_treatment_fpage_title_general) && !empty($condition_treatment_fpage_title_general) ) ? $condition_treatment_fpage_title_general : 'Related [Conditions and Treatments]'; // Fake subpage (or section), title
+					$condition_treatment_fpage_intro_general = ( isset($condition_treatment_fpage_intro_general) && !empty($condition_treatment_fpage_intro_general) ) ? $condition_treatment_fpage_intro_general : 'UAMS Health [providers] perform and prescribe a broad range of [treatments] for a broad range of [conditions], some of which may not be listed below.'; // Fake subpage (or section), intro text
+
+				// Substitute placeholder text for relevant Find-a-Doc Settings value
+
+					$condition_treatment_fpage_title_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_title_general, $page_titles); // Fake subpage (or section), title
+					$condition_treatment_fpage_intro_general = uamswp_fad_fpage_text_replace($condition_treatment_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
+
+				// Create an array to be used on the templates and template parts
+
+					$fpage_text_condition_treatment_general_vars = array(
+						'condition_treatment_fpage_title_general'	=> $condition_treatment_fpage_title_general, // string
+						'condition_treatment_fpage_intro_general'	=> $condition_treatment_fpage_intro_general // string
+					);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_condition_treatment_general_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $fpage_text_condition_treatment_general_vars;
+
+			}
 
 		}
 
@@ -4695,22 +4720,29 @@ function uamswp_fad_fpage_text_replace(
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
 
-					if ( !isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider) ) {
-						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-						}
-						$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
+					if (
+						!isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider)
+						||
+						!isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider)
+					) {
+
+						// Get the system settings for general placement of combined condition and treatment item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+
 					}
-					if ( !isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider) ) {
-						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-						}
+
+					if (
+						!isset($condition_treatment_fpage_title_provider) || empty($condition_treatment_fpage_title_provider)
+					) {
+
+						$condition_treatment_fpage_title_provider = $condition_treatment_fpage_title_general; // Title
+
+					}
+
+					if (
+						!isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider)
+					) {
+
 						$condition_treatment_fpage_intro_provider = $condition_treatment_fpage_intro_general; // Intro text
 					}
 
@@ -5235,22 +5267,29 @@ function uamswp_fad_fpage_text_replace(
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
 
-					if ( !isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location) ) {
-						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-						}
-						$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
+					if (
+						!isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location)
+						||
+						!isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location)
+					) {
+
+						// Get the system settings for general placement of combined condition and treatment item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+
 					}
-					if ( !isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location) ) {
-						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-						}
+
+					if (
+						!isset($condition_treatment_fpage_title_location) || empty($condition_treatment_fpage_title_location)
+					) {
+
+						$condition_treatment_fpage_title_location = $condition_treatment_fpage_title_general; // Title
+
+					}
+
+					if (
+						!isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location)
+					) {
+
 						$condition_treatment_fpage_intro_location = $condition_treatment_fpage_intro_general; // Intro text
 					}
 
@@ -6240,22 +6279,29 @@ function uamswp_fad_fpage_text_replace(
 					// If the variable is not set or is empty...
 					// Get the Find-a-Doc Settings value for general placement of a combined conditions and treatments subpage/section
 
-						if ( !isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise) ) {
-							if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-								$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-								);
-									$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-							}
-							$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
+						if (
+							!isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise)
+							||
+							!isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location)
+						) {
+
+							// Get the system settings for general placement of combined condition and treatment item text elements
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+
 						}
-						if ( !isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise) ) {
-							if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-								$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-									$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-								);
-									$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-							}
+
+						if (
+							!isset($condition_treatment_fpage_title_expertise) || empty($condition_treatment_fpage_title_expertise)
+						) {
+
+							$condition_treatment_fpage_title_expertise = $condition_treatment_fpage_title_general; // Title
+
+						}
+
+						if (
+							!isset($condition_treatment_fpage_intro_expertise) || empty($condition_treatment_fpage_intro_expertise)
+						) {
+
 							$condition_treatment_fpage_intro_expertise = $condition_treatment_fpage_intro_general; // Intro text
 						}
 
@@ -6765,22 +6811,29 @@ function uamswp_fad_fpage_text_replace(
 				// If the variable is not set or is empty...
 				// Get the Find-a-Doc Settings value for general placement
 
-					if ( !isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource) ) {
-						if ( !isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-						}
-						$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
+					if (
+						!isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource)
+						||
+						!isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource)
+					) {
+
+						// Get the system settings for general placement of combined condition and treatment item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+
 					}
-					if ( !isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource) ) {
-						if ( !isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general) ) {
-							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-						}
+
+					if (
+						!isset($condition_treatment_fpage_title_clinical_resource) || empty($condition_treatment_fpage_title_clinical_resource)
+					) {
+
+						$condition_treatment_fpage_title_clinical_resource = $condition_treatment_fpage_title_general; // Title
+
+					}
+
+					if (
+						!isset($condition_treatment_fpage_intro_clinical_resource) || empty($condition_treatment_fpage_intro_clinical_resource)
+					) {
+
 						$condition_treatment_fpage_intro_clinical_resource = $condition_treatment_fpage_intro_general; // Intro text
 					}
 
