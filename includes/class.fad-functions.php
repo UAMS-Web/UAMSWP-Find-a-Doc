@@ -8642,8 +8642,8 @@ function uamswp_fad_fpage_text_image_overlay(
 				$ontology_type = isset($ontology_type) ? $ontology_type : true;
 			}
 
-		// Get system settings for area of expertise profile text elements
-		include( UAMS_FAD_PATH . '//templates/parts/vars/page/text-elements/single/expertise.php' );
+		// Get system settings for text elements in an area of expertise subsection (or profile)
+		include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/expertise.php' );
 
 		// Values Specific to the Fake Subpage
 

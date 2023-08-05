@@ -158,36 +158,8 @@
 
 	// Get system settings for elements of a fake subpage (or section) in an Provider subsection (or profile)
 
-		// Text elements
-
-			$fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provider_vars : uamswp_fad_fpage_text_provider(
-				$page_id, // int
-				$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-			);
-				$location_fpage_title_provider = $fpage_text_provider_vars['location_fpage_title_provider']; // string
-				$location_fpage_intro_provider = $fpage_text_provider_vars['location_fpage_intro_provider']; // string
-				$location_fpage_ref_main_title_provider = $fpage_text_provider_vars['location_fpage_ref_main_title_provider']; // string
-				$location_fpage_ref_main_intro_provider = $fpage_text_provider_vars['location_fpage_ref_main_intro_provider']; // string
-				$location_fpage_ref_main_link_provider = $fpage_text_provider_vars['location_fpage_ref_main_link_provider']; // string
-				$expertise_fpage_title_provider = $fpage_text_provider_vars['expertise_fpage_title_provider']; // string
-				$expertise_fpage_intro_provider = $fpage_text_provider_vars['expertise_fpage_intro_provider']; // string
-				$expertise_fpage_ref_main_title_provider = $fpage_text_provider_vars['expertise_fpage_ref_main_title_provider']; // string
-				$expertise_fpage_ref_main_intro_provider = $fpage_text_provider_vars['expertise_fpage_ref_main_intro_provider']; // string
-				$expertise_fpage_ref_main_link_provider = $fpage_text_provider_vars['expertise_fpage_ref_main_link_provider']; // string
-				$clinical_resource_fpage_title_provider = $fpage_text_provider_vars['clinical_resource_fpage_title_provider']; // string
-				$clinical_resource_fpage_intro_provider = $fpage_text_provider_vars['clinical_resource_fpage_intro_provider']; // string
-				$clinical_resource_fpage_ref_main_title_provider = $fpage_text_provider_vars['clinical_resource_fpage_ref_main_title_provider']; // string
-				$clinical_resource_fpage_ref_main_intro_provider = $fpage_text_provider_vars['clinical_resource_fpage_ref_main_intro_provider']; // string
-				$clinical_resource_fpage_ref_main_link_provider = $fpage_text_provider_vars['clinical_resource_fpage_ref_main_link_provider']; // string
-				$clinical_resource_fpage_more_text_provider = $fpage_text_provider_vars['clinical_resource_fpage_more_text_provider']; // string
-				$clinical_resource_fpage_more_link_text_provider = $fpage_text_provider_vars['clinical_resource_fpage_more_link_text_provider']; // string
-				$clinical_resource_fpage_more_link_descr_provider = $fpage_text_provider_vars['clinical_resource_fpage_more_link_descr_provider']; // string
-				$condition_fpage_title_provider = $fpage_text_provider_vars['condition_fpage_title_provider']; // string
-				$condition_fpage_intro_provider = $fpage_text_provider_vars['condition_fpage_intro_provider']; // string
-				$treatment_fpage_title_provider = $fpage_text_provider_vars['treatment_fpage_title_provider']; // string
-				$treatment_fpage_intro_provider = $fpage_text_provider_vars['treatment_fpage_intro_provider']; // string
-				$condition_treatment_fpage_title_provider = $fpage_text_provider_vars['condition_treatment_fpage_title_provider']; // string
-				$condition_treatment_fpage_intro_provider = $fpage_text_provider_vars['condition_treatment_fpage_intro_provider']; // string
+		// Get system settings for text elements in a provider subsection (or profile)
+		include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/provider.php' );
 
 		// Image elements
 

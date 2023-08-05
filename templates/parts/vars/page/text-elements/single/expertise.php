@@ -1,9 +1,13 @@
 <?php
 /*
- * Template Name: Page-specific settings for area of expertise profile text elements
+ * Template Name: System settings for text elements in an area of expertise 
+ * subsection (or profile)
  * 
  * Description: A template part that defines a series of variables related to the 
- * page-specific settings for area of expertise profile text elements
+ * text elements in an area of expertise subsection (or profile). This includes 
+ * the titles and intro text of the subsection (or profile) and the text elements 
+ * of the fake subpages (or sections) for related ontology items that have been 
+ * placed in the subsection (or profile)
  * 
  * Required vars:
  * 	$page_id // int
