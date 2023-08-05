@@ -129,6 +129,43 @@
 
 		}
 
+	// Text elements
+
+		if ( $expertise_section_show ) {
+
+			// Get the system settings for general placement of area of expertise item text elements
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+
+			if ( !$expertise_descendant_list ) {
+
+				// Areas of Expertise
+
+				$expertise_section_title = $expertise_fpage_title_general;
+				$expertise_section_intro = $expertise_fpage_intro_general;
+
+				// Get system settings for area of expertise labels
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
+
+			} else {
+				
+				// Descendant Areas of Expertise
+
+				$expertise_section_title = $expertise_descendant_fpage_title_general;
+				$expertise_section_intro = $expertise_descendant_fpage_intro_general;
+				
+				// Override area of expertise values with descendant area of expertise item values
+
+					// Get system settings for descendant area of expertise item labels
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise-descendant.php' );
+
+					$expertise_single_name = $expertise_descendant_single_name; // string
+					$expertise_single_name_attr = $expertise_descendant_single_name_attr; // string
+					$expertise_plural_name = $expertise_descendant_plural_name; // string
+					$expertise_plural_name_attr = $expertise_descendant_plural_name_attr; // string
+
+			}
+		}
+
 	// Query for whether item is ontology type vs. content type
 
 		if (
@@ -140,106 +177,6 @@
 		) {
 
 			$ontology_type = true;
-
-		}
-
-	// Text to use for the section title
-
-		if (
-			$expertise_section_show
-			&&
-			(
-				!isset($expertise_section_title) || empty($expertise_section_title)
-			)
-		) {
-
-			if ( !$expertise_descendant_list ) {
-
-				// Areas of Expertise
-
-				if (
-					!isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general)
-				) {
-
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
-
-				}
-
-				// Override area of expertise values with descendant area of expertise item values
-				$expertise_section_title = $expertise_fpage_title_general;
-
-			} else {
-
-				// Descendant Areas of Expertise
-
-				if (
-					!isset($expertise_descendant_fpage_title_general) || empty($expertise_descendant_fpage_title_general)
-				) {
-
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
-
-				}
-
-				// Override area of expertise values with descendant area of expertise item values
-				$expertise_section_title = $expertise_descendant_fpage_title_general;
-
-			}
-
-		}
-
-	// Text to use for the section intro text
-
-		if (
-			$expertise_section_show
-			&&
-			(
-				!isset($expertise_section_intro) || empty($expertise_section_intro)
-			)
-		) {
-
-			if ( !$expertise_descendant_list ) {
-
-				// Areas of Expertise
-
-				if (
-					!isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general)
-				) {
-
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
-
-				}
-
-				// Override area of expertise values with descendant area of expertise item values
-				$expertise_section_intro = $expertise_fpage_intro_general;
-
-			} else {
-
-				// Descendant Areas of Expertise
-
-				if (
-					!isset($expertise_descendant_fpage_intro_general) || empty($expertise_descendant_fpage_intro_general)
-				) {
-
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
-
-				}
-
-				// Override area of expertise values with descendant area of expertise item values
-				$expertise_section_intro = $expertise_descendant_fpage_intro_general;
-
-			}
 
 		}
 
@@ -258,77 +195,6 @@
 	// Section ID
 
 		$expertise_section_id = isset($expertise_section_id) ? $expertise_section_id : 'expertise';
-
-	// Get system settings for area of expertise labels
-
-		if ( $expertise_section_show ) {
-
-			if ( !$expertise_descendant_list ) {
-
-				// Get system settings for area of expertise labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
-
-			} else {
-
-				// Get system settings for descendant area of expertise item labels
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise-descendant.php' );
-
-				// Override area of expertise values with descendant area of expertise item values
-				$expertise_single_name = $expertise_descendant_single_name; // string
-				$expertise_single_name_attr = $expertise_descendant_single_name_attr; // string
-				$expertise_plural_name = $expertise_descendant_plural_name; // string
-				$expertise_plural_name_attr = $expertise_descendant_plural_name_attr; // string
-				$placeholder_expertise_single_name = $placeholder_expertise_descendant_single_name; // string
-				$placeholder_expertise_plural_name = $placeholder_expertise_descendant_plural_name; // string
-
-			}
-
-		}
-
-	// uamswp_fad_fpage_text_expertise_general()
-
-		if (
-			$expertise_section_show
-			&&
-			(
-				!isset($expertise_fpage_title_general) || empty($expertise_fpage_title_general)
-				||
-				!isset($expertise_fpage_intro_general) || empty($expertise_fpage_intro_general)
-			)
-		) {
-
-			if ( !$expertise_descendant_list ) {
-
-				// Areas of Expertise
-
-				$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$expertise_fpage_title_general = $fpage_text_expertise_general_vars['expertise_fpage_title_general']; // string
-					$expertise_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_fpage_intro_general']; // string
-
-			} else {
-
-				// Descendant Areas of Expertise
-
-				if (
-					!isset($expertise_descendant_fpage_title_general) || empty($expertise_descendant_fpage_title_general)
-				) {
-
-					$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$expertise_descendant_fpage_title_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_title_general']; // string
-						$expertise_descendant_fpage_intro_general = $fpage_text_expertise_general_vars['expertise_descendant_fpage_intro_general']; // string
-
-				}
-
-				$expertise_fpage_title_general = $expertise_descendant_fpage_title_general;
-				$expertise_fpage_intro_general = $expertise_descendant_fpage_intro_general;
-
-			}
-
-		}
 
 if ( $expertise_section_show ) {
 
