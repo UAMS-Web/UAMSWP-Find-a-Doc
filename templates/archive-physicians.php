@@ -59,10 +59,8 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/provid
 
 	// Do nothing
 
-// Get system settings for this archive page's featured image
-
-	$archive_image_provider_vars = isset($archive_image_provider_vars) ? $archive_image_provider_vars : uamswp_fad_archive_image_provider();
-		$provider_archive_image = $archive_image_provider_vars['provider_archive_image']; // int
+// Get the system settings for the image elements of the provider archive
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/provider.php' );
 
 // Get the featured image
 

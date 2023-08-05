@@ -47,10 +47,8 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/expert
 
 	// Do nothing
 
-// Get system settings for this archive page's featured image
-
-	$archive_image_expertise_vars = isset($archive_image_expertise_vars) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
-		$expertise_archive_image = $archive_image_expertise_vars['expertise_archive_image']; // int
+// Get the system settings for the image elements of the area of expertise archive
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
 
 // Get the featured image
 

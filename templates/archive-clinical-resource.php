@@ -65,10 +65,8 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/clinic
 
 	// Do nothing
 
-// Get system settings for this archive page's featured image
-
-	$archive_image_clinical_resource_vars = isset($archive_image_clinical_resource_vars) ? $archive_image_clinical_resource_vars : uamswp_fad_archive_image_clinical_resource();
-		$clinical_resource_archive_image = $archive_image_clinical_resource_vars['clinical_resource_archive_image']; // int
+// Get the system settings for the image elements of the clinical resource archive
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/clinical-resource.php' );
 
 // Get the featured image
 

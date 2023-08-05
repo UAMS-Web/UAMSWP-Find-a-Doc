@@ -8652,10 +8652,8 @@ function uamswp_fad_fpage_text_image_overlay(
 
 			if ( $current_fpage == 'providers' ) {
 
-				if ( !isset($provider_archive_image) || empty($provider_archive_image) ) {
-					$archive_image_provider_vars = isset($archive_image_provider_vars) ? $archive_image_provider_vars : uamswp_fad_archive_image_provider();
-						$provider_archive_image = $archive_image_provider_vars['provider_archive_image']; // int
-				}
+				// Get the system settings for the image elements of the provider archive
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/provider.php' );
 
 				// Create array of main archive attributes
 				$text_image_overlay_main_archive = array(
@@ -8677,10 +8675,8 @@ function uamswp_fad_fpage_text_image_overlay(
 
 			} elseif ( $current_fpage == 'locations' ) {
 
-				if ( !isset($location_archive_image) || empty($location_archive_image) ) {
-					$archive_image_location_vars = isset($archive_image_location_vars) ? $archive_image_location_vars : uamswp_fad_archive_image_location();
-						$location_archive_image = $archive_image_location_vars['location_archive_image']; // int
-				}
+				// Get the system settings for the image elements of the location archive
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/location.php' );
 
 				// Create array of main archive attributes
 				$text_image_overlay_main_archive = array(
@@ -8702,10 +8698,8 @@ function uamswp_fad_fpage_text_image_overlay(
 
 			} elseif ( $current_fpage == 'specialties' ) {
 
-				if ( !isset($expertise_archive_image) || empty($expertise_archive_image) ) {
-					$archive_image_expertise_vars = isset($archive_image_expertise_vars) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
-						$expertise_archive_image = $archive_image_expertise_vars['expertise_archive_image']; // int
-				}
+				// Get the system settings for the image elements of the area of expertise archive
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
 
 				// Create array of main archive attributes
 				$text_image_overlay_main_archive = array(
@@ -8718,10 +8712,8 @@ function uamswp_fad_fpage_text_image_overlay(
 
 			} elseif ( $current_fpage == 'related' ) {
 
-				if ( !isset($expertise_archive_image) || empty($expertise_archive_image) ) {
-					$archive_image_expertise_vars = isset($archive_image_expertise_vars) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
-						$expertise_archive_image = $archive_image_expertise_vars['expertise_archive_image']; // int
-				}
+				// Get the system settings for the image elements of the area of expertise archive
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
 
 				// Create array of main archive attributes
 				$text_image_overlay_main_archive = array(
@@ -8737,10 +8729,8 @@ function uamswp_fad_fpage_text_image_overlay(
 				// Define whether to display the item linking to the parent archive in the overlay block
 				$show_parent_archive = true;
 
-				if ( !isset($clinical_resource_archive_image) || empty($clinical_resource_archive_image) ) {
-					$archive_image_clinical_resource_vars = isset($archive_image_clinical_resource_vars) ? $archive_image_clinical_resource_vars : uamswp_fad_archive_image_clinical_resource();
-						$clinical_resource_archive_image = $archive_image_clinical_resource_vars['clinical_resource_archive_image']; // int
-				}
+				// Get the system settings for the image elements of the clinical resource archive
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/clinical-resource.php' );
 
 				// Create array of main archive attributes
 				$text_image_overlay_main_archive = array(
