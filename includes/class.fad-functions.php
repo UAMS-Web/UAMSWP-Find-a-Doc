@@ -4700,40 +4700,13 @@ function uamswp_fad_fpage_text_replace(
 						!isset($provider_fpage_ref_top_intro_location) || empty($provider_fpage_ref_top_intro_location)
 						||
 						!isset($provider_fpage_ref_top_link_location) || empty($provider_fpage_ref_top_link_location)
-						) {
+					) {
+
 						// If any of the variables are not set or are empty...
 
-						// Check for the general placement variables.
-						// If any aren't set or are empty, call the function and set the global variables.
-						if (
-							!isset($provider_fpage_title_general) || empty($provider_fpage_title_general)
-							||
-							!isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general)
-							||
-							!isset($provider_fpage_ref_main_title_general) || empty($provider_fpage_ref_main_title_general)
-							||
-							!isset($provider_fpage_ref_main_intro_general) || empty($provider_fpage_ref_main_intro_general)
-							||
-							!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
-							||
-							!isset($provider_fpage_ref_top_title_general) || empty($provider_fpage_ref_top_title_general)
-							||
-							!isset($provider_fpage_ref_top_intro_general) || empty($provider_fpage_ref_top_intro_general)
-							||
-							!isset($provider_fpage_ref_top_link_general) || empty($provider_fpage_ref_top_link_general)
-							) {
-							$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
-								$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
-								$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
-								$provider_fpage_ref_main_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_intro_general']; // string
-								$provider_fpage_ref_main_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_link_general']; // string
-								$provider_fpage_ref_top_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_title_general']; // string
-								$provider_fpage_ref_top_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_intro_general']; // string
-								$provider_fpage_ref_top_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_link_general']; // string
-						}
+						// Get the system settings for general placement of provider item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+
 					}
 					$provider_fpage_title_location = ( !isset($provider_fpage_title_location) || empty($provider_fpage_title_location) ) ? $provider_fpage_title_general : ''; // Title
 					$provider_fpage_intro_location = ( !isset($provider_fpage_intro_location) || empty($provider_fpage_intro_location) ) ? $provider_fpage_intro_general : ''; // Intro text
@@ -5551,40 +5524,13 @@ function uamswp_fad_fpage_text_replace(
 								!isset($provider_fpage_ref_top_intro_expertise) || empty($provider_fpage_ref_top_intro_expertise)
 								||
 								!isset($provider_fpage_ref_top_link_expertise) || empty($provider_fpage_ref_top_link_expertise)
-								) {
+							) {
+
 								// If any of the variables are not set or are empty...
 
-								// Check for the general placement variables.
-								// If any aren't set or are empty, call the function and set the global variables.
-								if (
-									!isset($provider_fpage_title_general) || empty($provider_fpage_title_general)
-									||
-									!isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general)
-									||
-									!isset($provider_fpage_ref_main_title_general) || empty($provider_fpage_ref_main_title_general)
-									||
-									!isset($provider_fpage_ref_main_intro_general) || empty($provider_fpage_ref_main_intro_general)
-									||
-									!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
-									||
-									!isset($provider_fpage_ref_top_title_general) || empty($provider_fpage_ref_top_title_general)
-									||
-									!isset($provider_fpage_ref_top_intro_general) || empty($provider_fpage_ref_top_intro_general)
-									||
-									!isset($provider_fpage_ref_top_link_general) || empty($provider_fpage_ref_top_link_general)
-									) {
-									$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
-										$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-									);
-										$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
-										$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
-										$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
-										$provider_fpage_ref_main_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_intro_general']; // string
-										$provider_fpage_ref_main_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_link_general']; // string
-										$provider_fpage_ref_top_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_title_general']; // string
-										$provider_fpage_ref_top_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_intro_general']; // string
-										$provider_fpage_ref_top_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_top_link_general']; // string
-								}
+								// Get the system settings for general placement of provider item text elements
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+
 							}
 							if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
 								$provider_fpage_title_expertise = $provider_fpage_title_general; // Title
@@ -6497,31 +6443,13 @@ function uamswp_fad_fpage_text_replace(
 						!isset($provider_fpage_ref_main_intro_clinical_resource) || empty($provider_fpage_ref_main_intro_clinical_resource)
 						||
 						!isset($provider_fpage_ref_main_link_clinical_resource) || empty($provider_fpage_ref_main_link_clinical_resource)
-						) {
+					) {
+
 						// If any of the variables are not set or are empty...
 
-						// Check for the general placement variables.
-						// If any aren't set or are empty, call the function and set the global variables.
-						if (
-							!isset($provider_fpage_title_general) || empty($provider_fpage_title_general)
-							||
-							!isset($provider_fpage_intro_general) || empty($provider_fpage_intro_general)
-							||
-							!isset($provider_fpage_ref_main_title_general) || empty($provider_fpage_ref_main_title_general)
-							||
-							!isset($provider_fpage_ref_main_intro_general) || empty($provider_fpage_ref_main_intro_general)
-							||
-							!isset($provider_fpage_ref_main_link_general) || empty($provider_fpage_ref_main_link_general)
-							) {
-							$fpage_text_provider_general_vars = isset($fpage_text_provider_general_vars) ? $fpage_text_provider_general_vars : uamswp_fad_fpage_text_provider_general(
-								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-							);
-								$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string
-								$provider_fpage_intro_general = $fpage_text_provider_general_vars['provider_fpage_intro_general']; // string
-								$provider_fpage_ref_main_title_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_title_general']; // string
-								$provider_fpage_ref_main_intro_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_intro_general']; // string
-								$provider_fpage_ref_main_link_general = $fpage_text_provider_general_vars['provider_fpage_ref_main_link_general']; // string
-						}
+						// Get the system settings for general placement of provider item text elements
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+
 					}
 					if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
 						$provider_fpage_title_clinical_resource = $provider_fpage_title_general; // Title

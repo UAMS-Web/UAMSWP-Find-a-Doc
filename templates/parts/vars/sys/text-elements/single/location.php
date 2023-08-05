@@ -1,7 +1,8 @@
 <?php
 /*
- * Template Name: System settings for general location profile text elements
+ * Template Name: System settings for general placement of location item text 
+ * elements
  * 
  * Description: A template part that defines a series of variables related to the 
- * system settings for general location profile text elements
+ * system settings for the general placement of location item text elements
  */
