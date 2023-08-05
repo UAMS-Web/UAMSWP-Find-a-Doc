@@ -1,7 +1,7 @@
 <?php
 /*
- * Template Name: System settings for general placement of condition item text 
- * elements
+ * Template Name: System settings for text elements in general placements of 
+ * conditions fake subpages (or sections)
  * 
  * Description: A template part that defines a series of variables related to the 
  * system settings for the general placement of condition item text elements

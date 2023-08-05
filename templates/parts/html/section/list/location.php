@@ -60,7 +60,7 @@ if ( $location_section_show ) {
 			// Set the section title using the system settings for the section title in a general placement
 
 				// Get the system settings for general placement of location item text elements
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 				$location_section_title = $location_fpage_title_general;
 		}
@@ -71,7 +71,7 @@ if ( $location_section_show ) {
 			// Set the section title using the system settings for the section title in a general placement
 
 				// Get the system settings for general placement of location item text elements
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 				$location_section_intro = $location_fpage_intro_general;
 		}
@@ -102,7 +102,7 @@ if ( $location_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 			// Get the system settings for general placement of location item text elements
-			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );

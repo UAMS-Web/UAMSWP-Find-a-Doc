@@ -115,7 +115,7 @@ if ( $condition_treatment_section_show ) {
 			) {
 
 				// Get the system settings for general placement of condition item text elements
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 			}
 
@@ -140,7 +140,7 @@ if ( $condition_treatment_section_show ) {
 			) {
 
 				// Get the system settings for general placement of treatment item text elements
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 
 			}
 
@@ -170,7 +170,7 @@ if ( $condition_treatment_section_show ) {
 					) {
 
 						// Get the system settings for general placement of combined condition and treatment item text elements
-						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition-treatment.php' );
 
 					}
 
@@ -247,7 +247,7 @@ if ( $condition_treatment_section_show ) {
 		// Other variables
 
 			// Get the system settings for general placement of condition item text elements
-			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 			// Related Conditions Section Query
 			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );

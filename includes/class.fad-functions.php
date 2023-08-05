@@ -4428,7 +4428,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of location item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 						}
 						if ( !isset($location_fpage_title_provider) || empty($location_fpage_title_provider) ) {
@@ -4500,7 +4500,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of area of expertise item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/expertise.php' );
 
 						}
 						if ( !isset($expertise_fpage_title_provider) || empty($expertise_fpage_title_provider) ) {
@@ -4590,7 +4590,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of clinical resource item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
 
 						}
 						if ( !isset($clinical_resource_fpage_title_provider) || empty($clinical_resource_fpage_title_provider) ) {
@@ -4654,7 +4654,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of condition item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 						}
 
@@ -4700,7 +4700,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 
 						}
 
@@ -4747,7 +4747,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of combined condition and treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition-treatment.php' );
 
 						}
 
@@ -4882,7 +4882,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of provider item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/provider.php' );
 
 						}
 						$provider_fpage_title_location = ( !isset($provider_fpage_title_location) || empty($provider_fpage_title_location) ) ? $provider_fpage_title_general : ''; // Title
@@ -4940,7 +4940,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of location item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 						}
 						if ( !isset($location_descendant_fpage_title_location) || empty($location_descendant_fpage_title_location) ) {
@@ -5030,7 +5030,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of area of expertise item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/expertise.php' );
 
 						}
 						if ( !isset($expertise_fpage_title_location) || empty($expertise_fpage_title_location) ) {
@@ -5150,7 +5150,7 @@ function uamswp_fad_fpage_text_replace(
 								// If any of the variables are not set or are empty...
 		
 								// Get the system settings for general placement of clinical resource item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
 		
 							}
 						if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
@@ -5226,7 +5226,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of condition item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 						}
 						
@@ -5272,7 +5272,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 
 						}
 
@@ -5319,7 +5319,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of combined condition and treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition-treatment.php' );
 
 						}
 
@@ -5645,7 +5645,7 @@ function uamswp_fad_fpage_text_replace(
 								// If any of the variables are not set or are empty...
 
 								// Get the system settings for general placement of provider item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/provider.php' );
 
 							}
 							if ( !isset($provider_fpage_title_expertise) || empty($provider_fpage_title_expertise) ) {
@@ -5773,7 +5773,7 @@ function uamswp_fad_fpage_text_replace(
 								// If any of the variables are not set or are empty...
 
 								// Get the system settings for general placement of location item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 							}
 							if ( !isset($location_fpage_title_expertise) || empty($location_fpage_title_expertise) ) {
@@ -5883,7 +5883,7 @@ function uamswp_fad_fpage_text_replace(
 								// If any of the variables are not set or are empty...
 
 								// Get the system settings for general placement of area of expertise item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/expertise.php' );
 
 							}
 							if ( !isset($expertise_descendant_fpage_title_expertise) || empty($expertise_descendant_fpage_title_expertise) ) {
@@ -5981,7 +5981,7 @@ function uamswp_fad_fpage_text_replace(
 								// If any of the variables are not set or are empty...
 
 								// Get the system settings for general placement of area of expertise item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/expertise.php' );
 
 							}
 							if ( !isset($expertise_fpage_title_expertise) || empty($expertise_fpage_title_expertise) ) {
@@ -6115,7 +6115,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 	
 							// Get the system settings for general placement of clinical resource item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
 		
 						}
 						if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
@@ -6217,7 +6217,7 @@ function uamswp_fad_fpage_text_replace(
 							) {
 
 								// Get the system settings for general placement of condition item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 							}
 
@@ -6276,7 +6276,7 @@ function uamswp_fad_fpage_text_replace(
 							) {
 		
 								// Get the system settings for general placement of treatment item text elements
-								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 		
 							}
 		
@@ -6336,7 +6336,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of combined condition and treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition-treatment.php' );
 
 						}
 
@@ -6499,7 +6499,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of provider item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/provider.php' );
 
 						}
 						if ( !isset($provider_fpage_title_clinical_resource) || empty($provider_fpage_title_clinical_resource) ) {
@@ -6571,7 +6571,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of location item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/location.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/location.php' );
 
 						}
 						if ( !isset($location_fpage_title_clinical_resource) || empty($location_fpage_title_clinical_resource) ) {
@@ -6643,7 +6643,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of area of expertise item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/expertise.php' );
 
 						}
 						if ( !isset($expertise_fpage_title_clinical_resource) || empty($expertise_fpage_title_clinical_resource) ) {
@@ -6733,7 +6733,7 @@ function uamswp_fad_fpage_text_replace(
 							// If any of the variables are not set or are empty...
 
 							// Get the system settings for general placement of clinical resource item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/clinical-resource.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
 		
 						}
 						if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
@@ -6797,7 +6797,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of condition item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 						}
 
@@ -6842,7 +6842,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 
 						}
 
@@ -6888,7 +6888,7 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// Get the system settings for general placement of combined condition and treatment item text elements
-							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition-treatment.php' );
 
 						}
 
@@ -8643,7 +8643,7 @@ function uamswp_fad_fpage_text_image_overlay(
 			}
 
 		// Get system settings for text elements in an area of expertise subsection (or profile)
-		include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/expertise.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/expertise.php' );
 
 		// Values Specific to the Fake Subpage
 

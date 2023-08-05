@@ -84,7 +84,7 @@ if ( $treatment_section_show ) {
 			) {
 
 				// Get the system settings for general placement of treatment item text elements
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 
 			}
 
@@ -119,7 +119,7 @@ if ( $treatment_section_show ) {
 		// Other variables
 
 			// Get the system settings for general placement of treatment item text elements
-			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/treatment.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
 
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );

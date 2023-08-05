@@ -68,7 +68,7 @@
 		);
 
 // Get system settings for text elements in an area of expertise subsection (or profile)
-include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/expertise.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/expertise.php' );
 
 // Get system settings for area of expertise profile image elements
 include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/expertise.php' );

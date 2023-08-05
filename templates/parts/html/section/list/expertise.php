@@ -134,7 +134,7 @@
 		if ( $expertise_section_show ) {
 
 			// Get the system settings for general placement of area of expertise item text elements
-			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/expertise.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/expertise.php' );
 
 			if ( !$expertise_descendant_list ) {
 

@@ -52,7 +52,7 @@
 	// Get system settings for elements of a fake subpage (or section) in an Clinical subsection (or profile)
 
 		// Get system settings for text elements in a clinical resource subsection (or profile)
-		include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/clinical-resource.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/clinical-resource.php' );
 
 		// Image elements
 

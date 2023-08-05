@@ -159,7 +159,7 @@
 	// Get system settings for elements of a fake subpage (or section) in an Provider subsection (or profile)
 
 		// Get system settings for text elements in a provider subsection (or profile)
-		include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/provider.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/provider.php' );
 
 		// Image elements
 

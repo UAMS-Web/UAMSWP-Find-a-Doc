@@ -1,7 +1,7 @@
 <?php
 /*
- * Template Name: System settings for general placement of provider item text 
- * elements
+ * Template Name: System settings for text elements in general placements of 
+ * providers fake subpages (or sections)
  * 
  * Description: A template part that defines a series of variables related to the 
  * system settings for the general placement of provider item text elements

@@ -55,7 +55,7 @@ if ( $provider_section_show ) {
 				// Set the section title using the system settings for the section title in a general placement
 
 					// Get the system settings for general placement of provider item text elements
-					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/provider.php' );
 
 					$provider_section_title = $provider_fpage_title_general;
 			}
@@ -67,7 +67,7 @@ if ( $provider_section_show ) {
 				// Set the section title using the system settings for the section title in a general placement
 
 					// Get the system settings for general placement of provider item text elements
-					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/provider.php' );
 
 					$provider_section_intro = $provider_fpage_intro_general;
 			}
@@ -99,7 +99,7 @@ if ( $provider_section_show ) {
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 			// Get the system settings for general placement of provider item text elements
-			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/provider.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/provider.php' );
 
 			// Get the ontology subsection values
 			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );

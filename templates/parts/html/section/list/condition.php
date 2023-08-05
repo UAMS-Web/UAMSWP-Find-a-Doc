@@ -83,7 +83,7 @@ if ( $condition_section_show ) {
 			) {
 
 				// Get the system settings for general placement of condition item text elements
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 			}
 
@@ -112,7 +112,7 @@ if ( $condition_section_show ) {
 		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 		// Get the system settings for general placement of condition item text elements
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 		// Get the ontology subsection values
 		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );

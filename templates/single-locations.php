@@ -84,7 +84,7 @@
 	// Get system settings for elements of a fake subpage (or section) in a Location subsection (or profile)
 
 		// Get system settings for text elements in a location subsection (or profile)
-		include( UAMS_FAD_PATH . '/templates/parts/vars/page/text-elements/single/location.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/location.php' );
 
 		// Image elements
 
