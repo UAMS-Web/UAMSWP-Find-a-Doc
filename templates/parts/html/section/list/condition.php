@@ -74,29 +74,34 @@ if ( $condition_section_show ) {
 		// Query for whether item is ontology type vs. content type
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 
-		// Text to use for the section title
-		if ( !isset($condition_section_title) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($condition_fpage_title_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-			}
-			$condition_section_title = $condition_fpage_title_general;
-		}
+		// Text elements
 
-		// Text to use for the section intro text
-		if ( !isset($condition_section_intro) ) {
-			// Set the section title using the system settings for the section title in a general placement
-			if ( !isset($condition_fpage_intro_general) ) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
+			if (
+				!isset($condition_section_title) || empty($condition_section_title)
+				||
+				!isset($condition_section_intro) || empty($condition_section_intro)
+			) {
+
+				// Get the system settings for general placement of condition item text elements
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
+
 			}
-			$condition_section_intro = $condition_fpage_intro_general;
-		}
+
+			// Text to use for the section title
+
+				if ( !isset($condition_section_title) || empty($condition_section_title) ) {
+
+					$condition_section_title = $condition_fpage_title_general;
+
+				}
+
+			// Text to use for the section intro text
+			
+				if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
+
+					$condition_section_intro = $condition_fpage_intro_general;
+
+				}
 
 		// Query for whether to display the section header
 		$condition_section_show_header = isset($condition_section_show_header) ? $condition_section_show_header : true;
@@ -110,25 +115,14 @@ if ( $condition_section_show ) {
 		// Get system settings for condition labels
 		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
-		// Other variables
+		// Get the system settings for general placement of condition item text elements
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
 
-			if (
-				!isset($condition_fpage_title_general) || empty($condition_fpage_title_general)
-				||
-				!isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general)
-			) {
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
-			}
+		// Get the ontology subsection values
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
-			// Get the ontology subsection values
-			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
-
-			// Related Conditions Section Query
-			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
+		// Related Conditions Section Query
+		include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
 	?>
 	<section class="uams-module<?php echo $condition_section_class ? ' ' . $condition_section_class : ''; ?> bg-auto<?php echo $condition_section_collapse_list ? ' collapse-list' : ''; ?>"<?php echo $condition_section_id ? ' id="' . $condition_section_id . '" aria-labelledby="' . $condition_section_id . '-title"' : ''; ?>>

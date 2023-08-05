@@ -106,132 +106,136 @@ if ( $condition_treatment_section_show ) {
 		// Treatments subsection class
 		$treatment_section_class = isset($treatment_section_class) ? $treatment_section_class : 'treatments';
 
-		// Text to use for the section title and the section intro text
-		if ( $condition_section_show && $treatment_section_show ) {
-			// If both the conditions section and the treatments section are shown...
+		// Conditions subsection
 
-			// Set the section title and section intro normally
-			if ( !isset($condition_treatment_section_title) ) {
+			if (
+				!isset($condition_section_title) || empty($condition_section_title)
+				||
+				!isset($condition_section_intro) || empty($condition_section_intro)
+			) {
 
-				// Set the section title using the system settings for the section title in a general placement
-				if ( !isset($condition_treatment_fpage_title_general) ) {
-					$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-				}
-				$condition_treatment_section_title = $condition_treatment_fpage_title_general;
-
-			}
-			if ( !isset($condition_treatment_section_intro) ) {
-
-				// Set the section title using the system settings for the section title in a general placement
-				if ( !isset($condition_treatment_fpage_intro_general) ) {
-					$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-					);
-						$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-				}
-				$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
+				// Get the system settings for general placement of condition item text elements
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
 
 			}
 
-			// Add a split class to the item containers
-			$condition_treatment_section_split_class = 'col-md-6';
+			// Text to use for the section title
 
-			// Conditions subsection class
-			$condition_section_class = $condition_treatment_section_split_class . ' ' . $condition_section_class;
-
-			// Treatments subsection class
-			$treatment_section_class = $condition_treatment_section_split_class . ' ' . $treatment_section_class;
-
-		} elseif ( $condition_section_show && !$treatment_section_show ) {
-
-			// If only the conditions section is shown...
-
-			// Set the section title and section intro using the conditions values
-			$condition_treatment_section_title = $condition_section_title;
-			$condition_treatment_section_intro = $condition_section_intro;
-
-		} elseif ( !$condition_section_show && $treatment_section_show ) {
-
-			// If only the treatments section is shown...
-
-			// Set the section title and section intro using the treatments values
-			$condition_treatment_section_title = $treatment_section_title;
-			$condition_treatment_section_intro = $treatment_section_intro;
-
-		}
-
-		// Text to use for the conditions subsection title
-
-			if ( !isset($condition_section_title) ) {
-
-				// Set the section title using the system settings for the section title in a general placement
-
-					if ( !isset($condition_fpage_title_general) ) {
-						$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						);
-							$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-					}
+				if ( !isset($condition_section_title) || empty($condition_section_title) ) {
 
 					$condition_section_title = $condition_fpage_title_general;
 
-			}
+				}
 
-		// Text to use for the conditions subsection intro text
-
-			if ( !isset($condition_section_intro) ) {
-
-				// Set the section title using the system settings for the section title in a general placement
-
-					if ( !isset($condition_fpage_intro_general) ) {
-
-						$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						);
-							$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
-
-					}
+			// Text to use for the section intro text
+			
+				if ( !isset($condition_section_intro) || empty($condition_section_intro) ) {
 
 					$condition_section_intro = $condition_fpage_intro_general;
 
+				}
+
+		// Treatments subsection
+
+			if (
+				!isset($treatment_section_title) || empty($treatment_section_title)
+				||
+				!isset($treatment_section_intro) || empty($treatment_section_intro)
+			) {
+
+				if ( !isset($treatment_fpage_title_general) || !isset($treatment_fpage_intro_general) ) {
+					$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
+						$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+					);
+						$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
+						$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
+
+				}
+
 			}
 
-		// Text to use for the treatments subsection title
+			// Text to use for the section title
 
-			if ( !isset($treatment_section_title) ) {
-
-				// Set the section title using the system settings for the section title in a general placement
-
-					if ( !isset($treatment_fpage_title_general) ) {
-						$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						);
-							$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-					}
+				if ( !isset($treatment_section_title) || empty($treatment_section_title) ) {
 
 					$treatment_section_title = $treatment_fpage_title_general;
 
-			}
+				}
 
-		// Text to use for the treatments subsection intro text
-
-			if ( !isset($treatment_section_intro) ) {
-
-				// Set the section title using the system settings for the section title in a general placement
-
-					if ( !isset($treatment_fpage_intro_general) ) {
-
-						$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-							$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-						);
-							$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-
-					}
+			// Text to use for the section intro text
+			
+				if ( !isset($treatment_section_intro) || empty($treatment_section_intro) ) {
 
 					$treatment_section_intro = $treatment_fpage_intro_general;
+
+				}
+
+		// Text to use for the section title and the section intro text
+
+			if ( $condition_section_show && $treatment_section_show ) {
+
+				// If both the conditions section and the treatments section are shown...
+				// Set the section title and section intro normally
+
+					if (
+						!isset($condition_treatment_section_title) || empty($condition_treatment_section_title)
+						||
+						!isset($condition_treatment_section_intro) || empty($condition_treatment_section_intro)
+					) {
+
+						if ( !isset($condition_treatment_fpage_title_general) || !isset($condition_treatment_fpage_intro_general) ) {
+						
+							$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
+								$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+							);
+								$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
+								$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
+						
+						}
+		
+					}
+
+					// Text to use for the section title
+
+						if ( !isset($condition_treatment_section_title) || empty($condition_treatment_section_title) ) {
+
+							$condition_treatment_section_title = $condition_treatment_fpage_title_general;
+
+						}
+
+					// Text to use for the section intro text
+					
+						if ( !isset($condition_treatment_section_intro) || empty($condition_treatment_section_intro) ) {
+
+							$condition_treatment_section_intro = $condition_treatment_fpage_intro_general;
+
+						}
+
+
+				// Add a split class to the item containers
+				$condition_treatment_section_split_class = 'col-md-6';
+
+				// Conditions subsection class
+				$condition_section_class = $condition_treatment_section_split_class . ' ' . $condition_section_class;
+
+				// Treatments subsection class
+				$treatment_section_class = $condition_treatment_section_split_class . ' ' . $treatment_section_class;
+
+			} elseif ( $condition_section_show && !$treatment_section_show ) {
+
+				// If only the conditions section is shown...
+
+				// Set the section title and section intro using the conditions values
+				$condition_treatment_section_title = $condition_section_title;
+				$condition_treatment_section_intro = $condition_section_intro;
+
+			} elseif ( !$condition_section_show && $treatment_section_show ) {
+
+				// If only the treatments section is shown...
+
+				// Set the section title and section intro using the treatments values
+				$condition_treatment_section_title = $treatment_section_title;
+				$condition_treatment_section_intro = $treatment_section_intro;
 
 			}
 
@@ -267,47 +271,8 @@ if ( $condition_treatment_section_show ) {
 
 		// Other variables
 
-			if (
-				!isset($condition_treatment_fpage_title_general) || empty($condition_treatment_fpage_title_general)
-				||
-				!isset($condition_treatment_fpage_intro_general) || empty($condition_treatment_fpage_intro_general)
-			) {
-
-				$fpage_text_condition_treatment_general_vars = isset($fpage_text_condition_treatment_general_vars) ? $fpage_text_condition_treatment_general_vars : uamswp_fad_fpage_text_condition_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_treatment_fpage_title_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_title_general']; // string
-					$condition_treatment_fpage_intro_general = $fpage_text_condition_treatment_general_vars['condition_treatment_fpage_intro_general']; // string
-
-			}
-
-			if (
-				!isset($condition_fpage_title_general) || empty($condition_fpage_title_general)
-				||
-				!isset($condition_fpage_intro_general) || empty($condition_fpage_intro_general)
-			) {
-
-				$fpage_text_condition_general_vars = isset($fpage_text_condition_general_vars) ? $fpage_text_condition_general_vars : uamswp_fad_fpage_text_condition_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$condition_fpage_title_general = $fpage_text_condition_general_vars['condition_fpage_title_general']; // string
-					$condition_fpage_intro_general = $fpage_text_condition_general_vars['condition_fpage_intro_general']; // string
-
-			}
-
-			if (
-				!isset($treatment_fpage_title_general) || empty($treatment_fpage_title_general)
-				||
-				!isset($treatment_fpage_intro_general) || empty($treatment_fpage_intro_general)
-			) {
-
-				$fpage_text_treatment_general_vars = isset($fpage_text_treatment_general_vars) ? $fpage_text_treatment_general_vars : uamswp_fad_fpage_text_treatment_general(
-					$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-				);
-					$treatment_fpage_title_general = $fpage_text_treatment_general_vars['treatment_fpage_title_general']; // string
-					$treatment_fpage_intro_general = $fpage_text_treatment_general_vars['treatment_fpage_intro_general']; // string
-
-			}
+			// Get the system settings for general placement of condition item text elements
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/condition.php' );
 
 			// Related Conditions Section Query
 			include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
