@@ -8639,215 +8639,240 @@ function uamswp_fad_fpage_text_image_overlay(
 	$text_image_overlay_id = 'archives' // string (optional) // Section ID attribute value
 ) {
 
-	// Check/define variables
+	// Retrieve the value of the transients
+	uamswp_fad_get_transient( 'text_image_overlay_row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
+	uamswp_fad_get_transient( 'text_image_overlay_row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
 
-		// Get the ontology subsection values
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
+	if (
+		!empty( $text_image_overlay_row_0 )
+		&&
+		!empty( $text_image_overlay_row_1 )
+	) {
 
-		// Page Title
-
-			if ( !isset($page_title) || empty($page_title) ) {
-				$page_title = isset($page_titles['page_title']) ? $page_titles['page_title'] : get_the_title();
-			}
-
-		// Ontology Type
-
-			if ( !isset($ontology_type) || empty($ontology_type) ) {
-				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-			}
-
-		// Get system settings for text elements in an area of expertise subsection (or profile)
-		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/expertise.php' );
-
-		// Values Specific to the Fake Subpage
-
-			// Define whether to display the item linking to the parent archive in the overlay block
-			$show_parent_archive = false;
-
-			if ( $current_fpage == 'providers' ) {
-
-				// Get the system settings for the image elements of the provider archive
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/provider.php' );
-
-				// Create array of main archive attributes
-				$text_image_overlay_main_archive = array(
-					'heading'			=> $provider_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $provider_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $provider_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
-					'image'				=> $provider_archive_image // Background image ID // int
-				);
-
-				// Create array of top-level ontology ancestor fake subpage attributes
-				$text_image_overlay_parent_archive = array(
-					'heading'			=> $provider_fpage_ref_top_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $provider_fpage_ref_top_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $provider_fpage_ref_top_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('providers'), // Full URL // str
-					'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
-				);
-
-			} elseif ( $current_fpage == 'locations' ) {
-
-				// Get the system settings for the image elements of the location archive
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/location.php' );
-
-				// Create array of main archive attributes
-				$text_image_overlay_main_archive = array(
-					'heading'			=> $location_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $location_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $location_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
-					'image'				=> $location_archive_image // Background image ID // int
-				);
-
-				// Create array of top-level ontology ancestor fake subpage attributes
-				$text_image_overlay_parent_archive = array(
-					'heading'			=> $location_fpage_ref_top_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $location_fpage_ref_top_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $location_fpage_ref_top_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('locations'), // Full URL // str
-					'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
-				);
-
-			} elseif ( $current_fpage == 'specialties' ) {
-
-				// Get the system settings for the image elements of the area of expertise archive
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
-
-				// Create array of main archive attributes
-				$text_image_overlay_main_archive = array(
-					'heading'			=> $expertise_descendant_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $expertise_descendant_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $expertise_descendant_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
-					'image'				=> $expertise_archive_image // Background image ID // int
-				);
-
-			} elseif ( $current_fpage == 'related' ) {
-
-				// Get the system settings for the image elements of the area of expertise archive
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
-
-				// Create array of main archive attributes
-				$text_image_overlay_main_archive = array(
-					'heading'			=> $expertise_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $expertise_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $expertise_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
-					'image'				=> $expertise_archive_image // Background image ID // int
-				);
-
-			} elseif ( $current_fpage == 'resources' ) {
-
-				// Define whether to display the item linking to the parent archive in the overlay block
-				$show_parent_archive = true;
-
-				// Get the system settings for the image elements of the clinical resource archive
-				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/clinical-resource.php' );
-
-				// Create array of main archive attributes
-				$text_image_overlay_main_archive = array(
-					'heading'			=> $clinical_resource_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $clinical_resource_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $clinical_resource_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
-					'image'				=> $clinical_resource_archive_image // Background image ID // int
-				);
-
-				// Create array of top-level ontology ancestor fake subpage attributes
-				$text_image_overlay_parent_archive = array(
-					'heading'			=> $clinical_resource_fpage_ref_top_title_expertise, // Heading text, limited to 65 characters // str
-					'body'				=> $clinical_resource_fpage_ref_top_intro_expertise, // Body text, limited to 280 characters // str
-					'button_text'		=> $clinical_resource_fpage_ref_top_link_expertise, // Link text, limited to 27 characters // str
-					'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('resources'), // Full URL // str
-					'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
-				);
-
-			}
-
-		// Create the sequence of background colors
-		$text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
-
-		// Create an array for storing the UAMS Text & Image Overlay Block item configuration arrays
-
-
-			// Iteration count
-			$i = 0;
-
-			// Create the array for the UAMS Text & Image Overlay Block item linking to the parent archive
-			// ... and add it to the main array
-
-			if (
-				!$page_top_level_query // If the fake subpage's parent is not the top-level ontology item
-				&&
-				isset($text_image_overlay_parent_archive)
-				) {
-
-				// Create the array
-
-					$parent_archive = array();
-					$parent_archive['heading'] = $text_image_overlay_parent_archive['heading']; // Heading text, limited to 65 characters // str
-					$parent_archive['body'] = $text_image_overlay_parent_archive['body']; // Body text, limited to 280 characters // str
-					$parent_archive['button_text'] = $text_image_overlay_parent_archive['button_text']; // Link text, limited to 27 characters // str
-					$parent_archive['button_url'] = $text_image_overlay_parent_archive['button_url']; // Full URL // str
-					$parent_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
-					$parent_archive['button_desc'] = $parent_archive['button_text'] . ', ' . $parent_archive['heading']; // Link ARIA label text // str
-					$parent_archive['image'] = $text_image_overlay_parent_archive['image']; // Background image ID // int
-					$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-
-				// Add it to the main array
-				$fpage_text_image_overlay[] = $parent_archive;
-
-				// Advance the iteration count
-				$i++;
-
-			}
-
-			// Create the array for the UAMS Text & Image Overlay Block item linking to the main archive
-			// ... and add it to the main array
-
-				// Create the array
-
-					$main_archive = array();
-					$main_archive['heading'] = $text_image_overlay_main_archive['heading']; // Heading text, limited to 65 characters // str
-					$main_archive['body'] = $text_image_overlay_main_archive['body']; // Body text, limited to 280 characters // str
-					$main_archive['button_text'] = $text_image_overlay_main_archive['button_text']; // Link text, limited to 27 characters // str
-					$main_archive['button_url'] = $text_image_overlay_main_archive['button_url']; // Full URL // str
-					$main_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
-					$main_archive['button_desc'] = $main_archive['button_text'] . ', ' . $main_archive['heading']; // Link ARIA label text // str
-					$main_archive['image'] = $text_image_overlay_main_archive['image']; // Background image ID // int
-					$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
-
-				// Add it to the main array
-				$fpage_text_image_overlay[] = $main_archive;
-
-	// Pass the values to the UAMS Text & Image Overlay Block template part
-
-		if (
-			isset($parent_archive) && !empty($parent_archive)
-			&&
-			isset($main_archive) && !empty($main_archive)
-		) {
-
-			$text_image_overlay_row_0 = $parent_archive; // Values for the first item
-			$text_image_overlay_row_1 = $main_archive; // Values for the second item
-
-		} elseif (
-			isset($main_archive) && !empty($main_archive)
-		) {
-
-			$text_image_overlay_row_0 = $main_archive; // Values for the first item
-			$text_image_overlay_row_1 = ''; // Values for the second item
-
-		} else {
-
-			$text_image_overlay_row_0 = ''; // Values for the first item
-			$text_image_overlay_row_1 = ''; // Values for the second item
-
-		}
+		/* 
+		 * The transients exists.
+		 * Load the template part.
+		 */
 
 		include( UAMS_FAD_PATH . '/templates/parts/html/section/text-image-overlay.php' );
+
+	} else {
+
+		/* 
+		 * The transient does not exist.
+		 * Define the variables again.
+		 */
+
+		// Check/define variables
+
+			// Get the ontology subsection values
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
+
+			// Page Titles Array
+			$page_titles = is_array($page_titles) ? $page_titles : array( $page_titles );
+			$page_titles['page_title'] = isset($page_titles['page_title']) ? $page_titles['page_title'] : get_the_title();
+
+			// Ontology Type
+			$ontology_type = !empty($ontology_type) ? $ontology_type : true;
+
+			// Get system settings for text elements in an area of expertise subsection (or profile)
+			include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/expertise.php' );
+
+			// Values Specific to the Fake Subpage
+
+				// Define whether to display the item linking to the parent archive in the overlay block
+				$show_parent_archive = false;
+
+				if ( $current_fpage == 'providers' ) {
+
+					// Get the system settings for the image elements of the provider archive
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/provider.php' );
+
+					// Create array of main archive attributes
+					$text_image_overlay_main_archive = array(
+						'heading'			=> $provider_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $provider_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $provider_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> get_post_type_archive_link('provider'), // Full URL // str
+						'image'				=> $provider_archive_image // Background image ID // int
+					);
+
+					// Create array of top-level ontology ancestor fake subpage attributes
+					$text_image_overlay_parent_archive = array(
+						'heading'			=> $provider_fpage_ref_top_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $provider_fpage_ref_top_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $provider_fpage_ref_top_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('providers'), // Full URL // str
+						'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
+					);
+
+				} elseif ( $current_fpage == 'locations' ) {
+
+					// Get the system settings for the image elements of the location archive
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/location.php' );
+
+					// Create array of main archive attributes
+					$text_image_overlay_main_archive = array(
+						'heading'			=> $location_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $location_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $location_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> get_post_type_archive_link('location'), // Full URL // str
+						'image'				=> $location_archive_image // Background image ID // int
+					);
+
+					// Create array of top-level ontology ancestor fake subpage attributes
+					$text_image_overlay_parent_archive = array(
+						'heading'			=> $location_fpage_ref_top_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $location_fpage_ref_top_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $location_fpage_ref_top_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('locations'), // Full URL // str
+						'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
+					);
+
+				} elseif ( $current_fpage == 'specialties' ) {
+
+					// Get the system settings for the image elements of the area of expertise archive
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
+
+					// Create array of main archive attributes
+					$text_image_overlay_main_archive = array(
+						'heading'			=> $expertise_descendant_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $expertise_descendant_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $expertise_descendant_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
+						'image'				=> $expertise_archive_image // Background image ID // int
+					);
+
+				} elseif ( $current_fpage == 'related' ) {
+
+					// Get the system settings for the image elements of the area of expertise archive
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
+
+					// Create array of main archive attributes
+					$text_image_overlay_main_archive = array(
+						'heading'			=> $expertise_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $expertise_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $expertise_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> get_post_type_archive_link('expertise'), // Full URL // str
+						'image'				=> $expertise_archive_image // Background image ID // int
+					);
+
+				} elseif ( $current_fpage == 'resources' ) {
+
+					// Define whether to display the item linking to the parent archive in the overlay block
+					$show_parent_archive = true;
+
+					// Get the system settings for the image elements of the clinical resource archive
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/clinical-resource.php' );
+
+					// Create array of main archive attributes
+					$text_image_overlay_main_archive = array(
+						'heading'			=> $clinical_resource_fpage_ref_main_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $clinical_resource_fpage_ref_main_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $clinical_resource_fpage_ref_main_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> get_post_type_archive_link('clinical-resource'), // Full URL // str
+						'image'				=> $clinical_resource_archive_image // Background image ID // int
+					);
+
+					// Create array of top-level ontology ancestor fake subpage attributes
+					$text_image_overlay_parent_archive = array(
+						'heading'			=> $clinical_resource_fpage_ref_top_title_expertise, // Heading text, limited to 65 characters // str
+						'body'				=> $clinical_resource_fpage_ref_top_intro_expertise, // Body text, limited to 280 characters // str
+						'button_text'		=> $clinical_resource_fpage_ref_top_link_expertise, // Link text, limited to 27 characters // str
+						'button_url'		=> trailingslashit(get_permalink($ancestors_ontology_farthest)) . user_trailingslashit('resources'), // Full URL // str
+						'image'				=> get_post_thumbnail_id($ancestors_ontology_farthest) // Background image ID // int
+					);
+
+				}
+
+			// Create the sequence of background colors
+			$text_image_overlay_color_auto = array( 'bg-blue', 'bg-green' );
+
+			// Create an array for storing the UAMS Text & Image Overlay Block item configuration arrays
+
+
+				// Iteration count
+				$i = 0;
+
+				// Create the array for the UAMS Text & Image Overlay Block item linking to the parent archive
+				// ... and add it to the main array
+
+				if (
+					!$page_top_level_query // If the fake subpage's parent is not the top-level ontology item
+					&&
+					isset($text_image_overlay_parent_archive)
+					) {
+
+					// Create the array
+
+						$parent_archive = array();
+						$parent_archive['heading'] = $text_image_overlay_parent_archive['heading']; // Heading text, limited to 65 characters // str
+						$parent_archive['body'] = $text_image_overlay_parent_archive['body']; // Body text, limited to 280 characters // str
+						$parent_archive['button_text'] = $text_image_overlay_parent_archive['button_text']; // Link text, limited to 27 characters // str
+						$parent_archive['button_url'] = $text_image_overlay_parent_archive['button_url']; // Full URL // str
+						$parent_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
+						$parent_archive['button_desc'] = $parent_archive['button_text'] . ', ' . $parent_archive['heading']; // Link ARIA label text // str
+						$parent_archive['image'] = $text_image_overlay_parent_archive['image']; // Background image ID // int
+						$parent_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+
+					// Add it to the main array
+					$fpage_text_image_overlay[] = $parent_archive;
+
+					// Advance the iteration count
+					$i++;
+
+				}
+
+				// Create the array for the UAMS Text & Image Overlay Block item linking to the main archive
+				// ... and add it to the main array
+
+					// Create the array
+
+						$main_archive = array();
+						$main_archive['heading'] = $text_image_overlay_main_archive['heading']; // Heading text, limited to 65 characters // str
+						$main_archive['body'] = $text_image_overlay_main_archive['body']; // Body text, limited to 280 characters // str
+						$main_archive['button_text'] = $text_image_overlay_main_archive['button_text']; // Link text, limited to 27 characters // str
+						$main_archive['button_url'] = $text_image_overlay_main_archive['button_url']; // Full URL // str
+						$main_archive['button_target'] = true; // Query on whether to open the link in a new window/tab // bool
+						$main_archive['button_desc'] = $main_archive['button_text'] . ', ' . $main_archive['heading']; // Link ARIA label text // str
+						$main_archive['image'] = $text_image_overlay_main_archive['image']; // Background image ID // int
+						$main_archive['background_color'] = $text_image_overlay_color_auto[$i]; // Background color value // str (default: 'blue')
+
+					// Add it to the main array
+					$fpage_text_image_overlay[] = $main_archive;
+
+		// Pass the values to the UAMS Text & Image Overlay Block template part
+
+			if (
+				isset($parent_archive) && !empty($parent_archive)
+				&&
+				isset($main_archive) && !empty($main_archive)
+			) {
+
+				$text_image_overlay_row_0 = $parent_archive; // Values for the first item
+				$text_image_overlay_row_1 = $main_archive; // Values for the second item
+
+			} elseif (
+				isset($main_archive) && !empty($main_archive)
+			) {
+
+				$text_image_overlay_row_0 = $main_archive; // Values for the first item
+				$text_image_overlay_row_1 = ''; // Values for the second item
+
+			} else {
+
+				$text_image_overlay_row_0 = ''; // Values for the first item
+				$text_image_overlay_row_1 = ''; // Values for the second item
+
+			}
+
+		// Set/update the value of the transients
+		uamswp_fad_set_transient( 'text_image_overlay_row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
+		uamswp_fad_set_transient( 'text_image_overlay_row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
+
+		include( UAMS_FAD_PATH . '/templates/parts/html/section/text-image-overlay.php' );
+
+	}
 
 }
 
