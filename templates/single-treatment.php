@@ -374,15 +374,9 @@
 
 			// Get system settings for jump links (a.k.a. anchor links)
 
-				// Eliminate PHP errors
-
-					$labels_jump_links_vars = '';
-					$fad_jump_links_title = '';
-
 				if ( $jump_links_section_show ) {
 
-					$labels_jump_links_vars = uamswp_fad_labels_jump_links();
-						$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/jump-links.php' );
 
 				}
 
