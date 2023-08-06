@@ -8173,13 +8173,13 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for address or location
 	function uamswp_schema_address(
-		$schema_address = '', // array (optional) // Main address or location schema array
+		$schema_address = array(), // array (optional) // Main address or location schema array
 		$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
 		$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
 		$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
 		$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 		$postal_code = '', // string (optional) // The postal code. For example, 94043.
-		$address_country = '', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+		$address_country = 'USA', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
 		$name = '', // string (optional) // The name of the item.
 		$telephone = '', // string (optional) // The telephone number.
 		$fax_number = '' // string (optional) // The fax number.
@@ -8210,16 +8210,8 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
-			$street_address = isset($street_address) ? $street_address : '';
-			$post_office_box_number = isset($post_office_box_number) ? $post_office_box_number : '';
-			$address_locality = isset($address_locality) ? $address_locality : '';
-			$address_region = isset($address_region) ? $address_region : '';
-			$postal_code = isset($postal_code) ? $postal_code : '';
-			$address_country = ( isset($address_country) && !empty($address_country) ) ? $address_country : 'USA';
-			$name = isset($name) ? $name : '';
-			$telephone = isset($telephone) ? $telephone : '';
-			$fax_number = isset($fax_number) ? $fax_number : '';
+			$schema_address = is_array($schema_address) ? $schema_address : array();
+			$address_country = !empty($address_country) ? $address_country : 'USA';
 
 		// Create an array for this item
 
@@ -8281,7 +8273,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for medicalSpecialty
 	function uamswp_schema_medical_specialty(
-		$schema_medical_specialty = '', // array (optional) // Main medicalSpecialty schema array
+		$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
 		$name = '', // string (optional) // The name of the item.
 		$url = '', // string (optional) // URL of the item.
 		$alternate_name = '' // string (optional) // An alias for the item.
@@ -8304,10 +8296,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-			$name = isset($name) ? $name : '';
-			$url = isset($url) ? $url : '';
-			$alternate_name = isset($alternate_name) ? $alternate_name : '';
+			$schema_medical_specialty = is_array($schema_medical_specialty) ? $schema_medical_specialty : array();
 
 		// Create an array for this item
 
@@ -8345,7 +8334,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for faxNumber
 	function uamswp_schema_fax_number(
-		$schema_fax_number = '', // array (optional) // Main faxNumber schema array
+		$schema_fax_number = array(), // array (optional) // Main faxNumber schema array
 		$fax_number = '' // string (optional) // The fax number.
 	) {
 
@@ -8365,8 +8354,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
-			$fax_number = isset($fax_number) ? $fax_number : '';
+			$schema_fax_number = is_array($schema_fax_number) ? $schema_fax_number : array();
 
 		// Add values to the main faxNumber schema array
 
@@ -8382,7 +8370,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for telephone
 	function uamswp_schema_telephone(
-		$schema_telephone = '', // array (optional) // Main telephone schema array
+		$schema_telephone = array(), // array (optional) // Main telephone schema array
 		$telephone_number = '' // string (optional) // The telephone number.
 	) {
 
@@ -8402,8 +8390,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-			$telephone_number = isset($telephone_number) ? $telephone_number : '';
+			$schema_telephone = is_array($schema_telephone) ? $schema_telephone : array();
 
 		// Add values to the main telephone schema array
 
@@ -8419,8 +8406,8 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for OpeningHoursSpecification
 	function uamswp_schema_opening_hours_specification(
-		$schema_opening_hours_specification = '', // array (optional) // Main OpeningHoursSpecification schema array
-		$day_of_week = '', // array|string (optional) // The day of the week for which these opening hours are valid.
+		$schema_opening_hours_specification = array(), // array (optional) // Main OpeningHoursSpecification schema array
+		$day_of_week = array(), // array|string (optional) // The day of the week for which these opening hours are valid.
 		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		$closes = '', // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		$valid_from = '', // string (optional) // The date when the item becomes valid.
@@ -8465,12 +8452,8 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
-			$day_of_week = isset($day_of_week) ? $day_of_week : array();
-			$opens = isset($opens) ? $opens : '';
-			$closes = isset($closes) ? $closes : '';
-			$valid_from = isset($valid_from) ? $valid_from : '';
-			$valid_through = isset($valid_through) ? $valid_through : '';
+			$schema_opening_hours_specification = is_array($schema_opening_hours_specification) ? $schema_opening_hours_specification : array();
+			$day_of_week = !empty($day_of_week) ? $day_of_week : array();
 
 		// Create an array for this item
 
@@ -8516,7 +8499,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for OpeningHours
 	function uamswp_schema_opening_hours(
-		$schema_opening_hours = '', // array (optional) // Main OpeningHours schema array
+		$schema_opening_hours = array() // array (optional) // Main OpeningHours schema array
 		$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -8541,10 +8524,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
-			$day_of_week = isset($day_of_week) ? $day_of_week : '';
-			$opens = isset($opens) ? $opens : '';
-			$closes = isset($closes) ? $closes : '';
+			$schema_opening_hours = is_array($schema_opening_hours) ? $schema_opening_hours : array();
 
 		// Add values to the array
 
@@ -8566,7 +8546,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for geo
 	function uamswp_schema_geo(
-		$schema_geo = '', // array (optional) // Main geo schema array
+		$schema_geo = array(), // array (optional) // Main geo schema array
 		$latitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 		$longitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 		$elevation = '' // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
@@ -8591,10 +8571,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
-			$latitude = isset($latitude) ? $latitude : '';
-			$longitude = isset($longitude) ? $longitude : '';
-			$elevation = isset($elevation) ? $elevation : '';
+			$schema_geo = is_array($schema_geo)? $schema_geo : array();
 
 		// Create an array for this item
 
