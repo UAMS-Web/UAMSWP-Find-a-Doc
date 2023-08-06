@@ -804,32 +804,17 @@
 					$expertise_section_title,
 					$expertise_section_intro
 				) {
+
 					include( UAMS_FAD_PATH . '/templates/parts/html/section/list/expertise.php' );
+
 				}, 20 );
 
 			// Construct appointment information section
 
-				add_action( 'genesis_after_entry', function() use (
-					$location_single_name,
-					$location_single_name_attr,
-					$appointment_section_show
-				) {
-					if ( $appointment_section_show ) {
-						$appointment_location_url = '/location/';
-						//$appointment_location_label = 'View a list of UAMS Health locations';
-						?>
-						<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-xs-12">
-										<h2>Make an Appointment</h2>
-										<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a <?php echo strtolower($location_single_name_attr); ?> directly">contacting a <?php echo strtolower($location_single_name); ?> directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
-									</div>
-								</div>
-							</div>
-						</section>
-						<?php
-					}
+				add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
+
+					include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+
 				}, 22 );
 
 	// FOOTER

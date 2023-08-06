@@ -2478,36 +2478,6 @@ function uamswp_keyword_hook_header( $keywords ) {
 
 }
 
-// Construct ontology subsection appointment information section
-function uamswp_fad_ontology_appointment(
-	$appointment_section_show // bool
-) {
-
-	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
-
-	if ( $appointment_section_show ) {
-		if ( get_field('location_expertise') ) {
-			$appointment_location_url = '#locations';
-			//$appointment_location_label = 'Go to the list of relevant locations';
-		} else {
-			$appointment_location_url = user_trailingslashit('/location/');
-			//$appointment_location_label = 'View a list of UAMS Health locations';
-		} ?>
-		<section class="uams-module cta-bar cta-bar-1 bg-auto" id="appointment-info">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2>Make an Appointment</h2>
-						<p>Request an appointment by <a href="<?php echo $appointment_location_url; ?>" data-itemtitle="Contact a clinic directly">contacting a <?php echo strtolower($location_single_name); ?> directly</a> or by calling the UAMS&nbsp;Health appointment line at <a href="tel:501-686-8000" class="no-break" data-itemtitle="Call the UAMS Health appointment line">(501) 686-8000</a>.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php }
-
-}
-
 // Add bg-white class to article.entry element
 function uamswp_add_entry_class( $attributes ) {
 
@@ -7974,19 +7944,19 @@ function uamswp_fad_appointment_patients() {
 		// Phone Number Information
 
 			// New Patients Only
-			$appointment_patients_phone_number_new = get_field('appointment_patients_phone_number_new', 'option') ?: '';
+			$appointment_patients_phone_number_new = format_phone_dash(get_field('appointment_patients_phone_number_new', 'option')) ?: '';
 			$appointment_patients_phone_label_new = get_field('appointment_patients_phone_label_new', 'option') ?: '';
 			$appointment_patients_phone_label_new_attr = uamswp_attr_conversion($appointment_patients_phone_label_new);
 			$appointment_patients_phone_info_new = get_field('appointment_patients_phone_info_new', 'option') ?: '';
 
 			// Existing Patients Only
-			$appointment_patients_phone_number_existing = get_field('appointment_patients_phone_number_existing', 'option') ?: '';
+			$appointment_patients_phone_number_existing = format_phone_dash(get_field('appointment_patients_phone_number_existing', 'option')) ?: '';
 			$appointment_patients_phone_label_existing = get_field('appointment_patients_phone_label_existing', 'option') ?: '';
 			$appointment_patients_phone_label_existing_attr = uamswp_attr_conversion($appointment_patients_phone_label_existing);
 			$appointment_patients_phone_info_existing = get_field('appointment_patients_phone_info_existing', 'option') ?: '';
 
 			// Both New and Existing Patients
-			$appointment_patients_phone_number_both = get_field('appointment_patients_phone_number_both', 'option') ?: '';
+			$appointment_patients_phone_number_both = format_phone_dash(get_field('appointment_patients_phone_number_both', 'option')) ?: '';
 			$appointment_patients_phone_label_both = get_field('appointment_patients_phone_label_both', 'option') ?: '';
 			$appointment_patients_phone_label_both_attr = uamswp_attr_conversion($appointment_patients_phone_label_both);
 			$appointment_patients_phone_info_both = get_field('appointment_patients_phone_info_both', 'option') ?: '';
@@ -8074,14 +8044,14 @@ function uamswp_fad_appointment_refer() {
 
 		// Phone Number Information
 
-			$appointment_refer_phone_number = get_field('appointment_refer_phone_number', 'option') ?: '';
+			$appointment_refer_phone_number = format_phone_dash(get_field('appointment_refer_phone_number', 'option')) ?: '';
 			$appointment_refer_phone_label = get_field('appointment_refer_phone_label', 'option') ?: '';
 			$appointment_refer_phone_label_attr = uamswp_attr_conversion($appointment_refer_phone_label);
 			$appointment_refer_phone_info = get_field('appointment_refer_phone_info', 'option') ?: '';
 
 		// Fax Information
 
-			$appointment_refer_fax_number = get_field('appointment_refer_fax_number', 'option') ?: '';
+			$appointment_refer_fax_number = format_phone_dash(get_field('appointment_refer_fax_number', 'option')) ?: '';
 			$appointment_refer_fax_label = get_field('appointment_refer_fax_label', 'option') ?: '';
 			$appointment_refer_fax_label_attr = uamswp_attr_conversion($appointment_refer_fax_label);
 			$appointment_refer_fax_info = get_field('appointment_refer_fax_info', 'option') ?: '';

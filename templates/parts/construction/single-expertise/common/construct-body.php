@@ -105,12 +105,12 @@
 
 			// Display appointment information
 
-				add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
+				add_action( 'genesis_after_entry', function() use (
+					$appointment_section_show,
+					$location_section_show
+				) {
 
-					uamswp_fad_ontology_appointment(
-
-						$appointment_section_show
-					);
+					include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
 
 				}, 26 );
 
