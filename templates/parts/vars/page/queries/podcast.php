@@ -25,6 +25,6 @@
 		$podcast_name, // string
 		$jump_link_count // int
 	);
-		$podcast_section_show = $treatment_query_vars['podcast_section_show']; // bool
+		$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
 
 }
