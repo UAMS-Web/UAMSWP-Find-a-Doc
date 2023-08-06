@@ -149,13 +149,7 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 				$podcast_subject = $page_title; // string
 
 				// Check if podcast section should be displayed
-
-					$podcast_query_vars = uamswp_fad_podcast_query(
-						$page_id, // int
-						$podcast_name // string
-					);
-						$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/podcast.php' );
 
 				add_action( 'genesis_after_entry', function() use (
 					$podcast_name,

@@ -674,13 +674,7 @@
 			// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
 
 				$podcast_name = get_field('physician_podcast_name');
-				$podcast_query_vars = uamswp_fad_podcast_query(
-					$page_id, // int
-					$podcast_name, // string
-					$jump_link_count // int
-				);
-					$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-					$jump_link_count = $podcast_query_vars['jump_link_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/podcast.php' );
 
 			// Check if Clinical Bio section should be displayed
 
