@@ -7772,7 +7772,7 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_clinical_resource_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_image_clinical_resource_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $fpage_image_clinical_resource_vars;
