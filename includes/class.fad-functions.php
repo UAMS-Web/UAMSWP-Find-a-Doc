@@ -2367,16 +2367,16 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $foo, __FUNCTION__ );
+		uamswp_fad_get_transient( 'vars_' . $page_id, $treatment_query_vars, __FUNCTION__ );
 
-		if ( !empty( $foo ) ) {
+		if ( !empty( $treatment_query_vars ) ) {
 
 			/* 
 			 * The transient exists.
 			 * Return the variable.
 			 */
 
-			return $foo;
+			return $treatment_query_vars;
 
 		} else {
 
