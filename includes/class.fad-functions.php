@@ -8633,7 +8633,7 @@ if ( !function_exists('array_is_list') ) {
 // Construct UAMS Text & Image Overlay Block on Ontology Fake Subpages
 function uamswp_fad_fpage_text_image_overlay(
 	$page_id, // int
-	$page_titles, // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
+	$page_titles, // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	$current_fpage = '', // string (optional) // Fake subpage slug
 	$ontology_type = true, // bool (optional)
 	$text_image_overlay_id = 'archives' // string (optional) // Section ID attribute value
