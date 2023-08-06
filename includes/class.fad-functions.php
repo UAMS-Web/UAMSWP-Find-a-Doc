@@ -8079,20 +8079,20 @@ function uamswp_fad_labels_jump_links() {
 
 }
 
-// Crop and resize images for Open Graph and Twitter
-function uamswp_meta_image_resize( $featured_image ) {
+// Set image values for Open Graph, Twitter and Oembed
+function uamswp_meta_image_values( $featured_image ) {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars_' . $featured_image, $meta_image_resize_vars, __FUNCTION__ );
+	uamswp_fad_get_transient( 'vars_' . $featured_image, $meta_image_values_vars, __FUNCTION__ );
 
-	if ( !empty( $meta_image_resize_vars ) ) {
+	if ( !empty( $meta_image_values_vars ) ) {
 
 		/* 
 		 * The transient exists.
 		 * Return the variable.
 		 */
 
-		return $meta_image_resize_vars;
+		return $meta_image_values_vars;
 
 	} else {
 
@@ -8145,23 +8145,25 @@ function uamswp_meta_image_resize( $featured_image ) {
 			$meta_twitter_image_height = '';
 		}
 
+		$meta_twitter_image_alt = $featured_image ? get_post_meta( $featured_image, '_wp_attachment_image_alt', true ) : ''; // string // Alt text of the image in $meta_twitter_image
 
 		// Create an array to be used on the templates and template parts
 
-			$meta_image_resize_vars = array(
+			$meta_image_values_vars = array(
 				'meta_og_image'				=> $meta_og_image, // string
 				'meta_og_image_width'		=> $meta_og_image_width, // int
 				'meta_og_image_height'		=> $meta_og_image_height, // int
 				'meta_twitter_image'		=> $meta_twitter_image, // string
 				'meta_twitter_image_width'	=> $meta_twitter_image_width, // int
-				'meta_twitter_image_height'	=> $meta_twitter_image_height // int
+				'meta_twitter_image_height'	=> $meta_twitter_image_height, // int
+				'meta_twitter_image_alt'	=> $meta_twitter_image_alt // string // Alt text of the image in $meta_twitter_image
 			);
 			
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars_' . $featured_image, $meta_image_resize_vars, __FUNCTION__ );
+		uamswp_fad_set_transient( 'vars_' . $featured_image, $meta_image_values_vars, __FUNCTION__ );
 
 		// Return the variable
-		return $meta_image_resize_vars;
+		return $meta_image_values_vars;
 
 	}
 

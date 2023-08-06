@@ -1,9 +1,9 @@
 <?php
 /*
- * Template Name: Open Graph Social Media Meta Tags
+ * Template Name: Social Media Meta Tags
  * 
- * Description: A template part that displays the open graph meta tags in the 
- * head element
+ * Description: A template part that displays the Open Graph, twitter and Oembed 
+ * meta tags in the head element
  * 
  * Optional vars:
  * 	$meta_og_type // string // Open Graph type
@@ -35,49 +35,13 @@
 
 // Check/define variables
 
-	// Define featured image values
+	// Get the featured image ID
 
-		// Get the featured image ID
+		$featured_image = ( isset($featured_image) && !empty($featured_image) ) ? $featured_image : get_post_thumbnail_id(); // int // Featured image ID
+		$featured_image = $featured_image ? $featured_image : '';
 
-			$featured_image = ( isset($featured_image) && !empty($featured_image) ) ? $featured_image : get_post_thumbnail_id(); // int // Featured image ID
-			$featured_image = $featured_image ? $featured_image : '';
-
-		// Crop and resize images for Open Graph and Twitter
-
-			if ( $featured_image ) {
-
-					$meta_image_resize_vars = uamswp_meta_image_resize( $featured_image );
-						$meta_og_image = $meta_image_resize_vars['meta_og_image']; // string
-						$meta_og_image_width = $meta_image_resize_vars['meta_og_image_width']; // int
-						$meta_og_image_height = $meta_image_resize_vars['meta_og_image_height']; // int
-						$meta_twitter_image = $meta_image_resize_vars['meta_twitter_image']; // string
-						$meta_twitter_image_width = $meta_image_resize_vars['meta_twitter_image_width']; // int
-						$meta_twitter_image_height = $meta_image_resize_vars['meta_twitter_image_height']; // int
-
-				$meta_oembed_thumbnail_size = ''; // string // Thumbnail size used in Oembed
-				$meta_oembed_thumbnail = ''; // string // An image URL which should represent your object within Oembed
-				$meta_oembed_thumbnail_width = ''; // int // Width of the image in $meta_oembed_thumbnail
-				$meta_oembed_thumbnail_height = ''; // int // Width of the image in $meta_oembed_thumbnail
-				$meta_twitter_image_alt = get_post_meta( $featured_image, '_wp_attachment_image_alt', true ); // string // Alt text of the image in $meta_twitter_image
-
-			} else {
-
-				// Eliminate PHP errors
-
-					$meta_image_resize_vars = '';
-					$meta_og_image = '';
-					$meta_og_image_width = '';
-					$meta_og_image_height = '';
-					$meta_twitter_image = '';
-					$meta_twitter_image_width = '';
-					$meta_twitter_image_height = '';
-					$meta_oembed_thumbnail_size = '';
-					$meta_oembed_thumbnail = '';
-					$meta_oembed_thumbnail_width = '';
-					$meta_oembed_thumbnail_height = '';
-					$meta_twitter_image_alt = '';
-
-			}
+	// Set image values for Open Graph, Twitter and Oembed
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/common/meta-image-values.php' );
 
 // Filter Open Graph type (og:type) and properties for that type
 
