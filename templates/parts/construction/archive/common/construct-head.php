@@ -1,26 +1,26 @@
 <?php
 /*
- * Template Name: Area of Expertise Template HEAD Elements
+ * Template Name: Archive Template Common HEAD Elements
  * 
  * Description: A template part that constructs the HEAD elements common to all 
- * area of expertise overview pages and all fake area of expertise subpages
+ * archive pages
  */
 
 // Title tag
 
 	// Override SEOPress's standard title tag settings
 
-		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
+	add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
 
-			if ( $meta_title ) {
+		if ( $meta_title ) {
 
-				$html = $meta_title;
+			$html = $meta_title;
 
-			}
+		}
 
-			return $html;
+		return $html;
 
-		}, 15, 2 );
+	}, 15, 2 );
 
 // Meta Description and Schema Description
 
@@ -53,6 +53,11 @@
 		} );
 
 // Meta Social Media Tags
+
+	// Filter hooks
+	include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
+
+// Override the theme's method of defining the social media meta tags
 
 	// Filter hooks
 	include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
