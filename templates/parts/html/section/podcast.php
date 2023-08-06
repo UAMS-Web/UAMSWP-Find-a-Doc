@@ -19,26 +19,17 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 if ( $podcast_section_show ) {
 
-	if ( $podcast_filter == 'tag' ) {
-
-		$podcast_filter_id = '303';
-
-	} elseif ( $podcast_filter == 'doctor' ) {
-
-		$podcast_filter_id = '303,1837';
-
-	} else {
-
-		$podcast_filter_id = '';
-
-	}
+	$podcast_filter_id = array (
+		'tag'		=> '303',
+		'doctor'	=> '303,1837'
+	)
 
 	?>
 	<section class="uams-module podcast-list bg-auto" id="podcast">
 		<script type="text/javascript" src="https://radiomd.com/widget/easyXDM.js">
 		</script>
 		<script type="text/javascript">
-			radiomd_embedded_filtered_<?php echo $podcast_filter; ?>("uams","radiomd-embedded-filtered-<?php echo $podcast_filter; ?>",<?php echo $podcast_filter_id; ?>,"<?php echo $podcast_name; ?>");
+			radiomd_embedded_filtered_<?php echo $podcast_filter; ?>("uams","radiomd-embedded-filtered-<?php echo $podcast_filter; ?>",<?php echo $podcast_filter_id[$podcast_filter]; ?>,"<?php echo $podcast_name; ?>");
 		</script>
 		<style type="text/css">
 			#radiomd-embedded-filtered-<?php echo $podcast_filter; ?> iframe {
