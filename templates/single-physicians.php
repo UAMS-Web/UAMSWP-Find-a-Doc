@@ -1575,12 +1575,7 @@
 
 							$podcast_filter = 'doctor';
 							$podcast_subject = $short_name;
-							uamswp_fad_podcast(
-								$podcast_name, // string
-								$podcast_section_show, // bool
-								$podcast_filter, // string // Expected values: 'tag' or 'doctor'
-								$podcast_subject // string
-							);
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/podcast.php' );
 
 						// Construct Clinical Resources Section
 

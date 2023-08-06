@@ -142,19 +142,20 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 					endif;
 				}
 
-			// Check if podcast section should be displayed
-
-				$podcast_name = get_field('expertise_podcast_name');
-				$podcast_query_vars = uamswp_fad_podcast_query(
-					$page_id, // int
-					$podcast_name // string
-				);
-					$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-
 			// Construct UAMS Health Talk podcast section
 
+				$podcast_name = get_field('expertise_podcast_name');
 				$podcast_filter = 'tag'; // string // Expected values: 'tag' or 'doctor'
 				$podcast_subject = $page_title; // string
+
+				// Check if podcast section should be displayed
+
+					$podcast_query_vars = uamswp_fad_podcast_query(
+						$page_id, // int
+						$podcast_name // string
+					);
+						$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
+
 
 				add_action( 'genesis_after_entry', function() use (
 					$podcast_name,
@@ -162,12 +163,9 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 					$podcast_filter,
 					$podcast_subject
 				) {
-					uamswp_fad_podcast(
-						$podcast_name, // string
-						$podcast_section_show, // bool
-						$podcast_filter, // string // Expected values: 'tag' or 'doctor'
-						$podcast_subject // string
-					);
+
+					include( UAMS_FAD_PATH . '/templates/parts/html/section/podcast.php' );
+
 				}, 10 );
 
 			// Construct Combined Conditions and Treatments Section
