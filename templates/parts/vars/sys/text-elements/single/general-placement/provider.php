@@ -30,7 +30,7 @@ if (
 ) {
 
 	$fpage_text_provider_general_vars = uamswp_fad_fpage_text_provider_general(
-		$page_id // int
+		$page_id, // int
 		$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	);
 		$provider_fpage_title_general = $fpage_text_provider_general_vars['provider_fpage_title_general']; // string

@@ -8499,7 +8499,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	// Add data to an array defining schema data for OpeningHours
 	function uamswp_schema_opening_hours(
-		$schema_opening_hours = array() // array (optional) // Main OpeningHours schema array
+		$schema_opening_hours = array(), // array (optional) // Main OpeningHours schema array
 		$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
