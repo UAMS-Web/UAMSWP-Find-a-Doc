@@ -8640,8 +8640,8 @@ function uamswp_fad_fpage_text_image_overlay(
 ) {
 
 	// Retrieve the value of the transients
-	uamswp_fad_get_transient( 'text_image_overlay_row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
-	uamswp_fad_get_transient( 'text_image_overlay_row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
+	uamswp_fad_get_transient( 'row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
+	uamswp_fad_get_transient( 'row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
 
 	if (
 		!empty( $text_image_overlay_row_0 )
@@ -8867,8 +8867,8 @@ function uamswp_fad_fpage_text_image_overlay(
 			}
 
 		// Set/update the value of the transients
-		uamswp_fad_set_transient( 'text_image_overlay_row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
-		uamswp_fad_set_transient( 'text_image_overlay_row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
+		uamswp_fad_set_transient( 'row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
+		uamswp_fad_set_transient( 'row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
 
 		include( UAMS_FAD_PATH . '/templates/parts/html/section/text-image-overlay.php' );
 
