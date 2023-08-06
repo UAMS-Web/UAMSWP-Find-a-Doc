@@ -152,10 +152,12 @@ get_header();
 	// Check for valid locations
 
 		$location_valid = false;
+		$location_section_show = false;
 		if ( $locations && $location_query->have_posts() ) {
 			foreach( $locations as $location ) {
 				if ( get_post_status ( $location ) == 'publish' ) {
 					$location_valid = true;
+					$location_section_show = true;
 					$break;
 				}
 			}
@@ -380,9 +382,11 @@ get_header();
 				</div>
 			</div>
 		</section>
-		<?php endif; ?>
-		<?php
+		<?php endif;
+
+		$appointment_section_show = true; // It should always be displayed.
 		include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+
 		?>
 	</main>
 </div>
