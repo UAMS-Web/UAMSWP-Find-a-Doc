@@ -1514,7 +1514,7 @@ function uamswp_fad_ontology_site_values(
 				// Set the navbar-subbrand title element using the page's values 
 				$site_nav_id = $page_id;
 				$site_nav_title = !empty($page_title) ? $page_title : get_the_title();
-				$site_nav_title_attr = $uamswp_attr_conversion($site_nav_title);
+				$site_nav_title_attr = uamswp_attr_conversion($site_nav_title);
 				$site_nav_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
 				$navbar_subbrand_title = $site_nav_title;
 				$navbar_subbrand_title_attr = $site_nav_title_attr;
