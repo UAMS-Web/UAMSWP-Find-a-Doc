@@ -208,7 +208,7 @@ function my_taxonomy_query( $args, $field ) {
 			$short_desc = $_POST['acf']['field_expertise_short_desc'];
 			$page_title_options = $type ? 'landingpage' : $_POST['acf']['field_expertise_page_title_options'];
 			$page_header_graphic_intro = $_POST['acf']['field_expertise_page_title_graphic']['field_fad_page_header_graphic']['field_page_header_graphic_intro'];
-			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_page_header_landingpage']['field_page_header_landingpage_intro'];
+			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_fad_page_header_landingpage']['field_page_header_landingpage_intro'];
 
 			// Set the excerpt variable value
 			if ( !$short_desc_query ) {
