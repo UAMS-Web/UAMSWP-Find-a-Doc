@@ -9796,3 +9796,459 @@ function uamswp_prevent_orphan($string) {
 
 			}
 		}
+
+	// Location profile field values
+
+		function uamswp_fad_location_profile_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $location_profile_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $location_profile_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $location_profile_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$location_profile_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$location_profile_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$location_profile_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$location_profile_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$location_profile_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$location_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $location_profile_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $location_profile_fields_vars;
+
+			}
+		}
+
+	// Location card field values
+
+		function uamswp_fad_location_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $location_card_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $location_card_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$location_card_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$location_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$location_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$location_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$location_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$location_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $location_card_fields_vars;
+
+			}
+		}
+
+	// Area of expertise profile field values
+
+		function uamswp_fad_expertise_profile_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_profile_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $expertise_profile_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $expertise_profile_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$expertise_profile_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$expertise_profile_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$expertise_profile_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$expertise_profile_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$expertise_profile_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$expertise_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_profile_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $expertise_profile_fields_vars;
+
+			}
+		}
+
+	// Area of expertise card field values
+
+		function uamswp_fad_expertise_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $expertise_card_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $expertise_card_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$expertise_card_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$expertise_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$expertise_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$expertise_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$expertise_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$expertise_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $expertise_card_fields_vars;
+
+			}
+		}
+
+	// Clinical resource profile field values
+
+		function uamswp_fad_clinical_resource_profile_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_profile_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $clinical_resource_profile_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $clinical_resource_profile_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$clinical_resource_profile_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$clinical_resource_profile_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_profile_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$clinical_resource_profile_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_profile_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$clinical_resource_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_profile_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $clinical_resource_profile_fields_vars;
+
+			}
+		}
+
+	// Clinical resource card field values
+
+		function uamswp_fad_clinical_resource_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $clinical_resource_card_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $clinical_resource_card_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$clinical_resource_card_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$clinical_resource_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$clinical_resource_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$clinical_resource_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $clinical_resource_card_fields_vars;
+
+			}
+		}
