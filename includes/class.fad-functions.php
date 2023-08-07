@@ -10055,42 +10055,77 @@ function uamswp_prevent_orphan($string) {
 
 				// Get the field values
 
-					// Foo
+					// Post Title
 
-						$foo = get_field( 'foo', $page_id ); // string
+						$expertise_title = get_the_title($page_id); // string
+						$expertise_title_attr = uamswp_attr_conversion($expertise_title); // string
 
-						$expertise_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+						// Add to the variables array
 
-					// Bar (taxonomy multi-select)
+							$expertise_card_fields_vars['expertise_title'] = isset($expertise_title) ? $expertise_title : '';
+							$expertise_card_fields_vars['expertise_title_attr'] = isset($expertise_title_attr) ? $expertise_title_attr : '';
 
-						$bar = get_field( 'bar', $page_id ); // int[]
+					// Post Excerpt
 
-						foreach ( $bar as $item ) {
+						$expertise_excerpt = get_field( 'expertise_selected_post_excerpt', $page_id ); // string
+						$expertise_excerpt = $expertise_excerpt ?: get_the_excerpt($page_id); // string
+						$expertise_excerpt = $expertise_excerpt ?: wp_strip_all_tags( get_the_content($page_id) ); // string
+						$expertise_excerpt = $expertise_excerpt ?: ''; // string
+						$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
 
-							$bar_array[$item] = array(
-								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
-							);
+						// Add to the variables array
 
-						}
+							$expertise_card_fields_vars['expertise_excerpt'] = isset($expertise_excerpt) ? $expertise_excerpt : '';
+							$expertise_card_fields_vars['expertise_excerpt_attr'] = isset($expertise_excerpt_attr) ? $expertise_excerpt_attr : '';
 
-						$expertise_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
-						$expertise_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+					// Post URL
 
-					// Baz (taxonomy select/radio/checkbox)
+						$expertise_url = get_permalink($page_id); // string
 
-						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
-						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+						// Add to the variables array
+						$expertise_card_fields_vars['expertise_url'] = isset($expertise_url) ? $expertise_url : '';
 
-						foreach ( $baz as $item ) {
+					// Post Featured Image
 
-							$baz_array[$item] = array(
-								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
-							);
+						// Featured image ID
+						$expertise_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
 
-						}
+						// Featured image URL
+						$expertise_featured_image_url = $expertise_featured_image ? wp_get_attachment_image_url( $expertise_featured_image, 'aspect-16-9-small' ) : ''; // string
 
-						$expertise_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
-						$expertise_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+						// Add to the variables array
+
+							$expertise_card_fields_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image : '';
+							$expertise_card_fields_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url : '';
+
+					// Parent
+
+						// Parent ID
+						$expertise_parent_id = wp_get_post_parent_id($page_id) ?: ''; // int
+
+						// Query on whether the current item has a parent
+						$expertise_has_parent = $expertise_parent_id ? true : false; // bool
+
+						// Parent post object
+						$expertise_parent_object = $expertise_has_parent ? get_post($expertise_parent_id) : ''; // object
+						$expertise_has_parent = $expertise_parent_object ? $expertise_has_parent : false; // bool
+
+						// Parent title
+
+							$expertise_parent_title = $expertise_parent_object ? $expertise_parent_object->post_title : ''; // string
+							$expertise_parent_title_attr = uamswp_attr_conversion($expertise_parent_title); // string
+
+						// Parent URL
+						$expertise_parent_url = $expertise_parent_object ? get_permalink($expertise_parent_id) : ''; // string
+
+						// Add to the variables array
+
+							$expertise_card_fields_vars['expertise_parent_id'] = isset($expertise_parent_id) ? $expertise_parent_id : '';
+							$expertise_card_fields_vars['expertise_has_parent'] = isset($expertise_has_parent) ? $expertise_has_parent : '';
+							$expertise_card_fields_vars['expertise_parent_object'] = isset($expertise_parent_object) ? $expertise_parent_object : '';
+							$expertise_card_fields_vars['expertise_parent_title'] = isset($expertise_parent_title) ? $expertise_parent_title : '';
+							$expertise_card_fields_vars['expertise_parent_title_attr'] = isset($expertise_parent_title_attr) ? $expertise_parent_title_attr : '';
+							$expertise_card_fields_vars['expertise_parent_url'] = isset($expertise_parent_url) ? $expertise_parent_url : '';
 
 				// Set/update the value of the transient
 				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
