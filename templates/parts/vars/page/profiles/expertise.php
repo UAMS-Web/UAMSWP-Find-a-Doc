@@ -7,12 +7,25 @@
  * 
  * Required vars:
  * 	$page_id // int // ID of the profile
+ * 
+ * Optional vars:
+ * 	$current_fpage // string // Current fake subpage slug
  */
 
-$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields( $page_id );
+// Check/define optional variables
+$current_fpage = isset($current_fpage) ? $current_fpage : '';
 
-foreach ( $expertise_profile_fields_vars as $key => $value ) {
+// Call the function
 
-	${$key} = $value; // Create a variable for each item in the array
+	$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields(
+		$page_id,
+		$current_fpage
+	);
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $expertise_profile_fields_vars as $key => $value ) {
+
+		${$key} = $value; 
+
+	}
