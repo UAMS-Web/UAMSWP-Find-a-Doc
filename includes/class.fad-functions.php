@@ -3909,7 +3909,7 @@ function uamswp_fad_fpage_text_replace(
 				// Areas of Expertise
 
 					// Get the Find-a-Doc Settings values for the text elements in general placements
-					
+
 						$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Fake subpage (or section), title
 						$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 						$expertise_fpage_ref_main_title_general = get_field('expertise_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
@@ -3921,7 +3921,7 @@ function uamswp_fad_fpage_text_replace(
 
 					// If the variable is not set or is empty...
 					// Set a hardcoded fallback value
-					
+
 						$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
 						$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Fake subpage (or section), intro text
 						$expertise_fpage_ref_main_title_general = ( isset($expertise_fpage_ref_main_title_general) && !empty($expertise_fpage_ref_main_title_general) ) ? $expertise_fpage_ref_main_title_general : 'Full List of [Areas of Expertise]'; // Reference to the main area of expertise archive, title
@@ -3932,7 +3932,7 @@ function uamswp_fad_fpage_text_replace(
 						$expertise_fpage_ref_top_link_general = ( isset($expertise_fpage_ref_top_link_general) && !empty($expertise_fpage_ref_top_link_general) ) ? $expertise_fpage_ref_top_link_general : $expertise_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
-					
+
 						$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general, $page_titles); // Fake subpage (or section), title
 						$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 						$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general, $page_titles); // Reference to the main area of expertise archive, title
@@ -3945,7 +3945,7 @@ function uamswp_fad_fpage_text_replace(
 				// Descendant Areas of Expertise
 
 					// Get the Find-a-Doc Settings values for the text elements in general placements
-					
+
 						$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
 						$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 						$expertise_descendant_fpage_ref_main_title_general = get_field('expertise_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
@@ -4627,7 +4627,7 @@ function uamswp_fad_fpage_text_replace(
 						}
 
 						if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
-							
+
 							$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
 
 						}
@@ -5064,10 +5064,10 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 								// If any of the variables are not set or are empty...
-		
+
 								// Get the system settings for general placement of clinical resource item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 							}
 						if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
 							$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_general; // Title
@@ -5145,13 +5145,13 @@ function uamswp_fad_fpage_text_replace(
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 						}
-						
+
 						if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
 
 							$condition_fpage_title_location = $condition_fpage_title_general; // Title
 
 						}
-						
+
 						if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
 
 							$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
@@ -5199,7 +5199,7 @@ function uamswp_fad_fpage_text_replace(
 						}
 
 						if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
-							
+
 							$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
 
 						}
@@ -6029,10 +6029,10 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// If any of the variables are not set or are empty...
-	
+
 							// Get the system settings for general placement of clinical resource item text elements
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 						}
 						if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
 							$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general; // Title
@@ -6190,22 +6190,22 @@ function uamswp_fad_fpage_text_replace(
 								||
 								!isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise)
 							) {
-		
+
 								// Get the system settings for general placement of treatment item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
-		
+
 							}
-		
+
 							if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
-		
+
 								$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
-		
+
 							}
-		
+
 							if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
-								
+
 								$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
-		
+
 							}
 
 						// Substitute placeholder text for relevant Find-a-Doc Settings value
@@ -6650,7 +6650,7 @@ function uamswp_fad_fpage_text_replace(
 
 							// Get the system settings for general placement of clinical resource item text elements
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 						}
 						if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
 							$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_general; // Title
@@ -6769,7 +6769,7 @@ function uamswp_fad_fpage_text_replace(
 						}
 
 						if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
-							
+
 							$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
 
 						}
@@ -8068,7 +8068,7 @@ function uamswp_fad_labels_jump_links() {
 				'fad_jump_links_title'	=> $fad_jump_links_title // string
 			);
 			return $labels_jump_links_vars;
-			
+
 		// Set/update the value of the transient
 		uamswp_fad_set_transient( 'vars', $labels_jump_links_vars, __FUNCTION__ );
 
@@ -8158,7 +8158,7 @@ function uamswp_meta_image_values( $featured_image ) {
 				'meta_twitter_image_height'	=> $meta_twitter_image_height, // int
 				'meta_twitter_image_alt'	=> $meta_twitter_image_alt // string // Alt text of the image in $meta_twitter_image
 			);
-			
+
 		// Set/update the value of the transient
 		uamswp_fad_set_transient( 'vars_' . $featured_image, $meta_image_values_vars, __FUNCTION__ );
 
@@ -9646,7 +9646,7 @@ function uamswp_prevent_orphan($string) {
 						$provider_additional_info = get_field( 'physician_additional_info', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_additional_info'] = isset($provider_additional_info) ? $provider_additional_info : ''; // Add to the variables array
-					
+
 				// Set/update the value of the transient
 				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_profile_fields_vars, __FUNCTION__ );
 
@@ -9654,6 +9654,7 @@ function uamswp_prevent_orphan($string) {
 				return $provider_profile_fields_vars;
 
 			}
+
 		}
 
 	// Provider card field values
@@ -9684,7 +9685,7 @@ function uamswp_prevent_orphan($string) {
 				// Create a variables array to be used on the templates and template parts
 				$provider_card_fields_vars = array();
 
-				
+
 				// Get the field values
 
 					// First Name
@@ -9795,6 +9796,7 @@ function uamswp_prevent_orphan($string) {
 				return $provider_card_fields_vars;
 
 			}
+
 		}
 
 	// Location profile field values
@@ -9947,6 +9949,7 @@ function uamswp_prevent_orphan($string) {
 				return $location_card_fields_vars;
 
 			}
+
 		}
 
 	// Area of expertise profile field values
@@ -10023,6 +10026,7 @@ function uamswp_prevent_orphan($string) {
 				return $expertise_profile_fields_vars;
 
 			}
+
 		}
 
 	// Area of expertise card field values
@@ -10134,6 +10138,7 @@ function uamswp_prevent_orphan($string) {
 				return $expertise_card_fields_vars;
 
 			}
+
 		}
 
 	// Clinical resource profile field values
@@ -10210,6 +10215,7 @@ function uamswp_prevent_orphan($string) {
 				return $clinical_resource_profile_fields_vars;
 
 			}
+
 		}
 
 	// Clinical resource card field values
@@ -10286,4 +10292,5 @@ function uamswp_prevent_orphan($string) {
 				return $clinical_resource_card_fields_vars;
 
 			}
+
 		}
