@@ -9964,11 +9964,12 @@ function uamswp_prevent_orphan($string) {
 	// Area of expertise profile field values
 
 		function uamswp_fad_expertise_profile_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$current_fpage = '' // int // Current fake subpage slug
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_profile_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $expertise_profile_fields_vars ) ) {
 
@@ -10386,8 +10387,79 @@ function uamswp_prevent_orphan($string) {
 						// Construct non-standard post title
 						include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
 
+					// Overview / Content Pages
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_overview_vars = array();
+
+					// Fake Subpage: Related Providers
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_provider_vars = array();
+
+						// Get the field values
+
+							if ( 'providers' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Related Locations
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_location_vars = array();
+
+						// Get the field values
+
+							if ( 'locations' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Descendant Areas of Expertise
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_expertise_descendant_vars = array();
+
+						// Get the field values
+
+							if ( 'specialties' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Related Areas of Expertise
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_expertise_vars = array();
+
+						// Get the field values
+
+							if ( 'related' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Related Clinical Resources
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_clinical_resource_vars = array();
+
+						// Get the field values
+
+							if ( 'resources' == $current_fpage ) {
+
+							}
+
+				// Merge the arrays
+				$expertise_profile_fields_vars = array_merge(
+					$expertise_profile_fields_vars,
+					$expertise_profile_fields_overview_vars,
+					$expertise_profile_fields_fpage_provider_vars,
+					$expertise_profile_fields_fpage_location_vars,
+					$expertise_profile_fields_fpage_expertise_descendant_vars,
+					$expertise_profile_fields_fpage_expertise_vars,
+					$expertise_profile_fields_fpage_clinical_resource_vars
+				);
+
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_profile_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $expertise_profile_fields_vars;
