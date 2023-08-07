@@ -204,11 +204,11 @@ function my_taxonomy_query( $args, $field ) {
 
 			// Get all contenders for the post excerpt
 			$type = $_POST['acf']['field_expertise_type']; // What Type of Content Is This Page?
-			$short_desc_query = $_POST['acf']['field_expertise_short_desc_query'];
-			$short_desc = $_POST['acf']['field_expertise_short_desc'];
-			$page_title_options = $type ? 'landingpage' : $_POST['acf']['field_expertise_page_title_options'];
-			$page_header_graphic_intro = $_POST['acf']['field_expertise_page_title_graphic']['field_fad_page_header_graphic']['field_page_header_graphic_intro'];
-			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_fad_page_header_landingpage']['field_page_header_landingpage_intro'];
+			$short_desc_query = $_POST['acf']['field_expertise_short_desc_query']; // Use This Page's Intro Text As the Short Description for This Page?
+			$short_desc = $_POST['acf']['field_expertise_short_desc']; // Short Description for This Page
+			$page_title_options = $type ? 'landingpage' : $_POST['acf']['field_expertise_page_title_options']; // Page Header Style
+			$page_header_graphic_intro = $_POST['acf']['field_expertise_page_title_graphic']['field_fad_page_header_graphic']['field_page_header_graphic_intro']; // Graphic Header Intro Text
+			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_fad_page_header_landingpage']['field_page_header_landingpage_intro']; // Marketing Landing Page Header Intro Text
 
 			// Set the excerpt variable value
 			if ( !$short_desc_query ) {
