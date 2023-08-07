@@ -9994,6 +9994,8 @@ function uamswp_prevent_orphan($string) {
 
 					// Common
 
+						global $post;
+
 						// Post Title (if current item is a fake subpage, title of the parent item)
 
 							$page_title = get_the_title();
@@ -10155,6 +10157,9 @@ function uamswp_prevent_orphan($string) {
 							$expertise_profile_fields_vars['template_type'] = isset($template_type) ? $template_type : '';
 
 						// Meta title
+
+							// Get system settings for area of expertise labels
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 							$meta_title_enhanced_addition = $expertise_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 							include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
