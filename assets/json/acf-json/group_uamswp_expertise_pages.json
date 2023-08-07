@@ -29,7 +29,7 @@
 			"key": "field_expertise_archive_intro_text",
 			"label": "Intro Text of Area of Expertise Archive",
 			"name": "expertise_archive_intro_text",
-			"type": "wysiwyg",
+			"type": "textarea",
 			"instructions": "Leave empty if you do not want to display any intro text.",
 			"required": 0,
 			"conditional_logic": 0,
@@ -38,14 +38,12 @@
 				"class": "",
 				"id": ""
 			},
-			"acfe_permissions": "",
 			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0,
-			"acfe_validate": "",
-			"acfe_update": ""
+			"placeholder": "",
+			"maxlength": 500,
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0
 		},
 		{
 			"key": "field_expertise_archive_featured_image",
