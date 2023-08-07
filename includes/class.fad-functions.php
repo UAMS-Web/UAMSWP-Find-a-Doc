@@ -10378,15 +10378,6 @@ function uamswp_prevent_orphan($string) {
 
 										$expertise_profile_fields_common_vars['jump_link_count'] = isset($jump_link_count) ? $jump_link_count : '';
 
-						// Ontology subsection site header
-						include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
-						
-						// Ontology subsection primary navigation
-						include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
-						
-						// Construct non-standard post title
-						include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
-
 					// Overview / Content Pages
 
 						// Create a variables array to be used on the templates and template parts
