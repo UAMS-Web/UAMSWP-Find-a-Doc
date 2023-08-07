@@ -44,14 +44,17 @@
 	} );
 
 ?>
-<div class="content-sidebar-wrap">
-	<main id="genesis-content">
-		<section class="archive-description">
-			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo ${ $variable_slug . '_archive_headline' }; ?></h1>
-			</header>
-			<?php echo (${ $variable_slug . '_archive_intro_text' } ? '<div class="entry-content clearfix" itemprop="text"><div class="archive-intro">' . ${ $variable_slug . '_archive_intro_text' } . '</div></div>' : '' ); ?>
-		</section>
+<div class="content-sidebar-wrap row">
+	<?php
+
+	// Construct the entry title
+
+	$entry_title_text = ${ $variable_slug . '_archive_headline' };
+	$entry_title_text_body = ${ $variable_slug . '_archive_intro_text' };
+	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/graphic.php');
+
+	?>
+	<main class="col-12" id="genesis-content">
 		<section class="uams-module conditions-treatments">
 			<div class="container-fluid">
 				<div class="row">

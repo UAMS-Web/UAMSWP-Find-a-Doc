@@ -25,28 +25,17 @@
 add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 ?>
-<div class="content-sidebar-wrap">
-	<main id="genesis-content">
-		<section class="archive-description">
-			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo $page_title; ?></h1>
-			</header>
-			<?php
-			
-			if ( $archive_construct_args['cards-layout']['intro-text'] ) {
+<div class="content-sidebar-wrap row">
+	<?php
 
-				?>
-				<div class="entry-content clearfix" itemprop="text">
-					<div class="archive-intro">
-						<?php echo $archive_construct_args['cards-layout']['intro-text']; ?>
-					</div>
-				</div>
-				<?php
+	// Construct the entry title
 
-			}
-			
-			?>
-		</section>
+	$entry_title_text = ${ $variable_slug . '_archive_headline' };
+	$entry_title_text_body = ${ $variable_slug . '_archive_intro_text' };
+	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/graphic.php');
+
+	?>
+	<main class="col-12" id="genesis-content">
 		<section class="uams-module" id="<?php echo $archive_construct_args['cards-layout']['id']; ?>">
 			<div class="container-fluid">
 				<div class="row">
