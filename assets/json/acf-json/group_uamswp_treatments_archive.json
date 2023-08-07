@@ -4,7 +4,7 @@
 	"fields": [
 		{
 			"key": "field_treatments_archive_headline",
-			"label": "Archive Headline",
+			"label": "Title of Treatment Archive",
 			"name": "treatments_archive_headline",
 			"type": "text",
 			"instructions": "Your child theme uses accessible headings. If you leave this blank, the default accessible heading will be used.",
@@ -26,7 +26,7 @@
 		},
 		{
 			"key": "field_treatments_archive_intro_text",
-			"label": "Archive Intro Text",
+			"label": "Intro Text of Treatment Archive",
 			"name": "treatments_archive_intro_text",
 			"type": "textarea",
 			"instructions": "Leave empty if you do not want to display any intro text.",
