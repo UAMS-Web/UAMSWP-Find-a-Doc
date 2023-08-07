@@ -1513,9 +1513,12 @@ function uamswp_fad_ontology_site_values(
 				// If the page has the ontology type...
 				// Set the navbar-subbrand title element using the page's values 
 				$site_nav_id = $page_id;
-				$navbar_subbrand_title = !empty($page_title) ? $page_title : get_the_title();
-				$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-				$navbar_subbrand_title_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
+				$site_nav_title = !empty($page_title) ? $page_title : get_the_title();
+				$site_nav_title_attr = $uamswp_attr_conversion($site_nav_title);
+				$site_nav_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
+				$navbar_subbrand_title = $site_nav_title;
+				$navbar_subbrand_title_attr = $site_nav_title_attr;
+				$navbar_subbrand_title_url = $site_nav_url;
 				if ( $ancestors_ontology_farthest ) {
 					// If a farthest ancestor with the ontology type exists
 					// Set the navbar-subbrand parent element using the that ancestor's values 
@@ -1532,9 +1535,12 @@ function uamswp_fad_ontology_site_values(
 				// If the page  does not have the ontology type...
 				// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
 				$site_nav_id = $ancestors_ontology_closest;
-				$navbar_subbrand_title = $ancestors_ontology_closest_title;
-				$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-				$navbar_subbrand_title_url = $ancestors_ontology_closest_url;
+				$site_nav_title = $ancestors_ontology_closest_title;
+				$site_nav_title_attr = $uamswp_attr_conversion($site_nav_title);
+				$site_nav_url = $ancestors_ontology_closest_url;
+				$navbar_subbrand_title = $site_nav_title;
+				$navbar_subbrand_title_attr = $site_nav_title_attr;
+				$navbar_subbrand_title_url = $site_nav_url;
 				if ( $ancestors_ontology_farthest && ( $ancestors_ontology_closest !== $ancestors_ontology_farthest ) ) {
 					// If a farthest ancestor with the ontology type exists...
 					// And if closest and farthest ancestors with the ontology type are not the same...
@@ -1568,6 +1574,9 @@ function uamswp_fad_ontology_site_values(
 
 			$ontology_site_values_vars = array(
 				'site_nav_id'					=> $site_nav_id, // int
+				'site_nav_title'				=> $site_nav_title, // string
+				'site_nav_title_attr'			=> $site_nav_title_attr, // string
+				'site_nav_url'					=> $site_nav_url, // string
 				'navbar_subbrand'				=> array (
 					'title'		=> array(
 						'name'	=> $navbar_subbrand_title, // string
