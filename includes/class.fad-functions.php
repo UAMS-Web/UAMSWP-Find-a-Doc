@@ -8967,3 +8967,141 @@ function uamswp_prevent_orphan($string) {
 
 			return;
 		}
+
+// Profile field values
+
+	// Provider profile field values
+
+		function uamswp_fad_provider_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $provider_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $provider_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				$provider_fields_vars = array(
+					'provider_first_name'				=> get_field( 'physician_first_name', $page_id ), // string // First Name
+					'provider_middle_name'				=> get_field( 'physician_middle_name', $page_id ), // string // Middle Name
+					'provider_last_name'				=> get_field( 'physician_last_name', $page_id ), // string // Last Name
+					'provider_pedigree'					=> get_field( 'physician_pedigree', $page_id ), // string // Generational Suffix
+					'provider_degree'					=> get_field( 'physician_degree', $page_id ), // int[] // Degree and/or Credential
+					'provider_prefix'					=> get_field( 'physician_prefix', $page_id ), // string // Prefix
+					'provider_gender'					=> get_field( 'physician_gender', $page_id ), // Gender
+					'provider_searchable'				=> get_field( 'physician_searchable', $page_id ), // bool // Searchable
+					'provider_full_name'				=> get_field( 'physician_full_name', $page_id ), // string // Full Name
+					'_thumbnail_id'						=> get_field( '_thumbnail_id', $page_id ), // Headshot
+					'provider_image_wide'				=> get_field( 'physician_image_wide', $page_id ), // Wide Image
+					'provider_resident'					=> get_field( 'physician_resident', $page_id ), // bool // Is the Provider a Resident?
+					'provider_eligible_appointments'	=> get_field( 'physician_eligible_appointments', $page_id ), // Does the Provider See Patients Via Appointments?
+					'provider_primary_care'				=> get_field( 'physician_primary_care', $page_id ), // Is the Provider a Primary Care Provider?
+					'provider_accepting_patients'		=> get_field( 'physician_accepting_patients', $page_id ), // Is the Provider Accepting New Patients?
+					'provider_referral_required'		=> get_field( 'physician_referral_required', $page_id ), // Does the Provider Require a Referral for New Patients?
+					'provider_second_opinion'			=> get_field( 'physician_second_opinion', $page_id ), // Does the Provider Offer Second Opinions?
+					'provider_appointment_link'			=> get_field( 'physician_appointment_link', $page_id ), // Appointment Link
+					'provider_title'					=> get_field( 'physician_title', $page_id ), // int // Clinical Job Title
+					'provider_service_line'				=> get_field( 'physician_service_line', $page_id ), // int // UAMS Health Service Line
+					'clinical_admin_title_tax'			=> get_term( get_sub_field('clinical_admin_title_tax', $page_id ), 'clinical_admin_title' ), // int // Clinical Administrative Title
+					'provider_clinical_admin_area'		=> get_term( get_sub_field('clinical_admin_title_tax', $page_id ), 'provider_clinical_admin_area' ), // int // Service Line
+					'provider_npi'						=> get_field( 'physician_npi', $page_id ), // National Provider Identifier (NPI)
+					'provider_pid'						=> get_field( 'physician_pid', $page_id ), // UAMS Health Epic SER ID
+					'provider_patient_types'			=> get_field( 'physician_patient_types', $page_id ), // int // Patient Type(s)
+					'provider_languages'				=> get_field( 'physician_languages', $page_id ), // int // Language(s)
+					'provider_clinical_bio'				=> get_field( 'physician_clinical_bio', $page_id ), // Patient-focused Clinical Biography
+					'provider_short_clinical_bio'		=> get_field( 'physician_short_clinical_bio', $page_id ), // string // Short Patient-focused Clinical Biography
+					'provider_youtube_link'				=> get_field( 'physician_youtube_link', $page_id ), // Featured Video
+					'provider_clinical_focus'			=> get_field( 'physician_clinical_focus', $page_id ), // Clinical Focus
+					'provider_medical_specialties'		=> get_field( 'physician_medical_specialties', $page_id ), // int // Medical Specialties
+					'provider_conditions_cpt'			=> get_field( 'physician_conditions_cpt', $page_id ), // Conditions Treated
+					'provider_treatments_cpt'			=> get_field( 'physician_treatments_cpt', $page_id ), // Treatments & Procedures
+					'provider_medical_terms'			=> get_field( 'physician_medical_terms', $page_id ), // Medical Terms (Tags)
+					'provider_locations'				=> get_field( 'physician_locations', $page_id ), // Locations
+					'provider_region'					=> get_field( 'physician_region', $page_id ), // Region
+					'provider_affiliation'				=> get_field( 'physician_affiliation', $page_id ), // Hospital Affiliations
+					'provider_institute_affiliation'	=> get_field( 'physician_institute_affiliation', $page_id ), // Institute Affiliations
+					'provider_portal'					=> get_field( 'physician_portal', $page_id ), // Portal
+					'provider_expertise'				=> get_field( 'physician_expertise', $page_id ), // Areas of Expertise
+					'provider_clinical_resources'		=> get_field( 'physician_clinical_resources', $page_id ), // Clinical Resources
+					'provider_recognitions'				=> get_field( 'physician_recognitions', $page_id ), // Recognition Lists
+					'provider_hidden'					=> get_field( 'physician_hidden', $page_id ), // Hide from Provider List
+					'provider_podcast_name'				=> get_field( 'physician_podcast_name', $page_id ), // string // UAMS Health Talk Podcast Guest Name
+					'provider_asp_filter'				=> get_field( 'physician_asp_filter', $page_id ), // string // Ajax Search Filter
+					'provider_resident_profile_group'	=> get_field( 'physician_resident_profile_group', $page_id ),
+						"sub_fields": [
+							'provider_resident_hometown_international'	=> get_field( 'physician_resident_hometown_international', $page_id ), // Is the hometown outside the U.S.?
+							'provider_resident_hometown_city'	=> get_field( 'physician_resident_hometown_city', $page_id ), // string // Hometown City
+							'provider_resident_hometown_state'	=> get_field( 'physician_resident_hometown_state', $page_id ), // string // Hometown State \/ District \/ Territory
+							'provider_resident_hometown_country'	=> get_field( 'physician_resident_hometown_country', $page_id ), // string // Hometown Country
+							'provider_resident_school'	=> get_field( 'physician_resident_school', $page_id ), // Medical School
+							'provider_resident_academic_department'	=> get_field( 'physician_resident_academic_department', $page_id ), // Academic Department
+							'provider_resident_academic_chief'	=> get_field( 'physician_resident_academic_chief', $page_id ), // Chief Resident?
+							'provider_resident_academic_year'	=> get_field( 'physician_resident_academic_year', $page_id ), // Residency Year
+					'provider_academic_title'			=> get_field( 'physician_academic_title', $page_id ), // string // Academic Title
+					'provider_academic_college'			=> get_field( 'physician_academic_college', $page_id ), // College Affiliation
+					'provider_academic_position'		=> get_field( 'physician_academic_position', $page_id ), // Academic Position Type
+					'provider_academic_appointment'		=> get_field( 'physician_academic_appointment', $page_id ), // array // Faculty Title
+						"sub_fields": [
+							'academic_title'			=> get_field( 'academic_title', $page_id ), // string // Title (Original)
+							'academic_title_tax'		=> get_field( 'academic_title_tax', $page_id ), // Title
+							'department'				=> get_field( 'department', $page_id ), // Academic Department
+					'provider_academic_admin_title'		=> get_field( 'physician_academic_admin_title', $page_id ), // array // Academic Administrative Title
+						"sub_fields": [
+							'academic_admin_title_tax'	=> get_field( 'academic_admin_title_tax', $page_id ), // Academic Administrative Title
+							'department'				=> get_field( 'department', $page_id ), // Academic Department
+					'provider_academic_bio'				=> get_field( 'physician_academic_bio', $page_id ), // Academic Biography
+					'provider_academic_short_bio'		=> get_field( 'physician_academic_short_bio', $page_id ), // string // Short Academic Biography
+					'provider_academic_office'			=> get_field( 'physician_academic_office', $page_id ), // string // Office Location
+					'provider_academic_map'				=> get_field( 'physician_academic_map', $page_id ), // string // Building \/ Map
+					'provider_contact_information'		=> get_field( 'physician_contact_information', $page_id ), // array // Contact Information
+						"sub_fields": [
+							'type'						=> get_field( 'type', $page_id ), // string // Type
+							'information'				=> get_field( 'information', $page_id ), // string // Information
+					'provider_education'				=> get_field( 'physician_education', $page_id ), // array // Education and Training
+						"sub_fields": [
+							'education_type'			=> get_field( 'education_type', $page_id ), // Education or Training Type
+							'school'					=> get_field( 'school', $page_id ), // Organization
+							'description'				=> get_field( 'description', $page_id ), // string // Description
+					'provider_boards'					=> get_field( 'physician_boards', $page_id ), // Boards and Certifications
+					'provider_associations'				=> get_field( 'physician_associations', $page_id ), // Associations
+					'provider_research_bio'				=> get_field( 'physician_research_bio', $page_id ), // Research Bio
+					'provider_research_interests'		=> get_field( 'physician_research_interests', $page_id ), // string // Research Interests
+					'provider_research_profiles_link'	=> get_field( 'physician_research_profiles_link', $page_id ), // UAMS Profiles Link
+					'provider_pubmed_author_id'			=> get_field( 'physician_pubmed_author_id', $page_id ), // string // Pubmed Author ID \/ Name
+					'provider_author_number'			=> get_field( 'physician_author_number', $page_id ), // string // Number of Latest Articles to Display
+					'provider_select_publications'		=> get_field( 'physician_select_publications', $page_id ), // array // Selected Publications
+						"sub_fields": [
+							'pubmed_id_pmid'			=> get_field( 'pubmed_id_pmid', $page_id ), // string // PubMed ID (PMID)
+							'pubmed_information'		=> get_field( 'pubmed_information', $page_id ), // string // Pubmed Information (HTML)
+					'provider_gmb_exclude'				=> get_field( 'physician_gmb_exclude', $page_id ), // bool // Exclude Listing in Google My Business
+					'provider_gmb_cat'					=> get_field( 'physician_gmb_cat', $page_id ), // int // Google My Business Category
+					'provider_awards'					=> get_field( 'physician_awards', $page_id ), // array // Award(s)
+						"sub_fields": [
+							'year'						=> get_field( 'year', $page_id ), // string // Year
+							'title'						=> get_field( 'title', $page_id ), // string // Award Title
+							'information'				=> get_field( 'information', $page_id ), // string // Information
+					'provider_additional_info'			=> get_field( 'physician_additional_info', $page_id ) // Additional Information
+				);
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $provider_fields_vars;
+
+			}
+		}
