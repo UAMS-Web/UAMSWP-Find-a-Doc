@@ -33,7 +33,7 @@ if (
 	!isset($appointment_refer_web_info) || empty($appointment_refer_web_info)
 ) {
 
-	$appointment_refer_vars = uamswp_fad_appointment_refer();
+	$appointment_refer_vars = isset($appointment_refer_vars) ? $appointment_refer_vars : uamswp_fad_appointment_refer();
 		$appointment_refer_phone_number = $appointment_refer_vars['appointment_refer_phone_number'];  // string
 		$appointment_refer_phone_label = $appointment_refer_vars['appointment_refer_phone_label'];  // string
 		$appointment_refer_phone_label_attr = $appointment_refer_vars['appointment_refer_phone_label_attr'];  // string

@@ -29,7 +29,7 @@
 	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
 	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
-	$expertise_query_vars = uamswp_fad_expertise_query(
+	$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
 		$page_id, // int
 		$expertises, // int[]
 		$jump_link_count, // int

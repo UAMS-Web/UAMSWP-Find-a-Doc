@@ -42,7 +42,7 @@
 	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
 	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
-	$expertise_descendant_query_vars = uamswp_fad_expertise_descendant_query(
+	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
 		$page_id, // int
 		$expertise_descendants, // int[]
 		$content_placement, // string

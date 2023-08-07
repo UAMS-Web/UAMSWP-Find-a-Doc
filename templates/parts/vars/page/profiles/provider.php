@@ -9,7 +9,7 @@
  * 	$page_id // int // ID of the profile
  */
 
-$provider_profile_fields_vars = uamswp_fad_provider_profile_fields( $page_id );
+$provider_profile_fields_vars = isset($provider_profile_fields_vars) ? $provider_profile_fields_vars : uamswp_fad_provider_profile_fields( $page_id );
 
 foreach ( $provider_profile_fields_vars as $key => $value ) {
 

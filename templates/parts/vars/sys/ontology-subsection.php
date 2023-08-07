@@ -61,7 +61,7 @@
 		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
 		$page_url = ( isset($page_url) && !empty($page_url) ) ? $page_url : '';
 
-	$ontology_site_values_vars = uamswp_fad_ontology_site_values(
+	$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
 		$page_id, // int // ID of the current ontology item
 		$ontology_type, // bool // Ontology type of the current ontology item (true is ontology type, false is content type)
 		$page_title, // string // Title of the current ontology item

@@ -56,7 +56,7 @@ if (
 	!isset($appointment_patients_web_info_both) || empty($appointment_patients_web_info_both)
 ) {
 
-	$appointment_patients_vars = uamswp_fad_appointment_patients();
+	$appointment_patients_vars = isset($appointment_patients_vars) ? $appointment_patients_vars : uamswp_fad_appointment_patients();
 		$appointment_patients_phone_number_new = $appointment_patients_vars['appointment_patients_phone_number_new'];  // string
 		$appointment_patients_phone_label_new = $appointment_patients_vars['appointment_patients_phone_label_new'];  // string
 		$appointment_patients_phone_label_new_attr = $appointment_patients_vars['appointment_patients_phone_label_new_attr'];  // string

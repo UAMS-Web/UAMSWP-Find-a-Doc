@@ -14,7 +14,7 @@
 	!isset($placeholder_provider_archive_headline) || empty($placeholder_provider_archive_headline)
 ) {
 
-	$archive_text_provider_vars = uamswp_fad_archive_text_provider();
+	$archive_text_provider_vars = isset($archive_text_provider_vars) ? $archive_text_provider_vars : uamswp_fad_archive_text_provider();
 		$provider_archive_headline = $archive_text_provider_vars['provider_archive_headline']; // string
 		$provider_archive_headline_attr = $archive_text_provider_vars['provider_archive_headline_attr']; // string
 		$placeholder_provider_archive_headline = $archive_text_provider_vars['placeholder_provider_archive_headline']; // string

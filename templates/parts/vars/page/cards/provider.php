@@ -9,7 +9,7 @@
  * 	$page_id // int // ID of the profile
  */
 
-$provider_card_fields_vars = uamswp_fad_provider_card_fields( $page_id );
+$provider_card_fields_vars = isset($provider_card_fields_vars) ? $provider_card_fields_vars : uamswp_fad_provider_card_fields( $page_id );
 
 foreach ( $provider_card_fields_vars as $key => $value ) {
 

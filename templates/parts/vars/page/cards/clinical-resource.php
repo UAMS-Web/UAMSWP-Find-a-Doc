@@ -9,7 +9,7 @@
  * 	$page_id // int // ID of the profile
  */
 
-$clinical_resource_card_fields_vars = uamswp_fad_clinical_resource_card_fields( $page_id );
+$clinical_resource_card_fields_vars = isset($clinical_resource_card_fields_vars) ? $clinical_resource_card_fields_vars : uamswp_fad_clinical_resource_card_fields( $page_id );
 
 foreach ( $clinical_resource_card_fields_vars as $key => $value ) {
 

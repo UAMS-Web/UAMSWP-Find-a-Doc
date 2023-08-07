@@ -25,7 +25,7 @@
 	!isset($placeholder_provider_short_name_possessive) || empty($placeholder_provider_short_name_possessive)
 ) {
 
-	$labels_provider_vars = uamswp_fad_labels_provider();
+	$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
 		$provider_single_name = $labels_provider_vars['provider_single_name']; // string
 		$provider_single_name_attr = $labels_provider_vars['provider_single_name_attr']; // string
 		$provider_plural_name = $labels_provider_vars['provider_plural_name']; // string

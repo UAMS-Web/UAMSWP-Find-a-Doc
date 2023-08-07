@@ -30,7 +30,7 @@
 	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
 	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
-	$location_query_vars = uamswp_fad_location_query(
+	$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
 		$page_id, // int
 		$locations, // int[]
 		$jump_link_count, // int

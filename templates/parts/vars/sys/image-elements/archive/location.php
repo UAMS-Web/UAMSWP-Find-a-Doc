@@ -10,7 +10,7 @@
 	!isset($location_archive_image) || empty($location_archive_image)
 ) {
 
-	$archive_image_location_vars = uamswp_fad_archive_image_location();
+	$archive_image_location_vars = isset($archive_image_location_vars) ? $archive_image_location_vars : uamswp_fad_archive_image_location();
 		$location_archive_image = $archive_image_location_vars['location_archive_image']; // int
 
 }

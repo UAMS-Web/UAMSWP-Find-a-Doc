@@ -9,7 +9,7 @@
  * 	$page_id // int // ID of the profile
  */
 
-$expertise_profile_fields_vars = uamswp_fad_expertise_profile_fields( $page_id );
+$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields( $page_id );
 
 foreach ( $expertise_profile_fields_vars as $key => $value ) {
 

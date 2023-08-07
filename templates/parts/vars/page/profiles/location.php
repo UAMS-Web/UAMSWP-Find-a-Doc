@@ -9,7 +9,7 @@
  * 	$page_id // int // ID of the profile
  */
 
-$location_profile_fields_vars = uamswp_fad_location_profile_fields( $page_id );
+$location_profile_fields_vars = isset($location_profile_fields_vars) ? $location_profile_fields_vars : uamswp_fad_location_profile_fields( $page_id );
 
 foreach ( $location_profile_fields_vars as $key => $value ) {
 

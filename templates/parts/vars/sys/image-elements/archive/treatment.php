@@ -10,7 +10,7 @@
 	!isset($treatment_archive_image) || empty($treatment_archive_image)
 ) {
 
-	$archive_image_treatment_vars = uamswp_fad_archive_image_treatment();
+	$archive_image_treatment_vars = isset($archive_image_treatment_vars) ? $archive_image_treatment_vars : uamswp_fad_archive_image_treatment();
 		$treatment_archive_image = $archive_image_treatment_vars['treatment_archive_image']; // int
 
 }

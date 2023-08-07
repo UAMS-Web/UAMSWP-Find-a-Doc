@@ -10,7 +10,7 @@
 	!isset($clinical_resource_archive_image) || empty($clinical_resource_archive_image)
 ) {
 
-	$archive_image_clinical_resource_vars = uamswp_fad_archive_image_clinical_resource();
+	$archive_image_clinical_resource_vars = isset($archive_image_clinical_resource_vars) ? $archive_image_clinical_resource_vars : uamswp_fad_archive_image_clinical_resource();
 		$clinical_resource_archive_image = $archive_image_clinical_resource_vars['clinical_resource_archive_image']; // int
 
 }
