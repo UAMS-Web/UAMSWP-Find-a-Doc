@@ -28,121 +28,6 @@
 
 $resource_related_max = 3; // Set how many of each related item type to display
 
-// Check for valid providers
-
-	$resource_providers = get_field('clinical_resource_providers');
-	$resource_provider_valid = false;
-	if ( !empty($resource_providers) ) {
-		foreach( $resource_providers as $resource_provider ) {
-			if ( get_post_status ( $resource_provider ) == 'publish' ) {
-				$resource_provider_valid = true;
-				$break;
-			} // endif
-		} // endforeach;
-		$resource_provider = '';
-		// Count published providers
-		$resource_provider_count = 0;
-		foreach( $resource_providers as $resource_provider) {
-			if ( get_post_status ( $resource_provider ) == 'publish' ) {
-				$resource_provider_count++;
-			} // endif
-		} // endforeach;
-		$resource_provider = '';
-		$resource_provider_label = $resource_provider_count > 1 ? $provider_plural_name : $provider_single_name;
-	}
-
-// Check for valid locations
-
-	$resource_locations = get_field('clinical_resource_locations');
-	$resource_location_valid = false;
-	if( !empty($resource_locations) ) {
-		foreach( $resource_locations as $resource_location ) {
-			if ( get_post_status ( $resource_location ) == 'publish' ) {
-				$resource_location_valid = true;
-				$break;
-			} // endif
-		} // endforeach;
-		$resource_location = '';
-		// Count published locations
-		$resource_location_count = 0;
-		foreach( $resource_locations as $resource_location) {
-			if ( get_post_status ( $resource_location ) == 'publish' ) {
-				$resource_location_count++;
-			} // endif
-		} // endforeach;
-		$resource_location = '';
-		$resource_location_label = $resource_location_count > 1 ? $location_plural_name : $location_single_name;
-	}
-
-// Check for valid conditions
-
-	$resource_conditions = get_field('clinical_resource_conditions');
-	$resource_condition_valid = false;
-	if ( !empty($resource_conditions) ) {
-		foreach( $resource_conditions as $resource_condition ) {
-			if ( get_post_status ( $resource_condition ) == 'publish' ) {
-				$resource_condition_valid = true;
-				$break;
-			} // endif
-		} // endforeach;
-		$resource_condition = '';
-		// Count published conditions
-		$resource_condition_count = 0;
-		foreach( $resource_conditions as $resource_condition) {
-			if ( get_post_status ( $resource_condition ) == 'publish' ) {
-				$resource_condition_count++;
-			} // endif
-		} // endforeach;
-		$resource_condition = '';
-		$resource_condition_label = $resource_condition_count > 1 ? $condition_plural_name : $condition_single_name;
-	}
-
-// Check for valid treatments
-
-	$resource_treatments = get_field('clinical_resource_treatments');
-	$resource_treatment_valid = false;
-	if ( !empty($resource_treatments) ) {
-		foreach( $resource_treatments as $resource_treatment ) {
-			if ( get_post_status ( $resource_treatment ) == 'publish' ) {
-				$resource_treatment_valid = true;
-				$break;
-			} // endif
-		} // endforeach;
-		$resource_treatment = '';
-		// Count published treatments
-		$resource_treatment_count = 0;
-		foreach( $resource_treatments as $resource_treatment) {
-			if ( get_post_status ( $resource_treatment ) == 'publish' ) {
-				$resource_treatment_count++;
-			} // endif
-		} // endforeach;
-		$resource_treatment = '';
-		$resource_treatment_label = $resource_treatment_count > 1 ? $treatment_plural_name : $treatment_single_name;
-	}
-
-// Check for valid areas of expertise
-
-	$resource_expertises = get_field('clinical_resource_aoe');
-	$resource_expertise_valid = false;
-	if ( !empty($resource_expertises) ) {
-		foreach( $resource_expertises as $resource_expertise ) {
-			if ( get_post_status ( $resource_expertise ) == 'publish' ) {
-				$resource_expertise_valid = true;
-				$break;
-			} // endif
-		} // endforeach;
-		$resource_expertise = '';
-		// Count areas of expertise
-		$resource_expertise_count = 0;
-		foreach( $resource_expertises as $resource_expertise) {
-			if ( get_post_status ( $resource_expertise ) == 'publish' ) {
-				$resource_expertise_count++;
-			} // endif
-		} // endforeach;
-		$resource_expertise = '';
-		$resource_expertise_label = $resource_expertise_count > 1 ? $expertise_plural_name : $expertise_single_name;
-	}
-
 // Construct the card
 
 ?>
@@ -225,38 +110,34 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 								// Providers
 
-									if (
-										$resource_providers
-										&&
-										$resource_provider_valid
-									) {
+									if ( $clinical_resource_providers ) {
 
 										// Get system settings for provider labels
 										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 										?>
-										<dt><?php echo $resource_provider_label; ?></dt>
+										<dt><?php echo $clinical_resource_provider_label; ?></dt>
 										<dd>
 											<?php
 
 											$resource_i = 0;
-											$resource_count = $resource_provider_count;
-											$associates = $resource_providers;
+											$resource_count = $clinical_resource_provider_count;
+											$associates = $clinical_resource_providers;
 
 											foreach( $associates as $associate) {
 
-												$resource_provider_prefix = get_field('physician_prefix', $associate);
-												$resource_provider_first_name = get_field('physician_first_name', $associate);
-												$resource_provider_middle_name = get_field('physician_middle_name', $associate);
-												$resource_provider_last_name = get_field('physician_last_name', $associate);
-												$resource_provider_pedigree = get_field('physician_pedigree', $associate);
-												$resource_provider_medium_name = ($resource_provider_prefix ? $resource_provider_prefix .' ' : '') . $resource_provider_first_name .' ' .($resource_provider_middle_name ? $resource_provider_middle_name . ' ' : '') . $resource_provider_last_name . ($resource_provider_pedigree ? ' ' . $resource_provider_pedigree : '');
+												$clinical_resource_provider_prefix = get_field('physician_prefix', $associate);
+												$clinical_resource_provider_first_name = get_field('physician_first_name', $associate);
+												$clinical_resource_provider_middle_name = get_field('physician_middle_name', $associate);
+												$clinical_resource_provider_last_name = get_field('physician_last_name', $associate);
+												$clinical_resource_provider_pedigree = get_field('physician_pedigree', $associate);
+												$clinical_resource_provider_medium_name = ($clinical_resource_provider_prefix ? $clinical_resource_provider_prefix .' ' : '') . $clinical_resource_provider_first_name .' ' .($clinical_resource_provider_middle_name ? $clinical_resource_provider_middle_name . ' ' : '') . $clinical_resource_provider_last_name . ($clinical_resource_provider_pedigree ? ' ' . $clinical_resource_provider_pedigree : '');
 
 												if ( get_post_status ( $associate ) == 'publish' ) {
 
 													if ( $resource_i < $resource_related_max ) {
 
-														$associate_title = $resource_provider_medium_name;
+														$associate_title = $clinical_resource_provider_medium_name;
 														$associate_title_attr = uamswp_attr_conversion($associate_title);
 
 														echo '<a href="' . get_permalink( $associate ) . '" data-categorytitle="Related Location" data-typetitle="' . $associate_title_attr . '" data-itemtitle="' . $clinical_resource_title_attr . '">' . $associate_title . '</a>';
@@ -310,23 +191,19 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 								// Locations
 
-									if (
-										$resource_locations
-										&&
-										$resource_location_valid
-									) {
+									if ( $clinical_resource_locations ) {
 
 										// Get system settings for location labels
 										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 										?>
-										<dt><?php echo $resource_location_label; ?></dt>
+										<dt><?php echo $clinical_resource_location_label; ?></dt>
 										<dd>
 											<?php
 
 											$resource_i = 0;
-											$resource_count = $resource_location_count;
-											$associates = $resource_locations;
+											$resource_count = $clinical_resource_location_count;
+											$associates = $clinical_resource_locations;
 
 											foreach ( $associates as $associate) {
 
@@ -396,23 +273,19 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 								// Areas of Expertise
 
-									if (
-										$resource_expertises
-										&&
-										$resource_expertise_valid
-									) {
+									if ( $clinical_resource_expertises ) {
 
 										// Get system settings for area of expertise labels
 										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 										?>
-										<dt><?php echo $resource_expertise_label; ?></dt>
+										<dt><?php echo $clinical_resource_expertise_label; ?></dt>
 										<dd>
 											<?php
 
 											$resource_i = 0;
-											$resource_count = $resource_expertise_count;
-											$associates = $resource_expertises;
+											$resource_count = $clinical_resource_expertise_count;
+											$associates = $clinical_resource_expertises;
 
 											foreach ( $associates as $associate) {
 
@@ -483,23 +356,19 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 								// Conditions
 
-									if (
-										$resource_conditions
-										&&
-										$resource_condition_valid
-									) {
+									if ( $clinical_resource_conditions ) {
 
 										// Get system settings for condition labels
 										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 										?>
-										<dt><?php echo $resource_condition_label; ?></dt>
+										<dt><?php echo $clinical_resource_condition_label; ?></dt>
 										<dd>
 											<?php
 
 											$resource_i = 0;
-											$resource_count = $resource_condition_count;
-											$associates = $resource_conditions;
+											$resource_count = $clinical_resource_condition_count;
+											$associates = $clinical_resource_conditions;
 
 											foreach ( $associates as $associate) {
 
@@ -570,23 +439,19 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 								// Treatments
 
-									if (
-										$resource_treatments
-										&&
-										$resource_treatment_valid
-									) {
+									if ( $clinical_resource_treatments ) {
 
 										// Get system settings for treatment labels
 										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 										?>
-										<dt><?php echo $resource_treatment_label; ?></dt>
+										<dt><?php echo $clinical_resource_treatment_label; ?></dt>
 										<dd>
 											<?php
 
 											$resource_i = 0;
-											$resource_count = $resource_treatment_count;
-											$associates = $resource_treatments;
+											$resource_count = $clinical_resource_treatment_count;
+											$associates = $clinical_resource_treatments;
 
 											foreach ( $associates as $associate) {
 
