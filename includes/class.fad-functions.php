@@ -10841,11 +10841,15 @@ function uamswp_prevent_orphan($string) {
 	// Clinical resource card field values
 
 		function uamswp_fad_clinical_resource_card_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$clinical_resource_card_style = 'basic' // string enum('basic', 'detailed') // Clinical resource card style
 		) {
 
+			// Check optional variables
+			$clinical_resource_card_style = ( 'basic' == $clinical_resource_card_style || 'detailed' == $clinical_resource_card_style ) ? $clinical_resource_card_style : 'basic';
+
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $clinical_resource_card_style . '_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $clinical_resource_card_fields_vars ) ) {
 
@@ -10905,8 +10909,17 @@ function uamswp_prevent_orphan($string) {
 						$clinical_resource_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
 						$clinical_resource_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
 
+					// Common
+
+					// Clinical Resource Card Styles
+
+						if ( 'basic' == $clinical_resource_card_style ) {
+
+						} elseif ( 'detailed' == $clinical_resource_card_style ) {
+
+						}
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $clinical_resource_card_style . '_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $clinical_resource_card_fields_vars;
