@@ -30,14 +30,6 @@
 	// Link accessible label
 	$expertise_label = 'View ' . $expertise_single_name_attr . ' page for ' . $expertise_title_attr;
 
-	// Truncate the excerpt if it is greater than 160 characters
-	
-		if ( strlen($expertise_excerpt) > 160 ) {
-
-			$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
-
-		}
-
 // Construct the card
 
 ?>

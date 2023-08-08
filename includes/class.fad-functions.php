@@ -10513,6 +10513,15 @@ function uamswp_prevent_orphan($string) {
 						$expertise_excerpt = $expertise_excerpt ?: get_the_excerpt($page_id); // string
 						$expertise_excerpt = $expertise_excerpt ?: wp_strip_all_tags( get_the_content($page_id) ); // string
 						$expertise_excerpt = $expertise_excerpt ?: ''; // string
+
+						// Truncate the excerpt if it is greater than 160 characters
+						
+							if ( strlen($expertise_excerpt) > 160 ) {
+
+								$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
+
+							}
+
 						$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
 
 						// Add to the variables array
