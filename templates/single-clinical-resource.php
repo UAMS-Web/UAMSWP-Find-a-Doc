@@ -813,7 +813,7 @@
 
 				add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
 
-					include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );
 
 				}, 22 );
 

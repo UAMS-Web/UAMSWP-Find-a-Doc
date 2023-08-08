@@ -1146,7 +1146,7 @@
 
 																$phone_output_id = $location;
 																$phone_output = 'associated_locations';
-																include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+																include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location.php' );
 
 															?>
 															<div class="btn-container">
@@ -1409,7 +1409,7 @@
 							if ( $appointment_section_show ) {
 
 								$appointment_block_instance = 1;
-								include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment_provider.php' );
 
 							}
 
@@ -1950,7 +1950,7 @@
 								)
 							) {
 								$appointment_block_instance = 2;
-								include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment_provider.php' );
 							}
 
 						?>

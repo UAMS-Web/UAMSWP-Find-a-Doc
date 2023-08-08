@@ -16,7 +16,7 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php
 
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 
-include( UAMS_FAD_PATH . '/templates/loops/resource-card-archive.php' );
+include( UAMS_FAD_PATH . '/templates/parts/html/cards/clinical-resource_archive.php' );
 
 endwhile; else : ?>
 	<p><?php _e( 'Sorry, no ' . strtolower($clinical_resource_plural_name) . ' matched your criteria.' ); ?></p>

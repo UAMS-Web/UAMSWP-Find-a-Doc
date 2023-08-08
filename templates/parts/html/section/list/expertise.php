@@ -214,7 +214,7 @@ if ( $expertise_section_show ) {
 									while ( $expertise_query->have_posts() ) {
 										$expertise_query->the_post();
 										$page_id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+										include( UAMS_FAD_PATH . '/templates/parts/html/cards/expertise.php' );
 									} // endwhile
 								} // endif ( $expertise_count > 0 )
 								wp_reset_postdata();

@@ -236,7 +236,7 @@ if ( $location_section_show ) {
 									while ( $location_query->have_posts() ) {
 										$location_query->the_post();
 										$page_id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+										include( UAMS_FAD_PATH . '/templates/parts/html/cards/location.php' );
 										if ( $location_section_filter_title ) {
 											$title_list[] = get_field('location_title', $page_id);
 										}

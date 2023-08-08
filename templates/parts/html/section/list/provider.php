@@ -229,7 +229,7 @@ if ( $provider_section_show ) {
 									while ( $provider_query->have_posts() ) {
 										$provider_query->the_post();
 										$page_id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+										include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 										if ( $provider_section_filter_title ) {
 											$title_list[] = get_field('physician_title', $page_id);
 										}

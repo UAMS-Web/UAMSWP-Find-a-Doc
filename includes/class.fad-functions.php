@@ -432,7 +432,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		$out = '';
 		if ($loop -> have_posts()) : while ($loop -> have_posts()) : $loop -> the_post();
 			$page_id = get_the_ID();
-			$out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+			$out .= include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 		endwhile;
 		endif;
 		wp_die();
@@ -879,7 +879,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					// $z=0;
 					while ( $search_query->have_posts() ) : $search_query->the_post();
 						$page_id = get_the_ID();
-						include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 						// $z++;
 					endwhile;
 					echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $provider_region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
@@ -1009,7 +1009,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					while ( $search_query->have_posts() ) : $search_query->the_post();
 						$page_id = get_the_ID();
 						$title_list[] = get_field('physician_title', $page_id);
-						include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 					endwhile;
 					echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 				} else {
@@ -1168,7 +1168,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$location_ids = $search_query->posts;
 					while ( $search_query->have_posts() ) : $search_query->the_post();
 						$page_id = get_the_ID();
-						include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/cards/location.php' );
 					endwhile;
 					echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
 				} else {
