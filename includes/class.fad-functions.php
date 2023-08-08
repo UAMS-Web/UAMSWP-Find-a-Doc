@@ -9678,22 +9678,21 @@ function uamswp_prevent_orphan($string) {
 			if ( !empty( $provider_card_fields_vars ) ) {
 
 				/* 
-					* The transient exists.
-					* Return the variable.
-					*/
+				 * The transient exists.
+				  Return the variable.
+				 */
 
 				return $provider_card_fields_vars;
 
 			} else {
 
 				/* 
-					* The transient does not exist.
-					* Define the variable again.
-					*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Create a variables array to be used on the templates and template parts
 				$provider_card_fields_vars = array();
-
 
 				// Get the field values
 
