@@ -103,28 +103,51 @@ function my_taxonomy_query( $args, $field ) {
 			return;
 		}
 
-		// Create full name to store in 'physician_full_name' field
-		$first_name = $_POST['acf']['field_physician_first_name'];
-		$middle_name = $_POST['acf']['field_physician_middle_name'];
-		$last_name = $_POST['acf']['field_physician_last_name'];
-		$pedigree = $_POST['acf']['field_physician_pedigree'];
-		$degrees = $_POST['acf']['field_physician_degree'];
+		// Create provider name combinations to store in fields
+		
+			$first_name = $_POST['acf']['field_physician_first_name'];
+			$middle_name = $_POST['acf']['field_physician_middle_name'];
+			$last_name = $_POST['acf']['field_physician_last_name'];
+			$pedigree = $_POST['acf']['field_physician_pedigree'];
 
-		$i = 1;
-			if ( $degrees ) {
-				foreach( $degrees as $degree ):
-					$degree_name = get_term( $degree, 'degree');
-					$degree_list .= $degree_name->name;
-					if( count($degrees) > $i ) {
-						$degree_list .= ", ";
+			// Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
+
+				$degrees = $_POST['acf']['field_physician_degree'];
+
+				$i = 1;
+					if ( $degrees ) {
+						foreach( $degrees as $degree ):
+							$degree_name = get_term( $degree, 'degree');
+							$degree_list .= $degree_name->name;
+							if( count($degrees) > $i ) {
+								$degree_list .= ", ";
+							}
+							$i++;
+						endforeach;
 					}
-					$i++;
-				endforeach;
-			}
 
-		$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
+				$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
 
-		$_POST['acf']['field_physician_full_name'] = $full_name;
+				$_POST['acf']['field_physician_full_name'] = $full_name;
+
+			// Create medium name to store in 'physician_medium_name' field (e.g., "Dr. Leonard H. McCoy")
+
+				$prefix = $_POST['acf']['field_physician_prefix'];
+
+				$medium_name = implode(
+					' ',
+					array_filter(
+						array(
+							( $prefix ?: '' ),
+							( $first_name ?: '' ),
+							( $middle_name ?: '' ),
+							( $last_name ?: '' ),
+							( $pedigree ?: '' )
+						)
+					)
+				);
+
+				$_POST['acf']['field_physician_medium_name'] = $medium_name;
 
 		$expertises = $_POST['acf']['field_physician_expertise'];
 		$conditions = $_POST['acf']['field_physician_conditions_cpt'];
