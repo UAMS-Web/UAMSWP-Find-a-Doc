@@ -1577,18 +1577,12 @@ function uamswp_fad_ontology_site_values(
 				'site_nav_title'				=> $site_nav_title, // string
 				'site_nav_title_attr'			=> $site_nav_title_attr, // string
 				'site_nav_url'					=> $site_nav_url, // string
-				'navbar_subbrand'				=> array (
-					'title'		=> array(
-						'name'	=> $navbar_subbrand_title, // string
-						'attr'	=> $navbar_subbrand_title_attr, // string
-						'url'	=> $navbar_subbrand_title_url, // string
-					),
-					'parent'	=> array(
-						'name'	=> $navbar_subbrand_parent, // string
-						'attr'	=> $navbar_subbrand_parent_attr, // string
-						'url'	=> $navbar_subbrand_parent_url, // string
-					)
-				),
+				'navbar_subbrand_title'			=> $navbar_subbrand_title, // string
+				'navbar_subbrand_title_attr'	=> $navbar_subbrand_title_attr, // string
+				'navbar_subbrand_title_url'		=> $navbar_subbrand_title_url, // string
+				'navbar_subbrand_parent'		=> $navbar_subbrand_parent, // string
+				'navbar_subbrand_parent_attr'	=> $navbar_subbrand_parent_attr, // string
+				'navbar_subbrand_parent_url'	=> $navbar_subbrand_parent_url, // string
 				'providers'						=> $providers, // int[]
 				'locations'						=> $locations, // int[]
 				'expertises'					=> $expertises, // int[]
