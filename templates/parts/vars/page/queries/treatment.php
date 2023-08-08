@@ -34,7 +34,7 @@
 	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
 	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
-	$treatment_query_vars = uamswp_fad_treatment_query(
+	$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
 		$page_id, // int
 		$treatments_cpt, // int[]
 		$condition_treatment_section_show, // bool (optional)

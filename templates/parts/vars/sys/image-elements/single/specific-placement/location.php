@@ -23,7 +23,7 @@ if (
 	!isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location)
 ) {
 
-	$fpage_image_location_vars = uamswp_fad_fpage_image_location(
+	$fpage_image_location_vars = isset($fpage_image_location_vars) ? $fpage_image_location_vars : uamswp_fad_fpage_image_location(
 		$page_id // int
 	);
 		$provider_fpage_image_location = $fpage_image_location_vars['provider_fpage_image_location']; // int

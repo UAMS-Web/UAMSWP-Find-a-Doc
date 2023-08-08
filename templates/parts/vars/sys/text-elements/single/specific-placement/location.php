@@ -92,7 +92,7 @@
 	!isset($condition_treatment_fpage_intro_location) || empty($condition_treatment_fpage_intro_location)
 ) {
 
-	$fpage_text_location_vars = uamswp_fad_fpage_text_location(
+	$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location(
 		$page_id, // int
 		$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	);

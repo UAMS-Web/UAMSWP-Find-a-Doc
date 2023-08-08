@@ -39,7 +39,7 @@
 	!isset($clinical_resource_fpage_featured_image_expertise_url) || empty($clinical_resource_fpage_featured_image_expertise_url)
 ) {
 
-	$fpage_image_expertise_vars = uamswp_fad_fpage_image_expertise(
+	$fpage_image_expertise_vars = isset($fpage_image_expertise_vars) ? $fpage_image_expertise_vars : uamswp_fad_fpage_image_expertise(
 		$page_id // int
 	);
 		$expertise_featured_image = $fpage_image_expertise_vars['expertise_featured_image']; // int

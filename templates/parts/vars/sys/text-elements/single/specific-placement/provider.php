@@ -64,7 +64,7 @@ if (
 	!isset($condition_treatment_fpage_intro_provider) || empty($condition_treatment_fpage_intro_provider)
 ) {
 
-	$fpage_text_provider_vars = uamswp_fad_fpage_text_provider(
+	$fpage_text_provider_vars = isset($fpage_text_provider_vars) ? $fpage_text_provider_vars : uamswp_fad_fpage_text_provider(
 		$page_id, // int
 		$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	);

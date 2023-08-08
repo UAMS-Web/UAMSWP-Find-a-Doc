@@ -46,7 +46,7 @@ if (
 	!isset($expertise_descendant_fpage_ref_top_link_general) || empty($expertise_descendant_fpage_ref_top_link_general)
 ) {
 
-	$fpage_text_expertise_general_vars = uamswp_fad_fpage_text_expertise_general(
+	$fpage_text_expertise_general_vars = isset($fpage_text_expertise_general_vars) ? $fpage_text_expertise_general_vars : uamswp_fad_fpage_text_expertise_general(
 		$page_id, // int
 		$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
 	);

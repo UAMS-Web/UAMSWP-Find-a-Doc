@@ -21,7 +21,7 @@ if (
 	!isset($clinical_resource_fpage_image_provider) || empty($clinical_resource_fpage_image_provider)
 ) {
 
-	$fpage_image_provider_vars = uamswp_fad_fpage_image_provider(
+	$fpage_image_provider_vars = isset($fpage_image_provider_vars) ? $fpage_image_provider_vars : uamswp_fad_fpage_image_provider(
 		$page_id // int
 	);
 		$location_fpage_image_provider = $fpage_image_location_vars['location_fpage_image_provider']; // int

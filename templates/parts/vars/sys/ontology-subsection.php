@@ -18,6 +18,12 @@
  if (
 	!isset($site_nav_id) || empty($site_nav_id)
 	||
+	!isset($site_nav_title) || empty($site_nav_title)
+	||
+	!isset($site_nav_title_attr) || empty($site_nav_title_attr)
+	||
+	!isset($site_nav_url) || empty($site_nav_url)
+	||
 	!isset($navbar_subbrand_title) || empty($navbar_subbrand_title)
 	||
 	!isset($navbar_subbrand_title_attr) || empty($navbar_subbrand_title_attr)
@@ -55,13 +61,16 @@
 		$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
 		$page_url = ( isset($page_url) && !empty($page_url) ) ? $page_url : '';
 
-	$ontology_site_values_vars = uamswp_fad_ontology_site_values(
+	$ontology_site_values_vars = isset($ontology_site_values_vars) ? $ontology_site_values_vars : uamswp_fad_ontology_site_values(
 		$page_id, // int // ID of the current ontology item
 		$ontology_type, // bool // Ontology type of the current ontology item (true is ontology type, false is content type)
 		$page_title, // string // Title of the current ontology item
 		$page_url // string // Permalink of the current ontology item
 	);
 		$site_nav_id = $ontology_site_values_vars['site_nav_id']; // int
+		$site_nav_title = $ontology_site_values_vars['site_nav_title']; // string
+		$site_nav_title_attr = $ontology_site_values_vars['site_nav_title_attr']; // string
+		$site_nav_url = $ontology_site_values_vars['site_nav_url']; // string
 		$navbar_subbrand_title = $ontology_site_values_vars['navbar_subbrand']['title']['name']; // string
 		$navbar_subbrand_title_attr = $ontology_site_values_vars['navbar_subbrand']['title']['attr']; // string
 		$navbar_subbrand_title_url = $ontology_site_values_vars['navbar_subbrand']['title']['url']; // string

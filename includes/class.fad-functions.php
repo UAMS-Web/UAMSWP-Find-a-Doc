@@ -1513,9 +1513,12 @@ function uamswp_fad_ontology_site_values(
 				// If the page has the ontology type...
 				// Set the navbar-subbrand title element using the page's values 
 				$site_nav_id = $page_id;
-				$navbar_subbrand_title = !empty($page_title) ? $page_title : get_the_title();
-				$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-				$navbar_subbrand_title_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
+				$site_nav_title = !empty($page_title) ? $page_title : get_the_title();
+				$site_nav_title_attr = uamswp_attr_conversion($site_nav_title);
+				$site_nav_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
+				$navbar_subbrand_title = $site_nav_title;
+				$navbar_subbrand_title_attr = $site_nav_title_attr;
+				$navbar_subbrand_title_url = $site_nav_url;
 				if ( $ancestors_ontology_farthest ) {
 					// If a farthest ancestor with the ontology type exists
 					// Set the navbar-subbrand parent element using the that ancestor's values 
@@ -1532,9 +1535,12 @@ function uamswp_fad_ontology_site_values(
 				// If the page  does not have the ontology type...
 				// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
 				$site_nav_id = $ancestors_ontology_closest;
-				$navbar_subbrand_title = $ancestors_ontology_closest_title;
-				$navbar_subbrand_title_attr = uamswp_attr_conversion($navbar_subbrand_title);
-				$navbar_subbrand_title_url = $ancestors_ontology_closest_url;
+				$site_nav_title = $ancestors_ontology_closest_title;
+				$site_nav_title_attr = $uamswp_attr_conversion($site_nav_title);
+				$site_nav_url = $ancestors_ontology_closest_url;
+				$navbar_subbrand_title = $site_nav_title;
+				$navbar_subbrand_title_attr = $site_nav_title_attr;
+				$navbar_subbrand_title_url = $site_nav_url;
 				if ( $ancestors_ontology_farthest && ( $ancestors_ontology_closest !== $ancestors_ontology_farthest ) ) {
 					// If a farthest ancestor with the ontology type exists...
 					// And if closest and farthest ancestors with the ontology type are not the same...
@@ -1568,6 +1574,9 @@ function uamswp_fad_ontology_site_values(
 
 			$ontology_site_values_vars = array(
 				'site_nav_id'					=> $site_nav_id, // int
+				'site_nav_title'				=> $site_nav_title, // string
+				'site_nav_title_attr'			=> $site_nav_title_attr, // string
+				'site_nav_url'					=> $site_nav_url, // string
 				'navbar_subbrand'				=> array (
 					'title'		=> array(
 						'name'	=> $navbar_subbrand_title, // string
@@ -3909,7 +3918,7 @@ function uamswp_fad_fpage_text_replace(
 				// Areas of Expertise
 
 					// Get the Find-a-Doc Settings values for the text elements in general placements
-					
+
 						$expertise_fpage_title_general = get_field('expertise_fpage_title_general', 'option'); // Fake subpage (or section), title
 						$expertise_fpage_intro_general = get_field('expertise_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 						$expertise_fpage_ref_main_title_general = get_field('expertise_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
@@ -3921,7 +3930,7 @@ function uamswp_fad_fpage_text_replace(
 
 					// If the variable is not set or is empty...
 					// Set a hardcoded fallback value
-					
+
 						$expertise_fpage_title_general = ( isset($expertise_fpage_title_general) && !empty($expertise_fpage_title_general) ) ? $expertise_fpage_title_general : 'Related [Areas of Expertise]'; // Fake subpage (or section), title
 						$expertise_fpage_intro_general = ( isset($expertise_fpage_intro_general) && !empty($expertise_fpage_intro_general) ) ? $expertise_fpage_intro_general : ''; // Fake subpage (or section), intro text
 						$expertise_fpage_ref_main_title_general = ( isset($expertise_fpage_ref_main_title_general) && !empty($expertise_fpage_ref_main_title_general) ) ? $expertise_fpage_ref_main_title_general : 'Full List of [Areas of Expertise]'; // Reference to the main area of expertise archive, title
@@ -3932,7 +3941,7 @@ function uamswp_fad_fpage_text_replace(
 						$expertise_fpage_ref_top_link_general = ( isset($expertise_fpage_ref_top_link_general) && !empty($expertise_fpage_ref_top_link_general) ) ? $expertise_fpage_ref_top_link_general : $expertise_fpage_ref_main_link_general; // Reference to a Top-Level Ontology Item's Fake Subpage for Areas of Expertise, link text
 
 					// Substitute placeholder text for relevant Find-a-Doc Settings value
-					
+
 						$expertise_fpage_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_title_general, $page_titles); // Fake subpage (or section), title
 						$expertise_fpage_intro_general = uamswp_fad_fpage_text_replace($expertise_fpage_intro_general, $page_titles); // Fake subpage (or section), intro text
 						$expertise_fpage_ref_main_title_general = uamswp_fad_fpage_text_replace($expertise_fpage_ref_main_title_general, $page_titles); // Reference to the main area of expertise archive, title
@@ -3945,7 +3954,7 @@ function uamswp_fad_fpage_text_replace(
 				// Descendant Areas of Expertise
 
 					// Get the Find-a-Doc Settings values for the text elements in general placements
-					
+
 						$expertise_descendant_fpage_title_general = get_field('expertise_descendant_fpage_title_general', 'option'); // Fake subpage (or section), title
 						$expertise_descendant_fpage_intro_general = get_field('expertise_descendant_fpage_intro_general', 'option'); // Fake subpage (or section), intro text
 						$expertise_descendant_fpage_ref_main_title_general = get_field('expertise_descendant_fpage_ref_main_title_general', 'option'); // Reference to the main area of expertise archive, title
@@ -4627,7 +4636,7 @@ function uamswp_fad_fpage_text_replace(
 						}
 
 						if ( !isset($treatment_fpage_intro_provider) || empty($treatment_fpage_intro_provider) ) {
-							
+
 							$treatment_fpage_intro_provider = $treatment_fpage_intro_general; // Intro text
 
 						}
@@ -5064,10 +5073,10 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 								// If any of the variables are not set or are empty...
-		
+
 								// Get the system settings for general placement of clinical resource item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 							}
 						if ( !isset($clinical_resource_fpage_title_location) || empty($clinical_resource_fpage_title_location) ) {
 							$clinical_resource_fpage_title_location = $clinical_resource_fpage_title_general; // Title
@@ -5145,13 +5154,13 @@ function uamswp_fad_fpage_text_replace(
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/condition.php' );
 
 						}
-						
+
 						if ( !isset($condition_fpage_title_location) || empty($condition_fpage_title_location) ) {
 
 							$condition_fpage_title_location = $condition_fpage_title_general; // Title
 
 						}
-						
+
 						if ( !isset($condition_fpage_intro_location) || empty($condition_fpage_intro_location) ) {
 
 							$condition_fpage_intro_location = $condition_fpage_intro_general; // Intro text
@@ -5199,7 +5208,7 @@ function uamswp_fad_fpage_text_replace(
 						}
 
 						if ( !isset($treatment_fpage_intro_location) || empty($treatment_fpage_intro_location) ) {
-							
+
 							$treatment_fpage_intro_location = $treatment_fpage_intro_general; // Intro text
 
 						}
@@ -6029,10 +6038,10 @@ function uamswp_fad_fpage_text_replace(
 						) {
 
 							// If any of the variables are not set or are empty...
-	
+
 							// Get the system settings for general placement of clinical resource item text elements
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 						}
 						if ( !isset($clinical_resource_fpage_title_expertise) || empty($clinical_resource_fpage_title_expertise) ) {
 							$clinical_resource_fpage_title_expertise = $clinical_resource_fpage_title_general; // Title
@@ -6190,22 +6199,22 @@ function uamswp_fad_fpage_text_replace(
 								||
 								!isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise)
 							) {
-		
+
 								// Get the system settings for general placement of treatment item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/treatment.php' );
-		
+
 							}
-		
+
 							if ( !isset($treatment_fpage_title_expertise) || empty($treatment_fpage_title_expertise) ) {
-		
+
 								$treatment_fpage_title_expertise = $treatment_fpage_title_general; // Title
-		
+
 							}
-		
+
 							if ( !isset($treatment_fpage_intro_expertise) || empty($treatment_fpage_intro_expertise) ) {
-								
+
 								$treatment_fpage_intro_expertise = $treatment_fpage_intro_general; // Intro text
-		
+
 							}
 
 						// Substitute placeholder text for relevant Find-a-Doc Settings value
@@ -6650,7 +6659,7 @@ function uamswp_fad_fpage_text_replace(
 
 							// Get the system settings for general placement of clinical resource item text elements
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 						}
 						if ( !isset($clinical_resource_fpage_title_clinical_resource) || empty($clinical_resource_fpage_title_clinical_resource) ) {
 							$clinical_resource_fpage_title_clinical_resource = $clinical_resource_fpage_title_general; // Title
@@ -6769,7 +6778,7 @@ function uamswp_fad_fpage_text_replace(
 						}
 
 						if ( !isset($treatment_fpage_intro_clinical_resource) || empty($treatment_fpage_intro_clinical_resource) ) {
-							
+
 							$treatment_fpage_intro_clinical_resource = $treatment_fpage_intro_general; // Intro text
 
 						}
@@ -8068,7 +8077,7 @@ function uamswp_fad_labels_jump_links() {
 				'fad_jump_links_title'	=> $fad_jump_links_title // string
 			);
 			return $labels_jump_links_vars;
-			
+
 		// Set/update the value of the transient
 		uamswp_fad_set_transient( 'vars', $labels_jump_links_vars, __FUNCTION__ );
 
@@ -8158,7 +8167,7 @@ function uamswp_meta_image_values( $featured_image ) {
 				'meta_twitter_image_height'	=> $meta_twitter_image_height, // int
 				'meta_twitter_image_alt'	=> $meta_twitter_image_alt // string // Alt text of the image in $meta_twitter_image
 			);
-			
+
 		// Set/update the value of the transient
 		uamswp_fad_set_transient( 'vars_' . $featured_image, $meta_image_values_vars, __FUNCTION__ );
 
@@ -8968,25 +8977,25 @@ function uamswp_prevent_orphan($string) {
 			return;
 		}
 
-// Profile field values
+// Profile and card field values
 
 	// Provider profile field values
 
-		function uamswp_fad_provider_fields(
+		function uamswp_fad_provider_profile_fields(
 			$page_id // int // ID of the profile
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_profile_fields_vars, __FUNCTION__ );
 
-			if ( !empty( $provider_fields_vars ) ) {
+			if ( !empty( $provider_profile_fields_vars ) ) {
 
 				/* 
 				 * The transient exists.
 				 * Return the variable.
 				 */
 
-				return $provider_fields_vars;
+				return $provider_profile_fields_vars;
 
 			} else {
 
@@ -8995,113 +9004,1732 @@ function uamswp_prevent_orphan($string) {
 				 * Define the variable again.
 				 */
 
-				$provider_fields_vars = array(
-					'provider_first_name'				=> get_field( 'physician_first_name', $page_id ), // string // First Name
-					'provider_middle_name'				=> get_field( 'physician_middle_name', $page_id ), // string // Middle Name
-					'provider_last_name'				=> get_field( 'physician_last_name', $page_id ), // string // Last Name
-					'provider_pedigree'					=> get_field( 'physician_pedigree', $page_id ), // string // Generational Suffix
-					'provider_degree'					=> get_field( 'physician_degree', $page_id ), // int[] // Degree and/or Credential
-					'provider_prefix'					=> get_field( 'physician_prefix', $page_id ), // string // Prefix
-					'provider_gender'					=> get_field( 'physician_gender', $page_id ), // Gender
-					'provider_searchable'				=> get_field( 'physician_searchable', $page_id ), // bool // Searchable
-					'provider_full_name'				=> get_field( 'physician_full_name', $page_id ), // string // Full Name
-					'_thumbnail_id'						=> get_field( '_thumbnail_id', $page_id ), // Headshot
-					'provider_image_wide'				=> get_field( 'physician_image_wide', $page_id ), // Wide Image
-					'provider_resident'					=> get_field( 'physician_resident', $page_id ), // bool // Is the Provider a Resident?
-					'provider_eligible_appointments'	=> get_field( 'physician_eligible_appointments', $page_id ), // Does the Provider See Patients Via Appointments?
-					'provider_primary_care'				=> get_field( 'physician_primary_care', $page_id ), // Is the Provider a Primary Care Provider?
-					'provider_accepting_patients'		=> get_field( 'physician_accepting_patients', $page_id ), // Is the Provider Accepting New Patients?
-					'provider_referral_required'		=> get_field( 'physician_referral_required', $page_id ), // Does the Provider Require a Referral for New Patients?
-					'provider_second_opinion'			=> get_field( 'physician_second_opinion', $page_id ), // Does the Provider Offer Second Opinions?
-					'provider_appointment_link'			=> get_field( 'physician_appointment_link', $page_id ), // Appointment Link
-					'provider_title'					=> get_field( 'physician_title', $page_id ), // int // Clinical Job Title
-					'provider_service_line'				=> get_field( 'physician_service_line', $page_id ), // int // UAMS Health Service Line
-					'clinical_admin_title_tax'			=> get_term( get_sub_field('clinical_admin_title_tax', $page_id ), 'clinical_admin_title' ), // int // Clinical Administrative Title
-					'provider_clinical_admin_area'		=> get_term( get_sub_field('clinical_admin_title_tax', $page_id ), 'provider_clinical_admin_area' ), // int // Service Line
-					'provider_npi'						=> get_field( 'physician_npi', $page_id ), // National Provider Identifier (NPI)
-					'provider_pid'						=> get_field( 'physician_pid', $page_id ), // UAMS Health Epic SER ID
-					'provider_patient_types'			=> get_field( 'physician_patient_types', $page_id ), // int // Patient Type(s)
-					'provider_languages'				=> get_field( 'physician_languages', $page_id ), // int // Language(s)
-					'provider_clinical_bio'				=> get_field( 'physician_clinical_bio', $page_id ), // Patient-focused Clinical Biography
-					'provider_short_clinical_bio'		=> get_field( 'physician_short_clinical_bio', $page_id ), // string // Short Patient-focused Clinical Biography
-					'provider_youtube_link'				=> get_field( 'physician_youtube_link', $page_id ), // Featured Video
-					'provider_clinical_focus'			=> get_field( 'physician_clinical_focus', $page_id ), // Clinical Focus
-					'provider_medical_specialties'		=> get_field( 'physician_medical_specialties', $page_id ), // int // Medical Specialties
-					'provider_conditions_cpt'			=> get_field( 'physician_conditions_cpt', $page_id ), // Conditions Treated
-					'provider_treatments_cpt'			=> get_field( 'physician_treatments_cpt', $page_id ), // Treatments & Procedures
-					'provider_medical_terms'			=> get_field( 'physician_medical_terms', $page_id ), // Medical Terms (Tags)
-					'provider_locations'				=> get_field( 'physician_locations', $page_id ), // Locations
-					'provider_region'					=> get_field( 'physician_region', $page_id ), // Region
-					'provider_affiliation'				=> get_field( 'physician_affiliation', $page_id ), // Hospital Affiliations
-					'provider_institute_affiliation'	=> get_field( 'physician_institute_affiliation', $page_id ), // Institute Affiliations
-					'provider_portal'					=> get_field( 'physician_portal', $page_id ), // Portal
-					'provider_expertise'				=> get_field( 'physician_expertise', $page_id ), // Areas of Expertise
-					'provider_clinical_resources'		=> get_field( 'physician_clinical_resources', $page_id ), // Clinical Resources
-					'provider_recognitions'				=> get_field( 'physician_recognitions', $page_id ), // Recognition Lists
-					'provider_hidden'					=> get_field( 'physician_hidden', $page_id ), // Hide from Provider List
-					'provider_podcast_name'				=> get_field( 'physician_podcast_name', $page_id ), // string // UAMS Health Talk Podcast Guest Name
-					'provider_asp_filter'				=> get_field( 'physician_asp_filter', $page_id ), // string // Ajax Search Filter
-					'provider_resident_profile_group'	=> get_field( 'physician_resident_profile_group', $page_id ),
-						"sub_fields": [
-							'provider_resident_hometown_international'	=> get_field( 'physician_resident_hometown_international', $page_id ), // Is the hometown outside the U.S.?
-							'provider_resident_hometown_city'	=> get_field( 'physician_resident_hometown_city', $page_id ), // string // Hometown City
-							'provider_resident_hometown_state'	=> get_field( 'physician_resident_hometown_state', $page_id ), // string // Hometown State \/ District \/ Territory
-							'provider_resident_hometown_country'	=> get_field( 'physician_resident_hometown_country', $page_id ), // string // Hometown Country
-							'provider_resident_school'	=> get_field( 'physician_resident_school', $page_id ), // Medical School
-							'provider_resident_academic_department'	=> get_field( 'physician_resident_academic_department', $page_id ), // Academic Department
-							'provider_resident_academic_chief'	=> get_field( 'physician_resident_academic_chief', $page_id ), // Chief Resident?
-							'provider_resident_academic_year'	=> get_field( 'physician_resident_academic_year', $page_id ), // Residency Year
-					'provider_academic_title'			=> get_field( 'physician_academic_title', $page_id ), // string // Academic Title
-					'provider_academic_college'			=> get_field( 'physician_academic_college', $page_id ), // College Affiliation
-					'provider_academic_position'		=> get_field( 'physician_academic_position', $page_id ), // Academic Position Type
-					'provider_academic_appointment'		=> get_field( 'physician_academic_appointment', $page_id ), // array // Faculty Title
-						"sub_fields": [
-							'academic_title'			=> get_field( 'academic_title', $page_id ), // string // Title (Original)
-							'academic_title_tax'		=> get_field( 'academic_title_tax', $page_id ), // Title
-							'department'				=> get_field( 'department', $page_id ), // Academic Department
-					'provider_academic_admin_title'		=> get_field( 'physician_academic_admin_title', $page_id ), // array // Academic Administrative Title
-						"sub_fields": [
-							'academic_admin_title_tax'	=> get_field( 'academic_admin_title_tax', $page_id ), // Academic Administrative Title
-							'department'				=> get_field( 'department', $page_id ), // Academic Department
-					'provider_academic_bio'				=> get_field( 'physician_academic_bio', $page_id ), // Academic Biography
-					'provider_academic_short_bio'		=> get_field( 'physician_academic_short_bio', $page_id ), // string // Short Academic Biography
-					'provider_academic_office'			=> get_field( 'physician_academic_office', $page_id ), // string // Office Location
-					'provider_academic_map'				=> get_field( 'physician_academic_map', $page_id ), // string // Building \/ Map
-					'provider_contact_information'		=> get_field( 'physician_contact_information', $page_id ), // array // Contact Information
-						"sub_fields": [
-							'type'						=> get_field( 'type', $page_id ), // string // Type
-							'information'				=> get_field( 'information', $page_id ), // string // Information
-					'provider_education'				=> get_field( 'physician_education', $page_id ), // array // Education and Training
-						"sub_fields": [
-							'education_type'			=> get_field( 'education_type', $page_id ), // Education or Training Type
-							'school'					=> get_field( 'school', $page_id ), // Organization
-							'description'				=> get_field( 'description', $page_id ), // string // Description
-					'provider_boards'					=> get_field( 'physician_boards', $page_id ), // Boards and Certifications
-					'provider_associations'				=> get_field( 'physician_associations', $page_id ), // Associations
-					'provider_research_bio'				=> get_field( 'physician_research_bio', $page_id ), // Research Bio
-					'provider_research_interests'		=> get_field( 'physician_research_interests', $page_id ), // string // Research Interests
-					'provider_research_profiles_link'	=> get_field( 'physician_research_profiles_link', $page_id ), // UAMS Profiles Link
-					'provider_pubmed_author_id'			=> get_field( 'physician_pubmed_author_id', $page_id ), // string // Pubmed Author ID \/ Name
-					'provider_author_number'			=> get_field( 'physician_author_number', $page_id ), // string // Number of Latest Articles to Display
-					'provider_select_publications'		=> get_field( 'physician_select_publications', $page_id ), // array // Selected Publications
-						"sub_fields": [
-							'pubmed_id_pmid'			=> get_field( 'pubmed_id_pmid', $page_id ), // string // PubMed ID (PMID)
-							'pubmed_information'		=> get_field( 'pubmed_information', $page_id ), // string // Pubmed Information (HTML)
-					'provider_gmb_exclude'				=> get_field( 'physician_gmb_exclude', $page_id ), // bool // Exclude Listing in Google My Business
-					'provider_gmb_cat'					=> get_field( 'physician_gmb_cat', $page_id ), // int // Google My Business Category
-					'provider_awards'					=> get_field( 'physician_awards', $page_id ), // array // Award(s)
-						"sub_fields": [
-							'year'						=> get_field( 'year', $page_id ), // string // Year
-							'title'						=> get_field( 'title', $page_id ), // string // Award Title
-							'information'				=> get_field( 'information', $page_id ), // string // Information
-					'provider_additional_info'			=> get_field( 'physician_additional_info', $page_id ) // Additional Information
+				// Create a variables array to be used on the templates and template parts
+				$provider_profile_fields_vars = array();
+
+				// Get the field values
+
+					// First Name
+
+						$provider_first_name = get_field( 'physician_first_name', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_first_name'] = isset($provider_first_name) ? $provider_first_name : ''; // Add to the variables array
+
+					// Middle Name
+
+						$provider_middle_name = get_field( 'physician_middle_name', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_middle_name'] = isset($provider_middle_name) ? $provider_middle_name : ''; // Add to the variables array
+
+					// Last Name
+
+						$provider_last_name = get_field( 'physician_last_name', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_last_name'] = isset($provider_last_name) ? $provider_last_name : ''; // Add to the variables array
+
+					// Generational Suffix
+
+						$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_pedigree'] = isset($provider_pedigree) ? $provider_pedigree : ''; // Add to the variables array
+
+					// Degree and/or Credential (taxonomy multi-select)
+
+						$provider_degree = get_field( 'physician_degree', $page_id ); // int[]
+
+						foreach ( $provider_degree as $item ) {
+
+							$provider_degree_array[$item] = array(
+								'name'	=> get_term( $item, 'degree')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_degree'] = isset($provider_degree) ? $provider_degree : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_degree_array'] = isset($provider_degree_array) ? $provider_degree_array : ''; // Add to the variables array
+
+					// Prefix
+
+						$provider_prefix = get_field( 'physician_prefix', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_prefix'] = isset($provider_prefix) ? $provider_prefix : ''; // Add to the variables array
+
+					// Gender
+
+						$provider_gender = get_field( 'physician_gender', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_gender'] = isset($provider_gender) ? $provider_gender : ''; // Add to the variables array
+
+					// Searchable
+
+						$provider_searchable = get_field( 'physician_searchable', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_searchable'] = isset($provider_searchable) ? $provider_searchable : ''; // Add to the variables array
+
+					// Full Name
+
+						$provider_full_name = get_field( 'physician_full_name', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_full_name'] = isset($provider_full_name) ? $provider_full_name : ''; // Add to the variables array
+
+					// Headshot
+
+						$_thumbnail_id = get_field( '_thumbnail_id', $page_id ); // int
+
+						$provider_profile_fields_vars['_thumbnail_id'] = isset($_thumbnail_id) ? $_thumbnail_id : ''; // Add to the variables array 
+
+					// Wide Image
+
+						$provider_image_wide = get_field( 'physician_image_wide', $page_id ); // int 
+
+						$provider_profile_fields_vars['provider_image_wide'] = isset($provider_image_wide) ? $provider_image_wide : ''; // Add to the variables array
+
+					// Is the Provider a Resident?
+
+						$provider_resident = get_field( 'physician_resident', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
+
+					// Does the Provider See Patients Via Appointments?
+
+						$provider_eligible_appointments = get_field( 'physician_eligible_appointments', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_eligible_appointments'] = isset($provider_eligible_appointments) ? $provider_eligible_appointments : ''; // Add to the variables array
+
+					// Is the Provider a Primary Care Provider?
+
+						$provider_primary_care = get_field( 'physician_primary_care', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_primary_care'] = isset($provider_primary_care) ? $provider_primary_care : ''; // Add to the variables array
+
+					// Is the Provider Accepting New Patients?
+
+						$provider_accepting_patients = get_field( 'physician_accepting_patients', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_accepting_patients'] = isset($provider_accepting_patients) ? $provider_accepting_patients : ''; // Add to the variables array
+
+					// Does the Provider Require a Referral for New Patients?
+
+						$provider_referral_required = get_field( 'physician_referral_required', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_referral_required'] = isset($provider_referral_required) ? $provider_referral_required : ''; // Add to the variables array
+
+					// Does the Provider Offer Second Opinions?
+
+						$provider_second_opinion = get_field( 'physician_second_opinion', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_second_opinion'] = isset($provider_second_opinion) ? $provider_second_opinion : ''; // Add to the variables array
+
+					// Appointment Link
+
+						$provider_appointment_link = get_field( 'physician_appointment_link', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_appointment_link'] = isset($provider_appointment_link) ? $provider_appointment_link : ''; // Add to the variables array 
+
+					// Clinical Job Title (taxonomy select)
+
+						$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
+						$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
+
+						foreach ( $provider_title as $item ) {
+
+							$provider_title_array[$item] = array(
+								'name'	=> get_term( $item, 'clinical_title')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_title'] = isset($provider_title) ? $provider_title : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_title_array'] = isset($provider_title_array) ? $provider_title_array : ''; // Add to the variables array
+
+					// UAMS Health Service Line (taxonomy select)
+
+						$provider_service_line = get_field( 'physician_service_line', $page_id ); // string|int[] // Term ID(s)
+						$provider_service_line = is_array($provider_service_line) ? $provider_service_line : array($provider_service_line); // int[] // Term ID(s)
+
+						foreach ( $provider_service_line as $item ) {
+
+							$provider_service_line_array[$item] = array(
+								'name'	=> get_term( $item, 'service_line')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_service_line'] = isset($provider_service_line) ? $provider_service_line : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_service_line_array'] = isset($provider_service_line_array) ? $provider_service_line_array : ''; // Add to the variables array
+
+					// Clinical Administrative Title (repeater)
+
+						$provider_clinical_admin_title = get_field( 'physician_clinical_admin_title', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_clinical_admin_title'] = isset($provider_clinical_admin_title) ? $provider_clinical_admin_title : ''; // Add to the variables array
+
+					// National Provider Identifier (NPI)
+
+						$provider_npi = get_field( 'physician_npi', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : ''; // Add to the variables array
+
+					// UAMS Health Epic SER ID
+
+						$provider_pid = get_field( 'physician_pid', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_pid'] = isset($provider_pid) ? $provider_pid : ''; // Add to the variables array
+
+					// Patient Type(s) (taxonomy checkbox)
+
+						$provider_patient_types = get_field( 'physician_patient_types', $page_id ); // string|int[] // Term ID(s)
+						$provider_patient_types = is_array($provider_patient_types) ? $provider_patient_types : array($provider_patient_types); // int[] // Term ID(s)
+
+						foreach ( $provider_patient_types as $item ) {
+
+							$provider_patient_types_array[$item] = array(
+								'name'	=> get_term( $item, 'patient_type')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_patient_types'] = isset($provider_patient_types) ? $provider_patient_types : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_patient_types_array'] = isset($provider_patient_types_array) ? $provider_patient_types_array : ''; // Add to the variables array
+
+					// Language(s) (taxonomy multi-select)
+
+						$provider_languages = get_field( 'physician_languages', $page_id ); // int[]
+
+						foreach ( $provider_languages as $item ) {
+
+							$provider_languages_array[$item] = array(
+								'name'	=> get_term( $item, 'language')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_languages'] = isset($provider_languages) ? $provider_languages : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_languages_array'] = isset($provider_languages_array) ? $provider_languages_array : ''; // Add to the variables array
+
+					// Patient-focused Clinical Biography
+
+						$provider_clinical_bio = get_field( 'physician_clinical_bio', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_clinical_bio'] = isset($provider_clinical_bio) ? $provider_clinical_bio : ''; // Add to the variables array
+
+					// Short Patient-focused Clinical Biography
+
+						$provider_short_clinical_bio = get_field( 'physician_short_clinical_bio', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_short_clinical_bio'] = isset($provider_short_clinical_bio) ? $provider_short_clinical_bio : ''; // Add to the variables array
+
+					// Featured Video
+
+						$provider_youtube_link = get_field( 'physician_youtube_link', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_youtube_link'] = isset($provider_youtube_link) ? $provider_youtube_link : ''; // Add to the variables array
+
+					// Clinical Focus
+
+						$provider_clinical_focus = get_field( 'physician_clinical_focus', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_clinical_focus'] = isset($provider_clinical_focus) ? $provider_clinical_focus : ''; // Add to the variables array
+
+					// Medical Specialties (taxonomy multi-select)
+
+						$provider_medical_specialties = get_field( 'physician_medical_specialties', $page_id ); // int[]
+
+						foreach ( $provider_medical_specialties as $item ) {
+
+							$provider_medical_specialties_array[$item] = array(
+								'name'	=> get_term( $item, 'specialty')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_medical_specialties'] = isset($provider_medical_specialties) ? $provider_medical_specialties : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_medical_specialties_array'] = isset($provider_medical_specialties_array) ? $provider_medical_specialties_array : ''; // Add to the variables array
+
+					// Conditions Treated (post_object multi-select)
+
+						$provider_conditions_cpt = get_field( 'physician_conditions_cpt', $page_id ); // int[]
+
+						$provider_profile_fields_vars['provider_conditions_cpt'] = isset($provider_conditions_cpt) ? $provider_conditions_cpt : ''; // Add to the variables array
+
+					// Treatments & Procedures (post_object multi-select)
+
+						$provider_treatments_cpt = get_field( 'physician_treatments_cpt', $page_id ); // int[] 
+
+						$provider_profile_fields_vars['provider_treatments_cpt'] = isset($provider_treatments_cpt) ? $provider_treatments_cpt : ''; // Add to the variables array
+
+					// Medical Terms (Tags) (taxonomy multi-select)
+
+						$provider_medical_terms = get_field( 'physician_medical_terms', $page_id ); // int[] 
+
+						foreach ( $provider_medical_terms as $item ) {
+
+							$provider_medical_terms_array[$item] = array(
+								'name'	=> get_term( $item, 'medical_term')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_medical_terms'] = isset($provider_medical_terms) ? $provider_medical_terms : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_medical_terms_array'] = isset($provider_medical_terms_array) ? $provider_medical_terms_array : ''; // Add to the variables array
+
+					// Locations (relationship)
+
+						$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
+
+						$provider_profile_fields_vars['provider_locations'] = isset($provider_locations) ? $provider_locations : ''; // Add to the variables array
+
+					// Region (taxonomy multi-select)
+
+						$provider_region = get_field( 'physician_region', $page_id ); // int[] 
+
+						foreach ( $provider_region as $item ) {
+
+							$provider_region_array[$item] = array(
+								'name'	=> get_term( $item, 'region')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_region'] = isset($provider_region) ? $provider_region : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_region_array'] = isset($provider_region_array) ? $provider_region_array : ''; // Add to the variables array
+
+					// Hospital Affiliations (taxonomy checkbox)
+
+						$provider_affiliation = get_field( 'physician_affiliation', $page_id ); // string|int[] // Term ID(s)
+						$provider_affiliation = is_array($provider_affiliation) ? $provider_affiliation : array($provider_affiliation); // int[] // Term ID(s)
+
+						foreach ( $provider_affiliation as $item ) {
+
+							$provider_affiliation_array[$item] = array(
+								'name'	=> get_term( $item, 'affiliation')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_affiliation'] = isset($provider_affiliation) ? $provider_affiliation : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_affiliation_array'] = isset($provider_affiliation_array) ? $provider_affiliation_array : ''; // Add to the variables array
+
+					// Institute Affiliations (taxonomy checkbox)
+
+						$provider_institute_affiliation = get_field( 'physician_institute_affiliation', $page_id ); // string|int[] // Term ID(s)
+						$provider_institute_affiliation = is_array($provider_institute_affiliation) ? $provider_institute_affiliation : array($provider_institute_affiliation); // int[] // Term ID(s)
+
+						foreach ( $provider_institute_affiliation as $item ) {
+
+							$provider_institute_affiliation_array[$item] = array(
+								'name'	=> get_term( $item, 'institute_affiliation')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_institute_affiliation'] = isset($provider_institute_affiliation) ? $provider_institute_affiliation : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_institute_affiliation_array'] = isset($provider_institute_affiliation_array) ? $provider_institute_affiliation_array : ''; // Add to the variables array
+
+					// Portal (taxonomy radio)
+
+						$provider_portal = get_field( 'physician_portal', $page_id ); // string|int[] // Term ID(s)
+						$provider_portal = is_array($provider_portal) ? $provider_portal : array($provider_portal); // int[] // Term ID(s)
+
+						foreach ( $provider_portal as $item ) {
+
+							$provider_portal_array[$item] = array(
+								'name'	=> get_term( $item, 'portal')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_portal'] = isset($provider_portal) ? $provider_portal : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_portal_array'] = isset($provider_portal_array) ? $provider_portal_array : ''; // Add to the variables array
+
+					// Areas of Expertise (relationship)
+
+						$provider_expertise = get_field( 'physician_expertise', $page_id ); // int[] 
+
+						$provider_profile_fields_vars['provider_expertise'] = isset($provider_expertise) ? $provider_expertise : ''; // Add to the variables array
+
+					// Clinical Resources (relationship)
+
+						$provider_clinical_resources = get_field( 'physician_clinical_resources', $page_id ); // int[] 
+
+						$provider_profile_fields_vars['provider_clinical_resources'] = isset($provider_clinical_resources) ? $provider_clinical_resources : ''; // Add to the variables array
+
+					// Recognition Lists (taxonomy multi-select)
+
+						$provider_recognitions = get_field( 'physician_recognitions', $page_id ); // int[] 
+
+						foreach ( $provider_recognitions as $item ) {
+
+							$provider_recognitions_array[$item] = array(
+								'name'	=> get_term( $item, 'recognition')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_recognitions'] = isset($provider_recognitions) ? $provider_recognitions : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_recognitions_array'] = isset($provider_recognitions_array) ? $provider_recognitions_array : ''; // Add to the variables array
+
+					// Hide from Provider List
+
+						$provider_hidden = get_field( 'physician_hidden', $page_id ); // bool 
+
+						$provider_profile_fields_vars['provider_hidden'] = isset($provider_hidden) ? $provider_hidden : ''; // Add to the variables array
+
+					// UAMS Health Talk Podcast Guest Name
+
+						$provider_podcast_name = get_field( 'physician_podcast_name', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_podcast_name'] = isset($provider_podcast_name) ? $provider_podcast_name : ''; // Add to the variables array
+
+					// Ajax Search Filter
+
+						$provider_asp_filter = get_field( 'physician_asp_filter', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_asp_filter'] = isset($provider_asp_filter) ? $provider_asp_filter : ''; // Add to the variables array
+
+					// Resident profile group
+
+						$provider_resident_profile_group = get_field( 'physician_resident_profile_group', $page_id ); // group
+
+						$provider_profile_fields_vars['provider_resident_profile_group'] = isset($provider_resident_profile_group) ? $provider_resident_profile_group : ''; // Add to the variables array
+
+						// Is the hometown outside the U.S.?
+
+							$provider_resident_hometown_international = $provider_resident_profile_group['physician_resident_hometown_international']; // bool 
+
+							$provider_profile_fields_vars['provider_resident_hometown_international'] = isset($provider_resident_hometown_international) ? $provider_resident_hometown_international : ''; // Add to the variables array
+
+						// Hometown City
+
+							$provider_resident_hometown_city = $provider_resident_profile_group['physician_resident_hometown_city']; // string 
+
+							$provider_profile_fields_vars['provider_resident_hometown_city'] = isset($provider_resident_hometown_city) ? $provider_resident_hometown_city : ''; // Add to the variables array
+
+						// Hometown State / District / Territory
+
+							$provider_resident_hometown_state = $provider_resident_profile_group['physician_resident_hometown_state']; // string 
+
+							$provider_profile_fields_vars['provider_resident_hometown_state'] = isset($provider_resident_hometown_state) ? $provider_resident_hometown_state : ''; // Add to the variables array
+
+						// Hometown Country
+
+							$provider_resident_hometown_country = $provider_resident_profile_group['physician_resident_hometown_country']; // string 
+
+							$provider_profile_fields_vars['provider_resident_hometown_country'] = isset($provider_resident_hometown_country) ? $provider_resident_hometown_country : ''; // Add to the variables array
+
+						// Medical School (taxonomy select)
+
+							$provider_resident_school = get_field( 'physician_resident_school', $page_id ); // string|int[] // Term ID(s)
+							$provider_resident_school = is_array($provider_resident_school) ? $provider_resident_school : array($provider_resident_school); // int[] // Term ID(s)
+
+							foreach ( $provider_resident_school as $item ) {
+
+								$provider_resident_school_array[$item] = array(
+									'name'	=> get_term( $item, 'school')->name // string // Term name
+								);
+
+							}
+
+							$provider_profile_fields_vars['provider_resident_school'] = isset($provider_resident_school) ? $provider_resident_school : ''; // Add to the variables array
+							$provider_profile_fields_vars['provider_resident_school_array'] = isset($provider_resident_school_array) ? $provider_resident_school_array : ''; // Add to the variables array
+
+						// Academic Department (taxonomy select)
+
+							$provider_resident_academic_department = get_field( 'physician_resident_academic_department', $page_id ); // string|int[] // Term ID(s)
+							$provider_resident_academic_department = is_array($provider_resident_academic_department) ? $provider_resident_academic_department : array($provider_resident_academic_department); // int[] // Term ID(s)
+
+							foreach ( $provider_resident_academic_department as $item ) {
+
+								$provider_resident_academic_department_array[$item] = array(
+									'name'	=> get_term( $item, 'academic_department')->name // string // Term name
+								);
+
+							}
+
+							$provider_profile_fields_vars['provider_fields_vars'] = isset($provider_profile_fields_vars) ? $provider_profile_fields_vars : ''; // Add to the variables array
+							$provider_profile_fields_vars['provider_resident_academic_department_array'] = isset($provider_resident_academic_department_array) ? $provider_resident_academic_department_array : ''; // Add to the variables array
+
+						// Chief Resident?
+
+							$provider_resident_academic_chief = $provider_resident_profile_group['physician_resident_academic_chief']; // bool
+
+							$provider_profile_fields_vars['provider_resident_academic_chief'] = isset($provider_resident_academic_chief) ? $provider_resident_academic_chief : ''; // Add to the variables array
+
+						// Residency Year (taxonomy select)
+
+							$provider_resident_academic_year = get_field( 'physician_resident_academic_year', $page_id ); // string|int[] // Term ID(s)
+							$provider_resident_academic_year = is_array($provider_resident_academic_year) ? $provider_resident_academic_year : array($provider_resident_academic_year); // int[] // Term ID(s)
+
+							foreach ( $provider_resident_academic_year as $item ) {
+
+								$provider_resident_academic_year_array[$item] = array(
+									'name'	=> get_term( $item, 'residency_year')->name // string // Term name
+								);
+
+							}
+
+							$provider_profile_fields_vars['provider_resident_academic_year'] = isset($provider_resident_academic_year) ? $provider_resident_academic_year : ''; // Add to the variables array
+							$provider_profile_fields_vars['provider_resident_academic_year_array'] = isset($provider_resident_academic_year_array) ? $provider_resident_academic_year_array : ''; // Add to the variables array
+
+					// Academic Title
+
+						$provider_academic_title = get_field( 'physician_academic_title', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_academic_title'] = isset($provider_academic_title) ? $provider_academic_title : ''; // Add to the variables array
+
+					// College Affiliation (taxonomy checkbox)
+
+						$provider_academic_college = get_field( 'physician_academic_college', $page_id ); // string|int[] // Term ID(s)
+						$provider_academic_college = is_array($provider_academic_college) ? $provider_academic_college : array($provider_academic_college); // int[] // Term ID(s)
+
+						foreach ( $provider_academic_college as $item ) {
+
+							$provider_academic_college_array[$item] = array(
+								'name'	=> get_term( $item, 'academic_college')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_academic_college'] = isset($provider_academic_college) ? $provider_academic_college : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_academic_college_array'] = isset($provider_academic_college_array) ? $provider_academic_college_array : ''; // Add to the variables array
+
+					// Academic Position Type (taxonomy checkbox)
+
+						$provider_academic_position = get_field( 'physician_academic_position', $page_id ); // string|int[] // Term ID(s)
+						$provider_academic_position = is_array($provider_academic_position) ? $provider_academic_position : array($provider_academic_position); // int[] // Term ID(s)
+
+						foreach ( $provider_academic_position as $item ) {
+
+							$provider_academic_position_array[$item] = array(
+								'name'	=> get_term( $item, 'academic_position')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_academic_position'] = isset($provider_academic_position) ? $provider_academic_position : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_academic_position_array'] = isset($provider_academic_position_array) ? $provider_academic_position_array : ''; // Add to the variables array
+
+					// Faculty Title (repeater)
+
+						$provider_academic_appointment = get_field( 'physician_academic_appointment', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_academic_appointment'] = isset($provider_academic_appointment) ? $provider_academic_appointment : ''; // Add to the variables array
+
+					// Academic Administrative Title (repeater)
+
+						$provider_academic_admin_title = get_field( 'physician_academic_admin_title', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_academic_admin_title'] = isset($provider_academic_admin_title) ? $provider_academic_admin_title : ''; // Add to the variables array
+
+					// Academic Biography
+
+						$provider_academic_bio = get_field( 'physician_academic_bio', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_academic_bio'] = isset($provider_academic_bio) ? $provider_academic_bio : ''; // Add to the variables array
+
+					// Short Academic Biography
+
+						$provider_academic_short_bio = get_field( 'physician_academic_short_bio', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_academic_short_bio'] = isset($provider_academic_short_bio) ? $provider_academic_short_bio : ''; // Add to the variables array
+
+					// Office Location
+
+						$provider_academic_office = get_field( 'physician_academic_office', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_academic_office'] = isset($provider_academic_office) ? $provider_academic_office : ''; // Add to the variables array
+
+					// Building / Map
+
+						$provider_academic_map = get_field( 'physician_academic_map', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_academic_map'] = isset($provider_academic_map) ? $provider_academic_map : ''; // Add to the variables array
+
+					// Contact Information (repeater)
+
+						$provider_contact_information = get_field( 'physician_contact_information', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_contact_information'] = isset($provider_contact_information) ? $provider_contact_information : ''; // Add to the variables array
+
+					// Education and Training (repeater)
+
+						$provider_education = get_field( 'physician_education', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_education'] = isset($provider_education) ? $provider_education : ''; // Add to the variables array
+
+					// Boards and Certifications (taxonomy multi-select)
+
+						$provider_boards = get_field( 'physician_boards', $page_id ); // int[]
+
+						foreach ( $provider_boards as $item ) {
+
+							$provider_boards_array[$item] = array(
+								'name'	=> get_term( $item, 'board')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_boards'] = isset($provider_boards) ? $provider_boards : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_boards_array'] = isset($provider_boards_array) ? $provider_boards_array : ''; // Add to the variables array
+
+					// Associations (taxonomy multi-select)
+
+						$provider_associations = get_field( 'physician_associations', $page_id ); // int[]
+
+						foreach ( $provider_associations as $item ) {
+
+							$provider_associations_array[$item] = array(
+								'name'	=> get_term( $item, 'association')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_associations'] = isset($provider_associations) ? $provider_associations : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_associations_array'] = isset($provider_associations_array) ? $provider_associations_array : ''; // Add to the variables array
+
+					// Research Bio
+
+						$provider_research_bio = get_field( 'physician_research_bio', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_research_bio'] = isset($provider_research_bio) ? $provider_research_bio : ''; // Add to the variables array
+
+					// Research Interests
+
+						$provider_research_interests = get_field( 'physician_research_interests', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_research_interests'] = isset($provider_research_interests) ? $provider_research_interests : ''; // Add to the variables array
+
+					// UAMS Profiles Link
+
+						$provider_research_profiles_link = get_field( 'physician_research_profiles_link', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_research_profiles_link'] = isset($provider_research_profiles_link) ? $provider_research_profiles_link : ''; // Add to the variables array
+
+					// Pubmed Author ID / Name
+
+						$provider_pubmed_author_id = get_field( 'physician_pubmed_author_id', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_pubmed_author_id'] = isset($provider_pubmed_author_id) ? $provider_pubmed_author_id : ''; // Add to the variables array
+
+					// Number of Latest Articles to Display
+
+						$provider_author_number = get_field( 'physician_author_number', $page_id ); // string 
+
+						$provider_profile_fields_vars['provider_author_number'] = isset($provider_author_number) ? $provider_author_number : ''; // Add to the variables array
+
+					// Selected Publications (repeater)
+
+						$provider_select_publications = get_field( 'physician_select_publications', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_select_publications'] = isset($provider_select_publications) ? $provider_select_publications : ''; // Add to the variables array
+
+					// Exclude Listing in Google My Business
+
+						$provider_gmb_exclude = get_field( 'physician_gmb_exclude', $page_id ); // bool
+
+						$provider_profile_fields_vars['provider_gmb_exclude'] = isset($provider_gmb_exclude) ? $provider_gmb_exclude : ''; // Add to the variables array
+
+					// Google My Business Category (taxonomy multi-select)
+
+						$provider_gmb_cat = get_field( 'physician_gmb_cat', $page_id ); // int[]
+
+						foreach ( $provider_gmb_cat as $item ) {
+
+							$provider_gmb_cat_array[$item] = array(
+								'name'	=> get_term( $item, 'gmb_cat_provider')->name // string // Term name
+							);
+
+						}
+
+						$provider_profile_fields_vars['provider_gmb_cat'] = isset($provider_gmb_cat) ? $provider_gmb_cat : ''; // Add to the variables array
+						$provider_profile_fields_vars['provider_gmb_cat_array'] = isset($provider_gmb_cat_array) ? $provider_gmb_cat_array : ''; // Add to the variables array
+
+					// Award(s) (repeater)
+
+						$provider_awards = get_field( 'physician_awards', $page_id ); // array
+
+						$provider_profile_fields_vars['provider_awards'] = isset($provider_awards) ? $provider_awards : ''; // Add to the variables array
+
+					// Additional Information
+
+						$provider_additional_info = get_field( 'physician_additional_info', $page_id ); // string
+
+						$provider_profile_fields_vars['provider_additional_info'] = isset($provider_additional_info) ? $provider_additional_info : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_profile_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $provider_profile_fields_vars;
+
+			}
+
+		}
+
+	// Provider card field values
+
+		function uamswp_fad_provider_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $provider_card_fields_vars ) ) {
+
+				/* 
+					* The transient exists.
+					* Return the variable.
+					*/
+
+				return $provider_card_fields_vars;
+
+			} else {
+
+				/* 
+					* The transient does not exist.
+					* Define the variable again.
+					*/
+
+				// Create a variables array to be used on the templates and template parts
+				$provider_card_fields_vars = array();
+
+
+				// Get the field values
+
+					// First Name
+
+						$provider_first_name = get_field( 'physician_first_name', $page_id ); // string
+
+						$provider_card_fields_vars['provider_first_name'] = isset($provider_first_name) ? $provider_first_name : ''; // Add to the variables array
+
+					// Middle Name
+
+						$provider_middle_name = get_field( 'physician_middle_name', $page_id ); // string
+
+						$provider_card_fields_vars['provider_middle_name'] = isset($provider_middle_name) ? $provider_middle_name : ''; // Add to the variables array
+
+					// Last Name
+
+						$provider_last_name = get_field( 'physician_last_name', $page_id ); // string
+
+						$provider_card_fields_vars['provider_last_name'] = isset($provider_last_name) ? $provider_last_name : ''; // Add to the variables array
+
+					// Generational Suffix
+
+						$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string 
+
+						$provider_card_fields_vars['provider_pedigree'] = isset($provider_pedigree) ? $provider_pedigree : ''; // Add to the variables array
+
+					// Degree and/or Credential (taxonomy multi-select)
+
+						$provider_degree = get_field( 'physician_degree', $page_id ); // int[]
+
+						foreach ( $provider_degree as $item ) {
+
+							$provider_degree_array[$item] = array(
+								'name'	=> get_term( $item, 'degree')->name // string // Term name
+							);
+
+						}
+
+						$provider_card_fields_vars['provider_degree'] = isset($provider_degree) ? $provider_degree : ''; // Add to the variables array
+						$provider_card_fields_vars['provider_degree_array'] = isset($provider_degree_array) ? $provider_degree_array : ''; // Add to the variables array
+
+					// Headshot
+
+						$_thumbnail_id = get_field( '_thumbnail_id', $page_id ); // int
+
+						$provider_card_fields_vars['_thumbnail_id'] = isset($_thumbnail_id) ? $_thumbnail_id : ''; // Add to the variables array 
+
+					// Is the Provider a Resident?
+
+						$provider_resident = get_field( 'physician_resident', $page_id ); // bool 
+
+						$provider_card_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
+
+					// Clinical Job Title (taxonomy select)
+
+						$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
+						$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
+
+						foreach ( $provider_title as $item ) {
+
+							$provider_title_array[$item] = array(
+								'name'	=> get_term( $item, 'clinical_title')->name // string // Term name
+							);
+
+						}
+
+						$provider_card_fields_vars['provider_title'] = isset($provider_title) ? $provider_title : ''; // Add to the variables array
+						$provider_card_fields_vars['provider_title_array'] = isset($provider_title_array) ? $provider_title_array : ''; // Add to the variables array
+
+					// UAMS Health Service Line (taxonomy select)
+
+						$provider_service_line = get_field( 'physician_service_line', $page_id ); // string|int[] // Term ID(s)
+						$provider_service_line = is_array($provider_service_line) ? $provider_service_line : array($provider_service_line); // int[] // Term ID(s)
+
+						foreach ( $provider_service_line as $item ) {
+
+							$provider_service_line_array[$item] = array(
+								'name'	=> get_term( $item, 'service_line')->name // string // Term name
+							);
+
+						}
+
+						$provider_card_fields_vars['provider_service_line'] = isset($provider_service_line) ? $provider_service_line : ''; // Add to the variables array
+						$provider_card_fields_vars['provider_service_line_array'] = isset($provider_service_line_array) ? $provider_service_line_array : ''; // Add to the variables array
+
+					// National Provider Identifier (NPI)
+
+						$provider_npi = get_field( 'physician_npi', $page_id ); // string
+
+						$provider_card_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : ''; // Add to the variables array
+
+					// Short Patient-focused Clinical Biography
+
+						$provider_short_clinical_bio = get_field( 'physician_short_clinical_bio', $page_id ); // string 
+
+						$provider_card_fields_vars['provider_short_clinical_bio'] = isset($provider_short_clinical_bio) ? $provider_short_clinical_bio : ''; // Add to the variables array
+
+					// Locations (relationship)
+
+						$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
+
+						$provider_card_fields_vars['provider_locations'] = isset($provider_locations) ? $provider_locations : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $provider_card_fields_vars;
+
+			}
+
+		}
+
+	// Location profile field values
+
+		function uamswp_fad_location_profile_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $location_profile_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $location_profile_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $location_profile_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$location_profile_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$location_profile_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$location_profile_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$location_profile_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$location_profile_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$location_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $location_profile_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $location_profile_fields_vars;
+
+			}
+		}
+
+	// Location card field values
+
+		function uamswp_fad_location_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $location_card_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $location_card_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$location_card_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$location_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$location_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$location_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$location_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$location_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $location_card_fields_vars;
+
+			}
+
+		}
+
+	// Area of expertise profile field values
+
+		function uamswp_fad_expertise_profile_fields(
+			$page_id, // int // ID of the profile
+			$current_fpage = '' // int // Current fake subpage slug
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $expertise_profile_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $expertise_profile_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$expertise_profile_fields_vars = array();
+
+				// Get the field values
+
+					// Common
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_common_vars = array();
+
+						// Post Title (if current item is a fake subpage, title of the parent item)
+
+							$page_title = get_the_title();
+							$page_title_attr = uamswp_attr_conversion($page_title);
+				
+							// Array for page titles and section titles
+
+								$page_titles = array(
+									'page_title'		=> $page_title,
+									'page_title_attr'	=> $page_title_attr
+								);
+
+							// Add to the variables array
+
+								$expertise_profile_fields_common_vars['page_title'] = isset($page_title) ? $page_title : '';
+								$expertise_profile_fields_common_vars['page_titles'] = isset($page_titles) ? $page_titles : '';
+
+						// Post URL (if current item is a fake subpage, URL of the parent item)
+
+							$page_url = user_trailingslashit(get_permalink());
+
+							// Add to the variables array
+							$expertise_profile_fields_common_vars['page_url'] = isset($page_url) ? $page_url : '';
+
+						// Post Slug (if current item is a fake subpage, slug of the parent item)
+
+							$page_slug = $post->post_name;
+
+							// Add to the variables array
+							$expertise_profile_fields_common_vars['page_slug'] = isset($page_slug) ? $page_slug : '';
+
+						// Ontology / Content Type
+
+							$ontology_type = get_field('expertise_type'); // Ontology type of the post (true is ontology type, false is content type)
+							$ontology_type = isset($ontology_type) ? $ontology_type : true; // Check if 'expertise_type' is not null, and if so, set value to true
+
+							// Add to the variables array
+							$expertise_profile_fields_common_vars['ontology_type'] = isset($ontology_type) ? $ontology_type : '';
+
+						// Get system settings for text elements in an area of expertise subsection (or profile)
+
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/expertise.php' );
+
+							// Add to the variables array
+
+								$expertise_profile_fields_common_vars['expertise_page_title_options'] = isset($expertise_page_title_options) ? $expertise_page_title_options: '';
+								$expertise_profile_fields_common_vars['expertise_page_title'] = isset($expertise_page_title) ? $expertise_page_title: '';
+								$expertise_profile_fields_common_vars['expertise_page_intro'] = isset($expertise_page_intro) ? $expertise_page_intro: '';
+								$expertise_profile_fields_common_vars['expertise_page_image'] = isset($expertise_page_image) ? $expertise_page_image: '';
+								$expertise_profile_fields_common_vars['expertise_page_image_mobile'] = isset($expertise_page_image_mobile) ? $expertise_page_image_mobile: '';
+								$expertise_profile_fields_common_vars['expertise_short_desc'] = isset($expertise_short_desc) ? $expertise_short_desc: '';
+								$expertise_profile_fields_common_vars['provider_fpage_title_expertise'] = isset($provider_fpage_title_expertise) ? $provider_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_intro_expertise'] = isset($provider_fpage_intro_expertise) ? $provider_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_ref_main_title_expertise'] = isset($provider_fpage_ref_main_title_expertise) ? $provider_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_ref_main_intro_expertise'] = isset($provider_fpage_ref_main_intro_expertise) ? $provider_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_ref_main_link_expertise'] = isset($provider_fpage_ref_main_link_expertise) ? $provider_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_ref_top_title_expertise'] = isset($provider_fpage_ref_top_title_expertise) ? $provider_fpage_ref_top_title_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_ref_top_intro_expertise'] = isset($provider_fpage_ref_top_intro_expertise) ? $provider_fpage_ref_top_intro_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_ref_top_link_expertise'] = isset($provider_fpage_ref_top_link_expertise) ? $provider_fpage_ref_top_link_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_short_desc_expertise'] = isset($provider_fpage_short_desc_expertise) ? $provider_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_title_expertise'] = isset($location_fpage_title_expertise) ? $location_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_intro_expertise'] = isset($location_fpage_intro_expertise) ? $location_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_short_desc_expertise'] = isset($location_fpage_short_desc_expertise) ? $location_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_ref_main_title_expertise'] = isset($location_fpage_ref_main_title_expertise) ? $location_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_ref_main_intro_expertise'] = isset($location_fpage_ref_main_intro_expertise) ? $location_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_ref_main_link_expertise'] = isset($location_fpage_ref_main_link_expertise) ? $location_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_ref_top_title_expertise'] = isset($location_fpage_ref_top_title_expertise) ? $location_fpage_ref_top_title_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_ref_top_intro_expertise'] = isset($location_fpage_ref_top_intro_expertise) ? $location_fpage_ref_top_intro_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_ref_top_link_expertise'] = isset($location_fpage_ref_top_link_expertise) ? $location_fpage_ref_top_link_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_title_expertise'] = isset($expertise_descendant_fpage_title_expertise) ? $expertise_descendant_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_intro_expertise'] = isset($expertise_descendant_fpage_intro_expertise) ? $expertise_descendant_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_short_desc_expertise'] = isset($expertise_descendant_fpage_short_desc_expertise) ? $expertise_descendant_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_ref_main_title_expertise'] = isset($expertise_descendant_fpage_ref_main_title_expertise) ? $expertise_descendant_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_ref_main_intro_expertise'] = isset($expertise_descendant_fpage_ref_main_intro_expertise) ? $expertise_descendant_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_ref_main_link_expertise'] = isset($expertise_descendant_fpage_ref_main_link_expertise) ? $expertise_descendant_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_title_expertise'] = isset($expertise_fpage_title_expertise) ? $expertise_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_intro_expertise'] = isset($expertise_fpage_intro_expertise) ? $expertise_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_short_desc_expertise'] = isset($expertise_fpage_short_desc_expertise) ? $expertise_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_ref_main_title_expertise'] = isset($expertise_fpage_ref_main_title_expertise) ? $expertise_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_ref_main_intro_expertise'] = isset($expertise_fpage_ref_main_intro_expertise) ? $expertise_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_ref_main_link_expertise'] = isset($expertise_fpage_ref_main_link_expertise) ? $expertise_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_title_expertise'] = isset($clinical_resource_fpage_title_expertise) ? $clinical_resource_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_intro_expertise'] = isset($clinical_resource_fpage_intro_expertise) ? $clinical_resource_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_main_title_expertise'] = isset($clinical_resource_fpage_ref_main_title_expertise) ? $clinical_resource_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_main_intro_expertise'] = isset($clinical_resource_fpage_ref_main_intro_expertise) ? $clinical_resource_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_main_link_expertise'] = isset($clinical_resource_fpage_ref_main_link_expertise) ? $clinical_resource_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_top_title_expertise'] = isset($clinical_resource_fpage_ref_top_title_expertise) ? $clinical_resource_fpage_ref_top_title_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_top_intro_expertise'] = isset($clinical_resource_fpage_ref_top_intro_expertise) ? $clinical_resource_fpage_ref_top_intro_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_top_link_expertise'] = isset($clinical_resource_fpage_ref_top_link_expertise) ? $clinical_resource_fpage_ref_top_link_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_more_text_expertise'] = isset($clinical_resource_fpage_more_text_expertise) ? $clinical_resource_fpage_more_text_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_more_link_text_expertise'] = isset($clinical_resource_fpage_more_link_text_expertise) ? $clinical_resource_fpage_more_link_text_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_more_link_descr_expertise'] = isset($clinical_resource_fpage_more_link_descr_expertise) ? $clinical_resource_fpage_more_link_descr_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_short_desc_expertise'] = isset($clinical_resource_fpage_short_desc_expertise) ? $clinical_resource_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_common_vars['condition_fpage_title_expertise'] = isset($condition_fpage_title_expertise) ? $condition_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['condition_fpage_intro_expertise'] = isset($condition_fpage_intro_expertise) ? $condition_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['treatment_fpage_title_expertise'] = isset($treatment_fpage_title_expertise) ? $treatment_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['treatment_fpage_intro_expertise'] = isset($treatment_fpage_intro_expertise) ? $treatment_fpage_intro_expertise: '';
+								$expertise_profile_fields_common_vars['condition_treatment_fpage_title_expertise'] = isset($condition_treatment_fpage_title_expertise) ? $condition_treatment_fpage_title_expertise: '';
+								$expertise_profile_fields_common_vars['condition_treatment_fpage_intro_expertise'] = isset($condition_treatment_fpage_intro_expertise) ? $condition_treatment_fpage_intro_expertise: '';
+
+						// Get system settings for area of expertise profile image elements
+
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/single/specific-placement/expertise.php' );
+
+							// Add to the variables array
+
+								$expertise_profile_fields_common_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image: '';
+								$expertise_profile_fields_common_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url: '';
+								$expertise_profile_fields_common_vars['provider_fpage_featured_image_expertise'] = isset($provider_fpage_featured_image_expertise) ? $provider_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_common_vars['provider_fpage_featured_image_expertise_url'] = isset($provider_fpage_featured_image_expertise_url) ? $provider_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_common_vars['location_fpage_featured_image_expertise'] = isset($location_fpage_featured_image_expertise) ? $location_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_common_vars['location_fpage_featured_image_expertise_url'] = isset($location_fpage_featured_image_expertise_url) ? $location_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_featured_image_expertise'] = isset($expertise_fpage_featured_image_expertise) ? $expertise_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_fpage_featured_image_expertise_url'] = isset($expertise_fpage_featured_image_expertise_url) ? $expertise_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_featured_image_expertise'] = isset($expertise_descendant_fpage_featured_image_expertise) ? $expertise_descendant_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_common_vars['expertise_descendant_fpage_featured_image_expertise_url'] = isset($expertise_descendant_fpage_featured_image_expertise_url) ? $expertise_descendant_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_featured_image_expertise'] = isset($clinical_resource_fpage_featured_image_expertise) ? $clinical_resource_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_common_vars['clinical_resource_fpage_featured_image_expertise_url'] = isset($clinical_resource_fpage_featured_image_expertise_url) ? $clinical_resource_fpage_featured_image_expertise_url: '';
+					
+						// Get the ontology subsection values
+
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
+
+							// Add to the variables array
+
+								$expertise_profile_fields_common_vars['site_nav_id'] = isset($site_nav_id) ? $site_nav_id: '';
+								$expertise_profile_fields_common_vars['site_nav_title'] = isset($site_nav_title) ? $site_nav_title: '';
+								$expertise_profile_fields_common_vars['site_nav_title_attr'] = isset($site_nav_title_attr) ? $site_nav_title_attr: '';
+								$expertise_profile_fields_common_vars['site_nav_url'] = isset($site_nav_url) ? $site_nav_url: '';
+								$expertise_profile_fields_common_vars['navbar_subbrand_title'] = isset($navbar_subbrand_title) ? $navbar_subbrand_title: '';
+								$expertise_profile_fields_common_vars['navbar_subbrand_title_attr'] = isset($navbar_subbrand_title_attr) ? $navbar_subbrand_title_attr: '';
+								$expertise_profile_fields_common_vars['navbar_subbrand_title_url'] = isset($navbar_subbrand_title_url) ? $navbar_subbrand_title_url: '';
+								$expertise_profile_fields_common_vars['navbar_subbrand_parent'] = isset($navbar_subbrand_parent) ? $navbar_subbrand_parent: '';
+								$expertise_profile_fields_common_vars['navbar_subbrand_parent_attr'] = isset($navbar_subbrand_parent_attr) ? $navbar_subbrand_parent_attr: '';
+								$expertise_profile_fields_common_vars['navbar_subbrand_parent_url'] = isset($navbar_subbrand_parent_url) ? $navbar_subbrand_parent_url: '';
+								$expertise_profile_fields_common_vars['providers'] = isset($providers) ? $providers: '';
+								$expertise_profile_fields_common_vars['locations'] = isset($locations) ? $locations: '';
+								$expertise_profile_fields_common_vars['expertises'] = isset($expertises) ? $expertises: '';
+								$expertise_profile_fields_common_vars['expertise_descendants'] = isset($expertise_descendants) ? $expertise_descendants: '';
+								$expertise_profile_fields_common_vars['clinical_resources'] = isset($clinical_resources) ? $clinical_resources: '';
+								$expertise_profile_fields_common_vars['conditions_cpt'] = isset($conditions_cpt) ? $conditions_cpt: '';
+								$expertise_profile_fields_common_vars['treatments_cpt'] = isset($treatments_cpt) ? $treatments_cpt: '';
+								$expertise_profile_fields_common_vars['ancestors_ontology_farthest'] = isset($ancestors_ontology_farthest) ? $ancestors_ontology_farthest: '';
+								$expertise_profile_fields_common_vars['page_top_level_query'] = isset($page_top_level_query) ? $page_top_level_query: '';
+					
+						// Post Featured Image (if current item is a fake subpage, featured image of the parent item)
+
+							$featured_image = $expertise_featured_image; // Image ID
+							$featured_image = $featured_image ? $featured_image : '';
+
+							// Add to the variables array
+							$expertise_profile_fields_common_vars['featured_image'] = isset($featured_image) ? $featured_image : '';
+
+						// Page template class
+						
+							$template_type = 'default';
+
+							// Add to the variables array
+							$expertise_profile_fields_common_vars['template_type'] = isset($template_type) ? $template_type : '';
+
+						// Meta title
+
+							$meta_title_enhanced_addition = $expertise_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
+							include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
+
+							// Add to the variables array
+							$expertise_profile_fields_common_vars['meta_title'] = isset($meta_title) ? $meta_title : '';
+
+						// Meta Description and Schema Description
+
+							// Get excerpt
+
+								$excerpt = get_the_excerpt(); // 'expertise_selected_post_excerpt'
+								$excerpt_attr = uamswp_attr_conversion($excerpt);
+								$excerpt_user = true;
+
+								if ( empty( $excerpt ) ) {
+
+									$excerpt_user = false;
+
+								}
+
+							// Set schema description
+
+								$schema_description = $excerpt_attr; // Used for Schema Data. Should ALWAYS have a value
+
+							// Add to the variables array
+
+								$expertise_profile_fields_common_vars['excerpt'] = isset($excerpt) ? $excerpt : '';
+								$expertise_profile_fields_common_vars['excerpt_attr'] = isset($excerpt_attr) ? $excerpt_attr : '';
+								$expertise_profile_fields_common_vars['excerpt_user'] = isset($excerpt_user) ? $excerpt_user : '';
+								$expertise_profile_fields_common_vars['schema_description'] = isset($schema_description) ? $schema_description : '';
+
+							// Meta Keywords
+
+								$keywords = get_field('expertise_alternate_names');
+
+								// Add to the variables array
+								$expertise_profile_fields_common_vars['keywords'] = isset($keywords) ? $keywords : '';
+
+							// Meta Social Media Tags
+
+								// Filter hooks
+								include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
+
+								// Add to the variables array
+
+									$expertise_profile_fields_common_vars['meta_og_type'] = isset($meta_og_type) ? $meta_og_type : '';
+									$expertise_profile_fields_common_vars['meta_og_type_property'] = isset($meta_og_type_property) ? $meta_og_type_property : '';
+									$expertise_profile_fields_common_vars['meta_og_namespace'] = isset($meta_og_namespace) ? $meta_og_namespace : '';
+									$expertise_profile_fields_common_vars['meta_og_updated_time'] = isset($meta_og_updated_time) ? $meta_og_updated_time : '';
+									$expertise_profile_fields_common_vars['meta_article_author'] = isset($meta_article_author) ? $meta_article_author : '';
+									$expertise_profile_fields_common_vars['meta_article_author_content'] = isset($meta_article_author_content) ? $meta_article_author_content : '';
+									$expertise_profile_fields_common_vars['meta_article_author_count'] = isset($meta_article_author_count) ? $meta_article_author_count : '';
+									$expertise_profile_fields_common_vars['meta_article_publisher'] = isset($meta_article_publisher) ? $meta_article_publisher : '';
+									$expertise_profile_fields_common_vars['meta_article_publisher_content'] = isset($meta_article_publisher_content) ? $meta_article_publisher_content : '';
+									$expertise_profile_fields_common_vars['meta_article_publisher_count'] = isset($meta_article_publisher_count) ? $meta_article_publisher_count : '';
+									$expertise_profile_fields_common_vars['meta_og_locale'] = isset($meta_og_locale) ? $meta_og_locale : '';
+									$expertise_profile_fields_common_vars['meta_og_url'] = isset($meta_og_url) ? $meta_og_url : '';
+									$expertise_profile_fields_common_vars['meta_og_title'] = isset($meta_og_title) ? $meta_og_title : '';
+									$expertise_profile_fields_common_vars['meta_og_image'] = isset($meta_og_image) ? $meta_og_image : '';
+									$expertise_profile_fields_common_vars['meta_og_image_width'] = isset($meta_og_image_width) ? $meta_og_image_width : '';
+									$expertise_profile_fields_common_vars['meta_og_image_height'] = isset($meta_og_image_height) ? $meta_og_image_height : '';
+									$expertise_profile_fields_common_vars['meta_og_site_name'] = isset($meta_og_site_name) ? $meta_og_site_name : '';
+									$expertise_profile_fields_common_vars['meta_og_description'] = isset($meta_og_description) ? $meta_og_description : '';
+									$expertise_profile_fields_common_vars['meta_oembed_title'] = isset($meta_oembed_title) ? $meta_oembed_title : '';
+									$expertise_profile_fields_common_vars['meta_oembed_thumbnail_size'] = isset($meta_oembed_thumbnail_size) ? $meta_oembed_thumbnail_size : '';
+									$expertise_profile_fields_common_vars['meta_oembed_thumbnail'] = isset($meta_oembed_thumbnail) ? $meta_oembed_thumbnail : '';
+									$expertise_profile_fields_common_vars['meta_oembed_thumbnail_width'] = isset($meta_oembed_thumbnail_width) ? $meta_oembed_thumbnail_width : '';
+									$expertise_profile_fields_common_vars['meta_oembed_thumbnail_height'] = isset($meta_oembed_thumbnail_height) ? $meta_oembed_thumbnail_height : '';
+									$expertise_profile_fields_common_vars['meta_twitter_card_type'] = isset($meta_twitter_card_type) ? $meta_twitter_card_type : '';
+									$expertise_profile_fields_common_vars['meta_twitter_site'] = isset($meta_twitter_site) ? $meta_twitter_site : '';
+									$expertise_profile_fields_common_vars['meta_twitter_creator'] = isset($meta_twitter_creator) ? $meta_twitter_creator : '';
+									$expertise_profile_fields_common_vars['meta_twitter_description'] = isset($meta_twitter_description) ? $meta_twitter_description : '';
+									$expertise_profile_fields_common_vars['meta_twitter_title'] = isset($meta_twitter_title) ? $meta_twitter_title : '';
+									$expertise_profile_fields_common_vars['meta_twitter_image'] = isset($meta_twitter_image) ? $meta_twitter_image : '';
+									$expertise_profile_fields_common_vars['meta_twitter_image_alt'] = isset($meta_twitter_image_alt) ? $meta_twitter_image_alt : '';
+
+							// Define the placement for content
+
+								$content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'
+
+								// Add to the variables array
+								$expertise_profile_fields_common_vars['content_placement'] = isset($content_placement) ? $content_placement : '';
+
+							// Page title configuration
+
+								$entry_header_style = $expertise_page_title_options ?: 'graphic'; // Entry header style
+								$entry_title_text = $expertise_page_title; // Regular title
+								$entry_title_text_supertitle = ''; // Optional supertitle, placed above the regular title
+								$entry_title_text_subtitle = ''; // Optional subtitle, placed below the regular title
+								$entry_title_text_body = $expertise_page_intro; // Optional lead paragraph, placed below the entry title
+								$entry_title_image_desktop = $expertise_page_image; // Desktop breakpoint image ID
+								$entry_title_image_mobile = $expertise_page_image_mobile; // Optional mobile breakpoint image ID
+
+								// Add to the variables array
+
+									$expertise_profile_fields_common_vars['entry_header_style'] = isset($entry_header_style) ? $entry_header_style : '';
+									$expertise_profile_fields_common_vars['entry_title_text'] = isset($entry_title_text) ? $entry_title_text : '';
+									$expertise_profile_fields_common_vars['entry_title_text_supertitle'] = isset($entry_title_text_supertitle) ? $entry_title_text_supertitle : '';
+									$expertise_profile_fields_common_vars['entry_title_text_subtitle'] = isset($entry_title_text_subtitle) ? $entry_title_text_subtitle : '';
+									$expertise_profile_fields_common_vars['entry_title_text_body'] = isset($entry_title_text_body) ? $entry_title_text_body : '';
+									$expertise_profile_fields_common_vars['entry_title_image_desktop'] = isset($entry_title_image_desktop) ? $entry_title_image_desktop : '';
+									$expertise_profile_fields_common_vars['entry_title_image_mobile'] = isset($entry_title_image_mobile) ? $entry_title_image_mobile : '';
+
+							// Query for whether to conditionally suppress ontology sections based on based on region and service line
+
+								$regions = isset($regions) ? $regions : array();
+								$service_lines = isset($service_lines) ? $service_lines : array();
+
+								include( UAMS_FAD_PATH . '/templates/parts/vars/page/ontology-hide.php' );
+
+								// Add to the variables array
+								$expertise_profile_fields_common_vars['hide_medical_ontology'] = isset($hide_medical_ontology) ? $hide_medical_ontology : '';
+
+
+							// Queries for whether each of the sections should be displayed
+
+								// Related Providers Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['provider_query'] = isset($provider_query) ? $provider_query : '';
+										$expertise_profile_fields_common_vars['provider_section_show'] = isset($provider_section_show) ? $provider_section_show : '';
+										$expertise_profile_fields_common_vars['provider_ids'] = isset($provider_ids) ? $provider_ids : '';
+										$expertise_profile_fields_common_vars['provider_count'] = isset($provider_count) ? $provider_count : '';
+
+								// Related Locations Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['location_query'] = isset($location_query) ? $location_query : '';
+										$expertise_profile_fields_common_vars['location_section_show'] = isset($location_section_show) ? $location_section_show : '';
+										$expertise_profile_fields_common_vars['location_ids'] = isset($location_ids) ? $location_ids : '';
+										$expertise_profile_fields_common_vars['location_count'] = isset($location_count) ? $location_count : '';
+										$expertise_profile_fields_common_vars['location_valid'] = isset($location_valid) ? $location_valid : '';
+
+								// Descendant Areas of Expertise Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise-descendant.php' );
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['expertise_descendant_query'] = isset($expertise_descendant_query) ? $expertise_descendant_query : '';
+										$expertise_profile_fields_common_vars['expertise_descendant_section_show'] = isset($expertise_descendant_section_show) ? $expertise_descendant_section_show : '';
+										$expertise_profile_fields_common_vars['expertise_descendant_ids'] = isset($expertise_descendant_ids) ? $expertise_descendant_ids : '';
+										$expertise_profile_fields_common_vars['expertise_descendant_count'] = isset($expertise_descendant_count) ? $expertise_descendant_count : '';
+										$expertise_profile_fields_common_vars['expertise_content_query'] = isset($expertise_content_query) ? $expertise_content_query : '';
+										$expertise_profile_fields_common_vars['expertise_content_nav_show'] = isset($expertise_content_nav_show) ? $expertise_content_nav_show : '';
+										$expertise_profile_fields_common_vars['expertise_content_ids'] = isset($expertise_content_ids) ? $expertise_content_ids : '';
+										$expertise_profile_fields_common_vars['expertise_content_count'] = isset($expertise_content_count) ? $expertise_content_count : '';
+										$expertise_profile_fields_common_vars['expertise_content_nav'] = isset($expertise_content_nav) ? $expertise_content_nav : '';
+
+								// Related Areas of Expertise Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
+
+										// Add to the variables array
+
+											$expertise_profile_fields_common_vars['expertise_query'] = isset($expertise_query) ? $expertise_query : '';
+											$expertise_profile_fields_common_vars['expertise_section_show'] = isset($expertise_section_show) ? $expertise_section_show : '';
+											$expertise_profile_fields_common_vars['expertise_ids'] = isset($expertise_ids) ? $expertise_ids : '';
+											$expertise_profile_fields_common_vars['expertise_count'] = isset($expertise_count) ? $expertise_count : '';
+
+								// Related Clinical Resources Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
+									$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_fpage;
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['clinical_resource_query'] = isset($clinical_resource_query) ? $clinical_resource_query : '';
+										$expertise_profile_fields_common_vars['clinical_resource_section_show'] = isset($clinical_resource_section_show) ? $clinical_resource_section_show : '';
+										$expertise_profile_fields_common_vars['clinical_resource_ids'] = isset($clinical_resource_ids) ? $clinical_resource_ids : '';
+										$expertise_profile_fields_common_vars['clinical_resource_count'] = isset($clinical_resource_count) ? $clinical_resource_count : '';
+
+								// Related Conditions Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['condition_cpt_query'] = isset($condition_cpt_query) ? $condition_cpt_query : '';
+										$expertise_profile_fields_common_vars['condition_section_show'] = isset($condition_section_show) ? $condition_section_show : '';
+										$expertise_profile_fields_common_vars['condition_ids'] = isset($condition_ids) ? $condition_ids : '';
+										$expertise_profile_fields_common_vars['condition_count'] = isset($condition_count) ? $condition_count : '';
+										$expertise_profile_fields_common_vars['schema_medical_specialty'] = isset($schema_medical_specialty) ? $schema_medical_specialty : '';
+
+								// Related Treatments Section Query
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['treatment_cpt_query'] = isset($treatment_cpt_query) ? $treatment_cpt_query : '';
+										$expertise_profile_fields_common_vars['treatment_section_show'] = isset($treatment_section_show) ? $treatment_section_show : '';
+										$expertise_profile_fields_common_vars['treatment_ids'] = isset($treatment_ids) ? $treatment_ids : '';
+										$expertise_profile_fields_common_vars['treatment_count'] = isset($treatment_count) ? $treatment_count : '';
+										$expertise_profile_fields_common_vars['schema_medical_specialty'] = isset($schema_medical_specialty) ? $schema_medical_specialty : '';
+
+								// Query for whether Make an Appointment section should be displayed
+
+									$appointment_section_show = true; // It should always be displayed.
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['appointment_section_show'] = isset($appointment_section_show) ? $appointment_section_show : '';
+
+								// Jump links
+
+									$jump_link_count = isset($jump_link_count) ? $jump_link_count : '';
+
+									// Add to the variables array
+
+										$expertise_profile_fields_common_vars['jump_link_count'] = isset($jump_link_count) ? $jump_link_count : '';
+
+						// Ontology subsection site header
+						include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
+						
+						// Ontology subsection primary navigation
+						include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
+						
+						// Construct non-standard post title
+						include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
+
+					// Overview / Content Pages
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_overview_vars = array();
+
+					// Fake Subpage: Related Providers
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_provider_vars = array();
+
+						// Get the field values
+
+							if ( 'providers' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Related Locations
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_location_vars = array();
+
+						// Get the field values
+
+							if ( 'locations' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Descendant Areas of Expertise
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_expertise_descendant_vars = array();
+
+						// Get the field values
+
+							if ( 'specialties' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Related Areas of Expertise
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_expertise_vars = array();
+
+						// Get the field values
+
+							if ( 'related' == $current_fpage ) {
+
+							}
+
+					// Fake Subpage: Related Clinical Resources
+
+						// Create a variables array to be used on the templates and template parts
+						$expertise_profile_fields_fpage_clinical_resource_vars = array();
+
+						// Get the field values
+
+							if ( 'resources' == $current_fpage ) {
+
+							}
+
+				// Merge the arrays
+				$expertise_profile_fields_vars = array_merge(
+					$expertise_profile_fields_vars,
+					$expertise_profile_fields_overview_vars,
+					$expertise_profile_fields_fpage_provider_vars,
+					$expertise_profile_fields_fpage_location_vars,
+					$expertise_profile_fields_fpage_expertise_descendant_vars,
+					$expertise_profile_fields_fpage_expertise_vars,
+					$expertise_profile_fields_fpage_clinical_resource_vars
 				);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );
 
 				// Return the variable
-				return $provider_fields_vars;
+				return $expertise_profile_fields_vars;
 
 			}
+
+		}
+
+	// Area of expertise card field values
+
+		function uamswp_fad_expertise_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $expertise_card_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $expertise_card_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$expertise_card_fields_vars = array();
+
+				// Get the field values
+
+					// Post Title
+
+						$expertise_title = get_the_title($page_id); // string
+						$expertise_title_attr = uamswp_attr_conversion($expertise_title); // string
+
+						// Add to the variables array
+
+							$expertise_card_fields_vars['expertise_title'] = isset($expertise_title) ? $expertise_title : '';
+							$expertise_card_fields_vars['expertise_title_attr'] = isset($expertise_title_attr) ? $expertise_title_attr : '';
+
+					// Post Excerpt
+
+						$expertise_excerpt = get_field( 'expertise_selected_post_excerpt', $page_id ); // string
+						$expertise_excerpt = $expertise_excerpt ?: get_the_excerpt($page_id); // string
+						$expertise_excerpt = $expertise_excerpt ?: wp_strip_all_tags( get_the_content($page_id) ); // string
+						$expertise_excerpt = $expertise_excerpt ?: ''; // string
+						$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
+
+						// Add to the variables array
+
+							$expertise_card_fields_vars['expertise_excerpt'] = isset($expertise_excerpt) ? $expertise_excerpt : '';
+							$expertise_card_fields_vars['expertise_excerpt_attr'] = isset($expertise_excerpt_attr) ? $expertise_excerpt_attr : '';
+
+					// Post URL
+
+						$expertise_url = get_permalink($page_id); // string
+
+						// Add to the variables array
+						$expertise_card_fields_vars['expertise_url'] = isset($expertise_url) ? $expertise_url : '';
+
+					// Post Featured Image
+
+						// Featured image ID
+						$expertise_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
+
+						// Featured image URL
+						$expertise_featured_image_url = $expertise_featured_image ? wp_get_attachment_image_url( $expertise_featured_image, 'aspect-16-9-small' ) : ''; // string
+
+						// Add to the variables array
+
+							$expertise_card_fields_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image : '';
+							$expertise_card_fields_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url : '';
+
+					// Parent
+
+						// Parent ID
+						$expertise_parent_id = wp_get_post_parent_id($page_id) ?: ''; // int
+
+						// Query on whether the current item has a parent
+						$expertise_has_parent = $expertise_parent_id ? true : false; // bool
+
+						// Parent post object
+						$expertise_parent_object = $expertise_has_parent ? get_post($expertise_parent_id) : ''; // object
+						$expertise_has_parent = $expertise_parent_object ? $expertise_has_parent : false; // bool
+
+						// Parent title
+
+							$expertise_parent_title = $expertise_parent_object ? $expertise_parent_object->post_title : ''; // string
+							$expertise_parent_title_attr = uamswp_attr_conversion($expertise_parent_title); // string
+
+						// Parent URL
+						$expertise_parent_url = $expertise_parent_object ? get_permalink($expertise_parent_id) : ''; // string
+
+						// Add to the variables array
+
+							$expertise_card_fields_vars['expertise_parent_id'] = isset($expertise_parent_id) ? $expertise_parent_id : '';
+							$expertise_card_fields_vars['expertise_has_parent'] = isset($expertise_has_parent) ? $expertise_has_parent : '';
+							$expertise_card_fields_vars['expertise_parent_object'] = isset($expertise_parent_object) ? $expertise_parent_object : '';
+							$expertise_card_fields_vars['expertise_parent_title'] = isset($expertise_parent_title) ? $expertise_parent_title : '';
+							$expertise_card_fields_vars['expertise_parent_title_attr'] = isset($expertise_parent_title_attr) ? $expertise_parent_title_attr : '';
+							$expertise_card_fields_vars['expertise_parent_url'] = isset($expertise_parent_url) ? $expertise_parent_url : '';
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $expertise_card_fields_vars;
+
+			}
+
+		}
+
+	// Clinical resource profile field values
+
+		function uamswp_fad_clinical_resource_profile_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_profile_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $clinical_resource_profile_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $clinical_resource_profile_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$clinical_resource_profile_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$clinical_resource_profile_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_profile_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$clinical_resource_profile_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_profile_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$clinical_resource_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_profile_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $clinical_resource_profile_fields_vars;
+
+			}
+
+		}
+
+	// Clinical resource card field values
+
+		function uamswp_fad_clinical_resource_card_fields(
+			$page_id // int // ID of the profile
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+
+			if ( !empty( $clinical_resource_card_fields_vars ) ) {
+
+				/* 
+				 * The transient exists.
+				 * Return the variable.
+				 */
+
+				return $clinical_resource_card_fields_vars;
+
+			} else {
+
+				/* 
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
+
+				// Create a variables array to be used on the templates and template parts
+				$clinical_resource_card_fields_vars = array();
+
+				// Get the field values
+
+					// Foo
+
+						$foo = get_field( 'foo', $page_id ); // string
+
+						$clinical_resource_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+
+					// Bar (taxonomy multi-select)
+
+						$bar = get_field( 'bar', $page_id ); // int[]
+
+						foreach ( $bar as $item ) {
+
+							$bar_array[$item] = array(
+								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
+						$clinical_resource_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+
+					// Baz (taxonomy select/radio/checkbox)
+
+						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
+						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+
+						foreach ( $baz as $item ) {
+
+							$baz_array[$item] = array(
+								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
+							);
+
+						}
+
+						$clinical_resource_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
+						$clinical_resource_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+
+				// Return the variable
+				return $clinical_resource_card_fields_vars;
+
+			}
+
 		}

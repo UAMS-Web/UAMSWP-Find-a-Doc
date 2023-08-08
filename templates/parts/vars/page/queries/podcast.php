@@ -20,7 +20,7 @@
 
 	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
 
-	$podcast_query_vars = uamswp_fad_podcast_query(
+	$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
 		$page_id, // int
 		$podcast_name, // string
 		$jump_link_count // int

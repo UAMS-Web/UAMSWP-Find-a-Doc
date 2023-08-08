@@ -23,7 +23,7 @@
 	!isset($clinical_resource_fpage_image_clinical_resource) || empty($clinical_resource_fpage_image_clinical_resource)
 ) {
 
-	$fpage_image_clinical_resource_vars = uamswp_fad_fpage_image_clinical_resource(
+	$fpage_image_clinical_resource_vars = isset($fpage_image_clinical_resource_vars) ? $fpage_image_clinical_resource_vars : uamswp_fad_fpage_image_clinical_resource(
 		$page_id // int
 	);
 		$provider_fpage_image_clinical_resource = $fpage_image_clinical_resource_vars['provider_fpage_image_clinical_resource']; // int

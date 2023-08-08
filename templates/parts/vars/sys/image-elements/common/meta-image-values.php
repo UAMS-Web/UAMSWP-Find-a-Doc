@@ -27,7 +27,7 @@ if ( $featured_image ) {
 		!isset($meta_twitter_image_alt) || empty($meta_twitter_image_alt)
 	) {
 
-		$meta_image_values_vars = uamswp_meta_image_values(
+		$meta_image_values_vars = isset($meta_image_values_vars) ? $meta_image_values_vars : uamswp_meta_image_values(
 			$featured_image // int // ID of the featured image
 		);
 			$meta_og_image = $meta_image_values_vars['meta_og_image']; // string // Image URL for Open Graph
