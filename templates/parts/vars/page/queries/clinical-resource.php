@@ -35,7 +35,7 @@
 
 // Create a variable for each item in the array
 
-	foreach ( $provider_card_fields_vars as $key => $value ) {
+	foreach ( $clinical_resource_query_vars as $key => $value ) {
 
 		${$key} = $value; // Create a variable for each item in the array
 
