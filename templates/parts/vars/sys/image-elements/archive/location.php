@@ -6,11 +6,14 @@
  * system settings for location archive image elements
  */
 
- if (
-	!isset($location_archive_image) || empty($location_archive_image)
-) {
+// Call the function
 
 	$archive_image_location_vars = isset($archive_image_location_vars) ? $archive_image_location_vars : uamswp_fad_archive_image_location();
-		$location_archive_image = $archive_image_location_vars['location_archive_image']; // int
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $archive_image_location_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

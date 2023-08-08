@@ -9,10 +9,14 @@
  * 	$page_id // int // ID of the profile
  */
 
-$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields( $page_id );
+// Call the function
 
-foreach ( $expertise_profile_fields_vars as $key => $value ) {
+	$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields( $page_id );
 
-	${$key} = $value; // Create a variable for each item in the array
+// Create a variable for each item in the array
 
-}
+	foreach ( $expertise_profile_fields_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

@@ -9,10 +9,14 @@
  * 	$page_id // int // ID of the profile
  */
 
-$clinical_resource_card_fields_vars = isset($clinical_resource_card_fields_vars) ? $clinical_resource_card_fields_vars : uamswp_fad_clinical_resource_card_fields( $page_id );
+// Call the function
 
-foreach ( $clinical_resource_card_fields_vars as $key => $value ) {
+	$clinical_resource_card_fields_vars = isset($clinical_resource_card_fields_vars) ? $clinical_resource_card_fields_vars : uamswp_fad_clinical_resource_card_fields( $page_id );
 
-	${$key} = $value; // Create a variable for each item in the array
+// Create a variable for each item in the array
 
-}
+	foreach ( $clinical_resource_card_fields_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

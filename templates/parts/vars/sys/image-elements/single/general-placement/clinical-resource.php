@@ -8,11 +8,14 @@
  * for clinical resources with no specific placement in mind
  */
 
-if (
-	!isset($clinical_resource_fpage_image_general) || empty($clinical_resource_fpage_image_general)
-) {
+// Call the function
 
 	$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
-		$clinical_resource_fpage_image_general = $fpage_image_clinical_resource_general_vars['clinical_resource_fpage_image_general']; // int
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $fpage_image_clinical_resource_general_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

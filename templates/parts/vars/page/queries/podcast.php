@@ -14,17 +14,22 @@
  * 	$jump_link_count // int
  */
 
- if (
-	!isset($podcast_section_show) || empty($podcast_section_show)
-) {
+// Check/define optional variables
 
 	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
+
+// Call the function
 
 	$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
 		$page_id, // int
 		$podcast_name, // string
 		$jump_link_count // int
 	);
-		$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $podcast_query_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

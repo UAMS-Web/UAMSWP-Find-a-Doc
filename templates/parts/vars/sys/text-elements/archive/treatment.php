@@ -6,26 +6,17 @@
  * system settings for treatment archive text elements
  */
 
- if (
-	!isset($treatment_archive_headline) || empty($treatment_archive_headline)
-	||
-	!isset($treatment_archive_headline_attr) || empty($treatment_archive_headline_attr)
-	||
-	!isset($treatment_archive_intro_text) || empty($treatment_archive_intro_text)
-	||
-	!isset($placeholder_treatment_archive_headline) || empty($placeholder_treatment_archive_headline)
-	||
-	!isset($placeholder_treatment_archive_intro_text) || empty($placeholder_treatment_archive_intro_text)
-) {
+// Call the function
 
 	$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
-		$treatment_archive_headline = $archive_text_treatment_vars['treatment_archive_headline']; // string
-		$treatment_archive_headline_attr = $archive_text_treatment_vars['treatment_archive_headline_attr']; // string
-		$treatment_archive_intro_text = $archive_text_treatment_vars['treatment_archive_intro_text']; // string
-		$placeholder_treatment_archive_headline = $archive_text_treatment_vars['placeholder_treatment_archive_headline']; // string
-		$placeholder_treatment_archive_intro_text = $archive_text_treatment_vars['placeholder_treatment_archive_intro_text']; // string
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $archive_text_treatment_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}
 
 if (
 	!isset($treatment_archive_link) || empty($treatment_archive_link)

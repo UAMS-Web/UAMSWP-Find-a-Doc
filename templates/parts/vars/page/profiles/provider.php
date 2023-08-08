@@ -9,10 +9,14 @@
  * 	$page_id // int // ID of the profile
  */
 
-$provider_profile_fields_vars = isset($provider_profile_fields_vars) ? $provider_profile_fields_vars : uamswp_fad_provider_profile_fields( $page_id );
+// Call the function
 
-foreach ( $provider_profile_fields_vars as $key => $value ) {
+	$provider_profile_fields_vars = isset($provider_profile_fields_vars) ? $provider_profile_fields_vars : uamswp_fad_provider_profile_fields( $page_id );
 
-	${$key} = $value; // Create a variable for each item in the array
+// Create a variable for each item in the array
 
-}
+	foreach ( $provider_profile_fields_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

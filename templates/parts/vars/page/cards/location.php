@@ -9,10 +9,14 @@
  * 	$page_id // int // ID of the profile
  */
 
-$location_card_fields_vars = isset($location_card_fields_vars) ? $location_card_fields_vars : uamswp_fad_location_card_fields( $page_id );
+// Call the function
 
-foreach ( $location_card_fields_vars as $key => $value ) {
+	$location_card_fields_vars = isset($location_card_fields_vars) ? $location_card_fields_vars : uamswp_fad_location_card_fields( $page_id );
 
-	${$key} = $value; // Create a variable for each item in the array
+// Create a variable for each item in the array
 
-}
+	foreach ( $location_card_fields_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

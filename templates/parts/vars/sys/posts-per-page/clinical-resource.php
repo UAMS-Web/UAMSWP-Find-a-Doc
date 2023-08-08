@@ -6,14 +6,14 @@
  * clinical resource items to display on a fake subpage (or section)
  */
 
-if (
-	!isset($clinical_resource_posts_per_page_fpage) || empty($clinical_resource_posts_per_page_fpage)
-	||
-	!isset($clinical_resource_posts_per_page_section) || empty($clinical_resource_posts_per_page_section)
-) {
+// Call the function
 
 	$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-		$clinical_resource_posts_per_page_fpage = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_fpage']; // int
-		$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $posts_per_page_clinical_resource_general_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

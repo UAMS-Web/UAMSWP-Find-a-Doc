@@ -13,22 +13,16 @@
  * 	$page_id // int
  */
 
-if (
-	!isset($provider_fpage_image_location) || empty($provider_fpage_image_location)
-	||
-	!isset($location_descendant_fpage_image_location) || empty($location_descendant_fpage_image_location)
-	||
-	!isset($expertise_fpage_image_location) || empty($expertise_fpage_image_location)
-	||
-	!isset($clinical_resource_fpage_image_location) || empty($clinical_resource_fpage_image_location)
-) {
+// Call the function
 
 	$fpage_image_location_vars = isset($fpage_image_location_vars) ? $fpage_image_location_vars : uamswp_fad_fpage_image_location(
 		$page_id // int
 	);
-		$provider_fpage_image_location = $fpage_image_location_vars['provider_fpage_image_location']; // int
-		$location_descendant_fpage_image_location = $fpage_image_location_vars['location_descendant_fpage_image_location']; // int
-		$expertise_fpage_image_location = $fpage_image_location_vars['expertise_fpage_image_location']; // int
-		$clinical_resource_fpage_image_location = $fpage_image_location_vars['clinical_resource_fpage_image_location']; // int
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $fpage_image_location_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}
