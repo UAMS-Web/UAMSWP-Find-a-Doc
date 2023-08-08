@@ -27,6 +27,8 @@
 	// Get system settings for location labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
+// Construct the card
+
 ?>
 <div class="col item-container">
 	<div class="item">
