@@ -19,10 +19,10 @@
 
 // Check/define optional variables
 
-	$condition_treatment_section_show = ( isset($condition_treatment_section_show) && empty($condition_treatment_section_show) ) ? $condition_treatment_section_show : '';
-	$ontology_type = ( isset($ontology_type) && empty($ontology_type) ) ? $ontology_type : '';
-	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
-	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
+	$condition_treatment_section_show = ( isset($condition_treatment_section_show) && !empty($condition_treatment_section_show) ) ? $condition_treatment_section_show : '';
+	$ontology_type = ( isset($ontology_type) && !empty($ontology_type) ) ? $ontology_type : true;
+	$jump_link_count = ( isset($jump_link_count) && !empty($jump_link_count) ) ? $jump_link_count : '';
+	$hide_medical_ontology = ( isset($hide_medical_ontology) && !empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
 // Call the function
 

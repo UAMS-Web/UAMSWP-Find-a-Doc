@@ -19,10 +19,10 @@
 
 // Check/define optional variables
 
-	$content_placement = ( isset($content_placement) && empty($content_placement) ) ? $content_placement : '';
-	$site_nav_id = ( isset($site_nav_id) && empty($site_nav_id) ) ? $site_nav_id : '';
-	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
-	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
+	$content_placement = ( isset($content_placement) && !empty($content_placement) ) ? $content_placement : '';
+	$site_nav_id = ( isset($site_nav_id) && !empty($site_nav_id) ) ? $site_nav_id : '';
+	$jump_link_count = ( isset($jump_link_count) && !empty($jump_link_count) ) ? $jump_link_count : '';
+	$hide_medical_ontology = ( isset($hide_medical_ontology) && !empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
 // Call the function
 

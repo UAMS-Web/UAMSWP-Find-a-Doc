@@ -16,7 +16,7 @@
 
 // Check/define optional variables
 
-	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
+	$jump_link_count = ( isset($jump_link_count) && !empty($jump_link_count) ) ? $jump_link_count : '';
 
 // Call the function
 
