@@ -10,7 +10,7 @@
 		$variable_slug = 'provider';
 
 	// Post type
-	
+
 		$post_type = 'provider';
 
 	// Get system settings for ontology item labels
@@ -37,7 +37,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/provider.php' );
 
 	// Meta title variables
-	
+
 		// Do nothing
 
 	// Arguments used in construction

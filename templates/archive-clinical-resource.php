@@ -38,7 +38,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/clinical-resource.php' );
 
 	// Meta title variables
-	
+
 		// Do nothing
 
 	// Arguments used in construction

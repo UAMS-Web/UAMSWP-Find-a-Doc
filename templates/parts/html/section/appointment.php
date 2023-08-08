@@ -77,5 +77,5 @@ if ( $appointment_section_show ) {
 			<?php
 
 		} // endif ( $appointment_location_url || $appointment_patients_phone_number_both )
-		
+
 } // endif ( $appointment_section_show )

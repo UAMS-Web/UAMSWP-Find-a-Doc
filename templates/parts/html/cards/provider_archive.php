@@ -16,7 +16,7 @@
 	$page_id = get_the_ID();
 
 	// Get the field values for the card
-	
+
 		$provider_card_fields_vars = ''; // Reset the variables
 		$provider_card_style = 'detailed'; // Provider card style
 		include( UAMS_FAD_PATH . '/templates/parts/vars/page/cards/provider.php' );

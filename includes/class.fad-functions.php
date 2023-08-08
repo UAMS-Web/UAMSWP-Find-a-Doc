@@ -9717,28 +9717,28 @@ function uamswp_prevent_orphan($string) {
 							$provider_degree = get_field( 'physician_degree', $page_id ); // int[]
 
 							// List degree term names
-								
+
 								if ( $provider_degree ) {
-							
+
 									foreach ( $provider_degree as $key => $value ) {
-							
+
 										$provider_degree_term = get_term( $value, 'degree' );
-							
+
 										if ( is_object( $provider_degree_term ) ) {
-							
+
 											$provider_degree[$key] = $provider_degree_term->name;
-							
+
 										} else {
-							
+
 											unset($provider_degree[$key]);
 											$provider_degree = array_values($provider_degree);
-							
+
 										}
-							
+
 									} // endforeach
-							
+
 									$provider_degree_list = $provider_degree ? implode(", ", $provider_degree) : ''; // string
-							
+
 								} else {
 
 									// Eliminate PHP errors
@@ -9780,35 +9780,35 @@ function uamswp_prevent_orphan($string) {
 
 								$provider_title = '';
 								$provider_title_list = 'Resident Physician';
-								
+
 							} else {
 
 								$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
 								$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
 
 								// List Clinical Job Title term names
-									
+
 								if ( $provider_title ) {
-								
+
 									foreach ( $provider_title as $key => $value ) {
-							
+
 										$provider_title_term = get_term( $value, 'clinical_title' );
-							
+
 										if ( is_object( $provider_title_term ) ) {
-							
+
 											$provider_title[$key] = $provider_title_term->name;
-							
+
 										} else {
-							
+
 											unset($provider_title[$key]);
 											$provider_title = array_values($provider_title);
-							
+
 										}
-							
+
 									} // endforeach
-							
+
 									$provider_title_list = $provider_title ? implode(", ", $provider_title) : ''; // string
-							
+
 								} else {
 
 									// Eliminate PHP errors
@@ -9932,7 +9932,7 @@ function uamswp_prevent_orphan($string) {
 							$provider_excerpt = $provider_excerpt ?: ''; // string
 
 							// Truncate the excerpt if it is greater than 160 characters
-							
+
 								if ( strlen($provider_excerpt) > 160 ) {
 
 									$provider_excerpt = wp_trim_words( $provider_excerpt, 23, ' &hellip;' );
@@ -10173,7 +10173,7 @@ function uamswp_prevent_orphan($string) {
 
 							$page_title = get_the_title();
 							$page_title_attr = uamswp_attr_conversion($page_title);
-				
+
 							// Array for page titles and section titles
 
 								$page_titles = array(
@@ -10287,7 +10287,7 @@ function uamswp_prevent_orphan($string) {
 								$expertise_profile_fields_common_vars['expertise_descendant_fpage_featured_image_expertise_url'] = isset($expertise_descendant_fpage_featured_image_expertise_url) ? $expertise_descendant_fpage_featured_image_expertise_url: '';
 								$expertise_profile_fields_common_vars['clinical_resource_fpage_featured_image_expertise'] = isset($clinical_resource_fpage_featured_image_expertise) ? $clinical_resource_fpage_featured_image_expertise: '';
 								$expertise_profile_fields_common_vars['clinical_resource_fpage_featured_image_expertise_url'] = isset($clinical_resource_fpage_featured_image_expertise_url) ? $clinical_resource_fpage_featured_image_expertise_url: '';
-					
+
 						// Get the ontology subsection values
 
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
@@ -10313,7 +10313,7 @@ function uamswp_prevent_orphan($string) {
 								$expertise_profile_fields_common_vars['treatments_cpt'] = isset($treatments_cpt) ? $treatments_cpt: '';
 								$expertise_profile_fields_common_vars['ancestors_ontology_farthest'] = isset($ancestors_ontology_farthest) ? $ancestors_ontology_farthest: '';
 								$expertise_profile_fields_common_vars['page_top_level_query'] = isset($page_top_level_query) ? $page_top_level_query: '';
-					
+
 						// Post Featured Image (if current item is a fake subpage, featured image of the parent item)
 
 							$featured_image = $expertise_featured_image; // Image ID
@@ -10323,7 +10323,7 @@ function uamswp_prevent_orphan($string) {
 							$expertise_profile_fields_common_vars['featured_image'] = isset($featured_image) ? $featured_image : '';
 
 						// Page template class
-						
+
 							$template_type = 'default';
 
 							// Add to the variables array
@@ -10552,10 +10552,10 @@ function uamswp_prevent_orphan($string) {
 
 						// Ontology subsection site header
 						include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
-						
+
 						// Ontology subsection primary navigation
 						include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
-						
+
 						// Construct non-standard post title
 						include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
 
@@ -10688,7 +10688,7 @@ function uamswp_prevent_orphan($string) {
 						$expertise_excerpt = $expertise_excerpt ?: ''; // string
 
 						// Truncate the excerpt if it is greater than 160 characters
-						
+
 							if ( strlen($expertise_excerpt) > 160 ) {
 
 								$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
@@ -10872,50 +10872,264 @@ function uamswp_prevent_orphan($string) {
 
 				// Get the field values
 
-					// Foo
-
-						$foo = get_field( 'foo', $page_id ); // string
-
-						$clinical_resource_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
-
-					// Bar (taxonomy multi-select)
-
-						$bar = get_field( 'bar', $page_id ); // int[]
-
-						foreach ( $bar as $item ) {
-
-							$bar_array[$item] = array(
-								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
-							);
-
-						}
-
-						$clinical_resource_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
-						$clinical_resource_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
-
-					// Baz (taxonomy select/radio/checkbox)
-
-						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
-						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
-
-						foreach ( $baz as $item ) {
-
-							$baz_array[$item] = array(
-								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
-							);
-
-						}
-
-						$clinical_resource_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
-						$clinical_resource_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
-
 					// Common
+
+						// Title
+
+							$clinical_resource_title = get_the_title($page_id);
+							$clinical_resource_title_attr = uamswp_attr_conversion($clinical_resource_title);
+
+							// Add to the variables array
+
+								$clinical_resource_card_fields_vars['clinical_resource_title'] = isset($clinical_resource_title) ? $clinical_resource_title : '';
+								$clinical_resource_card_fields_vars['clinical_resource_title_attr'] = isset($clinical_resource_title_attr) ? $clinical_resource_title_attr : '';
+
+						// Type
+
+							$clinical_resource_type = get_field('clinical_resource_type', $page_id);
+							$clinical_resource_type_value = $clinical_resource_type['value']; // value
+							$clinical_resource_type_label = $clinical_resource_type['label']; // label
+
+							// Add to the variables array
+							$clinical_resource_card_fields_vars['clinical_resource_type_label'] = isset($clinical_resource_type_label) ? $clinical_resource_type_label : '';
+
+						// Link Element
+
+							// Build an array of resource type values (keys) with the corresponding link text (values)
+
+								$clinical_resource_link_text_map = array(
+									'text' => 'Read the Article',
+									'infographic' => 'View the Infographic',
+									'video' => 'Watch the Video',
+									'doc' => 'Read the Document'
+								);
+
+							// Link text
+
+								// Get system settings for clinical resource labels
+
+									if ( !$clinical_resource_type_value ) {
+
+										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
+
+									}
+
+								$clinical_resource_link_text = ( $clinical_resource_type_value && $clinical_resource_link_text_map[$clinical_resource_type_value] ) ? $clinical_resource_link_text_map[$clinical_resource_type_value] : 'View the ' . $clinical_resource_single_name;
+
+							// Link accessible label
+
+								$clinical_resource_link_label = implode(
+									', ',
+									array(
+										$clinical_resource_link_text,
+										$clinical_resource_title
+									)
+								);
+								$clinical_resource_link_label = uamswp_attr_conversion($clinical_resource_link_label);
+
+							// Add to the variables array
+
+								$clinical_resource_card_fields_vars['clinical_resource_link_text'] = isset($clinical_resource_link_text) ? $clinical_resource_link_text : '';
+								$clinical_resource_card_fields_vars['clinical_resource_link_label'] = isset($clinical_resource_link_label) ? $clinical_resource_link_label : '';
+
+						// Excerpt
+
+							$clinical_resource_excerpt = get_field( 'clinical_resource_excerpt', $page_id ); // string
+							$clinical_resource_excerpt = $clinical_resource_excerpt ?: get_the_excerpt($page_id); // string
+
+							if ( !$clinical_resource_excerpt ) {
+
+								$clinical_resource_content_map = array(
+									'text' => get_field( 'clinical_resource_text', $page_id ),
+									'infographic' => get_field( 'clinical_resource_infographic_descr', $page_id ),
+									'video' => get_field( 'clinical_resource_video_descr', $page_id ),
+									'doc' => get_field( 'clinical_resource_document_descr', $page_id )
+								);
+
+								$clinical_resource_content = ( $clinical_resource_type_value && $clinical_resource_content_map[$clinical_resource_type_value] ) ? $clinical_resource_content_map[$clinical_resource_type_value] : '';
+
+							}
+							$clinical_resource_excerpt = $clinical_resource_excerpt ?: wp_strip_all_tags( $clinical_resource_content ); // string
+							$clinical_resource_excerpt = $clinical_resource_excerpt ?: ''; // string
+
+							// Truncate the excerpt if it is greater than 160 characters
+
+								if ( strlen($clinical_resource_excerpt) > 160 ) {
+
+									$clinical_resource_excerpt = wp_trim_words( $clinical_resource_excerpt, 23, ' &hellip;' );
+
+								}
+
+							// Add to the variables array
+							$clinical_resource_card_fields_vars['clinical_resource_excerpt'] = isset($clinical_resource_excerpt) ? $clinical_resource_excerpt : '';
+
+						// Clinical Resource URL
+
+							$clinical_resource_url = get_permalink($page_id);
+
+							// Add to the variables array
+							$clinical_resource_card_fields_vars['clinical_resource_url'] = isset($clinical_resource_url) ? $clinical_resource_url : array(); 
 
 					// Clinical Resource Card Styles
 
 						if ( 'basic' == $clinical_resource_card_style ) {
 
+							// Featured image (wide)
+
+								$clinical_resource_featured_image = get_field( '_thumbnail_id', $page_id ); // int
+
+								if (
+									$clinical_resource_featured_image
+									&&
+									function_exists( 'fly_add_image_size' )
+								) {
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' ),
+										'media-min-width'	=> '1921px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 433, 244, 'center', 'center' ),
+										'media-min-width'	=> '1500px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' ),
+										'media-min-width'	=> '992px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 433, 244, 'center', 'center' ),
+										'media-min-width'	=> '768px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' ),
+										'media-min-width'	=> '1px'
+									);
+
+									$clinical_resource_featured_image_base_url = image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' );
+
+								} elseif ( $clinical_resource_featured_image ) {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = wp_get_attachment_image_url( $clinical_resource_featured_image, 'aspect-16-9-small' );
+
+								} else {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = '';
+
+								}
+
+								// Add to the variables array
+
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array(); 
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : ''; 
+
 						} elseif ( 'detailed' == $clinical_resource_card_style ) {
+
+							// Featured image (wide and square)
+
+								$clinical_resource_featured_image = get_field( '_thumbnail_id', $page_id ); // int
+								$clinical_resource_featured_image_square = get_field( 'clinical_resource_image_square', $page_id ); // int
+
+								if (
+									$clinical_resource_featured_image
+									&&
+									function_exists( 'fly_add_image_size' )
+								) {
+
+									// srcset
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												243, 243,
+												'bar', 'center'
+											),
+											'media-min-width'	=> '2054px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												184, 184,
+												'center', 'center'
+											),
+											'media-min-width'	=> '1784px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												243, 243,
+												'center', 'center'
+											),
+											'media-min-width'	=> '1200px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												184, 184,
+												'center', 'center'
+											),
+											'media-min-width'	=> '930px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												$clinical_resource_featured_image,
+												580, 326,
+												'center', 'center'
+											),
+											'media-min-width'	=> '768px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												95, 95,
+												'center', 'center'
+											),
+											'media-min-width'	=> '576px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												$clinical_resource_featured_image,
+												510, 286,
+												'center', 'center'
+											),
+											'media-min-width'	=> '1px'
+										);
+
+									// Base image
+
+										$clinical_resource_featured_image_base_url = image_sizer(
+											$clinical_resource_featured_image,
+											510, 286,
+											'center', 'center'
+										);
+
+								} elseif ( $clinical_resource_featured_image ) {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = wp_get_attachment_image_url( $clinical_resource_featured_image, 'aspect-16-9-small' );
+
+								} else {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = '';
+
+								}
+
+								// Add to the variables array
+
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array(); 
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : ''; 
 
 						}
 				// Set/update the value of the transient

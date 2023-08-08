@@ -56,10 +56,10 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 				</div>
 			</div>
 			<?php
-			
+
 			// FacetWP Hide elements
 			// Set # value depending on element
-			
+
 			?>
 			<script>
 				(function($) {

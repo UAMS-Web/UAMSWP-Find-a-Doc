@@ -76,7 +76,7 @@ if ( $treatment_section_show ) {
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 
 		// Text elements
-		
+
 			if (
 				!isset($treatment_section_title) || empty($treatment_section_title)
 				||
