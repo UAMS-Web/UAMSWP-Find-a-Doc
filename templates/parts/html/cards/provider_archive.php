@@ -41,7 +41,7 @@
 							foreach ( $provider_headshot_srcset as $srcset ) {
 
 								?>
-								<source srcset="<?php echo $provider_headshot_srcset['url']; ?>" media="(min-width: <?php echo $provider_headshot_srcset['media-min-width']; ?>)">
+								<source srcset="<?php echo $srcset['url']; ?>" media="(min-width: <?php echo $srcset['media-min-width']; ?>)">
 								<?php
 
 							}

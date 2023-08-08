@@ -48,19 +48,21 @@
 			<span class="name"><?php echo $provider_full_name; ?></span>
 			<?php
 
-			if ( $provider_title_list ) {
+			// Add subtitle for clinical title
 
-				?>
-				<span class="subtitle"><?php echo $provider_title_list; ?></span>
-				<?php
-			} // endif ( $provider_title_list )
+				if ( $provider_title_list ) {
+
+					?>
+					<span class="subtitle"><?php echo $provider_title_list; ?></span>
+					<?php
+				} // endif ( $provider_title_list )
 
 			?>
 		</h3>
 	</div>
 	<div class="btn-container">
 		<div class="inner-container">
-			<a href="<?php the_permalink( $page_id ); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $provider_full_name_attr; ?>" data-itemtitle="<?php echo $provider_full_name_attr; ?>">View Profile</a>
+			<a href="<?php echo $provider_url; ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $provider_full_name_attr; ?>" data-itemtitle="<?php echo $provider_full_name_attr; ?>">View Profile</a>
 		</div>
 	</div>
 </div>

@@ -9777,31 +9777,6 @@ function uamswp_prevent_orphan($string) {
 								$provider_card_fields_vars['provider_full_name'] = isset($provider_full_name) ? $provider_full_name : '';
 								$provider_card_fields_vars['provider_full_name_attr'] = isset($provider_full_name_attr) ? $provider_full_name_attr : '';
 
-						// Headshot
-
-							$provider_headshot = get_field( '_thumbnail_id', $page_id ); // int
-
-							if (
-								$provider_headshot
-								&&
-								function_exists( 'fly_add_image_size' )
-							) {
-
-								$provider_headshot_url = image_sizer( $provider_headshot, 253, 337, 'center', 'center' );
-
-							} elseif ( $provider_headshot ) {
-
-								$provider_headshot_url = wp_get_attachment_image_url( $provider_headshot, 'medium' );
-
-							} else {
-
-								$provider_headshot_url = '';
-
-							}
-
-							// Add to the variables array
-							$provider_card_fields_vars['provider_headshot_url'] = isset($provider_headshot_url) ? $provider_headshot_url : ''; 
-
 						// Clinical Job Title (taxonomy select)
 
 							// Is the Provider a Resident?
@@ -9854,11 +9829,100 @@ function uamswp_prevent_orphan($string) {
 								$provider_card_fields_vars['provider_title'] = isset($provider_title) ? $provider_title : '';
 								$provider_card_fields_vars['provider_title_list'] = isset($provider_title_list) ? $provider_title_list : '';
 
+						// Profile URL
+
+							$provider_url = user_trailingslashit(get_permalink( $page_id ));
+
+							// Add to the variables array
+							$provider_card_fields_vars['provider_url'] = isset($provider_url) ? $provider_url : '';
+
 					// Provider Card Styles
 
 					if ( 'basic' == $provider_card_style ) {
 
+						// Headshot
+
+							$provider_headshot = get_field( '_thumbnail_id', $page_id ); // int
+
+							if (
+								$provider_headshot
+								&&
+								function_exists( 'fly_add_image_size' )
+							) {
+
+								$provider_headshot_url = image_sizer( $provider_headshot, 253, 337, 'center', 'center' );
+
+							} elseif ( $provider_headshot ) {
+
+								$provider_headshot_url = wp_get_attachment_image_url( $provider_headshot, 'medium' );
+
+							} else {
+
+								$provider_headshot_url = '';
+
+							}
+
+							// Add to the variables array
+							$provider_card_fields_vars['provider_headshot_url'] = isset($provider_headshot_url) ? $provider_headshot_url : ''; 
+
 					} elseif ( 'detailed' == $provider_card_style ) {
+
+						// Headshot
+
+							$provider_headshot = get_field( '_thumbnail_id', $page_id ); // int
+
+							if (
+								$provider_headshot
+								&&
+								function_exists( 'fly_add_image_size' )
+							) {
+
+								$provider_headshot_srcset[] = array(
+									'url'				=> image_sizer( $provider_headshot, 243, 324, 'center', 'center' ),
+									'media-min-width'	=> '2054px'
+								);
+
+								$provider_headshot_srcset[] = array(
+									'url'				=> image_sizer( $provider_headshot, 184, 245, 'center', 'center' ),
+									'media-min-width'	=> '1784px'
+								);
+
+								$provider_headshot_srcset[] = array(
+									'url'				=> image_sizer( $provider_headshot, 243, 324, 'center', 'center' ),
+									'media-min-width'	=> '1200px'
+								);
+
+								$provider_headshot_srcset[] = array(
+									'url'				=> image_sizer( $provider_headshot, 184, 245, 'center', 'center' ),
+									'media-min-width'	=> '768px'
+								);
+
+								$provider_headshot_srcset[] = array(
+									'url'				=> image_sizer( $provider_headshot, 95, 127, 'center', 'center' ),
+									'media-min-width'	=> '576px'
+								);
+
+								$provider_headshot_srcset[] = array(
+									'url'				=> image_sizer( $provider_headshot, 184, 245, 'center', 'center' ),
+									'media-min-width'	=> '1px'
+								);
+
+								$provider_headshot_base_url = image_sizer( $provider_headshot, 184, 245, 'center', 'center' );
+
+							} elseif ( $provider_headshot ) {
+
+								$provider_headshot_base_url = wp_get_attachment_image_url( $provider_headshot, 'medium' );
+
+							} else {
+
+								$provider_headshot_base_url = '';
+
+							}
+
+							// Add to the variables array
+
+								$provider_card_fields_vars['provider_headshot_srcset'] = isset($provider_headshot_srcset) ? $provider_headshot_srcset : array(); 
+								$provider_card_fields_vars['provider_headshot_base_url'] = isset($provider_headshot_base_url) ? $provider_headshot_base_url : ''; 
 
 						// National Provider Identifier (NPI)
 
@@ -9867,19 +9931,48 @@ function uamswp_prevent_orphan($string) {
 							// Add to the variables array
 							$provider_card_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : '';
 
-						// Short Patient-focused Clinical Biography
+						// Post Excerpt
 
-							$provider_short_clinical_bio = get_field( 'physician_short_clinical_bio', $page_id ); // string 
+							$provider_excerpt = get_field( 'physician_short_clinical_bio', $page_id ); // string
+							$provider_excerpt = $provider_excerpt ?: wp_strip_all_tags( get_field( 'physician_clinical_bio', $page_id ) ); // string
+							$provider_excerpt = $provider_excerpt ?: ''; // string
+
+							// Truncate the excerpt if it is greater than 160 characters
+							
+								if ( strlen($provider_excerpt) > 160 ) {
+
+									$provider_excerpt = wp_trim_words( $provider_excerpt, 23, ' &hellip;' );
+
+								}
 
 							// Add to the variables array
-							$provider_card_fields_vars['provider_short_clinical_bio'] = isset($provider_short_clinical_bio) ? $provider_short_clinical_bio : '';
+							$provider_card_fields_vars['provider_excerpt'] = isset($provider_excerpt) ? $provider_excerpt : '';
 
 						// Locations (relationship)
 
 							$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
 
+							// Check for valid locations
+
+								foreach ( $provider_locations as $key => $value ) {
+
+									if ( get_post_status ( $value ) == 'publish' ) {
+
+										$provider_locations_array[$value]['title'] = get_the_title( $value );
+										$provider_locations_array[$value]['title_attr'] = uamswp_attr_conversion($provider_locations_array[$value]['title']);
+										$provider_locations_array[$value]['url'] = get_permalink( $value );
+
+									} else {
+
+										unset($provider_locations[$key]);
+
+									}
+								}
+
+								$provider_locations = array_values($provider_locations);
+
 							// Add to the variables array
-							$provider_card_fields_vars['provider_locations'] = isset($provider_locations) ? $provider_locations : '';
+							$provider_card_fields_vars['provider_locations_array'] = isset($provider_locations_array) ? $provider_locations_array : '';
 
 					} // endif
 
