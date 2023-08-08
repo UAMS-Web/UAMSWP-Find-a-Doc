@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_text_condition_vars = isset($archive_text_condition_vars) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
+	$archive_text_condition_vars = ( isset($archive_text_condition_vars) && !empty($archive_text_condition_vars) ) ? $archive_text_condition_vars : uamswp_fad_archive_text_condition();
 
 // Create a variable for each item in the array
 

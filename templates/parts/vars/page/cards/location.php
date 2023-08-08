@@ -11,7 +11,7 @@
 
 // Call the function
 
-	$location_card_fields_vars = isset($location_card_fields_vars) ? $location_card_fields_vars : uamswp_fad_location_card_fields( $page_id );
+	$location_card_fields_vars = ( isset($location_card_fields_vars) && !empty($location_card_fields_vars) ) ? $location_card_fields_vars : uamswp_fad_location_card_fields( $page_id );
 
 // Create a variable for each item in the array
 

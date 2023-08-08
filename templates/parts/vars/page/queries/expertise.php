@@ -23,7 +23,7 @@
 
 // Call the function
 
-	$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+	$expertise_query_vars = ( isset($expertise_query_vars) && !empty($expertise_query_vars) ) ? $expertise_query_vars : uamswp_fad_expertise_query(
 		$page_id, // int
 		$expertises, // int[]
 		$jump_link_count, // int

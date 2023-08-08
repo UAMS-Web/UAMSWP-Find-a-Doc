@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_text_location_vars = isset($archive_text_location_vars) ? $archive_text_location_vars : uamswp_fad_archive_text_location();
+	$archive_text_location_vars = ( isset($archive_text_location_vars) && !empty($archive_text_location_vars) ) ? $archive_text_location_vars : uamswp_fad_archive_text_location();
 
 // Create a variable for each item in the array
 

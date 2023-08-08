@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_location_vars = isset($labels_location_vars) ? $labels_location_vars : uamswp_fad_labels_location();
+	$labels_location_vars = ( isset($labels_location_vars) && !empty($labels_location_vars) ) ? $labels_location_vars : uamswp_fad_labels_location();
 
 // Create a variable for each item in the array
 

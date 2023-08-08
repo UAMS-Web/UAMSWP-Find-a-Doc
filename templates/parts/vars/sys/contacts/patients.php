@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$appointment_patients_vars = isset($appointment_patients_vars) ? $appointment_patients_vars : uamswp_fad_appointment_patients();
+	$appointment_patients_vars = ( isset($appointment_patients_vars) && !empty($appointment_patients_vars) ) ? $appointment_patients_vars : uamswp_fad_appointment_patients();
 
 // Create a variable for each item in the array
 

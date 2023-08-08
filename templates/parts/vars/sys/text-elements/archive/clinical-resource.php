@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_text_clinical_resource_vars = isset($archive_text_clinical_resource_vars) ? $archive_text_clinical_resource_vars : uamswp_fad_archive_text_clinical_resource();
+	$archive_text_clinical_resource_vars = ( isset($archive_text_clinical_resource_vars) && !empty($archive_text_clinical_resource_vars) ) ? $archive_text_clinical_resource_vars : uamswp_fad_archive_text_clinical_resource();
 
 // Create a variable for each item in the array
 

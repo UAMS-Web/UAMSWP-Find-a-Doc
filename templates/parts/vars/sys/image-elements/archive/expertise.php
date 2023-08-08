@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_image_expertise_vars = isset($archive_image_expertise_vars) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
+	$archive_image_expertise_vars = ( isset($archive_image_expertise_vars) && !empty($archive_image_expertise_vars) ) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
 
 // Create a variable for each item in the array
 

@@ -26,7 +26,7 @@
 
 // Call the function
 
-	$expertise_descendant_query_vars = isset($expertise_descendant_query_vars) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
+	$expertise_descendant_query_vars = ( isset($expertise_descendant_query_vars) && !empty($expertise_descendant_query_vars) ) ? $expertise_descendant_query_vars : uamswp_fad_expertise_descendant_query(
 		$page_id, // int
 		$expertise_descendants, // int[]
 		$content_placement, // string

@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_treatment_vars = isset($labels_treatment_vars) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
+	$labels_treatment_vars = ( isset($labels_treatment_vars) && !empty($labels_treatment_vars) ) ? $labels_treatment_vars : uamswp_fad_labels_treatment();
 
 // Create a variable for each item in the array
 

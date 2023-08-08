@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_provider_vars = isset($labels_provider_vars) ? $labels_provider_vars : uamswp_fad_labels_provider();
+	$labels_provider_vars = ( isset($labels_provider_vars) && !empty($labels_provider_vars) ) ? $labels_provider_vars : uamswp_fad_labels_provider();
 
 // Create a variable for each item in the array
 

@@ -10,7 +10,7 @@
 
 // Call the function
 
-	$fpage_image_clinical_resource_general_vars = isset($fpage_image_clinical_resource_general_vars) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
+	$fpage_image_clinical_resource_general_vars = ( isset($fpage_image_clinical_resource_general_vars) && !empty($fpage_image_clinical_resource_general_vars) ) ? $fpage_image_clinical_resource_general_vars : uamswp_fad_fpage_image_clinical_resource_general();
 
 // Create a variable for each item in the array
 

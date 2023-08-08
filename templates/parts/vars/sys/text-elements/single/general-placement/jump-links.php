@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
+	$labels_jump_links_vars = ( isset($labels_jump_links_vars) && !empty($labels_jump_links_vars) ) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
 
 // Create a variable for each item in the array
 

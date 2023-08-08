@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_image_provider_vars = isset($archive_image_provider_vars) ? $archive_image_provider_vars : uamswp_fad_archive_image_provider();
+	$archive_image_provider_vars = ( isset($archive_image_provider_vars) && !empty($archive_image_provider_vars) ) ? $archive_image_provider_vars : uamswp_fad_archive_image_provider();
 
 // Create a variable for each item in the array
 

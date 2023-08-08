@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_text_expertise_vars = isset($archive_text_expertise_vars) ? $archive_text_expertise_vars : uamswp_fad_archive_text_expertise();
+	$archive_text_expertise_vars = ( isset($archive_text_expertise_vars) && !empty($archive_text_expertise_vars) ) ? $archive_text_expertise_vars : uamswp_fad_archive_text_expertise();
 
 // Create a variable for each item in the array
 

@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_expertise_descendant_vars = isset($labels_expertise_descendant_vars) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
+	$labels_expertise_descendant_vars = ( isset($labels_expertise_descendant_vars) && !empty($labels_expertise_descendant_vars) ) ? $labels_expertise_descendant_vars : uamswp_fad_labels_expertise_descendant();
 
 // Create a variable for each item in the array
 

@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_text_treatment_vars = isset($archive_text_treatment_vars) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
+	$archive_text_treatment_vars = ( isset($archive_text_treatment_vars) && !empty($archive_text_treatment_vars) ) ? $archive_text_treatment_vars : uamswp_fad_archive_text_treatment();
 
 // Create a variable for each item in the array
 

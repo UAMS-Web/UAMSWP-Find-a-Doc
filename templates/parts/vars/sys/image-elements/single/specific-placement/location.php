@@ -15,7 +15,7 @@
 
 // Call the function
 
-	$fpage_image_location_vars = isset($fpage_image_location_vars) ? $fpage_image_location_vars : uamswp_fad_fpage_image_location(
+	$fpage_image_location_vars = ( isset($fpage_image_location_vars) && !empty($fpage_image_location_vars) ) ? $fpage_image_location_vars : uamswp_fad_fpage_image_location(
 		$page_id // int
 	);
 

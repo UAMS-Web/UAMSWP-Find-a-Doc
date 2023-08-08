@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$appointment_refer_vars = isset($appointment_refer_vars) ? $appointment_refer_vars : uamswp_fad_appointment_refer();
+	$appointment_refer_vars = ( isset($appointment_refer_vars) && !empty($appointment_refer_vars) ) ? $appointment_refer_vars : uamswp_fad_appointment_refer();
 
 // Create a variable for each item in the array
 

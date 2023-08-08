@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
+	$labels_expertise_vars = ( isset($labels_expertise_vars) && !empty($labels_expertise_vars) ) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
 
 // Create a variable for each item in the array
 

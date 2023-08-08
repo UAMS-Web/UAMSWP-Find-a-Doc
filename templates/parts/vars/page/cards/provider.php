@@ -11,7 +11,7 @@
 
 // Call the function
 
-	$provider_card_fields_vars = isset($provider_card_fields_vars) ? $provider_card_fields_vars : uamswp_fad_provider_card_fields( $page_id );
+	$provider_card_fields_vars = ( isset($provider_card_fields_vars) && !empty($provider_card_fields_vars) ) ? $provider_card_fields_vars : uamswp_fad_provider_card_fields( $page_id );
 
 // Create a variable for each item in the array
 

@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_clinical_resource_vars = isset($labels_clinical_resource_vars) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
+	$labels_clinical_resource_vars = ( isset($labels_clinical_resource_vars) && !empty($labels_clinical_resource_vars) ) ? $labels_clinical_resource_vars : uamswp_fad_labels_clinical_resource();
 
 // Create a variable for each item in the array
 

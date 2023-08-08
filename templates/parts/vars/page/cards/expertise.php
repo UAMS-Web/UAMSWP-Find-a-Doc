@@ -11,7 +11,7 @@
 
 // Call the function
 
-	$expertise_card_fields_vars = isset($expertise_card_fields_vars) ? $expertise_card_fields_vars : uamswp_fad_expertise_card_fields( $page_id );
+	$expertise_card_fields_vars = ( isset($expertise_card_fields_vars) && !empty($expertise_card_fields_vars) ) ? $expertise_card_fields_vars : uamswp_fad_expertise_card_fields( $page_id );
 
 // Create a variable for each item in the array
 

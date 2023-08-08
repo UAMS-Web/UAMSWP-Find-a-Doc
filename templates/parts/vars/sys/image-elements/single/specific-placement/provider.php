@@ -15,7 +15,7 @@
 
 // Call the function
 
-	$fpage_image_provider_vars = isset($fpage_image_provider_vars) ? $fpage_image_provider_vars : uamswp_fad_fpage_image_provider(
+	$fpage_image_provider_vars = ( isset($fpage_image_provider_vars) && !empty($fpage_image_provider_vars) ) ? $fpage_image_provider_vars : uamswp_fad_fpage_image_provider(
 		$page_id // int
 	);
 

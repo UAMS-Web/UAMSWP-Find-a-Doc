@@ -15,7 +15,7 @@
  
 // Call the function
 
-	$fpage_image_clinical_resource_vars = isset($fpage_image_clinical_resource_vars) ? $fpage_image_clinical_resource_vars : uamswp_fad_fpage_image_clinical_resource(
+	$fpage_image_clinical_resource_vars = ( isset($fpage_image_clinical_resource_vars) && !empty($fpage_image_clinical_resource_vars) ) ? $fpage_image_clinical_resource_vars : uamswp_fad_fpage_image_clinical_resource(
 		$page_id // int
 	);
 

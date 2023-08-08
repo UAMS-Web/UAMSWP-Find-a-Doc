@@ -11,7 +11,7 @@
 
 // Call the function
 
-	$clinical_resource_card_fields_vars = isset($clinical_resource_card_fields_vars) ? $clinical_resource_card_fields_vars : uamswp_fad_clinical_resource_card_fields( $page_id );
+	$clinical_resource_card_fields_vars = ( isset($clinical_resource_card_fields_vars) && !empty($clinical_resource_card_fields_vars) ) ? $clinical_resource_card_fields_vars : uamswp_fad_clinical_resource_card_fields( $page_id );
 
 // Create a variable for each item in the array
 

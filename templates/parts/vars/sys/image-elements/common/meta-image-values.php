@@ -13,7 +13,7 @@ if ( $featured_image ) {
 
 	// Call the function
 
-		$meta_image_values_vars = isset($meta_image_values_vars) ? $meta_image_values_vars : uamswp_meta_image_values(
+		$meta_image_values_vars = ( isset($meta_image_values_vars) && !empty($meta_image_values_vars) ) ? $meta_image_values_vars : uamswp_meta_image_values(
 			$featured_image // int // ID of the featured image
 		);
 

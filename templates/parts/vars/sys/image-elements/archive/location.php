@@ -8,7 +8,7 @@
 
 // Call the function
 
-	$archive_image_location_vars = isset($archive_image_location_vars) ? $archive_image_location_vars : uamswp_fad_archive_image_location();
+	$archive_image_location_vars = ( isset($archive_image_location_vars) && !empty($archive_image_location_vars) ) ? $archive_image_location_vars : uamswp_fad_archive_image_location();
 
 // Create a variable for each item in the array
 

@@ -11,7 +11,7 @@
 
 // Call the function
 
-	$location_profile_fields_vars = isset($location_profile_fields_vars) ? $location_profile_fields_vars : uamswp_fad_location_profile_fields( $page_id );
+	$location_profile_fields_vars = ( isset($location_profile_fields_vars) && !empty($location_profile_fields_vars) ) ? $location_profile_fields_vars : uamswp_fad_location_profile_fields( $page_id );
 
 // Create a variable for each item in the array
 

@@ -9,7 +9,7 @@
 
 // Call the function
 
-	$labels_condition_vars = isset($labels_condition_vars) ? $labels_condition_vars : uamswp_fad_labels_condition();
+	$labels_condition_vars = ( isset($labels_condition_vars) && !empty($labels_condition_vars) ) ? $labels_condition_vars : uamswp_fad_labels_condition();
 
 // Create a variable for each item in the array
 

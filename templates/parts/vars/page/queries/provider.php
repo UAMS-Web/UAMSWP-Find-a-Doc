@@ -22,7 +22,7 @@
 
 // Call the function
 
-	$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+	$provider_query_vars = ( isset($provider_query_vars) && !empty($provider_query_vars) ) ? $provider_query_vars : uamswp_fad_provider_query(
 		$page_id, // int
 		$providers, // int[]
 		$jump_link_count, // int

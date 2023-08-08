@@ -15,7 +15,7 @@
 
 // Call the function
 
-	$fpage_image_expertise_vars = isset($fpage_image_expertise_vars) ? $fpage_image_expertise_vars : uamswp_fad_fpage_image_expertise(
+	$fpage_image_expertise_vars = ( isset($fpage_image_expertise_vars) && !empty($fpage_image_expertise_vars) ) ? $fpage_image_expertise_vars : uamswp_fad_fpage_image_expertise(
 		$page_id // int
 	);
 

@@ -11,7 +11,7 @@
 
 // Call the function
 
-	$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields( $page_id );
+	$expertise_profile_fields_vars = ( isset($expertise_profile_fields_vars) && !empty($expertise_profile_fields_vars) ) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields( $page_id );
 
 // Create a variable for each item in the array
 
