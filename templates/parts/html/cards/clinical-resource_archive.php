@@ -26,7 +26,7 @@
 	// Get system settings for clinical resource labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
-$resource_related_max = 3; // Set how many of each related item type to display
+$clinical_resource_related_max = 3; // Set how many of each related item type to display
 
 // Construct the card
 
@@ -135,7 +135,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 												if ( get_post_status ( $associate ) == 'publish' ) {
 
-													if ( $resource_i < $resource_related_max ) {
+													if ( $resource_i < $clinical_resource_related_max ) {
 
 														$associate_title = $clinical_resource_provider_medium_name;
 														$associate_title_attr = uamswp_attr_conversion($associate_title);
@@ -145,15 +145,15 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														if ( 
 															(
-																$resource_count > $resource_related_max
+																$resource_count > $clinical_resource_related_max
 																&&
-																$resource_i != $resource_related_max
+																$resource_i != $clinical_resource_related_max
 															)
 															||
 															(
 																$resource_count > 1
 																&&
-																$resource_count <= $resource_related_max
+																$resource_count <= $clinical_resource_related_max
 																&&
 																$resource_i < ($resource_count - 1)
 															)
@@ -163,13 +163,13 @@ $resource_related_max = 3; // Set how many of each related item type to display
 															// OR If there are as many or fewer items than the max AND this is not the penultimate item
 															echo ', ';
 
-														} elseif ( $resource_count > 1 && $resource_count <= $resource_related_max && $resource_i == ($resource_count - 1) ) {
+														} elseif ( $resource_count > 1 && $resource_count <= $clinical_resource_related_max && $resource_i == ($resource_count - 1) ) {
 
 															// If there are as many or fewer items than the max AND this is the penultimate item
 															echo ' and ';
 														}
 
-													} elseif ( $resource_i == $resource_related_max ) {
+													} elseif ( $resource_i == $clinical_resource_related_max ) {
 
 														echo ' and more';
 														break;
@@ -209,7 +209,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 												if ( get_post_status ( $associate ) == 'publish' ) {
 
-													if ( $resource_i < $resource_related_max ) {
+													if ( $resource_i < $clinical_resource_related_max ) {
 
 														$associate_title = get_the_title( $associate );
 														$associate_title_attr = uamswp_attr_conversion($associate_title);
@@ -219,15 +219,15 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														if ( 
 															(
-																$resource_count > $resource_related_max
+																$resource_count > $clinical_resource_related_max
 																&&
-																$resource_i != $resource_related_max
+																$resource_i != $clinical_resource_related_max
 															)
 															||
 															(
 																$resource_count > 1
 																&&
-																$resource_count <= $resource_related_max
+																$resource_count <= $clinical_resource_related_max
 																&&
 																$resource_i < ($resource_count - 1)
 															)
@@ -240,7 +240,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 														} elseif (
 															$resource_count > 1
 															&&
-															$resource_count <= $resource_related_max
+															$resource_count <= $clinical_resource_related_max
 															&&
 															$resource_i == ($resource_count - 1)
 														) {
@@ -250,7 +250,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														}
 
-													} elseif ( $resource_i == $resource_related_max ) {
+													} elseif ( $resource_i == $clinical_resource_related_max ) {
 
 														echo ' and more';
 														break;
@@ -291,7 +291,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 												if ( get_post_status ( $associate ) == 'publish' ) {
 
-													if ( $resource_i < $resource_related_max ) {
+													if ( $resource_i < $clinical_resource_related_max ) {
 
 														$associate_title = get_the_title( $associate );
 														$associate_title_attr = uamswp_attr_conversion($associate_title);
@@ -302,15 +302,15 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														if ( 
 															(
-																$resource_count > $resource_related_max
+																$resource_count > $clinical_resource_related_max
 																&&
-																$resource_i != $resource_related_max
+																$resource_i != $clinical_resource_related_max
 															)
 															||
 															(
 																$resource_count > 1
 																&&
-																$resource_count <= $resource_related_max
+																$resource_count <= $clinical_resource_related_max
 																&&
 																$resource_i < ($resource_count - 1)
 															)
@@ -323,7 +323,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 														} elseif (
 															$resource_count > 1
 															&&
-															$resource_count <= $resource_related_max
+															$resource_count <= $clinical_resource_related_max
 															&&
 															$resource_i == ($resource_count - 1)
 														) {
@@ -333,7 +333,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														}
 
-													} elseif ( $resource_i == $resource_related_max ) {
+													} elseif ( $resource_i == $clinical_resource_related_max ) {
 
 														echo ' and more';
 														break;
@@ -374,7 +374,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 												if ( get_post_status ( $associate ) == 'publish' ) {
 
-													if ( $resource_i < $resource_related_max ) {
+													if ( $resource_i < $clinical_resource_related_max ) {
 
 														$associate_title = get_the_title( $associate );
 														$associate_title_attr = uamswp_attr_conversion($associate_title);
@@ -385,15 +385,15 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														if (
 															(
-																$resource_count > $resource_related_max
+																$resource_count > $clinical_resource_related_max
 																&&
-																$resource_i != $resource_related_max
+																$resource_i != $clinical_resource_related_max
 															)
 															||
 															(
 																$resource_count > 1
 																&&
-																$resource_count <= $resource_related_max
+																$resource_count <= $clinical_resource_related_max
 																&&
 																$resource_i < ($resource_count - 1)
 															)
@@ -406,7 +406,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 														} elseif (
 															$resource_count > 1
 															&&
-															$resource_count <= $resource_related_max
+															$resource_count <= $clinical_resource_related_max
 															&&
 															$resource_i == ($resource_count - 1)
 														) {
@@ -416,7 +416,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														}
 
-													} elseif ( $resource_i == $resource_related_max ) {
+													} elseif ( $resource_i == $clinical_resource_related_max ) {
 
 														echo ' and more';
 														break;
@@ -457,7 +457,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 												if ( get_post_status ( $associate ) == 'publish' ) {
 
-													if ( $resource_i < $resource_related_max ) {
+													if ( $resource_i < $clinical_resource_related_max ) {
 
 														$associate_title = get_the_title( $associate );
 														$associate_title_attr = uamswp_attr_conversion($associate_title);
@@ -468,15 +468,15 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														if (
 															(
-																$resource_count > $resource_related_max
+																$resource_count > $clinical_resource_related_max
 																&&
-																$resource_i != $resource_related_max
+																$resource_i != $clinical_resource_related_max
 															)
 															||
 															(
 																$resource_count > 1
 																&&
-																$resource_count <= $resource_related_max
+																$resource_count <= $clinical_resource_related_max
 																&&
 																$resource_i < ($resource_count - 1)
 															)
@@ -489,7 +489,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 														} elseif (
 															$resource_count > 1
 															&&
-															$resource_count <= $resource_related_max
+															$resource_count <= $clinical_resource_related_max
 															&&
 															$resource_i == ($resource_count - 1)
 														) {
@@ -499,7 +499,7 @@ $resource_related_max = 3; // Set how many of each related item type to display
 
 														}
 
-													} elseif ( $resource_i == $resource_related_max ) {
+													} elseif ( $resource_i == $clinical_resource_related_max ) {
 
 														echo ' and more';
 														break;
