@@ -1615,27 +1615,146 @@ function uamswp_fad_ontology_site_values(
 			// Check/define variables
 			$array = ( isset($array) && is_array($array) && !empty($array) ) ? $array : array();
 
-			if ( !$array ) {
+			// If the array is empty, stop here
 
-				return $array;
+				if ( !$array ) {
 
-			}
-
-			// Check for published items
-
-			foreach ( $array as $key => $value ) {
-
-				if ( get_post_status ( $value ) != 'publish' ) {
-
-					unset($array[$key]);
+					return $array;
 
 				}
 
-			}
+			// Check for published items
 
-			$array = array_values($array);
+				foreach ( $array as $key => $value ) {
+
+					if ( get_post_status ( $value ) != 'publish' ) {
+
+						unset($array[$key]);
+
+					}
+
+				}
+
+				$array = array_values($array);
 
 			return $array;
+
+		}
+
+	// Loop through array of IDs and get published field values used to construct the linked text items in a list
+
+		function uamswp_fad_link_item_list(
+			$input, // int[] // Array of post IDs
+		) {
+
+			// Check/define values
+
+				$input = ( isset($input) && is_array($input) && !empty($input) ) ? $input : array();
+
+			// If the array is empty, stop here
+
+				if ( !$input ) {
+
+					return $output;
+
+				}
+
+			// Check for published items
+
+				foreach ( $input as $key => $value ) {
+
+					$output[$value] = uamswp_fad_link_item_val($value);
+
+				}
+
+			return $output;
+
+		}
+
+	// Get published field values used to construct a linked text item in a list
+
+		function uamswp_fad_link_item_val(
+			$page_id, // int // Post ID
+		) {
+
+			// Retrieve the value of the transient
+			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
+
+			if ( !empty( $provider_query_vars ) ) {
+
+				/* 
+				* The transient exists.
+				* Return the variable.
+				*/
+
+				return $provider_query_vars;
+
+			} else {
+
+				$output = array();
+
+				if ( get_post_status ( $page_id ) == 'publish' ) {
+
+					// Titles and sort name
+
+						if ( get_post_type($page_id) == 'provider' ) {
+
+							// If provider, get medium name for title
+
+								$output['title'] = get_field( 'physician_medium_name', $page_id ) ?: '';
+
+								if (
+									!isset( $output['title'] )
+									||
+									empty( $output['title'] )
+								) {
+
+									$output['title'] = implode(
+										' ',
+										array_filter(
+											array(
+												( get_field( 'physician_prefix', $page_id ) ?: '' ),
+												( get_field( 'physician_first_name', $page_id ) ?: '' ),
+												( get_field( 'physician_middle_name', $page_id ) ?: '' ),
+												( get_field( 'physician_last_name', $page_id ) ?: '' ),
+												( get_field( 'physician_pedigree', $page_id ) ?: '' )
+											)
+										)
+									) ?: '';
+					
+								}
+
+							// Attribute-friendly title
+							$output['title_attr'] = uamswp_attr_conversion($output['title']);
+
+							// Sort name
+							$output['sort_name'] = get_the_title($page_id);
+
+						} else {
+
+							// Otherwise, get the post title
+							$output['title'] = get_the_title($page_id);
+
+							// Attribute-friendly title
+							$output['title_attr'] = uamswp_attr_conversion($output['title']);
+
+							// Sort name
+							$output['sort_name'] = $output['title'];
+
+						}
+
+					// URL
+					$output['url'] = get_permalink($page_id);
+
+				}
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( $page_id, $output, __FUNCTION__ );
+	
+				// Return the array
+				return $output;
+
+			}
 
 		}
 
@@ -11166,28 +11285,45 @@ function uamswp_prevent_orphan($string) {
 
 							// Related content
 
+								$clinical_resource_related_max = 3;
+								$clinical_resource_provider_more_text = 'more';
+
 								// Providers
 
 									// Get IDs of related providers
 									$clinical_resource_providers = get_field( 'clinical_resource_providers', $page_id ) ?: array();
 									
 									// Get only published IDs
-									$clinical_resource_providers = uamswp_fad_simple_publish_loop($clinical_resource_providers);
+									$clinical_resource_providers = $clinical_resource_providers ? uamswp_fad_simple_publish_loop($clinical_resource_providers) : array();
 
 									// Count remaining providers
 									$clinical_resource_provider_count = count($clinical_resource_providers);
 
+									// Display reference to more items
+									$clinical_resource_provider_more = ( $clinical_resource_provider_count > $clinical_resource_related_max ) ? true : false; // bool
+
+									// Limit number of providers
+									$clinical_resource_providers = array_slice($clinical_resource_providers, 0, 3);
+
+									// Get link values for providers
+									$clinical_resource_provider_vals = uamswp_fad_link_item_list($clinical_resource_providers);
+
 									// List label
 									
-										// Get system settings for provider labels
-										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
+										if ( $clinical_resource_providers ) {
 
-										$clinical_resource_provider_label = $clinical_resource_provider_count > 1 ? $provider_plural_name : $provider_single_name;
+											// Get system settings for provider labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
+
+											$clinical_resource_provider_label = $clinical_resource_provider_count > 1 ? $provider_plural_name : $provider_single_name;
+
+										}
 
 									// Add to the variables array
 
 										$clinical_resource_card_fields_vars['clinical_resource_providers'] = isset($clinical_resource_providers) ? $clinical_resource_providers : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_provider_count'] = isset($clinical_resource_provider_count) ? $clinical_resource_provider_count : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_provider_more'] = isset($clinical_resource_provider_more) ? $clinical_resource_provider_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_provider_label'] = isset($clinical_resource_provider_label) ? $clinical_resource_provider_label : array(); 
 
 								// Locations
@@ -11196,22 +11332,36 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_locations = get_field( 'clinical_resource_locations', $page_id ) ?: array();
 									
 									// Get only published IDs
-									$clinical_resource_locations = uamswp_fad_simple_publish_loop($clinical_resource_locations);
+									$clinical_resource_locations = $clinical_resource_locations ? uamswp_fad_simple_publish_loop($clinical_resource_locations) : array();
 
 									// Count remaining locations
 									$clinical_resource_location_count = count($clinical_resource_locations);
 
+									// Display reference to more items
+									$clinical_resource_location_more = ( $clinical_resource_location_count > $clinical_resource_related_max ) ? true : false; // bool
+									
+									// Limit number of locations
+									$clinical_resource_locations = array_slice($clinical_resource_locations, 0, 3);
+
+									// Get link values for locations
+									$clinical_resource_location_vals = uamswp_fad_link_item_list($clinical_resource_locations);
+
 									// List label
 									
-										// Get system settings for location labels
-										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+										if ( $clinical_resource_locations ) {
 
-										$clinical_resource_location_label = $clinical_resource_location_count > 1 ? $location_plural_name : $location_single_name;
+											// Get system settings for location labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+
+											$clinical_resource_location_label = $clinical_resource_location_count > 1 ? $location_plural_name : $location_single_name;
+
+										}
 
 									// Add to the variables array
 
 										$clinical_resource_card_fields_vars['clinical_resource_locations'] = isset($clinical_resource_locations) ? $clinical_resource_locations : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_location_count'] = isset($clinical_resource_location_count) ? $clinical_resource_location_count : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_location_more'] = isset($clinical_resource_location_more) ? $clinical_resource_location_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_location_label'] = isset($clinical_resource_location_label) ? $clinical_resource_location_label : array(); 
 
 								// Areas of Expertise
@@ -11220,22 +11370,36 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_expertises = get_field( 'clinical_resource_aoe', $page_id ) ?: array();
 									
 									// Get only published IDs
-									$clinical_resource_expertises = uamswp_fad_simple_publish_loop($clinical_resource_expertises);
+									$clinical_resource_expertises = $clinical_resource_expertises ? uamswp_fad_simple_publish_loop($clinical_resource_expertises) : array();
 
 									// Count remaining expertises
 									$clinical_resource_expertise_count = count($clinical_resource_expertises);
 
+									// Display reference to more items
+									$clinical_resource_expertise_more = ( $clinical_resource_expertise_count > $clinical_resource_related_max ) ? true : false; // bool
+									
+									// Limit number of expertises
+									$clinical_resource_expertises = array_slice($clinical_resource_expertises, 0, 3);
+
+									// Get link values for expertises
+									$clinical_resource_expertise_vals = uamswp_fad_link_item_list($clinical_resource_expertises);
+
 									// List label
 									
-										// Get system settings for area of expertise labels
-										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
+										if ( $clinical_resource_expertises ) {
 
-										$clinical_resource_expertise_label = $clinical_resource_expertise_count > 1 ? $expertise_plural_name : $expertise_single_name;
+											// Get system settings for expertise labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
+
+											$clinical_resource_expertise_label = $clinical_resource_expertise_count > 1 ? $expertise_plural_name : $expertise_single_name;
+
+										}
 
 									// Add to the variables array
 
 										$clinical_resource_card_fields_vars['clinical_resource_expertises'] = isset($clinical_resource_expertises) ? $clinical_resource_expertises : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_expertise_count'] = isset($clinical_resource_expertise_count) ? $clinical_resource_expertise_count : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_expertise_more'] = isset($clinical_resource_expertise_more) ? $clinical_resource_expertise_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_expertise_label'] = isset($clinical_resource_expertise_label) ? $clinical_resource_expertise_label : array(); 
 
 								// Conditions
@@ -11244,22 +11408,36 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_conditions = get_field( 'clinical_resource_conditions', $page_id ) ?: array();
 									
 									// Get only published IDs
-									$clinical_resource_conditions = uamswp_fad_simple_publish_loop($clinical_resource_conditions);
+									$clinical_resource_conditions = $clinical_resource_conditions ? uamswp_fad_simple_publish_loop($clinical_resource_conditions) : array();
 
 									// Count remaining conditions
 									$clinical_resource_condition_count = count($clinical_resource_conditions);
 
+									// Display reference to more items
+									$clinical_resource_condition_more = ( $clinical_resource_condition_count > $clinical_resource_related_max ) ? true : false; // bool
+									
+									// Limit number of conditions
+									$clinical_resource_conditions = array_slice($clinical_resource_conditions, 0, 3);
+
+									// Get link values for conditions
+									$clinical_resource_condition_vals = uamswp_fad_link_item_list($clinical_resource_conditions);
+
 									// List label
 									
-										// Get system settings for condition labels
-										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
+										if ( $clinical_resource_conditions ) {
 
-										$clinical_resource_condition_label = $clinical_resource_condition_count > 1 ? $condition_plural_name : $condition_single_name;
+											// Get system settings for condition labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
+
+											$clinical_resource_condition_label = $clinical_resource_condition_count > 1 ? $condition_plural_name : $condition_single_name;
+
+										}
 
 									// Add to the variables array
 
 										$clinical_resource_card_fields_vars['clinical_resource_conditions'] = isset($clinical_resource_conditions) ? $clinical_resource_conditions : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_condition_count'] = isset($clinical_resource_condition_count) ? $clinical_resource_condition_count : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_condition_more'] = isset($clinical_resource_condition_more) ? $clinical_resource_condition_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_condition_label'] = isset($clinical_resource_condition_label) ? $clinical_resource_condition_label : array(); 
 
 								// Treatments
@@ -11268,22 +11446,36 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_treatments = get_field( 'clinical_resource_treatments', $page_id ) ?: array();
 									
 									// Get only published IDs
-									$clinical_resource_treatments = uamswp_fad_simple_publish_loop($clinical_resource_treatments);
+									$clinical_resource_treatments = $clinical_resource_treatments ? uamswp_fad_simple_publish_loop($clinical_resource_treatments) : array();
 
 									// Count remaining treatments
 									$clinical_resource_treatment_count = count($clinical_resource_treatments);
 
+									// Display reference to more items
+									$clinical_resource_treatment_more = ( $clinical_resource_treatment_count > $clinical_resource_related_max ) ? true : false; // bool
+									
+									// Limit number of treatments
+									$clinical_resource_treatments = array_slice($clinical_resource_treatments, 0, 3);
+
+									// Get link values for treatments
+									$clinical_resource_treatment_vals = uamswp_fad_link_item_list($clinical_resource_treatments);
+
 									// List label
 									
-										// Get system settings for treatment labels
-										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
+										if ( $clinical_resource_treatments ) {
 
-										$clinical_resource_treatment_label = $clinical_resource_treatment_count > 1 ? $treatment_plural_name : $treatment_single_name;
+											// Get system settings for treatment labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
+
+											$clinical_resource_treatment_label = $clinical_resource_treatment_count > 1 ? $treatment_plural_name : $treatment_single_name;
+
+										}
 
 									// Add to the variables array
 
 										$clinical_resource_card_fields_vars['clinical_resource_treatments'] = isset($clinical_resource_treatments) ? $clinical_resource_treatments : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_treatment_count'] = isset($clinical_resource_treatment_count) ? $clinical_resource_treatment_count : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_treatment_more'] = isset($clinical_resource_treatment_more) ? $clinical_resource_treatment_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_treatment_label'] = isset($clinical_resource_treatment_label) ? $clinical_resource_treatment_label : array(); 
 
 						}
