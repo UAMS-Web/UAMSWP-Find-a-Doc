@@ -7,11 +7,24 @@
  * 
  * Required vars:
  * 	$page_id // int // ID of the profile
+ * 
+ * Optional vars:
+ * 	$location_card_style // string enum('basic', 'detailed') // Location card style
+ * 	$location_descendant_list // bool // Query on whether this card is in a list of descendant locations
  */
+
+// Check/define optional variables
+
+	$location_card_style = isset($location_card_style) ? $location_card_style : '';
+	$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : '';
 
 // Call the function
 
-	$location_card_fields_vars = ( isset($location_card_fields_vars) && !empty($location_card_fields_vars) ) ? $location_card_fields_vars : uamswp_fad_location_card_fields( $page_id );
+	$location_card_fields_vars = ( isset($location_card_fields_vars) && !empty($location_card_fields_vars) ) ? $location_card_fields_vars : uamswp_fad_location_card_fields(
+		$page_id,
+		$location_card_style,
+		$location_descendant_list
+	);
 
 // Create a variable for each item in the array
 
