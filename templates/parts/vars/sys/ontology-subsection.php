@@ -17,7 +17,7 @@
 
 // Check/define optional variables
 
-	$ontology_type = ( isset($ontology_type) && !empty($ontology_type) ) ? $ontology_type : true;
+	$ontology_type = isset($ontology_type) ? $ontology_type : true;
 	$page_title = ( isset($page_title) && !empty($page_title) ) ? $page_title : '';
 	$page_url = ( isset($page_url) && !empty($page_url) ) ? $page_url : '';
 
