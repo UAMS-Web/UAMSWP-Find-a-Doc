@@ -1644,7 +1644,7 @@ function uamswp_fad_ontology_site_values(
 	// Loop through array of IDs and get published field values used to construct the linked text items in a list
 
 		function uamswp_fad_link_item_list(
-			$input, // int[] // Array of post IDs
+			$input // int[] // Array of post IDs
 		) {
 
 			// Check/define values
@@ -1674,7 +1674,7 @@ function uamswp_fad_ontology_site_values(
 	// Get published field values used to construct a linked text item in a list
 
 		function uamswp_fad_link_item_val(
-			$page_id, // int // Post ID
+			$page_id // int // Post ID
 		) {
 
 			// Retrieve the value of the transient
@@ -1758,6 +1758,91 @@ function uamswp_fad_ontology_site_values(
 
 		}
 
+	// Create HTML for a comma-separated list of linked ontology items
+
+		function uamswp_fad_link_item_list_html(
+			$array, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+			$data_category_title = '', // string // 'data-categorytitle' attribute value
+			$data_item_title = '', // string // 'data-itemtitle' attribute value
+			$more = false // bool // Query for whether to include reference to more items
+		) {
+
+			// Construct link elements
+
+				foreach ( $array as $item ) {
+					
+					if ( $item['url'] ) {
+
+						// Open anchor element
+
+							$item_link_open = '<a';
+							$item_link_open .= ' href="' . $item['url'] . '"';
+							$item_link_open .= $data_category_title ? ( ' data-categorytitle="' . $data_category_title .'"' ) : '';
+							$item_link_open .= $item['title_attr'] ? ( ' data-typetitle="' . $item['title_attr'] . '"' ) : '';
+							$item_link_open .= $data_item_title ? ' data-categorytitle="' . $data_item_title . '"' : '';
+							$item_link_open .= '>';
+
+						// Close anchor element
+
+							$item_link_close .= '</a>';
+
+					}
+					
+					$output_array[] = $item_link_open . $item['title'] . $item_link_close;
+
+				}
+
+			// Add reference to more items
+			$output_array[] = $more ? 'more' : '';
+
+			// Remove any empty items from the array
+			$output_array = array_filter($output_array);
+			
+			// Split lists for serial grammar
+
+				// Final two items in array
+
+					$output_array_split_1 = array_slice(
+						$output_array,
+						-2, // start two items from the end
+						2 // include two items
+					);
+
+				// Remainder of the array (the items at the beginning)
+
+					$output_array_split_0 = array_slice(
+						$output_array,
+						0, // start at the beginning
+						( count($output_array) - count($output_array_split_1) ) // include the remainder
+					);
+
+			// Construct the list as a string
+
+				// Join the final two items with "and"
+
+					$output_string_split_1 = implode(
+						' and ',
+						$output_array_split_1
+					);
+				
+				// Merge the combined final two items string with the beginning array
+
+					$output_array_merge = array_merge(
+						$output_array_split_0,
+						array($output_string_split_1)
+					); // reset variable
+
+				// Join the items in the array with commas
+
+					$output = implode(
+						', ',
+						$output_array_merge
+					);
+
+			return $output;
+
+		}
+	
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query(
 		$page_id, // int
@@ -11292,285 +11377,246 @@ function uamswp_prevent_orphan($string) {
 
 									// Get IDs of related providers
 									$clinical_resource_providers = get_field( 'clinical_resource_providers', $page_id ) ?: array();
-									
-									// Get only published IDs
-									$clinical_resource_providers = $clinical_resource_providers ? uamswp_fad_simple_publish_loop($clinical_resource_providers) : array();
 
-									// Count remaining providers
-									$clinical_resource_provider_count = count($clinical_resource_providers);
+									if ( $clinical_resource_providers ) {
 
-									// Display reference to more items
-									$clinical_resource_provider_more = ( $clinical_resource_provider_count > $clinical_resource_related_max ) ? true : false; // bool
+										// Get only published IDs
+										$clinical_resource_providers = $clinical_resource_providers ? uamswp_fad_simple_publish_loop($clinical_resource_providers) : array();
 
-									// Limit number of providers
-									$clinical_resource_providers = array_slice($clinical_resource_providers, 0, 3);
+										// Count remaining providers
+										$clinical_resource_provider_count = count($clinical_resource_providers);
 
-									// Get field values for provider links
-									$clinical_resource_provider_vals = uamswp_fad_link_item_list($clinical_resource_providers);
+										// Display reference to more items
+										$clinical_resource_provider_more = ( $clinical_resource_provider_count > $clinical_resource_related_max ) ? true : false; // bool
 
-									// Create the text list of providers
-									
-										$clinical_resource_provider_categorytitle = 'Related Location'; // data-categorytitle attribute value
+										// Limit number of providers
+										$clinical_resource_providers = array_slice($clinical_resource_providers, 0, $clinical_resource_related_max);
 
-										function uamswp_fad_link_item_list_html(
-											$array, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
-											$data_category_title = '', // string // 'data-categorytitle' attribute value
-											$data_item_title = '', // string // 'data-itemtitle' attribute value
-											$more = false // bool // Query for whether to include reference to more items
-										) {
+										// Get field values for provider links
+										$clinical_resource_provider_vals = uamswp_fad_link_item_list($clinical_resource_providers);
 
-											// Construct link elements
+										// Define the list label
+										
+											if ( $clinical_resource_providers ) {
 
-												foreach ( $array as $item ) {
-													
-													if ( $item['url'] ) {
+												// Get system settings for provider labels
+												include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
-														// Open anchor element
+												$clinical_resource_provider_label = $clinical_resource_provider_count > 1 ? $provider_plural_name : $provider_single_name;
 
-															$item_link_open = '<a';
-															$item_link_open .= ' href="' . $item['url'] . '"';
-															$item_link_open .= $data_category_title ? ( ' data-categorytitle="' . $data_category_title .'"' ) : '';
-															$item_link_open .= $item['title_attr'] ? ( ' data-typetitle="' . $item['title_attr'] . '"' ) : '';
-															$item_link_open .= $data_item_title ? ' data-categorytitle="' . $data_item_title . '"' : '';
-															$item_link_open .= '>';
+											}
 
-														// Close anchor element
+										// Create the comma-separated list of linked provider items
+										
+											$clinical_resource_provider_list = uamswp_fad_link_item_list_html(
+												$clinical_resource_provider_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+												'Related Provider', // string // 'data-categorytitle' attribute value
+												$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
+												$clinical_resource_provider_more // bool // Query for whether to include reference to more items
+											);
 
-															$item_link_close .= '</a>';
-	
-													}
-													
-													$output_array[] = $item_link_open . $item['title'] . $item_link_close;
-
-												}
-
-											// Add reference to more items
-											$output_array[] = $more ? 'more' : '';
-
-											// Remove any empty items from the array
-											$output_array = array_filter($output_array);
-											
-											// Split lists for serial grammar
-
-												// Final two items in array
-
-													$output_array_split_1 = array_slice(
-														$output_array,
-														-2, // start two items from the end
-														2 // include two items
-													);
-
-												// Remainder of the array (the items at the beginning)
-
-													$output_array_split_0 = array_slice(
-														$output_array,
-														0, // start at the beginning
-														( count($output_array) - count($output_array_split_1) ) // include the remainder
-													);
-
-											// Construct the list as a string
-
-												// Join the final two items with "and"
-
-													$output_string_split_1 = implode(
-														' and ',
-														$output_array_split_1
-													);
-												
-												// Merge the combined final two items string with the beginning array
-
-													$output_array_merge = array_merge(
-														$output_array_split_0,
-														array($output_string_split_1)
-													); // reset variable
-
-												// Join the items in the array with commas
-
-													$output = implode(
-														', ',
-														$output_array_merge
-													);
-
-											return $output;
-
-										}
-									
-										$clinical_resource_provider_list = uamswp_fad_link_item_list_html(
-											$clinical_resource_provider_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
-											'Related Provider', // string // 'data-categorytitle' attribute value
-											$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
-											$clinical_resource_provider_more // bool // Query for whether to include reference to more items
-										);
-
-									// List label
-									
-										if ( $clinical_resource_providers ) {
-
-											// Get system settings for provider labels
-											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
-
-											$clinical_resource_provider_label = $clinical_resource_provider_count > 1 ? $provider_plural_name : $provider_single_name;
-
-										}
+									}
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_providers'] = isset($clinical_resource_providers) ? $clinical_resource_providers : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_provider_count'] = isset($clinical_resource_provider_count) ? $clinical_resource_provider_count : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_provider_more'] = isset($clinical_resource_provider_more) ? $clinical_resource_provider_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_provider_label'] = isset($clinical_resource_provider_label) ? $clinical_resource_provider_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_provider_list'] = isset($clinical_resource_provider_list) ? $clinical_resource_provider_list : array(); 
 
 								// Locations
 
 									// Get IDs of related locations
 									$clinical_resource_locations = get_field( 'clinical_resource_locations', $page_id ) ?: array();
-									
-									// Get only published IDs
-									$clinical_resource_locations = $clinical_resource_locations ? uamswp_fad_simple_publish_loop($clinical_resource_locations) : array();
 
-									// Count remaining locations
-									$clinical_resource_location_count = count($clinical_resource_locations);
+									if ( $clinical_resource_locations ) {
 
-									// Display reference to more items
-									$clinical_resource_location_more = ( $clinical_resource_location_count > $clinical_resource_related_max ) ? true : false; // bool
-									
-									// Limit number of locations
-									$clinical_resource_locations = array_slice($clinical_resource_locations, 0, 3);
+										// Get only published IDs
+										$clinical_resource_locations = $clinical_resource_locations ? uamswp_fad_simple_publish_loop($clinical_resource_locations) : array();
 
-									// Get link values for locations
-									$clinical_resource_location_vals = uamswp_fad_link_item_list($clinical_resource_locations);
+										// Count remaining locations
+										$clinical_resource_location_count = count($clinical_resource_locations);
 
-									// List label
-									
-										if ( $clinical_resource_locations ) {
+										// Display reference to more items
+										$clinical_resource_location_more = ( $clinical_resource_location_count > $clinical_resource_related_max ) ? true : false; // bool
 
-											// Get system settings for location labels
-											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+										// Limit number of locations
+										$clinical_resource_locations = array_slice($clinical_resource_locations, 0, $clinical_resource_related_max);
 
-											$clinical_resource_location_label = $clinical_resource_location_count > 1 ? $location_plural_name : $location_single_name;
+										// Get field values for location links
+										$clinical_resource_location_vals = uamswp_fad_link_item_list($clinical_resource_locations);
 
-										}
+										// Define the list label
+										
+											if ( $clinical_resource_locations ) {
+
+												// Get system settings for location labels
+												include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+
+												$clinical_resource_location_label = $clinical_resource_location_count > 1 ? $location_plural_name : $location_single_name;
+
+											}
+
+										// Create the comma-separated list of linked location items
+										
+											$clinical_resource_location_list = uamswp_fad_link_item_list_html(
+												$clinical_resource_location_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+												'Related Location', // string // 'data-categorytitle' attribute value
+												$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
+												$clinical_resource_location_more // bool // Query for whether to include reference to more items
+											);
+
+									}
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_locations'] = isset($clinical_resource_locations) ? $clinical_resource_locations : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_location_count'] = isset($clinical_resource_location_count) ? $clinical_resource_location_count : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_location_more'] = isset($clinical_resource_location_more) ? $clinical_resource_location_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_location_label'] = isset($clinical_resource_location_label) ? $clinical_resource_location_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_location_list'] = isset($clinical_resource_location_list) ? $clinical_resource_location_list : array(); 
 
 								// Areas of Expertise
 
 									// Get IDs of related areas of expertise
 									$clinical_resource_expertises = get_field( 'clinical_resource_aoe', $page_id ) ?: array();
-									
-									// Get only published IDs
-									$clinical_resource_expertises = $clinical_resource_expertises ? uamswp_fad_simple_publish_loop($clinical_resource_expertises) : array();
 
-									// Count remaining expertises
-									$clinical_resource_expertise_count = count($clinical_resource_expertises);
+									if ( $clinical_resource_expertises ) {
 
-									// Display reference to more items
-									$clinical_resource_expertise_more = ( $clinical_resource_expertise_count > $clinical_resource_related_max ) ? true : false; // bool
-									
-									// Limit number of expertises
-									$clinical_resource_expertises = array_slice($clinical_resource_expertises, 0, 3);
+										// Get only published IDs
+										$clinical_resource_expertises = $clinical_resource_expertises ? uamswp_fad_simple_publish_loop($clinical_resource_expertises) : array();
 
-									// Get link values for expertises
-									$clinical_resource_expertise_vals = uamswp_fad_link_item_list($clinical_resource_expertises);
+										// Count remaining expertises
+										$clinical_resource_expertise_count = count($clinical_resource_expertises);
 
-									// List label
-									
-										if ( $clinical_resource_expertises ) {
+										// Display reference to more items
+										$clinical_resource_expertise_more = ( $clinical_resource_expertise_count > $clinical_resource_related_max ) ? true : false; // bool
 
-											// Get system settings for expertise labels
-											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
+										// Limit number of expertises
+										$clinical_resource_expertises = array_slice($clinical_resource_expertises, 0, $clinical_resource_related_max);
 
-											$clinical_resource_expertise_label = $clinical_resource_expertise_count > 1 ? $expertise_plural_name : $expertise_single_name;
+										// Get field values for expertise links
+										$clinical_resource_expertise_vals = uamswp_fad_link_item_list($clinical_resource_expertises);
 
-										}
+										// Define the list label
+										
+											if ( $clinical_resource_expertises ) {
+
+												// Get system settings for expertise labels
+												include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
+
+												$clinical_resource_expertise_label = $clinical_resource_expertise_count > 1 ? $expertise_plural_name : $expertise_single_name;
+
+											}
+
+										// Create the comma-separated list of linked expertise items
+										
+											$clinical_resource_expertise_list = uamswp_fad_link_item_list_html(
+												$clinical_resource_expertise_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+												'Related Area of Expertise', // string // 'data-categorytitle' attribute value
+												$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
+												$clinical_resource_expertise_more // bool // Query for whether to include reference to more items
+											);
+
+									}
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_expertises'] = isset($clinical_resource_expertises) ? $clinical_resource_expertises : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_expertise_count'] = isset($clinical_resource_expertise_count) ? $clinical_resource_expertise_count : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_expertise_more'] = isset($clinical_resource_expertise_more) ? $clinical_resource_expertise_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_expertise_label'] = isset($clinical_resource_expertise_label) ? $clinical_resource_expertise_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_expertise_list'] = isset($clinical_resource_expertise_list) ? $clinical_resource_expertise_list : array(); 
 
 								// Conditions
 
 									// Get IDs of related conditions
 									$clinical_resource_conditions = get_field( 'clinical_resource_conditions', $page_id ) ?: array();
-									
-									// Get only published IDs
-									$clinical_resource_conditions = $clinical_resource_conditions ? uamswp_fad_simple_publish_loop($clinical_resource_conditions) : array();
 
-									// Count remaining conditions
-									$clinical_resource_condition_count = count($clinical_resource_conditions);
+									if ( $clinical_resource_conditions ) {
 
-									// Display reference to more items
-									$clinical_resource_condition_more = ( $clinical_resource_condition_count > $clinical_resource_related_max ) ? true : false; // bool
-									
-									// Limit number of conditions
-									$clinical_resource_conditions = array_slice($clinical_resource_conditions, 0, 3);
+										// Get only published IDs
+										$clinical_resource_conditions = $clinical_resource_conditions ? uamswp_fad_simple_publish_loop($clinical_resource_conditions) : array();
 
-									// Get link values for conditions
-									$clinical_resource_condition_vals = uamswp_fad_link_item_list($clinical_resource_conditions);
+										// Count remaining conditions
+										$clinical_resource_condition_count = count($clinical_resource_conditions);
 
-									// List label
-									
-										if ( $clinical_resource_conditions ) {
+										// Display reference to more items
+										$clinical_resource_condition_more = ( $clinical_resource_condition_count > $clinical_resource_related_max ) ? true : false; // bool
 
-											// Get system settings for condition labels
-											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
+										// Limit number of conditions
+										$clinical_resource_conditions = array_slice($clinical_resource_conditions, 0, $clinical_resource_related_max);
 
-											$clinical_resource_condition_label = $clinical_resource_condition_count > 1 ? $condition_plural_name : $condition_single_name;
+										// Get field values for condition links
+										$clinical_resource_condition_vals = uamswp_fad_link_item_list($clinical_resource_conditions);
 
-										}
+										// Define the list label
+										
+											if ( $clinical_resource_conditions ) {
+
+												// Get system settings for condition labels
+												include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
+
+												$clinical_resource_condition_label = $clinical_resource_condition_count > 1 ? $condition_plural_name : $condition_single_name;
+
+											}
+
+										// Create the comma-separated list of linked condition items
+										
+											$clinical_resource_condition_list = uamswp_fad_link_item_list_html(
+												$clinical_resource_condition_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+												'Related Condition', // string // 'data-categorytitle' attribute value
+												$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
+												$clinical_resource_condition_more // bool // Query for whether to include reference to more items
+											);
+
+									}
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_conditions'] = isset($clinical_resource_conditions) ? $clinical_resource_conditions : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_condition_count'] = isset($clinical_resource_condition_count) ? $clinical_resource_condition_count : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_condition_more'] = isset($clinical_resource_condition_more) ? $clinical_resource_condition_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_condition_label'] = isset($clinical_resource_condition_label) ? $clinical_resource_condition_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_condition_list'] = isset($clinical_resource_condition_list) ? $clinical_resource_condition_list : array(); 
 
 								// Treatments
 
 									// Get IDs of related treatments
 									$clinical_resource_treatments = get_field( 'clinical_resource_treatments', $page_id ) ?: array();
-									
-									// Get only published IDs
-									$clinical_resource_treatments = $clinical_resource_treatments ? uamswp_fad_simple_publish_loop($clinical_resource_treatments) : array();
 
-									// Count remaining treatments
-									$clinical_resource_treatment_count = count($clinical_resource_treatments);
+									if ( $clinical_resource_treatments ) {
 
-									// Display reference to more items
-									$clinical_resource_treatment_more = ( $clinical_resource_treatment_count > $clinical_resource_related_max ) ? true : false; // bool
-									
-									// Limit number of treatments
-									$clinical_resource_treatments = array_slice($clinical_resource_treatments, 0, 3);
+										// Get only published IDs
+										$clinical_resource_treatments = $clinical_resource_treatments ? uamswp_fad_simple_publish_loop($clinical_resource_treatments) : array();
 
-									// Get link values for treatments
-									$clinical_resource_treatment_vals = uamswp_fad_link_item_list($clinical_resource_treatments);
+										// Count remaining treatments
+										$clinical_resource_treatment_count = count($clinical_resource_treatments);
 
-									// List label
-									
-										if ( $clinical_resource_treatments ) {
+										// Display reference to more items
+										$clinical_resource_treatment_more = ( $clinical_resource_treatment_count > $clinical_resource_related_max ) ? true : false; // bool
 
-											// Get system settings for treatment labels
-											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
+										// Limit number of treatments
+										$clinical_resource_treatments = array_slice($clinical_resource_treatments, 0, $clinical_resource_related_max);
 
-											$clinical_resource_treatment_label = $clinical_resource_treatment_count > 1 ? $treatment_plural_name : $treatment_single_name;
+										// Get field values for treatment links
+										$clinical_resource_treatment_vals = uamswp_fad_link_item_list($clinical_resource_treatments);
 
-										}
+										// Define the list label
+										
+											if ( $clinical_resource_treatments ) {
+
+												// Get system settings for treatment labels
+												include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
+
+												$clinical_resource_treatment_label = $clinical_resource_treatment_count > 1 ? $treatment_plural_name : $treatment_single_name;
+
+											}
+
+										// Create the comma-separated list of linked treatment items
+										
+											$clinical_resource_treatment_list = uamswp_fad_link_item_list_html(
+												$clinical_resource_treatment_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+												'Related Treatment', // string // 'data-categorytitle' attribute value
+												$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
+												$clinical_resource_treatment_more // bool // Query for whether to include reference to more items
+											);
+
+									}
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_treatments'] = isset($clinical_resource_treatments) ? $clinical_resource_treatments : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_treatment_count'] = isset($clinical_resource_treatment_count) ? $clinical_resource_treatment_count : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_treatment_more'] = isset($clinical_resource_treatment_more) ? $clinical_resource_treatment_more : array(); 
 										$clinical_resource_card_fields_vars['clinical_resource_treatment_label'] = isset($clinical_resource_treatment_label) ? $clinical_resource_treatment_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_treatment_list'] = isset($clinical_resource_treatment_list) ? $clinical_resource_treatment_list : array(); 
 
 						}
 
