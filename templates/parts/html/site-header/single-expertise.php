@@ -14,10 +14,13 @@
  * 	$ontology_type // bool // Ontology type of the area of expertise item (true is ontology type, false is content type)
  * 	$page_title // string // Title of the area of expertise item
  * 	$page_url // string // Permalink of the area of expertise item
+ * 	$navbar_subbrand_title // string
+ * 	$navbar_subbrand_title_attr // string
+ * 	$navbar_subbrand_title_url // string
+ * 	$navbar_subbrand_parent // string
+ * 	$navbar_subbrand_parent_attr // string
+ * 	$navbar_subbrand_parent_url // string
  */
-
-// Get the ontology subsection values
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 // Begin Title / Logo
 
