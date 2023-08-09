@@ -1536,7 +1536,7 @@ function uamswp_fad_ontology_site_values(
 				// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
 				$site_nav_id = $ancestors_ontology_closest;
 				$site_nav_title = $ancestors_ontology_closest_title;
-				$site_nav_title_attr = $uamswp_attr_conversion($site_nav_title);
+				$site_nav_title_attr = uamswp_attr_conversion($site_nav_title);
 				$site_nav_url = $ancestors_ontology_closest_url;
 				$navbar_subbrand_title = $site_nav_title;
 				$navbar_subbrand_title_attr = $site_nav_title_attr;
