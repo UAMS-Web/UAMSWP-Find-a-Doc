@@ -1784,7 +1784,7 @@ function uamswp_fad_ontology_site_values(
 
 						// Close anchor element
 
-							$item_link_close .= '</a>';
+							$item_link_close = '</a>';
 
 					}
 					
