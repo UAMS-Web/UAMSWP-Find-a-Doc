@@ -10409,54 +10409,13 @@ function uamswp_prevent_orphan($string) {
 
 				// Get the field values
 
-					// Foo
-
-						$foo = get_field( 'foo', $page_id ); // string
-
-						// Add to the variables array
-						$location_card_fields_vars['foo'] = isset($foo) ? $foo : '';
-
-					// Bar (taxonomy multi-select)
-
-						$bar = get_field( 'bar', $page_id ); // int[]
-
-						foreach ( $bar as $item ) {
-
-							$bar_array[$item] = array(
-								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
-							);
-
-						}
-
-						// Add to the variables array
-
-							$location_card_fields_vars['bar'] = isset($bar) ? $bar : '';
-							$location_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : '';
-
-					// Baz (taxonomy select/radio/checkbox)
-
-						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
-						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
-
-						foreach ( $baz as $item ) {
-
-							$baz_array[$item] = array(
-								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
-							);
-
-						}
-
-						// Add to the variables array
-
-							$location_card_fields_vars['baz'] = isset($baz) ? $baz : '';
-							$location_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : '';
-
 					// Common
 
 						// Query on whether this card is in a list of descendant locations
-						$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
+						
+							$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
-						// Title
+						// Location Title
 
 							$location_title = get_the_title($page_id);
 							$location_title_attr = uamswp_attr_conversion($location_title);
@@ -10466,242 +10425,513 @@ function uamswp_prevent_orphan($string) {
 								$location_card_fields_vars['location_title'] = isset($location_title) ? $location_title : '';
 								$location_card_fields_vars['location_title_attr'] = isset($location_title_attr) ? $location_title_attr : '';
 
-						// Profile URL
+						// Location URL
 							$location_url = user_trailingslashit(get_permalink($page_id));
 						
 							// Add to the variables array
 							$location_card_fields_vars['location_url'] = isset($location_url) ? $location_url : '';
 
-					// Query on whether the current item has a parent
-					$location_has_parent = get_field('location_parent', $page_id) ?: '';
+						// Query on whether the current location has a parent
 
-					// Parent location
-						
-						// Parent ID
-						$location_parent_id = $location_has_parent ? ( get_field('location_parent_id', $page_id) ?: '' ) : '';
+							$location_has_parent = get_field('location_parent', $page_id) ?: '';
 
-						// Get the parent post object
-						$location_parent_object = $location_parent_id ? get_post($location_parent_id) : '';
+						// Parent location
+							
+							// Parent ID
+							$location_parent_id = $location_has_parent ? ( get_field('location_parent_id', $page_id) ?: '' ) : '';
 
-						if ( $location_parent_object ) {
+							// Get the parent post object
+							$location_parent_object = $location_parent_id ? get_post($location_parent_id) : '';
+							$location_parent_display = ( $location_parent_object && !$location_descendant_list ) ? true : false;
 
-							// If the parent post object exists...
+							if ( $location_parent_object ) {
 
-							// Parent title
+								// If the parent post object exists...
 
-								$location_parent_title = $location_parent_object->post_title;
-								$location_parent_title_attr = uamswp_attr_conversion($location_parent_title);
+								// Parent title
 
-							// Parent URL
-							$location_parent_url = get_permalink($location_parent_id);
+									$location_parent_title = $location_parent_object->post_title;
+									$location_parent_title_attr = uamswp_attr_conversion($location_parent_title);
 
-							// Set address ID using the parent ID
-							$location_address_id = $location_parent_id;
+								// Parent URL
+								$location_parent_url = get_permalink($location_parent_id);
 
-							// Query on whether to override the photos using the parent's photos
-							$location_override_parent_photo = get_field('location_image_override_parent', $page_id) ?: false;
+								// Set address ID using the parent ID
+								$location_address_id = $location_parent_id;
 
-							// Query on whether to override the featured photo using the parent's featured photo
-							$location_override_parent_photo_featured = $location_override_parent_photo ? get_field('location_image_override_parent_featured', $page_id) : false;
+								// Query on whether to override the photos using the parent's photos
+								$location_override_parent_photo = get_field('location_image_override_parent', $page_id) ?: false;
 
-						} else {
-
-							// Eliminate PHP errors
-
-							$location_parent_title = '';
-							$location_parent_title_attr = '';
-							$location_parent_url = '';
-							$location_address_id = $page_id;
-							$location_override_parent_photo = '';
-							$location_override_parent_photo_featured = '';
-
-						}
-
-						// Add to the variables array
-						$location_card_fields_vars['location_parent_object'] = isset($location_parent_object) ? $location_parent_object : '';
-						$location_card_fields_vars['location_parent_title'] = isset($location_parent_title) ? $location_parent_title : '';
-						$location_card_fields_vars['location_parent_title_attr'] = isset($location_parent_title_attr) ? $location_parent_title_attr : '';
-						$location_card_fields_vars['location_parent_url'] = isset($location_parent_url) ? $location_parent_url : '';
-
-					// Featured image
-
-						// Featured image ID
-
-							if (
-								$location_parent_object
-								&&
-								!$location_override_parent_photo_featured
-							) {
-
-								$location_featured_image = get_post_thumbnail_id($location_parent_id) ?: ''; // int
+								// Query on whether to override the featured photo using the parent's featured photo
+								$location_override_parent_photo_featured = $location_override_parent_photo ? get_field('location_image_override_parent_featured', $page_id) : false;
 
 							} else {
 
-								$location_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
+								// Eliminate PHP errors
+
+								$location_parent_title = '';
+								$location_parent_title_attr = '';
+								$location_parent_url = '';
+								$location_address_id = $page_id;
+								$location_override_parent_photo = '';
+								$location_override_parent_photo_featured = '';
 
 							}
 
-						// Featured image URL
-						$location_featured_image_url = $location_featured_image ? wp_get_attachment_image_url( $location_featured_image, 'aspect-16-9-small' ) : ''; // string
+							// Add to the variables array
+							$location_card_fields_vars['location_parent_object'] = isset($location_parent_object) ? $location_parent_object : '';
+							$location_card_fields_vars['location_parent_display'] = isset($location_parent_display) ? $location_parent_display : '';
+							$location_card_fields_vars['location_parent_title'] = isset($location_parent_title) ? $location_parent_title : '';
+							$location_card_fields_vars['location_parent_title_attr'] = isset($location_parent_title_attr) ? $location_parent_title_attr : '';
+							$location_card_fields_vars['location_parent_url'] = isset($location_parent_url) ? $location_parent_url : '';
 
-						// Add to the variables array
-						$location_card_fields_vars['location_featured_image_url'] = isset($location_featured_image_url) ? $location_featured_image_url : '';
+						// Featured image
 
-					// Get system settings for location labels
-					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+							// Featured image ID
 
-					// Get the address attributes of the relevant item
+								if (
+									$location_parent_object
+									&&
+									!$location_override_parent_photo_featured
+								) {
 
-						// Street address (address line 1)
-						$location_address_1 = get_field('location_address_1', $location_address_id ) ?: '';
+									$location_featured_image = get_post_thumbnail_id($location_parent_id) ?: ''; // int
 
-						// Address Details
+								} else {
 
-							// Building
+									$location_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
 
-								$location_building = get_field('location_building', $location_address_id ) ?: '';
-								$location_building_term = $location_building ? get_term( $location_building, 'building' ) : '';
-								$location_building_slug = $location_building_term ? $location_building_term->slug : '';
-								$location_building_name = $location_building_term ? $location_building_term->name : '';
+								}
 
-								// If building slug is set to '_none' (standalone building), reset the values
+							// Featured image URL
+							$location_featured_image_url = $location_featured_image ? wp_get_attachment_image_url( $location_featured_image, 'aspect-16-9-small' ) : ''; // string
 
-									if ( $location_building_slug == '_none' ) {
+							// Add to the variables array
+							$location_card_fields_vars['location_featured_image_url'] = isset($location_featured_image_url) ? $location_featured_image_url : '';
 
-										$location_building = '';
-										$location_building_term = '';
-										$location_building_slug = '';
-										$location_building_name = '';
-			
-									}
+						// Get system settings for location labels
+						
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
-							// Building floor
+						// Get the address attributes of the relevant item
 
-								$location_floor = get_field_object('location_building_floor', $location_address_id ) ?: '';
-								$location_floor_value = $location_floor ? $location_floor['value'] : '';
-								$location_floor_label = $location_floor ? $location_floor['choices'][$location_floor_value] : '';
+							// Street address (address line 1)
+							$location_address_1 = get_field('location_address_1', $location_address_id ) ?: '';
 
-								// If floor value is set to '0' (single-story building), reset the values
+							// Building, Floor and Suite
 
-									if ( $location_floor_value == '0' ) {
+								// Building
 
-										$location_floor = '';
-										$location_floor_value = '';
-										$location_floor_label = '';
-					
-									}
+									$location_building = get_field('location_building', $location_address_id ) ?: '';
+									$location_building_term = $location_building ? get_term( $location_building, 'building' ) : '';
+									$location_building_slug = $location_building_term ? $location_building_term->slug : '';
+									$location_building_name = $location_building_term ? $location_building_term->name : '';
 
-							// Suite/unit number
+									// If building slug is set to '_none' (standalone building), reset the values
 
-								$location_suite = get_field('location_suite', $location_address_id ) ?: '';
+										if ( $location_building_slug == '_none' ) {
 
-							// Create address detail line(s) string
+											$location_building = '';
+											$location_building_term = '';
+											$location_building_slug = '';
+											$location_building_name = '';
+				
+										}
 
-								$location_address_detail = implode(
-									'<br />',
-									array_filter(
-										array(
-											$location_building_name,
-											implode(
-												', ',
-												array_filter(
-													array(
-														$location_floor_label,
-														$location_suite
+								// Building floor
+
+									$location_floor = get_field_object('location_building_floor', $location_address_id ) ?: '';
+									$location_floor_value = $location_floor ? $location_floor['value'] : '';
+									$location_floor_label = $location_floor ? $location_floor['choices'][$location_floor_value] : '';
+
+									// If floor value is set to '0' (single-story building), reset the values
+
+										if ( $location_floor_value == '0' ) {
+
+											$location_floor = '';
+											$location_floor_value = '';
+											$location_floor_label = '';
+						
+										}
+
+								// Suite/unit number
+
+									$location_suite = get_field('location_suite', $location_address_id ) ?: '';
+
+								// Create address detail line(s) string
+
+									$location_address_detail = implode(
+										'<br />',
+										array_filter(
+											array(
+												$location_building_name,
+												implode(
+													', ',
+													array_filter(
+														array(
+															$location_floor_label,
+															$location_suite
+														)
 													)
 												)
 											)
 										)
-									)
-								);
+									);
 
-							// Construct the schema for address line 2
+								// Construct the schema for address line 2
 
-								$location_address_2_schema = implode(
-									' ',
-									array_filter(
-										array(
-											$location_building_name,
-											$location_floor_label,
-											$location_suite
+									$location_address_2_schema = implode(
+										' ',
+										array_filter(
+											array(
+												$location_building_name,
+												$location_floor_label,
+												$location_suite
+											)
 										)
-									)
-								);
+									);
 
-						// Fall back to the deprecated address line 2 field
-						
-							if (
-								!$location_address_detail
-								||
-								!$location_address_2_schema
-							) {
+								// Fall back to the deprecated address line 2 field
+								
+									if (
+										!$location_address_detail
+										||
+										!$location_address_2_schema
+									) {
 
-								// Get deprecated address line 2 value
-								$location_address_2_deprecated = get_field('location_address_2', $location_address_id ) ?: '';
+										// Get deprecated address line 2 value
+										$location_address_2_deprecated = get_field('location_address_2', $location_address_id ) ?: '';
 
-								$location_address_detail = $location_address_detail ?: $location_address_2_deprecated;
-								$location_address_2_schema = $location_address_2_schema ?: $location_address_2_deprecated;
+										$location_address_detail = $location_address_detail ?: $location_address_2_deprecated;
+										$location_address_2_schema = $location_address_2_schema ?: $location_address_2_deprecated;
 
-							}
+									}
 
-						// City
-						$location_city = get_field('location_city', $location_address_id) ?: '';
+							// City, State and ZIP
+								
+								// City
+								$location_city = get_field('location_city', $location_address_id) ?: '';
 
-						// State
-						$location_state = get_field('location_state', $location_address_id) ?: '';
+								// State
+								$location_state = get_field('location_state', $location_address_id) ?: '';
 
-						// ZIP
-						$location_zip = get_field('location_zip', $location_address_id) ?: '';
+								// ZIP
+								$location_zip = get_field('location_zip', $location_address_id) ?: '';
 
-						// Construct final address line string
+								// Construct final address line string
 
-							$location_address_final_line = implode(
-								', ',
-								array_filter(
-									array(
-										$location_city,
-										implode(
-											' ',
-											array_filter(
-												array(
-													$location_state,
-													$location_zip
+									$location_address_final_line = implode(
+										', ',
+										array_filter(
+											array(
+												$location_city,
+												implode(
+													' ',
+													array_filter(
+														array(
+															$location_state,
+															$location_zip
+														)
+													)
 												)
 											)
 										)
+									);
+
+							// Construct address paragraph text
+
+								$location_address_text = implode(
+									'<br />',
+									array_filter(
+										array(
+											$location_address_1,
+											$location_address_detail,
+											$location_address_final_line
+										)
 									)
-								)
-							);
+								);
 
-						// Construct address paragraph text
-
-							$location_address_text = implode(
-								'<br />',
-								array_filter(
-									array(
-										$location_address_1,
-										$location_address_detail,
-										$location_address_final_line
-									)
-								)
-							);
-
-
-						// GPS / Map
-						$location_map = get_field('location_map', $location_address_id) ?: '';
-
-						// Add to the variables array
-
+							// Add to the variables array
 							$location_card_fields_vars['location_address_text'] = isset($location_address_text) ? $location_address_text : '';
-							$location_card_fields_vars['location_map'] = isset($location_map) ? $location_map : '';
 
-						// Location Card Styles
+						// GPS / Map / Directions
 
-							if ( 'basic' == $location_card_style ) {
+							$location_map = get_field('location_map', $location_address_id) ?: '';
 
-							} elseif ( 'detailed' == $location_card_style ) {
+							// Construct directions URL (Google Maps)
+							$location_directions_url = $location_map ? 'https://www.google.com/maps/dir/Current+Location/' . $location_map['lat'] . ',' . $location_map['lng'] : '';
 
-							} // endif
+							// Add to the variables array
+							$location_card_fields_vars['location_directions_url'] = isset($location_directions_url) ? $location_directions_url : '';
+
+						// Location Alerts
+
+							// Closure Alert
+
+								// Query for whether the location is closing
+
+									$location_closing = get_field('location_closing', $page_id) ?: false; // bool
+
+								// Eliminate PHP errors
+
+									$location_closing_date = '';
+									$location_closing_date_past = '';
+									$location_closing_length = '';
+									$location_closing_reopen_known = '';
+									$location_closing_reopen_date = '';
+
+								if ( $location_closing ) {
+
+									// Closing Date
+									$location_closing_date = get_field('location_closing_date', $page_id) ?: ''; // Date Format: "F j, Y"
+
+									// Query for whether the closing date is in the past
+
+										if ( new DateTime() >= new DateTime($location_closing_date) ) {
+
+											$location_closing_date_past = true;
+							
+										} else {
+
+											$location_closing_date_past = false;
+											
+										} // endif
+						
+									// Temporary or permanent?
+									$location_closing_length = get_field('location_closing_length', $page_id) ?: ''; // string enum('temporary', 'permanent')
+
+									if ( $location_closing_length == 'temporary' ) {
+
+										// Reopening date known?
+										$location_closing_reopen_known = get_field('location_reopen_known', $page_id) ?: ''; // string enum('tbd', 'date')
+
+										if ( $location_closing_reopen_known == 'date' ) {
+
+											// Reopening date
+											$location_closing_reopen_date = get_field('location_reopen_date', $page_id) ?: ''; // Date Format: "F j, Y"
+
+										} // endif ( $location_closing_reopen_known == 'date' )
+
+									} // endif ( $location_closing_length == 'temporary' )
+
+								} // endif ( $location_closing )
+
+								// Query for whether to display the location closure alert
+
+									if (
+										(
+											$location_closing
+											&&
+											$location_closing_length == 'permanent'
+										)
+										||
+										(
+											$location_closing
+											&&
+											$location_closing_length == 'temporary'
+											&&
+											!$location_closing_reopen_date_past
+										)
+									) {
+
+										$location_closing_display = true;
+
+									} else {
+
+										$location_closing_display = false;
+
+									}
+
+							// Modified Hours Alert
+
+								$location_modified_hours_group = get_field('location_hours_group', $page_id);
+
+								// Datetime references (Unix timestamp)
+
+									$today = strtotime("today");
+									$today_30 = strtotime("+30 days");
+				
+								// Modified Clinic Hours
+								
+									// Query for whether there are upcoming modified clinic hours
+									$location_modified_clinic_hours = $location_modified_hours_group['location_modified_hours'] ?: false; // bool
+
+									// Eliminate PHP errors
+
+										$location_modified_clinic_hours_start_date = '';
+										$location_modified_clinic_hours_start_date_unix = '';
+										$location_modified_clinic_hours_end = '';
+										$location_modified_clinic_hours_end_date = '';
+										$location_modified_clinic_hours_end_date_unix = '';
+
+									if ( $location_modified_clinic_hours ) {
+
+										// Modified Clinic Hours Start Date
+
+											$location_modified_clinic_hours_start_date = $location_modified_hours_group['location_modified_hours_start_date'] ?: ''; // Date Format: "F j, Y"
+											$location_modified_clinic_hours_start_date_unix = $location_modified_clinic_hours_start_date ? strtotime($location_modified_clinic_hours_start_date) : ''; // (Unix timestamp)
+
+										// Query for whether there is an end date to the modified clinic hours
+										$location_modified_clinic_hours_end = $location_modified_hours_group['location_modified_hours_end'] ?: false; // bool
+
+										if ( $location_modified_clinic_hours_end ) {
+
+											// Modified Clinic Hours End Date
+
+												$location_modified_clinic_hours_end_date = $location_modified_hours_group['location_modified_hours_end_date'] ?: ''; // Date Format: "F j, Y"
+												$location_modified_clinic_hours_end_date_unix = $location_modified_clinic_hours_end_date ? strtotime($location_modified_clinic_hours_end_date) : ''; // (Unix timestamp)
+
+										}
+
+									}
+
+								// Modified Telemedicine Hours
+								
+									// Query for whether there are upcoming modified telemedicine hours
+									$location_modified_telemed_hours = $location_modified_hours_group['location_telemed_modified_hours_query'] ?: false; // bool
+
+									// Eliminate PHP errors
+
+										$location_modified_telemed_hours_start_date = '';
+										$location_modified_telemed_hours_start_date_unix = '';
+										$location_modified_telemed_hours_end = '';
+										$location_modified_telemed_hours_end_date = '';
+										$location_modified_telemed_hours_end_date_unix = '';
+
+									if ( $location_modified_telemed_hours ) {
+
+										// Modified Telemedicine Hours Start Date
+
+											$location_modified_telemed_hours_start_date = $location_modified_hours_group['location_telemed_modified_hours_start_date'] ?: ''; // Date Format: "F j, Y"
+											$location_modified_telemed_hours_start_date_unix = $location_modified_telemed_hours_start_date ? strtotime($location_modified_telemed_hours_start_date) : ''; // (Unix timestamp)
+
+										// Query for whether there is an end date to the modified telemedicine hours
+										$location_modified_telemed_hours_end = $location_modified_hours_group['location_telemed_modified_hours_end'] ?: false; // bool
+
+										if ( $location_modified_telemed_hours_end ) {
+
+											// Modified Telemedicine Hours End Date
+
+												$location_modified_telemed_hours_end_date = $location_modified_hours_group['location_telemed_modified_hours_end_date'] ?: ''; // Date Format: "F j, Y"
+												$location_modified_telemed_hours_end_date_unix = $location_modified_telemed_hours_end_date ? strtotime($location_modified_telemed_hours_end_date) : ''; // (Unix timestamp)
+
+										}
+
+									}
+
+								// Query for whether to display the location closure alert
+
+									if (
+										(
+											$location_modified_clinic_hours
+											&&
+											$location_modified_clinic_hours_start_date_unix <= $today_30
+											&&
+											$location_modified_clinic_hours_end_date_unix >= $today
+										)
+										||
+										(
+											$location_modified_clinic_hours
+											&&
+											$location_modified_clinic_hours_start_date_unix <= $today_30
+											&&
+											!$location_modified_clinic_hours_end
+										)
+										||
+										(
+											$location_modified_telemed_hours
+											&&
+											$location_modified_telemed_hours_start_date_unix <= $today_30
+											&&
+											$location_modified_telemed_hours_end_date_unix >= $today
+										)
+										||
+										(
+											$location_modified_telemed_hours
+											&&
+											$location_modified_telemed_hours_start_date_unix <= $today_30
+											&&
+											!$location_modified_telemed_hours_end
+										)
+									) {
+
+										$location_modified_hours_display = true;
+
+									} else {
+
+										$location_modified_hours_display = false;
+
+									}
+
+								// Set start of modified hours based on the earliest of the two (clinic and telemedicine)
+
+									$location_modified_hours_start_date_unix = min(
+										array_filter(
+											array(
+												$location_modified_clinic_hours_start_date_unix,
+												$location_modified_telemed_hours_start_date_unix
+											)
+										)
+									);
+									$location_modified_hours_start_date = date( 'F j, Y', $location_modified_hours_start_date_unix );
+
+								// Determine if earliest modified hours start date has past
+
+									$location_modified_hours_date_past = ( $location_modified_hours_start_date_unix <= $today ) ? true : false;
+
+							// Construct the location alert elements
+
+								// Link accessible label
+								
+									if ( $location_closing_display ) {
+
+										if ( $location_closing_date_past ) {
+
+											$alert_message = 'This ' . strtolower($location_single_name) . ' is ' . ( $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ) . ' closed.';
+				
+										} else {
+				
+											$alert_message = 'This ' . strtolower($location_single_name) . ' will be closing ' . ( $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ) . ' on ' .  $location_closing_date . '.';
+				
+										} // endif
+				
+										$alert_label_attr = 'Learn more about the closure of ' . $location_title_attr . '.';
+					
+									} elseif ( $location_modified_hours_display ) {
+					
+										if ( $location_closing_date_past ) {
+
+											$alert_message = 'This ' . strtolower($location_single_name) . '\'s hours have been temporarily modified.';
+				
+										} else {
+				
+											$alert_message = 'This ' . strtolower($location_single_name) . '\'s hours will be temporarily modified beginning on ' . $location_modified_clinic_hours_start_date . '.';
+				
+										} // endif
+				
+										$alert_label_attr = 'Learn more about the modified hours.';
+					
+									} else {
+
+										$alert_message = '';
+										$alert_label_attr = '';
+
+									} // endif
+
+							// Add to the variables array
+
+								$location_card_fields_vars['location_closing_display'] = isset($location_closing_display) ? $location_closing_display : '';
+								$location_card_fields_vars['location_modified_hours_display'] = isset($location_modified_hours_display) ? $location_modified_hours_display : '';
+								$location_card_fields_vars['alert_message'] = isset($alert_message) ? $alert_message : '';
+								$location_card_fields_vars['alert_label_attr'] = isset($alert_label_attr) ? $alert_label_attr : '';
+
+					// Location Card Styles
+
+						if ( 'basic' == $location_card_style ) {
+
+						} elseif ( 'detailed' == $location_card_style ) {
+
+						} // endif
 
 				// Set/update the value of the transient
 				uamswp_fad_set_transient( 'vars_' . $location_card_style . '_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
