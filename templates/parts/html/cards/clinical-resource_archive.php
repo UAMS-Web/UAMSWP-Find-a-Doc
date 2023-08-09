@@ -110,7 +110,7 @@ $clinical_resource_related_max = 3; // Set how many of each related item type to
 
 								// Providers
 
-									if ( $clinical_resource_providers ) {
+									if ( $clinical_resource_provider_list ) {
 
 										?>
 										<dt><?php echo $clinical_resource_provider_label; ?></dt>
@@ -121,7 +121,7 @@ $clinical_resource_related_max = 3; // Set how many of each related item type to
 
 								// Locations
 
-									if ( $clinical_resource_locations ) {
+									if ( $clinical_resource_location_list ) {
 
 										?>
 										<dt><?php echo $clinical_resource_location_label; ?></dt>
@@ -132,7 +132,7 @@ $clinical_resource_related_max = 3; // Set how many of each related item type to
 
 								// Areas of Expertise
 
-									if ( $clinical_resource_expertises ) {
+									if ( $clinical_resource_expertise_list ) {
 
 										?>
 										<dt><?php echo $clinical_resource_expertise_label; ?></dt>
@@ -143,7 +143,7 @@ $clinical_resource_related_max = 3; // Set how many of each related item type to
 
 								// Conditions
 
-									if ( $clinical_resource_conditions ) {
+									if ( $clinical_resource_condition_list ) {
 
 										?>
 										<dt><?php echo $clinical_resource_condition_label; ?></dt>
@@ -154,7 +154,7 @@ $clinical_resource_related_max = 3; // Set how many of each related item type to
 
 								// Treatments
 
-									if ( $clinical_resource_treatments ) {
+									if ( $clinical_resource_treatment_list ) {
 
 										?>
 										<dt><?php echo $clinical_resource_treatment_label; ?></dt>
