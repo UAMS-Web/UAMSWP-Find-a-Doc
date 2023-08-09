@@ -11282,7 +11282,7 @@ function uamswp_prevent_orphan($string) {
 
 										$clinical_resource_featured_image_srcset[] = array(
 											'url'				=> image_sizer(
-												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
 												243, 243,
 												'bar', 'center'
 											),
@@ -11291,7 +11291,7 @@ function uamswp_prevent_orphan($string) {
 
 										$clinical_resource_featured_image_srcset[] = array(
 											'url'				=> image_sizer(
-												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
 												184, 184,
 												'center', 'center'
 											),
@@ -11300,7 +11300,7 @@ function uamswp_prevent_orphan($string) {
 
 										$clinical_resource_featured_image_srcset[] = array(
 											'url'				=> image_sizer(
-												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
 												243, 243,
 												'center', 'center'
 											),
@@ -11309,7 +11309,7 @@ function uamswp_prevent_orphan($string) {
 
 										$clinical_resource_featured_image_srcset[] = array(
 											'url'				=> image_sizer(
-												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
 												184, 184,
 												'center', 'center'
 											),
@@ -11327,7 +11327,7 @@ function uamswp_prevent_orphan($string) {
 
 										$clinical_resource_featured_image_srcset[] = array(
 											'url'				=> image_sizer(
-												( $clinical_resource_featured_image_square ?: $resource_image_wide ),
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
 												95, 95,
 												'center', 'center'
 											),
