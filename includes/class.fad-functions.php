@@ -8208,20 +8208,22 @@ function uamswp_fad_appointment_patients() {
 
 		// Phone Number Information
 
+			$appointment_patients_phone_number_both_fallback = '(501) 686-8800';
+
 			// New Patients Only
-			$appointment_patients_phone_number_new = format_phone_dash(get_field('appointment_patients_phone_number_new', 'option')) ?: '';
+			$appointment_patients_phone_number_new = format_phone_dash(get_field('appointment_patients_phone_number_new', 'option')) ?: $appointment_patients_phone_number_both_fallback;
 			$appointment_patients_phone_label_new = get_field('appointment_patients_phone_label_new', 'option') ?: '';
 			$appointment_patients_phone_label_new_attr = uamswp_attr_conversion($appointment_patients_phone_label_new);
 			$appointment_patients_phone_info_new = get_field('appointment_patients_phone_info_new', 'option') ?: '';
 
 			// Existing Patients Only
-			$appointment_patients_phone_number_existing = format_phone_dash(get_field('appointment_patients_phone_number_existing', 'option')) ?: '';
+			$appointment_patients_phone_number_existing = format_phone_dash(get_field('appointment_patients_phone_number_existing', 'option')) ?: $appointment_patients_phone_number_both_fallback;
 			$appointment_patients_phone_label_existing = get_field('appointment_patients_phone_label_existing', 'option') ?: '';
 			$appointment_patients_phone_label_existing_attr = uamswp_attr_conversion($appointment_patients_phone_label_existing);
 			$appointment_patients_phone_info_existing = get_field('appointment_patients_phone_info_existing', 'option') ?: '';
 
 			// Both New and Existing Patients
-			$appointment_patients_phone_number_both = format_phone_dash(get_field('appointment_patients_phone_number_both', 'option')) ?: '';
+			$appointment_patients_phone_number_both = format_phone_dash(get_field('appointment_patients_phone_number_both', 'option')) ?: $appointment_patients_phone_number_both_fallback;
 			$appointment_patients_phone_label_both = get_field('appointment_patients_phone_label_both', 'option') ?: '';
 			$appointment_patients_phone_label_both_attr = uamswp_attr_conversion($appointment_patients_phone_label_both);
 			$appointment_patients_phone_info_both = get_field('appointment_patients_phone_info_both', 'option') ?: '';
