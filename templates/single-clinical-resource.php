@@ -811,7 +811,10 @@
 
 			// Construct appointment information section
 
-				add_action( 'genesis_after_entry', function() use ( $appointment_section_show ) {
+				add_action( 'genesis_after_entry', function() use (
+					$appointment_section_show,
+					$content_placement
+				) {
 
 					include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );
 

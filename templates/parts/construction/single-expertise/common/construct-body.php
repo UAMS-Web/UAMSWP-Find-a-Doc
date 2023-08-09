@@ -107,7 +107,10 @@
 
 				add_action( 'genesis_after_entry', function() use (
 					$appointment_section_show,
-					$location_section_show
+					$location_section_show,
+					$content_placement,
+					$page_url,
+					$current_fpage
 				) {
 
 					include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );

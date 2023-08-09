@@ -19,6 +19,7 @@
 	$page_id = get_the_ID();
 
 	// Get the field values for the card
+	$expertise_card_fields_vars = ''; // Reset the variables
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/cards/expertise.php' );
 
 	// Query on whether this card is in a list of descendant areas of expertise
