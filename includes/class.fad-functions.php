@@ -11305,8 +11305,102 @@ function uamswp_prevent_orphan($string) {
 									// Limit number of providers
 									$clinical_resource_providers = array_slice($clinical_resource_providers, 0, 3);
 
-									// Get link values for providers
+									// Get field values for provider links
 									$clinical_resource_provider_vals = uamswp_fad_link_item_list($clinical_resource_providers);
+
+									// Create the text list of providers
+									
+										$clinical_resource_provider_categorytitle = 'Related Location'; // data-categorytitle attribute value
+
+										function uamswp_fad_link_item_list_html(
+											$array, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+											$data_category_title = '', // string // 'data-categorytitle' attribute value
+											$data_item_title = '', // string // 'data-itemtitle' attribute value
+											$more = false // bool // Query for whether to include reference to more items
+										) {
+
+											// Construct link elements
+
+												foreach ( $array as $item ) {
+													
+													if ( $item['url'] ) {
+
+														// Open anchor element
+
+															$item_link_open = '<a';
+															$item_link_open .= ' href="' . $item['url'] . '"';
+															$item_link_open .= $data_category_title ? ( ' data-categorytitle="' . $data_category_title .'"' ) : '';
+															$item_link_open .= $item['title_attr'] ? ( ' data-typetitle="' . $item['title_attr'] . '"' ) : '';
+															$item_link_open .= $data_item_title ? ' data-categorytitle="' . $data_item_title . '"' : '';
+															$item_link_open .= '>';
+
+														// Close anchor element
+
+															$item_link_close .= '</a>';
+	
+													}
+													
+													$output_array[] = $item_link_open . $item['title'] . $item_link_close;
+
+												}
+
+											// Add reference to more items
+											$output_array[] = $more ? 'more' : '';
+
+											// Remove any empty items from the array
+											$output_array = array_filter($output_array);
+											
+											// Split lists for serial grammar
+
+												// Final two items in array
+
+													$output_array_split_1 = array_slice(
+														$output_array,
+														-2, // start two items from the end
+														2 // include two items
+													);
+
+												// Remainder of the array (the items at the beginning)
+
+													$output_array_split_0 = array_slice(
+														$output_array,
+														0, // start at the beginning
+														( count($output_array) - count($output_array_split_1) ) // include the remainder
+													);
+
+											// Construct the list as a string
+
+												// Join the final two items with "and"
+
+													$output_string_split_1 = implode(
+														' and ',
+														$output_array_split_1
+													);
+												
+												// Merge the combined final two items string with the beginning array
+
+													$output_array_merge = array_merge(
+														$output_array_split_0,
+														array($output_string_split_1)
+													); // reset variable
+
+												// Join the items in the array with commas
+
+													$output = implode(
+														', ',
+														$output_array_merge
+													);
+
+											return $output;
+
+										}
+									
+										$clinical_resource_provider_list = uamswp_fad_link_item_list_html(
+											$clinical_resource_provider_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+											'Related Provider', // string // 'data-categorytitle' attribute value
+											$clinical_resource_title_attr, // string // 'data-itemtitle' attribute value
+											$clinical_resource_provider_more // bool // Query for whether to include reference to more items
+										);
 
 									// List label
 									
