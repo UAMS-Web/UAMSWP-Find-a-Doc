@@ -76,7 +76,17 @@
 
 			?>
 		</h3>
-		<p class="card-text"><?php echo $expertise_excerpt; ?></p>
+		<?php
+
+		if ( $expertise_excerpt ) {
+			
+			?>
+			<p class="card-text"><?php echo $expertise_excerpt; ?></p>
+			<?php
+
+		} // endif ( $expertise_excerpt )
+
+		?>
 	</div>
 	<div class="btn-container">
 		<div class="inner-container">
