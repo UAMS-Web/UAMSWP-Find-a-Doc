@@ -11,6 +11,7 @@
  * Optional vars:
  * 	$location_card_style // string enum('basic', 'detailed') // Location card style
  * 	$schema_telephone // array // Schema telephone data
+ * 	$schema_fax_number // array // Schema fax number data
  * 	$location_descendant_list // bool // Query on whether this card is in a list of descendant locations
  */
 
@@ -18,6 +19,7 @@
 
 	$location_card_style = isset($location_card_style) ? $location_card_style : '';
 	$schema_telephone = isset($schema_telephone) ? $schema_telephone : '';
+	$schema_fax_number = isset($schema_fax_number) ? $schema_fax_number : '';
 	$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : '';
 
 // Call the function
@@ -26,6 +28,7 @@
 		$page_id,
 		$location_card_style,
 		$schema_telephone,
+		$schema_fax_number,
 		$location_descendant_list
 	);
 

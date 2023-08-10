@@ -10380,6 +10380,7 @@ function uamswp_prevent_orphan($string) {
 			$page_id, // int // ID of the profile
 			$location_card_style, // string enum('basic', 'detailed') // Location card style
 			$schema_telephone = array(), // array // Schema telephone data
+			$schema_fax_number = array(), // array // Schema fax number data
 			$location_descendant_list = false // bool // Query on whether this card is in a list of descendant locations
 		) {
 
@@ -11118,6 +11119,11 @@ function uamswp_prevent_orphan($string) {
 
 								// Check/define the main telephone schema array
 								$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+
+							// Telephone Schema Data
+
+								// Check/define the main fax number schema array
+								$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_telephone) ) ? $schema_fax_number : array();
 
 							// Add to the variables array
 							
