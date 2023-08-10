@@ -10953,147 +10953,311 @@ function uamswp_prevent_orphan($string) {
 
 									} else {
 
-										$location_phone_link_data_typetitle = $location_single_name . ' Phone Number';
+										$location_phone_link_data_typetitle = 'Location Phone Number';
 									}
 
-							// General information phone number
+							if ( !$location_appointments_query ) {
 
-								$location_phone = get_field( 'location_phone', $page_id ) ?: '';
-								$location_phone_format_dash = format_phone_dash( $location_phone );
+								// Add general information phone number to location phone numbers array
 
-								// Build the anchor element for the general information phone number
-								$location_phone_link = $location_phone ? '<a href="tel:' . $location_phone_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ($location_phone_link_data_typetitle ? ' data-typetitle="' . $location_phone_link_data_typetitle . '"' : '') . '>' . $location_phone_format_dash . '</a>' : '';
-							
-							// Query for whether there are main appointment phone numbers other than the general information phone number
-							
-								if (
-									!$location_ac_query
-									&&
-									$location_appointments_query
-								) {
+									// Get the general information phone number
+									$location_phone = get_field( 'location_phone', $page_id ) ?: '';
 
-									$location_clinic_phone_query = get_field( 'location_clinic_phone_query', $page_id ) ?: '';
+									// Add the general information phone number (as the appointment phone number) to the location phone numbers array
 
-								} else {
+										if ( $location_phone ) {
 
-									$location_clinic_phone_query = '';
+											$location_phone_numbers['General Information']['general'] = array(
+												'link'		=> uamswp_fad_create_telephone_link(
+													$location_phone, // string // phone number
+													'icon-phone', // string // class attribute value
+													$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+													$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+													'General Information Phone Number' // string // data-typetitle attribute value
+												),
+												'subtitle'	=> ''
+											);
 
-								}
+										}
 
-							// Query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments?
-								
-								if (
-									$location_ac_query
-									&&
-									$location_appointments_query
-								) {
+							} else {
 
-									$location_ac_appointments_query = get_field('location_ac_appointments_query', $page_id) ?: '';
+								// Query for whether there are main appointment phone numbers other than the general information phone number
 
-								} else {
+									if (
+										!$location_ac_query
+									) {
 
-									$location_ac_appointments_query = '';
+										$location_phone_appointment_query = get_field( 'location_clinic_phone_query', $page_id ) ?: false;
 
-								}
+									} else {
 
-							// Appointment phone number for (new) patients
+										$location_phone_appointment_query = false;
 
-								if (
-									$location_clinic_phone_query
-									||
-									(
-										$location_ac_query
+									}
+
+								// General information phone number
+
+									if (
+										!$location_phone_appointment_query // If there are no main appointment phone numbers other than the general information phone number
+									) {
+
+										// Get the general information phone number
+										$location_phone = get_field( 'location_phone', $page_id ) ?: '';
+
+									} else {
+
+										$location_phone = '';
+
+									}
+
+									// Add the general information phone number (as the appointment phone number) to the location phone numbers array
+
+										if ( $location_phone ) {
+
+											$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+												'link'		=> uamswp_fad_create_telephone_link(
+													$location_phone, // string // phone number
+													'icon-phone', // string // class attribute value
+													$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+													$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+													'Appointment Phone Number for New and Returning Patients' // string // data-typetitle attribute value
+												),
+												'subtitle'	=> 'New and Returning Patients'
+											);
+
+										}
+
+								// Query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments
+
+									if (
+										$location_ac_query // If this is an Arkansas Children's location
+									) {
+
+										// Get field value of query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments
+										$location_phone_appointment_ac_query = get_field('location_ac_appointments_query', $page_id) ?: false;
+
+									} else {
+
+										$location_phone_appointment_ac_query = false;
+
+									}
+
+									// Arkansas Children's appointment phone number for primary care and for specialty care
+
+										if ( $location_phone_appointment_ac_query ) {
+
+											// Arkansas Children's appointment phone number for primary care
+
+												$location_phone_appointment_ac_primary = get_field('location_ac_appointments_primary', $page_id) ?: '';
+
+												// Add the phone number to the location phone numbers array
+
+													if ( $location_phone_appointment_ac_primary ) {
+
+														$location_phone_numbers['Appointment Phone Numbers']['ac-primary'] = array(
+															'link'		=> uamswp_fad_create_telephone_link(
+																$location_phone_appointment_ac_primary, // string // phone number
+																'icon-phone', // string // class attribute value
+																$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+																$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+																'Arkansas Children\'s Primary Care Appointments Phone Number' // string // data-typetitle attribute value
+															),
+															'subtitle'	=> 'Primary Care'
+														);
+
+													}
+
+											// Arkansas Children's appointment phone number for specialty care
+
+												$location_phone_appointment_ac_specialty = get_field('location_ac_appointments_specialty', $page_id) ?: '';
+
+												// Add the phone number to the location phone numbers array
+
+													if ( $location_phone_appointment_ac_specialty ) {
+
+														$location_phone_numbers['Appointment Phone Numbers']['ac-specialty'] = array(
+															'link'		=> uamswp_fad_create_telephone_link(
+																$location_phone_appointment_ac_specialty, // string // phone number
+																'icon-phone', // string // class attribute value
+																$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+																$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+																'Arkansas Children\'s Specialty Care Appointments Phone Number' // string // data-typetitle attribute value
+															),
+															'subtitle'	=> 'Specialty Care'
+														);
+
+													}
+
+										}
+								// Appointment phone numbers for new and returning patients
+
+									// New Patients
+
+										if (
+											$location_phone_appointment_query
+											||
+											(
+												$location_ac_query
+												&&
+												!$location_phone_appointment_ac_query
+											)
+										) {
+
+											// Get appointment phone number for (new) patients
+											$location_phone_appointment_new = get_field('location_new_appointments_phone', $page_id) ?: ''; 
+
+											$location_phone_appointment_new_format_dash = format_phone_dash( $location_phone_appointment_new );
+
+											// Build the anchor element for the appointment phone for (new) patients
+											// $location_phone_appointment_new_link = $location_phone_appointment_new ? '<a href="tel:' . $location_phone_appointment_new_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Appointment Phone Number for New' . ($location_phone_appointment_returning_query ? '' : ' and Returning') . ' Patients">' . $location_phone_appointment_new_format_dash . '</a>' : '';
+
+										} else {
+
+											$location_phone_appointment_new = '';
+
+										}
+
+									// Query for whether there is a separate appointment phone number for returning patients
+
+										if ( $location_phone_appointment_query ) {
+
+											$location_phone_appointment_returning_query = get_field('location_appointment_phone_query', $page_id) ?: false; 
+
+										} else {
+
+											$location_phone_appointment_returning_query = false;
+
+										}
+
+										// Appointments Phone Number for Returning Patients
+
+											if ( $location_phone_appointment_returning_query ) {
+
+												$location_phone_appointment_returning = get_field('location_return_appointments_phone', $page_id) ?: '';
+												
+												$location_phone_appointment_returning_format_dash = format_phone_dash( $location_phone_appointment_returning );
+
+												// Build the anchor element for the appointment phone number for returning patients
+												// $location_phone_appointment_returning_link = $location_phone_appointment_returning ? '<a href="tel:' . $location_phone_appointment_returning_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Appointment Phone Number for Returning Patients">' . $location_phone_appointment_returning_format_dash . '</a>' : '';
+
+											} else {
+
+												$location_phone_appointment_returning = '';
+												$location_phone_appointment_returning_format_dash = '';
+												$location_phone_appointment_returning_link = '';
+
+											}
+
+									// Add the phone numbers to the location phone numbers array
+
+										if ( $location_phone_appointment_new ) {
+
+											if ( $location_phone_appointment_query ) {
+
+												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+													'link'		=> uamswp_fad_create_telephone_link(
+														$location_phone_appointment_new, // string // phone number
+														'icon-phone', // string // class attribute value
+														$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+														$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+														'Appointment Phone Number for New Patients' // string // data-typetitle attribute value
+													),
+													'subtitle'	=> 'New Patients'
+												);
+
+											} else {
+
+												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+													'link'		=> uamswp_fad_create_telephone_link(
+														$location_phone_appointment_new, // string // phone number
+														'icon-phone', // string // class attribute value
+														$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+														$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+														'Appointment Phone Number for New and Returning Patients' // string // data-typetitle attribute value
+													),
+													'subtitle'	=> 'New and Returning Patients'
+												);
+
+											} // endif
+
+										} // endif
+
+										if ( $location_phone_appointment_returning ) {
+
+											$location_phone_numbers['Appointment Phone Numbers']['returning'] = array(
+												'link'		=> uamswp_fad_create_telephone_link(
+													$location_phone_appointment_returning, // string // phone number
+													'icon-phone', // string // class attribute value
+													$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+													$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+													'Appointment Phone Number for Returning Patients' // string // data-typetitle attribute value
+												),
+												'subtitle'	=> 'Returning Patients'
+											);
+
+										} // endif
+
+							} // endif
+
+							// Make adjustments to the location phone numbers array
+
+								// Remove general phone number item if there is no phone number value
+
+									if (
+										isset($location_phone_numbers['General Information'])
 										&&
-										!$location_ac_appointments_query
-									)
-								) {
+										(
+											!isset($location_phone_numbers['General Information']['general']['link'])
+											||
+											empty($location_phone_numbers['General Information']['general']['link'])
+										)
+									) {
 
-									$location_new_appointments_phone = get_field('location_new_appointments_phone', $page_id) ?: ''; 
-									$location_new_appointments_phone_format_dash = format_phone_dash( $location_new_appointments_phone );
-									
-									// Build the anchor element for the appointment phone for (new) patients
-									$location_new_appointments_phone_link = $location_new_appointments_phone ? '<a href="tel:' . $location_new_appointments_phone_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Appointment Phone Number for New' . ($location_appointment_phone_query ? '' : ' and Returning') . ' Patients">' . $location_new_appointments_phone_format_dash . '</a>' : '';
+										// unset($location_phone_numbers['General Information']);
 
-								} else {
+									} // endif
 
-									$location_new_appointments_phone = '';
-									$location_new_appointments_phone_format_dash = '';
-									$location_new_appointments_phone_link = '';
-
-								}
-
-							// Arkansas Children's appointment phone number for primary care and for specialty care
-
-								if ( $location_ac_appointments_query ) {
-
-									// Query for whether there are multiple appointment phone numbers
-
-										$location_phone_appointments_multiple_query = true;
-
-									// Arkansas Children's appointment phone number for primary care
-
-										$location_ac_appointments_primary = get_field('location_ac_appointments_primary', $page_id) ?: '';
-										$location_ac_appointments_primary_format_dash = format_phone_dash( $location_ac_appointments_primary );
-										
-										// Build the anchor element for the Arkansas Children's primary care appointments phone number
-										$location_ac_appointments_primary_link = $location_ac_appointments_primary ? '<a href="tel:' . $location_ac_appointments_primary_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Arkansas Children\'s Primary Care Appointments Phone Number">' . $location_ac_appointments_primary_format_dash . '</a>' : '';
-
-									// Arkansas Children's appointment phone number for specialty care
-
-										$location_ac_appointments_specialty = get_field('location_ac_appointments_specialty', $page_id) ?: '';
-										$location_ac_appointments_specialty_format_dash = format_phone_dash( $location_ac_appointments_specialty );
-										
-										// Build the anchor element for the Arkansas Children's specialty care appointments phone number
-										$location_ac_appointments_specialty_link = $location_ac_appointments_specialty ? '<a href="tel:' . $location_ac_appointments_specialty_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Arkansas Children\'s Specialty Care Appointments Phone Number">' . $location_ac_appointments_specialty_format_dash . '</a>' : '';
-
-								} else {
-
-									$location_phone_appointments_multiple_query = isset($location_phone_appointments_multiple_query) ? $location_phone_appointments_multiple_query : '';
-
-									$location_ac_appointments_primary = '';
-									$location_ac_appointments_primary_format_dash = '';
-									$location_ac_appointments_primary_link = '';
-
-									$location_ac_appointments_specialty = '';
-									$location_ac_appointments_specialty_format_dash = '';
-									$location_ac_appointments_specialty_link = '';
-
-								}
+								// Remove appointment phone number item if there is no phone number value
 								
-							// Query for whether there is a separate appointment phone number for returning patients
-							
-								if ( $location_clinic_phone_query ) {
+									if ( isset($location_phone_numbers['Appointment Phone Numbers']) ) {
 
-									$location_appointment_phone_query = get_field('location_appointment_phone_query', $page_id) ?: false; 
+										foreach ( $location_phone_numbers['Appointment Phone Numbers'] as $item ) {
 
-									// Query for whether there are multiple appointment phone numbers
+											if (
+												!isset($item['link'])
+												||
+												empty($item['link'])
+											) {
 
-										$location_phone_appointments_multiple_query = true;
+												// unset($item);
 
-								} else {
+											} // endif
 
-									$location_appointment_phone_query = '';
-									$location_phone_appointments_multiple_query = isset($location_phone_appointments_multiple_query) ? $location_phone_appointments_multiple_query : '';
+										} // endforeach
 
-								}
+										// If the appointment phone numbers item is now empty, remove it
 
-							// Appointments Phone Number for Returning Patients
+											if ( empty($location_phone_numbers['Appointment Phone Numbers']) ) {
 
-								if ( $location_appointment_phone_query ) {
+												// unset($location_phone_numbers['Appointment Phone Numbers']);
 
-									$location_return_appointments_phone = get_field('location_return_appointments_phone', $page_id) ?: '';
-									$location_return_appointments_phone_format_dash = format_phone_dash( $location_return_appointments_phone );
-									
-									// Build the anchor element for the appointment phone number for returning patients
-									$location_return_appointments_phone_link = $location_return_appointments_phone ? '<a href="tel:' . $location_return_appointments_phone_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Appointment Phone Number for Returning Patients">' . $location_return_appointments_phone_format_dash . '</a>' : '';
+											}
 
-								} else {
+									} // endif
 
-									$location_return_appointments_phone = '';
-									$location_return_appointments_phone_format_dash = '';
-									$location_return_appointments_phone_link = '';
+								// Change key of appointment phone numbers item to singular if there is only one phone number sub-item
 
-								}
+									if (
+										isset($location_phone_numbers['Appointment Phone Numbers'])
+										&&
+										count($location_phone_numbers['Appointment Phone Numbers']) == 1
+									) {
+
+										$location_phone_numbers['Appointment Phone Number'] = $location_phone_numbers['Appointment Phone Numbers'];
+										unset($location_phone_numbers['Appointment Phone Numbers']);
+
+									}
 
 							// Fax number
 
@@ -11102,10 +11266,16 @@ function uamswp_prevent_orphan($string) {
 								) {
 
 									$location_fax = get_field('location_fax', $page_id) ?: ''; 
-									$location_fax_format_dash = format_phone_dash( $location_fax );
 
 									// Build the anchor element for the fax number
-									$location_fax_link = $location_fax ? '<a href="tel:' . $location_fax_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Clinic Fax Number">' . $location_fax_format_dash . '</a>' : '';
+
+										$location_fax_link = uamswp_fad_create_telephone_link(
+											$location_fax, // string // phone number
+											'icon-phone', // string // class attribute value
+											$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+											$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+											'Clinic Fax Number' // string // data-typetitle attribute value
+										);
 
 								} else {
 
@@ -11126,20 +11296,11 @@ function uamswp_prevent_orphan($string) {
 								$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_telephone) ) ? $schema_fax_number : array();
 
 							// Add to the variables array
-							
-								$location_card_fields_vars['location_phone_link'] = isset($location_phone_link) ? $location_phone_link : '';
+
+								$location_card_fields_vars['location_phone_numbers'] = isset($location_phone_numbers) ? $location_phone_numbers : '';
 								$location_card_fields_vars['location_phone_data_categorytitle'] = isset($location_phone_data_categorytitle) ? $location_phone_data_categorytitle : '';
 								$location_card_fields_vars['location_appointments_query'] = isset($location_appointments_query) ? $location_appointments_query : '';
-								$location_card_fields_vars['location_phone_appointments_multiple_query'] = isset($location_phone_appointments_multiple_query) ? $location_phone_appointments_multiple_query : '';
-								$location_card_fields_vars['location_new_appointments_phone'] = isset($location_new_appointments_phone) ? $location_new_appointments_phone : '';
-								$location_card_fields_vars['location_clinic_phone_query'] = isset($location_clinic_phone_query) ? $location_clinic_phone_query : '';
-								$location_card_fields_vars['location_new_appointments_phone_link'] = isset($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : '';
-								$location_card_fields_vars['location_appointment_phone_query'] = isset($location_appointment_phone_query) ? $location_appointment_phone_query : '';
-								$location_card_fields_vars['location_return_appointments_phone'] = isset($location_return_appointments_phone) ? $location_return_appointments_phone : '';
-								$location_card_fields_vars['location_return_appointments_phone_link'] = isset($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : '';
-								$location_card_fields_vars['location_ac_appointments_query'] = isset($location_ac_appointments_query) ? $location_ac_appointments_query : '';
-								$location_card_fields_vars['location_ac_appointments_primary_link'] = isset($location_ac_appointments_primary_link) ? $location_ac_appointments_primary_link : '';
-								$location_card_fields_vars['location_ac_appointments_specialty_link'] = isset($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : '';
+								$location_card_fields_vars['location_fax_link'] = isset($location_fax_link) ? $location_fax_link : '';
 
 					// Location Card Styles
 
@@ -12320,3 +12481,41 @@ function uamswp_prevent_orphan($string) {
 			}
 
 		}
+
+// Create telephone link element
+
+	function uamswp_fad_create_telephone_link(
+		$phone_number, // string
+		$class = '', // string
+		$data_category_title = '', // string // data-categorytitle attribute value
+		$data_item_title = '', // string // data-itemtitle attribute value
+		$data_type_title = '' // string // data-typetitle attribute value
+	) {
+
+		// Check/define optional variables
+
+			$phone_number =  ( isset($phone_number) && !empty($phone_number) ) ? format_phone_dash( $phone_number ) : '';
+			$class = $class ?: '';
+			$data_category_title = $data_category_title ?: '';
+			$data_item_title = $data_item_title ?: '';
+			$data_type_title = $data_type_title ?: '';
+			$output = '';
+
+		if ( !$phone_number ) {
+
+			return $output;
+
+		}
+
+		$output = '<a href="tel:' . $phone_number . '"';
+		$output .= $class ? ' class="' . $class . '"' : '';
+		$output .= $data_category_title ? ' data-categorytitle="' . $data_category_title . '"' : '';
+		$output .= $data_item_title ? ' data-itemtitle="' . $data_item_title . '"' : '';
+		$output .= $data_type_title ? ' data-typetitle="' . $data_type_title . '"' : '';
+		$output .= '>';
+		$output .= $phone_number;
+		$output .= '</a>';
+
+		return $output;
+
+	}

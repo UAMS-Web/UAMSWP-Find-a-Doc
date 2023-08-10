@@ -23,88 +23,40 @@
 
 // Display phone numbers for associated locations
 
-	if ( $location_phone_link ) {
+	if ( $location_phone_numbers ) {
 
 		?>
 		<dl <?php echo $location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
 			<?php
 
-			if ( $location_appointments_query ) {
+			foreach ( $location_phone_numbers as $key => $value ) {
 
-				// IF a patient can schedule an appointment for services rendered at this location...
+				?>
+				<dt><?php echo $key; ?></dt>
+				<?php
 
-					?>
-					<dt>Appointment Phone Number<?php echo $location_phone_appointments_multiple_query ? 's' : ''; ?></dt>
-					<?php
-
-					if (
-						$location_new_appointments_phone
-						&&
-						$location_clinic_phone_query
-					) {
-
-						// UAMS location appointments
-
-							?>
-							<dd>
-								<?php echo $location_new_appointments_phone_link; ?><br/>
-								<span class="subtitle"><?php echo $location_appointment_phone_query ? 'New Patients' : 'New and Returning Patients'; ?></span>
-							</dd>
-							<?php
-
-							if (
-								$location_return_appointments_phone
-								&&
-								$location_appointment_phone_query
-							) {
-
-								?>
-								<dd>
-									<?php echo $location_return_appointments_phone_link; ?><br/>
-									<span class="subtitle">Returning Patients</span>
-								</dd>
-								<?php
-
-							} // endif
-
-					} elseif ( $location_ac_appointments_query ) {
-
-						// Arkansas Children's Primary Care and Specialty Care Appointments
-
-							?>
-							<dd>
-								<?php echo $location_ac_appointments_primary_link; ?><br/>
-								<span class="subtitle">Primary Care</span>
-							</dd>
-							<dd>
-								<?php echo $location_ac_appointments_specialty_link; ?><br/>
-								<span class="subtitle">Specialty Care</span>
-							</dd>
-							<?php
-
-					} else {
-
-						// Display general information number as the appointments number
-
-							?>
-							<dd>
-								<?php echo $location_phone_link; ?><br/>
-								<span class="subtitle">New and Returning Patients</span>
-							</dd>
-							<?php
-
-					} // endif
-
-			} else {
-
-				// IF a patient cannot schedule an appointment for services rendered at this location...
+				foreach( $value as $item) {
 
 					?>
-					<dt>General Information</dt>
-					<dd><?php echo $location_phone_link; ?></dd>
-					<?php
+					<dd>
+						<?php
+						
+						echo $item['link'];
+						
+						if ( $item['subtitle'] ) {
 
-			} // endif
+							?><br/>
+							<span class="subtitle"><?php echo $item['subtitle']; ?></span>
+							<?php
+						}
+
+						?>
+					</dd>
+					<?php
+	
+				}
+
+			}
 
 			?>
 		</dl>
