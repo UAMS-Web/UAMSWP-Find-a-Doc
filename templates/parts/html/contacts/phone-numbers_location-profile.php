@@ -27,7 +27,6 @@
  * 		)
  */
 
-
 // Telephone Schema Data
 
 	// Check/define the main telephone schema array

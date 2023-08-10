@@ -1076,7 +1076,7 @@
 
 												$phone_output_id = $page_id;
 												$phone_output = 'location_profile';
-												include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location.php' );
+												include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location-profile.php' );
 
 											// Hours values
 
