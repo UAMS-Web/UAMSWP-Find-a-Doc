@@ -104,7 +104,7 @@ function my_taxonomy_query( $args, $field ) {
 		}
 
 		// Create provider name combinations to store in fields
-		
+
 			$first_name = $_POST['acf']['field_physician_first_name'];
 			$middle_name = $_POST['acf']['field_physician_middle_name'];
 			$last_name = $_POST['acf']['field_physician_last_name'];

@@ -1704,7 +1704,7 @@ function uamswp_fad_ontology_site_values(
 				}
 
 			// Create the comma-separated list of linked provider items
-			
+
 				$related_array_list = uamswp_fad_related_list_html(
 					$related_array_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
 					$data_category_title, // string // 'data-categorytitle' attribute value
@@ -1766,7 +1766,7 @@ function uamswp_fad_ontology_site_values(
 												)
 											)
 										) ?: '';
-						
+
 									}
 
 								// Attribute-friendly title
@@ -1795,7 +1795,7 @@ function uamswp_fad_ontology_site_values(
 
 					// Set/update the value of the transient
 					uamswp_fad_set_transient( $page_id, $output, __FUNCTION__ );
-		
+
 					// Return the array
 					return $output;
 
@@ -1846,7 +1846,7 @@ function uamswp_fad_ontology_site_values(
 				// Construct link elements
 
 					foreach ( $array as $item ) {
-						
+
 						if ( $item['url'] ) {
 
 							// Open anchor element
@@ -1863,7 +1863,7 @@ function uamswp_fad_ontology_site_values(
 								$item_link_close = '</a>';
 
 						}
-						
+
 						$output_array[] = $item_link_open . $item['title'] . $item_link_close;
 
 					}
@@ -1873,7 +1873,7 @@ function uamswp_fad_ontology_site_values(
 
 				// Remove any empty items from the array
 				$output_array = array_filter($output_array);
-				
+
 				// Split lists for serial grammar
 
 					// Final two items in array
@@ -1903,7 +1903,7 @@ function uamswp_fad_ontology_site_values(
 							),
 							$output_array_split_1
 						);
-					
+
 					// Merge the combined final two items string with the beginning array
 
 						$output_array_merge = array_merge(
@@ -1921,7 +1921,7 @@ function uamswp_fad_ontology_site_values(
 				return $output;
 
 			}
-		
+
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query(
 		$page_id, // int
@@ -10412,7 +10412,7 @@ function uamswp_prevent_orphan($string) {
 					// Common
 
 						// Query on whether this card is in a list of descendant locations
-						
+
 							$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
 						// Location Title
@@ -10427,7 +10427,7 @@ function uamswp_prevent_orphan($string) {
 
 						// Location URL
 							$location_url = user_trailingslashit(get_permalink($page_id));
-						
+
 							// Add to the variables array
 							$location_card_fields_vars['location_url'] = isset($location_url) ? $location_url : '';
 
@@ -10436,7 +10436,7 @@ function uamswp_prevent_orphan($string) {
 							$location_has_parent = get_field('location_parent', $page_id) ?: '';
 
 						// Parent location
-							
+
 							// Parent ID
 							$location_parent_id = $location_has_parent ? ( get_field('location_parent_id', $page_id) ?: '' ) : '';
 
@@ -10510,7 +10510,7 @@ function uamswp_prevent_orphan($string) {
 							$location_card_fields_vars['location_featured_image_url'] = isset($location_featured_image_url) ? $location_featured_image_url : '';
 
 						// Get system settings for location labels
-						
+
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 						// Get the address attributes of the relevant item
@@ -10535,7 +10535,7 @@ function uamswp_prevent_orphan($string) {
 											$location_building_term = '';
 											$location_building_slug = '';
 											$location_building_name = '';
-				
+
 										}
 
 								// Building floor
@@ -10551,7 +10551,7 @@ function uamswp_prevent_orphan($string) {
 											$location_floor = '';
 											$location_floor_value = '';
 											$location_floor_label = '';
-						
+
 										}
 
 								// Suite/unit number
@@ -10592,7 +10592,7 @@ function uamswp_prevent_orphan($string) {
 									);
 
 								// Fall back to the deprecated address line 2 field
-								
+
 									if (
 										!$location_address_detail
 										||
@@ -10608,7 +10608,7 @@ function uamswp_prevent_orphan($string) {
 									}
 
 							// City, State and ZIP
-								
+
 								// City
 								$location_city = get_field('location_city', $location_address_id) ?: '';
 
@@ -10690,13 +10690,13 @@ function uamswp_prevent_orphan($string) {
 										if ( new DateTime() >= new DateTime($location_closing_date) ) {
 
 											$location_closing_date_past = true;
-							
+
 										} else {
 
 											$location_closing_date_past = false;
-											
+
 										} // endif
-						
+
 									// Temporary or permanent?
 									$location_closing_length = get_field('location_closing_length', $page_id) ?: ''; // string enum('temporary', 'permanent')
 
@@ -10750,9 +10750,9 @@ function uamswp_prevent_orphan($string) {
 
 									$today = strtotime("today");
 									$today_30 = strtotime("+30 days");
-				
+
 								// Modified Clinic Hours
-								
+
 									// Query for whether there are upcoming modified clinic hours
 									$location_modified_clinic_hours = $location_modified_hours_group['location_modified_hours'] ?: false; // bool
 
@@ -10786,7 +10786,7 @@ function uamswp_prevent_orphan($string) {
 									}
 
 								// Modified Telemedicine Hours
-								
+
 									// Query for whether there are upcoming modified telemedicine hours
 									$location_modified_telemed_hours = $location_modified_hours_group['location_telemed_modified_hours_query'] ?: false; // bool
 
@@ -10882,35 +10882,35 @@ function uamswp_prevent_orphan($string) {
 							// Construct the location alert elements
 
 								// Link accessible label
-								
+
 									if ( $location_closing_display ) {
 
 										if ( $location_closing_date_past ) {
 
 											$alert_message = 'This ' . strtolower($location_single_name) . ' is ' . ( $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ) . ' closed.';
-				
+
 										} else {
-				
+
 											$alert_message = 'This ' . strtolower($location_single_name) . ' will be closing ' . ( $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ) . ' on ' .  $location_closing_date . '.';
-				
+
 										} // endif
-				
+
 										$alert_label_attr = 'Learn more about the closure of ' . $location_title_attr . '.';
-					
+
 									} elseif ( $location_modified_hours_display ) {
-					
+
 										if ( $location_closing_date_past ) {
 
 											$alert_message = 'This ' . strtolower($location_single_name) . '\'s hours have been temporarily modified.';
-				
+
 										} else {
-				
+
 											$alert_message = 'This ' . strtolower($location_single_name) . '\'s hours will be temporarily modified beginning on ' . $location_modified_clinic_hours_start_date . '.';
-				
+
 										} // endif
-				
+
 										$alert_label_attr = 'Learn more about the modified hours.';
-					
+
 									} else {
 
 										$alert_message = '';
@@ -11949,7 +11949,7 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_providers = get_field( 'clinical_resource_providers', $page_id ) ?: array();
 
 									// Construct the list of related providers
-										
+
 										$clinical_resource_provider_list = uamswp_fad_related_list(
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
@@ -11958,7 +11958,7 @@ function uamswp_prevent_orphan($string) {
 										);
 
 									// Define the list label
-									
+
 										if ( $clinical_resource_provider_list ) {
 
 											// Get system settings for provider labels
@@ -11979,7 +11979,7 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_locations = get_field( 'clinical_resource_locations', $page_id ) ?: array();
 
 									// Construct the list of related locations
-										
+
 										$clinical_resource_location_list = uamswp_fad_related_list(
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
@@ -11988,7 +11988,7 @@ function uamswp_prevent_orphan($string) {
 										);
 
 									// Define the list label
-									
+
 										if ( $clinical_resource_location_list ) {
 
 											// Get system settings for location labels
@@ -12009,7 +12009,7 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_expertises = get_field( 'clinical_resource_aoe', $page_id ) ?: array();
 
 									// Construct the list of related expertises
-										
+
 										$clinical_resource_expertise_list = uamswp_fad_related_list(
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
@@ -12018,7 +12018,7 @@ function uamswp_prevent_orphan($string) {
 										);
 
 									// Define the list label
-									
+
 										if ( $clinical_resource_expertise_list ) {
 
 											// Get system settings for expertise labels
@@ -12039,7 +12039,7 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_conditions = get_field( 'clinical_resource_conditions', $page_id ) ?: array();
 
 									// Construct the list of related conditions
-										
+
 										$clinical_resource_condition_list = uamswp_fad_related_list(
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
@@ -12048,7 +12048,7 @@ function uamswp_prevent_orphan($string) {
 										);
 
 									// Define the list label
-									
+
 										if ( $clinical_resource_condition_list ) {
 
 											// Get system settings for condition labels
@@ -12069,7 +12069,7 @@ function uamswp_prevent_orphan($string) {
 									$clinical_resource_treatments = get_field( 'clinical_resource_treatments', $page_id ) ?: array();
 
 									// Construct the list of related treatments
-										
+
 										$clinical_resource_treatment_list = uamswp_fad_related_list(
 											$page_id, // int // ID of the current ontology item
 											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
@@ -12078,7 +12078,7 @@ function uamswp_prevent_orphan($string) {
 										);
 
 									// Define the list label
-									
+
 										if ( $clinical_resource_treatment_list ) {
 
 											// Get system settings for treatment labels

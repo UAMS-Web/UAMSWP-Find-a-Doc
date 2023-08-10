@@ -101,7 +101,7 @@
 		// Address values
 
 			if ( $location_address_text ) {
-				
+
 				?>
 				<p class="card-text"><?php echo $location_address_text; ?></p>
 				<?php 

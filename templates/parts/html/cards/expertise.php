@@ -79,7 +79,7 @@
 		<?php
 
 		if ( $expertise_excerpt ) {
-			
+
 			?>
 			<p class="card-text"><?php echo $expertise_excerpt; ?></p>
 			<?php
