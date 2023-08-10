@@ -45,15 +45,9 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 // Data attributes
 
 	$location_phone_data_categorytitle = 'Telephone Number';
-	$location_title = '';
-	$location_phone_data_itemtitle = '';
-	$location_title_attr = '';
-
-	if ( $phone_output == 'associated_locations' ) {
-		$location_title = get_the_title($phone_output_id);
-		$location_title_attr = uamswp_attr_conversion($location_title);
-		$location_phone_data_itemtitle = $location_title_attr;
-	}
+	$location_title = get_the_title($phone_output_id);
+	$location_title_attr = uamswp_attr_conversion($location_title);
+	$location_phone_data_itemtitle = $location_title_attr;
 
 // General information phone number
 
@@ -61,7 +55,9 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 	$location_phone_format_dash = format_phone_dash( $location_phone );
 	$location_phone_link_data_typetitle = '';
 
-	if ( $location_appointments_query && ( $phone_output == 'associated_locations' ) ) {
+	if (
+		$location_appointments_query
+	) {
 	
 		// IF a patient can schedule an appointment for services rendered at this location...
 		// AND IF the output is on references to associated locations like location cards and a Provider profile's primary location section...
@@ -209,276 +205,6 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 		
 		} // endif ( $phone_output == 'location_profile' )
 
-// Display phone numbers on location profile's contact information section 
-
-	if ( $phone_output == 'location_profile' ) {
-		
-		?>
-		<dl <?php echo $location_phone_data_categorytitle ? 'data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
-			<?php
-			
-			// General Information
-
-				if ( !empty($location_phone) ) {
-
-						?>
-						<dt>General Information<?php echo ( $location_clinic_phone_query || !$location_appointments_query ) ? '' : ' and Appointments'; ?></dt>
-						<dd><?php echo !empty($location_phone_link) ? $location_phone_link : $location_phone; ?></dd>
-						<?php
-
-					// Check/define the main telephone schema array
-					
-						$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-					// Add this location's details to the main telephone schema array
-
-						$schema_telephone = uamswp_schema_telephone(
-							$schema_telephone, // array (optional) // Main telephone schema array
-							$location_phone_format_dash // string (optional) // The telephone number.
-						);
-
-				} // endif ( !empty($location_phone) )
-				
-			// Appointment phone numbers
-				
-				if (
-					$location_clinic_phone_query
-					&&
-					(
-						!empty($location_new_appointments_phone)
-						||
-						(
-							!empty($location_return_appointments_phone)
-							&&
-							$location_appointment_phone_query
-						)
-					)
-				) {
-
-					// Appointments
-
-					?>
-					<dt>Appointments</dt>
-					<?php
-					
-					if ( !empty($location_new_appointments_phone) ) {
-						
-						?>
-						<dd>
-							<?php
-						
-							echo !empty($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : $location_new_appointments_phone;
-							echo $location_appointment_phone_query ? '<br/><span class="subtitle">New Patients</span>' : '';
-							
-							?>
-						</dd>
-						<?php
-
-						// Check/define the main telephone schema array
-						
-							$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-						// Add this location's details to the main telephone schema array
-						
-							$schema_telephone = uamswp_schema_telephone(
-								$schema_telephone, // array (optional) // Main telephone schema array
-								$location_new_appointments_phone_format_dash // string (optional) // The telephone number.
-							);
-
-					} // endif ( !empty($location_new_appointments_phone) )
-
-					if ( !empty($location_return_appointments_phone) && $location_appointment_phone_query ) {
-						
-						?>
-						<dd>
-							<?php
-							
-							echo !empty($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : $location_return_appointments_phone;
-							
-							?><br/>
-							<span class="subtitle">Returning Patients</span>
-						</dd>
-						<?php
-
-						// Check/define the main telephone schema array
-						
-							$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-						// Add this location's details to the main telephone schema array
-
-							$schema_telephone = uamswp_schema_telephone(
-								$schema_telephone, // array (optional) // Main telephone schema array
-								$location_return_appointments_phone_format_dash // string (optional) // The telephone number.
-							);
-
-					} // endif ( !empty($location_return_appointments_phone) && $location_appointment_phone_query )
-
-				} elseif (
-					$location_ac_appointments_query
-					&&
-					(
-						!empty($location_ac_appointments_primary)
-						||
-						!empty($location_ac_appointments_specialty)
-					)
-				) {
-
-					// Arkansas Children's Primary Care and Specialty Care Appointments
-
-						?>
-						<dt>Appointments</dt>
-						<?php
-						
-						if ( !empty($location_ac_appointments_primary) ) {
-							
-							?>
-							<dd>
-								<?php
-								
-								echo !empty($location_ac_appointments_primary_link) ? $location_ac_appointments_primary_link : $location_ac_appointments_primary;
-								
-								?><br/>
-								<span class="subtitle">Primary Care</span>
-							</dd>
-							<?php
-
-							// Check/define the main telephone schema array
-							
-								$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-							// Add this location's details to the main telephone schema array
-								
-								$schema_telephone = uamswp_schema_telephone(
-									$schema_telephone, // array (optional) // Main telephone schema array
-									$location_ac_appointments_primary_format_dash // string (optional) // The telephone number.
-								);
-
-						} // endif ( !empty($location_ac_appointments_primary) )
-
-						if ( !empty($location_ac_appointments_specialty) ) {
-							
-							?>
-							<dd>
-								<?php
-								
-								echo !empty($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : $location_ac_appointments_specialty;
-								
-								?><br/>
-								<span class="subtitle">Specialty Care</span>
-							</dd>
-							<?php
-
-							// Check/define the main telephone schema array
-							
-								$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-							// Add this location's details to the main telephone schema array
-
-								$schema_telephone = uamswp_schema_telephone(
-									$schema_telephone, // array (optional) // Main telephone schema array
-									$location_ac_appointments_specialty_format_dash // string (optional) // The telephone number.
-								);
-
-						} // endif ( !empty($location_ac_appointments_specialty) )
-
-				} // endif
-
-			// Fax
-
-				if ( !empty($location_fax) ) {
-
-					?>
-					<dt>Fax Number</dt>
-					<dd><?php echo $location_fax_format_dash; ?></dd>
-					<?php
-
-					// FaxNumber Schema Data
-
-						// Check/define the main faxNumber schema array
-						
-							$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
-
-						// Add this location's details to the main faxNumber schema array
-						
-							$schema_fax_number = uamswp_schema_fax_number(
-								$schema_fax_number, // array (optional) // Main faxNumber schema array
-								$location_fax_format_dash // string (optional) // The fax number.
-							);
-
-				} // endif ( !empty($location_fax)
-
-			// Additional phone numbers
-
-				if ( $location_phone_numbers ) {
-
-					$phone_numbers = $location_phone_numbers;
-
-					while ( have_rows('field_location_phone_numbers') ) {
-
-						the_row();
-
-						$title = get_sub_field('location_appointments_text');
-						$title_attr = uamswp_attr_conversion($title);
-						$phone = get_sub_field('location_appointments_phone');
-						$phone_format_dash = format_phone_dash( $phone );
-						$text = get_sub_field('location_appointments_additional_text');
-						?>
-						<dt><?php echo $title; ?></dt>
-						<dd><a href="tel:<?php echo $phone_format_dash; ?>" data-typetitle="Additional Phone Number: <?php echo $title_attr; ?>"><?php echo $phone_format_dash; ?></a><?php echo ($text ? '<br/><span class="subtitle">'. $text .'</span>' : ''); ?></dd>
-						<?php
-
-						// Add phone number to schema construction array
-						if ( isset($phone) && !empty($phone) ) {
-
-							// Check/define the main telephone schema array
-							$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-							// Add this location's details to the main telephone schema array
-							$schema_telephone = uamswp_schema_telephone(
-								$schema_telephone, // array (optional) // Main telephone schema array
-								$phone_format_dash // string (optional) // The telephone number.
-							);
-
-						}
-
-					} // endwhile ( have_rows('field_location_phone_numbers') )
-
-				} // endif ( $location_phone_numbers )
-
-				
-			$phone_numbers = get_field('location_appointments');
-
-			if (
-				!empty( $phone_numbers )
-				&&
-				!empty( $phone_numbers[0]['number'] )
-			) {
-
-				foreach ( $phone_numbers as $phone_number ) {
-
-					if (
-						!empty($phone_number['text'])
-						&&
-						!empty($phone_number['number'])
-					) {
-
-						?>
-						<dt><?php echo $phone_number['text']; ?></dt>
-						<dd><a href="tel:<?php echo $phone_number['number']; ?>" class="icon-phone"><?php echo $phone_number['number']; ?></a> <?php echo $phone_number['after']; ?></dd><?php  // Display sub-field value ?>
-						<?php
-
-					} // endif
-				
-				} // endforeach ( $phone_numbers as $phone_number )
-
-			} // endif
-
-			?>
-		</dl>
-		<?php
-		
-	} // endif ( $phone_output == 'location_profile' )
-
 // Display phone numbers for associated locations
 
 	if ( $phone_output == 'associated_locations' ) {
@@ -493,68 +219,68 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 					// IF a patient can schedule an appointment for services rendered at this location...
 
-					?>
-					<dt>Appointment Phone Number<?php echo $location_phone_appointments_multiple_query ? 's' : ''; ?></dt>
-					<?php
-					
-					if (
-						$location_new_appointments_phone
-						&&
-						$location_clinic_phone_query
-					) {
-
-						// Appointments
-
 						?>
-						<dd>
-							<?php echo $location_new_appointments_phone_link; ?><br/>
-							<span class="subtitle"><?php echo $location_appointment_phone_query ? 'New Patients' : 'New and Returning Patients'; ?></span>
-						</dd>
+						<dt>Appointment Phone Number<?php echo $location_phone_appointments_multiple_query ? 's' : ''; ?></dt>
 						<?php
 						
 						if (
-							$location_return_appointments_phone
+							$location_new_appointments_phone
 							&&
-							$location_appointment_phone_query
+							$location_clinic_phone_query
 						) {
+
+							// UAMS location appointments
+
+								?>
+								<dd>
+									<?php echo $location_new_appointments_phone_link; ?><br/>
+									<span class="subtitle"><?php echo $location_appointment_phone_query ? 'New Patients' : 'New and Returning Patients'; ?></span>
+								</dd>
+								<?php
+								
+								if (
+									$location_return_appointments_phone
+									&&
+									$location_appointment_phone_query
+								) {
+									
+									?>
+									<dd>
+										<?php echo $location_return_appointments_phone_link; ?><br/>
+										<span class="subtitle">Returning Patients</span>
+									</dd>
+									<?php
+									
+								} // endif
 							
-							?>
-							<dd>
-								<?php echo $location_return_appointments_phone_link; ?><br/>
-								<span class="subtitle">Returning Patients</span>
-							</dd>
-							<?php
+						} elseif ( $location_ac_appointments_query ) {
+
+							// Arkansas Children's Primary Care and Specialty Care Appointments
+
+								?>
+								<dd>
+									<?php echo $location_ac_appointments_primary_link; ?><br/>
+									<span class="subtitle">Primary Care</span>
+								</dd>
+								<dd>
+									<?php echo $location_ac_appointments_specialty_link; ?><br/>
+									<span class="subtitle">Specialty Care</span>
+								</dd>
+								<?php
+							
+						} else {
+
+							// Display general information number as the appointments number
+
+								?>
+								<dd>
+									<?php echo $location_phone_link; ?><br/>
+									<span class="subtitle">New and Returning Patients</span>
+								</dd>
+								<?php
 							
 						} // endif
 						
-					} elseif ( $location_ac_appointments_query ) {
-
-						// Arkansas Children's Primary Care and Specialty Care Appointments
-
-							?>
-							<dd>
-								<?php echo $location_ac_appointments_primary_link; ?><br/>
-								<span class="subtitle">Primary Care</span>
-							</dd>
-							<dd>
-								<?php echo $location_ac_appointments_specialty_link; ?><br/>
-								<span class="subtitle">Specialty Care</span>
-							</dd>
-							<?php
-						
-					} else {
-
-						// Display general information number as the appointments number
-
-							?>
-							<dd>
-								<?php echo $location_phone_link; ?><br/>
-								<span class="subtitle">New and Returning Patients</span>
-							</dd>
-							<?php
-						
-					} // endif
-					
 				} else {
 
 					// IF a patient cannot schedule an appointment for services rendered at this location...
