@@ -11131,6 +11131,15 @@ function uamswp_prevent_orphan($string) {
 								$location_card_fields_vars['location_phone_data_categorytitle'] = isset($location_phone_data_categorytitle) ? $location_phone_data_categorytitle : '';
 								$location_card_fields_vars['location_appointments_query'] = isset($location_appointments_query) ? $location_appointments_query : '';
 								$location_card_fields_vars['location_phone_appointments_multiple_query'] = isset($location_phone_appointments_multiple_query) ? $location_phone_appointments_multiple_query : '';
+								$location_card_fields_vars['location_new_appointments_phone'] = isset($location_new_appointments_phone) ? $location_new_appointments_phone : '';
+								$location_card_fields_vars['location_clinic_phone_query'] = isset($location_clinic_phone_query) ? $location_clinic_phone_query : '';
+								$location_card_fields_vars['location_new_appointments_phone_link'] = isset($location_new_appointments_phone_link) ? $location_new_appointments_phone_link : '';
+								$location_card_fields_vars['location_appointment_phone_query'] = isset($location_appointment_phone_query) ? $location_appointment_phone_query : '';
+								$location_card_fields_vars['location_return_appointments_phone'] = isset($location_return_appointments_phone) ? $location_return_appointments_phone : '';
+								$location_card_fields_vars['location_return_appointments_phone_link'] = isset($location_return_appointments_phone_link) ? $location_return_appointments_phone_link : '';
+								$location_card_fields_vars['location_ac_appointments_query'] = isset($location_ac_appointments_query) ? $location_ac_appointments_query : '';
+								$location_card_fields_vars['location_ac_appointments_primary_link'] = isset($location_ac_appointments_primary_link) ? $location_ac_appointments_primary_link : '';
+								$location_card_fields_vars['location_ac_appointments_specialty_link'] = isset($location_ac_appointments_specialty_link) ? $location_ac_appointments_specialty_link : '';
 
 					// Location Card Styles
 
