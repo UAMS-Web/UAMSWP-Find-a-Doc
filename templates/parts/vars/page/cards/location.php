@@ -10,12 +10,14 @@
  * 
  * Optional vars:
  * 	$location_card_style // string enum('basic', 'detailed') // Location card style
+ * 	$schema_telephone // array // Schema telephone data
  * 	$location_descendant_list // bool // Query on whether this card is in a list of descendant locations
  */
 
 // Check/define optional variables
 
 	$location_card_style = isset($location_card_style) ? $location_card_style : '';
+	$schema_telephone = isset($schema_telephone) ? $schema_telephone : '';
 	$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : '';
 
 // Call the function
@@ -23,6 +25,7 @@
 	$location_card_fields_vars = ( isset($location_card_fields_vars) && !empty($location_card_fields_vars) ) ? $location_card_fields_vars : uamswp_fad_location_card_fields(
 		$page_id,
 		$location_card_style,
+		$schema_telephone,
 		$location_descendant_list
 	);
 
