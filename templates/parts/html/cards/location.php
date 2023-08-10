@@ -111,8 +111,7 @@
 		// Phone values
 
 			$phone_output_id = $page_id;
-			$phone_output = 'associated_locations';
-			include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location-profile.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location-card.php' );
 
 		?>
 	</div><?php // end div.card-body ?>
