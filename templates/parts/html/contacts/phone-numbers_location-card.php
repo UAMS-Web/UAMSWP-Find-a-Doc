@@ -19,12 +19,6 @@
  * Required vars:
  * 	$location_single_name // System setting for Locations Plural Item Name
  * 	$phone_output_id (ID of location)
- * 	$phone_output
- * 		(
- * 			valid values for $phone_output:
- * 			'location_profile' is for a Location profile's contact information section,
- * 			'associated_locations' is for references to associated locations like location cards and a Provider profile's primary location section
- * 		)
  */
 
 // Telephone Schema Data
