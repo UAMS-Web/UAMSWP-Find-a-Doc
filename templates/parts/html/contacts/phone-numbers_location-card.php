@@ -1,24 +1,18 @@
 <?php
 /**
- * Template Name: Location Phone Numbers Variable Definitions
+ * Template Name: Location Appointment Phone Numbers List
  * 
- * Description: A template part that displays a list of phone numbers using a 
- * definition list element.
+ * Description: A template part that displays a list of appointment phone 
+ * numbers using a definition list element.
  * 
- * Two output options are available: location profile and associated locations.
- * 
- * The location profile output is intended to be used in the contact information 
- * section of a location profile.
- * 
- * The associated locations output is intended to be used in secondary references 
- * to a location such as a location card or the primary location section of a 
- * provider profile.
+ * The output is intended to be used in secondary references to a location such as 
+ * a location card or the primary location section of a provider profile.
  * 
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	$location_single_name // System setting for Locations Plural Item Name
- * 	$phone_output_id (ID of location)
+ * 	$location_phone_numbers // array
+ * 	$location_phone_data_categorytitle // string // data-categorytitle attribute value
  */
 
 // Display phone numbers for associated locations
