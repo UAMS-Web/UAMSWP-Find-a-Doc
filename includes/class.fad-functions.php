@@ -1609,11 +1609,13 @@ function uamswp_fad_ontology_site_values(
 	// Loop through array of IDs and remove the IDs of unpublished posts
 
 		function uamswp_fad_simple_publish_loop(
-			$array // int[] // Array of post items
+			$array, // int[] // Array of post items,
+			$max = 0 // int // Maximum number of posts to return (0 = all)
 		) {
 
 			// Check/define variables
-			$array = ( isset($array) && is_array($array) && !empty($array) ) ? $array : array();
+				$array = ( isset($array) && is_array($array) && !empty($array) ) ? $array : array();
+				$max = ( isset($max) && !empty($max) ) ? $max : 0;
 
 			// If the array is empty, stop here
 
@@ -1625,11 +1627,29 @@ function uamswp_fad_ontology_site_values(
 
 			// Check for published items
 
+				$i = 0;
+
 				foreach ( $array as $key => $value ) {
 
 					if ( get_post_status ( $value ) != 'publish' ) {
 
 						unset($array[$key]);
+
+					} else {
+
+						$i++;
+
+						if (
+							$max != 0
+							&&
+							$i == $max
+						) {
+
+							$array = array_values($array);
+
+							return $array;
+
+						}
 
 					}
 
@@ -2043,6 +2063,7 @@ function uamswp_fad_ontology_site_values(
 				$location_valid = false;
 				$location_ids = array();
 				$location_count = 0;
+				$location_primary_query = '';
 
 			if (
 				!$hide_medical_ontology
@@ -2073,6 +2094,22 @@ function uamswp_fad_ontology_site_values(
 					$location_count = count($location_query->posts);
 					$jump_link_count++;
 
+					if ( 'provider' == get_post_type($page_id) ) {
+
+						$args = array(
+							'post__in' => $locations,
+							'post_type' => 'location',
+							'post_status' => 'publish',
+							'posts_per_page' => 1,
+							'order' => 'ASC',
+							'orderby' => 'post__in',
+							'fields' => 'ids',
+						);
+
+						$location_primary_query = new WP_Query( $args );
+
+					}
+
 				}
 
 			}
@@ -2080,12 +2117,13 @@ function uamswp_fad_ontology_site_values(
 			// Create an array to be used on the templates and template parts
 
 				$location_query_vars = array(
-					'location_query'		=> $location_query, // WP_Post[]
-					'location_section_show'	=> $location_section_show, // bool
-					'location_ids'			=> $location_ids, // int[]
-					'location_count'		=> $location_count, // int
-					'location_valid'		=> $location_valid, // bool
-					'jump_link_count'		=> $jump_link_count // int
+					'location_query'			=> $location_query, // WP_Post[]
+					'location_section_show'		=> $location_section_show, // bool
+					'location_ids'				=> $location_ids, // int[]
+					'location_count'			=> $location_count, // int
+					'location_valid'			=> $location_valid, // bool
+					'location_primary_query'	=> $location_primary_query, // WP_Post[]
+					'jump_link_count'			=> $jump_link_count // int
 				);
 
 			// Set/update the value of the transient
@@ -10378,14 +10416,14 @@ function uamswp_prevent_orphan($string) {
 
 		function uamswp_fad_location_card_fields(
 			$page_id, // int // ID of the profile
-			$location_card_style, // string enum('basic', 'detailed') // Location card style
+			$location_card_style, // string enum('basic', 'detailed', 'primary-location') // Location card style
 			$schema_telephone = array(), // array // Schema telephone data
 			$schema_fax_number = array(), // array // Schema fax number data
 			$location_descendant_list = false // bool // Query on whether this card is in a list of descendant locations
 		) {
 
 			// Check optional variables
-			$location_card_style = ( 'basic' == $location_card_style || 'detailed' == $location_card_style ) ? $location_card_style : 'basic';
+			$location_card_style = ( 'basic' == $location_card_style || 'detailed' == $location_card_style || 'primary-location' == $location_card_style ) ? $location_card_style : 'basic';
 
 			// Retrieve the value of the transient
 			uamswp_fad_get_transient( 'vars_' . $location_card_style . '_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
@@ -10639,22 +10677,6 @@ function uamswp_prevent_orphan($string) {
 											)
 										)
 									);
-
-							// Construct address paragraph text
-
-								$location_address_text = implode(
-									'<br />',
-									array_filter(
-										array(
-											$location_address_1,
-											$location_address_detail,
-											$location_address_final_line
-										)
-									)
-								);
-
-							// Add to the variables array
-							$location_card_fields_vars['location_address_text'] = isset($location_address_text) ? $location_address_text : '';
 
 						// GPS / Map / Directions
 
@@ -11320,7 +11342,55 @@ function uamswp_prevent_orphan($string) {
 
 						if ( 'basic' == $location_card_style ) {
 
+							// Construct address paragraph text
+
+								$location_address_text = implode(
+									'<br />',
+									array_filter(
+										array(
+											$location_address_1,
+											$location_address_detail,
+											$location_address_final_line
+										)
+									)
+								);
+
+							// Add to the variables array
+							$location_card_fields_vars['location_address_text'] = isset($location_address_text) ? $location_address_text : '';
+
 						} elseif ( 'detailed' == $location_card_style ) {
+
+						} elseif ( 'primary-location' == $location_card_style ) {
+
+							// Reference to parent location
+
+								if ( $location_parent_display ) {
+
+									$location_parent_reference = '(Part of <a href="' . $location_parent_url . '" data-categorytitle="Parent Name">' . $location_parent_title . '</a>)';
+
+								} else {
+
+									$location_parent_reference = '';
+
+								}
+
+							// Construct address paragraph text
+
+								$location_address_text = implode(
+									'<br />',
+									array_filter(
+										array(
+											'<strong>' . $location_title . '</strong>',
+											$location_parent_reference,
+											$location_address_1,
+											$location_address_detail,
+											$location_address_final_line
+										)
+									)
+								);
+
+							// Add to the variables array
+							$location_card_fields_vars['location_address_text'] = isset($location_address_text) ? $location_address_text : '';
 
 						} // endif
 
