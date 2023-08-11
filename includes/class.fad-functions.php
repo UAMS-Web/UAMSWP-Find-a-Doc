@@ -11000,33 +11000,35 @@ function uamswp_prevent_orphan($string) {
 
 									if (
 										!$location_phone_appointment_query // If there are no main appointment phone numbers other than the general information phone number
+										&&
+										!$location_ac_query // If this is not an Arkansas Children's location
 									) {
 
 										// Get the general information phone number
 										$location_phone = get_field( 'location_phone', $page_id ) ?: '';
+
+										// Add the general information phone number (as the appointment phone number) to the location phone numbers array
+
+											if ( $location_phone ) {
+
+												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+													'link'		=> uamswp_fad_create_telephone_link(
+														$location_phone, // string // phone number
+														'icon-phone', // string // class attribute value
+														$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+														$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+														'Appointment Phone Number for New and Returning Patients' // string // data-typetitle attribute value
+													),
+													'subtitle'	=> 'New and Returning Patients'
+												);
+
+											}
 
 									} else {
 
 										$location_phone = '';
 
 									}
-
-									// Add the general information phone number (as the appointment phone number) to the location phone numbers array
-
-										if ( $location_phone ) {
-
-											$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
-												'link'		=> uamswp_fad_create_telephone_link(
-													$location_phone, // string // phone number
-													'icon-phone', // string // class attribute value
-													$location_phone_data_categorytitle, // string // data-categorytitle attribute value
-													$location_phone_data_itemtitle, // string // data-itemtitle attribute value
-													'Appointment Phone Number for New and Returning Patients' // string // data-typetitle attribute value
-												),
-												'subtitle'	=> 'New and Returning Patients'
-											);
-
-										}
 
 								// Query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments
 
@@ -11037,123 +11039,104 @@ function uamswp_prevent_orphan($string) {
 										// Get field value of query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments
 										$location_phone_appointment_ac_query = get_field('location_ac_appointments_query', $page_id) ?: false;
 
+										// Arkansas Children's appointment phone number for primary care and for specialty care
+
+											if ( $location_phone_appointment_ac_query ) {
+
+												// Arkansas Children's appointment phone number for primary care
+
+													$location_phone_appointment_ac_primary = get_field('location_ac_appointments_primary', $page_id) ?: '';
+
+													// Add the phone number to the location phone numbers array
+
+														if ( $location_phone_appointment_ac_primary ) {
+
+															$location_phone_numbers['Appointment Phone Numbers']['ac-primary'] = array(
+																'link'		=> uamswp_fad_create_telephone_link(
+																	$location_phone_appointment_ac_primary, // string // phone number
+																	'icon-phone', // string // class attribute value
+																	$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+																	$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+																	'Arkansas Children\'s Primary Care Appointments Phone Number' // string // data-typetitle attribute value
+																),
+																'subtitle'	=> 'Primary Care'
+															);
+
+														}
+
+												// Arkansas Children's appointment phone number for specialty care
+
+													$location_phone_appointment_ac_specialty = get_field('location_ac_appointments_specialty', $page_id) ?: '';
+
+													// Add the phone number to the location phone numbers array
+
+														if ( $location_phone_appointment_ac_specialty ) {
+
+															$location_phone_numbers['Appointment Phone Numbers']['ac-specialty'] = array(
+																'link'		=> uamswp_fad_create_telephone_link(
+																	$location_phone_appointment_ac_specialty, // string // phone number
+																	'icon-phone', // string // class attribute value
+																	$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+																	$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+																	'Arkansas Children\'s Specialty Care Appointments Phone Number' // string // data-typetitle attribute value
+																),
+																'subtitle'	=> 'Specialty Care'
+															);
+
+														}
+
+											}
+
 									} else {
 
 										$location_phone_appointment_ac_query = false;
 
 									}
 
-									// Arkansas Children's appointment phone number for primary care and for specialty care
-
-										if ( $location_phone_appointment_ac_query ) {
-
-											// Arkansas Children's appointment phone number for primary care
-
-												$location_phone_appointment_ac_primary = get_field('location_ac_appointments_primary', $page_id) ?: '';
-
-												// Add the phone number to the location phone numbers array
-
-													if ( $location_phone_appointment_ac_primary ) {
-
-														$location_phone_numbers['Appointment Phone Numbers']['ac-primary'] = array(
-															'link'		=> uamswp_fad_create_telephone_link(
-																$location_phone_appointment_ac_primary, // string // phone number
-																'icon-phone', // string // class attribute value
-																$location_phone_data_categorytitle, // string // data-categorytitle attribute value
-																$location_phone_data_itemtitle, // string // data-itemtitle attribute value
-																'Arkansas Children\'s Primary Care Appointments Phone Number' // string // data-typetitle attribute value
-															),
-															'subtitle'	=> 'Primary Care'
-														);
-
-													}
-
-											// Arkansas Children's appointment phone number for specialty care
-
-												$location_phone_appointment_ac_specialty = get_field('location_ac_appointments_specialty', $page_id) ?: '';
-
-												// Add the phone number to the location phone numbers array
-
-													if ( $location_phone_appointment_ac_specialty ) {
-
-														$location_phone_numbers['Appointment Phone Numbers']['ac-specialty'] = array(
-															'link'		=> uamswp_fad_create_telephone_link(
-																$location_phone_appointment_ac_specialty, // string // phone number
-																'icon-phone', // string // class attribute value
-																$location_phone_data_categorytitle, // string // data-categorytitle attribute value
-																$location_phone_data_itemtitle, // string // data-itemtitle attribute value
-																'Arkansas Children\'s Specialty Care Appointments Phone Number' // string // data-typetitle attribute value
-															),
-															'subtitle'	=> 'Specialty Care'
-														);
-
-													}
-
-										}
 								// Appointment phone numbers for new and returning patients
 
-									// New Patients
+									if (
+										$location_phone_appointment_query
+										||
+										(
+											$location_ac_query
+											&&
+											!$location_phone_appointment_ac_query
+										)
+									) {
 
-										if (
-											$location_phone_appointment_query
-											||
-											(
-												$location_ac_query
-												&&
-												!$location_phone_appointment_ac_query
-											)
-										) {
+										// Get appointment phone number for (new) patients
+										$location_phone_appointment_new = get_field('location_new_appointments_phone', $page_id) ?: ''; 
 
-											// Get appointment phone number for (new) patients
-											$location_phone_appointment_new = get_field('location_new_appointments_phone', $page_id) ?: ''; 
-
-											$location_phone_appointment_new_format_dash = format_phone_dash( $location_phone_appointment_new );
-
-											// Build the anchor element for the appointment phone for (new) patients
-											// $location_phone_appointment_new_link = $location_phone_appointment_new ? '<a href="tel:' . $location_phone_appointment_new_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Appointment Phone Number for New' . ($location_phone_appointment_returning_query ? '' : ' and Returning') . ' Patients">' . $location_phone_appointment_new_format_dash . '</a>' : '';
-
-										} else {
-
-											$location_phone_appointment_new = '';
-
-										}
-
-									// Query for whether there is a separate appointment phone number for returning patients
-
-										if ( $location_phone_appointment_query ) {
+										// Query for whether there is a separate appointment phone number for returning patients
 
 											$location_phone_appointment_returning_query = get_field('location_appointment_phone_query', $page_id) ?: false; 
 
-										} else {
+											// Appointments Phone Number for Returning Patients
 
-											$location_phone_appointment_returning_query = false;
+												if ( $location_phone_appointment_returning_query ) {
 
-										}
+													$location_phone_appointment_returning = get_field('location_return_appointments_phone', $page_id) ?: '';
+													
+												} else {
 
-										// Appointments Phone Number for Returning Patients
+													$location_phone_appointment_returning = '';
 
-											if ( $location_phone_appointment_returning_query ) {
+												}
 
-												$location_phone_appointment_returning = get_field('location_return_appointments_phone', $page_id) ?: '';
-												
-												$location_phone_appointment_returning_format_dash = format_phone_dash( $location_phone_appointment_returning );
+									} else {
 
-												// Build the anchor element for the appointment phone number for returning patients
-												// $location_phone_appointment_returning_link = $location_phone_appointment_returning ? '<a href="tel:' . $location_phone_appointment_returning_format_dash . '" class="icon-phone"' . ($location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '') . ($location_phone_data_itemtitle ? ' data-itemtitle="' . $location_phone_data_itemtitle . '"' : '') . ' data-typetitle="Appointment Phone Number for Returning Patients">' . $location_phone_appointment_returning_format_dash . '</a>' : '';
+										$location_phone_appointment_new = '';
+										$location_phone_appointment_returning_query = false;
+										$location_phone_appointment_returning = '';
 
-											} else {
-
-												$location_phone_appointment_returning = '';
-												$location_phone_appointment_returning_format_dash = '';
-												$location_phone_appointment_returning_link = '';
-
-											}
+									}
 
 									// Add the phone numbers to the location phone numbers array
 
 										if ( $location_phone_appointment_new ) {
 
-											if ( $location_phone_appointment_query ) {
+											if ( $location_phone_appointment_returning_query ) {
 
 												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
 													'link'		=> uamswp_fad_create_telephone_link(
