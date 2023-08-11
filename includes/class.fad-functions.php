@@ -10881,7 +10881,7 @@ function uamswp_prevent_orphan($string) {
 										);
 
 										$location_modified_hours_start_date_unix = ( count($location_modified_hours_start_date_unix_array) > 1 ) ? min($location_modified_hours_start_date_unix_array) : $location_modified_hours_start_date_unix_array[0];
-											
+
 									} else {
 
 										$location_modified_hours_start_date_unix = '';
@@ -11148,7 +11148,7 @@ function uamswp_prevent_orphan($string) {
 												if ( $location_phone_appointment_returning_query ) {
 
 													$location_phone_appointment_returning = get_field('location_return_appointments_phone', $page_id) ?: '';
-													
+
 												} else {
 
 													$location_phone_appointment_returning = '';
@@ -11233,7 +11233,7 @@ function uamswp_prevent_orphan($string) {
 									} // endif
 
 								// Remove appointment phone number item if there is no phone number value
-								
+
 									if ( isset($location_phone_numbers['Appointment Phone Numbers']) ) {
 
 										foreach ( $location_phone_numbers['Appointment Phone Numbers'] as $item ) {

@@ -40,9 +40,9 @@
 					?>
 					<dd>
 						<?php
-						
+
 						echo $item['link'];
-						
+
 						if ( $item['subtitle'] ) {
 
 							?><br/>
@@ -53,7 +53,7 @@
 						?>
 					</dd>
 					<?php
-	
+
 				}
 
 			}
