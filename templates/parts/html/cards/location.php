@@ -29,6 +29,9 @@
 		$location_card_style = 'basic'; // Location card style
 		include( UAMS_FAD_PATH . '/templates/parts/vars/page/cards/location.php' );
 
+	// Get system settings for location labels
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+
 // Construct the card
 
 ?>
