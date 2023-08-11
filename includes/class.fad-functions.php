@@ -8607,11 +8607,11 @@ function uamswp_meta_image_values( $featured_image ) {
 			}
 
 			if ( $telephone ) {
-				$schema['telephone'] = $telephone;
+				$schema['telephone'] = format_phone_dash($telephone);
 			}
 
 			if ( $fax_number ) {
-				$schema['faxNumber'] = $fax_number;
+				$schema['faxNumber'] = format_phone_dash($fax_number);
 			}
 
 			if ( !empty($schema) ) {
