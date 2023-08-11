@@ -1006,19 +1006,19 @@
 										// Primary location
 
 											if ( $location_primary_query->have_posts() ) {
-											
+
 												// start of the loop. the_post() sets the global $post variable
 												while ( $location_primary_query->have_posts() ) {
-												
+
 													$location_primary_query->the_post();
-												
+
 													include( UAMS_FAD_PATH . '/templates/parts/html/cards/location_primary-location.php' );
 
 												} // endwhile
 												// end of the loop
-											
+
 											} // endif
-											
+
 											//reset global post variable. After this point, we are back to the Main Query object
 											wp_reset_postdata();
 
