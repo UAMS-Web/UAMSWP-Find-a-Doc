@@ -15,45 +15,43 @@
  * 	$location_phone_data_categorytitle // string // data-categorytitle attribute value
  */
 
-// Display phone numbers for associated locations
+if ( $location_phone_numbers ) {
 
-	if ( $location_phone_numbers ) {
+	?>
+	<dl <?php echo $location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
+		<?php
 
-		?>
-		<dl <?php echo $location_phone_data_categorytitle ? ' data-categorytitle="' . $location_phone_data_categorytitle . '"' : '' ?>>
+		foreach ( $location_phone_numbers as $key => $value ) {
+
+			?>
+			<dt><?php echo $key; ?></dt>
 			<?php
 
-			foreach ( $location_phone_numbers as $key => $value ) {
+			foreach( $value as $item) {
 
 				?>
-				<dt><?php echo $key; ?></dt>
-				<?php
-
-				foreach( $value as $item) {
-
-					?>
-					<dd>
-						<?php
-
-						echo $item['link'];
-
-						if ( $item['subtitle'] ) {
-
-							?><br/>
-							<span class="subtitle"><?php echo $item['subtitle']; ?></span>
-							<?php
-						}
-
-						?>
-					</dd>
+				<dd>
 					<?php
 
-				}
+					echo $item['link'];
+
+					if ( $item['subtitle'] ) {
+
+						?><br/>
+						<span class="subtitle"><?php echo $item['subtitle']; ?></span>
+						<?php
+					} // endif
+
+					?>
+				</dd>
+				<?php
 
 			}
 
-			?>
-		</dl>
-		<?php
+		} // endforeach
 
-	} // endif $location_phone
+		?>
+	</dl>
+	<?php
+
+} // endif $location_phone_numbers
