@@ -11887,20 +11887,24 @@ function uamswp_prevent_orphan($string) {
 
 					// Post Excerpt
 
-						$expertise_excerpt = get_field( 'expertise_selected_post_excerpt', $page_id ); // string
+						$expertise_excerpt = get_field( 'expertise_selected_post_excerpt', $page_id ) ?: ''; // string
 						$expertise_excerpt = $expertise_excerpt ?: get_the_excerpt($page_id); // string
 						$expertise_excerpt = $expertise_excerpt ?: wp_strip_all_tags( get_the_content($page_id) ); // string
 						$expertise_excerpt = $expertise_excerpt ?: ''; // string
 
-						// Truncate the excerpt if it is greater than 160 characters
+						if ( $expertise_excerpt ) {
 
-							if ( strlen($expertise_excerpt) > 160 ) {
+							// Truncate the excerpt if it is greater than 160 characters
 
-								$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
+								if ( strlen($expertise_excerpt) > 160 ) {
 
-							}
+									$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
 
-						$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
+								}
+
+							$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
+
+						}
 
 						// Add to the variables array
 
@@ -11917,40 +11921,51 @@ function uamswp_prevent_orphan($string) {
 					// Post Featured Image
 
 						// Featured image ID
-						$expertise_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
 
-						// Featured image URL
-						$expertise_featured_image_url = $expertise_featured_image ? wp_get_attachment_image_url( $expertise_featured_image, 'aspect-16-9-small' ) : ''; // string
+							$expertise_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
+
+							if ( $expertise_featured_image ) {
+
+								// Featured image URL
+								$expertise_featured_image_url = wp_get_attachment_image_url( $expertise_featured_image, 'aspect-16-9-small' ) ?: ''; // string
+
+							}
 
 						// Add to the variables array
 
 							$expertise_card_fields_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image : '';
 							$expertise_card_fields_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url : '';
 
-					// Parent
+					// Parent Area of Expertise
 
 						// Parent ID
-						$expertise_parent_id = wp_get_post_parent_id($page_id) ?: ''; // int
 
-						// Query on whether the current item has a parent
-						$expertise_has_parent = $expertise_parent_id ? true : false; // bool
+							$expertise_parent_id = wp_get_post_parent_id($page_id) ?: ''; // int
 
-						// Parent post object
-						$expertise_parent_object = $expertise_has_parent ? get_post($expertise_parent_id) : ''; // object
-						$expertise_has_parent = $expertise_parent_object ? $expertise_has_parent : false; // bool
+							if ( $expertise_parent_id ) {
 
-						// Parent title
+								// Parent post object
 
-							$expertise_parent_title = $expertise_parent_object ? $expertise_parent_object->post_title : ''; // string
-							$expertise_parent_title_attr = uamswp_attr_conversion($expertise_parent_title); // string
+									$expertise_parent_object = get_post($expertise_parent_id) ?: ''; // object
 
-						// Parent URL
-						$expertise_parent_url = $expertise_parent_object ? get_permalink($expertise_parent_id) : ''; // string
+									if ( $expertise_parent_object ) {
+
+										// Parent title
+
+											$expertise_parent_title = $expertise_parent_object->post_title ?: ''; // string
+											$expertise_parent_title_attr = uamswp_attr_conversion($expertise_parent_title); // string
+
+										// Parent URL
+
+											$expertise_parent_url = get_permalink($expertise_parent_id) ?: ''; // string
+
+									}
+
+							}
 
 						// Add to the variables array
 
 							$expertise_card_fields_vars['expertise_parent_id'] = isset($expertise_parent_id) ? $expertise_parent_id : '';
-							$expertise_card_fields_vars['expertise_has_parent'] = isset($expertise_has_parent) ? $expertise_has_parent : '';
 							$expertise_card_fields_vars['expertise_parent_object'] = isset($expertise_parent_object) ? $expertise_parent_object : '';
 							$expertise_card_fields_vars['expertise_parent_title'] = isset($expertise_parent_title) ? $expertise_parent_title : '';
 							$expertise_card_fields_vars['expertise_parent_title_attr'] = isset($expertise_parent_title_attr) ? $expertise_parent_title_attr : '';
