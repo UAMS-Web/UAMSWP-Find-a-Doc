@@ -1,18 +1,13 @@
 <?php 
 /**
- * Template Name: Location Loop - Card layout
+ * Template Name: Location Card, Basic Style
  * 
- * Description: A template part that displays a location card to be included in a 
- * list of locations associated with the current page.
+ * Description: A template part that displays a card containing basic information 
+ * about a location and links to the location's profile
  * 
  * Must be used inside a loop
  * 
  * Designed for UAMS Health Find-a-Doc
- * 
- * Required vars:
- * 	$location_single_name // string // System setting for Locations Plural Item Name
- * 	$location_single_name_attr // string // Attribute value friendly version of system setting for Locations single item name
- * 	$page_id // int
  * 
  * Optional vars:
  * 	$location_descendant_list // bool (default: false) // Query for whether this is a list of child locations within a location
