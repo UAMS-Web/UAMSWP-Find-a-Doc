@@ -10867,19 +10867,50 @@ function uamswp_prevent_orphan($string) {
 
 								// Set start of modified hours based on the earliest of the two (clinic and telemedicine)
 
-									$location_modified_hours_start_date_unix = min(
-										array_filter(
+									if (
+										$location_modified_clinic_hours_start_date_unix
+										||
+										$location_modified_telemed_hours_start_date_unix
+									) {
+
+										$location_modified_hours_start_date_unix_array = array_filter(
 											array(
 												$location_modified_clinic_hours_start_date_unix,
 												$location_modified_telemed_hours_start_date_unix
 											)
-										)
-									);
-									$location_modified_hours_start_date = date( 'F j, Y', $location_modified_hours_start_date_unix );
+										);
+
+										$location_modified_hours_start_date_unix = ( count($location_modified_hours_start_date_unix_array) > 1 ) ? min($location_modified_hours_start_date_unix_array) : $location_modified_hours_start_date_unix_array[0];
+											
+									} else {
+
+										$location_modified_hours_start_date_unix = '';
+
+									}
+
+								// Format modified hours start date
+
+									if ( $location_modified_hours_start_date_unix ) {
+
+										$location_modified_hours_start_date = date( 'F j, Y', $location_modified_hours_start_date_unix );
+
+									} else {
+
+										$location_modified_hours_start_date = '';
+
+									}
 
 								// Determine if earliest modified hours start date has past
 
-									$location_modified_hours_date_past = ( $location_modified_hours_start_date_unix <= $today ) ? true : false;
+									if ( $location_modified_hours_start_date_unix ) {
+
+										$location_modified_hours_date_past = ( $location_modified_hours_start_date_unix <= $today ) ? true : false;
+
+									} else {
+
+										$location_modified_hours_date_past = '';
+
+									}
 
 							// Construct the location alert elements
 
