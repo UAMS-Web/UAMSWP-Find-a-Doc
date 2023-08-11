@@ -11844,11 +11844,15 @@ function uamswp_prevent_orphan($string) {
 	// Area of expertise card field values
 
 		function uamswp_fad_expertise_card_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$expertise_card_style = 'basic' // string enum('basic', 'detailed') // Area of expertise card style
 		) {
 
+			// Check optional variables
+			$expertise_card_style = ( 'basic' == $expertise_card_style || 'detailed' == $expertise_card_style ) ? $expertise_card_style : 'basic';
+
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $expertise_card_style . '_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $expertise_card_fields_vars ) ) {
 
@@ -11953,7 +11957,7 @@ function uamswp_prevent_orphan($string) {
 							$expertise_card_fields_vars['expertise_parent_url'] = isset($expertise_parent_url) ? $expertise_parent_url : '';
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $expertise_card_style . '_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $expertise_card_fields_vars;
