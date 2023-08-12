@@ -1406,6 +1406,7 @@ function uamswp_attr_conversion($input) {
 		return '';
 	}
 
+	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Replace non-breaking space with normal space
 	$input_attr = str_replace('&#8220;', '\'', $input_attr); // Replace left double quotation mark with normal space
 	$input_attr = str_replace('&#8221;', '\'', $input_attr); // Replace right double quotation mark with normal space
 	$input_attr = str_replace('&#8216;', '\'', $input_attr); // Replace left single quotation mark with normal space
