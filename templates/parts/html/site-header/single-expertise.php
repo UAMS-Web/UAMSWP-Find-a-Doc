@@ -26,7 +26,7 @@
 
 	?>
 	<div class="global-title">
-		<a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$navbar_subbrand_title ) { echo 'no-subbrand'; } ?>">
+		<a href="<?php echo network_site_url(); ?>" class="navbar-brand<?php echo !$navbar_subbrand_title ? ' no-subbrand' : ''; ?>">
 			<picture>
 				<source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
 				<source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
@@ -36,10 +36,18 @@
 		</a>
 		<div class="navbar-subbrand">
 			<?php
+
 			// If the current item has a top-level ancestor with the ontology type, display the that ancestor
-			if ( $navbar_subbrand_parent ) { ?>
+
+			if ( $navbar_subbrand_parent ) {
+
+				?>
 				<a class="parent" href="<?php echo $navbar_subbrand_parent_url; ?>"><?php echo $navbar_subbrand_parent; ?></a><span class="sr-only">: </span>
-			<?php } // endif ( $navbar_subbrand_parent ) ?>
+				<?php
+
+			} // endif ( $navbar_subbrand_parent )
+
+			?>
 			<a class="title" href="<?php echo $navbar_subbrand_title_url; ?>"><?php echo $navbar_subbrand_title; ?></a>
 		</div>
 	</div>
@@ -52,7 +60,9 @@
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
 				<?php
+
 				// Options - uamshealth
+
 				?>
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
@@ -64,7 +74,9 @@
 					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
 				</li>
 				<?php
+
 				// End right nav
+
 				?>
 			</ul>
 		</div>
