@@ -9126,7 +9126,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Check/define variables
 
-			$schema_geo = is_array($schema_geo)? $schema_geo : array();
+			$schema_geo = is_array($schema_geo) ? $schema_geo : array();
 
 		// Create an array for this item
 
@@ -10616,6 +10616,7 @@ function uamswp_prevent_orphan($string) {
 			$schema_address = array(), // array // Schema address data
 			$schema_telephone = array(), // array // Schema telephone data
 			$schema_fax_number = array(), // array // Schema fax number data
+			$schema_geo = array(), // array // Schema geo data
 			$location_section_schema_query = false, // bool // Query for whether to add locations to schema
 			$location_descendant_list = false // bool // Query on whether this card is in a list of descendant locations
 		) {

@@ -13,6 +13,7 @@
  * 	$schema_address // array // Schema address data
  * 	$schema_telephone // array // Schema telephone data
  * 	$schema_fax_number // array // Schema fax number data
+ * 	$schema_geo // array // Schema geo data
  * 	$location_section_schema_query // bool // Query for whether to add locations to schema
  * 	$location_descendant_list // bool // Query on whether this card is in a list of descendant locations
  */
@@ -23,6 +24,7 @@
 	$schema_address = isset($schema_address) ? $schema_address : '';
 	$schema_telephone = isset($schema_telephone) ? $schema_telephone : '';
 	$schema_fax_number = isset($schema_fax_number) ? $schema_fax_number : '';
+	$schema_geo = isset($schema_geo) ? $schema_geo : '';
 	$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : '';
 	$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : '';
 
@@ -34,6 +36,7 @@
 		$schema_address,
 		$schema_telephone,
 		$schema_fax_number,
+		$schema_geo,
 		$location_section_schema_query,
 		$location_descendant_list
 	);
