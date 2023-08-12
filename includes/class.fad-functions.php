@@ -8579,39 +8579,165 @@ function uamswp_meta_image_values( $featured_image ) {
 		// Add values to the array
 
 			if ( $name ) {
-				$schema['name'] = $name;
+
+				if ( is_array($name) ) {
+
+					foreach ( $name as $item ) {
+
+						$schema['name'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['name'] = uamswp_attr_conversion($name);
+
+				}
+
 			}
 
 			if ( $street_address ) {
-				$schema['streetAddress'] = $street_address;
+
+				if ( is_array($street_address) ) {
+
+					foreach ( $street_address as $item ) {
+
+						$schema['streetAddress'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['streetAddress'] = uamswp_attr_conversion($street_address);
+
+				}
+
 			}
 
 			if ( $post_office_box_number ) {
-				$schema['postOfficeBoxNumber'] = $post_office_box_number;
+
+				if ( is_array($post_office_box_number) ) {
+
+					foreach ( $post_office_box_number as $item ) {
+
+						$schema['postOfficeBoxNumber'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['postOfficeBoxNumber'] = uamswp_attr_conversion($post_office_box_number);
+
+				}
+
 			}
 
 			if ( $address_locality ) {
-				$schema['addressLocality'] = $address_locality;
+
+				if ( is_array($address_locality) ) {
+
+					foreach ( $address_locality as $item ) {
+
+						$schema['addressLocality'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['addressLocality'] = uamswp_attr_conversion($address_locality);
+
+				}
+
 			}
 
 			if ( $address_region ) {
-				$schema['addressRegion'] = $address_region;
+
+				if ( is_array($address_region) ) {
+
+					foreach ( $address_region as $item ) {
+
+						$schema['addressRegion'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['addressRegion'] = uamswp_attr_conversion($address_region);
+
+				}
+
 			}
 
 			if ( $postal_code ) {
-				$schema['postalCode'] = $postal_code;
+
+				if ( is_array($postal_code) ) {
+
+					foreach ( $postal_code as $item ) {
+
+						$schema['postalCode'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['postalCode'] = uamswp_attr_conversion($postal_code);
+
+				}
+
 			}
 
 			if ( $address_country ) {
-				$schema['addressCountry'] = $address_country;
+
+				if ( is_array($address_country) ) {
+
+					foreach ( $address_country as $item ) {
+
+						$schema['addressCountry'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['addressCountry'] = uamswp_attr_conversion($address_country);
+
+				}
+
 			}
 
 			if ( $telephone ) {
-				$schema['telephone'] = format_phone_dash($telephone);
+
+				if ( is_array($telephone) ) {
+
+					foreach ( $telephone as $item ) {
+
+						$schema['telephone'][] = format_phone_dash($item);
+
+					}
+
+				} else {
+
+					$schema['telephone'] = format_phone_dash($telephone);
+
+				}
+
 			}
 
 			if ( $fax_number ) {
-				$schema['faxNumber'] = format_phone_dash($fax_number);
+
+				if ( is_array($fax_number) ) {
+
+					foreach ( $fax_number as $item ) {
+
+						$schema['faxNumber'][] = format_phone_dash($item);
+
+					}
+
+				} else {
+
+					$schema['faxNumber'] = format_phone_dash($fax_number);
+
+				}
+
 			}
 
 			if ( !empty($schema) ) {
@@ -8664,15 +8790,57 @@ function uamswp_meta_image_values( $featured_image ) {
 		// Add values to the array
 
 			if ( $name ) {
-				$schema['name'] = $name;
+
+				if ( is_array($name) ) {
+
+					foreach ( $name as $item ) {
+
+						$schema['name'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['name'] = uamswp_attr_conversion($name);
+
+				}
+
 			}
 
 			if ( $url ) {
-				$schema['url'] = $url;
+
+				if ( is_array($url) ) {
+
+					foreach ( $url as $item ) {
+
+						$schema['url'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['url'] = uamswp_attr_conversion($url);
+
+				}
+
 			}
 
 			if ( $alternate_name ) {
-				$schema['alternateName'] = $alternate_name;
+
+				if ( is_array($alternate_name) ) {
+
+					foreach ( $alternate_name as $item ) {
+
+						$schema['alternateName'][] = uamswp_attr_conversion($item);
+
+					}
+
+				} else {
+
+					$schema['alternateName'] = uamswp_attr_conversion($alternate_name);
+
+				}
+
 			}
 
 			if ( !empty($schema) ) {
@@ -8718,7 +8886,21 @@ function uamswp_meta_image_values( $featured_image ) {
 		// Add values to the main faxNumber schema array
 
 			if ( $fax_number ) {
-				$schema_fax_number[] = $fax_number;
+
+				if ( is_array($fax_number) ) {
+
+					foreach ( $fax_number as $item ) {
+
+						$schema_fax_number[] = format_phone_dash($item);
+
+					}
+
+				} else {
+
+					$schema_fax_number[] = format_phone_dash($fax_number);
+
+				}
+
 			}
 
 		// Return the main faxNumber schema array
@@ -8754,7 +8936,21 @@ function uamswp_meta_image_values( $featured_image ) {
 		// Add values to the main telephone schema array
 
 			if ( $telephone_number ) {
-				$schema_telephone[] = $telephone_number;
+
+				if ( is_array($telephone_number) ) {
+
+					foreach ( $telephone_number as $item ) {
+
+						$schema_telephone[] = format_phone_dash($item);
+
+					}
+
+				} else {
+
+					$schema_telephone[] = format_phone_dash($telephone_number);
+
+				}
+
 			}
 
 		// Return the main telephone schema array
