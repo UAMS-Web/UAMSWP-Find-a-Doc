@@ -9163,9 +9163,9 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	}
 
-	// Add data to an array defining schema data for hospital affiliation
+	// Add data to an array defining schema data for hospitalAffiliation
 	function uamswp_schema_hospital_affiliation(
-		$schema_hospital_affiliation = array(), // array (optional) // Main geo hospitalAffiliation array
+		$schema_hospital_affiliation = array(), // array (optional) // Main hospitalAffiliation schema array
 		$hospital_affiliation = array() // array (optional) // Hospital affiliation
 	) {
 
@@ -9179,7 +9179,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 		// Loop through each hospital affiliation
 
-			foreach ( $hospital_affiliation as $affiliation ) {
+			foreach ( $hospital_affiliation as $hospital ) {
 
 				// Eliminate PHP errors
 
@@ -9190,15 +9190,16 @@ function uamswp_meta_image_values( $featured_image ) {
 
 				// Get the Hospital Affiliation term from the ID
 
-					$hospital_affiliation_term = get_term( $affiliation, 'affiliation' ) ?: '';
+					$hospital_affiliation_term = get_term( $hospital, 'affiliation' ) ?: '';
 
 				// Associated location
 
 					// Get the ID of the location profile associated with the Affiliated Location
 
-						if ( term_exists($hospital_affiliation_term) ) {
+						if ( is_object($hospital_affiliation_term) ) {
 
-							$hospital_affiliation_location = get_field( 'affiliation_location', $hospital_affiliation_term )[0] ?: '';
+							$hospital_affiliation_location = get_field( 'affiliation_location', $hospital_affiliation_term ) ?: '';
+							$hospital_affiliation_location = is_array($hospital_affiliation_location) && !empty($hospital_affiliation_location) ? $hospital_affiliation_location[0] : '';
 
 							if ( $hospital_affiliation_location ) {
 
@@ -9261,7 +9262,7 @@ function uamswp_meta_image_values( $featured_image ) {
 						$schema = array('@type' => 'Hospital') + $schema;
 					}
 
-				// Add this item's array to the main geo schema array
+				// Add this item's array to the main hospitalAffiliation schema array
 
 					if ( !empty($schema) ) {
 						$schema_hospital_affiliation[] = $schema;
@@ -9269,7 +9270,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 			} // endforeach
 
-		// Return the main geo schema array
+		// Return the main hospitalAffiliation schema array
 
 			return $schema_hospital_affiliation;
 

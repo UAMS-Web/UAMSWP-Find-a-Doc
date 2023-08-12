@@ -1845,7 +1845,7 @@
 								$schema_hospital_affiliation = ( isset($schema_hospital_affiliation) && is_array($schema_hospital_affiliation) && !empty($schema_hospital_affiliation) ) ? $schema_hospital_affiliation : array(); // array
 
 								$schema_hospital_affiliation = uamswp_schema_hospital_affiliation(
-									$schema_hospital_affiliation, // array (optional) // Main geo hospitalAffiliation array
+									$schema_hospital_affiliation, // array (optional) // Main hospitalAffiliation schema array
 									$affiliation // array (optional) // Hospital affiliation
 								);
 
