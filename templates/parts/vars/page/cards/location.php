@@ -9,7 +9,7 @@
  * 	$page_id // int // ID of the profile
  * 
  * Optional vars:
- * 	$location_card_style // string enum('basic', 'detailed') // Location card style
+ * 	$location_card_style // string enum('basic', 'detailed', 'primary-location') // Location card style
  * 	$schema_address // array // Schema address data
  * 	$schema_telephone // array // Schema telephone data
  * 	$schema_fax_number // array // Schema fax number data

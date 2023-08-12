@@ -755,7 +755,7 @@
 
 			// Construct locations section
 
-				$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+				$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false; // Query for whether to add locations to schema
 				$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 				$location_section_title = $location_fpage_title_clinical_resource; // Text to use for the section title
 				$location_section_intro = $location_fpage_intro_clinical_resource; // Text to use for the section intro text
