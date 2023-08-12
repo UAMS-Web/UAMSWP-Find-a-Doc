@@ -201,7 +201,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 				// Add this location's details to the main telephone schema array
 
-					$schema_telephone = uamswp_schema_telephone(
+					$schema_telephone = uamswp_fad_schema_telephone(
 						$schema_telephone, // array (optional) // Main telephone schema array
 						$location_phone_format_dash // string (optional) // The telephone number.
 					);
@@ -251,7 +251,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_schema_telephone(
+								$schema_telephone = uamswp_fad_schema_telephone(
 									$schema_telephone, // array (optional) // Main telephone schema array
 									$location_new_appointments_phone_format_dash // string (optional) // The telephone number.
 								);
@@ -283,7 +283,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_schema_telephone(
+								$schema_telephone = uamswp_fad_schema_telephone(
 									$schema_telephone, // array (optional) // Main telephone schema array
 									$location_return_appointments_phone_format_dash // string (optional) // The telephone number.
 								);
@@ -327,7 +327,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_schema_telephone(
+								$schema_telephone = uamswp_fad_schema_telephone(
 									$schema_telephone, // array (optional) // Main telephone schema array
 									$location_ac_appointments_primary_format_dash // string (optional) // The telephone number.
 								);
@@ -355,7 +355,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 							// Add this location's details to the main telephone schema array
 
-								$schema_telephone = uamswp_schema_telephone(
+								$schema_telephone = uamswp_fad_schema_telephone(
 									$schema_telephone, // array (optional) // Main telephone schema array
 									$location_ac_appointments_specialty_format_dash // string (optional) // The telephone number.
 								);
@@ -381,7 +381,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 
 					// Add this location's details to the main faxNumber schema array
 
-						$schema_fax_number = uamswp_schema_fax_number(
+						$schema_fax_number = uamswp_fad_schema_fax_number(
 							$schema_fax_number, // array (optional) // Main faxNumber schema array
 							$location_fax_format_dash // string (optional) // The fax number.
 						);
@@ -415,7 +415,7 @@ $location_appointments_query = get_field('location_appointments_query', $phone_o
 						$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
 
 						// Add this location's details to the main telephone schema array
-						$schema_telephone = uamswp_schema_telephone(
+						$schema_telephone = uamswp_fad_schema_telephone(
 							$schema_telephone, // array (optional) // Main telephone schema array
 							$phone_format_dash // string (optional) // The telephone number.
 						);

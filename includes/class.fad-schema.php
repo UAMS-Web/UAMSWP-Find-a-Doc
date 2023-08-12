@@ -3,7 +3,7 @@
 // Collect Values For Schema Data Properties
 
 	// Add data to an array defining schema data for address or location
-	function uamswp_schema_address(
+	function uamswp_fad_schema_address(
 		$schema_address = array(), // array (optional) // Main address or location schema array
 		$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
 		$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
@@ -24,7 +24,7 @@
 		* 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
 		* 
 		* 		// Add this location's details to the main address or location schema array
-		* 		$schema_address = uamswp_schema_address(
+		* 		$schema_address = uamswp_fad_schema_address(
 		* 			$schema_address, // array (optional) // Main address or location schema array
 		* 			'PostalAddress', // string (optional) // Schema type
 		* 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
@@ -229,7 +229,7 @@
 	}
 
 	// Add data to an array defining schema data for medicalSpecialty
-	function uamswp_schema_medical_specialty(
+	function uamswp_fad_schema_medical_specialty(
 		$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
 		$name = '', // string (optional) // The name of the item.
 		$url = '', // string (optional) // URL of the item.
@@ -244,7 +244,7 @@
 		* 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 		* 
 		* 		// Add this location's details to the main medicalSpecialty schema array
-		* 		$schema_medical_specialty = uamswp_schema_medical_specialty(
+		* 		$schema_medical_specialty = uamswp_fad_schema_medical_specialty(
 		* 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
 		* 			$condition_title_attr, // string (optional) // The name of the item.
 		* 			$condition_url // string (optional) // URL of the item.
@@ -332,7 +332,7 @@
 	}
 
 	// Add data to an array defining schema data for faxNumber
-	function uamswp_schema_fax_number(
+	function uamswp_fad_schema_fax_number(
 		$schema_fax_number = array(), // array (optional) // Main faxNumber schema array
 		$fax_number = '' // string (optional) // The fax number.
 	) {
@@ -345,7 +345,7 @@
 		* 		$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
 		* 
 		* 		// Add this location's details to the main faxNumber schema array
-		* 		$schema_fax_number = uamswp_schema_fax_number(
+		* 		$schema_fax_number = uamswp_fad_schema_fax_number(
 		* 			$schema_fax_number, // array (optional) // Main faxNumber schema array
 		* 			$location_fax_format_dash // string (optional) // The fax number.
 		* 		);
@@ -382,7 +382,7 @@
 	}
 
 	// Add data to an array defining schema data for telephone
-	function uamswp_schema_telephone(
+	function uamswp_fad_schema_telephone(
 		$schema_telephone = array(), // array (optional) // Main telephone schema array
 		$telephone_number = '' // string (optional) // The telephone number.
 	) {
@@ -395,7 +395,7 @@
 		* 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
 		* 
 		* 		// Add this location's details to the main telephone schema array
-		* 		$schema_telephone = uamswp_schema_telephone(
+		* 		$schema_telephone = uamswp_fad_schema_telephone(
 		* 			$schema_telephone, // array (optional) // Main telephone schema array
 		* 			$telephone_number // string (optional) // The telephone number.
 		* 		);
@@ -432,7 +432,7 @@
 	}
 
 	// Add data to an array defining schema data for OpeningHoursSpecification
-	function uamswp_schema_opening_hours_specification(
+	function uamswp_fad_schema_opening_hours_specification(
 		$schema_opening_hours_specification = array(), // array (optional) // Main OpeningHoursSpecification schema array
 		$day_of_week = array(), // array|string (optional) // The day of the week for which these opening hours are valid.
 		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -453,7 +453,7 @@
 		* 			// // Schema.org method: Add all days as an array under the dayOfWeek property
 		* 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 		* 
-		* 			// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+		* 			// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 		* 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 		* 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
 		* 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -466,7 +466,7 @@
 		* 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 		* 
 		* 				foreach ( $schema_day_of_week as $day) {
-		* 					$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+		* 					$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 		* 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 		* 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 		* 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -525,7 +525,7 @@
 	}
 
 	// Add data to an array defining schema data for OpeningHours
-	function uamswp_schema_opening_hours(
+	function uamswp_fad_schema_opening_hours(
 		$schema_opening_hours = array(), // array (optional) // Main OpeningHours schema array
 		$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -541,7 +541,7 @@
 		* 
 		* 		// Add this location's details to the main OpeningHours schema array
 		* 
-		* 			$schema_opening_hours = uamswp_schema_opening_hours(
+		* 			$schema_opening_hours = uamswp_fad_schema_opening_hours(
 		* 				$schema_opening_hours, // array (optional) // Main OpeningHours schema array
 		* 				$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 		* 				$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -571,9 +571,9 @@
 
 	}
 
-	// Add data to an array defining schema data for geo
-	function uamswp_schema_geo(
-		$schema_geo = array(), // array (optional) // Main geo schema array
+	// Add data to an array defining schema data for GeoCoordinates
+	function uamswp_schema_geo_coordinates(
+		$schema_geo_coordinates = array(), // array (optional) // main GeoCoordinates schema array
 		$latitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 		$longitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 		$elevation = '' // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
@@ -581,15 +581,15 @@
 
 		/* Example use:
 		 * 
-		 * 	// Geo Schema Data
+		 * 	// GeoCoordinates Schema Data
 		 * 
-		 * 		// Check/define the main geo schema array
-		 * 		$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+		 * 		// Check/define the main GeoCoordinates schema array
+		 * 		$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
 		 * 
-		 * 		// Add this location's details to the main geo schema array
+		 * 		// Add this location's details to the main GeoCoordinates schema array
 		 * 
-		 * 			$schema_geo = uamswp_schema_geo(
-		 * 				$schema_geo, // array (optional) // Main geo schema array
+		 * 			$schema_geo_coordinates = uamswp_schema_geo_coordinates(
+		 * 				$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
 		 * 				$schema_latitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 		 * 				$schema_longitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 		 * 				$schema_elevation // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
@@ -598,7 +598,7 @@
 
 		// Check/define variables
 
-			$schema_geo = is_array($schema_geo) ? $schema_geo : array();
+			$schema_geo_coordinates = is_array($schema_geo_coordinates) ? $schema_geo_coordinates : array();
 
 		// Create an array for this item
 
@@ -622,20 +622,20 @@
 				$schema = array('@type' => 'GeoCoordinates') + $schema;
 			}
 
-		// Add this item's array to the main geo schema array
+		// Add this item's array to the main GeoCoordinates schema array
 
 			if ( !empty($schema) ) {
-				$schema_geo[] = $schema;
+				$schema_geo_coordinates[] = $schema;
 			}
 
-		// Return the main geo schema array
+		// Return the main GeoCoordinates schema array
 
-			return $schema_geo;
+			return $schema_geo_coordinates;
 
 	}
 
 	// Add data to an array defining schema data for hospitalAffiliation
-	function uamswp_schema_hospital_affiliation(
+	function uamswp_fad_schema_hospital_affiliation(
 		$schema_hospital_affiliation = array(), // array (optional) // Main hospitalAffiliation schema array
 		$hospital_affiliation = array() // array (optional) // Hospital affiliation
 	) {
@@ -748,7 +748,7 @@
 	}
 
 	// Add data to an array defining schema data for availableService
-	function uamswp_schema_available_service(
+	function uamswp_fad_schema_available_service(
 		$schema_available_service, // array // Main availableService schema array
 		$entity_id // int // ID of the medical entity (a.k.a., Treatment and Procedure post)
 	) {

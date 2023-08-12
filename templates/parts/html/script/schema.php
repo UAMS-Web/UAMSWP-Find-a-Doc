@@ -14,7 +14,7 @@
  * 	$schema_aggregate_rating_value; // string
  * 	$schema_aggregate_rating_count; // int
  * 	$schema_aggregate_rating_review_count; // int
- * 	$schema_geo; // array
+ * 	$schema_geo_coordinates; // array
  * 	$schema_hospital_affiliation; // array
  * 	$schema_opening_hours_specification // array
  * 	$schema_telephone // array
@@ -83,7 +83,7 @@
 			// Google Structured Data Documentation:
 			// 	- Geographic coordinates of the business
 			// 	- latitude and longitude: The precision must be at least 5 decimal places.
-			$schema_geo = isset($schema_geo) ? $schema_geo : '';
+			$schema_geo_coordinates = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
 
 		// Property: openingHoursSpecification
 			// 	Expected Type: OpeningHoursSpecification
@@ -692,24 +692,24 @@
 
 // Add geo
 
-if ( $schema_geo ) {
+if ( $schema_geo_coordinates ) {
 
 	// If the geo schema array only contains one top-level item/array, flatten the geo schema array
-	if ( is_array($schema_geo) ) {
+	if ( is_array($schema_geo_coordinates) ) {
 
-		if ( 1 == count($schema_geo) && is_array($schema_geo[0]) ) {
+		if ( 1 == count($schema_geo_coordinates) && is_array($schema_geo_coordinates[0]) ) {
 
-			$schema_geo = array_reduce( $schema_geo, 'array_merge', array() );
+			$schema_geo_coordinates = array_reduce( $schema_geo_coordinates, 'array_merge', array() );
 
-		} elseif ( 1 == count($schema_geo) && !is_array($schema_geo[0]) ) {
+		} elseif ( 1 == count($schema_geo_coordinates) && !is_array($schema_geo_coordinates[0]) ) {
 
-			$schema_geo = $schema_geo[0];
+			$schema_geo_coordinates = $schema_geo_coordinates[0];
 
 		}
 
 	}
 
-	$schema_block['geo'] = $schema_geo; // Add the relevant 'geo' value
+	$schema_block['geo'] = $schema_geo_coordinates; // Add the relevant 'geo' value
 
 }
 

@@ -9983,7 +9983,7 @@ function uamswp_prevent_orphan($string) {
 			$schema_address = array(), // array // Schema address data
 			$schema_telephone = array(), // array // Schema telephone data
 			$schema_fax_number = array(), // array // Schema fax number data
-			$schema_geo = array(), // array // Schema geo data
+			$schema_geo_coordinates = array(), // array // Schema geo data
 			$location_section_schema_query = false, // bool // Query for whether to add locations to schema
 			$location_descendant_list = false // bool // Query on whether this card is in a list of descendant locations
 		) {
@@ -10913,7 +10913,7 @@ function uamswp_prevent_orphan($string) {
 
 										// Add this location's details to the main address schema array
 
-											$schema_address = uamswp_schema_address(
+											$schema_address = uamswp_fad_schema_address(
 												$schema_address, // array (optional) // Main address schema array
 												( isset($location_address_schema) ? $location_address_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
 												'', // string (optional) // The post office box number for PO box addresses.
@@ -10934,7 +10934,7 @@ function uamswp_prevent_orphan($string) {
 
 										// Add this location's details to the main telephone schema array
 
-											$schema_telephone = uamswp_schema_telephone(
+											$schema_telephone = uamswp_fad_schema_telephone(
 												$schema_telephone, // array (optional) // Main telephone schema array
 												( isset($location_phone) ? $location_phone : '' ) // string (optional) // The telephone number.
 											);
@@ -10947,21 +10947,21 @@ function uamswp_prevent_orphan($string) {
 
 										// Add this location's details to the main fax number schema array
 
-											$schema_fax_number = uamswp_schema_fax_number(
+											$schema_fax_number = uamswp_fad_schema_fax_number(
 												$schema_fax_number, // array (optional) // Main faxNumber schema array
 												( isset($location_fax) ? $location_fax : '' ) // string (optional) // The fax number.
 											);
 
-									// Geo Schema Data
+									// GeoCoordinates Schema Data
 
-										// Check/define the main geo schema array
+										// Check/define the main GeoCoordinates schema array
 
-											$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+											$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
 
-										// Add this location's details to the main geo schema array
+										// Add this location's details to the main GeoCoordinates schema array
 
-											$schema_geo = uamswp_schema_geo(
-												$schema_geo, // array (optional) // Main geo schema array
+											$schema_geo_coordinates = uamswp_schema_geo_coordinates(
+												$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
 												$location_map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 												$location_map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 											);
@@ -10973,7 +10973,7 @@ function uamswp_prevent_orphan($string) {
 									$location_card_fields_vars['schema_address'] = isset($schema_address) ? $schema_address : '';
 									$location_card_fields_vars['schema_telephone'] = isset($schema_telephone) ? $schema_telephone : '';
 									$location_card_fields_vars['schema_fax_number'] = isset($schema_fax_number) ? $schema_fax_number : '';
-									$location_card_fields_vars['schema_geo'] = isset($schema_geo) ? $schema_geo : '';
+									$location_card_fields_vars['schema_geo'] = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
 
 					// Location Card Styles
 

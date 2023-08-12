@@ -1824,7 +1824,7 @@
 							}
 
 							// Property: geo
-							$schema_geo = isset($schema_geo) ? $schema_geo : '';
+							$schema_geo_coordinates = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
 
 							// Property: url
 							$schema_url = $page_url; // string
@@ -1847,7 +1847,7 @@
 
 								$schema_hospital_affiliation = ( isset($schema_hospital_affiliation) && is_array($schema_hospital_affiliation) && !empty($schema_hospital_affiliation) ) ? $schema_hospital_affiliation : array(); // array
 
-								$schema_hospital_affiliation = uamswp_schema_hospital_affiliation(
+								$schema_hospital_affiliation = uamswp_fad_schema_hospital_affiliation(
 									$schema_hospital_affiliation, // array (optional) // Main hospitalAffiliation schema array
 									$affiliation // array (optional) // Hospital affiliation
 								);
