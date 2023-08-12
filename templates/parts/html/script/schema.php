@@ -15,6 +15,7 @@
  * 	$schema_aggregate_rating_count; // int
  * 	$schema_aggregate_rating_review_count; // int
  * 	$schema_geo; // array
+ * 	$schema_hospital_affiliation; // array
  * 	$schema_opening_hours_specification // array
  * 	$schema_telephone // array
  * 	$schema_url // string
@@ -143,6 +144,12 @@
 
 			$schema_description = isset($schema_description) ? $schema_description : '';
 
+		// Property: hospitalAffiliation
+			// Expected Type: Hospital
+			// Description: A hospital with which the physician or office is affiliated.
+
+			$schema_hospital_affiliation = isset($schema_hospital_affiliation) ? $schema_hospital_affiliation : '';
+
 		// Property: image
 			// 	Expected Type: ImageObject or URL
 			// 	Description: One or more images of the MedicalClinic.
@@ -193,10 +200,6 @@
 				// Property: availableService
 					// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
 					// Description: A medical service available from this provider.
-
-				// Property: hospitalAffiliation
-					// Expected Type: Hospital
-					// Description: A hospital with which the physician or office is affiliated.
 
 			// Properties for Term: LocalBusiness
 
@@ -627,6 +630,12 @@
 
 	if ( $schema_description ) {
 		$schema_block['description'] = $schema_description; // Add the relevant 'description' value
+	}
+
+// Add hospitalAffiliation
+
+	if ( $schema_hospital_affiliation ) {
+		$schema_block['hospitalAffiliation'] = $schema_hospital_affiliation; // Add the relevant 'hospitalAffiliation' value
 	}
 
 // Add medicalSpecialty

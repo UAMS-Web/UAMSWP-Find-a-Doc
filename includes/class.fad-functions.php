@@ -9163,6 +9163,118 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	}
 
+	// Add data to an array defining schema data for hospital affiliation
+	function uamswp_schema_hospital_affiliation(
+		$schema_hospital_affiliation = array(), // array (optional) // Main geo hospitalAffiliation array
+		$hospital_affiliation = array() // array (optional) // Hospital affiliation
+	) {
+
+		// Check/define variables
+
+			$schema_hospital_affiliation = is_array($schema_hospital_affiliation) ? $schema_hospital_affiliation : array();
+
+		// Create an array for this item
+
+		$schema = array();
+
+		// Loop through each hospital affiliation
+
+			foreach ( $hospital_affiliation as $affiliation ) {
+
+				// Eliminate PHP errors
+
+					$hospital_affiliation_term = '';
+					$hospital_affiliation_location = '';
+					$hospital_affiliation_location_title = '';
+					$hospital_affiliation_location_url = '';
+
+				// Get the Hospital Affiliation term from the ID
+
+					$hospital_affiliation_term = get_term( $affiliation, 'affiliation' ) ?: '';
+
+				// Associated location
+
+					// Get the ID of the location profile associated with the Affiliated Location
+
+						if ( term_exists($hospital_affiliation_term) ) {
+
+							$hospital_affiliation_location = get_field( 'affiliation_location', $hospital_affiliation_term )[0] ?: '';
+
+							if ( $hospital_affiliation_location ) {
+
+								// Get the name of the associated location profile
+
+									$hospital_affiliation_location_title = get_the_title($hospital_affiliation_location);
+
+								// Get the URL of the associated location profile
+
+									$hospital_affiliation_location_url = get_permalink($hospital_affiliation_location);
+
+							} else {
+
+								// Skip the rest of the current loop iteration
+								continue;
+
+							}
+
+						}
+
+				// Add values to the array
+
+					if ( $hospital_affiliation_location_title ) {
+
+						if ( is_array($hospital_affiliation_location_title) ) {
+		
+							foreach ( $hospital_affiliation_location_title as $item ) {
+		
+								$schema['name'][] = uamswp_attr_conversion($item);
+		
+							}
+		
+						} else {
+		
+							$schema['name'] = uamswp_attr_conversion($hospital_affiliation_location_title);
+		
+						}
+		
+					}
+		
+					if ( $hospital_affiliation_location_url ) {
+		
+						if ( is_array($hospital_affiliation_location_url) ) {
+		
+							foreach ( $hospital_affiliation_location_url as $item ) {
+		
+								$schema['url'][] = user_trailingslashit($item);
+		
+							}
+		
+						} else {
+		
+							$schema['url'] = user_trailingslashit($hospital_affiliation_location_url);
+		
+						}
+		
+					}
+		
+					if ( !empty($schema) ) {
+						$schema = array('@type' => 'Hospital') + $schema;
+					}
+
+				// Add this item's array to the main geo schema array
+
+					if ( !empty($schema) ) {
+						$schema_hospital_affiliation[] = $schema;
+					}
+
+			} // endforeach
+
+		// Return the main geo schema array
+
+			return $schema_hospital_affiliation;
+
+	}
+
 // Create array_is_list function that is available in PHP 8
 if ( !function_exists('array_is_list') ) {
 

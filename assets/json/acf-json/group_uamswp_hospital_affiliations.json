@@ -63,6 +63,34 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		"field_affiliation_location": {
+			"key": "field_affiliation_location",
+			"label": "Associated Location Profile",
+			"name": "affiliation_location",
+			"type": "relationship",
+			"instructions": "Select the location profile that matches this affiliated hospital.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"location"
+			],
+			"taxonomy": "",
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			}
 		}
 	},
 	"modified": false

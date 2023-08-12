@@ -1840,6 +1840,15 @@
 							// Property: medicalSpecialty
 							$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array(); // array
 
+							// Property: hospitalAffiliation
+
+								$schema_hospital_affiliation = ( isset($schema_hospital_affiliation) && is_array($schema_hospital_affiliation) && !empty($schema_hospital_affiliation) ) ? $schema_hospital_affiliation : array(); // array
+
+								$schema_hospital_affiliation = uamswp_schema_hospital_affiliation(
+									$schema_hospital_affiliation, // array (optional) // Main geo hospitalAffiliation array
+									$affiliation // array (optional) // Hospital affiliation
+								);
+
 					// Construct the schema script tag
 
 						include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
