@@ -9276,6 +9276,157 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	}
 
+	// Add data to an array defining schema data for availableService
+	function uamswp_schema_available_service(
+		$schema_available_service, // array // Main availableService schema array
+		$entity_id // int // ID of the medical entity (a.k.a., Treatment and Procedure post)
+	) {
+
+		// Retrieve the value of the transient
+		uamswp_fad_get_transient( 'val_' . $entity_id, $schema, __FUNCTION__ );
+
+		if ( !empty( $schema ) ) {
+
+			/* 
+			 * The transient exists.
+			 * Return the variable.
+			 */
+
+			return $schema;
+
+		} else {
+
+			/* 
+			 * The transient does not exist.
+			 * Define the variable again.
+			 */
+
+			// Check/define variables
+
+				$schema_available_service = is_array($schema_available_service) ? $schema_available_service : array();
+
+			// Create an array for this item
+
+				$schema = array();
+
+			// Determine specific type of MedicalEntity
+
+				$medical_entity = get_field( 'treatment_procedure_schema_medical_entity', $entity_id ) ?: '';
+
+				if ( $medical_entity == 'MedicalTest' ) {
+
+					// Determine specific type of MedicalTest
+
+					$medical_test = get_field( 'treatment_procedure_schema_medical_test', $entity_id ) ?: '';
+
+						if ( $medical_test == 'none' ) {
+
+							$type = $medical_entity;
+
+						} else {
+
+							$type = $medical_test;
+
+						}
+
+				} elseif ( $medical_entity == 'MedicalProcedure' ) {
+
+					// Determine specific type of MedicalProcedure
+
+						$medical_procedure = get_field( 'treatment_procedure_schema_medical_procedure', $entity_id ) ?: '';
+
+						if ( $medical_procedure == 'none' ) {
+
+							$type = $medical_entity;
+
+						} else {
+
+							if ( $medical_procedure == 'TherapeuticProcedure' ) {
+
+								// Determine specific type of TherapeuticProcedure
+
+									$therapeutic_procedure = get_field( 'treatment_procedure_schema_therapeutic_procedure', $entity_id ) ?: '';
+
+									if ( $therapeutic_procedure == 'MedicalTherapy' ) {
+
+										// Determine specific type of MedicalTherapy
+
+											$medical_therapy = get_field( 'treatment_procedure_schema_medical_therapy', $entity_id ) ?: '';
+
+											if ( $medical_therapy == 'none' ) {
+
+												$type = $therapeutic_procedure;
+
+											} else {
+
+												$type = $medical_therapy;
+
+											}
+
+									} else {
+
+										$type = $therapeutic_procedure;
+
+									}
+
+							} else {
+
+								$type = $medical_procedure;
+
+							}
+
+						}
+
+				}
+
+			// Add values to the array
+
+				if ( $type ) {
+
+					// MedicalEntity Name
+						
+						$name = get_the_title($entity_id) ?: '';
+
+						if ( $name ) {
+
+							$schema['name'] = uamswp_attr_conversion($name);
+
+						}
+
+					// MedicalEntity Name
+						
+						$name = get_the_title($entity_id) ?: '';
+
+						if ( $name ) {
+
+							$schema['name'] = uamswp_attr_conversion($name);
+
+						}
+
+				}
+
+				if ( !empty($schema) ) {
+					$schema = array('@type' => $type) + $schema;
+				}
+
+				// Set/update the value of the transient
+				uamswp_fad_set_transient( 'val_' . $entity_id, $schema, __FUNCTION__ );
+
+			// Add this item's array to the main availableService schema array
+
+				if ( !empty($schema) ) {
+					$schema_available_service[] = $schema;
+				}
+
+			// Return the main availableService schema array
+
+				// Return the variable
+				return $schema_available_service;
+
+		}
+
+	}
+
 // Create array_is_list function that is available in PHP 8
 if ( !function_exists('array_is_list') ) {
 

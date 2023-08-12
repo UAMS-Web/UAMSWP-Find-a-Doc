@@ -132,6 +132,12 @@
 
 	// Additional Selected Properties
 
+		// Property: availableService
+			// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
+			// Description: A medical service available from this provider.
+
+			$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array(); // array
+
 		// Property: faxNumber
 			// Expected Type: Text
 			// Description: The fax number.
@@ -190,12 +196,6 @@
 	// https://schema.org/MedicalClinic (https://archive.is/ZS6nb)
 
 			// Properties for Term: MedicalClinic
-
-				// Property: availableService
-					// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
-					// Description: A medical service available from this provider.
-
-			// Properties for Term: Physician
 
 				// Property: availableService
 					// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
@@ -636,6 +636,12 @@
 
 	if ( $schema_hospital_affiliation ) {
 		$schema_block['hospitalAffiliation'] = $schema_hospital_affiliation; // Add the relevant 'hospitalAffiliation' value
+	}
+
+// Add availableService
+
+	if ( $schema_available_service ) {
+		$schema_block['availableService'] = $schema_available_service; // Add the relevant 'availableService' value
 	}
 
 // Add medicalSpecialty

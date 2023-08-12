@@ -2618,6 +2618,9 @@
 
 						// Additional Selected Properties
 
+							// Property: availableService
+							$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array(); // array
+
 							// Property: description
 							$schema_description = isset($schema_description) ? $schema_description : ''; // string
 

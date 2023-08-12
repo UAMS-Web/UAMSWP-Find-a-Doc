@@ -379,16 +379,15 @@ if ( $condition_treatment_section_show ) {
 												$treatment_aria_label = '';
 											}
 
-											// MedicalSpecialty Schema Data
+											// AvailableService Schema Data
 
-												// Check/define the main medicalSpecialty schema array
-												$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+												// Check/define the main AvailableService schema array
+												$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array();
 
-												// Add this location's details to the main medicalSpecialty schema array
-												$schema_medical_specialty = uamswp_schema_medical_specialty(
-													$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-													$treatment_title_attr, // string (optional) // The name of the item.
-													$treatment_url // string (optional) // URL of the item.
+												// Add this treatment's details to the main AvailableService schema array
+												$schema_available_service = uamswp_schema_available_service(
+													$schema_available_service, // array // Main availableService schema array
+													$page_id // int // ID of the medical entity (a.k.a., Treatment and Procedure post)
 												);
 
 											?>
