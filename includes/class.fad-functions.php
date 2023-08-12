@@ -10613,8 +10613,10 @@ function uamswp_prevent_orphan($string) {
 		function uamswp_fad_location_card_fields(
 			$page_id, // int // ID of the profile
 			$location_card_style, // string enum('basic', 'detailed', 'primary-location') // Location card style
+			$schema_address = array(), // array // Schema address data
 			$schema_telephone = array(), // array // Schema telephone data
 			$schema_fax_number = array(), // array // Schema fax number data
+			$location_section_schema_query = false, // bool // Query for whether to add locations to schema
 			$location_descendant_list = false // bool // Query on whether this card is in a list of descendant locations
 		) {
 
@@ -10842,6 +10844,18 @@ function uamswp_prevent_orphan($string) {
 										$location_address_2_schema = $location_address_2_schema ?: $location_address_2_deprecated;
 
 									}
+
+								// Construct the full schema address line
+
+									$location_address_schema = implode(
+										' ',
+										array_filter(
+											array(
+												$location_address_1,
+												$location_address_2_schema
+											)
+										)
+									);
 
 							// City, State and ZIP
 
@@ -11247,14 +11261,15 @@ function uamswp_prevent_orphan($string) {
 
 								// General information phone number
 
+									// Get the general information phone number
+
+										$location_phone = get_field( 'location_phone', $page_id ) ?: '';
+
 									if (
 										!$location_phone_appointment_query // If there are no main appointment phone numbers other than the general information phone number
 										&&
 										!$location_ac_query // If this is not an Arkansas Children's location
 									) {
-
-										// Get the general information phone number
-										$location_phone = get_field( 'location_phone', $page_id ) ?: '';
 
 										// Add the general information phone number (as the appointment phone number) to the location phone numbers array
 
@@ -11272,10 +11287,6 @@ function uamswp_prevent_orphan($string) {
 												);
 
 											}
-
-									} else {
-
-										$location_phone = '';
 
 									}
 
@@ -11509,23 +11520,7 @@ function uamswp_prevent_orphan($string) {
 											'Clinic Fax Number' // string // data-typetitle attribute value
 										);
 
-								} else {
-
-									$location_fax = '';
-									$location_fax_format_dash = '';
-									$location_fax_link = '';
-
 								}
-
-							// Telephone Schema Data
-
-								// Check/define the main telephone schema array
-								$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-
-							// Telephone Schema Data
-
-								// Check/define the main fax number schema array
-								$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_telephone) ) ? $schema_fax_number : array();
 
 							// Add to the variables array
 
@@ -11533,6 +11528,84 @@ function uamswp_prevent_orphan($string) {
 								$location_card_fields_vars['location_phone_data_categorytitle'] = isset($location_phone_data_categorytitle) ? $location_phone_data_categorytitle : '';
 								$location_card_fields_vars['location_appointments_query'] = isset($location_appointments_query) ? $location_appointments_query : '';
 								$location_card_fields_vars['location_fax_link'] = isset($location_fax_link) ? $location_fax_link : '';
+
+							// Add location details to schema data
+
+								// Query for whether to add locations to schema
+								
+									$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+
+								if ( $location_section_schema_query ) {
+
+									// Address Schema Data
+
+										// Check/define the main address schema array
+
+											$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+
+										// Add this location's details to the main address schema array
+
+											$schema_address = uamswp_schema_address(
+												$schema_address, // array (optional) // Main address schema array
+												( isset($location_address_schema) ? $location_address_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+												'', // string (optional) // The post office box number for PO box addresses.
+												( isset($location_city) ? $location_city : '' ), // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+												( isset($location_state) ? $location_state : '' ), // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+												( isset($location_zip) ? $location_zip : '' ), // string (optional) // The postal code. For example, 94043.
+												'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+												( isset($location_title) ? $location_title : '' ), // string (optional) // The name of the item.
+												( isset($location_phone) ? $location_phone : '' ), // string (optional) // The telephone number.
+												( isset($location_fax) ? $location_fax : '' ) // string (optional) // The fax number.
+											);
+
+									// Telephone Schema Data
+
+										// Check/define the main telephone schema array
+										
+											$schema_telephone =  (( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array() );
+
+										// Add this location's details to the main telephone schema array
+
+											$schema_telephone = uamswp_schema_telephone(
+												$schema_telephone, // array (optional) // Main telephone schema array
+												( isset($location_phone) ? $location_phone : '' ) // string (optional) // The telephone number.
+											);
+
+									// Fax Schema Data
+
+										// Check/define the main fax number schema array
+										
+											$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_telephone) ) ? $schema_fax_number : array();
+
+										// Add this location's details to the main fax number schema array
+
+											$schema_fax_number = uamswp_schema_fax_number(
+												$schema_fax_number, // array (optional) // Main faxNumber schema array
+												( isset($location_fax) ? $location_fax : '' ) // string (optional) // The fax number.
+											);
+
+									// Geo Schema Data
+
+										// Check/define the main geo schema array
+
+											$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+
+										// Add this location's details to the main geo schema array
+
+											$schema_geo = uamswp_schema_geo(
+												$schema_geo, // array (optional) // Main geo schema array
+												$location_map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+												$location_map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+											);
+
+								} // endif ( $location_section_schema_query )
+
+								// Add to the variables array
+
+									$location_card_fields_vars['schema_address'] = isset($schema_address) ? $schema_address : '';
+									$location_card_fields_vars['schema_telephone'] = isset($schema_telephone) ? $schema_telephone : '';
+									$location_card_fields_vars['schema_fax_number'] = isset($schema_fax_number) ? $schema_fax_number : '';
+									$location_card_fields_vars['schema_geo'] = isset($schema_geo) ? $schema_geo : '';
 
 					// Location Card Styles
 
