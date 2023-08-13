@@ -37379,20 +37379,27 @@
 		function uamswp_fad_schema_medicalentity(
 			$schema, // array // Main schema array
 			// MedicalEntity
-			$foo, // foo
+				$code = '', // code
+				$funding = '', // funding
+				$guideline = '', // guideline
+				$legalStatus = '', // legalStatus
+				$medicineSystem = '', // medicineSystem
+				$recognizingAuthority = '', // recognizingAuthority
+				$relevantSpecialty = '', // relevantSpecialty
+				$study = '', // study
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -37416,40 +37423,134 @@
 
 				// Properties from MedicalEntity (Thing > MedicalEntity)
 
-					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
-
+					$code = ( isset($code) && !empty($code) ) ? $code : '';
+					$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
+					$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
+					$legalStatus = ( isset($legalStatus) && !empty($legalStatus) ) ? $legalStatus : '';
+					$medicineSystem = ( isset($medicineSystem) && !empty($medicineSystem) ) ? $medicineSystem : '';
+					$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
+					$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
+					$study = ( isset($study) && !empty($study) ) ? $study : '';
+			
 			// Add values to the schema array
 
 				// Inherited properties
 
 					$schema = uamswp_fad_schema_thing(
 						$schema, // array // Main schema array
-						$additionalType, // additionalType
-						$alternateName, // alternateName
-						$description, // description
-						$disambiguatingDescription, // disambiguatingDescription
-						$identifier, // identifier
-						$image, // image
-						$mainEntityOfPage, // mainEntityOfPage
-						$name, // name
-						$potentialAction, // potentialAction
-						$sameAs, // sameAs
-						$subjectOf, // subjectOf
-						$url // url
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
 					);
 
 				// Properties from MedicalEntity
 
-					// foo
+					// code
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     MedicalCode
+						 * 
+						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+						 */
 
-						$schema['foo'] = $foo;
+						$schema['code'] = $code;
+
+					// funding
+
+						/* 
+						 * Expected Type:
+						 *     Grant
+						 * 
+						 * A Grant that directly or indirectly provide funding or sponsorship for this 
+						 * item. See also ownershipFundingInfo.
+						 * 
+						 * Inverse property: fundedItem
+						 */
+
+						$schema['funding'] = $funding;
+
+					// guideline
+
+						/* 
+						 * Expected Type:
+						 *     MedicalGuideline
+						 * 
+						 * A medical guideline related to this entity.
+						 */
+
+						$schema['guideline'] = $guideline;
+
+					// legalStatus
+
+						/* 
+						 * Expected Type:
+						 *     DrugLegalStatus
+						 *     MedicalEnumeration
+						 *     Text
+						 * 
+						 * The drug or supplement's legal status, including any controlled substance 
+						 * schedules that apply.
+						 */
+
+						$schema['legalStatus'] = $legalStatus;
+
+					// medicineSystem
+
+						/* 
+						 * Expected Type:
+						 *     MedicineSystem
+						 * 
+						 * The system of medicine that includes this MedicalEntity, for example 
+						 * 'evidence-based', 'homeopathic', 'chiropractic', etc.
+						 */
+
+						$schema['medicineSystem'] = $medicineSystem;
+
+					// recognizingAuthority
+
+						/* 
+						 * Expected Type:
+						 *     Organization
+						 * 
+						 * If applicable, the organization that officially recognizes this entity as part 
+						 * of its endorsed system of medicine.
+						 */
+
+						$schema['recognizingAuthority'] = $recognizingAuthority;
+
+					// relevantSpecialty
+
+						/* 
+						 * Expected Type:
+						 *     MedicalSpecialty
+						 * 
+						 * If applicable, a medical specialty in which this entity is relevant.
+						 */
+
+						$schema['relevantSpecialty'] = $relevantSpecialty;
+
+					// study
+
+						/* 
+						 * Expected Type:
+						 *     MedicalStudy
+						 * 
+						 * A medical study or trial related to this entity.
+						 */
+
+						$schema['study'] = $study;
 
 			// Remove any empty values from the schema array
 
