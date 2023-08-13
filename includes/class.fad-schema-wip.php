@@ -31283,7 +31283,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -31724,7 +31724,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -32165,7 +32165,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -33063,7 +33063,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -33505,7 +33505,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -33946,7 +33946,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -34388,7 +34388,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -34851,7 +34851,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -35294,7 +35294,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -35741,7 +35741,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
@@ -36205,7 +36205,7 @@
 	
 						// Inherited properties
 	
-							$schema = uamswp_fad_schema_creativework(
+							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
 									$breadcrumb, // breadcrumb
