@@ -31440,7 +31440,6 @@
 				function uamswp_fad_schema_CheckoutPage(
 					$schema = '', // array // Main schema array
 					// CheckoutPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -31882,7 +31881,6 @@
 				function uamswp_fad_schema_CollectionPage(
 					$schema = '', // array // Main schema array
 					// CollectionPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -32333,7 +32331,6 @@
 				function uamswp_fad_schema_ContactPage(
 					$schema = '', // array // Main schema array
 					// ContactPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -32776,7 +32773,6 @@
 				function uamswp_fad_schema_FAQPage(
 					$schema = '', // array // Main schema array
 					// FAQPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -33218,7 +33214,6 @@
 				function uamswp_fad_schema_ItemPage(
 					$schema = '', // array // Main schema array
 					// ItemPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -34124,7 +34119,6 @@
 				function uamswp_fad_schema_ProfilePage(
 					$schema = '', // array // Main schema array
 					// ProfilePage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -34568,7 +34562,6 @@
 				function uamswp_fad_schema_QAPage(
 					$schema = '', // array // Main schema array
 					// QAPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
@@ -35480,7 +35473,6 @@
 				function uamswp_fad_schema_SearchResultsPage(
 					$schema = '', // array // Main schema array
 					// SearchResultsPage (no property vars)
-						$foo = '', // foo
 					// WebPage
 						$breadcrumb = '', // breadcrumb
 						$lastReviewed = '', // lastReviewed
