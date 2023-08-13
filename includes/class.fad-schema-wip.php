@@ -32322,6 +32322,454 @@
 	
 				}
 
+					// MediaGallery
+
+						/*
+						 * Web page type: Media gallery page. A mixed-media page that can contain media 
+						 * such as images, videos, and other multimedia.
+						 */
+
+						function uamswp_fad_schema_mediagallery(
+							$schema = '', // array // Main schema array
+							// MediaGallery (no property vars)
+							// CollectionPage (no property vars)
+							// WebPage
+								$breadcrumb = '', // breadcrumb
+								$lastReviewed = '', // lastReviewed
+								$mainContentOfPage = '', // mainContentOfPage
+								$primaryImageOfPage = '', // primaryImageOfPage
+								$relatedLink = '', // relatedLink
+								$reviewedBy = '', // reviewedBy
+								$significantLink = '', // significantLink
+								$speakable = '', // speakable
+								$specialty = '', // specialty
+							// CreativeWork
+								$about = '', // about
+								$abstract = '', // abstract
+								$accessibilityAPI = '', // accessibilityAPI
+								$accessibilityControl = '', // accessibilityControl
+								$accessibilityFeature = '', // accessibilityFeature
+								$accessibilityHazard = '', // accessibilityHazard
+								$accessibilitySummary = '', // accessibilitySummary
+								$accessMode = '', // accessMode
+								$accessModeSufficient = '', // accessModeSufficient
+								$accountablePerson = '', // accountablePerson
+								$acquireLicensePage = '', // acquireLicensePage
+								$aggregateRating = '', // aggregateRating
+								$alternativeHeadline = '', // alternativeHeadline
+								$archivedAt = '', // archivedAt
+								$assesses = '', // assesses
+								$associatedMedia = '', // associatedMedia
+								$audience = '', // audience
+								$audio = '', // audio
+								$author = '', // author
+								$award = '', // award
+								$character = '', // character
+								$citation = '', // citation
+								$comment = '', // comment
+								$commentCount = '', // commentCount
+								$conditionsOfAccess = '', // conditionsOfAccess
+								$contentLocation = '', // contentLocation
+								$contentRating = '', // contentRating
+								$contentReferenceTime = '', // contentReferenceTime
+								$contributor = '', // contributor
+								$copyrightHolder = '', // copyrightHolder
+								$copyrightNotice = '', // copyrightNotice
+								$copyrightYear = '', // copyrightYear
+								$correction = '', // correction
+								$countryOfOrigin = '', // countryOfOrigin
+								$creativeWorkStatus = '', // creativeWorkStatus
+								$creator = '', // creator
+								$creditText = '', // creditText
+								$dateCreated = '', // dateCreated
+								$dateModified = '', // dateModified
+								$datePublished = '', // datePublished
+								$discussionUrl = '', // discussionUrl
+								$editEIDR = '', // editEIDR
+								$editor = '', // editor
+								$educationalAlignment = '', // educationalAlignment
+								$educationalLevel = '', // educationalLevel
+								$educationalUse = '', // educationalUse
+								$encoding = '', // encoding
+								$encodingFormat = '', // encodingFormat
+								$exampleOfWork = '', // exampleOfWork
+								$expires = '', // expires
+								$funder = '', // funder
+								$funding = '', // funding
+								$genre = '', // genre
+								$hasPart = '', // hasPart
+								$headline = '', // headline
+								$inLanguage = '', // inLanguage
+								$interactionStatistic = '', // interactionStatistic
+								$interactivityType = '', // interactivityType
+								$interpretedAsClaim = '', // interpretedAsClaim
+								$isAccessibleForFree = '', // isAccessibleForFree
+								$isBasedOn = '', // isBasedOn
+								$isFamilyFriendly = '', // isFamilyFriendly
+								$isPartOf = '', // isPartOf
+								$keywords = '', // keywords
+								$learningResourceType = '', // learningResourceType
+								$license = '', // license
+								$locationCreated = '', // locationCreated
+								$mainEntity = '', // mainEntity
+								$maintainer = '', // maintainer
+								$material = '', // material
+								$materialExtent = '', // materialExtent
+								$mentions = '', // mentions
+								$offers = '', // offers
+								$pattern = '', // pattern
+								$position = '', // position
+								$producer = '', // producer
+								$provider = '', // provider
+								$publication = '', // publication
+								$publisher = '', // publisher
+								$publisherImprint = '', // publisherImprint
+								$publishingPrinciples = '', // publishingPrinciples
+								$recordedAt = '', // recordedAt
+								$releasedEvent = '', // releasedEvent
+								$review = '', // review
+								$schemaVersion = '', // schemaVersion
+								$sdDatePublished = '', // sdDatePublished
+								$sdLicense = '', // sdLicense
+								$sdPublisher = '', // sdPublisher
+								$size = '', // size
+								$sourceOrganization = '', // sourceOrganization
+								$spatial = '', // spatial
+								$spatialCoverage = '', // spatialCoverage
+								$sponsor = '', // sponsor
+								$teaches = '', // teaches
+								$temporal = '', // temporal
+								$temporalCoverage = '', // temporalCoverage
+								$text = '', // text
+								$thumbnail = '', // thumbnail
+								$thumbnailUrl = '', // thumbnailUrl
+								$timeRequired = '', // timeRequired
+								$translationOfWork = '', // translationOfWork
+								$translator = '', // translator
+								$typicalAgeRange = '', // typicalAgeRange
+								$usageInfo = '', // usageInfo
+								$version = '', // version
+								$video = '', // video
+								$workExample = '', // workExample
+								$workTranslation = '', // workTranslation
+							// Thing
+								$additionalType = '', // additionalType
+								$alternateName = '', // alternateName
+								$description = '', // description
+								$disambiguatingDescription = '', // disambiguatingDescription
+								$identifier = '', // identifier
+								$image = '', // image
+								$mainEntityOfPage = '', // mainEntityOfPage
+								$name = '', // name
+								$potentialAction = '', // potentialAction
+								$sameAs = '', // sameAs
+								$subjectOf = '', // subjectOf
+								$url = '' // url
+						) {
+			
+							// Check/define variables
+			
+								$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+			
+								// Inherited properties from Thing
+			
+									$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+									$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+									$description = ( isset($description) && !empty($description) ) ? $description : '';
+									$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+									$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+									$image = ( isset($image) && !empty($image) ) ? $image : '';
+									$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+									$name = ( isset($name) && !empty($name) ) ? $name : '';
+									$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+									$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+									$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+									$url = ( isset($url) && !empty($url) ) ? $url : '';
+			
+								// Inherited properties from CreativeWork (Thing > CreativeWork)
+			
+									$about = ( isset($about) && !empty($about) ) ? $about : '';
+									$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
+									$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
+									$accessibilityControl = ( isset($accessibilityControl) && !empty($accessibilityControl) ) ? $accessibilityControl : '';
+									$accessibilityFeature = ( isset($accessibilityFeature) && !empty($accessibilityFeature) ) ? $accessibilityFeature : '';
+									$accessibilityHazard = ( isset($accessibilityHazard) && !empty($accessibilityHazard) ) ? $accessibilityHazard : '';
+									$accessibilitySummary = ( isset($accessibilitySummary) && !empty($accessibilitySummary) ) ? $accessibilitySummary : '';
+									$accessMode = ( isset($accessMode) && !empty($accessMode) ) ? $accessMode : '';
+									$accessModeSufficient = ( isset($accessModeSufficient) && !empty($accessModeSufficient) ) ? $accessModeSufficient : '';
+									$accountablePerson = ( isset($accountablePerson) && !empty($accountablePerson) ) ? $accountablePerson : '';
+									$acquireLicensePage = ( isset($acquireLicensePage) && !empty($acquireLicensePage) ) ? $acquireLicensePage : '';
+									$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
+									$alternativeHeadline = ( isset($alternativeHeadline) && !empty($alternativeHeadline) ) ? $alternativeHeadline : '';
+									$archivedAt = ( isset($archivedAt) && !empty($archivedAt) ) ? $archivedAt : '';
+									$assesses = ( isset($assesses) && !empty($assesses) ) ? $assesses : '';
+									$associatedMedia = ( isset($associatedMedia) && !empty($associatedMedia) ) ? $associatedMedia : '';
+									$audience = ( isset($audience) && !empty($audience) ) ? $audience : '';
+									$audio = ( isset($audio) && !empty($audio) ) ? $audio : '';
+									$author = ( isset($author) && !empty($author) ) ? $author : '';
+									$award = ( isset($award) && !empty($award) ) ? $award : '';
+									$character = ( isset($character) && !empty($character) ) ? $character : '';
+									$citation = ( isset($citation) && !empty($citation) ) ? $citation : '';
+									$comment = ( isset($comment) && !empty($comment) ) ? $comment : '';
+									$commentCount = ( isset($commentCount) && !empty($commentCount) ) ? $commentCount : '';
+									$conditionsOfAccess = ( isset($conditionsOfAccess) && !empty($conditionsOfAccess) ) ? $conditionsOfAccess : '';
+									$contentLocation = ( isset($contentLocation) && !empty($contentLocation) ) ? $contentLocation : '';
+									$contentRating = ( isset($contentRating) && !empty($contentRating) ) ? $contentRating : '';
+									$contentReferenceTime = ( isset($contentReferenceTime) && !empty($contentReferenceTime) ) ? $contentReferenceTime : '';
+									$contributor = ( isset($contributor) && !empty($contributor) ) ? $contributor : '';
+									$copyrightHolder = ( isset($copyrightHolder) && !empty($copyrightHolder) ) ? $copyrightHolder : '';
+									$copyrightNotice = ( isset($copyrightNotice) && !empty($copyrightNotice) ) ? $copyrightNotice : '';
+									$copyrightYear = ( isset($copyrightYear) && !empty($copyrightYear) ) ? $copyrightYear : '';
+									$correction = ( isset($correction) && !empty($correction) ) ? $correction : '';
+									$countryOfOrigin = ( isset($countryOfOrigin) && !empty($countryOfOrigin) ) ? $countryOfOrigin : '';
+									$creativeWorkStatus = ( isset($creativeWorkStatus) && !empty($creativeWorkStatus) ) ? $creativeWorkStatus : '';
+									$creator = ( isset($creator) && !empty($creator) ) ? $creator : '';
+									$creditText = ( isset($creditText) && !empty($creditText) ) ? $creditText : '';
+									$dateCreated = ( isset($dateCreated) && !empty($dateCreated) ) ? $dateCreated : '';
+									$dateModified = ( isset($dateModified) && !empty($dateModified) ) ? $dateModified : '';
+									$datePublished = ( isset($datePublished) && !empty($datePublished) ) ? $datePublished : '';
+									$discussionUrl = ( isset($discussionUrl) && !empty($discussionUrl) ) ? $discussionUrl : '';
+									$editEIDR = ( isset($editEIDR) && !empty($editEIDR) ) ? $editEIDR : '';
+									$editor = ( isset($editor) && !empty($editor) ) ? $editor : '';
+									$educationalAlignment = ( isset($educationalAlignment) && !empty($educationalAlignment) ) ? $educationalAlignment : '';
+									$educationalLevel = ( isset($educationalLevel) && !empty($educationalLevel) ) ? $educationalLevel : '';
+									$educationalUse = ( isset($educationalUse) && !empty($educationalUse) ) ? $educationalUse : '';
+									$encoding = ( isset($encoding) && !empty($encoding) ) ? $encoding : '';
+									$encodingFormat = ( isset($encodingFormat) && !empty($encodingFormat) ) ? $encodingFormat : '';
+									$exampleOfWork = ( isset($exampleOfWork) && !empty($exampleOfWork) ) ? $exampleOfWork : '';
+									$expires = ( isset($expires) && !empty($expires) ) ? $expires : '';
+									$funder = ( isset($funder) && !empty($funder) ) ? $funder : '';
+									$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
+									$genre = ( isset($genre) && !empty($genre) ) ? $genre : '';
+									$hasPart = ( isset($hasPart) && !empty($hasPart) ) ? $hasPart : '';
+									$headline = ( isset($headline) && !empty($headline) ) ? $headline : '';
+									$inLanguage = ( isset($inLanguage) && !empty($inLanguage) ) ? $inLanguage : '';
+									$interactionStatistic = ( isset($interactionStatistic) && !empty($interactionStatistic) ) ? $interactionStatistic : '';
+									$interactivityType = ( isset($interactivityType) && !empty($interactivityType) ) ? $interactivityType : '';
+									$interpretedAsClaim = ( isset($interpretedAsClaim) && !empty($interpretedAsClaim) ) ? $interpretedAsClaim : '';
+									$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
+									$isBasedOn = ( isset($isBasedOn) && !empty($isBasedOn) ) ? $isBasedOn : '';
+									$isFamilyFriendly = ( isset($isFamilyFriendly) && !empty($isFamilyFriendly) ) ? $isFamilyFriendly : '';
+									$isPartOf = ( isset($isPartOf) && !empty($isPartOf) ) ? $isPartOf : '';
+									$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
+									$learningResourceType = ( isset($learningResourceType) && !empty($learningResourceType) ) ? $learningResourceType : '';
+									$license = ( isset($license) && !empty($license) ) ? $license : '';
+									$locationCreated = ( isset($locationCreated) && !empty($locationCreated) ) ? $locationCreated : '';
+									$mainEntity = ( isset($mainEntity) && !empty($mainEntity) ) ? $mainEntity : '';
+									$maintainer = ( isset($maintainer) && !empty($maintainer) ) ? $maintainer : '';
+									$material = ( isset($material) && !empty($material) ) ? $material : '';
+									$materialExtent = ( isset($materialExtent) && !empty($materialExtent) ) ? $materialExtent : '';
+									$mentions = ( isset($mentions) && !empty($mentions) ) ? $mentions : '';
+									$offers = ( isset($offers) && !empty($offers) ) ? $offers : '';
+									$pattern = ( isset($pattern) && !empty($pattern) ) ? $pattern : '';
+									$position = ( isset($position) && !empty($position) ) ? $position : '';
+									$producer = ( isset($producer) && !empty($producer) ) ? $producer : '';
+									$provider = ( isset($provider) && !empty($provider) ) ? $provider : '';
+									$publication = ( isset($publication) && !empty($publication) ) ? $publication : '';
+									$publisher = ( isset($publisher) && !empty($publisher) ) ? $publisher : '';
+									$publisherImprint = ( isset($publisherImprint) && !empty($publisherImprint) ) ? $publisherImprint : '';
+									$publishingPrinciples = ( isset($publishingPrinciples) && !empty($publishingPrinciples) ) ? $publishingPrinciples : '';
+									$recordedAt = ( isset($recordedAt) && !empty($recordedAt) ) ? $recordedAt : '';
+									$releasedEvent = ( isset($releasedEvent) && !empty($releasedEvent) ) ? $releasedEvent : '';
+									$review = ( isset($review) && !empty($review) ) ? $review : '';
+									$schemaVersion = ( isset($schemaVersion) && !empty($schemaVersion) ) ? $schemaVersion : '';
+									$sdDatePublished = ( isset($sdDatePublished) && !empty($sdDatePublished) ) ? $sdDatePublished : '';
+									$sdLicense = ( isset($sdLicense) && !empty($sdLicense) ) ? $sdLicense : '';
+									$sdPublisher = ( isset($sdPublisher) && !empty($sdPublisher) ) ? $sdPublisher : '';
+									$size = ( isset($size) && !empty($size) ) ? $size : '';
+									$sourceOrganization = ( isset($sourceOrganization) && !empty($sourceOrganization) ) ? $sourceOrganization : '';
+									$spatial = ( isset($spatial) && !empty($spatial) ) ? $spatial : '';
+									$spatialCoverage = ( isset($spatialCoverage) && !empty($spatialCoverage) ) ? $spatialCoverage : '';
+									$sponsor = ( isset($sponsor) && !empty($sponsor) ) ? $sponsor : '';
+									$teaches = ( isset($teaches) && !empty($teaches) ) ? $teaches : '';
+									$temporal = ( isset($temporal) && !empty($temporal) ) ? $temporal : '';
+									$temporalCoverage = ( isset($temporalCoverage) && !empty($temporalCoverage) ) ? $temporalCoverage : '';
+									$text = ( isset($text) && !empty($text) ) ? $text : '';
+									$thumbnail = ( isset($thumbnail) && !empty($thumbnail) ) ? $thumbnail : '';
+									$thumbnailUrl = ( isset($thumbnailUrl) && !empty($thumbnailUrl) ) ? $thumbnailUrl : '';
+									$timeRequired = ( isset($timeRequired) && !empty($timeRequired) ) ? $timeRequired : '';
+									$translationOfWork = ( isset($translationOfWork) && !empty($translationOfWork) ) ? $translationOfWork : '';
+									$translator = ( isset($translator) && !empty($translator) ) ? $translator : '';
+									$typicalAgeRange = ( isset($typicalAgeRange) && !empty($typicalAgeRange) ) ? $typicalAgeRange : '';
+									$usageInfo = ( isset($usageInfo) && !empty($usageInfo) ) ? $usageInfo : '';
+									$version = ( isset($version) && !empty($version) ) ? $version : '';
+									$video = ( isset($video) && !empty($video) ) ? $video : '';
+									$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
+									$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
+			
+								// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
+			
+									$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
+									$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
+									$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
+									$primaryImageOfPage = ( isset($primaryImageOfPage) && !empty($primaryImageOfPage) ) ? $primaryImageOfPage : '';
+									$relatedLink = ( isset($relatedLink) && !empty($relatedLink) ) ? $relatedLink : '';
+									$reviewedBy = ( isset($reviewedBy) && !empty($reviewedBy) ) ? $reviewedBy : '';
+									$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
+									$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
+									$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
+					
+								// Inherited properties from CollectionPage (Thing > CreativeWork > WebPage > CollectionPage)
+			
+									// Do nothing (no property vars)
+
+								// Properties from MediaGallery (Thing > CreativeWork > WebPage > CollectionPage > MediaGallery)
+			
+									// Do nothing (no property vars)
+
+							// Add values to the schema array
+			
+								// Inherited properties
+			
+									$schema = uamswp_fad_schema_collectionpage(
+										$schema, // array // Main schema array
+										// CollectionPage (no property vars)
+										// WebPage
+											$breadcrumb, // breadcrumb
+											$lastReviewed, // lastReviewed
+											$mainContentOfPage, // mainContentOfPage
+											$primaryImageOfPage, // primaryImageOfPage
+											$relatedLink, // relatedLink
+											$reviewedBy, // reviewedBy
+											$significantLink, // significantLink
+											$speakable, // speakable
+											$specialty, // specialty
+										// CreativeWork
+											$about, // about
+											$abstract, // abstract
+											$accessibilityAPI, // accessibilityAPI
+											$accessibilityControl, // accessibilityControl
+											$accessibilityFeature, // accessibilityFeature
+											$accessibilityHazard, // accessibilityHazard
+											$accessibilitySummary, // accessibilitySummary
+											$accessMode, // accessMode
+											$accessModeSufficient, // accessModeSufficient
+											$accountablePerson, // accountablePerson
+											$acquireLicensePage, // acquireLicensePage
+											$aggregateRating, // aggregateRating
+											$alternativeHeadline, // alternativeHeadline
+											$archivedAt, // archivedAt
+											$assesses, // assesses
+											$associatedMedia, // associatedMedia
+											$audience, // audience
+											$audio, // audio
+											$author, // author
+											$award, // award
+											$character, // character
+											$citation, // citation
+											$comment, // comment
+											$commentCount, // commentCount
+											$conditionsOfAccess, // conditionsOfAccess
+											$contentLocation, // contentLocation
+											$contentRating, // contentRating
+											$contentReferenceTime, // contentReferenceTime
+											$contributor, // contributor
+											$copyrightHolder, // copyrightHolder
+											$copyrightNotice, // copyrightNotice
+											$copyrightYear, // copyrightYear
+											$correction, // correction
+											$countryOfOrigin, // countryOfOrigin
+											$creativeWorkStatus, // creativeWorkStatus
+											$creator, // creator
+											$creditText, // creditText
+											$dateCreated, // dateCreated
+											$dateModified, // dateModified
+											$datePublished, // datePublished
+											$discussionUrl, // discussionUrl
+											$editEIDR, // editEIDR
+											$editor, // editor
+											$educationalAlignment, // educationalAlignment
+											$educationalLevel, // educationalLevel
+											$educationalUse, // educationalUse
+											$encoding, // encoding
+											$encodingFormat, // encodingFormat
+											$exampleOfWork, // exampleOfWork
+											$expires, // expires
+											$funder, // funder
+											$funding, // funding
+											$genre, // genre
+											$hasPart, // hasPart
+											$headline, // headline
+											$inLanguage, // inLanguage
+											$interactionStatistic, // interactionStatistic
+											$interactivityType, // interactivityType
+											$interpretedAsClaim, // interpretedAsClaim
+											$isAccessibleForFree, // isAccessibleForFree
+											$isBasedOn, // isBasedOn
+											$isFamilyFriendly, // isFamilyFriendly
+											$isPartOf, // isPartOf
+											$keywords, // keywords
+											$learningResourceType, // learningResourceType
+											$license, // license
+											$locationCreated, // locationCreated
+											$mainEntity, // mainEntity
+											$maintainer, // maintainer
+											$material, // material
+											$materialExtent, // materialExtent
+											$mentions, // mentions
+											$offers, // offers
+											$pattern, // pattern
+											$position, // position
+											$producer, // producer
+											$provider, // provider
+											$publication, // publication
+											$publisher, // publisher
+											$publisherImprint, // publisherImprint
+											$publishingPrinciples, // publishingPrinciples
+											$recordedAt, // recordedAt
+											$releasedEvent, // releasedEvent
+											$review, // review
+											$schemaVersion, // schemaVersion
+											$sdDatePublished, // sdDatePublished
+											$sdLicense, // sdLicense
+											$sdPublisher, // sdPublisher
+											$size, // size
+											$sourceOrganization, // sourceOrganization
+											$spatial, // spatial
+											$spatialCoverage, // spatialCoverage
+											$sponsor, // sponsor
+											$teaches, // teaches
+											$temporal, // temporal
+											$temporalCoverage, // temporalCoverage
+											$text, // text
+											$thumbnail, // thumbnail
+											$thumbnailUrl, // thumbnailUrl
+											$timeRequired, // timeRequired
+											$translationOfWork, // translationOfWork
+											$translator, // translator
+											$typicalAgeRange, // typicalAgeRange
+											$usageInfo, // usageInfo
+											$version, // version
+											$video, // video
+											$workExample, // workExample
+											$workTranslation, // workTranslation
+										// Thing
+											$additionalType, // additionalType
+											$alternateName, // alternateName
+											$description, // description
+											$disambiguatingDescription, // disambiguatingDescription
+											$identifier, // identifier
+											$image, // image
+											$mainEntityOfPage, // mainEntityOfPage
+											$name, // name
+											$potentialAction, // potentialAction
+											$sameAs, // sameAs
+											$subjectOf, // subjectOf
+											$url // url
+									);
+			
+								// Properties from MediaGallery
+			
+									// Do nothing (no property vars)
+			
+							// Remove any empty values from the schema array
+			
+								$schema = array_filter($schema);
+			
+							return $schema;
+			
+						}
+
 			// ContactPage
 
 				/*
