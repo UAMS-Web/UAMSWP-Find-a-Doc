@@ -37459,6 +37459,26 @@
 
 		}
 
+		// AnatomicalStructure
+		// AnatomicalSystem
+		// DrugClass
+		// DrugCost
+		// LifestyleModification
+		// MedicalCause
+		// MedicalCondition
+		// MedicalContraindication
+		// MedicalDevice
+		// MedicalGuideline
+		// MedicalIndication
+		// MedicalIntangible
+		// MedicalProcedure
+		// MedicalRiskEstimator
+		// MedicalRiskFactor
+		// MedicalStudy
+		// MedicalTest
+		// Substance
+		// SuperficialAnatomy
+
 	// Organization
 
 		/*
