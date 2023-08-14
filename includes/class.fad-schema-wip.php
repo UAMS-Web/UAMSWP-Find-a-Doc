@@ -94,6 +94,10 @@
 
 // Thing
 
+	/*
+	 * The most generic type of item.
+	 */
+
 	function uamswp_fad_schema_thing(
 		$schema, // array // Main schema array
 		// Thing
@@ -38232,6 +38236,157 @@
 		// EnergyConsumptionDetails
 		// EntryPoint
 		// Enumeration
+
+			/*
+			 * Thing > Intangible > Enumeration
+			 * 
+			 * Lists or enumerations — for example, a list of cuisines or music genres, etc.
+			 */
+
+			// AdultOrientedEnumeration
+			// BoardingPolicyType
+			// BookFormatType
+			// BusinessEntityType
+			// BusinessFunction
+			// CarUsageType
+			// ContactPointOption
+			// DayOfWeek
+			// DeliveryMethod
+			// DigitalDocumentPermissionType
+			// DigitalPlatformEnumeration
+			// EnergyEfficiencyEnumeration
+			// EventAttendanceModeEnumeration
+			// GameAvailabilityEnumeration
+			// GamePlayMode
+			// GenderType
+			// GovernmentBenefitsType
+			// HealthAspectEnumeration
+			// ItemAvailability
+			// ItemListOrderType
+			// LegalValueLevel
+			// MapCategoryType
+			// MeasurementMethodEnum
+			// MeasurementTypeEnumeration
+			// MediaManipulationRatingEnumeration
+			// MedicalEnumeration
+
+				/*
+				 * Thing > Intangible > Enumeration > MedicalEnumeration
+				 * 
+				 * Enumerations related to health and the practice of medicine: A concept that is 
+				 * used to attribute a quality to another concept, as a qualifier, a collection of 
+				 * items or a listing of all of the elements of a set in medicine practice.
+				 */
+
+				// DrugCostCategory
+				// DrugPregnancyCategory
+				// DrugPrescriptionStatus
+				// InfectiousAgentClass
+				// MedicalAudienceType
+				// MedicalDevicePurpose
+				// MedicalEvidenceLevel
+				// MedicalImagingTechnique
+				// MedicalObservationalStudyDesign
+				// MedicalProcedureType
+				// MedicalSpecialty
+
+					/*
+					 * Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
+					 * 
+					 *     Also: Thing > Intangible > Enumeration > Specialty > MedicalSpecialty
+					 * 
+					 * Any specific branch of medical science or practice. Medical specialities 
+					 * include clinical specialties that pertain to particular organ systems and 
+					 * their respective disease states, as well as allied health specialties. 
+					 * Enumerated type.
+					 * 
+					 * Enumeration members:
+					 * 
+					 *     Anesthesia
+					 *     Cardiovascular
+					 *     CommunityHealth
+					 *     Dentistry
+					 *     Dermatology
+					 *     DietNutrition
+					 *     Emergency
+					 *     Endocrine
+					 *     Gastroenterologic
+					 *     Genetic
+					 *     Geriatric
+					 *     Gynecologic
+					 *     Hematologic
+					 *     Infectious
+					 *     LaboratoryScience
+					 *     Midwifery
+					 *     Musculoskeletal
+					 *     Neurologic
+					 *     Nursing
+					 *     Obstetric
+					 *     Oncologic
+					 *     Optometric
+					 *     Otolaryngologic
+					 *     Pathology
+					 *     Pediatric
+					 *     PharmacySpecialty
+					 *     Physiotherapy
+					 *     PlasticSurgery
+					 *     Podiatric
+					 *     PrimaryCare
+					 *     Psychiatric
+					 *     PublicHealth
+					 *     Pulmonary
+					 *     Radiography
+					 *     Renal
+					 *     RespiratoryTherapy
+					 *     Rheumatologic
+					 *     SpeechPathology
+					 *     Surgical
+					 *     Toxicologic
+					 *     Urologic
+					 */
+
+				// MedicalStudyStatus
+				// MedicalTrialDesign
+				// MedicineSystem
+				// PhysicalExam
+
+			// MerchantReturnEnumeration
+			// MusicAlbumProductionType
+			// MusicAlbumReleaseType
+			// MusicReleaseFormatType
+			// NonprofitType
+			// OfferItemCondition
+			// PaymentMethod
+			// PhysicalActivityCategory
+			// PriceComponentTypeEnumeration
+			// PriceTypeEnumeration
+			// QualitativeValue
+			// RefundTypeEnumeration
+			// RestrictedDiet
+			// ReturnFeesEnumeration
+			// ReturnLabelSourceEnumeration
+			// ReturnMethodEnumeration
+			// RsvpResponseType
+			// SizeGroupEnumeration
+			// SizeSystemEnumeration
+			// Specialty
+
+				/*
+				 * Thing > Intangible > Enumeration > Specialty
+				 * 
+				 * Any branch of a field in which people typically develop specific expertise, 
+				 * usually after significant study, time, and effort.
+				 */
+
+				// MedicalSpecialty
+
+					/*
+					 * See: Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
+					 */
+
+			// StatusEnumeration
+			// WarrantyScope
+
 		// FloorPlan
 		// GameServer
 		// GeospatialGeometry
