@@ -97,18 +97,18 @@
 	function uamswp_fad_schema_thing(
 		$schema, // array // Main schema array
 		// Thing
-		$additionalType = '', // additionalType
-		$alternateName = '', // alternateName
-		$description = '', // description
-		$disambiguatingDescription = '', // disambiguatingDescription
-		$identifier = '', // identifier
-		$image = '', // image
-		$mainEntityOfPage = '', // mainEntityOfPage
-		$name = '', // name
-		$potentialAction = '', // potentialAction
-		$sameAs = '', // sameAs
-		$subjectOf = '', // subjectOf
-		$url = '' // url
+			$additionalType = '', // additionalType
+			$alternateName = '', // alternateName
+			$description = '', // description
+			$disambiguatingDescription = '', // disambiguatingDescription
+			$identifier = '', // identifier
+			$image = '', // image
+			$mainEntityOfPage = '', // mainEntityOfPage
+			$name = '', // name
+			$potentialAction = '', // potentialAction
+			$sameAs = '', // sameAs
+			$subjectOf = '', // subjectOf
+			$url = '' // url
 	) {
 
 		// Check/define variables
@@ -309,20 +309,20 @@
 		function uamswp_fad_schema_Action(
 			$schema, // array // Main schema array
 			// Action
-			$foo, // foo
+				$foo, // foo
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -398,20 +398,20 @@
 		function uamswp_fad_schema_BioChemEntity(
 			$schema, // array // Main schema array
 			// BioChemEntity
-			$foo, // foo
+				$foo, // foo
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -488,127 +488,127 @@
 		function uamswp_fad_schema_creativework(
 			$schema = '', // array // Main schema array
 			// CreativeWork
-			$about = '', // about
-			$abstract = '', // abstract
-			$accessibilityAPI = '', // accessibilityAPI
-			$accessibilityControl = '', // accessibilityControl
-			$accessibilityFeature = '', // accessibilityFeature
-			$accessibilityHazard = '', // accessibilityHazard
-			$accessibilitySummary = '', // accessibilitySummary
-			$accessMode = '', // accessMode
-			$accessModeSufficient = '', // accessModeSufficient
-			$accountablePerson = '', // accountablePerson
-			$acquireLicensePage = '', // acquireLicensePage
-			$aggregateRating = '', // aggregateRating
-			$alternativeHeadline = '', // alternativeHeadline
-			$archivedAt = '', // archivedAt
-			$assesses = '', // assesses
-			$associatedMedia = '', // associatedMedia
-			$audience = '', // audience
-			$audio = '', // audio
-			$author = '', // author
-			$award = '', // award
-			$character = '', // character
-			$citation = '', // citation
-			$comment = '', // comment
-			$commentCount = '', // commentCount
-			$conditionsOfAccess = '', // conditionsOfAccess
-			$contentLocation = '', // contentLocation
-			$contentRating = '', // contentRating
-			$contentReferenceTime = '', // contentReferenceTime
-			$contributor = '', // contributor
-			$copyrightHolder = '', // copyrightHolder
-			$copyrightNotice = '', // copyrightNotice
-			$copyrightYear = '', // copyrightYear
-			$correction = '', // correction
-			$countryOfOrigin = '', // countryOfOrigin
-			$creativeWorkStatus = '', // creativeWorkStatus
-			$creator = '', // creator
-			$creditText = '', // creditText
-			$dateCreated = '', // dateCreated
-			$dateModified = '', // dateModified
-			$datePublished = '', // datePublished
-			$discussionUrl = '', // discussionUrl
-			$editEIDR = '', // editEIDR
-			$editor = '', // editor
-			$educationalAlignment = '', // educationalAlignment
-			$educationalLevel = '', // educationalLevel
-			$educationalUse = '', // educationalUse
-			$encoding = '', // encoding
-			$encodingFormat = '', // encodingFormat
-			$exampleOfWork = '', // exampleOfWork
-			$expires = '', // expires
-			$funder = '', // funder
-			$funding = '', // funding
-			$genre = '', // genre
-			$hasPart = '', // hasPart
-			$headline = '', // headline
-			$inLanguage = '', // inLanguage
-			$interactionStatistic = '', // interactionStatistic
-			$interactivityType = '', // interactivityType
-			$interpretedAsClaim = '', // interpretedAsClaim
-			$isAccessibleForFree = '', // isAccessibleForFree
-			$isBasedOn = '', // isBasedOn
-			$isFamilyFriendly = '', // isFamilyFriendly
-			$isPartOf = '', // isPartOf
-			$keywords = '', // keywords
-			$learningResourceType = '', // learningResourceType
-			$license = '', // license
-			$locationCreated = '', // locationCreated
-			$mainEntity = '', // mainEntity
-			$maintainer = '', // maintainer
-			$material = '', // material
-			$materialExtent = '', // materialExtent
-			$mentions = '', // mentions
-			$offers = '', // offers
-			$pattern = '', // pattern
-			$position = '', // position
-			$producer = '', // producer
-			$provider = '', // provider
-			$publication = '', // publication
-			$publisher = '', // publisher
-			$publisherImprint = '', // publisherImprint
-			$publishingPrinciples = '', // publishingPrinciples
-			$recordedAt = '', // recordedAt
-			$releasedEvent = '', // releasedEvent
-			$review = '', // review
-			$schemaVersion = '', // schemaVersion
-			$sdDatePublished = '', // sdDatePublished
-			$sdLicense = '', // sdLicense
-			$sdPublisher = '', // sdPublisher
-			$size = '', // size
-			$sourceOrganization = '', // sourceOrganization
-			$spatial = '', // spatial
-			$spatialCoverage = '', // spatialCoverage
-			$sponsor = '', // sponsor
-			$teaches = '', // teaches
-			$temporal = '', // temporal
-			$temporalCoverage = '', // temporalCoverage
-			$text = '', // text
-			$thumbnail = '', // thumbnail
-			$thumbnailUrl = '', // thumbnailUrl
-			$timeRequired = '', // timeRequired
-			$translationOfWork = '', // translationOfWork
-			$translator = '', // translator
-			$typicalAgeRange = '', // typicalAgeRange
-			$usageInfo = '', // usageInfo
-			$version = '', // version
-			$video = '', // video
-			$workExample = '', // workExample
-			$workTranslation = '', // workTranslation
+				$about = '', // about
+				$abstract = '', // abstract
+				$accessibilityAPI = '', // accessibilityAPI
+				$accessibilityControl = '', // accessibilityControl
+				$accessibilityFeature = '', // accessibilityFeature
+				$accessibilityHazard = '', // accessibilityHazard
+				$accessibilitySummary = '', // accessibilitySummary
+				$accessMode = '', // accessMode
+				$accessModeSufficient = '', // accessModeSufficient
+				$accountablePerson = '', // accountablePerson
+				$acquireLicensePage = '', // acquireLicensePage
+				$aggregateRating = '', // aggregateRating
+				$alternativeHeadline = '', // alternativeHeadline
+				$archivedAt = '', // archivedAt
+				$assesses = '', // assesses
+				$associatedMedia = '', // associatedMedia
+				$audience = '', // audience
+				$audio = '', // audio
+				$author = '', // author
+				$award = '', // award
+				$character = '', // character
+				$citation = '', // citation
+				$comment = '', // comment
+				$commentCount = '', // commentCount
+				$conditionsOfAccess = '', // conditionsOfAccess
+				$contentLocation = '', // contentLocation
+				$contentRating = '', // contentRating
+				$contentReferenceTime = '', // contentReferenceTime
+				$contributor = '', // contributor
+				$copyrightHolder = '', // copyrightHolder
+				$copyrightNotice = '', // copyrightNotice
+				$copyrightYear = '', // copyrightYear
+				$correction = '', // correction
+				$countryOfOrigin = '', // countryOfOrigin
+				$creativeWorkStatus = '', // creativeWorkStatus
+				$creator = '', // creator
+				$creditText = '', // creditText
+				$dateCreated = '', // dateCreated
+				$dateModified = '', // dateModified
+				$datePublished = '', // datePublished
+				$discussionUrl = '', // discussionUrl
+				$editEIDR = '', // editEIDR
+				$editor = '', // editor
+				$educationalAlignment = '', // educationalAlignment
+				$educationalLevel = '', // educationalLevel
+				$educationalUse = '', // educationalUse
+				$encoding = '', // encoding
+				$encodingFormat = '', // encodingFormat
+				$exampleOfWork = '', // exampleOfWork
+				$expires = '', // expires
+				$funder = '', // funder
+				$funding = '', // funding
+				$genre = '', // genre
+				$hasPart = '', // hasPart
+				$headline = '', // headline
+				$inLanguage = '', // inLanguage
+				$interactionStatistic = '', // interactionStatistic
+				$interactivityType = '', // interactivityType
+				$interpretedAsClaim = '', // interpretedAsClaim
+				$isAccessibleForFree = '', // isAccessibleForFree
+				$isBasedOn = '', // isBasedOn
+				$isFamilyFriendly = '', // isFamilyFriendly
+				$isPartOf = '', // isPartOf
+				$keywords = '', // keywords
+				$learningResourceType = '', // learningResourceType
+				$license = '', // license
+				$locationCreated = '', // locationCreated
+				$mainEntity = '', // mainEntity
+				$maintainer = '', // maintainer
+				$material = '', // material
+				$materialExtent = '', // materialExtent
+				$mentions = '', // mentions
+				$offers = '', // offers
+				$pattern = '', // pattern
+				$position = '', // position
+				$producer = '', // producer
+				$provider = '', // provider
+				$publication = '', // publication
+				$publisher = '', // publisher
+				$publisherImprint = '', // publisherImprint
+				$publishingPrinciples = '', // publishingPrinciples
+				$recordedAt = '', // recordedAt
+				$releasedEvent = '', // releasedEvent
+				$review = '', // review
+				$schemaVersion = '', // schemaVersion
+				$sdDatePublished = '', // sdDatePublished
+				$sdLicense = '', // sdLicense
+				$sdPublisher = '', // sdPublisher
+				$size = '', // size
+				$sourceOrganization = '', // sourceOrganization
+				$spatial = '', // spatial
+				$spatialCoverage = '', // spatialCoverage
+				$sponsor = '', // sponsor
+				$teaches = '', // teaches
+				$temporal = '', // temporal
+				$temporalCoverage = '', // temporalCoverage
+				$text = '', // text
+				$thumbnail = '', // thumbnail
+				$thumbnailUrl = '', // thumbnailUrl
+				$timeRequired = '', // timeRequired
+				$translationOfWork = '', // translationOfWork
+				$translator = '', // translator
+				$typicalAgeRange = '', // typicalAgeRange
+				$usageInfo = '', // usageInfo
+				$version = '', // version
+				$video = '', // video
+				$workExample = '', // workExample
+				$workTranslation = '', // workTranslation
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -2234,127 +2234,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from AmpStory
@@ -2653,127 +2653,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from ArchiveComponent
@@ -3072,127 +3072,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Article
@@ -3491,127 +3491,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Atlas
@@ -3910,127 +3910,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Blog
@@ -4329,127 +4329,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Book
@@ -4748,127 +4748,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Chapter
@@ -5167,127 +5167,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Claim
@@ -5586,127 +5586,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Clip
@@ -6005,127 +6005,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Collection
@@ -6424,127 +6424,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from ComicStory
@@ -6843,127 +6843,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Comment
@@ -7262,127 +7262,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Conversation
@@ -7681,127 +7681,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Course
@@ -8100,127 +8100,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from CreativeWorkSeason
@@ -8519,127 +8519,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from CreativeWorkSeries
@@ -8938,127 +8938,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from DataCatalog
@@ -9357,127 +9357,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Dataset
@@ -9776,127 +9776,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from DefinedTermSet
@@ -10195,127 +10195,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Diet
@@ -10614,127 +10614,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from DigitalDocument
@@ -11033,127 +11033,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Drawing
@@ -11452,127 +11452,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from EducationalOccupationalCredential
@@ -11871,127 +11871,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Episode
@@ -12290,127 +12290,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from ExercisePlan
@@ -12709,127 +12709,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Game
@@ -13128,127 +13128,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Guide
@@ -13547,127 +13547,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HowTo
@@ -13966,127 +13966,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HowToDirection
@@ -14385,127 +14385,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HowToSection
@@ -14804,127 +14804,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HowToStep
@@ -15223,127 +15223,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HowToTip
@@ -15642,127 +15642,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HyperToc
@@ -16061,127 +16061,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from HyperTocEntry
@@ -16480,127 +16480,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from LearningResource
@@ -16899,127 +16899,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Legislation
@@ -17318,127 +17318,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Manuscript
@@ -17737,127 +17737,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Map
@@ -18156,127 +18156,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MathSolver
@@ -18575,127 +18575,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MediaObject
@@ -18994,127 +18994,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MediaReviewItem
@@ -19413,127 +19413,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Menu
@@ -19832,127 +19832,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MenuSection
@@ -20251,127 +20251,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Message
@@ -20670,127 +20670,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Movie
@@ -21089,127 +21089,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MusicComposition
@@ -21508,127 +21508,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MusicPlaylist
@@ -21927,127 +21927,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from MusicRecording
@@ -22346,127 +22346,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Painting
@@ -22765,127 +22765,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Photograph
@@ -23184,127 +23184,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Play
@@ -23603,127 +23603,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Poster
@@ -24022,127 +24022,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from PublicationIssue
@@ -24441,127 +24441,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from PublicationVolume
@@ -24860,127 +24860,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Quotation
@@ -25279,127 +25279,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Review
@@ -25698,127 +25698,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Sculpture
@@ -26117,127 +26117,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from SheetMusic
@@ -26536,127 +26536,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from ShortStory
@@ -26955,127 +26955,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from SoftwareApplication
@@ -27374,127 +27374,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from SoftwareSourceCode
@@ -27793,127 +27793,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from SpecialAnnouncement
@@ -28212,127 +28212,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Statement
@@ -28631,127 +28631,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from TVSeason
@@ -29050,127 +29050,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from TVSeries
@@ -29469,127 +29469,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from Thesis
@@ -29888,127 +29888,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from VisualArtwork
@@ -30307,127 +30307,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from WebContent
@@ -30746,127 +30746,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from WebPage
@@ -36615,127 +36615,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from WebPageElement
@@ -37034,127 +37034,127 @@
 						$schema = uamswp_fad_schema_creativework(
 							$schema, // array // Main schema array
 							// CreativeWork
-							$about, // about
-							$abstract, // abstract
-							$accessibilityAPI, // accessibilityAPI
-							$accessibilityControl, // accessibilityControl
-							$accessibilityFeature, // accessibilityFeature
-							$accessibilityHazard, // accessibilityHazard
-							$accessibilitySummary, // accessibilitySummary
-							$accessMode, // accessMode
-							$accessModeSufficient, // accessModeSufficient
-							$accountablePerson, // accountablePerson
-							$acquireLicensePage, // acquireLicensePage
-							$aggregateRating, // aggregateRating
-							$alternativeHeadline, // alternativeHeadline
-							$archivedAt, // archivedAt
-							$assesses, // assesses
-							$associatedMedia, // associatedMedia
-							$audience, // audience
-							$audio, // audio
-							$author, // author
-							$award, // award
-							$character, // character
-							$citation, // citation
-							$comment, // comment
-							$commentCount, // commentCount
-							$conditionsOfAccess, // conditionsOfAccess
-							$contentLocation, // contentLocation
-							$contentRating, // contentRating
-							$contentReferenceTime, // contentReferenceTime
-							$contributor, // contributor
-							$copyrightHolder, // copyrightHolder
-							$copyrightNotice, // copyrightNotice
-							$copyrightYear, // copyrightYear
-							$correction, // correction
-							$countryOfOrigin, // countryOfOrigin
-							$creativeWorkStatus, // creativeWorkStatus
-							$creator, // creator
-							$creditText, // creditText
-							$dateCreated, // dateCreated
-							$dateModified, // dateModified
-							$datePublished, // datePublished
-							$discussionUrl, // discussionUrl
-							$editEIDR, // editEIDR
-							$editor, // editor
-							$educationalAlignment, // educationalAlignment
-							$educationalLevel, // educationalLevel
-							$educationalUse, // educationalUse
-							$encoding, // encoding
-							$encodingFormat, // encodingFormat
-							$exampleOfWork, // exampleOfWork
-							$expires, // expires
-							$funder, // funder
-							$funding, // funding
-							$genre, // genre
-							$hasPart, // hasPart
-							$headline, // headline
-							$inLanguage, // inLanguage
-							$interactionStatistic, // interactionStatistic
-							$interactivityType, // interactivityType
-							$interpretedAsClaim, // interpretedAsClaim
-							$isAccessibleForFree, // isAccessibleForFree
-							$isBasedOn, // isBasedOn
-							$isFamilyFriendly, // isFamilyFriendly
-							$isPartOf, // isPartOf
-							$keywords, // keywords
-							$learningResourceType, // learningResourceType
-							$license, // license
-							$locationCreated, // locationCreated
-							$mainEntity, // mainEntity
-							$maintainer, // maintainer
-							$material, // material
-							$materialExtent, // materialExtent
-							$mentions, // mentions
-							$offers, // offers
-							$pattern, // pattern
-							$position, // position
-							$producer, // producer
-							$provider, // provider
-							$publication, // publication
-							$publisher, // publisher
-							$publisherImprint, // publisherImprint
-							$publishingPrinciples, // publishingPrinciples
-							$recordedAt, // recordedAt
-							$releasedEvent, // releasedEvent
-							$review, // review
-							$schemaVersion, // schemaVersion
-							$sdDatePublished, // sdDatePublished
-							$sdLicense, // sdLicense
-							$sdPublisher, // sdPublisher
-							$size, // size
-							$sourceOrganization, // sourceOrganization
-							$spatial, // spatial
-							$spatialCoverage, // spatialCoverage
-							$sponsor, // sponsor
-							$teaches, // teaches
-							$temporal, // temporal
-							$temporalCoverage, // temporalCoverage
-							$text, // text
-							$thumbnail, // thumbnail
-							$thumbnailUrl, // thumbnailUrl
-							$timeRequired, // timeRequired
-							$translationOfWork, // translationOfWork
-							$translator, // translator
-							$typicalAgeRange, // typicalAgeRange
-							$usageInfo, // usageInfo
-							$version, // version
-							$video, // video
-							$workExample, // workExample
-							$workTranslation, // workTranslation
+								$about, // about
+								$abstract, // abstract
+								$accessibilityAPI, // accessibilityAPI
+								$accessibilityControl, // accessibilityControl
+								$accessibilityFeature, // accessibilityFeature
+								$accessibilityHazard, // accessibilityHazard
+								$accessibilitySummary, // accessibilitySummary
+								$accessMode, // accessMode
+								$accessModeSufficient, // accessModeSufficient
+								$accountablePerson, // accountablePerson
+								$acquireLicensePage, // acquireLicensePage
+								$aggregateRating, // aggregateRating
+								$alternativeHeadline, // alternativeHeadline
+								$archivedAt, // archivedAt
+								$assesses, // assesses
+								$associatedMedia, // associatedMedia
+								$audience, // audience
+								$audio, // audio
+								$author, // author
+								$award, // award
+								$character, // character
+								$citation, // citation
+								$comment, // comment
+								$commentCount, // commentCount
+								$conditionsOfAccess, // conditionsOfAccess
+								$contentLocation, // contentLocation
+								$contentRating, // contentRating
+								$contentReferenceTime, // contentReferenceTime
+								$contributor, // contributor
+								$copyrightHolder, // copyrightHolder
+								$copyrightNotice, // copyrightNotice
+								$copyrightYear, // copyrightYear
+								$correction, // correction
+								$countryOfOrigin, // countryOfOrigin
+								$creativeWorkStatus, // creativeWorkStatus
+								$creator, // creator
+								$creditText, // creditText
+								$dateCreated, // dateCreated
+								$dateModified, // dateModified
+								$datePublished, // datePublished
+								$discussionUrl, // discussionUrl
+								$editEIDR, // editEIDR
+								$editor, // editor
+								$educationalAlignment, // educationalAlignment
+								$educationalLevel, // educationalLevel
+								$educationalUse, // educationalUse
+								$encoding, // encoding
+								$encodingFormat, // encodingFormat
+								$exampleOfWork, // exampleOfWork
+								$expires, // expires
+								$funder, // funder
+								$funding, // funding
+								$genre, // genre
+								$hasPart, // hasPart
+								$headline, // headline
+								$inLanguage, // inLanguage
+								$interactionStatistic, // interactionStatistic
+								$interactivityType, // interactivityType
+								$interpretedAsClaim, // interpretedAsClaim
+								$isAccessibleForFree, // isAccessibleForFree
+								$isBasedOn, // isBasedOn
+								$isFamilyFriendly, // isFamilyFriendly
+								$isPartOf, // isPartOf
+								$keywords, // keywords
+								$learningResourceType, // learningResourceType
+								$license, // license
+								$locationCreated, // locationCreated
+								$mainEntity, // mainEntity
+								$maintainer, // maintainer
+								$material, // material
+								$materialExtent, // materialExtent
+								$mentions, // mentions
+								$offers, // offers
+								$pattern, // pattern
+								$position, // position
+								$producer, // producer
+								$provider, // provider
+								$publication, // publication
+								$publisher, // publisher
+								$publisherImprint, // publisherImprint
+								$publishingPrinciples, // publishingPrinciples
+								$recordedAt, // recordedAt
+								$releasedEvent, // releasedEvent
+								$review, // review
+								$schemaVersion, // schemaVersion
+								$sdDatePublished, // sdDatePublished
+								$sdLicense, // sdLicense
+								$sdPublisher, // sdPublisher
+								$size, // size
+								$sourceOrganization, // sourceOrganization
+								$spatial, // spatial
+								$spatialCoverage, // spatialCoverage
+								$sponsor, // sponsor
+								$teaches, // teaches
+								$temporal, // temporal
+								$temporalCoverage, // temporalCoverage
+								$text, // text
+								$thumbnail, // thumbnail
+								$thumbnailUrl, // thumbnailUrl
+								$timeRequired, // timeRequired
+								$translationOfWork, // translationOfWork
+								$translator, // translator
+								$typicalAgeRange, // typicalAgeRange
+								$usageInfo, // usageInfo
+								$version, // version
+								$video, // video
+								$workExample, // workExample
+								$workTranslation, // workTranslation
 							// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
 						);
 
 					// Properties from WebSite
@@ -37187,20 +37187,20 @@
 		function uamswp_fad_schema_Event(
 			$schema, // array // Main schema array
 			// Event
-			$foo, // foo
+				$foo, // foo
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -38223,12 +38223,6 @@
 					/*
 					 * See: Thing > Intangible > Audience > MedicalAudience
 					 */
-
-					 // Patient
-					 
-						/*
-						* See: Thing > Intangible > Audience > MedicalAudience > Patient
-						*/
 
 				// ParentAudience
 
@@ -41597,26 +41591,28 @@
 	// Organization
 
 		/*
+		 * Thing > Organization
 		 * 
+		 * An organization such as a school, NGO, corporation, club, etc.
 		 */
 
 		function uamswp_fad_schema_Organization(
 			$schema, // array // Main schema array
 			// Organization
-			$foo, // foo
+				$foo, // foo
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -41682,6 +41678,1051 @@
 			return $schema;
 
 		}
+
+		// Airline
+		// Consortium
+		// Corporation
+		// EducationalOrganization
+		// FundingScheme
+		// GovernmentOrganization
+		// LibrarySystem
+		// LocalBusiness
+
+			/*
+			 * Thing > Organization > LocalBusiness
+			 * 
+			 *     Also: Thing > Place > LocalBusiness
+			 * 
+			 * A particular physical business or branch of an organization. Examples of 
+			 * LocalBusiness include a restaurant, a particular branch of a restaurant chain, 
+			 * a branch of a bank, a medical practice, a club, a bowling alley, etc.
+			 */
+
+			function uamswp_fad_schema_localbusiness(
+				$schema, // array // Main schema array
+				// LocalBusiness
+					$currenciesAccepted = '', // currenciesAccepted
+					$openingHours = '', // openingHours
+					$paymentAccepted = '', // paymentAccepted
+					$priceRange = '', // priceRange
+				// Place
+					$additionalProperty = '', // additionalProperty
+					$address = '', // address
+					$aggregateRating = '', // aggregateRating
+					$amenityFeature = '', // amenityFeature
+					$branchCode = '', // branchCode
+					$containedInPlace = '', // containedInPlace
+					$containsPlace = '', // containsPlace
+					$event = '', // event
+					$faxNumber = '', // faxNumber
+					$geo = '', // geo
+					$geoContains = '', // geoContains
+					$geoCoveredBy = '', // geoCoveredBy
+					$geoCovers = '', // geoCovers
+					$geoCrosses = '', // geoCrosses
+					$geoDisjoint = '', // geoDisjoint
+					$geoEquals = '', // geoEquals
+					$geoIntersects = '', // geoIntersects
+					$geoOverlaps = '', // geoOverlaps
+					$geoTouches = '', // geoTouches
+					$geoWithin = '', // geoWithin
+					$globalLocationNumber = '', // globalLocationNumber
+					$hasDriveThroughService = '', // hasDriveThroughService
+					$hasMap = '', // hasMap
+					$isAccessibleForFree = '', // isAccessibleForFree
+					$isicV4 = '', // isicV4
+					$keywords = '', // keywords
+					$latitude = '', // latitude
+					$logo = '', // logo
+					$longitude = '', // longitude
+					$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
+					$openingHoursSpecification = '', // openingHoursSpecification
+					$photo = '', // photo
+					$publicAccess = '', // publicAccess
+					$review = '', // review
+					$slogan = '', // slogan
+					$smokingAllowed = '', // smokingAllowed
+					$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
+					$telephone = '', // telephone
+					$tourBookingPage = '', // tourBookingPage
+				// Thing
+					$additionalType = '', // additionalType
+					$alternateName = '', // alternateName
+					$description = '', // description
+					$disambiguatingDescription = '', // disambiguatingDescription
+					$identifier = '', // identifier
+					$image = '', // image
+					$mainEntityOfPage = '', // mainEntityOfPage
+					$name = '', // name
+					$potentialAction = '', // potentialAction
+					$sameAs = '', // sameAs
+					$subjectOf = '', // subjectOf
+					$url = '' // url
+			) {
+
+				// Check/define variables
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+					// Inherited properties from Thing
+
+						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+						$description = ( isset($description) && !empty($description) ) ? $description : '';
+						$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+						$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+						$image = ( isset($image) && !empty($image) ) ? $image : '';
+						$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+						$name = ( isset($name) && !empty($name) ) ? $name : '';
+						$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+						$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+					// Inherited properties from Place (Thing > Place)
+
+					// Properties from LocalBusiness (Thing > Place > LocalBusiness)
+
+						$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
+						$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
+						$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
+						$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
+
+				// Add values to the schema array
+
+					// Inherited properties
+
+						$schema = uamswp_fad_schema_place(
+							$schema, // array // Main schema array
+							$additionalProperty, // additionalProperty
+							$address, // address
+							$aggregateRating, // aggregateRating
+							$amenityFeature, // amenityFeature
+							$branchCode, // branchCode
+							$containedInPlace, // containedInPlace
+							$containsPlace, // containsPlace
+							$event, // event
+							$faxNumber, // faxNumber
+							$geo, // geo
+							$geoContains, // geoContains
+							$geoCoveredBy, // geoCoveredBy
+							$geoCovers, // geoCovers
+							$geoCrosses, // geoCrosses
+							$geoDisjoint, // geoDisjoint
+							$geoEquals, // geoEquals
+							$geoIntersects, // geoIntersects
+							$geoOverlaps, // geoOverlaps
+							$geoTouches, // geoTouches
+							$geoWithin, // geoWithin
+							$globalLocationNumber, // globalLocationNumber
+							$hasDriveThroughService, // hasDriveThroughService
+							$hasMap, // hasMap
+							$isAccessibleForFree, // isAccessibleForFree
+							$isicV4, // isicV4
+							$keywords, // keywords
+							$latitude, // latitude
+							$logo, // logo
+							$longitude, // longitude
+							$maximumAttendeeCapacity, // maximumAttendeeCapacity
+							$openingHoursSpecification, // openingHoursSpecification
+							$photo, // photo
+							$publicAccess, // publicAccess
+							$review, // review
+							$slogan, // slogan
+							$smokingAllowed, // smokingAllowed
+							$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
+							$telephone, // telephone
+							$tourBookingPage, // tourBookingPage
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+						);
+
+					// Properties from LocalBusiness (Thing > Place > LocalBusiness)
+
+						// currenciesAccepted
+
+							/* 
+							 * Expected Type:
+							 *     DataType > Text
+							 * 
+							 * The currency accepted.
+							 * 
+							 * Use standard formats: ISO 4217 currency format (e.g., "USD"; Ticker symbol for 
+							 * cryptocurrencies, e.g., "BTC"; well known names for Local Exchange Trading 
+							 * Systems (LETS) and other currency types, e.g., "Ithaca HOUR").
+							 */
+
+							$schema['currenciesAccepted'] = $currenciesAccepted;
+
+						// openingHours
+
+							/* 
+							 * Expected Type:
+							 *     DataType > Text
+							 * 
+							 * The general opening hours for a business. Opening hours can be specified as a 
+							 * weekly time range, starting with days, then times per day. Multiple days can be 
+							 * listed with commas ',' separating each day. Day or time ranges are specified 
+							 * using a hyphen '-'.
+							 * 
+							 * Days are specified using the following two-letter combinations: Mo, Tu, We, Th, 
+							 * Fr, Sa, Su.
+							 * 
+							 * Times are specified using 24:00 format. For example, 3pm is specified as 15:00, 
+							 * 10am as 10:00.
+							 * 
+							 * Here is an example: 
+							 * <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
+							 * 
+							 * If a business is open 7 days a week, then it can be specified as 
+							 * <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
+							 */
+
+							$schema['openingHours'] = $openingHours;
+
+						// paymentAccepted
+
+							/* 
+							 * Expected Type:
+							 *     DataType > Text
+							 * 
+							 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
+							 */
+
+							$schema['paymentAccepted'] = $paymentAccepted;
+
+						// priceRange
+
+							/* 
+							 * Expected Type:
+							 *     DataType > Text
+							 * 
+							 * The price range of the business, for example $$$.
+							 */
+
+							$schema['priceRange'] = $priceRange;
+
+				// Remove any empty values from the schema array
+
+					$schema = array_filter($schema);
+
+				return $schema;
+
+			}
+
+			// AnimalShelter
+			// ArchiveOrganization
+			// AutomotiveBusiness
+			// ChildCare
+			// Dentist
+			// DryCleaningOrLaundry
+			// EmergencyService
+			// EmploymentAgency
+			// EntertainmentBusiness
+			// FinancialService
+			// FoodEstablishment
+			// GovernmentOffice
+			// HealthAndBeautyBusiness
+			// HomeAndConstructionBusiness
+			// InternetCafe
+			// LegalService
+			// Library
+			// LodgingBusiness
+			// MedicalBusiness
+
+				/*
+				 * Thing > Organization > LocalBusiness > MedicalBusiness
+				 * 
+				 *     Also: Thing > Place > LocalBusiness > MedicalBusiness
+				 * 
+				 * A particular physical or virtual business of an organization for medical 
+				 * purposes. Examples of MedicalBusiness include different businesses run by 
+				 * health professionals.
+				 */
+
+				function uamswp_fad_schema_medicalbusiness(
+					$schema, // array // Main schema array,
+					// MedicalBusiness (no property vars)
+					// LocalBusiness
+						$currenciesAccepted = '', // currenciesAccepted
+						$openingHours = '', // openingHours
+						$paymentAccepted = '', // paymentAccepted
+						$priceRange = '', // priceRange
+					// Place
+						$additionalProperty = '', // additionalProperty
+						$address = '', // address
+						$aggregateRating = '', // aggregateRating
+						$amenityFeature = '', // amenityFeature
+						$branchCode = '', // branchCode
+						$containedInPlace = '', // containedInPlace
+						$containsPlace = '', // containsPlace
+						$event = '', // event
+						$faxNumber = '', // faxNumber
+						$geo = '', // geo
+						$geoContains = '', // geoContains
+						$geoCoveredBy = '', // geoCoveredBy
+						$geoCovers = '', // geoCovers
+						$geoCrosses = '', // geoCrosses
+						$geoDisjoint = '', // geoDisjoint
+						$geoEquals = '', // geoEquals
+						$geoIntersects = '', // geoIntersects
+						$geoOverlaps = '', // geoOverlaps
+						$geoTouches = '', // geoTouches
+						$geoWithin = '', // geoWithin
+						$globalLocationNumber = '', // globalLocationNumber
+						$hasDriveThroughService = '', // hasDriveThroughService
+						$hasMap = '', // hasMap
+						$isAccessibleForFree = '', // isAccessibleForFree
+						$isicV4 = '', // isicV4
+						$keywords = '', // keywords
+						$latitude = '', // latitude
+						$logo = '', // logo
+						$longitude = '', // longitude
+						$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
+						$openingHoursSpecification = '', // openingHoursSpecification
+						$photo = '', // photo
+						$publicAccess = '', // publicAccess
+						$review = '', // review
+						$slogan = '', // slogan
+						$smokingAllowed = '', // smokingAllowed
+						$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
+						$telephone = '', // telephone
+						$tourBookingPage = '', // tourBookingPage
+					// Thing
+						$additionalType = '', // additionalType
+						$alternateName = '', // alternateName
+						$description = '', // description
+						$disambiguatingDescription = '', // disambiguatingDescription
+						$identifier = '', // identifier
+						$image = '', // image
+						$mainEntityOfPage = '', // mainEntityOfPage
+						$name = '', // name
+						$potentialAction = '', // potentialAction
+						$sameAs = '', // sameAs
+						$subjectOf = '', // subjectOf
+						$url = '' // url
+				) {
+
+					// Check/define variables
+
+						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+						// Inherited properties from Thing
+
+							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+							$description = ( isset($description) && !empty($description) ) ? $description : '';
+							$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+							$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+							$image = ( isset($image) && !empty($image) ) ? $image : '';
+							$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+							$name = ( isset($name) && !empty($name) ) ? $name : '';
+							$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+							$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+						// Inherited properties from Place
+
+							$additionalProperty = ( isset($additionalProperty) && !empty($additionalProperty) ) ? $additionalProperty : '';
+							$address = ( isset($address) && !empty($address) ) ? $address : '';
+							$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
+							$amenityFeature = ( isset($amenityFeature) && !empty($amenityFeature) ) ? $amenityFeature : '';
+							$branchCode = ( isset($branchCode) && !empty($branchCode) ) ? $branchCode : '';
+							$containedInPlace = ( isset($containedInPlace) && !empty($containedInPlace) ) ? $containedInPlace : '';
+							$containsPlace = ( isset($containsPlace) && !empty($containsPlace) ) ? $containsPlace : '';
+							$event = ( isset($event) && !empty($event) ) ? $event : '';
+							$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
+							$geo = ( isset($geo) && !empty($geo) ) ? $geo : '';
+							$geoContains = ( isset($geoContains) && !empty($geoContains) ) ? $geoContains : '';
+							$geoCoveredBy = ( isset($geoCoveredBy) && !empty($geoCoveredBy) ) ? $geoCoveredBy : '';
+							$geoCovers = ( isset($geoCovers) && !empty($geoCovers) ) ? $geoCovers : '';
+							$geoCrosses = ( isset($geoCrosses) && !empty($geoCrosses) ) ? $geoCrosses : '';
+							$geoDisjoint = ( isset($geoDisjoint) && !empty($geoDisjoint) ) ? $geoDisjoint : '';
+							$geoEquals = ( isset($geoEquals) && !empty($geoEquals) ) ? $geoEquals : '';
+							$geoIntersects = ( isset($geoIntersects) && !empty($geoIntersects) ) ? $geoIntersects : '';
+							$geoOverlaps = ( isset($geoOverlaps) && !empty($geoOverlaps) ) ? $geoOverlaps : '';
+							$geoTouches = ( isset($geoTouches) && !empty($geoTouches) ) ? $geoTouches : '';
+							$geoWithin = ( isset($geoWithin) && !empty($geoWithin) ) ? $geoWithin : '';
+							$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
+							$hasDriveThroughService = ( isset($hasDriveThroughService) && !empty($hasDriveThroughService) ) ? $hasDriveThroughService : '';
+							$hasMap = ( isset($hasMap) && !empty($hasMap) ) ? $hasMap : '';
+							$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
+							$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
+							$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
+							$latitude = ( isset($latitude) && !empty($latitude) ) ? $latitude : '';
+							$logo = ( isset($logo) && !empty($logo) ) ? $logo : '';
+							$longitude = ( isset($longitude) && !empty($longitude) ) ? $longitude : '';
+							$maximumAttendeeCapacity = ( isset($maximumAttendeeCapacity) && !empty($maximumAttendeeCapacity) ) ? $maximumAttendeeCapacity : '';
+							$openingHoursSpecification = ( isset($openingHoursSpecification) && !empty($openingHoursSpecification) ) ? $openingHoursSpecification : '';
+							$photo = ( isset($photo) && !empty($photo) ) ? $photo : '';
+							$publicAccess = ( isset($publicAccess) && !empty($publicAccess) ) ? $publicAccess : '';
+							$review = ( isset($review) && !empty($review) ) ? $review : '';
+							$slogan = ( isset($slogan) && !empty($slogan) ) ? $slogan : '';
+							$smokingAllowed = ( isset($smokingAllowed) && !empty($smokingAllowed) ) ? $smokingAllowed : '';
+							$specialOpeningHoursSpecification = ( isset($specialOpeningHoursSpecification) && !empty($specialOpeningHoursSpecification) ) ? $specialOpeningHoursSpecification : '';
+							$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
+							$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
+
+						// Inherited properties from LocalBusiness
+
+							$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
+							$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
+							$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
+							$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
+
+						// Properties from MedicalBusiness
+
+							// Do nothing
+
+					// Add values to the schema array
+
+						// Inherited properties
+
+							$schema = uamswp_fad_schema_localbusiness(
+								$schema, // array // Main schema array
+								$currenciesAccepted, // currenciesAccepted
+								$openingHours, // openingHours
+								$paymentAccepted, // paymentAccepted
+								$priceRange, // priceRange
+								$additionalProperty, // additionalProperty
+								$address, // address
+								$aggregateRating, // aggregateRating
+								$amenityFeature, // amenityFeature
+								$branchCode, // branchCode
+								$containedInPlace, // containedInPlace
+								$containsPlace, // containsPlace
+								$event, // event
+								$faxNumber, // faxNumber
+								$geo, // geo
+								$geoContains, // geoContains
+								$geoCoveredBy, // geoCoveredBy
+								$geoCovers, // geoCovers
+								$geoCrosses, // geoCrosses
+								$geoDisjoint, // geoDisjoint
+								$geoEquals, // geoEquals
+								$geoIntersects, // geoIntersects
+								$geoOverlaps, // geoOverlaps
+								$geoTouches, // geoTouches
+								$geoWithin, // geoWithin
+								$globalLocationNumber, // globalLocationNumber
+								$hasDriveThroughService, // hasDriveThroughService
+								$hasMap, // hasMap
+								$isAccessibleForFree, // isAccessibleForFree
+								$isicV4, // isicV4
+								$keywords, // keywords
+								$latitude, // latitude
+								$logo, // logo
+								$longitude, // longitude
+								$maximumAttendeeCapacity, // maximumAttendeeCapacity
+								$openingHoursSpecification, // openingHoursSpecification
+								$photo, // photo
+								$publicAccess, // publicAccess
+								$review, // review
+								$slogan, // slogan
+								$smokingAllowed, // smokingAllowed
+								$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
+								$telephone, // telephone
+								$tourBookingPage, // tourBookingPage
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
+							);
+
+						// Properties from MedicalBusiness
+
+							// Do nothing
+
+					// Remove any empty values from the schema array
+
+						$schema = array_filter($schema);
+
+					return $schema;
+
+				}
+
+				// CommunityHealth
+				// Dentist
+				// Dermatology
+				// DietNutrition
+				// Emergency
+				// Geriatric
+				// Gynecologic
+				// MedicalClinic
+
+					/*
+					 * Thing > Organization > LocalBusiness > MedicalBusiness > MedicalClinic
+					 * 
+					 *     Also: Thing > Organization > MedicalOrganization > MedicalClinic
+					 *     Also: Thing > Place > LocalBusiness > MedicalBusiness > MedicalClinic
+					 * 
+					 * A facility, often associated with a hospital or medical school, that is devoted 
+					 * to the specific diagnosis and/or healthcare. Previously limited to outpatients 
+					 * but with evolution it may be open to inpatients as well.
+					 */
+
+					function uamswp_fad_schema_medicalclinic(
+						$schema, // array // Main schema array
+						// MedicalClinic
+							$availableService = '', // availableService
+							$medicalSpecialty = '', // medicalSpecialty
+						// MedicalBusiness (no property vars)
+						// LocalBusiness
+							$currenciesAccepted = '', // currenciesAccepted
+							$openingHours = '', // openingHours
+							$paymentAccepted = '', // paymentAccepted
+							$priceRange = '', // priceRange
+						// Place
+							$additionalProperty = '', // additionalProperty
+							$address = '', // address
+							$aggregateRating = '', // aggregateRating
+							$amenityFeature = '', // amenityFeature
+							$branchCode = '', // branchCode
+							$containedInPlace = '', // containedInPlace
+							$containsPlace = '', // containsPlace
+							$event = '', // event
+							$faxNumber = '', // faxNumber
+							$geo = '', // geo
+							$geoContains = '', // geoContains
+							$geoCoveredBy = '', // geoCoveredBy
+							$geoCovers = '', // geoCovers
+							$geoCrosses = '', // geoCrosses
+							$geoDisjoint = '', // geoDisjoint
+							$geoEquals = '', // geoEquals
+							$geoIntersects = '', // geoIntersects
+							$geoOverlaps = '', // geoOverlaps
+							$geoTouches = '', // geoTouches
+							$geoWithin = '', // geoWithin
+							$globalLocationNumber = '', // globalLocationNumber
+							$hasDriveThroughService = '', // hasDriveThroughService
+							$hasMap = '', // hasMap
+							$isAccessibleForFree = '', // isAccessibleForFree
+							$isicV4 = '', // isicV4
+							$keywords = '', // keywords
+							$latitude = '', // latitude
+							$logo = '', // logo
+							$longitude = '', // longitude
+							$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
+							$openingHoursSpecification = '', // openingHoursSpecification
+							$photo = '', // photo
+							$publicAccess = '', // publicAccess
+							$review = '', // review
+							$slogan = '', // slogan
+							$smokingAllowed = '', // smokingAllowed
+							$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
+							$telephone = '', // telephone
+							$tourBookingPage = '', // tourBookingPage
+						// Thing
+							$additionalType = '', // additionalType
+							$alternateName = '', // alternateName
+							$description = '', // description
+							$disambiguatingDescription = '', // disambiguatingDescription
+							$identifier = '', // identifier
+							$image = '', // image
+							$mainEntityOfPage = '', // mainEntityOfPage
+							$name = '', // name
+							$potentialAction = '', // potentialAction
+							$sameAs = '', // sameAs
+							$subjectOf = '', // subjectOf
+							$url = '' // url
+					) {
+
+						// Check/define variables
+
+							$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+							// Inherited properties from Thing
+
+								$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+								$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+								$description = ( isset($description) && !empty($description) ) ? $description : '';
+								$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+								$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+								$image = ( isset($image) && !empty($image) ) ? $image : '';
+								$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+								$name = ( isset($name) && !empty($name) ) ? $name : '';
+								$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+								$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+								$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+								$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+							// Inherited properties from Place
+
+								$additionalProperty = ( isset($additionalProperty) && !empty($additionalProperty) ) ? $additionalProperty : '';
+								$address = ( isset($address) && !empty($address) ) ? $address : '';
+								$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
+								$amenityFeature = ( isset($amenityFeature) && !empty($amenityFeature) ) ? $amenityFeature : '';
+								$branchCode = ( isset($branchCode) && !empty($branchCode) ) ? $branchCode : '';
+								$containedInPlace = ( isset($containedInPlace) && !empty($containedInPlace) ) ? $containedInPlace : '';
+								$containsPlace = ( isset($containsPlace) && !empty($containsPlace) ) ? $containsPlace : '';
+								$event = ( isset($event) && !empty($event) ) ? $event : '';
+								$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
+								$geo = ( isset($geo) && !empty($geo) ) ? $geo : '';
+								$geoContains = ( isset($geoContains) && !empty($geoContains) ) ? $geoContains : '';
+								$geoCoveredBy = ( isset($geoCoveredBy) && !empty($geoCoveredBy) ) ? $geoCoveredBy : '';
+								$geoCovers = ( isset($geoCovers) && !empty($geoCovers) ) ? $geoCovers : '';
+								$geoCrosses = ( isset($geoCrosses) && !empty($geoCrosses) ) ? $geoCrosses : '';
+								$geoDisjoint = ( isset($geoDisjoint) && !empty($geoDisjoint) ) ? $geoDisjoint : '';
+								$geoEquals = ( isset($geoEquals) && !empty($geoEquals) ) ? $geoEquals : '';
+								$geoIntersects = ( isset($geoIntersects) && !empty($geoIntersects) ) ? $geoIntersects : '';
+								$geoOverlaps = ( isset($geoOverlaps) && !empty($geoOverlaps) ) ? $geoOverlaps : '';
+								$geoTouches = ( isset($geoTouches) && !empty($geoTouches) ) ? $geoTouches : '';
+								$geoWithin = ( isset($geoWithin) && !empty($geoWithin) ) ? $geoWithin : '';
+								$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
+								$hasDriveThroughService = ( isset($hasDriveThroughService) && !empty($hasDriveThroughService) ) ? $hasDriveThroughService : '';
+								$hasMap = ( isset($hasMap) && !empty($hasMap) ) ? $hasMap : '';
+								$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
+								$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
+								$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
+								$latitude = ( isset($latitude) && !empty($latitude) ) ? $latitude : '';
+								$logo = ( isset($logo) && !empty($logo) ) ? $logo : '';
+								$longitude = ( isset($longitude) && !empty($longitude) ) ? $longitude : '';
+								$maximumAttendeeCapacity = ( isset($maximumAttendeeCapacity) && !empty($maximumAttendeeCapacity) ) ? $maximumAttendeeCapacity : '';
+								$openingHoursSpecification = ( isset($openingHoursSpecification) && !empty($openingHoursSpecification) ) ? $openingHoursSpecification : '';
+								$photo = ( isset($photo) && !empty($photo) ) ? $photo : '';
+								$publicAccess = ( isset($publicAccess) && !empty($publicAccess) ) ? $publicAccess : '';
+								$review = ( isset($review) && !empty($review) ) ? $review : '';
+								$slogan = ( isset($slogan) && !empty($slogan) ) ? $slogan : '';
+								$smokingAllowed = ( isset($smokingAllowed) && !empty($smokingAllowed) ) ? $smokingAllowed : '';
+								$specialOpeningHoursSpecification = ( isset($specialOpeningHoursSpecification) && !empty($specialOpeningHoursSpecification) ) ? $specialOpeningHoursSpecification : '';
+								$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
+								$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
+
+							// Inherited properties from LocalBusiness
+
+								$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
+								$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
+								$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
+								$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
+
+							// Inherited properties from MedicalBusiness
+
+								// Do nothing
+
+							// Properties from MedicalClinic
+
+								$availableService = ( isset($availableService) && !empty($availableService) ) ? $availableService : '';
+								$medicalSpecialty = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? $medicalSpecialty : '';
+
+						// Add values to the schema array
+
+							// Inherited properties
+
+								$schema = uamswp_fad_schema_medicalbusiness(
+									$schema, // array // Main schema array
+									$currenciesAccepted, // currenciesAccepted
+									$openingHours, // openingHours
+									$paymentAccepted, // paymentAccepted
+									$priceRange, // priceRange
+									$additionalProperty, // additionalProperty
+									$address, // address
+									$aggregateRating, // aggregateRating
+									$amenityFeature, // amenityFeature
+									$branchCode, // branchCode
+									$containedInPlace, // containedInPlace
+									$containsPlace, // containsPlace
+									$event, // event
+									$faxNumber, // faxNumber
+									$geo, // geo
+									$geoContains, // geoContains
+									$geoCoveredBy, // geoCoveredBy
+									$geoCovers, // geoCovers
+									$geoCrosses, // geoCrosses
+									$geoDisjoint, // geoDisjoint
+									$geoEquals, // geoEquals
+									$geoIntersects, // geoIntersects
+									$geoOverlaps, // geoOverlaps
+									$geoTouches, // geoTouches
+									$geoWithin, // geoWithin
+									$globalLocationNumber, // globalLocationNumber
+									$hasDriveThroughService, // hasDriveThroughService
+									$hasMap, // hasMap
+									$isAccessibleForFree, // isAccessibleForFree
+									$isicV4, // isicV4
+									$keywords, // keywords
+									$latitude, // latitude
+									$logo, // logo
+									$longitude, // longitude
+									$maximumAttendeeCapacity, // maximumAttendeeCapacity
+									$openingHoursSpecification, // openingHoursSpecification
+									$photo, // photo
+									$publicAccess, // publicAccess
+									$review, // review
+									$slogan, // slogan
+									$smokingAllowed, // smokingAllowed
+									$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
+									$telephone, // telephone
+									$tourBookingPage, // tourBookingPage
+									$additionalType, // additionalType
+									$alternateName, // alternateName
+									$description, // description
+									$disambiguatingDescription, // disambiguatingDescription
+									$identifier, // identifier
+									$image, // image
+									$mainEntityOfPage, // mainEntityOfPage
+									$name, // name
+									$potentialAction, // potentialAction
+									$sameAs, // sameAs
+									$subjectOf, // subjectOf
+									$url // url
+								);
+
+							// Properties from MedicalClinic
+
+								// availableService
+
+									/* 
+									 * Expected Type:
+									 *     MedicalProcedure
+									 *     MedicalTest
+									 *     MedicalTherapy
+									 * 
+									 * A medical service available from this provider.
+									 */
+
+									$schema['availableService'] = $availableService;
+
+								// medicalSpecialty
+
+									/* 
+									 * Expected Type:
+									 *     MedicalSpecialty
+									 * 
+									 * A medical specialty of the provider.
+									 */
+
+									$schema['medicalSpecialty'] = $medicalSpecialty;
+
+						// Remove any empty values from the schema array
+
+							$schema = array_filter($schema);
+
+						return $schema;
+
+					}
+
+				// Midwifery
+				// Nursing
+				// Obstetric
+				// Oncologic
+				// Optician
+				// Optometric
+				// Otolaryngologic
+				// Pediatric
+				// Pharmacy
+				// Physician
+
+					/*
+					 * Thing > Organization > LocalBusiness > MedicalBusiness > Physician
+					 * 
+					 *     Also: Thing > Organization > MedicalOrganization > Physician
+					 *     Also: Thing > Place > LocalBusiness > MedicalBusiness > Physician
+					 * 
+					 * A doctor's office.
+					 */
+
+					function uamswp_fad_schema_physician(
+						$schema, // array // Main schema array
+						// Physician
+							$availableService = '', // availableService
+							$hospitalAffiliation = '', // hospitalAffiliation
+							$medicalSpecialty = '', // medicalSpecialty
+						// MedicalBusiness (no property vars)
+						// LocalBusiness
+							$currenciesAccepted = '', // currenciesAccepted
+							$openingHours = '', // openingHours
+							$paymentAccepted = '', // paymentAccepted
+							$priceRange = '', // priceRange
+						// Place
+							$additionalProperty = '', // additionalProperty
+							$address = '', // address
+							$aggregateRating = '', // aggregateRating
+							$amenityFeature = '', // amenityFeature
+							$branchCode = '', // branchCode
+							$containedInPlace = '', // containedInPlace
+							$containsPlace = '', // containsPlace
+							$event = '', // event
+							$faxNumber = '', // faxNumber
+							$geo = '', // geo
+							$geoContains = '', // geoContains
+							$geoCoveredBy = '', // geoCoveredBy
+							$geoCovers = '', // geoCovers
+							$geoCrosses = '', // geoCrosses
+							$geoDisjoint = '', // geoDisjoint
+							$geoEquals = '', // geoEquals
+							$geoIntersects = '', // geoIntersects
+							$geoOverlaps = '', // geoOverlaps
+							$geoTouches = '', // geoTouches
+							$geoWithin = '', // geoWithin
+							$globalLocationNumber = '', // globalLocationNumber
+							$hasDriveThroughService = '', // hasDriveThroughService
+							$hasMap = '', // hasMap
+							$isAccessibleForFree = '', // isAccessibleForFree
+							$isicV4 = '', // isicV4
+							$keywords = '', // keywords
+							$latitude = '', // latitude
+							$logo = '', // logo
+							$longitude = '', // longitude
+							$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
+							$openingHoursSpecification = '', // openingHoursSpecification
+							$photo = '', // photo
+							$publicAccess = '', // publicAccess
+							$review = '', // review
+							$slogan = '', // slogan
+							$smokingAllowed = '', // smokingAllowed
+							$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
+							$telephone = '', // telephone
+							$tourBookingPage = '', // tourBookingPage
+						// Thing
+							$additionalType = '', // additionalType
+							$alternateName = '', // alternateName
+							$description = '', // description
+							$disambiguatingDescription = '', // disambiguatingDescription
+							$identifier = '', // identifier
+							$image = '', // image
+							$mainEntityOfPage = '', // mainEntityOfPage
+							$name = '', // name
+							$potentialAction = '', // potentialAction
+							$sameAs = '', // sameAs
+							$subjectOf = '', // subjectOf
+							$url = '' // url
+					) {
+
+						// Check/define variables
+
+							$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+							// Inherited properties from Thing
+
+								$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+								$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+								$description = ( isset($description) && !empty($description) ) ? $description : '';
+								$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+								$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+								$image = ( isset($image) && !empty($image) ) ? $image : '';
+								$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+								$name = ( isset($name) && !empty($name) ) ? $name : '';
+								$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+								$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+								$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+								$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+							// Inherited properties from Place
+
+								$additionalProperty = ( isset($additionalProperty) && !empty($additionalProperty) ) ? $additionalProperty : '';
+								$address = ( isset($address) && !empty($address) ) ? $address : '';
+								$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
+								$amenityFeature = ( isset($amenityFeature) && !empty($amenityFeature) ) ? $amenityFeature : '';
+								$branchCode = ( isset($branchCode) && !empty($branchCode) ) ? $branchCode : '';
+								$containedInPlace = ( isset($containedInPlace) && !empty($containedInPlace) ) ? $containedInPlace : '';
+								$containsPlace = ( isset($containsPlace) && !empty($containsPlace) ) ? $containsPlace : '';
+								$event = ( isset($event) && !empty($event) ) ? $event : '';
+								$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
+								$geo = ( isset($geo) && !empty($geo) ) ? $geo : '';
+								$geoContains = ( isset($geoContains) && !empty($geoContains) ) ? $geoContains : '';
+								$geoCoveredBy = ( isset($geoCoveredBy) && !empty($geoCoveredBy) ) ? $geoCoveredBy : '';
+								$geoCovers = ( isset($geoCovers) && !empty($geoCovers) ) ? $geoCovers : '';
+								$geoCrosses = ( isset($geoCrosses) && !empty($geoCrosses) ) ? $geoCrosses : '';
+								$geoDisjoint = ( isset($geoDisjoint) && !empty($geoDisjoint) ) ? $geoDisjoint : '';
+								$geoEquals = ( isset($geoEquals) && !empty($geoEquals) ) ? $geoEquals : '';
+								$geoIntersects = ( isset($geoIntersects) && !empty($geoIntersects) ) ? $geoIntersects : '';
+								$geoOverlaps = ( isset($geoOverlaps) && !empty($geoOverlaps) ) ? $geoOverlaps : '';
+								$geoTouches = ( isset($geoTouches) && !empty($geoTouches) ) ? $geoTouches : '';
+								$geoWithin = ( isset($geoWithin) && !empty($geoWithin) ) ? $geoWithin : '';
+								$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
+								$hasDriveThroughService = ( isset($hasDriveThroughService) && !empty($hasDriveThroughService) ) ? $hasDriveThroughService : '';
+								$hasMap = ( isset($hasMap) && !empty($hasMap) ) ? $hasMap : '';
+								$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
+								$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
+								$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
+								$latitude = ( isset($latitude) && !empty($latitude) ) ? $latitude : '';
+								$logo = ( isset($logo) && !empty($logo) ) ? $logo : '';
+								$longitude = ( isset($longitude) && !empty($longitude) ) ? $longitude : '';
+								$maximumAttendeeCapacity = ( isset($maximumAttendeeCapacity) && !empty($maximumAttendeeCapacity) ) ? $maximumAttendeeCapacity : '';
+								$openingHoursSpecification = ( isset($openingHoursSpecification) && !empty($openingHoursSpecification) ) ? $openingHoursSpecification : '';
+								$photo = ( isset($photo) && !empty($photo) ) ? $photo : '';
+								$publicAccess = ( isset($publicAccess) && !empty($publicAccess) ) ? $publicAccess : '';
+								$review = ( isset($review) && !empty($review) ) ? $review : '';
+								$slogan = ( isset($slogan) && !empty($slogan) ) ? $slogan : '';
+								$smokingAllowed = ( isset($smokingAllowed) && !empty($smokingAllowed) ) ? $smokingAllowed : '';
+								$specialOpeningHoursSpecification = ( isset($specialOpeningHoursSpecification) && !empty($specialOpeningHoursSpecification) ) ? $specialOpeningHoursSpecification : '';
+								$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
+								$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
+
+							// Inherited properties from LocalBusiness
+
+								$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
+								$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
+								$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
+								$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
+
+							// Inherited properties from MedicalBusiness
+
+								// Do nothing
+
+							// Properties from Physician
+
+								$availableService = ( isset($availableService) && !empty($availableService) ) ? $availableService : '';
+								$hospitalAffiliation = ( isset($hospitalAffiliation) && !empty($hospitalAffiliation) ) ? $hospitalAffiliation : '';
+								$medicalSpecialty = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? $medicalSpecialty : '';
+
+						// Add values to the schema array
+
+							// Inherited properties
+
+								$schema = uamswp_fad_schema_medicalbusiness(
+									$schema, // array // Main schema array
+									$currenciesAccepted, // currenciesAccepted
+									$openingHours, // openingHours
+									$paymentAccepted, // paymentAccepted
+									$priceRange, // priceRange
+									$additionalProperty, // additionalProperty
+									$address, // address
+									$aggregateRating, // aggregateRating
+									$amenityFeature, // amenityFeature
+									$branchCode, // branchCode
+									$containedInPlace, // containedInPlace
+									$containsPlace, // containsPlace
+									$event, // event
+									$faxNumber, // faxNumber
+									$geo, // geo
+									$geoContains, // geoContains
+									$geoCoveredBy, // geoCoveredBy
+									$geoCovers, // geoCovers
+									$geoCrosses, // geoCrosses
+									$geoDisjoint, // geoDisjoint
+									$geoEquals, // geoEquals
+									$geoIntersects, // geoIntersects
+									$geoOverlaps, // geoOverlaps
+									$geoTouches, // geoTouches
+									$geoWithin, // geoWithin
+									$globalLocationNumber, // globalLocationNumber
+									$hasDriveThroughService, // hasDriveThroughService
+									$hasMap, // hasMap
+									$isAccessibleForFree, // isAccessibleForFree
+									$isicV4, // isicV4
+									$keywords, // keywords
+									$latitude, // latitude
+									$logo, // logo
+									$longitude, // longitude
+									$maximumAttendeeCapacity, // maximumAttendeeCapacity
+									$openingHoursSpecification, // openingHoursSpecification
+									$photo, // photo
+									$publicAccess, // publicAccess
+									$review, // review
+									$slogan, // slogan
+									$smokingAllowed, // smokingAllowed
+									$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
+									$telephone, // telephone
+									$tourBookingPage, // tourBookingPage
+									$additionalType, // additionalType
+									$alternateName, // alternateName
+									$description, // description
+									$disambiguatingDescription, // disambiguatingDescription
+									$identifier, // identifier
+									$image, // image
+									$mainEntityOfPage, // mainEntityOfPage
+									$name, // name
+									$potentialAction, // potentialAction
+									$sameAs, // sameAs
+									$subjectOf, // subjectOf
+									$url // url
+								);
+
+							// Properties from Physician
+
+								// availableService
+
+									/* 
+									 * Expected Type:
+									 *     MedicalProcedure
+									 *     MedicalTest
+									 *     MedicalTherapy
+									 * 
+									 * A medical service available from this provider.
+									 */
+
+									$schema['availableService'] = $availableService;
+
+								// hospitalAffiliation
+
+									/* 
+									 * Expected Type:
+									 *     Hospital
+									 * 
+									 * A hospital with which the physician or office is affiliated.
+									 */
+
+									$schema['hospitalAffiliation'] = $hospitalAffiliation;
+
+								// medicalSpecialty
+
+									/* 
+									 * Expected Type:
+									 *     MedicalSpecialty
+									 * 
+									 * A medical specialty of the provider.
+									 */
+
+									$schema['medicalSpecialty'] = $medicalSpecialty;
+
+						// Remove any empty values from the schema array
+
+							$schema = array_filter($schema);
+
+						return $schema;
+
+					}
+
+				// Physiotherapy
+				// PlasticSurgery
+				// Podiatric
+				// PrimaryCare
+				// Psychiatric
+				// PublicHealth
+
+			// ProfessionalService
+			// RadioStation
+			// RealEstateAgent
+			// RecyclingCenter
+			// SelfStorage
+			// ShoppingCenter
+			// SportsActivityLocation
+			// Store
+			// TelevisionStation
+			// TouristInformationCenter
+			// TravelAgency
+
+		// MedicalOrganization
+		// NGO
+		// NewsMediaOrganization
+		// OnlineBusiness
+		// PerformingGroup
+		// PoliticalParty
+		// Project
+		// ResearchOrganization
+		// SearchRescueOrganization
+		// SportsOrganization
+		// WorkersUnion
 
 	// Person
 
@@ -42585,58 +43626,59 @@
 
 		function uamswp_fad_schema_place(
 			$schema, // array // Main schema array
-			$additionalProperty = '', // additionalProperty
-			$address = '', // address
-			$aggregateRating = '', // aggregateRating
-			$amenityFeature = '', // amenityFeature
-			$branchCode = '', // branchCode
-			$containedInPlace = '', // containedInPlace
-			$containsPlace = '', // containsPlace
-			$event = '', // event
-			$faxNumber = '', // faxNumber
-			$geo = '', // geo
-			$geoContains = '', // geoContains
-			$geoCoveredBy = '', // geoCoveredBy
-			$geoCovers = '', // geoCovers
-			$geoCrosses = '', // geoCrosses
-			$geoDisjoint = '', // geoDisjoint
-			$geoEquals = '', // geoEquals
-			$geoIntersects = '', // geoIntersects
-			$geoOverlaps = '', // geoOverlaps
-			$geoTouches = '', // geoTouches
-			$geoWithin = '', // geoWithin
-			$globalLocationNumber = '', // globalLocationNumber
-			$hasDriveThroughService = '', // hasDriveThroughService
-			$hasMap = '', // hasMap
-			$isAccessibleForFree = '', // isAccessibleForFree
-			$isicV4 = '', // isicV4
-			$keywords = '', // keywords
-			$latitude = '', // latitude
-			$logo = '', // logo
-			$longitude = '', // longitude
-			$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
-			$openingHoursSpecification = '', // openingHoursSpecification
-			$photo = '', // photo
-			$publicAccess = '', // publicAccess
-			$review = '', // review
-			$slogan = '', // slogan
-			$smokingAllowed = '', // smokingAllowed
-			$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
-			$telephone = '', // telephone
-			$tourBookingPage = '', // tourBookingPage
+			// Place
+				$additionalProperty = '', // additionalProperty
+				$address = '', // address
+				$aggregateRating = '', // aggregateRating
+				$amenityFeature = '', // amenityFeature
+				$branchCode = '', // branchCode
+				$containedInPlace = '', // containedInPlace
+				$containsPlace = '', // containsPlace
+				$event = '', // event
+				$faxNumber = '', // faxNumber
+				$geo = '', // geo
+				$geoContains = '', // geoContains
+				$geoCoveredBy = '', // geoCoveredBy
+				$geoCovers = '', // geoCovers
+				$geoCrosses = '', // geoCrosses
+				$geoDisjoint = '', // geoDisjoint
+				$geoEquals = '', // geoEquals
+				$geoIntersects = '', // geoIntersects
+				$geoOverlaps = '', // geoOverlaps
+				$geoTouches = '', // geoTouches
+				$geoWithin = '', // geoWithin
+				$globalLocationNumber = '', // globalLocationNumber
+				$hasDriveThroughService = '', // hasDriveThroughService
+				$hasMap = '', // hasMap
+				$isAccessibleForFree = '', // isAccessibleForFree
+				$isicV4 = '', // isicV4
+				$keywords = '', // keywords
+				$latitude = '', // latitude
+				$logo = '', // logo
+				$longitude = '', // longitude
+				$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
+				$openingHoursSpecification = '', // openingHoursSpecification
+				$photo = '', // photo
+				$publicAccess = '', // publicAccess
+				$review = '', // review
+				$slogan = '', // slogan
+				$smokingAllowed = '', // smokingAllowed
+				$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
+				$telephone = '', // telephone
+				$tourBookingPage = '', // tourBookingPage
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -43248,976 +44290,9 @@
 		// LandmarksOrHistoricalBuildings
 		// LocalBusiness
 
-			function uamswp_fad_schema_localbusiness(
-				$schema, // array // Main schema array
-				$currenciesAccepted = '', // currenciesAccepted
-				$openingHours = '', // openingHours
-				$paymentAccepted = '', // paymentAccepted
-				$priceRange = '', // priceRange
-				$additionalProperty = '', // additionalProperty
-				$address = '', // address
-				$aggregateRating = '', // aggregateRating
-				$amenityFeature = '', // amenityFeature
-				$branchCode = '', // branchCode
-				$containedInPlace = '', // containedInPlace
-				$containsPlace = '', // containsPlace
-				$event = '', // event
-				$faxNumber = '', // faxNumber
-				$geo = '', // geo
-				$geoContains = '', // geoContains
-				$geoCoveredBy = '', // geoCoveredBy
-				$geoCovers = '', // geoCovers
-				$geoCrosses = '', // geoCrosses
-				$geoDisjoint = '', // geoDisjoint
-				$geoEquals = '', // geoEquals
-				$geoIntersects = '', // geoIntersects
-				$geoOverlaps = '', // geoOverlaps
-				$geoTouches = '', // geoTouches
-				$geoWithin = '', // geoWithin
-				$globalLocationNumber = '', // globalLocationNumber
-				$hasDriveThroughService = '', // hasDriveThroughService
-				$hasMap = '', // hasMap
-				$isAccessibleForFree = '', // isAccessibleForFree
-				$isicV4 = '', // isicV4
-				$keywords = '', // keywords
-				$latitude = '', // latitude
-				$logo = '', // logo
-				$longitude = '', // longitude
-				$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
-				$openingHoursSpecification = '', // openingHoursSpecification
-				$photo = '', // photo
-				$publicAccess = '', // publicAccess
-				$review = '', // review
-				$slogan = '', // slogan
-				$smokingAllowed = '', // smokingAllowed
-				$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
-				$telephone = '', // telephone
-				$tourBookingPage = '', // tourBookingPage
-				// Thing
-					$additionalType = '', // additionalType
-					$alternateName = '', // alternateName
-					$description = '', // description
-					$disambiguatingDescription = '', // disambiguatingDescription
-					$identifier = '', // identifier
-					$image = '', // image
-					$mainEntityOfPage = '', // mainEntityOfPage
-					$name = '', // name
-					$potentialAction = '', // potentialAction
-					$sameAs = '', // sameAs
-					$subjectOf = '', // subjectOf
-					$url = '' // url
-			) {
-
-				// Check/define variables
-
-					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-
-					// Inherited properties from Thing
-
-						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
-						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
-						$description = ( isset($description) && !empty($description) ) ? $description : '';
-						$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
-						$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
-						$image = ( isset($image) && !empty($image) ) ? $image : '';
-						$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
-						$name = ( isset($name) && !empty($name) ) ? $name : '';
-						$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
-						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
-						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
-						$url = ( isset($url) && !empty($url) ) ? $url : '';
-
-					// Inherited properties from Place (Thing > Place)
-
-					// Properties from LocalBusiness (Thing > Place > LocalBusiness)
-
-						$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
-						$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
-						$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
-						$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
-
-				// Add values to the schema array
-
-					// Inherited properties
-
-						$schema = uamswp_fad_schema_place(
-							$schema, // array // Main schema array
-							$additionalProperty, // additionalProperty
-							$address, // address
-							$aggregateRating, // aggregateRating
-							$amenityFeature, // amenityFeature
-							$branchCode, // branchCode
-							$containedInPlace, // containedInPlace
-							$containsPlace, // containsPlace
-							$event, // event
-							$faxNumber, // faxNumber
-							$geo, // geo
-							$geoContains, // geoContains
-							$geoCoveredBy, // geoCoveredBy
-							$geoCovers, // geoCovers
-							$geoCrosses, // geoCrosses
-							$geoDisjoint, // geoDisjoint
-							$geoEquals, // geoEquals
-							$geoIntersects, // geoIntersects
-							$geoOverlaps, // geoOverlaps
-							$geoTouches, // geoTouches
-							$geoWithin, // geoWithin
-							$globalLocationNumber, // globalLocationNumber
-							$hasDriveThroughService, // hasDriveThroughService
-							$hasMap, // hasMap
-							$isAccessibleForFree, // isAccessibleForFree
-							$isicV4, // isicV4
-							$keywords, // keywords
-							$latitude, // latitude
-							$logo, // logo
-							$longitude, // longitude
-							$maximumAttendeeCapacity, // maximumAttendeeCapacity
-							$openingHoursSpecification, // openingHoursSpecification
-							$photo, // photo
-							$publicAccess, // publicAccess
-							$review, // review
-							$slogan, // slogan
-							$smokingAllowed, // smokingAllowed
-							$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
-							$telephone, // telephone
-							$tourBookingPage, // tourBookingPage
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
-						);
-
-					// Properties from LocalBusiness (Thing > Place > LocalBusiness)
-
-						// currenciesAccepted
-
-							/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The currency accepted.
-							 * 
-							 * Use standard formats: ISO 4217 currency format (e.g., "USD"; Ticker symbol for 
-							 * cryptocurrencies, e.g., "BTC"; well known names for Local Exchange Trading 
-							 * Systems (LETS) and other currency types, e.g., "Ithaca HOUR").
-							 */
-
-							$schema['currenciesAccepted'] = $currenciesAccepted;
-
-						// openingHours
-
-							/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The general opening hours for a business. Opening hours can be specified as a 
-							 * weekly time range, starting with days, then times per day. Multiple days can be 
-							 * listed with commas ',' separating each day. Day or time ranges are specified 
-							 * using a hyphen '-'.
-							 * 
-							 * Days are specified using the following two-letter combinations: Mo, Tu, We, Th, 
-							 * Fr, Sa, Su.
-							 * 
-							 * Times are specified using 24:00 format. For example, 3pm is specified as 15:00, 
-							 * 10am as 10:00.
-							 * 
-							 * Here is an example: 
-							 * <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
-							 * 
-							 * If a business is open 7 days a week, then it can be specified as 
-							 * <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
-							 */
-
-							$schema['openingHours'] = $openingHours;
-
-						// paymentAccepted
-
-							/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-							 */
-
-							$schema['paymentAccepted'] = $paymentAccepted;
-
-						// priceRange
-
-							/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The price range of the business, for example $$$.
-							 */
-
-							$schema['priceRange'] = $priceRange;
-
-				// Remove any empty values from the schema array
-
-					$schema = array_filter($schema);
-
-				return $schema;
-
-			}
-
-			// AnimalShelter
-			// ArchiveOrganization
-			// AutomotiveBusiness
-			// ChildCare
-			// Dentist
-			// DryCleaningOrLaundry
-			// EmergencyService
-			// EmploymentAgency
-			// EntertainmentBusiness
-			// FinancialService
-			// FoodEstablishment
-			// GovernmentOffice
-			// HealthAndBeautyBusiness
-			// HomeAndConstructionBusiness
-			// InternetCafe
-			// LegalService
-			// Library
-			// LodgingBusiness
-			// MedicalBusiness
-
-				function uamswp_fad_schema_medicalbusiness(
-					$schema, // array // Main schema array,
-					$currenciesAccepted = '', // currenciesAccepted
-					$openingHours = '', // openingHours
-					$paymentAccepted = '', // paymentAccepted
-					$priceRange = '', // priceRange
-					$additionalProperty = '', // additionalProperty
-					$address = '', // address
-					$aggregateRating = '', // aggregateRating
-					$amenityFeature = '', // amenityFeature
-					$branchCode = '', // branchCode
-					$containedInPlace = '', // containedInPlace
-					$containsPlace = '', // containsPlace
-					$event = '', // event
-					$faxNumber = '', // faxNumber
-					$geo = '', // geo
-					$geoContains = '', // geoContains
-					$geoCoveredBy = '', // geoCoveredBy
-					$geoCovers = '', // geoCovers
-					$geoCrosses = '', // geoCrosses
-					$geoDisjoint = '', // geoDisjoint
-					$geoEquals = '', // geoEquals
-					$geoIntersects = '', // geoIntersects
-					$geoOverlaps = '', // geoOverlaps
-					$geoTouches = '', // geoTouches
-					$geoWithin = '', // geoWithin
-					$globalLocationNumber = '', // globalLocationNumber
-					$hasDriveThroughService = '', // hasDriveThroughService
-					$hasMap = '', // hasMap
-					$isAccessibleForFree = '', // isAccessibleForFree
-					$isicV4 = '', // isicV4
-					$keywords = '', // keywords
-					$latitude = '', // latitude
-					$logo = '', // logo
-					$longitude = '', // longitude
-					$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
-					$openingHoursSpecification = '', // openingHoursSpecification
-					$photo = '', // photo
-					$publicAccess = '', // publicAccess
-					$review = '', // review
-					$slogan = '', // slogan
-					$smokingAllowed = '', // smokingAllowed
-					$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
-					$telephone = '', // telephone
-					$tourBookingPage = '', // tourBookingPage
-					// Thing
-						$additionalType = '', // additionalType
-						$alternateName = '', // alternateName
-						$description = '', // description
-						$disambiguatingDescription = '', // disambiguatingDescription
-						$identifier = '', // identifier
-						$image = '', // image
-						$mainEntityOfPage = '', // mainEntityOfPage
-						$name = '', // name
-						$potentialAction = '', // potentialAction
-						$sameAs = '', // sameAs
-						$subjectOf = '', // subjectOf
-						$url = '' // url
-				) {
-
-					// Check/define variables
-
-						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-
-						// Inherited properties from Thing
-
-							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
-							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
-							$description = ( isset($description) && !empty($description) ) ? $description : '';
-							$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
-							$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
-							$image = ( isset($image) && !empty($image) ) ? $image : '';
-							$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
-							$name = ( isset($name) && !empty($name) ) ? $name : '';
-							$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
-							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
-							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
-							$url = ( isset($url) && !empty($url) ) ? $url : '';
-
-						// Inherited properties from Place
-
-							$additionalProperty = ( isset($additionalProperty) && !empty($additionalProperty) ) ? $additionalProperty : '';
-							$address = ( isset($address) && !empty($address) ) ? $address : '';
-							$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
-							$amenityFeature = ( isset($amenityFeature) && !empty($amenityFeature) ) ? $amenityFeature : '';
-							$branchCode = ( isset($branchCode) && !empty($branchCode) ) ? $branchCode : '';
-							$containedInPlace = ( isset($containedInPlace) && !empty($containedInPlace) ) ? $containedInPlace : '';
-							$containsPlace = ( isset($containsPlace) && !empty($containsPlace) ) ? $containsPlace : '';
-							$event = ( isset($event) && !empty($event) ) ? $event : '';
-							$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
-							$geo = ( isset($geo) && !empty($geo) ) ? $geo : '';
-							$geoContains = ( isset($geoContains) && !empty($geoContains) ) ? $geoContains : '';
-							$geoCoveredBy = ( isset($geoCoveredBy) && !empty($geoCoveredBy) ) ? $geoCoveredBy : '';
-							$geoCovers = ( isset($geoCovers) && !empty($geoCovers) ) ? $geoCovers : '';
-							$geoCrosses = ( isset($geoCrosses) && !empty($geoCrosses) ) ? $geoCrosses : '';
-							$geoDisjoint = ( isset($geoDisjoint) && !empty($geoDisjoint) ) ? $geoDisjoint : '';
-							$geoEquals = ( isset($geoEquals) && !empty($geoEquals) ) ? $geoEquals : '';
-							$geoIntersects = ( isset($geoIntersects) && !empty($geoIntersects) ) ? $geoIntersects : '';
-							$geoOverlaps = ( isset($geoOverlaps) && !empty($geoOverlaps) ) ? $geoOverlaps : '';
-							$geoTouches = ( isset($geoTouches) && !empty($geoTouches) ) ? $geoTouches : '';
-							$geoWithin = ( isset($geoWithin) && !empty($geoWithin) ) ? $geoWithin : '';
-							$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
-							$hasDriveThroughService = ( isset($hasDriveThroughService) && !empty($hasDriveThroughService) ) ? $hasDriveThroughService : '';
-							$hasMap = ( isset($hasMap) && !empty($hasMap) ) ? $hasMap : '';
-							$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
-							$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
-							$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
-							$latitude = ( isset($latitude) && !empty($latitude) ) ? $latitude : '';
-							$logo = ( isset($logo) && !empty($logo) ) ? $logo : '';
-							$longitude = ( isset($longitude) && !empty($longitude) ) ? $longitude : '';
-							$maximumAttendeeCapacity = ( isset($maximumAttendeeCapacity) && !empty($maximumAttendeeCapacity) ) ? $maximumAttendeeCapacity : '';
-							$openingHoursSpecification = ( isset($openingHoursSpecification) && !empty($openingHoursSpecification) ) ? $openingHoursSpecification : '';
-							$photo = ( isset($photo) && !empty($photo) ) ? $photo : '';
-							$publicAccess = ( isset($publicAccess) && !empty($publicAccess) ) ? $publicAccess : '';
-							$review = ( isset($review) && !empty($review) ) ? $review : '';
-							$slogan = ( isset($slogan) && !empty($slogan) ) ? $slogan : '';
-							$smokingAllowed = ( isset($smokingAllowed) && !empty($smokingAllowed) ) ? $smokingAllowed : '';
-							$specialOpeningHoursSpecification = ( isset($specialOpeningHoursSpecification) && !empty($specialOpeningHoursSpecification) ) ? $specialOpeningHoursSpecification : '';
-							$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
-							$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
-
-						// Inherited properties from LocalBusiness
-
-							$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
-							$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
-							$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
-							$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
-
-						// Properties from MedicalBusiness
-
-							// Do nothing
-
-					// Add values to the schema array
-
-						// Inherited properties
-
-							$schema = uamswp_fad_schema_localbusiness(
-								$schema, // array // Main schema array
-								$currenciesAccepted, // currenciesAccepted
-								$openingHours, // openingHours
-								$paymentAccepted, // paymentAccepted
-								$priceRange, // priceRange
-								$additionalProperty, // additionalProperty
-								$address, // address
-								$aggregateRating, // aggregateRating
-								$amenityFeature, // amenityFeature
-								$branchCode, // branchCode
-								$containedInPlace, // containedInPlace
-								$containsPlace, // containsPlace
-								$event, // event
-								$faxNumber, // faxNumber
-								$geo, // geo
-								$geoContains, // geoContains
-								$geoCoveredBy, // geoCoveredBy
-								$geoCovers, // geoCovers
-								$geoCrosses, // geoCrosses
-								$geoDisjoint, // geoDisjoint
-								$geoEquals, // geoEquals
-								$geoIntersects, // geoIntersects
-								$geoOverlaps, // geoOverlaps
-								$geoTouches, // geoTouches
-								$geoWithin, // geoWithin
-								$globalLocationNumber, // globalLocationNumber
-								$hasDriveThroughService, // hasDriveThroughService
-								$hasMap, // hasMap
-								$isAccessibleForFree, // isAccessibleForFree
-								$isicV4, // isicV4
-								$keywords, // keywords
-								$latitude, // latitude
-								$logo, // logo
-								$longitude, // longitude
-								$maximumAttendeeCapacity, // maximumAttendeeCapacity
-								$openingHoursSpecification, // openingHoursSpecification
-								$photo, // photo
-								$publicAccess, // publicAccess
-								$review, // review
-								$slogan, // slogan
-								$smokingAllowed, // smokingAllowed
-								$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
-								$telephone, // telephone
-								$tourBookingPage, // tourBookingPage
-								$additionalType, // additionalType
-								$alternateName, // alternateName
-								$description, // description
-								$disambiguatingDescription, // disambiguatingDescription
-								$identifier, // identifier
-								$image, // image
-								$mainEntityOfPage, // mainEntityOfPage
-								$name, // name
-								$potentialAction, // potentialAction
-								$sameAs, // sameAs
-								$subjectOf, // subjectOf
-								$url // url
-							);
-
-						// Properties from MedicalBusiness
-
-							// Do nothing
-
-					// Remove any empty values from the schema array
-
-						$schema = array_filter($schema);
-
-					return $schema;
-
-				}
-
-				// CommunityHealth
-				// Dentist
-				// Dermatology
-				// DietNutrition
-				// Emergency
-				// Geriatric
-				// Gynecologic
-				// MedicalClinic
-
-					function uamswp_fad_schema_medicalclinic(
-						$schema, // array // Main schema array
-						$availableService = '', // availableService
-						$medicalSpecialty = '', // medicalSpecialty
-						$currenciesAccepted = '', // currenciesAccepted
-						$openingHours = '', // openingHours
-						$paymentAccepted = '', // paymentAccepted
-						$priceRange = '', // priceRange
-						$additionalProperty = '', // additionalProperty
-						$address = '', // address
-						$aggregateRating = '', // aggregateRating
-						$amenityFeature = '', // amenityFeature
-						$branchCode = '', // branchCode
-						$containedInPlace = '', // containedInPlace
-						$containsPlace = '', // containsPlace
-						$event = '', // event
-						$faxNumber = '', // faxNumber
-						$geo = '', // geo
-						$geoContains = '', // geoContains
-						$geoCoveredBy = '', // geoCoveredBy
-						$geoCovers = '', // geoCovers
-						$geoCrosses = '', // geoCrosses
-						$geoDisjoint = '', // geoDisjoint
-						$geoEquals = '', // geoEquals
-						$geoIntersects = '', // geoIntersects
-						$geoOverlaps = '', // geoOverlaps
-						$geoTouches = '', // geoTouches
-						$geoWithin = '', // geoWithin
-						$globalLocationNumber = '', // globalLocationNumber
-						$hasDriveThroughService = '', // hasDriveThroughService
-						$hasMap = '', // hasMap
-						$isAccessibleForFree = '', // isAccessibleForFree
-						$isicV4 = '', // isicV4
-						$keywords = '', // keywords
-						$latitude = '', // latitude
-						$logo = '', // logo
-						$longitude = '', // longitude
-						$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
-						$openingHoursSpecification = '', // openingHoursSpecification
-						$photo = '', // photo
-						$publicAccess = '', // publicAccess
-						$review = '', // review
-						$slogan = '', // slogan
-						$smokingAllowed = '', // smokingAllowed
-						$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
-						$telephone = '', // telephone
-						$tourBookingPage = '', // tourBookingPage
-						// Thing
-			$additionalType = '', // additionalType
-						$alternateName = '', // alternateName
-						$description = '', // description
-						$disambiguatingDescription = '', // disambiguatingDescription
-						$identifier = '', // identifier
-						$image = '', // image
-						$mainEntityOfPage = '', // mainEntityOfPage
-						$name = '', // name
-						$potentialAction = '', // potentialAction
-						$sameAs = '', // sameAs
-						$subjectOf = '', // subjectOf
-						$url = '' // url
-					) {
-
-						// Check/define variables
-
-							$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-
-							// Inherited properties from Thing
-
-								$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
-								$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
-								$description = ( isset($description) && !empty($description) ) ? $description : '';
-								$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
-								$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
-								$image = ( isset($image) && !empty($image) ) ? $image : '';
-								$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
-								$name = ( isset($name) && !empty($name) ) ? $name : '';
-								$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
-								$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
-								$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
-								$url = ( isset($url) && !empty($url) ) ? $url : '';
-
-							// Inherited properties from Place
-
-								$additionalProperty = ( isset($additionalProperty) && !empty($additionalProperty) ) ? $additionalProperty : '';
-								$address = ( isset($address) && !empty($address) ) ? $address : '';
-								$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
-								$amenityFeature = ( isset($amenityFeature) && !empty($amenityFeature) ) ? $amenityFeature : '';
-								$branchCode = ( isset($branchCode) && !empty($branchCode) ) ? $branchCode : '';
-								$containedInPlace = ( isset($containedInPlace) && !empty($containedInPlace) ) ? $containedInPlace : '';
-								$containsPlace = ( isset($containsPlace) && !empty($containsPlace) ) ? $containsPlace : '';
-								$event = ( isset($event) && !empty($event) ) ? $event : '';
-								$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
-								$geo = ( isset($geo) && !empty($geo) ) ? $geo : '';
-								$geoContains = ( isset($geoContains) && !empty($geoContains) ) ? $geoContains : '';
-								$geoCoveredBy = ( isset($geoCoveredBy) && !empty($geoCoveredBy) ) ? $geoCoveredBy : '';
-								$geoCovers = ( isset($geoCovers) && !empty($geoCovers) ) ? $geoCovers : '';
-								$geoCrosses = ( isset($geoCrosses) && !empty($geoCrosses) ) ? $geoCrosses : '';
-								$geoDisjoint = ( isset($geoDisjoint) && !empty($geoDisjoint) ) ? $geoDisjoint : '';
-								$geoEquals = ( isset($geoEquals) && !empty($geoEquals) ) ? $geoEquals : '';
-								$geoIntersects = ( isset($geoIntersects) && !empty($geoIntersects) ) ? $geoIntersects : '';
-								$geoOverlaps = ( isset($geoOverlaps) && !empty($geoOverlaps) ) ? $geoOverlaps : '';
-								$geoTouches = ( isset($geoTouches) && !empty($geoTouches) ) ? $geoTouches : '';
-								$geoWithin = ( isset($geoWithin) && !empty($geoWithin) ) ? $geoWithin : '';
-								$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
-								$hasDriveThroughService = ( isset($hasDriveThroughService) && !empty($hasDriveThroughService) ) ? $hasDriveThroughService : '';
-								$hasMap = ( isset($hasMap) && !empty($hasMap) ) ? $hasMap : '';
-								$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
-								$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
-								$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
-								$latitude = ( isset($latitude) && !empty($latitude) ) ? $latitude : '';
-								$logo = ( isset($logo) && !empty($logo) ) ? $logo : '';
-								$longitude = ( isset($longitude) && !empty($longitude) ) ? $longitude : '';
-								$maximumAttendeeCapacity = ( isset($maximumAttendeeCapacity) && !empty($maximumAttendeeCapacity) ) ? $maximumAttendeeCapacity : '';
-								$openingHoursSpecification = ( isset($openingHoursSpecification) && !empty($openingHoursSpecification) ) ? $openingHoursSpecification : '';
-								$photo = ( isset($photo) && !empty($photo) ) ? $photo : '';
-								$publicAccess = ( isset($publicAccess) && !empty($publicAccess) ) ? $publicAccess : '';
-								$review = ( isset($review) && !empty($review) ) ? $review : '';
-								$slogan = ( isset($slogan) && !empty($slogan) ) ? $slogan : '';
-								$smokingAllowed = ( isset($smokingAllowed) && !empty($smokingAllowed) ) ? $smokingAllowed : '';
-								$specialOpeningHoursSpecification = ( isset($specialOpeningHoursSpecification) && !empty($specialOpeningHoursSpecification) ) ? $specialOpeningHoursSpecification : '';
-								$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
-								$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
-
-							// Inherited properties from LocalBusiness
-
-								$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
-								$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
-								$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
-								$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
-
-							// Inherited properties from MedicalBusiness
-
-								// Do nothing
-
-							// Properties from MedicalClinic
-
-								$availableService = ( isset($availableService) && !empty($availableService) ) ? $availableService : '';
-								$medicalSpecialty = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? $medicalSpecialty : '';
-
-						// Add values to the schema array
-
-							// Inherited properties
-
-								$schema = uamswp_fad_schema_medicalbusiness(
-									$schema, // array // Main schema array
-									$currenciesAccepted, // currenciesAccepted
-									$openingHours, // openingHours
-									$paymentAccepted, // paymentAccepted
-									$priceRange, // priceRange
-									$additionalProperty, // additionalProperty
-									$address, // address
-									$aggregateRating, // aggregateRating
-									$amenityFeature, // amenityFeature
-									$branchCode, // branchCode
-									$containedInPlace, // containedInPlace
-									$containsPlace, // containsPlace
-									$event, // event
-									$faxNumber, // faxNumber
-									$geo, // geo
-									$geoContains, // geoContains
-									$geoCoveredBy, // geoCoveredBy
-									$geoCovers, // geoCovers
-									$geoCrosses, // geoCrosses
-									$geoDisjoint, // geoDisjoint
-									$geoEquals, // geoEquals
-									$geoIntersects, // geoIntersects
-									$geoOverlaps, // geoOverlaps
-									$geoTouches, // geoTouches
-									$geoWithin, // geoWithin
-									$globalLocationNumber, // globalLocationNumber
-									$hasDriveThroughService, // hasDriveThroughService
-									$hasMap, // hasMap
-									$isAccessibleForFree, // isAccessibleForFree
-									$isicV4, // isicV4
-									$keywords, // keywords
-									$latitude, // latitude
-									$logo, // logo
-									$longitude, // longitude
-									$maximumAttendeeCapacity, // maximumAttendeeCapacity
-									$openingHoursSpecification, // openingHoursSpecification
-									$photo, // photo
-									$publicAccess, // publicAccess
-									$review, // review
-									$slogan, // slogan
-									$smokingAllowed, // smokingAllowed
-									$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
-									$telephone, // telephone
-									$tourBookingPage, // tourBookingPage
-									$additionalType, // additionalType
-									$alternateName, // alternateName
-									$description, // description
-									$disambiguatingDescription, // disambiguatingDescription
-									$identifier, // identifier
-									$image, // image
-									$mainEntityOfPage, // mainEntityOfPage
-									$name, // name
-									$potentialAction, // potentialAction
-									$sameAs, // sameAs
-									$subjectOf, // subjectOf
-									$url // url
-								);
-
-							// Properties from MedicalClinic
-
-								// availableService
-
-									/* 
-									 * Expected Type:
-									 *     MedicalProcedure
-									 *     MedicalTest
-									 *     MedicalTherapy
-									 * 
-									 * A medical service available from this provider.
-									 */
-
-									$schema['availableService'] = $availableService;
-
-								// medicalSpecialty
-
-									/* 
-									 * Expected Type:
-									 *     MedicalSpecialty
-									 * 
-									 * A medical specialty of the provider.
-									 */
-
-									$schema['medicalSpecialty'] = $medicalSpecialty;
-
-						// Remove any empty values from the schema array
-
-							$schema = array_filter($schema);
-
-						return $schema;
-
-					}
-
-				// Midwifery
-				// Nursing
-				// Obstetric
-				// Oncologic
-				// Optician
-				// Optometric
-				// Otolaryngologic
-				// Pediatric
-				// Pharmacy
-				// Physician
-
-					function uamswp_fad_schema_physician(
-						$schema, // array // Main schema array
-						$availableService = '', // availableService
-						$hospitalAffiliation = '', // hospitalAffiliation
-						$medicalSpecialty = '', // medicalSpecialty
-						$currenciesAccepted = '', // currenciesAccepted
-						$openingHours = '', // openingHours
-						$paymentAccepted = '', // paymentAccepted
-						$priceRange = '', // priceRange
-						$additionalProperty = '', // additionalProperty
-						$address = '', // address
-						$aggregateRating = '', // aggregateRating
-						$amenityFeature = '', // amenityFeature
-						$branchCode = '', // branchCode
-						$containedInPlace = '', // containedInPlace
-						$containsPlace = '', // containsPlace
-						$event = '', // event
-						$faxNumber = '', // faxNumber
-						$geo = '', // geo
-						$geoContains = '', // geoContains
-						$geoCoveredBy = '', // geoCoveredBy
-						$geoCovers = '', // geoCovers
-						$geoCrosses = '', // geoCrosses
-						$geoDisjoint = '', // geoDisjoint
-						$geoEquals = '', // geoEquals
-						$geoIntersects = '', // geoIntersects
-						$geoOverlaps = '', // geoOverlaps
-						$geoTouches = '', // geoTouches
-						$geoWithin = '', // geoWithin
-						$globalLocationNumber = '', // globalLocationNumber
-						$hasDriveThroughService = '', // hasDriveThroughService
-						$hasMap = '', // hasMap
-						$isAccessibleForFree = '', // isAccessibleForFree
-						$isicV4 = '', // isicV4
-						$keywords = '', // keywords
-						$latitude = '', // latitude
-						$logo = '', // logo
-						$longitude = '', // longitude
-						$maximumAttendeeCapacity = '', // maximumAttendeeCapacity
-						$openingHoursSpecification = '', // openingHoursSpecification
-						$photo = '', // photo
-						$publicAccess = '', // publicAccess
-						$review = '', // review
-						$slogan = '', // slogan
-						$smokingAllowed = '', // smokingAllowed
-						$specialOpeningHoursSpecification = '', // specialOpeningHoursSpecification
-						$telephone = '', // telephone
-						$tourBookingPage = '', // tourBookingPage
-						// Thing
-			$additionalType = '', // additionalType
-						$alternateName = '', // alternateName
-						$description = '', // description
-						$disambiguatingDescription = '', // disambiguatingDescription
-						$identifier = '', // identifier
-						$image = '', // image
-						$mainEntityOfPage = '', // mainEntityOfPage
-						$name = '', // name
-						$potentialAction = '', // potentialAction
-						$sameAs = '', // sameAs
-						$subjectOf = '', // subjectOf
-						$url = '' // url
-					) {
-
-						// Check/define variables
-
-							$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-
-							// Inherited properties from Thing
-
-								$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
-								$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
-								$description = ( isset($description) && !empty($description) ) ? $description : '';
-								$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
-								$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
-								$image = ( isset($image) && !empty($image) ) ? $image : '';
-								$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
-								$name = ( isset($name) && !empty($name) ) ? $name : '';
-								$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
-								$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
-								$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
-								$url = ( isset($url) && !empty($url) ) ? $url : '';
-
-							// Inherited properties from Place
-
-								$additionalProperty = ( isset($additionalProperty) && !empty($additionalProperty) ) ? $additionalProperty : '';
-								$address = ( isset($address) && !empty($address) ) ? $address : '';
-								$aggregateRating = ( isset($aggregateRating) && !empty($aggregateRating) ) ? $aggregateRating : '';
-								$amenityFeature = ( isset($amenityFeature) && !empty($amenityFeature) ) ? $amenityFeature : '';
-								$branchCode = ( isset($branchCode) && !empty($branchCode) ) ? $branchCode : '';
-								$containedInPlace = ( isset($containedInPlace) && !empty($containedInPlace) ) ? $containedInPlace : '';
-								$containsPlace = ( isset($containsPlace) && !empty($containsPlace) ) ? $containsPlace : '';
-								$event = ( isset($event) && !empty($event) ) ? $event : '';
-								$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
-								$geo = ( isset($geo) && !empty($geo) ) ? $geo : '';
-								$geoContains = ( isset($geoContains) && !empty($geoContains) ) ? $geoContains : '';
-								$geoCoveredBy = ( isset($geoCoveredBy) && !empty($geoCoveredBy) ) ? $geoCoveredBy : '';
-								$geoCovers = ( isset($geoCovers) && !empty($geoCovers) ) ? $geoCovers : '';
-								$geoCrosses = ( isset($geoCrosses) && !empty($geoCrosses) ) ? $geoCrosses : '';
-								$geoDisjoint = ( isset($geoDisjoint) && !empty($geoDisjoint) ) ? $geoDisjoint : '';
-								$geoEquals = ( isset($geoEquals) && !empty($geoEquals) ) ? $geoEquals : '';
-								$geoIntersects = ( isset($geoIntersects) && !empty($geoIntersects) ) ? $geoIntersects : '';
-								$geoOverlaps = ( isset($geoOverlaps) && !empty($geoOverlaps) ) ? $geoOverlaps : '';
-								$geoTouches = ( isset($geoTouches) && !empty($geoTouches) ) ? $geoTouches : '';
-								$geoWithin = ( isset($geoWithin) && !empty($geoWithin) ) ? $geoWithin : '';
-								$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
-								$hasDriveThroughService = ( isset($hasDriveThroughService) && !empty($hasDriveThroughService) ) ? $hasDriveThroughService : '';
-								$hasMap = ( isset($hasMap) && !empty($hasMap) ) ? $hasMap : '';
-								$isAccessibleForFree = ( isset($isAccessibleForFree) && !empty($isAccessibleForFree) ) ? $isAccessibleForFree : '';
-								$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
-								$keywords = ( isset($keywords) && !empty($keywords) ) ? $keywords : '';
-								$latitude = ( isset($latitude) && !empty($latitude) ) ? $latitude : '';
-								$logo = ( isset($logo) && !empty($logo) ) ? $logo : '';
-								$longitude = ( isset($longitude) && !empty($longitude) ) ? $longitude : '';
-								$maximumAttendeeCapacity = ( isset($maximumAttendeeCapacity) && !empty($maximumAttendeeCapacity) ) ? $maximumAttendeeCapacity : '';
-								$openingHoursSpecification = ( isset($openingHoursSpecification) && !empty($openingHoursSpecification) ) ? $openingHoursSpecification : '';
-								$photo = ( isset($photo) && !empty($photo) ) ? $photo : '';
-								$publicAccess = ( isset($publicAccess) && !empty($publicAccess) ) ? $publicAccess : '';
-								$review = ( isset($review) && !empty($review) ) ? $review : '';
-								$slogan = ( isset($slogan) && !empty($slogan) ) ? $slogan : '';
-								$smokingAllowed = ( isset($smokingAllowed) && !empty($smokingAllowed) ) ? $smokingAllowed : '';
-								$specialOpeningHoursSpecification = ( isset($specialOpeningHoursSpecification) && !empty($specialOpeningHoursSpecification) ) ? $specialOpeningHoursSpecification : '';
-								$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
-								$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
-
-							// Inherited properties from LocalBusiness
-
-								$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
-								$openingHours = ( isset($openingHours) && !empty($openingHours) ) ? $openingHours : '';
-								$paymentAccepted = ( isset($paymentAccepted) && !empty($paymentAccepted) ) ? $paymentAccepted : '';
-								$priceRange = ( isset($priceRange) && !empty($priceRange) ) ? $priceRange : '';
-
-							// Inherited properties from MedicalBusiness
-
-								// Do nothing
-
-							// Properties from Physician
-
-								$availableService = ( isset($availableService) && !empty($availableService) ) ? $availableService : '';
-								$hospitalAffiliation = ( isset($hospitalAffiliation) && !empty($hospitalAffiliation) ) ? $hospitalAffiliation : '';
-								$medicalSpecialty = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? $medicalSpecialty : '';
-
-						// Add values to the schema array
-
-							// Inherited properties
-
-								$schema = uamswp_fad_schema_medicalbusiness(
-									$schema, // array // Main schema array
-									$currenciesAccepted, // currenciesAccepted
-									$openingHours, // openingHours
-									$paymentAccepted, // paymentAccepted
-									$priceRange, // priceRange
-									$additionalProperty, // additionalProperty
-									$address, // address
-									$aggregateRating, // aggregateRating
-									$amenityFeature, // amenityFeature
-									$branchCode, // branchCode
-									$containedInPlace, // containedInPlace
-									$containsPlace, // containsPlace
-									$event, // event
-									$faxNumber, // faxNumber
-									$geo, // geo
-									$geoContains, // geoContains
-									$geoCoveredBy, // geoCoveredBy
-									$geoCovers, // geoCovers
-									$geoCrosses, // geoCrosses
-									$geoDisjoint, // geoDisjoint
-									$geoEquals, // geoEquals
-									$geoIntersects, // geoIntersects
-									$geoOverlaps, // geoOverlaps
-									$geoTouches, // geoTouches
-									$geoWithin, // geoWithin
-									$globalLocationNumber, // globalLocationNumber
-									$hasDriveThroughService, // hasDriveThroughService
-									$hasMap, // hasMap
-									$isAccessibleForFree, // isAccessibleForFree
-									$isicV4, // isicV4
-									$keywords, // keywords
-									$latitude, // latitude
-									$logo, // logo
-									$longitude, // longitude
-									$maximumAttendeeCapacity, // maximumAttendeeCapacity
-									$openingHoursSpecification, // openingHoursSpecification
-									$photo, // photo
-									$publicAccess, // publicAccess
-									$review, // review
-									$slogan, // slogan
-									$smokingAllowed, // smokingAllowed
-									$specialOpeningHoursSpecification, // specialOpeningHoursSpecification
-									$telephone, // telephone
-									$tourBookingPage, // tourBookingPage
-									$additionalType, // additionalType
-									$alternateName, // alternateName
-									$description, // description
-									$disambiguatingDescription, // disambiguatingDescription
-									$identifier, // identifier
-									$image, // image
-									$mainEntityOfPage, // mainEntityOfPage
-									$name, // name
-									$potentialAction, // potentialAction
-									$sameAs, // sameAs
-									$subjectOf, // subjectOf
-									$url // url
-								);
-
-							// Properties from Physician
-
-								// availableService
-
-									/* 
-									 * Expected Type:
-									 *     MedicalProcedure
-									 *     MedicalTest
-									 *     MedicalTherapy
-									 * 
-									 * A medical service available from this provider.
-									 */
-
-									$schema['availableService'] = $availableService;
-
-								// hospitalAffiliation
-
-									/* 
-									 * Expected Type:
-									 *     Hospital
-									 * 
-									 * A hospital with which the physician or office is affiliated.
-									 */
-
-									$schema['hospitalAffiliation'] = $hospitalAffiliation;
-
-								// medicalSpecialty
-
-									/* 
-									 * Expected Type:
-									 *     MedicalSpecialty
-									 * 
-									 * A medical specialty of the provider.
-									 */
-
-									$schema['medicalSpecialty'] = $medicalSpecialty;
-
-						// Remove any empty values from the schema array
-
-							$schema = array_filter($schema);
-
-						return $schema;
-
-					}
-
-				// Physiotherapy
-				// PlasticSurgery
-				// Podiatric
-				// PrimaryCare
-				// Psychiatric
-				// PublicHealth
-
-			// ProfessionalService
-			// RadioStation
-			// RealEstateAgent
-			// RecyclingCenter
-			// SelfStorage
-			// ShoppingCenter
-			// SportsActivityLocation
-			// Store
-			// TelevisionStation
-			// TouristInformationCenter
-			// TravelAgency
+			/*
+			 * See: Thing > Organization > LocalBusiness
+			 */
 
 		// Residence
 		// TouristAttraction
@@ -44232,20 +44307,20 @@
 		function uamswp_fad_schema_Product(
 			$schema, // array // Main schema array
 			// Product
-			$foo, // foo
+				$foo, // foo
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
@@ -44321,20 +44396,20 @@
 		function uamswp_fad_schema_Taxon(
 			$schema, // array // Main schema array
 			// Taxon
-			$foo, // foo
+				$foo, // foo
 			// Thing
-			$additionalType = '', // additionalType
-			$alternateName = '', // alternateName
-			$description = '', // description
-			$disambiguatingDescription = '', // disambiguatingDescription
-			$identifier = '', // identifier
-			$image = '', // image
-			$mainEntityOfPage = '', // mainEntityOfPage
-			$name = '', // name
-			$potentialAction = '', // potentialAction
-			$sameAs = '', // sameAs
-			$subjectOf = '', // subjectOf
-			$url = '' // url
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
 
 			// Check/define variables
