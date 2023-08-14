@@ -37448,7 +37448,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * The target group associated with a given audience (e.g. veterans, car owners, musicians, etc.).
+							 * The target group associated with a given audience (e.g., veterans, car owners, 
+							 * musicians).
 							 */
 
 							$schema['audienceType'] = $audienceType;
@@ -38110,7 +38111,8 @@
 								 * Expected Type:
 								 *     MedicalCondition
 								 * 
-								 * Specifying the health condition(s) of a patient, medical study, or other target audience.
+								 * Specifying the health condition(s) of a patient, medical study, or other target 
+								 * audience.
 								 */
 
 								$schema['healthCondition'] = $healthCondition;
@@ -38154,7 +38156,8 @@
 								 * Expected Type:
 								 *     QuantitativeValue
 								 * 
-								 * The age or age range for the intended audience or person, for example 3-12 months for infants, 1-5 years for toddlers.
+								 * The age or age range for the intended audience or person, for example 3-12 
+								 * months for infants, 1-5 years for toddlers.
 								 */
 
 								$schema['suggestedAge'] = $suggestedAge;
@@ -38166,7 +38169,8 @@
 								 *     GenderType
 								 *     Text
 								 * 
-								 * The suggested gender of the intended person or audience, for example "male", "female", or "unisex".
+								 * The suggested gender of the intended person or audience, for example "male", 
+								 * "female", or "unisex".
 								 */
 
 								$schema['suggestedGender'] = $suggestedGender;
@@ -38188,7 +38192,9 @@
 								 * Expected Type:
 								 *     QuantitativeValue
 								 * 
-								 * A suggested range of body measurements for the intended audience or person, for example inseam between 32 and 34 inches or height between 170 and 190 cm. Typically found on a size chart for wearable products.
+								 * A suggested range of body measurements for the intended audience or person, for 
+								 * example inseam between 32 and 34 inches or height between 170 and 190 cm. 
+								 * Typically found on a size chart for wearable products.
 								 */
 
 								$schema['suggestedMeasurement'] = $suggestedMeasurement;
@@ -38600,7 +38606,9 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.
+							 * If applicable, a description of the pathophysiology associated with the 
+							 * anatomical system, including potential abnormal changes in the mechanical, 
+							 * physical, and biochemical functions of the system.
 							 */
 
 							$schema['associatedPathophysiology'] = $associatedPathophysiology;
@@ -38633,7 +38641,8 @@
 							 * Expected Type:
 							 *     ImageObject
 							 * 
-							 * An image containing a diagram that illustrates the structure and/or its component substructures and/or connections with other structures.
+							 * An image containing a diagram that illustrates the structure and/or its 
+							 * component substructures and/or connections with other structures.
 							 */
 
 							$schema['diagram'] = $diagram;
@@ -38808,7 +38817,9 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.
+							 * If applicable, a description of the pathophysiology associated with the 
+							 * anatomical system, including potential abnormal changes in the mechanical, 
+							 * physical, and biochemical functions of the system.
 							 */
 
 							$schema['associatedPathophysiology'] = $associatedPathophysiology;
@@ -38820,7 +38831,9 @@
 							 *     AnatomicalStructure
 							 *     AnatomicalSystem
 							 * 
-							 * Specifying something physically contained by something else. Typically used here for the underlying anatomical structures, such as organs, that comprise the anatomical system.
+							 * Specifying something physically contained by something else. Typically used 
+							 * here for the underlying anatomical structures, such as organs, that comprise 
+							 * the anatomical system.
 							 */
 
 							$schema['comprisedOf'] = $comprisedOf;
@@ -38842,7 +38855,8 @@
 							 * Expected Type:
 							 *     AnatomicalStructure
 							 * 
-							 * Related anatomical structure(s) that are not part of the system but relate or connect to it, such as vascular bundles associated with an organ system.
+							 * Related anatomical structure(s) that are not part of the system but relate or 
+							 * connect to it, such as vascular bundles associated with an organ system.
 							 */
 
 							$schema['relatedStructure'] = $relatedStructure;
@@ -38869,7 +38883,7 @@
 		// DrugClass
 
 			/*
-			 * A class of medical drugs, e.g., statins. Classes can represent general 
+			 * A class of medical drugs (e.g., statins). Classes can represent general 
 			 * pharmacological class, common mechanisms of action, common physiological 
 			 * effects, etc.
 			 */
@@ -39131,7 +39145,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * The currency (in 3-letter) of the drug cost. See: http://en.wikipedia.org/wiki/ISO_4217.
+							 * The currency (in 3-letter) of the drug cost. 
+							 * See: http://en.wikipedia.org/wiki/ISO_4217.
 							 */
 
 							$schema['costCurrency'] = $costCurrency;
@@ -39142,7 +39157,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * Additional details to capture the origin of the cost data. For example, 'Medicare Part B'.
+							 * Additional details to capture the origin of the cost data. For example, 
+							 * 'Medicare Part B'.
 							 */
 
 							$schema['costOrigin'] = $costOrigin;
@@ -39166,7 +39182,7 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * The unit in which the drug is measured, e.g. '5 mg tablet'.
+							 * The unit in which the drug is measured (e.g., '5 mg tablet').
 							 */
 
 							$schema['drugUnit'] = $drugUnit;
@@ -39562,7 +39578,8 @@
 							 *     AnatomicalSystem
 							 *     SuperficialAnatomy
 							 * 
-							 * The anatomy of the underlying organ system or structures associated with this entity.
+							 * The anatomy of the underlying organ system or structures associated with this 
+							 * entity.
 							 */
 
 							$schema['associatedAnatomy'] = $associatedAnatomy;
@@ -39573,7 +39590,11 @@
 							 * Expected Type:
 							 *     DDxElement
 							 * 
-							 * One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.
+							 * One of a set of differential diagnoses for the condition. Specifically, a 
+							 * closely-related or competing diagnosis typically considered later in the 
+							 * cognitive process whereby this medical condition is distinguished from others 
+							 * most likely responsible for a similar collection of signs and symptoms to reach 
+							 * the most parsimonious diagnosis or diagnoses in a patient.
 							 */
 
 							$schema['differentialDiagnosis'] = $differentialDiagnosis;
@@ -39606,7 +39627,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * The likely outcome in either the short term or long term of the medical condition.
+							 * The likely outcome in either the short term or long term of the medical 
+							 * condition.
 							 */
 
 							$schema['expectedPrognosis'] = $expectedPrognosis;
@@ -39617,7 +39639,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * The expected progression of the condition if it is not treated and allowed to progress naturally.
+							 * The expected progression of the condition if it is not treated and allowed to 
+							 * progress naturally.
 							 */
 
 							$schema['naturalProgression'] = $naturalProgression;
@@ -39628,7 +39651,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.
+							 * Changes in the normal mechanical, physical, and biochemical functions that are 
+							 * associated with this activity or condition.
 							 */
 
 							$schema['pathophysiology'] = $pathophysiology;
@@ -39639,7 +39663,9 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.
+							 * A possible unexpected and unfavorable evolution of a medical condition. 
+							 * Complications may include worsening of the signs or symptoms of the disease, 
+							 * extension of the condition to other organ systems, etc.
 							 */
 
 							$schema['possibleComplication'] = $possibleComplication;
@@ -39661,7 +39687,8 @@
 							 * Expected Type:
 							 *     MedicalTherapy
 							 * 
-							 * A preventative therapy used to prevent an initial occurrence of the medical condition, such as vaccination.
+							 * A preventative therapy used to prevent an initial occurrence of the medical 
+							 * condition, such as vaccination.
 							 */
 
 							$schema['primaryPrevention'] = $primaryPrevention;
@@ -39672,7 +39699,8 @@
 							 * Expected Type:
 							 *     MedicalRiskFactor
 							 * 
-							 * A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.
+							 * A preventative therapy used to prevent reoccurrence of the medical condition 
+							 * after an initial episode of the condition.
 							 */
 
 							$schema['riskFactor'] = $riskFactor;
@@ -39683,7 +39711,8 @@
 							 * Expected Type:
 							 *     MedicalTherapy
 							 * 
-							 * A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.
+							 * A preventative therapy used to prevent reoccurrence of the medical condition 
+							 * after an initial episode of the condition.
 							 */
 
 							$schema['secondaryPrevention'] = $secondaryPrevention;
@@ -39694,7 +39723,9 @@
 							 * Expected Type:
 							 *     MedicalSignOrSymptom
 							 * 
-							 * A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition.
+							 * A sign or symptom of this condition. Signs are objective or physically 
+							 * observable manifestations of the medical condition while symptoms are the 
+							 * subjective experience of the medical condition.
 							 */
 
 							$schema['signOrSymptom'] = $signOrSymptom;
@@ -39971,7 +40002,10 @@
 							 * Expected Type:
 							 *     MedicalEntity
 							 * 
-							 * A possible complication and/or side effect of this therapy. If it is known that an adverse outcome is serious (resulting in death, disability, or permanent damage; requiring hospitalization; or otherwise life-threatening or requiring immediate medical attention), tag it as a seriousAdverseOutcome instead.
+							 * A possible complication and/or side effect of this therapy. If it is known that 
+							 * an adverse outcome is serious (resulting in death, disability, or permanent 
+							 * damage; requiring hospitalization; or otherwise life-threatening or requiring 
+							 * immediate medical attention), tag it as a seriousAdverseOutcome instead.
 							 */
 
 							$schema['adverseOutcome'] = $adverseOutcome;
@@ -39994,7 +40028,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * A description of the postoperative procedures, care, and/or followups for this device.
+							 * A description of the postoperative procedures, care, and/or followups for this 
+							 * device.
 							 */
 
 							$schema['postOp'] = $postOp;
@@ -40005,7 +40040,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * A description of the workup, testing, and other preparations required before implanting this device.
+							 * A description of the workup, testing, and other preparations required before 
+							 * implanting this device.
 							 */
 
 							$schema['preOp'] = $preOp;
@@ -40016,7 +40052,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * A description of the procedure involved in setting up, using, and/or installing the device.
+							 * A description of the procedure involved in setting up, using, and/or installing 
+							 * the device.
 							 */
 
 							$schema['procedure'] = $procedure;
@@ -40027,7 +40064,12 @@
 							 * Expected Type:
 							 *     MedicalEntity
 							 * 
-							 * A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.
+							 * A possible serious complication and/or serious side effect of this therapy. 
+							 * Serious adverse outcomes include those that are life-threatening; result in 
+							 * death, disability, or permanent damage; require hospitalization or prolong 
+							 * existing hospitalization; cause congenital anomalies or birth defects; or 
+							 * jeopardize the patient and may require medical or surgical intervention to 
+							 * prevent one of the outcomes in this definition.
 							 */
 
 							$schema['seriousAdverseOutcome'] = $seriousAdverseOutcome;
@@ -40043,7 +40085,7 @@
 		// MedicalGuideline
 
 			/*
-			 * Any recommendation made by a standard society (e.g. ACC/AHA) or consensus 
+			 * Any recommendation made by a standard society (e.g., ACC/AHA) or consensus 
 			 * statement that denotes how to diagnose and treat a particular condition. 
 			 * Note: this type should be used to tag the actual guideline recommendation; if 
 			 * the guideline recommendation occurs in a larger scholarly article, use 
@@ -40169,7 +40211,8 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * Source of the data used to formulate the guidance, e.g. RCT, consensus opinion, etc.
+							 * Source of the data used to formulate the guidance (e.g., RCT, consensus 
+							 * opinion).
 							 */
 
 							$schema['evidenceOrigin'] = $evidenceOrigin;
@@ -40576,7 +40619,8 @@
 							 *     MedicalEntity
 							 *     Text
 							 * 
-							 * Typical preparation that a patient must undergo before having the procedure performed.
+							 * Typical preparation that a patient must undergo before having the procedure 
+							 * performed.
 
 							 */
 
@@ -40734,7 +40778,8 @@
 							 * Expected Type:
 							 *     MedicalRiskFactor
 							 * 
-							 * A modifiable or non-modifiable risk factor included in the calculation (e.g., age, coexisting condition).
+							 * A modifiable or non-modifiable risk factor included in the calculation (e.g., 
+							 * age, coexisting condition).
 							 */
 
 							$schema['includedRiskFactor'] = $includedRiskFactor;
@@ -40877,7 +40922,7 @@
 			 * as MedicalTrial or MedicalObservationalStudy. Also, note that this type should 
 			 * be used to mark up data that describes the study itself; to tag an article that 
 			 * publishes the results of a study, use MedicalScholarlyArticle. Note: use the 
-			 * code property of MedicalEntity to store study IDs, e.g. clinicaltrials.gov ID.
+			 * code property of MedicalEntity to store study IDs (e.g., clinicaltrials.gov ID).
 			 */
 
 			function uamswp_fad_schema_MedicalStudy(
@@ -40988,7 +41033,8 @@
 							 * Expected Type:
 							 *     MedicalCondition
 							 * 
-							 * Specifying the health condition(s) of a patient, medical study, or other target audience.
+							 * Specifying the health condition(s) of a patient, medical study, or other target 
+							 * audience.
 							 */
 
 							$schema['healthCondition'] = $healthCondition;
@@ -41000,7 +41046,9 @@
 							 *     Organization
 							 *     Person
 							 * 
-							 * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+							 * A person or organization that supports a thing through a pledge, promise, or 
+							 * financial contribution (e.g.,  a sponsor of a Medical Study or a corporate 
+							 * sponsor of an event).
 							 */
 
 							$schema['sponsor'] = $sponsor;
@@ -41035,7 +41083,8 @@
 							 * Expected Type:
 							 *     MedicalEntity
 							 * 
-							 * A subject of the study (i.e., one of the medical conditions, therapies, devices, drugs, etc. investigated by the study).
+							 * A subject of the study (i.e., one of the medical conditions, therapies, 
+							 * devices, drugs, etc. investigated by the study).
 							 */
 
 							$schema['studySubject'] = $studySubject;
@@ -41485,7 +41534,9 @@
 							 * Expected Type:
 							 *     Text
 							 * 
-							 * If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.
+							 * If applicable, a description of the pathophysiology associated with the 
+							 * anatomical system, including potential abnormal changes in the mechanical, 
+							 * physical, and biochemical functions of the system.
 							 */
 
 							$schema['associatedPathophysiology'] = $associatedPathophysiology;
@@ -41846,7 +41897,8 @@
 						 * Expected Type:
 						 *     Organization
 						 * 
-						 * An organization that this person is affiliated with. For example, a school/university, a club, or a team.
+						 * An organization that this person is affiliated with. For example, a 
+						 * school/university, a club, or a team.
 						 */
 
 						$schema['affiliation'] = $affiliation;
@@ -41905,7 +41957,8 @@
 						 *     Brand
 						 *     Organization
 						 * 
-						 * The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+						 * The brand(s) associated with a product or service, or the brand(s) maintained 
+						 * by an organization or business person.
 						 */
 
 						$schema['brand'] = $brand;
@@ -41916,7 +41969,8 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * A callsign, as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles.
+						 * A callsign, as used in broadcasting and radio communications to identify 
+						 * people, radio and TV stations, or vehicles.
 						 */
 
 						$schema['callSign'] = $callSign;
@@ -41983,7 +42037,8 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * The Dun & Bradstreet DUNS number for identifying an organization or business person.
+						 * The Dun & Bradstreet DUNS number for identifying an organization or business 
+						 * person.
 						 */
 
 						$schema['duns'] = $duns;
@@ -42039,7 +42094,8 @@
 						 *     Organization
 						 *     Person
 						 * 
-						 * A person or organization that supports (sponsors) something through some kind of financial contribution.
+						 * A person or organization that supports (sponsors) something through some kind 
+						 * of financial contribution.
 						 */
 
 						$schema['funder'] = $funder;
@@ -42050,7 +42106,8 @@
 						 * Expected Type:
 						 *     Grant
 						 * 
-						 * A Grant that directly or indirectly provide funding or sponsorship for this item. See also ownershipFundingInfo.
+						 * A Grant that directly or indirectly provide funding or sponsorship for this 
+						 * item. See also ownershipFundingInfo.
 						 * 
 						 * Inverse property: fundedItem
 						 */
@@ -42064,7 +42121,13 @@
 						 *     GenderType
 						 *     Text
 						 * 
-						 * Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The gender property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender SportsTeam can be indicated with a text value of "Mixed".
+						 * Gender of something, typically a Person, but possibly also fictional 
+						 * characters, animals, etc. While https://schema.org/Male and 
+						 * https://schema.org/Female may be used, text strings are also acceptable for 
+						 * people who do not identify as a binary gender. The gender property can also be 
+						 * used in an extended sense to cover (e.g., the gender of sports teams). As with 
+						 * the gender of individuals, we do not try to enumerate all possibilities. A 
+						 * mixed-gender SportsTeam can be indicated with a text value of "Mixed".
 						 */
 
 						$schema['gender'] = $gender;
@@ -42086,7 +42149,9 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.
+						 * The Global Location Number (GLN, sometimes also referred to as International 
+						 * Location Number or ILN) of the respective organization, person, or place. The 
+						 * GLN is a 13-digit number used to identify parties and physical locations.
 						 */
 
 						$schema['globalLocationNumber'] = $globalLocationNumber;
@@ -42187,7 +42252,9 @@
 						 * Expected Type:
 						 *     InteractionCounter
 						 * 
-						 * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication. The most specific child type of InteractionCounter should be used. Supersedes interactionCount.
+						 * The number of interactions for the CreativeWork using the WebSite or 
+						 * SoftwareApplication. The most specific child type of InteractionCounter should 
+						 * be used. Supersedes interactionCount.
 						 */
 
 						$schema['interactionStatistic'] = $interactionStatistic;
@@ -42198,7 +42265,9 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code for a particular organization, business person, or place.
+						 * The International Standard of Industrial Classification of All Economic 
+						 * Activities (ISIC), Revision 4 code for a particular organization, business 
+						 * person, or place.
 						 */
 
 						$schema['isicV4'] = $isicV4;
@@ -42234,7 +42303,10 @@
 						 *     Thing
 						 *     URL
 						 * 
-						 * Of a Person, and less typically of an Organization, to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or JobPosting descriptions.
+						 * Of a Person, and less typically of an Organization, to indicate a topic that is 
+						 * known about - suggesting possible expertise but not implying it. We do not 
+						 * distinguish skill levels here, or relate this to educational content, events, 
+						 * objectives or JobPosting descriptions.
 						 */
 
 						$schema['knowsAbout'] = $knowsAbout;
@@ -42246,7 +42318,10 @@
 						 *     Language
 						 *     Text
 						 * 
-						 * Of a Person, and less typically of an Organization, to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the IETF BCP 47 standard.
+						 * Of a Person, and less typically of an Organization, to indicate a known 
+						 * language. We do not distinguish skill levels or 
+						 * reading/writing/speaking/signing here. Use language codes from the IETF BCP 47 
+						 * standard.
 						 */
 
 						$schema['knowsLanguage'] = $knowsLanguage;
@@ -42271,7 +42346,8 @@
 						 *     Organization
 						 *     ProgramMembership
 						 * 
-						 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+						 * An Organization (or ProgramMembership) to which this Person or Organization 
+						 * belongs.
 						 * 
 						 * Inverse property: member
 						 */
@@ -42284,7 +42360,8 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * The North American Industry Classification System (NAICS) code for a particular organization or business person.
+						 * The North American Industry Classification System (NAICS) code for a particular 
+						 * organization or business person.
 						 */
 
 						$schema['naics'] = $naics;
@@ -42307,7 +42384,8 @@
 						 *     MonetaryAmount
 						 *     PriceSpecification
 						 * 
-						 * The total financial value of the person as calculated by subtracting assets from liabilities.
+						 * The total financial value of the person as calculated by subtracting assets 
+						 * from liabilities.
 						 */
 
 						$schema['netWorth'] = $netWorth;
@@ -42353,7 +42431,12 @@
 						 *     CreativeWork
 						 *     URL
 						 * 
-						 * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual, e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork.
+						 * The publishingPrinciples property indicates (typically via URL) a document 
+						 * describing the editorial principles of an Organization (or individual, e.g., a 
+						 * Person writing a blog) that relate to their activities as a publisher (e.g., 
+						 * ethics or diversity policies). When applied to a CreativeWork (e.g., 
+						 * NewsArticle) the principles are those of the party primarily responsible for 
+						 * the creation of the CreativeWork.
 						 */
 
 						$schema['publishingPrinciples'] = $publishingPrinciples;
@@ -42398,7 +42481,9 @@
 						 *     Organization
 						 *     Person
 						 * 
-						 * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+						 * A person or organization that supports a thing through a pledge, promise, or 
+						 * financial contribution (e.g., a sponsor of a Medical Study or a corporate 
+						 * sponsor of an event).
 						 */
 
 						$schema['sponsor'] = $sponsor;
@@ -42420,7 +42505,8 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.
+						 * The Tax / Fiscal ID of the organization or person (e.g.,  the TIN in the US or 
+						 * the CIF/NIF in Spain).
 						 */
 
 						$schema['taxID'] = $taxID;
@@ -42480,7 +42566,6 @@
 						 */
 
 						$schema['worksFor'] = $worksFor;
-
 
 			// Remove any empty values from the schema array
 
@@ -42640,511 +42725,511 @@
 					// additionalProperty
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > StructuredValue > PropertyValue
-							 * 
-							 * A property-value pair representing an additional characteristic of the entity 
-							 * (e.g., a product feature or another characteristic for which there is no 
-							 * matching property in schema.org).
-							 * 
-							 * Note: Publishers should be aware that applications designed to use specific 
-							 * schema.org properties (e.g., https://schema.org/width, 
-							 * https://schema.org/color, https://schema.org/gtin13, ...) will typically expect 
-							 * such data to be provided using those properties, rather than using the generic 
-							 * property/value mechanism.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > StructuredValue > PropertyValue
+						 * 
+						 * A property-value pair representing an additional characteristic of the entity 
+						 * (e.g., a product feature or another characteristic for which there is no 
+						 * matching property in schema.org).
+						 * 
+						 * Note: Publishers should be aware that applications designed to use specific 
+						 * schema.org properties (e.g., https://schema.org/width, 
+						 * https://schema.org/color, https://schema.org/gtin13, ...) will typically expect 
+						 * such data to be provided using those properties, rather than using the generic 
+						 * property/value mechanism.
+						 */
 
 						$schema['additionalProperty'] = $additionalProperty;
 
 					// address
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > StructuredValue > ContactPoint > PostalAddress
-							 *     DataType > Text
-							 * 
-							 * Physical address of the item.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > StructuredValue > ContactPoint > PostalAddress
+						 *     DataType > Text
+						 * 
+						 * Physical address of the item.
+						 */
 
 						$schema['address'] = $address;
 
 					// aggregateRating
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > Rating > AggregateRating
-							 * 
-							 * The overall rating, based on a collection of reviews or ratings, of the 
-							 * item.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > Rating > AggregateRating
+						 * 
+						 * The overall rating, based on a collection of reviews or ratings, of the 
+						 * item.
+						 */
 
 						$schema['aggregateRating'] = $aggregateRating;
 
 					// amenityFeature
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > StructuredValue > PropertyValue > LocationFeatureSpecification
-							 * 
-							 * An amenity feature (e.g. a characteristic or service) of the Accommodation. 
-							 * This generic property does not make a statement about whether the feature is 
-							 * included in an offer for the main accommodation or available at extra costs.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > StructuredValue > PropertyValue > LocationFeatureSpecification
+						 * 
+						 * An amenity feature (e.g., a characteristic or service) of the Accommodation. 
+						 * This generic property does not make a statement about whether the feature is 
+						 * included in an offer for the main accommodation or available at extra costs.
+						 */
 
 						$schema['amenityFeature'] = $amenityFeature;
 
 					// branchCode
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * A short textual code (also called "store code") that uniquely identifies a 
-							 * place of business. The code is typically assigned by the parentOrganization and 
-							 * used in structured URLs.
-							 * 
-							 * For example, in the URL 
-							 * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a 
-							 * branchCode for a particular branch.
-							 */
+						 * Expected Type:
+						 *     DataType > Text
+						 * 
+						 * A short textual code (also called "store code") that uniquely identifies a 
+						 * place of business. The code is typically assigned by the parentOrganization and 
+						 * used in structured URLs.
+						 * 
+						 * For example, in the URL 
+						 * http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code "3047" is a 
+						 * branchCode for a particular branch.
+						 */
 
 						$schema['branchCode'] = $branchCode;
 
 					// containedInPlace
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Place
-							 * 
-							 * The basic containment relation between a place and one that contains it. 
-							 * Supersedes containedIn.
-							 * 
-							 * Inverse property: containsPlace
-							 */
+						 * Expected Type:
+						 *     Thing > Place
+						 * 
+						 * The basic containment relation between a place and one that contains it. 
+						 * Supersedes containedIn.
+						 * 
+						 * Inverse property: containsPlace
+						 */
 
 						$schema['containedInPlace'] = $containedInPlace;
 
 					// containsPlace
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Place
-							 * 
-							 * The basic containment relation between a place and another that it contains.
-							 * 
-							 * Inverse property: containedInPlace
-							 */
+						 * Expected Type:
+						 *     Thing > Place
+						 * 
+						 * The basic containment relation between a place and another that it contains.
+						 * 
+						 * Inverse property: containedInPlace
+						 */
 
 						$schema['containsPlace'] = $containsPlace;
 
 					// event
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Event
-							 * 
-							 * Upcoming or past event associated with this place, organization, or action. 
-							 * Supersedes events.
-							 */
+						 * Expected Type:
+						 *     Thing > Event
+						 * 
+						 * Upcoming or past event associated with this place, organization, or action. 
+						 * Supersedes events.
+						 */
 
 						$schema['event'] = $event;
 
 					// faxNumber
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The fax number.
-							 */
+						 * Expected Type:
+						 *     DataType > Text
+						 * 
+						 * The fax number.
+						 */
 
 						$schema['faxNumber'] = $faxNumber;
 
 					// geo
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > StructuredValue > GeoCoordinates
-							 *     Thing > Intangible > StructuredValue > GeoShape
-							 * 
-							 * The geo coordinates of the place.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > StructuredValue > GeoCoordinates
+						 *     Thing > Intangible > StructuredValue > GeoShape
+						 * 
+						 * The geo coordinates of the place.
+						 */
 
 						$schema['geo'] = $geo;
 
 					// geoContains
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents a relationship between two geometries (or the places they 
-							 * represent), relating a containing geometry to a contained geometry. "a contains 
-							 * b iff no points of b lie in the exterior of a, and at least one point of the 
-							 * interior of b lies in the interior of a". As defined in DE-9IM.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents a relationship between two geometries (or the places they 
+						 * represent), relating a containing geometry to a contained geometry. "a contains 
+						 * b iff no points of b lie in the exterior of a, and at least one point of the 
+						 * interior of b lies in the interior of a". As defined in DE-9IM.
+						 */
 
 						$schema['geoContains'] = $geoContains;
 
 					// geoCoveredBy
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents a relationship between two geometries (or the places they 
-							 * represent), relating a geometry to another that covers it. As defined in DE-9IM.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents a relationship between two geometries (or the places they 
+						 * represent), relating a geometry to another that covers it. As defined in DE-9IM.
+						 */
 
 						$schema['geoCoveredBy'] = $geoCoveredBy;
 
 					// geoCovers
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents a relationship between two geometries (or the places they 
-							 * represent), relating a covering geometry to a covered geometry. "Every point of 
-							 * b is a point of (the interior or boundary of) a". As defined in DE-9IM.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents a relationship between two geometries (or the places they 
+						 * represent), relating a covering geometry to a covered geometry. "Every point of 
+						 * b is a point of (the interior or boundary of) a". As defined in DE-9IM.
+						 */
 
 						$schema['geoCovers'] = $geoCovers;
 
 					// geoCrosses
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents a relationship between two geometries (or the places they 
-							 * represent), relating a geometry to another that crosses it: "a crosses b: they 
-							 * have some but not all interior points in common, and the dimension of the 
-							 * intersection is less than that of at least one of them". As defined in DE-9IM.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents a relationship between two geometries (or the places they 
+						 * represent), relating a geometry to another that crosses it: "a crosses b: they 
+						 * have some but not all interior points in common, and the dimension of the 
+						 * intersection is less than that of at least one of them". As defined in DE-9IM.
+						 */
 
 						$schema['geoCrosses'] = $geoCrosses;
 
 					// geoDisjoint
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents spatial relations in which two geometries (or the places they 
-							 * represent) are topologically disjoint: "they have no point in common. They form 
-							 * a set of disconnected geometries." (A symmetric relationship, as defined in 
-							 * DE-9IM.)
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents spatial relations in which two geometries (or the places they 
+						 * represent) are topologically disjoint: "they have no point in common. They form 
+						 * a set of disconnected geometries." (A symmetric relationship, as defined in 
+						 * DE-9IM.)
+						 */
 
 						$schema['geoDisjoint'] = $geoDisjoint;
 
 					// geoEquals
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents spatial relations in which two geometries (or the places they 
-							 * represent) are topologically equal, as defined in DE-9IM. "Two geometries are 
-							 * topologically equal if their interiors intersect and no part of the interior or 
-							 * boundary of one geometry intersects the exterior of the other" (a symmetric 
-							 * relationship).
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents spatial relations in which two geometries (or the places they 
+						 * represent) are topologically equal, as defined in DE-9IM. "Two geometries are 
+						 * topologically equal if their interiors intersect and no part of the interior or 
+						 * boundary of one geometry intersects the exterior of the other" (a symmetric 
+						 * relationship).
+						 */
 
 						$schema['geoEquals'] = $geoEquals;
 
 					// geoIntersects
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents spatial relations in which two geometries (or the places they 
-							 * represent) have at least one point in common. As defined in DE-9IM.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents spatial relations in which two geometries (or the places they 
+						 * represent) have at least one point in common. As defined in DE-9IM.
+						 */
 
 						$schema['geoIntersects'] = $geoIntersects;
 
 					// geoOverlaps
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents a relationship between two geometries (or the places they 
-							 * represent), relating a geometry to another that geospatially overlaps it 
-							 * (i.e., they have some but not all points in common. As defined in 
-							 * DE-9IM).
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents a relationship between two geometries (or the places they 
+						 * represent), relating a geometry to another that geospatially overlaps it 
+						 * (i.e., they have some but not all points in common. As defined in 
+						 * DE-9IM).
+						 */
 
 						$schema['geoOverlaps'] = $geoOverlaps;
 
 					// geoTouches
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents spatial relations in which two geometries (or the places they 
-							 * represent) touch: "they have at least one boundary point in common, but no 
-							 * interior points." (A symmetric relationship, as defined in DE-9IM.)
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents spatial relations in which two geometries (or the places they 
+						 * represent) touch: "they have at least one boundary point in common, but no 
+						 * interior points." (A symmetric relationship, as defined in DE-9IM.)
+						 */
 
 						$schema['geoTouches'] = $geoTouches;
 
 					// geoWithin
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > GeospatialGeometry
-							 *     Thing > Place
-							 * 
-							 * Represents a relationship between two geometries (or the places they 
-							 * represent), relating a geometry to one that contains it (i.e., it is inside 
-							 * (within) its interior. As defined in DE-9IM.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > GeospatialGeometry
+						 *     Thing > Place
+						 * 
+						 * Represents a relationship between two geometries (or the places they 
+						 * represent), relating a geometry to one that contains it (i.e., it is inside 
+						 * (within) its interior. As defined in DE-9IM.
+						 */
 
 						$schema['geoWithin'] = $geoWithin;
 
 					// globalLocationNumber
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The Global Location Number (GLN, sometimes also referred to as International 
-							 * Location Number or ILN) of the respective organization, person, or place. The 
-							 * GLN is a 13-digit number used to identify parties and physical locations.
-							 */
+						 * Expected Type:
+						 *     DataType > Text
+						 * 
+						 * The Global Location Number (GLN, sometimes also referred to as International 
+						 * Location Number or ILN) of the respective organization, person, or place. The 
+						 * GLN is a 13-digit number used to identify parties and physical locations.
+						 */
 
 						$schema['globalLocationNumber'] = $globalLocationNumber;
 
 					// hasDriveThroughService
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Boolean
-							 * 
-							 * Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) 
-							 * offers a service that can be used by driving through in a car. In the case of 
-							 * CovidTestingFacility such facilities could potentially help with social 
-							 * distancing from other potentially-infected users.
-							 */
+						 * Expected Type:
+						 *     DataType > Boolean
+						 * 
+						 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility) 
+						 * offers a service that can be used by driving through in a car. In the case of 
+						 * CovidTestingFacility such facilities could potentially help with social 
+						 * distancing from other potentially-infected users.
+						 */
 
 						$schema['hasDriveThroughService'] = $hasDriveThroughService;
 
 					// hasMap
 
 						/* 
-							 * Expected Type:
-							 *     Thing > CreativeWork > Map
-							 *     DataType > Text > URL
-							 * 
-							 * A URL to a map of the place. Supersedes maps, map.
-							 */
+						 * Expected Type:
+						 *     Thing > CreativeWork > Map
+						 *     DataType > Text > URL
+						 * 
+						 * A URL to a map of the place. Supersedes maps, map.
+						 */
 
 						$schema['hasMap'] = $hasMap;
 
 					// isAccessibleForFree
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Boolean
-							 * 
-							 * A flag to signal that the item, event, or place is accessible for free. 
-							 * Supersedes free.
-							 */
+						 * Expected Type:
+						 *     DataType > Boolean
+						 * 
+						 * A flag to signal that the item, event, or place is accessible for free. 
+						 * Supersedes free.
+						 */
 
 						$schema['isAccessibleForFree'] = $isAccessibleForFree;
 
 					// isicV4
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The International Standard of Industrial Classification of All Economic 
-							 * Activities (ISIC), Revision 4 code for a particular organization, business 
-							 * person, or place.
-							 */
+						 * Expected Type:
+						 *     DataType > Text
+						 * 
+						 * The International Standard of Industrial Classification of All Economic 
+						 * Activities (ISIC), Revision 4 code for a particular organization, business 
+						 * person, or place.
+						 */
 
 						$schema['isicV4'] = $isicV4;
 
 					// keywords
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > DefinedTerm
-							 *     DataType > Text
-							 *     DataType > Text > URL
-							 * 
-							 * Keywords or tags used to describe some item. Multiple textual entries in a 
-							 * keywords list are typically delimited by commas, or by repeating the property.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > DefinedTerm
+						 *     DataType > Text
+						 *     DataType > Text > URL
+						 * 
+						 * Keywords or tags used to describe some item. Multiple textual entries in a 
+						 * keywords list are typically delimited by commas, or by repeating the property.
+						 */
 
 						$schema['keywords'] = $keywords;
 
 					// latitude
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Number
-							 *     DataType > Text
-							 * 
-							 * The latitude of a location. For example 37.42242 (WGS 84).
-							 */
+						 * Expected Type:
+						 *     DataType > Number
+						 *     DataType > Text
+						 * 
+						 * The latitude of a location. For example 37.42242 (WGS 84).
+						 */
 
 						$schema['latitude'] = $latitude;
 
 					// logo
 
 						/* 
-							 * Expected Type:
-							 *     Thing > CreativeWork > MediaObject > ImageObject
-							 *     DataType > Text > URL
-							 * 
-							 * An associated logo.
-							 */
+						 * Expected Type:
+						 *     Thing > CreativeWork > MediaObject > ImageObject
+						 *     DataType > Text > URL
+						 * 
+						 * An associated logo.
+						 */
 
 						$schema['logo'] = $logo;
 
 					// longitude
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Number
-							 *     DataType > Text
-							 * 
-							 * The longitude of a location. For example -122.08585 (WGS 84).
-							 */
+						 * Expected Type:
+						 *     DataType > Number
+						 *     DataType > Text
+						 * 
+						 * The longitude of a location. For example -122.08585 (WGS 84).
+						 */
 
 						$schema['longitude'] = $longitude;
 
 					// maximumAttendeeCapacity
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Number > Integer
-							 * 
-							 * The total number of individuals that may attend an event or venue.
-							 */
+						 * Expected Type:
+						 *     DataType > Number > Integer
+						 * 
+						 * The total number of individuals that may attend an event or venue.
+						 */
 
 						$schema['maximumAttendeeCapacity'] = $maximumAttendeeCapacity;
 
 					// openingHoursSpecification
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > StructuredValue > OpeningHoursSpecification
-							 * 
-							 * The opening hours of a certain place.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > StructuredValue > OpeningHoursSpecification
+						 * 
+						 * The opening hours of a certain place.
+						 */
 
 						$schema['openingHoursSpecification'] = $openingHoursSpecification;
 
 					// photo
 
 						/* 
-							 * Expected Type:
-							 *     Thing > CreativeWork > MediaObject > ImageObject
-							 *     Thing > CreativeWork > Photograph
-							 * 
-							 * A photograph of this place. Supersedes photos.
-							 */
+						 * Expected Type:
+						 *     Thing > CreativeWork > MediaObject > ImageObject
+						 *     Thing > CreativeWork > Photograph
+						 * 
+						 * A photograph of this place. Supersedes photos.
+						 */
 
 						$schema['photo'] = $photo;
 
 					// publicAccess
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Boolean
-							 * 
-							 * A flag to signal that the Place is open to public visitors. If this property is 
-							 * omitted there is no assumed default boolean value
-							 */
+						 * Expected Type:
+						 *     DataType > Boolean
+						 * 
+						 * A flag to signal that the Place is open to public visitors. If this property is 
+						 * omitted there is no assumed default boolean value
+						 */
 
 						$schema['publicAccess'] = $publicAccess;
 
 					// review
 
 						/* 
-							 * Expected Type:
-							 *     Thing > CreativeWork > Review
-							 * 
-							 * A review of the item. Supersedes reviews.
-							 */
+						 * Expected Type:
+						 *     Thing > CreativeWork > Review
+						 * 
+						 * A review of the item. Supersedes reviews.
+						 */
 
 						$schema['review'] = $review;
 
 					// slogan
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * A slogan or motto associated with the item.
-							 */
+						 * Expected Type:
+						 *     DataType > Text
+						 * 
+						 * A slogan or motto associated with the item.
+						 */
 
 						$schema['slogan'] = $slogan;
 
 					// smokingAllowed
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Boolean
-							 * 
-							 * Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, 
-							 * hotel or hotel room.
-							 */
+						 * Expected Type:
+						 *     DataType > Boolean
+						 * 
+						 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant, 
+						 * hotel or hotel room).
+						 */
 
 						$schema['smokingAllowed'] = $smokingAllowed;
 
 					// specialOpeningHoursSpecification
 
 						/* 
-							 * Expected Type:
-							 *     Thing > Intangible > StructuredValue > OpeningHoursSpecification
-							 * 
-							 * The special opening hours of a certain place.
-							 * 
-							 * Use this to explicitly override general opening hours brought in scope by 
-							 * openingHoursSpecification or openingHours.
-							 */
+						 * Expected Type:
+						 *     Thing > Intangible > StructuredValue > OpeningHoursSpecification
+						 * 
+						 * The special opening hours of a certain place.
+						 * 
+						 * Use this to explicitly override general opening hours brought in scope by 
+						 * openingHoursSpecification or openingHours.
+						 */
 
 						$schema['specialOpeningHoursSpecification'] = $specialOpeningHoursSpecification;
 
 					// telephone
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text
-							 * 
-							 * The telephone number.
-							 */
+						 * Expected Type:
+						 *     DataType > Text
+						 * 
+						 * The telephone number.
+						 */
 
 						$schema['telephone'] = $telephone;
 
 					// tourBookingPage
 
 						/* 
-							 * Expected Type:
-							 *     DataType > Text > URL
-							 * 
-							 * A page providing information on how to book a tour of some Place, such as an 
-							 * Accommodation or ApartmentComplex in a real estate setting, as well as other 
-							 * kinds of tours as appropriate.
-							 */
+						 * Expected Type:
+						 *     DataType > Text > URL
+						 * 
+						 * A page providing information on how to book a tour of some Place, such as an 
+						 * Accommodation or ApartmentComplex in a real estate setting, as well as other 
+						 * kinds of tours as appropriate.
+						 */
 
 						$schema['tourBookingPage'] = $tourBookingPage;
 
@@ -43320,9 +43405,9 @@
 							 * 
 							 * The currency accepted.
 							 * 
-							 * Use standard formats: ISO 4217 currency format, e.g. "USD"; Ticker symbol for 
-							 * cryptocurrencies, e.g. "BTC"; well known names for Local Exchange Trading 
-							 * Systems (LETS) and other currency types, e.g. "Ithaca HOUR".
+							 * Use standard formats: ISO 4217 currency format (e.g., "USD"; Ticker symbol for 
+							 * cryptocurrencies, e.g., "BTC"; well known names for Local Exchange Trading 
+							 * Systems (LETS) and other currency types, e.g., "Ithaca HOUR").
 							 */
 
 							$schema['currenciesAccepted'] = $currenciesAccepted;
