@@ -17,7 +17,7 @@
 		// Action
 
 			/*
-			 * Thing > foo > Action
+			 * Thing > Action
 			 * 
 			 * 
 			 */
@@ -31,7 +31,7 @@
 			// AchieveAction
 
 				/*
-				 * Thing > foo > bar > AchieveAction
+				 * Thing > Action > AchieveAction
 				 * 
 				 * 
 				 */
@@ -45,7 +45,7 @@
 				// LoseAction
 
 					/*
-					 * Thing > foo > bar > baz > LoseAction
+					 * Thing > Action > baz > LoseAction
 					 * 
 					 * 
 					 */
@@ -59,7 +59,7 @@
 				// TieAction
 
 					/*
-					 * Thing > foo > bar > baz > TieAction
+					 * Thing > Action > baz > TieAction
 					 * 
 					 * 
 					 */
@@ -73,7 +73,7 @@
 				// WinAction
 
 					/*
-					 * Thing > foo > bar > baz > WinAction
+					 * Thing > Action > baz > WinAction
 					 * 
 					 * 
 					 */
@@ -87,7 +87,7 @@
 			// AssessAction
 
 				/*
-				 * Thing > foo > bar > AssessAction
+				 * Thing > Action > AssessAction
 				 * 
 				 * 
 				 */
@@ -101,7 +101,7 @@
 				// ChooseAction
 
 					/*
-					 * Thing > foo > bar > baz > ChooseAction
+					 * Thing > Action > baz > ChooseAction
 					 * 
 					 * 
 					 */
@@ -115,7 +115,7 @@
 					// VoteAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > VoteAction
+						 * Thing > Action > baz > qux > VoteAction
 						 * 
 						 * 
 						 */
@@ -129,7 +129,7 @@
 				// IgnoreAction
 
 					/*
-					 * Thing > foo > bar > baz > IgnoreAction
+					 * Thing > Action > baz > IgnoreAction
 					 * 
 					 * 
 					 */
@@ -143,7 +143,7 @@
 				// ReactAction
 
 					/*
-					 * Thing > foo > bar > baz > ReactAction
+					 * Thing > Action > baz > ReactAction
 					 * 
 					 * 
 					 */
@@ -157,7 +157,7 @@
 					// AgreeAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > AgreeAction
+						 * Thing > Action > baz > qux > AgreeAction
 						 * 
 						 * 
 						 */
@@ -171,7 +171,7 @@
 					// DisagreeAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > DisagreeAction
+						 * Thing > Action > baz > qux > DisagreeAction
 						 * 
 						 * 
 						 */
@@ -185,7 +185,7 @@
 					// DislikeAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > DislikeAction
+						 * Thing > Action > baz > qux > DislikeAction
 						 * 
 						 * 
 						 */
@@ -199,7 +199,7 @@
 					// EndorseAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > EndorseAction
+						 * Thing > Action > baz > qux > EndorseAction
 						 * 
 						 * 
 						 */
@@ -213,7 +213,7 @@
 					// LikeAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > LikeAction
+						 * Thing > Action > baz > qux > LikeAction
 						 * 
 						 * 
 						 */
@@ -227,7 +227,7 @@
 					// WantAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > WantAction
+						 * Thing > Action > baz > qux > WantAction
 						 * 
 						 * 
 						 */
@@ -241,7 +241,7 @@
 				// ReviewAction
 
 					/*
-					 * Thing > foo > bar > baz > ReviewAction
+					 * Thing > Action > baz > ReviewAction
 					 * 
 					 * 
 					 */
@@ -255,7 +255,7 @@
 			// ConsumeAction
 
 				/*
-				 * Thing > foo > bar > ConsumeAction
+				 * Thing > Action > ConsumeAction
 				 * 
 				 * 
 				 */
@@ -269,7 +269,7 @@
 				// DrinkAction
 
 					/*
-					 * Thing > foo > bar > baz > DrinkAction
+					 * Thing > Action > baz > DrinkAction
 					 * 
 					 * 
 					 */
@@ -283,7 +283,7 @@
 				// EatAction
 
 					/*
-					 * Thing > foo > bar > baz > EatAction
+					 * Thing > Action > baz > EatAction
 					 * 
 					 * 
 					 */
@@ -297,7 +297,7 @@
 				// InstallAction
 
 					/*
-					 * Thing > foo > bar > baz > InstallAction
+					 * Thing > Action > baz > InstallAction
 					 * 
 					 * 
 					 */
@@ -311,7 +311,7 @@
 				// ListenAction
 
 					/*
-					 * Thing > foo > bar > baz > ListenAction
+					 * Thing > Action > baz > ListenAction
 					 * 
 					 * 
 					 */
@@ -325,7 +325,7 @@
 				// PlayGameAction
 
 					/*
-					 * Thing > foo > bar > baz > PlayGameAction
+					 * Thing > Action > baz > PlayGameAction
 					 * 
 					 * 
 					 */
@@ -339,7 +339,7 @@
 				// ReadAction
 
 					/*
-					 * Thing > foo > bar > baz > ReadAction
+					 * Thing > Action > baz > ReadAction
 					 * 
 					 * 
 					 */
@@ -353,7 +353,7 @@
 				// UseAction
 
 					/*
-					 * Thing > foo > bar > baz > UseAction
+					 * Thing > Action > baz > UseAction
 					 * 
 					 * 
 					 */
@@ -367,7 +367,7 @@
 					// WearAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > WearAction
+						 * Thing > Action > baz > qux > WearAction
 						 * 
 						 * 
 						 */
@@ -381,7 +381,7 @@
 				// ViewAction
 
 					/*
-					 * Thing > foo > bar > baz > ViewAction
+					 * Thing > Action > baz > ViewAction
 					 * 
 					 * 
 					 */
@@ -395,7 +395,7 @@
 				// WatchAction
 
 					/*
-					 * Thing > foo > bar > baz > WatchAction
+					 * Thing > Action > baz > WatchAction
 					 * 
 					 * 
 					 */
@@ -409,7 +409,7 @@
 			// ControlAction
 
 				/*
-				 * Thing > foo > bar > ControlAction
+				 * Thing > Action > ControlAction
 				 * 
 				 * 
 				 */
@@ -423,7 +423,7 @@
 				// ActivateAction
 
 					/*
-					 * Thing > foo > bar > baz > ActivateAction
+					 * Thing > Action > baz > ActivateAction
 					 * 
 					 * 
 					 */
@@ -437,7 +437,7 @@
 				// DeactivateAction
 
 					/*
-					 * Thing > foo > bar > baz > DeactivateAction
+					 * Thing > Action > baz > DeactivateAction
 					 * 
 					 * 
 					 */
@@ -451,7 +451,7 @@
 				// ResumeAction
 
 					/*
-					 * Thing > foo > bar > baz > ResumeAction
+					 * Thing > Action > baz > ResumeAction
 					 * 
 					 * 
 					 */
@@ -465,7 +465,7 @@
 				// SuspendAction
 
 					/*
-					 * Thing > foo > bar > baz > SuspendAction
+					 * Thing > Action > baz > SuspendAction
 					 * 
 					 * 
 					 */
@@ -479,7 +479,7 @@
 			// CreateAction
 
 				/*
-				 * Thing > foo > bar > CreateAction
+				 * Thing > Action > CreateAction
 				 * 
 				 * 
 				 */
@@ -493,7 +493,7 @@
 				// CookAction
 
 					/*
-					 * Thing > foo > bar > baz > CookAction
+					 * Thing > Action > baz > CookAction
 					 * 
 					 * 
 					 */
@@ -507,7 +507,7 @@
 				// DrawAction
 
 					/*
-					 * Thing > foo > bar > baz > DrawAction
+					 * Thing > Action > baz > DrawAction
 					 * 
 					 * 
 					 */
@@ -521,7 +521,7 @@
 				// FilmAction
 
 					/*
-					 * Thing > foo > bar > baz > FilmAction
+					 * Thing > Action > baz > FilmAction
 					 * 
 					 * 
 					 */
@@ -535,7 +535,7 @@
 				// PaintAction
 
 					/*
-					 * Thing > foo > bar > baz > PaintAction
+					 * Thing > Action > baz > PaintAction
 					 * 
 					 * 
 					 */
@@ -549,7 +549,7 @@
 				// PhotographAction
 
 					/*
-					 * Thing > foo > bar > baz > PhotographAction
+					 * Thing > Action > baz > PhotographAction
 					 * 
 					 * 
 					 */
@@ -563,7 +563,7 @@
 				// WriteAction
 
 					/*
-					 * Thing > foo > bar > baz > WriteAction
+					 * Thing > Action > baz > WriteAction
 					 * 
 					 * 
 					 */
@@ -577,7 +577,7 @@
 			// FindAction
 
 				/*
-				 * Thing > foo > bar > FindAction
+				 * Thing > Action > FindAction
 				 * 
 				 * 
 				 */
@@ -591,7 +591,7 @@
 				// CheckAction
 
 					/*
-					 * Thing > foo > bar > baz > CheckAction
+					 * Thing > Action > baz > CheckAction
 					 * 
 					 * 
 					 */
@@ -605,7 +605,7 @@
 				// DiscoverAction
 
 					/*
-					 * Thing > foo > bar > baz > DiscoverAction
+					 * Thing > Action > baz > DiscoverAction
 					 * 
 					 * 
 					 */
@@ -619,7 +619,7 @@
 				// TrackAction
 
 					/*
-					 * Thing > foo > bar > baz > TrackAction
+					 * Thing > Action > baz > TrackAction
 					 * 
 					 * 
 					 */
@@ -633,7 +633,7 @@
 			// InteractAction
 
 				/*
-				 * Thing > foo > bar > InteractAction
+				 * Thing > Action > InteractAction
 				 * 
 				 * 
 				 */
@@ -647,7 +647,7 @@
 				// BefriendAction
 
 					/*
-					 * Thing > foo > bar > baz > BefriendAction
+					 * Thing > Action > baz > BefriendAction
 					 * 
 					 * 
 					 */
@@ -661,7 +661,7 @@
 				// CommunicateAction
 
 					/*
-					 * Thing > foo > bar > baz > CommunicateAction
+					 * Thing > Action > baz > CommunicateAction
 					 * 
 					 * 
 					 */
@@ -675,7 +675,7 @@
 					// AskAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > AskAction
+						 * Thing > Action > baz > qux > AskAction
 						 * 
 						 * 
 						 */
@@ -689,7 +689,7 @@
 					// CheckInAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > CheckInAction
+						 * Thing > Action > baz > qux > CheckInAction
 						 * 
 						 * 
 						 */
@@ -703,7 +703,7 @@
 					// CheckOutAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > CheckOutAction
+						 * Thing > Action > baz > qux > CheckOutAction
 						 * 
 						 * 
 						 */
@@ -717,7 +717,7 @@
 					// CommentAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > CommentAction
+						 * Thing > Action > baz > qux > CommentAction
 						 * 
 						 * 
 						 */
@@ -731,7 +731,7 @@
 					// InformAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > InformAction
+						 * Thing > Action > baz > qux > InformAction
 						 * 
 						 * 
 						 */
@@ -745,7 +745,7 @@
 						// ConfirmAction
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ConfirmAction
+							 * Thing > Action > baz > qux > quux > ConfirmAction
 							 * 
 							 * 
 							 */
@@ -759,7 +759,7 @@
 						// RsvpAction
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RsvpAction
+							 * Thing > Action > baz > qux > quux > RsvpAction
 							 * 
 							 * 
 							 */
@@ -773,7 +773,7 @@
 					// InviteAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > InviteAction
+						 * Thing > Action > baz > qux > InviteAction
 						 * 
 						 * 
 						 */
@@ -787,7 +787,7 @@
 					// ReplyAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReplyAction
+						 * Thing > Action > baz > qux > ReplyAction
 						 * 
 						 * 
 						 */
@@ -801,7 +801,7 @@
 					// ShareAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > ShareAction
+						 * Thing > Action > baz > qux > ShareAction
 						 * 
 						 * 
 						 */
@@ -815,7 +815,7 @@
 				// FollowAction
 
 					/*
-					 * Thing > foo > bar > baz > FollowAction
+					 * Thing > Action > baz > FollowAction
 					 * 
 					 * 
 					 */
@@ -829,7 +829,7 @@
 				// JoinAction
 
 					/*
-					 * Thing > foo > bar > baz > JoinAction
+					 * Thing > Action > baz > JoinAction
 					 * 
 					 * 
 					 */
@@ -843,7 +843,7 @@
 				// LeaveAction
 
 					/*
-					 * Thing > foo > bar > baz > LeaveAction
+					 * Thing > Action > baz > LeaveAction
 					 * 
 					 * 
 					 */
@@ -857,7 +857,7 @@
 				// MarryAction
 
 					/*
-					 * Thing > foo > bar > baz > MarryAction
+					 * Thing > Action > baz > MarryAction
 					 * 
 					 * 
 					 */
@@ -871,7 +871,7 @@
 				// RegisterAction
 
 					/*
-					 * Thing > foo > bar > baz > RegisterAction
+					 * Thing > Action > baz > RegisterAction
 					 * 
 					 * 
 					 */
@@ -885,7 +885,7 @@
 				// SubscribeAction
 
 					/*
-					 * Thing > foo > bar > baz > SubscribeAction
+					 * Thing > Action > baz > SubscribeAction
 					 * 
 					 * 
 					 */
@@ -899,7 +899,7 @@
 				// UnRegisterAction
 
 					/*
-					 * Thing > foo > bar > baz > UnRegisterAction
+					 * Thing > Action > baz > UnRegisterAction
 					 * 
 					 * 
 					 */
@@ -913,7 +913,7 @@
 			// MoveAction
 
 				/*
-				 * Thing > foo > bar > MoveAction
+				 * Thing > Action > MoveAction
 				 * 
 				 * 
 				 */
@@ -927,7 +927,7 @@
 				// ArriveAction
 
 					/*
-					 * Thing > foo > bar > baz > ArriveAction
+					 * Thing > Action > baz > ArriveAction
 					 * 
 					 * 
 					 */
@@ -941,7 +941,7 @@
 				// DepartAction
 
 					/*
-					 * Thing > foo > bar > baz > DepartAction
+					 * Thing > Action > baz > DepartAction
 					 * 
 					 * 
 					 */
@@ -955,7 +955,7 @@
 				// TravelAction
 
 					/*
-					 * Thing > foo > bar > baz > TravelAction
+					 * Thing > Action > baz > TravelAction
 					 * 
 					 * 
 					 */
@@ -969,7 +969,7 @@
 			// OrganizeAction
 
 				/*
-				 * Thing > foo > bar > OrganizeAction
+				 * Thing > Action > OrganizeAction
 				 * 
 				 * 
 				 */
@@ -983,7 +983,7 @@
 				// AllocateAction
 
 					/*
-					 * Thing > foo > bar > baz > AllocateAction
+					 * Thing > Action > baz > AllocateAction
 					 * 
 					 * 
 					 */
@@ -997,7 +997,7 @@
 					// AcceptAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > AcceptAction
+						 * Thing > Action > baz > qux > AcceptAction
 						 * 
 						 * 
 						 */
@@ -1011,7 +1011,7 @@
 					// AssignAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > AssignAction
+						 * Thing > Action > baz > qux > AssignAction
 						 * 
 						 * 
 						 */
@@ -1025,7 +1025,7 @@
 					// AuthorizeAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > AuthorizeAction
+						 * Thing > Action > baz > qux > AuthorizeAction
 						 * 
 						 * 
 						 */
@@ -1039,7 +1039,7 @@
 					// RejectAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > RejectAction
+						 * Thing > Action > baz > qux > RejectAction
 						 * 
 						 * 
 						 */
@@ -1053,7 +1053,7 @@
 				// ApplyAction
 
 					/*
-					 * Thing > foo > bar > baz > ApplyAction
+					 * Thing > Action > baz > ApplyAction
 					 * 
 					 * 
 					 */
@@ -1067,7 +1067,7 @@
 				// BookmarkAction
 
 					/*
-					 * Thing > foo > bar > baz > BookmarkAction
+					 * Thing > Action > baz > BookmarkAction
 					 * 
 					 * 
 					 */
@@ -1081,7 +1081,7 @@
 				// PlanAction
 
 					/*
-					 * Thing > foo > bar > baz > PlanAction
+					 * Thing > Action > baz > PlanAction
 					 * 
 					 * 
 					 */
@@ -1095,7 +1095,7 @@
 					// CancelAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > CancelAction
+						 * Thing > Action > baz > qux > CancelAction
 						 * 
 						 * 
 						 */
@@ -1109,7 +1109,7 @@
 					// ReserveAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReserveAction
+						 * Thing > Action > baz > qux > ReserveAction
 						 * 
 						 * 
 						 */
@@ -1123,7 +1123,7 @@
 					// ScheduleAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > ScheduleAction
+						 * Thing > Action > baz > qux > ScheduleAction
 						 * 
 						 * 
 						 */
@@ -1138,7 +1138,7 @@
 			// PlayAction
 
 				/*
-				 * Thing > foo > bar > PlayAction
+				 * Thing > Action > PlayAction
 				 * 
 				 * 
 				 */
@@ -1152,7 +1152,7 @@
 				// ExerciseAction
 
 					/*
-					 * Thing > foo > bar > baz > ExerciseAction
+					 * Thing > Action > baz > ExerciseAction
 					 * 
 					 * 
 					 */
@@ -1166,7 +1166,7 @@
 				// PerformAction
 
 					/*
-					 * Thing > foo > bar > baz > PerformAction
+					 * Thing > Action > baz > PerformAction
 					 * 
 					 * 
 					 */
@@ -1180,7 +1180,7 @@
 			// SearchAction
 
 				/*
-				 * Thing > foo > bar > SearchAction
+				 * Thing > Action > SearchAction
 				 * 
 				 * 
 				 */
@@ -1194,7 +1194,7 @@
 			// SeekToAction
 
 				/*
-				 * Thing > foo > bar > SeekToAction
+				 * Thing > Action > SeekToAction
 				 * 
 				 * 
 				 */
@@ -1208,7 +1208,7 @@
 			// SolveMathAction
 
 				/*
-				 * Thing > foo > bar > SolveMathAction
+				 * Thing > Action > SolveMathAction
 				 * 
 				 * 
 				 */
@@ -1222,7 +1222,7 @@
 			// TradeAction
 
 				/*
-				 * Thing > foo > bar > TradeAction
+				 * Thing > Action > TradeAction
 				 * 
 				 * 
 				 */
@@ -1236,7 +1236,7 @@
 				// BuyAction
 
 					/*
-					 * Thing > foo > bar > baz > BuyAction
+					 * Thing > Action > baz > BuyAction
 					 * 
 					 * 
 					 */
@@ -1250,7 +1250,7 @@
 				// DonateAction
 
 					/*
-					 * Thing > foo > bar > baz > DonateAction
+					 * Thing > Action > baz > DonateAction
 					 * 
 					 * 
 					 */
@@ -1264,7 +1264,7 @@
 				// OrderAction
 
 					/*
-					 * Thing > foo > bar > baz > OrderAction
+					 * Thing > Action > baz > OrderAction
 					 * 
 					 * 
 					 */
@@ -1278,7 +1278,7 @@
 				// PayAction
 
 					/*
-					 * Thing > foo > bar > baz > PayAction
+					 * Thing > Action > baz > PayAction
 					 * 
 					 * 
 					 */
@@ -1292,7 +1292,7 @@
 				// PreOrderAction
 
 					/*
-					 * Thing > foo > bar > baz > PreOrderAction
+					 * Thing > Action > baz > PreOrderAction
 					 * 
 					 * 
 					 */
@@ -1306,7 +1306,7 @@
 				// QuoteAction
 
 					/*
-					 * Thing > foo > bar > baz > QuoteAction
+					 * Thing > Action > baz > QuoteAction
 					 * 
 					 * 
 					 */
@@ -1320,7 +1320,7 @@
 				// RentAction
 
 					/*
-					 * Thing > foo > bar > baz > RentAction
+					 * Thing > Action > baz > RentAction
 					 * 
 					 * 
 					 */
@@ -1334,7 +1334,7 @@
 				// SellAction
 
 					/*
-					 * Thing > foo > bar > baz > SellAction
+					 * Thing > Action > baz > SellAction
 					 * 
 					 * 
 					 */
@@ -1348,7 +1348,7 @@
 				// TipAction
 
 					/*
-					 * Thing > foo > bar > baz > TipAction
+					 * Thing > Action > baz > TipAction
 					 * 
 					 * 
 					 */
@@ -1362,7 +1362,7 @@
 			// TransferAction
 
 				/*
-				 * Thing > foo > bar > TransferAction
+				 * Thing > Action > TransferAction
 				 * 
 				 * 
 				 */
@@ -1376,7 +1376,7 @@
 				// BorrowAction
 
 					/*
-					 * Thing > foo > bar > baz > BorrowAction
+					 * Thing > Action > baz > BorrowAction
 					 * 
 					 * 
 					 */
@@ -1390,7 +1390,7 @@
 				// DownloadAction
 
 					/*
-					 * Thing > foo > bar > baz > DownloadAction
+					 * Thing > Action > baz > DownloadAction
 					 * 
 					 * 
 					 */
@@ -1404,7 +1404,7 @@
 				// GiveAction
 
 					/*
-					 * Thing > foo > bar > baz > GiveAction
+					 * Thing > Action > baz > GiveAction
 					 * 
 					 * 
 					 */
@@ -1418,7 +1418,7 @@
 				// LendAction
 
 					/*
-					 * Thing > foo > bar > baz > LendAction
+					 * Thing > Action > baz > LendAction
 					 * 
 					 * 
 					 */
@@ -1432,7 +1432,7 @@
 				// MoneyTransfer
 
 					/*
-					 * Thing > foo > bar > baz > MoneyTransfer
+					 * Thing > Action > baz > MoneyTransfer
 					 * 
 					 * 
 					 */
@@ -1446,7 +1446,7 @@
 				// ReceiveAction
 
 					/*
-					 * Thing > foo > bar > baz > ReceiveAction
+					 * Thing > Action > baz > ReceiveAction
 					 * 
 					 * 
 					 */
@@ -1460,7 +1460,7 @@
 				// ReturnAction
 
 					/*
-					 * Thing > foo > bar > baz > ReturnAction
+					 * Thing > Action > baz > ReturnAction
 					 * 
 					 * 
 					 */
@@ -1474,7 +1474,7 @@
 				// SendAction
 
 					/*
-					 * Thing > foo > bar > baz > SendAction
+					 * Thing > Action > baz > SendAction
 					 * 
 					 * 
 					 */
@@ -1488,7 +1488,7 @@
 				// TakeAction
 
 					/*
-					 * Thing > foo > bar > baz > TakeAction
+					 * Thing > Action > baz > TakeAction
 					 * 
 					 * 
 					 */
@@ -1502,7 +1502,7 @@
 			// UpdateAction
 
 				/*
-				 * Thing > foo > bar > UpdateAction
+				 * Thing > Action > UpdateAction
 				 * 
 				 * 
 				 */
@@ -1516,7 +1516,7 @@
 				// AddAction
 
 					/*
-					 * Thing > foo > bar > baz > AddAction
+					 * Thing > Action > baz > AddAction
 					 * 
 					 * 
 					 */
@@ -1530,7 +1530,7 @@
 					// InsertAction
 
 						/*
-						 * Thing > foo > bar > baz > qux > InsertAction
+						 * Thing > Action > baz > qux > InsertAction
 						 * 
 						 * 
 						 */
@@ -1544,7 +1544,7 @@
 						// AppendAction
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > AppendAction
+							 * Thing > Action > baz > qux > quux > AppendAction
 							 * 
 							 * 
 							 */
@@ -1558,7 +1558,7 @@
 						// PrependAction
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PrependAction
+							 * Thing > Action > baz > qux > quux > PrependAction
 							 * 
 							 * 
 							 */
@@ -1573,7 +1573,7 @@
 				// DeleteAction
 
 					/*
-					 * Thing > foo > bar > baz > DeleteAction
+					 * Thing > Action > baz > DeleteAction
 					 * 
 					 * 
 					 */
@@ -1587,7 +1587,7 @@
 				// ReplaceAction
 
 					/*
-					 * Thing > foo > bar > baz > ReplaceAction
+					 * Thing > Action > baz > ReplaceAction
 					 * 
 					 * 
 					 */
@@ -1602,7 +1602,7 @@
 		// BioChemEntity
 
 			/*
-			 * Thing > foo > BioChemEntity
+			 * Thing > BioChemEntity
 			 * 
 			 * 
 			 */
@@ -1616,7 +1616,7 @@
 			// ChemicalSubstance
 
 				/*
-				 * Thing > foo > bar > ChemicalSubstance
+				 * Thing > BioChemEntity > ChemicalSubstance
 				 * 
 				 * 
 				 */
@@ -1630,7 +1630,7 @@
 			// Gene
 
 				/*
-				 * Thing > foo > bar > Gene
+				 * Thing > BioChemEntity > Gene
 				 * 
 				 * 
 				 */
@@ -1644,7 +1644,7 @@
 			// MolecularEntity
 
 				/*
-				 * Thing > foo > bar > MolecularEntity
+				 * Thing > BioChemEntity > MolecularEntity
 				 * 
 				 * 
 				 */
@@ -1658,7 +1658,7 @@
 			// Protein
 
 				/*
-				 * Thing > foo > bar > Protein
+				 * Thing > BioChemEntity > Protein
 				 * 
 				 * 
 				 */
@@ -1672,7 +1672,7 @@
 		// CreativeWork
 
 			/*
-			 * Thing > foo > CreativeWork
+			 * Thing > CreativeWork
 			 * 
 			 * 
 			 */
@@ -1686,7 +1686,7 @@
 			// AmpStory
 
 				/*
-				 * Thing > foo > bar > AmpStory
+				 * Thing > CreativeWork > AmpStory
 				 * 
 				 * 
 				 */
@@ -1700,7 +1700,7 @@
 			// ArchiveComponent
 
 				/*
-				 * Thing > foo > bar > ArchiveComponent
+				 * Thing > CreativeWork > ArchiveComponent
 				 * 
 				 * 
 				 */
@@ -1714,7 +1714,7 @@
 			// Article
 
 				/*
-				 * Thing > foo > bar > Article
+				 * Thing > CreativeWork > Article
 				 * 
 				 * 
 				 */
@@ -1728,7 +1728,7 @@
 				// AdvertiserContentArticle
 
 					/*
-					 * Thing > foo > bar > baz > AdvertiserContentArticle
+					 * Thing > CreativeWork > baz > AdvertiserContentArticle
 					 * 
 					 * 
 					 */
@@ -1742,7 +1742,7 @@
 				// NewsArticle
 
 					/*
-					 * Thing > foo > bar > baz > NewsArticle
+					 * Thing > CreativeWork > baz > NewsArticle
 					 * 
 					 * 
 					 */
@@ -1756,7 +1756,7 @@
 					// AnalysisNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > AnalysisNewsArticle
+						 * Thing > CreativeWork > baz > qux > AnalysisNewsArticle
 						 * 
 						 * 
 						 */
@@ -1770,7 +1770,7 @@
 					// AskPublicNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > AskPublicNewsArticle
+						 * Thing > CreativeWork > baz > qux > AskPublicNewsArticle
 						 * 
 						 * 
 						 */
@@ -1784,7 +1784,7 @@
 					// BackgroundNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > BackgroundNewsArticle
+						 * Thing > CreativeWork > baz > qux > BackgroundNewsArticle
 						 * 
 						 * 
 						 */
@@ -1798,7 +1798,7 @@
 					// OpinionNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > OpinionNewsArticle
+						 * Thing > CreativeWork > baz > qux > OpinionNewsArticle
 						 * 
 						 * 
 						 */
@@ -1812,7 +1812,7 @@
 					// ReportageNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReportageNewsArticle
+						 * Thing > CreativeWork > baz > qux > ReportageNewsArticle
 						 * 
 						 * 
 						 */
@@ -1826,7 +1826,7 @@
 					// ReviewNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReviewNewsArticle
+						 * Thing > CreativeWork > baz > qux > ReviewNewsArticle
 						 * 
 						 * 
 						 */
@@ -1840,7 +1840,7 @@
 				// Report
 
 					/*
-					 * Thing > foo > bar > baz > Report
+					 * Thing > CreativeWork > baz > Report
 					 * 
 					 * 
 					 */
@@ -1854,7 +1854,7 @@
 				// SatiricalArticle
 
 					/*
-					 * Thing > foo > bar > baz > SatiricalArticle
+					 * Thing > CreativeWork > baz > SatiricalArticle
 					 * 
 					 * 
 					 */
@@ -1868,7 +1868,7 @@
 				// ScholarlyArticle
 
 					/*
-					 * Thing > foo > bar > baz > ScholarlyArticle
+					 * Thing > CreativeWork > baz > ScholarlyArticle
 					 * 
 					 * 
 					 */
@@ -1882,7 +1882,7 @@
 					// MedicalScholarlyArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalScholarlyArticle
+						 * Thing > CreativeWork > baz > qux > MedicalScholarlyArticle
 						 * 
 						 * 
 						 */
@@ -1896,7 +1896,7 @@
 				// SocialMediaPosting
 
 					/*
-					 * Thing > foo > bar > baz > SocialMediaPosting
+					 * Thing > CreativeWork > baz > SocialMediaPosting
 					 * 
 					 * 
 					 */
@@ -1910,7 +1910,7 @@
 					// BlogPosting
 
 						/*
-						 * Thing > foo > bar > baz > qux > BlogPosting
+						 * Thing > CreativeWork > baz > qux > BlogPosting
 						 * 
 						 * 
 						 */
@@ -1924,7 +1924,7 @@
 						// LiveBlogPosting
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > LiveBlogPosting
+							 * Thing > CreativeWork > baz > qux > quux > LiveBlogPosting
 							 * 
 							 * 
 							 */
@@ -1938,7 +1938,7 @@
 					// DiscussionForumPosting
 
 						/*
-						 * Thing > foo > bar > baz > qux > DiscussionForumPosting
+						 * Thing > CreativeWork > baz > qux > DiscussionForumPosting
 						 * 
 						 * 
 						 */
@@ -1952,7 +1952,7 @@
 				// TechArticle
 
 					/*
-					 * Thing > foo > bar > baz > TechArticle
+					 * Thing > CreativeWork > baz > TechArticle
 					 * 
 					 * 
 					 */
@@ -1966,7 +1966,7 @@
 					// APIReference
 
 						/*
-						 * Thing > foo > bar > baz > qux > APIReference
+						 * Thing > CreativeWork > baz > qux > APIReference
 						 * 
 						 * 
 						 */
@@ -1981,7 +1981,7 @@
 			// Atlas
 
 				/*
-				 * Thing > foo > bar > Atlas
+				 * Thing > CreativeWork > Atlas
 				 * 
 				 * 
 				 */
@@ -1995,7 +1995,7 @@
 			// Blog
 
 				/*
-				 * Thing > foo > bar > Blog
+				 * Thing > CreativeWork > Blog
 				 * 
 				 * 
 				 */
@@ -2009,7 +2009,7 @@
 			// Book
 
 				/*
-				 * Thing > foo > bar > Book
+				 * Thing > CreativeWork > Book
 				 * 
 				 * 
 				 */
@@ -2023,7 +2023,7 @@
 				// Audiobook
 
 					/*
-					 * Thing > foo > bar > baz > Audiobook
+					 * Thing > CreativeWork > baz > Audiobook
 					 * 
 					 * 
 					 */
@@ -2037,7 +2037,7 @@
 			// Chapter
 
 				/*
-				 * Thing > foo > bar > Chapter
+				 * Thing > CreativeWork > Chapter
 				 * 
 				 * 
 				 */
@@ -2051,7 +2051,7 @@
 			// Claim
 
 				/*
-				 * Thing > foo > bar > Claim
+				 * Thing > CreativeWork > Claim
 				 * 
 				 * 
 				 */
@@ -2065,7 +2065,7 @@
 			// Clip
 
 				/*
-				 * Thing > foo > bar > Clip
+				 * Thing > CreativeWork > Clip
 				 * 
 				 * 
 				 */
@@ -2079,7 +2079,7 @@
 				// MovieClip
 
 					/*
-					 * Thing > foo > bar > baz > MovieClip
+					 * Thing > CreativeWork > baz > MovieClip
 					 * 
 					 * 
 					 */
@@ -2093,7 +2093,7 @@
 				// RadioClip
 
 					/*
-					 * Thing > foo > bar > baz > RadioClip
+					 * Thing > CreativeWork > baz > RadioClip
 					 * 
 					 * 
 					 */
@@ -2107,7 +2107,7 @@
 				// TVClip
 
 					/*
-					 * Thing > foo > bar > baz > TVClip
+					 * Thing > CreativeWork > baz > TVClip
 					 * 
 					 * 
 					 */
@@ -2121,7 +2121,7 @@
 				// VideoGameClip
 
 					/*
-					 * Thing > foo > bar > baz > VideoGameClip
+					 * Thing > CreativeWork > baz > VideoGameClip
 					 * 
 					 * 
 					 */
@@ -2135,7 +2135,7 @@
 			// Code
 
 				/*
-				 * Thing > foo > bar > Code
+				 * Thing > CreativeWork > Code
 				 * 
 				 * 
 				 */
@@ -2149,7 +2149,7 @@
 			// Collection
 
 				/*
-				 * Thing > foo > bar > Collection
+				 * Thing > CreativeWork > Collection
 				 * 
 				 * 
 				 */
@@ -2163,7 +2163,7 @@
 				// ProductCollection
 
 					/*
-					 * Thing > foo > bar > baz > ProductCollection
+					 * Thing > CreativeWork > baz > ProductCollection
 					 * 
 					 * 
 					 */
@@ -2177,7 +2177,7 @@
 			// ComicStory
 
 				/*
-				 * Thing > foo > bar > ComicStory
+				 * Thing > CreativeWork > ComicStory
 				 * 
 				 * 
 				 */
@@ -2191,7 +2191,7 @@
 				// ComicCoverArt
 
 					/*
-					 * Thing > foo > bar > baz > ComicCoverArt
+					 * Thing > CreativeWork > baz > ComicCoverArt
 					 * 
 					 * 
 					 */
@@ -2205,7 +2205,7 @@
 			// Comment
 
 				/*
-				 * Thing > foo > bar > Comment
+				 * Thing > CreativeWork > Comment
 				 * 
 				 * 
 				 */
@@ -2219,7 +2219,7 @@
 				// Answer
 
 					/*
-					 * Thing > foo > bar > baz > Answer
+					 * Thing > CreativeWork > baz > Answer
 					 * 
 					 * 
 					 */
@@ -2233,7 +2233,7 @@
 				// CorrectionComment
 
 					/*
-					 * Thing > foo > bar > baz > CorrectionComment
+					 * Thing > CreativeWork > baz > CorrectionComment
 					 * 
 					 * 
 					 */
@@ -2247,7 +2247,7 @@
 				// Question
 
 					/*
-					 * Thing > foo > bar > baz > Question
+					 * Thing > CreativeWork > baz > Question
 					 * 
 					 * 
 					 */
@@ -2261,7 +2261,7 @@
 			// Conversation
 
 				/*
-				 * Thing > foo > bar > Conversation
+				 * Thing > CreativeWork > Conversation
 				 * 
 				 * 
 				 */
@@ -2275,7 +2275,7 @@
 			// Course
 
 				/*
-				 * Thing > foo > bar > Course
+				 * Thing > CreativeWork > Course
 				 * 
 				 * 
 				 */
@@ -2289,7 +2289,7 @@
 			// CreativeWorkSeason
 
 				/*
-				 * Thing > foo > bar > CreativeWorkSeason
+				 * Thing > CreativeWork > CreativeWorkSeason
 				 * 
 				 * 
 				 */
@@ -2303,7 +2303,7 @@
 				// PodcastSeason
 
 					/*
-					 * Thing > foo > bar > baz > PodcastSeason
+					 * Thing > CreativeWork > baz > PodcastSeason
 					 * 
 					 * 
 					 */
@@ -2317,7 +2317,7 @@
 				// RadioSeason
 
 					/*
-					 * Thing > foo > bar > baz > RadioSeason
+					 * Thing > CreativeWork > baz > RadioSeason
 					 * 
 					 * 
 					 */
@@ -2331,7 +2331,7 @@
 				// TVSeason
 
 					/*
-					 * Thing > foo > bar > baz > TVSeason
+					 * Thing > CreativeWork > baz > TVSeason
 					 * 
 					 * 
 					 */
@@ -2345,7 +2345,7 @@
 			// CreativeWorkSeries
 
 				/*
-				 * Thing > foo > bar > CreativeWorkSeries
+				 * Thing > CreativeWork > CreativeWorkSeries
 				 * 
 				 * 
 				 */
@@ -2359,7 +2359,7 @@
 				// BookSeries
 
 					/*
-					 * Thing > foo > bar > baz > BookSeries
+					 * Thing > CreativeWork > baz > BookSeries
 					 * 
 					 * 
 					 */
@@ -2373,7 +2373,7 @@
 				// MovieSeries
 
 					/*
-					 * Thing > foo > bar > baz > MovieSeries
+					 * Thing > CreativeWork > baz > MovieSeries
 					 * 
 					 * 
 					 */
@@ -2387,7 +2387,7 @@
 				// Periodical
 
 					/*
-					 * Thing > foo > bar > baz > Periodical
+					 * Thing > CreativeWork > baz > Periodical
 					 * 
 					 * 
 					 */
@@ -2401,7 +2401,7 @@
 					// ComicSeries
 
 						/*
-						 * Thing > foo > bar > baz > qux > ComicSeries
+						 * Thing > CreativeWork > baz > qux > ComicSeries
 						 * 
 						 * 
 						 */
@@ -2415,7 +2415,7 @@
 					// Newspaper
 
 						/*
-						 * Thing > foo > bar > baz > qux > Newspaper
+						 * Thing > CreativeWork > baz > qux > Newspaper
 						 * 
 						 * 
 						 */
@@ -2429,7 +2429,7 @@
 				// PodcastSeries
 
 					/*
-					 * Thing > foo > bar > baz > PodcastSeries
+					 * Thing > CreativeWork > baz > PodcastSeries
 					 * 
 					 * 
 					 */
@@ -2443,7 +2443,7 @@
 				// RadioSeries
 
 					/*
-					 * Thing > foo > bar > baz > RadioSeries
+					 * Thing > CreativeWork > baz > RadioSeries
 					 * 
 					 * 
 					 */
@@ -2457,7 +2457,7 @@
 				// TVSeries
 
 					/*
-					 * Thing > foo > bar > baz > TVSeries
+					 * Thing > CreativeWork > baz > TVSeries
 					 * 
 					 * 
 					 */
@@ -2471,7 +2471,7 @@
 				// VideoGameSeries
 
 					/*
-					 * Thing > foo > bar > baz > VideoGameSeries
+					 * Thing > CreativeWork > baz > VideoGameSeries
 					 * 
 					 * 
 					 */
@@ -2485,7 +2485,7 @@
 			// DataCatalog
 
 				/*
-				 * Thing > foo > bar > DataCatalog
+				 * Thing > CreativeWork > DataCatalog
 				 * 
 				 * 
 				 */
@@ -2499,7 +2499,7 @@
 			// Dataset
 
 				/*
-				 * Thing > foo > bar > Dataset
+				 * Thing > CreativeWork > Dataset
 				 * 
 				 * 
 				 */
@@ -2513,7 +2513,7 @@
 				// DataFeed
 
 					/*
-					 * Thing > foo > bar > baz > DataFeed
+					 * Thing > CreativeWork > baz > DataFeed
 					 * 
 					 * 
 					 */
@@ -2527,7 +2527,7 @@
 					// CompleteDataFeed
 
 						/*
-						 * Thing > foo > bar > baz > qux > CompleteDataFeed
+						 * Thing > CreativeWork > baz > qux > CompleteDataFeed
 						 * 
 						 * 
 						 */
@@ -2542,7 +2542,7 @@
 			// DefinedTermSet
 
 				/*
-				 * Thing > foo > bar > DefinedTermSet
+				 * Thing > CreativeWork > DefinedTermSet
 				 * 
 				 * 
 				 */
@@ -2556,7 +2556,7 @@
 				// CategoryCodeSet
 
 					/*
-					 * Thing > foo > bar > baz > CategoryCodeSet
+					 * Thing > CreativeWork > baz > CategoryCodeSet
 					 * 
 					 * 
 					 */
@@ -2570,7 +2570,7 @@
 			// Diet
 
 				/*
-				 * Thing > foo > bar > Diet
+				 * Thing > CreativeWork > Diet
 				 * 
 				 * 
 				 */
@@ -2584,7 +2584,7 @@
 			// DigitalDocument
 
 				/*
-				 * Thing > foo > bar > DigitalDocument
+				 * Thing > CreativeWork > DigitalDocument
 				 * 
 				 * 
 				 */
@@ -2598,7 +2598,7 @@
 				// NoteDigitalDocument
 
 					/*
-					 * Thing > foo > bar > baz > NoteDigitalDocument
+					 * Thing > CreativeWork > baz > NoteDigitalDocument
 					 * 
 					 * 
 					 */
@@ -2612,7 +2612,7 @@
 				// PresentationDigitalDocument
 
 					/*
-					 * Thing > foo > bar > baz > PresentationDigitalDocument
+					 * Thing > CreativeWork > baz > PresentationDigitalDocument
 					 * 
 					 * 
 					 */
@@ -2626,7 +2626,7 @@
 				// SpreadsheetDigitalDocument
 
 					/*
-					 * Thing > foo > bar > baz > SpreadsheetDigitalDocument
+					 * Thing > CreativeWork > baz > SpreadsheetDigitalDocument
 					 * 
 					 * 
 					 */
@@ -2640,7 +2640,7 @@
 				// TextDigitalDocument
 
 					/*
-					 * Thing > foo > bar > baz > TextDigitalDocument
+					 * Thing > CreativeWork > baz > TextDigitalDocument
 					 * 
 					 * 
 					 */
@@ -2654,7 +2654,7 @@
 			// Drawing
 
 				/*
-				 * Thing > foo > bar > Drawing
+				 * Thing > CreativeWork > Drawing
 				 * 
 				 * 
 				 */
@@ -2668,7 +2668,7 @@
 			// EducationalOccupationalCredential
 
 				/*
-				 * Thing > foo > bar > EducationalOccupationalCredential
+				 * Thing > CreativeWork > EducationalOccupationalCredential
 				 * 
 				 * 
 				 */
@@ -2682,7 +2682,7 @@
 			// Episode
 
 				/*
-				 * Thing > foo > bar > Episode
+				 * Thing > CreativeWork > Episode
 				 * 
 				 * 
 				 */
@@ -2696,7 +2696,7 @@
 				// PodcastEpisode
 
 					/*
-					 * Thing > foo > bar > baz > PodcastEpisode
+					 * Thing > CreativeWork > baz > PodcastEpisode
 					 * 
 					 * 
 					 */
@@ -2710,7 +2710,7 @@
 				// RadioEpisode
 
 					/*
-					 * Thing > foo > bar > baz > RadioEpisode
+					 * Thing > CreativeWork > baz > RadioEpisode
 					 * 
 					 * 
 					 */
@@ -2724,7 +2724,7 @@
 				// TVEpisode
 
 					/*
-					 * Thing > foo > bar > baz > TVEpisode
+					 * Thing > CreativeWork > baz > TVEpisode
 					 * 
 					 * 
 					 */
@@ -2738,7 +2738,7 @@
 			// ExercisePlan
 
 				/*
-				 * Thing > foo > bar > ExercisePlan
+				 * Thing > CreativeWork > ExercisePlan
 				 * 
 				 * 
 				 */
@@ -2752,7 +2752,7 @@
 			// Game
 
 				/*
-				 * Thing > foo > bar > Game
+				 * Thing > CreativeWork > Game
 				 * 
 				 * 
 				 */
@@ -2766,7 +2766,7 @@
 				// VideoGame
 
 					/*
-					 * Thing > foo > bar > baz > VideoGame
+					 * Thing > CreativeWork > baz > VideoGame
 					 * 
 					 * 
 					 */
@@ -2780,7 +2780,7 @@
 			// Guide
 
 				/*
-				 * Thing > foo > bar > Guide
+				 * Thing > CreativeWork > Guide
 				 * 
 				 * 
 				 */
@@ -2794,7 +2794,7 @@
 			// HowTo
 
 				/*
-				 * Thing > foo > bar > HowTo
+				 * Thing > CreativeWork > HowTo
 				 * 
 				 * 
 				 */
@@ -2808,7 +2808,7 @@
 				// Recipe
 
 					/*
-					 * Thing > foo > bar > baz > Recipe
+					 * Thing > CreativeWork > baz > Recipe
 					 * 
 					 * 
 					 */
@@ -2822,7 +2822,7 @@
 			// HowToDirection
 
 				/*
-				 * Thing > foo > bar > HowToDirection
+				 * Thing > CreativeWork > HowToDirection
 				 * 
 				 * 
 				 */
@@ -2836,7 +2836,7 @@
 			// HowToSection
 
 				/*
-				 * Thing > foo > bar > HowToSection
+				 * Thing > CreativeWork > HowToSection
 				 * 
 				 * 
 				 */
@@ -2850,7 +2850,7 @@
 			// HowToStep
 
 				/*
-				 * Thing > foo > bar > HowToStep
+				 * Thing > CreativeWork > HowToStep
 				 * 
 				 * 
 				 */
@@ -2864,7 +2864,7 @@
 			// HowToTip
 
 				/*
-				 * Thing > foo > bar > HowToTip
+				 * Thing > CreativeWork > HowToTip
 				 * 
 				 * 
 				 */
@@ -2878,7 +2878,7 @@
 			// HyperToc
 
 				/*
-				 * Thing > foo > bar > HyperToc
+				 * Thing > CreativeWork > HyperToc
 				 * 
 				 * 
 				 */
@@ -2892,7 +2892,7 @@
 			// HyperTocEntry
 
 				/*
-				 * Thing > foo > bar > HyperTocEntry
+				 * Thing > CreativeWork > HyperTocEntry
 				 * 
 				 * 
 				 */
@@ -2906,7 +2906,7 @@
 			// LearningResource
 
 				/*
-				 * Thing > foo > bar > LearningResource
+				 * Thing > CreativeWork > LearningResource
 				 * 
 				 * 
 				 */
@@ -2920,7 +2920,7 @@
 				// Course
 
 					/*
-					 * Thing > foo > bar > baz > Course
+					 * Thing > CreativeWork > baz > Course
 					 * 
 					 * 
 					 */
@@ -2934,7 +2934,7 @@
 				// Quiz
 
 					/*
-					 * Thing > foo > bar > baz > Quiz
+					 * Thing > CreativeWork > baz > Quiz
 					 * 
 					 * 
 					 */
@@ -2948,7 +2948,7 @@
 				// Syllabus
 
 					/*
-					 * Thing > foo > bar > baz > Syllabus
+					 * Thing > CreativeWork > baz > Syllabus
 					 * 
 					 * 
 					 */
@@ -2962,7 +2962,7 @@
 			// Legislation
 
 				/*
-				 * Thing > foo > bar > Legislation
+				 * Thing > CreativeWork > Legislation
 				 * 
 				 * 
 				 */
@@ -2976,7 +2976,7 @@
 				// LegislationObject
 
 					/*
-					 * Thing > foo > bar > baz > LegislationObject
+					 * Thing > CreativeWork > baz > LegislationObject
 					 * 
 					 * 
 					 */
@@ -2990,7 +2990,7 @@
 			// Manuscript
 
 				/*
-				 * Thing > foo > bar > Manuscript
+				 * Thing > CreativeWork > Manuscript
 				 * 
 				 * 
 				 */
@@ -3004,7 +3004,7 @@
 			// Map
 
 				/*
-				 * Thing > foo > bar > Map
+				 * Thing > CreativeWork > Map
 				 * 
 				 * 
 				 */
@@ -3018,7 +3018,7 @@
 			// MathSolver
 
 				/*
-				 * Thing > foo > bar > MathSolver
+				 * Thing > CreativeWork > MathSolver
 				 * 
 				 * 
 				 */
@@ -3032,7 +3032,7 @@
 			// MediaObject
 
 				/*
-				 * Thing > foo > bar > MediaObject
+				 * Thing > CreativeWork > MediaObject
 				 * 
 				 * 
 				 */
@@ -3046,7 +3046,7 @@
 				// 3DModel
 
 					/*
-					 * Thing > foo > bar > baz > 3DModel
+					 * Thing > CreativeWork > baz > 3DModel
 					 * 
 					 * 
 					 */
@@ -3060,7 +3060,7 @@
 				// AmpStory
 
 					/*
-					 * Thing > foo > bar > baz > AmpStory
+					 * Thing > CreativeWork > baz > AmpStory
 					 * 
 					 * 
 					 */
@@ -3074,7 +3074,7 @@
 				// AudioObject
 
 					/*
-					 * Thing > foo > bar > baz > AudioObject
+					 * Thing > CreativeWork > baz > AudioObject
 					 * 
 					 * 
 					 */
@@ -3088,7 +3088,7 @@
 					// AudioObjectSnapshot
 
 						/*
-						 * Thing > foo > bar > baz > qux > AudioObjectSnapshot
+						 * Thing > CreativeWork > baz > qux > AudioObjectSnapshot
 						 * 
 						 * 
 						 */
@@ -3102,7 +3102,7 @@
 					// Audiobook
 
 						/*
-						 * Thing > foo > bar > baz > qux > Audiobook
+						 * Thing > CreativeWork > baz > qux > Audiobook
 						 * 
 						 * 
 						 */
@@ -3116,7 +3116,7 @@
 				// DataDownload
 
 					/*
-					 * Thing > foo > bar > baz > DataDownload
+					 * Thing > CreativeWork > baz > DataDownload
 					 * 
 					 * 
 					 */
@@ -3130,7 +3130,7 @@
 				// ImageObject
 
 					/*
-					 * Thing > foo > bar > baz > ImageObject
+					 * Thing > CreativeWork > baz > ImageObject
 					 * 
 					 * 
 					 */
@@ -3144,7 +3144,7 @@
 					// Barcode
 
 						/*
-						 * Thing > foo > bar > baz > qux > Barcode
+						 * Thing > CreativeWork > baz > qux > Barcode
 						 * 
 						 * 
 						 */
@@ -3158,7 +3158,7 @@
 					// ImageObjectSnapshot
 
 						/*
-						 * Thing > foo > bar > baz > qux > ImageObjectSnapshot
+						 * Thing > CreativeWork > baz > qux > ImageObjectSnapshot
 						 * 
 						 * 
 						 */
@@ -3172,7 +3172,7 @@
 				// LegislationObject
 
 					/*
-					 * Thing > foo > bar > baz > LegislationObject
+					 * Thing > CreativeWork > baz > LegislationObject
 					 * 
 					 * 
 					 */
@@ -3186,7 +3186,7 @@
 				// MusicVideoObject
 
 					/*
-					 * Thing > foo > bar > baz > MusicVideoObject
+					 * Thing > CreativeWork > baz > MusicVideoObject
 					 * 
 					 * 
 					 */
@@ -3200,7 +3200,7 @@
 				// TextObject
 
 					/*
-					 * Thing > foo > bar > baz > TextObject
+					 * Thing > CreativeWork > baz > TextObject
 					 * 
 					 * 
 					 */
@@ -3214,7 +3214,7 @@
 				// VideoObject
 
 					/*
-					 * Thing > foo > bar > baz > VideoObject
+					 * Thing > CreativeWork > baz > VideoObject
 					 * 
 					 * 
 					 */
@@ -3228,7 +3228,7 @@
 					// VideoObjectSnapshot
 
 						/*
-						 * Thing > foo > bar > baz > qux > VideoObjectSnapshot
+						 * Thing > CreativeWork > baz > qux > VideoObjectSnapshot
 						 * 
 						 * 
 						 */
@@ -3243,7 +3243,7 @@
 			// MediaReviewItem
 
 				/*
-				 * Thing > foo > bar > MediaReviewItem
+				 * Thing > CreativeWork > MediaReviewItem
 				 * 
 				 * 
 				 */
@@ -3257,7 +3257,7 @@
 			// Menu
 
 				/*
-				 * Thing > foo > bar > Menu
+				 * Thing > CreativeWork > Menu
 				 * 
 				 * 
 				 */
@@ -3271,7 +3271,7 @@
 			// MenuSection
 
 				/*
-				 * Thing > foo > bar > MenuSection
+				 * Thing > CreativeWork > MenuSection
 				 * 
 				 * 
 				 */
@@ -3285,7 +3285,7 @@
 			// Message
 
 				/*
-				 * Thing > foo > bar > Message
+				 * Thing > CreativeWork > Message
 				 * 
 				 * 
 				 */
@@ -3299,7 +3299,7 @@
 				// EmailMessage
 
 					/*
-					 * Thing > foo > bar > baz > EmailMessage
+					 * Thing > CreativeWork > baz > EmailMessage
 					 * 
 					 * 
 					 */
@@ -3313,7 +3313,7 @@
 			// Movie
 
 				/*
-				 * Thing > foo > bar > Movie
+				 * Thing > CreativeWork > Movie
 				 * 
 				 * 
 				 */
@@ -3327,7 +3327,7 @@
 			// MusicComposition
 
 				/*
-				 * Thing > foo > bar > MusicComposition
+				 * Thing > CreativeWork > MusicComposition
 				 * 
 				 * 
 				 */
@@ -3341,7 +3341,7 @@
 			// MusicPlaylist
 
 				/*
-				 * Thing > foo > bar > MusicPlaylist
+				 * Thing > CreativeWork > MusicPlaylist
 				 * 
 				 * 
 				 */
@@ -3355,7 +3355,7 @@
 				// MusicAlbum
 
 					/*
-					 * Thing > foo > bar > baz > MusicAlbum
+					 * Thing > CreativeWork > baz > MusicAlbum
 					 * 
 					 * 
 					 */
@@ -3369,7 +3369,7 @@
 				// MusicRelease
 
 					/*
-					 * Thing > foo > bar > baz > MusicRelease
+					 * Thing > CreativeWork > baz > MusicRelease
 					 * 
 					 * 
 					 */
@@ -3383,7 +3383,7 @@
 			// MusicRecording
 
 				/*
-				 * Thing > foo > bar > MusicRecording
+				 * Thing > CreativeWork > MusicRecording
 				 * 
 				 * 
 				 */
@@ -3397,7 +3397,7 @@
 			// Painting
 
 				/*
-				 * Thing > foo > bar > Painting
+				 * Thing > CreativeWork > Painting
 				 * 
 				 * 
 				 */
@@ -3411,7 +3411,7 @@
 			// Photograph
 
 				/*
-				 * Thing > foo > bar > Photograph
+				 * Thing > CreativeWork > Photograph
 				 * 
 				 * 
 				 */
@@ -3425,7 +3425,7 @@
 			// Play
 
 				/*
-				 * Thing > foo > bar > Play
+				 * Thing > CreativeWork > Play
 				 * 
 				 * 
 				 */
@@ -3439,7 +3439,7 @@
 			// Poster
 
 				/*
-				 * Thing > foo > bar > Poster
+				 * Thing > CreativeWork > Poster
 				 * 
 				 * 
 				 */
@@ -3453,7 +3453,7 @@
 			// PublicationIssue
 
 				/*
-				 * Thing > foo > bar > PublicationIssue
+				 * Thing > CreativeWork > PublicationIssue
 				 * 
 				 * 
 				 */
@@ -3467,7 +3467,7 @@
 				// ComicIssue
 
 					/*
-					 * Thing > foo > bar > baz > ComicIssue
+					 * Thing > CreativeWork > baz > ComicIssue
 					 * 
 					 * 
 					 */
@@ -3481,7 +3481,7 @@
 			// PublicationVolume
 
 				/*
-				 * Thing > foo > bar > PublicationVolume
+				 * Thing > CreativeWork > PublicationVolume
 				 * 
 				 * 
 				 */
@@ -3495,7 +3495,7 @@
 			// Quotation
 
 				/*
-				 * Thing > foo > bar > Quotation
+				 * Thing > CreativeWork > Quotation
 				 * 
 				 * 
 				 */
@@ -3509,7 +3509,7 @@
 			// Review
 
 				/*
-				 * Thing > foo > bar > Review
+				 * Thing > CreativeWork > Review
 				 * 
 				 * 
 				 */
@@ -3523,7 +3523,7 @@
 				// ClaimReview
 
 					/*
-					 * Thing > foo > bar > baz > ClaimReview
+					 * Thing > CreativeWork > baz > ClaimReview
 					 * 
 					 * 
 					 */
@@ -3537,7 +3537,7 @@
 				// CriticReview
 
 					/*
-					 * Thing > foo > bar > baz > CriticReview
+					 * Thing > CreativeWork > baz > CriticReview
 					 * 
 					 * 
 					 */
@@ -3551,7 +3551,7 @@
 					// ReviewNewsArticle
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReviewNewsArticle
+						 * Thing > CreativeWork > baz > qux > ReviewNewsArticle
 						 * 
 						 * 
 						 */
@@ -3565,7 +3565,7 @@
 				// EmployerReview
 
 					/*
-					 * Thing > foo > bar > baz > EmployerReview
+					 * Thing > CreativeWork > baz > EmployerReview
 					 * 
 					 * 
 					 */
@@ -3579,7 +3579,7 @@
 				// MediaReview
 
 					/*
-					 * Thing > foo > bar > baz > MediaReview
+					 * Thing > CreativeWork > baz > MediaReview
 					 * 
 					 * 
 					 */
@@ -3593,7 +3593,7 @@
 				// Recommendation
 
 					/*
-					 * Thing > foo > bar > baz > Recommendation
+					 * Thing > CreativeWork > baz > Recommendation
 					 * 
 					 * 
 					 */
@@ -3607,7 +3607,7 @@
 				// UserReview
 
 					/*
-					 * Thing > foo > bar > baz > UserReview
+					 * Thing > CreativeWork > baz > UserReview
 					 * 
 					 * 
 					 */
@@ -3621,7 +3621,7 @@
 			// Sculpture
 
 				/*
-				 * Thing > foo > bar > Sculpture
+				 * Thing > CreativeWork > Sculpture
 				 * 
 				 * 
 				 */
@@ -3635,7 +3635,7 @@
 			// Season
 
 				/*
-				 * Thing > foo > bar > Season
+				 * Thing > CreativeWork > Season
 				 * 
 				 * 
 				 */
@@ -3649,7 +3649,7 @@
 			// SheetMusic
 
 				/*
-				 * Thing > foo > bar > SheetMusic
+				 * Thing > CreativeWork > SheetMusic
 				 * 
 				 * 
 				 */
@@ -3663,7 +3663,7 @@
 			// ShortStory
 
 				/*
-				 * Thing > foo > bar > ShortStory
+				 * Thing > CreativeWork > ShortStory
 				 * 
 				 * 
 				 */
@@ -3677,7 +3677,7 @@
 			// SoftwareApplication
 
 				/*
-				 * Thing > foo > bar > SoftwareApplication
+				 * Thing > CreativeWork > SoftwareApplication
 				 * 
 				 * 
 				 */
@@ -3691,7 +3691,7 @@
 				// MobileApplication
 
 					/*
-					 * Thing > foo > bar > baz > MobileApplication
+					 * Thing > CreativeWork > baz > MobileApplication
 					 * 
 					 * 
 					 */
@@ -3705,7 +3705,7 @@
 				// VideoGame
 
 					/*
-					 * Thing > foo > bar > baz > VideoGame
+					 * Thing > CreativeWork > baz > VideoGame
 					 * 
 					 * 
 					 */
@@ -3719,7 +3719,7 @@
 				// WebApplication
 
 					/*
-					 * Thing > foo > bar > baz > WebApplication
+					 * Thing > CreativeWork > baz > WebApplication
 					 * 
 					 * 
 					 */
@@ -3733,7 +3733,7 @@
 			// SoftwareSourceCode
 
 				/*
-				 * Thing > foo > bar > SoftwareSourceCode
+				 * Thing > CreativeWork > SoftwareSourceCode
 				 * 
 				 * 
 				 */
@@ -3747,7 +3747,7 @@
 			// SpecialAnnouncement
 
 				/*
-				 * Thing > foo > bar > SpecialAnnouncement
+				 * Thing > CreativeWork > SpecialAnnouncement
 				 * 
 				 * 
 				 */
@@ -3761,7 +3761,7 @@
 			// Statement
 
 				/*
-				 * Thing > foo > bar > Statement
+				 * Thing > CreativeWork > Statement
 				 * 
 				 * 
 				 */
@@ -3775,7 +3775,7 @@
 			// TVSeason
 
 				/*
-				 * Thing > foo > bar > TVSeason
+				 * Thing > CreativeWork > TVSeason
 				 * 
 				 * 
 				 */
@@ -3789,7 +3789,7 @@
 			// TVSeries
 
 				/*
-				 * Thing > foo > bar > TVSeries
+				 * Thing > CreativeWork > TVSeries
 				 * 
 				 * 
 				 */
@@ -3803,7 +3803,7 @@
 			// Thesis
 
 				/*
-				 * Thing > foo > bar > Thesis
+				 * Thing > CreativeWork > Thesis
 				 * 
 				 * 
 				 */
@@ -3817,7 +3817,7 @@
 			// VisualArtwork
 
 				/*
-				 * Thing > foo > bar > VisualArtwork
+				 * Thing > CreativeWork > VisualArtwork
 				 * 
 				 * 
 				 */
@@ -3831,7 +3831,7 @@
 				// CoverArt
 
 					/*
-					 * Thing > foo > bar > baz > CoverArt
+					 * Thing > CreativeWork > baz > CoverArt
 					 * 
 					 * 
 					 */
@@ -3845,7 +3845,7 @@
 					// ComicCoverArt
 
 						/*
-						 * Thing > foo > bar > baz > qux > ComicCoverArt
+						 * Thing > CreativeWork > baz > qux > ComicCoverArt
 						 * 
 						 * 
 						 */
@@ -3860,7 +3860,7 @@
 			// WebContent
 
 				/*
-				 * Thing > foo > bar > WebContent
+				 * Thing > CreativeWork > WebContent
 				 * 
 				 * 
 				 */
@@ -3874,7 +3874,7 @@
 				// HealthTopicContent
 
 					/*
-					 * Thing > foo > bar > baz > HealthTopicContent
+					 * Thing > CreativeWork > baz > HealthTopicContent
 					 * 
 					 * 
 					 */
@@ -3888,7 +3888,7 @@
 			// WebPage
 
 				/*
-				 * Thing > foo > bar > WebPage
+				 * Thing > CreativeWork > WebPage
 				 * 
 				 * 
 				 */
@@ -3902,7 +3902,7 @@
 				// AboutPage
 
 					/*
-					 * Thing > foo > bar > baz > AboutPage
+					 * Thing > CreativeWork > baz > AboutPage
 					 * 
 					 * 
 					 */
@@ -3916,7 +3916,7 @@
 				// CheckoutPage
 
 					/*
-					 * Thing > foo > bar > baz > CheckoutPage
+					 * Thing > CreativeWork > baz > CheckoutPage
 					 * 
 					 * 
 					 */
@@ -3930,7 +3930,7 @@
 				// CollectionPage
 
 					/*
-					 * Thing > foo > bar > baz > CollectionPage
+					 * Thing > CreativeWork > baz > CollectionPage
 					 * 
 					 * 
 					 */
@@ -3944,7 +3944,7 @@
 					// MediaGallery
 
 						/*
-						 * Thing > foo > bar > baz > qux > MediaGallery
+						 * Thing > CreativeWork > baz > qux > MediaGallery
 						 * 
 						 * 
 						 */
@@ -3958,7 +3958,7 @@
 						// ImageGallery
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ImageGallery
+							 * Thing > CreativeWork > baz > qux > quux > ImageGallery
 							 * 
 							 * 
 							 */
@@ -3972,7 +3972,7 @@
 						// VideoGallery
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > VideoGallery
+							 * Thing > CreativeWork > baz > qux > quux > VideoGallery
 							 * 
 							 * 
 							 */
@@ -3987,7 +3987,7 @@
 				// ContactPage
 
 					/*
-					 * Thing > foo > bar > baz > ContactPage
+					 * Thing > CreativeWork > baz > ContactPage
 					 * 
 					 * 
 					 */
@@ -4001,7 +4001,7 @@
 				// FAQPage
 
 					/*
-					 * Thing > foo > bar > baz > FAQPage
+					 * Thing > CreativeWork > baz > FAQPage
 					 * 
 					 * 
 					 */
@@ -4015,7 +4015,7 @@
 				// ItemPage
 
 					/*
-					 * Thing > foo > bar > baz > ItemPage
+					 * Thing > CreativeWork > baz > ItemPage
 					 * 
 					 * 
 					 */
@@ -4029,7 +4029,7 @@
 				// MedicalWebPage
 
 					/*
-					 * Thing > foo > bar > baz > MedicalWebPage
+					 * Thing > CreativeWork > baz > MedicalWebPage
 					 * 
 					 * 
 					 */
@@ -4043,7 +4043,7 @@
 				// ProfilePage
 
 					/*
-					 * Thing > foo > bar > baz > ProfilePage
+					 * Thing > CreativeWork > baz > ProfilePage
 					 * 
 					 * 
 					 */
@@ -4057,7 +4057,7 @@
 				// QAPage
 
 					/*
-					 * Thing > foo > bar > baz > QAPage
+					 * Thing > CreativeWork > baz > QAPage
 					 * 
 					 * 
 					 */
@@ -4071,7 +4071,7 @@
 				// RealEstateListing
 
 					/*
-					 * Thing > foo > bar > baz > RealEstateListing
+					 * Thing > CreativeWork > baz > RealEstateListing
 					 * 
 					 * 
 					 */
@@ -4085,7 +4085,7 @@
 				// SearchResultsPage
 
 					/*
-					 * Thing > foo > bar > baz > SearchResultsPage
+					 * Thing > CreativeWork > baz > SearchResultsPage
 					 * 
 					 * 
 					 */
@@ -4099,7 +4099,7 @@
 			// WebPageElement
 
 				/*
-				 * Thing > foo > bar > WebPageElement
+				 * Thing > CreativeWork > WebPageElement
 				 * 
 				 * 
 				 */
@@ -4113,7 +4113,7 @@
 				// SiteNavigationElement
 
 					/*
-					 * Thing > foo > bar > baz > SiteNavigationElement
+					 * Thing > CreativeWork > baz > SiteNavigationElement
 					 * 
 					 * 
 					 */
@@ -4127,7 +4127,7 @@
 				// Table
 
 					/*
-					 * Thing > foo > bar > baz > Table
+					 * Thing > CreativeWork > baz > Table
 					 * 
 					 * 
 					 */
@@ -4141,7 +4141,7 @@
 				// WPAdBlock
 
 					/*
-					 * Thing > foo > bar > baz > WPAdBlock
+					 * Thing > CreativeWork > baz > WPAdBlock
 					 * 
 					 * 
 					 */
@@ -4155,7 +4155,7 @@
 				// WPFooter
 
 					/*
-					 * Thing > foo > bar > baz > WPFooter
+					 * Thing > CreativeWork > baz > WPFooter
 					 * 
 					 * 
 					 */
@@ -4169,7 +4169,7 @@
 				// WPHeader
 
 					/*
-					 * Thing > foo > bar > baz > WPHeader
+					 * Thing > CreativeWork > baz > WPHeader
 					 * 
 					 * 
 					 */
@@ -4183,7 +4183,7 @@
 				// WPSideBar
 
 					/*
-					 * Thing > foo > bar > baz > WPSideBar
+					 * Thing > CreativeWork > baz > WPSideBar
 					 * 
 					 * 
 					 */
@@ -4197,7 +4197,7 @@
 			// WebSite
 
 				/*
-				 * Thing > foo > bar > WebSite
+				 * Thing > CreativeWork > WebSite
 				 * 
 				 * 
 				 */
@@ -4211,7 +4211,7 @@
 		// Event
 
 			/*
-			 * Thing > foo > Event
+			 * Thing > Event
 			 * 
 			 * 
 			 */
@@ -4225,7 +4225,7 @@
 			// BusinessEvent
 
 				/*
-				 * Thing > foo > bar > BusinessEvent
+				 * Thing > Event > BusinessEvent
 				 * 
 				 * 
 				 */
@@ -4239,7 +4239,7 @@
 			// ChildrensEvent
 
 				/*
-				 * Thing > foo > bar > ChildrensEvent
+				 * Thing > Event > ChildrensEvent
 				 * 
 				 * 
 				 */
@@ -4253,7 +4253,7 @@
 			// ComedyEvent
 
 				/*
-				 * Thing > foo > bar > ComedyEvent
+				 * Thing > Event > ComedyEvent
 				 * 
 				 * 
 				 */
@@ -4267,7 +4267,7 @@
 			// CourseInstance
 
 				/*
-				 * Thing > foo > bar > CourseInstance
+				 * Thing > Event > CourseInstance
 				 * 
 				 * 
 				 */
@@ -4281,7 +4281,7 @@
 			// DanceEvent
 
 				/*
-				 * Thing > foo > bar > DanceEvent
+				 * Thing > Event > DanceEvent
 				 * 
 				 * 
 				 */
@@ -4295,7 +4295,7 @@
 			// DeliveryEvent
 
 				/*
-				 * Thing > foo > bar > DeliveryEvent
+				 * Thing > Event > DeliveryEvent
 				 * 
 				 * 
 				 */
@@ -4309,7 +4309,7 @@
 			// EducationEvent
 
 				/*
-				 * Thing > foo > bar > EducationEvent
+				 * Thing > Event > EducationEvent
 				 * 
 				 * 
 				 */
@@ -4323,7 +4323,7 @@
 			// EventSeries
 
 				/*
-				 * Thing > foo > bar > EventSeries
+				 * Thing > Event > EventSeries
 				 * 
 				 * 
 				 */
@@ -4337,7 +4337,7 @@
 			// ExhibitionEvent
 
 				/*
-				 * Thing > foo > bar > ExhibitionEvent
+				 * Thing > Event > ExhibitionEvent
 				 * 
 				 * 
 				 */
@@ -4351,7 +4351,7 @@
 			// Festival
 
 				/*
-				 * Thing > foo > bar > Festival
+				 * Thing > Event > Festival
 				 * 
 				 * 
 				 */
@@ -4365,7 +4365,7 @@
 			// FoodEvent
 
 				/*
-				 * Thing > foo > bar > FoodEvent
+				 * Thing > Event > FoodEvent
 				 * 
 				 * 
 				 */
@@ -4379,7 +4379,7 @@
 			// Hackathon
 
 				/*
-				 * Thing > foo > bar > Hackathon
+				 * Thing > Event > Hackathon
 				 * 
 				 * 
 				 */
@@ -4393,7 +4393,7 @@
 			// LiteraryEvent
 
 				/*
-				 * Thing > foo > bar > LiteraryEvent
+				 * Thing > Event > LiteraryEvent
 				 * 
 				 * 
 				 */
@@ -4407,7 +4407,7 @@
 			// MusicEvent
 
 				/*
-				 * Thing > foo > bar > MusicEvent
+				 * Thing > Event > MusicEvent
 				 * 
 				 * 
 				 */
@@ -4421,7 +4421,7 @@
 			// PublicationEvent
 
 				/*
-				 * Thing > foo > bar > PublicationEvent
+				 * Thing > Event > PublicationEvent
 				 * 
 				 * 
 				 */
@@ -4435,7 +4435,7 @@
 				// BroadcastEvent
 
 					/*
-					 * Thing > foo > bar > baz > BroadcastEvent
+					 * Thing > Event > baz > BroadcastEvent
 					 * 
 					 * 
 					 */
@@ -4449,7 +4449,7 @@
 				// OnDemandEvent
 
 					/*
-					 * Thing > foo > bar > baz > OnDemandEvent
+					 * Thing > Event > baz > OnDemandEvent
 					 * 
 					 * 
 					 */
@@ -4463,7 +4463,7 @@
 			// SaleEvent
 
 				/*
-				 * Thing > foo > bar > SaleEvent
+				 * Thing > Event > SaleEvent
 				 * 
 				 * 
 				 */
@@ -4477,7 +4477,7 @@
 			// ScreeningEvent
 
 				/*
-				 * Thing > foo > bar > ScreeningEvent
+				 * Thing > Event > ScreeningEvent
 				 * 
 				 * 
 				 */
@@ -4491,7 +4491,7 @@
 			// SocialEvent
 
 				/*
-				 * Thing > foo > bar > SocialEvent
+				 * Thing > Event > SocialEvent
 				 * 
 				 * 
 				 */
@@ -4505,7 +4505,7 @@
 			// SportsEvent
 
 				/*
-				 * Thing > foo > bar > SportsEvent
+				 * Thing > Event > SportsEvent
 				 * 
 				 * 
 				 */
@@ -4519,7 +4519,7 @@
 			// TheaterEvent
 
 				/*
-				 * Thing > foo > bar > TheaterEvent
+				 * Thing > Event > TheaterEvent
 				 * 
 				 * 
 				 */
@@ -4533,7 +4533,7 @@
 			// UserInteraction
 
 				/*
-				 * Thing > foo > bar > UserInteraction
+				 * Thing > Event > UserInteraction
 				 * 
 				 * 
 				 */
@@ -4547,7 +4547,7 @@
 				// UserBlocks
 
 					/*
-					 * Thing > foo > bar > baz > UserBlocks
+					 * Thing > Event > baz > UserBlocks
 					 * 
 					 * 
 					 */
@@ -4561,7 +4561,7 @@
 				// UserCheckins
 
 					/*
-					 * Thing > foo > bar > baz > UserCheckins
+					 * Thing > Event > baz > UserCheckins
 					 * 
 					 * 
 					 */
@@ -4575,7 +4575,7 @@
 				// UserComments
 
 					/*
-					 * Thing > foo > bar > baz > UserComments
+					 * Thing > Event > baz > UserComments
 					 * 
 					 * 
 					 */
@@ -4589,7 +4589,7 @@
 				// UserDownloads
 
 					/*
-					 * Thing > foo > bar > baz > UserDownloads
+					 * Thing > Event > baz > UserDownloads
 					 * 
 					 * 
 					 */
@@ -4603,7 +4603,7 @@
 				// UserLikes
 
 					/*
-					 * Thing > foo > bar > baz > UserLikes
+					 * Thing > Event > baz > UserLikes
 					 * 
 					 * 
 					 */
@@ -4617,7 +4617,7 @@
 				// UserPageVisits
 
 					/*
-					 * Thing > foo > bar > baz > UserPageVisits
+					 * Thing > Event > baz > UserPageVisits
 					 * 
 					 * 
 					 */
@@ -4631,7 +4631,7 @@
 				// UserPlays
 
 					/*
-					 * Thing > foo > bar > baz > UserPlays
+					 * Thing > Event > baz > UserPlays
 					 * 
 					 * 
 					 */
@@ -4645,7 +4645,7 @@
 				// UserPlusOnes
 
 					/*
-					 * Thing > foo > bar > baz > UserPlusOnes
+					 * Thing > Event > baz > UserPlusOnes
 					 * 
 					 * 
 					 */
@@ -4659,7 +4659,7 @@
 				// UserTweets
 
 					/*
-					 * Thing > foo > bar > baz > UserTweets
+					 * Thing > Event > baz > UserTweets
 					 * 
 					 * 
 					 */
@@ -4673,7 +4673,7 @@
 			// VisualArtsEvent
 
 				/*
-				 * Thing > foo > bar > VisualArtsEvent
+				 * Thing > Event > VisualArtsEvent
 				 * 
 				 * 
 				 */
@@ -4687,7 +4687,7 @@
 		// Intangible
 
 			/*
-			 * Thing > foo > Intangible
+			 * Thing > Intangible
 			 * 
 			 * 
 			 */
@@ -4701,7 +4701,7 @@
 			// ActionAccessSpecification
 
 				/*
-				 * Thing > foo > bar > ActionAccessSpecification
+				 * Thing > Intangible > ActionAccessSpecification
 				 * 
 				 * 
 				 */
@@ -4715,7 +4715,7 @@
 			// AlignmentObject
 
 				/*
-				 * Thing > foo > bar > AlignmentObject
+				 * Thing > Intangible > AlignmentObject
 				 * 
 				 * 
 				 */
@@ -4729,7 +4729,7 @@
 			// Audience
 
 				/*
-				 * Thing > foo > bar > Audience
+				 * Thing > Intangible > Audience
 				 * 
 				 * 
 				 */
@@ -4743,7 +4743,7 @@
 				// BusinessAudience
 
 					/*
-					 * Thing > foo > bar > baz > BusinessAudience
+					 * Thing > Intangible > baz > BusinessAudience
 					 * 
 					 * 
 					 */
@@ -4757,7 +4757,7 @@
 				// EducationalAudience
 
 					/*
-					 * Thing > foo > bar > baz > EducationalAudience
+					 * Thing > Intangible > baz > EducationalAudience
 					 * 
 					 * 
 					 */
@@ -4771,7 +4771,7 @@
 				// MedicalAudience
 
 					/*
-					 * Thing > foo > bar > baz > MedicalAudience
+					 * Thing > Intangible > baz > MedicalAudience
 					 * 
 					 * 
 					 */
@@ -4785,7 +4785,7 @@
 					// Patient
 
 						/*
-						 * Thing > foo > bar > baz > qux > Patient
+						 * Thing > Intangible > baz > qux > Patient
 						 * 
 						 * 
 						 */
@@ -4799,7 +4799,7 @@
 				// PeopleAudience
 
 					/*
-					 * Thing > foo > bar > baz > PeopleAudience
+					 * Thing > Intangible > baz > PeopleAudience
 					 * 
 					 * 
 					 */
@@ -4813,7 +4813,7 @@
 					// MedicalAudience
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalAudience
+						 * Thing > Intangible > baz > qux > MedicalAudience
 						 * 
 						 * 
 						 */
@@ -4827,7 +4827,7 @@
 					// ParentAudience
 
 						/*
-						 * Thing > foo > bar > baz > qux > ParentAudience
+						 * Thing > Intangible > baz > qux > ParentAudience
 						 * 
 						 * 
 						 */
@@ -4841,7 +4841,7 @@
 				// Researcher
 
 					/*
-					 * Thing > foo > bar > baz > Researcher
+					 * Thing > Intangible > baz > Researcher
 					 * 
 					 * 
 					 */
@@ -4855,7 +4855,7 @@
 			// BedDetails
 
 				/*
-				 * Thing > foo > bar > BedDetails
+				 * Thing > Intangible > BedDetails
 				 * 
 				 * 
 				 */
@@ -4869,7 +4869,7 @@
 			// Brand
 
 				/*
-				 * Thing > foo > bar > Brand
+				 * Thing > Intangible > Brand
 				 * 
 				 * 
 				 */
@@ -4883,7 +4883,7 @@
 			// BroadcastChannel
 
 				/*
-				 * Thing > foo > bar > BroadcastChannel
+				 * Thing > Intangible > BroadcastChannel
 				 * 
 				 * 
 				 */
@@ -4897,7 +4897,7 @@
 				// RadioChannel
 
 					/*
-					 * Thing > foo > bar > baz > RadioChannel
+					 * Thing > Intangible > baz > RadioChannel
 					 * 
 					 * 
 					 */
@@ -4911,7 +4911,7 @@
 					// AMRadioChannel
 
 						/*
-						 * Thing > foo > bar > baz > qux > AMRadioChannel
+						 * Thing > Intangible > baz > qux > AMRadioChannel
 						 * 
 						 * 
 						 */
@@ -4925,7 +4925,7 @@
 					// FMRadioChannel
 
 						/*
-						 * Thing > foo > bar > baz > qux > FMRadioChannel
+						 * Thing > Intangible > baz > qux > FMRadioChannel
 						 * 
 						 * 
 						 */
@@ -4939,7 +4939,7 @@
 				// TelevisionChannel
 
 					/*
-					 * Thing > foo > bar > baz > TelevisionChannel
+					 * Thing > Intangible > baz > TelevisionChannel
 					 * 
 					 * 
 					 */
@@ -4953,7 +4953,7 @@
 			// BroadcastFrequencySpecification
 
 				/*
-				 * Thing > foo > bar > BroadcastFrequencySpecification
+				 * Thing > Intangible > BroadcastFrequencySpecification
 				 * 
 				 * 
 				 */
@@ -4967,7 +4967,7 @@
 			// Class
 
 				/*
-				 * Thing > foo > bar > Class
+				 * Thing > Intangible > Class
 				 * 
 				 * 
 				 */
@@ -4981,7 +4981,7 @@
 			// ComputerLanguage
 
 				/*
-				 * Thing > foo > bar > ComputerLanguage
+				 * Thing > Intangible > ComputerLanguage
 				 * 
 				 * 
 				 */
@@ -4995,7 +4995,7 @@
 			// ConstraintNode
 
 				/*
-				 * Thing > foo > bar > ConstraintNode
+				 * Thing > Intangible > ConstraintNode
 				 * 
 				 * 
 				 */
@@ -5009,7 +5009,7 @@
 				// StatisticalVariable
 
 					/*
-					 * Thing > foo > bar > baz > StatisticalVariable
+					 * Thing > Intangible > baz > StatisticalVariable
 					 * 
 					 * 
 					 */
@@ -5023,7 +5023,7 @@
 			// DataFeedItem
 
 				/*
-				 * Thing > foo > bar > DataFeedItem
+				 * Thing > Intangible > DataFeedItem
 				 * 
 				 * 
 				 */
@@ -5037,7 +5037,7 @@
 			// DefinedTerm
 
 				/*
-				 * Thing > foo > bar > DefinedTerm
+				 * Thing > Intangible > DefinedTerm
 				 * 
 				 * 
 				 */
@@ -5051,7 +5051,7 @@
 				// CategoryCode
 
 					/*
-					 * Thing > foo > bar > baz > CategoryCode
+					 * Thing > Intangible > baz > CategoryCode
 					 * 
 					 * 
 					 */
@@ -5065,7 +5065,7 @@
 					// MedicalCode
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalCode
+						 * Thing > Intangible > baz > qux > MedicalCode
 						 * 
 						 * 
 						 */
@@ -5080,7 +5080,7 @@
 			// Demand
 
 				/*
-				 * Thing > foo > bar > Demand
+				 * Thing > Intangible > Demand
 				 * 
 				 * 
 				 */
@@ -5094,7 +5094,7 @@
 			// DigitalDocumentPermission
 
 				/*
-				 * Thing > foo > bar > DigitalDocumentPermission
+				 * Thing > Intangible > DigitalDocumentPermission
 				 * 
 				 * 
 				 */
@@ -5108,7 +5108,7 @@
 			// EducationalOccupationalProgram
 
 				/*
-				 * Thing > foo > bar > EducationalOccupationalProgram
+				 * Thing > Intangible > EducationalOccupationalProgram
 				 * 
 				 * 
 				 */
@@ -5122,7 +5122,7 @@
 				// WorkBasedProgram
 
 					/*
-					 * Thing > foo > bar > baz > WorkBasedProgram
+					 * Thing > Intangible > baz > WorkBasedProgram
 					 * 
 					 * 
 					 */
@@ -5136,7 +5136,7 @@
 			// EnergyConsumptionDetails
 
 				/*
-				 * Thing > foo > bar > EnergyConsumptionDetails
+				 * Thing > Intangible > EnergyConsumptionDetails
 				 * 
 				 * 
 				 */
@@ -5150,7 +5150,7 @@
 			// EntryPoint
 
 				/*
-				 * Thing > foo > bar > EntryPoint
+				 * Thing > Intangible > EntryPoint
 				 * 
 				 * 
 				 */
@@ -5164,7 +5164,7 @@
 			// Enumeration
 
 				/*
-				 * Thing > foo > bar > Enumeration
+				 * Thing > Intangible > Enumeration
 				 * 
 				 * 
 				 */
@@ -5178,7 +5178,7 @@
 				// AdultOrientedEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > AdultOrientedEnumeration
+					 * Thing > Intangible > baz > AdultOrientedEnumeration
 					 * 
 					 * 
 					 */
@@ -5192,7 +5192,7 @@
 					// AlcoholConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > AlcoholConsideration
+						 * Thing > Intangible > baz > qux > AlcoholConsideration
 						 * 
 						 * 
 						 */
@@ -5206,7 +5206,7 @@
 					// DangerousGoodConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > DangerousGoodConsideration
+						 * Thing > Intangible > baz > qux > DangerousGoodConsideration
 						 * 
 						 * 
 						 */
@@ -5220,7 +5220,7 @@
 					// HealthcareConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > HealthcareConsideration
+						 * Thing > Intangible > baz > qux > HealthcareConsideration
 						 * 
 						 * 
 						 */
@@ -5234,7 +5234,7 @@
 					// NarcoticConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > NarcoticConsideration
+						 * Thing > Intangible > baz > qux > NarcoticConsideration
 						 * 
 						 * 
 						 */
@@ -5248,7 +5248,7 @@
 					// ReducedRelevanceForChildrenConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReducedRelevanceForChildrenConsideration
+						 * Thing > Intangible > baz > qux > ReducedRelevanceForChildrenConsideration
 						 * 
 						 * 
 						 */
@@ -5262,7 +5262,7 @@
 					// SexualContentConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > SexualContentConsideration
+						 * Thing > Intangible > baz > qux > SexualContentConsideration
 						 * 
 						 * 
 						 */
@@ -5276,7 +5276,7 @@
 					// TobaccoNicotineConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > TobaccoNicotineConsideration
+						 * Thing > Intangible > baz > qux > TobaccoNicotineConsideration
 						 * 
 						 * 
 						 */
@@ -5290,7 +5290,7 @@
 					// UnclassifiedAdultConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > UnclassifiedAdultConsideration
+						 * Thing > Intangible > baz > qux > UnclassifiedAdultConsideration
 						 * 
 						 * 
 						 */
@@ -5304,7 +5304,7 @@
 					// ViolenceConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > ViolenceConsideration
+						 * Thing > Intangible > baz > qux > ViolenceConsideration
 						 * 
 						 * 
 						 */
@@ -5318,7 +5318,7 @@
 					// WeaponConsideration
 
 						/*
-						 * Thing > foo > bar > baz > qux > WeaponConsideration
+						 * Thing > Intangible > baz > qux > WeaponConsideration
 						 * 
 						 * 
 						 */
@@ -5332,7 +5332,7 @@
 				// BoardingPolicyType
 
 					/*
-					 * Thing > foo > bar > baz > BoardingPolicyType
+					 * Thing > Intangible > baz > BoardingPolicyType
 					 * 
 					 * 
 					 */
@@ -5346,7 +5346,7 @@
 					// GroupBoardingPolicy
 
 						/*
-						 * Thing > foo > bar > baz > qux > GroupBoardingPolicy
+						 * Thing > Intangible > baz > qux > GroupBoardingPolicy
 						 * 
 						 * 
 						 */
@@ -5360,7 +5360,7 @@
 					// ZoneBoardingPolicy
 
 						/*
-						 * Thing > foo > bar > baz > qux > ZoneBoardingPolicy
+						 * Thing > Intangible > baz > qux > ZoneBoardingPolicy
 						 * 
 						 * 
 						 */
@@ -5374,7 +5374,7 @@
 				// BookFormatType
 
 					/*
-					 * Thing > foo > bar > baz > BookFormatType
+					 * Thing > Intangible > baz > BookFormatType
 					 * 
 					 * 
 					 */
@@ -5388,7 +5388,7 @@
 					// AudiobookFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > AudiobookFormat
+						 * Thing > Intangible > baz > qux > AudiobookFormat
 						 * 
 						 * 
 						 */
@@ -5402,7 +5402,7 @@
 					// EBook
 
 						/*
-						 * Thing > foo > bar > baz > qux > EBook
+						 * Thing > Intangible > baz > qux > EBook
 						 * 
 						 * 
 						 */
@@ -5416,7 +5416,7 @@
 					// GraphicNovel
 
 						/*
-						 * Thing > foo > bar > baz > qux > GraphicNovel
+						 * Thing > Intangible > baz > qux > GraphicNovel
 						 * 
 						 * 
 						 */
@@ -5430,7 +5430,7 @@
 					// Hardcover
 
 						/*
-						 * Thing > foo > bar > baz > qux > Hardcover
+						 * Thing > Intangible > baz > qux > Hardcover
 						 * 
 						 * 
 						 */
@@ -5444,7 +5444,7 @@
 					// Paperback
 
 						/*
-						 * Thing > foo > bar > baz > qux > Paperback
+						 * Thing > Intangible > baz > qux > Paperback
 						 * 
 						 * 
 						 */
@@ -5458,7 +5458,7 @@
 				// BusinessEntityType
 
 					/*
-					 * Thing > foo > bar > baz > BusinessEntityType
+					 * Thing > Intangible > baz > BusinessEntityType
 					 * 
 					 * 
 					 */
@@ -5472,7 +5472,7 @@
 				// BusinessFunction
 
 					/*
-					 * Thing > foo > bar > baz > BusinessFunction
+					 * Thing > Intangible > baz > BusinessFunction
 					 * 
 					 * 
 					 */
@@ -5486,7 +5486,7 @@
 				// CarUsageType
 
 					/*
-					 * Thing > foo > bar > baz > CarUsageType
+					 * Thing > Intangible > baz > CarUsageType
 					 * 
 					 * 
 					 */
@@ -5500,7 +5500,7 @@
 					// DrivingSchoolVehicleUsage
 
 						/*
-						 * Thing > foo > bar > baz > qux > DrivingSchoolVehicleUsage
+						 * Thing > Intangible > baz > qux > DrivingSchoolVehicleUsage
 						 * 
 						 * 
 						 */
@@ -5514,7 +5514,7 @@
 					// RentalVehicleUsage
 
 						/*
-						 * Thing > foo > bar > baz > qux > RentalVehicleUsage
+						 * Thing > Intangible > baz > qux > RentalVehicleUsage
 						 * 
 						 * 
 						 */
@@ -5528,7 +5528,7 @@
 					// TaxiVehicleUsage
 
 						/*
-						 * Thing > foo > bar > baz > qux > TaxiVehicleUsage
+						 * Thing > Intangible > baz > qux > TaxiVehicleUsage
 						 * 
 						 * 
 						 */
@@ -5542,7 +5542,7 @@
 				// ContactPointOption
 
 					/*
-					 * Thing > foo > bar > baz > ContactPointOption
+					 * Thing > Intangible > baz > ContactPointOption
 					 * 
 					 * 
 					 */
@@ -5556,7 +5556,7 @@
 					// HearingImpairedSupported
 
 						/*
-						 * Thing > foo > bar > baz > qux > HearingImpairedSupported
+						 * Thing > Intangible > baz > qux > HearingImpairedSupported
 						 * 
 						 * 
 						 */
@@ -5570,7 +5570,7 @@
 					// TollFree
 
 						/*
-						 * Thing > foo > bar > baz > qux > TollFree
+						 * Thing > Intangible > baz > qux > TollFree
 						 * 
 						 * 
 						 */
@@ -5584,7 +5584,7 @@
 				// DayOfWeek
 
 					/*
-					 * Thing > foo > bar > baz > DayOfWeek
+					 * Thing > Intangible > baz > DayOfWeek
 					 * 
 					 * 
 					 */
@@ -5598,7 +5598,7 @@
 					// Friday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Friday
+						 * Thing > Intangible > baz > qux > Friday
 						 * 
 						 * 
 						 */
@@ -5612,7 +5612,7 @@
 					// Monday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Monday
+						 * Thing > Intangible > baz > qux > Monday
 						 * 
 						 * 
 						 */
@@ -5626,7 +5626,7 @@
 					// PublicHolidays
 
 						/*
-						 * Thing > foo > bar > baz > qux > PublicHolidays
+						 * Thing > Intangible > baz > qux > PublicHolidays
 						 * 
 						 * 
 						 */
@@ -5640,7 +5640,7 @@
 					// Saturday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Saturday
+						 * Thing > Intangible > baz > qux > Saturday
 						 * 
 						 * 
 						 */
@@ -5654,7 +5654,7 @@
 					// Sunday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Sunday
+						 * Thing > Intangible > baz > qux > Sunday
 						 * 
 						 * 
 						 */
@@ -5668,7 +5668,7 @@
 					// Thursday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Thursday
+						 * Thing > Intangible > baz > qux > Thursday
 						 * 
 						 * 
 						 */
@@ -5682,7 +5682,7 @@
 					// Tuesday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Tuesday
+						 * Thing > Intangible > baz > qux > Tuesday
 						 * 
 						 * 
 						 */
@@ -5696,7 +5696,7 @@
 					// Wednesday
 
 						/*
-						 * Thing > foo > bar > baz > qux > Wednesday
+						 * Thing > Intangible > baz > qux > Wednesday
 						 * 
 						 * 
 						 */
@@ -5710,7 +5710,7 @@
 				// DeliveryMethod
 
 					/*
-					 * Thing > foo > bar > baz > DeliveryMethod
+					 * Thing > Intangible > baz > DeliveryMethod
 					 * 
 					 * 
 					 */
@@ -5724,7 +5724,7 @@
 					// LockerDelivery
 
 						/*
-						 * Thing > foo > bar > baz > qux > LockerDelivery
+						 * Thing > Intangible > baz > qux > LockerDelivery
 						 * 
 						 * 
 						 */
@@ -5738,7 +5738,7 @@
 					// OnSitePickup
 
 						/*
-						 * Thing > foo > bar > baz > qux > OnSitePickup
+						 * Thing > Intangible > baz > qux > OnSitePickup
 						 * 
 						 * 
 						 */
@@ -5752,7 +5752,7 @@
 					// ParcelService
 
 						/*
-						 * Thing > foo > bar > baz > qux > ParcelService
+						 * Thing > Intangible > baz > qux > ParcelService
 						 * 
 						 * 
 						 */
@@ -5766,7 +5766,7 @@
 				// DigitalDocumentPermissionType
 
 					/*
-					 * Thing > foo > bar > baz > DigitalDocumentPermissionType
+					 * Thing > Intangible > baz > DigitalDocumentPermissionType
 					 * 
 					 * 
 					 */
@@ -5780,7 +5780,7 @@
 					// CommentPermission
 
 						/*
-						 * Thing > foo > bar > baz > qux > CommentPermission
+						 * Thing > Intangible > baz > qux > CommentPermission
 						 * 
 						 * 
 						 */
@@ -5794,7 +5794,7 @@
 					// ReadPermission
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReadPermission
+						 * Thing > Intangible > baz > qux > ReadPermission
 						 * 
 						 * 
 						 */
@@ -5808,7 +5808,7 @@
 					// WritePermission
 
 						/*
-						 * Thing > foo > bar > baz > qux > WritePermission
+						 * Thing > Intangible > baz > qux > WritePermission
 						 * 
 						 * 
 						 */
@@ -5822,7 +5822,7 @@
 				// DigitalPlatformEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > DigitalPlatformEnumeration
+					 * Thing > Intangible > baz > DigitalPlatformEnumeration
 					 * 
 					 * 
 					 */
@@ -5836,7 +5836,7 @@
 					// AndroidPlatform
 
 						/*
-						 * Thing > foo > bar > baz > qux > AndroidPlatform
+						 * Thing > Intangible > baz > qux > AndroidPlatform
 						 * 
 						 * 
 						 */
@@ -5850,7 +5850,7 @@
 					// DesktopWebPlatform
 
 						/*
-						 * Thing > foo > bar > baz > qux > DesktopWebPlatform
+						 * Thing > Intangible > baz > qux > DesktopWebPlatform
 						 * 
 						 * 
 						 */
@@ -5864,7 +5864,7 @@
 					// GenericWebPlatform
 
 						/*
-						 * Thing > foo > bar > baz > qux > GenericWebPlatform
+						 * Thing > Intangible > baz > qux > GenericWebPlatform
 						 * 
 						 * 
 						 */
@@ -5878,7 +5878,7 @@
 					// IOSPlatform
 
 						/*
-						 * Thing > foo > bar > baz > qux > IOSPlatform
+						 * Thing > Intangible > baz > qux > IOSPlatform
 						 * 
 						 * 
 						 */
@@ -5892,7 +5892,7 @@
 					// MobileWebPlatform
 
 						/*
-						 * Thing > foo > bar > baz > qux > MobileWebPlatform
+						 * Thing > Intangible > baz > qux > MobileWebPlatform
 						 * 
 						 * 
 						 */
@@ -5906,7 +5906,7 @@
 				// EnergyEfficiencyEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > EnergyEfficiencyEnumeration
+					 * Thing > Intangible > baz > EnergyEfficiencyEnumeration
 					 * 
 					 * 
 					 */
@@ -5920,7 +5920,7 @@
 					// EUEnergyEfficiencyEnumeration
 
 						/*
-						 * Thing > foo > bar > baz > qux > EUEnergyEfficiencyEnumeration
+						 * Thing > Intangible > baz > qux > EUEnergyEfficiencyEnumeration
 						 * 
 						 * 
 						 */
@@ -5934,7 +5934,7 @@
 						// EUEnergyEfficiencyCategoryA
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryA
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryA
 							 * 
 							 * 
 							 */
@@ -5948,7 +5948,7 @@
 						// EUEnergyEfficiencyCategoryA1Plus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryA1Plus
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryA1Plus
 							 * 
 							 * 
 							 */
@@ -5962,7 +5962,7 @@
 						// EUEnergyEfficiencyCategoryA2Plus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryA2Plus
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryA2Plus
 							 * 
 							 * 
 							 */
@@ -5976,7 +5976,7 @@
 						// EUEnergyEfficiencyCategoryA3Plus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryA3Plus
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryA3Plus
 							 * 
 							 * 
 							 */
@@ -5990,7 +5990,7 @@
 						// EUEnergyEfficiencyCategoryB
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryB
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryB
 							 * 
 							 * 
 							 */
@@ -6004,7 +6004,7 @@
 						// EUEnergyEfficiencyCategoryC
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryC
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryC
 							 * 
 							 * 
 							 */
@@ -6018,7 +6018,7 @@
 						// EUEnergyEfficiencyCategoryD
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryD
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryD
 							 * 
 							 * 
 							 */
@@ -6032,7 +6032,7 @@
 						// EUEnergyEfficiencyCategoryE
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryE
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryE
 							 * 
 							 * 
 							 */
@@ -6046,7 +6046,7 @@
 						// EUEnergyEfficiencyCategoryF
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryF
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryF
 							 * 
 							 * 
 							 */
@@ -6060,7 +6060,7 @@
 						// EUEnergyEfficiencyCategoryG
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EUEnergyEfficiencyCategoryG
+							 * Thing > Intangible > baz > qux > quux > EUEnergyEfficiencyCategoryG
 							 * 
 							 * 
 							 */
@@ -6074,7 +6074,7 @@
 					// EnergyStarEnergyEfficiencyEnumeration
 
 						/*
-						 * Thing > foo > bar > baz > qux > EnergyStarEnergyEfficiencyEnumeration
+						 * Thing > Intangible > baz > qux > EnergyStarEnergyEfficiencyEnumeration
 						 * 
 						 * 
 						 */
@@ -6088,7 +6088,7 @@
 						// EnergyStarCertified
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EnergyStarCertified
+							 * Thing > Intangible > baz > qux > quux > EnergyStarCertified
 							 * 
 							 * 
 							 */
@@ -6103,7 +6103,7 @@
 				// EventAttendanceModeEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > EventAttendanceModeEnumeration
+					 * Thing > Intangible > baz > EventAttendanceModeEnumeration
 					 * 
 					 * 
 					 */
@@ -6117,7 +6117,7 @@
 					// MixedEventAttendanceMode
 
 						/*
-						 * Thing > foo > bar > baz > qux > MixedEventAttendanceMode
+						 * Thing > Intangible > baz > qux > MixedEventAttendanceMode
 						 * 
 						 * 
 						 */
@@ -6131,7 +6131,7 @@
 					// OfflineEventAttendanceMode
 
 						/*
-						 * Thing > foo > bar > baz > qux > OfflineEventAttendanceMode
+						 * Thing > Intangible > baz > qux > OfflineEventAttendanceMode
 						 * 
 						 * 
 						 */
@@ -6145,7 +6145,7 @@
 					// OnlineEventAttendanceMode
 
 						/*
-						 * Thing > foo > bar > baz > qux > OnlineEventAttendanceMode
+						 * Thing > Intangible > baz > qux > OnlineEventAttendanceMode
 						 * 
 						 * 
 						 */
@@ -6159,7 +6159,7 @@
 				// GameAvailabilityEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > GameAvailabilityEnumeration
+					 * Thing > Intangible > baz > GameAvailabilityEnumeration
 					 * 
 					 * 
 					 */
@@ -6173,7 +6173,7 @@
 					// DemoGameAvailability
 
 						/*
-						 * Thing > foo > bar > baz > qux > DemoGameAvailability
+						 * Thing > Intangible > baz > qux > DemoGameAvailability
 						 * 
 						 * 
 						 */
@@ -6187,7 +6187,7 @@
 					// FullGameAvailability
 
 						/*
-						 * Thing > foo > bar > baz > qux > FullGameAvailability
+						 * Thing > Intangible > baz > qux > FullGameAvailability
 						 * 
 						 * 
 						 */
@@ -6201,7 +6201,7 @@
 				// GamePlayMode
 
 					/*
-					 * Thing > foo > bar > baz > GamePlayMode
+					 * Thing > Intangible > baz > GamePlayMode
 					 * 
 					 * 
 					 */
@@ -6215,7 +6215,7 @@
 					// CoOp
 
 						/*
-						 * Thing > foo > bar > baz > qux > CoOp
+						 * Thing > Intangible > baz > qux > CoOp
 						 * 
 						 * 
 						 */
@@ -6229,7 +6229,7 @@
 					// MultiPlayer
 
 						/*
-						 * Thing > foo > bar > baz > qux > MultiPlayer
+						 * Thing > Intangible > baz > qux > MultiPlayer
 						 * 
 						 * 
 						 */
@@ -6243,7 +6243,7 @@
 					// SinglePlayer
 
 						/*
-						 * Thing > foo > bar > baz > qux > SinglePlayer
+						 * Thing > Intangible > baz > qux > SinglePlayer
 						 * 
 						 * 
 						 */
@@ -6257,7 +6257,7 @@
 				// GenderType
 
 					/*
-					 * Thing > foo > bar > baz > GenderType
+					 * Thing > Intangible > baz > GenderType
 					 * 
 					 * 
 					 */
@@ -6271,7 +6271,7 @@
 					// Female
 
 						/*
-						 * Thing > foo > bar > baz > qux > Female
+						 * Thing > Intangible > baz > qux > Female
 						 * 
 						 * 
 						 */
@@ -6285,7 +6285,7 @@
 					// Male
 
 						/*
-						 * Thing > foo > bar > baz > qux > Male
+						 * Thing > Intangible > baz > qux > Male
 						 * 
 						 * 
 						 */
@@ -6299,7 +6299,7 @@
 				// GovernmentBenefitsType
 
 					/*
-					 * Thing > foo > bar > baz > GovernmentBenefitsType
+					 * Thing > Intangible > baz > GovernmentBenefitsType
 					 * 
 					 * 
 					 */
@@ -6313,7 +6313,7 @@
 					// BasicIncome
 
 						/*
-						 * Thing > foo > bar > baz > qux > BasicIncome
+						 * Thing > Intangible > baz > qux > BasicIncome
 						 * 
 						 * 
 						 */
@@ -6327,7 +6327,7 @@
 					// BusinessSupport
 
 						/*
-						 * Thing > foo > bar > baz > qux > BusinessSupport
+						 * Thing > Intangible > baz > qux > BusinessSupport
 						 * 
 						 * 
 						 */
@@ -6341,7 +6341,7 @@
 					// DisabilitySupport
 
 						/*
-						 * Thing > foo > bar > baz > qux > DisabilitySupport
+						 * Thing > Intangible > baz > qux > DisabilitySupport
 						 * 
 						 * 
 						 */
@@ -6355,7 +6355,7 @@
 					// HealthCare
 
 						/*
-						 * Thing > foo > bar > baz > qux > HealthCare
+						 * Thing > Intangible > baz > qux > HealthCare
 						 * 
 						 * 
 						 */
@@ -6369,7 +6369,7 @@
 					// OneTimePayments
 
 						/*
-						 * Thing > foo > bar > baz > qux > OneTimePayments
+						 * Thing > Intangible > baz > qux > OneTimePayments
 						 * 
 						 * 
 						 */
@@ -6383,7 +6383,7 @@
 					// PaidLeave
 
 						/*
-						 * Thing > foo > bar > baz > qux > PaidLeave
+						 * Thing > Intangible > baz > qux > PaidLeave
 						 * 
 						 * 
 						 */
@@ -6397,7 +6397,7 @@
 					// ParentalSupport
 
 						/*
-						 * Thing > foo > bar > baz > qux > ParentalSupport
+						 * Thing > Intangible > baz > qux > ParentalSupport
 						 * 
 						 * 
 						 */
@@ -6411,7 +6411,7 @@
 					// UnemploymentSupport
 
 						/*
-						 * Thing > foo > bar > baz > qux > UnemploymentSupport
+						 * Thing > Intangible > baz > qux > UnemploymentSupport
 						 * 
 						 * 
 						 */
@@ -6425,7 +6425,7 @@
 				// HealthAspectEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > HealthAspectEnumeration
+					 * Thing > Intangible > baz > HealthAspectEnumeration
 					 * 
 					 * 
 					 */
@@ -6439,7 +6439,7 @@
 					// AllergiesHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > AllergiesHealthAspect
+						 * Thing > Intangible > baz > qux > AllergiesHealthAspect
 						 * 
 						 * 
 						 */
@@ -6453,7 +6453,7 @@
 					// BenefitsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > BenefitsHealthAspect
+						 * Thing > Intangible > baz > qux > BenefitsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6467,7 +6467,7 @@
 					// CausesHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > CausesHealthAspect
+						 * Thing > Intangible > baz > qux > CausesHealthAspect
 						 * 
 						 * 
 						 */
@@ -6481,7 +6481,7 @@
 					// ContagiousnessHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > ContagiousnessHealthAspect
+						 * Thing > Intangible > baz > qux > ContagiousnessHealthAspect
 						 * 
 						 * 
 						 */
@@ -6495,7 +6495,7 @@
 					// EffectivenessHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > EffectivenessHealthAspect
+						 * Thing > Intangible > baz > qux > EffectivenessHealthAspect
 						 * 
 						 * 
 						 */
@@ -6509,7 +6509,7 @@
 					// GettingAccessHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > GettingAccessHealthAspect
+						 * Thing > Intangible > baz > qux > GettingAccessHealthAspect
 						 * 
 						 * 
 						 */
@@ -6523,7 +6523,7 @@
 					// HowItWorksHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > HowItWorksHealthAspect
+						 * Thing > Intangible > baz > qux > HowItWorksHealthAspect
 						 * 
 						 * 
 						 */
@@ -6537,7 +6537,7 @@
 					// HowOrWhereHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > HowOrWhereHealthAspect
+						 * Thing > Intangible > baz > qux > HowOrWhereHealthAspect
 						 * 
 						 * 
 						 */
@@ -6551,7 +6551,7 @@
 					// IngredientsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > IngredientsHealthAspect
+						 * Thing > Intangible > baz > qux > IngredientsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6565,7 +6565,7 @@
 					// LivingWithHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > LivingWithHealthAspect
+						 * Thing > Intangible > baz > qux > LivingWithHealthAspect
 						 * 
 						 * 
 						 */
@@ -6579,7 +6579,7 @@
 					// MayTreatHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > MayTreatHealthAspect
+						 * Thing > Intangible > baz > qux > MayTreatHealthAspect
 						 * 
 						 * 
 						 */
@@ -6593,7 +6593,7 @@
 					// MisconceptionsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > MisconceptionsHealthAspect
+						 * Thing > Intangible > baz > qux > MisconceptionsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6607,7 +6607,7 @@
 					// OverviewHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > OverviewHealthAspect
+						 * Thing > Intangible > baz > qux > OverviewHealthAspect
 						 * 
 						 * 
 						 */
@@ -6621,7 +6621,7 @@
 					// PatientExperienceHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > PatientExperienceHealthAspect
+						 * Thing > Intangible > baz > qux > PatientExperienceHealthAspect
 						 * 
 						 * 
 						 */
@@ -6635,7 +6635,7 @@
 					// PregnancyHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > PregnancyHealthAspect
+						 * Thing > Intangible > baz > qux > PregnancyHealthAspect
 						 * 
 						 * 
 						 */
@@ -6649,7 +6649,7 @@
 					// PreventionHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > PreventionHealthAspect
+						 * Thing > Intangible > baz > qux > PreventionHealthAspect
 						 * 
 						 * 
 						 */
@@ -6663,7 +6663,7 @@
 					// PrognosisHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > PrognosisHealthAspect
+						 * Thing > Intangible > baz > qux > PrognosisHealthAspect
 						 * 
 						 * 
 						 */
@@ -6677,7 +6677,7 @@
 					// RelatedTopicsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > RelatedTopicsHealthAspect
+						 * Thing > Intangible > baz > qux > RelatedTopicsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6691,7 +6691,7 @@
 					// RisksOrComplicationsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > RisksOrComplicationsHealthAspect
+						 * Thing > Intangible > baz > qux > RisksOrComplicationsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6705,7 +6705,7 @@
 					// SafetyHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > SafetyHealthAspect
+						 * Thing > Intangible > baz > qux > SafetyHealthAspect
 						 * 
 						 * 
 						 */
@@ -6719,7 +6719,7 @@
 					// ScreeningHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > ScreeningHealthAspect
+						 * Thing > Intangible > baz > qux > ScreeningHealthAspect
 						 * 
 						 * 
 						 */
@@ -6733,7 +6733,7 @@
 					// SeeDoctorHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > SeeDoctorHealthAspect
+						 * Thing > Intangible > baz > qux > SeeDoctorHealthAspect
 						 * 
 						 * 
 						 */
@@ -6747,7 +6747,7 @@
 					// SelfCareHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > SelfCareHealthAspect
+						 * Thing > Intangible > baz > qux > SelfCareHealthAspect
 						 * 
 						 * 
 						 */
@@ -6761,7 +6761,7 @@
 					// SideEffectsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > SideEffectsHealthAspect
+						 * Thing > Intangible > baz > qux > SideEffectsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6775,7 +6775,7 @@
 					// StagesHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > StagesHealthAspect
+						 * Thing > Intangible > baz > qux > StagesHealthAspect
 						 * 
 						 * 
 						 */
@@ -6789,7 +6789,7 @@
 					// SymptomsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > SymptomsHealthAspect
+						 * Thing > Intangible > baz > qux > SymptomsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6803,7 +6803,7 @@
 					// TreatmentsHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > TreatmentsHealthAspect
+						 * Thing > Intangible > baz > qux > TreatmentsHealthAspect
 						 * 
 						 * 
 						 */
@@ -6817,7 +6817,7 @@
 					// TypesHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > TypesHealthAspect
+						 * Thing > Intangible > baz > qux > TypesHealthAspect
 						 * 
 						 * 
 						 */
@@ -6831,7 +6831,7 @@
 					// UsageOrScheduleHealthAspect
 
 						/*
-						 * Thing > foo > bar > baz > qux > UsageOrScheduleHealthAspect
+						 * Thing > Intangible > baz > qux > UsageOrScheduleHealthAspect
 						 * 
 						 * 
 						 */
@@ -6845,7 +6845,7 @@
 				// ItemAvailability
 
 					/*
-					 * Thing > foo > bar > baz > ItemAvailability
+					 * Thing > Intangible > baz > ItemAvailability
 					 * 
 					 * 
 					 */
@@ -6859,7 +6859,7 @@
 					// BackOrder
 
 						/*
-						 * Thing > foo > bar > baz > qux > BackOrder
+						 * Thing > Intangible > baz > qux > BackOrder
 						 * 
 						 * 
 						 */
@@ -6873,7 +6873,7 @@
 					// Discontinued
 
 						/*
-						 * Thing > foo > bar > baz > qux > Discontinued
+						 * Thing > Intangible > baz > qux > Discontinued
 						 * 
 						 * 
 						 */
@@ -6887,7 +6887,7 @@
 					// InStock
 
 						/*
-						 * Thing > foo > bar > baz > qux > InStock
+						 * Thing > Intangible > baz > qux > InStock
 						 * 
 						 * 
 						 */
@@ -6901,7 +6901,7 @@
 					// InStoreOnly
 
 						/*
-						 * Thing > foo > bar > baz > qux > InStoreOnly
+						 * Thing > Intangible > baz > qux > InStoreOnly
 						 * 
 						 * 
 						 */
@@ -6915,7 +6915,7 @@
 					// LimitedAvailability
 
 						/*
-						 * Thing > foo > bar > baz > qux > LimitedAvailability
+						 * Thing > Intangible > baz > qux > LimitedAvailability
 						 * 
 						 * 
 						 */
@@ -6929,7 +6929,7 @@
 					// OnlineOnly
 
 						/*
-						 * Thing > foo > bar > baz > qux > OnlineOnly
+						 * Thing > Intangible > baz > qux > OnlineOnly
 						 * 
 						 * 
 						 */
@@ -6943,7 +6943,7 @@
 					// OutOfStock
 
 						/*
-						 * Thing > foo > bar > baz > qux > OutOfStock
+						 * Thing > Intangible > baz > qux > OutOfStock
 						 * 
 						 * 
 						 */
@@ -6957,7 +6957,7 @@
 					// PreOrder
 
 						/*
-						 * Thing > foo > bar > baz > qux > PreOrder
+						 * Thing > Intangible > baz > qux > PreOrder
 						 * 
 						 * 
 						 */
@@ -6971,7 +6971,7 @@
 					// PreSale
 
 						/*
-						 * Thing > foo > bar > baz > qux > PreSale
+						 * Thing > Intangible > baz > qux > PreSale
 						 * 
 						 * 
 						 */
@@ -6985,7 +6985,7 @@
 					// SoldOut
 
 						/*
-						 * Thing > foo > bar > baz > qux > SoldOut
+						 * Thing > Intangible > baz > qux > SoldOut
 						 * 
 						 * 
 						 */
@@ -6999,7 +6999,7 @@
 				// ItemListOrderType
 
 					/*
-					 * Thing > foo > bar > baz > ItemListOrderType
+					 * Thing > Intangible > baz > ItemListOrderType
 					 * 
 					 * 
 					 */
@@ -7013,7 +7013,7 @@
 					// ItemListOrderAscending
 
 						/*
-						 * Thing > foo > bar > baz > qux > ItemListOrderAscending
+						 * Thing > Intangible > baz > qux > ItemListOrderAscending
 						 * 
 						 * 
 						 */
@@ -7027,7 +7027,7 @@
 					// ItemListOrderDescending
 
 						/*
-						 * Thing > foo > bar > baz > qux > ItemListOrderDescending
+						 * Thing > Intangible > baz > qux > ItemListOrderDescending
 						 * 
 						 * 
 						 */
@@ -7041,7 +7041,7 @@
 					// ItemListUnordered
 
 						/*
-						 * Thing > foo > bar > baz > qux > ItemListUnordered
+						 * Thing > Intangible > baz > qux > ItemListUnordered
 						 * 
 						 * 
 						 */
@@ -7055,7 +7055,7 @@
 				// LegalValueLevel
 
 					/*
-					 * Thing > foo > bar > baz > LegalValueLevel
+					 * Thing > Intangible > baz > LegalValueLevel
 					 * 
 					 * 
 					 */
@@ -7069,7 +7069,7 @@
 					// AuthoritativeLegalValue
 
 						/*
-						 * Thing > foo > bar > baz > qux > AuthoritativeLegalValue
+						 * Thing > Intangible > baz > qux > AuthoritativeLegalValue
 						 * 
 						 * 
 						 */
@@ -7083,7 +7083,7 @@
 					// DefinitiveLegalValue
 
 						/*
-						 * Thing > foo > bar > baz > qux > DefinitiveLegalValue
+						 * Thing > Intangible > baz > qux > DefinitiveLegalValue
 						 * 
 						 * 
 						 */
@@ -7097,7 +7097,7 @@
 					// OfficialLegalValue
 
 						/*
-						 * Thing > foo > bar > baz > qux > OfficialLegalValue
+						 * Thing > Intangible > baz > qux > OfficialLegalValue
 						 * 
 						 * 
 						 */
@@ -7111,7 +7111,7 @@
 					// UnofficialLegalValue
 
 						/*
-						 * Thing > foo > bar > baz > qux > UnofficialLegalValue
+						 * Thing > Intangible > baz > qux > UnofficialLegalValue
 						 * 
 						 * 
 						 */
@@ -7125,7 +7125,7 @@
 				// MapCategoryType
 
 					/*
-					 * Thing > foo > bar > baz > MapCategoryType
+					 * Thing > Intangible > baz > MapCategoryType
 					 * 
 					 * 
 					 */
@@ -7139,7 +7139,7 @@
 					// ParkingMap
 
 						/*
-						 * Thing > foo > bar > baz > qux > ParkingMap
+						 * Thing > Intangible > baz > qux > ParkingMap
 						 * 
 						 * 
 						 */
@@ -7153,7 +7153,7 @@
 					// SeatingMap
 
 						/*
-						 * Thing > foo > bar > baz > qux > SeatingMap
+						 * Thing > Intangible > baz > qux > SeatingMap
 						 * 
 						 * 
 						 */
@@ -7167,7 +7167,7 @@
 					// TransitMap
 
 						/*
-						 * Thing > foo > bar > baz > qux > TransitMap
+						 * Thing > Intangible > baz > qux > TransitMap
 						 * 
 						 * 
 						 */
@@ -7181,7 +7181,7 @@
 					// VenueMap
 
 						/*
-						 * Thing > foo > bar > baz > qux > VenueMap
+						 * Thing > Intangible > baz > qux > VenueMap
 						 * 
 						 * 
 						 */
@@ -7195,7 +7195,7 @@
 				// MeasurementMethodEnum
 
 					/*
-					 * Thing > foo > bar > baz > MeasurementMethodEnum
+					 * Thing > Intangible > baz > MeasurementMethodEnum
 					 * 
 					 * 
 					 */
@@ -7209,7 +7209,7 @@
 					// ExampleMeasurementMethodEnum
 
 						/*
-						 * Thing > foo > bar > baz > qux > ExampleMeasurementMethodEnum
+						 * Thing > Intangible > baz > qux > ExampleMeasurementMethodEnum
 						 * 
 						 * 
 						 */
@@ -7223,7 +7223,7 @@
 				// MeasurementTypeEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > MeasurementTypeEnumeration
+					 * Thing > Intangible > baz > MeasurementTypeEnumeration
 					 * 
 					 * 
 					 */
@@ -7237,7 +7237,7 @@
 					// BodyMeasurementTypeEnumeration
 
 						/*
-						 * Thing > foo > bar > baz > qux > BodyMeasurementTypeEnumeration
+						 * Thing > Intangible > baz > qux > BodyMeasurementTypeEnumeration
 						 * 
 						 * 
 						 */
@@ -7251,7 +7251,7 @@
 						// BodyMeasurementArm
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementArm
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementArm
 							 * 
 							 * 
 							 */
@@ -7265,7 +7265,7 @@
 						// BodyMeasurementBust
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementBust
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementBust
 							 * 
 							 * 
 							 */
@@ -7279,7 +7279,7 @@
 						// BodyMeasurementChest
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementChest
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementChest
 							 * 
 							 * 
 							 */
@@ -7293,7 +7293,7 @@
 						// BodyMeasurementFoot
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementFoot
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementFoot
 							 * 
 							 * 
 							 */
@@ -7307,7 +7307,7 @@
 						// BodyMeasurementHand
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementHand
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementHand
 							 * 
 							 * 
 							 */
@@ -7321,7 +7321,7 @@
 						// BodyMeasurementHead
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementHead
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementHead
 							 * 
 							 * 
 							 */
@@ -7335,7 +7335,7 @@
 						// BodyMeasurementHeight
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementHeight
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementHeight
 							 * 
 							 * 
 							 */
@@ -7349,7 +7349,7 @@
 						// BodyMeasurementHips
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementHips
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementHips
 							 * 
 							 * 
 							 */
@@ -7363,7 +7363,7 @@
 						// BodyMeasurementInsideLeg
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementInsideLeg
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementInsideLeg
 							 * 
 							 * 
 							 */
@@ -7377,7 +7377,7 @@
 						// BodyMeasurementNeck
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementNeck
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementNeck
 							 * 
 							 * 
 							 */
@@ -7391,7 +7391,7 @@
 						// BodyMeasurementUnderbust
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementUnderbust
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementUnderbust
 							 * 
 							 * 
 							 */
@@ -7405,7 +7405,7 @@
 						// BodyMeasurementWaist
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementWaist
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementWaist
 							 * 
 							 * 
 							 */
@@ -7419,7 +7419,7 @@
 						// BodyMeasurementWeight
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BodyMeasurementWeight
+							 * Thing > Intangible > baz > qux > quux > BodyMeasurementWeight
 							 * 
 							 * 
 							 */
@@ -7433,7 +7433,7 @@
 					// WearableMeasurementTypeEnumeration
 
 						/*
-						 * Thing > foo > bar > baz > qux > WearableMeasurementTypeEnumeration
+						 * Thing > Intangible > baz > qux > WearableMeasurementTypeEnumeration
 						 * 
 						 * 
 						 */
@@ -7447,7 +7447,7 @@
 						// WearableMeasurementBack
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementBack
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementBack
 							 * 
 							 * 
 							 */
@@ -7461,7 +7461,7 @@
 						// WearableMeasurementChestOrBust
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementChestOrBust
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementChestOrBust
 							 * 
 							 * 
 							 */
@@ -7475,7 +7475,7 @@
 						// WearableMeasurementCollar
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementCollar
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementCollar
 							 * 
 							 * 
 							 */
@@ -7489,7 +7489,7 @@
 						// WearableMeasurementCup
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementCup
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementCup
 							 * 
 							 * 
 							 */
@@ -7503,7 +7503,7 @@
 						// WearableMeasurementHeight
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementHeight
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementHeight
 							 * 
 							 * 
 							 */
@@ -7517,7 +7517,7 @@
 						// WearableMeasurementHips
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementHips
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementHips
 							 * 
 							 * 
 							 */
@@ -7531,7 +7531,7 @@
 						// WearableMeasurementInseam
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementInseam
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementInseam
 							 * 
 							 * 
 							 */
@@ -7545,7 +7545,7 @@
 						// WearableMeasurementLength
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementLength
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementLength
 							 * 
 							 * 
 							 */
@@ -7559,7 +7559,7 @@
 						// WearableMeasurementOutsideLeg
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementOutsideLeg
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementOutsideLeg
 							 * 
 							 * 
 							 */
@@ -7573,7 +7573,7 @@
 						// WearableMeasurementSleeve
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementSleeve
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementSleeve
 							 * 
 							 * 
 							 */
@@ -7587,7 +7587,7 @@
 						// WearableMeasurementWaist
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementWaist
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementWaist
 							 * 
 							 * 
 							 */
@@ -7601,7 +7601,7 @@
 						// WearableMeasurementWidth
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableMeasurementWidth
+							 * Thing > Intangible > baz > qux > quux > WearableMeasurementWidth
 							 * 
 							 * 
 							 */
@@ -7616,7 +7616,7 @@
 				// MediaManipulationRatingEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > MediaManipulationRatingEnumeration
+					 * Thing > Intangible > baz > MediaManipulationRatingEnumeration
 					 * 
 					 * 
 					 */
@@ -7630,7 +7630,7 @@
 					// DecontextualizedContent
 
 						/*
-						 * Thing > foo > bar > baz > qux > DecontextualizedContent
+						 * Thing > Intangible > baz > qux > DecontextualizedContent
 						 * 
 						 * 
 						 */
@@ -7644,7 +7644,7 @@
 					// EditedOrCroppedContent
 
 						/*
-						 * Thing > foo > bar > baz > qux > EditedOrCroppedContent
+						 * Thing > Intangible > baz > qux > EditedOrCroppedContent
 						 * 
 						 * 
 						 */
@@ -7658,7 +7658,7 @@
 					// OriginalMediaContent
 
 						/*
-						 * Thing > foo > bar > baz > qux > OriginalMediaContent
+						 * Thing > Intangible > baz > qux > OriginalMediaContent
 						 * 
 						 * 
 						 */
@@ -7672,7 +7672,7 @@
 					// SatireOrParodyContent
 
 						/*
-						 * Thing > foo > bar > baz > qux > SatireOrParodyContent
+						 * Thing > Intangible > baz > qux > SatireOrParodyContent
 						 * 
 						 * 
 						 */
@@ -7686,7 +7686,7 @@
 					// StagedContent
 
 						/*
-						 * Thing > foo > bar > baz > qux > StagedContent
+						 * Thing > Intangible > baz > qux > StagedContent
 						 * 
 						 * 
 						 */
@@ -7700,7 +7700,7 @@
 					// TransformedContent
 
 						/*
-						 * Thing > foo > bar > baz > qux > TransformedContent
+						 * Thing > Intangible > baz > qux > TransformedContent
 						 * 
 						 * 
 						 */
@@ -7714,7 +7714,7 @@
 				// MedicalEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > MedicalEnumeration
+					 * Thing > Intangible > baz > MedicalEnumeration
 					 * 
 					 * 
 					 */
@@ -7728,7 +7728,7 @@
 					// DrugCostCategory
 
 						/*
-						 * Thing > foo > bar > baz > qux > DrugCostCategory
+						 * Thing > Intangible > baz > qux > DrugCostCategory
 						 * 
 						 * 
 						 */
@@ -7742,7 +7742,7 @@
 						// ReimbursementCap
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ReimbursementCap
+							 * Thing > Intangible > baz > qux > quux > ReimbursementCap
 							 * 
 							 * 
 							 */
@@ -7756,7 +7756,7 @@
 						// Retail
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Retail
+							 * Thing > Intangible > baz > qux > quux > Retail
 							 * 
 							 * 
 							 */
@@ -7770,7 +7770,7 @@
 						// Wholesale
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Wholesale
+							 * Thing > Intangible > baz > qux > quux > Wholesale
 							 * 
 							 * 
 							 */
@@ -7784,7 +7784,7 @@
 					// DrugPregnancyCategory
 
 						/*
-						 * Thing > foo > bar > baz > qux > DrugPregnancyCategory
+						 * Thing > Intangible > baz > qux > DrugPregnancyCategory
 						 * 
 						 * 
 						 */
@@ -7798,7 +7798,7 @@
 						// FDAcategoryA
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FDAcategoryA
+							 * Thing > Intangible > baz > qux > quux > FDAcategoryA
 							 * 
 							 * 
 							 */
@@ -7812,7 +7812,7 @@
 						// FDAcategoryB
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FDAcategoryB
+							 * Thing > Intangible > baz > qux > quux > FDAcategoryB
 							 * 
 							 * 
 							 */
@@ -7826,7 +7826,7 @@
 						// FDAcategoryC
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FDAcategoryC
+							 * Thing > Intangible > baz > qux > quux > FDAcategoryC
 							 * 
 							 * 
 							 */
@@ -7840,7 +7840,7 @@
 						// FDAcategoryD
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FDAcategoryD
+							 * Thing > Intangible > baz > qux > quux > FDAcategoryD
 							 * 
 							 * 
 							 */
@@ -7854,7 +7854,7 @@
 						// FDAcategoryX
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FDAcategoryX
+							 * Thing > Intangible > baz > qux > quux > FDAcategoryX
 							 * 
 							 * 
 							 */
@@ -7868,7 +7868,7 @@
 						// FDAnotEvaluated
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FDAnotEvaluated
+							 * Thing > Intangible > baz > qux > quux > FDAnotEvaluated
 							 * 
 							 * 
 							 */
@@ -7882,7 +7882,7 @@
 					// DrugPrescriptionStatus
 
 						/*
-						 * Thing > foo > bar > baz > qux > DrugPrescriptionStatus
+						 * Thing > Intangible > baz > qux > DrugPrescriptionStatus
 						 * 
 						 * 
 						 */
@@ -7896,7 +7896,7 @@
 						// OTC
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OTC
+							 * Thing > Intangible > baz > qux > quux > OTC
 							 * 
 							 * 
 							 */
@@ -7910,7 +7910,7 @@
 						// PrescriptionOnly
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PrescriptionOnly
+							 * Thing > Intangible > baz > qux > quux > PrescriptionOnly
 							 * 
 							 * 
 							 */
@@ -7924,7 +7924,7 @@
 					// InfectiousAgentClass
 
 						/*
-						 * Thing > foo > bar > baz > qux > InfectiousAgentClass
+						 * Thing > Intangible > baz > qux > InfectiousAgentClass
 						 * 
 						 * 
 						 */
@@ -7938,7 +7938,7 @@
 						// Bacteria
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Bacteria
+							 * Thing > Intangible > baz > qux > quux > Bacteria
 							 * 
 							 * 
 							 */
@@ -7952,7 +7952,7 @@
 						// Fungus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Fungus
+							 * Thing > Intangible > baz > qux > quux > Fungus
 							 * 
 							 * 
 							 */
@@ -7966,7 +7966,7 @@
 						// MulticellularParasite
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > MulticellularParasite
+							 * Thing > Intangible > baz > qux > quux > MulticellularParasite
 							 * 
 							 * 
 							 */
@@ -7980,7 +7980,7 @@
 						// Prion
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Prion
+							 * Thing > Intangible > baz > qux > quux > Prion
 							 * 
 							 * 
 							 */
@@ -7994,7 +7994,7 @@
 						// Protozoa
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Protozoa
+							 * Thing > Intangible > baz > qux > quux > Protozoa
 							 * 
 							 * 
 							 */
@@ -8008,7 +8008,7 @@
 						// Virus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Virus
+							 * Thing > Intangible > baz > qux > quux > Virus
 							 * 
 							 * 
 							 */
@@ -8022,7 +8022,7 @@
 					// MedicalAudienceType
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalAudienceType
+						 * Thing > Intangible > baz > qux > MedicalAudienceType
 						 * 
 						 * 
 						 */
@@ -8036,7 +8036,7 @@
 						// Clinician
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Clinician
+							 * Thing > Intangible > baz > qux > quux > Clinician
 							 * 
 							 * 
 							 */
@@ -8050,7 +8050,7 @@
 						// MedicalResearcher
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > MedicalResearcher
+							 * Thing > Intangible > baz > qux > quux > MedicalResearcher
 							 * 
 							 * 
 							 */
@@ -8064,7 +8064,7 @@
 					// MedicalDevicePurpose
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalDevicePurpose
+						 * Thing > Intangible > baz > qux > MedicalDevicePurpose
 						 * 
 						 * 
 						 */
@@ -8078,7 +8078,7 @@
 						// Diagnostic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Diagnostic
+							 * Thing > Intangible > baz > qux > quux > Diagnostic
 							 * 
 							 * 
 							 */
@@ -8092,7 +8092,7 @@
 						// Therapeutic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Therapeutic
+							 * Thing > Intangible > baz > qux > quux > Therapeutic
 							 * 
 							 * 
 							 */
@@ -8106,7 +8106,7 @@
 					// MedicalEvidenceLevel
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalEvidenceLevel
+						 * Thing > Intangible > baz > qux > MedicalEvidenceLevel
 						 * 
 						 * 
 						 */
@@ -8120,7 +8120,7 @@
 						// EvidenceLevelA
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EvidenceLevelA
+							 * Thing > Intangible > baz > qux > quux > EvidenceLevelA
 							 * 
 							 * 
 							 */
@@ -8134,7 +8134,7 @@
 						// EvidenceLevelB
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EvidenceLevelB
+							 * Thing > Intangible > baz > qux > quux > EvidenceLevelB
 							 * 
 							 * 
 							 */
@@ -8148,7 +8148,7 @@
 						// EvidenceLevelC
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EvidenceLevelC
+							 * Thing > Intangible > baz > qux > quux > EvidenceLevelC
 							 * 
 							 * 
 							 */
@@ -8162,7 +8162,7 @@
 					// MedicalImagingTechnique
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalImagingTechnique
+						 * Thing > Intangible > baz > qux > MedicalImagingTechnique
 						 * 
 						 * 
 						 */
@@ -8176,7 +8176,7 @@
 						// CT
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CT
+							 * Thing > Intangible > baz > qux > quux > CT
 							 * 
 							 * 
 							 */
@@ -8190,7 +8190,7 @@
 						// MRI
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > MRI
+							 * Thing > Intangible > baz > qux > quux > MRI
 							 * 
 							 * 
 							 */
@@ -8204,7 +8204,7 @@
 						// PET
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PET
+							 * Thing > Intangible > baz > qux > quux > PET
 							 * 
 							 * 
 							 */
@@ -8218,7 +8218,7 @@
 						// Radiography
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Radiography
+							 * Thing > Intangible > baz > qux > quux > Radiography
 							 * 
 							 * 
 							 */
@@ -8232,7 +8232,7 @@
 						// Ultrasound
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Ultrasound
+							 * Thing > Intangible > baz > qux > quux > Ultrasound
 							 * 
 							 * 
 							 */
@@ -8246,7 +8246,7 @@
 						// XRay
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > XRay
+							 * Thing > Intangible > baz > qux > quux > XRay
 							 * 
 							 * 
 							 */
@@ -8260,7 +8260,7 @@
 					// MedicalObservationalStudyDesign
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalObservationalStudyDesign
+						 * Thing > Intangible > baz > qux > MedicalObservationalStudyDesign
 						 * 
 						 * 
 						 */
@@ -8274,7 +8274,7 @@
 						// CaseSeries
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CaseSeries
+							 * Thing > Intangible > baz > qux > quux > CaseSeries
 							 * 
 							 * 
 							 */
@@ -8288,7 +8288,7 @@
 						// CohortStudy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CohortStudy
+							 * Thing > Intangible > baz > qux > quux > CohortStudy
 							 * 
 							 * 
 							 */
@@ -8302,7 +8302,7 @@
 						// CrossSectional
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CrossSectional
+							 * Thing > Intangible > baz > qux > quux > CrossSectional
 							 * 
 							 * 
 							 */
@@ -8316,7 +8316,7 @@
 						// Longitudinal
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Longitudinal
+							 * Thing > Intangible > baz > qux > quux > Longitudinal
 							 * 
 							 * 
 							 */
@@ -8330,7 +8330,7 @@
 						// Observational
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Observational
+							 * Thing > Intangible > baz > qux > quux > Observational
 							 * 
 							 * 
 							 */
@@ -8344,7 +8344,7 @@
 						// Registry
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Registry
+							 * Thing > Intangible > baz > qux > quux > Registry
 							 * 
 							 * 
 							 */
@@ -8358,7 +8358,7 @@
 					// MedicalProcedureType
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalProcedureType
+						 * Thing > Intangible > baz > qux > MedicalProcedureType
 						 * 
 						 * 
 						 */
@@ -8372,7 +8372,7 @@
 						// NoninvasiveProcedure
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > NoninvasiveProcedure
+							 * Thing > Intangible > baz > qux > quux > NoninvasiveProcedure
 							 * 
 							 * 
 							 */
@@ -8386,7 +8386,7 @@
 						// PercutaneousProcedure
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PercutaneousProcedure
+							 * Thing > Intangible > baz > qux > quux > PercutaneousProcedure
 							 * 
 							 * 
 							 */
@@ -8400,7 +8400,7 @@
 					// MedicalSpecialty
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalSpecialty
+						 * Thing > Intangible > baz > qux > MedicalSpecialty
 						 * 
 						 * 
 						 */
@@ -8414,7 +8414,7 @@
 						// Anesthesia
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Anesthesia
+							 * Thing > Intangible > baz > qux > quux > Anesthesia
 							 * 
 							 * 
 							 */
@@ -8428,7 +8428,7 @@
 						// Cardiovascular
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Cardiovascular
+							 * Thing > Intangible > baz > qux > quux > Cardiovascular
 							 * 
 							 * 
 							 */
@@ -8442,7 +8442,7 @@
 						// CommunityHealth
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CommunityHealth
+							 * Thing > Intangible > baz > qux > quux > CommunityHealth
 							 * 
 							 * 
 							 */
@@ -8456,7 +8456,7 @@
 						// Dentistry
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Dentistry
+							 * Thing > Intangible > baz > qux > quux > Dentistry
 							 * 
 							 * 
 							 */
@@ -8470,7 +8470,7 @@
 						// Dermatologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Dermatologic
+							 * Thing > Intangible > baz > qux > quux > Dermatologic
 							 * 
 							 * 
 							 */
@@ -8484,7 +8484,7 @@
 						// Dermatology
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Dermatology
+							 * Thing > Intangible > baz > qux > quux > Dermatology
 							 * 
 							 * 
 							 */
@@ -8498,7 +8498,7 @@
 						// DietNutrition
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > DietNutrition
+							 * Thing > Intangible > baz > qux > quux > DietNutrition
 							 * 
 							 * 
 							 */
@@ -8512,7 +8512,7 @@
 						// Emergency
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Emergency
+							 * Thing > Intangible > baz > qux > quux > Emergency
 							 * 
 							 * 
 							 */
@@ -8526,7 +8526,7 @@
 						// Endocrine
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Endocrine
+							 * Thing > Intangible > baz > qux > quux > Endocrine
 							 * 
 							 * 
 							 */
@@ -8540,7 +8540,7 @@
 						// Gastroenterologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Gastroenterologic
+							 * Thing > Intangible > baz > qux > quux > Gastroenterologic
 							 * 
 							 * 
 							 */
@@ -8554,7 +8554,7 @@
 						// Genetic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Genetic
+							 * Thing > Intangible > baz > qux > quux > Genetic
 							 * 
 							 * 
 							 */
@@ -8568,7 +8568,7 @@
 						// Geriatric
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Geriatric
+							 * Thing > Intangible > baz > qux > quux > Geriatric
 							 * 
 							 * 
 							 */
@@ -8582,7 +8582,7 @@
 						// Gynecologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Gynecologic
+							 * Thing > Intangible > baz > qux > quux > Gynecologic
 							 * 
 							 * 
 							 */
@@ -8596,7 +8596,7 @@
 						// Hematologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Hematologic
+							 * Thing > Intangible > baz > qux > quux > Hematologic
 							 * 
 							 * 
 							 */
@@ -8610,7 +8610,7 @@
 						// Infectious
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Infectious
+							 * Thing > Intangible > baz > qux > quux > Infectious
 							 * 
 							 * 
 							 */
@@ -8624,7 +8624,7 @@
 						// LaboratoryScience
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > LaboratoryScience
+							 * Thing > Intangible > baz > qux > quux > LaboratoryScience
 							 * 
 							 * 
 							 */
@@ -8638,7 +8638,7 @@
 						// Midwifery
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Midwifery
+							 * Thing > Intangible > baz > qux > quux > Midwifery
 							 * 
 							 * 
 							 */
@@ -8652,7 +8652,7 @@
 						// Musculoskeletal
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Musculoskeletal
+							 * Thing > Intangible > baz > qux > quux > Musculoskeletal
 							 * 
 							 * 
 							 */
@@ -8666,7 +8666,7 @@
 						// Neurologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Neurologic
+							 * Thing > Intangible > baz > qux > quux > Neurologic
 							 * 
 							 * 
 							 */
@@ -8680,7 +8680,7 @@
 						// Nursing
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nursing
+							 * Thing > Intangible > baz > qux > quux > Nursing
 							 * 
 							 * 
 							 */
@@ -8694,7 +8694,7 @@
 						// Obstetric
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Obstetric
+							 * Thing > Intangible > baz > qux > quux > Obstetric
 							 * 
 							 * 
 							 */
@@ -8708,7 +8708,7 @@
 						// Oncologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Oncologic
+							 * Thing > Intangible > baz > qux > quux > Oncologic
 							 * 
 							 * 
 							 */
@@ -8722,7 +8722,7 @@
 						// Optometric
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Optometric
+							 * Thing > Intangible > baz > qux > quux > Optometric
 							 * 
 							 * 
 							 */
@@ -8736,7 +8736,7 @@
 						// Otolaryngologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Otolaryngologic
+							 * Thing > Intangible > baz > qux > quux > Otolaryngologic
 							 * 
 							 * 
 							 */
@@ -8750,7 +8750,7 @@
 						// Pathology
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Pathology
+							 * Thing > Intangible > baz > qux > quux > Pathology
 							 * 
 							 * 
 							 */
@@ -8764,7 +8764,7 @@
 						// Pediatric
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Pediatric
+							 * Thing > Intangible > baz > qux > quux > Pediatric
 							 * 
 							 * 
 							 */
@@ -8778,7 +8778,7 @@
 						// PharmacySpecialty
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PharmacySpecialty
+							 * Thing > Intangible > baz > qux > quux > PharmacySpecialty
 							 * 
 							 * 
 							 */
@@ -8792,7 +8792,7 @@
 						// Physiotherapy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Physiotherapy
+							 * Thing > Intangible > baz > qux > quux > Physiotherapy
 							 * 
 							 * 
 							 */
@@ -8806,7 +8806,7 @@
 						// PlasticSurgery
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PlasticSurgery
+							 * Thing > Intangible > baz > qux > quux > PlasticSurgery
 							 * 
 							 * 
 							 */
@@ -8820,7 +8820,7 @@
 						// Podiatric
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Podiatric
+							 * Thing > Intangible > baz > qux > quux > Podiatric
 							 * 
 							 * 
 							 */
@@ -8834,7 +8834,7 @@
 						// PrimaryCare
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PrimaryCare
+							 * Thing > Intangible > baz > qux > quux > PrimaryCare
 							 * 
 							 * 
 							 */
@@ -8848,7 +8848,7 @@
 						// Psychiatric
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Psychiatric
+							 * Thing > Intangible > baz > qux > quux > Psychiatric
 							 * 
 							 * 
 							 */
@@ -8862,7 +8862,7 @@
 						// PublicHealth
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PublicHealth
+							 * Thing > Intangible > baz > qux > quux > PublicHealth
 							 * 
 							 * 
 							 */
@@ -8876,7 +8876,7 @@
 						// Pulmonary
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Pulmonary
+							 * Thing > Intangible > baz > qux > quux > Pulmonary
 							 * 
 							 * 
 							 */
@@ -8890,7 +8890,7 @@
 						// Radiography
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Radiography
+							 * Thing > Intangible > baz > qux > quux > Radiography
 							 * 
 							 * 
 							 */
@@ -8904,7 +8904,7 @@
 						// Renal
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Renal
+							 * Thing > Intangible > baz > qux > quux > Renal
 							 * 
 							 * 
 							 */
@@ -8918,7 +8918,7 @@
 						// RespiratoryTherapy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RespiratoryTherapy
+							 * Thing > Intangible > baz > qux > quux > RespiratoryTherapy
 							 * 
 							 * 
 							 */
@@ -8932,7 +8932,7 @@
 						// Rheumatologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Rheumatologic
+							 * Thing > Intangible > baz > qux > quux > Rheumatologic
 							 * 
 							 * 
 							 */
@@ -8946,7 +8946,7 @@
 						// SpeechPathology
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > SpeechPathology
+							 * Thing > Intangible > baz > qux > quux > SpeechPathology
 							 * 
 							 * 
 							 */
@@ -8960,7 +8960,7 @@
 						// Surgical
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Surgical
+							 * Thing > Intangible > baz > qux > quux > Surgical
 							 * 
 							 * 
 							 */
@@ -8974,7 +8974,7 @@
 						// Toxicologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Toxicologic
+							 * Thing > Intangible > baz > qux > quux > Toxicologic
 							 * 
 							 * 
 							 */
@@ -8988,7 +8988,7 @@
 						// Urologic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Urologic
+							 * Thing > Intangible > baz > qux > quux > Urologic
 							 * 
 							 * 
 							 */
@@ -9002,7 +9002,7 @@
 					// MedicalStudyStatus
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalStudyStatus
+						 * Thing > Intangible > baz > qux > MedicalStudyStatus
 						 * 
 						 * 
 						 */
@@ -9016,7 +9016,7 @@
 						// ActiveNotRecruiting
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ActiveNotRecruiting
+							 * Thing > Intangible > baz > qux > quux > ActiveNotRecruiting
 							 * 
 							 * 
 							 */
@@ -9030,7 +9030,7 @@
 						// Completed
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Completed
+							 * Thing > Intangible > baz > qux > quux > Completed
 							 * 
 							 * 
 							 */
@@ -9044,7 +9044,7 @@
 						// EnrollingByInvitation
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EnrollingByInvitation
+							 * Thing > Intangible > baz > qux > quux > EnrollingByInvitation
 							 * 
 							 * 
 							 */
@@ -9058,7 +9058,7 @@
 						// NotYetRecruiting
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > NotYetRecruiting
+							 * Thing > Intangible > baz > qux > quux > NotYetRecruiting
 							 * 
 							 * 
 							 */
@@ -9072,7 +9072,7 @@
 						// Recruiting
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Recruiting
+							 * Thing > Intangible > baz > qux > quux > Recruiting
 							 * 
 							 * 
 							 */
@@ -9086,7 +9086,7 @@
 						// ResultsAvailable
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ResultsAvailable
+							 * Thing > Intangible > baz > qux > quux > ResultsAvailable
 							 * 
 							 * 
 							 */
@@ -9100,7 +9100,7 @@
 						// ResultsNotAvailable
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ResultsNotAvailable
+							 * Thing > Intangible > baz > qux > quux > ResultsNotAvailable
 							 * 
 							 * 
 							 */
@@ -9114,7 +9114,7 @@
 						// Suspended
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Suspended
+							 * Thing > Intangible > baz > qux > quux > Suspended
 							 * 
 							 * 
 							 */
@@ -9128,7 +9128,7 @@
 						// Terminated
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Terminated
+							 * Thing > Intangible > baz > qux > quux > Terminated
 							 * 
 							 * 
 							 */
@@ -9142,7 +9142,7 @@
 						// Withdrawn
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Withdrawn
+							 * Thing > Intangible > baz > qux > quux > Withdrawn
 							 * 
 							 * 
 							 */
@@ -9156,7 +9156,7 @@
 					// MedicalTrialDesign
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalTrialDesign
+						 * Thing > Intangible > baz > qux > MedicalTrialDesign
 						 * 
 						 * 
 						 */
@@ -9170,7 +9170,7 @@
 						// DoubleBlindedTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > DoubleBlindedTrial
+							 * Thing > Intangible > baz > qux > quux > DoubleBlindedTrial
 							 * 
 							 * 
 							 */
@@ -9184,7 +9184,7 @@
 						// InternationalTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > InternationalTrial
+							 * Thing > Intangible > baz > qux > quux > InternationalTrial
 							 * 
 							 * 
 							 */
@@ -9198,7 +9198,7 @@
 						// MultiCenterTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > MultiCenterTrial
+							 * Thing > Intangible > baz > qux > quux > MultiCenterTrial
 							 * 
 							 * 
 							 */
@@ -9212,7 +9212,7 @@
 						// OpenTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OpenTrial
+							 * Thing > Intangible > baz > qux > quux > OpenTrial
 							 * 
 							 * 
 							 */
@@ -9226,7 +9226,7 @@
 						// PlaceboControlledTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PlaceboControlledTrial
+							 * Thing > Intangible > baz > qux > quux > PlaceboControlledTrial
 							 * 
 							 * 
 							 */
@@ -9240,7 +9240,7 @@
 						// RandomizedTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RandomizedTrial
+							 * Thing > Intangible > baz > qux > quux > RandomizedTrial
 							 * 
 							 * 
 							 */
@@ -9254,7 +9254,7 @@
 						// SingleBlindedTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > SingleBlindedTrial
+							 * Thing > Intangible > baz > qux > quux > SingleBlindedTrial
 							 * 
 							 * 
 							 */
@@ -9268,7 +9268,7 @@
 						// SingleCenterTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > SingleCenterTrial
+							 * Thing > Intangible > baz > qux > quux > SingleCenterTrial
 							 * 
 							 * 
 							 */
@@ -9282,7 +9282,7 @@
 						// TripleBlindedTrial
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > TripleBlindedTrial
+							 * Thing > Intangible > baz > qux > quux > TripleBlindedTrial
 							 * 
 							 * 
 							 */
@@ -9296,7 +9296,7 @@
 					// MedicineSystem
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicineSystem
+						 * Thing > Intangible > baz > qux > MedicineSystem
 						 * 
 						 * 
 						 */
@@ -9310,7 +9310,7 @@
 						// Ayurvedic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Ayurvedic
+							 * Thing > Intangible > baz > qux > quux > Ayurvedic
 							 * 
 							 * 
 							 */
@@ -9324,7 +9324,7 @@
 						// Chiropractic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Chiropractic
+							 * Thing > Intangible > baz > qux > quux > Chiropractic
 							 * 
 							 * 
 							 */
@@ -9338,7 +9338,7 @@
 						// Homeopathic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Homeopathic
+							 * Thing > Intangible > baz > qux > quux > Homeopathic
 							 * 
 							 * 
 							 */
@@ -9352,7 +9352,7 @@
 						// Osteopathic
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Osteopathic
+							 * Thing > Intangible > baz > qux > quux > Osteopathic
 							 * 
 							 * 
 							 */
@@ -9366,7 +9366,7 @@
 						// TraditionalChinese
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > TraditionalChinese
+							 * Thing > Intangible > baz > qux > quux > TraditionalChinese
 							 * 
 							 * 
 							 */
@@ -9380,7 +9380,7 @@
 						// WesternConventional
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WesternConventional
+							 * Thing > Intangible > baz > qux > quux > WesternConventional
 							 * 
 							 * 
 							 */
@@ -9394,7 +9394,7 @@
 					// PhysicalExam
 
 						/*
-						 * Thing > foo > bar > baz > qux > PhysicalExam
+						 * Thing > Intangible > baz > qux > PhysicalExam
 						 * 
 						 * 
 						 */
@@ -9408,7 +9408,7 @@
 						// Abdomen
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Abdomen
+							 * Thing > Intangible > baz > qux > quux > Abdomen
 							 * 
 							 * 
 							 */
@@ -9422,7 +9422,7 @@
 						// Appearance
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Appearance
+							 * Thing > Intangible > baz > qux > quux > Appearance
 							 * 
 							 * 
 							 */
@@ -9436,7 +9436,7 @@
 						// CardiovascularExam
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CardiovascularExam
+							 * Thing > Intangible > baz > qux > quux > CardiovascularExam
 							 * 
 							 * 
 							 */
@@ -9450,7 +9450,7 @@
 						// Ear
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Ear
+							 * Thing > Intangible > baz > qux > quux > Ear
 							 * 
 							 * 
 							 */
@@ -9464,7 +9464,7 @@
 						// Eye
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Eye
+							 * Thing > Intangible > baz > qux > quux > Eye
 							 * 
 							 * 
 							 */
@@ -9478,7 +9478,7 @@
 						// Genitourinary
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Genitourinary
+							 * Thing > Intangible > baz > qux > quux > Genitourinary
 							 * 
 							 * 
 							 */
@@ -9492,7 +9492,7 @@
 						// Head
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Head
+							 * Thing > Intangible > baz > qux > quux > Head
 							 * 
 							 * 
 							 */
@@ -9506,7 +9506,7 @@
 						// Lung
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Lung
+							 * Thing > Intangible > baz > qux > quux > Lung
 							 * 
 							 * 
 							 */
@@ -9520,7 +9520,7 @@
 						// MusculoskeletalExam
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > MusculoskeletalExam
+							 * Thing > Intangible > baz > qux > quux > MusculoskeletalExam
 							 * 
 							 * 
 							 */
@@ -9534,7 +9534,7 @@
 						// Neck
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Neck
+							 * Thing > Intangible > baz > qux > quux > Neck
 							 * 
 							 * 
 							 */
@@ -9548,7 +9548,7 @@
 						// Neuro
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Neuro
+							 * Thing > Intangible > baz > qux > quux > Neuro
 							 * 
 							 * 
 							 */
@@ -9562,7 +9562,7 @@
 						// Nose
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nose
+							 * Thing > Intangible > baz > qux > quux > Nose
 							 * 
 							 * 
 							 */
@@ -9576,7 +9576,7 @@
 						// Skin
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Skin
+							 * Thing > Intangible > baz > qux > quux > Skin
 							 * 
 							 * 
 							 */
@@ -9590,7 +9590,7 @@
 						// Throat
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Throat
+							 * Thing > Intangible > baz > qux > quux > Throat
 							 * 
 							 * 
 							 */
@@ -9605,7 +9605,7 @@
 				// MerchantReturnEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > MerchantReturnEnumeration
+					 * Thing > Intangible > baz > MerchantReturnEnumeration
 					 * 
 					 * 
 					 */
@@ -9619,7 +9619,7 @@
 					// MerchantReturnFiniteReturnWindow
 
 						/*
-						 * Thing > foo > bar > baz > qux > MerchantReturnFiniteReturnWindow
+						 * Thing > Intangible > baz > qux > MerchantReturnFiniteReturnWindow
 						 * 
 						 * 
 						 */
@@ -9633,7 +9633,7 @@
 					// MerchantReturnNotPermitted
 
 						/*
-						 * Thing > foo > bar > baz > qux > MerchantReturnNotPermitted
+						 * Thing > Intangible > baz > qux > MerchantReturnNotPermitted
 						 * 
 						 * 
 						 */
@@ -9647,7 +9647,7 @@
 					// MerchantReturnUnlimitedWindow
 
 						/*
-						 * Thing > foo > bar > baz > qux > MerchantReturnUnlimitedWindow
+						 * Thing > Intangible > baz > qux > MerchantReturnUnlimitedWindow
 						 * 
 						 * 
 						 */
@@ -9661,7 +9661,7 @@
 					// MerchantReturnUnspecified
 
 						/*
-						 * Thing > foo > bar > baz > qux > MerchantReturnUnspecified
+						 * Thing > Intangible > baz > qux > MerchantReturnUnspecified
 						 * 
 						 * 
 						 */
@@ -9675,7 +9675,7 @@
 				// MusicAlbumProductionType
 
 					/*
-					 * Thing > foo > bar > baz > MusicAlbumProductionType
+					 * Thing > Intangible > baz > MusicAlbumProductionType
 					 * 
 					 * 
 					 */
@@ -9689,7 +9689,7 @@
 					// CompilationAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > CompilationAlbum
+						 * Thing > Intangible > baz > qux > CompilationAlbum
 						 * 
 						 * 
 						 */
@@ -9703,7 +9703,7 @@
 					// DJMixAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > DJMixAlbum
+						 * Thing > Intangible > baz > qux > DJMixAlbum
 						 * 
 						 * 
 						 */
@@ -9717,7 +9717,7 @@
 					// DemoAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > DemoAlbum
+						 * Thing > Intangible > baz > qux > DemoAlbum
 						 * 
 						 * 
 						 */
@@ -9731,7 +9731,7 @@
 					// LiveAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > LiveAlbum
+						 * Thing > Intangible > baz > qux > LiveAlbum
 						 * 
 						 * 
 						 */
@@ -9745,7 +9745,7 @@
 					// MixtapeAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > MixtapeAlbum
+						 * Thing > Intangible > baz > qux > MixtapeAlbum
 						 * 
 						 * 
 						 */
@@ -9759,7 +9759,7 @@
 					// RemixAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > RemixAlbum
+						 * Thing > Intangible > baz > qux > RemixAlbum
 						 * 
 						 * 
 						 */
@@ -9773,7 +9773,7 @@
 					// SoundtrackAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > SoundtrackAlbum
+						 * Thing > Intangible > baz > qux > SoundtrackAlbum
 						 * 
 						 * 
 						 */
@@ -9787,7 +9787,7 @@
 					// SpokenWordAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > SpokenWordAlbum
+						 * Thing > Intangible > baz > qux > SpokenWordAlbum
 						 * 
 						 * 
 						 */
@@ -9801,7 +9801,7 @@
 					// StudioAlbum
 
 						/*
-						 * Thing > foo > bar > baz > qux > StudioAlbum
+						 * Thing > Intangible > baz > qux > StudioAlbum
 						 * 
 						 * 
 						 */
@@ -9815,7 +9815,7 @@
 				// MusicAlbumReleaseType
 
 					/*
-					 * Thing > foo > bar > baz > MusicAlbumReleaseType
+					 * Thing > Intangible > baz > MusicAlbumReleaseType
 					 * 
 					 * 
 					 */
@@ -9829,7 +9829,7 @@
 					// AlbumRelease
 
 						/*
-						 * Thing > foo > bar > baz > qux > AlbumRelease
+						 * Thing > Intangible > baz > qux > AlbumRelease
 						 * 
 						 * 
 						 */
@@ -9843,7 +9843,7 @@
 					// BroadcastRelease
 
 						/*
-						 * Thing > foo > bar > baz > qux > BroadcastRelease
+						 * Thing > Intangible > baz > qux > BroadcastRelease
 						 * 
 						 * 
 						 */
@@ -9857,7 +9857,7 @@
 					// EPRelease
 
 						/*
-						 * Thing > foo > bar > baz > qux > EPRelease
+						 * Thing > Intangible > baz > qux > EPRelease
 						 * 
 						 * 
 						 */
@@ -9871,7 +9871,7 @@
 					// SingleRelease
 
 						/*
-						 * Thing > foo > bar > baz > qux > SingleRelease
+						 * Thing > Intangible > baz > qux > SingleRelease
 						 * 
 						 * 
 						 */
@@ -9885,7 +9885,7 @@
 				// MusicReleaseFormatType
 
 					/*
-					 * Thing > foo > bar > baz > MusicReleaseFormatType
+					 * Thing > Intangible > baz > MusicReleaseFormatType
 					 * 
 					 * 
 					 */
@@ -9899,7 +9899,7 @@
 					// CDFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > CDFormat
+						 * Thing > Intangible > baz > qux > CDFormat
 						 * 
 						 * 
 						 */
@@ -9913,7 +9913,7 @@
 					// CassetteFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > CassetteFormat
+						 * Thing > Intangible > baz > qux > CassetteFormat
 						 * 
 						 * 
 						 */
@@ -9927,7 +9927,7 @@
 					// DVDFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > DVDFormat
+						 * Thing > Intangible > baz > qux > DVDFormat
 						 * 
 						 * 
 						 */
@@ -9941,7 +9941,7 @@
 					// DigitalAudioTapeFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > DigitalAudioTapeFormat
+						 * Thing > Intangible > baz > qux > DigitalAudioTapeFormat
 						 * 
 						 * 
 						 */
@@ -9955,7 +9955,7 @@
 					// DigitalFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > DigitalFormat
+						 * Thing > Intangible > baz > qux > DigitalFormat
 						 * 
 						 * 
 						 */
@@ -9969,7 +9969,7 @@
 					// LaserDiscFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > LaserDiscFormat
+						 * Thing > Intangible > baz > qux > LaserDiscFormat
 						 * 
 						 * 
 						 */
@@ -9983,7 +9983,7 @@
 					// VinylFormat
 
 						/*
-						 * Thing > foo > bar > baz > qux > VinylFormat
+						 * Thing > Intangible > baz > qux > VinylFormat
 						 * 
 						 * 
 						 */
@@ -9997,7 +9997,7 @@
 				// NonprofitType
 
 					/*
-					 * Thing > foo > bar > baz > NonprofitType
+					 * Thing > Intangible > baz > NonprofitType
 					 * 
 					 * 
 					 */
@@ -10011,7 +10011,7 @@
 					// NLNonprofitType
 
 						/*
-						 * Thing > foo > bar > baz > qux > NLNonprofitType
+						 * Thing > Intangible > baz > qux > NLNonprofitType
 						 * 
 						 * 
 						 */
@@ -10025,7 +10025,7 @@
 						// NonprofitANBI
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > NonprofitANBI
+							 * Thing > Intangible > baz > qux > quux > NonprofitANBI
 							 * 
 							 * 
 							 */
@@ -10039,7 +10039,7 @@
 						// NonprofitSBBI
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > NonprofitSBBI
+							 * Thing > Intangible > baz > qux > quux > NonprofitSBBI
 							 * 
 							 * 
 							 */
@@ -10053,7 +10053,7 @@
 					// UKNonprofitType
 
 						/*
-						 * Thing > foo > bar > baz > qux > UKNonprofitType
+						 * Thing > Intangible > baz > qux > UKNonprofitType
 						 * 
 						 * 
 						 */
@@ -10067,7 +10067,7 @@
 						// CharitableIncorporatedOrganization
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CharitableIncorporatedOrganization
+							 * Thing > Intangible > baz > qux > quux > CharitableIncorporatedOrganization
 							 * 
 							 * 
 							 */
@@ -10081,7 +10081,7 @@
 						// LimitedByGuaranteeCharity
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > LimitedByGuaranteeCharity
+							 * Thing > Intangible > baz > qux > quux > LimitedByGuaranteeCharity
 							 * 
 							 * 
 							 */
@@ -10095,7 +10095,7 @@
 						// UKTrust
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > UKTrust
+							 * Thing > Intangible > baz > qux > quux > UKTrust
 							 * 
 							 * 
 							 */
@@ -10109,7 +10109,7 @@
 						// UnincorporatedAssociationCharity
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > UnincorporatedAssociationCharity
+							 * Thing > Intangible > baz > qux > quux > UnincorporatedAssociationCharity
 							 * 
 							 * 
 							 */
@@ -10123,7 +10123,7 @@
 					// USNonprofitType
 
 						/*
-						 * Thing > foo > bar > baz > qux > USNonprofitType
+						 * Thing > Intangible > baz > qux > USNonprofitType
 						 * 
 						 * 
 						 */
@@ -10137,7 +10137,7 @@
 						// Nonprofit501a
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501a
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501a
 							 * 
 							 * 
 							 */
@@ -10151,7 +10151,7 @@
 						// Nonprofit501c1
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c1
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c1
 							 * 
 							 * 
 							 */
@@ -10165,7 +10165,7 @@
 						// Nonprofit501c10
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c10
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c10
 							 * 
 							 * 
 							 */
@@ -10179,7 +10179,7 @@
 						// Nonprofit501c11
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c11
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c11
 							 * 
 							 * 
 							 */
@@ -10193,7 +10193,7 @@
 						// Nonprofit501c12
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c12
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c12
 							 * 
 							 * 
 							 */
@@ -10207,7 +10207,7 @@
 						// Nonprofit501c13
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c13
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c13
 							 * 
 							 * 
 							 */
@@ -10221,7 +10221,7 @@
 						// Nonprofit501c14
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c14
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c14
 							 * 
 							 * 
 							 */
@@ -10235,7 +10235,7 @@
 						// Nonprofit501c15
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c15
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c15
 							 * 
 							 * 
 							 */
@@ -10249,7 +10249,7 @@
 						// Nonprofit501c16
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c16
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c16
 							 * 
 							 * 
 							 */
@@ -10263,7 +10263,7 @@
 						// Nonprofit501c17
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c17
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c17
 							 * 
 							 * 
 							 */
@@ -10277,7 +10277,7 @@
 						// Nonprofit501c18
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c18
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c18
 							 * 
 							 * 
 							 */
@@ -10291,7 +10291,7 @@
 						// Nonprofit501c19
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c19
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c19
 							 * 
 							 * 
 							 */
@@ -10305,7 +10305,7 @@
 						// Nonprofit501c2
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c2
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c2
 							 * 
 							 * 
 							 */
@@ -10319,7 +10319,7 @@
 						// Nonprofit501c20
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c20
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c20
 							 * 
 							 * 
 							 */
@@ -10333,7 +10333,7 @@
 						// Nonprofit501c21
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c21
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c21
 							 * 
 							 * 
 							 */
@@ -10347,7 +10347,7 @@
 						// Nonprofit501c22
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c22
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c22
 							 * 
 							 * 
 							 */
@@ -10361,7 +10361,7 @@
 						// Nonprofit501c23
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c23
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c23
 							 * 
 							 * 
 							 */
@@ -10375,7 +10375,7 @@
 						// Nonprofit501c24
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c24
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c24
 							 * 
 							 * 
 							 */
@@ -10389,7 +10389,7 @@
 						// Nonprofit501c25
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c25
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c25
 							 * 
 							 * 
 							 */
@@ -10403,7 +10403,7 @@
 						// Nonprofit501c26
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c26
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c26
 							 * 
 							 * 
 							 */
@@ -10417,7 +10417,7 @@
 						// Nonprofit501c27
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c27
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c27
 							 * 
 							 * 
 							 */
@@ -10431,7 +10431,7 @@
 						// Nonprofit501c28
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c28
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c28
 							 * 
 							 * 
 							 */
@@ -10445,7 +10445,7 @@
 						// Nonprofit501c3
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c3
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c3
 							 * 
 							 * 
 							 */
@@ -10459,7 +10459,7 @@
 						// Nonprofit501c4
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c4
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c4
 							 * 
 							 * 
 							 */
@@ -10473,7 +10473,7 @@
 						// Nonprofit501c5
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c5
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c5
 							 * 
 							 * 
 							 */
@@ -10487,7 +10487,7 @@
 						// Nonprofit501c6
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c6
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c6
 							 * 
 							 * 
 							 */
@@ -10501,7 +10501,7 @@
 						// Nonprofit501c7
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c7
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c7
 							 * 
 							 * 
 							 */
@@ -10515,7 +10515,7 @@
 						// Nonprofit501c8
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c8
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c8
 							 * 
 							 * 
 							 */
@@ -10529,7 +10529,7 @@
 						// Nonprofit501c9
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501c9
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501c9
 							 * 
 							 * 
 							 */
@@ -10543,7 +10543,7 @@
 						// Nonprofit501d
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501d
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501d
 							 * 
 							 * 
 							 */
@@ -10557,7 +10557,7 @@
 						// Nonprofit501e
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501e
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501e
 							 * 
 							 * 
 							 */
@@ -10571,7 +10571,7 @@
 						// Nonprofit501f
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501f
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501f
 							 * 
 							 * 
 							 */
@@ -10585,7 +10585,7 @@
 						// Nonprofit501k
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501k
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501k
 							 * 
 							 * 
 							 */
@@ -10599,7 +10599,7 @@
 						// Nonprofit501n
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501n
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501n
 							 * 
 							 * 
 							 */
@@ -10613,7 +10613,7 @@
 						// Nonprofit501q
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit501q
+							 * Thing > Intangible > baz > qux > quux > Nonprofit501q
 							 * 
 							 * 
 							 */
@@ -10627,7 +10627,7 @@
 						// Nonprofit527
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Nonprofit527
+							 * Thing > Intangible > baz > qux > quux > Nonprofit527
 							 * 
 							 * 
 							 */
@@ -10642,7 +10642,7 @@
 				// OfferItemCondition
 
 					/*
-					 * Thing > foo > bar > baz > OfferItemCondition
+					 * Thing > Intangible > baz > OfferItemCondition
 					 * 
 					 * 
 					 */
@@ -10656,7 +10656,7 @@
 					// DamagedCondition
 
 						/*
-						 * Thing > foo > bar > baz > qux > DamagedCondition
+						 * Thing > Intangible > baz > qux > DamagedCondition
 						 * 
 						 * 
 						 */
@@ -10670,7 +10670,7 @@
 					// NewCondition
 
 						/*
-						 * Thing > foo > bar > baz > qux > NewCondition
+						 * Thing > Intangible > baz > qux > NewCondition
 						 * 
 						 * 
 						 */
@@ -10684,7 +10684,7 @@
 					// RefurbishedCondition
 
 						/*
-						 * Thing > foo > bar > baz > qux > RefurbishedCondition
+						 * Thing > Intangible > baz > qux > RefurbishedCondition
 						 * 
 						 * 
 						 */
@@ -10698,7 +10698,7 @@
 					// UsedCondition
 
 						/*
-						 * Thing > foo > bar > baz > qux > UsedCondition
+						 * Thing > Intangible > baz > qux > UsedCondition
 						 * 
 						 * 
 						 */
@@ -10712,7 +10712,7 @@
 				// PaymentMethod
 
 					/*
-					 * Thing > foo > bar > baz > PaymentMethod
+					 * Thing > Intangible > baz > PaymentMethod
 					 * 
 					 * 
 					 */
@@ -10726,7 +10726,7 @@
 					// PaymentCard
 
 						/*
-						 * Thing > foo > bar > baz > qux > PaymentCard
+						 * Thing > Intangible > baz > qux > PaymentCard
 						 * 
 						 * 
 						 */
@@ -10740,7 +10740,7 @@
 						// CreditCard
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CreditCard
+							 * Thing > Intangible > baz > qux > quux > CreditCard
 							 * 
 							 * 
 							 */
@@ -10755,7 +10755,7 @@
 				// PhysicalActivityCategory
 
 					/*
-					 * Thing > foo > bar > baz > PhysicalActivityCategory
+					 * Thing > Intangible > baz > PhysicalActivityCategory
 					 * 
 					 * 
 					 */
@@ -10769,7 +10769,7 @@
 					// AerobicActivity
 
 						/*
-						 * Thing > foo > bar > baz > qux > AerobicActivity
+						 * Thing > Intangible > baz > qux > AerobicActivity
 						 * 
 						 * 
 						 */
@@ -10783,7 +10783,7 @@
 					// AnaerobicActivity
 
 						/*
-						 * Thing > foo > bar > baz > qux > AnaerobicActivity
+						 * Thing > Intangible > baz > qux > AnaerobicActivity
 						 * 
 						 * 
 						 */
@@ -10797,7 +10797,7 @@
 					// Balance
 
 						/*
-						 * Thing > foo > bar > baz > qux > Balance
+						 * Thing > Intangible > baz > qux > Balance
 						 * 
 						 * 
 						 */
@@ -10811,7 +10811,7 @@
 					// Flexibility
 
 						/*
-						 * Thing > foo > bar > baz > qux > Flexibility
+						 * Thing > Intangible > baz > qux > Flexibility
 						 * 
 						 * 
 						 */
@@ -10825,7 +10825,7 @@
 					// LeisureTimeActivity
 
 						/*
-						 * Thing > foo > bar > baz > qux > LeisureTimeActivity
+						 * Thing > Intangible > baz > qux > LeisureTimeActivity
 						 * 
 						 * 
 						 */
@@ -10839,7 +10839,7 @@
 					// OccupationalActivity
 
 						/*
-						 * Thing > foo > bar > baz > qux > OccupationalActivity
+						 * Thing > Intangible > baz > qux > OccupationalActivity
 						 * 
 						 * 
 						 */
@@ -10853,7 +10853,7 @@
 					// StrengthTraining
 
 						/*
-						 * Thing > foo > bar > baz > qux > StrengthTraining
+						 * Thing > Intangible > baz > qux > StrengthTraining
 						 * 
 						 * 
 						 */
@@ -10867,7 +10867,7 @@
 				// PriceComponentTypeEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > PriceComponentTypeEnumeration
+					 * Thing > Intangible > baz > PriceComponentTypeEnumeration
 					 * 
 					 * 
 					 */
@@ -10881,7 +10881,7 @@
 					// ActivationFee
 
 						/*
-						 * Thing > foo > bar > baz > qux > ActivationFee
+						 * Thing > Intangible > baz > qux > ActivationFee
 						 * 
 						 * 
 						 */
@@ -10895,7 +10895,7 @@
 					// CleaningFee
 
 						/*
-						 * Thing > foo > bar > baz > qux > CleaningFee
+						 * Thing > Intangible > baz > qux > CleaningFee
 						 * 
 						 * 
 						 */
@@ -10909,7 +10909,7 @@
 					// DistanceFee
 
 						/*
-						 * Thing > foo > bar > baz > qux > DistanceFee
+						 * Thing > Intangible > baz > qux > DistanceFee
 						 * 
 						 * 
 						 */
@@ -10923,7 +10923,7 @@
 					// Downpayment
 
 						/*
-						 * Thing > foo > bar > baz > qux > Downpayment
+						 * Thing > Intangible > baz > qux > Downpayment
 						 * 
 						 * 
 						 */
@@ -10937,7 +10937,7 @@
 					// Installment
 
 						/*
-						 * Thing > foo > bar > baz > qux > Installment
+						 * Thing > Intangible > baz > qux > Installment
 						 * 
 						 * 
 						 */
@@ -10951,7 +10951,7 @@
 					// Subscription
 
 						/*
-						 * Thing > foo > bar > baz > qux > Subscription
+						 * Thing > Intangible > baz > qux > Subscription
 						 * 
 						 * 
 						 */
@@ -10965,7 +10965,7 @@
 				// PriceTypeEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > PriceTypeEnumeration
+					 * Thing > Intangible > baz > PriceTypeEnumeration
 					 * 
 					 * 
 					 */
@@ -10979,7 +10979,7 @@
 					// InvoicePrice
 
 						/*
-						 * Thing > foo > bar > baz > qux > InvoicePrice
+						 * Thing > Intangible > baz > qux > InvoicePrice
 						 * 
 						 * 
 						 */
@@ -10993,7 +10993,7 @@
 					// ListPrice
 
 						/*
-						 * Thing > foo > bar > baz > qux > ListPrice
+						 * Thing > Intangible > baz > qux > ListPrice
 						 * 
 						 * 
 						 */
@@ -11007,7 +11007,7 @@
 					// MSRP
 
 						/*
-						 * Thing > foo > bar > baz > qux > MSRP
+						 * Thing > Intangible > baz > qux > MSRP
 						 * 
 						 * 
 						 */
@@ -11021,7 +11021,7 @@
 					// MinimumAdvertisedPrice
 
 						/*
-						 * Thing > foo > bar > baz > qux > MinimumAdvertisedPrice
+						 * Thing > Intangible > baz > qux > MinimumAdvertisedPrice
 						 * 
 						 * 
 						 */
@@ -11035,7 +11035,7 @@
 					// SRP
 
 						/*
-						 * Thing > foo > bar > baz > qux > SRP
+						 * Thing > Intangible > baz > qux > SRP
 						 * 
 						 * 
 						 */
@@ -11049,7 +11049,7 @@
 					// SalePrice
 
 						/*
-						 * Thing > foo > bar > baz > qux > SalePrice
+						 * Thing > Intangible > baz > qux > SalePrice
 						 * 
 						 * 
 						 */
@@ -11063,7 +11063,7 @@
 				// QualitativeValue
 
 					/*
-					 * Thing > foo > bar > baz > QualitativeValue
+					 * Thing > Intangible > baz > QualitativeValue
 					 * 
 					 * 
 					 */
@@ -11077,7 +11077,7 @@
 					// BedType
 
 						/*
-						 * Thing > foo > bar > baz > qux > BedType
+						 * Thing > Intangible > baz > qux > BedType
 						 * 
 						 * 
 						 */
@@ -11091,7 +11091,7 @@
 					// DriveWheelConfigurationValue
 
 						/*
-						 * Thing > foo > bar > baz > qux > DriveWheelConfigurationValue
+						 * Thing > Intangible > baz > qux > DriveWheelConfigurationValue
 						 * 
 						 * 
 						 */
@@ -11105,7 +11105,7 @@
 						// AllWheelDriveConfiguration
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > AllWheelDriveConfiguration
+							 * Thing > Intangible > baz > qux > quux > AllWheelDriveConfiguration
 							 * 
 							 * 
 							 */
@@ -11119,7 +11119,7 @@
 						// FourWheelDriveConfiguration
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FourWheelDriveConfiguration
+							 * Thing > Intangible > baz > qux > quux > FourWheelDriveConfiguration
 							 * 
 							 * 
 							 */
@@ -11133,7 +11133,7 @@
 						// FrontWheelDriveConfiguration
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FrontWheelDriveConfiguration
+							 * Thing > Intangible > baz > qux > quux > FrontWheelDriveConfiguration
 							 * 
 							 * 
 							 */
@@ -11147,7 +11147,7 @@
 						// RearWheelDriveConfiguration
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RearWheelDriveConfiguration
+							 * Thing > Intangible > baz > qux > quux > RearWheelDriveConfiguration
 							 * 
 							 * 
 							 */
@@ -11161,7 +11161,7 @@
 					// SizeSpecification
 
 						/*
-						 * Thing > foo > bar > baz > qux > SizeSpecification
+						 * Thing > Intangible > baz > qux > SizeSpecification
 						 * 
 						 * 
 						 */
@@ -11175,7 +11175,7 @@
 					// SteeringPositionValue
 
 						/*
-						 * Thing > foo > bar > baz > qux > SteeringPositionValue
+						 * Thing > Intangible > baz > qux > SteeringPositionValue
 						 * 
 						 * 
 						 */
@@ -11189,7 +11189,7 @@
 						// LeftHandDriving
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > LeftHandDriving
+							 * Thing > Intangible > baz > qux > quux > LeftHandDriving
 							 * 
 							 * 
 							 */
@@ -11203,7 +11203,7 @@
 						// RightHandDriving
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RightHandDriving
+							 * Thing > Intangible > baz > qux > quux > RightHandDriving
 							 * 
 							 * 
 							 */
@@ -11218,7 +11218,7 @@
 				// RefundTypeEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > RefundTypeEnumeration
+					 * Thing > Intangible > baz > RefundTypeEnumeration
 					 * 
 					 * 
 					 */
@@ -11232,7 +11232,7 @@
 					// ExchangeRefund
 
 						/*
-						 * Thing > foo > bar > baz > qux > ExchangeRefund
+						 * Thing > Intangible > baz > qux > ExchangeRefund
 						 * 
 						 * 
 						 */
@@ -11246,7 +11246,7 @@
 					// FullRefund
 
 						/*
-						 * Thing > foo > bar > baz > qux > FullRefund
+						 * Thing > Intangible > baz > qux > FullRefund
 						 * 
 						 * 
 						 */
@@ -11260,7 +11260,7 @@
 					// StoreCreditRefund
 
 						/*
-						 * Thing > foo > bar > baz > qux > StoreCreditRefund
+						 * Thing > Intangible > baz > qux > StoreCreditRefund
 						 * 
 						 * 
 						 */
@@ -11274,7 +11274,7 @@
 				// RestrictedDiet
 
 					/*
-					 * Thing > foo > bar > baz > RestrictedDiet
+					 * Thing > Intangible > baz > RestrictedDiet
 					 * 
 					 * 
 					 */
@@ -11288,7 +11288,7 @@
 					// DiabeticDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > DiabeticDiet
+						 * Thing > Intangible > baz > qux > DiabeticDiet
 						 * 
 						 * 
 						 */
@@ -11302,7 +11302,7 @@
 					// GlutenFreeDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > GlutenFreeDiet
+						 * Thing > Intangible > baz > qux > GlutenFreeDiet
 						 * 
 						 * 
 						 */
@@ -11316,7 +11316,7 @@
 					// HalalDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > HalalDiet
+						 * Thing > Intangible > baz > qux > HalalDiet
 						 * 
 						 * 
 						 */
@@ -11330,7 +11330,7 @@
 					// HinduDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > HinduDiet
+						 * Thing > Intangible > baz > qux > HinduDiet
 						 * 
 						 * 
 						 */
@@ -11344,7 +11344,7 @@
 					// KosherDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > KosherDiet
+						 * Thing > Intangible > baz > qux > KosherDiet
 						 * 
 						 * 
 						 */
@@ -11358,7 +11358,7 @@
 					// LowCalorieDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > LowCalorieDiet
+						 * Thing > Intangible > baz > qux > LowCalorieDiet
 						 * 
 						 * 
 						 */
@@ -11372,7 +11372,7 @@
 					// LowFatDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > LowFatDiet
+						 * Thing > Intangible > baz > qux > LowFatDiet
 						 * 
 						 * 
 						 */
@@ -11386,7 +11386,7 @@
 					// LowLactoseDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > LowLactoseDiet
+						 * Thing > Intangible > baz > qux > LowLactoseDiet
 						 * 
 						 * 
 						 */
@@ -11400,7 +11400,7 @@
 					// LowSaltDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > LowSaltDiet
+						 * Thing > Intangible > baz > qux > LowSaltDiet
 						 * 
 						 * 
 						 */
@@ -11414,7 +11414,7 @@
 					// VeganDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > VeganDiet
+						 * Thing > Intangible > baz > qux > VeganDiet
 						 * 
 						 * 
 						 */
@@ -11428,7 +11428,7 @@
 					// VegetarianDiet
 
 						/*
-						 * Thing > foo > bar > baz > qux > VegetarianDiet
+						 * Thing > Intangible > baz > qux > VegetarianDiet
 						 * 
 						 * 
 						 */
@@ -11442,7 +11442,7 @@
 				// ReturnFeesEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > ReturnFeesEnumeration
+					 * Thing > Intangible > baz > ReturnFeesEnumeration
 					 * 
 					 * 
 					 */
@@ -11456,7 +11456,7 @@
 					// FreeReturn
 
 						/*
-						 * Thing > foo > bar > baz > qux > FreeReturn
+						 * Thing > Intangible > baz > qux > FreeReturn
 						 * 
 						 * 
 						 */
@@ -11470,7 +11470,7 @@
 					// OriginalShippingFees
 
 						/*
-						 * Thing > foo > bar > baz > qux > OriginalShippingFees
+						 * Thing > Intangible > baz > qux > OriginalShippingFees
 						 * 
 						 * 
 						 */
@@ -11484,7 +11484,7 @@
 					// RestockingFees
 
 						/*
-						 * Thing > foo > bar > baz > qux > RestockingFees
+						 * Thing > Intangible > baz > qux > RestockingFees
 						 * 
 						 * 
 						 */
@@ -11498,7 +11498,7 @@
 					// ReturnFeesCustomerResponsibility
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnFeesCustomerResponsibility
+						 * Thing > Intangible > baz > qux > ReturnFeesCustomerResponsibility
 						 * 
 						 * 
 						 */
@@ -11512,7 +11512,7 @@
 					// ReturnShippingFees
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnShippingFees
+						 * Thing > Intangible > baz > qux > ReturnShippingFees
 						 * 
 						 * 
 						 */
@@ -11526,7 +11526,7 @@
 				// ReturnLabelSourceEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > ReturnLabelSourceEnumeration
+					 * Thing > Intangible > baz > ReturnLabelSourceEnumeration
 					 * 
 					 * 
 					 */
@@ -11540,7 +11540,7 @@
 					// ReturnLabelCustomerResponsibility
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnLabelCustomerResponsibility
+						 * Thing > Intangible > baz > qux > ReturnLabelCustomerResponsibility
 						 * 
 						 * 
 						 */
@@ -11554,7 +11554,7 @@
 					// ReturnLabelDownloadAndPrint
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnLabelDownloadAndPrint
+						 * Thing > Intangible > baz > qux > ReturnLabelDownloadAndPrint
 						 * 
 						 * 
 						 */
@@ -11568,7 +11568,7 @@
 					// ReturnLabelInBox
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnLabelInBox
+						 * Thing > Intangible > baz > qux > ReturnLabelInBox
 						 * 
 						 * 
 						 */
@@ -11582,7 +11582,7 @@
 				// ReturnMethodEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > ReturnMethodEnumeration
+					 * Thing > Intangible > baz > ReturnMethodEnumeration
 					 * 
 					 * 
 					 */
@@ -11596,7 +11596,7 @@
 					// ReturnAtKiosk
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnAtKiosk
+						 * Thing > Intangible > baz > qux > ReturnAtKiosk
 						 * 
 						 * 
 						 */
@@ -11610,7 +11610,7 @@
 					// ReturnByMail
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnByMail
+						 * Thing > Intangible > baz > qux > ReturnByMail
 						 * 
 						 * 
 						 */
@@ -11624,7 +11624,7 @@
 					// ReturnInStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReturnInStore
+						 * Thing > Intangible > baz > qux > ReturnInStore
 						 * 
 						 * 
 						 */
@@ -11638,7 +11638,7 @@
 				// RsvpResponseType
 
 					/*
-					 * Thing > foo > bar > baz > RsvpResponseType
+					 * Thing > Intangible > baz > RsvpResponseType
 					 * 
 					 * 
 					 */
@@ -11652,7 +11652,7 @@
 					// RsvpResponseMaybe
 
 						/*
-						 * Thing > foo > bar > baz > qux > RsvpResponseMaybe
+						 * Thing > Intangible > baz > qux > RsvpResponseMaybe
 						 * 
 						 * 
 						 */
@@ -11666,7 +11666,7 @@
 					// RsvpResponseNo
 
 						/*
-						 * Thing > foo > bar > baz > qux > RsvpResponseNo
+						 * Thing > Intangible > baz > qux > RsvpResponseNo
 						 * 
 						 * 
 						 */
@@ -11680,7 +11680,7 @@
 					// RsvpResponseYes
 
 						/*
-						 * Thing > foo > bar > baz > qux > RsvpResponseYes
+						 * Thing > Intangible > baz > qux > RsvpResponseYes
 						 * 
 						 * 
 						 */
@@ -11694,7 +11694,7 @@
 				// SizeGroupEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > SizeGroupEnumeration
+					 * Thing > Intangible > baz > SizeGroupEnumeration
 					 * 
 					 * 
 					 */
@@ -11708,7 +11708,7 @@
 					// WearableSizeGroupEnumeration
 
 						/*
-						 * Thing > foo > bar > baz > qux > WearableSizeGroupEnumeration
+						 * Thing > Intangible > baz > qux > WearableSizeGroupEnumeration
 						 * 
 						 * 
 						 */
@@ -11722,7 +11722,7 @@
 						// WearableSizeGroupBig
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupBig
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupBig
 							 * 
 							 * 
 							 */
@@ -11736,7 +11736,7 @@
 						// WearableSizeGroupBoys
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupBoys
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupBoys
 							 * 
 							 * 
 							 */
@@ -11750,7 +11750,7 @@
 						// WearableSizeGroupExtraShort
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupExtraShort
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupExtraShort
 							 * 
 							 * 
 							 */
@@ -11764,7 +11764,7 @@
 						// WearableSizeGroupExtraTall
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupExtraTall
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupExtraTall
 							 * 
 							 * 
 							 */
@@ -11778,7 +11778,7 @@
 						// WearableSizeGroupGirls
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupGirls
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupGirls
 							 * 
 							 * 
 							 */
@@ -11792,7 +11792,7 @@
 						// WearableSizeGroupHusky
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupHusky
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupHusky
 							 * 
 							 * 
 							 */
@@ -11806,7 +11806,7 @@
 						// WearableSizeGroupInfants
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupInfants
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupInfants
 							 * 
 							 * 
 							 */
@@ -11820,7 +11820,7 @@
 						// WearableSizeGroupJuniors
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupJuniors
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupJuniors
 							 * 
 							 * 
 							 */
@@ -11834,7 +11834,7 @@
 						// WearableSizeGroupMaternity
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupMaternity
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupMaternity
 							 * 
 							 * 
 							 */
@@ -11848,7 +11848,7 @@
 						// WearableSizeGroupMens
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupMens
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupMens
 							 * 
 							 * 
 							 */
@@ -11862,7 +11862,7 @@
 						// WearableSizeGroupMisses
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupMisses
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupMisses
 							 * 
 							 * 
 							 */
@@ -11876,7 +11876,7 @@
 						// WearableSizeGroupPetite
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupPetite
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupPetite
 							 * 
 							 * 
 							 */
@@ -11890,7 +11890,7 @@
 						// WearableSizeGroupPlus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupPlus
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupPlus
 							 * 
 							 * 
 							 */
@@ -11904,7 +11904,7 @@
 						// WearableSizeGroupRegular
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupRegular
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupRegular
 							 * 
 							 * 
 							 */
@@ -11918,7 +11918,7 @@
 						// WearableSizeGroupShort
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupShort
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupShort
 							 * 
 							 * 
 							 */
@@ -11932,7 +11932,7 @@
 						// WearableSizeGroupTall
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupTall
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupTall
 							 * 
 							 * 
 							 */
@@ -11946,7 +11946,7 @@
 						// WearableSizeGroupWomens
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeGroupWomens
+							 * Thing > Intangible > baz > qux > quux > WearableSizeGroupWomens
 							 * 
 							 * 
 							 */
@@ -11961,7 +11961,7 @@
 				// SizeSystemEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > SizeSystemEnumeration
+					 * Thing > Intangible > baz > SizeSystemEnumeration
 					 * 
 					 * 
 					 */
@@ -11975,7 +11975,7 @@
 					// SizeSystemImperial
 
 						/*
-						 * Thing > foo > bar > baz > qux > SizeSystemImperial
+						 * Thing > Intangible > baz > qux > SizeSystemImperial
 						 * 
 						 * 
 						 */
@@ -11989,7 +11989,7 @@
 					// SizeSystemMetric
 
 						/*
-						 * Thing > foo > bar > baz > qux > SizeSystemMetric
+						 * Thing > Intangible > baz > qux > SizeSystemMetric
 						 * 
 						 * 
 						 */
@@ -12003,7 +12003,7 @@
 					// WearableSizeSystemEnumeration
 
 						/*
-						 * Thing > foo > bar > baz > qux > WearableSizeSystemEnumeration
+						 * Thing > Intangible > baz > qux > WearableSizeSystemEnumeration
 						 * 
 						 * 
 						 */
@@ -12017,7 +12017,7 @@
 						// WearableSizeSystemAU
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemAU
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemAU
 							 * 
 							 * 
 							 */
@@ -12031,7 +12031,7 @@
 						// WearableSizeSystemBR
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemBR
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemBR
 							 * 
 							 * 
 							 */
@@ -12045,7 +12045,7 @@
 						// WearableSizeSystemCN
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemCN
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemCN
 							 * 
 							 * 
 							 */
@@ -12059,7 +12059,7 @@
 						// WearableSizeSystemContinental
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemContinental
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemContinental
 							 * 
 							 * 
 							 */
@@ -12073,7 +12073,7 @@
 						// WearableSizeSystemDE
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemDE
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemDE
 							 * 
 							 * 
 							 */
@@ -12087,7 +12087,7 @@
 						// WearableSizeSystemEN13402
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemEN13402
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemEN13402
 							 * 
 							 * 
 							 */
@@ -12101,7 +12101,7 @@
 						// WearableSizeSystemEurope
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemEurope
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemEurope
 							 * 
 							 * 
 							 */
@@ -12115,7 +12115,7 @@
 						// WearableSizeSystemFR
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemFR
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemFR
 							 * 
 							 * 
 							 */
@@ -12129,7 +12129,7 @@
 						// WearableSizeSystemGS1
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemGS1
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemGS1
 							 * 
 							 * 
 							 */
@@ -12143,7 +12143,7 @@
 						// WearableSizeSystemIT
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemIT
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemIT
 							 * 
 							 * 
 							 */
@@ -12157,7 +12157,7 @@
 						// WearableSizeSystemJP
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemJP
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemJP
 							 * 
 							 * 
 							 */
@@ -12171,7 +12171,7 @@
 						// WearableSizeSystemMX
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemMX
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemMX
 							 * 
 							 * 
 							 */
@@ -12185,7 +12185,7 @@
 						// WearableSizeSystemUK
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemUK
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemUK
 							 * 
 							 * 
 							 */
@@ -12199,7 +12199,7 @@
 						// WearableSizeSystemUS
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > WearableSizeSystemUS
+							 * Thing > Intangible > baz > qux > quux > WearableSizeSystemUS
 							 * 
 							 * 
 							 */
@@ -12214,7 +12214,7 @@
 				// Specialty
 
 					/*
-					 * Thing > foo > bar > baz > Specialty
+					 * Thing > Intangible > baz > Specialty
 					 * 
 					 * 
 					 */
@@ -12228,7 +12228,7 @@
 					// MedicalSpecialty
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalSpecialty
+						 * Thing > Intangible > baz > qux > MedicalSpecialty
 						 * 
 						 * 
 						 */
@@ -12242,7 +12242,7 @@
 				// StatusEnumeration
 
 					/*
-					 * Thing > foo > bar > baz > StatusEnumeration
+					 * Thing > Intangible > baz > StatusEnumeration
 					 * 
 					 * 
 					 */
@@ -12256,7 +12256,7 @@
 					// ActionStatusType
 
 						/*
-						 * Thing > foo > bar > baz > qux > ActionStatusType
+						 * Thing > Intangible > baz > qux > ActionStatusType
 						 * 
 						 * 
 						 */
@@ -12270,7 +12270,7 @@
 						// ActiveActionStatus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ActiveActionStatus
+							 * Thing > Intangible > baz > qux > quux > ActiveActionStatus
 							 * 
 							 * 
 							 */
@@ -12284,7 +12284,7 @@
 						// CompletedActionStatus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CompletedActionStatus
+							 * Thing > Intangible > baz > qux > quux > CompletedActionStatus
 							 * 
 							 * 
 							 */
@@ -12298,7 +12298,7 @@
 						// FailedActionStatus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > FailedActionStatus
+							 * Thing > Intangible > baz > qux > quux > FailedActionStatus
 							 * 
 							 * 
 							 */
@@ -12312,7 +12312,7 @@
 						// PotentialActionStatus
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PotentialActionStatus
+							 * Thing > Intangible > baz > qux > quux > PotentialActionStatus
 							 * 
 							 * 
 							 */
@@ -12326,7 +12326,7 @@
 					// EventStatusType
 
 						/*
-						 * Thing > foo > bar > baz > qux > EventStatusType
+						 * Thing > Intangible > baz > qux > EventStatusType
 						 * 
 						 * 
 						 */
@@ -12340,7 +12340,7 @@
 						// EventCancelled
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EventCancelled
+							 * Thing > Intangible > baz > qux > quux > EventCancelled
 							 * 
 							 * 
 							 */
@@ -12354,7 +12354,7 @@
 						// EventMovedOnline
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EventMovedOnline
+							 * Thing > Intangible > baz > qux > quux > EventMovedOnline
 							 * 
 							 * 
 							 */
@@ -12368,7 +12368,7 @@
 						// EventPostponed
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EventPostponed
+							 * Thing > Intangible > baz > qux > quux > EventPostponed
 							 * 
 							 * 
 							 */
@@ -12382,7 +12382,7 @@
 						// EventRescheduled
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EventRescheduled
+							 * Thing > Intangible > baz > qux > quux > EventRescheduled
 							 * 
 							 * 
 							 */
@@ -12396,7 +12396,7 @@
 						// EventScheduled
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > EventScheduled
+							 * Thing > Intangible > baz > qux > quux > EventScheduled
 							 * 
 							 * 
 							 */
@@ -12410,7 +12410,7 @@
 					// GameServerStatus
 
 						/*
-						 * Thing > foo > bar > baz > qux > GameServerStatus
+						 * Thing > Intangible > baz > qux > GameServerStatus
 						 * 
 						 * 
 						 */
@@ -12424,7 +12424,7 @@
 						// OfflinePermanently
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OfflinePermanently
+							 * Thing > Intangible > baz > qux > quux > OfflinePermanently
 							 * 
 							 * 
 							 */
@@ -12438,7 +12438,7 @@
 						// OfflineTemporarily
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OfflineTemporarily
+							 * Thing > Intangible > baz > qux > quux > OfflineTemporarily
 							 * 
 							 * 
 							 */
@@ -12452,7 +12452,7 @@
 						// Online
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > Online
+							 * Thing > Intangible > baz > qux > quux > Online
 							 * 
 							 * 
 							 */
@@ -12466,7 +12466,7 @@
 						// OnlineFull
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OnlineFull
+							 * Thing > Intangible > baz > qux > quux > OnlineFull
 							 * 
 							 * 
 							 */
@@ -12480,7 +12480,7 @@
 					// LegalForceStatus
 
 						/*
-						 * Thing > foo > bar > baz > qux > LegalForceStatus
+						 * Thing > Intangible > baz > qux > LegalForceStatus
 						 * 
 						 * 
 						 */
@@ -12494,7 +12494,7 @@
 						// InForce
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > InForce
+							 * Thing > Intangible > baz > qux > quux > InForce
 							 * 
 							 * 
 							 */
@@ -12508,7 +12508,7 @@
 						// NotInForce
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > NotInForce
+							 * Thing > Intangible > baz > qux > quux > NotInForce
 							 * 
 							 * 
 							 */
@@ -12522,7 +12522,7 @@
 						// PartiallyInForce
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PartiallyInForce
+							 * Thing > Intangible > baz > qux > quux > PartiallyInForce
 							 * 
 							 * 
 							 */
@@ -12536,7 +12536,7 @@
 					// OrderStatus
 
 						/*
-						 * Thing > foo > bar > baz > qux > OrderStatus
+						 * Thing > Intangible > baz > qux > OrderStatus
 						 * 
 						 * 
 						 */
@@ -12550,7 +12550,7 @@
 						// OrderCancelled
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderCancelled
+							 * Thing > Intangible > baz > qux > quux > OrderCancelled
 							 * 
 							 * 
 							 */
@@ -12564,7 +12564,7 @@
 						// OrderDelivered
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderDelivered
+							 * Thing > Intangible > baz > qux > quux > OrderDelivered
 							 * 
 							 * 
 							 */
@@ -12578,7 +12578,7 @@
 						// OrderInTransit
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderInTransit
+							 * Thing > Intangible > baz > qux > quux > OrderInTransit
 							 * 
 							 * 
 							 */
@@ -12592,7 +12592,7 @@
 						// OrderPaymentDue
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderPaymentDue
+							 * Thing > Intangible > baz > qux > quux > OrderPaymentDue
 							 * 
 							 * 
 							 */
@@ -12606,7 +12606,7 @@
 						// OrderPickupAvailable
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderPickupAvailable
+							 * Thing > Intangible > baz > qux > quux > OrderPickupAvailable
 							 * 
 							 * 
 							 */
@@ -12620,7 +12620,7 @@
 						// OrderProblem
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderProblem
+							 * Thing > Intangible > baz > qux > quux > OrderProblem
 							 * 
 							 * 
 							 */
@@ -12634,7 +12634,7 @@
 						// OrderProcessing
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderProcessing
+							 * Thing > Intangible > baz > qux > quux > OrderProcessing
 							 * 
 							 * 
 							 */
@@ -12648,7 +12648,7 @@
 						// OrderReturned
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OrderReturned
+							 * Thing > Intangible > baz > qux > quux > OrderReturned
 							 * 
 							 * 
 							 */
@@ -12662,7 +12662,7 @@
 					// PaymentStatusType
 
 						/*
-						 * Thing > foo > bar > baz > qux > PaymentStatusType
+						 * Thing > Intangible > baz > qux > PaymentStatusType
 						 * 
 						 * 
 						 */
@@ -12676,7 +12676,7 @@
 						// PaymentAutomaticallyApplied
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PaymentAutomaticallyApplied
+							 * Thing > Intangible > baz > qux > quux > PaymentAutomaticallyApplied
 							 * 
 							 * 
 							 */
@@ -12690,7 +12690,7 @@
 						// PaymentComplete
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PaymentComplete
+							 * Thing > Intangible > baz > qux > quux > PaymentComplete
 							 * 
 							 * 
 							 */
@@ -12704,7 +12704,7 @@
 						// PaymentDeclined
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PaymentDeclined
+							 * Thing > Intangible > baz > qux > quux > PaymentDeclined
 							 * 
 							 * 
 							 */
@@ -12718,7 +12718,7 @@
 						// PaymentDue
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PaymentDue
+							 * Thing > Intangible > baz > qux > quux > PaymentDue
 							 * 
 							 * 
 							 */
@@ -12732,7 +12732,7 @@
 						// PaymentPastDue
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PaymentPastDue
+							 * Thing > Intangible > baz > qux > quux > PaymentPastDue
 							 * 
 							 * 
 							 */
@@ -12746,7 +12746,7 @@
 					// ReservationStatusType
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReservationStatusType
+						 * Thing > Intangible > baz > qux > ReservationStatusType
 						 * 
 						 * 
 						 */
@@ -12760,7 +12760,7 @@
 						// ReservationCancelled
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ReservationCancelled
+							 * Thing > Intangible > baz > qux > quux > ReservationCancelled
 							 * 
 							 * 
 							 */
@@ -12774,7 +12774,7 @@
 						// ReservationConfirmed
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ReservationConfirmed
+							 * Thing > Intangible > baz > qux > quux > ReservationConfirmed
 							 * 
 							 * 
 							 */
@@ -12788,7 +12788,7 @@
 						// ReservationHold
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ReservationHold
+							 * Thing > Intangible > baz > qux > quux > ReservationHold
 							 * 
 							 * 
 							 */
@@ -12802,7 +12802,7 @@
 						// ReservationPending
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > ReservationPending
+							 * Thing > Intangible > baz > qux > quux > ReservationPending
 							 * 
 							 * 
 							 */
@@ -12817,7 +12817,7 @@
 				// WarrantyScope
 
 					/*
-					 * Thing > foo > bar > baz > WarrantyScope
+					 * Thing > Intangible > baz > WarrantyScope
 					 * 
 					 * 
 					 */
@@ -12831,7 +12831,7 @@
 			// FloorPlan
 
 				/*
-				 * Thing > foo > bar > FloorPlan
+				 * Thing > Intangible > FloorPlan
 				 * 
 				 * 
 				 */
@@ -12845,7 +12845,7 @@
 			// GameServer
 
 				/*
-				 * Thing > foo > bar > GameServer
+				 * Thing > Intangible > GameServer
 				 * 
 				 * 
 				 */
@@ -12859,7 +12859,7 @@
 			// GeospatialGeometry
 
 				/*
-				 * Thing > foo > bar > GeospatialGeometry
+				 * Thing > Intangible > GeospatialGeometry
 				 * 
 				 * 
 				 */
@@ -12873,7 +12873,7 @@
 			// Grant
 
 				/*
-				 * Thing > foo > bar > Grant
+				 * Thing > Intangible > Grant
 				 * 
 				 * 
 				 */
@@ -12887,7 +12887,7 @@
 				// MonetaryGrant
 
 					/*
-					 * Thing > foo > bar > baz > MonetaryGrant
+					 * Thing > Intangible > baz > MonetaryGrant
 					 * 
 					 * 
 					 */
@@ -12901,7 +12901,7 @@
 			// HealthInsurancePlan
 
 				/*
-				 * Thing > foo > bar > HealthInsurancePlan
+				 * Thing > Intangible > HealthInsurancePlan
 				 * 
 				 * 
 				 */
@@ -12915,7 +12915,7 @@
 			// HealthPlanCostSharingSpecification
 
 				/*
-				 * Thing > foo > bar > HealthPlanCostSharingSpecification
+				 * Thing > Intangible > HealthPlanCostSharingSpecification
 				 * 
 				 * 
 				 */
@@ -12929,7 +12929,7 @@
 			// HealthPlanFormulary
 
 				/*
-				 * Thing > foo > bar > HealthPlanFormulary
+				 * Thing > Intangible > HealthPlanFormulary
 				 * 
 				 * 
 				 */
@@ -12943,7 +12943,7 @@
 			// HealthPlanNetwork
 
 				/*
-				 * Thing > foo > bar > HealthPlanNetwork
+				 * Thing > Intangible > HealthPlanNetwork
 				 * 
 				 * 
 				 */
@@ -12957,7 +12957,7 @@
 			// Invoice
 
 				/*
-				 * Thing > foo > bar > Invoice
+				 * Thing > Intangible > Invoice
 				 * 
 				 * 
 				 */
@@ -12971,7 +12971,7 @@
 			// ItemList
 
 				/*
-				 * Thing > foo > bar > ItemList
+				 * Thing > Intangible > ItemList
 				 * 
 				 * 
 				 */
@@ -12985,7 +12985,7 @@
 				// BreadcrumbList
 
 					/*
-					 * Thing > foo > bar > baz > BreadcrumbList
+					 * Thing > Intangible > baz > BreadcrumbList
 					 * 
 					 * 
 					 */
@@ -12999,7 +12999,7 @@
 				// HowToSection
 
 					/*
-					 * Thing > foo > bar > baz > HowToSection
+					 * Thing > Intangible > baz > HowToSection
 					 * 
 					 * 
 					 */
@@ -13013,7 +13013,7 @@
 				// HowToStep
 
 					/*
-					 * Thing > foo > bar > baz > HowToStep
+					 * Thing > Intangible > baz > HowToStep
 					 * 
 					 * 
 					 */
@@ -13027,7 +13027,7 @@
 				// OfferCatalog
 
 					/*
-					 * Thing > foo > bar > baz > OfferCatalog
+					 * Thing > Intangible > baz > OfferCatalog
 					 * 
 					 * 
 					 */
@@ -13041,7 +13041,7 @@
 			// JobPosting
 
 				/*
-				 * Thing > foo > bar > JobPosting
+				 * Thing > Intangible > JobPosting
 				 * 
 				 * 
 				 */
@@ -13055,7 +13055,7 @@
 			// Language
 
 				/*
-				 * Thing > foo > bar > Language
+				 * Thing > Intangible > Language
 				 * 
 				 * 
 				 */
@@ -13069,7 +13069,7 @@
 			// ListItem
 
 				/*
-				 * Thing > foo > bar > ListItem
+				 * Thing > Intangible > ListItem
 				 * 
 				 * 
 				 */
@@ -13083,7 +13083,7 @@
 				// HowToDirection
 
 					/*
-					 * Thing > foo > bar > baz > HowToDirection
+					 * Thing > Intangible > baz > HowToDirection
 					 * 
 					 * 
 					 */
@@ -13097,7 +13097,7 @@
 				// HowToItem
 
 					/*
-					 * Thing > foo > bar > baz > HowToItem
+					 * Thing > Intangible > baz > HowToItem
 					 * 
 					 * 
 					 */
@@ -13111,7 +13111,7 @@
 					// HowToSupply
 
 						/*
-						 * Thing > foo > bar > baz > qux > HowToSupply
+						 * Thing > Intangible > baz > qux > HowToSupply
 						 * 
 						 * 
 						 */
@@ -13125,7 +13125,7 @@
 					// HowToTool
 
 						/*
-						 * Thing > foo > bar > baz > qux > HowToTool
+						 * Thing > Intangible > baz > qux > HowToTool
 						 * 
 						 * 
 						 */
@@ -13139,7 +13139,7 @@
 				// HowToSection
 
 					/*
-					 * Thing > foo > bar > baz > HowToSection
+					 * Thing > Intangible > baz > HowToSection
 					 * 
 					 * 
 					 */
@@ -13153,7 +13153,7 @@
 				// HowToStep
 
 					/*
-					 * Thing > foo > bar > baz > HowToStep
+					 * Thing > Intangible > baz > HowToStep
 					 * 
 					 * 
 					 */
@@ -13167,7 +13167,7 @@
 				// HowToTip
 
 					/*
-					 * Thing > foo > bar > baz > HowToTip
+					 * Thing > Intangible > baz > HowToTip
 					 * 
 					 * 
 					 */
@@ -13181,7 +13181,7 @@
 			// MediaSubscription
 
 				/*
-				 * Thing > foo > bar > MediaSubscription
+				 * Thing > Intangible > MediaSubscription
 				 * 
 				 * 
 				 */
@@ -13195,7 +13195,7 @@
 			// MenuItem
 
 				/*
-				 * Thing > foo > bar > MenuItem
+				 * Thing > Intangible > MenuItem
 				 * 
 				 * 
 				 */
@@ -13209,7 +13209,7 @@
 			// MerchantReturnPolicy
 
 				/*
-				 * Thing > foo > bar > MerchantReturnPolicy
+				 * Thing > Intangible > MerchantReturnPolicy
 				 * 
 				 * 
 				 */
@@ -13223,7 +13223,7 @@
 			// MerchantReturnPolicySeasonalOverride
 
 				/*
-				 * Thing > foo > bar > MerchantReturnPolicySeasonalOverride
+				 * Thing > Intangible > MerchantReturnPolicySeasonalOverride
 				 * 
 				 * 
 				 */
@@ -13237,7 +13237,7 @@
 			// Observation
 
 				/*
-				 * Thing > foo > bar > Observation
+				 * Thing > Intangible > Observation
 				 * 
 				 * 
 				 */
@@ -13251,7 +13251,7 @@
 			// Occupation
 
 				/*
-				 * Thing > foo > bar > Occupation
+				 * Thing > Intangible > Occupation
 				 * 
 				 * 
 				 */
@@ -13265,7 +13265,7 @@
 			// OccupationalExperienceRequirements
 
 				/*
-				 * Thing > foo > bar > OccupationalExperienceRequirements
+				 * Thing > Intangible > OccupationalExperienceRequirements
 				 * 
 				 * 
 				 */
@@ -13279,7 +13279,7 @@
 			// Offer
 
 				/*
-				 * Thing > foo > bar > Offer
+				 * Thing > Intangible > Offer
 				 * 
 				 * 
 				 */
@@ -13293,7 +13293,7 @@
 				// AggregateOffer
 
 					/*
-					 * Thing > foo > bar > baz > AggregateOffer
+					 * Thing > Intangible > baz > AggregateOffer
 					 * 
 					 * 
 					 */
@@ -13307,7 +13307,7 @@
 				// OfferForLease
 
 					/*
-					 * Thing > foo > bar > baz > OfferForLease
+					 * Thing > Intangible > baz > OfferForLease
 					 * 
 					 * 
 					 */
@@ -13321,7 +13321,7 @@
 				// OfferForPurchase
 
 					/*
-					 * Thing > foo > bar > baz > OfferForPurchase
+					 * Thing > Intangible > baz > OfferForPurchase
 					 * 
 					 * 
 					 */
@@ -13335,7 +13335,7 @@
 			// Order
 
 				/*
-				 * Thing > foo > bar > Order
+				 * Thing > Intangible > Order
 				 * 
 				 * 
 				 */
@@ -13349,7 +13349,7 @@
 			// OrderItem
 
 				/*
-				 * Thing > foo > bar > OrderItem
+				 * Thing > Intangible > OrderItem
 				 * 
 				 * 
 				 */
@@ -13363,7 +13363,7 @@
 			// ParcelDelivery
 
 				/*
-				 * Thing > foo > bar > ParcelDelivery
+				 * Thing > Intangible > ParcelDelivery
 				 * 
 				 * 
 				 */
@@ -13377,7 +13377,7 @@
 			// Permit
 
 				/*
-				 * Thing > foo > bar > Permit
+				 * Thing > Intangible > Permit
 				 * 
 				 * 
 				 */
@@ -13391,7 +13391,7 @@
 				// GovernmentPermit
 
 					/*
-					 * Thing > foo > bar > baz > GovernmentPermit
+					 * Thing > Intangible > baz > GovernmentPermit
 					 * 
 					 * 
 					 */
@@ -13405,7 +13405,7 @@
 			// ProgramMembership
 
 				/*
-				 * Thing > foo > bar > ProgramMembership
+				 * Thing > Intangible > ProgramMembership
 				 * 
 				 * 
 				 */
@@ -13419,7 +13419,7 @@
 			// Property
 
 				/*
-				 * Thing > foo > bar > Property
+				 * Thing > Intangible > Property
 				 * 
 				 * 
 				 */
@@ -13433,7 +13433,7 @@
 			// PropertyValueSpecification
 
 				/*
-				 * Thing > foo > bar > PropertyValueSpecification
+				 * Thing > Intangible > PropertyValueSpecification
 				 * 
 				 * 
 				 */
@@ -13447,7 +13447,7 @@
 			// Quantity
 
 				/*
-				 * Thing > foo > bar > Quantity
+				 * Thing > Intangible > Quantity
 				 * 
 				 * 
 				 */
@@ -13461,7 +13461,7 @@
 				// Distance
 
 					/*
-					 * Thing > foo > bar > baz > Distance
+					 * Thing > Intangible > baz > Distance
 					 * 
 					 * 
 					 */
@@ -13475,7 +13475,7 @@
 				// Duration
 
 					/*
-					 * Thing > foo > bar > baz > Duration
+					 * Thing > Intangible > baz > Duration
 					 * 
 					 * 
 					 */
@@ -13489,7 +13489,7 @@
 				// Energy
 
 					/*
-					 * Thing > foo > bar > baz > Energy
+					 * Thing > Intangible > baz > Energy
 					 * 
 					 * 
 					 */
@@ -13503,7 +13503,7 @@
 				// Mass
 
 					/*
-					 * Thing > foo > bar > baz > Mass
+					 * Thing > Intangible > baz > Mass
 					 * 
 					 * 
 					 */
@@ -13517,7 +13517,7 @@
 			// Rating
 
 				/*
-				 * Thing > foo > bar > Rating
+				 * Thing > Intangible > Rating
 				 * 
 				 * 
 				 */
@@ -13531,7 +13531,7 @@
 				// AggregateRating
 
 					/*
-					 * Thing > foo > bar > baz > AggregateRating
+					 * Thing > Intangible > baz > AggregateRating
 					 * 
 					 * 
 					 */
@@ -13545,7 +13545,7 @@
 					// EmployerAggregateRating
 
 						/*
-						 * Thing > foo > bar > baz > qux > EmployerAggregateRating
+						 * Thing > Intangible > baz > qux > EmployerAggregateRating
 						 * 
 						 * 
 						 */
@@ -13559,7 +13559,7 @@
 				// EndorsementRating
 
 					/*
-					 * Thing > foo > bar > baz > EndorsementRating
+					 * Thing > Intangible > baz > EndorsementRating
 					 * 
 					 * 
 					 */
@@ -13573,7 +13573,7 @@
 			// Reservation
 
 				/*
-				 * Thing > foo > bar > Reservation
+				 * Thing > Intangible > Reservation
 				 * 
 				 * 
 				 */
@@ -13587,7 +13587,7 @@
 				// BoatReservation
 
 					/*
-					 * Thing > foo > bar > baz > BoatReservation
+					 * Thing > Intangible > baz > BoatReservation
 					 * 
 					 * 
 					 */
@@ -13601,7 +13601,7 @@
 				// BusReservation
 
 					/*
-					 * Thing > foo > bar > baz > BusReservation
+					 * Thing > Intangible > baz > BusReservation
 					 * 
 					 * 
 					 */
@@ -13615,7 +13615,7 @@
 				// EventReservation
 
 					/*
-					 * Thing > foo > bar > baz > EventReservation
+					 * Thing > Intangible > baz > EventReservation
 					 * 
 					 * 
 					 */
@@ -13629,7 +13629,7 @@
 				// FlightReservation
 
 					/*
-					 * Thing > foo > bar > baz > FlightReservation
+					 * Thing > Intangible > baz > FlightReservation
 					 * 
 					 * 
 					 */
@@ -13643,7 +13643,7 @@
 				// FoodEstablishmentReservation
 
 					/*
-					 * Thing > foo > bar > baz > FoodEstablishmentReservation
+					 * Thing > Intangible > baz > FoodEstablishmentReservation
 					 * 
 					 * 
 					 */
@@ -13657,7 +13657,7 @@
 				// LodgingReservation
 
 					/*
-					 * Thing > foo > bar > baz > LodgingReservation
+					 * Thing > Intangible > baz > LodgingReservation
 					 * 
 					 * 
 					 */
@@ -13671,7 +13671,7 @@
 				// RentalCarReservation
 
 					/*
-					 * Thing > foo > bar > baz > RentalCarReservation
+					 * Thing > Intangible > baz > RentalCarReservation
 					 * 
 					 * 
 					 */
@@ -13685,7 +13685,7 @@
 				// ReservationPackage
 
 					/*
-					 * Thing > foo > bar > baz > ReservationPackage
+					 * Thing > Intangible > baz > ReservationPackage
 					 * 
 					 * 
 					 */
@@ -13699,7 +13699,7 @@
 				// TaxiReservation
 
 					/*
-					 * Thing > foo > bar > baz > TaxiReservation
+					 * Thing > Intangible > baz > TaxiReservation
 					 * 
 					 * 
 					 */
@@ -13713,7 +13713,7 @@
 				// TrainReservation
 
 					/*
-					 * Thing > foo > bar > baz > TrainReservation
+					 * Thing > Intangible > baz > TrainReservation
 					 * 
 					 * 
 					 */
@@ -13727,7 +13727,7 @@
 			// Role
 
 				/*
-				 * Thing > foo > bar > Role
+				 * Thing > Intangible > Role
 				 * 
 				 * 
 				 */
@@ -13741,7 +13741,7 @@
 				// LinkRole
 
 					/*
-					 * Thing > foo > bar > baz > LinkRole
+					 * Thing > Intangible > baz > LinkRole
 					 * 
 					 * 
 					 */
@@ -13755,7 +13755,7 @@
 				// OrganizationRole
 
 					/*
-					 * Thing > foo > bar > baz > OrganizationRole
+					 * Thing > Intangible > baz > OrganizationRole
 					 * 
 					 * 
 					 */
@@ -13769,7 +13769,7 @@
 					// EmployeeRole
 
 						/*
-						 * Thing > foo > bar > baz > qux > EmployeeRole
+						 * Thing > Intangible > baz > qux > EmployeeRole
 						 * 
 						 * 
 						 */
@@ -13783,7 +13783,7 @@
 				// PerformanceRole
 
 					/*
-					 * Thing > foo > bar > baz > PerformanceRole
+					 * Thing > Intangible > baz > PerformanceRole
 					 * 
 					 * 
 					 */
@@ -13797,7 +13797,7 @@
 			// Schedule
 
 				/*
-				 * Thing > foo > bar > Schedule
+				 * Thing > Intangible > Schedule
 				 * 
 				 * 
 				 */
@@ -13811,7 +13811,7 @@
 			// Seat
 
 				/*
-				 * Thing > foo > bar > Seat
+				 * Thing > Intangible > Seat
 				 * 
 				 * 
 				 */
@@ -13825,7 +13825,7 @@
 			// Series
 
 				/*
-				 * Thing > foo > bar > Series
+				 * Thing > Intangible > Series
 				 * 
 				 * 
 				 */
@@ -13839,7 +13839,7 @@
 				// CreativeWorkSeries
 
 					/*
-					 * Thing > foo > bar > baz > CreativeWorkSeries
+					 * Thing > Intangible > baz > CreativeWorkSeries
 					 * 
 					 * 
 					 */
@@ -13853,7 +13853,7 @@
 				// EventSeries
 
 					/*
-					 * Thing > foo > bar > baz > EventSeries
+					 * Thing > Intangible > baz > EventSeries
 					 * 
 					 * 
 					 */
@@ -13867,7 +13867,7 @@
 			// Service
 
 				/*
-				 * Thing > foo > bar > Service
+				 * Thing > Intangible > Service
 				 * 
 				 * 
 				 */
@@ -13881,7 +13881,7 @@
 				// BroadcastService
 
 					/*
-					 * Thing > foo > bar > baz > BroadcastService
+					 * Thing > Intangible > baz > BroadcastService
 					 * 
 					 * 
 					 */
@@ -13895,7 +13895,7 @@
 					// RadioBroadcastService
 
 						/*
-						 * Thing > foo > bar > baz > qux > RadioBroadcastService
+						 * Thing > Intangible > baz > qux > RadioBroadcastService
 						 * 
 						 * 
 						 */
@@ -13909,7 +13909,7 @@
 				// CableOrSatelliteService
 
 					/*
-					 * Thing > foo > bar > baz > CableOrSatelliteService
+					 * Thing > Intangible > baz > CableOrSatelliteService
 					 * 
 					 * 
 					 */
@@ -13923,7 +13923,7 @@
 				// FinancialProduct
 
 					/*
-					 * Thing > foo > bar > baz > FinancialProduct
+					 * Thing > Intangible > baz > FinancialProduct
 					 * 
 					 * 
 					 */
@@ -13937,7 +13937,7 @@
 					// BankAccount
 
 						/*
-						 * Thing > foo > bar > baz > qux > BankAccount
+						 * Thing > Intangible > baz > qux > BankAccount
 						 * 
 						 * 
 						 */
@@ -13951,7 +13951,7 @@
 						// DepositAccount
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > DepositAccount
+							 * Thing > Intangible > baz > qux > quux > DepositAccount
 							 * 
 							 * 
 							 */
@@ -13965,7 +13965,7 @@
 					// CurrencyConversionService
 
 						/*
-						 * Thing > foo > bar > baz > qux > CurrencyConversionService
+						 * Thing > Intangible > baz > qux > CurrencyConversionService
 						 * 
 						 * 
 						 */
@@ -13979,7 +13979,7 @@
 					// InvestmentOrDeposit
 
 						/*
-						 * Thing > foo > bar > baz > qux > InvestmentOrDeposit
+						 * Thing > Intangible > baz > qux > InvestmentOrDeposit
 						 * 
 						 * 
 						 */
@@ -13993,7 +13993,7 @@
 						// BrokerageAccount
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > BrokerageAccount
+							 * Thing > Intangible > baz > qux > quux > BrokerageAccount
 							 * 
 							 * 
 							 */
@@ -14007,7 +14007,7 @@
 						// DepositAccount
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > DepositAccount
+							 * Thing > Intangible > baz > qux > quux > DepositAccount
 							 * 
 							 * 
 							 */
@@ -14021,7 +14021,7 @@
 						// InvestmentFund
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > InvestmentFund
+							 * Thing > Intangible > baz > qux > quux > InvestmentFund
 							 * 
 							 * 
 							 */
@@ -14035,7 +14035,7 @@
 					// LoanOrCredit
 
 						/*
-						 * Thing > foo > bar > baz > qux > LoanOrCredit
+						 * Thing > Intangible > baz > qux > LoanOrCredit
 						 * 
 						 * 
 						 */
@@ -14049,7 +14049,7 @@
 						// CreditCard
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CreditCard
+							 * Thing > Intangible > baz > qux > quux > CreditCard
 							 * 
 							 * 
 							 */
@@ -14063,7 +14063,7 @@
 						// MortgageLoan
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > MortgageLoan
+							 * Thing > Intangible > baz > qux > quux > MortgageLoan
 							 * 
 							 * 
 							 */
@@ -14077,7 +14077,7 @@
 					// PaymentCard
 
 						/*
-						 * Thing > foo > bar > baz > qux > PaymentCard
+						 * Thing > Intangible > baz > qux > PaymentCard
 						 * 
 						 * 
 						 */
@@ -14091,7 +14091,7 @@
 					// PaymentService
 
 						/*
-						 * Thing > foo > bar > baz > qux > PaymentService
+						 * Thing > Intangible > baz > qux > PaymentService
 						 * 
 						 * 
 						 */
@@ -14105,7 +14105,7 @@
 				// FoodService
 
 					/*
-					 * Thing > foo > bar > baz > FoodService
+					 * Thing > Intangible > baz > FoodService
 					 * 
 					 * 
 					 */
@@ -14119,7 +14119,7 @@
 				// GovernmentService
 
 					/*
-					 * Thing > foo > bar > baz > GovernmentService
+					 * Thing > Intangible > baz > GovernmentService
 					 * 
 					 * 
 					 */
@@ -14133,7 +14133,7 @@
 				// Taxi
 
 					/*
-					 * Thing > foo > bar > baz > Taxi
+					 * Thing > Intangible > baz > Taxi
 					 * 
 					 * 
 					 */
@@ -14147,7 +14147,7 @@
 				// TaxiService
 
 					/*
-					 * Thing > foo > bar > baz > TaxiService
+					 * Thing > Intangible > baz > TaxiService
 					 * 
 					 * 
 					 */
@@ -14161,7 +14161,7 @@
 				// WebAPI
 
 					/*
-					 * Thing > foo > bar > baz > WebAPI
+					 * Thing > Intangible > baz > WebAPI
 					 * 
 					 * 
 					 */
@@ -14175,7 +14175,7 @@
 			// ServiceChannel
 
 				/*
-				 * Thing > foo > bar > ServiceChannel
+				 * Thing > Intangible > ServiceChannel
 				 * 
 				 * 
 				 */
@@ -14189,7 +14189,7 @@
 			// SpeakableSpecification
 
 				/*
-				 * Thing > foo > bar > SpeakableSpecification
+				 * Thing > Intangible > SpeakableSpecification
 				 * 
 				 * 
 				 */
@@ -14203,7 +14203,7 @@
 			// StatisticalPopulation
 
 				/*
-				 * Thing > foo > bar > StatisticalPopulation
+				 * Thing > Intangible > StatisticalPopulation
 				 * 
 				 * 
 				 */
@@ -14217,7 +14217,7 @@
 			// StructuredValue
 
 				/*
-				 * Thing > foo > bar > StructuredValue
+				 * Thing > Intangible > StructuredValue
 				 * 
 				 * 
 				 */
@@ -14231,7 +14231,7 @@
 				// CDCPMDRecord
 
 					/*
-					 * Thing > foo > bar > baz > CDCPMDRecord
+					 * Thing > Intangible > baz > CDCPMDRecord
 					 * 
 					 * 
 					 */
@@ -14245,7 +14245,7 @@
 				// ContactPoint
 
 					/*
-					 * Thing > foo > bar > baz > ContactPoint
+					 * Thing > Intangible > baz > ContactPoint
 					 * 
 					 * 
 					 */
@@ -14259,7 +14259,7 @@
 					// PostalAddress
 
 						/*
-						 * Thing > foo > bar > baz > qux > PostalAddress
+						 * Thing > Intangible > baz > qux > PostalAddress
 						 * 
 						 * 
 						 */
@@ -14273,7 +14273,7 @@
 				// DatedMoneySpecification
 
 					/*
-					 * Thing > foo > bar > baz > DatedMoneySpecification
+					 * Thing > Intangible > baz > DatedMoneySpecification
 					 * 
 					 * 
 					 */
@@ -14287,7 +14287,7 @@
 				// DefinedRegion
 
 					/*
-					 * Thing > foo > bar > baz > DefinedRegion
+					 * Thing > Intangible > baz > DefinedRegion
 					 * 
 					 * 
 					 */
@@ -14301,7 +14301,7 @@
 				// DeliveryTimeSettings
 
 					/*
-					 * Thing > foo > bar > baz > DeliveryTimeSettings
+					 * Thing > Intangible > baz > DeliveryTimeSettings
 					 * 
 					 * 
 					 */
@@ -14315,7 +14315,7 @@
 				// EngineSpecification
 
 					/*
-					 * Thing > foo > bar > baz > EngineSpecification
+					 * Thing > Intangible > baz > EngineSpecification
 					 * 
 					 * 
 					 */
@@ -14329,7 +14329,7 @@
 				// ExchangeRateSpecification
 
 					/*
-					 * Thing > foo > bar > baz > ExchangeRateSpecification
+					 * Thing > Intangible > baz > ExchangeRateSpecification
 					 * 
 					 * 
 					 */
@@ -14343,7 +14343,7 @@
 				// GeoCoordinates
 
 					/*
-					 * Thing > foo > bar > baz > GeoCoordinates
+					 * Thing > Intangible > baz > GeoCoordinates
 					 * 
 					 * 
 					 */
@@ -14357,7 +14357,7 @@
 				// GeoShape
 
 					/*
-					 * Thing > foo > bar > baz > GeoShape
+					 * Thing > Intangible > baz > GeoShape
 					 * 
 					 * 
 					 */
@@ -14371,7 +14371,7 @@
 					// GeoCircle
 
 						/*
-						 * Thing > foo > bar > baz > qux > GeoCircle
+						 * Thing > Intangible > baz > qux > GeoCircle
 						 * 
 						 * 
 						 */
@@ -14385,7 +14385,7 @@
 				// InteractionCounter
 
 					/*
-					 * Thing > foo > bar > baz > InteractionCounter
+					 * Thing > Intangible > baz > InteractionCounter
 					 * 
 					 * 
 					 */
@@ -14399,7 +14399,7 @@
 				// MonetaryAmount
 
 					/*
-					 * Thing > foo > bar > baz > MonetaryAmount
+					 * Thing > Intangible > baz > MonetaryAmount
 					 * 
 					 * 
 					 */
@@ -14413,7 +14413,7 @@
 				// NutritionInformation
 
 					/*
-					 * Thing > foo > bar > baz > NutritionInformation
+					 * Thing > Intangible > baz > NutritionInformation
 					 * 
 					 * 
 					 */
@@ -14427,7 +14427,7 @@
 				// OfferShippingDetails
 
 					/*
-					 * Thing > foo > bar > baz > OfferShippingDetails
+					 * Thing > Intangible > baz > OfferShippingDetails
 					 * 
 					 * 
 					 */
@@ -14441,7 +14441,7 @@
 				// OpeningHoursSpecification
 
 					/*
-					 * Thing > foo > bar > baz > OpeningHoursSpecification
+					 * Thing > Intangible > baz > OpeningHoursSpecification
 					 * 
 					 * 
 					 */
@@ -14455,7 +14455,7 @@
 				// OwnershipInfo
 
 					/*
-					 * Thing > foo > bar > baz > OwnershipInfo
+					 * Thing > Intangible > baz > OwnershipInfo
 					 * 
 					 * 
 					 */
@@ -14469,7 +14469,7 @@
 				// PostalCodeRangeSpecification
 
 					/*
-					 * Thing > foo > bar > baz > PostalCodeRangeSpecification
+					 * Thing > Intangible > baz > PostalCodeRangeSpecification
 					 * 
 					 * 
 					 */
@@ -14483,7 +14483,7 @@
 				// PriceSpecification
 
 					/*
-					 * Thing > foo > bar > baz > PriceSpecification
+					 * Thing > Intangible > baz > PriceSpecification
 					 * 
 					 * 
 					 */
@@ -14497,7 +14497,7 @@
 					// CompoundPriceSpecification
 
 						/*
-						 * Thing > foo > bar > baz > qux > CompoundPriceSpecification
+						 * Thing > Intangible > baz > qux > CompoundPriceSpecification
 						 * 
 						 * 
 						 */
@@ -14511,7 +14511,7 @@
 					// DeliveryChargeSpecification
 
 						/*
-						 * Thing > foo > bar > baz > qux > DeliveryChargeSpecification
+						 * Thing > Intangible > baz > qux > DeliveryChargeSpecification
 						 * 
 						 * 
 						 */
@@ -14525,7 +14525,7 @@
 					// PaymentChargeSpecification
 
 						/*
-						 * Thing > foo > bar > baz > qux > PaymentChargeSpecification
+						 * Thing > Intangible > baz > qux > PaymentChargeSpecification
 						 * 
 						 * 
 						 */
@@ -14539,7 +14539,7 @@
 					// UnitPriceSpecification
 
 						/*
-						 * Thing > foo > bar > baz > qux > UnitPriceSpecification
+						 * Thing > Intangible > baz > qux > UnitPriceSpecification
 						 * 
 						 * 
 						 */
@@ -14553,7 +14553,7 @@
 				// PropertyValue
 
 					/*
-					 * Thing > foo > bar > baz > PropertyValue
+					 * Thing > Intangible > baz > PropertyValue
 					 * 
 					 * 
 					 */
@@ -14567,7 +14567,7 @@
 					// LocationFeatureSpecification
 
 						/*
-						 * Thing > foo > bar > baz > qux > LocationFeatureSpecification
+						 * Thing > Intangible > baz > qux > LocationFeatureSpecification
 						 * 
 						 * 
 						 */
@@ -14581,7 +14581,7 @@
 				// QuantitativeValue
 
 					/*
-					 * Thing > foo > bar > baz > QuantitativeValue
+					 * Thing > Intangible > baz > QuantitativeValue
 					 * 
 					 * 
 					 */
@@ -14595,7 +14595,7 @@
 					// Observation
 
 						/*
-						 * Thing > foo > bar > baz > qux > Observation
+						 * Thing > Intangible > baz > qux > Observation
 						 * 
 						 * 
 						 */
@@ -14609,7 +14609,7 @@
 				// QuantitativeValueDistribution
 
 					/*
-					 * Thing > foo > bar > baz > QuantitativeValueDistribution
+					 * Thing > Intangible > baz > QuantitativeValueDistribution
 					 * 
 					 * 
 					 */
@@ -14623,7 +14623,7 @@
 					// MonetaryAmountDistribution
 
 						/*
-						 * Thing > foo > bar > baz > qux > MonetaryAmountDistribution
+						 * Thing > Intangible > baz > qux > MonetaryAmountDistribution
 						 * 
 						 * 
 						 */
@@ -14637,7 +14637,7 @@
 				// RepaymentSpecification
 
 					/*
-					 * Thing > foo > bar > baz > RepaymentSpecification
+					 * Thing > Intangible > baz > RepaymentSpecification
 					 * 
 					 * 
 					 */
@@ -14651,7 +14651,7 @@
 				// ShippingDeliveryTime
 
 					/*
-					 * Thing > foo > bar > baz > ShippingDeliveryTime
+					 * Thing > Intangible > baz > ShippingDeliveryTime
 					 * 
 					 * 
 					 */
@@ -14665,7 +14665,7 @@
 				// ShippingRateSettings
 
 					/*
-					 * Thing > foo > bar > baz > ShippingRateSettings
+					 * Thing > Intangible > baz > ShippingRateSettings
 					 * 
 					 * 
 					 */
@@ -14679,7 +14679,7 @@
 				// TypeAndQuantityNode
 
 					/*
-					 * Thing > foo > bar > baz > TypeAndQuantityNode
+					 * Thing > Intangible > baz > TypeAndQuantityNode
 					 * 
 					 * 
 					 */
@@ -14693,7 +14693,7 @@
 				// WarrantyPromise
 
 					/*
-					 * Thing > foo > bar > baz > WarrantyPromise
+					 * Thing > Intangible > baz > WarrantyPromise
 					 * 
 					 * 
 					 */
@@ -14707,7 +14707,7 @@
 			// Ticket
 
 				/*
-				 * Thing > foo > bar > Ticket
+				 * Thing > Intangible > Ticket
 				 * 
 				 * 
 				 */
@@ -14721,7 +14721,7 @@
 			// Trip
 
 				/*
-				 * Thing > foo > bar > Trip
+				 * Thing > Intangible > Trip
 				 * 
 				 * 
 				 */
@@ -14735,7 +14735,7 @@
 				// BoatTrip
 
 					/*
-					 * Thing > foo > bar > baz > BoatTrip
+					 * Thing > Intangible > baz > BoatTrip
 					 * 
 					 * 
 					 */
@@ -14749,7 +14749,7 @@
 				// BusTrip
 
 					/*
-					 * Thing > foo > bar > baz > BusTrip
+					 * Thing > Intangible > baz > BusTrip
 					 * 
 					 * 
 					 */
@@ -14763,7 +14763,7 @@
 				// Flight
 
 					/*
-					 * Thing > foo > bar > baz > Flight
+					 * Thing > Intangible > baz > Flight
 					 * 
 					 * 
 					 */
@@ -14777,7 +14777,7 @@
 				// TouristTrip
 
 					/*
-					 * Thing > foo > bar > baz > TouristTrip
+					 * Thing > Intangible > baz > TouristTrip
 					 * 
 					 * 
 					 */
@@ -14791,7 +14791,7 @@
 				// TrainTrip
 
 					/*
-					 * Thing > foo > bar > baz > TrainTrip
+					 * Thing > Intangible > baz > TrainTrip
 					 * 
 					 * 
 					 */
@@ -14805,7 +14805,7 @@
 			// VirtualLocation
 
 				/*
-				 * Thing > foo > bar > VirtualLocation
+				 * Thing > Intangible > VirtualLocation
 				 * 
 				 * 
 				 */
@@ -14819,7 +14819,7 @@
 		// MedicalEntity
 
 			/*
-			 * Thing > foo > MedicalEntity
+			 * Thing > MedicalEntity
 			 * 
 			 * 
 			 */
@@ -14833,7 +14833,7 @@
 			// AnatomicalStructure
 
 				/*
-				 * Thing > foo > bar > AnatomicalStructure
+				 * Thing > MedicalEntity > AnatomicalStructure
 				 * 
 				 * 
 				 */
@@ -14847,7 +14847,7 @@
 				// Bone
 
 					/*
-					 * Thing > foo > bar > baz > Bone
+					 * Thing > MedicalEntity > baz > Bone
 					 * 
 					 * 
 					 */
@@ -14861,7 +14861,7 @@
 				// BrainStructure
 
 					/*
-					 * Thing > foo > bar > baz > BrainStructure
+					 * Thing > MedicalEntity > baz > BrainStructure
 					 * 
 					 * 
 					 */
@@ -14875,7 +14875,7 @@
 				// Joint
 
 					/*
-					 * Thing > foo > bar > baz > Joint
+					 * Thing > MedicalEntity > baz > Joint
 					 * 
 					 * 
 					 */
@@ -14889,7 +14889,7 @@
 				// Ligament
 
 					/*
-					 * Thing > foo > bar > baz > Ligament
+					 * Thing > MedicalEntity > baz > Ligament
 					 * 
 					 * 
 					 */
@@ -14903,7 +14903,7 @@
 				// Muscle
 
 					/*
-					 * Thing > foo > bar > baz > Muscle
+					 * Thing > MedicalEntity > baz > Muscle
 					 * 
 					 * 
 					 */
@@ -14917,7 +14917,7 @@
 				// Nerve
 
 					/*
-					 * Thing > foo > bar > baz > Nerve
+					 * Thing > MedicalEntity > baz > Nerve
 					 * 
 					 * 
 					 */
@@ -14931,7 +14931,7 @@
 				// Vessel
 
 					/*
-					 * Thing > foo > bar > baz > Vessel
+					 * Thing > MedicalEntity > baz > Vessel
 					 * 
 					 * 
 					 */
@@ -14945,7 +14945,7 @@
 					// Artery
 
 						/*
-						 * Thing > foo > bar > baz > qux > Artery
+						 * Thing > MedicalEntity > baz > qux > Artery
 						 * 
 						 * 
 						 */
@@ -14959,7 +14959,7 @@
 					// LymphaticVessel
 
 						/*
-						 * Thing > foo > bar > baz > qux > LymphaticVessel
+						 * Thing > MedicalEntity > baz > qux > LymphaticVessel
 						 * 
 						 * 
 						 */
@@ -14973,7 +14973,7 @@
 					// Vein
 
 						/*
-						 * Thing > foo > bar > baz > qux > Vein
+						 * Thing > MedicalEntity > baz > qux > Vein
 						 * 
 						 * 
 						 */
@@ -14988,7 +14988,7 @@
 			// AnatomicalSystem
 
 				/*
-				 * Thing > foo > bar > AnatomicalSystem
+				 * Thing > MedicalEntity > AnatomicalSystem
 				 * 
 				 * 
 				 */
@@ -15002,7 +15002,7 @@
 			// DrugClass
 
 				/*
-				 * Thing > foo > bar > DrugClass
+				 * Thing > MedicalEntity > DrugClass
 				 * 
 				 * 
 				 */
@@ -15016,7 +15016,7 @@
 			// DrugCost
 
 				/*
-				 * Thing > foo > bar > DrugCost
+				 * Thing > MedicalEntity > DrugCost
 				 * 
 				 * 
 				 */
@@ -15030,7 +15030,7 @@
 			// LifestyleModification
 
 				/*
-				 * Thing > foo > bar > LifestyleModification
+				 * Thing > MedicalEntity > LifestyleModification
 				 * 
 				 * 
 				 */
@@ -15044,7 +15044,7 @@
 				// Diet
 
 					/*
-					 * Thing > foo > bar > baz > Diet
+					 * Thing > MedicalEntity > baz > Diet
 					 * 
 					 * 
 					 */
@@ -15058,7 +15058,7 @@
 				// PhysicalActivity
 
 					/*
-					 * Thing > foo > bar > baz > PhysicalActivity
+					 * Thing > MedicalEntity > baz > PhysicalActivity
 					 * 
 					 * 
 					 */
@@ -15072,7 +15072,7 @@
 					// ExercisePlan
 
 						/*
-						 * Thing > foo > bar > baz > qux > ExercisePlan
+						 * Thing > MedicalEntity > baz > qux > ExercisePlan
 						 * 
 						 * 
 						 */
@@ -15087,7 +15087,7 @@
 			// MedicalCause
 
 				/*
-				 * Thing > foo > bar > MedicalCause
+				 * Thing > MedicalEntity > MedicalCause
 				 * 
 				 * 
 				 */
@@ -15101,7 +15101,7 @@
 			// MedicalCondition
 
 				/*
-				 * Thing > foo > bar > MedicalCondition
+				 * Thing > MedicalEntity > MedicalCondition
 				 * 
 				 * 
 				 */
@@ -15115,7 +15115,7 @@
 				// InfectiousDisease
 
 					/*
-					 * Thing > foo > bar > baz > InfectiousDisease
+					 * Thing > MedicalEntity > baz > InfectiousDisease
 					 * 
 					 * 
 					 */
@@ -15129,7 +15129,7 @@
 				// MedicalSignOrSymptom
 
 					/*
-					 * Thing > foo > bar > baz > MedicalSignOrSymptom
+					 * Thing > MedicalEntity > baz > MedicalSignOrSymptom
 					 * 
 					 * 
 					 */
@@ -15143,7 +15143,7 @@
 					// MedicalSign
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalSign
+						 * Thing > MedicalEntity > baz > qux > MedicalSign
 						 * 
 						 * 
 						 */
@@ -15157,7 +15157,7 @@
 						// VitalSign
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > VitalSign
+							 * Thing > MedicalEntity > baz > qux > quux > VitalSign
 							 * 
 							 * 
 							 */
@@ -15171,7 +15171,7 @@
 					// MedicalSymptom
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalSymptom
+						 * Thing > MedicalEntity > baz > qux > MedicalSymptom
 						 * 
 						 * 
 						 */
@@ -15186,7 +15186,7 @@
 			// MedicalContraindication
 
 				/*
-				 * Thing > foo > bar > MedicalContraindication
+				 * Thing > MedicalEntity > MedicalContraindication
 				 * 
 				 * 
 				 */
@@ -15200,7 +15200,7 @@
 			// MedicalDevice
 
 				/*
-				 * Thing > foo > bar > MedicalDevice
+				 * Thing > MedicalEntity > MedicalDevice
 				 * 
 				 * 
 				 */
@@ -15214,7 +15214,7 @@
 			// MedicalGuideline
 
 				/*
-				 * Thing > foo > bar > MedicalGuideline
+				 * Thing > MedicalEntity > MedicalGuideline
 				 * 
 				 * 
 				 */
@@ -15228,7 +15228,7 @@
 				// MedicalGuidelineContraindication
 
 					/*
-					 * Thing > foo > bar > baz > MedicalGuidelineContraindication
+					 * Thing > MedicalEntity > baz > MedicalGuidelineContraindication
 					 * 
 					 * 
 					 */
@@ -15242,7 +15242,7 @@
 				// MedicalGuidelineRecommendation
 
 					/*
-					 * Thing > foo > bar > baz > MedicalGuidelineRecommendation
+					 * Thing > MedicalEntity > baz > MedicalGuidelineRecommendation
 					 * 
 					 * 
 					 */
@@ -15256,7 +15256,7 @@
 			// MedicalIndication
 
 				/*
-				 * Thing > foo > bar > MedicalIndication
+				 * Thing > MedicalEntity > MedicalIndication
 				 * 
 				 * 
 				 */
@@ -15270,7 +15270,7 @@
 				// ApprovedIndication
 
 					/*
-					 * Thing > foo > bar > baz > ApprovedIndication
+					 * Thing > MedicalEntity > baz > ApprovedIndication
 					 * 
 					 * 
 					 */
@@ -15284,7 +15284,7 @@
 				// PreventionIndication
 
 					/*
-					 * Thing > foo > bar > baz > PreventionIndication
+					 * Thing > MedicalEntity > baz > PreventionIndication
 					 * 
 					 * 
 					 */
@@ -15298,7 +15298,7 @@
 				// TreatmentIndication
 
 					/*
-					 * Thing > foo > bar > baz > TreatmentIndication
+					 * Thing > MedicalEntity > baz > TreatmentIndication
 					 * 
 					 * 
 					 */
@@ -15312,7 +15312,7 @@
 			// MedicalIntangible
 
 				/*
-				 * Thing > foo > bar > MedicalIntangible
+				 * Thing > MedicalEntity > MedicalIntangible
 				 * 
 				 * 
 				 */
@@ -15326,7 +15326,7 @@
 				// DDxElement
 
 					/*
-					 * Thing > foo > bar > baz > DDxElement
+					 * Thing > MedicalEntity > baz > DDxElement
 					 * 
 					 * 
 					 */
@@ -15340,7 +15340,7 @@
 				// DoseSchedule
 
 					/*
-					 * Thing > foo > bar > baz > DoseSchedule
+					 * Thing > MedicalEntity > baz > DoseSchedule
 					 * 
 					 * 
 					 */
@@ -15354,7 +15354,7 @@
 					// MaximumDoseSchedule
 
 						/*
-						 * Thing > foo > bar > baz > qux > MaximumDoseSchedule
+						 * Thing > MedicalEntity > baz > qux > MaximumDoseSchedule
 						 * 
 						 * 
 						 */
@@ -15368,7 +15368,7 @@
 					// RecommendedDoseSchedule
 
 						/*
-						 * Thing > foo > bar > baz > qux > RecommendedDoseSchedule
+						 * Thing > MedicalEntity > baz > qux > RecommendedDoseSchedule
 						 * 
 						 * 
 						 */
@@ -15382,7 +15382,7 @@
 					// ReportedDoseSchedule
 
 						/*
-						 * Thing > foo > bar > baz > qux > ReportedDoseSchedule
+						 * Thing > MedicalEntity > baz > qux > ReportedDoseSchedule
 						 * 
 						 * 
 						 */
@@ -15396,7 +15396,7 @@
 				// DrugLegalStatus
 
 					/*
-					 * Thing > foo > bar > baz > DrugLegalStatus
+					 * Thing > MedicalEntity > baz > DrugLegalStatus
 					 * 
 					 * 
 					 */
@@ -15410,7 +15410,7 @@
 				// DrugStrength
 
 					/*
-					 * Thing > foo > bar > baz > DrugStrength
+					 * Thing > MedicalEntity > baz > DrugStrength
 					 * 
 					 * 
 					 */
@@ -15424,7 +15424,7 @@
 				// MedicalCode
 
 					/*
-					 * Thing > foo > bar > baz > MedicalCode
+					 * Thing > MedicalEntity > baz > MedicalCode
 					 * 
 					 * 
 					 */
@@ -15438,7 +15438,7 @@
 				// MedicalConditionStage
 
 					/*
-					 * Thing > foo > bar > baz > MedicalConditionStage
+					 * Thing > MedicalEntity > baz > MedicalConditionStage
 					 * 
 					 * 
 					 */
@@ -15452,7 +15452,7 @@
 			// MedicalProcedure
 
 				/*
-				 * Thing > foo > bar > MedicalProcedure
+				 * Thing > MedicalEntity > MedicalProcedure
 				 * 
 				 * 
 				 */
@@ -15466,7 +15466,7 @@
 				// DiagnosticProcedure
 
 					/*
-					 * Thing > foo > bar > baz > DiagnosticProcedure
+					 * Thing > MedicalEntity > baz > DiagnosticProcedure
 					 * 
 					 * 
 					 */
@@ -15480,7 +15480,7 @@
 				// PalliativeProcedure
 
 					/*
-					 * Thing > foo > bar > baz > PalliativeProcedure
+					 * Thing > MedicalEntity > baz > PalliativeProcedure
 					 * 
 					 * 
 					 */
@@ -15494,7 +15494,7 @@
 				// PhysicalExam
 
 					/*
-					 * Thing > foo > bar > baz > PhysicalExam
+					 * Thing > MedicalEntity > baz > PhysicalExam
 					 * 
 					 * 
 					 */
@@ -15508,7 +15508,7 @@
 				// SurgicalProcedure
 
 					/*
-					 * Thing > foo > bar > baz > SurgicalProcedure
+					 * Thing > MedicalEntity > baz > SurgicalProcedure
 					 * 
 					 * 
 					 */
@@ -15522,7 +15522,7 @@
 				// TherapeuticProcedure
 
 					/*
-					 * Thing > foo > bar > baz > TherapeuticProcedure
+					 * Thing > MedicalEntity > baz > TherapeuticProcedure
 					 * 
 					 * 
 					 */
@@ -15536,7 +15536,7 @@
 					// MedicalTherapy
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalTherapy
+						 * Thing > MedicalEntity > baz > qux > MedicalTherapy
 						 * 
 						 * 
 						 */
@@ -15550,7 +15550,7 @@
 						// OccupationalTherapy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > OccupationalTherapy
+							 * Thing > MedicalEntity > baz > qux > quux > OccupationalTherapy
 							 * 
 							 * 
 							 */
@@ -15564,7 +15564,7 @@
 						// PalliativeProcedure
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PalliativeProcedure
+							 * Thing > MedicalEntity > baz > qux > quux > PalliativeProcedure
 							 * 
 							 * 
 							 */
@@ -15578,7 +15578,7 @@
 						// PhysicalTherapy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > PhysicalTherapy
+							 * Thing > MedicalEntity > baz > qux > quux > PhysicalTherapy
 							 * 
 							 * 
 							 */
@@ -15592,7 +15592,7 @@
 						// RadiationTherapy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RadiationTherapy
+							 * Thing > MedicalEntity > baz > qux > quux > RadiationTherapy
 							 * 
 							 * 
 							 */
@@ -15606,7 +15606,7 @@
 						// RespiratoryTherapy
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > RespiratoryTherapy
+							 * Thing > MedicalEntity > baz > qux > quux > RespiratoryTherapy
 							 * 
 							 * 
 							 */
@@ -15620,7 +15620,7 @@
 					// PsychologicalTreatment
 
 						/*
-						 * Thing > foo > bar > baz > qux > PsychologicalTreatment
+						 * Thing > MedicalEntity > baz > qux > PsychologicalTreatment
 						 * 
 						 * 
 						 */
@@ -15635,7 +15635,7 @@
 			// MedicalRiskEstimator
 
 				/*
-				 * Thing > foo > bar > MedicalRiskEstimator
+				 * Thing > MedicalEntity > MedicalRiskEstimator
 				 * 
 				 * 
 				 */
@@ -15649,7 +15649,7 @@
 				// MedicalRiskCalculator
 
 					/*
-					 * Thing > foo > bar > baz > MedicalRiskCalculator
+					 * Thing > MedicalEntity > baz > MedicalRiskCalculator
 					 * 
 					 * 
 					 */
@@ -15663,7 +15663,7 @@
 				// MedicalRiskScore
 
 					/*
-					 * Thing > foo > bar > baz > MedicalRiskScore
+					 * Thing > MedicalEntity > baz > MedicalRiskScore
 					 * 
 					 * 
 					 */
@@ -15677,7 +15677,7 @@
 			// MedicalRiskFactor
 
 				/*
-				 * Thing > foo > bar > MedicalRiskFactor
+				 * Thing > MedicalEntity > MedicalRiskFactor
 				 * 
 				 * 
 				 */
@@ -15691,7 +15691,7 @@
 			// MedicalStudy
 
 				/*
-				 * Thing > foo > bar > MedicalStudy
+				 * Thing > MedicalEntity > MedicalStudy
 				 * 
 				 * 
 				 */
@@ -15705,7 +15705,7 @@
 				// MedicalObservationalStudy
 
 					/*
-					 * Thing > foo > bar > baz > MedicalObservationalStudy
+					 * Thing > MedicalEntity > baz > MedicalObservationalStudy
 					 * 
 					 * 
 					 */
@@ -15719,7 +15719,7 @@
 				// MedicalTrial
 
 					/*
-					 * Thing > foo > bar > baz > MedicalTrial
+					 * Thing > MedicalEntity > baz > MedicalTrial
 					 * 
 					 * 
 					 */
@@ -15733,7 +15733,7 @@
 			// MedicalTest
 
 				/*
-				 * Thing > foo > bar > MedicalTest
+				 * Thing > MedicalEntity > MedicalTest
 				 * 
 				 * 
 				 */
@@ -15747,7 +15747,7 @@
 				// BloodTest
 
 					/*
-					 * Thing > foo > bar > baz > BloodTest
+					 * Thing > MedicalEntity > baz > BloodTest
 					 * 
 					 * 
 					 */
@@ -15761,7 +15761,7 @@
 				// ImagingTest
 
 					/*
-					 * Thing > foo > bar > baz > ImagingTest
+					 * Thing > MedicalEntity > baz > ImagingTest
 					 * 
 					 * 
 					 */
@@ -15775,7 +15775,7 @@
 				// MedicalTestPanel
 
 					/*
-					 * Thing > foo > bar > baz > MedicalTestPanel
+					 * Thing > MedicalEntity > baz > MedicalTestPanel
 					 * 
 					 * 
 					 */
@@ -15789,7 +15789,7 @@
 				// PathologyTest
 
 					/*
-					 * Thing > foo > bar > baz > PathologyTest
+					 * Thing > MedicalEntity > baz > PathologyTest
 					 * 
 					 * 
 					 */
@@ -15803,7 +15803,7 @@
 			// Substance
 
 				/*
-				 * Thing > foo > bar > Substance
+				 * Thing > MedicalEntity > Substance
 				 * 
 				 * 
 				 */
@@ -15817,7 +15817,7 @@
 				// DietarySupplement
 
 					/*
-					 * Thing > foo > bar > baz > DietarySupplement
+					 * Thing > MedicalEntity > baz > DietarySupplement
 					 * 
 					 * 
 					 */
@@ -15831,7 +15831,7 @@
 				// Drug
 
 					/*
-					 * Thing > foo > bar > baz > Drug
+					 * Thing > MedicalEntity > baz > Drug
 					 * 
 					 * 
 					 */
@@ -15845,7 +15845,7 @@
 			// SuperficialAnatomy
 
 				/*
-				 * Thing > foo > bar > SuperficialAnatomy
+				 * Thing > MedicalEntity > SuperficialAnatomy
 				 * 
 				 * 
 				 */
@@ -15859,7 +15859,7 @@
 		// Organization
 
 			/*
-			 * Thing > foo > Organization
+			 * Thing > Organization
 			 * 
 			 * 
 			 */
@@ -15873,7 +15873,7 @@
 			// Airline
 
 				/*
-				 * Thing > foo > bar > Airline
+				 * Thing > Organization > Airline
 				 * 
 				 * 
 				 */
@@ -15887,7 +15887,7 @@
 			// Consortium
 
 				/*
-				 * Thing > foo > bar > Consortium
+				 * Thing > Organization > Consortium
 				 * 
 				 * 
 				 */
@@ -15901,7 +15901,7 @@
 			// Corporation
 
 				/*
-				 * Thing > foo > bar > Corporation
+				 * Thing > Organization > Corporation
 				 * 
 				 * 
 				 */
@@ -15915,7 +15915,7 @@
 			// EducationalOrganization
 
 				/*
-				 * Thing > foo > bar > EducationalOrganization
+				 * Thing > Organization > EducationalOrganization
 				 * 
 				 * 
 				 */
@@ -15929,7 +15929,7 @@
 				// CollegeOrUniversity
 
 					/*
-					 * Thing > foo > bar > baz > CollegeOrUniversity
+					 * Thing > Organization > baz > CollegeOrUniversity
 					 * 
 					 * 
 					 */
@@ -15943,7 +15943,7 @@
 				// ElementarySchool
 
 					/*
-					 * Thing > foo > bar > baz > ElementarySchool
+					 * Thing > Organization > baz > ElementarySchool
 					 * 
 					 * 
 					 */
@@ -15957,7 +15957,7 @@
 				// HighSchool
 
 					/*
-					 * Thing > foo > bar > baz > HighSchool
+					 * Thing > Organization > baz > HighSchool
 					 * 
 					 * 
 					 */
@@ -15971,7 +15971,7 @@
 				// MiddleSchool
 
 					/*
-					 * Thing > foo > bar > baz > MiddleSchool
+					 * Thing > Organization > baz > MiddleSchool
 					 * 
 					 * 
 					 */
@@ -15985,7 +15985,7 @@
 				// Preschool
 
 					/*
-					 * Thing > foo > bar > baz > Preschool
+					 * Thing > Organization > baz > Preschool
 					 * 
 					 * 
 					 */
@@ -15999,7 +15999,7 @@
 				// School
 
 					/*
-					 * Thing > foo > bar > baz > School
+					 * Thing > Organization > baz > School
 					 * 
 					 * 
 					 */
@@ -16013,7 +16013,7 @@
 			// FundingScheme
 
 				/*
-				 * Thing > foo > bar > FundingScheme
+				 * Thing > Organization > FundingScheme
 				 * 
 				 * 
 				 */
@@ -16027,7 +16027,7 @@
 			// GovernmentOrganization
 
 				/*
-				 * Thing > foo > bar > GovernmentOrganization
+				 * Thing > Organization > GovernmentOrganization
 				 * 
 				 * 
 				 */
@@ -16041,7 +16041,7 @@
 			// LibrarySystem
 
 				/*
-				 * Thing > foo > bar > LibrarySystem
+				 * Thing > Organization > LibrarySystem
 				 * 
 				 * 
 				 */
@@ -16055,7 +16055,7 @@
 			// LocalBusiness
 
 				/*
-				 * Thing > foo > bar > LocalBusiness
+				 * Thing > Organization > LocalBusiness
 				 * 
 				 * 
 				 */
@@ -16069,7 +16069,7 @@
 				// AnimalShelter
 
 					/*
-					 * Thing > foo > bar > baz > AnimalShelter
+					 * Thing > Organization > baz > AnimalShelter
 					 * 
 					 * 
 					 */
@@ -16083,7 +16083,7 @@
 				// ArchiveOrganization
 
 					/*
-					 * Thing > foo > bar > baz > ArchiveOrganization
+					 * Thing > Organization > baz > ArchiveOrganization
 					 * 
 					 * 
 					 */
@@ -16097,7 +16097,7 @@
 				// AutomotiveBusiness
 
 					/*
-					 * Thing > foo > bar > baz > AutomotiveBusiness
+					 * Thing > Organization > baz > AutomotiveBusiness
 					 * 
 					 * 
 					 */
@@ -16111,7 +16111,7 @@
 					// AutoBodyShop
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoBodyShop
+						 * Thing > Organization > baz > qux > AutoBodyShop
 						 * 
 						 * 
 						 */
@@ -16125,7 +16125,7 @@
 					// AutoDealer
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoDealer
+						 * Thing > Organization > baz > qux > AutoDealer
 						 * 
 						 * 
 						 */
@@ -16139,7 +16139,7 @@
 					// AutoPartsStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoPartsStore
+						 * Thing > Organization > baz > qux > AutoPartsStore
 						 * 
 						 * 
 						 */
@@ -16153,7 +16153,7 @@
 					// AutoRental
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoRental
+						 * Thing > Organization > baz > qux > AutoRental
 						 * 
 						 * 
 						 */
@@ -16167,7 +16167,7 @@
 					// AutoRepair
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoRepair
+						 * Thing > Organization > baz > qux > AutoRepair
 						 * 
 						 * 
 						 */
@@ -16181,7 +16181,7 @@
 					// AutoWash
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoWash
+						 * Thing > Organization > baz > qux > AutoWash
 						 * 
 						 * 
 						 */
@@ -16195,7 +16195,7 @@
 					// GasStation
 
 						/*
-						 * Thing > foo > bar > baz > qux > GasStation
+						 * Thing > Organization > baz > qux > GasStation
 						 * 
 						 * 
 						 */
@@ -16209,7 +16209,7 @@
 					// MotorcycleDealer
 
 						/*
-						 * Thing > foo > bar > baz > qux > MotorcycleDealer
+						 * Thing > Organization > baz > qux > MotorcycleDealer
 						 * 
 						 * 
 						 */
@@ -16223,7 +16223,7 @@
 					// MotorcycleRepair
 
 						/*
-						 * Thing > foo > bar > baz > qux > MotorcycleRepair
+						 * Thing > Organization > baz > qux > MotorcycleRepair
 						 * 
 						 * 
 						 */
@@ -16237,7 +16237,7 @@
 				// ChildCare
 
 					/*
-					 * Thing > foo > bar > baz > ChildCare
+					 * Thing > Organization > baz > ChildCare
 					 * 
 					 * 
 					 */
@@ -16251,7 +16251,7 @@
 				// Dentist
 
 					/*
-					 * Thing > foo > bar > baz > Dentist
+					 * Thing > Organization > baz > Dentist
 					 * 
 					 * 
 					 */
@@ -16265,7 +16265,7 @@
 				// DryCleaningOrLaundry
 
 					/*
-					 * Thing > foo > bar > baz > DryCleaningOrLaundry
+					 * Thing > Organization > baz > DryCleaningOrLaundry
 					 * 
 					 * 
 					 */
@@ -16279,7 +16279,7 @@
 				// EmergencyService
 
 					/*
-					 * Thing > foo > bar > baz > EmergencyService
+					 * Thing > Organization > baz > EmergencyService
 					 * 
 					 * 
 					 */
@@ -16293,7 +16293,7 @@
 					// FireStation
 
 						/*
-						 * Thing > foo > bar > baz > qux > FireStation
+						 * Thing > Organization > baz > qux > FireStation
 						 * 
 						 * 
 						 */
@@ -16307,7 +16307,7 @@
 					// Hospital
 
 						/*
-						 * Thing > foo > bar > baz > qux > Hospital
+						 * Thing > Organization > baz > qux > Hospital
 						 * 
 						 * 
 						 */
@@ -16321,7 +16321,7 @@
 					// PoliceStation
 
 						/*
-						 * Thing > foo > bar > baz > qux > PoliceStation
+						 * Thing > Organization > baz > qux > PoliceStation
 						 * 
 						 * 
 						 */
@@ -16335,7 +16335,7 @@
 				// EmploymentAgency
 
 					/*
-					 * Thing > foo > bar > baz > EmploymentAgency
+					 * Thing > Organization > baz > EmploymentAgency
 					 * 
 					 * 
 					 */
@@ -16349,7 +16349,7 @@
 				// EntertainmentBusiness
 
 					/*
-					 * Thing > foo > bar > baz > EntertainmentBusiness
+					 * Thing > Organization > baz > EntertainmentBusiness
 					 * 
 					 * 
 					 */
@@ -16363,7 +16363,7 @@
 					// AdultEntertainment
 
 						/*
-						 * Thing > foo > bar > baz > qux > AdultEntertainment
+						 * Thing > Organization > baz > qux > AdultEntertainment
 						 * 
 						 * 
 						 */
@@ -16377,7 +16377,7 @@
 					// AmusementPark
 
 						/*
-						 * Thing > foo > bar > baz > qux > AmusementPark
+						 * Thing > Organization > baz > qux > AmusementPark
 						 * 
 						 * 
 						 */
@@ -16391,7 +16391,7 @@
 					// ArtGallery
 
 						/*
-						 * Thing > foo > bar > baz > qux > ArtGallery
+						 * Thing > Organization > baz > qux > ArtGallery
 						 * 
 						 * 
 						 */
@@ -16405,7 +16405,7 @@
 					// Casino
 
 						/*
-						 * Thing > foo > bar > baz > qux > Casino
+						 * Thing > Organization > baz > qux > Casino
 						 * 
 						 * 
 						 */
@@ -16419,7 +16419,7 @@
 					// ComedyClub
 
 						/*
-						 * Thing > foo > bar > baz > qux > ComedyClub
+						 * Thing > Organization > baz > qux > ComedyClub
 						 * 
 						 * 
 						 */
@@ -16433,7 +16433,7 @@
 					// MovieTheater
 
 						/*
-						 * Thing > foo > bar > baz > qux > MovieTheater
+						 * Thing > Organization > baz > qux > MovieTheater
 						 * 
 						 * 
 						 */
@@ -16447,7 +16447,7 @@
 					// NightClub
 
 						/*
-						 * Thing > foo > bar > baz > qux > NightClub
+						 * Thing > Organization > baz > qux > NightClub
 						 * 
 						 * 
 						 */
@@ -16461,7 +16461,7 @@
 				// FinancialService
 
 					/*
-					 * Thing > foo > bar > baz > FinancialService
+					 * Thing > Organization > baz > FinancialService
 					 * 
 					 * 
 					 */
@@ -16475,7 +16475,7 @@
 					// AccountingService
 
 						/*
-						 * Thing > foo > bar > baz > qux > AccountingService
+						 * Thing > Organization > baz > qux > AccountingService
 						 * 
 						 * 
 						 */
@@ -16489,7 +16489,7 @@
 					// AutomatedTeller
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutomatedTeller
+						 * Thing > Organization > baz > qux > AutomatedTeller
 						 * 
 						 * 
 						 */
@@ -16503,7 +16503,7 @@
 					// BankOrCreditUnion
 
 						/*
-						 * Thing > foo > bar > baz > qux > BankOrCreditUnion
+						 * Thing > Organization > baz > qux > BankOrCreditUnion
 						 * 
 						 * 
 						 */
@@ -16517,7 +16517,7 @@
 					// InsuranceAgency
 
 						/*
-						 * Thing > foo > bar > baz > qux > InsuranceAgency
+						 * Thing > Organization > baz > qux > InsuranceAgency
 						 * 
 						 * 
 						 */
@@ -16531,7 +16531,7 @@
 				// FoodEstablishment
 
 					/*
-					 * Thing > foo > bar > baz > FoodEstablishment
+					 * Thing > Organization > baz > FoodEstablishment
 					 * 
 					 * 
 					 */
@@ -16545,7 +16545,7 @@
 					// Bakery
 
 						/*
-						 * Thing > foo > bar > baz > qux > Bakery
+						 * Thing > Organization > baz > qux > Bakery
 						 * 
 						 * 
 						 */
@@ -16559,7 +16559,7 @@
 					// BarOrPub
 
 						/*
-						 * Thing > foo > bar > baz > qux > BarOrPub
+						 * Thing > Organization > baz > qux > BarOrPub
 						 * 
 						 * 
 						 */
@@ -16573,7 +16573,7 @@
 					// Brewery
 
 						/*
-						 * Thing > foo > bar > baz > qux > Brewery
+						 * Thing > Organization > baz > qux > Brewery
 						 * 
 						 * 
 						 */
@@ -16587,7 +16587,7 @@
 					// CafeOrCoffeeShop
 
 						/*
-						 * Thing > foo > bar > baz > qux > CafeOrCoffeeShop
+						 * Thing > Organization > baz > qux > CafeOrCoffeeShop
 						 * 
 						 * 
 						 */
@@ -16601,7 +16601,7 @@
 					// Distillery
 
 						/*
-						 * Thing > foo > bar > baz > qux > Distillery
+						 * Thing > Organization > baz > qux > Distillery
 						 * 
 						 * 
 						 */
@@ -16615,7 +16615,7 @@
 					// FastFoodRestaurant
 
 						/*
-						 * Thing > foo > bar > baz > qux > FastFoodRestaurant
+						 * Thing > Organization > baz > qux > FastFoodRestaurant
 						 * 
 						 * 
 						 */
@@ -16629,7 +16629,7 @@
 					// IceCreamShop
 
 						/*
-						 * Thing > foo > bar > baz > qux > IceCreamShop
+						 * Thing > Organization > baz > qux > IceCreamShop
 						 * 
 						 * 
 						 */
@@ -16643,7 +16643,7 @@
 					// Restaurant
 
 						/*
-						 * Thing > foo > bar > baz > qux > Restaurant
+						 * Thing > Organization > baz > qux > Restaurant
 						 * 
 						 * 
 						 */
@@ -16657,7 +16657,7 @@
 					// Winery
 
 						/*
-						 * Thing > foo > bar > baz > qux > Winery
+						 * Thing > Organization > baz > qux > Winery
 						 * 
 						 * 
 						 */
@@ -16671,7 +16671,7 @@
 				// GovernmentOffice
 
 					/*
-					 * Thing > foo > bar > baz > GovernmentOffice
+					 * Thing > Organization > baz > GovernmentOffice
 					 * 
 					 * 
 					 */
@@ -16685,7 +16685,7 @@
 					// PostOffice
 
 						/*
-						 * Thing > foo > bar > baz > qux > PostOffice
+						 * Thing > Organization > baz > qux > PostOffice
 						 * 
 						 * 
 						 */
@@ -16699,7 +16699,7 @@
 				// HealthAndBeautyBusiness
 
 					/*
-					 * Thing > foo > bar > baz > HealthAndBeautyBusiness
+					 * Thing > Organization > baz > HealthAndBeautyBusiness
 					 * 
 					 * 
 					 */
@@ -16713,7 +16713,7 @@
 					// BeautySalon
 
 						/*
-						 * Thing > foo > bar > baz > qux > BeautySalon
+						 * Thing > Organization > baz > qux > BeautySalon
 						 * 
 						 * 
 						 */
@@ -16727,7 +16727,7 @@
 					// DaySpa
 
 						/*
-						 * Thing > foo > bar > baz > qux > DaySpa
+						 * Thing > Organization > baz > qux > DaySpa
 						 * 
 						 * 
 						 */
@@ -16741,7 +16741,7 @@
 					// HairSalon
 
 						/*
-						 * Thing > foo > bar > baz > qux > HairSalon
+						 * Thing > Organization > baz > qux > HairSalon
 						 * 
 						 * 
 						 */
@@ -16755,7 +16755,7 @@
 					// HealthClub
 
 						/*
-						 * Thing > foo > bar > baz > qux > HealthClub
+						 * Thing > Organization > baz > qux > HealthClub
 						 * 
 						 * 
 						 */
@@ -16769,7 +16769,7 @@
 					// NailSalon
 
 						/*
-						 * Thing > foo > bar > baz > qux > NailSalon
+						 * Thing > Organization > baz > qux > NailSalon
 						 * 
 						 * 
 						 */
@@ -16783,7 +16783,7 @@
 					// TattooParlor
 
 						/*
-						 * Thing > foo > bar > baz > qux > TattooParlor
+						 * Thing > Organization > baz > qux > TattooParlor
 						 * 
 						 * 
 						 */
@@ -16797,7 +16797,7 @@
 				// HomeAndConstructionBusiness
 
 					/*
-					 * Thing > foo > bar > baz > HomeAndConstructionBusiness
+					 * Thing > Organization > baz > HomeAndConstructionBusiness
 					 * 
 					 * 
 					 */
@@ -16811,7 +16811,7 @@
 					// Electrician
 
 						/*
-						 * Thing > foo > bar > baz > qux > Electrician
+						 * Thing > Organization > baz > qux > Electrician
 						 * 
 						 * 
 						 */
@@ -16825,7 +16825,7 @@
 					// GeneralContractor
 
 						/*
-						 * Thing > foo > bar > baz > qux > GeneralContractor
+						 * Thing > Organization > baz > qux > GeneralContractor
 						 * 
 						 * 
 						 */
@@ -16839,7 +16839,7 @@
 					// HVACBusiness
 
 						/*
-						 * Thing > foo > bar > baz > qux > HVACBusiness
+						 * Thing > Organization > baz > qux > HVACBusiness
 						 * 
 						 * 
 						 */
@@ -16853,7 +16853,7 @@
 					// HousePainter
 
 						/*
-						 * Thing > foo > bar > baz > qux > HousePainter
+						 * Thing > Organization > baz > qux > HousePainter
 						 * 
 						 * 
 						 */
@@ -16867,7 +16867,7 @@
 					// Locksmith
 
 						/*
-						 * Thing > foo > bar > baz > qux > Locksmith
+						 * Thing > Organization > baz > qux > Locksmith
 						 * 
 						 * 
 						 */
@@ -16881,7 +16881,7 @@
 					// MovingCompany
 
 						/*
-						 * Thing > foo > bar > baz > qux > MovingCompany
+						 * Thing > Organization > baz > qux > MovingCompany
 						 * 
 						 * 
 						 */
@@ -16895,7 +16895,7 @@
 					// Plumber
 
 						/*
-						 * Thing > foo > bar > baz > qux > Plumber
+						 * Thing > Organization > baz > qux > Plumber
 						 * 
 						 * 
 						 */
@@ -16909,7 +16909,7 @@
 					// RoofingContractor
 
 						/*
-						 * Thing > foo > bar > baz > qux > RoofingContractor
+						 * Thing > Organization > baz > qux > RoofingContractor
 						 * 
 						 * 
 						 */
@@ -16923,7 +16923,7 @@
 				// InternetCafe
 
 					/*
-					 * Thing > foo > bar > baz > InternetCafe
+					 * Thing > Organization > baz > InternetCafe
 					 * 
 					 * 
 					 */
@@ -16937,7 +16937,7 @@
 				// LegalService
 
 					/*
-					 * Thing > foo > bar > baz > LegalService
+					 * Thing > Organization > baz > LegalService
 					 * 
 					 * 
 					 */
@@ -16951,7 +16951,7 @@
 					// Attorney
 
 						/*
-						 * Thing > foo > bar > baz > qux > Attorney
+						 * Thing > Organization > baz > qux > Attorney
 						 * 
 						 * 
 						 */
@@ -16965,7 +16965,7 @@
 					// Notary
 
 						/*
-						 * Thing > foo > bar > baz > qux > Notary
+						 * Thing > Organization > baz > qux > Notary
 						 * 
 						 * 
 						 */
@@ -16979,7 +16979,7 @@
 				// Library
 
 					/*
-					 * Thing > foo > bar > baz > Library
+					 * Thing > Organization > baz > Library
 					 * 
 					 * 
 					 */
@@ -16993,7 +16993,7 @@
 				// LodgingBusiness
 
 					/*
-					 * Thing > foo > bar > baz > LodgingBusiness
+					 * Thing > Organization > baz > LodgingBusiness
 					 * 
 					 * 
 					 */
@@ -17007,7 +17007,7 @@
 					// BedAndBreakfast
 
 						/*
-						 * Thing > foo > bar > baz > qux > BedAndBreakfast
+						 * Thing > Organization > baz > qux > BedAndBreakfast
 						 * 
 						 * 
 						 */
@@ -17021,7 +17021,7 @@
 					// Campground
 
 						/*
-						 * Thing > foo > bar > baz > qux > Campground
+						 * Thing > Organization > baz > qux > Campground
 						 * 
 						 * 
 						 */
@@ -17035,7 +17035,7 @@
 					// Hostel
 
 						/*
-						 * Thing > foo > bar > baz > qux > Hostel
+						 * Thing > Organization > baz > qux > Hostel
 						 * 
 						 * 
 						 */
@@ -17049,7 +17049,7 @@
 					// Hotel
 
 						/*
-						 * Thing > foo > bar > baz > qux > Hotel
+						 * Thing > Organization > baz > qux > Hotel
 						 * 
 						 * 
 						 */
@@ -17063,7 +17063,7 @@
 					// Motel
 
 						/*
-						 * Thing > foo > bar > baz > qux > Motel
+						 * Thing > Organization > baz > qux > Motel
 						 * 
 						 * 
 						 */
@@ -17077,7 +17077,7 @@
 					// Resort
 
 						/*
-						 * Thing > foo > bar > baz > qux > Resort
+						 * Thing > Organization > baz > qux > Resort
 						 * 
 						 * 
 						 */
@@ -17091,7 +17091,7 @@
 						// SkiResort
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > SkiResort
+							 * Thing > Organization > baz > qux > quux > SkiResort
 							 * 
 							 * 
 							 */
@@ -17105,7 +17105,7 @@
 					// VacationRental
 
 						/*
-						 * Thing > foo > bar > baz > qux > VacationRental
+						 * Thing > Organization > baz > qux > VacationRental
 						 * 
 						 * 
 						 */
@@ -17119,7 +17119,7 @@
 				// MedicalBusiness
 
 					/*
-					 * Thing > foo > bar > baz > MedicalBusiness
+					 * Thing > Organization > baz > MedicalBusiness
 					 * 
 					 * 
 					 */
@@ -17133,7 +17133,7 @@
 					// CommunityHealth
 
 						/*
-						 * Thing > foo > bar > baz > qux > CommunityHealth
+						 * Thing > Organization > baz > qux > CommunityHealth
 						 * 
 						 * 
 						 */
@@ -17147,7 +17147,7 @@
 					// Dentist
 
 						/*
-						 * Thing > foo > bar > baz > qux > Dentist
+						 * Thing > Organization > baz > qux > Dentist
 						 * 
 						 * 
 						 */
@@ -17161,7 +17161,7 @@
 					// Dermatology
 
 						/*
-						 * Thing > foo > bar > baz > qux > Dermatology
+						 * Thing > Organization > baz > qux > Dermatology
 						 * 
 						 * 
 						 */
@@ -17175,7 +17175,7 @@
 					// DietNutrition
 
 						/*
-						 * Thing > foo > bar > baz > qux > DietNutrition
+						 * Thing > Organization > baz > qux > DietNutrition
 						 * 
 						 * 
 						 */
@@ -17189,7 +17189,7 @@
 					// Emergency
 
 						/*
-						 * Thing > foo > bar > baz > qux > Emergency
+						 * Thing > Organization > baz > qux > Emergency
 						 * 
 						 * 
 						 */
@@ -17203,7 +17203,7 @@
 					// Geriatric
 
 						/*
-						 * Thing > foo > bar > baz > qux > Geriatric
+						 * Thing > Organization > baz > qux > Geriatric
 						 * 
 						 * 
 						 */
@@ -17217,7 +17217,7 @@
 					// Gynecologic
 
 						/*
-						 * Thing > foo > bar > baz > qux > Gynecologic
+						 * Thing > Organization > baz > qux > Gynecologic
 						 * 
 						 * 
 						 */
@@ -17231,7 +17231,7 @@
 					// MedicalClinic
 
 						/*
-						 * Thing > foo > bar > baz > qux > MedicalClinic
+						 * Thing > Organization > baz > qux > MedicalClinic
 						 * 
 						 * 
 						 */
@@ -17245,7 +17245,7 @@
 						// CovidTestingFacility
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CovidTestingFacility
+							 * Thing > Organization > baz > qux > quux > CovidTestingFacility
 							 * 
 							 * 
 							 */
@@ -17259,7 +17259,7 @@
 					// Midwifery
 
 						/*
-						 * Thing > foo > bar > baz > qux > Midwifery
+						 * Thing > Organization > baz > qux > Midwifery
 						 * 
 						 * 
 						 */
@@ -17273,7 +17273,7 @@
 					// Nursing
 
 						/*
-						 * Thing > foo > bar > baz > qux > Nursing
+						 * Thing > Organization > baz > qux > Nursing
 						 * 
 						 * 
 						 */
@@ -17287,7 +17287,7 @@
 					// Obstetric
 
 						/*
-						 * Thing > foo > bar > baz > qux > Obstetric
+						 * Thing > Organization > baz > qux > Obstetric
 						 * 
 						 * 
 						 */
@@ -17301,7 +17301,7 @@
 					// Oncologic
 
 						/*
-						 * Thing > foo > bar > baz > qux > Oncologic
+						 * Thing > Organization > baz > qux > Oncologic
 						 * 
 						 * 
 						 */
@@ -17315,7 +17315,7 @@
 					// Optician
 
 						/*
-						 * Thing > foo > bar > baz > qux > Optician
+						 * Thing > Organization > baz > qux > Optician
 						 * 
 						 * 
 						 */
@@ -17329,7 +17329,7 @@
 					// Optometric
 
 						/*
-						 * Thing > foo > bar > baz > qux > Optometric
+						 * Thing > Organization > baz > qux > Optometric
 						 * 
 						 * 
 						 */
@@ -17343,7 +17343,7 @@
 					// Otolaryngologic
 
 						/*
-						 * Thing > foo > bar > baz > qux > Otolaryngologic
+						 * Thing > Organization > baz > qux > Otolaryngologic
 						 * 
 						 * 
 						 */
@@ -17357,7 +17357,7 @@
 					// Pediatric
 
 						/*
-						 * Thing > foo > bar > baz > qux > Pediatric
+						 * Thing > Organization > baz > qux > Pediatric
 						 * 
 						 * 
 						 */
@@ -17371,7 +17371,7 @@
 					// Pharmacy
 
 						/*
-						 * Thing > foo > bar > baz > qux > Pharmacy
+						 * Thing > Organization > baz > qux > Pharmacy
 						 * 
 						 * 
 						 */
@@ -17385,7 +17385,7 @@
 					// Physician
 
 						/*
-						 * Thing > foo > bar > baz > qux > Physician
+						 * Thing > Organization > baz > qux > Physician
 						 * 
 						 * 
 						 */
@@ -17399,7 +17399,7 @@
 					// Physiotherapy
 
 						/*
-						 * Thing > foo > bar > baz > qux > Physiotherapy
+						 * Thing > Organization > baz > qux > Physiotherapy
 						 * 
 						 * 
 						 */
@@ -17413,7 +17413,7 @@
 					// PlasticSurgery
 
 						/*
-						 * Thing > foo > bar > baz > qux > PlasticSurgery
+						 * Thing > Organization > baz > qux > PlasticSurgery
 						 * 
 						 * 
 						 */
@@ -17427,7 +17427,7 @@
 					// Podiatric
 
 						/*
-						 * Thing > foo > bar > baz > qux > Podiatric
+						 * Thing > Organization > baz > qux > Podiatric
 						 * 
 						 * 
 						 */
@@ -17441,7 +17441,7 @@
 					// PrimaryCare
 
 						/*
-						 * Thing > foo > bar > baz > qux > PrimaryCare
+						 * Thing > Organization > baz > qux > PrimaryCare
 						 * 
 						 * 
 						 */
@@ -17455,7 +17455,7 @@
 					// Psychiatric
 
 						/*
-						 * Thing > foo > bar > baz > qux > Psychiatric
+						 * Thing > Organization > baz > qux > Psychiatric
 						 * 
 						 * 
 						 */
@@ -17469,7 +17469,7 @@
 					// PublicHealth
 
 						/*
-						 * Thing > foo > bar > baz > qux > PublicHealth
+						 * Thing > Organization > baz > qux > PublicHealth
 						 * 
 						 * 
 						 */
@@ -17483,7 +17483,7 @@
 				// ProfessionalService
 
 					/*
-					 * Thing > foo > bar > baz > ProfessionalService
+					 * Thing > Organization > baz > ProfessionalService
 					 * 
 					 * 
 					 */
@@ -17497,7 +17497,7 @@
 				// RadioStation
 
 					/*
-					 * Thing > foo > bar > baz > RadioStation
+					 * Thing > Organization > baz > RadioStation
 					 * 
 					 * 
 					 */
@@ -17511,7 +17511,7 @@
 				// RealEstateAgent
 
 					/*
-					 * Thing > foo > bar > baz > RealEstateAgent
+					 * Thing > Organization > baz > RealEstateAgent
 					 * 
 					 * 
 					 */
@@ -17525,7 +17525,7 @@
 				// RecyclingCenter
 
 					/*
-					 * Thing > foo > bar > baz > RecyclingCenter
+					 * Thing > Organization > baz > RecyclingCenter
 					 * 
 					 * 
 					 */
@@ -17539,7 +17539,7 @@
 				// SelfStorage
 
 					/*
-					 * Thing > foo > bar > baz > SelfStorage
+					 * Thing > Organization > baz > SelfStorage
 					 * 
 					 * 
 					 */
@@ -17553,7 +17553,7 @@
 				// ShoppingCenter
 
 					/*
-					 * Thing > foo > bar > baz > ShoppingCenter
+					 * Thing > Organization > baz > ShoppingCenter
 					 * 
 					 * 
 					 */
@@ -17567,7 +17567,7 @@
 				// SportsActivityLocation
 
 					/*
-					 * Thing > foo > bar > baz > SportsActivityLocation
+					 * Thing > Organization > baz > SportsActivityLocation
 					 * 
 					 * 
 					 */
@@ -17581,7 +17581,7 @@
 					// BowlingAlley
 
 						/*
-						 * Thing > foo > bar > baz > qux > BowlingAlley
+						 * Thing > Organization > baz > qux > BowlingAlley
 						 * 
 						 * 
 						 */
@@ -17595,7 +17595,7 @@
 					// ExerciseGym
 
 						/*
-						 * Thing > foo > bar > baz > qux > ExerciseGym
+						 * Thing > Organization > baz > qux > ExerciseGym
 						 * 
 						 * 
 						 */
@@ -17609,7 +17609,7 @@
 					// GolfCourse
 
 						/*
-						 * Thing > foo > bar > baz > qux > GolfCourse
+						 * Thing > Organization > baz > qux > GolfCourse
 						 * 
 						 * 
 						 */
@@ -17623,7 +17623,7 @@
 					// HealthClub
 
 						/*
-						 * Thing > foo > bar > baz > qux > HealthClub
+						 * Thing > Organization > baz > qux > HealthClub
 						 * 
 						 * 
 						 */
@@ -17637,7 +17637,7 @@
 					// PublicSwimmingPool
 
 						/*
-						 * Thing > foo > bar > baz > qux > PublicSwimmingPool
+						 * Thing > Organization > baz > qux > PublicSwimmingPool
 						 * 
 						 * 
 						 */
@@ -17651,7 +17651,7 @@
 					// SkiResort
 
 						/*
-						 * Thing > foo > bar > baz > qux > SkiResort
+						 * Thing > Organization > baz > qux > SkiResort
 						 * 
 						 * 
 						 */
@@ -17665,7 +17665,7 @@
 					// SportsClub
 
 						/*
-						 * Thing > foo > bar > baz > qux > SportsClub
+						 * Thing > Organization > baz > qux > SportsClub
 						 * 
 						 * 
 						 */
@@ -17679,7 +17679,7 @@
 					// StadiumOrArena
 
 						/*
-						 * Thing > foo > bar > baz > qux > StadiumOrArena
+						 * Thing > Organization > baz > qux > StadiumOrArena
 						 * 
 						 * 
 						 */
@@ -17693,7 +17693,7 @@
 					// TennisComplex
 
 						/*
-						 * Thing > foo > bar > baz > qux > TennisComplex
+						 * Thing > Organization > baz > qux > TennisComplex
 						 * 
 						 * 
 						 */
@@ -17707,7 +17707,7 @@
 				// Store
 
 					/*
-					 * Thing > foo > bar > baz > Store
+					 * Thing > Organization > baz > Store
 					 * 
 					 * 
 					 */
@@ -17721,7 +17721,7 @@
 					// AutoPartsStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > AutoPartsStore
+						 * Thing > Organization > baz > qux > AutoPartsStore
 						 * 
 						 * 
 						 */
@@ -17735,7 +17735,7 @@
 					// BikeStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > BikeStore
+						 * Thing > Organization > baz > qux > BikeStore
 						 * 
 						 * 
 						 */
@@ -17749,7 +17749,7 @@
 					// BookStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > BookStore
+						 * Thing > Organization > baz > qux > BookStore
 						 * 
 						 * 
 						 */
@@ -17763,7 +17763,7 @@
 					// ClothingStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ClothingStore
+						 * Thing > Organization > baz > qux > ClothingStore
 						 * 
 						 * 
 						 */
@@ -17777,7 +17777,7 @@
 					// ComputerStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ComputerStore
+						 * Thing > Organization > baz > qux > ComputerStore
 						 * 
 						 * 
 						 */
@@ -17791,7 +17791,7 @@
 					// ConvenienceStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ConvenienceStore
+						 * Thing > Organization > baz > qux > ConvenienceStore
 						 * 
 						 * 
 						 */
@@ -17805,7 +17805,7 @@
 					// DepartmentStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > DepartmentStore
+						 * Thing > Organization > baz > qux > DepartmentStore
 						 * 
 						 * 
 						 */
@@ -17819,7 +17819,7 @@
 					// ElectronicsStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ElectronicsStore
+						 * Thing > Organization > baz > qux > ElectronicsStore
 						 * 
 						 * 
 						 */
@@ -17833,7 +17833,7 @@
 					// Florist
 
 						/*
-						 * Thing > foo > bar > baz > qux > Florist
+						 * Thing > Organization > baz > qux > Florist
 						 * 
 						 * 
 						 */
@@ -17847,7 +17847,7 @@
 					// FurnitureStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > FurnitureStore
+						 * Thing > Organization > baz > qux > FurnitureStore
 						 * 
 						 * 
 						 */
@@ -17861,7 +17861,7 @@
 					// GardenStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > GardenStore
+						 * Thing > Organization > baz > qux > GardenStore
 						 * 
 						 * 
 						 */
@@ -17875,7 +17875,7 @@
 					// GroceryStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > GroceryStore
+						 * Thing > Organization > baz > qux > GroceryStore
 						 * 
 						 * 
 						 */
@@ -17889,7 +17889,7 @@
 					// HardwareStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > HardwareStore
+						 * Thing > Organization > baz > qux > HardwareStore
 						 * 
 						 * 
 						 */
@@ -17903,7 +17903,7 @@
 					// HobbyShop
 
 						/*
-						 * Thing > foo > bar > baz > qux > HobbyShop
+						 * Thing > Organization > baz > qux > HobbyShop
 						 * 
 						 * 
 						 */
@@ -17917,7 +17917,7 @@
 					// HomeGoodsStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > HomeGoodsStore
+						 * Thing > Organization > baz > qux > HomeGoodsStore
 						 * 
 						 * 
 						 */
@@ -17931,7 +17931,7 @@
 					// JewelryStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > JewelryStore
+						 * Thing > Organization > baz > qux > JewelryStore
 						 * 
 						 * 
 						 */
@@ -17945,7 +17945,7 @@
 					// LiquorStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > LiquorStore
+						 * Thing > Organization > baz > qux > LiquorStore
 						 * 
 						 * 
 						 */
@@ -17959,7 +17959,7 @@
 					// MensClothingStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > MensClothingStore
+						 * Thing > Organization > baz > qux > MensClothingStore
 						 * 
 						 * 
 						 */
@@ -17973,7 +17973,7 @@
 					// MobilePhoneStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > MobilePhoneStore
+						 * Thing > Organization > baz > qux > MobilePhoneStore
 						 * 
 						 * 
 						 */
@@ -17987,7 +17987,7 @@
 					// MovieRentalStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > MovieRentalStore
+						 * Thing > Organization > baz > qux > MovieRentalStore
 						 * 
 						 * 
 						 */
@@ -18001,7 +18001,7 @@
 					// MusicStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > MusicStore
+						 * Thing > Organization > baz > qux > MusicStore
 						 * 
 						 * 
 						 */
@@ -18015,7 +18015,7 @@
 					// OfficeEquipmentStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > OfficeEquipmentStore
+						 * Thing > Organization > baz > qux > OfficeEquipmentStore
 						 * 
 						 * 
 						 */
@@ -18029,7 +18029,7 @@
 					// OutletStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > OutletStore
+						 * Thing > Organization > baz > qux > OutletStore
 						 * 
 						 * 
 						 */
@@ -18043,7 +18043,7 @@
 					// PawnShop
 
 						/*
-						 * Thing > foo > bar > baz > qux > PawnShop
+						 * Thing > Organization > baz > qux > PawnShop
 						 * 
 						 * 
 						 */
@@ -18057,7 +18057,7 @@
 					// PetStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > PetStore
+						 * Thing > Organization > baz > qux > PetStore
 						 * 
 						 * 
 						 */
@@ -18071,7 +18071,7 @@
 					// ShoeStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ShoeStore
+						 * Thing > Organization > baz > qux > ShoeStore
 						 * 
 						 * 
 						 */
@@ -18085,7 +18085,7 @@
 					// SportingGoodsStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > SportingGoodsStore
+						 * Thing > Organization > baz > qux > SportingGoodsStore
 						 * 
 						 * 
 						 */
@@ -18099,7 +18099,7 @@
 					// TireShop
 
 						/*
-						 * Thing > foo > bar > baz > qux > TireShop
+						 * Thing > Organization > baz > qux > TireShop
 						 * 
 						 * 
 						 */
@@ -18113,7 +18113,7 @@
 					// ToyStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > ToyStore
+						 * Thing > Organization > baz > qux > ToyStore
 						 * 
 						 * 
 						 */
@@ -18127,7 +18127,7 @@
 					// WholesaleStore
 
 						/*
-						 * Thing > foo > bar > baz > qux > WholesaleStore
+						 * Thing > Organization > baz > qux > WholesaleStore
 						 * 
 						 * 
 						 */
@@ -18141,7 +18141,7 @@
 				// TelevisionStation
 
 					/*
-					 * Thing > foo > bar > baz > TelevisionStation
+					 * Thing > Organization > baz > TelevisionStation
 					 * 
 					 * 
 					 */
@@ -18155,7 +18155,7 @@
 				// TouristInformationCenter
 
 					/*
-					 * Thing > foo > bar > baz > TouristInformationCenter
+					 * Thing > Organization > baz > TouristInformationCenter
 					 * 
 					 * 
 					 */
@@ -18169,7 +18169,7 @@
 				// TravelAgency
 
 					/*
-					 * Thing > foo > bar > baz > TravelAgency
+					 * Thing > Organization > baz > TravelAgency
 					 * 
 					 * 
 					 */
@@ -18183,7 +18183,7 @@
 			// MedicalOrganization
 
 				/*
-				 * Thing > foo > bar > MedicalOrganization
+				 * Thing > Organization > MedicalOrganization
 				 * 
 				 * 
 				 */
@@ -18197,7 +18197,7 @@
 				// Dentist
 
 					/*
-					 * Thing > foo > bar > baz > Dentist
+					 * Thing > Organization > baz > Dentist
 					 * 
 					 * 
 					 */
@@ -18211,7 +18211,7 @@
 				// DiagnosticLab
 
 					/*
-					 * Thing > foo > bar > baz > DiagnosticLab
+					 * Thing > Organization > baz > DiagnosticLab
 					 * 
 					 * 
 					 */
@@ -18225,7 +18225,7 @@
 				// Hospital
 
 					/*
-					 * Thing > foo > bar > baz > Hospital
+					 * Thing > Organization > baz > Hospital
 					 * 
 					 * 
 					 */
@@ -18239,7 +18239,7 @@
 				// MedicalClinic
 
 					/*
-					 * Thing > foo > bar > baz > MedicalClinic
+					 * Thing > Organization > baz > MedicalClinic
 					 * 
 					 * 
 					 */
@@ -18253,7 +18253,7 @@
 				// Pharmacy
 
 					/*
-					 * Thing > foo > bar > baz > Pharmacy
+					 * Thing > Organization > baz > Pharmacy
 					 * 
 					 * 
 					 */
@@ -18267,7 +18267,7 @@
 				// Physician
 
 					/*
-					 * Thing > foo > bar > baz > Physician
+					 * Thing > Organization > baz > Physician
 					 * 
 					 * 
 					 */
@@ -18281,7 +18281,7 @@
 				// VeterinaryCare
 
 					/*
-					 * Thing > foo > bar > baz > VeterinaryCare
+					 * Thing > Organization > baz > VeterinaryCare
 					 * 
 					 * 
 					 */
@@ -18295,7 +18295,7 @@
 			// NGO
 
 				/*
-				 * Thing > foo > bar > NGO
+				 * Thing > Organization > NGO
 				 * 
 				 * 
 				 */
@@ -18309,7 +18309,7 @@
 			// NewsMediaOrganization
 
 				/*
-				 * Thing > foo > bar > NewsMediaOrganization
+				 * Thing > Organization > NewsMediaOrganization
 				 * 
 				 * 
 				 */
@@ -18323,7 +18323,7 @@
 			// OnlineBusiness
 
 				/*
-				 * Thing > foo > bar > OnlineBusiness
+				 * Thing > Organization > OnlineBusiness
 				 * 
 				 * 
 				 */
@@ -18337,7 +18337,7 @@
 				// OnlineStore
 
 					/*
-					 * Thing > foo > bar > baz > OnlineStore
+					 * Thing > Organization > baz > OnlineStore
 					 * 
 					 * 
 					 */
@@ -18351,7 +18351,7 @@
 			// PerformingGroup
 
 				/*
-				 * Thing > foo > bar > PerformingGroup
+				 * Thing > Organization > PerformingGroup
 				 * 
 				 * 
 				 */
@@ -18365,7 +18365,7 @@
 				// DanceGroup
 
 					/*
-					 * Thing > foo > bar > baz > DanceGroup
+					 * Thing > Organization > baz > DanceGroup
 					 * 
 					 * 
 					 */
@@ -18379,7 +18379,7 @@
 				// MusicGroup
 
 					/*
-					 * Thing > foo > bar > baz > MusicGroup
+					 * Thing > Organization > baz > MusicGroup
 					 * 
 					 * 
 					 */
@@ -18393,7 +18393,7 @@
 				// TheaterGroup
 
 					/*
-					 * Thing > foo > bar > baz > TheaterGroup
+					 * Thing > Organization > baz > TheaterGroup
 					 * 
 					 * 
 					 */
@@ -18407,7 +18407,7 @@
 			// PoliticalParty
 
 				/*
-				 * Thing > foo > bar > PoliticalParty
+				 * Thing > Organization > PoliticalParty
 				 * 
 				 * 
 				 */
@@ -18421,7 +18421,7 @@
 			// Project
 
 				/*
-				 * Thing > foo > bar > Project
+				 * Thing > Organization > Project
 				 * 
 				 * 
 				 */
@@ -18435,7 +18435,7 @@
 				// FundingAgency
 
 					/*
-					 * Thing > foo > bar > baz > FundingAgency
+					 * Thing > Organization > baz > FundingAgency
 					 * 
 					 * 
 					 */
@@ -18449,7 +18449,7 @@
 				// ResearchProject
 
 					/*
-					 * Thing > foo > bar > baz > ResearchProject
+					 * Thing > Organization > baz > ResearchProject
 					 * 
 					 * 
 					 */
@@ -18463,7 +18463,7 @@
 			// ResearchOrganization
 
 				/*
-				 * Thing > foo > bar > ResearchOrganization
+				 * Thing > Organization > ResearchOrganization
 				 * 
 				 * 
 				 */
@@ -18477,7 +18477,7 @@
 			// SearchRescueOrganization
 
 				/*
-				 * Thing > foo > bar > SearchRescueOrganization
+				 * Thing > Organization > SearchRescueOrganization
 				 * 
 				 * 
 				 */
@@ -18491,7 +18491,7 @@
 			// SportsOrganization
 
 				/*
-				 * Thing > foo > bar > SportsOrganization
+				 * Thing > Organization > SportsOrganization
 				 * 
 				 * 
 				 */
@@ -18505,7 +18505,7 @@
 				// SportsTeam
 
 					/*
-					 * Thing > foo > bar > baz > SportsTeam
+					 * Thing > Organization > baz > SportsTeam
 					 * 
 					 * 
 					 */
@@ -18519,7 +18519,7 @@
 			// WorkersUnion
 
 				/*
-				 * Thing > foo > bar > WorkersUnion
+				 * Thing > Organization > WorkersUnion
 				 * 
 				 * 
 				 */
@@ -18533,7 +18533,7 @@
 		// Person
 
 			/*
-			 * Thing > foo > Person
+			 * Thing > Person
 			 * 
 			 * 
 			 */
@@ -18547,7 +18547,7 @@
 			// Patient
 
 				/*
-				 * Thing > foo > bar > Patient
+				 * Thing > Person > Patient
 				 * 
 				 * 
 				 */
@@ -18561,7 +18561,7 @@
 		// Place
 
 			/*
-			 * Thing > foo > Place
+			 * Thing > Place
 			 * 
 			 * 
 			 */
@@ -18575,7 +18575,7 @@
 			// Accommodation
 
 				/*
-				 * Thing > foo > bar > Accommodation
+				 * Thing > Place > Accommodation
 				 * 
 				 * 
 				 */
@@ -18589,7 +18589,7 @@
 				// Apartment
 
 					/*
-					 * Thing > foo > bar > baz > Apartment
+					 * Thing > Place > baz > Apartment
 					 * 
 					 * 
 					 */
@@ -18603,7 +18603,7 @@
 				// CampingPitch
 
 					/*
-					 * Thing > foo > bar > baz > CampingPitch
+					 * Thing > Place > baz > CampingPitch
 					 * 
 					 * 
 					 */
@@ -18617,7 +18617,7 @@
 				// House
 
 					/*
-					 * Thing > foo > bar > baz > House
+					 * Thing > Place > baz > House
 					 * 
 					 * 
 					 */
@@ -18631,7 +18631,7 @@
 					// SingleFamilyResidence
 
 						/*
-						 * Thing > foo > bar > baz > qux > SingleFamilyResidence
+						 * Thing > Place > baz > qux > SingleFamilyResidence
 						 * 
 						 * 
 						 */
@@ -18645,7 +18645,7 @@
 				// Room
 
 					/*
-					 * Thing > foo > bar > baz > Room
+					 * Thing > Place > baz > Room
 					 * 
 					 * 
 					 */
@@ -18659,7 +18659,7 @@
 					// HotelRoom
 
 						/*
-						 * Thing > foo > bar > baz > qux > HotelRoom
+						 * Thing > Place > baz > qux > HotelRoom
 						 * 
 						 * 
 						 */
@@ -18673,7 +18673,7 @@
 					// MeetingRoom
 
 						/*
-						 * Thing > foo > bar > baz > qux > MeetingRoom
+						 * Thing > Place > baz > qux > MeetingRoom
 						 * 
 						 * 
 						 */
@@ -18687,7 +18687,7 @@
 				// Suite
 
 					/*
-					 * Thing > foo > bar > baz > Suite
+					 * Thing > Place > baz > Suite
 					 * 
 					 * 
 					 */
@@ -18701,7 +18701,7 @@
 			// AdministrativeArea
 
 				/*
-				 * Thing > foo > bar > AdministrativeArea
+				 * Thing > Place > AdministrativeArea
 				 * 
 				 * 
 				 */
@@ -18715,7 +18715,7 @@
 				// City
 
 					/*
-					 * Thing > foo > bar > baz > City
+					 * Thing > Place > baz > City
 					 * 
 					 * 
 					 */
@@ -18729,7 +18729,7 @@
 				// Country
 
 					/*
-					 * Thing > foo > bar > baz > Country
+					 * Thing > Place > baz > Country
 					 * 
 					 * 
 					 */
@@ -18743,7 +18743,7 @@
 				// SchoolDistrict
 
 					/*
-					 * Thing > foo > bar > baz > SchoolDistrict
+					 * Thing > Place > baz > SchoolDistrict
 					 * 
 					 * 
 					 */
@@ -18757,7 +18757,7 @@
 				// State
 
 					/*
-					 * Thing > foo > bar > baz > State
+					 * Thing > Place > baz > State
 					 * 
 					 * 
 					 */
@@ -18771,7 +18771,7 @@
 			// CivicStructure
 
 				/*
-				 * Thing > foo > bar > CivicStructure
+				 * Thing > Place > CivicStructure
 				 * 
 				 * 
 				 */
@@ -18785,7 +18785,7 @@
 				// Airport
 
 					/*
-					 * Thing > foo > bar > baz > Airport
+					 * Thing > Place > baz > Airport
 					 * 
 					 * 
 					 */
@@ -18799,7 +18799,7 @@
 				// Aquarium
 
 					/*
-					 * Thing > foo > bar > baz > Aquarium
+					 * Thing > Place > baz > Aquarium
 					 * 
 					 * 
 					 */
@@ -18813,7 +18813,7 @@
 				// Beach
 
 					/*
-					 * Thing > foo > bar > baz > Beach
+					 * Thing > Place > baz > Beach
 					 * 
 					 * 
 					 */
@@ -18827,7 +18827,7 @@
 				// BoatTerminal
 
 					/*
-					 * Thing > foo > bar > baz > BoatTerminal
+					 * Thing > Place > baz > BoatTerminal
 					 * 
 					 * 
 					 */
@@ -18841,7 +18841,7 @@
 				// Bridge
 
 					/*
-					 * Thing > foo > bar > baz > Bridge
+					 * Thing > Place > baz > Bridge
 					 * 
 					 * 
 					 */
@@ -18855,7 +18855,7 @@
 				// BusStation
 
 					/*
-					 * Thing > foo > bar > baz > BusStation
+					 * Thing > Place > baz > BusStation
 					 * 
 					 * 
 					 */
@@ -18869,7 +18869,7 @@
 				// BusStop
 
 					/*
-					 * Thing > foo > bar > baz > BusStop
+					 * Thing > Place > baz > BusStop
 					 * 
 					 * 
 					 */
@@ -18883,7 +18883,7 @@
 				// Campground
 
 					/*
-					 * Thing > foo > bar > baz > Campground
+					 * Thing > Place > baz > Campground
 					 * 
 					 * 
 					 */
@@ -18897,7 +18897,7 @@
 				// Cemetery
 
 					/*
-					 * Thing > foo > bar > baz > Cemetery
+					 * Thing > Place > baz > Cemetery
 					 * 
 					 * 
 					 */
@@ -18911,7 +18911,7 @@
 				// Crematorium
 
 					/*
-					 * Thing > foo > bar > baz > Crematorium
+					 * Thing > Place > baz > Crematorium
 					 * 
 					 * 
 					 */
@@ -18925,7 +18925,7 @@
 				// EducationalOrganization
 
 					/*
-					 * Thing > foo > bar > baz > EducationalOrganization
+					 * Thing > Place > baz > EducationalOrganization
 					 * 
 					 * 
 					 */
@@ -18939,7 +18939,7 @@
 				// EventVenue
 
 					/*
-					 * Thing > foo > bar > baz > EventVenue
+					 * Thing > Place > baz > EventVenue
 					 * 
 					 * 
 					 */
@@ -18953,7 +18953,7 @@
 				// FireStation
 
 					/*
-					 * Thing > foo > bar > baz > FireStation
+					 * Thing > Place > baz > FireStation
 					 * 
 					 * 
 					 */
@@ -18967,7 +18967,7 @@
 				// GovernmentBuilding
 
 					/*
-					 * Thing > foo > bar > baz > GovernmentBuilding
+					 * Thing > Place > baz > GovernmentBuilding
 					 * 
 					 * 
 					 */
@@ -18981,7 +18981,7 @@
 					// CityHall
 
 						/*
-						 * Thing > foo > bar > baz > qux > CityHall
+						 * Thing > Place > baz > qux > CityHall
 						 * 
 						 * 
 						 */
@@ -18995,7 +18995,7 @@
 					// Courthouse
 
 						/*
-						 * Thing > foo > bar > baz > qux > Courthouse
+						 * Thing > Place > baz > qux > Courthouse
 						 * 
 						 * 
 						 */
@@ -19009,7 +19009,7 @@
 					// DefenceEstablishment
 
 						/*
-						 * Thing > foo > bar > baz > qux > DefenceEstablishment
+						 * Thing > Place > baz > qux > DefenceEstablishment
 						 * 
 						 * 
 						 */
@@ -19023,7 +19023,7 @@
 					// Embassy
 
 						/*
-						 * Thing > foo > bar > baz > qux > Embassy
+						 * Thing > Place > baz > qux > Embassy
 						 * 
 						 * 
 						 */
@@ -19037,7 +19037,7 @@
 					// LegislativeBuilding
 
 						/*
-						 * Thing > foo > bar > baz > qux > LegislativeBuilding
+						 * Thing > Place > baz > qux > LegislativeBuilding
 						 * 
 						 * 
 						 */
@@ -19051,7 +19051,7 @@
 				// Hospital
 
 					/*
-					 * Thing > foo > bar > baz > Hospital
+					 * Thing > Place > baz > Hospital
 					 * 
 					 * 
 					 */
@@ -19065,7 +19065,7 @@
 				// MovieTheater
 
 					/*
-					 * Thing > foo > bar > baz > MovieTheater
+					 * Thing > Place > baz > MovieTheater
 					 * 
 					 * 
 					 */
@@ -19079,7 +19079,7 @@
 				// Museum
 
 					/*
-					 * Thing > foo > bar > baz > Museum
+					 * Thing > Place > baz > Museum
 					 * 
 					 * 
 					 */
@@ -19093,7 +19093,7 @@
 				// MusicVenue
 
 					/*
-					 * Thing > foo > bar > baz > MusicVenue
+					 * Thing > Place > baz > MusicVenue
 					 * 
 					 * 
 					 */
@@ -19107,7 +19107,7 @@
 				// Park
 
 					/*
-					 * Thing > foo > bar > baz > Park
+					 * Thing > Place > baz > Park
 					 * 
 					 * 
 					 */
@@ -19121,7 +19121,7 @@
 				// ParkingFacility
 
 					/*
-					 * Thing > foo > bar > baz > ParkingFacility
+					 * Thing > Place > baz > ParkingFacility
 					 * 
 					 * 
 					 */
@@ -19135,7 +19135,7 @@
 				// PerformingArtsTheater
 
 					/*
-					 * Thing > foo > bar > baz > PerformingArtsTheater
+					 * Thing > Place > baz > PerformingArtsTheater
 					 * 
 					 * 
 					 */
@@ -19149,7 +19149,7 @@
 				// PlaceOfWorship
 
 					/*
-					 * Thing > foo > bar > baz > PlaceOfWorship
+					 * Thing > Place > baz > PlaceOfWorship
 					 * 
 					 * 
 					 */
@@ -19163,7 +19163,7 @@
 					// BuddhistTemple
 
 						/*
-						 * Thing > foo > bar > baz > qux > BuddhistTemple
+						 * Thing > Place > baz > qux > BuddhistTemple
 						 * 
 						 * 
 						 */
@@ -19177,7 +19177,7 @@
 					// Church
 
 						/*
-						 * Thing > foo > bar > baz > qux > Church
+						 * Thing > Place > baz > qux > Church
 						 * 
 						 * 
 						 */
@@ -19191,7 +19191,7 @@
 						// CatholicChurch
 
 							/*
-							 * Thing > foo > bar > baz > qux > quux > CatholicChurch
+							 * Thing > Place > baz > qux > quux > CatholicChurch
 							 * 
 							 * 
 							 */
@@ -19205,7 +19205,7 @@
 					// HinduTemple
 
 						/*
-						 * Thing > foo > bar > baz > qux > HinduTemple
+						 * Thing > Place > baz > qux > HinduTemple
 						 * 
 						 * 
 						 */
@@ -19219,7 +19219,7 @@
 					// Mosque
 
 						/*
-						 * Thing > foo > bar > baz > qux > Mosque
+						 * Thing > Place > baz > qux > Mosque
 						 * 
 						 * 
 						 */
@@ -19233,7 +19233,7 @@
 					// Synagogue
 
 						/*
-						 * Thing > foo > bar > baz > qux > Synagogue
+						 * Thing > Place > baz > qux > Synagogue
 						 * 
 						 * 
 						 */
@@ -19247,7 +19247,7 @@
 				// Playground
 
 					/*
-					 * Thing > foo > bar > baz > Playground
+					 * Thing > Place > baz > Playground
 					 * 
 					 * 
 					 */
@@ -19261,7 +19261,7 @@
 				// PoliceStation
 
 					/*
-					 * Thing > foo > bar > baz > PoliceStation
+					 * Thing > Place > baz > PoliceStation
 					 * 
 					 * 
 					 */
@@ -19275,7 +19275,7 @@
 				// PublicToilet
 
 					/*
-					 * Thing > foo > bar > baz > PublicToilet
+					 * Thing > Place > baz > PublicToilet
 					 * 
 					 * 
 					 */
@@ -19289,7 +19289,7 @@
 				// RVPark
 
 					/*
-					 * Thing > foo > bar > baz > RVPark
+					 * Thing > Place > baz > RVPark
 					 * 
 					 * 
 					 */
@@ -19303,7 +19303,7 @@
 				// StadiumOrArena
 
 					/*
-					 * Thing > foo > bar > baz > StadiumOrArena
+					 * Thing > Place > baz > StadiumOrArena
 					 * 
 					 * 
 					 */
@@ -19317,7 +19317,7 @@
 				// SubwayStation
 
 					/*
-					 * Thing > foo > bar > baz > SubwayStation
+					 * Thing > Place > baz > SubwayStation
 					 * 
 					 * 
 					 */
@@ -19331,7 +19331,7 @@
 				// TaxiStand
 
 					/*
-					 * Thing > foo > bar > baz > TaxiStand
+					 * Thing > Place > baz > TaxiStand
 					 * 
 					 * 
 					 */
@@ -19345,7 +19345,7 @@
 				// TrainStation
 
 					/*
-					 * Thing > foo > bar > baz > TrainStation
+					 * Thing > Place > baz > TrainStation
 					 * 
 					 * 
 					 */
@@ -19359,7 +19359,7 @@
 				// Zoo
 
 					/*
-					 * Thing > foo > bar > baz > Zoo
+					 * Thing > Place > baz > Zoo
 					 * 
 					 * 
 					 */
@@ -19373,7 +19373,7 @@
 			// Landform
 
 				/*
-				 * Thing > foo > bar > Landform
+				 * Thing > Place > Landform
 				 * 
 				 * 
 				 */
@@ -19387,7 +19387,7 @@
 				// BodyOfWater
 
 					/*
-					 * Thing > foo > bar > baz > BodyOfWater
+					 * Thing > Place > baz > BodyOfWater
 					 * 
 					 * 
 					 */
@@ -19401,7 +19401,7 @@
 					// Canal
 
 						/*
-						 * Thing > foo > bar > baz > qux > Canal
+						 * Thing > Place > baz > qux > Canal
 						 * 
 						 * 
 						 */
@@ -19415,7 +19415,7 @@
 					// LakeBodyOfWater
 
 						/*
-						 * Thing > foo > bar > baz > qux > LakeBodyOfWater
+						 * Thing > Place > baz > qux > LakeBodyOfWater
 						 * 
 						 * 
 						 */
@@ -19429,7 +19429,7 @@
 					// OceanBodyOfWater
 
 						/*
-						 * Thing > foo > bar > baz > qux > OceanBodyOfWater
+						 * Thing > Place > baz > qux > OceanBodyOfWater
 						 * 
 						 * 
 						 */
@@ -19443,7 +19443,7 @@
 					// Pond
 
 						/*
-						 * Thing > foo > bar > baz > qux > Pond
+						 * Thing > Place > baz > qux > Pond
 						 * 
 						 * 
 						 */
@@ -19457,7 +19457,7 @@
 					// Reservoir
 
 						/*
-						 * Thing > foo > bar > baz > qux > Reservoir
+						 * Thing > Place > baz > qux > Reservoir
 						 * 
 						 * 
 						 */
@@ -19471,7 +19471,7 @@
 					// RiverBodyOfWater
 
 						/*
-						 * Thing > foo > bar > baz > qux > RiverBodyOfWater
+						 * Thing > Place > baz > qux > RiverBodyOfWater
 						 * 
 						 * 
 						 */
@@ -19485,7 +19485,7 @@
 					// SeaBodyOfWater
 
 						/*
-						 * Thing > foo > bar > baz > qux > SeaBodyOfWater
+						 * Thing > Place > baz > qux > SeaBodyOfWater
 						 * 
 						 * 
 						 */
@@ -19499,7 +19499,7 @@
 					// Waterfall
 
 						/*
-						 * Thing > foo > bar > baz > qux > Waterfall
+						 * Thing > Place > baz > qux > Waterfall
 						 * 
 						 * 
 						 */
@@ -19513,7 +19513,7 @@
 				// Continent
 
 					/*
-					 * Thing > foo > bar > baz > Continent
+					 * Thing > Place > baz > Continent
 					 * 
 					 * 
 					 */
@@ -19527,7 +19527,7 @@
 				// Mountain
 
 					/*
-					 * Thing > foo > bar > baz > Mountain
+					 * Thing > Place > baz > Mountain
 					 * 
 					 * 
 					 */
@@ -19541,7 +19541,7 @@
 				// Volcano
 
 					/*
-					 * Thing > foo > bar > baz > Volcano
+					 * Thing > Place > baz > Volcano
 					 * 
 					 * 
 					 */
@@ -19555,7 +19555,7 @@
 			// LandmarksOrHistoricalBuildings
 
 				/*
-				 * Thing > foo > bar > LandmarksOrHistoricalBuildings
+				 * Thing > Place > LandmarksOrHistoricalBuildings
 				 * 
 				 * 
 				 */
@@ -19569,7 +19569,7 @@
 			// LocalBusiness
 
 				/*
-				 * Thing > foo > bar > LocalBusiness
+				 * Thing > Place > LocalBusiness
 				 * 
 				 * 
 				 */
@@ -19583,7 +19583,7 @@
 			// Residence
 
 				/*
-				 * Thing > foo > bar > Residence
+				 * Thing > Place > Residence
 				 * 
 				 * 
 				 */
@@ -19597,7 +19597,7 @@
 				// ApartmentComplex
 
 					/*
-					 * Thing > foo > bar > baz > ApartmentComplex
+					 * Thing > Place > baz > ApartmentComplex
 					 * 
 					 * 
 					 */
@@ -19611,7 +19611,7 @@
 				// GatedResidenceCommunity
 
 					/*
-					 * Thing > foo > bar > baz > GatedResidenceCommunity
+					 * Thing > Place > baz > GatedResidenceCommunity
 					 * 
 					 * 
 					 */
@@ -19625,7 +19625,7 @@
 			// TouristAttraction
 
 				/*
-				 * Thing > foo > bar > TouristAttraction
+				 * Thing > Place > TouristAttraction
 				 * 
 				 * 
 				 */
@@ -19639,7 +19639,7 @@
 			// TouristDestination
 
 				/*
-				 * Thing > foo > bar > TouristDestination
+				 * Thing > Place > TouristDestination
 				 * 
 				 * 
 				 */
@@ -19653,7 +19653,7 @@
 		// Product
 
 			/*
-			 * Thing > foo > Product
+			 * Thing > Product
 			 * 
 			 * 
 			 */
@@ -19667,7 +19667,7 @@
 			// DietarySupplement
 
 				/*
-				 * Thing > foo > bar > DietarySupplement
+				 * Thing > Product > DietarySupplement
 				 * 
 				 * 
 				 */
@@ -19681,7 +19681,7 @@
 			// Drug
 
 				/*
-				 * Thing > foo > bar > Drug
+				 * Thing > Product > Drug
 				 * 
 				 * 
 				 */
@@ -19695,7 +19695,7 @@
 			// IndividualProduct
 
 				/*
-				 * Thing > foo > bar > IndividualProduct
+				 * Thing > Product > IndividualProduct
 				 * 
 				 * 
 				 */
@@ -19709,7 +19709,7 @@
 			// ProductCollection
 
 				/*
-				 * Thing > foo > bar > ProductCollection
+				 * Thing > Product > ProductCollection
 				 * 
 				 * 
 				 */
@@ -19723,7 +19723,7 @@
 			// ProductGroup
 
 				/*
-				 * Thing > foo > bar > ProductGroup
+				 * Thing > Product > ProductGroup
 				 * 
 				 * 
 				 */
@@ -19737,7 +19737,7 @@
 			// ProductModel
 
 				/*
-				 * Thing > foo > bar > ProductModel
+				 * Thing > Product > ProductModel
 				 * 
 				 * 
 				 */
@@ -19751,7 +19751,7 @@
 			// SomeProducts
 
 				/*
-				 * Thing > foo > bar > SomeProducts
+				 * Thing > Product > SomeProducts
 				 * 
 				 * 
 				 */
@@ -19765,7 +19765,7 @@
 			// Vehicle
 
 				/*
-				 * Thing > foo > bar > Vehicle
+				 * Thing > Product > Vehicle
 				 * 
 				 * 
 				 */
@@ -19779,7 +19779,7 @@
 				// BusOrCoach
 
 					/*
-					 * Thing > foo > bar > baz > BusOrCoach
+					 * Thing > Product > baz > BusOrCoach
 					 * 
 					 * 
 					 */
@@ -19793,7 +19793,7 @@
 				// Car
 
 					/*
-					 * Thing > foo > bar > baz > Car
+					 * Thing > Product > baz > Car
 					 * 
 					 * 
 					 */
@@ -19807,7 +19807,7 @@
 				// Motorcycle
 
 					/*
-					 * Thing > foo > bar > baz > Motorcycle
+					 * Thing > Product > baz > Motorcycle
 					 * 
 					 * 
 					 */
@@ -19821,7 +19821,7 @@
 				// MotorizedBicycle
 
 					/*
-					 * Thing > foo > bar > baz > MotorizedBicycle
+					 * Thing > Product > baz > MotorizedBicycle
 					 * 
 					 * 
 					 */
@@ -19836,7 +19836,7 @@
 		// Taxon
 
 			/*
-			 * Thing > foo > Taxon
+			 * Thing > Taxon
 			 * 
 			 * 
 			 */
