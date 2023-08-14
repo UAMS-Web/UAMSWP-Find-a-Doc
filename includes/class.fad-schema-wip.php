@@ -34534,17 +34534,6 @@
 
 				}
 
-				/*
-				 * A web page that provides medical information.
-				 */
-
-				function uamswp_fad_schema_medicalwebpage(
-					$schema,
-					$medicalAudience
-				) {
-
-				}
-
 			// ProfilePage
 
 				/*
