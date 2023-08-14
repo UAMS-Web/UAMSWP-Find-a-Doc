@@ -373,11 +373,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -462,11 +462,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -632,7 +632,6 @@
 
 				// Properties from CreativeWork (Thing > CreativeWork)
 
-					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
 					$about = ( isset($about) && !empty($about) ) ? $about : '';
 					$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 					$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -763,17 +762,6 @@
 					);
 
 				// Properties from CreativeWork
-
-					// foo
-
-						/* 
-						 * Expected Type:
-						 *     bar
-						 * 
-						 * 
-						 */
-
-						$schema['foo'] = $foo;
 
 					// about
 
@@ -2374,11 +2362,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -2793,11 +2781,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -3212,11 +3200,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -3631,11 +3619,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -4050,11 +4038,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -4469,11 +4457,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -4888,11 +4876,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -5307,11 +5295,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -5726,11 +5714,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -6145,11 +6133,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -6564,11 +6552,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -6983,11 +6971,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -7402,11 +7390,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -7821,11 +7809,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -8240,11 +8228,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -8659,11 +8647,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -9078,11 +9066,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -9497,11 +9485,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -9916,11 +9904,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -10335,11 +10323,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -10754,11 +10742,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -11173,11 +11161,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -11592,11 +11580,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -12011,11 +11999,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -12430,11 +12418,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -12849,11 +12837,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -13268,11 +13256,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -13687,11 +13675,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -14106,11 +14094,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -14525,11 +14513,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -14944,11 +14932,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -15363,11 +15351,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -15782,11 +15770,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -16201,11 +16189,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -16620,11 +16608,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -17039,11 +17027,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -17458,11 +17446,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -17877,11 +17865,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -18296,11 +18284,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -18715,11 +18703,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -19134,11 +19122,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -19553,11 +19541,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -19972,11 +19960,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -20391,11 +20379,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -20810,11 +20798,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -21229,11 +21217,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -21648,11 +21636,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -22067,11 +22055,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -22486,11 +22474,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -22905,11 +22893,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -23324,11 +23312,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -23743,11 +23731,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -24162,11 +24150,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -24581,11 +24569,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -25000,11 +24988,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -25419,11 +25407,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -25838,11 +25826,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -26257,11 +26245,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -26676,11 +26664,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -27095,11 +27083,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -27514,11 +27502,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -27933,11 +27921,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -28352,11 +28340,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -28771,11 +28759,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -29190,11 +29178,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -29609,11 +29597,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -30028,11 +30016,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -30447,11 +30435,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -30750,7 +30738,7 @@
 						$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 						$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 						$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-		
+
 				// Add values to the schema array
 
 					// Inherited properties
@@ -30982,7 +30970,6 @@
 
 							$schema['specialty'] = $specialty;
 
-			
 				// Remove any empty values from the schema array
 
 					$schema = array_filter($schema);
@@ -31133,13 +31120,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -31152,9 +31139,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -31263,9 +31250,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -31275,15 +31262,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from AboutPage (Thing > CreativeWork > WebPage > AboutPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -31419,17 +31406,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from AboutPage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// CheckoutPage
@@ -31574,13 +31561,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -31593,9 +31580,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -31704,9 +31691,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -31716,15 +31703,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from CheckoutPage (Thing > CreativeWork > WebPage > CheckoutPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -31860,17 +31847,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from CheckoutPage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// CollectionPage
@@ -32015,13 +32002,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -32034,9 +32021,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -32145,9 +32132,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -32157,15 +32144,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from CollectionPage (Thing > CreativeWork > WebPage > CollectionPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -32301,26 +32288,26 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from CollectionPage
-	
+
 							// foo
-	
+
 								/* 
 								 * Expected Type:
 								 *     bar
 								 * 
 								 * 
 								 */
-	
+
 								$schema['foo'] = $foo;
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 					// MediaGallery
@@ -32467,13 +32454,13 @@
 								$subjectOf = '', // subjectOf
 								$url = '' // url
 						) {
-			
+
 							// Check/define variables
-			
+
 								$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-			
+
 								// Inherited properties from Thing
-			
+
 									$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 									$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 									$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -32486,9 +32473,9 @@
 									$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 									$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 									$url = ( isset($url) && !empty($url) ) ? $url : '';
-			
+
 								// Inherited properties from CreativeWork (Thing > CreativeWork)
-			
+
 									$about = ( isset($about) && !empty($about) ) ? $about : '';
 									$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 									$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -32597,9 +32584,9 @@
 									$video = ( isset($video) && !empty($video) ) ? $video : '';
 									$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 									$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-			
+
 								// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-			
+
 									$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 									$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 									$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -32609,19 +32596,19 @@
 									$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 									$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 									$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-					
+
 								// Inherited properties from CollectionPage (Thing > CreativeWork > WebPage > CollectionPage)
-			
+
 									// Do nothing (no property vars)
 
 								// Properties from MediaGallery (Thing > CreativeWork > WebPage > CollectionPage > MediaGallery)
-			
+
 									// Do nothing (no property vars)
 
 							// Add values to the schema array
-			
+
 								// Inherited properties
-			
+
 									$schema = uamswp_fad_schema_collectionpage(
 										$schema, // array // Main schema array
 										// CollectionPage (no property vars)
@@ -32758,17 +32745,17 @@
 											$subjectOf, // subjectOf
 											$url // url
 									);
-			
+
 								// Properties from MediaGallery
-			
+
 									// Do nothing (no property vars)
-			
+
 							// Remove any empty values from the schema array
-			
+
 								$schema = array_filter($schema);
-			
+
 							return $schema;
-			
+
 						}
 
 			// ContactPage
@@ -32913,13 +32900,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -32932,9 +32919,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -33043,9 +33030,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -33055,15 +33042,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from ContactPage (Thing > CreativeWork > WebPage > ContactPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -33199,17 +33186,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from ContactPage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// FAQPage
@@ -33355,13 +33342,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -33374,9 +33361,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -33485,9 +33472,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -33497,15 +33484,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from FAQPage (Thing > CreativeWork > WebPage > FAQPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -33641,17 +33628,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from FAQPage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// ItemPage
@@ -33796,13 +33783,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -33815,9 +33802,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -33926,9 +33913,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -33938,15 +33925,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from ItemPage (Thing > CreativeWork > WebPage > ItemPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -34082,17 +34069,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from ItemPage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// MedicalWebPage
@@ -34238,13 +34225,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -34257,9 +34244,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -34368,9 +34355,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -34380,15 +34367,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from MedicalWebPage (Thing > CreativeWork > WebPage > MedicalWebPage)
-	
+
 							$medicalAudience = ( isset($medicalAudience) && !empty($medicalAudience) ) ? $medicalAudience : '';
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -34524,11 +34511,11 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from MedicalWebPage
-	
+
 							// medicalAudience
-	
+
 								/* 
 								 * Expected Type:
 								 *     MedicalAudience
@@ -34536,17 +34523,16 @@
 								 * 
 								 * Medical audience for page.
 								 */
-	
-								$schema['medicalAudience'] = $medicalAudience;
-	
-					// Remove any empty values from the schema array
-	
-						$schema = array_filter($schema);
-	
-					return $schema;
-	
-				}
 
+								$schema['medicalAudience'] = $medicalAudience;
+
+					// Remove any empty values from the schema array
+
+						$schema = array_filter($schema);
+
+					return $schema;
+
+				}
 
 				/*
 				 * A web page that provides medical information.
@@ -34701,13 +34687,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -34720,9 +34706,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -34831,9 +34817,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -34843,15 +34829,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from ProfilePage (Thing > CreativeWork > WebPage > ProfilePage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -34987,17 +34973,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from ProfilePage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// QAPage
@@ -35144,13 +35130,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -35163,9 +35149,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -35274,9 +35260,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -35286,15 +35272,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from QAPage (Thing > CreativeWork > WebPage > QAPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -35430,17 +35416,17 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from QAPage
-	
+
 							// Do nothing (no property vars)
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// RealEstateListing
@@ -35590,13 +35576,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -35609,9 +35595,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -35720,9 +35706,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -35732,16 +35718,16 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from RealEstateListing (Thing > CreativeWork > WebPage > RealEstateListing)
-	
+
 						$datePosted = ( isset($datePosted) && !empty($datePosted) ) ? $datePosted : '';
 						$leaseLength = ( isset($leaseLength) && !empty($leaseLength) ) ? $leaseLength : '';
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -35877,11 +35863,11 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
+
 						// Properties from RealEstateListing
-	
+
 							// datePosted
-	
+
 								/* 
 								 * Expected Type:
 								 *     DataType > Date
@@ -35889,11 +35875,11 @@
 								 * 
 								 * Publication date of an online listing.
 								 */
-	
+
 								$schema['datePosted'] = $datePosted;
-	
+
 							// leaseLength
-	
+
 								/* 
 								 * Expected Type:
 								 *     Thing > Intangible > Quantity > Duration
@@ -35902,15 +35888,15 @@
 								 * Length of the lease for some Accommodation, either particular to some Offer or 
 								 * in some cases intrinsic to the property.
 								 */
-	
+
 								$schema['leaseLength'] = $leaseLength;
-	
+
 					// Remove any empty values from the schema array
-	
+
 						$schema = array_filter($schema);
-	
+
 					return $schema;
-	
+
 				}
 
 			// SearchResultsPage
@@ -36055,13 +36041,13 @@
 						$subjectOf = '', // subjectOf
 						$url = '' // url
 				) {
-	
+
 					// Check/define variables
-	
+
 						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 						// Inherited properties from Thing
-	
+
 							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 							$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -36074,9 +36060,9 @@
 							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 							$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 						// Inherited properties from CreativeWork (Thing > CreativeWork)
-	
+
 							$about = ( isset($about) && !empty($about) ) ? $about : '';
 							$abstract = ( isset($abstract) && !empty($abstract) ) ? $abstract : '';
 							$accessibilityAPI = ( isset($accessibilityAPI) && !empty($accessibilityAPI) ) ? $accessibilityAPI : '';
@@ -36185,9 +36171,9 @@
 							$video = ( isset($video) && !empty($video) ) ? $video : '';
 							$workExample = ( isset($workExample) && !empty($workExample) ) ? $workExample : '';
 							$workTranslation = ( isset($workTranslation) && !empty($workTranslation) ) ? $workTranslation : '';
-	
+
 						// Inherited properties from WebPage (Thing > CreativeWork > WebPage)
-	
+
 							$breadcrumb = ( isset($breadcrumb) && !empty($breadcrumb) ) ? $breadcrumb : '';
 							$lastReviewed = ( isset($lastReviewed) && !empty($lastReviewed) ) ? $lastReviewed : '';
 							$mainContentOfPage = ( isset($mainContentOfPage) && !empty($mainContentOfPage) ) ? $mainContentOfPage : '';
@@ -36197,15 +36183,15 @@
 							$significantLink = ( isset($significantLink) && !empty($significantLink) ) ? $significantLink : '';
 							$speakable = ( isset($speakable) && !empty($speakable) ) ? $speakable : '';
 							$specialty = ( isset($specialty) && !empty($specialty) ) ? $specialty : '';
-			
+
 						// Properties from SearchResultsPage (Thing > CreativeWork > WebPage > SearchResultsPage)
-	
+
 							// Do nothing (no property vars)
 
 					// Add values to the schema array
-	
+
 						// Inherited properties
-	
+
 							$schema = uamswp_fad_schema_webpage(
 								$schema, // array // Main schema array
 								// WebPage
@@ -36341,19 +36327,18 @@
 									$subjectOf, // subjectOf
 									$url // url
 							);
-	
-						// Properties from SearchResultsPage
-	
-							// Do nothing (no property vars)
-	
-					// Remove any empty values from the schema array
-	
-						$schema = array_filter($schema);
-	
-					return $schema;
-	
-				}
 
+						// Properties from SearchResultsPage
+
+							// Do nothing (no property vars)
+
+					// Remove any empty values from the schema array
+
+						$schema = array_filter($schema);
+
+					return $schema;
+
+				}
 
 		// WebPageElement
 
@@ -36758,11 +36743,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -37177,11 +37162,11 @@
 						// foo
 
 							/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+							 * Expected Type:
+							 *     bar
+							 * 
+							 * 
+							 */
 
 							$schema['foo'] = $foo;
 
@@ -37266,11 +37251,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -37355,11 +37340,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -37432,7 +37417,7 @@
 					$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 					$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 					$study = ( isset($study) && !empty($study) ) ? $study : '';
-			
+
 			// Add values to the schema array
 
 				// Inherited properties
@@ -40620,13 +40605,12 @@
 							$schema['significance'] = $significance;
 
 				// Remove any empty values from the schema array
-	
-					$schema = array_filter($schema);
-	
-				return $schema;
-	
-			}
 
+					$schema = array_filter($schema);
+
+				return $schema;
+
+			}
 
 	// Organization
 
@@ -40701,11 +40685,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -40790,11 +40774,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -42521,11 +42505,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
@@ -42610,11 +42594,11 @@
 					// foo
 
 						/* 
-							* Expected Type:
-							*     bar
-							* 
-							* 
-							*/
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
 
 						$schema['foo'] = $foo;
 
