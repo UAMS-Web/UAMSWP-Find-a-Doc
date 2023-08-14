@@ -37573,7 +37573,14 @@
 			function uamswp_fad_schema_anatomicalstructure(
 				$schema, // array // Main schema array
 				// AnatomicalStructure
-					$foo = '', // foo
+					$associatedPathophysiology = '', // associatedPathophysiology
+					$bodyLocation = '', // bodyLocation
+					$connectedTo = '', // connectedTo
+					$diagram = '', // diagram
+					$partOfSystem = '', // partOfSystem
+					$relatedCondition = '', // relatedCondition
+					$relatedTherapy = '', // relatedTherapy
+					$subStructure = '', // subStructure
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -37597,13 +37604,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -37616,9 +37623,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -37627,15 +37634,22 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from AnatomicalStructure (Thing > MedicalEntity > AnatomicalStructure)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology: '';
+						$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation: '';
+						$connectedTo = ( isset($connectedTo) && !empty($connectedTo) ) ? $connectedTo: '';
+						$diagram = ( isset($diagram) && !empty($diagram) ) ? $diagram: '';
+						$partOfSystem = ( isset($partOfSystem) && !empty($partOfSystem) ) ? $partOfSystem: '';
+						$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition: '';
+						$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy: '';
+						$subStructure = ( isset($subStructure) && !empty($subStructure) ) ? $subStructure: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -37661,26 +37675,103 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalEntity
-	
-						// foo
-	
+
+						// associatedPathophysiology
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Text
 							 * 
-							 * 
+							 * If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['associatedPathophysiology'] = $associatedPathophysiology;
+
+						// bodyLocation
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * Location in the body of the anatomical structure.
+							 */
+
+							$schema['bodyLocation'] = $bodyLocation;
+
+						// connectedTo
+
+							/* 
+							 * Expected Type:
+							 *     AnatomicalStructure
+							 * 
+							 * Other anatomical structures to which this structure is connected.
+							 */
+
+							$schema['connectedTo'] = $connectedTo;
+
+						// diagram
+
+							/* 
+							 * Expected Type:
+							 *     ImageObject
+							 * 
+							 * An image containing a diagram that illustrates the structure and/or its component substructures and/or connections with other structures.
+							 */
+
+							$schema['diagram'] = $diagram;
+
+						// partOfSystem
+
+							/* 
+							 * Expected Type:
+							 *     AnatomicalSystem
+							 * 
+							 * The anatomical or organ system that this structure is part of.
+							 */
+
+							$schema['partOfSystem'] = $partOfSystem;
+
+						// relatedCondition
+
+							/* 
+							 * Expected Type:
+							 *     MedicalCondition
+							 * 
+							 * A medical condition associated with this anatomy.
+							 */
+
+							$schema['relatedCondition'] = $relatedCondition;
+
+						// relatedTherapy
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A medical therapy related to this anatomy.
+							 */
+
+							$schema['relatedTherapy'] = $relatedTherapy;
+
+						// subStructure
+
+							/* 
+							 * Expected Type:
+							 *     AnatomicalStructure
+							 * 
+							 * Component (sub-)structure(s) that comprise this anatomical structure.
+							 */
+
+							$schema['subStructure'] = $subStructure;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// AnatomicalSystem
@@ -37696,7 +37787,11 @@
 			function uamswp_fad_schema_AnatomicalSystem(
 				$schema, // array // Main schema array
 				// AnatomicalSystem
-					$foo = '', // foo
+					$associatedPathophysiology = '', // associatedPathophysiology
+					$comprisedOf = '', // comprisedOf
+					$relatedCondition = '', // relatedCondition
+					$relatedStructure = '', // relatedStructure
+					$relatedTherapy = '', // relatedTherapy
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -37720,13 +37815,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -37739,9 +37834,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -37750,15 +37845,19 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from AnatomicalSystem (Thing > MedicalEntity > AnatomicalSystem)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology: '';
+						$comprisedOf = ( isset($comprisedOf) && !empty($comprisedOf) ) ? $comprisedOf: '';
+						$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition: '';
+						$relatedStructure = ( isset($relatedStructure) && !empty($relatedStructure) ) ? $relatedStructure: '';
+						$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -37784,26 +37883,71 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from AnatomicalSystem
-	
-						// foo
-	
+
+						// associatedPathophysiology
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Text
 							 * 
-							 * 
+							 * If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['associatedPathophysiology'] = $associatedPathophysiology;
+
+						// comprisedOf
+
+							/* 
+							 * Expected Type:
+							 *     AnatomicalStructure
+							 *     AnatomicalSystem
+							 * 
+							 * Specifying something physically contained by something else. Typically used here for the underlying anatomical structures, such as organs, that comprise the anatomical system.
+							 */
+
+							$schema['comprisedOf'] = $comprisedOf;
+
+						// relatedCondition
+
+							/* 
+							 * Expected Type:
+							 *     MedicalCondition
+							 * 
+							 * A medical condition associated with this anatomy.
+							 */
+
+							$schema['relatedCondition'] = $relatedCondition;
+
+						// relatedStructure
+
+							/* 
+							 * Expected Type:
+							 *     AnatomicalStructure
+							 * 
+							 * Related anatomical structure(s) that are not part of the system but relate or connect to it, such as vascular bundles associated with an organ system.
+							 */
+
+							$schema['relatedStructure'] = $relatedStructure;
+
+						// relatedTherapy
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A medical therapy related to this anatomy.
+							 */
+
+							$schema['relatedTherapy'] = $relatedTherapy;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// DrugClass
@@ -37817,7 +37961,7 @@
 			function uamswp_fad_schema_DrugClass(
 				$schema, // array // Main schema array
 				// DrugClass
-					$foo = '', // foo
+					$drug = '', // drug
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -37841,13 +37985,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -37860,9 +38004,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -37871,15 +38015,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from DrugClass (Thing > MedicalEntity > DrugClass)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$drug = ( isset($drug) && !empty($drug) ) ? $drug : '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -37905,26 +38049,26 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from DrugClass
-	
-						// foo
-	
+
+						// drug
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Drug
 							 * 
-							 * 
+							 * Specifying a drug or medicine used in a medication procedure.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							 $schema['drug'] = $drug;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// DrugCost
@@ -37942,7 +38086,12 @@
 			function uamswp_fad_schema_DrugCost(
 				$schema, // array // Main schema array
 				// DrugCost
-					$foo = '', // foo
+					$applicableLocation = '', // applicableLocation
+					$costCategory = '', // costCategory
+					$costCurrency = '', // costCurrency
+					$costOrigin = '', // costOrigin
+					$costPerUnit = '', // costPerUnit
+					$drugUnit = '', // drugUnit
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -37966,13 +38115,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -37985,9 +38134,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -37996,15 +38145,20 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from DrugCost (Thing > MedicalEntity > DrugCost)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$applicableLocation = ( isset($applicableLocation) && !empty($applicableLocation) ) ? $applicableLocation: '';
+						$costCategory = ( isset($costCategory) && !empty($costCategory) ) ? $costCategory: '';
+						$costCurrency = ( isset($costCurrency) && !empty($costCurrency) ) ? $costCurrency: '';
+						$costOrigin = ( isset($costOrigin) && !empty($costOrigin) ) ? $costOrigin: '';
+						$costPerUnit = ( isset($costPerUnit) && !empty($costPerUnit) ) ? $costPerUnit: '';
+						$drugUnit = ( isset($drugUnit) && !empty($drugUnit) ) ? $drugUnit: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38030,26 +38184,83 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from DrugCost
-	
-						// foo
-	
+
+						// applicableLocation
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     AdministrativeArea
 							 * 
-							 * 
+							 * The location in which the status applies.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['applicableLocation'] = $applicableLocation;
+
+						// costCategory
+
+							/* 
+							 * Expected Type:
+							 *     DrugCostCategory
+							 * 
+							 * The category of cost, such as wholesale, retail, reimbursement cap, etc.
+							 */
+
+							$schema['costCategory'] = $costCategory;
+
+						// costCurrency
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * The currency (in 3-letter) of the drug cost. See: http://en.wikipedia.org/wiki/ISO_4217.
+							 */
+
+							$schema['costCurrency'] = $costCurrency;
+
+						// costOrigin
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * Additional details to capture the origin of the cost data. For example, 'Medicare Part B'.
+							 */
+
+							$schema['costOrigin'] = $costOrigin;
+
+						// costPerUnit
+
+							/* 
+							 * Expected Type:
+							 *     Number
+							 *     QualitativeValue
+							 *     Text
+							 * 
+							 * The cost per unit of the drug.
+							 */
+
+							$schema['costPerUnit'] = $costPerUnit;
+
+						// drugUnit
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * The unit in which the drug is measured, e.g. '5 mg tablet'.
+							 */
+
+							$schema['drugUnit'] = $drugUnit;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// LifestyleModification
@@ -38061,8 +38272,7 @@
 
 			function uamswp_fad_schema_LifestyleModification(
 				$schema, // array // Main schema array
-				// LifestyleModification
-					$foo = '', // foo
+				// LifestyleModification (no property vars)
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38086,13 +38296,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38105,9 +38315,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38116,15 +38326,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from LifestyleModification (Thing > MedicalEntity > LifestyleModification)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						// Do nothing (no property vars)
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38150,26 +38360,17 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from LifestyleModification
-	
-						// foo
-	
-							/* 
-							 * Expected Type:
-							 *     Bar
-							 * 
-							 * 
-							 */
-	
-							$schema['foo'] = $foo;
-	
+
+						// Do nothing (no property vars)
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalCause
@@ -38195,7 +38396,7 @@
 			function uamswp_fad_schema_MedicalCause(
 				$schema, // array // Main schema array
 				// MedicalCause
-					$foo = '', // foo
+					$causeOf = '', // causeOf
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38219,13 +38420,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38238,9 +38439,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38249,15 +38450,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalCause (Thing > MedicalEntity > MedicalCause)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$causeOf = ( isset($causeOf) && !empty($causeOf) ) ? $causeOf: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38283,26 +38484,26 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalCause
-	
-						// foo
-	
+
+						// causeOf
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     MedicalEntity
 							 * 
-							 * 
+							 * The condition, complication, symptom, sign, etc. caused.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['causeOf'] = $causeOf;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalCondition
@@ -38316,7 +38517,22 @@
 			function uamswp_fad_schema_MedicalCondition(
 				$schema, // array // Main schema array
 				// MedicalCondition
-					$foo = '', // foo
+					$associatedAnatomy = '', // associatedAnatomy
+					$differentialDiagnosis = '', // differentialDiagnosis
+					$drug = '', // drug
+					$epidemiology = '', // epidemiology
+					$expectedPrognosis = '', // expectedPrognosis
+					$naturalProgression = '', // naturalProgression
+					$pathophysiology = '', // pathophysiology
+					$possibleComplication = '', // possibleComplication
+					$possibleTreatment = '', // possibleTreatment
+					$primaryPrevention = '', // primaryPrevention
+					$riskFactor = '', // riskFactor
+					$secondaryPrevention = '', // secondaryPrevention
+					$signOrSymptom = '', // signOrSymptom
+					$stage = '', // stage
+					$status = '', // status
+					$typicalTest = '', // typicalTest
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38340,13 +38556,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38359,9 +38575,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38370,15 +38586,30 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalCondition (Thing > MedicalEntity > MedicalCondition)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$associatedAnatomy = ( isset($associatedAnatomy) && !empty($associatedAnatomy) ) ? $associatedAnatomy: '';
+						$differentialDiagnosis = ( isset($differentialDiagnosis) && !empty($differentialDiagnosis) ) ? $differentialDiagnosis: '';
+						$drug = ( isset($drug) && !empty($drug) ) ? $drug: '';
+						$epidemiology = ( isset($epidemiology) && !empty($epidemiology) ) ? $epidemiology: '';
+						$expectedPrognosis = ( isset($expectedPrognosis) && !empty($expectedPrognosis) ) ? $expectedPrognosis: '';
+						$naturalProgression = ( isset($naturalProgression) && !empty($naturalProgression) ) ? $naturalProgression: '';
+						$pathophysiology = ( isset($pathophysiology) && !empty($pathophysiology) ) ? $pathophysiology: '';
+						$possibleComplication = ( isset($possibleComplication) && !empty($possibleComplication) ) ? $possibleComplication: '';
+						$possibleTreatment = ( isset($possibleTreatment) && !empty($possibleTreatment) ) ? $possibleTreatment: '';
+						$primaryPrevention = ( isset($primaryPrevention) && !empty($primaryPrevention) ) ? $primaryPrevention: '';
+						$riskFactor = ( isset($riskFactor) && !empty($riskFactor) ) ? $riskFactor: '';
+						$secondaryPrevention = ( isset($secondaryPrevention) && !empty($secondaryPrevention) ) ? $secondaryPrevention: '';
+						$signOrSymptom = ( isset($signOrSymptom) && !empty($signOrSymptom) ) ? $signOrSymptom: '';
+						$stage = ( isset($stage) && !empty($stage) ) ? $stage: '';
+						$status = ( isset($status) && !empty($status) ) ? $status: '';
+						$typicalTest = ( isset($typicalTest) && !empty($typicalTest) ) ? $typicalTest: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38404,26 +38635,195 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalCondition
-	
-						// foo
-	
+
+						// associatedAnatomy
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     AnatomicalStructure
+							 *     AnatomicalSystem
+							 *     SuperficialAnatomy
 							 * 
-							 * 
+							 * The anatomy of the underlying organ system or structures associated with this entity.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['associatedAnatomy'] = $associatedAnatomy;
+
+						// differentialDiagnosis
+
+							/* 
+							 * Expected Type:
+							 *     DDxElement
+							 * 
+							 * One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.
+							 */
+
+							$schema['differentialDiagnosis'] = $differentialDiagnosis;
+
+						// drug
+
+							/* 
+							 * Expected Type:
+							 *     Drug
+							 * 
+							 * Specifying a drug or medicine used in a medication procedure.
+							 */
+
+							$schema['drug'] = $drug;
+
+						// epidemiology
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * The characteristics of associated patients, such as age, gender, race etc.
+							 */
+
+							$schema['epidemiology'] = $epidemiology;
+
+						// expectedPrognosis
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * The likely outcome in either the short term or long term of the medical condition.
+							 */
+
+							$schema['expectedPrognosis'] = $expectedPrognosis;
+
+						// naturalProgression
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * The expected progression of the condition if it is not treated and allowed to progress naturally.
+							 */
+
+							$schema['naturalProgression'] = $naturalProgression;
+
+						// pathophysiology
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.
+							 */
+
+							$schema['pathophysiology'] = $pathophysiology;
+
+						// possibleComplication
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.
+							 */
+
+							$schema['possibleComplication'] = $possibleComplication;
+
+						// possibleTreatment
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A possible treatment to address this condition, sign or symptom.
+							 */
+
+							$schema['possibleTreatment'] = $possibleTreatment;
+
+						// primaryPrevention
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A preventative therapy used to prevent an initial occurrence of the medical condition, such as vaccination.
+							 */
+
+							$schema['primaryPrevention'] = $primaryPrevention;
+
+						// riskFactor
+
+							/* 
+							 * Expected Type:
+							 *     MedicalRiskFactor
+							 * 
+							 * A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.
+							 */
+
+							$schema['riskFactor'] = $riskFactor;
+
+						// secondaryPrevention
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A preventative therapy used to prevent reoccurrence of the medical condition after an initial episode of the condition.
+							 */
+
+							$schema['secondaryPrevention'] = $secondaryPrevention;
+
+						// signOrSymptom
+
+							/* 
+							 * Expected Type:
+							 *     MedicalSignOrSymptom
+							 * 
+							 * A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition.
+							 */
+
+							$schema['signOrSymptom'] = $signOrSymptom;
+
+						// stage
+
+							/* 
+							 * Expected Type:
+							 *     MedicalConditionStage
+							 * 
+							 * The stage of the condition, if applicable.
+							 */
+
+							$schema['stage'] = $stage;
+
+						// status
+
+							/* 
+							 * Expected Type:
+							 *     EventStatusType
+							 *     MedicalStudyStatus
+							 *     Text
+							 * 
+							 * The status of the study (enumerated).
+							 */
+
+							$schema['status'] = $status;
+
+						// typicalTest
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTest
+							 * 
+							 * A medical test typically performed given this condition.
+							 */
+
+							$schema['typicalTest'] = $typicalTest;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalContraindication
@@ -38438,8 +38838,7 @@
 
 			function uamswp_fad_schema_MedicalContraindication(
 				$schema, // array // Main schema array
-				// MedicalContraindication
-					$foo = '', // foo
+				// MedicalContraindication (no property vars)
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38463,13 +38862,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38482,9 +38881,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38493,15 +38892,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalContraindication (Thing > MedicalEntity > MedicalContraindication)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						// Do nothing (no property vars)
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38527,26 +38926,17 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalContraindication
-	
-						// foo
-	
-							/* 
-							 * Expected Type:
-							 *     Bar
-							 * 
-							 * 
-							 */
-	
-							$schema['foo'] = $foo;
-	
+
+						// Do nothing (no property vars)
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalDevice
@@ -38558,7 +38948,12 @@
 			function uamswp_fad_schema_MedicalDevice(
 				$schema, // array // Main schema array
 				// MedicalDevice
-					$foo = '', // foo
+					$adverseOutcome = '', // adverseOutcome
+					$contraindication = '', // contraindication
+					$postOp = '', // postOp
+					$preOp = '', // preOp
+					$procedure = '', // procedure
+					$seriousAdverseOutcome = '', // seriousAdverseOutcome
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38582,13 +38977,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38601,9 +38996,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38612,15 +39007,20 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalDevice (Thing > MedicalEntity > MedicalDevice)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$adverseOutcome = ( isset($adverseOutcome) && !empty($adverseOutcome) ) ? $adverseOutcome: '';
+						$contraindication = ( isset($contraindication) && !empty($contraindication) ) ? $contraindication: '';
+						$postOp = ( isset($postOp) && !empty($postOp) ) ? $postOp: '';
+						$preOp = ( isset($preOp) && !empty($preOp) ) ? $preOp: '';
+						$procedure = ( isset($procedure) && !empty($procedure) ) ? $procedure: '';
+						$seriousAdverseOutcome = ( isset($seriousAdverseOutcome) && !empty($seriousAdverseOutcome) ) ? $seriousAdverseOutcome: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38646,26 +39046,82 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalDevice
-	
-						// foo
-	
+
+						// adverseOutcome
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     MedicalEntity
 							 * 
-							 * 
+							 * A possible complication and/or side effect of this therapy. If it is known that an adverse outcome is serious (resulting in death, disability, or permanent damage; requiring hospitalization; or otherwise life-threatening or requiring immediate medical attention), tag it as a seriousAdverseOutcome instead.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['adverseOutcome'] = $adverseOutcome;
+
+						// contraindication
+
+							/* 
+							 * Expected Type:
+							 *     MedicalContraindication
+							 *     Text
+							 * 
+							 * A contraindication for this therapy.
+							 */
+
+							$schema['contraindication'] = $contraindication;
+
+						// postOp
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * A description of the postoperative procedures, care, and/or followups for this device.
+							 */
+
+							$schema['postOp'] = $postOp;
+
+						// preOp
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * A description of the workup, testing, and other preparations required before implanting this device.
+							 */
+
+							$schema['preOp'] = $preOp;
+
+						// procedure
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * A description of the procedure involved in setting up, using, and/or installing the device.
+							 */
+
+							$schema['procedure'] = $procedure;
+
+						// seriousAdverseOutcome
+
+							/* 
+							 * Expected Type:
+							 *     MedicalEntity
+							 * 
+							 * A possible serious complication and/or serious side effect of this therapy. Serious adverse outcomes include those that are life-threatening; result in death, disability, or permanent damage; require hospitalization or prolong existing hospitalization; cause congenital anomalies or birth defects; or jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes in this definition.
+							 */
+
+							$schema['seriousAdverseOutcome'] = $seriousAdverseOutcome;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalGuideline
@@ -38683,7 +39139,10 @@
 			function uamswp_fad_schema_MedicalGuideline(
 				$schema, // array // Main schema array
 				// MedicalGuideline
-					$foo = '', // foo
+					$evidenceLevel = '', // evidenceLevel
+					$evidenceOrigin = '', // evidenceOrigin
+					$guidelineDate = '', // guidelineDate
+					$guidelineSubject = '', // guidelineSubject
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38707,13 +39166,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38726,9 +39185,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38737,15 +39196,18 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalGuideline (Thing > MedicalEntity > MedicalGuideline)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$evidenceLevel = ( isset($evidenceLevel) && !empty($evidenceLevel) ) ? $evidenceLevel: '';
+						$evidenceOrigin = ( isset($evidenceOrigin) && !empty($evidenceOrigin) ) ? $evidenceOrigin: '';
+						$guidelineDate = ( isset($guidelineDate) && !empty($guidelineDate) ) ? $guidelineDate: '';
+						$guidelineSubject = ( isset($guidelineSubject) && !empty($guidelineSubject) ) ? $guidelineSubject: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38771,26 +39233,59 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalGuideline
-	
-						// foo
-	
+
+						// evidenceLevel
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     MedicalEvidenceLevel
 							 * 
-							 * 
+							 * Strength of evidence of the data used to formulate the guideline (enumerated).
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['evidenceLevel'] = $evidenceLevel;
+
+						// evidenceOrigin
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * Source of the data used to formulate the guidance, e.g. RCT, consensus opinion, etc.
+							 */
+
+							$schema['evidenceOrigin'] = $evidenceOrigin;
+
+						// guidelineDate
+
+							/* 
+							 * Expected Type:
+							 *     Date
+							 * 
+							 * Date on which this guideline's recommendation was made.
+							 */
+
+							$schema['guidelineDate'] = $guidelineDate;
+
+						// guidelineSubject
+
+							/* 
+							 * Expected Type:
+							 *     MedicalEntity
+							 * 
+							 * The medical conditions, treatments, etc. that are the subject of the guideline.
+							 */
+
+							$schema['guidelineSubject'] = $guidelineSubject;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalIndication
@@ -38802,8 +39297,7 @@
 
 			function uamswp_fad_schema_MedicalIndication(
 				$schema, // array // Main schema array
-				// MedicalIndication
-					$foo = '', // foo
+				// MedicalIndication (no property vars)
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38827,13 +39321,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38846,9 +39340,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38857,15 +39351,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalIndication (Thing > MedicalEntity > MedicalIndication)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						// Do nothing (no property vars)
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -38891,26 +39385,17 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalIndication
-	
-						// foo
-	
-							/* 
-							 * Expected Type:
-							 *     Bar
-							 * 
-							 * 
-							 */
-	
-							$schema['foo'] = $foo;
-	
+
+						// Do nothing (no property vars)
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalIntangible
@@ -38922,8 +39407,7 @@
 
 			function uamswp_fad_schema_MedicalIntangible(
 				$schema, // array // Main schema array
-				// MedicalIntangible
-					$foo = '', // foo
+				// MedicalIntangible (no property vars)
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -38947,13 +39431,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -38966,9 +39450,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -38977,15 +39461,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalIntangible (Thing > MedicalEntity > MedicalIntangible)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						// Do nothing (no property vars)
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39011,26 +39495,17 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalIntangible
-	
-						// foo
-	
-							/* 
-							 * Expected Type:
-							 *     Bar
-							 * 
-							 * 
-							 */
-	
-							$schema['foo'] = $foo;
-	
+
+						// Do nothing (no property vars)
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalProcedure
@@ -39044,7 +39519,12 @@
 			function uamswp_fad_schema_MedicalProcedure(
 				$schema, // array // Main schema array
 				// MedicalProcedure
-					$foo = '', // foo
+					$bodyLocation = '', // bodyLocation
+					$followup = '', // followup
+					$howPerformed = '', // howPerformed
+					$preparation = '', // preparation
+					$procedureType = '', // procedureType
+					$status = '', // status
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39068,13 +39548,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39087,9 +39567,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39098,15 +39578,20 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalProcedure (Thing > MedicalEntity > MedicalProcedure)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation: '';
+						$followup = ( isset($followup) && !empty($followup) ) ? $followup: '';
+						$howPerformed = ( isset($howPerformed) && !empty($howPerformed) ) ? $howPerformed: '';
+						$preparation = ( isset($preparation) && !empty($preparation) ) ? $preparation: '';
+						$procedureType = ( isset($procedureType) && !empty($procedureType) ) ? $procedureType: '';
+						$status = ( isset($status) && !empty($status) ) ? $status: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39132,26 +39617,85 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalProcedure
-	
-						// foo
-	
+
+						// bodyLocation
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Text
 							 * 
-							 * 
+							 * Location in the body of the anatomical structure.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['bodyLocation'] = $bodyLocation;
+
+						// followup
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * Typical or recommended followup care after the procedure is performed.
+							 */
+
+							$schema['followup'] = $followup;
+
+						// howPerformed
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * How the procedure is performed.
+							 */
+
+							$schema['howPerformed'] = $howPerformed;
+
+						// preparation
+
+							/* 
+							 * Expected Type:
+							 *     MedicalEntity
+							 *     Text
+							 * 
+							 * Typical preparation that a patient must undergo before having the procedure performed.
+
+							 */
+
+							$schema['preparation'] = $preparation;
+
+						// procedureType
+
+							/* 
+							 * Expected Type:
+							 *     MedicalProcedureType
+							 * 
+							 * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
+							 */
+
+							$schema['procedureType'] = $procedureType;
+
+						// status
+
+							/* 
+							 * Expected Type:
+							 *     EventStatusType
+							 *     MedicalStudyStatus
+							 *     Text
+							 * 
+							 * The status of the study (enumerated).
+							 */
+
+							$schema['status'] = $status;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalRiskEstimator
@@ -39164,7 +39708,8 @@
 			function uamswp_fad_schema_MedicalRiskEstimator(
 				$schema, // array // Main schema array
 				// MedicalRiskEstimator
-					$foo = '', // foo
+					$estimatesRiskOf = '', // estimatesRiskOf
+					$includedRiskFactor = '', // includedRiskFactor
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39188,13 +39733,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39207,9 +39752,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39218,15 +39763,16 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalRiskEstimator (Thing > MedicalEntity > MedicalRiskEstimator)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$estimatesRiskOf = ( isset($estimatesRiskOf) && !empty($estimatesRiskOf) ) ? $estimatesRiskOf: '';
+						$includedRiskFactor = ( isset($includedRiskFactor) && !empty($includedRiskFactor) ) ? $includedRiskFactor: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39252,26 +39798,37 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalRiskEstimator
-	
-						// foo
-	
+
+						// estimatesRiskOf
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     MedicalEntity
 							 * 
-							 * 
+							 * The condition, complication, or symptom whose risk is being estimated.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['estimatesRiskOf'] = $estimatesRiskOf;
+
+						// includedRiskFactor
+
+							/* 
+							 * Expected Type:
+							 *     MedicalRiskFactor
+							 * 
+							 * A modifiable or non-modifiable risk factor included in the calculation (e.g., age, coexisting condition).
+							 */
+
+							$schema['includedRiskFactor'] = $includedRiskFactor;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalRiskFactor
@@ -39284,7 +39841,7 @@
 			function uamswp_fad_schema_MedicalRiskFactor(
 				$schema, // array // Main schema array
 				// MedicalRiskFactor
-					$foo = '', // foo
+					$increasesRiskOf = '', // increasesRiskOf
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39308,13 +39865,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39327,9 +39884,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39338,15 +39895,15 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalRiskFactor (Thing > MedicalEntity > MedicalRiskFactor)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$increasesRiskOf = ( isset($increasesRiskOf) && !empty($increasesRiskOf) ) ? $increasesRiskOf : '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39372,26 +39929,26 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalRiskFactor
-	
-						// foo
-	
+
+						// increasesRiskOf
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Thing > MedicalEntity
 							 * 
-							 * 
+							 * The condition, complication, etc. influenced by this factor.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['increasesRiskOf'] = $increasesRiskOf;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalStudy
@@ -39410,7 +39967,11 @@
 			function uamswp_fad_schema_MedicalStudy(
 				$schema, // array // Main schema array
 				// MedicalStudy
-					$foo = '', // foo
+					$healthCondition = '', // healthCondition
+					$sponsor = '', // sponsor
+					$status = '', // status
+					$studyLocation = '', // studyLocation
+					$studySubject = '', // studySubject
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39434,13 +39995,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39453,9 +40014,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39464,15 +40025,19 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalStudy (Thing > MedicalEntity > MedicalStudy)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition: '';
+						$sponsor = ( isset($sponsor) && !empty($sponsor) ) ? $sponsor: '';
+						$status = ( isset($status) && !empty($status) ) ? $status: '';
+						$studyLocation = ( isset($studyLocation) && !empty($studyLocation) ) ? $studyLocation: '';
+						$studySubject = ( isset($studySubject) && !empty($studySubject) ) ? $studySubject: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39498,26 +40063,73 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalStudy
-	
-						// foo
-	
+
+						// healthCondition
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     MedicalCondition
 							 * 
-							 * 
+							 * Specifying the health condition(s) of a patient, medical study, or other target audience.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['healthCondition'] = $healthCondition;
+
+						// sponsor
+
+							/* 
+							 * Expected Type:
+							 *     Organization
+							 *     Person
+							 * 
+							 * A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.
+							 */
+
+							$schema['sponsor'] = $sponsor;
+
+						// status
+
+							/* 
+							 * Expected Type:
+							 *     EventStatusType
+							 *     MedicalStudyStatus
+							 *     Text
+							 * 
+							 * The status of the study (enumerated).
+							 */
+
+							$schema['status'] = $status;
+
+						// studyLocation
+
+							/* 
+							 * Expected Type:
+							 *     AdministrativeArea
+							 * 
+							 * The location in which the study is taking/took place.
+							 */
+
+							$schema['studyLocation'] = $studyLocation;
+
+						// studySubject
+
+							/* 
+							 * Expected Type:
+							 *     MedicalEntity
+							 * 
+							 * A subject of the study (i.e., one of the medical conditions, therapies, devices, drugs, etc. investigated by the study).
+							 */
+
+							$schema['studySubject'] = $studySubject;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// MedicalTest
@@ -39529,7 +40141,11 @@
 			function uamswp_fad_schema_MedicalTest(
 				$schema, // array // Main schema array
 				// MedicalTest
-					$foo = '', // foo
+					$affectedBy = '', // affectedBy
+					$normalRange = '', // normalRange
+					$signDetected = '', // signDetected
+					$usedToDiagnose = '', // usedToDiagnose
+					$usesDevice = '', // usesDevice
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39553,13 +40169,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39572,9 +40188,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39583,15 +40199,19 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from MedicalTest (Thing > MedicalEntity > MedicalTest)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$affectedBy = ( isset($affectedBy) && !empty($affectedBy) ) ? $affectedBy: '';
+						$normalRange = ( isset($normalRange) && !empty($normalRange) ) ? $normalRange: '';
+						$signDetected = ( isset($signDetected) && !empty($signDetected) ) ? $signDetected: '';
+						$usedToDiagnose = ( isset($usedToDiagnose) && !empty($usedToDiagnose) ) ? $usedToDiagnose: '';
+						$usesDevice = ( isset($usesDevice) && !empty($usesDevice) ) ? $usesDevice: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39617,26 +40237,71 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from MedicalTest
-	
-						// foo
-	
+
+						// affectedBy
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Drug
 							 * 
-							 * 
+							 * Drugs that affect the test's results.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['affectedBy'] = $affectedBy;
+
+						// normalRange
+
+							/* 
+							 * Expected Type:
+							 *     MedicalEnumeration
+							 *     Text
+							 * 
+							 * Range of acceptable values for a typical patient, when applicable.
+							 */
+
+							$schema['normalRange'] = $normalRange;
+
+						// signDetected
+
+							/* 
+							 * Expected Type:
+							 *     MedicalSign
+							 * 
+							 * A sign detected by the test.
+							 */
+
+							$schema['signDetected'] = $signDetected;
+
+						// usedToDiagnose
+
+							/* 
+							 * Expected Type:
+							 *     MedicalCondition
+							 * 
+							 * A condition the test is used to diagnose.
+							 */
+
+							$schema['usedToDiagnose'] = $usedToDiagnose;
+
+						// usesDevice
+
+							/* 
+							 * Expected Type:
+							 *     MedicalDevice
+							 * 
+							 * Device used to perform the test.
+							 */
+
+							$schema['usesDevice'] = $usesDevice;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// Substance
@@ -39649,7 +40314,8 @@
 			function uamswp_fad_schema_Substance(
 				$schema, // array // Main schema array
 				// Substance
-					$foo = '', // foo
+					$activeIngredient = '', // activeIngredient
+					$maximumIntake = '', // maximumIntake
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39673,13 +40339,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39692,9 +40358,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39703,15 +40369,16 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from Substance (Thing > MedicalEntity > Substance)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$activeIngredient = ( isset($activeIngredient) && !empty($activeIngredient) ) ? $activeIngredient : '';
+						$maximumIntake = ( isset($maximumIntake) && !empty($maximumIntake) ) ? $maximumIntake : '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39737,26 +40404,38 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from Substance
-	
-						// foo
-	
+
+						// activeIngredient
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     DataType > Text
 							 * 
-							 * 
+							 * An active ingredient, typically chemical compounds and/or biologic substances.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['activeIngredient'] = $activeIngredient;
+
+						// maximumIntake
+
+							/* 
+							 * Expected Type:
+							 *     Thing > MedicalEntity > MedicalIntangible > DoseSchedule > MaximumDoseSchedule
+							 * 
+							 * Recommended intake of this supplement for a given population as defined by a 
+							 * specific recommending authority.
+							 */
+
+							$schema['maximumIntake'] = $maximumIntake;
+
 				// Remove any empty values from the schema array
-	
+
 					$schema = array_filter($schema);
-	
+
 				return $schema;
-	
+
 			}
 
 		// SuperficialAnatomy
@@ -39785,7 +40464,11 @@
 			function uamswp_fad_schema_SuperficialAnatomy(
 				$schema, // array // Main schema array
 				// SuperficialAnatomy
-					$foo = '', // foo
+					$associatedPathophysiology = '', // associatedPathophysiology
+					$relatedAnatomy = '', // relatedAnatomy
+					$relatedCondition = '', // relatedCondition
+					$relatedTherapy = '', // relatedTherapy
+					$significance = '', // significance
 				// MedicalEntity
 					$code = '', // code
 					$funding = '', // funding
@@ -39809,13 +40492,13 @@
 					$subjectOf = '', // subjectOf
 					$url = '' // url
 			) {
-	
+
 				// Check/define variables
-	
+
 					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-	
+
 					// Inherited properties from Thing
-	
+
 						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
 						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
 						$description = ( isset($description) && !empty($description) ) ? $description : '';
@@ -39828,9 +40511,9 @@
 						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
 						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
 						$url = ( isset($url) && !empty($url) ) ? $url : '';
-	
+
 					// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-	
+
 						$code = ( isset($code) && !empty($code) ) ? $code : '';
 						$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
 						$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
@@ -39839,15 +40522,19 @@
 						$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
 						$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
 						$study = ( isset($study) && !empty($study) ) ? $study : '';
-				
+
 					// Properties from SuperficialAnatomy (Thing > MedicalEntity > SuperficialAnatomy)
 
-						$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+						$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology: '';
+						$relatedAnatomy = ( isset($relatedAnatomy) && !empty($relatedAnatomy) ) ? $relatedAnatomy: '';
+						$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition: '';
+						$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy: '';
+						$significance = ( isset($significance) && !empty($significance) ) ? $significance: '';
 
 				// Add values to the schema array
-	
+
 					// Inherited properties
-	
+
 						$schema = uamswp_fad_schema_medicalentity(
 							$schema, // array // Main schema array
 							// MedicalEntity
@@ -39873,20 +40560,65 @@
 								$subjectOf, // subjectOf
 								$url // url
 						);
-	
+
 					// Properties from SuperficialAnatomy
-	
-						// foo
-	
+
+						// associatedPathophysiology
+
 							/* 
 							 * Expected Type:
-							 *     Bar
+							 *     Text
 							 * 
-							 * 
+							 * If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.
 							 */
-	
-							$schema['foo'] = $foo;
-	
+
+							$schema['associatedPathophysiology'] = $associatedPathophysiology;
+
+						// relatedAnatomy
+
+							/* 
+							 * Expected Type:
+							 *     AnatomicalStructure
+							 *     AnatomicalSystem
+							 * 
+							 * Anatomical systems or structures that relate to the superficial anatomy.
+							 */
+
+							$schema['relatedAnatomy'] = $relatedAnatomy;
+
+						// relatedCondition
+
+							/* 
+							 * Expected Type:
+							 *     MedicalCondition
+							 * 
+							 * A medical condition associated with this anatomy.
+							 */
+
+							$schema['relatedCondition'] = $relatedCondition;
+
+						// relatedTherapy
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A medical therapy related to this anatomy.
+							 */
+
+							$schema['relatedTherapy'] = $relatedTherapy;
+
+						// significance
+
+							/* 
+							 * Expected Type:
+							 *     MedicalTherapy
+							 * 
+							 * A medical therapy related to this anatomy.
+							 */
+
+							$schema['significance'] = $significance;
+
 				// Remove any empty values from the schema array
 	
 					$schema = array_filter($schema);
