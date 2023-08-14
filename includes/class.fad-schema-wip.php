@@ -481,7 +481,8 @@
 	// CreativeWork
 
 		/*
-		 * The most generic kind of creative work, including books, movies, photographs, software programs, etc.
+		 * The most generic kind of creative work, including books, movies, photographs,
+		 *  software programs, etc.
 		 */
 
 		function uamswp_fad_schema_creativework(
@@ -37565,7 +37566,8 @@
 		// AnatomicalStructure
 
 			/*
-			 * 
+			 * Any part of the human body, typically a component of an anatomical system.
+			 * Organs, tissues, and cells are all anatomical structures.
 			 */
 
 			function uamswp_fad_schema_anatomicalstructure(
@@ -37684,7 +37686,11 @@
 		// AnatomicalSystem
 
 			/*
-			 * 
+			 * An anatomical system is a group of anatomical structures that work together to 
+			 * perform a certain task. Anatomical systems, such as organ systems, are one 
+			 * organizing principle of anatomy, and can include circulatory, digestive, 
+			 * endocrine, integumentary, immune, lymphatic, muscular, nervous, reproductive, 
+			 * respiratory, skeletal, urinary, vestibular, and other systems.
 			 */
 
 			function uamswp_fad_schema_AnatomicalSystem(
@@ -37803,7 +37809,9 @@
 		// DrugClass
 
 			/*
-			 * 
+			 * A class of medical drugs, e.g., statins. Classes can represent general 
+			 * pharmacological class, common mechanisms of action, common physiological 
+			 * effects, etc.
 			 */
 
 			function uamswp_fad_schema_DrugClass(
@@ -37922,7 +37930,13 @@
 		// DrugCost
 
 			/*
-			 * 
+			 * The cost per unit of a medical drug. Note that this type is not meant to 
+			 * represent the price in an offer of a drug for sale; see the Offer type for 
+			 * that. This type will typically be used to tag wholesale or average retail cost 
+			 * of a drug, or maximum reimbursable cost. Costs of medical drugs vary widely 
+			 * depending on how and where they are paid for, so while this type captures some 
+			 * of the variables, costs should be used with caution by consumers of this 
+			 * schema's markup.
 			 */
 
 			function uamswp_fad_schema_DrugCost(
@@ -38041,7 +38055,8 @@
 		// LifestyleModification
 
 			/*
-			 * 
+			 * A process of care involving exercise, changes to diet, fitness routines, and 
+			 * other lifestyle changes aimed at improving a health condition.
 			 */
 
 			function uamswp_fad_schema_LifestyleModification(
@@ -38160,7 +38175,21 @@
 		// MedicalCause
 
 			/*
-			 * 
+			 * The causative agent(s) that are responsible for the pathophysiologic process 
+			 * that eventually results in a medical condition, symptom or sign. In this 
+			 * schema, unless otherwise specified this is meant to be the proximate cause of 
+			 * the medical condition, symptom or sign. The proximate cause is defined as the 
+			 * causative agent that most directly results in the medical condition, symptom or 
+			 * sign. For example, the HIV virus could be considered a cause of AIDS. Or in a 
+			 * diagnostic context, if a patient fell and sustained a hip fracture and two days 
+			 * later sustained a pulmonary embolism which eventuated in a cardiac arrest, the 
+			 * cause of the cardiac arrest (the proximate cause) would be the pulmonary 
+			 * embolism and not the fall. Medical causes can include cardiovascular, chemical, 
+			 * dermatologic, endocrine, environmental, gastroenterologic, genetic, 
+			 * hematologic, gynecologic, iatrogenic, infectious, musculoskeletal, neurologic, 
+			 * nutritional, obstetric, oncologic, otolaryngologic, pharmacologic, psychiatric, 
+			 * pulmonary, renal, rheumatologic, toxic, traumatic, or urologic causes; medical 
+			 * conditions can be causes as well.
 			 */
 
 			function uamswp_fad_schema_MedicalCause(
@@ -38279,7 +38308,9 @@
 		// MedicalCondition
 
 			/*
-			 * 
+			 * Any condition of the human body that affects the normal functioning of a 
+			 * person, whether physically or mentally. Includes diseases, injuries, 
+			 * disabilities, disorders, syndromes, etc.
 			 */
 
 			function uamswp_fad_schema_MedicalCondition(
@@ -38398,7 +38429,11 @@
 		// MedicalContraindication
 
 			/*
-			 * 
+			 * A condition or factor that serves as a reason to withhold a certain medical 
+			 * therapy. Contraindications can be absolute (there are no reasonable 
+			 * circumstances for undertaking a course of action) or relative (the patient is 
+			 * at higher risk of complications, but these risks may be outweighed by other 
+			 * considerations or mitigated by other measures).
 			 */
 
 			function uamswp_fad_schema_MedicalContraindication(
@@ -38517,7 +38552,7 @@
 		// MedicalDevice
 
 			/*
-			 * 
+			 * Any object used in a medical capacity, such as to diagnose or treat a patient.
 			 */
 
 			function uamswp_fad_schema_MedicalDevice(
@@ -38636,7 +38671,13 @@
 		// MedicalGuideline
 
 			/*
-			 * 
+			 * Any recommendation made by a standard society (e.g. ACC/AHA) or consensus 
+			 * statement that denotes how to diagnose and treat a particular condition. 
+			 * Note: this type should be used to tag the actual guideline recommendation; if 
+			 * the guideline recommendation occurs in a larger scholarly article, use 
+			 * MedicalScholarlyArticle to tag the overall article, not this type. Note 
+			 * also: the organization making the recommendation should be captured in the 
+			 * recognizingAuthority base property of MedicalEntity.
 			 */
 
 			function uamswp_fad_schema_MedicalGuideline(
@@ -38755,7 +38796,8 @@
 		// MedicalIndication
 
 			/*
-			 * 
+			 * A condition or factor that indicates use of a medical therapy, including signs, 
+			 * symptoms, risk factors, anatomical states, etc.
 			 */
 
 			function uamswp_fad_schema_MedicalIndication(
@@ -38874,7 +38916,8 @@
 		// MedicalIntangible
 
 			/*
-			 * 
+			 * A utility class that serves as the umbrella for a number of 'intangible' things 
+			 * in the medical space.
 			 */
 
 			function uamswp_fad_schema_MedicalIntangible(
@@ -38993,7 +39036,9 @@
 		// MedicalProcedure
 
 			/*
-			 * 
+			 * A process of care used in either a diagnostic, therapeutic, preventive or 
+			 * palliative capacity that relies on invasive (surgical), non-invasive, or other 
+			 * techniques.
 			 */
 
 			function uamswp_fad_schema_MedicalProcedure(
@@ -39112,7 +39157,8 @@
 		// MedicalRiskEstimator
 
 			/*
-			 * 
+			 * Any rule set or interactive tool for estimating the risk of developing a 
+			 * complication or condition.
 			 */
 
 			function uamswp_fad_schema_MedicalRiskEstimator(
@@ -39231,7 +39277,8 @@
 		// MedicalRiskFactor
 
 			/*
-			 * 
+			 * A risk factor is anything that increases a person's likelihood of developing or 
+			 * contracting a disease, medical condition, or complication.
 			 */
 
 			function uamswp_fad_schema_MedicalRiskFactor(
@@ -39350,7 +39397,14 @@
 		// MedicalStudy
 
 			/*
-			 * 
+			 * A medical study is an umbrella type covering all kinds of research studies 
+			 * relating to human medicine or health, including observational studies and 
+			 * interventional trials and registries, randomized, controlled or not. When the 
+			 * specific type of study is known, use one of the extensions of this type, such 
+			 * as MedicalTrial or MedicalObservationalStudy. Also, note that this type should 
+			 * be used to mark up data that describes the study itself; to tag an article that 
+			 * publishes the results of a study, use MedicalScholarlyArticle. Note: use the 
+			 * code property of MedicalEntity to store study IDs, e.g. clinicaltrials.gov ID.
 			 */
 
 			function uamswp_fad_schema_MedicalStudy(
@@ -39469,7 +39523,7 @@
 		// MedicalTest
 
 			/*
-			 * 
+			 * Any medical test, typically performed for diagnostic purposes.
 			 */
 
 			function uamswp_fad_schema_MedicalTest(
@@ -39588,7 +39642,8 @@
 		// Substance
 
 			/*
-			 * 
+			 * Any matter of defined composition that has discrete existence, whose origin may 
+			 * be biological, mineral or chemical.
 			 */
 
 			function uamswp_fad_schema_Substance(
@@ -39707,7 +39762,24 @@
 		// SuperficialAnatomy
 
 			/*
-			 * 
+			 * Anatomical features that can be observed by sight (without dissection), 
+			 * including the form and proportions of the human body as well as surface 
+			 * landmarks that correspond to deeper subcutaneous structures. Superficial 
+			 * anatomy plays an important role in sports medicine, phlebotomy, and other 
+			 * medical specialties as underlying anatomical structures can be identified 
+			 * through surface palpation. For example, during back surgery, superficial 
+			 * anatomy can be used to palpate and count vertebrae to find the site of 
+			 * incision. Or in phlebotomy, superficial anatomy can be used to locate an 
+			 * underlying vein; for example, the median cubital vein can be located by 
+			 * palpating the borders of the cubital fossa (such as the epicondyles of the 
+			 * humerus) and then looking for the superficial signs of the vein, such as 
+			 * size, prominence, ability to refill after depression, and feel of surrounding 
+			 * tissue support. As another example, in a subluxation (dislocation) of the 
+			 * glenohumeral joint, the bony structure becomes pronounced with the deltoid 
+			 * muscle failing to cover the glenohumeral joint allowing the edges of the 
+			 * scapula to be superficially visible. Here, the superficial anatomy is the 
+			 * visible edges of the scapula, implying the underlying dislocation of the joint 
+			 * (the related anatomical structure).
 			 */
 
 			function uamswp_fad_schema_SuperficialAnatomy(
