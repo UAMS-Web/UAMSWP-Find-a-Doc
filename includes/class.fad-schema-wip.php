@@ -310,7 +310,7 @@
 		 * 
 		 */
 
-		function uamswp_fad_schema_Action(
+		function uamswp_fad_schema_action(
 			$schema, // array // Main schema array
 			// Action
 				$foo, // foo
@@ -399,7 +399,7 @@
 		 * 
 		 */
 
-		function uamswp_fad_schema_BioChemEntity(
+		function uamswp_fad_schema_biochementity(
 			$schema, // array // Main schema array
 			// BioChemEntity
 				$foo, // foo
@@ -2388,7 +2388,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_ArchiveComponent(
+			function uamswp_fad_schema_archivecomponent(
 				$schema = '', // array // Main schema array
 				// ArchiveComponent
 					$foo = '', // foo
@@ -2807,7 +2807,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Article(
+			function uamswp_fad_schema_article(
 				$schema = '', // array // Main schema array
 				// Article
 					$foo = '', // foo
@@ -3226,7 +3226,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Atlas(
+			function uamswp_fad_schema_atlas(
 				$schema = '', // array // Main schema array
 				// Atlas
 					$foo = '', // foo
@@ -3645,7 +3645,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Blog(
+			function uamswp_fad_schema_blog(
 				$schema = '', // array // Main schema array
 				// Blog
 					$foo = '', // foo
@@ -4064,7 +4064,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Book(
+			function uamswp_fad_schema_book(
 				$schema = '', // array // Main schema array
 				// Book
 					$foo = '', // foo
@@ -4483,7 +4483,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Chapter(
+			function uamswp_fad_schema_chapter(
 				$schema = '', // array // Main schema array
 				// Chapter
 					$foo = '', // foo
@@ -4902,7 +4902,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Claim(
+			function uamswp_fad_schema_claim(
 				$schema = '', // array // Main schema array
 				// Claim
 					$foo = '', // foo
@@ -5321,7 +5321,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Clip(
+			function uamswp_fad_schema_clip(
 				$schema = '', // array // Main schema array
 				// Clip
 					$foo = '', // foo
@@ -5740,7 +5740,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Collection(
+			function uamswp_fad_schema_collection(
 				$schema = '', // array // Main schema array
 				// Collection
 					$foo = '', // foo
@@ -6159,7 +6159,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_ComicStory(
+			function uamswp_fad_schema_comicstory(
 				$schema = '', // array // Main schema array
 				// ComicStory
 					$foo = '', // foo
@@ -6578,7 +6578,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Comment(
+			function uamswp_fad_schema_comment(
 				$schema = '', // array // Main schema array
 				// Comment
 					$foo = '', // foo
@@ -6997,7 +6997,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Conversation(
+			function uamswp_fad_schema_conversation(
 				$schema = '', // array // Main schema array
 				// Conversation
 					$foo = '', // foo
@@ -7416,7 +7416,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Course(
+			function uamswp_fad_schema_course(
 				$schema = '', // array // Main schema array
 				// Course
 					$foo = '', // foo
@@ -7835,7 +7835,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_CreativeWorkSeason(
+			function uamswp_fad_schema_creativeworkseason(
 				$schema = '', // array // Main schema array
 				// CreativeWorkSeason
 					$foo = '', // foo
@@ -8254,7 +8254,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_CreativeWorkSeries(
+			function uamswp_fad_schema_creativeworkseries(
 				$schema = '', // array // Main schema array
 				// CreativeWorkSeries
 					$foo = '', // foo
@@ -8673,7 +8673,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_DataCatalog(
+			function uamswp_fad_schema_datacatalog(
 				$schema = '', // array // Main schema array
 				// DataCatalog
 					$foo = '', // foo
@@ -9092,7 +9092,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Dataset(
+			function uamswp_fad_schema_dataset(
 				$schema = '', // array // Main schema array
 				// Dataset
 					$foo = '', // foo
@@ -9511,7 +9511,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_DefinedTermSet(
+			function uamswp_fad_schema_definedtermset(
 				$schema = '', // array // Main schema array
 				// DefinedTermSet
 					$foo = '', // foo
@@ -9930,7 +9930,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Diet(
+			function uamswp_fad_schema_diet(
 				$schema = '', // array // Main schema array
 				// Diet
 					$foo = '', // foo
@@ -10349,7 +10349,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_DigitalDocument(
+			function uamswp_fad_schema_digitaldocument(
 				$schema = '', // array // Main schema array
 				// DigitalDocument
 					$foo = '', // foo
@@ -10768,7 +10768,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Drawing(
+			function uamswp_fad_schema_drawing(
 				$schema = '', // array // Main schema array
 				// Drawing
 					$foo = '', // foo
@@ -11187,7 +11187,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_EducationalOccupationalCredential(
+			function uamswp_fad_schema_educationaloccupationalcredential(
 				$schema = '', // array // Main schema array
 				// EducationalOccupationalCredential
 					$foo = '', // foo
@@ -11606,7 +11606,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Episode(
+			function uamswp_fad_schema_episode(
 				$schema = '', // array // Main schema array
 				// Episode
 					$foo = '', // foo
@@ -12025,7 +12025,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_ExercisePlan(
+			function uamswp_fad_schema_exerciseplan(
 				$schema = '', // array // Main schema array
 				// ExercisePlan
 					$foo = '', // foo
@@ -12444,7 +12444,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Game(
+			function uamswp_fad_schema_game(
 				$schema = '', // array // Main schema array
 				// Game
 					$foo = '', // foo
@@ -12863,7 +12863,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Guide(
+			function uamswp_fad_schema_guide(
 				$schema = '', // array // Main schema array
 				// Guide
 					$foo = '', // foo
@@ -13282,7 +13282,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HowTo(
+			function uamswp_fad_schema_howto(
 				$schema = '', // array // Main schema array
 				// HowTo
 					$foo = '', // foo
@@ -13701,7 +13701,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HowToDirection(
+			function uamswp_fad_schema_howtodirection(
 				$schema = '', // array // Main schema array
 				// HowToDirection
 					$foo = '', // foo
@@ -14120,7 +14120,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HowToSection(
+			function uamswp_fad_schema_howtosection(
 				$schema = '', // array // Main schema array
 				// HowToSection
 					$foo = '', // foo
@@ -14539,7 +14539,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HowToStep(
+			function uamswp_fad_schema_howtostep(
 				$schema = '', // array // Main schema array
 				// HowToStep
 					$foo = '', // foo
@@ -14958,7 +14958,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HowToTip(
+			function uamswp_fad_schema_howtotip(
 				$schema = '', // array // Main schema array
 				// HowToTip
 					$foo = '', // foo
@@ -15377,7 +15377,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HyperToc(
+			function uamswp_fad_schema_hypertoc(
 				$schema = '', // array // Main schema array
 				// HyperToc
 					$foo = '', // foo
@@ -15796,7 +15796,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_HyperTocEntry(
+			function uamswp_fad_schema_hypertocentry(
 				$schema = '', // array // Main schema array
 				// HyperTocEntry
 					$foo = '', // foo
@@ -16215,7 +16215,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_LearningResource(
+			function uamswp_fad_schema_learningresource(
 				$schema = '', // array // Main schema array
 				// LearningResource
 					$foo = '', // foo
@@ -16634,7 +16634,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Legislation(
+			function uamswp_fad_schema_legislation(
 				$schema = '', // array // Main schema array
 				// Legislation
 					$foo = '', // foo
@@ -17053,7 +17053,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Manuscript(
+			function uamswp_fad_schema_manuscript(
 				$schema = '', // array // Main schema array
 				// Manuscript
 					$foo = '', // foo
@@ -17472,7 +17472,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Map(
+			function uamswp_fad_schema_map(
 				$schema = '', // array // Main schema array
 				// Map
 					$foo = '', // foo
@@ -17891,7 +17891,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MathSolver(
+			function uamswp_fad_schema_mathsolver(
 				$schema = '', // array // Main schema array
 				// MathSolver
 					$foo = '', // foo
@@ -18310,7 +18310,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MediaObject(
+			function uamswp_fad_schema_mediaobject(
 				$schema = '', // array // Main schema array
 				// MediaObject
 					$foo = '', // foo
@@ -18729,7 +18729,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MediaReviewItem(
+			function uamswp_fad_schema_mediareviewitem(
 				$schema = '', // array // Main schema array
 				// MediaReviewItem
 					$foo = '', // foo
@@ -19148,7 +19148,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Menu(
+			function uamswp_fad_schema_menu(
 				$schema = '', // array // Main schema array
 				// Menu
 					$foo = '', // foo
@@ -19567,7 +19567,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MenuSection(
+			function uamswp_fad_schema_menusection(
 				$schema = '', // array // Main schema array
 				// MenuSection
 					$foo = '', // foo
@@ -19986,7 +19986,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Message(
+			function uamswp_fad_schema_message(
 				$schema = '', // array // Main schema array
 				// Message
 					$foo = '', // foo
@@ -20405,7 +20405,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Movie(
+			function uamswp_fad_schema_movie(
 				$schema = '', // array // Main schema array
 				// Movie
 					$foo = '', // foo
@@ -20824,7 +20824,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MusicComposition(
+			function uamswp_fad_schema_musiccomposition(
 				$schema = '', // array // Main schema array
 				// MusicComposition
 					$foo = '', // foo
@@ -21243,7 +21243,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MusicPlaylist(
+			function uamswp_fad_schema_musicplaylist(
 				$schema = '', // array // Main schema array
 				// MusicPlaylist
 					$foo = '', // foo
@@ -21662,7 +21662,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_MusicRecording(
+			function uamswp_fad_schema_musicrecording(
 				$schema = '', // array // Main schema array
 				// MusicRecording
 					$foo = '', // foo
@@ -22081,7 +22081,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Painting(
+			function uamswp_fad_schema_painting(
 				$schema = '', // array // Main schema array
 				// Painting
 					$foo = '', // foo
@@ -22500,7 +22500,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Photograph(
+			function uamswp_fad_schema_photograph(
 				$schema = '', // array // Main schema array
 				// Photograph
 					$foo = '', // foo
@@ -22919,7 +22919,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Play(
+			function uamswp_fad_schema_play(
 				$schema = '', // array // Main schema array
 				// Play
 					$foo = '', // foo
@@ -23338,7 +23338,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Poster(
+			function uamswp_fad_schema_poster(
 				$schema = '', // array // Main schema array
 				// Poster
 					$foo = '', // foo
@@ -23757,7 +23757,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_PublicationIssue(
+			function uamswp_fad_schema_publicationissue(
 				$schema = '', // array // Main schema array
 				// PublicationIssue
 					$foo = '', // foo
@@ -24176,7 +24176,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_PublicationVolume(
+			function uamswp_fad_schema_publicationvolume(
 				$schema = '', // array // Main schema array
 				// PublicationVolume
 					$foo = '', // foo
@@ -24595,7 +24595,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Quotation(
+			function uamswp_fad_schema_quotation(
 				$schema = '', // array // Main schema array
 				// Quotation
 					$foo = '', // foo
@@ -25014,7 +25014,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Review(
+			function uamswp_fad_schema_review(
 				$schema = '', // array // Main schema array
 				// Review
 					$foo = '', // foo
@@ -25433,7 +25433,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Sculpture(
+			function uamswp_fad_schema_sculpture(
 				$schema = '', // array // Main schema array
 				// Sculpture
 					$foo = '', // foo
@@ -25852,7 +25852,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_SheetMusic(
+			function uamswp_fad_schema_sheetmusic(
 				$schema = '', // array // Main schema array
 				// SheetMusic
 					$foo = '', // foo
@@ -26271,7 +26271,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_ShortStory(
+			function uamswp_fad_schema_shortstory(
 				$schema = '', // array // Main schema array
 				// ShortStory
 					$foo = '', // foo
@@ -26690,7 +26690,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_SoftwareApplication(
+			function uamswp_fad_schema_softwareapplication(
 				$schema = '', // array // Main schema array
 				// SoftwareApplication
 					$foo = '', // foo
@@ -27109,7 +27109,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_SoftwareSourceCode(
+			function uamswp_fad_schema_softwaresourcecode(
 				$schema = '', // array // Main schema array
 				// SoftwareSourceCode
 					$foo = '', // foo
@@ -27528,7 +27528,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_SpecialAnnouncement(
+			function uamswp_fad_schema_specialannouncement(
 				$schema = '', // array // Main schema array
 				// SpecialAnnouncement
 					$foo = '', // foo
@@ -27947,7 +27947,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Statement(
+			function uamswp_fad_schema_statement(
 				$schema = '', // array // Main schema array
 				// Statement
 					$foo = '', // foo
@@ -28366,7 +28366,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_TVSeason(
+			function uamswp_fad_schema_tvseason(
 				$schema = '', // array // Main schema array
 				// TVSeason
 					$foo = '', // foo
@@ -28785,7 +28785,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_TVSeries(
+			function uamswp_fad_schema_tvseries(
 				$schema = '', // array // Main schema array
 				// TVSeries
 					$foo = '', // foo
@@ -29204,7 +29204,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_Thesis(
+			function uamswp_fad_schema_thesis(
 				$schema = '', // array // Main schema array
 				// Thesis
 					$foo = '', // foo
@@ -29623,7 +29623,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_VisualArtwork(
+			function uamswp_fad_schema_visualartwork(
 				$schema = '', // array // Main schema array
 				// VisualArtwork
 					$foo = '', // foo
@@ -30042,7 +30042,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_WebContent(
+			function uamswp_fad_schema_webcontent(
 				$schema = '', // array // Main schema array
 				// WebContent
 					$foo = '', // foo
@@ -31429,7 +31429,7 @@
 				 * Web page type: Checkout page.
 				 */
 
-				function uamswp_fad_schema_CheckoutPage(
+				function uamswp_fad_schema_checkoutpage(
 					$schema = '', // array // Main schema array
 					// CheckoutPage (no property vars)
 					// WebPage
@@ -31870,7 +31870,7 @@
 				 * Web page type: Collection page.
 				 */
 
-				function uamswp_fad_schema_CollectionPage(
+				function uamswp_fad_schema_collectionpage(
 					$schema = '', // array // Main schema array
 					// CollectionPage (no property vars)
 					// WebPage
@@ -32768,7 +32768,7 @@
 				 * Web page type: Contact page.
 				 */
 
-				function uamswp_fad_schema_ContactPage(
+				function uamswp_fad_schema_contactpage(
 					$schema = '', // array // Main schema array
 					// ContactPage (no property vars)
 					// WebPage
@@ -33210,7 +33210,7 @@
 				 * also QAPage).
 				 */
 
-				function uamswp_fad_schema_FAQPage(
+				function uamswp_fad_schema_faqpage(
 					$schema = '', // array // Main schema array
 					// FAQPage (no property vars)
 					// WebPage
@@ -33651,7 +33651,7 @@
 				 * A page devoted to a single item, such as a particular product or hotel.
 				 */
 
-				function uamswp_fad_schema_ItemPage(
+				function uamswp_fad_schema_itempage(
 					$schema = '', // array // Main schema array
 					// ItemPage (no property vars)
 					// WebPage
@@ -34092,7 +34092,7 @@
 				 * A web page that provides medical information.
 				 */
 
-				function uamswp_fad_schema_MedicalWebPage(
+				function uamswp_fad_schema_medicalwebpage(
 					$schema = '', // array // Main schema array
 					// MedicalWebPage
 						$medicalAudience = '', // medicalAudience
@@ -34544,7 +34544,7 @@
 				 * Web page type: Profile page.
 				 */
 
-				function uamswp_fad_schema_ProfilePage(
+				function uamswp_fad_schema_profilepage(
 					$schema = '', // array // Main schema array
 					// ProfilePage (no property vars)
 					// WebPage
@@ -34987,7 +34987,7 @@
 				 * Questions [FAQs]).
 				 */
 
-				function uamswp_fad_schema_QAPage(
+				function uamswp_fad_schema_qapage(
 					$schema = '', // array // Main schema array
 					// QAPage (no property vars)
 					// WebPage
@@ -35431,7 +35431,7 @@
 				 * some WebPage.
 				 */
 
-				function uamswp_fad_schema_RealEstateListing(
+				function uamswp_fad_schema_realestatelisting(
 					$schema = '', // array // Main schema array
 					// RealEstateListing
 						$datePosted = '', // datePosted
@@ -35898,7 +35898,7 @@
 				 * Web page type: Search results page.
 				 */
 
-				function uamswp_fad_schema_SearchResultsPage(
+				function uamswp_fad_schema_searchresultspage(
 					$schema = '', // array // Main schema array
 					// SearchResultsPage (no property vars)
 					// WebPage
@@ -36339,7 +36339,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_WebPageElement(
+			function uamswp_fad_schema_webpageelement(
 				$schema = '', // array // Main schema array
 				// WebPageElement
 					$foo = '', // foo
@@ -36758,7 +36758,7 @@
 			 *
 			 */
 
-			function uamswp_fad_schema_WebSite(
+			function uamswp_fad_schema_website(
 				$schema = '', // array // Main schema array
 				// WebSite
 					$foo = '', // foo
@@ -37177,7 +37177,7 @@
 		 * 
 		 */
 
-		function uamswp_fad_schema_Event(
+		function uamswp_fad_schema_event(
 			$schema, // array // Main schema array
 			// Event
 				$foo, // foo
@@ -38847,7 +38847,7 @@
 			 * respiratory, skeletal, urinary, vestibular, and other systems.
 			 */
 
-			function uamswp_fad_schema_AnatomicalSystem(
+			function uamswp_fad_schema_anatomicalsystem(
 				$schema, // array // Main schema array
 				// AnatomicalSystem
 					$associatedPathophysiology = '', // associatedPathophysiology
@@ -39026,7 +39026,7 @@
 			 * effects, etc.
 			 */
 
-			function uamswp_fad_schema_DrugClass(
+			function uamswp_fad_schema_drugclass(
 				$schema, // array // Main schema array
 				// DrugClass
 					$drug = '', // drug
@@ -39151,7 +39151,7 @@
 			 * schema's markup.
 			 */
 
-			function uamswp_fad_schema_DrugCost(
+			function uamswp_fad_schema_drugcost(
 				$schema, // array // Main schema array
 				// DrugCost
 					$applicableLocation = '', // applicableLocation
@@ -39340,7 +39340,7 @@
 			 * other lifestyle changes aimed at improving a health condition.
 			 */
 
-			function uamswp_fad_schema_LifestyleModification(
+			function uamswp_fad_schema_lifestylemodification(
 				$schema, // array // Main schema array
 				// LifestyleModification (no property vars)
 				// MedicalEntity
@@ -39463,7 +39463,7 @@
 			 * conditions can be causes as well.
 			 */
 
-			function uamswp_fad_schema_MedicalCause(
+			function uamswp_fad_schema_medicalcause(
 				$schema, // array // Main schema array
 				// MedicalCause
 					$causeOf = '', // causeOf
@@ -39584,7 +39584,7 @@
 			 * disabilities, disorders, syndromes, etc.
 			 */
 
-			function uamswp_fad_schema_MedicalCondition(
+			function uamswp_fad_schema_medicalcondition(
 				$schema, // array // Main schema array
 				// MedicalCondition
 					$associatedAnatomy = '', // associatedAnatomy
@@ -39921,7 +39921,7 @@
 			 * considerations or mitigated by other measures).
 			 */
 
-			function uamswp_fad_schema_MedicalContraindication(
+			function uamswp_fad_schema_medicalcontraindication(
 				$schema, // array // Main schema array
 				// MedicalContraindication (no property vars)
 				// MedicalEntity
@@ -40030,7 +40030,7 @@
 			 * Any object used in a medical capacity, such as to diagnose or treat a patient.
 			 */
 
-			function uamswp_fad_schema_MedicalDevice(
+			function uamswp_fad_schema_medicaldevice(
 				$schema, // array // Main schema array
 				// MedicalDevice
 					$adverseOutcome = '', // adverseOutcome
@@ -40232,7 +40232,7 @@
 			 * recognizingAuthority base property of MedicalEntity.
 			 */
 
-			function uamswp_fad_schema_MedicalGuideline(
+			function uamswp_fad_schema_medicalguideline(
 				$schema, // array // Main schema array
 				// MedicalGuideline
 					$evidenceLevel = '', // evidenceLevel
@@ -40392,7 +40392,7 @@
 			 * symptoms, risk factors, anatomical states, etc.
 			 */
 
-			function uamswp_fad_schema_MedicalIndication(
+			function uamswp_fad_schema_medicalindication(
 				$schema, // array // Main schema array
 				// MedicalIndication (no property vars)
 				// MedicalEntity
@@ -40502,7 +40502,7 @@
 			 * in the medical space.
 			 */
 
-			function uamswp_fad_schema_MedicalIntangible(
+			function uamswp_fad_schema_medicalintangible(
 				$schema, // array // Main schema array
 				// MedicalIntangible (no property vars)
 				// MedicalEntity
@@ -40613,7 +40613,7 @@
 			 * techniques.
 			 */
 
-			function uamswp_fad_schema_MedicalProcedure(
+			function uamswp_fad_schema_medicalprocedure(
 				$schema, // array // Main schema array
 				// MedicalProcedure
 					$bodyLocation = '', // bodyLocation
@@ -40802,7 +40802,7 @@
 			 * complication or condition.
 			 */
 
-			function uamswp_fad_schema_MedicalRiskEstimator(
+			function uamswp_fad_schema_medicalriskestimator(
 				$schema, // array // Main schema array
 				// MedicalRiskEstimator
 					$estimatesRiskOf = '', // estimatesRiskOf
@@ -40936,7 +40936,7 @@
 			 * contracting a disease, medical condition, or complication.
 			 */
 
-			function uamswp_fad_schema_MedicalRiskFactor(
+			function uamswp_fad_schema_medicalriskfactor(
 				$schema, // array // Main schema array
 				// MedicalRiskFactor
 					$increasesRiskOf = '', // increasesRiskOf
@@ -41062,7 +41062,7 @@
 			 * code property of MedicalEntity to store study IDs (e.g., clinicaltrials.gov ID).
 			 */
 
-			function uamswp_fad_schema_MedicalStudy(
+			function uamswp_fad_schema_medicalstudy(
 				$schema, // array // Main schema array
 				// MedicalStudy
 					$healthCondition = '', // healthCondition
@@ -41240,7 +41240,7 @@
 			 * Any medical test, typically performed for diagnostic purposes.
 			 */
 
-			function uamswp_fad_schema_MedicalTest(
+			function uamswp_fad_schema_medicaltest(
 				$schema, // array // Main schema array
 				// MedicalTest
 					$affectedBy = '', // affectedBy
@@ -41413,7 +41413,7 @@
 			 * be biological, mineral or chemical.
 			 */
 
-			function uamswp_fad_schema_Substance(
+			function uamswp_fad_schema_substance(
 				$schema, // array // Main schema array
 				// Substance
 					$activeIngredient = '', // activeIngredient
@@ -41563,7 +41563,7 @@
 			 * (the related anatomical structure).
 			 */
 
-			function uamswp_fad_schema_SuperficialAnatomy(
+			function uamswp_fad_schema_superficialanatomy(
 				$schema, // array // Main schema array
 				// SuperficialAnatomy
 					$associatedPathophysiology = '', // associatedPathophysiology
@@ -45045,7 +45045,7 @@
 		 * A person (alive, dead, undead, or fictional).
 		 */
 
-		function uamswp_fad_schema_Person(
+		function uamswp_fad_schema_person(
 			$schema, // array // Main schema array
 			// Person
 				$additionalName = '', // additionalName
@@ -46667,7 +46667,7 @@
 		 * 
 		 */
 
-		function uamswp_fad_schema_Product(
+		function uamswp_fad_schema_product(
 			$schema, // array // Main schema array
 			// Product
 				$foo, // foo
@@ -46756,7 +46756,7 @@
 		 * 
 		 */
 
-		function uamswp_fad_schema_Taxon(
+		function uamswp_fad_schema_taxon(
 			$schema, // array // Main schema array
 			// Taxon
 				$foo, // foo
