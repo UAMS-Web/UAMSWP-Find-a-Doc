@@ -37373,7 +37373,7 @@
 	// MedicalEntity
 
 		/*
-		 * 
+		 * The most generic type of entity related to health and the practice of medicine.
 		 */
 
 		function uamswp_fad_schema_medicalentity(
@@ -37459,7 +37459,8 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalCode
+						 *     Thing > Intangible > DefinedTerm > CategoryCode > MedicalCode
+						 *     Thing > MedicalEntity > MedicalIntangible > MedicalCode
 						 * 
 						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
 						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
@@ -37471,7 +37472,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Grant
+						 *     Thing > Intangible > Grant
 						 * 
 						 * A Grant that directly or indirectly provide funding or sponsorship for this 
 						 * item. See also ownershipFundingInfo.
@@ -37485,7 +37486,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalGuideline
+						 *     Thing > MedicalEntity > MedicalGuideline
 						 * 
 						 * A medical guideline related to this entity.
 						 */
@@ -37496,9 +37497,9 @@
 
 						/* 
 						 * Expected Type:
-						 *     DrugLegalStatus
-						 *     MedicalEnumeration
-						 *     Text
+						 *     Thing > MedicalEntity > MedicalIntangible > DrugLegalStatus
+						 *     Thing > Intangible > Enumeration > MedicalEnumeration
+						 *     DataType > Text
 						 * 
 						 * The drug or supplement's legal status, including any controlled substance 
 						 * schedules that apply.
@@ -37510,7 +37511,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicineSystem
+						 *     Thing > Intangible > Enumeration > MedicalEnumeration > MedicineSystem
 						 * 
 						 * The system of medicine that includes this MedicalEntity, for example 
 						 * 'evidence-based', 'homeopathic', 'chiropractic', etc.
@@ -37522,7 +37523,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Organization
+						 *     Thing > Organization
 						 * 
 						 * If applicable, the organization that officially recognizes this entity as part 
 						 * of its endorsed system of medicine.
@@ -37534,7 +37535,8 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalSpecialty
+						 *     Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
+						 *     Thing > Intangible > Enumeration > Specialty > MedicalSpecialty
 						 * 
 						 * If applicable, a medical specialty in which this entity is relevant.
 						 */
@@ -37545,7 +37547,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalStudy
+						 *     Thing > MedicalEntity > MedicalStudy
 						 * 
 						 * A medical study or trial related to this entity.
 						 */
