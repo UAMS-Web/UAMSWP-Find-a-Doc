@@ -118,7 +118,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Location in the body of the anatomical structure.
 					 */
@@ -129,7 +129,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Typical or recommended followup care after the procedure is performed.
 					 */
@@ -140,7 +140,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * How the procedure is performed.
 					 */
@@ -152,7 +152,7 @@
 					/* 
 					 * Expected Type:
 					 *     MedicalEntity
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Typical preparation that a patient must undergo before having the procedure 
 					 * performed.
@@ -177,7 +177,7 @@
 					 * Expected Type:
 					 *     EventStatusType
 					 *     MedicalStudyStatus
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The status of the study (enumerated).
 					 */

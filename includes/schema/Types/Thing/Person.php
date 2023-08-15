@@ -191,7 +191,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An additional name for a Person, can be used for a middle name.
 					 */
@@ -202,8 +202,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     PostalAddress
-					 *     Text
+					 *     Thing > Intangible > StructuredValue > ContactPoint > PostalAddress
+					 *     DataType > Text
 					 * 
 					 * Physical address of the item.
 					 */
@@ -214,7 +214,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
+					 *     Thing > Organization
 					 * 
 					 * An organization that this person is affiliated with. For example, a 
 					 * school/university, a club, or a team.
@@ -227,7 +227,7 @@
 					/* 
 					 * Expected Type:
 					 *     EducationalOrganization
-					 *     Organization
+					 *     Thing > Organization
 					 * 
 					 * An organization that the person is an alumni of.
 					 * 
@@ -240,7 +240,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An award won by or for this item. Supersedes awards.
 					 */
@@ -251,7 +251,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Date
+					 *     DataType > Date
 					 * 
 					 * Date of birth.
 					 */
@@ -262,7 +262,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Place
+					 *     Thing > Place
 					 * 
 					 * The place where the person was born.
 					 */
@@ -273,8 +273,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Brand
-					 *     Organization
+					 *     Thing > Intangible > Brand
+					 *     Thing > Organization
 					 * 
 					 * The brand(s) associated with a product or service, or the brand(s) maintained 
 					 * by an organization or business person.
@@ -286,7 +286,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * A callsign, as used in broadcasting and radio communications to identify 
 					 * people, radio and TV stations, or vehicles.
@@ -298,7 +298,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * A child of the person.
 					 */
@@ -309,8 +309,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
-					 *     URL
+					 *     Thing > Person
+					 *     DataType > Text > URL
 					 * 
 					 * A colleague of the person. Supersedes colleagues.
 					 */
@@ -321,7 +321,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     ContactPoint
+					 *     Thing > Intangible > StructuredValue > ContactPoint
 					 * 
 					 * A contact point for a person or organization. Supersedes contactPoints.
 					 */
@@ -332,7 +332,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Date
+					 *     DataType > Date
 					 * 
 					 * Date of death.
 					 */
@@ -343,7 +343,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Place
+					 *     Thing > Place
 					 * 
 					 * The place where the person died.
 					 */
@@ -354,7 +354,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Dun & Bradstreet DUNS number for identifying an organization or business 
 					 * person.
@@ -366,7 +366,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Email address.
 					 */
@@ -377,7 +377,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Family name. In the U.S., the last name of a Person.
 					 */
@@ -388,7 +388,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The fax number.
 					 */
@@ -399,7 +399,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * The most generic uni-directional social relation.
 					 */
@@ -410,8 +410,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     Person
+					 *     Thing > Organization
+					 *     Thing > Person
 					 * 
 					 * A person or organization that supports (sponsors) something through some kind 
 					 * of financial contribution.
@@ -423,7 +423,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Grant
+					 *     Thing > Intangible > Grant
 					 * 
 					 * A Grant that directly or indirectly provide funding or sponsorship for this 
 					 * item. See also ownershipFundingInfo.
@@ -438,7 +438,7 @@
 					/* 
 					 * Expected Type:
 					 *     GenderType
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Gender of something, typically a Person, but possibly also fictional 
 					 * characters, animals, etc. While https://schema.org/Male and 
@@ -455,7 +455,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Given name. In the U.S., the first name of a Person.
 					 */
@@ -466,7 +466,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Global Location Number (GLN, sometimes also referred to as International 
 					 * Location Number or ILN) of the respective organization, person, or place. The 
@@ -479,7 +479,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     EducationalOccupationalCredential
+					 *     Thing > CreativeWork > EducationalOccupationalCredential
 					 * 
 					 * A credential awarded to the Person or Organization.
 					 */
@@ -501,7 +501,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     OfferCatalog
+					 *     Thing > Intangible > ItemList > OfferCatalog
 					 * 
 					 * Indicates an OfferCatalog listing for this Organization, Person, or Service.
 					 */
@@ -512,7 +512,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Place
+					 *     Thing > Place
 					 * 
 					 * Points-of-Sales operated by the organization or person.
 					 */
@@ -524,7 +524,7 @@
 					/* 
 					 * Expected Type:
 					 *     Distance
-					 *     QuantitativeValue
+					 *     Thing > Intangible > StructuredValue > QuantitativeValue
 					 * 
 					 * The height of the item.
 					 */
@@ -535,8 +535,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     ContactPoint
-					 *     Place
+					 *     Thing > Intangible > StructuredValue > ContactPoint
+					 *     Thing > Place
 					 * 
 					 * A contact location for a person's residence.
 					 */
@@ -547,7 +547,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
 					 */
@@ -558,7 +558,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An honorific suffix following a Person's name such as M.D./PhD/MSCSW.
 					 */
@@ -569,7 +569,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     InteractionCounter
+					 *     Thing > Intangible > StructuredValue > InteractionCounter
 					 * 
 					 * The number of interactions for the CreativeWork using the WebSite or 
 					 * SoftwareApplication. The most specific child type of InteractionCounter should 
@@ -582,7 +582,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The International Standard of Industrial Classification of All Economic 
 					 * Activities (ISIC), Revision 4 code for a particular organization, business 
@@ -595,8 +595,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     DefinedTerm
-					 *     Text
+					 *     Thing > Intangible > DefinedTerm
+					 *     DataType > Text
 					 * 
 					 * The job title of the person (for example, Financial Manager).
 					 */
@@ -607,7 +607,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * The most generic bi-directional social/work relation.
 					 */
@@ -618,9 +618,9 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 *     Thing
-					 *     URL
+					 *     DataType > Text > URL
 					 * 
 					 * Of a Person, and less typically of an Organization, to indicate a topic that is 
 					 * known about - suggesting possible expertise but not implying it. We do not 
@@ -634,8 +634,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Language
-					 *     Text
+					 *     Thing > Intangible > Language
+					 *     DataType > Text
 					 * 
 					 * Of a Person, and less typically of an Organization, to indicate a known 
 					 * language. We do not distinguish skill levels or 
@@ -649,7 +649,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Offer
+					 *     Thing > Intangible > Offer
 					 * 
 					 * A pointer to products or services offered by the organization or person.
 					 * 
@@ -662,8 +662,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     ProgramMembership
+					 *     Thing > Organization
+					 *     Thing > Intangible > ProgramMembership
 					 * 
 					 * An Organization (or ProgramMembership) to which this Person or Organization 
 					 * belongs.
@@ -677,7 +677,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The North American Industry Classification System (NAICS) code for a particular 
 					 * organization or business person.
@@ -713,8 +713,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     OwnershipInfo
-					 *     Product
+					 *     Thing > Intangible > StructuredValue > OwnershipInfo
+					 *     Thing > Product
 					 * 
 					 * Products owned by the organization or person.
 					 */
@@ -725,7 +725,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * A parent of this person. Supersedes parents.
 					 */
@@ -736,7 +736,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Event
+					 *     Thing > Event
 					 * 
 					 * Event that this person is a performer or participant in.
 					 */
@@ -747,8 +747,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * The publishingPrinciples property indicates (typically via URL) a document 
 					 * describing the editorial principles of an Organization (or individual, e.g., a 
@@ -764,7 +764,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * The most generic familial relation.
 					 */
@@ -775,7 +775,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Demand
+					 *     Thing > Intangible > Demand
 					 * 
 					 * A pointer to products or services sought by the organization or person (demand).
 					 */
@@ -786,7 +786,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * A sibling of the person. Supersedes siblings.
 					 */
@@ -797,8 +797,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     Person
+					 *     Thing > Organization
+					 *     Thing > Person
 					 * 
 					 * A person or organization that supports a thing through a pledge, promise, or 
 					 * financial contribution (e.g., a sponsor of a Medical Study or a corporate 
@@ -811,7 +811,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * The person's spouse.
 					 */
@@ -822,7 +822,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Tax / Fiscal ID of the organization or person (e.g.,  the TIN in the US or 
 					 * the CIF/NIF in Spain).
@@ -834,7 +834,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The telephone number.
 					 */
@@ -845,7 +845,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Value-added Tax ID of the organization or person.
 					 */
@@ -856,7 +856,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     QuantitativeValue
+					 *     Thing > Intangible > StructuredValue > QuantitativeValue
 					 * 
 					 * The weight of the product or person.
 					 */
@@ -867,8 +867,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     ContactPoint
-					 *     Place
+					 *     Thing > Intangible > StructuredValue > ContactPoint
+					 *     Thing > Place
 					 * 
 					 * A contact location for a person's place of work.
 					 */
@@ -879,7 +879,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
+					 *     Thing > Organization
 					 * 
 					 * Organizations that the person works for.
 					 */

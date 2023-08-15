@@ -191,8 +191,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * For a NewsMediaOrganization or other news-related Organization, a statement 
 					 * about public engagement activities (for news media, the newsroom’s), including 
@@ -206,8 +206,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     PostalAddress
-					 *     Text
+					 *     Thing > Intangible > StructuredValue > ContactPoint > PostalAddress
+					 *     DataType > Text
 					 * 
 					 * Physical address of the item.
 					 */
@@ -218,7 +218,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     AggregateRating
+					 *     Thing > Intangible > Rating > AggregateRating
 					 * 
 					 * The overall rating, based on a collection of reviews or ratings, of the item.
 					 */
@@ -229,7 +229,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * Alumni of an organization.
 					 * 
@@ -242,10 +242,10 @@
 
 					/* 
 					 * Expected Type:
-					 *     AdministrativeArea
-					 *     GeoShape
-					 *     Place
-					 *     Text
+					 *     Thing > Place > AdministrativeArea
+					 *     Thing > Intangible > StructuredValue > GeoShape
+					 *     Thing > Place
+					 *     DataType > Text
 					 * 
 					 * The geographic area where a service or offered item is provided. Supersedes 
 					 * serviceArea.
@@ -257,7 +257,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An award won by or for this item. Supersedes awards.
 					 */
@@ -268,8 +268,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Brand
-					 *     Organization
+					 *     Thing > Intangible > Brand
+					 *     Thing > Organization
 					 * 
 					 * The brand(s) associated with a product or service, or the brand(s) maintained 
 					 * by an organization or business person.
@@ -281,7 +281,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     ContactPoint
+					 *     Thing > Intangible > StructuredValue > ContactPoint
 					 * 
 					 * A contact point for a person or organization. Supersedes contactPoints.
 					 */
@@ -292,8 +292,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * For an Organization (e.g. NewsMediaOrganization), a statement describing (in 
 					 * news media, the newsroom’s) disclosure and correction policy for errors.
@@ -305,7 +305,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
+					 *     Thing > Organization
 					 * 
 					 * A relationship between an organization and a department of that organization, 
 					 * also described as an organization (allowing different urls, logos, opening 
@@ -318,7 +318,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Date
+					 *     DataType > Date
 					 * 
 					 * The date that this organization was dissolved.
 					 */
@@ -329,8 +329,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. 
 					 * For a NewsMediaOrganization, a statement describing the newsroom’s diversity 
@@ -343,8 +343,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Article
-					 *     URL
+					 *     Thing > CreativeWork > Article
+					 *     DataType > Text > URL
 					 * 
 					 * For an Organization (often but not necessarily a NewsMediaOrganization), a 
 					 * report on staffing diversity issues. In a news context this might be for 
@@ -357,7 +357,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Dun & Bradstreet DUNS number for identifying an organization or business 
 					 * person.
@@ -369,7 +369,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Email address.
 					 */
@@ -380,7 +380,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * Someone working for this organization. Supersedes employees.
 					 */
@@ -391,8 +391,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * Statement about ethics policy, e.g. of a NewsMediaOrganization regarding 
 					 * journalistic and publishing practices, or of a Restaurant, a page describing 
@@ -407,7 +407,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Event
+					 *     Thing > Event
 					 * 
 					 * Upcoming or past event associated with this place, organization, or action. 
 					 * Supersedes events.
@@ -419,7 +419,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The fax number.
 					 */
@@ -430,7 +430,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Person
+					 *     Thing > Person
 					 * 
 					 * A person who founded this organization. Supersedes founders.
 					 */
@@ -441,7 +441,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Date
+					 *     DataType > Date
 					 * 
 					 * The date that this organization was founded.
 					 */
@@ -452,7 +452,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Place
+					 *     Thing > Place
 					 * 
 					 * The place where the Organization was founded.
 					 */
@@ -463,8 +463,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     Person
+					 *     Thing > Organization
+					 *     Thing > Person
 					 * 
 					 * A person or organization that supports (sponsors) something through some kind 
 					 * of financial contribution.
@@ -476,7 +476,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Grant
+					 *     Thing > Intangible > Grant
 					 * 
 					 * A Grant that directly or indirectly provide funding or sponsorship for this 
 					 * item. See also ownershipFundingInfo.
@@ -490,7 +490,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Global Location Number (GLN, sometimes also referred to as International 
 					 * Location Number or ILN) of the respective organization, person, or place. The 
@@ -503,7 +503,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     EducationalOccupationalCredential
+					 *     Thing > CreativeWork > EducationalOccupationalCredential
 					 * 
 					 * A credential awarded to the Person or Organization.
 					 */
@@ -514,7 +514,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     MerchantReturnPolicy
+					 *     Thing > Intangible > MerchantReturnPolicy
 					 * 
 					 * Specifies a MerchantReturnPolicy that may be applicable. Supersedes 
 					 * hasProductReturnPolicy.
@@ -526,7 +526,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     OfferCatalog
+					 *     Thing > Intangible > ItemList > OfferCatalog
 					 * 
 					 * Indicates an OfferCatalog listing for this Organization, Person, or Service.
 					 */
@@ -537,7 +537,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Place
+					 *     Thing > Place
 					 * 
 					 * Points-of-Sales operated by the organization or person.
 					 */
@@ -548,7 +548,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     InteractionCounter
+					 *     Thing > Intangible > StructuredValue > InteractionCounter
 					 * 
 					 * The number of interactions for the CreativeWork using the WebSite or 
 					 * SoftwareApplication. The most specific child type of InteractionCounter should 
@@ -561,7 +561,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The International Standard of Industrial Classification of All Economic 
 					 * Activities (ISIC), Revision 4 code for a particular organization, business 
@@ -574,7 +574,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An organization identifier as defined in ISO 6523(-1). Note that many existing 
 					 * organization identifiers such as leiCode, duns and vatID can be expressed as an 
@@ -588,9 +588,9 @@
 
 					/* 
 					 * Expected Type:
-					 *     DefinedTerm
-					 *     Text
-					 *     URL
+					 *     Thing > Intangible > DefinedTerm
+					 *     DataType > Text
+					 *     DataType > Text > URL
 					 * 
 					 * Keywords or tags used to describe some item. Multiple textual entries in a 
 					 * keywords list are typically delimited by commas, or by repeating the property.
@@ -602,9 +602,9 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 *     Thing
-					 *     URL
+					 *     DataType > Text > URL
 					 * 
 					 * Of a Person, and less typically of an Organization, to indicate a topic that is 
 					 * known about - suggesting possible expertise but not implying it. We do not 
@@ -618,8 +618,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Language
-					 *     Text
+					 *     Thing > Intangible > Language
+					 *     DataType > Text
 					 * 
 					 * Of a Person, and less typically of an Organization, to indicate a known 
 					 * language. We do not distinguish skill levels or 
@@ -633,7 +633,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The official name of the organization, e.g. the registered company name.
 					 */
@@ -644,7 +644,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * An organization identifier that uniquely identifies a legal entity as defined 
 					 * in ISO 17442.
@@ -656,10 +656,10 @@
 
 					/* 
 					 * Expected Type:
-					 *     Place
-					 *     PostalAddress
-					 *     Text
-					 *     VirtualLocation
+					 *     Thing > Place
+					 *     Thing > Intangible > StructuredValue > ContactPoint > PostalAddress
+					 *     DataType > Text
+					 *     Thing > Intangible > VirtualLocation
 					 * 
 					 * The location of, for example, where an event is happening, where an 
 					 * organization is located, or where an action takes place.
@@ -671,8 +671,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     ImageObject
-					 *     URL
+					 *     Thing > CreativeWork > MediaObject > ImageObject
+					 *     DataType > Text > URL
 					 * 
 					 * An associated logo.
 					 */
@@ -683,7 +683,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Offer
+					 *     Thing > Intangible > Offer
 					 * 
 					 * A pointer to products or services offered by the organization or person.
 					 * 
@@ -696,8 +696,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     Person
+					 *     Thing > Organization
+					 *     Thing > Person
 					 * 
 					 * A member of an Organization or a ProgramMembership. Organizations can be 
 					 * members of organizations; ProgramMembership is typically for individuals. 
@@ -712,8 +712,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     ProgramMembership
+					 *     Thing > Organization
+					 *     Thing > Intangible > ProgramMembership
 					 * 
 					 * An Organization (or ProgramMembership) to which this Person or Organization 
 					 * belongs.
@@ -727,7 +727,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The North American Industry Classification System (NAICS) code for a particular 
 					 * organization or business person.
@@ -739,7 +739,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     NonprofitType
+					 *     Thing > Intangible > Enumeration > NonprofitType
 					 * 
 					 * nonprofitStatus indicates the legal status of a non-profit organization in its 
 					 * primary place of business.
@@ -751,7 +751,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     QuantitativeValue
+					 *     Thing > Intangible > StructuredValue > QuantitativeValue
 					 * 
 					 * The number of employees in an organization, e.g. business.
 					 */
@@ -762,10 +762,10 @@
 
 					/* 
 					 * Expected Type:
-					 *     AboutPage
-					 *     CreativeWork
-					 *     Text
-					 *     URL
+					 *     Thing > CreativeWork > WebPage > AboutPage
+					 *     Thing > CreativeWork
+					 *     DataType > Text
+					 *     DataType > Text > URL
 					 * 
 					 * For an Organization (often but not necessarily a NewsMediaOrganization), a 
 					 * description of organizational ownership structure; funding and grants. In a 
@@ -780,8 +780,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     OwnershipInfo
-					 *     Product
+					 *     Thing > Intangible > StructuredValue > OwnershipInfo
+					 *     Thing > Product
 					 * 
 					 * Products owned by the organization or person.
 					 */
@@ -792,7 +792,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
+					 *     Thing > Organization
 					 * 
 					
 					 Supersedes branchOf.
@@ -806,8 +806,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * The publishingPrinciples property indicates (typically via URL) a document 
 					 * describing the editorial principles of an Organization (or individual, e.g., a 
@@ -827,7 +827,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Review
+					 *     Thing > CreativeWork > Review
 					 * 
 					 * A review of the item. Supersedes reviews.
 					 */
@@ -838,7 +838,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Demand
+					 *     Thing > Intangible > Demand
 					 * 
 					 * A pointer to products or services sought by the organization or person (demand).
 					 */
@@ -849,7 +849,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * A slogan or motto associated with the item.
 					 */
@@ -860,8 +860,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
-					 *     Person
+					 *     Thing > Organization
+					 *     Thing > Person
 					 * 
 					 * A person or organization that supports a thing through a pledge, promise, or 
 					 * financial contribution (e.g., a sponsor of a Medical Study or a corporate 
@@ -874,7 +874,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Organization
+					 *     Thing > Organization
 					 * 
 					 * A relationship between two organizations where the first includes the second, 
 					 * e.g., as a subsidiary. See also: the more specific 'department' property.
@@ -888,7 +888,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Tax / Fiscal ID of the organization or person, e.g., the TIN in the US or 
 					 * the CIF/NIF in Spain.
@@ -900,7 +900,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The telephone number.
 					 */
@@ -911,8 +911,8 @@
 
 					/* 
 					 * Expected Type:
-					 *     CreativeWork
-					 *     URL
+					 *     Thing > CreativeWork
+					 *     DataType > Text > URL
 					 * 
 					 * For an Organization (typically a NewsMediaOrganization), a statement about 
 					 * policy on use of unnamed sources and the decision process required.
@@ -924,7 +924,7 @@
 
 					/* 
 					 * Expected Type:
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * The Value-added Tax ID of the organization or person.
 					 */
@@ -940,6 +940,7 @@
 	}
 
 	// Airline
+	include_once __DIR__ . '/Organization/Airline.php';
 
 		/*
 		 * Thing > Organization > Airline
@@ -954,6 +955,7 @@
 		}
 
 	// Consortium
+	include_once __DIR__ . '/Organization/Consortium.php';
 
 		/*
 		 * Thing > Organization > Consortium
@@ -968,6 +970,7 @@
 		}
 
 	// Corporation
+	include_once __DIR__ . '/Organization/Corporation.php';
 
 		/*
 		 * Thing > Organization > Corporation
@@ -982,6 +985,7 @@
 		}
 
 	// EducationalOrganization
+	include_once __DIR__ . '/Organization/EducationalOrganization.php';
 
 		/*
 		 * Thing > Organization > EducationalOrganization
@@ -1080,6 +1084,7 @@
 			}
 
 	// FundingScheme
+	include_once __DIR__ . '/Organization/FundingScheme.php';
 
 		/*
 		 * Thing > Organization > FundingScheme
@@ -1094,6 +1099,7 @@
 		}
 
 	// GovernmentOrganization
+	include_once __DIR__ . '/Organization/GovernmentOrganization.php';
 
 		/*
 		 * Thing > Organization > GovernmentOrganization
@@ -1108,6 +1114,7 @@
 		}
 
 	// LibrarySystem
+	include_once __DIR__ . '/Organization/LibrarySystem.php';
 
 		/*
 		 * Thing > Organization > LibrarySystem
@@ -1125,6 +1132,7 @@
 	include_once __DIR__ . '/Organization/LocalBusiness.php';
 
 	// MedicalOrganization
+	include_once __DIR__ . '/Organization/MedicalOrganization.php';
 
 		/*
 		 * Thing > Organization > MedicalOrganization
@@ -1387,7 +1395,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * Name or unique ID of network. (Networks are often reused across different 
 						 * insurance plans.)
@@ -1410,7 +1418,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalSpecialty
+						 *     Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
 						 * 
 						 * A medical specialty of the provider.
 						 */
@@ -1488,6 +1496,7 @@
 			 */
 
 	// NGO
+	include_once __DIR__ . '/Organization/NGO.php';
 
 		/*
 		 * Thing > Organization > NGO
@@ -1502,6 +1511,7 @@
 		}
 
 	// NewsMediaOrganization
+	include_once __DIR__ . '/Organization/NewsMediaOrganization.php';
 
 		/*
 		 * Thing > Organization > NewsMediaOrganization
@@ -1516,6 +1526,7 @@
 		}
 
 	// OnlineBusiness
+	include_once __DIR__ . '/Organization/OnlineBusiness.php';
 
 		/*
 		 * Thing > Organization > OnlineBusiness
@@ -1544,6 +1555,7 @@
 			}
 
 	// PerformingGroup
+	include_once __DIR__ . '/Organization/PerformingGroup.php';
 
 		/*
 		 * Thing > Organization > PerformingGroup
@@ -1600,6 +1612,7 @@
 			}
 
 	// PoliticalParty
+	include_once __DIR__ . '/Organization/PoliticalParty.php';
 
 		/*
 		 * Thing > Organization > PoliticalParty
@@ -1614,6 +1627,7 @@
 		}
 
 	// Project
+	include_once __DIR__ . '/Organization/Project.php';
 
 		/*
 		 * Thing > Organization > Project
@@ -1656,6 +1670,7 @@
 			}
 
 	// ResearchOrganization
+	include_once __DIR__ . '/Organization/ResearchOrganization.php';
 
 		/*
 		 * Thing > Organization > ResearchOrganization
@@ -1670,6 +1685,7 @@
 		}
 
 	// SearchRescueOrganization
+	include_once __DIR__ . '/Organization/SearchRescueOrganization.php';
 
 		/*
 		 * Thing > Organization > SearchRescueOrganization
@@ -1684,6 +1700,7 @@
 		}
 
 	// SportsOrganization
+	include_once __DIR__ . '/Organization/SportsOrganization.php';
 
 		/*
 		 * Thing > Organization > SportsOrganization
@@ -1712,6 +1729,7 @@
 			}
 
 	// WorkersUnion
+	include_once __DIR__ . '/Organization/WorkersUnion.php';
 
 		/*
 		 * Thing > Organization > WorkersUnion

@@ -126,7 +126,7 @@
 					/* 
 					 * Expected Type:
 					 *     MedicalEnumeration
-					 *     Text
+					 *     DataType > Text
 					 * 
 					 * Range of acceptable values for a typical patient, when applicable.
 					 */

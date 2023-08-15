@@ -994,9 +994,9 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalProcedure
-						 *     MedicalTest
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure
+						 *     Thing > MedicalEntity > MedicalTest
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A medical service available from this provider.
 						 */
@@ -1007,7 +1007,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalSpecialty
+						 *     Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
 						 * 
 						 * A medical specialty of the provider.
 						 */

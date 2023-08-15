@@ -473,6 +473,7 @@
 	}
 
 	// AnimalShelter
+	include_once __DIR__ . '/LocalBusiness/AnimalShelter.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > AnimalShelter
@@ -487,6 +488,7 @@
 		}
 
 	// ArchiveOrganization
+	include_once __DIR__ . '/LocalBusiness/ArchiveOrganization.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > ArchiveOrganization
@@ -501,6 +503,7 @@
 		}
 
 	// AutomotiveBusiness
+	include_once __DIR__ . '/LocalBusiness/AutomotiveBusiness.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > AutomotiveBusiness
@@ -641,6 +644,7 @@
 			}
 
 	// ChildCare
+	include_once __DIR__ . '/LocalBusiness/ChildCare.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > ChildCare
@@ -655,6 +659,7 @@
 		}
 
 	// Dentist
+	include_once __DIR__ . '/LocalBusiness/Dentist.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > Dentist
@@ -669,6 +674,7 @@
 		}
 
 	// DryCleaningOrLaundry
+	include_once __DIR__ . '/LocalBusiness/DryCleaningOrLaundry.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > DryCleaningOrLaundry
@@ -683,6 +689,7 @@
 		}
 
 	// EmergencyService
+	include_once __DIR__ . '/LocalBusiness/EmergencyService.php';
 
 		/*
 		 * See: Thing > Organization > LocalBusiness > EmergencyService
@@ -733,6 +740,7 @@
 			}
 
 	// EmploymentAgency
+	include_once __DIR__ . '/LocalBusiness/EmploymentAgency.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > EmploymentAgency
@@ -747,6 +755,7 @@
 		}
 
 	// EntertainmentBusiness
+	include_once __DIR__ . '/LocalBusiness/EntertainmentBusiness.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > EntertainmentBusiness
@@ -859,6 +868,7 @@
 			}
 
 	// FinancialService
+	include_once __DIR__ . '/LocalBusiness/FinancialService.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > FinancialService
@@ -929,6 +939,7 @@
 			}
 
 	// FoodEstablishment
+	include_once __DIR__ . '/LocalBusiness/FoodEstablishment.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > FoodEstablishment
@@ -1069,6 +1080,7 @@
 			}
 
 	// GovernmentOffice
+	include_once __DIR__ . '/LocalBusiness/GovernmentOffice.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > GovernmentOffice
@@ -1097,6 +1109,7 @@
 			}
 
 	// HealthAndBeautyBusiness
+	include_once __DIR__ . '/LocalBusiness/HealthAndBeautyBusiness.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > HealthAndBeautyBusiness
@@ -1195,6 +1208,7 @@
 			}
 
 	// HomeAndConstructionBusiness
+	include_once __DIR__ . '/LocalBusiness/HomeAndConstructionBusiness.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > HomeAndConstructionBusiness
@@ -1321,6 +1335,7 @@
 			}
 
 	// InternetCafe
+	include_once __DIR__ . '/LocalBusiness/InternetCafe.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > InternetCafe
@@ -1335,6 +1350,7 @@
 		}
 
 	// LegalService
+	include_once __DIR__ . '/LocalBusiness/LegalService.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > LegalService
@@ -1377,6 +1393,7 @@
 			}
 
 	// Library
+	include_once __DIR__ . '/LocalBusiness/Library.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > Library
@@ -1391,6 +1408,7 @@
 		}
 
 	// LodgingBusiness
+	include_once __DIR__ . '/LocalBusiness/LodgingBusiness.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > LodgingBusiness
@@ -1520,6 +1538,7 @@
 	include_once __DIR__ . '/LocalBusiness/MedicalBusiness.php';
 
 	// ProfessionalService
+	include_once __DIR__ . '/LocalBusiness/ProfessionalService.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > ProfessionalService
@@ -1534,6 +1553,7 @@
 		}
 
 	// RadioStation
+	include_once __DIR__ . '/LocalBusiness/RadioStation.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > RadioStation
@@ -1548,6 +1568,7 @@
 		}
 
 	// RealEstateAgent
+	include_once __DIR__ . '/LocalBusiness/RealEstateAgent.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > RealEstateAgent
@@ -1562,6 +1583,7 @@
 		}
 
 	// RecyclingCenter
+	include_once __DIR__ . '/LocalBusiness/RecyclingCenter.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > RecyclingCenter
@@ -1576,6 +1598,7 @@
 		}
 
 	// SelfStorage
+	include_once __DIR__ . '/LocalBusiness/SelfStorage.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > SelfStorage
@@ -1590,6 +1613,7 @@
 		}
 
 	// ShoppingCenter
+	include_once __DIR__ . '/LocalBusiness/ShoppingCenter.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > ShoppingCenter
@@ -1604,6 +1628,7 @@
 		}
 
 	// SportsActivityLocation
+	include_once __DIR__ . '/LocalBusiness/SportsActivityLocation.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > SportsActivityLocation
@@ -1744,6 +1769,7 @@
 			}
 
 	// Store
+	include_once __DIR__ . '/LocalBusiness/Store.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > Store
@@ -2178,6 +2204,7 @@
 			}
 
 	// TelevisionStation
+	include_once __DIR__ . '/LocalBusiness/TelevisionStation.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > TelevisionStation
@@ -2192,6 +2219,7 @@
 		}
 
 	// TouristInformationCenter
+	include_once __DIR__ . '/LocalBusiness/TouristInformationCenter.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > TouristInformationCenter
@@ -2206,6 +2234,7 @@
 		}
 
 	// TravelAgency
+	include_once __DIR__ . '/LocalBusiness/TravelAgency.php';
 
 		/*
 		 * Thing > Organization > LocalBusiness > TravelAgency

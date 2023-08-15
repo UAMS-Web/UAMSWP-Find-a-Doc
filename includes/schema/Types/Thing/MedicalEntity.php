@@ -316,7 +316,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * If applicable, a description of the pathophysiology associated with the 
 						 * anatomical system, including potential abnormal changes in the mechanical, 
@@ -329,7 +329,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * Location in the body of the anatomical structure.
 						 */
@@ -351,7 +351,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     ImageObject
+						 *     Thing > CreativeWork > MediaObject > ImageObject
 						 * 
 						 * An image containing a diagram that illustrates the structure and/or its 
 						 * component substructures and/or connections with other structures.
@@ -385,7 +385,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A medical therapy related to this anatomy.
 						 */
@@ -671,7 +671,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * If applicable, a description of the pathophysiology associated with the 
 						 * anatomical system, including potential abnormal changes in the mechanical, 
@@ -721,7 +721,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A medical therapy related to this anatomy.
 						 */
@@ -983,7 +983,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     AdministrativeArea
+						 *     Thing > Place > AdministrativeArea
 						 * 
 						 * The location in which the status applies.
 						 */
@@ -1005,7 +1005,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The currency (in 3-letter) of the drug cost. 
 						 * See: http://en.wikipedia.org/wiki/ISO_4217.
@@ -1017,7 +1017,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * Additional details to capture the origin of the cost data. For example, 
 						 * 'Medicare Part B'.
@@ -1031,7 +1031,7 @@
 						 * Expected Type:
 						 *     Number
 						 *     QualitativeValue
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The cost per unit of the drug.
 						 */
@@ -1042,7 +1042,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The unit in which the drug is measured (e.g., '5 mg tablet').
 						 */
@@ -1528,7 +1528,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The characteristics of associated patients, such as age, gender, race etc.
 						 */
@@ -1539,7 +1539,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The likely outcome in either the short term or long term of the medical 
 						 * condition.
@@ -1551,7 +1551,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The expected progression of the condition if it is not treated and allowed to 
 						 * progress naturally.
@@ -1563,7 +1563,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * Changes in the normal mechanical, physical, and biochemicalfunctions that are 
 						 * associated with this activity or condition.
@@ -1575,7 +1575,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * A possible unexpected and unfavorable evolution of a medical condition. 
 						 * Complications may include worsening of the signs or symptoms of the disease, 
@@ -1588,7 +1588,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A possible treatment to address this condition, sign or symptom.
 						 */
@@ -1599,7 +1599,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A preventative therapy used to prevent an initial occurrence of the medical 
 						 * condition, such as vaccination.
@@ -1623,7 +1623,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A preventative therapy used to prevent reoccurrence of the medical condition 
 						 * after an initial episode of the condition.
@@ -1661,7 +1661,7 @@
 						 * Expected Type:
 						 *     EventStatusType
 						 *     MedicalStudyStatus
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The status of the study (enumerated).
 						 */
@@ -1672,7 +1672,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTest
+						 *     Thing > MedicalEntity > MedicalTest
 						 * 
 						 * A medical test typically performed given this condition.
 						 */
@@ -2006,7 +2006,7 @@
 						/* 
 						 * Expected Type:
 						 *     MedicalContraindication
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * A contraindication for this therapy.
 						 */
@@ -2017,7 +2017,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * A description of the postoperative procedures, care, and/or followups for this 
 						 * device.
@@ -2029,7 +2029,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * A description of the workup, testing, and other preparations required before 
 						 * implanting this device.
@@ -2041,7 +2041,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * A description of the procedure involved in setting up, using, and/or installing 
 						 * the device.
@@ -2203,7 +2203,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * Source of the data used to formulate the guidance (e.g., RCT, consensus 
 						 * opinion).
@@ -2215,7 +2215,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Date
+						 *     DataType > Date
 						 * 
 						 * Date on which this guideline's recommendation was made.
 						 */
@@ -3088,8 +3088,8 @@
 
 						/* 
 						 * Expected Type:
-						 *     Organization
-						 *     Person
+						 *     Thing > Organization
+						 *     Thing > Person
 						 * 
 						 * A person or organization that supports a thing through a pledge, promise, or 
 						 * financial contribution (e.g.,  a sponsor of a Medical Study or a corporate 
@@ -3104,7 +3104,7 @@
 						 * Expected Type:
 						 *     EventStatusType
 						 *     MedicalStudyStatus
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The status of the study (enumerated).
 						 */
@@ -3115,7 +3115,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     AdministrativeArea
+						 *     Thing > Place > AdministrativeArea
 						 * 
 						 * The location in which the study is taking/took place.
 						 */
@@ -3470,7 +3470,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * If applicable, a description of the pathophysiology associated with the 
 						 * anatomical system, including potential abnormal changes in the mechanical, 
@@ -3506,7 +3506,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A medical therapy related to this anatomy.
 						 */
@@ -3517,7 +3517,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     MedicalTherapy
+						 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 						 * 
 						 * A medical therapy related to this anatomy.
 						 */

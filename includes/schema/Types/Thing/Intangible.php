@@ -208,7 +208,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     Text
+						 *     DataType > Text
 						 * 
 						 * The target group associated with a given audience (e.g., veterans, car owners, 
 						 * musicians).
@@ -220,7 +220,7 @@
 
 						/* 
 						 * Expected Type:
-						 *     AdministrativeArea
+						 *     Thing > Place > AdministrativeArea
 						 * 
 						 * The geographic area associated with the audience.
 						 */
@@ -909,7 +909,7 @@
 
 							/* 
 							 * Expected Type:
-							 *     Text
+							 *     DataType > Text
 							 * 
 							 * Audiences defined by a person's gender.
 							 */
@@ -942,7 +942,7 @@
 
 							/* 
 							 * Expected Type:
-							 *     QuantitativeValue
+							 *     Thing > Intangible > StructuredValue > QuantitativeValue
 							 * 
 							 * The age or age range for the intended audience or person, for example 3-12 
 							 * months for infants, 1-5 years for toddlers.
@@ -955,7 +955,7 @@
 							/* 
 							 * Expected Type:
 							 *     GenderType
-							 *     Text
+							 *     DataType > Text
 							 * 
 							 * The suggested gender of the intended person or audience, for example "male", 
 							 * "female", or "unisex".
@@ -978,7 +978,7 @@
 
 							/* 
 							 * Expected Type:
-							 *     QuantitativeValue
+							 *     Thing > Intangible > StructuredValue > QuantitativeValue
 							 * 
 							 * A suggested range of body measurements for the intended audience or person, for 
 							 * example inseam between 32 and 34 inches or height between 170 and 190 cm. 
