@@ -7777,7 +7777,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_course(
+		function uamswp_fad_schema_course(
 			$schema = '', // array // Main schema array
 			// Course
 				$foo = '', // foo
@@ -8198,7 +8198,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_creativeworkseason(
+		function uamswp_fad_schema_creativeworkseason(
 			$schema = '', // array // Main schema array
 			// CreativeWorkSeason
 				$foo = '', // foo
@@ -8661,7 +8661,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_creativeworkseries(
+		function uamswp_fad_schema_creativeworkseries(
 			$schema = '', // array // Main schema array
 			// CreativeWorkSeries
 				$foo = '', // foo
@@ -9208,7 +9208,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_datacatalog(
+		function uamswp_fad_schema_datacatalog(
 			$schema = '', // array // Main schema array
 			// DataCatalog
 				$foo = '', // foo
@@ -9629,7 +9629,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_dataset(
+		function uamswp_fad_schema_dataset(
 			$schema = '', // array // Main schema array
 			// Dataset
 				$foo = '', // foo
@@ -10079,7 +10079,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_definedtermset(
+		function uamswp_fad_schema_definedtermset(
 			$schema = '', // array // Main schema array
 			// DefinedTermSet
 				$foo = '', // foo
@@ -10514,7 +10514,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_diet(
+		function uamswp_fad_schema_diet(
 			$schema = '', // array // Main schema array
 			// Diet
 				$foo = '', // foo
@@ -10935,7 +10935,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_digitaldocument(
+		function uamswp_fad_schema_digitaldocument(
 			$schema = '', // array // Main schema array
 			// DigitalDocument
 				$foo = '', // foo
@@ -11412,7 +11412,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_drawing(
+		function uamswp_fad_schema_drawing(
 			$schema = '', // array // Main schema array
 			// Drawing
 				$foo = '', // foo
@@ -11833,7 +11833,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_educationaloccupationalcredential(
+		function uamswp_fad_schema_educationaloccupationalcredential(
 			$schema = '', // array // Main schema array
 			// EducationalOccupationalCredential
 				$foo = '', // foo
@@ -12254,7 +12254,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_episode(
+		function uamswp_fad_schema_episode(
 			$schema = '', // array // Main schema array
 			// Episode
 				$foo = '', // foo
@@ -12717,7 +12717,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_exerciseplan(
+		function uamswp_fad_schema_exerciseplan(
 			$schema = '', // array // Main schema array
 			// ExercisePlan
 				$foo = '', // foo
@@ -13138,7 +13138,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_game(
+		function uamswp_fad_schema_game(
 			$schema = '', // array // Main schema array
 			// Game
 				$foo = '', // foo
@@ -13573,7 +13573,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_guide(
+		function uamswp_fad_schema_guide(
 			$schema = '', // array // Main schema array
 			// Guide
 				$foo = '', // foo
@@ -13994,7 +13994,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_howto(
+		function uamswp_fad_schema_howto(
 			$schema = '', // array // Main schema array
 			// HowTo
 				$foo = '', // foo
@@ -14429,7 +14429,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_howtodirection(
+		function uamswp_fad_schema_howtodirection(
 			$schema = '', // array // Main schema array
 			// HowToDirection
 				$foo = '', // foo
@@ -14850,7 +14850,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_howtosection(
+		function uamswp_fad_schema_howtosection(
 			$schema = '', // array // Main schema array
 			// HowToSection
 				$foo = '', // foo
@@ -15271,7 +15271,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_howtostep(
+		function uamswp_fad_schema_howtostep(
 			$schema = '', // array // Main schema array
 			// HowToStep
 				$foo = '', // foo
@@ -15692,7 +15692,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_howtotip(
+		function uamswp_fad_schema_howtotip(
 			$schema = '', // array // Main schema array
 			// HowToTip
 				$foo = '', // foo
@@ -16113,7 +16113,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_hypertoc(
+		function uamswp_fad_schema_hypertoc(
 			$schema = '', // array // Main schema array
 			// HyperToc
 				$foo = '', // foo
@@ -16534,7 +16534,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_hypertocentry(
+		function uamswp_fad_schema_hypertocentry(
 			$schema = '', // array // Main schema array
 			// HyperTocEntry
 				$foo = '', // foo
@@ -16955,7 +16955,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_learningresource(
+		function uamswp_fad_schema_learningresource(
 			$schema = '', // array // Main schema array
 			// LearningResource
 				$foo = '', // foo
@@ -17418,7 +17418,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_legislation(
+		function uamswp_fad_schema_legislation(
 			$schema = '', // array // Main schema array
 			// Legislation
 				$foo = '', // foo
@@ -17853,7 +17853,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_manuscript(
+		function uamswp_fad_schema_manuscript(
 			$schema = '', // array // Main schema array
 			// Manuscript
 				$foo = '', // foo
@@ -18274,7 +18274,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_map(
+		function uamswp_fad_schema_map(
 			$schema = '', // array // Main schema array
 			// Map
 				$foo = '', // foo
@@ -18695,7 +18695,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_mathsolver(
+		function uamswp_fad_schema_mathsolver(
 			$schema = '', // array // Main schema array
 			// MathSolver
 				$foo = '', // foo
@@ -19116,7 +19116,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_mediaobject(
+		function uamswp_fad_schema_mediaobject(
 			$schema = '', // array // Main schema array
 			// MediaObject
 				$foo = '', // foo
@@ -19734,7 +19734,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_mediareviewitem(
+		function uamswp_fad_schema_mediareviewitem(
 			$schema = '', // array // Main schema array
 			// MediaReviewItem
 				$foo = '', // foo
@@ -20155,7 +20155,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_menu(
+		function uamswp_fad_schema_menu(
 			$schema = '', // array // Main schema array
 			// Menu
 				$foo = '', // foo
@@ -20576,7 +20576,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_menusection(
+		function uamswp_fad_schema_menusection(
 			$schema = '', // array // Main schema array
 			// MenuSection
 				$foo = '', // foo
@@ -20997,7 +20997,7 @@
 		 * 
 		 */
 
-		 function uamswp_fad_schema_message(
+		function uamswp_fad_schema_message(
 			$schema = '', // array // Main schema array
 			// Message
 				$foo = '', // foo

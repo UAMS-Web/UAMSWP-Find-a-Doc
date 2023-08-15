@@ -8,7 +8,7 @@
 	 * 
 	 */
 
-	 function uamswp_fad_schema_biochementity(
+	function uamswp_fad_schema_biochementity(
 		$schema, // array // Main schema array
 		// BioChemEntity
 			$foo, // foo

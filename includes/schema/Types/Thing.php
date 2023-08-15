@@ -6,7 +6,7 @@
 	 * The most generic type of item.
 	 */
 
-	 function uamswp_fad_schema_thing(
+	function uamswp_fad_schema_thing(
 		$schema, // array // Main schema array
 		// Thing
 			$additionalType = '', // additionalType

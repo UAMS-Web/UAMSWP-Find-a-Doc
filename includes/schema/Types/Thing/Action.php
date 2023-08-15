@@ -8,7 +8,7 @@
 	 * 
 	 */
 
-	 function uamswp_fad_schema_action(
+	function uamswp_fad_schema_action(
 		$schema, // array // Main schema array
 		// Action
 			$foo, // foo

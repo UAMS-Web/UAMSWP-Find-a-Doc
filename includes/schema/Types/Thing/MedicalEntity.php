@@ -8,7 +8,7 @@
 	 * The most generic type of entity related to health and the practice of medicine.
 	 */
 
-	 function uamswp_fad_schema_medicalentity(
+	function uamswp_fad_schema_medicalentity(
 		$schema, // array // Main schema array
 		// MedicalEntity
 			$code = '', // code
@@ -195,6 +195,7 @@
 	}
 
 	// AnatomicalStructure
+	include_once __DIR__ . '/MedicalEntity/AnatomicalStructure.php';
 
 		/*
 		 * Thing > MedicalEntity > AnatomicalStructure
@@ -203,7 +204,7 @@
 		 * Organs, tissues, and cells are all anatomical structures.
 		 */
 
-		 function uamswp_fad_schema_anatomicalstructure(
+		function uamswp_fad_schema_anatomicalstructure(
 			$schema, // array // Main schema array
 			// AnatomicalStructure
 				$associatedPathophysiology = '', // associatedPathophysiology
@@ -319,7 +320,7 @@
 						 * 
 						 * If applicable, a description of the pathophysiology associated with the 
 						 * anatomical system, including potential abnormal changes in the mechanical, 
-						 * physical, and biochemical functions of the system.
+						 * physical, and biochemicalfunctions of the system.
 						 */
 
 						$schema['associatedPathophysiology'] = $associatedPathophysiology;
@@ -552,6 +553,7 @@
 
 
 	// AnatomicalSystem
+	include_once __DIR__ . '/MedicalEntity/AnatomicalSystem.php';
 
 		/*
 		 * Thing > MedicalEntity > AnatomicalSystem
@@ -563,7 +565,7 @@
 		 * respiratory, skeletal, urinary, vestibular, and other systems.
 		 */
 
-		 function uamswp_fad_schema_anatomicalsystem(
+		function uamswp_fad_schema_anatomicalsystem(
 			$schema, // array // Main schema array
 			// AnatomicalSystem
 				$associatedPathophysiology = '', // associatedPathophysiology
@@ -673,7 +675,7 @@
 						 * 
 						 * If applicable, a description of the pathophysiology associated with the 
 						 * anatomical system, including potential abnormal changes in the mechanical, 
-						 * physical, and biochemical functions of the system.
+						 * physical, and biochemicalfunctions of the system.
 						 */
 
 						$schema['associatedPathophysiology'] = $associatedPathophysiology;
@@ -735,6 +737,7 @@
 		}
 
 	// DrugClass
+	include_once __DIR__ . '/MedicalEntity/DrugClass.php';
 
 		/*
 		 * Thing > MedicalEntity > DrugClass
@@ -744,7 +747,7 @@
 		 * effects, etc.
 		 */
 
-		 function uamswp_fad_schema_drugclass(
+		function uamswp_fad_schema_drugclass(
 			$schema, // array // Main schema array
 			// DrugClass
 				$drug = '', // drug
@@ -858,6 +861,7 @@
 		}
 
 	// DrugCost
+	include_once __DIR__ . '/MedicalEntity/DrugCost.php';
 
 		/*
 		 * Thing > MedicalEntity > DrugCost
@@ -871,7 +875,7 @@
 		 * schema's markup.
 		 */
 
-		 function uamswp_fad_schema_drugcost(
+		function uamswp_fad_schema_drugcost(
 			$schema, // array // Main schema array
 			// DrugCost
 				$applicableLocation = '', // applicableLocation
@@ -1054,6 +1058,7 @@
 		}
 
 	// LifestyleModification
+	include_once __DIR__ . '/MedicalEntity/LifestyleModification.php';
 
 		/*
 		 * Thing > MedicalEntity > LifestyleModification
@@ -1062,7 +1067,7 @@
 		 * other lifestyle changes aimed at improving a health condition.
 		 */
 
-		 function uamswp_fad_schema_lifestylemodification(
+		function uamswp_fad_schema_lifestylemodification(
 			$schema, // array // Main schema array
 			// LifestyleModification (no property vars)
 			// MedicalEntity
@@ -1209,6 +1214,7 @@
 
 
 	// MedicalCause
+	include_once __DIR__ . '/MedicalEntity/MedicalCause.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalCause
@@ -1230,7 +1236,7 @@
 		 * conditions can be causes as well.
 		 */
 
-		 function uamswp_fad_schema_medicalcause(
+		function uamswp_fad_schema_medicalcause(
 			$schema, // array // Main schema array
 			// MedicalCause
 				$causeOf = '', // causeOf
@@ -1344,16 +1350,17 @@
 		}
 
 	// MedicalCondition
+	include_once __DIR__ . '/MedicalEntity/MedicalCondition.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalCondition
 		 * 
-		 * Any condition of the human body that affects the normal functioning of a 
+		 * Any condition of the human body that affects the normalfunctioning of a 
 		 * person, whether physically or mentally. Includes diseases, injuries, 
 		 * disabilities, disorders, syndromes, etc.
 		 */
 
-		 function uamswp_fad_schema_medicalcondition(
+		function uamswp_fad_schema_medicalcondition(
 			$schema, // array // Main schema array
 			// MedicalCondition
 				$associatedAnatomy = '', // associatedAnatomy
@@ -1558,7 +1565,7 @@
 						 * Expected Type:
 						 *     Text
 						 * 
-						 * Changes in the normal mechanical, physical, and biochemical functions that are 
+						 * Changes in the normal mechanical, physical, and biochemicalfunctions that are 
 						 * associated with this activity or condition.
 						 */
 
@@ -1752,6 +1759,7 @@
 
 
 	// MedicalContraindication
+	include_once __DIR__ . '/MedicalEntity/MedicalContraindication.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalContraindication
@@ -1763,7 +1771,7 @@
 		 * considerations or mitigated by other measures).
 		 */
 
-		 function uamswp_fad_schema_medicalcontraindication(
+		function uamswp_fad_schema_medicalcontraindication(
 			$schema, // array // Main schema array
 			// MedicalContraindication (no property vars)
 			// MedicalEntity
@@ -1867,6 +1875,7 @@
 		}
 
 	// MedicalDevice
+	include_once __DIR__ . '/MedicalEntity/MedicalDevice.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalDevice
@@ -1874,7 +1883,7 @@
 		 * Any object used in a medical capacity, such as to diagnose or treat a patient.
 		 */
 
-		 function uamswp_fad_schema_medicaldevice(
+		function uamswp_fad_schema_medicaldevice(
 			$schema, // array // Main schema array
 			// MedicalDevice
 				$adverseOutcome = '', // adverseOutcome
@@ -2065,6 +2074,7 @@
 		}
 
 	// MedicalGuideline
+	include_once __DIR__ . '/MedicalEntity/MedicalGuideline.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalGuideline
@@ -2078,7 +2088,7 @@
 		 * recognizingAuthority base property of MedicalEntity.
 		 */
 
-		 function uamswp_fad_schema_medicalguideline(
+		function uamswp_fad_schema_medicalguideline(
 			$schema, // array // Main schema array
 			// MedicalGuideline
 				$evidenceLevel = '', // evidenceLevel
@@ -2260,6 +2270,7 @@
 			}
 
 	// MedicalIndication
+	include_once __DIR__ . '/MedicalEntity/MedicalIndication.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalIndication
@@ -2268,7 +2279,7 @@
 		 * symptoms, risk factors, anatomical states, etc.
 		 */
 
-		 function uamswp_fad_schema_medicalindication(
+		function uamswp_fad_schema_medicalindication(
 			$schema, // array // Main schema array
 			// MedicalIndication (no property vars)
 			// MedicalEntity
@@ -2414,6 +2425,7 @@
 			}
 
 	// MedicalIntangible
+	include_once __DIR__ . '/MedicalEntity/MedicalIntangible.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalIntangible
@@ -2422,7 +2434,7 @@
 		 * in the medical space.
 		 */
 
-		 function uamswp_fad_schema_medicalintangible(
+		function uamswp_fad_schema_medicalintangible(
 			$schema, // array // Main schema array
 			// MedicalIntangible (no property vars)
 			// MedicalEntity
@@ -2652,367 +2664,10 @@
 			}
 
 	// MedicalProcedure
-
-		/*
-		 * Thing > MedicalEntity > MedicalProcedure
-		 * 
-		 * A process of care used in either a diagnostic, therapeutic, preventive or 
-		 * palliative capacity that relies on invasive (surgical), non-invasive, or other 
-		 * techniques.
-		 */
-
-		 function uamswp_fad_schema_medicalprocedure(
-			$schema, // array // Main schema array
-			// MedicalProcedure
-				$bodyLocation = '', // bodyLocation
-				$followup = '', // followup
-				$howPerformed = '', // howPerformed
-				$preparation = '', // preparation
-				$procedureType = '', // procedureType
-				$status = '', // status
-			// MedicalEntity
-				$code = '', // code
-				$funding = '', // funding
-				$guideline = '', // guideline
-				$legalStatus = '', // legalStatus
-				$medicineSystem = '', // medicineSystem
-				$recognizingAuthority = '', // recognizingAuthority
-				$relevantSpecialty = '', // relevantSpecialty
-				$study = '', // study
-			// Thing
-				$additionalType = '', // additionalType
-				$alternateName = '', // alternateName
-				$description = '', // description
-				$disambiguatingDescription = '', // disambiguatingDescription
-				$identifier = '', // identifier
-				$image = '', // image
-				$mainEntityOfPage = '', // mainEntityOfPage
-				$name = '', // name
-				$potentialAction = '', // potentialAction
-				$sameAs = '', // sameAs
-				$subjectOf = '', // subjectOf
-				$url = '' // url
-		) {
-
-			// Check/define variables
-
-				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-
-				// Inherited properties from Thing
-
-					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
-					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
-					$description = ( isset($description) && !empty($description) ) ? $description : '';
-					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
-					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
-					$image = ( isset($image) && !empty($image) ) ? $image : '';
-					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
-					$name = ( isset($name) && !empty($name) ) ? $name : '';
-					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
-					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
-					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
-					$url = ( isset($url) && !empty($url) ) ? $url : '';
-
-				// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-
-					$code = ( isset($code) && !empty($code) ) ? $code : '';
-					$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
-					$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
-					$legalStatus = ( isset($legalStatus) && !empty($legalStatus) ) ? $legalStatus : '';
-					$medicineSystem = ( isset($medicineSystem) && !empty($medicineSystem) ) ? $medicineSystem : '';
-					$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
-					$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
-					$study = ( isset($study) && !empty($study) ) ? $study : '';
-
-				// Properties from MedicalProcedure (Thing > MedicalEntity > MedicalProcedure)
-
-					$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation: '';
-					$followup = ( isset($followup) && !empty($followup) ) ? $followup: '';
-					$howPerformed = ( isset($howPerformed) && !empty($howPerformed) ) ? $howPerformed: '';
-					$preparation = ( isset($preparation) && !empty($preparation) ) ? $preparation: '';
-					$procedureType = ( isset($procedureType) && !empty($procedureType) ) ? $procedureType: '';
-					$status = ( isset($status) && !empty($status) ) ? $status: '';
-
-			// Add values to the schema array
-
-				// Inherited properties
-
-					$schema = uamswp_fad_schema_medicalentity(
-						$schema, // array // Main schema array
-						// MedicalEntity
-							$code, // code
-							$funding, // funding
-							$guideline, // guideline
-							$legalStatus, // legalStatus
-							$medicineSystem, // medicineSystem
-							$recognizingAuthority, // recognizingAuthority
-							$relevantSpecialty, // relevantSpecialty
-							$study, // study
-						// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
-					);
-
-				// Properties from MedicalProcedure
-
-					// bodyLocation
-
-						/* 
-						 * Expected Type:
-						 *     Text
-						 * 
-						 * Location in the body of the anatomical structure.
-						 */
-
-						$schema['bodyLocation'] = $bodyLocation;
-
-					// followup
-
-						/* 
-						 * Expected Type:
-						 *     Text
-						 * 
-						 * Typical or recommended followup care after the procedure is performed.
-						 */
-
-						$schema['followup'] = $followup;
-
-					// howPerformed
-
-						/* 
-						 * Expected Type:
-						 *     Text
-						 * 
-						 * How the procedure is performed.
-						 */
-
-						$schema['howPerformed'] = $howPerformed;
-
-					// preparation
-
-						/* 
-						 * Expected Type:
-						 *     MedicalEntity
-						 *     Text
-						 * 
-						 * Typical preparation that a patient must undergo before having the procedure 
-						 * performed.
-						 */
-
-						$schema['preparation'] = $preparation;
-
-					// procedureType
-
-						/* 
-						 * Expected Type:
-						 *     MedicalProcedureType
-						 * 
-						 * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
-						 */
-
-						$schema['procedureType'] = $procedureType;
-
-					// status
-
-						/* 
-						 * Expected Type:
-						 *     EventStatusType
-						 *     MedicalStudyStatus
-						 *     Text
-						 * 
-						 * The status of the study (enumerated).
-						 */
-
-						$schema['status'] = $status;
-
-			// Remove any empty values from the schema array
-
-				$schema = array_filter($schema);
-
-			return $schema;
-
-		}
-
-		// DiagnosticProcedure
-
-			/*
-			 * Thing > MedicalEntity > MedicalProcedure > DiagnosticProcedure
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_diagnosticprocedure(
-				
-			) {
-				
-			}
-
-		// PalliativeProcedure
-
-			/*
-			 * Thing > MedicalEntity > MedicalProcedure > PalliativeProcedure
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_palliativeprocedure(
-				
-			) {
-				
-			}
-
-		// PhysicalExam
-
-			/*
-			 * Thing > MedicalEntity > MedicalProcedure > PhysicalExam
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_physicalexam(
-				
-			) {
-				
-			}
-
-		// SurgicalProcedure
-
-			/*
-			 * Thing > MedicalEntity > MedicalProcedure > SurgicalProcedure
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_surgicalprocedure(
-				
-			) {
-				
-			}
-
-		// TherapeuticProcedure
-
-			/*
-			 * Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_therapeuticprocedure(
-				
-			) {
-				
-			}
-
-			// MedicalTherapy
-
-				/*
-				 * Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
-				 * 
-				 * 
-				 */
-
-				function uamswp_fad_schema_medicaltherapy(
-					
-				) {
-					
-				}
-
-				// OccupationalTherapy
-
-					/*
-					 * Thing > MedicalEntity > MedicalProcedure > qux > quux > OccupationalTherapy
-					 * 
-					 * 
-					 */
-
-					function uamswp_fad_schema_occupationaltherapy(
-						
-					) {
-						
-					}
-
-				// PalliativeProcedure
-
-					/*
-					 * Thing > MedicalEntity > MedicalProcedure > qux > quux > PalliativeProcedure
-					 * 
-					 * 
-					 */
-
-					function uamswp_fad_schema_palliativeprocedure(
-						
-					) {
-						
-					}
-
-				// PhysicalTherapy
-
-					/*
-					 * Thing > MedicalEntity > MedicalProcedure > qux > quux > PhysicalTherapy
-					 * 
-					 * 
-					 */
-
-					function uamswp_fad_schema_physicaltherapy(
-						
-					) {
-						
-					}
-
-				// RadiationTherapy
-
-					/*
-					 * Thing > MedicalEntity > MedicalProcedure > qux > quux > RadiationTherapy
-					 * 
-					 * 
-					 */
-
-					function uamswp_fad_schema_radiationtherapy(
-						
-					) {
-						
-					}
-
-				// RespiratoryTherapy
-
-					/*
-					 * Thing > MedicalEntity > MedicalProcedure > qux > quux > RespiratoryTherapy
-					 * 
-					 * 
-					 */
-
-					function uamswp_fad_schema_respiratorytherapy(
-						
-					) {
-						
-					}
-
-			// PsychologicalTreatment
-
-				/*
-				 * Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > PsychologicalTreatment
-				 * 
-				 * 
-				 */
-
-				function uamswp_fad_schema_psychologicaltreatment(
-					
-				) {
-					
-				}
-
+	include_once __DIR__ . '/MedicalEntity/MedicalProcedure.php';
 
 	// MedicalRiskEstimator
+	include_once __DIR__ . '/MedicalEntity/MedicalRiskEstimator.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalRiskEstimator
@@ -3021,7 +2676,7 @@
 		 * complication or condition.
 		 */
 
-		 function uamswp_fad_schema_medicalriskestimator(
+		function uamswp_fad_schema_medicalriskestimator(
 			$schema, // array // Main schema array
 			// MedicalRiskEstimator
 				$estimatesRiskOf = '', // estimatesRiskOf
@@ -3177,6 +2832,7 @@
 			}
 
 	// MedicalRiskFactor
+	include_once __DIR__ . '/MedicalEntity/MedicalRiskFactor.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalRiskFactor
@@ -3185,7 +2841,7 @@
 		 * contracting a disease, medical condition, or complication.
 		 */
 
-		 function uamswp_fad_schema_medicalriskfactor(
+		function uamswp_fad_schema_medicalriskfactor(
 			$schema, // array // Main schema array
 			// MedicalRiskFactor
 				$increasesRiskOf = '', // increasesRiskOf
@@ -3299,6 +2955,7 @@
 		}
 
 	// MedicalStudy
+	include_once __DIR__ . '/MedicalEntity/MedicalStudy.php';
 
 		/*
 		 * Thing > MedicalEntity > MedicalStudy
@@ -3313,7 +2970,7 @@
 		 * code property of MedicalEntity to store study IDs (e.g., clinicaltrials.gov ID).
 		 */
 
-		 function uamswp_fad_schema_medicalstudy(
+		function uamswp_fad_schema_medicalstudy(
 			$schema, // array // Main schema array
 			// MedicalStudy
 				$healthCondition = '', // healthCondition
@@ -3514,236 +3171,10 @@
 			}
 
 	// MedicalTest
-
-		/*
-		 * Thing > MedicalEntity > MedicalTest
-		 * 
-		 * Any medical test, typically performed for diagnostic purposes.
-		 */
-
-		 function uamswp_fad_schema_medicaltest(
-			$schema, // array // Main schema array
-			// MedicalTest
-				$affectedBy = '', // affectedBy
-				$normalRange = '', // normalRange
-				$signDetected = '', // signDetected
-				$usedToDiagnose = '', // usedToDiagnose
-				$usesDevice = '', // usesDevice
-			// MedicalEntity
-				$code = '', // code
-				$funding = '', // funding
-				$guideline = '', // guideline
-				$legalStatus = '', // legalStatus
-				$medicineSystem = '', // medicineSystem
-				$recognizingAuthority = '', // recognizingAuthority
-				$relevantSpecialty = '', // relevantSpecialty
-				$study = '', // study
-			// Thing
-				$additionalType = '', // additionalType
-				$alternateName = '', // alternateName
-				$description = '', // description
-				$disambiguatingDescription = '', // disambiguatingDescription
-				$identifier = '', // identifier
-				$image = '', // image
-				$mainEntityOfPage = '', // mainEntityOfPage
-				$name = '', // name
-				$potentialAction = '', // potentialAction
-				$sameAs = '', // sameAs
-				$subjectOf = '', // subjectOf
-				$url = '' // url
-		) {
-
-			// Check/define variables
-
-				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
-
-				// Inherited properties from Thing
-
-					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
-					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
-					$description = ( isset($description) && !empty($description) ) ? $description : '';
-					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
-					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
-					$image = ( isset($image) && !empty($image) ) ? $image : '';
-					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
-					$name = ( isset($name) && !empty($name) ) ? $name : '';
-					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
-					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
-					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
-					$url = ( isset($url) && !empty($url) ) ? $url : '';
-
-				// Inherited properties from MedicalEntity (Thing > MedicalEntity)
-
-					$code = ( isset($code) && !empty($code) ) ? $code : '';
-					$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
-					$guideline = ( isset($guideline) && !empty($guideline) ) ? $guideline : '';
-					$legalStatus = ( isset($legalStatus) && !empty($legalStatus) ) ? $legalStatus : '';
-					$medicineSystem = ( isset($medicineSystem) && !empty($medicineSystem) ) ? $medicineSystem : '';
-					$recognizingAuthority = ( isset($recognizingAuthority) && !empty($recognizingAuthority) ) ? $recognizingAuthority : '';
-					$relevantSpecialty = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
-					$study = ( isset($study) && !empty($study) ) ? $study : '';
-
-				// Properties from MedicalTest (Thing > MedicalEntity > MedicalTest)
-
-					$affectedBy = ( isset($affectedBy) && !empty($affectedBy) ) ? $affectedBy: '';
-					$normalRange = ( isset($normalRange) && !empty($normalRange) ) ? $normalRange: '';
-					$signDetected = ( isset($signDetected) && !empty($signDetected) ) ? $signDetected: '';
-					$usedToDiagnose = ( isset($usedToDiagnose) && !empty($usedToDiagnose) ) ? $usedToDiagnose: '';
-					$usesDevice = ( isset($usesDevice) && !empty($usesDevice) ) ? $usesDevice: '';
-
-			// Add values to the schema array
-
-				// Inherited properties
-
-					$schema = uamswp_fad_schema_medicalentity(
-						$schema, // array // Main schema array
-						// MedicalEntity
-							$code, // code
-							$funding, // funding
-							$guideline, // guideline
-							$legalStatus, // legalStatus
-							$medicineSystem, // medicineSystem
-							$recognizingAuthority, // recognizingAuthority
-							$relevantSpecialty, // relevantSpecialty
-							$study, // study
-						// Thing
-							$additionalType, // additionalType
-							$alternateName, // alternateName
-							$description, // description
-							$disambiguatingDescription, // disambiguatingDescription
-							$identifier, // identifier
-							$image, // image
-							$mainEntityOfPage, // mainEntityOfPage
-							$name, // name
-							$potentialAction, // potentialAction
-							$sameAs, // sameAs
-							$subjectOf, // subjectOf
-							$url // url
-					);
-
-				// Properties from MedicalTest
-
-					// affectedBy
-
-						/* 
-						 * Expected Type:
-						 *     Drug
-						 * 
-						 * Drugs that affect the test's results.
-						 */
-
-						$schema['affectedBy'] = $affectedBy;
-
-					// normalRange
-
-						/* 
-						 * Expected Type:
-						 *     MedicalEnumeration
-						 *     Text
-						 * 
-						 * Range of acceptable values for a typical patient, when applicable.
-						 */
-
-						$schema['normalRange'] = $normalRange;
-
-					// signDetected
-
-						/* 
-						 * Expected Type:
-						 *     MedicalSign
-						 * 
-						 * A sign detected by the test.
-						 */
-
-						$schema['signDetected'] = $signDetected;
-
-					// usedToDiagnose
-
-						/* 
-						 * Expected Type:
-						 *     MedicalCondition
-						 * 
-						 * A condition the test is used to diagnose.
-						 */
-
-						$schema['usedToDiagnose'] = $usedToDiagnose;
-
-					// usesDevice
-
-						/* 
-						 * Expected Type:
-						 *     MedicalDevice
-						 * 
-						 * Device used to perform the test.
-						 */
-
-						$schema['usesDevice'] = $usesDevice;
-
-			// Remove any empty values from the schema array
-
-				$schema = array_filter($schema);
-
-			return $schema;
-
-		}
-
-		// BloodTest
-
-			/*
-			 * Thing > MedicalEntity > MedicalTest > BloodTest
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_bloodtest(
-				
-			) {
-				
-			}
-
-		// ImagingTest
-
-			/*
-			 * Thing > MedicalEntity > MedicalTest > ImagingTest
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_imagingtest(
-				
-			) {
-				
-			}
-
-		// MedicalTestPanel
-
-			/*
-			 * Thing > MedicalEntity > MedicalTest > MedicalTestPanel
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_medicaltestpanel(
-				
-			) {
-				
-			}
-
-		// PathologyTest
-
-			/*
-			 * Thing > MedicalEntity > MedicalTest > PathologyTest
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_pathologytest(
-				
-			) {
-				
-			}
+	include_once __DIR__ . '/MedicalEntity/MedicalTest.php';
 
 	// Substance
+	include_once __DIR__ . '/MedicalEntity/Substance.php';
 
 		/*
 		 * Thing > MedicalEntity > Substance
@@ -3752,7 +3183,7 @@
 		 * be biological, mineral or chemical.
 		 */
 
-		 function uamswp_fad_schema_substance(
+		function uamswp_fad_schema_substance(
 			$schema, // array // Main schema array
 			// Substance
 				$activeIngredient = '', // activeIngredient
@@ -3908,6 +3339,7 @@
 			}
 
 	// SuperficialAnatomy
+	include_once __DIR__ . '/MedicalEntity/SuperficialAnatomy.php';
 
 		/*
 		 * Thing > MedicalEntity > SuperficialAnatomy
@@ -3932,7 +3364,7 @@
 		 * (the related anatomical structure).
 		 */
 
-		 function uamswp_fad_schema_superficialanatomy(
+		function uamswp_fad_schema_superficialanatomy(
 			$schema, // array // Main schema array
 			// SuperficialAnatomy
 				$associatedPathophysiology = '', // associatedPathophysiology
@@ -4042,7 +3474,7 @@
 						 * 
 						 * If applicable, a description of the pathophysiology associated with the 
 						 * anatomical system, including potential abnormal changes in the mechanical, 
-						 * physical, and biochemical functions of the system.
+						 * physical, and biochemicalfunctions of the system.
 						 */
 
 						$schema['associatedPathophysiology'] = $associatedPathophysiology;
