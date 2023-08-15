@@ -5,13 +5,91 @@
 	/*
 	 * Thing > Intangible
 	 * 
-	 * 
+	 * A utility class that serves as the umbrella for a number of 'intangible' things 
+	 * such as quantities, structured values, etc.
 	 */
 
 	function uamswp_fad_schema_intangible(
-		
+		$schema, // array // Main schema array
+		// Intangible (no property vars)
+		// Thing
+		$additionalType = '', // additionalType
+		$alternateName = '', // alternateName
+		$description = '', // description
+		$disambiguatingDescription = '', // disambiguatingDescription
+		$identifier = '', // identifier
+		$image = '', // image
+		$mainEntityOfPage = '', // mainEntityOfPage
+		$name = '', // name
+		$potentialAction = '', // potentialAction
+		$sameAs = '', // sameAs
+		$subjectOf = '', // subjectOf
+		$url = '' // url
 	) {
-		
+
+		// Check/define variables
+
+			$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+			// Inherited properties from Thing
+
+				$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+				$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+				$description = ( isset($description) && !empty($description) ) ? $description : '';
+				$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+				$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+				$image = ( isset($image) && !empty($image) ) ? $image : '';
+				$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+				$name = ( isset($name) && !empty($name) ) ? $name : '';
+				$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+				$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+				$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+				$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+			// Properties from Intangible (Thing > Intangible)
+
+				// Do nothing (no property vars)
+
+		// Add values to the schema array
+
+			// Inherited properties
+
+				$schema = uamswp_fad_schema_thing(
+					$schema, // array // Main schema array
+					// Thing
+						$additionalType, // additionalType
+						$alternateName, // alternateName
+						$description, // description
+						$disambiguatingDescription, // disambiguatingDescription
+						$identifier, // identifier
+						$image, // image
+						$mainEntityOfPage, // mainEntityOfPage
+						$name, // name
+						$potentialAction, // potentialAction
+						$sameAs, // sameAs
+						$subjectOf, // subjectOf
+						$url // url
+				);
+
+			// Properties from Intangible
+
+				// foo
+
+					/* 
+					 * Expected Type:
+					 *     bar
+					 * 
+					 * 
+					 */
+
+					$schema['foo'] = $foo;
+
+		// Remove any empty values from the schema array
+
+			$schema = array_filter($schema);
+
+		return $schema;
+
 	}
 
 	// ActionAccessSpecification
@@ -47,13 +125,111 @@
 		/*
 		 * Thing > Intangible > Audience
 		 * 
-		 * 
+		 * Intended audience for an item (i.e., the group for whom the item was created).
 		 */
 
 		function uamswp_fad_schema_audience(
-			
+			$schema, // array // Main schema array
+			// Audience
+				$audienceType = '', // audienceType
+				$geographicArea = '', // geographicArea
+			// Intangible (no property vars)
+			// Thing
+				$additionalType = '', // additionalType
+				$alternateName = '', // alternateName
+				$description = '', // description
+				$disambiguatingDescription = '', // disambiguatingDescription
+				$identifier = '', // identifier
+				$image = '', // image
+				$mainEntityOfPage = '', // mainEntityOfPage
+				$name = '', // name
+				$potentialAction = '', // potentialAction
+				$sameAs = '', // sameAs
+				$subjectOf = '', // subjectOf
+				$url = '' // url
 		) {
-			
+
+			// Check/define variables
+
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Inherited properties from Thing
+
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+				// Inherited properties from Intangible (Thing > Intangible)
+
+					// Do nothing (no property vars)
+
+				// Properties from Audience (Thing > Intangible > Audience)
+
+					$audienceType = ( isset($audienceType) && !empty($audienceType) ) ? $audienceType : '';
+					$geographicArea = ( isset($geographicArea) && !empty($geographicArea) ) ? $geographicArea : '';
+
+			// Add values to the schema array
+
+				// Inherited properties
+
+					$schema = uamswp_fad_schema_intangible(
+						$schema, // array // Main schema array
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+
+				// Properties from Audience
+
+					// audienceType
+
+						/* 
+						 * Expected Type:
+						 *     Text
+						 * 
+						 * The target group associated with a given audience (e.g., veterans, car owners, 
+						 * musicians).
+						 */
+
+						$schema['audienceType'] = $audienceType;
+
+					// geographicArea
+
+						/* 
+						 * Expected Type:
+						 *     AdministrativeArea
+						 * 
+						 * The geographic area associated with the audience.
+						 */
+
+						$schema['geographicArea'] = $geographicArea;
+
+			// Remove any empty values from the schema array
+
+				$schema = array_filter($schema);
+
+			return $schema;
+
 		}
 
 		// BusinessAudience
@@ -89,13 +265,134 @@
 			/*
 			 * Thing > Intangible > Audience > MedicalAudience
 			 * 
+			 *     Also: Thing > Intangible > Audience > PeopleAudience > MedicalAudience
 			 * 
+			 * Target audiences for medical web pages.
 			 */
 
-			function uamswp_fad_schema_medicalaudience(
-				
+			 function uamswp_fad_schema_medicalaudience(
+				$schema, // array // Main schema array
+				// MedicalAudience (no property vars)
+				// PeopleAudience
+					$healthCondition = '', // healthCondition
+					$requiredGender = '', // requiredGender
+					$requiredMaxAge = '', // requiredMaxAge
+					$requiredMinAge = '', // requiredMinAge
+					$suggestedAge = '', // suggestedAge
+					$suggestedGender = '', // suggestedGender
+					$suggestedMaxAge = '', // suggestedMaxAge
+					$suggestedMeasurement = '', // suggestedMeasurement
+					$suggestedMinAge = '', // suggestedMinAge
+				// Audience
+					$audienceType = '', // audienceType
+					$geographicArea = '', // geographicArea
+				// Intangible (no property vars)
+				// Thing
+					$additionalType = '', // additionalType
+					$alternateName = '', // alternateName
+					$description = '', // description
+					$disambiguatingDescription = '', // disambiguatingDescription
+					$identifier = '', // identifier
+					$image = '', // image
+					$mainEntityOfPage = '', // mainEntityOfPage
+					$name = '', // name
+					$potentialAction = '', // potentialAction
+					$sameAs = '', // sameAs
+					$subjectOf = '', // subjectOf
+					$url = '' // url
 			) {
-				
+
+				// Check/define variables
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+					// Inherited properties from Thing
+
+						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+						$description = ( isset($description) && !empty($description) ) ? $description : '';
+						$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+						$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+						$image = ( isset($image) && !empty($image) ) ? $image : '';
+						$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+						$name = ( isset($name) && !empty($name) ) ? $name : '';
+						$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+						$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+					// Inherited properties from Intangible (Thing > Intangible)
+
+						// Do nothing (no property vars)
+
+					// Inherited properties from Audience (Thing > Intangible > Audience)
+
+						$audienceType = ( isset($audienceType) && !empty($audienceType) ) ? $audienceType : '';
+						$geographicArea = ( isset($geographicArea) && !empty($geographicArea) ) ? $geographicArea : '';
+
+					// Inherited properties from PeopleAudience (Thing > Intangible > Audience > PeopleAudience)
+
+						$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition : '';
+						$requiredGender = ( isset($requiredGender) && !empty($requiredGender) ) ? $requiredGender : '';
+						$requiredMaxAge = ( isset($requiredMaxAge) && !empty($requiredMaxAge) ) ? $requiredMaxAge : '';
+						$requiredMinAge = ( isset($requiredMinAge) && !empty($requiredMinAge) ) ? $requiredMinAge : '';
+						$suggestedAge = ( isset($suggestedAge) && !empty($suggestedAge) ) ? $suggestedAge : '';
+						$suggestedGender = ( isset($suggestedGender) && !empty($suggestedGender) ) ? $suggestedGender : '';
+						$suggestedMaxAge = ( isset($suggestedMaxAge) && !empty($suggestedMaxAge) ) ? $suggestedMaxAge : '';
+						$suggestedMeasurement = ( isset($suggestedMeasurement) && !empty($suggestedMeasurement) ) ? $suggestedMeasurement : '';
+						$suggestedMinAge = ( isset($suggestedMinAge) && !empty($suggestedMinAge) ) ? $suggestedMinAge : '';
+
+					// Properties from MedicalAudience (Thing > Intangible > Audience > MedicalAudience)
+					// Properties from MedicalAudience (Thing > Intangible > Audience > PeopleAudience > MedicalAudience)
+
+						// Do nothing (no property vars)
+
+				// Add values to the schema array
+
+					// Inherited properties
+
+						$schema = uamswp_fad_schema_peopleaudience(
+							$schema, // array // Main schema array
+							// PeopleAudience
+								$healthCondition, // healthCondition
+								$requiredGender, // requiredGender
+								$requiredMaxAge, // requiredMaxAge
+								$requiredMinAge, // requiredMinAge
+								$suggestedAge, // suggestedAge
+								$suggestedGender, // suggestedGender
+								$suggestedMaxAge, // suggestedMaxAge
+								$suggestedMeasurement, // suggestedMeasurement
+								$suggestedMinAge, // suggestedMinAge
+							// Audience
+								$audienceType, // audienceType
+								$geographicArea, // geographicArea
+							// Intangible (no property vars)
+							// Thing
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
+						);
+
+					// Properties from MedicalAudience (Thing > Intangible > Audience > MedicalAudience)
+					// Properties from MedicalAudience (Thing > Intangible > Audience > PeopleAudience > MedicalAudience)
+
+						// Do nothing (no property vars)
+
+				// Remove any empty values from the schema array
+
+					$schema = array_filter($schema);
+
+				return $schema;
+
 			}
 
 			// Patient
@@ -103,13 +400,387 @@
 				/*
 				 * Thing > Intangible > Audience > MedicalAudience > Patient
 				 * 
+				 *     Also: Thing > Person > Patient
+				 *     Also: Thing > Intangible > Audience > PeopleAudience > MedicalAudience > Patient
 				 * 
+				 * A patient is any person recipient of health care services.
 				 */
 
-				function uamswp_fad_schema_patient(
-					
+				 function uamswp_fad_schema_patient(
+					$schema, // array // Main schema array
+					// Patient
+						$diagnosis = '', // diagnosis
+						$drug = '', // drug
+						$healthCondition = '', // healthCondition
+					// MedicalAudience (no property vars)
+					// PeopleAudience
+						$healthCondition = '', // healthCondition
+						$requiredGender = '', // requiredGender
+						$requiredMaxAge = '', // requiredMaxAge
+						$requiredMinAge = '', // requiredMinAge
+						$suggestedAge = '', // suggestedAge
+						$suggestedGender = '', // suggestedGender
+						$suggestedMaxAge = '', // suggestedMaxAge
+						$suggestedMeasurement = '', // suggestedMeasurement
+						$suggestedMinAge = '', // suggestedMinAge
+					// Audience
+						$audienceType = '', // audienceType
+						$geographicArea = '', // geographicArea
+					// Person
+						$additionalName = '', // additionalName
+						$address = '', // address
+						$affiliation = '', // affiliation
+						$alumniOf = '', // alumniOf
+						$award = '', // award
+						$birthDate = '', // birthDate
+						$birthPlace = '', // birthPlace
+						$brand = '', // brand
+						$callSign = '', // callSign
+						$children = '', // children
+						$colleague = '', // colleague
+						$contactPoint = '', // contactPoint
+						$deathDate = '', // deathDate
+						$deathPlace = '', // deathPlace
+						$duns = '', // duns
+						$email = '', // email
+						$familyName = '', // familyName
+						$faxNumber = '', // faxNumber
+						$follows = '', // follows
+						$funder = '', // funder
+						$funding = '', // funding
+						$gender = '', // gender
+						$givenName = '', // givenName
+						$globalLocationNumber = '', // globalLocationNumber
+						$hasCredential = '', // hasCredential
+						$hasOccupation = '', // hasOccupation
+						$hasOfferCatalog = '', // hasOfferCatalog
+						$hasPOS = '', // hasPOS
+						$height = '', // height
+						$homeLocation = '', // homeLocation
+						$honorificPrefix = '', // honorificPrefix
+						$honorificSuffix = '', // honorificSuffix
+						$interactionStatistic = '', // interactionStatistic
+						$isicV4 = '', // isicV4
+						$jobTitle = '', // jobTitle
+						$knows = '', // knows
+						$knowsAbout = '', // knowsAbout
+						$knowsLanguage = '', // knowsLanguage
+						$makesOffer = '', // makesOffer
+						$memberOf = '', // memberOf
+						$naics = '', // naics
+						$nationality = '', // nationality
+						$netWorth = '', // netWorth
+						$owns = '', // owns
+						$parent = '', // parent
+						$performerIn = '', // performerIn
+						$publishingPrinciples = '', // publishingPrinciples
+						$relatedTo = '', // relatedTo
+						$seeks = '', // seeks
+						$sibling = '', // sibling
+						$sponsor = '', // sponsor
+						$spouse = '', // spouse
+						$taxID = '', // taxID
+						$telephone = '', // telephone
+						$vatID = '', // vatID
+						$weight = '', // weight
+						$workLocation = '', // workLocation
+						$worksFor = '', // worksFor
+					// Intangible (no property vars)
+					// Thing
+						$additionalType = '', // additionalType
+						$alternateName = '', // alternateName
+						$description = '', // description
+						$disambiguatingDescription = '', // disambiguatingDescription
+						$identifier = '', // identifier
+						$image = '', // image
+						$mainEntityOfPage = '', // mainEntityOfPage
+						$name = '', // name
+						$potentialAction = '', // potentialAction
+						$sameAs = '', // sameAs
+						$subjectOf = '', // subjectOf
+						$url = '' // url
 				) {
-					
+
+					// Check/define variables
+
+						$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+						// Inherited properties from Thing
+
+							$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+							$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+							$description = ( isset($description) && !empty($description) ) ? $description : '';
+							$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+							$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+							$image = ( isset($image) && !empty($image) ) ? $image : '';
+							$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+							$name = ( isset($name) && !empty($name) ) ? $name : '';
+							$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+							$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+							$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+							$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+						// Inherited properties from Intangible (Thing > Intangible)
+
+							// Do nothing (no property vars)
+
+						// Inherited properties from Person (Thing > Person)
+
+							$additionalName = ( isset($additionalName) && !empty($additionalName) ) ? $additionalName : '';
+							$address = ( isset($address) && !empty($address) ) ? $address : '';
+							$affiliation = ( isset($affiliation) && !empty($affiliation) ) ? $affiliation : '';
+							$alumniOf = ( isset($alumniOf) && !empty($alumniOf) ) ? $alumniOf : '';
+							$award = ( isset($award) && !empty($award) ) ? $award : '';
+							$birthDate = ( isset($birthDate) && !empty($birthDate) ) ? $birthDate : '';
+							$birthPlace = ( isset($birthPlace) && !empty($birthPlace) ) ? $birthPlace : '';
+							$brand = ( isset($brand) && !empty($brand) ) ? $brand : '';
+							$callSign = ( isset($callSign) && !empty($callSign) ) ? $callSign : '';
+							$children = ( isset($children) && !empty($children) ) ? $children : '';
+							$colleague = ( isset($colleague) && !empty($colleague) ) ? $colleague : '';
+							$contactPoint = ( isset($contactPoint) && !empty($contactPoint) ) ? $contactPoint : '';
+							$deathDate = ( isset($deathDate) && !empty($deathDate) ) ? $deathDate : '';
+							$deathPlace = ( isset($deathPlace) && !empty($deathPlace) ) ? $deathPlace : '';
+							$duns = ( isset($duns) && !empty($duns) ) ? $duns : '';
+							$email = ( isset($email) && !empty($email) ) ? $email : '';
+							$familyName = ( isset($familyName) && !empty($familyName) ) ? $familyName : '';
+							$faxNumber = ( isset($faxNumber) && !empty($faxNumber) ) ? $faxNumber : '';
+							$follows = ( isset($follows) && !empty($follows) ) ? $follows : '';
+							$funder = ( isset($funder) && !empty($funder) ) ? $funder : '';
+							$funding = ( isset($funding) && !empty($funding) ) ? $funding : '';
+							$gender = ( isset($gender) && !empty($gender) ) ? $gender : '';
+							$givenName = ( isset($givenName) && !empty($givenName) ) ? $givenName : '';
+							$globalLocationNumber = ( isset($globalLocationNumber) && !empty($globalLocationNumber) ) ? $globalLocationNumber : '';
+							$hasCredential = ( isset($hasCredential) && !empty($hasCredential) ) ? $hasCredential : '';
+							$hasOccupation = ( isset($hasOccupation) && !empty($hasOccupation) ) ? $hasOccupation : '';
+							$hasOfferCatalog = ( isset($hasOfferCatalog) && !empty($hasOfferCatalog) ) ? $hasOfferCatalog : '';
+							$hasPOS = ( isset($hasPOS) && !empty($hasPOS) ) ? $hasPOS : '';
+							$height = ( isset($height) && !empty($height) ) ? $height : '';
+							$homeLocation = ( isset($homeLocation) && !empty($homeLocation) ) ? $homeLocation : '';
+							$honorificPrefix = ( isset($honorificPrefix) && !empty($honorificPrefix) ) ? $honorificPrefix : '';
+							$honorificSuffix = ( isset($honorificSuffix) && !empty($honorificSuffix) ) ? $honorificSuffix : '';
+							$interactionStatistic = ( isset($interactionStatistic) && !empty($interactionStatistic) ) ? $interactionStatistic : '';
+							$isicV4 = ( isset($isicV4) && !empty($isicV4) ) ? $isicV4 : '';
+							$jobTitle = ( isset($jobTitle) && !empty($jobTitle) ) ? $jobTitle : '';
+							$knows = ( isset($knows) && !empty($knows) ) ? $knows : '';
+							$knowsAbout = ( isset($knowsAbout) && !empty($knowsAbout) ) ? $knowsAbout : '';
+							$knowsLanguage = ( isset($knowsLanguage) && !empty($knowsLanguage) ) ? $knowsLanguage : '';
+							$makesOffer = ( isset($makesOffer) && !empty($makesOffer) ) ? $makesOffer : '';
+							$memberOf = ( isset($memberOf) && !empty($memberOf) ) ? $memberOf : '';
+							$naics = ( isset($naics) && !empty($naics) ) ? $naics : '';
+							$nationality = ( isset($nationality) && !empty($nationality) ) ? $nationality : '';
+							$netWorth = ( isset($netWorth) && !empty($netWorth) ) ? $netWorth : '';
+							$owns = ( isset($owns) && !empty($owns) ) ? $owns : '';
+							$parent = ( isset($parent) && !empty($parent) ) ? $parent : '';
+							$performerIn = ( isset($performerIn) && !empty($performerIn) ) ? $performerIn : '';
+							$publishingPrinciples = ( isset($publishingPrinciples) && !empty($publishingPrinciples) ) ? $publishingPrinciples : '';
+							$relatedTo = ( isset($relatedTo) && !empty($relatedTo) ) ? $relatedTo : '';
+							$seeks = ( isset($seeks) && !empty($seeks) ) ? $seeks : '';
+							$sibling = ( isset($sibling) && !empty($sibling) ) ? $sibling : '';
+							$sponsor = ( isset($sponsor) && !empty($sponsor) ) ? $sponsor : '';
+							$spouse = ( isset($spouse) && !empty($spouse) ) ? $spouse : '';
+							$taxID = ( isset($taxID) && !empty($taxID) ) ? $taxID : '';
+							$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
+							$vatID = ( isset($vatID) && !empty($vatID) ) ? $vatID : '';
+							$weight = ( isset($weight) && !empty($weight) ) ? $weight : '';
+							$workLocation = ( isset($workLocation) && !empty($workLocation) ) ? $workLocation : '';
+							$worksFor = ( isset($worksFor) && !empty($worksFor) ) ? $worksFor : '';
+
+						// Inherited properties from Audience (Thing > Intangible > Audience)
+
+							$audienceType = ( isset($audienceType) && !empty($audienceType) ) ? $audienceType : '';
+							$geographicArea = ( isset($geographicArea) && !empty($geographicArea) ) ? $geographicArea : '';
+
+						// Inherited properties from PeopleAudience (Thing > Intangible > Audience > PeopleAudience)
+
+							$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition : '';
+							$requiredGender = ( isset($requiredGender) && !empty($requiredGender) ) ? $requiredGender : '';
+							$requiredMaxAge = ( isset($requiredMaxAge) && !empty($requiredMaxAge) ) ? $requiredMaxAge : '';
+							$requiredMinAge = ( isset($requiredMinAge) && !empty($requiredMinAge) ) ? $requiredMinAge : '';
+							$suggestedAge = ( isset($suggestedAge) && !empty($suggestedAge) ) ? $suggestedAge : '';
+							$suggestedGender = ( isset($suggestedGender) && !empty($suggestedGender) ) ? $suggestedGender : '';
+							$suggestedMaxAge = ( isset($suggestedMaxAge) && !empty($suggestedMaxAge) ) ? $suggestedMaxAge : '';
+							$suggestedMeasurement = ( isset($suggestedMeasurement) && !empty($suggestedMeasurement) ) ? $suggestedMeasurement : '';
+							$suggestedMinAge = ( isset($suggestedMinAge) && !empty($suggestedMinAge) ) ? $suggestedMinAge : '';
+
+						// Inherited properties from MedicalAudience (Thing > Intangible > Audience > MedicalAudience)
+
+							/* 
+							 * Also: Inherited properties from MedicalAudience (Thing > Intangible > Audience > PeopleAudience > MedicalAudience)
+							 */
+
+							// Do nothing (no property vars)
+
+						// Properties from Patient (Thing > Intangible > Audience > MedicalAudience > Patient)
+
+							/* 
+							 * Also: Properties from Patient (Thing > Person > Patient)
+							 * Also: Properties from Patient (Thing > Intangible > Audience > PeopleAudience > MedicalAudience > Patient)
+							 */
+
+							$diagnosis = ( isset($diagnosis) && !empty($diagnosis) ) ? $diagnosis : '';
+							$drug = ( isset($drug) && !empty($drug) ) ? $drug : '';
+							$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition : '';
+
+					// Add values to the schema array
+
+						// Inherited properties
+
+							$schema = uamswp_fad_schema_medicalaudience(
+								$schema, // array // Main schema array
+								// MedicalAudience (no property vars)
+								// PeopleAudience
+									$healthCondition, // healthCondition
+									$requiredGender, // requiredGender
+									$requiredMaxAge, // requiredMaxAge
+									$requiredMinAge, // requiredMinAge
+									$suggestedAge, // suggestedAge
+									$suggestedGender, // suggestedGender
+									$suggestedMaxAge, // suggestedMaxAge
+									$suggestedMeasurement, // suggestedMeasurement
+									$suggestedMinAge, // suggestedMinAge
+								// Audience
+									$audienceType, // audienceType
+									$geographicArea, // geographicArea
+								// Intangible (no property vars)
+								// Thing
+									$additionalType, // additionalType
+									$alternateName, // alternateName
+									$description, // description
+									$disambiguatingDescription, // disambiguatingDescription
+									$identifier, // identifier
+									$image, // image
+									$mainEntityOfPage, // mainEntityOfPage
+									$name, // name
+									$potentialAction, // potentialAction
+									$sameAs, // sameAs
+									$subjectOf, // subjectOf
+									$url // url
+							);
+
+							$schema = uamswp_fad_schema_person(
+								$schema, // array // Main schema array
+								// Person
+									$additionalName, // additionalName
+									$address, // address
+									$affiliation, // affiliation
+									$alumniOf, // alumniOf
+									$award, // award
+									$birthDate, // birthDate
+									$birthPlace, // birthPlace
+									$brand, // brand
+									$callSign, // callSign
+									$children, // children
+									$colleague, // colleague
+									$contactPoint, // contactPoint
+									$deathDate, // deathDate
+									$deathPlace, // deathPlace
+									$duns, // duns
+									$email, // email
+									$familyName, // familyName
+									$faxNumber, // faxNumber
+									$follows, // follows
+									$funder, // funder
+									$funding, // funding
+									$gender, // gender
+									$givenName, // givenName
+									$globalLocationNumber, // globalLocationNumber
+									$hasCredential, // hasCredential
+									$hasOccupation, // hasOccupation
+									$hasOfferCatalog, // hasOfferCatalog
+									$hasPOS, // hasPOS
+									$height, // height
+									$homeLocation, // homeLocation
+									$honorificPrefix, // honorificPrefix
+									$honorificSuffix, // honorificSuffix
+									$interactionStatistic, // interactionStatistic
+									$isicV4, // isicV4
+									$jobTitle, // jobTitle
+									$knows, // knows
+									$knowsAbout, // knowsAbout
+									$knowsLanguage, // knowsLanguage
+									$makesOffer, // makesOffer
+									$memberOf, // memberOf
+									$naics, // naics
+									$nationality, // nationality
+									$netWorth, // netWorth
+									$owns, // owns
+									$parent, // parent
+									$performerIn, // performerIn
+									$publishingPrinciples, // publishingPrinciples
+									$relatedTo, // relatedTo
+									$seeks, // seeks
+									$sibling, // sibling
+									$sponsor, // sponsor
+									$spouse, // spouse
+									$taxID, // taxID
+									$telephone, // telephone
+									$vatID, // vatID
+									$weight, // weight
+									$workLocation, // workLocation
+									$worksFor, // worksFor
+								// Thing
+									$additionalType, // additionalType
+									$alternateName, // alternateName
+									$description, // description
+									$disambiguatingDescription, // disambiguatingDescription
+									$identifier, // identifier
+									$image, // image
+									$mainEntityOfPage, // mainEntityOfPage
+									$name, // name
+									$potentialAction, // potentialAction
+									$sameAs, // sameAs
+									$subjectOf, // subjectOf
+									$url // url
+							);
+
+						// Properties from Patient (Thing > Intangible > Audience > MedicalAudience > Patient)
+
+							/* 
+							 * Also: Properties from Patient (Thing > Person > Patient)
+							 * Also: Properties from Patient (Thing > Intangible > Audience > PeopleAudience > MedicalAudience > Patient)
+							 */
+
+							// diagnosis
+
+								/* 
+								 * Expected Type:
+								 *     MedicalCondition
+								 * 
+								 * One or more alternative conditions considered in the differential diagnosis 
+								 * process as output of a diagnosis process.
+								 */
+
+								$schema['diagnosis'] = $diagnosis;
+
+							// drug
+
+								/* 
+								 * Expected Type:
+								 *     Drug
+								 * 
+								 * Specifying a drug or medicine used in a medication procedure.
+								 */
+
+								$schema['drug'] = $drug;
+
+							// healthCondition
+
+								/* 
+								 * Expected Type:
+								 *     MedicalCondition
+								 * 
+								 * Specifying the health condition(s) of a patient, medical study, or other target 
+								 * audience.
+								 */
+
+								$schema['healthCondition'] = $healthCondition;
+
+					// Remove any empty values from the schema array
+
+						$schema = array_filter($schema);
+
+					return $schema;
+
 				}
 
 		// PeopleAudience
@@ -117,13 +788,219 @@
 			/*
 			 * Thing > Intangible > Audience > PeopleAudience
 			 * 
-			 * 
+			 * A set of characteristics belonging to people (e.g., who compose an item's 
+			 * target audience).
 			 */
 
-			function uamswp_fad_schema_peopleaudience(
-				
+			 function uamswp_fad_schema_medicalaudience(
+				$schema, // array // Main schema array
+				// PeopleAudience
+					$healthCondition = '', // healthCondition
+					$requiredGender = '', // requiredGender
+					$requiredMaxAge = '', // requiredMaxAge
+					$requiredMinAge = '', // requiredMinAge
+					$suggestedAge = '', // suggestedAge
+					$suggestedGender = '', // suggestedGender
+					$suggestedMaxAge = '', // suggestedMaxAge
+					$suggestedMeasurement = '', // suggestedMeasurement
+					$suggestedMinAge = '', // suggestedMinAge
+				// Audience
+					$audienceType = '', // audienceType
+					$geographicArea = '', // geographicArea
+				// Intangible (no property vars)
+				// Thing
+					$additionalType = '', // additionalType
+					$alternateName = '', // alternateName
+					$description = '', // description
+					$disambiguatingDescription = '', // disambiguatingDescription
+					$identifier = '', // identifier
+					$image = '', // image
+					$mainEntityOfPage = '', // mainEntityOfPage
+					$name = '', // name
+					$potentialAction = '', // potentialAction
+					$sameAs = '', // sameAs
+					$subjectOf = '', // subjectOf
+					$url = '' // url
 			) {
-				
+
+				// Check/define variables
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+					// Inherited properties from Thing
+
+						$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+						$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+						$description = ( isset($description) && !empty($description) ) ? $description : '';
+						$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+						$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+						$image = ( isset($image) && !empty($image) ) ? $image : '';
+						$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+						$name = ( isset($name) && !empty($name) ) ? $name : '';
+						$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+						$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+						$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+						$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+					// Inherited properties from Intangible (Thing > Intangible)
+
+						// Do nothing (no property vars)
+
+					// Inherited properties from Audience (Thing > Intangible > Audience)
+
+						$audienceType = ( isset($audienceType) && !empty($audienceType) ) ? $audienceType : '';
+						$geographicArea = ( isset($geographicArea) && !empty($geographicArea) ) ? $geographicArea : '';
+
+					// Properties from PeopleAudience (Thing > Intangible > Audience > PeopleAudience)
+
+						$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition : '';
+						$requiredGender = ( isset($requiredGender) && !empty($requiredGender) ) ? $requiredGender : '';
+						$requiredMaxAge = ( isset($requiredMaxAge) && !empty($requiredMaxAge) ) ? $requiredMaxAge : '';
+						$requiredMinAge = ( isset($requiredMinAge) && !empty($requiredMinAge) ) ? $requiredMinAge : '';
+						$suggestedAge = ( isset($suggestedAge) && !empty($suggestedAge) ) ? $suggestedAge : '';
+						$suggestedGender = ( isset($suggestedGender) && !empty($suggestedGender) ) ? $suggestedGender : '';
+						$suggestedMaxAge = ( isset($suggestedMaxAge) && !empty($suggestedMaxAge) ) ? $suggestedMaxAge : '';
+						$suggestedMeasurement = ( isset($suggestedMeasurement) && !empty($suggestedMeasurement) ) ? $suggestedMeasurement : '';
+						$suggestedMinAge = ( isset($suggestedMinAge) && !empty($suggestedMinAge) ) ? $suggestedMinAge : '';
+
+				// Add values to the schema array
+
+					// Inherited properties
+
+						$schema = uamswp_fad_schema_audience(
+							$schema, // array // Main schema array
+							// Audience
+								$audienceType, // audienceType
+								$geographicArea, // geographicArea
+							// Intangible (no property vars)
+							// Thing
+								$additionalType, // additionalType
+								$alternateName, // alternateName
+								$description, // description
+								$disambiguatingDescription, // disambiguatingDescription
+								$identifier, // identifier
+								$image, // image
+								$mainEntityOfPage, // mainEntityOfPage
+								$name, // name
+								$potentialAction, // potentialAction
+								$sameAs, // sameAs
+								$subjectOf, // subjectOf
+								$url // url
+						);
+
+					// Properties from PeopleAudience (Thing > Intangible > Audience > PeopleAudience)
+
+						// healthCondition
+
+							/* 
+							 * Expected Type:
+							 *     MedicalCondition
+							 * 
+							 * Specifying the health condition(s) of a patient, medical study, or other target 
+							 * audience.
+							 */
+
+							$schema['healthCondition'] = $healthCondition;
+
+						// requiredGender
+
+							/* 
+							 * Expected Type:
+							 *     Text
+							 * 
+							 * Audiences defined by a person's gender.
+							 */
+
+							$schema['requiredGender'] = $requiredGender;
+
+						// requiredMaxAge
+
+							/* 
+							 * Expected Type:
+							 *     Integer
+							 * 
+							 * Audiences defined by a person's maximum age.
+							 */
+
+							$schema['requiredMaxAge'] = $requiredMaxAge;
+
+						// requiredMinAge
+
+							/* 
+							 * Expected Type:
+							 *     Integer
+							 * 
+							 * Audiences defined by a person's minimum age.
+							 */
+
+							$schema['requiredMinAge'] = $requiredMinAge;
+
+						// suggestedAge
+
+							/* 
+							 * Expected Type:
+							 *     QuantitativeValue
+							 * 
+							 * The age or age range for the intended audience or person, for example 3-12 
+							 * months for infants, 1-5 years for toddlers.
+							 */
+
+							$schema['suggestedAge'] = $suggestedAge;
+
+						// suggestedGender
+
+							/* 
+							 * Expected Type:
+							 *     GenderType
+							 *     Text
+							 * 
+							 * The suggested gender of the intended person or audience, for example "male", 
+							 * "female", or "unisex".
+							 */
+
+							$schema['suggestedGender'] = $suggestedGender;
+
+						// suggestedMaxAge
+
+							/* 
+							 * Expected Type:
+							 *     Number
+							 * 
+							 * Maximum recommended age in years for the audience or user.
+							 */
+
+							$schema['suggestedMaxAge'] = $suggestedMaxAge;
+
+						// suggestedMeasurement
+
+							/* 
+							 * Expected Type:
+							 *     QuantitativeValue
+							 * 
+							 * A suggested range of body measurements for the intended audience or person, for 
+							 * example inseam between 32 and 34 inches or height between 170 and 190 cm. 
+							 * Typically found on a size chart for wearable products.
+							 */
+
+							$schema['suggestedMeasurement'] = $suggestedMeasurement;
+
+						// suggestedMinAge
+
+							/* 
+							 * Expected Type:
+							 *     Number
+							 * 
+							 * Minimum recommended age in years for the audience or user.
+							 */
+
+							$schema['suggestedMinAge'] = $suggestedMinAge;
+
+				// Remove any empty values from the schema array
+
+					$schema = array_filter($schema);
+
+				return $schema;
+
 			}
 
 			// MedicalAudience
@@ -131,14 +1008,8 @@
 				/*
 				 * Thing > Intangible > Audience > PeopleAudience > MedicalAudience
 				 * 
-				 * 
+				 * See: Thing > Intangible > Audience > MedicalAudience
 				 */
-
-				function uamswp_fad_schema_medicalaudience(
-					
-				) {
-					
-				}
 
 			// ParentAudience
 
@@ -482,7 +1353,7 @@
 		/*
 		 * Thing > Intangible > Enumeration
 		 * 
-		 * 
+		 * Lists or enumerations — for example, a list of cuisines or music genres, etc.
 		 */
 
 		function uamswp_fad_schema_enumeration(
@@ -3032,7 +3903,9 @@
 			/*
 			 * Thing > Intangible > Enumeration > MedicalEnumeration
 			 * 
-			 * 
+			 * Enumerations related to health and the practice of medicine: A concept that is 
+			 * used to attribute a quality to another concept, as a qualifier, a collection of 
+			 * items or a listing of all of the elements of a set in medicine practice.
 			 */
 
 			function uamswp_fad_schema_medicalenumeration(
@@ -3716,9 +4589,58 @@
 			// MedicalSpecialty
 
 				/*
-				 * Thing > Intangible > Enumeration > qux > MedicalSpecialty
+				 * Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
 				 * 
+				 *     Also: Thing > Intangible > Enumeration > Specialty > MedicalSpecialty
 				 * 
+				 * Any specific branch of medical science or practice. Medical specialities 
+				 * include clinical specialties that pertain to particular organ systems and 
+				 * their respective disease states, as well as allied health specialties. 
+				 * Enumerated type.
+				 * 
+				 * Enumeration members:
+				 * 
+				 *     Anesthesia
+				 *     Cardiovascular
+				 *     CommunityHealth
+				 *     Dentistry
+				 *     Dermatology
+				 *     DietNutrition
+				 *     Emergency
+				 *     Endocrine
+				 *     Gastroenterologic
+				 *     Genetic
+				 *     Geriatric
+				 *     Gynecologic
+				 *     Hematologic
+				 *     Infectious
+				 *     LaboratoryScience
+				 *     Midwifery
+				 *     Musculoskeletal
+				 *     Neurologic
+				 *     Nursing
+				 *     Obstetric
+				 *     Oncologic
+				 *     Optometric
+				 *     Otolaryngologic
+				 *     Pathology
+				 *     Pediatric
+				 *     PharmacySpecialty
+				 *     Physiotherapy
+				 *     PlasticSurgery
+				 *     Podiatric
+				 *     PrimaryCare
+				 *     Psychiatric
+				 *     PublicHealth
+				 *     Pulmonary
+				 *     Radiography
+				 *     Renal
+				 *     RespiratoryTherapy
+				 *     Rheumatologic
+				 *     SpeechPathology
+				 *     Surgical
+				 *     Toxicologic
+				 *     Urologic
 				 */
 
 				function uamswp_fad_schema_medicalspecialty(
@@ -7532,7 +8454,8 @@
 			/*
 			 * Thing > Intangible > Enumeration > Specialty
 			 * 
-			 * 
+			 * Any branch of a field in which people typically develop specific expertise, 
+			 * usually after significant study, time, and effort.
 			 */
 
 			function uamswp_fad_schema_specialty(
@@ -7546,14 +8469,8 @@
 				/*
 				 * Thing > Intangible > Enumeration > Specialty > MedicalSpecialty
 				 * 
-				 * 
+				 * See: Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
 				 */
-
-				function uamswp_fad_schema_medicalspecialty(
-					
-				) {
-					
-				}
 
 		// StatusEnumeration
 
