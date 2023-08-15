@@ -13,18 +13,18 @@
 		$schema, // array // Main schema array
 		// Intangible (no property vars)
 		// Thing
-		$additionalType = '', // additionalType
-		$alternateName = '', // alternateName
-		$description = '', // description
-		$disambiguatingDescription = '', // disambiguatingDescription
-		$identifier = '', // identifier
-		$image = '', // image
-		$mainEntityOfPage = '', // mainEntityOfPage
-		$name = '', // name
-		$potentialAction = '', // potentialAction
-		$sameAs = '', // sameAs
-		$subjectOf = '', // subjectOf
-		$url = '' // url
+			$additionalType = '', // additionalType
+			$alternateName = '', // alternateName
+			$description = '', // description
+			$disambiguatingDescription = '', // disambiguatingDescription
+			$identifier = '', // identifier
+			$image = '', // image
+			$mainEntityOfPage = '', // mainEntityOfPage
+			$name = '', // name
+			$potentialAction = '', // potentialAction
+			$sameAs = '', // sameAs
+			$subjectOf = '', // subjectOf
+			$url = '' // url
 	) {
 
 		// Check/define variables
@@ -73,16 +73,7 @@
 
 			// Properties from Intangible
 
-				// foo
-
-					/* 
-					 * Expected Type:
-					 *     bar
-					 * 
-					 * 
-					 */
-
-					$schema['foo'] = $foo;
+				// Do nothing (no property vars)
 
 		// Remove any empty values from the schema array
 

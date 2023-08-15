@@ -9,10 +9,96 @@
 	 */
 
 	function uamswp_fad_schema_enumeration(
-		
+		$schema, // array // Main schema array
+		// Enumeration
+			$supersededBy = '', // supersededBy
+		// Intangible (no property vars)
+		// Thing
+			$additionalType = '', // additionalType
+			$alternateName = '', // alternateName
+			$description = '', // description
+			$disambiguatingDescription = '', // disambiguatingDescription
+			$identifier = '', // identifier
+			$image = '', // image
+			$mainEntityOfPage = '', // mainEntityOfPage
+			$name = '', // name
+			$potentialAction = '', // potentialAction
+			$sameAs = '', // sameAs
+			$subjectOf = '', // subjectOf
+			$url = '' // url
 	) {
-		
-	}
+
+		// Check/define variables
+
+			$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+			// Inherited properties from Thing
+
+				$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+				$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+				$description = ( isset($description) && !empty($description) ) ? $description : '';
+				$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+				$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+				$image = ( isset($image) && !empty($image) ) ? $image : '';
+				$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+				$name = ( isset($name) && !empty($name) ) ? $name : '';
+				$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+				$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+				$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+				$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+			// Inherited properties from Intangible (Thing > Intangible)
+
+				// Do nothing (no property vars)
+
+			// Properties from Enumeration (Thing > Intangible > Enumeration)
+
+				$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+
+		// Add values to the schema array
+
+			// Inherited properties
+
+				$schema = uamswp_fad_schema_intangible(
+					$schema, // array // Main schema array
+					// Intangible (no property vars)
+					// Thing
+						$additionalType, // additionalType
+						$alternateName, // alternateName
+						$description, // description
+						$disambiguatingDescription, // disambiguatingDescription
+						$identifier, // identifier
+						$image, // image
+						$mainEntityOfPage, // mainEntityOfPage
+						$name, // name
+						$potentialAction, // potentialAction
+						$sameAs, // sameAs
+						$subjectOf, // subjectOf
+						$url // url
+				);
+
+			// Properties from Enumeration
+
+				// supersededBy
+
+					/* 
+					 * Expected Type:
+					 *     Thing > Intangible > Class
+					 *     Thing > Intangible > Enumeration
+					 *     Thing > Intangible > Property
+					 * 
+					 * Relates a term (i.e., a property, class or enumeration) to one that supersedes 
+					 * it.
+					 */
+
+					 $schema['supersededBy'] = $supersededBy;
+
+		// Remove any empty values from the schema array
+
+			$schema = array_filter($schema);
+
+		return $schema;
+}
 
 	// AdultOrientedEnumeration
 	include_once __DIR__ . '/Place/AdultOrientedEnumeration.php';

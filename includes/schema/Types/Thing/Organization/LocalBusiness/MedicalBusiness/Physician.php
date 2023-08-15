@@ -494,7 +494,6 @@
 					 * Expected Type:
 					 *     Thing > MedicalEntity > MedicalProcedure
 					 *     Thing > MedicalEntity > MedicalTest
-					 *     Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy
 					 * 
 					 * A medical service available from this provider.
 					 */

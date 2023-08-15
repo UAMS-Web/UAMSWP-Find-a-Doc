@@ -271,14 +271,14 @@
 
 				// Properties from AnatomicalStructure (Thing > MedicalEntity > AnatomicalStructure)
 
-					$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology: '';
-					$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation: '';
-					$connectedTo = ( isset($connectedTo) && !empty($connectedTo) ) ? $connectedTo: '';
-					$diagram = ( isset($diagram) && !empty($diagram) ) ? $diagram: '';
-					$partOfSystem = ( isset($partOfSystem) && !empty($partOfSystem) ) ? $partOfSystem: '';
-					$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition: '';
-					$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy: '';
-					$subStructure = ( isset($subStructure) && !empty($subStructure) ) ? $subStructure: '';
+					$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology : '';
+					$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation : '';
+					$connectedTo = ( isset($connectedTo) && !empty($connectedTo) ) ? $connectedTo : '';
+					$diagram = ( isset($diagram) && !empty($diagram) ) ? $diagram : '';
+					$partOfSystem = ( isset($partOfSystem) && !empty($partOfSystem) ) ? $partOfSystem : '';
+					$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition : '';
+					$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy : '';
+					$subStructure = ( isset($subStructure) && !empty($subStructure) ) ? $subStructure : '';
 
 			// Add values to the schema array
 
@@ -629,11 +629,11 @@
 
 				// Properties from AnatomicalSystem (Thing > MedicalEntity > AnatomicalSystem)
 
-					$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology: '';
-					$comprisedOf = ( isset($comprisedOf) && !empty($comprisedOf) ) ? $comprisedOf: '';
-					$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition: '';
-					$relatedStructure = ( isset($relatedStructure) && !empty($relatedStructure) ) ? $relatedStructure: '';
-					$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy: '';
+					$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology : '';
+					$comprisedOf = ( isset($comprisedOf) && !empty($comprisedOf) ) ? $comprisedOf : '';
+					$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition : '';
+					$relatedStructure = ( isset($relatedStructure) && !empty($relatedStructure) ) ? $relatedStructure : '';
+					$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy : '';
 
 			// Add values to the schema array
 
@@ -940,12 +940,12 @@
 
 				// Properties from DrugCost (Thing > MedicalEntity > DrugCost)
 
-					$applicableLocation = ( isset($applicableLocation) && !empty($applicableLocation) ) ? $applicableLocation: '';
-					$costCategory = ( isset($costCategory) && !empty($costCategory) ) ? $costCategory: '';
-					$costCurrency = ( isset($costCurrency) && !empty($costCurrency) ) ? $costCurrency: '';
-					$costOrigin = ( isset($costOrigin) && !empty($costOrigin) ) ? $costOrigin: '';
-					$costPerUnit = ( isset($costPerUnit) && !empty($costPerUnit) ) ? $costPerUnit: '';
-					$drugUnit = ( isset($drugUnit) && !empty($drugUnit) ) ? $drugUnit: '';
+					$applicableLocation = ( isset($applicableLocation) && !empty($applicableLocation) ) ? $applicableLocation : '';
+					$costCategory = ( isset($costCategory) && !empty($costCategory) ) ? $costCategory : '';
+					$costCurrency = ( isset($costCurrency) && !empty($costCurrency) ) ? $costCurrency : '';
+					$costOrigin = ( isset($costOrigin) && !empty($costOrigin) ) ? $costOrigin : '';
+					$costPerUnit = ( isset($costPerUnit) && !empty($costPerUnit) ) ? $costPerUnit : '';
+					$drugUnit = ( isset($drugUnit) && !empty($drugUnit) ) ? $drugUnit : '';
 
 			// Add values to the schema array
 
@@ -1296,7 +1296,7 @@
 
 				// Properties from MedicalCause (Thing > MedicalEntity > MedicalCause)
 
-					$causeOf = ( isset($causeOf) && !empty($causeOf) ) ? $causeOf: '';
+					$causeOf = ( isset($causeOf) && !empty($causeOf) ) ? $causeOf : '';
 
 			// Add values to the schema array
 
@@ -1435,22 +1435,22 @@
 
 				// Properties from MedicalCondition (Thing > MedicalEntity > MedicalCondition)
 
-					$associatedAnatomy = ( isset($associatedAnatomy) && !empty($associatedAnatomy) ) ? $associatedAnatomy: '';
-					$differentialDiagnosis = ( isset($differentialDiagnosis) && !empty($differentialDiagnosis) ) ? $differentialDiagnosis: '';
-					$drug = ( isset($drug) && !empty($drug) ) ? $drug: '';
-					$epidemiology = ( isset($epidemiology) && !empty($epidemiology) ) ? $epidemiology: '';
-					$expectedPrognosis = ( isset($expectedPrognosis) && !empty($expectedPrognosis) ) ? $expectedPrognosis: '';
-					$naturalProgression = ( isset($naturalProgression) && !empty($naturalProgression) ) ? $naturalProgression: '';
-					$pathophysiology = ( isset($pathophysiology) && !empty($pathophysiology) ) ? $pathophysiology: '';
-					$possibleComplication = ( isset($possibleComplication) && !empty($possibleComplication) ) ? $possibleComplication: '';
-					$possibleTreatment = ( isset($possibleTreatment) && !empty($possibleTreatment) ) ? $possibleTreatment: '';
-					$primaryPrevention = ( isset($primaryPrevention) && !empty($primaryPrevention) ) ? $primaryPrevention: '';
-					$riskFactor = ( isset($riskFactor) && !empty($riskFactor) ) ? $riskFactor: '';
-					$secondaryPrevention = ( isset($secondaryPrevention) && !empty($secondaryPrevention) ) ? $secondaryPrevention: '';
-					$signOrSymptom = ( isset($signOrSymptom) && !empty($signOrSymptom) ) ? $signOrSymptom: '';
-					$stage = ( isset($stage) && !empty($stage) ) ? $stage: '';
-					$status = ( isset($status) && !empty($status) ) ? $status: '';
-					$typicalTest = ( isset($typicalTest) && !empty($typicalTest) ) ? $typicalTest: '';
+					$associatedAnatomy = ( isset($associatedAnatomy) && !empty($associatedAnatomy) ) ? $associatedAnatomy : '';
+					$differentialDiagnosis = ( isset($differentialDiagnosis) && !empty($differentialDiagnosis) ) ? $differentialDiagnosis : '';
+					$drug = ( isset($drug) && !empty($drug) ) ? $drug : '';
+					$epidemiology = ( isset($epidemiology) && !empty($epidemiology) ) ? $epidemiology : '';
+					$expectedPrognosis = ( isset($expectedPrognosis) && !empty($expectedPrognosis) ) ? $expectedPrognosis : '';
+					$naturalProgression = ( isset($naturalProgression) && !empty($naturalProgression) ) ? $naturalProgression : '';
+					$pathophysiology = ( isset($pathophysiology) && !empty($pathophysiology) ) ? $pathophysiology : '';
+					$possibleComplication = ( isset($possibleComplication) && !empty($possibleComplication) ) ? $possibleComplication : '';
+					$possibleTreatment = ( isset($possibleTreatment) && !empty($possibleTreatment) ) ? $possibleTreatment : '';
+					$primaryPrevention = ( isset($primaryPrevention) && !empty($primaryPrevention) ) ? $primaryPrevention : '';
+					$riskFactor = ( isset($riskFactor) && !empty($riskFactor) ) ? $riskFactor : '';
+					$secondaryPrevention = ( isset($secondaryPrevention) && !empty($secondaryPrevention) ) ? $secondaryPrevention : '';
+					$signOrSymptom = ( isset($signOrSymptom) && !empty($signOrSymptom) ) ? $signOrSymptom : '';
+					$stage = ( isset($stage) && !empty($stage) ) ? $stage : '';
+					$status = ( isset($status) && !empty($status) ) ? $status : '';
+					$typicalTest = ( isset($typicalTest) && !empty($typicalTest) ) ? $typicalTest : '';
 
 			// Add values to the schema array
 
@@ -1948,12 +1948,12 @@
 
 				// Properties from MedicalDevice (Thing > MedicalEntity > MedicalDevice)
 
-					$adverseOutcome = ( isset($adverseOutcome) && !empty($adverseOutcome) ) ? $adverseOutcome: '';
-					$contraindication = ( isset($contraindication) && !empty($contraindication) ) ? $contraindication: '';
-					$postOp = ( isset($postOp) && !empty($postOp) ) ? $postOp: '';
-					$preOp = ( isset($preOp) && !empty($preOp) ) ? $preOp: '';
-					$procedure = ( isset($procedure) && !empty($procedure) ) ? $procedure: '';
-					$seriousAdverseOutcome = ( isset($seriousAdverseOutcome) && !empty($seriousAdverseOutcome) ) ? $seriousAdverseOutcome: '';
+					$adverseOutcome = ( isset($adverseOutcome) && !empty($adverseOutcome) ) ? $adverseOutcome : '';
+					$contraindication = ( isset($contraindication) && !empty($contraindication) ) ? $contraindication : '';
+					$postOp = ( isset($postOp) && !empty($postOp) ) ? $postOp : '';
+					$preOp = ( isset($preOp) && !empty($preOp) ) ? $preOp : '';
+					$procedure = ( isset($procedure) && !empty($procedure) ) ? $procedure : '';
+					$seriousAdverseOutcome = ( isset($seriousAdverseOutcome) && !empty($seriousAdverseOutcome) ) ? $seriousAdverseOutcome : '';
 
 			// Add values to the schema array
 
@@ -2151,10 +2151,10 @@
 
 				// Properties from MedicalGuideline (Thing > MedicalEntity > MedicalGuideline)
 
-					$evidenceLevel = ( isset($evidenceLevel) && !empty($evidenceLevel) ) ? $evidenceLevel: '';
-					$evidenceOrigin = ( isset($evidenceOrigin) && !empty($evidenceOrigin) ) ? $evidenceOrigin: '';
-					$guidelineDate = ( isset($guidelineDate) && !empty($guidelineDate) ) ? $guidelineDate: '';
-					$guidelineSubject = ( isset($guidelineSubject) && !empty($guidelineSubject) ) ? $guidelineSubject: '';
+					$evidenceLevel = ( isset($evidenceLevel) && !empty($evidenceLevel) ) ? $evidenceLevel : '';
+					$evidenceOrigin = ( isset($evidenceOrigin) && !empty($evidenceOrigin) ) ? $evidenceOrigin : '';
+					$guidelineDate = ( isset($guidelineDate) && !empty($guidelineDate) ) ? $guidelineDate : '';
+					$guidelineSubject = ( isset($guidelineSubject) && !empty($guidelineSubject) ) ? $guidelineSubject : '';
 
 			// Add values to the schema array
 
@@ -2737,8 +2737,8 @@
 
 				// Properties from MedicalRiskEstimator (Thing > MedicalEntity > MedicalRiskEstimator)
 
-					$estimatesRiskOf = ( isset($estimatesRiskOf) && !empty($estimatesRiskOf) ) ? $estimatesRiskOf: '';
-					$includedRiskFactor = ( isset($includedRiskFactor) && !empty($includedRiskFactor) ) ? $includedRiskFactor: '';
+					$estimatesRiskOf = ( isset($estimatesRiskOf) && !empty($estimatesRiskOf) ) ? $estimatesRiskOf : '';
+					$includedRiskFactor = ( isset($includedRiskFactor) && !empty($includedRiskFactor) ) ? $includedRiskFactor : '';
 
 			// Add values to the schema array
 
@@ -3034,11 +3034,11 @@
 
 				// Properties from MedicalStudy (Thing > MedicalEntity > MedicalStudy)
 
-					$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition: '';
-					$sponsor = ( isset($sponsor) && !empty($sponsor) ) ? $sponsor: '';
-					$status = ( isset($status) && !empty($status) ) ? $status: '';
-					$studyLocation = ( isset($studyLocation) && !empty($studyLocation) ) ? $studyLocation: '';
-					$studySubject = ( isset($studySubject) && !empty($studySubject) ) ? $studySubject: '';
+					$healthCondition = ( isset($healthCondition) && !empty($healthCondition) ) ? $healthCondition : '';
+					$sponsor = ( isset($sponsor) && !empty($sponsor) ) ? $sponsor : '';
+					$status = ( isset($status) && !empty($status) ) ? $status : '';
+					$studyLocation = ( isset($studyLocation) && !empty($studyLocation) ) ? $studyLocation : '';
+					$studySubject = ( isset($studySubject) && !empty($studySubject) ) ? $studySubject : '';
 
 			// Add values to the schema array
 
@@ -3428,11 +3428,11 @@
 
 				// Properties from SuperficialAnatomy (Thing > MedicalEntity > SuperficialAnatomy)
 
-					$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology: '';
-					$relatedAnatomy = ( isset($relatedAnatomy) && !empty($relatedAnatomy) ) ? $relatedAnatomy: '';
-					$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition: '';
-					$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy: '';
-					$significance = ( isset($significance) && !empty($significance) ) ? $significance: '';
+					$associatedPathophysiology = ( isset($associatedPathophysiology) && !empty($associatedPathophysiology) ) ? $associatedPathophysiology : '';
+					$relatedAnatomy = ( isset($relatedAnatomy) && !empty($relatedAnatomy) ) ? $relatedAnatomy : '';
+					$relatedCondition = ( isset($relatedCondition) && !empty($relatedCondition) ) ? $relatedCondition : '';
+					$relatedTherapy = ( isset($relatedTherapy) && !empty($relatedTherapy) ) ? $relatedTherapy : '';
+					$significance = ( isset($significance) && !empty($significance) ) ? $significance : '';
 
 			// Add values to the schema array
 

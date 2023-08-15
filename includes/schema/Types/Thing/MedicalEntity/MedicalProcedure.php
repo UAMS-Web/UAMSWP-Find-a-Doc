@@ -75,12 +75,12 @@
 
 			// Properties from MedicalProcedure (Thing > MedicalEntity > MedicalProcedure)
 
-				$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation: '';
-				$followup = ( isset($followup) && !empty($followup) ) ? $followup: '';
-				$howPerformed = ( isset($howPerformed) && !empty($howPerformed) ) ? $howPerformed: '';
-				$preparation = ( isset($preparation) && !empty($preparation) ) ? $preparation: '';
-				$procedureType = ( isset($procedureType) && !empty($procedureType) ) ? $procedureType: '';
-				$status = ( isset($status) && !empty($status) ) ? $status: '';
+				$bodyLocation = ( isset($bodyLocation) && !empty($bodyLocation) ) ? $bodyLocation : '';
+				$followup = ( isset($followup) && !empty($followup) ) ? $followup : '';
+				$howPerformed = ( isset($howPerformed) && !empty($howPerformed) ) ? $howPerformed : '';
+				$preparation = ( isset($preparation) && !empty($preparation) ) ? $preparation : '';
+				$procedureType = ( isset($procedureType) && !empty($procedureType) ) ? $procedureType : '';
+				$status = ( isset($status) && !empty($status) ) ? $status : '';
 
 		// Add values to the schema array
 

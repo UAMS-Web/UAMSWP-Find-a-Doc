@@ -72,11 +72,11 @@
 
 			// Properties from MedicalTest (Thing > MedicalEntity > MedicalTest)
 
-				$affectedBy = ( isset($affectedBy) && !empty($affectedBy) ) ? $affectedBy: '';
-				$normalRange = ( isset($normalRange) && !empty($normalRange) ) ? $normalRange: '';
-				$signDetected = ( isset($signDetected) && !empty($signDetected) ) ? $signDetected: '';
-				$usedToDiagnose = ( isset($usedToDiagnose) && !empty($usedToDiagnose) ) ? $usedToDiagnose: '';
-				$usesDevice = ( isset($usesDevice) && !empty($usesDevice) ) ? $usesDevice: '';
+				$affectedBy = ( isset($affectedBy) && !empty($affectedBy) ) ? $affectedBy : '';
+				$normalRange = ( isset($normalRange) && !empty($normalRange) ) ? $normalRange : '';
+				$signDetected = ( isset($signDetected) && !empty($signDetected) ) ? $signDetected : '';
+				$usedToDiagnose = ( isset($usedToDiagnose) && !empty($usedToDiagnose) ) ? $usedToDiagnose : '';
+				$usesDevice = ( isset($usesDevice) && !empty($usesDevice) ) ? $usesDevice : '';
 
 		// Add values to the schema array
 

@@ -5,11 +5,5 @@
 	/*
 	 * Thing > MedicalEntity > MedicalProcedure > TherapeuticProcedure > MedicalTherapy > PalliativeProcedure
 	 * 
-	 * 
+	 * See: Thing > MedicalEntity > MedicalProcedure > PalliativeProcedure
 	 */
-
-	function uamswp_fad_schema_palliativeprocedure(
-		
-	) {
-		
-	}
