@@ -146,6 +146,7 @@
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

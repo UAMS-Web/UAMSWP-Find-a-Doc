@@ -137,7 +137,7 @@
 					 * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
 					 */
 
-					$schema['addressCountry'] = $addressCountry;
+					$schema['addressCountry'] = ( isset($addressCountry) && !empty($addressCountry) ) ? uamswp_fad_schema_type_selector($addressCountry) : '';
 
 				// addressLocality
 
@@ -148,7 +148,7 @@
 					 * The locality in which the street address is, and which is in the region. For example, Mountain View.
 					 */
 
-					$schema['addressLocality'] = $addressLocality;
+					$schema['addressLocality'] = ( isset($addressLocality) && !empty($addressLocality) ) ? uamswp_fad_schema_type_selector($addressLocality) : '';
 
 				// addressRegion
 
@@ -159,7 +159,7 @@
 					 * The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 					 */
 
-					$schema['addressRegion'] = $addressRegion;
+					$schema['addressRegion'] = ( isset($addressRegion) && !empty($addressRegion) ) ? uamswp_fad_schema_type_selector($addressRegion) : '';
 
 				// postalCode
 
@@ -170,7 +170,7 @@
 					 * The postal code. For example, 94043.
 					 */
 
-					$schema['postalCode'] = $postalCode;
+					$schema['postalCode'] = ( isset($postalCode) && !empty($postalCode) ) ? uamswp_fad_schema_type_selector($postalCode) : '';
 
 				// postOfficeBoxNumber
 
@@ -181,7 +181,7 @@
 					 * The post office box number for PO box addresses.
 					 */
 
-					$schema['postOfficeBoxNumber'] = $postOfficeBoxNumber;
+					$schema['postOfficeBoxNumber'] = ( isset($postOfficeBoxNumber) && !empty($postOfficeBoxNumber) ) ? uamswp_fad_schema_type_selector($postOfficeBoxNumber) : '';
 
 				// streetAddress
 
@@ -192,11 +192,12 @@
 					 * The street address. For example, 1600 Amphitheatre Pkwy.
 					 */
 
-					$schema['streetAddress'] = $streetAddress;
+					$schema['streetAddress'] = ( isset($streetAddress) && !empty($streetAddress) ) ? uamswp_fad_schema_type_selector($streetAddress) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

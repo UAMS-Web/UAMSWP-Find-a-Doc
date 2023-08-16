@@ -24,5 +24,6 @@ function bootstrap() {
 	include_once (__DIR__ . '/class.fad-acf-blocks.php' );
 	include_once (__DIR__ . '/class.fad-seopress-functions.php' ); // SEOPress specific functions
 	include_once (__DIR__ . '/class.fad-schema.php' ); // Schema data functions
+	include_once (__DIR__ . '/class.fad-schema-wip.php' ); // Schema data functions
 	include_once (__DIR__ . '/class.fad-gmb-settings-page.php' );
 }

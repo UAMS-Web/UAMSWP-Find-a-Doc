@@ -578,7 +578,7 @@
 					 * A medical service available from this provider.
 					 */
 
-					$schema['availableService'] = $availableService;
+					$schema['availableService'] = ( isset($availableService) && !empty($availableService) ) ? uamswp_fad_schema_type_selector($availableService) : '';
 
 				// healthcareReportingData
 
@@ -591,7 +591,7 @@
 					 * of Dataset).
 					 */
 
-					$schema['healthcareReportingData'] = $healthcareReportingData;
+					$schema['healthcareReportingData'] = ( isset($healthcareReportingData) && !empty($healthcareReportingData) ) ? uamswp_fad_schema_type_selector($healthcareReportingData) : '';
 
 				// medicalSpecialty
 
@@ -602,11 +602,12 @@
 					 * A medical specialty of the provider.
 					 */
 
-					$schema['medicalSpecialty'] = $medicalSpecialty;
+					$schema['medicalSpecialty'] = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? uamswp_fad_schema_type_selector($medicalSpecialty) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

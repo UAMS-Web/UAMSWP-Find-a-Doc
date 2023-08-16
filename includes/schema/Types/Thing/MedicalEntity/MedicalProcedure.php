@@ -123,7 +123,7 @@
 					 * Location in the body of the anatomical structure.
 					 */
 
-					$schema['bodyLocation'] = $bodyLocation;
+					$schema['bodyLocation'] = ( isset($bodyLocation) && !empty($bodyLocation) ) ? uamswp_fad_schema_type_selector($bodyLocation) : '';
 
 				// followup
 
@@ -134,7 +134,7 @@
 					 * Typical or recommended followup care after the procedure is performed.
 					 */
 
-					$schema['followup'] = $followup;
+					$schema['followup'] = ( isset($followup) && !empty($followup) ) ? uamswp_fad_schema_type_selector($followup) : '';
 
 				// howPerformed
 
@@ -145,7 +145,7 @@
 					 * How the procedure is performed.
 					 */
 
-					$schema['howPerformed'] = $howPerformed;
+					$schema['howPerformed'] = ( isset($howPerformed) && !empty($howPerformed) ) ? uamswp_fad_schema_type_selector($howPerformed) : '';
 
 				// preparation
 
@@ -158,7 +158,7 @@
 					 * performed.
 					 */
 
-					$schema['preparation'] = $preparation;
+					$schema['preparation'] = ( isset($preparation) && !empty($preparation) ) ? uamswp_fad_schema_type_selector($preparation) : '';
 
 				// procedureType
 
@@ -169,7 +169,7 @@
 					 * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
 					 */
 
-					$schema['procedureType'] = $procedureType;
+					$schema['procedureType'] = ( isset($procedureType) && !empty($procedureType) ) ? uamswp_fad_schema_type_selector($procedureType) : '';
 
 				// status
 
@@ -182,11 +182,12 @@
 					 * The status of the study (enumerated).
 					 */
 
-					$schema['status'] = $status;
+					$schema['status'] = ( isset($status) && !empty($status) ) ? uamswp_fad_schema_type_selector($status) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

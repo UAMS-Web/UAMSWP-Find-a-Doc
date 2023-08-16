@@ -153,7 +153,7 @@
 					 * A contraindication for this therapy.
 					 */
 
-					 $schema['contraindication'] = $contraindication;
+					 $schema['contraindication'] = ( isset($contraindication) && !empty($contraindication) ) ? uamswp_fad_schema_type_selector($contraindication) : '';
 
 				// duplicateTherapy
 
@@ -164,7 +164,7 @@
 					 * A therapy that duplicates or overlaps this one.
 					 */
 
-					 $schema['duplicateTherapy'] = $duplicateTherapy;
+					 $schema['duplicateTherapy'] = ( isset($duplicateTherapy) && !empty($duplicateTherapy) ) ? uamswp_fad_schema_type_selector($duplicateTherapy) : '';
 
 				// seriousAdverseOutcome
 
@@ -180,11 +180,12 @@
 					 * prevent one of the outcomes in this definition.
 					 */
 
-					 $schema['seriousAdverseOutcome'] = $seriousAdverseOutcome;
+					 $schema['seriousAdverseOutcome'] = ( isset($seriousAdverseOutcome) && !empty($seriousAdverseOutcome) ) ? uamswp_fad_schema_type_selector($seriousAdverseOutcome) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

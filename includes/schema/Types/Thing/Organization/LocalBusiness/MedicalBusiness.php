@@ -399,6 +399,7 @@
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 
@@ -413,9 +414,74 @@
 		 */
 
 		function uamswp_fad_schema_communityhealth(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Dentist
@@ -427,9 +493,74 @@
 		 */
 
 		function uamswp_fad_schema_dentist(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Dermatology
@@ -441,9 +572,74 @@
 		 */
 
 		function uamswp_fad_schema_dermatology(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// DietNutrition
@@ -455,9 +651,74 @@
 		 */
 
 		function uamswp_fad_schema_dietnutrition(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Emergency
@@ -469,9 +730,74 @@
 		 */
 
 		function uamswp_fad_schema_emergency(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Geriatric
@@ -483,9 +809,74 @@
 		 */
 
 		function uamswp_fad_schema_geriatric(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Gynecologic
@@ -497,9 +888,74 @@
 		 */
 
 		function uamswp_fad_schema_gynecologic(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// MedicalClinic
@@ -1001,7 +1457,7 @@
 						 * A medical service available from this provider.
 						 */
 
-						$schema['availableService'] = $availableService;
+						$schema['availableService'] = ( isset($availableService) && !empty($availableService) ) ? uamswp_fad_schema_type_selector($availableService) : '';
 
 					// medicalSpecialty
 
@@ -1012,11 +1468,12 @@
 						 * A medical specialty of the provider.
 						 */
 
-						$schema['medicalSpecialty'] = $medicalSpecialty;
+						$schema['medicalSpecialty'] = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? uamswp_fad_schema_type_selector($medicalSpecialty) : '';
 
 			// Remove any empty values from the schema array
 
 				$schema = array_filter($schema);
+				$schema = array_unique($schema, SORT_REGULAR);
 
 			return $schema;
 
@@ -1031,9 +1488,74 @@
 			 */
 
 			function uamswp_fad_schema_covidtestingfacility(
-				
+				array $schema, // Main schema array
+				array $input // Array of properties and values for a type and its parent types
 			) {
-				
+
+				/* 
+
+					Expected format for the array of properties and values for a type and its 
+					parent types:
+
+						$input = array(
+							'type'			=> 'Foo',
+							'properties'	=> array(
+								// Foo
+									'baz'	=> '', // baz
+									'qux'	=> '' // qux
+								// Bar
+									$quux	=> '', // quux
+									$corge	=> '' // corge
+							)
+						);
+
+				 */
+
+				// Check/define variables
+
+					// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+					// Immediate parent(s) of this type
+
+						/*
+
+							The type name and capitalization must match what is found on Schema.org.
+
+						*/
+
+						$type_parent = array(
+							'baz'
+						);
+
+					// Properties from this type (and not from the parent[s] of this type)
+
+						/*
+
+							The type name and capitalization must match what is found on Schema.org.
+
+							Find the expected types of their values on Schema.org page for this type
+							(e.g., https://schema.org/Thing).
+
+						*/
+
+						$type_properties = array(
+							'foo',
+							'bar'
+						);
+
+				// Construct schema array
+
+					$schema = uamswp_fad_schema_construct_array(
+						$schema, // Main schema array
+						$input, // Array of properties and values for the type and its parent types
+						$type_properties, // Array of properties available to the type
+						$type_parent // Array of the immediate parent(s) of this type
+					);
+
+				return $schema;
+
 			}
 
 	// Midwifery
@@ -1045,9 +1567,74 @@
 		 */
 
 		function uamswp_fad_schema_midwifery(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Nursing
@@ -1059,9 +1646,74 @@
 		 */
 
 		function uamswp_fad_schema_nursing(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Obstetric
@@ -1073,9 +1725,74 @@
 		 */
 
 		function uamswp_fad_schema_obstetric(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Oncologic
@@ -1087,9 +1804,74 @@
 		 */
 
 		function uamswp_fad_schema_oncologic(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Optician
@@ -1101,9 +1883,74 @@
 		 */
 
 		function uamswp_fad_schema_optician(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Optometric
@@ -1115,9 +1962,74 @@
 		 */
 
 		function uamswp_fad_schema_optometric(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Otolaryngologic
@@ -1129,9 +2041,74 @@
 		 */
 
 		function uamswp_fad_schema_otolaryngologic(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Pediatric
@@ -1143,9 +2120,74 @@
 		 */
 
 		function uamswp_fad_schema_pediatric(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Pharmacy
@@ -1157,9 +2199,74 @@
 		 */
 
 		function uamswp_fad_schema_pharmacy(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Physician
@@ -1174,9 +2281,74 @@
 		 */
 
 		function uamswp_fad_schema_physiotherapy(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// PlasticSurgery
@@ -1188,9 +2360,74 @@
 		 */
 
 		function uamswp_fad_schema_plasticsurgery(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Podiatric
@@ -1202,9 +2439,74 @@
 		 */
 
 		function uamswp_fad_schema_podiatric(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// PrimaryCare
@@ -1216,9 +2518,74 @@
 		 */
 
 		function uamswp_fad_schema_primarycare(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// Psychiatric
@@ -1230,9 +2597,74 @@
 		 */
 
 		function uamswp_fad_schema_psychiatric(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 
 	// PublicHealth
@@ -1244,8 +2676,73 @@
 		 */
 
 		function uamswp_fad_schema_publichealth(
-			
+			array $schema, // Main schema array
+			array $input // Array of properties and values for a type and its parent types
 		) {
-			
+
+			/* 
+
+				Expected format for the array of properties and values for a type and its 
+				parent types:
+
+					$input = array(
+						'type'			=> 'Foo',
+						'properties'	=> array(
+							// Foo
+								'baz'	=> '', // baz
+								'qux'	=> '' // qux
+							// Bar
+								$quux	=> '', // quux
+								$corge	=> '' // corge
+						)
+					);
+
+			 */
+
+			// Check/define variables
+
+				// Main schema array
+
+					$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+				// Immediate parent(s) of this type
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+					*/
+
+					$type_parent = array(
+						'baz'
+					);
+
+				// Properties from this type (and not from the parent[s] of this type)
+
+					/*
+
+						The type name and capitalization must match what is found on Schema.org.
+
+						Find the expected types of their values on Schema.org page for this type
+						(e.g., https://schema.org/Thing).
+
+					*/
+
+					$type_properties = array(
+						'foo',
+						'bar'
+					);
+
+			// Construct schema array
+
+				$schema = uamswp_fad_schema_construct_array(
+					$schema, // Main schema array
+					$input, // Array of properties and values for the type and its parent types
+					$type_properties, // Array of properties available to the type
+					$type_parent // Array of the immediate parent(s) of this type
+				);
+
+			return $schema;
+
 		}
 

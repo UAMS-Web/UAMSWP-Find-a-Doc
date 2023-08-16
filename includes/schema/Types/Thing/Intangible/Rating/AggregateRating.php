@@ -115,7 +115,7 @@
 					 * The item that is being reviewed/rated.
 					 */
 
-					$schema['itemReviewed'] = $itemReviewed;
+					$schema['itemReviewed'] = ( isset($itemReviewed) && !empty($itemReviewed) ) ? uamswp_fad_schema_type_selector($itemReviewed) : '';
 
 				// ratingCount
 
@@ -126,7 +126,7 @@
 					 * The count of total number of ratings.
 					 */
 
-					$schema['ratingCount'] = $ratingCount;
+					$schema['ratingCount'] = ( isset($ratingCount) && !empty($ratingCount) ) ? uamswp_fad_schema_type_selector($ratingCount) : '';
 
 				// reviewCount
 
@@ -137,11 +137,12 @@
 					 * The count of total number of reviews.
 					 */
 
-					$schema['reviewCount'] = $reviewCount;
+					$schema['reviewCount'] = ( isset($reviewCount) && !empty($reviewCount) ) ? uamswp_fad_schema_type_selector($reviewCount) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

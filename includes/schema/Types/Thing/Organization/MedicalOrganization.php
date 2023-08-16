@@ -267,7 +267,7 @@
 					 * insurance plans.)
 					 */
 
-					$schema['healthPlanNetworkId'] = $healthPlanNetworkId;
+					$schema['healthPlanNetworkId'] = ( isset($healthPlanNetworkId) && !empty($healthPlanNetworkId) ) ? uamswp_fad_schema_type_selector($healthPlanNetworkId) : '';
 
 				// isAcceptingNewPatients
 
@@ -278,7 +278,7 @@
 					 * Whether the provider is accepting new patients.
 					 */
 
-					$schema['isAcceptingNewPatients'] = $isAcceptingNewPatients;
+					$schema['isAcceptingNewPatients'] = ( isset($isAcceptingNewPatients) && !empty($isAcceptingNewPatients) ) ? uamswp_fad_schema_type_selector($isAcceptingNewPatients) : '';
 
 				// medicalSpecialty
 
@@ -289,11 +289,12 @@
 					 * A medical specialty of the provider.
 					 */
 
-					$schema['medicalSpecialty'] = $medicalSpecialty;
+					$schema['medicalSpecialty'] = ( isset($medicalSpecialty) && !empty($medicalSpecialty) ) ? uamswp_fad_schema_type_selector($medicalSpecialty) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

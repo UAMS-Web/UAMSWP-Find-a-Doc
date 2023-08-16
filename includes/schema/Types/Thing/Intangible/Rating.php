@@ -101,7 +101,7 @@
 					 * tag. That is equivalent to this and may be used interchangeably.
 					 */
 
-					$schema['author'] = $author;
+					$schema['author'] = ( isset($author) && !empty($author) ) ? uamswp_fad_schema_type_selector($author) : '';
 
 				// bestRating
 
@@ -114,7 +114,7 @@
 					 * assumed.
 					 */
 
-					$schema['bestRating'] = $bestRating;
+					$schema['bestRating'] = ( isset($bestRating) && !empty($bestRating) ) ? uamswp_fad_schema_type_selector($bestRating) : '';
 
 				// ratingExplanation
 
@@ -129,7 +129,7 @@
 
 					 */
 
-					$schema['ratingExplanation'] = $ratingExplanation;
+					$schema['ratingExplanation'] = ( isset($ratingExplanation) && !empty($ratingExplanation) ) ? uamswp_fad_schema_type_selector($ratingExplanation) : '';
 
 				// ratingValue
 
@@ -150,7 +150,7 @@
 
 					 */
 
-					$schema['ratingValue'] = $ratingValue;
+					$schema['ratingValue'] = ( isset($ratingValue) && !empty($ratingValue) ) ? uamswp_fad_schema_type_selector($ratingValue) : '';
 
 				// reviewAspect
 
@@ -161,7 +161,7 @@
 					 * This Review or Rating is relevant to this part or facet of the itemReviewed.
 					 */
 
-					$schema['reviewAspect'] = $reviewAspect;
+					$schema['reviewAspect'] = ( isset($reviewAspect) && !empty($reviewAspect) ) ? uamswp_fad_schema_type_selector($reviewAspect) : '';
 
 				// worstRating
 
@@ -174,11 +174,12 @@
 					 * assumed.
 					 */
 
-					$schema['worstRating'] = $worstRating;
+					$schema['worstRating'] = ( isset($worstRating) && !empty($worstRating) ) ? uamswp_fad_schema_type_selector($worstRating) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

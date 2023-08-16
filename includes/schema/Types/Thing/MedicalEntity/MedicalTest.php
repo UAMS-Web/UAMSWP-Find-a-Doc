@@ -119,7 +119,7 @@
 					 * Drugs that affect the test's results.
 					 */
 
-					$schema['affectedBy'] = $affectedBy;
+					$schema['affectedBy'] = ( isset($affectedBy) && !empty($affectedBy) ) ? uamswp_fad_schema_type_selector($affectedBy) : '';
 
 				// normalRange
 
@@ -131,7 +131,7 @@
 					 * Range of acceptable values for a typical patient, when applicable.
 					 */
 
-					$schema['normalRange'] = $normalRange;
+					$schema['normalRange'] = ( isset($normalRange) && !empty($normalRange) ) ? uamswp_fad_schema_type_selector($normalRange) : '';
 
 				// signDetected
 
@@ -142,7 +142,7 @@
 					 * A sign detected by the test.
 					 */
 
-					$schema['signDetected'] = $signDetected;
+					$schema['signDetected'] = ( isset($signDetected) && !empty($signDetected) ) ? uamswp_fad_schema_type_selector($signDetected) : '';
 
 				// usedToDiagnose
 
@@ -153,7 +153,7 @@
 					 * A condition the test is used to diagnose.
 					 */
 
-					$schema['usedToDiagnose'] = $usedToDiagnose;
+					$schema['usedToDiagnose'] = ( isset($usedToDiagnose) && !empty($usedToDiagnose) ) ? uamswp_fad_schema_type_selector($usedToDiagnose) : '';
 
 				// usesDevice
 
@@ -164,11 +164,12 @@
 					 * Device used to perform the test.
 					 */
 
-					$schema['usesDevice'] = $usesDevice;
+					$schema['usesDevice'] = ( isset($usesDevice) && !empty($usesDevice) ) ? uamswp_fad_schema_type_selector($usesDevice) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

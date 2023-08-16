@@ -110,7 +110,7 @@
 					 * 
 					 */
 
-					 $schema['areaServed'] = $areaServed;
+					 $schema['areaServed'] = ( isset($areaServed) && !empty($areaServed) ) ? uamswp_fad_schema_type_selector($areaServed) : '';
 
 				// availableLanguage
 
@@ -121,7 +121,7 @@
 					 * 
 					 */
 
-					 $schema['availableLanguage'] = $availableLanguage;
+					 $schema['availableLanguage'] = ( isset($availableLanguage) && !empty($availableLanguage) ) ? uamswp_fad_schema_type_selector($availableLanguage) : '';
 
 				// contactOption
 
@@ -132,7 +132,7 @@
 					 * 
 					 */
 
-					 $schema['contactOption'] = $contactOption;
+					 $schema['contactOption'] = ( isset($contactOption) && !empty($contactOption) ) ? uamswp_fad_schema_type_selector($contactOption) : '';
 
 				// contactType
 
@@ -143,7 +143,7 @@
 					 * 
 					 */
 
-					 $schema['contactType'] = $contactType;
+					 $schema['contactType'] = ( isset($contactType) && !empty($contactType) ) ? uamswp_fad_schema_type_selector($contactType) : '';
 
 				// email
 
@@ -154,7 +154,7 @@
 					 * 
 					 */
 
-					 $schema['email'] = $email;
+					 $schema['email'] = ( isset($email) && !empty($email) ) ? uamswp_fad_schema_type_selector($email) : '';
 
 				// faxNumber
 
@@ -165,7 +165,7 @@
 					 * 
 					 */
 
-					 $schema['faxNumber'] = $faxNumber;
+					 $schema['faxNumber'] = ( isset($faxNumber) && !empty($faxNumber) ) ? uamswp_fad_schema_type_selector($faxNumber) : '';
 
 				// hoursAvailable
 
@@ -176,7 +176,7 @@
 					 * 
 					 */
 
-					 $schema['hoursAvailable'] = $hoursAvailable;
+					 $schema['hoursAvailable'] = ( isset($hoursAvailable) && !empty($hoursAvailable) ) ? uamswp_fad_schema_type_selector($hoursAvailable) : '';
 
 				// productSupported
 
@@ -187,7 +187,7 @@
 					 * 
 					 */
 
-					 $schema['productSupported'] = $productSupported;
+					 $schema['productSupported'] = ( isset($productSupported) && !empty($productSupported) ) ? uamswp_fad_schema_type_selector($productSupported) : '';
 
 				// telephone
 
@@ -198,12 +198,13 @@
 					 * 
 					 */
 
-					 $schema['telephone'] = $telephone;
+					 $schema['telephone'] = ( isset($telephone) && !empty($telephone) ) ? uamswp_fad_schema_type_selector($telephone) : '';
 
 		 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 

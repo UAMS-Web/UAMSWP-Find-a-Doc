@@ -131,11 +131,12 @@
 					 * Imaging technique used.
 					 */
 
-					$schema['imagingTechnique'] = $imagingTechnique;
+					$schema['imagingTechnique'] = ( isset($imagingTechnique) && !empty($imagingTechnique) ) ? uamswp_fad_schema_type_selector($imagingTechnique) : '';
 
 		// Remove any empty values from the schema array
 
 			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
 
 		return $schema;
 
