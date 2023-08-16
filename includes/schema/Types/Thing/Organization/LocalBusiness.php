@@ -255,6 +255,7 @@
 				$telephone = ( isset($telephone) && !empty($telephone) ) ? $telephone : '';
 				$tourBookingPage = ( isset($tourBookingPage) && !empty($tourBookingPage) ) ? $tourBookingPage : '';
 
+			// Properties from LocalBusiness (Thing > Organization > LocalBusiness)
 			// Properties from LocalBusiness (Thing > Place > LocalBusiness)
 
 				$currenciesAccepted = ( isset($currenciesAccepted) && !empty($currenciesAccepted) ) ? $currenciesAccepted : '';
@@ -690,54 +691,6 @@
 
 	// EmergencyService
 	include_once __DIR__ . '/LocalBusiness/EmergencyService.php';
-
-		/*
-		 * See: Thing > Organization > LocalBusiness > EmergencyService
-		 * 
-		 *     Also: Thing > Place > LocalBusiness > EmergencyService
-		 * 
-		 * An emergency service, such as a fire station or ER.
-		 */
-
-		function uamswp_fad_schema_emergencyservice() {
-
-		 }
- 
-		// FireStation
-
-			/*
-			 * Thing > Organization > LocalBusiness > EmergencyService > FireStation
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_firestation(
-				
-			) {
-				
-			}
-
-		// Hospital
-
-			/*
-			 * Thing > Organization > LocalBusiness > EmergencyService > Hospital
-			 * 
-			 * See: Thing > Place > CivicStructure > Hospital
-			 */
-
-		// PoliceStation
-
-			/*
-			 * Thing > Organization > LocalBusiness > EmergencyService > PoliceStation
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_policestation(
-				
-			) {
-				
-			}
 
 	// EmploymentAgency
 	include_once __DIR__ . '/LocalBusiness/EmploymentAgency.php';

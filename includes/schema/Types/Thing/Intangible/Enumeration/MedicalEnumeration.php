@@ -11,9 +11,91 @@
 	 */
 
 	function uamswp_fad_schema_medicalenumeration(
-		
+		$schema, // array // Main schema array
+		// MedicalEnumeration (no property vars)
+		// Enumeration
+			$supersededBy, // supersededBy
+		// Intangible (no property vars)
+		// Thing
+			$additionalType, // additionalType
+			$alternateName, // alternateName
+			$description, // description
+			$disambiguatingDescription, // disambiguatingDescription
+			$identifier, // identifier
+			$image, // image
+			$mainEntityOfPage, // mainEntityOfPage
+			$name, // name
+			$potentialAction, // potentialAction
+			$sameAs, // sameAs
+			$subjectOf, // subjectOf
+			$url // url
 	) {
-		
+
+		// Check/define variables
+
+			$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+
+			// Inherited properties from Thing
+
+				$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+				$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+				$description = ( isset($description) && !empty($description) ) ? $description : '';
+				$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+				$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+				$image = ( isset($image) && !empty($image) ) ? $image : '';
+				$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+				$name = ( isset($name) && !empty($name) ) ? $name : '';
+				$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+				$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+				$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+				$url = ( isset($url) && !empty($url) ) ? $url : '';
+
+			// Inherited properties from Intangible (Thing > Intangible)
+
+				// Do nothing (no property vars)
+
+			// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+
+				$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+
+			// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+
+				// Do nothing (no property vars)
+
+		// Add values to the schema array
+
+			// Inherited properties
+
+				$schema = uamswp_fad_schema_enumeration(
+					$schema, // array // Main schema array
+					// Enumeration
+						$supersededBy, // supersededBy
+					// Intangible (no property vars)
+					// Thing
+						$additionalType, // additionalType
+						$alternateName, // alternateName
+						$description, // description
+						$disambiguatingDescription, // disambiguatingDescription
+						$identifier, // identifier
+						$image, // image
+						$mainEntityOfPage, // mainEntityOfPage
+						$name, // name
+						$potentialAction, // potentialAction
+						$sameAs, // sameAs
+						$subjectOf, // subjectOf
+						$url // url
+				);
+
+			// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+
+				// Do nothing (no property vars)
+
+		// Remove any empty values from the schema array
+
+			$schema = array_filter($schema);
+
+		return $schema;
+
 	}
 
 	// DrugCostCategory
@@ -26,9 +108,97 @@
 		 */
 
 		function uamswp_fad_schema_drugcostcategory(
-			
+			$schema, // array // Main schema array
+			// DrugCostCategory (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from DrugCostCategory (Thing > Intangible > Enumeration > MedicalEnumeration > DrugCostCategory)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DrugCostCategory (Thing > Intangible > Enumeration > MedicalEnumeration > DrugCostCategory)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ReimbursementCap
@@ -83,9 +253,97 @@
 		 */
 
 		function uamswp_fad_schema_drugpregnancycategory(
-			
+			$schema, // array // Main schema array
+			// DrugPregnancyCategory (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from DrugPregnancyCategory (Thing > Intangible > Enumeration > MedicalEnumeration > DrugPregnancyCategory)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DrugPregnancyCategory (Thing > Intangible > Enumeration > MedicalEnumeration > DrugPregnancyCategory)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// FDAcategoryA
@@ -182,9 +440,97 @@
 		 */
 
 		function uamswp_fad_schema_drugprescriptionstatus(
-			
+			$schema, // array // Main schema array
+			// DrugPrescriptionStatus (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from DrugPrescriptionStatus (Thing > Intangible > Enumeration > MedicalEnumeration > DrugPrescriptionStatus)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DrugPrescriptionStatus (Thing > Intangible > Enumeration > MedicalEnumeration > DrugPrescriptionStatus)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// OTC
@@ -225,9 +571,97 @@
 		 */
 
 		function uamswp_fad_schema_infectiousagentclass(
-			
+			$schema, // array // Main schema array
+			// InfectiousAgentClass (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from InfectiousAgentClass (Thing > Intangible > Enumeration > MedicalEnumeration > InfectiousAgentClass)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from InfectiousAgentClass (Thing > Intangible > Enumeration > MedicalEnumeration > InfectiousAgentClass)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// Bacteria
@@ -324,9 +758,97 @@
 		 */
 
 		function uamswp_fad_schema_medicalaudiencetype(
-			
+			$schema, // array // Main schema array
+			// MedicalAudienceType (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalAudienceType (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalAudienceType)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalAudienceType (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalAudienceType)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// Clinician
@@ -367,9 +889,97 @@
 		 */
 
 		function uamswp_fad_schema_medicaldevicepurpose(
-			
+			$schema, // array // Main schema array
+			// MedicalDevicePurpose (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalDevicePurpose (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalDevicePurpose)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalDevicePurpose (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalDevicePurpose)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// Diagnostic
@@ -410,9 +1020,97 @@
 		 */
 
 		function uamswp_fad_schema_medicalevidencelevel(
-			
+			$schema, // array // Main schema array
+			// MedicalEvidenceLevel (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalEvidenceLevel (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalEvidenceLevel)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalEvidenceLevel (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalEvidenceLevel)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// EvidenceLevelA
@@ -467,9 +1165,97 @@
 		 */
 
 		function uamswp_fad_schema_medicalimagingtechnique(
-			
+			$schema, // array // Main schema array
+			// MedicalImagingTechnique (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalImagingTechnique (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalImagingTechnique)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalImagingTechnique (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalImagingTechnique)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// CT
@@ -566,9 +1352,97 @@
 		 */
 
 		function uamswp_fad_schema_medicalobservationalstudydesign(
-			
+			$schema, // array // Main schema array
+			// MedicalObservationalStudyDesign (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalObservationalStudyDesign (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalObservationalStudyDesign)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalObservationalStudyDesign (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalObservationalStudyDesign)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// CaseSeries
@@ -665,9 +1539,97 @@
 		 */
 
 		function uamswp_fad_schema_medicalproceduretype(
-			
+			$schema, // array // Main schema array
+			// MedicalProcedureType (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalProcedureType (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalProcedureType)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalProcedureType (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalProcedureType)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// NoninvasiveProcedure
@@ -701,655 +1663,6 @@
 	// MedicalSpecialty
 	include_once __DIR__ . '/MedicalEnumeration/MedicalSpecialty.php';
 
-		/*
-		 * Thing > Intangible > Enumeration > MedicalEnumeration > MedicalSpecialty
-		 * 
-		 *     Also: Thing > Intangible > Enumeration > Specialty > MedicalSpecialty
-		 * 
-		 * Any specific branch of medical science or practice. Medical specialities 
-		 * include clinical specialties that pertain to particular organ systems and 
-		 * their respective disease states, as well as allied health specialties. 
-		 * Enumerated type.
-		 * 
-		 * Enumeration members:
-		 * 
-		 *     Anesthesia
-		 *     Cardiovascular
-		 *     CommunityHealth
-		 *     Dentistry
-		 *     Dermatology
-		 *     DietNutrition
-		 *     Emergency
-		 *     Endocrine
-		 *     Gastroenterologic
-		 *     Genetic
-		 *     Geriatric
-		 *     Gynecologic
-		 *     Hematologic
-		 *     Infectious
-		 *     LaboratoryScience
-		 *     Midwifery
-		 *     Musculoskeletal
-		 *     Neurologic
-		 *     Nursing
-		 *     Obstetric
-		 *     Oncologic
-		 *     Optometric
-		 *     Otolaryngologic
-		 *     Pathology
-		 *     Pediatric
-		 *     PharmacySpecialty
-		 *     Physiotherapy
-		 *     PlasticSurgery
-		 *     Podiatric
-		 *     PrimaryCare
-		 *     Psychiatric
-		 *     PublicHealth
-		 *     Pulmonary
-		 *     Radiography
-		 *     Renal
-		 *     RespiratoryTherapy
-		 *     Rheumatologic
-		 *     SpeechPathology
-		 *     Surgical
-		 *     Toxicologic
-		 *     Urologic
-		 */
-
-		function uamswp_fad_schema_medicalspecialty(
-			
-		) {
-			
-		}
-
-		// Anesthesia
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Anesthesia
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_anesthesia(
-				
-			) {
-				
-			}
-
-		// Cardiovascular
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Cardiovascular
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_cardiovascular(
-				
-			) {
-				
-			}
-
-		// CommunityHealth
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > CommunityHealth
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_communityhealth(
-				
-			) {
-				
-			}
-
-		// Dentistry
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Dentistry
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_dentistry(
-				
-			) {
-				
-			}
-
-		// Dermatologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Dermatologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_dermatologic(
-				
-			) {
-				
-			}
-
-		// Dermatology
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Dermatology
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_dermatology(
-				
-			) {
-				
-			}
-
-		// DietNutrition
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > DietNutrition
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_dietnutrition(
-				
-			) {
-				
-			}
-
-		// Emergency
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Emergency
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_emergency(
-				
-			) {
-				
-			}
-
-		// Endocrine
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Endocrine
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_endocrine(
-				
-			) {
-				
-			}
-
-		// Gastroenterologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Gastroenterologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_gastroenterologic(
-				
-			) {
-				
-			}
-
-		// Genetic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Genetic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_genetic(
-				
-			) {
-				
-			}
-
-		// Geriatric
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Geriatric
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_geriatric(
-				
-			) {
-				
-			}
-
-		// Gynecologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Gynecologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_gynecologic(
-				
-			) {
-				
-			}
-
-		// Hematologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Hematologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_hematologic(
-				
-			) {
-				
-			}
-
-		// Infectious
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Infectious
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_infectious(
-				
-			) {
-				
-			}
-
-		// LaboratoryScience
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > LaboratoryScience
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_laboratoryscience(
-				
-			) {
-				
-			}
-
-		// Midwifery
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Midwifery
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_midwifery(
-				
-			) {
-				
-			}
-
-		// Musculoskeletal
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Musculoskeletal
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_musculoskeletal(
-				
-			) {
-				
-			}
-
-		// Neurologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Neurologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_neurologic(
-				
-			) {
-				
-			}
-
-		// Nursing
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Nursing
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_nursing(
-				
-			) {
-				
-			}
-
-		// Obstetric
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Obstetric
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_obstetric(
-				
-			) {
-				
-			}
-
-		// Oncologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Oncologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_oncologic(
-				
-			) {
-				
-			}
-
-		// Optometric
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Optometric
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_optometric(
-				
-			) {
-				
-			}
-
-		// Otolaryngologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Otolaryngologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_otolaryngologic(
-				
-			) {
-				
-			}
-
-		// Pathology
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Pathology
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_pathology(
-				
-			) {
-				
-			}
-
-		// Pediatric
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Pediatric
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_pediatric(
-				
-			) {
-				
-			}
-
-		// PharmacySpecialty
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > PharmacySpecialty
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_pharmacyspecialty(
-				
-			) {
-				
-			}
-
-		// Physiotherapy
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Physiotherapy
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_physiotherapy(
-				
-			) {
-				
-			}
-
-		// PlasticSurgery
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > PlasticSurgery
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_plasticsurgery(
-				
-			) {
-				
-			}
-
-		// Podiatric
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Podiatric
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_podiatric(
-				
-			) {
-				
-			}
-
-		// PrimaryCare
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > PrimaryCare
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_primarycare(
-				
-			) {
-				
-			}
-
-		// Psychiatric
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Psychiatric
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_psychiatric(
-				
-			) {
-				
-			}
-
-		// PublicHealth
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > PublicHealth
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_publichealth(
-				
-			) {
-				
-			}
-
-		// Pulmonary
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Pulmonary
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_pulmonary(
-				
-			) {
-				
-			}
-
-		// Radiography
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Radiography
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_radiography(
-				
-			) {
-				
-			}
-
-		// Renal
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Renal
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_renal(
-				
-			) {
-				
-			}
-
-		// RespiratoryTherapy
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > RespiratoryTherapy
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_respiratorytherapy(
-				
-			) {
-				
-			}
-
-		// Rheumatologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Rheumatologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_rheumatologic(
-				
-			) {
-				
-			}
-
-		// SpeechPathology
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > SpeechPathology
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_speechpathology(
-				
-			) {
-				
-			}
-
-		// Surgical
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Surgical
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_surgical(
-				
-			) {
-				
-			}
-
-		// Toxicologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Toxicologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_toxicologic(
-				
-			) {
-				
-			}
-
-		// Urologic
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Urologic
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_urologic(
-				
-			) {
-				
-			}
-
 	// MedicalStudyStatus
 	include_once __DIR__ . '/MedicalEnumeration/MedicalStudyStatus.php';
 
@@ -1360,9 +1673,97 @@
 		 */
 
 		function uamswp_fad_schema_medicalstudystatus(
-			
+			$schema, // array // Main schema array
+			// MedicalStudyStatus (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalStudyStatus (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalStudyStatus)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalStudyStatus (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalStudyStatus)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ActiveNotRecruiting
@@ -1515,9 +1916,97 @@
 		 */
 
 		function uamswp_fad_schema_medicaltrialdesign(
-			
+			$schema, // array // Main schema array
+			// MedicalTrialDesign (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicalTrialDesign (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalTrialDesign)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicalTrialDesign (Thing > Intangible > Enumeration > MedicalEnumeration > MedicalTrialDesign)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// DoubleBlindedTrial
@@ -1656,9 +2145,97 @@
 		 */
 
 		function uamswp_fad_schema_medicinesystem(
-			
+			$schema, // array // Main schema array
+			// MedicineSystem (no property vars)
+			// MedicalEnumeration (no property vars)
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MedicalEnumeration (Thing > Intangible > Enumeration > MedicalEnumeration)
+	
+					// Do nothing (no property vars)
+	
+				// Properties from MedicineSystem (Thing > Intangible > Enumeration > MedicalEnumeration > MedicineSystem)
+	
+					// Do nothing (no property vars)
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_medicalenumeration(
+						$schema, // array // Main schema array
+						// MedicalEnumeration (no property vars)
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MedicineSystem (Thing > Intangible > Enumeration > MedicalEnumeration > MedicineSystem)
+	
+					// Do nothing (no property vars)
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// Ayurvedic
@@ -1747,211 +2324,3 @@
 
 	// PhysicalExam
 	include_once __DIR__ . '/MedicalEnumeration/PhysicalExam.php';
-
-		/*
-		 * Thing > Intangible > Enumeration > MedicalEnumeration > PhysicalExam
-		 * 
-		 * 
-		 */
-
-		function uamswp_fad_schema_physicalexam(
-			
-		) {
-			
-		}
-
-		// Abdomen
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Abdomen
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_abdomen(
-				
-			) {
-				
-			}
-
-		// Appearance
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Appearance
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_appearance(
-				
-			) {
-				
-			}
-
-		// CardiovascularExam
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > CardiovascularExam
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_cardiovascularexam(
-				
-			) {
-				
-			}
-
-		// Ear
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Ear
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_ear(
-				
-			) {
-				
-			}
-
-		// Eye
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Eye
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_eye(
-				
-			) {
-				
-			}
-
-		// Genitourinary
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Genitourinary
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_genitourinary(
-				
-			) {
-				
-			}
-
-		// Head
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Head
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_head(
-				
-			) {
-				
-			}
-
-		// Lung
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Lung
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_lung(
-				
-			) {
-				
-			}
-
-		// MusculoskeletalExam
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > MusculoskeletalExam
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_musculoskeletalexam(
-				
-			) {
-				
-			}
-
-		// Neck
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Neck
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_neck(
-				
-			) {
-				
-			}
-
-		// Neuro
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Neuro
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_neuro(
-				
-			) {
-				
-			}
-
-		// Nose
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Nose
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_nose(
-				
-			) {
-				
-			}
-
-		// Skin
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Skin
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_skin(
-				
-			) {
-				
-			}
-
-		// Throat
-
-			/*
-			 * Thing > Intangible > Enumeration > MedicalEnumeration > quux > Throat
-			 * 
-			 * 
-			 */
-
-			function uamswp_fad_schema_throat(
-				
-			) {
-				
-			}

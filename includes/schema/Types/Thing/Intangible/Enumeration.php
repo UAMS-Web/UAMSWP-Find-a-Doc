@@ -98,21 +98,114 @@
 			$schema = array_filter($schema);
 
 		return $schema;
-}
+
+	}
 
 	// AdultOrientedEnumeration
-	include_once __DIR__ . '/Place/AdultOrientedEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/AdultOrientedEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > AdultOrientedEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_adultorientedenumeration(
-			
+			$schema, // array // Main schema array
+			// AdultOrientedEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from AdultOrientedEnumeration (Thing > Intangible > Enumeration > AdultOrientedEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from AdultOrientedEnumeration (Thing > Intangible > Enumeration > AdultOrientedEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AlcoholConsideration
@@ -256,18 +349,110 @@
 			}
 
 	// BoardingPolicyType
-	include_once __DIR__ . '/Place/BoardingPolicyType.php';
-
+	include_once __DIR__ . '/Enumeration/BoardingPolicyType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > BoardingPolicyType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_boardingpolicytype(
-			
+			$schema, // array // Main schema array
+			// BoardingPolicyType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from BoardingPolicyType (Thing > Intangible > Enumeration > BoardingPolicyType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from BoardingPolicyType (Thing > Intangible > Enumeration > BoardingPolicyType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// GroupBoardingPolicy
@@ -299,18 +484,110 @@
 			}
 
 	// BookFormatType
-	include_once __DIR__ . '/Place/BookFormatType.php';
-
+	include_once __DIR__ . '/Enumeration/BookFormatType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > BookFormatType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_bookformattype(
-			
+			$schema, // array // Main schema array
+			// BookFormatType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from BookFormatType (Thing > Intangible > Enumeration > BookFormatType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from BookFormatType (Thing > Intangible > Enumeration > BookFormatType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AudiobookFormat
@@ -384,48 +661,324 @@
 			}
 
 	// BusinessEntityType
-	include_once __DIR__ . '/Place/BusinessEntityType.php';
-
+	include_once __DIR__ . '/Enumeration/BusinessEntityType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > BusinessEntityType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_businessentitytype(
-			
+			$schema, // array // Main schema array
+			// BusinessEntityType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from BusinessEntityType (Thing > Intangible > Enumeration > BusinessEntityType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from BusinessEntityType (Thing > Intangible > Enumeration > BusinessEntityType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 	// BusinessFunction
-	include_once __DIR__ . '/Place/BusinessFunction.php';
-
+	include_once __DIR__ . '/Enumeration/BusinessFunction.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > BusinessFunction
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_businessfunction(
-			
+			$schema, // array // Main schema array
+			// BusinessFunction
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from BusinessFunction (Thing > Intangible > Enumeration > BusinessFunction)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from BusinessFunction (Thing > Intangible > Enumeration > BusinessFunction)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 	// CarUsageType
-	include_once __DIR__ . '/Place/CarUsageType.php';
-
+	include_once __DIR__ . '/Enumeration/CarUsageType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > CarUsageType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_carusagetype(
-			
+			$schema, // array // Main schema array
+			// CarUsageType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from CarUsageType (Thing > Intangible > Enumeration > CarUsageType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from CarUsageType (Thing > Intangible > Enumeration > CarUsageType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// DrivingSchoolVehicleUsage
@@ -471,18 +1024,110 @@
 			}
 
 	// ContactPointOption
-	include_once __DIR__ . '/Place/ContactPointOption.php';
-
+	include_once __DIR__ . '/Enumeration/ContactPointOption.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > ContactPointOption
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_contactpointoption(
-			
+			$schema, // array // Main schema array
+			// ContactPointOption
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from ContactPointOption (Thing > Intangible > Enumeration > ContactPointOption)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from ContactPointOption (Thing > Intangible > Enumeration > ContactPointOption)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// HearingImpairedSupported
@@ -514,18 +1159,110 @@
 			}
 
 	// DayOfWeek
-	include_once __DIR__ . '/Place/DayOfWeek.php';
-
+	include_once __DIR__ . '/Enumeration/DayOfWeek.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > DayOfWeek
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_dayofweek(
-			
+			$schema, // array // Main schema array
+			// DayOfWeek
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from DayOfWeek (Thing > Intangible > Enumeration > DayOfWeek)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DayOfWeek (Thing > Intangible > Enumeration > DayOfWeek)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// Friday
@@ -641,18 +1378,110 @@
 			}
 
 	// DeliveryMethod
-	include_once __DIR__ . '/Place/DeliveryMethod.php';
-
+	include_once __DIR__ . '/Enumeration/DeliveryMethod.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > DeliveryMethod
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_deliverymethod(
-			
+			$schema, // array // Main schema array
+			// DeliveryMethod
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from DeliveryMethod (Thing > Intangible > Enumeration > DeliveryMethod)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DeliveryMethod (Thing > Intangible > Enumeration > DeliveryMethod)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// LockerDelivery
@@ -698,18 +1527,110 @@
 			}
 
 	// DigitalDocumentPermissionType
-	include_once __DIR__ . '/Place/DigitalDocumentPermissionType.php';
-
+	include_once __DIR__ . '/Enumeration/DigitalDocumentPermissionType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > DigitalDocumentPermissionType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_digitaldocumentpermissiontype(
-			
+			$schema, // array // Main schema array
+			// DigitalDocumentPermissionType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from DigitalDocumentPermissionType (Thing > Intangible > Enumeration > DigitalDocumentPermissionType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DigitalDocumentPermissionType (Thing > Intangible > Enumeration > DigitalDocumentPermissionType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// CommentPermission
@@ -755,18 +1676,110 @@
 			}
 
 	// DigitalPlatformEnumeration
-	include_once __DIR__ . '/Place/DigitalPlatformEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/DigitalPlatformEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > DigitalPlatformEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_digitalplatformenumeration(
-			
+			$schema, // array // Main schema array
+			// DigitalPlatformEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from DigitalPlatformEnumeration (Thing > Intangible > Enumeration > DigitalPlatformEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from DigitalPlatformEnumeration (Thing > Intangible > Enumeration > DigitalPlatformEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AndroidPlatform
@@ -840,18 +1853,110 @@
 			}
 
 	// EnergyEfficiencyEnumeration
-	include_once __DIR__ . '/Place/EnergyEfficiencyEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/EnergyEfficiencyEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > EnergyEfficiencyEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_energyefficiencyenumeration(
-			
+			$schema, // array // Main schema array
+			// EnergyEfficiencyEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from EnergyEfficiencyEnumeration (Thing > Intangible > Enumeration > EnergyEfficiencyEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from EnergyEfficiencyEnumeration (Thing > Intangible > Enumeration > EnergyEfficiencyEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// EUEnergyEfficiencyEnumeration
@@ -1038,18 +2143,110 @@
 
 
 	// EventAttendanceModeEnumeration
-	include_once __DIR__ . '/Place/EventAttendanceModeEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/EventAttendanceModeEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > EventAttendanceModeEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_eventattendancemodeenumeration(
-			
+			$schema, // array // Main schema array
+			// EventAttendanceModeEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from EventAttendanceModeEnumeration (Thing > Intangible > Enumeration > EventAttendanceModeEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from EventAttendanceModeEnumeration (Thing > Intangible > Enumeration > EventAttendanceModeEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// MixedEventAttendanceMode
@@ -1095,18 +2292,110 @@
 			}
 
 	// GameAvailabilityEnumeration
-	include_once __DIR__ . '/Place/GameAvailabilityEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/GameAvailabilityEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > GameAvailabilityEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_gameavailabilityenumeration(
-			
+			$schema, // array // Main schema array
+			// GameAvailabilityEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from GameAvailabilityEnumeration (Thing > Intangible > Enumeration > GameAvailabilityEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from GameAvailabilityEnumeration (Thing > Intangible > Enumeration > GameAvailabilityEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// DemoGameAvailability
@@ -1138,18 +2427,110 @@
 			}
 
 	// GamePlayMode
-	include_once __DIR__ . '/Place/GamePlayMode.php';
-
+	include_once __DIR__ . '/Enumeration/GamePlayMode.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > GamePlayMode
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_gameplaymode(
-			
+			$schema, // array // Main schema array
+			// GamePlayMode
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from GamePlayMode (Thing > Intangible > Enumeration > GamePlayMode)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from GamePlayMode (Thing > Intangible > Enumeration > GamePlayMode)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// CoOp
@@ -1195,18 +2576,110 @@
 			}
 
 	// GenderType
-	include_once __DIR__ . '/Place/GenderType.php';
-
+	include_once __DIR__ . '/Enumeration/GenderType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > GenderType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_gendertype(
-			
+			$schema, // array // Main schema array
+			// GenderType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from GenderType (Thing > Intangible > Enumeration > GenderType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from GenderType (Thing > Intangible > Enumeration > GenderType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// Female
@@ -1238,18 +2711,110 @@
 			}
 
 	// GovernmentBenefitsType
-	include_once __DIR__ . '/Place/GovernmentBenefitsType.php';
-
+	include_once __DIR__ . '/Enumeration/GovernmentBenefitsType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > GovernmentBenefitsType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_governmentbenefitstype(
-			
+			$schema, // array // Main schema array
+			// GovernmentBenefitsType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from GovernmentBenefitsType (Thing > Intangible > Enumeration > GovernmentBenefitsType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from GovernmentBenefitsType (Thing > Intangible > Enumeration > GovernmentBenefitsType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// BasicIncome
@@ -1365,18 +2930,110 @@
 			}
 
 	// HealthAspectEnumeration
-	include_once __DIR__ . '/Place/HealthAspectEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/HealthAspectEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > HealthAspectEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_healthaspectenumeration(
-			
+			$schema, // array // Main schema array
+			// HealthAspectEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from HealthAspectEnumeration (Thing > Intangible > Enumeration > HealthAspectEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from HealthAspectEnumeration (Thing > Intangible > Enumeration > HealthAspectEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AllergiesHealthAspect
@@ -1786,18 +3443,110 @@
 			}
 
 	// ItemAvailability
-	include_once __DIR__ . '/Place/ItemAvailability.php';
-
+	include_once __DIR__ . '/Enumeration/ItemAvailability.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > ItemAvailability
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_itemavailability(
-			
+			$schema, // array // Main schema array
+			// ItemAvailability
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from ItemAvailability (Thing > Intangible > Enumeration > ItemAvailability)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from ItemAvailability (Thing > Intangible > Enumeration > ItemAvailability)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// BackOrder
@@ -1941,18 +3690,110 @@
 			}
 
 	// ItemListOrderType
-	include_once __DIR__ . '/Place/ItemListOrderType.php';
-
+	include_once __DIR__ . '/Enumeration/ItemListOrderType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > ItemListOrderType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_itemlistordertype(
-			
+			$schema, // array // Main schema array
+			// ItemListOrderType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from ItemListOrderType (Thing > Intangible > Enumeration > ItemListOrderType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from ItemListOrderType (Thing > Intangible > Enumeration > ItemListOrderType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ItemListOrderAscending
@@ -1998,18 +3839,110 @@
 			}
 
 	// LegalValueLevel
-	include_once __DIR__ . '/Place/LegalValueLevel.php';
-
+	include_once __DIR__ . '/Enumeration/LegalValueLevel.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > LegalValueLevel
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_legalvaluelevel(
-			
+			$schema, // array // Main schema array
+			// LegalValueLevel
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from LegalValueLevel (Thing > Intangible > Enumeration > LegalValueLevel)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from LegalValueLevel (Thing > Intangible > Enumeration > LegalValueLevel)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AuthoritativeLegalValue
@@ -2069,18 +4002,110 @@
 			}
 
 	// MapCategoryType
-	include_once __DIR__ . '/Place/MapCategoryType.php';
-
+	include_once __DIR__ . '/Enumeration/MapCategoryType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MapCategoryType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_mapcategorytype(
-			
+			$schema, // array // Main schema array
+			// MapCategoryType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MapCategoryType (Thing > Intangible > Enumeration > MapCategoryType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MapCategoryType (Thing > Intangible > Enumeration > MapCategoryType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ParkingMap
@@ -2140,18 +4165,110 @@
 			}
 
 	// MeasurementMethodEnum
-	include_once __DIR__ . '/Place/MeasurementMethodEnum.php';
-
+	include_once __DIR__ . '/Enumeration/MeasurementMethodEnum.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MeasurementMethodEnum
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_measurementmethodenum(
-			
+			$schema, // array // Main schema array
+			// MeasurementMethodEnum
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MeasurementMethodEnum (Thing > Intangible > Enumeration > MeasurementMethodEnum)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MeasurementMethodEnum (Thing > Intangible > Enumeration > MeasurementMethodEnum)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ExampleMeasurementMethodEnum
@@ -2169,18 +4286,110 @@
 			}
 
 	// MeasurementTypeEnumeration
-	include_once __DIR__ . '/Place/MeasurementTypeEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/MeasurementTypeEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MeasurementTypeEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_measurementtypeenumeration(
-			
+			$schema, // array // Main schema array
+			// MeasurementTypeEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MeasurementTypeEnumeration (Thing > Intangible > Enumeration > MeasurementTypeEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MeasurementTypeEnumeration (Thing > Intangible > Enumeration > MeasurementTypeEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// BodyMeasurementTypeEnumeration
@@ -2563,18 +4772,110 @@
 
 
 	// MediaManipulationRatingEnumeration
-	include_once __DIR__ . '/Place/MediaManipulationRatingEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/MediaManipulationRatingEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MediaManipulationRatingEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_mediamanipulationratingenumeration(
-			
+			$schema, // array // Main schema array
+			// MediaManipulationRatingEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MediaManipulationRatingEnumeration (Thing > Intangible > Enumeration > MediaManipulationRatingEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MediaManipulationRatingEnumeration (Thing > Intangible > Enumeration > MediaManipulationRatingEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// DecontextualizedContent
@@ -2662,21 +4963,113 @@
 			}
 
 	// MedicalEnumeration
-	include_once __DIR__ . '/Place/MedicalEnumeration.php';
+	include_once __DIR__ . '/Enumeration/MedicalEnumeration.php';
 
 	// MerchantReturnEnumeration
-	include_once __DIR__ . '/Place/MerchantReturnEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/MerchantReturnEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MerchantReturnEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_merchantreturnenumeration(
-			
+			$schema, // array // Main schema array
+			// MerchantReturnEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MerchantReturnEnumeration (Thing > Intangible > Enumeration > MerchantReturnEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MerchantReturnEnumeration (Thing > Intangible > Enumeration > MerchantReturnEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// MerchantReturnFiniteReturnWindow
@@ -2736,18 +5129,110 @@
 			}
 
 	// MusicAlbumProductionType
-	include_once __DIR__ . '/Place/MusicAlbumProductionType.php';
-
+	include_once __DIR__ . '/Enumeration/MusicAlbumProductionType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MusicAlbumProductionType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_musicalbumproductiontype(
-			
+			$schema, // array // Main schema array
+			// MusicAlbumProductionType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MusicAlbumProductionType (Thing > Intangible > Enumeration > MusicAlbumProductionType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MusicAlbumProductionType (Thing > Intangible > Enumeration > MusicAlbumProductionType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// CompilationAlbum
@@ -2877,18 +5362,110 @@
 			}
 
 	// MusicAlbumReleaseType
-	include_once __DIR__ . '/Place/MusicAlbumReleaseType.php';
-
+	include_once __DIR__ . '/Enumeration/MusicAlbumReleaseType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MusicAlbumReleaseType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_musicalbumreleasetype(
-			
+			$schema, // array // Main schema array
+			// MusicAlbumReleaseType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MusicAlbumReleaseType (Thing > Intangible > Enumeration > MusicAlbumReleaseType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MusicAlbumReleaseType (Thing > Intangible > Enumeration > MusicAlbumReleaseType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AlbumRelease
@@ -2948,18 +5525,110 @@
 			}
 
 	// MusicReleaseFormatType
-	include_once __DIR__ . '/Place/MusicReleaseFormatType.php';
-
+	include_once __DIR__ . '/Enumeration/MusicReleaseFormatType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > MusicReleaseFormatType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_musicreleaseformattype(
-			
+			$schema, // array // Main schema array
+			// MusicReleaseFormatType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from MusicReleaseFormatType (Thing > Intangible > Enumeration > MusicReleaseFormatType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from MusicReleaseFormatType (Thing > Intangible > Enumeration > MusicReleaseFormatType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// CDFormat
@@ -3061,18 +5730,110 @@
 			}
 
 	// NonprofitType
-	include_once __DIR__ . '/Place/NonprofitType.php';
-
+	include_once __DIR__ . '/Enumeration/NonprofitType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > NonprofitType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_nonprofittype(
-			
+			$schema, // array // Main schema array
+			// NonprofitType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from NonprofitType (Thing > Intangible > Enumeration > NonprofitType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from NonprofitType (Thing > Intangible > Enumeration > NonprofitType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// NLNonprofitType
@@ -3707,18 +6468,110 @@
 
 
 	// OfferItemCondition
-	include_once __DIR__ . '/Place/OfferItemCondition.php';
-
+	include_once __DIR__ . '/Enumeration/OfferItemCondition.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > OfferItemCondition
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_offeritemcondition(
-			
+			$schema, // array // Main schema array
+			// OfferItemCondition
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from OfferItemCondition (Thing > Intangible > Enumeration > OfferItemCondition)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from OfferItemCondition (Thing > Intangible > Enumeration > OfferItemCondition)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// DamagedCondition
@@ -3778,18 +6631,110 @@
 			}
 
 	// PaymentMethod
-	include_once __DIR__ . '/Place/PaymentMethod.php';
-
+	include_once __DIR__ . '/Enumeration/PaymentMethod.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > PaymentMethod
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_paymentmethod(
-			
+			$schema, // array // Main schema array
+			// PaymentMethod
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from PaymentMethod (Thing > Intangible > Enumeration > PaymentMethod)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from PaymentMethod (Thing > Intangible > Enumeration > PaymentMethod)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// PaymentCard
@@ -3822,18 +6767,110 @@
 
 
 	// PhysicalActivityCategory
-	include_once __DIR__ . '/Place/PhysicalActivityCategory.php';
-
+	include_once __DIR__ . '/Enumeration/PhysicalActivityCategory.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > PhysicalActivityCategory
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_physicalactivitycategory(
-			
+			$schema, // array // Main schema array
+			// PhysicalActivityCategory
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from PhysicalActivityCategory (Thing > Intangible > Enumeration > PhysicalActivityCategory)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from PhysicalActivityCategory (Thing > Intangible > Enumeration > PhysicalActivityCategory)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// AerobicActivity
@@ -3935,18 +6972,110 @@
 			}
 
 	// PriceComponentTypeEnumeration
-	include_once __DIR__ . '/Place/PriceComponentTypeEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/PriceComponentTypeEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > PriceComponentTypeEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_pricecomponenttypeenumeration(
-			
+			$schema, // array // Main schema array
+			// PriceComponentTypeEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from PriceComponentTypeEnumeration (Thing > Intangible > Enumeration > PriceComponentTypeEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from PriceComponentTypeEnumeration (Thing > Intangible > Enumeration > PriceComponentTypeEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ActivationFee
@@ -4034,18 +7163,110 @@
 			}
 
 	// PriceTypeEnumeration
-	include_once __DIR__ . '/Place/PriceTypeEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/PriceTypeEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > PriceTypeEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_pricetypeenumeration(
-			
+			$schema, // array // Main schema array
+			// PriceTypeEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from PriceTypeEnumeration (Thing > Intangible > Enumeration > PriceTypeEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from PriceTypeEnumeration (Thing > Intangible > Enumeration > PriceTypeEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// InvoicePrice
@@ -4133,18 +7354,110 @@
 			}
 
 	// QualitativeValue
-	include_once __DIR__ . '/Place/QualitativeValue.php';
-
+	include_once __DIR__ . '/Enumeration/QualitativeValue.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > QualitativeValue
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_qualitativevalue(
-			
+			$schema, // array // Main schema array
+			// QualitativeValue
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from QualitativeValue (Thing > Intangible > Enumeration > QualitativeValue)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from QualitativeValue (Thing > Intangible > Enumeration > QualitativeValue)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// BedType
@@ -4289,18 +7602,110 @@
 
 
 	// RefundTypeEnumeration
-	include_once __DIR__ . '/Place/RefundTypeEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/RefundTypeEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > RefundTypeEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_refundtypeenumeration(
-			
+			$schema, // array // Main schema array
+			// RefundTypeEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from RefundTypeEnumeration (Thing > Intangible > Enumeration > RefundTypeEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from RefundTypeEnumeration (Thing > Intangible > Enumeration > RefundTypeEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ExchangeRefund
@@ -4346,18 +7751,110 @@
 			}
 
 	// RestrictedDiet
-	include_once __DIR__ . '/Place/RestrictedDiet.php';
-
+	include_once __DIR__ . '/Enumeration/RestrictedDiet.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > RestrictedDiet
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_restricteddiet(
-			
+			$schema, // array // Main schema array
+			// RestrictedDiet
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from RestrictedDiet (Thing > Intangible > Enumeration > RestrictedDiet)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from RestrictedDiet (Thing > Intangible > Enumeration > RestrictedDiet)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// DiabeticDiet
@@ -4515,18 +8012,110 @@
 			}
 
 	// ReturnFeesEnumeration
-	include_once __DIR__ . '/Place/ReturnFeesEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/ReturnFeesEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > ReturnFeesEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_returnfeesenumeration(
-			
+			$schema, // array // Main schema array
+			// ReturnFeesEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from ReturnFeesEnumeration (Thing > Intangible > Enumeration > ReturnFeesEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from ReturnFeesEnumeration (Thing > Intangible > Enumeration > ReturnFeesEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// FreeReturn
@@ -4600,18 +8189,110 @@
 			}
 
 	// ReturnLabelSourceEnumeration
-	include_once __DIR__ . '/Place/ReturnLabelSourceEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/ReturnLabelSourceEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > ReturnLabelSourceEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_returnlabelsourceenumeration(
-			
+			$schema, // array // Main schema array
+			// ReturnLabelSourceEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from ReturnLabelSourceEnumeration (Thing > Intangible > Enumeration > ReturnLabelSourceEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from ReturnLabelSourceEnumeration (Thing > Intangible > Enumeration > ReturnLabelSourceEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ReturnLabelCustomerResponsibility
@@ -4657,18 +8338,110 @@
 			}
 
 	// ReturnMethodEnumeration
-	include_once __DIR__ . '/Place/ReturnMethodEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/ReturnMethodEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > ReturnMethodEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_returnmethodenumeration(
-			
+			$schema, // array // Main schema array
+			// ReturnMethodEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from ReturnMethodEnumeration (Thing > Intangible > Enumeration > ReturnMethodEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from ReturnMethodEnumeration (Thing > Intangible > Enumeration > ReturnMethodEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ReturnAtKiosk
@@ -4714,18 +8487,110 @@
 			}
 
 	// RsvpResponseType
-	include_once __DIR__ . '/Place/RsvpResponseType.php';
-
+	include_once __DIR__ . '/Enumeration/RsvpResponseType.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > RsvpResponseType
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_rsvpresponsetype(
-			
+			$schema, // array // Main schema array
+			// RsvpResponseType
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from RsvpResponseType (Thing > Intangible > Enumeration > RsvpResponseType)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from RsvpResponseType (Thing > Intangible > Enumeration > RsvpResponseType)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// RsvpResponseMaybe
@@ -4771,18 +8636,110 @@
 			}
 
 	// SizeGroupEnumeration
-	include_once __DIR__ . '/Place/SizeGroupEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/SizeGroupEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > SizeGroupEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_sizegroupenumeration(
-			
+			$schema, // array // Main schema array
+			// SizeGroupEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from SizeGroupEnumeration (Thing > Intangible > Enumeration > SizeGroupEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from SizeGroupEnumeration (Thing > Intangible > Enumeration > SizeGroupEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// WearableSizeGroupEnumeration
@@ -5039,18 +8996,110 @@
 
 
 	// SizeSystemEnumeration
-	include_once __DIR__ . '/Place/SizeSystemEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/SizeSystemEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > SizeSystemEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_sizesystemenumeration(
-			
+			$schema, // array // Main schema array
+			// SizeSystemEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from SizeSystemEnumeration (Thing > Intangible > Enumeration > SizeSystemEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from SizeSystemEnumeration (Thing > Intangible > Enumeration > SizeSystemEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// SizeSystemImperial
@@ -5293,7 +9342,7 @@
 
 
 	// Specialty
-	include_once __DIR__ . '/Place/Specialty.php';
+	include_once __DIR__ . '/Enumeration/Specialty.php';
 
 		/*
 		 * Thing > Intangible > Enumeration > Specialty
@@ -5317,18 +9366,110 @@
 			 */
 
 	// StatusEnumeration
-	include_once __DIR__ . '/Place/StatusEnumeration.php';
-
+	include_once __DIR__ . '/Enumeration/StatusEnumeration.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > StatusEnumeration
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_statusenumeration(
-			
+			$schema, // array // Main schema array
+			// StatusEnumeration
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from StatusEnumeration (Thing > Intangible > Enumeration > StatusEnumeration)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from StatusEnumeration (Thing > Intangible > Enumeration > StatusEnumeration)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
 
 		// ActionStatusType
@@ -5893,16 +10034,108 @@
 
 
 	// WarrantyScope
-	include_once __DIR__ . '/Place/WarrantyScope.php';
-
+	include_once __DIR__ . '/Enumeration/WarrantyScope.php';
+	
 		/*
 		 * Thing > Intangible > Enumeration > WarrantyScope
 		 * 
 		 * 
 		 */
-
+	
 		function uamswp_fad_schema_warrantyscope(
-			
+			$schema, // array // Main schema array
+			// WarrantyScope
+				$foo, // foo
+			// Enumeration
+				$supersededBy, // supersededBy
+			// Intangible (no property vars)
+			// Thing
+				$additionalType, // additionalType
+				$alternateName, // alternateName
+				$description, // description
+				$disambiguatingDescription, // disambiguatingDescription
+				$identifier, // identifier
+				$image, // image
+				$mainEntityOfPage, // mainEntityOfPage
+				$name, // name
+				$potentialAction, // potentialAction
+				$sameAs, // sameAs
+				$subjectOf, // subjectOf
+				$url // url
 		) {
-			
+	
+			// Check/define variables
+	
+				$schema = ( isset($schema) && is_array($schema) && !empty($schema) ) ? $schema : array();
+	
+				// Inherited properties from Thing
+	
+					$additionalType = ( isset($additionalType) && !empty($additionalType) ) ? $additionalType : '';
+					$alternateName = ( isset($alternateName) && !empty($alternateName) ) ? $alternateName : '';
+					$description = ( isset($description) && !empty($description) ) ? $description : '';
+					$disambiguatingDescription = ( isset($disambiguatingDescription) && !empty($disambiguatingDescription) ) ? $disambiguatingDescription : '';
+					$identifier = ( isset($identifier) && !empty($identifier) ) ? $identifier : '';
+					$image = ( isset($image) && !empty($image) ) ? $image : '';
+					$mainEntityOfPage = ( isset($mainEntityOfPage) && !empty($mainEntityOfPage) ) ? $mainEntityOfPage : '';
+					$name = ( isset($name) && !empty($name) ) ? $name : '';
+					$potentialAction = ( isset($potentialAction) && !empty($potentialAction) ) ? $potentialAction : '';
+					$sameAs = ( isset($sameAs) && !empty($sameAs) ) ? $sameAs : '';
+					$subjectOf = ( isset($subjectOf) && !empty($subjectOf) ) ? $subjectOf : '';
+					$url = ( isset($url) && !empty($url) ) ? $url : '';
+	
+				// Inherited properties from Intangible (Thing > Intangible)
+	
+					// Do nothing (no property vars)
+	
+				// Inherited properties from Enumeration (Thing > Intangible > Enumeration)
+	
+					$supersededBy = ( isset($supersededBy) && !empty($supersededBy) ) ? $supersededBy : '';
+	
+				// Properties from WarrantyScope (Thing > Intangible > Enumeration > WarrantyScope)
+	
+					$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+	
+			// Add values to the schema array
+	
+				// Inherited properties
+	
+					$schema = uamswp_fad_schema_enumeration(
+						$schema, // array // Main schema array
+						// Enumeration
+							$supersededBy, // supersededBy
+						// Intangible (no property vars)
+						// Thing
+							$additionalType, // additionalType
+							$alternateName, // alternateName
+							$description, // description
+							$disambiguatingDescription, // disambiguatingDescription
+							$identifier, // identifier
+							$image, // image
+							$mainEntityOfPage, // mainEntityOfPage
+							$name, // name
+							$potentialAction, // potentialAction
+							$sameAs, // sameAs
+							$subjectOf, // subjectOf
+							$url // url
+					);
+	
+				// Properties from WarrantyScope (Thing > Intangible > Enumeration > WarrantyScope)
+	
+					// foo
+	
+						/* 
+						 * Expected Type:
+						 *     bar
+						 * 
+						 * 
+						 */
+	
+						 $schema['foo'] = $foo;
+	
+			// Remove any empty values from the schema array
+	
+				$schema = array_filter($schema);
+	
+			return $schema;
+	
 		}
