@@ -11,7 +11,12 @@
 	function uamswp_fad_schema_rating(
 		$schema, // array // Main schema array
 		// Rating
-			$foo = '', // foo
+			$author = '', // author
+			$bestRating = '', // bestRating
+			$ratingExplanation = '', // ratingExplanation
+			$ratingValue = '', // ratingValue
+			$reviewAspect = '', // reviewAspect
+			$worstRating = '', // worstRating
 		// Intangible (no property vars)
 		// Thing
 			$additionalType = '', // additionalType
@@ -51,9 +56,14 @@
 
 				// Do nothing (no property vars)
 
-			// Properties from Rating
+			// Properties from Rating (Thing > Intangible > Rating)
 
-				$foo = ( isset($foo) && !empty($foo) ) ? $foo : '';
+				$author = ( isset($author) && !empty($author) ) ? $author : '';
+				$bestRating = ( isset($bestRating) && !empty($bestRating) ) ? $bestRating : '';
+				$ratingExplanation = ( isset($ratingExplanation) && !empty($ratingExplanation) ) ? $ratingExplanation : '';
+				$ratingValue = ( isset($ratingValue) && !empty($ratingValue) ) ? $ratingValue : '';
+				$reviewAspect = ( isset($reviewAspect) && !empty($reviewAspect) ) ? $reviewAspect : '';
+				$worstRating = ( isset($worstRating) && !empty($worstRating) ) ? $worstRating : '';
 
 		// Add values to the schema array
 
@@ -77,18 +87,94 @@
 						$url // url
 				);
 
-			// Properties from Rating
+			// Properties from Rating (Thing > Intangible > Rating)
 
-				// foo
+				// author
 
 					/* 
 					 * Expected Type:
-					 *     bar
+					 *     Organization
+					 *     Person
 					 * 
-					 * 
+					 * The author of this content or rating. Please note that author is special in 
+					 * that HTML 5 provides a special mechanism for indicating authorship via the rel 
+					 * tag. That is equivalent to this and may be used interchangeably.
 					 */
 
-					 $schema['foo'] = $foo;
+					$schema['author'] = $author;
+
+				// bestRating
+
+					/* 
+					 * Expected Type:
+					 *     Number
+					 *     Text
+					 * 
+					 * The highest value allowed in this rating system. If bestRating is omitted, 5 is 
+					 * assumed.
+					 */
+
+					$schema['bestRating'] = $bestRating;
+
+				// ratingExplanation
+
+					/* 
+					 * Expected Type:
+					 *     Text
+					 * 
+					 * A short explanation (e.g. one to two sentences) providing background context 
+					 * and other information that led to the conclusion expressed in the rating. This 
+					 * is particularly applicable to ratings associated with "fact check" markup using 
+					 * ClaimReview.
+
+					 */
+
+					$schema['ratingExplanation'] = $ratingExplanation;
+
+				// ratingValue
+
+					/* 
+					 * Expected Type:
+					 *     Number
+					 *     Text
+					 * 
+					 * The rating for the content.
+					 * 
+					 * Usage guidelines:
+					 * 
+					 *     - Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' 
+					 *       (U+0039)) rather than superficially similar Unicode symbols.
+					 * 
+					 *     - Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a 
+					 *       decimal point. Avoid using these symbols as a readability separator.
+
+					 */
+
+					$schema['ratingValue'] = $ratingValue;
+
+				// reviewAspect
+
+					/* 
+					 * Expected Type:
+					 *     Text
+					 * 
+					 * This Review or Rating is relevant to this part or facet of the itemReviewed.
+					 */
+
+					$schema['reviewAspect'] = $reviewAspect;
+
+				// worstRating
+
+					/* 
+					 * Expected Type:
+					 *     Number
+					 *     Text
+					 * 
+					 * The lowest value allowed in this rating system. If worstRating is omitted, 1 is 
+					 * assumed.
+					 */
+
+					$schema['worstRating'] = $worstRating;
 
 		// Remove any empty values from the schema array
 
