@@ -439,9 +439,89 @@
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'hospitalAffiliation' => array(
-				array(
+				array( // Repeat for all associated locations
 					'@type' => 'Hospital',
-					'foo' => 'bar'
+					'name' => 'foo', // Replace 'foo' with location name
+					'address' => array(
+						'@type' => 'PostalAddress',
+						'addressCountry' = 'USA',
+						'addressLocality' = 'foo', // Replace 'foo' with city
+						'addressRegion' = 'Arkansas',
+						'postalCode' = 'foo', // Replace 'foo' with ZIP code
+						'streetAddress' = 'foo' // Replace 'foo' with street address
+					),
+					'areaServed' => array(
+						'@type' => 'AdministrativeArea',
+						'name' => 'Arkansas'
+					),
+					'brand' => array(
+						'@id' => 'https://uamshealth.com/#MedicalOrganization' // Replace array with relevant Organization (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+					),
+					'contactPoint' => array(
+						array(
+							'@type' => 'ContactPoint',
+							'contactType' => 'General information',
+							'telephone' => 'foo' // Replace 'foo' with phone number
+						),
+						array(
+							'@type' => 'ContactPoint',
+							'contactType' => 'Appointments for new patients',
+							'telephone' => 'foo' // Replace 'foo' with phone number
+						),
+						array(
+							'@type' => 'ContactPoint',
+							'contactType' => 'Appointments for existing patients',
+							'telephone' => 'foo' // Replace 'foo' with phone number
+						),
+						array(
+							'@type' => 'ContactPoint',
+							'contactType' => 'Appointments for new and existing patients',
+							'telephone' => 'foo' // Replace 'foo' with phone number
+						),
+						array(
+							'@type' => 'ContactPoint',
+							'contactType' => 'foo', // Replace 'foo' with additional phone number label
+							'telephone' => 'foo' // Replace 'foo' with phone number
+						),
+						array(
+							'@type' => 'ContactPoint',
+							'contactType' => 'Fax',
+							'faxNumber' => 'foo' // Replace 'foo' with fax number
+						),
+					),
+					'description' => 'foo', // Replace 'foo' with location description
+					'geo' => array(
+						'@type' => 'GeoCoordinates',
+						'latitude' => 'foo', // Replace 'foo' with latitude
+						'longitude' => 'foo' // Replace 'foo' with longitude
+					),
+					'openingHoursSpecification' => array( // The opening hours of a certain place.
+						array( // Repeat as necessary
+							'@type' => 'OpeningHoursSpecification',
+							'closes' => '23:59',
+							'dayOfWeek' => array(
+								'Monday',
+								'Tuesday',
+								'Wednesday',
+								'Thursday',
+								'Friday',
+								'Saturday',
+								'Sunday'
+							),
+							'opens' => '00:00'
+						)
+					),
+					'parentOrganization' => array(
+						'@id' => 'https://uamshealth.com/#MedicalOrganization' // Replace array with relevant Organization (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+					),
+					'photo' => array(
+						array( // Repeat for all photos include in location profile
+							'@type' => 'ImageObject',
+							'caption' => 'foo', // Replace 'foo' with alt text of image
+							'url' => 'foo' // Replace 'foo' with URL of image
+						)
+					),
+					'url' => 'foo' // Replace 'foo' with location profile URL
 				)
 			),
 			'isAcceptingNewPatients' => 'foo', // Boolean (Data Type)
@@ -536,16 +616,15 @@
 				)
 			),
 			'medicalSpecialty' => array(
-				'foo' => 'foo', // MedicalSpecialty (Enumeration Type)
-				'bar' // MedicalSpecialty (Enumeration Type)
+				'foo' // Replace foo with MedicalSpecialty (Enumeration Type) associated with the related area of expertise // Repeat as necessary
 			),
 			'parentOrganization' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
-			'review' => array(
+			'review' => array( // Include if NRC API allows for the content of the review to be loaded into this schema
 				array(
 					'@type' => 'Review',
-					'foo' => 'bar'
+					'foo' => 'bar' // Replace 'foo' and 'bar' with relevant property/value pairs as necessary
 				)
 			),
 			'url' => array(
@@ -559,12 +638,12 @@
 				'@id' => 'https://uamshealth.com/provider/foo/#Name', // Replace 'foo' with provider profile slug
 				'foo', // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
 			)
-			'affiliation' => array( // Keep if a UAMS location
+			'affiliation' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'alumniOf' => array(
 				array( // Repeat as necessary
-					'@type' => 'EducationalOrganization',
+					'@type' => 'EducationalOrganization', // Replace with more specific type as relevant
 					'name' => 'foo' // Replace 'foo' with name of the organization from which the provider received education/training
 				)
 			),
@@ -578,14 +657,14 @@
 			'hasCredential' => array(
 				array( // Repeat as necessary
 					'@type' => 'EducationalOccupationalCredential',
-					'name' => 'foo' // Full name of degree or credential
+					'name' => 'foo' // Full name of degree or credential (e.g., 'Doctor of Medicine')
 				)
 			),
 			'honorificPrefix' => 'foo', // Replace 'foo' with 'Dr.' if relevant // Text (Data Type)
 			'honorificSuffix' => 'foo', // Replace 'foo' with provider's degree list // Text (Data Type)
 			'image' => 'foo', // Replace 'foo' with provider's headshot URL // URL (Data Type)
 			'jobTitle' => array(
-				'foo' // Replace 'foo' with provider's clinical title // Repeat as necessary // Text (Data Type)
+				'foo' // Replace 'foo' with provider's clinical title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
 			),
 			'knowsLanguage' => array(
 				array( // Repeat as necessary
