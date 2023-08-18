@@ -238,9 +238,3 @@
 			echo $schema_line_break;
 
 	}
-
-// DataTypes
-include_once __DIR__ . '/Schema/DataTypes.php';
-
-// Types
-include_once __DIR__ . '/Schema/Types.php';
