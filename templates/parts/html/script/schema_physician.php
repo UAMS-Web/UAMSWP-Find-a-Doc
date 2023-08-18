@@ -418,17 +418,21 @@
 			'aggregateRating' => array(
 				array(
 					'@type' => 'AggregateRating',
-					'foo' => 'bar'
+					'itemReviewed' => 'foo', // Replace 'foo' with @id of relevant Thing (Physician or Person) // Thing
+					'ratingCount' => 'foo', // Replace 'foo' with relevant value // Integer (Data Type)
+					'reviewCount' => 'foo', // Replace 'foo' with relevant value // Integer (Data Type)
 				)
 			),
 			'availableService' => array(
-				array(
-					'@type' => 'MedicalProcedure',
-					'foo' => 'bar'
+				array( // Repeat as necessary
+					'@type' => 'MedicalProcedure', // Replace 'MedicalProcedure' with more specific type if relevant
+					'name' => 'foo', // Replace 'foo' with name of associated procedure
+					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
 				),
-				array(
-					'@type' => 'MedicalTest',
-					'foo' => 'bar'
+				array( // Repeat as necessary
+					'@type' => 'MedicalTest', // Replace 'MedicalProcedure' with more specific type if relevant
+					'name' => 'foo', // Replace 'foo' with name of associated test
+					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
 				)
 			),
 			'brand' => array(
