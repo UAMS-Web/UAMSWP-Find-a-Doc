@@ -6,22 +6,10 @@
 	$schema_graph = array(
 		// WebPage
 		array(
-			'@type' => 'WebPage',
+			'@type' => 'MedicalWebPage',
 			'@id' => 'https://uamshealth.com/provider/foo/#WebPage', // Replace 'foo' with provider profile slug
 			'name' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
-			),
-			'audience' => array(
-				array(
-					'@type' => 'Audience',
-					'name' => 'Patients',
-					'geographicArea' => 'Arkansas'
-				),
-				array(
-					'@type' => 'Audience',
-					'name' => 'Referring physicians',
-					'geographicArea' => 'Arkansas'
-				)
 			),
 			'author' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
@@ -40,6 +28,14 @@
 			),
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
+			),
+			'medicalAudience' => array(
+				array(
+					'@type' => 'Patient',
+					'name' => 'Patient',
+					'geographicArea' => 'Arkansas'
+				),
+				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
 			),
 			'mentions' => array(
 				array(
