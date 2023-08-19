@@ -11,11 +11,11 @@
 			'name' => array(
 				'@id' => 'https://uamshealth.com/location/foo/#Name' // Replace 'foo' with location item slug
 			),
+			'headline' => array(
+				'@id' => 'https://uamshealth.com/location/foo/#Name' // Replace 'foo' with location item slug
+			),
 			'about' => array(
 				'@id' => 'https://uamshealth.com/location/foo/#Thing' // Replace 'foo' with location item slug
-			),
-			'author' => array(
-				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'breadcrumb' => array(
 				'@id' => 'https://uamshealth.com/location/foo/#BreadcrumbList' // Replace 'foo' with location item slug
@@ -25,6 +25,7 @@
 			),
 			'dateModified' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
 			'datePublished' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
+			'description' => 'foo', // Replace 'foo' with excerpt / short description
 			'inLanguage' => 'English',
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/#WebSite'
@@ -38,17 +39,29 @@
 			'medicalAudience' => array(
 				array(
 					'@type' => 'Patient',
-					'name' => 'Patient',
 					'geographicArea' => 'Arkansas'
 				),
 				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
 			),
 			'mentions' => array(
 				array(
+					'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic' // Replace 'foo' with location item slug // Replace 'MedicalClinic' with 'Hospital' if necessary
+				),
+				array( // Populate values for related ontology items, repeating as necessary
+					'@id' => 'Thing',
 					'foo' => 'bar'
 				)
 			),
-			'primaryImageOfPage' => 'foo', // Replace 'foo' with URL of featured image
+			'primaryImageOfPage' => array( // Wayfinding photo
+				'@type' => 'ImageObject',
+				'caption' => 'foo', // Replace 'foo' with the image's alt text
+				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+				'height' => 'foo', // Replace 'foo' with the image's height
+				'representativeOfPage' => true,
+				'width' => 'foo' // Replace 'foo' with the image's width
+			),
 			'significantLink' => array(
 				'foo' // Replace 'foo' with URL to related ontology items // Repeat as necessary
 			),

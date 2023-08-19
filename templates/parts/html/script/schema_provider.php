@@ -11,12 +11,12 @@
 			'name' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
 			),
+			'headline' => array(
+				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
+			),
 			'about' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#Physician', // Replace 'foo' with provider profile slug
 				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
-			),
-			'author' => array(
-				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'breadcrumb' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#BreadcrumbList' // Replace 'foo' with provider profile slug
@@ -26,6 +26,7 @@
 			),
 			'dateModified' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
 			'datePublished' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
+			'description' => 'foo', // Replace 'foo' with excerpt / short description
 			'inLanguage' => 'English',
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/#WebSite'
@@ -39,7 +40,6 @@
 			'medicalAudience' => array(
 				array(
 					'@type' => 'Patient',
-					'name' => 'Patient',
 					'geographicArea' => 'Arkansas'
 				),
 				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
@@ -330,7 +330,7 @@
 				)
 			),
 			'medicalSpecialty' => array(
-				'foo' // Replace foo with MedicalSpecialty (Enumeration Type) associated with the related area of expertise // Repeat as necessary
+				'foo' // Replace 'foo' with MedicalSpecialty (Enumeration Type) associated with the related area of expertise // Repeat as necessary
 			),
 			'parentOrganization' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
