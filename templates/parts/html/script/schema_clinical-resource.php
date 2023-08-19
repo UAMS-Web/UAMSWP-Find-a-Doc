@@ -79,7 +79,7 @@
 						'url' => 'https://uamshealth.com/provider/',
 						'name' => 'Providers'
 					)
-					),
+				),
 				array(
 					'@type' => 'ListItem',
 					'position' => 3,
@@ -89,25 +89,16 @@
 				)
 			)
 		),
-		// CreativeWork
-			// Article = 'Article'
-			// Infographic = 'ImageObject'
-			// Video = 'VideoObject'
-			// Document = 'DigitalDocument'
+		// Article Clinical Resource
 		array(
-			'@type' => 'CreativeWork', // Replace 'CreativeWork' with the relevant specific sub-type (i.e., 'Article', 'ImageObject', 'VideoObject', 'DigitalDocument')
-			'@id' => 'https://uamshealth.com/clinical-resource/foo/#Physician', // Replace 'foo' with clinical resource item slug
+			'@type' => 'Article',
+			'@id' => 'https://uamshealth.com/clinical-resource/foo/#Article', // Replace 'foo' with clinical resource item slug
 			'name' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#Name', // Replace 'foo' with clinical resource item slug
 				'foo', // Replace 'foo' with title of the clinical resource item
 			),
-			'about' => array(
-				array( // Repeat for each related ontology item (e.g., Provider, Location)
-					'@type' => 'Thing', // Replace 'Thing' with appropriate Type
-					'foo' => 'bar' // Replace 'foo'/'bar' pair with appropriate property/value pairs as relevant
-				)
-			),
 			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
+			'articleBody' => 'foo', // Replace 'foo' with content of the article text
 			'audience' => array(
 				array(
 					'@type' => 'Patient',
@@ -115,69 +106,12 @@
 					'geographicArea' => 'Arkansas'
 				),
 				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			'audio' => 'foo', // Replace 'foo' with ___
-			'author' => array(
-				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
-			'dateModified' => 'foo', // Replace 'foo' with ___
-			'datePublished' => 'foo', // Replace 'foo' with ___
-			'hasPart' => 'foo', // Replace 'foo' with ___
-			'inLanguage' => 'foo', // Replace 'foo' with ___
-			'interactionStatistic' => 'foo', // Replace 'foo' with ___
-			'interactivityType' => 'foo', // Replace 'foo' with ___
-			'interpretedAsClaim' => 'foo', // Replace 'foo' with ___
-			'isAccessibleForFree' => 'foo', // Replace 'foo' with ___
-			'isBasedOn' => 'foo', // Replace 'foo' with ___
-			'isBasedOnUrl' => 'foo', // Replace 'foo' with ___
-			'isFamilyFriendly' => 'foo', // Replace 'foo' with ___
-			'isPartOf' => 'foo', // Replace 'foo' with ___
-			'keywords' => 'foo', // Replace 'foo' with ___
-			'learningResourceType' => 'foo', // Replace 'foo' with ___
-			'license' => 'foo', // Replace 'foo' with ___
-			'locationCreated' => 'foo', // Replace 'foo' with ___
-			'mainEntity' => 'foo', // Replace 'foo' with ___
-			'mainEntityOfPage' => 'foo', // Replace 'foo' with ___
-			'maintainer' => 'foo', // Replace 'foo' with ___
-			'material' => 'foo', // Replace 'foo' with ___
-			'materialExtent' => 'foo', // Replace 'foo' with ___
-			'mentions' => 'foo', // Replace 'foo' with ___
-			'offers' => 'foo', // Replace 'foo' with ___
-			'pattern' => 'foo', // Replace 'foo' with ___
-			'position' => 'foo', // Replace 'foo' with ___
-			'potentialAction' => 'foo', // Replace 'foo' with ___
-			'producer' => 'foo', // Replace 'foo' with ___
-			'provider' => 'foo', // Replace 'foo' with ___
-			'publication' => 'foo', // Replace 'foo' with ___
-			'publisher' => 'foo', // Replace 'foo' with ___
-			'publisherImprint' => 'foo', // Replace 'foo' with ___
-			'publishingPrinciples' => 'foo', // Replace 'foo' with ___
-			'recordedAt' => 'foo', // Replace 'foo' with ___
-			'releasedEvent' => 'foo', // Replace 'foo' with ___
-			'review' => 'foo', // Replace 'foo' with ___
-			'reviews' => 'foo', // Replace 'foo' with ___
-			'sameAs' => 'foo', // Replace 'foo' with ___
-			'schemaVersion' => 'foo', // Replace 'foo' with ___
-			'sdDatePublished' => 'foo', // Replace 'foo' with ___
-			'sdLicense' => 'foo', // Replace 'foo' with ___
-			'sdPublisher' => 'foo', // Replace 'foo' with ___
-			'size' => 'foo', // Replace 'foo' with ___
-			'sourceOrganization' => 'foo', // Replace 'foo' with ___
-			'spatial' => 'foo', // Replace 'foo' with ___
-			'spatialCoverage' => 'foo', // Replace 'foo' with ___
-			'sponsor' => 'foo', // Replace 'foo' with ___
-			'subjectOf' => 'foo', // Replace 'foo' with ___
-			'teaches' => 'foo', // Replace 'foo' with ___
-			'temporal' => 'foo', // Replace 'foo' with ___
-			'temporalCoverage' => 'foo', // Replace 'foo' with ___
-			'text' => 'foo', // Replace 'foo' with ___
-			'thumbnail' => 'foo', // Replace 'foo' with ___
-			'thumbnailUrl' => 'foo', // Replace 'foo' with ___
-			'url' => 'https://uamshealth.com/clinical-resource/foo/', // Replace 'foo' with clinical resource item slug
-			// Article
-			'articleBody' => 'foo', // Replace 'foo' with content of the article text
+			'dateModified' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
+			'datePublished' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
 			'image' => array( // Featured image
 				'@type' => 'ImageObject',
 				'caption' => 'foo', // Replace 'foo' with the image's alt text
@@ -188,31 +122,144 @@
 				'representativeOfPage' => 'foo', // Replace 'foo' with whatever value we determine to be typical of a featured image // Boolean (Data Type)
 				'width' => 'foo' // Replace 'foo' with the image's width
 			),
-			'timeRequired' => 'foo', // Replace 'foo' with 9th grade reading speed of article (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
+			'isAccessibleForFree' => true,
+			'isPartOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
+			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
+			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
 			'speakable' => array(
 				'@type' => 'SpeakableSpecification',
 				'cssSelector' => array(
 					'#foo' // Replace 'foo' with ID of element containing the article text
 				)
 			),
-			'wordCount' => 'foo', // Replace 'foo' with word count of the article text // Integer (Data Type)
-			// ImageObject
+			'timeRequired' => 'foo', // Replace 'foo' with 9th grade reading speed of article (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
+			'url' => 'https://uamshealth.com/clinical-resource/foo/', // Replace 'foo' with clinical resource item slug
+			'wordCount' => 'foo' // Replace 'foo' with word count of the article text // Integer (Data Type)
+		),
+		// Infographic Clinical Resource
+		array(
+			'@type' => 'ImageObject',
+			'@id' => 'https://uamshealth.com/clinical-resource/foo/#ImageObject', // Replace 'foo' with clinical resource item slug
+			'name' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#Name', // Replace 'foo' with clinical resource item slug
+				'foo', // Replace 'foo' with title of the clinical resource item
+			),
+			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
+			'audience' => array(
+				array(
+					'@type' => 'Patient',
+					'name' => 'Patient',
+					'geographicArea' => 'Arkansas'
+				),
+				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
+			),
 			'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
 			'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'dateModified' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
+			'datePublished' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
 			'embeddedTextCaption' => 'foo', // Replace 'foo' with content of infographic transcript input
 			'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
 			'height' => 'foo', // Replace 'foo' with the image's height
+			'isAccessibleForFree' => true,
+			'isPartOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
 			'representativeOfPage' => true,
+			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
+			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'thumbnail' => array( // Featured image
+				'@type' => 'ImageObject',
+				'caption' => 'foo', // Replace 'foo' with the image's alt text
+				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+				'height' => 'foo', // Replace 'foo' with the image's height
+				'representativeOfPage' => true,
+				'width' => 'foo' // Replace 'foo' with the image's width
+			),
 			'timeRequired' => 'foo', // Replace 'foo' with combo of 9th grade reading speed of Short Description + Transcript (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
+			'url' => 'https://uamshealth.com/clinical-resource/foo/', // Replace 'foo' with clinical resource item slug
 			'width' => 'foo' // Replace 'foo' with the image's width
-			// VideoObject
+		),
+		// Video Clinical Resource
+		array(
+			'@type' => 'VideoObject',
+			'@id' => 'https://uamshealth.com/clinical-resource/foo/#VideoObject', // Replace 'foo' with clinical resource item slug
+			'name' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#Name', // Replace 'foo' with clinical resource item slug
+				'foo', // Replace 'foo' with title of the clinical resource item
+			),
+			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
+			'audience' => array(
+				array(
+					'@type' => 'Patient',
+					'name' => 'Patient',
+					'geographicArea' => 'Arkansas'
+				),
+				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
+			),
+			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'dateModified' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
+			'datePublished' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
 			'duration' => 'foo', // Replace 'foo' with the duration of the video (in ISO 8601 duration format) if that info is available from YouTube/Vimeo
 			'embedUrl' => 'foo', // Replace 'foo' with the URL pointing to a player for the video. In general, this is the information in the src element of an embed tag.
+			'isAccessibleForFree' => true,
+			'isPartOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
+			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
+			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'thumbnail' => array( // Featured image
+				'@type' => 'ImageObject',
+				'caption' => 'foo', // Replace 'foo' with the image's alt text
+				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+				'height' => 'foo', // Replace 'foo' with the image's height
+				'representativeOfPage' => true,
+				'width' => 'foo' // Replace 'foo' with the image's width
+			),
 			'timeRequired' => 'foo', // Replace 'foo' with combo of 9th grade reading speed of Short Description + Transcript OR Short Description + video duration, whichever is greater (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
 			'transcript' => 'foo', // Replace 'foo' with content of video transcript input
+			'url' => 'https://uamshealth.com/clinical-resource/foo/', // Replace 'foo' with clinical resource item slug
 			'videoFrameSize' => 'foo', // Replace 'foo' with the frame size of the video if that info is available from YouTube/Vimeo
-			'videoQuality' => 'foo', // Replace 'foo' with the quality of the video if that info is available from YouTube/Vimeo
-			// DigitalDocument
+			'videoQuality' => 'foo' // Replace 'foo' with the quality of the video if that info is available from YouTube/Vimeo
+		),
+		// Document Clinical Resource
+		array(
+			'@type' => 'DigitalDocument',
+			'@id' => 'https://uamshealth.com/clinical-resource/foo/#DigitalDocument', // Replace 'foo' with clinical resource item slug
+			'name' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#Name', // Replace 'foo' with clinical resource item slug
+				'foo', // Replace 'foo' with title of the clinical resource item
+			),
+			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
+			'audience' => array(
+				array(
+					'@type' => 'Patient',
+					'name' => 'Patient',
+					'geographicArea' => 'Arkansas'
+				),
+				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
+			),
+			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'dateModified' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
+			'datePublished' => 'foo', // Replace 'foo' with the date value in ISO 8601 date format
 			'hasDigitalDocumentPermission' => array(
 				'@type' => 'DigitalDocumentPermission',
 				'permissionType' => 'ReadPermission',
@@ -221,6 +268,14 @@
 					'audienceType' => 'public'
 				)
 			)
-
+			'isAccessibleForFree' => true,
+			'isPartOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
+			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
+			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'url' => 'https://uamshealth.com/clinical-resource/foo/' // Replace 'foo' with clinical resource item slug
 		)
 	);
