@@ -99280,10 +99280,73 @@ function uamswp_fad_schema_org (
 
 			$type_properties = $schema_type['properties'];
 
-		// Construct schema array
+	// Construct schema array
 
-			$schema = uamswp_fad_schema_construct_array( $schema, $input, $type_properties, $type_parent );
+		// If either the list of properties or the list of parents are empty, stop now
 
-		return $schema;
+			if (
+				empty( array_filter($type_properties) )
+				||
+				empty( array_filter($type_parent) )
+			) {
+
+				return $schema;
+
+			}
+
+		// Extract variables from the input properties array
+
+			foreach ( $input['properties'] as $key => $value ) {
+
+				${$key} = $value;
+
+			}
+
+		// Add values to the schema block array for the properties of the indicated type
+
+			if ( !empty( array_filter($type_properties) ) ) {
+
+				foreach ( $type_properties as $property ) {
+
+					$schema[$property] = ( isset($property) && !empty($property) ) ? uamswp_fad_schema_type_selector($property) : '';
+
+				} // endforeach ( $type_properties as $property )
+
+			} // endif ( !empty( array_filter($type_properties) ) )
+
+		// Add values to the schema block array for the properties of the parent(s) of this type
+
+			if ( !empty( array_filter($type_parent) ) ) {
+
+				// Loop through each parent that is listed in the array
+
+					foreach ( $type_parent as $parent ) {
+
+						// Construct the name of function relevant to the parent of this type
+						
+							$parent_function = 'uamswp_fad_schema_' . strtolower($type_parent);
+
+						// Run the function (if it exists)
+
+							if ( function_exists($parent_function) ) {
+
+								$schema = $parent_function(
+									$schema, // array // Main schema array
+									$input // array // Properties from this type
+								);
+
+							} // endif ( function_exists($parent_function) )
+
+					} // endforeach ( $type_parent as $parent )
+
+			} // endif ( !empty( array_filter($type_parent) ) )
+
+		// Remove any empty values from the schema array
+
+			$schema = array_filter($schema);
+			$schema = array_unique($schema, SORT_REGULAR);
+
+	return $schema;
 
 }
+
