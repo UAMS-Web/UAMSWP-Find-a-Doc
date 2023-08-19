@@ -11,6 +11,9 @@
 			'name' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#Name' // Replace 'foo' with clinical resource item slug
 			),
+			'about' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#CreativeWork' // Replace 'foo' with location item slug // Replace 'CreativeWork' with subtype relevant to the clinical resource item
+			),
 			'author' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
@@ -25,6 +28,9 @@
 			'inLanguage' => 'English',
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/#WebSite'
+			),
+			'mainEntity' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#CreativeWork' // Replace 'foo' with location item slug // Replace 'CreativeWork' with subtype relevant to the clinical resource item
 			),
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
@@ -126,6 +132,9 @@
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
+			'mainEntityOfPage' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
 			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
 			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
@@ -135,6 +144,9 @@
 				'cssSelector' => array(
 					'#foo' // Replace 'foo' with ID of element containing the article text
 				)
+			),
+			'subjectOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
 			'timeRequired' => 'foo', // Replace 'foo' with 9th grade reading speed of article (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
 			'url' => 'https://uamshealth.com/clinical-resource/foo/', // Replace 'foo' with clinical resource item slug
@@ -171,10 +183,16 @@
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
+			'mainEntityOfPage' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
 			'representativeOfPage' => true,
 			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
 			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'subjectOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
 			'thumbnail' => array( // Featured image
 				'@type' => 'ImageObject',
@@ -218,9 +236,15 @@
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
+			'mainEntityOfPage' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
 			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
 			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'subjectOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
 			'thumbnail' => array( // Featured image
 				'@type' => 'ImageObject',
@@ -272,9 +296,15 @@
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
+			'mainEntityOfPage' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
+			),
 			'sameAs' => 'foo', // Replace 'foo' with the URL of the syndicated source item
 			'sourceOrganization' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'subjectOf' => array(
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace 'foo' with clinical resource item slug
 			),
 			'url' => 'https://uamshealth.com/clinical-resource/foo/' // Replace 'foo' with clinical resource item slug
 		)

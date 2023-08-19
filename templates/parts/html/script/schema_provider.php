@@ -11,6 +11,10 @@
 			'name' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
 			),
+			'about' => array(
+				'@id' => 'https://uamshealth.com/provider/foo/#Physician', // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
+			),
 			'author' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
@@ -25,6 +29,9 @@
 			'inLanguage' => 'English',
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/#WebSite'
+			),
+			'mainEntity' => array(
+				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
 			),
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
@@ -43,12 +50,24 @@
 				),
 				array(
 					'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
+				),
+				array( // Populate values for related ontology items, repeating as necessary
+					'@id' => 'Thing',
+					'foo' => 'bar'
 				)
 			),
-			'primaryImageOfPage' => 'foo', // Replace 'foo' with URL of headshot
+			'primaryImageOfPage' => array( // Provider headshot
+				'@type' => 'ImageObject',
+				'caption' => 'foo', // Replace 'foo' with the image's alt text
+				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+				'height' => 'foo', // Replace 'foo' with the image's height
+				'representativeOfPage' => true,
+				'width' => 'foo' // Replace 'foo' with the image's width
+			),
 			'significantLink' => array(
-				'foo', // Replace 'foo', 'bar', etc. with URLs to related ontology items
-				'bar'
+				'foo' // Replace 'foo' with URLs to related ontology items, repeating as necessary
 			),
 			'sourceOrganization' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
@@ -202,8 +221,13 @@
 					'photo' => array(
 						array( // Repeat for all photos include in location profile
 							'@type' => 'ImageObject',
-							'caption' => 'foo', // Replace 'foo' with alt text of image
-							'url' => 'foo' // Replace 'foo' with URL of image
+							'caption' => 'foo', // Replace 'foo' with the image's alt text
+							'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+							'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+							'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+							'height' => 'foo', // Replace 'foo' with the image's height
+							'representativeOfPage' => false,
+							'width' => 'foo' // Replace 'foo' with the image's width
 						)
 					),
 					'url' => 'foo' // Replace 'foo' with location profile URL
@@ -283,8 +307,13 @@
 					'photo' => array(
 						array( // Repeat for all photos include in location profile
 							'@type' => 'ImageObject',
-							'caption' => 'foo', // Replace 'foo' with alt text of image
-							'url' => 'foo' // Replace 'foo' with URL of image
+							'caption' => 'foo', // Replace 'foo' with the image's alt text
+							'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+							'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+							'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+							'height' => 'foo', // Replace 'foo' with the image's height
+							'representativeOfPage' => false,
+							'width' => 'foo' // Replace 'foo' with the image's width
 						)
 					),
 					'specialOpeningHoursSpecification' => array( // The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.
@@ -311,6 +340,9 @@
 					'@type' => 'Review',
 					'foo' => 'bar' // Replace 'foo' and 'bar' with relevant property/value pairs as necessary
 				)
+			),
+			'subjectOf' => array(
+				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
 			),
 			'url' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace 'foo' with provider profile slug
@@ -348,7 +380,38 @@
 			),
 			'honorificPrefix' => 'foo', // Replace 'foo' with 'Dr.' if relevant // Text (Data Type)
 			'honorificSuffix' => 'foo', // Replace 'foo' with provider's degree list // Text (Data Type)
-			'image' => 'foo', // Replace 'foo' with provider's headshot URL // URL (Data Type)
+			'image' => array( // Provider headshot
+				array( // Provider headshot (3:4 aspect ratio)
+					'@type' => 'ImageObject',
+					'caption' => 'foo', // Replace 'foo' with the image's alt text
+					'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+					'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+					'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+					'height' => 'foo', // Replace 'foo' with the image's height
+					'representativeOfPage' => true,
+					'width' => 'foo' // Replace 'foo' with the image's width
+				),
+				array( // Provider headshot (1:1 aspect ratio)
+					'@type' => 'ImageObject',
+					'caption' => 'foo', // Replace 'foo' with the image's alt text
+					'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+					'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+					'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+					'height' => 'foo', // Replace 'foo' with the image's height
+					'representativeOfPage' => true,
+					'width' => 'foo' // Replace 'foo' with the image's width
+				),
+				array( // Provider wide image (if available)
+					'@type' => 'ImageObject',
+					'caption' => 'foo', // Replace 'foo' with the image's alt text
+					'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+					'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+					'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+					'height' => 'foo', // Replace 'foo' with the image's height
+					'representativeOfPage' => true,
+					'width' => 'foo' // Replace 'foo' with the image's width
+				)
+			),
 			'jobTitle' => array(
 				'foo' // Replace 'foo' with provider's clinical title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
 			),
@@ -358,11 +421,17 @@
 					'name' => 'foo' // Replace 'foo' with provider's language
 				)
 			),
+			'mainEntityOfPage' => array(
+				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
+			),
 			'memberOf' => array(
 				array( // Repeat as necessary
 					'@type' => 'Organization',
 					'name' => 'foo' // Replace 'foo' with provider's association organization
 				)
+			),
+			'subjectOf' => array(
+				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
 			),
 			'url' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace 'foo' with provider profile slug
@@ -440,8 +509,13 @@
 					'photo' => array(
 						array( // Repeat for all photos include in location profile
 							'@type' => 'ImageObject',
-							'caption' => 'foo', // Replace 'foo' with alt text of image
-							'url' => 'foo' // Replace 'foo' with URL of image
+							'caption' => 'foo', // Replace 'foo' with the image's alt text
+							'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+							'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+							'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+							'height' => 'foo', // Replace 'foo' with the image's height
+							'representativeOfPage' => true,
+							'width' => 'foo' // Replace 'foo' with the image's width
 						)
 					),
 					'specialOpeningHoursSpecification' => array( // The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.
