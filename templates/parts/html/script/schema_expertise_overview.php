@@ -26,7 +26,7 @@
 					'@id' => 'MedicalProcedure',
 					'foo' => 'bar'
 				)
-v			),
+			),
 			'significantLink' => array(
 				'foo' // Replace 'foo' with URL to fake subpage // Repeat as necessary
 			)
@@ -34,7 +34,7 @@ v			),
 		// BreadcrumbList
 		array(
 		),
-		// Person
+		// MedicalEntity
 		array(
 			'@type' => 'MedicalEntity',
 			'@id' => 'https://uamshealth.com/expertise/foo/#MedicalEntity', // Replace URL up to the hash with relevant URL
