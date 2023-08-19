@@ -6,52 +6,6 @@ function uamswp_fad_schema_org (
 	string $type // Name of Schema.org type
 ) {
 
-	/* 
-
-		Expected format for the array of properties and values for a type and its 
-		parent types:
-
-			$input = array(
-				'type'			=> 'Foo',
-				'properties'	=> array(
-					'isAcceptingNewPatients'	=> true,
-					'medicalSpecialty'			=> array(
-						array(
-							'type'	=> 'MedicalSpecialty',
-							'name'	=> 'CommunityHealth'
-						),
-						array(
-							'type'	=> 'MedicalSpecialty',
-							'name'	=> 'Emergency'
-						),
-						array(
-							'type'	=> 'MedicalSpecialty',
-							'name'	=> 'Infectious'
-						),
-						array(
-							'type'	=> 'MedicalSpecialty',
-							'name'	=> 'PrimaryCare'
-						),
-						array(
-							'type'	=> 'MedicalSpecialty',
-							'name'	=> 'Psychiatric'
-						)
-					),
-					'address'					=> array(
-						'type': 'PostalAddress',
-						'addressLocality': 'Little Rock',
-						'addressRegion': 'AR',
-						'postalCode': '72205',
-						'streetAddress': '4301 West Markham Street Outpatient Center Internal Medicine Clinic'
-					),
-					'telephone'					=> '501-867-5309',
-					'name'						=> 'Leonard H. McCoy, M.D.',
-					'url'						=> 'https://uamshealth.com/provider/leonard-h-mccoy/'
-				)
-			);
-
-	 */
-
 	// Check/define variables
 
 		// Main schema array
