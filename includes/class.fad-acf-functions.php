@@ -103,28 +103,51 @@ function my_taxonomy_query( $args, $field ) {
 			return;
 		}
 
-		// Create full name to store in 'physician_full_name' field
-		$first_name = $_POST['acf']['field_physician_first_name'];
-		$middle_name = $_POST['acf']['field_physician_middle_name'];
-		$last_name = $_POST['acf']['field_physician_last_name'];
-		$pedigree = $_POST['acf']['field_physician_pedigree'];
-		$degrees = $_POST['acf']['field_physician_degree'];
+		// Create provider name combinations to store in fields
 
-		$i = 1;
-			if ( $degrees ) {
-				foreach( $degrees as $degree ):
-					$degree_name = get_term( $degree, 'degree');
-					$degree_list .= $degree_name->name;
-					if( count($degrees) > $i ) {
-						$degree_list .= ", ";
+			$first_name = $_POST['acf']['field_physician_first_name'];
+			$middle_name = $_POST['acf']['field_physician_middle_name'];
+			$last_name = $_POST['acf']['field_physician_last_name'];
+			$pedigree = $_POST['acf']['field_physician_pedigree'];
+
+			// Create full name to store in 'physician_full_name' field (e.g., "Leonard H. McCoy, M.D.")
+
+				$degrees = $_POST['acf']['field_physician_degree'];
+
+				$i = 1;
+					if ( $degrees ) {
+						foreach( $degrees as $degree ):
+							$degree_name = get_term( $degree, 'degree');
+							$degree_list .= $degree_name->name;
+							if( count($degrees) > $i ) {
+								$degree_list .= ", ";
+							}
+							$i++;
+						endforeach;
 					}
-					$i++;
-				endforeach;
-			}
 
-		$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
+				$full_name = $first_name .' ' .( $middle_name ? $middle_name . ' ' : '') . $last_name . ( $pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
 
-		$_POST['acf']['field_physician_full_name'] = $full_name;
+				$_POST['acf']['field_physician_full_name'] = $full_name;
+
+			// Create medium name to store in 'physician_medium_name' field (e.g., "Dr. Leonard H. McCoy")
+
+				$prefix = $_POST['acf']['field_physician_prefix'];
+
+				$medium_name = implode(
+					' ',
+					array_filter(
+						array(
+							( $prefix ?: '' ),
+							( $first_name ?: '' ),
+							( $middle_name ?: '' ),
+							( $last_name ?: '' ),
+							( $pedigree ?: '' )
+						)
+					)
+				);
+
+				$_POST['acf']['field_physician_medium_name'] = $medium_name;
 
 		$expertises = $_POST['acf']['field_physician_expertise'];
 		$conditions = $_POST['acf']['field_physician_conditions_cpt'];
@@ -204,11 +227,11 @@ function my_taxonomy_query( $args, $field ) {
 
 			// Get all contenders for the post excerpt
 			$type = $_POST['acf']['field_expertise_type']; // What Type of Content Is This Page?
-			$short_desc_query = $_POST['acf']['field_expertise_short_desc_query'];
-			$short_desc = $_POST['acf']['field_expertise_short_desc'];
-			$page_title_options = $type ? 'landingpage' : $_POST['acf']['field_expertise_page_title_options'];
-			$page_header_graphic_intro = $_POST['acf']['field_expertise_page_title_graphic']['field_fad_page_header_graphic']['field_page_header_graphic_intro'];
-			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_page_header_landingpage']['field_page_header_landingpage_intro'];
+			$short_desc_query = $_POST['acf']['field_expertise_short_desc_query']; // Use This Page's Intro Text As the Short Description for This Page?
+			$short_desc = $_POST['acf']['field_expertise_short_desc']; // Short Description for This Page
+			$page_title_options = $type ? 'landingpage' : $_POST['acf']['field_expertise_page_title_options']; // Page Header Style
+			$page_header_graphic_intro = $_POST['acf']['field_expertise_page_title_graphic']['field_fad_page_header_graphic']['field_page_header_graphic_intro']; // Graphic Header Intro Text
+			$page_header_landingpage_intro = $_POST['acf']['field_expertise_page_title_landingpage']['field_fad_page_header_landingpage']['field_page_header_landingpage_intro']; // Marketing Landing Page Header Intro Text
 
 			// Set the excerpt variable value
 			if ( !$short_desc_query ) {

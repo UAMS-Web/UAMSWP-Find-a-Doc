@@ -85,7 +85,7 @@ function display_provider_image() {
 					$pid = get_field('physician_pid',$post_id);
 					$pid = ( $pid == 0 ) ? '' : $pid;
 					$sort_name = get_the_title($post_id);
-					$profile_url = get_the_permalink($post_id);
+					$profile_url = user_trailingslashit(get_the_permalink($post_id));
 
 					// Get slug
 					$profile_slug = get_post_field( 'post_name', $post_id );

@@ -55,42 +55,35 @@ $term = get_queried_object();
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 // Get system settings for this post type's archive page text
-include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-condition.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/condition.php' );
 
 // Override theme's method of defining the meta page title
 
 	// Construct the meta title
 
 		$meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
-		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
-			'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-			'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-			$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-		);
-			$meta_title = $meta_title_vars['meta_title']; // string
+		include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
 
 	// Modify SEOPress's standard meta title settings
 
@@ -162,10 +155,12 @@ get_header();
 	// Check for valid locations
 
 		$location_valid = false;
+		$location_section_show = false;
 		if ( $locations && $location_query->have_posts() ) {
 			foreach( $locations as $location ) {
 				if ( get_post_status ( $location ) == 'publish' ) {
 					$location_valid = true;
+					$location_section_show = true;
 					$break;
 				}
 			}
@@ -184,7 +179,7 @@ get_header();
 		ob_clean();
 		while ( $location_query->have_posts() ) : $location_query->the_post();
 			$page_id = get_the_ID();
-			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/html/cards/location.php' );
 		endwhile;
 		$location_content .= ob_get_clean();
 		$location_content .= '</div>';
@@ -332,7 +327,7 @@ get_header();
 											<?php
 												while ($provider_query->have_posts()) : $provider_query->the_post();
 													$page_id = get_the_ID();
-													include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+													include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 												endwhile;
 												wp_reset_postdata();
 											?>
@@ -378,7 +373,7 @@ get_header();
 								<?php 
 									while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
 										$page_id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+										include( UAMS_FAD_PATH . '/templates/parts/html/cards/expertise.php' );
 									endwhile;
 									wp_reset_postdata();
 								?>
@@ -388,9 +383,11 @@ get_header();
 					</div>
 				</div>
 			</section>
-			<?php endif; ?>
-		<?php
-			include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+			<?php endif;
+
+			$appointment_section_show = true; // It should always be displayed.
+			include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );
+
 		?>
 	</main>
 </div>

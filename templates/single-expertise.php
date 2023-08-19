@@ -4,15 +4,15 @@
  */
 
 // Define variables common to all area of expertise pages and fake subpages
-include( UAMS_FAD_PATH . '/templates/parts/page_expertise-vars.php' );
+include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/vars.php' );
 
 // Construct HEAD elements common to all area of expertise overview pages and all fake area of expertise subpages
-include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
+include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/construct-head.php' );
 
 // BODY
 
 	// Construct BODY elements common to all area of expertise overview pages and all fake area of expertise subpages
-	include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-body.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/construct-body.php' );
 
 	// MAIN / ARTICLE
 
@@ -142,18 +142,14 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 					endif;
 				}
 
-			// Check if podcast section should be displayed
-
-				$podcast_name = get_field('expertise_podcast_name');
-				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
-					$podcast_name // string
-				);
-					$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-
 			// Construct UAMS Health Talk podcast section
 
+				$podcast_name = get_field('expertise_podcast_name');
 				$podcast_filter = 'tag'; // string // Expected values: 'tag' or 'doctor'
 				$podcast_subject = $page_title; // string
+
+				// Check if podcast section should be displayed
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/podcast.php' );
 
 				add_action( 'genesis_after_entry', function() use (
 					$podcast_name,
@@ -161,12 +157,9 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 					$podcast_filter,
 					$podcast_subject
 				) {
-					uamswp_fad_podcast(
-						$podcast_name, // string
-						$podcast_section_show, // bool
-						$podcast_filter, // string // Expected values: 'tag' or 'doctor'
-						$podcast_subject // string
-					);
+
+					include( UAMS_FAD_PATH . '/templates/parts/html/section/podcast.php' );
+
 				}, 10 );
 
 			// Construct Combined Conditions and Treatments Section
@@ -180,6 +173,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 				$treatment_section_intro = $treatment_fpage_intro_expertise; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
 
 				add_action( 'genesis_after_entry', function() use (
+					$page_id,
 					$conditions_cpt,
 					$treatments_cpt,
 					$page_titles,
@@ -196,7 +190,7 @@ include( UAMS_FAD_PATH . '/templates/parts/page_expertise-construct-head.php' );
 					$treatment_section_title,
 					$treatment_section_intro
 				) {
-					include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/html/section/list/condition-treatment.php' );
 				}, 16 );
 
 genesis();

@@ -10,7 +10,7 @@
  * Designed for UAMS Health Find-a-Doc
  * 
  * Required vars:
- * 	$page_id // int // Post ID of the current page
+ * 	$page_id // int // ID of the current page
  * 	$clinical_resource_single_name // string // System setting for Clinical Resources single item name
  */
 
