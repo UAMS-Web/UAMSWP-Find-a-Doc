@@ -351,6 +351,7 @@
 		// Person
 		array(
 			'@type' => 'Person',
+			'additionalType' => 'https://www.wikidata.org/wiki/Q11974939', // health professional (Q11974939)
 			'@id' => 'https://uamshealth.com/provider/foo/#Person', // Replace 'foo' with provider profile slug
 			'name' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#Name', // Replace 'foo' with provider profile slug
