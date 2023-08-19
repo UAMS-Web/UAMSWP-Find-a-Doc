@@ -8,15 +8,19 @@
 		// MedicalWebPage
 		array(
 			'mentions' => array(
-				array( // Populate values for related provider items, repeating as necessary
-					'@id' => 'MedicalClinic', // Replace 'MedicalClinic' with 'Hospital' as necessary
-					'foo' => 'bar'
+				array( // Populate values for related location items, repeating as necessary
+					'@type' => 'MedicalClinic', // Replace 'MedicalClinic' with 'Hospital' as necessary
+					'foo' => 'bar',
+					'url' => array(
+						'@id' => 'https://uamshealth.com/location/foo/#URL', // Replace URL up to the hash with relevant URL
+						'https://uamshealth.com/location/foo/' // Replace URL up to the hash with relevant URL
+					)
 				)
 			),
 			'significantLink' => array(
-				'foo', // Replace 'foo' with URL to related location profiles // Repeat as necessary
-				'bar', // Replace 'bar' with URL to main location archive, if relevant
-				'baz' // Replace 'baz' with URL to parent item's location list, if relevant
+				array( // Repeat as necessary
+					'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace URL up to the hash with relevant URL
+				)
 			)
 		),
 	);

@@ -9,14 +9,18 @@
 		array(
 			'mentions' => array(
 				array( // Populate values for related expertise items, repeating as necessary
-					'@id' => 'MedicalWebPage',
-					'foo' => 'bar'
+					'@type' => 'MedicalEntity',
+					'foo' => 'bar',
+					'url' => array(
+						'@id' => 'https://uamshealth.com/expertise/foo/#URL', // Replace URL up to the hash with relevant URL
+						'https://uamshealth.com/expertise/foo/' // Replace URL up to the hash with relevant URL
+					)
 				)
 			),
 			'significantLink' => array(
-				'foo', // Replace 'foo' with URL to related expertise profiles // Repeat as necessary
-				'bar', // Replace 'bar' with URL to main expertise archive, if relevant
-				'baz' // Replace 'baz' with URL to parent item's expertise list, if relevant
+				array( // Repeat as necessary
+					'@id' => 'https://uamshealth.com/expertise/foo/#URL' // Replace URL up to the hash with relevant URL
+				)
 			)
 		),
 	);

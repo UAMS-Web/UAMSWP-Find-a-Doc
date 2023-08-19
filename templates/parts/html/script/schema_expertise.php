@@ -45,9 +45,6 @@
 				),
 				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
 			),
-			'mentions' => array(
-				'foo' // Replace 'foo' with MedicalSpecialty (Enumeration Type) associated with the area of expertise // Repeat as necessary
-v			),
 			'primaryImageOfPage' => array( // Header background image
 				'@type' => 'ImageObject',
 				'caption' => 'foo', // Replace 'foo' with the image's alt text

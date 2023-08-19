@@ -9,14 +9,18 @@
 		array(
 			'mentions' => array(
 				array( // Populate values for related provider items, repeating as necessary
-					'@id' => 'Person',
-					'foo' => 'bar'
+					'@type' => 'Person',
+					'foo' => 'bar',
+					'url' => array(
+						'@id' => 'https://uamshealth.com/provider/foo/#URL', // Replace URL up to the hash with relevant URL
+						'https://uamshealth.com/provider/foo/' // Replace URL up to the hash with relevant URL
+					)
 				)
 			),
 			'significantLink' => array(
-				'foo', // Replace 'foo' with URL to related provider profiles // Repeat as necessary
-				'bar', // Replace 'bar' with URL to main provider archive, if relevant
-				'baz' // Replace 'baz' with URL to parent item's provider list, if relevant
+				array( // Repeat as necessary
+					'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace URL up to the hash with relevant URL
+				)
 			)
 		),
 	);

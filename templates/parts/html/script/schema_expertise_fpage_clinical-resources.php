@@ -5,18 +5,22 @@
 // Integrate into array with '@type' => 'MedicalWebPage' in $schema_base['@graph'] related to the area of expertise
 
 	$schema_graph_MedicalWebPage = array(
-		// MedicalWebPage
-		array(
-			'mentions' => array(
-				array( // Populate values for related clinical resource items, repeating as necessary
-					'@id' => 'CreativeWork', // Replace 'CreativeWork' as relevant for each related clinical resource
-					'foo' => 'bar'
+	// MedicalWebPage
+	array(
+		'mentions' => array(
+			array( // Populate values for related clinical resource items, repeating as necessary
+				'@type' => 'CreativeWork', // Replace 'CreativeWork' as relevant for each related clinical resource
+				'foo' => 'bar',
+				'url' => array(
+					'@id' => 'https://uamshealth.com/clinical-resource/foo/#URL', // Replace URL up to the hash with relevant URL
+					'https://uamshealth.com/clinical-resource/foo/' // Replace URL up to the hash with relevant URL
 				)
-			),
-			'significantLink' => array(
-				'foo', // Replace 'foo' with URL to related clinical resource items // Repeat as necessary
-				'bar', // Replace 'bar' with URL to main clinical resource archive, if relevant
-				'baz' // Replace 'baz' with URL to parent item's clinical resource list, if relevant
 			)
 		),
-	);
+		'significantLink' => array(
+			array( // Repeat as necessary
+				'@id' => 'https://uamshealth.com/clinical-resource/foo/#URL' // Replace URL up to the hash with relevant URL
+			)
+		)
+	),
+);
