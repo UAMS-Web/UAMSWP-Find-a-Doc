@@ -108,53 +108,23 @@
 				)
 			),
 			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
-			'associatedMedia' => 'foo', // Replace 'foo' with ___
-			'audience' => 'foo', // Replace 'foo' with ___
+			'audience' => array(
+				array(
+					'@type' => 'Patient',
+					'name' => 'Patient',
+					'geographicArea' => 'Arkansas'
+				),
+				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
 			'audio' => 'foo', // Replace 'foo' with ___
-			'author' => 'foo', // Replace 'foo' with ___
-			'award' => 'foo', // Replace 'foo' with ___
-			'awards' => 'foo', // Replace 'foo' with ___
-			'character' => 'foo', // Replace 'foo' with ___
-			'citation' => 'foo', // Replace 'foo' with ___
-			'comment' => 'foo', // Replace 'foo' with ___
-			'commentCount' => 'foo', // Replace 'foo' with ___
-			'conditionsOfAccess' => 'foo', // Replace 'foo' with ___
-			'contentLocation' => 'foo', // Replace 'foo' with ___
-			'contentRating' => 'foo', // Replace 'foo' with ___
-			'contentReferenceTime' => 'foo', // Replace 'foo' with ___
-			'contributor' => 'foo', // Replace 'foo' with ___
-			'copyrightHolder' => 'foo', // Replace 'foo' with ___
-			'copyrightNotice' => 'foo', // Replace 'foo' with ___
-			'copyrightYear' => 'foo', // Replace 'foo' with ___
-			'correction' => 'foo', // Replace 'foo' with ___
-			'countryOfOrigin' => 'foo', // Replace 'foo' with ___
-			'creativeWorkStatus' => 'foo', // Replace 'foo' with ___
-			'creator' => 'foo', // Replace 'foo' with ___
-			'creditText' => 'foo', // Replace 'foo' with ___
-			'dateCreated' => 'foo', // Replace 'foo' with ___
+			'author' => array(
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
+			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
+				'@id' => 'https://uamshealth.com/#MedicalOrganization'
+			),
 			'dateModified' => 'foo', // Replace 'foo' with ___
 			'datePublished' => 'foo', // Replace 'foo' with ___
-			'description' => 'foo', // Replace 'foo' with ___
-			'disambiguatingDescription' => 'foo', // Replace 'foo' with ___
-			'discussionUrl' => 'foo', // Replace 'foo' with ___
-			'editEIDR' => 'foo', // Replace 'foo' with ___
-			'editor' => 'foo', // Replace 'foo' with ___
-			'educationalAlignment' => 'foo', // Replace 'foo' with ___
-			'educationalLevel' => 'foo', // Replace 'foo' with ___
-			'educationalUse' => 'foo', // Replace 'foo' with ___
-			'encoding' => 'foo', // Replace 'foo' with ___
-			'encodingFormat' => 'foo', // Replace 'foo' with ___
-			'encodings' => 'foo', // Replace 'foo' with ___
-			'exampleOfWork' => 'foo', // Replace 'foo' with ___
-			'expires' => 'foo', // Replace 'foo' with ___
-			'fileFormat' => 'foo', // Replace 'foo' with ___
-			'funder' => 'foo', // Replace 'foo' with ___
-			'funding' => 'foo', // Replace 'foo' with ___
-			'genre' => 'foo', // Replace 'foo' with ___
 			'hasPart' => 'foo', // Replace 'foo' with ___
-			'headline' => 'foo', // Replace 'foo' with ___
-			'identifier' => 'foo', // Replace 'foo' with ___
-			'image' => 'foo', // Replace 'foo' with ___
 			'inLanguage' => 'foo', // Replace 'foo' with ___
 			'interactionStatistic' => 'foo', // Replace 'foo' with ___
 			'interactivityType' => 'foo', // Replace 'foo' with ___
@@ -205,18 +175,20 @@
 			'text' => 'foo', // Replace 'foo' with ___
 			'thumbnail' => 'foo', // Replace 'foo' with ___
 			'thumbnailUrl' => 'foo', // Replace 'foo' with ___
-			'timeRequired' => 'foo', // Replace 'foo' with ___
-			'translationOfWork' => 'foo', // Replace 'foo' with ___
-			'translator' => 'foo', // Replace 'foo' with ___
-			'typicalAgeRange' => 'foo', // Replace 'foo' with ___
-			'url' => 'foo', // Replace 'foo' with ___
-			'usageInfo' => 'foo', // Replace 'foo' with ___
-			'version' => 'foo', // Replace 'foo' with ___
-			'video' => 'foo', // Replace 'foo' with ___
-			'workExample' => 'foo', // Replace 'foo' with ___
-			'workTranslation' => 'foo', // Replace 'foo' with ___
+			'url' => 'https://uamshealth.com/clinical-resource/foo/', // Replace 'foo' with clinical resource item slug
 			// Article
 			'articleBody' => 'foo', // Replace 'foo' with content of the article text
+			'image' => array( // Featured image
+				'@type' => 'ImageObject',
+				'caption' => 'foo', // Replace 'foo' with the image's alt text
+				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+				'height' => 'foo', // Replace 'foo' with the image's height
+				'representativeOfPage' => 'foo', // Replace 'foo' with whatever value we determine to be typical of a featured image // Boolean (Data Type)
+				'width' => 'foo' // Replace 'foo' with the image's width
+			),
+			'timeRequired' => 'foo', // Replace 'foo' with 9th grade reading speed of article (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
 			'speakable' => array(
 				'@type' => 'SpeakableSpecification',
 				'cssSelector' => array(
@@ -225,9 +197,18 @@
 			),
 			'wordCount' => 'foo', // Replace 'foo' with word count of the article text // Integer (Data Type)
 			// ImageObject
+			'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+			'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
 			'embeddedTextCaption' => 'foo', // Replace 'foo' with content of infographic transcript input
+			'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+			'height' => 'foo', // Replace 'foo' with the image's height
 			'representativeOfPage' => true,
+			'timeRequired' => 'foo', // Replace 'foo' with combo of 9th grade reading speed of Short Description + Transcript (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
+			'width' => 'foo' // Replace 'foo' with the image's width
 			// VideoObject
+			'duration' => 'foo', // Replace 'foo' with the duration of the video (in ISO 8601 duration format) if that info is available from YouTube/Vimeo
+			'embedUrl' => 'foo', // Replace 'foo' with the URL pointing to a player for the video. In general, this is the information in the src element of an embed tag.
+			'timeRequired' => 'foo', // Replace 'foo' with combo of 9th grade reading speed of Short Description + Transcript OR Short Description + video duration, whichever is greater (in ISO 8601 duration format, https://en.wikipedia.org/wiki/ISO_8601#Durations)
 			'transcript' => 'foo', // Replace 'foo' with content of video transcript input
 			'videoFrameSize' => 'foo', // Replace 'foo' with the frame size of the video if that info is available from YouTube/Vimeo
 			'videoQuality' => 'foo', // Replace 'foo' with the quality of the video if that info is available from YouTube/Vimeo
