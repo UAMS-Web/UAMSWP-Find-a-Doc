@@ -144,8 +144,8 @@
 						)
 					)
 				),
-				'logo' => 'foo',
-				'nonprofitStatus' => 'foo',
+				'logo' => 'foo', // Replace foo with __
+				'nonprofitStatus' => 'foo', // Replace foo with __
 				'sameAs' => 'https://en.wikipedia.org/wiki/University_of_Arkansas_for_Medical_Sciences',
 				'slogan' => 'For a Better State of Health',
 				'subOrganization' => array(
@@ -166,8 +166,8 @@
 					'postalCode' = '72205',
 					'streetAddress' = '4301 West Markham Street'
 				),
-				'contactPoint' => 'foo',
-				'description' => 'foo',
+				'contactPoint' => 'foo', // Replace foo with __
+				'description' => 'foo', // Replace foo with __
 				'location' => array(
 					array(
 						'@type' => 'Place',
@@ -278,12 +278,12 @@
 						)
 					)
 				),
-				'logo' => 'foo',
-				'nonprofitStatus' => 'foo',
+				'logo' => 'foo', // Replace foo with __
+				'nonprofitStatus' => 'foo', // Replace foo with __
 				'parentOrganization' => array(
 					'@id' => 'https://uams.edu/#CollegeOrUniversity'
 				),
-				'slogan' => 'foo',
+				'slogan' => 'foo', // Replace foo with __
 				'url' => 'https://uamshealth.com'
 			),
 			array(

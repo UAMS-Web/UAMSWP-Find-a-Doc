@@ -58,7 +58,7 @@
 				'@id' => 'https://uamshealth.com/expertise/foo/#MedicalWebPage' // Replace URL up to the hash with relevant URL
 			),
 			'medicineSystem' => array(
-				'foo' // Replace 'foo' with MedicineSystem Enumeration Type
+				'foo' // Replace 'foo' with MedicineSystem Enumeration Type // Repeat as necessary
 			),
 			'relevantSpecialty' => array(
 				'foo' // Replace foo with MedicalSpecialty (Enumeration Type) associated with the area of expertise // Repeat as necessary
