@@ -175,16 +175,16 @@
 					'faxNumber' => 'foo' // Replace 'foo' with fax number
 				),
 			),
-			'containedInPlace' => 'foo',  // Replace 'foo' with parent location / building / facility / campus
-			'containsPlace' => 'foo',  // Replace 'foo' with descendant location
+			'containedInPlace' => 'foo', // Replace 'foo' with parent location / building / facility / campus
+			'containsPlace' => 'foo', // Replace 'foo' with descendant location
 			'description' => 'foo', // Replace 'foo' with location description
-			'employee' => 'foo',  // Replace 'foo' with related providers as Person
+			'employee' => 'foo', // Replace 'foo' with related providers as Person
 			'geo' => array(
 				'@type' => 'GeoCoordinates',
 				'latitude' => 'foo', // Replace 'foo' with latitude
 				'longitude' => 'foo' // Replace 'foo' with longitude
 			),
-			'keywords' => 'foo',  // Replace 'foo' with titles of related ontology items
+			'keywords' => 'foo', // Replace 'foo' with titles of related ontology items
 			'mainEntityOfPage' => array(
 				'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace 'foo' with location item slug
 			),
@@ -216,7 +216,7 @@
 					'width' => 'foo' // Replace 'foo' with the image's width
 				)
 			),
-			'sameAs' => 'foo',  // Replace 'foo' with URL of Wikipedia page or location profile on 3rd-party website (e.g., 'https://www.archildrens.org/locations/arkansas-childrens')
+			'sameAs' => 'foo', // Replace 'foo' with URL of Wikipedia page or location profile on 3rd-party website (e.g., 'https://www.archildrens.org/locations/arkansas-childrens')
 			'smokingAllowed' => false,
 			'specialOpeningHoursSpecification' => array( // The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.
 				array( // Repeat as necessary
