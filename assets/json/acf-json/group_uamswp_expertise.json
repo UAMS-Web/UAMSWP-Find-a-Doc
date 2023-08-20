@@ -296,6 +296,22 @@
 			},
 			"multiple": 0
 		},
+		"field_expertise_schema_additional_rdf": {
+			"key": "field_expertise_schema_additional_rdf",
+			"name": "expertise_schema_additional_rdf",
+			"type": "url",
+			"label": "Specific RDF Class About This Area of Expertise",
+			"instructions": "Add a URI-identified RDF class that unambiguously indicates this area of expertise's identity (e.g., <a href='https://www.wikidata.org/wiki/Q729267' target='_blank'>https://www.wikidata.org/wiki/Q729267</a> for radiation oncology).</p><p class='description' style='margin-top: 0.5em;'>This will be used for the additionalType and sameAs Schema.org properties.</p><p class='description' style='margin-top: 0.5em;'>For information on the additionalType Schema.org property, visit <a href='https://schema.org/additionalType' target='_blank'>https://schema.org/additionalType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the sameAs Schema.org property, visit <a href='https://schema.org/sameAs' target='_blank'>https://schema.org/sameAs</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
 		"field_expertise_tab_header": {
 			"key": "field_expertise_tab_header",
 			"label": "Page Header Details",
