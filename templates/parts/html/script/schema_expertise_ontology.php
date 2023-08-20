@@ -37,12 +37,21 @@
 			'alternateName' => array(
 				'foo' // Replace 'foo' with alternate name // Repeat as necessary
 			),
-			'code' => array(
-				'@id' => 'https://taxonomy.nucc.org/?searchTerm=foo', // Replace 'foo' with taxonomy code (clinical title slug)
-				'@type' => 'MedicalCode',
-				'code' => 'foo', // Replace 'foo' with taxonomy code (currently, the clinical title slug)
-				'codingSystem' => 'Health Care Provider Taxonomy Code Set',
-				'name' => 'foo' // Replace 'foo' with taxonomy name (not the clinical title)
+			'code' => (
+				array(
+					'@id' => 'https://taxonomy.nucc.org/?searchTerm=foo', // Replace 'foo' with taxonomy code
+					'@type' => 'MedicalCode',
+					'code' => 'foo', // Replace 'foo' with taxonomy code (or the parent code to specialization in the UAMS Health extension to the code set)
+					'codingSystem' => 'Health Care Provider Taxonomy Code Set',
+					'name' => 'foo' // Replace 'foo' with name associated with taxonomy code (not the clinical title)
+				),
+				array(
+					'@id' => 'https://www.cms.gov/regulations-and-guidance/guidance/manuals/internet-only-manuals-ioms-items/cms019018#foo', // Replace 'foo' with specialty code (or the parent code to specialization in the UAMS Health extension to the code set)
+					'@type' => 'MedicalCode',
+					'code' => 'foo', // Replace 'foo' with specialty code (or the parent code to specialization in the UAMS Health extension to the code set)
+					'codingSystem' => 'Centers for Medicare & Medicaid Services Specialty Codes',
+					'name' => 'foo' // Replace 'foo' with name associated with taxonomy code (not the clinical title)
+				)
 			),
 			'description' => 'foo', // Replace 'foo' with excerpt / short description
 			'mainEntityOfPage' => array(
