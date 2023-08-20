@@ -920,7 +920,7 @@
 		},
 		"field_condition_tab_medicare": {
 			"key": "field_condition_tab_medicare",
-			"label": "Medicare Codes",
+			"label": "Related CMS Specialty Code",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -947,12 +947,30 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_medicare_code": {
-			"key": "field_clinical_specialization_medicare_code",
-			"name": "clinical_specialization_medicare_code",
-			"label": "Related Medicare Specialty Code",
+		"field_clinical_specialization_cms_code_source": {
+			"key": "field_clinical_specialization_cms_code_source",
+			"name": "",
+			"label": "How to Find the CMS Specialty Code",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "The official list of specialty codes can be found in Centers for Medicare & Medicaid Services <a href='https://www.cms.gov/regulations-and-guidance/guidance/manuals/internet-only-manuals-ioms-items/cms019018' target='_blank'>Publication 100-06: Medicare Financial Management Manual</a>; Chapter 6: Medicare Administrator Contractor (MAC) Financial Reports; Section 400.3: Specialty Codes.</p><p class='description' style='margin-top: 0.5em;'>Find which CMS specialty code is paired with each taxonomy code at Data.CMS.gov in the <a href='https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk/data' target='_blank'>Medicare Provider and Supplier Taxonomy Crosswalk</a>.</p><p class='description' style='margin-top: 0.5em;'>It can also be found on <a href='https://npidb.org/' target='_blank'>NPIdb.org</a> on each taxonomy code page (e.g., <a href='https://npidb.org/taxonomy/207LA0401X/' target='_blank'>https://npidb.org/taxonomy/207LA0401X/</a>).",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_cms_code": {
+			"key": "field_clinical_specialization_cms_code",
+			"name": "clinical_specialization_cms_code",
+			"label": "Related CMS Specialty Code",
 			"type": "text",
-			"instructions": "This information can be found on Data.CMS.gov in the <a href='https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk/data' target='_blank'>Medicare Provider and Supplier Taxonomy Crosswalk</a>.</p><p class='description' style='margin-top: 0.5em;'>It can also be found on <a href='https://npidb.org/' target='_blank'>NPIdb.org</a> on each taxonomy code page (e.g., <a href='https://npidb.org/taxonomy/207LA0401X/' target='_blank'>https://npidb.org/taxonomy/207LA0401X/</a>).</p><p class='description' style='margin-top: 0.5em;'>Example: \"79\" for taxonomy code 207LA0401X.",
+			"instructions": "Example: \"79\" for taxonomy code 207LA0401X.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -966,12 +984,12 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_medicare_type": {
-			"key": "field_clinical_specialization_medicare_type",
-			"name": "clinical_specialization_medicare_type",
-			"label": "Related Medicare Provider/Supplier Type",
+		"field_clinical_specialization_cms_code_type": {
+			"key": "field_clinical_specialization_cms_code_type",
+			"name": "clinical_specialization_cms_code_type",
+			"label": "Related CMS Provider/Supplier Type",
 			"type": "text",
-			"instructions": "This information can be found on Data.CMS.gov in the <a href='https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk/data' target='_blank'>Medicare Provider and Supplier Taxonomy Crosswalk</a>.</p><p class='description' style='margin-top: 0.5em;'>It can also be found on <a href='https://npidb.org/' target='_blank'>NPIdb.org</a> on each taxonomy code page (e.g., <a href='https://npidb.org/taxonomy/207LA0401X/' target='_blank'>https://npidb.org/taxonomy/207LA0401X/</a>).</p><p class='description' style='margin-top: 0.5em;'>Example: \"Physician/Addiction Medicine\" for taxonomy code 207LA0401X.",
+			"instructions": "Include \"Physician/\" at the beginning if the specialty code is in the list of Physician/Limited License Physician Specialty Codes.</p><p class='description' style='margin-top: 0.5em;'>Examples: \"Physician/Addiction Medicine\" for taxonomy code 207LA0401X, \"Certified Nurse Midwife\" for taxonomy code 367A00000X.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
