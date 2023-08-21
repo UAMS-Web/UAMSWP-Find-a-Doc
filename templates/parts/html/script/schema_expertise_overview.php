@@ -8,11 +8,11 @@
 		array(
 			'mentions' => array(
 				array( // Populate values for related condition items, repeating as necessary
-					'@id' => 'MedicalCondition',
+					'@type' => 'MedicalCondition',
 					'foo' => 'bar'
 				),
 				array( // Populate values for related treatment/procedure items, repeating as necessary
-					'@id' => 'MedicalProcedure',
+					'@type' => 'MedicalProcedure',
 					'foo' => 'bar'
 				)
 			),
