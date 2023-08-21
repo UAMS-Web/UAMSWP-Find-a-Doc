@@ -7,18 +7,18 @@
 		// MedicalWebPage
 		array(
 			'@type' => 'MedicalWebPage',
-			'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage', // Replace 'foo' with location item slug
+			'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage', // Replace URL up to the hash with relevant URL
 			'name' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#Name' // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#Name' // Replace URL up to the hash with relevant URL
 			),
 			'headline' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#Name' // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#Name' // Replace URL up to the hash with relevant URL
 			),
 			'about' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#Thing' // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#Thing' // Replace URL up to the hash with relevant URL
 			),
 			'breadcrumb' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#BreadcrumbList' // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#BreadcrumbList' // Replace URL up to the hash with relevant URL
 			),
 			'creator' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
@@ -31,7 +31,7 @@
 				'@id' => 'https://uamshealth.com/#WebSite'
 			),
 			'mainEntity' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic', // Replace 'foo' with location item slug // Replace 'MedicalClinic' with 'Hospital' if necessary
+				'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic', // Replace URL up to the hash with relevant URL // Replace 'MedicalClinic' with 'Hospital' if necessary
 			),
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
@@ -45,7 +45,7 @@
 			),
 			'mentions' => array(
 				array(
-					'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic' // Replace 'foo' with location item slug // Replace 'MedicalClinic' with 'Hospital' if necessary
+					'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic' // Replace URL up to the hash with relevant URL // Replace 'MedicalClinic' with 'Hospital' if necessary
 				),
 				array( // Populate values for related ontology items, repeating as necessary
 					'@id' => 'Thing',
@@ -69,7 +69,7 @@
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'url' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#URL', // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#URL', // Replace URL up to the hash with relevant URL
 				'https://uamshealth.com/provider/foo/' // Replace 'foo' with provider profile slug
 			),
 			'video' => 'foo' // Replace 'foo' with URL to video if relevant
@@ -77,7 +77,7 @@
 		// BreadcrumbList
 		array(
 			'@type' => 'BreadcrumbList',
-			'@id' => 'https://uamshealth.com/location/foo/#BreadcrumbList', // Replace 'foo' with location item slug
+			'@id' => 'https://uamshealth.com/location/foo/#BreadcrumbList', // Replace URL up to the hash with relevant URL
 			'itemListElement' => array(
 				array(
 					'@type' => 'ListItem',
@@ -103,7 +103,7 @@
 					'@type' => 'ListItem',
 					'position' => 3,
 					'item' => array(
-						'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace 'foo' with location item slug
+						'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace URL up to the hash with relevant URL
 					)
 				)
 			)
@@ -111,9 +111,9 @@
 		// Location as the thing
 		array(
 			'@type' => 'MedicalClinic', // Replace 'MedicalClinic' with 'Hospital' if necessary
-			'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic', // Replace 'foo' with location item slug // Replace 'MedicalClinic' with 'Hospital' if necessary
+			'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic', // Replace URL up to the hash with relevant URL // Replace 'MedicalClinic' with 'Hospital' if necessary
 			'name' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#Name', // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#Name', // Replace URL up to the hash with relevant URL
 				'foo', // Replace 'foo' with title of the location item
 			),
 			'address' => array(
@@ -175,18 +175,30 @@
 					'faxNumber' => 'foo' // Replace 'foo' with fax number
 				),
 			),
-			'containedInPlace' => 'foo', // Replace 'foo' with parent location / building / facility / campus
-			'containsPlace' => 'foo', // Replace 'foo' with descendant location
+			'containedInPlace' => array(
+				'@type' => 'MedicalClinic', // Add property/value pairs for parent location / building / facility / campus // Replace 'MedicalClinic' with 'Hospital' if necessary // Repeat as necessary
+			),
+			'containsPlace' => array(
+				array(
+					'@type' => 'MedicalClinic', // Add property/value pairs for descendant location // Repeat as necessary
+				)
+			),
 			'description' => 'foo', // Replace 'foo' with location description
-			'employee' => 'foo', // Replace 'foo' with related providers as Person
+			'employee' => array(
+				array(
+					'@type' => 'Person', // Add property/value pairs for related provider // Repeat as necessary
+				)
+			),
 			'geo' => array(
 				'@type' => 'GeoCoordinates',
 				'latitude' => 'foo', // Replace 'foo' with latitude
 				'longitude' => 'foo' // Replace 'foo' with longitude
 			),
-			'keywords' => 'foo', // Replace 'foo' with titles of related ontology items
+			'keywords' => array(
+				'foo' // Replace 'foo' with titles of related ontology item // Repeat as necessary
+			),
 			'mainEntityOfPage' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace URL up to the hash with relevant URL
 			),
 			'medicalSpecialty' => array(
 				'foo' // Replace foo with MedicalSpecialty (Enumeration Type) associated with the related area of expertise // Repeat as necessary
@@ -229,7 +241,7 @@
 				)
 			),
 			'subjectOf' => array(
-				'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace 'foo' with location item slug
+				'@id' => 'https://uamshealth.com/location/foo/#MedicalWebPage' // Replace URL up to the hash with relevant URL
 			),
 			'url' => 'https://uamshealth.com/location/foo/' // Replace 'foo' with location item slug
 		)
