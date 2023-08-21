@@ -39,11 +39,12 @@
 			),
 			'code' => (
 				array(
-					'@id' => 'https://taxonomy.nucc.org/?searchTerm=foo', // Replace 'foo' with taxonomy code
+					'@id' => 'https://taxonomy.nucc.org/?searchTerm=foo#MedicaCode', // Replace 'foo' with taxonomy code
 					'@type' => 'MedicalCode',
 					'code' => 'foo', // Replace 'foo' with taxonomy code (or the parent code to specialization in the UAMS Health extension to the code set)
 					'codingSystem' => 'Health Care Provider Taxonomy Code Set',
-					'name' => 'foo' // Replace 'foo' with name associated with taxonomy code (not the clinical title)
+					'name' => 'foo', // Replace 'foo' with name associated with taxonomy code (not the clinical title)
+					'url' => 'https://taxonomy.nucc.org/?searchTerm=foo' // Replace 'foo' with taxonomy code
 				),
 				array(
 					'@id' => 'https://www.cms.gov/regulations-and-guidance/guidance/manuals/internet-only-manuals-ioms-items/cms019018#foo', // Replace 'foo' with specialty code (or the parent code to specialization in the UAMS Health extension to the code set)
