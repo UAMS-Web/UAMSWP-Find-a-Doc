@@ -14,6 +14,10 @@
 				array( // Populate values for related treatment/procedure items, repeating as necessary
 					'@type' => 'MedicalProcedure',
 					'foo' => 'bar'
+				),
+				array( // Populate values for related treatment/procedure items, repeating as necessary
+					'@type' => 'MedicalTest',
+					'foo' => 'bar'
 				)
 			),
 			'significantLink' => array(
