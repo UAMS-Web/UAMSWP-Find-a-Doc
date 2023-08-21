@@ -103,6 +103,153 @@
 				}
 			]
 		},
+		"field_condition_tab_schema": {
+			"key": "field_condition_tab_schema",
+			"label": "Schema Data",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_condition_schema_medicalcode": {
+			"key": "field_condition_schema_medicalcode",
+			"label": "MedicalCode for This Condition",
+			"name": "condition_schema_medicalcode",
+			"type": "repeater",
+			"instructions": "A medical code for the condition, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the codingSystem Schema.org property, visit <a href='https://schema.org/codingSystem' target='_blank'>https://schema.org/codingSystem</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the codeValue Schema.org property, visit <a href='https://schema.org/codeValue' target='_blank'>https://schema.org/codeValue</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "",
+			"min": 0,
+			"max": "",
+			"layout": "block",
+			"button_label": "Add MedicalCode",
+			"sub_fields": [
+				{
+					"key": "field_condition_schema_medicalcode_codingsystem",
+					"label": "Coding System (codingSystem)",
+					"name": "condition_schema_medicalcode_codingsystem",
+					"type": "select",
+					"instructions": "Select from the list of coding systems or enter a custom option.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"ICD-9": "ICD-9",
+						"ICD-9-CM": "ICD-9-CM",
+						"ICD-10": "ICD-10",
+						"ICD-10-CM": "ICD-10-CM",
+						"DiseasesDB": "DiseasesDB",
+						"SNOMED-CT": "SNOMED-CT",
+						"RxNorm": "RxNorm"
+					},
+					"default_value": [],
+					"allow_null": 1,
+					"multiple": 0,
+					"ui": 1,
+					"ajax": 0,
+					"return_format": "value",
+					"allow_custom": 1,
+					"placeholder": "",
+					"acfe_settings": "",
+					"acfe_validate": ""
+				},
+				{
+					"key": "field_condition_schema_medicalcode_codevalue",
+					"label": "Code Value (codeValue)",
+					"name": "condition_schema_medicalcode_codevalue",
+					"type": "text",
+					"instructions": "A short textual code that uniquely identifies the value.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				},
+				{
+					"key": "field_condition_schema_medicalcode_name",
+					"name": "condition_schema_medicalcode_name",
+					"label": "Name Associated With the Code (name)",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				},
+				{
+					"key": "field_condition_schema_medicalcode__url",
+					"name": "condition_schema_medicalcode__url",
+					"label": "URL of the Code Description or Detail Page (url)",
+					"type": "url",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": ""
+				}
+			]
+		},
+		"field_condition_schema_additional_rdf": {
+			"key": "field_condition_schema_additional_rdf",
+			"name": "condition_schema_additional_rdf",
+			"type": "url",
+			"label": "Specific RDF Class About This Condition",
+			"instructions": "Add a URI-identified RDF class that unambiguously indicates this condition's identity (e.g., <a href='https://www.wikidata.org/wiki/Q729267' target='_blank'>https://www.wikidata.org/wiki/Q729267</a> for radiation oncology).</p><p class='description' style='margin-top: 0.5em;'>This will be used for the additionalType and sameAs Schema.org properties.</p><p class='description' style='margin-top: 0.5em;'>For information on the additionalType Schema.org property, visit <a href='https://schema.org/additionalType' target='_blank'>https://schema.org/additionalType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the sameAs Schema.org property, visit <a href='https://schema.org/sameAs' target='_blank'>https://schema.org/sameAs</a>.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
 		"field_condition_tab_treatments": {
 			"key": "field_condition_tab_treatments",
 			"label": "Related Treatments",
