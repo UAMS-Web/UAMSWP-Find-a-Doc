@@ -7,19 +7,19 @@
 		// WebPage
 		array(
 			'@type' => 'MedicalWebPage',
-			'@id' => 'https://uamshealth.com/provider/foo/#WebPage', // Replace 'foo' with provider profile slug
+			'@id' => 'https://uamshealth.com/provider/foo/#WebPage', // Replace URL up to the hash with relevant URL
 			'name' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace URL up to the hash with relevant URL
 			),
 			'headline' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace URL up to the hash with relevant URL
 			),
 			'about' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#Physician', // Replace 'foo' with provider profile slug
-				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Physician', // Replace URL up to the hash with relevant URL
+				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace URL up to the hash with relevant URL
 			),
 			'breadcrumb' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#BreadcrumbList' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#BreadcrumbList' // Replace URL up to the hash with relevant URL
 			),
 			'creator' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
@@ -32,7 +32,7 @@
 				'@id' => 'https://uamshealth.com/#WebSite'
 			),
 			'mainEntity' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace URL up to the hash with relevant URL
 			),
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
@@ -46,10 +46,10 @@
 			),
 			'mentions' => array(
 				array(
-					'@id' => 'https://uamshealth.com/provider/foo/#Physician' // Replace 'foo' with provider profile slug
+					'@id' => 'https://uamshealth.com/provider/foo/#Physician' // Replace URL up to the hash with relevant URL
 				),
 				array(
-					'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace 'foo' with provider profile slug
+					'@id' => 'https://uamshealth.com/provider/foo/#Person' // Replace URL up to the hash with relevant URL
 				),
 				array( // Populate values for related ontology items, repeating as necessary
 					'@id' => 'Thing',
@@ -73,15 +73,15 @@
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
 			'url' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#URL', // Replace 'foo' with provider profile slug
-				'https://uamshealth.com/provider/foo/' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#URL', // Replace URL up to the hash with relevant URL
+				'https://uamshealth.com/provider/foo/' // Replace URL with relevant URL
 			),
 			'video' => 'foo' // Replace 'foo' with URL to featured video
 		),
 		// BreadcrumbList
 		array(
 			'@type' => 'BreadcrumbList',
-			'@id' => 'https://uamshealth.com/provider/foo/#BreadcrumbList', // Replace 'foo' with provider profile slug
+			'@id' => 'https://uamshealth.com/provider/foo/#BreadcrumbList', // Replace URL up to the hash with relevant URL
 			'itemListElement' => array(
 				array(
 					'@type' => 'ListItem',
@@ -107,7 +107,7 @@
 					'@type' => 'ListItem',
 					'position' => 3,
 					'item' => array(
-						'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
+						'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace URL up to the hash with relevant URL
 					)
 				)
 			)
@@ -115,9 +115,9 @@
 		// Physician
 		array(
 			'@type' => 'Physician',
-			'@id' => 'https://uamshealth.com/provider/foo/#Physician', // Replace 'foo' with provider profile slug
+			'@id' => 'https://uamshealth.com/provider/foo/#Physician', // Replace URL up to the hash with relevant URL
 			'name' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Name' // Replace URL up to the hash with relevant URL
 			),
 			'aggregateRating' => array(
 				array(
@@ -342,19 +342,19 @@
 				)
 			),
 			'subjectOf' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace URL up to the hash with relevant URL
 			),
 			'url' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace URL up to the hash with relevant URL
 			),
 		),
 		// Person
 		array(
 			'@type' => 'Person',
 			'additionalType' => 'https://www.wikidata.org/wiki/Q11974939', // health professional (Q11974939)
-			'@id' => 'https://uamshealth.com/provider/foo/#Person', // Replace 'foo' with provider profile slug
+			'@id' => 'https://uamshealth.com/provider/foo/#Person', // Replace URL up to the hash with relevant URL
 			'name' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#Name', // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#Name', // Replace URL up to the hash with relevant URL
 				'foo', // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
 			)
 			'affiliation' => array(
@@ -423,7 +423,7 @@
 				)
 			),
 			'mainEntityOfPage' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace URL up to the hash with relevant URL
 			),
 			'memberOf' => array(
 				array( // Repeat as necessary
@@ -432,10 +432,10 @@
 				)
 			),
 			'subjectOf' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#WebPage' // Replace URL up to the hash with relevant URL
 			),
 			'url' => array(
-				'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace 'foo' with provider profile slug
+				'@id' => 'https://uamshealth.com/provider/foo/#URL' // Replace URL up to the hash with relevant URL
 			),
 			'workLocation' => array(
 				array( // Repeat for all associated locations
