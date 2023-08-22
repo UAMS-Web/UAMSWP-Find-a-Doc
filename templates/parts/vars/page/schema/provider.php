@@ -6,27 +6,234 @@ $schema_provider = $schema_common_base;
 
 // Get Values
 
-	$provider_url = 'https://uamshealth.com/provider/foo/';
+	// Provider URL
+	$provider_url = 'https://uamshealth.com/provider/foo/'; // Replace with relevant URL
 
-// Schema JSON Node IDs
+	// Provider Schema JSON Node IDs
 
-	// Provider as MedicalWebPage
-	$schema_provider_MedicalWebPage_id = $provider_url . '#MedicalWebPage';
+		// Provider as MedicalWebPage
+		$schema_provider_MedicalWebPage_id = $provider_url . '#MedicalWebPage';
 
-	// BreadcrumbList
-	$schema_provider_BreadcrumbList_id = $provider_url . '#BreadcrumbList';
+		// BreadcrumbList
+		$schema_provider_BreadcrumbList_id = $provider_url . '#BreadcrumbList';
 
-	// Provider as Physician
-	$schema_provider_Physician_id = $provider_url . '#Physician';
+		// Provider as Physician
+		$schema_provider_Physician_id = $provider_url . '#Physician';
 
-	// Provider as Person
-	$schema_provider_Person_id = $provider_url . '#Person';
+		// Provider as Person
+		$schema_provider_Person_id = $provider_url . '#Person';
+
+		// Provider name
+		$schema_provider_name_id = $provider_url . '#Name';
+
+		// Provider URL
+		$schema_provider_url_id = $provider_url . '#URL';
+
+	// Provider Date Modified
+	$provider_date_modified = '2022-09-27'; // Replace with relevant date value in ISO 8601 date format.
+
+	// Provider Date Published
+	$provider_date_published = '2022-09-02'; // Replace with relevant date value in ISO 8601 date format.
+
+	// Provider Excerpt / Description
+	$provider_excerpt = 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.'; // Replace 'foo' with excerpt / short description
+
+	// Related ontology items as schema arrays
+
+		// Related Locations
+
+			$provider_related_location = array(
+				'@id' => 'MedicalClinic', // or 'Hospital'
+				'foo' => 'bar'
+			);
+
+		// Related Areas of Expertise
+
+			$provider_related_expertise = array(
+				'@id' => 'MedicalEntity',
+				'foo' => 'bar'
+			);
+
+		// Related Clinical Resources
+
+			$provider_related_clinical_resource = array(
+				'@id' => 'Article', // or 'ImageObject' or 'DigitalDocument' or 'VideoObject'
+				'foo' => 'bar'
+			);
+
+		// Related Conditions
+
+			$provider_related_condition = array(
+				'@id' => 'MedicalCondition', // or subtypes
+				'foo' => 'bar'
+			);
+
+		// Related Treatments
+
+			$provider_related_treatment = array(
+				'@id' => 'MedicalProcedure', // or 'MedicalTest' or their subtypes
+				'foo' => 'bar'
+			);
+
+	// Provider mentions
+
+		// Base
+
+			$provider_mentions = array(
+				array(
+					'@id' => $schema_provider_Physician_id
+				),
+				array(
+					'@id' => $schema_provider_Person_id
+				)
+			);
+
+		// Related Locations
+
+			$provider_mentions[] = $provider_related_location;
+
+		// Related Areas of Expertise
+
+			$provider_mentions[] = $provider_related_expertise;
+
+		// Related Clinical Resources
+
+			$provider_mentions[] = $provider_related_clinical_resource;
+
+		// Related Conditions
+
+			$provider_mentions[] = $provider_related_condition;
+
+		// Related Treatments
+
+			$provider_mentions[] = $provider_related_treatment;
+
+		// Remove empty items from the array
+
+			$provider_mentions = array_filter($provider_mentions);
 
 	// Provider name
-	$schema_provider_name_id = $provider_url . '#Name';
+	$provider_name = 'foo';
 
-	// Provider URL
-	$schema_provider_url_id = $provider_url . '#URL';
+	// Provider portrait
+
+		// Image ID
+		$provider_portrait = 'foo';
+
+		// Image Encoding Format
+		$provider_encoding_format = get_post_mime_type( $provider_portrait ); // e.g., 'image/jpeg'
+
+		// Image Values
+
+			// 1:1 Aspect Ratio
+
+				$provider_portrait_1_1 = wp_get_attachment_image_src( $provider_portrait, 'aspect-1-1' );
+				$provider_portrait_1_1_url = $provider_portrait_1_1[0];
+				$provider_portrait_1_1_width = $provider_portrait_1_1[1];
+				$provider_portrait_1_1_height = $provider_portrait_1_1[2];
+				$provider_portrait_1_1_size = '';
+
+			// 3:4 Aspect Ratio
+
+				$provider_portrait_3_4 = wp_get_attachment_image_src( $provider_portrait, 'aspect-3-4' );
+				$provider_portrait_3_4_url = $provider_portrait_3_4[0];
+				$provider_portrait_3_4_width = $provider_portrait_3_4[1];
+				$provider_portrait_3_4_height = $provider_portrait_3_4[2];
+				$provider_portrait_3_4_size = '';
+
+			// 4:3 Aspect Ratio
+
+				$provider_portrait_4_3 = wp_get_attachment_image_src( $provider_portrait, 'aspect-4-3' );
+				$provider_portrait_4_3_url = $provider_portrait_4_3[0];
+				$provider_portrait_4_3_width = $provider_portrait_4_3[1];
+				$provider_portrait_4_3_height = $provider_portrait_4_3[2];
+				$provider_portrait_4_3_size = '';
+
+			// 16:9 Aspect Ratio
+
+				$provider_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
+				$provider_portrait_16_9_url = $provider_portrait_16_9[0];
+				$provider_portrait_16_9_width = $provider_portrait_16_9[1];
+				$provider_portrait_16_9_height = $provider_portrait_16_9[2];
+				$provider_portrait_16_9_size = '';
+
+		// Image Objects
+
+			// Base object
+
+				$provider_portrait_image_object_base = array(
+					'@type' => 'ImageObject',
+					'caption' => $provider_name,
+					'encodingFormat' => $provider_encoding_format,
+					'representativeOfPage' => true,
+				);
+
+			// 1:1 Aspect Ratio
+
+				$provider_portrait_image_object[] = ksort(
+					array_filter(
+						array_merge(
+							$provider_portrait_image_object_base,
+							array(
+								'contentSize' => $provider_portrait_1_1_size,
+								'contentUrl' => $provider_portrait_url_1_1,
+								'height' => $provider_portrait_width_1_1,
+								'width' => $provider_portrait_height_1_1
+							)
+						)
+					)
+				);
+
+			// 3:4 Aspect Ratio
+
+				$provider_portrait_image_object[] = ksort(
+					array_filter(
+						array_merge(
+							$provider_portrait_image_object_base,
+							array(
+								'contentSize' => $provider_portrait_3_4_size,
+								'contentUrl' => $provider_portrait_url_3_4,
+								'height' => $provider_portrait_width_3_4,
+								'width' => $provider_portrait_height_3_4
+							)
+						)
+					)
+				);
+
+			// 4:3 Aspect Ratio
+
+				$provider_portrait_image_object[] = ksort(
+					array_filter(
+						array_merge(
+							$provider_portrait_image_object_base,
+							array(
+								'contentSize' => $provider_portrait_4_3_size,
+								'contentUrl' => $provider_portrait_url_4_3,
+								'height' => $provider_portrait_width_4_3,
+								'width' => $provider_portrait_height_4_3
+							)
+						)
+					)
+				);
+
+			// 16:9 Aspect Ratio
+
+				$provider_portrait_image_object[] = ksort(
+					array_filter(
+						array_merge(
+							$provider_portrait_image_object_base,
+							array(
+								'contentSize' => $provider_portrait_16_9_size,
+								'contentUrl' => $provider_portrait_url_16_9,
+								'height' => $provider_portrait_width_16_9,
+								'width' => $provider_portrait_height_16_9
+							)
+						)
+					)
+				);
+
+	// Provider featured video
+	$provider_video = 'foo';
 
 // Schema JSON Item Arrays
 
@@ -34,32 +241,32 @@ $schema_provider = $schema_common_base;
 
 		$schema_provider_MedicalWebPage = array(
 			'@type' => 'MedicalWebPage',
-			'@id' => $schema_provider_MedicalWebPage_id, // Replace URL up to the hash with relevant URL
+			'@id' => $schema_provider_MedicalWebPage_id,
 			'name' => array(
-				'@id' => $schema_provider_name_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_name_id
 			),
 			'headline' => array(
-				'@id' => $schema_provider_name_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_name_id
 			),
 			'about' => array(
-				'@id' => $schema_provider_Physician_id, // Replace URL up to the hash with relevant URL
-				'@id' => $schema_provider_Person_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_Physician_id,
+				'@id' => $schema_provider_Person_id
 			),
 			'breadcrumb' => array(
-				'@id' => $schema_provider_BreadcrumbList_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_BreadcrumbList_id
 			),
 			'creator' => array(
 				'@id' => $schema_base_org_uams_id
 			),
-			'dateModified' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
-			'datePublished' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
-			'description' => 'foo', // Replace 'foo' with excerpt / short description
+			'dateModified' => $provider_date_modified,
+			'datePublished' => $provider_date_published,
+			'description' => $provider_excerpt,
 			'inLanguage' => 'English',
 			'isPartOf' => array(
 				'@id' => $schema_base_website_uams_health_id
 			),
 			'mainEntity' => array(
-				'@id' => $schema_provider_Person_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_Person_id
 			),
 			'maintainer' => array(
 				'@id' => $schema_base_org_uams_id
@@ -71,28 +278,8 @@ $schema_provider = $schema_common_base;
 				),
 				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
 			),
-			'mentions' => array(
-				array(
-					'@id' => $schema_provider_Physician_id // Replace URL up to the hash with relevant URL
-				),
-				array(
-					'@id' => $schema_provider_Person_id // Replace URL up to the hash with relevant URL
-				),
-				array( // Populate values for related ontology items, repeating as necessary
-					'@id' => 'Thing',
-					'foo' => 'bar'
-				)
-			),
-			'primaryImageOfPage' => array( // Provider headshot
-				'@type' => 'ImageObject',
-				'caption' => 'foo', // Replace 'foo' with the image's alt text
-				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
-				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
-				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
-				'height' => 'foo', // Replace 'foo' with the image's height
-				'representativeOfPage' => true,
-				'width' => 'foo' // Replace 'foo' with the image's width
-			),
+			'mentions' => $provider_mentions,
+			'primaryImageOfPage' => $provider_portrait_image_object,
 			'significantLink' => array(
 				'foo' // Replace 'foo' with URLs to related ontology items, repeating as necessary
 			),
@@ -100,17 +287,17 @@ $schema_provider = $schema_common_base;
 				'@id' => $schema_base_org_uams_health_id
 			),
 			'url' => array(
-				'@id' => $schema_provider_url_id, // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_url_id,
 				$provider_url
 			),
-			'video' => 'foo' // Replace 'foo' with URL to featured video
+			'video' => $provider_video // Replace 'foo' with URL to featured video
 		);
 
 	// BreadcrumbList
 
 		$schema_provider_BreadcrumbList = array(
 			'@type' => 'BreadcrumbList',
-			'@id' => $schema_provider_BreadcrumbList_id, // Replace URL up to the hash with relevant URL
+			'@id' => $schema_provider_BreadcrumbList_id,
 			'itemListElement' => array(
 				array(
 					'@type' => 'ListItem',
@@ -136,7 +323,7 @@ $schema_provider = $schema_common_base;
 					'@type' => 'ListItem',
 					'position' => 3,
 					'item' => array(
-						'@id' => $schema_provider_MedicalWebPage_id // Replace URL up to the hash with relevant URL
+						'@id' => $schema_provider_MedicalWebPage_id
 					)
 				)
 			)
@@ -146,9 +333,9 @@ $schema_provider = $schema_common_base;
 
 		$schema_provider_Physician = (
 			'@type' => 'Physician',
-			'@id' => $schema_provider_Physician_id, // Replace URL up to the hash with relevant URL
+			'@id' => $schema_provider_Physician_id,
 			'name' => array(
-				'@id' => $schema_provider_name_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_name_id
 			),
 			'aggregateRating' => array(
 				array(
@@ -373,10 +560,10 @@ $schema_provider = $schema_common_base;
 				)
 			),
 			'subjectOf' => array(
-				'@id' => $schema_provider_MedicalWebPage_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_MedicalWebPage_id
 			),
 			'url' => array(
-				'@id' => $schema_provider_url_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_url_id
 			),
 		);
 
@@ -385,9 +572,9 @@ $schema_provider = $schema_common_base;
 		$schema_provider_Person = (
 			'@type' => 'Person',
 			'additionalType' => 'https://www.wikidata.org/wiki/Q11974939', // health professional (Q11974939)
-			'@id' => $schema_provider_Person_id, // Replace URL up to the hash with relevant URL
+			'@id' => $schema_provider_Person_id,
 			'name' => array(
-				'@id' => $schema_provider_name_id, // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_name_id,
 				'foo', // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
 			)
 			'affiliation' => array(
@@ -456,7 +643,7 @@ $schema_provider = $schema_common_base;
 				)
 			),
 			'mainEntityOfPage' => array(
-				'@id' => $schema_provider_MedicalWebPage_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_MedicalWebPage_id
 			),
 			'memberOf' => array(
 				array( // Repeat as necessary
@@ -465,10 +652,10 @@ $schema_provider = $schema_common_base;
 				)
 			),
 			'subjectOf' => array(
-				'@id' => $schema_provider_MedicalWebPage_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_MedicalWebPage_id
 			),
 			'url' => array(
-				'@id' => $schema_provider_url_id // Replace URL up to the hash with relevant URL
+				'@id' => $schema_provider_url_id
 			),
 			'workLocation' => array(
 				array( // Repeat for all associated locations
