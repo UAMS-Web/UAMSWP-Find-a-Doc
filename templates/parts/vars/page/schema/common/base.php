@@ -3,12 +3,12 @@
 $schema_common_base = array(
 	'@context' => 'https://schema.org/',
 	'@graph' => array(
-	),
+	)
 );
 
 // Add UAMS items to the array
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common_base.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
 
 	// UAMS as Parent Organization
 	$schema_common_base['@graph'][] = $schema_base_org_uams;

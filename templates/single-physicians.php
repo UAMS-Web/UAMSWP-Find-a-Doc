@@ -62,12 +62,14 @@
 		// Prefix (e.g., "Dr.")
 
 			$prefix = get_field('physician_prefix',$post->ID);
+			$prefix_attr = uamswp_attr_conversion($prefix);
 
 		// Degrees and credentials (e.g., M.D., Ph.D.)
 
 			$degrees = get_field('physician_degree',$post->ID);
 			$degree_count = $degrees ? count($degrees) : 0;
 			$degree_list = '';
+			$degree_attr_array = array();
 			$i = 1;
 
 			if ( $degrees ) {
@@ -76,6 +78,7 @@
 
 					$degree_name = get_term( $degree, 'degree');
 					$degree_list .= $degree_name->name;
+					$degree_attr_array[] = uamswp_attr_conversion($degree_name->name);
 
 					if ( $degree_count > $i ) {
 
@@ -195,7 +198,12 @@
 	// Get the featured image ID
 
 		$featured_image = get_post_thumbnail_id(); // int // Featured image ID
-		$featured_image = $featured_image ? $featured_image : '';
+		$featured_image = $featured_image ? : '';
+
+	// Get the wide image ID
+
+		$headshot_wide = get_field('physician_image_wide', $post->ID);
+		$headshot_wide = $headshot_wide ?: '';
 
 	// Schema image
 
@@ -861,6 +869,7 @@
 				$languages = get_field('physician_languages',$post->ID);
 				$language_count = $languages ? count($languages) : 0;
 				$language_list = '';
+				$language_attr_array = array();
 				$i = 1;
 
 				if ( $languages ) {
@@ -872,6 +881,7 @@
 						if ( is_object($language_name) ) {
 
 							$language_list .= $language_name->name;
+							$language_attr_array[] = uamswp_attr_conversion($language_name->name);
 
 							if ( $language_count > $i ) {
 
@@ -1805,9 +1815,6 @@
 							// Type: Physician
 							$schema_type = 'Physician'; // string
 
-							// Property: name
-							$schema_name = $full_name_attr; // string
-
 							// Property: address
 							$schema_address = isset($schema_address) ? $schema_address : ''; // array
 
@@ -1856,141 +1863,8 @@
 
 					// 	include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
 
-					// // Construct the schema script tag (v2)
-
-					// 	$uamswp_fad_schema_physician = array(
-					// 		'type'			=> 'Physician',
-					// 		'properties'	=> array(
-					// 			// Physician
-					// 				$availableService					=> '', // availableService
-					// 				$hospitalAffiliation				=> '', // hospitalAffiliation
-					// 				$medicalSpecialty					=> '', // medicalSpecialty
-					// 			// MedicalBusiness (no property vars)
-					// 			// LocalBusiness
-					// 				$currenciesAccepted					=> '', // currenciesAccepted
-					// 				$openingHours						=> '', // openingHours
-					// 				$paymentAccepted					=> '', // paymentAccepted
-					// 				$priceRange							=> '', // priceRange
-					// 			// MedicalOrganization
-					// 				$healthPlanNetworkId				=> '', // healthPlanNetworkId
-					// 				$isAcceptingNewPatients				=> '', // isAcceptingNewPatients
-					// 				$medicalSpecialty					=> '', // medicalSpecialty
-					// 			// Organization
-					// 				$actionableFeedbackPolicy			=> '', // actionableFeedbackPolicy
-					// 				$address							=> '', // address
-					// 				$aggregateRating					=> '', // aggregateRating
-					// 				$alumni								=> '', // alumni
-					// 				$areaServed							=> '', // areaServed
-					// 				$award								=> '', // award
-					// 				$brand								=> '', // brand
-					// 				$contactPoint						=> '', // contactPoint
-					// 				$correctionsPolicy					=> '', // correctionsPolicy
-					// 				$department							=> '', // department
-					// 				$dissolutionDate					=> '', // dissolutionDate
-					// 				$diversityPolicy					=> '', // diversityPolicy
-					// 				$diversityStaffingReport			=> '', // diversityStaffingReport
-					// 				$duns								=> '', // duns
-					// 				$email								=> '', // email
-					// 				$employee							=> '', // employee
-					// 				$ethicsPolicy						=> '', // ethicsPolicy
-					// 				$event								=> '', // event
-					// 				$faxNumber							=> '', // faxNumber
-					// 				$founder							=> '', // founder
-					// 				$foundingDate						=> '', // foundingDate
-					// 				$foundingLocation					=> '', // foundingLocation
-					// 				$funder								=> '', // funder
-					// 				$funding							=> '', // funding
-					// 				$globalLocationNumber				=> '', // globalLocationNumber
-					// 				$hasCredential						=> '', // hasCredential
-					// 				$hasMerchantReturnPolicy			=> '', // hasMerchantReturnPolicy
-					// 				$hasOfferCatalog					=> '', // hasOfferCatalog
-					// 				$hasPOS								=> '', // hasPOS
-					// 				$interactionStatistic				=> '', // interactionStatistic
-					// 				$isicV4								=> '', // isicV4
-					// 				$iso6523Code						=> '', // iso6523Code
-					// 				$keywords							=> '', // keywords
-					// 				$knowsAbout							=> '', // knowsAbout
-					// 				$knowsLanguage						=> '', // knowsLanguage
-					// 				$legalName							=> '', // legalName
-					// 				$leiCode							=> '', // leiCode
-					// 				$location							=> '', // location
-					// 				$logo								=> '', // logo
-					// 				$makesOffer							=> '', // makesOffer
-					// 				$member								=> '', // member
-					// 				$memberOf							=> '', // memberOf
-					// 				$naics								=> '', // naics
-					// 				$nonprofitStatus					=> '', // nonprofitStatus
-					// 				$numberOfEmployees					=> '', // numberOfEmployees
-					// 				$ownershipFundingInfo				=> '', // ownershipFundingInfo
-					// 				$owns								=> '', // owns
-					// 				$parentOrganization					=> '', // parentOrganization
-					// 				$publishingPrinciples				=> '', // publishingPrinciples
-					// 				$review								=> '', // review
-					// 				$seeks								=> '', // seeks
-					// 				$slogan								=> '', // slogan
-					// 				$sponsor							=> '', // sponsor
-					// 				$subOrganization					=> '', // subOrganization
-					// 				$taxID								=> '', // taxID
-					// 				$telephone							=> '', // telephone
-					// 				$unnamedSourcesPolicy				=> '', // unnamedSourcesPolicy
-					// 				$vatID								=> '', // vatID
-					// 			// Place
-					// 				$additionalProperty					=> '', // additionalProperty
-					// 				$address							=> '', // address
-					// 				$aggregateRating					=> '', // aggregateRating
-					// 				$amenityFeature						=> '', // amenityFeature
-					// 				$branchCode							=> '', // branchCode
-					// 				$containedInPlace					=> '', // containedInPlace
-					// 				$containsPlace						=> '', // containsPlace
-					// 				$event								=> '', // event
-					// 				$faxNumber							=> '', // faxNumber
-					// 				$geo								=> '', // geo
-					// 				$geoContains						=> '', // geoContains
-					// 				$geoCoveredBy						=> '', // geoCoveredBy
-					// 				$geoCovers							=> '', // geoCovers
-					// 				$geoCrosses							=> '', // geoCrosses
-					// 				$geoDisjoint						=> '', // geoDisjoint
-					// 				$geoEquals							=> '', // geoEquals
-					// 				$geoIntersects						=> '', // geoIntersects
-					// 				$geoOverlaps						=> '', // geoOverlaps
-					// 				$geoTouches							=> '', // geoTouches
-					// 				$geoWithin							=> '', // geoWithin
-					// 				$globalLocationNumber				=> '', // globalLocationNumber
-					// 				$hasDriveThroughService				=> '', // hasDriveThroughService
-					// 				$hasMap								=> '', // hasMap
-					// 				$isAccessibleForFree				=> '', // isAccessibleForFree
-					// 				$isicV4								=> '', // isicV4
-					// 				$keywords							=> '', // keywords
-					// 				$latitude							=> '', // latitude
-					// 				$logo								=> '', // logo
-					// 				$longitude							=> '', // longitude
-					// 				$maximumAttendeeCapacity			=> '', // maximumAttendeeCapacity
-					// 				$openingHoursSpecification			=> '', // openingHoursSpecification
-					// 				$photo								=> '', // photo
-					// 				$publicAccess						=> '', // publicAccess
-					// 				$review								=> '', // review
-					// 				$slogan								=> '', // slogan
-					// 				$smokingAllowed						=> '', // smokingAllowed
-					// 				$specialOpeningHoursSpecification	=> '', // specialOpeningHoursSpecification
-					// 				$telephone							=> '', // telephone
-					// 				$tourBookingPage					=> '', // tourBookingPage
-					// 			// Thing
-					// 				$additionalType						=> '', // additionalType
-					// 				$alternateName						=> '', // alternateName
-					// 				$description						=> '', // description
-					// 				$disambiguatingDescription			=> '', // disambiguatingDescription
-					// 				$identifier							=> '', // identifier
-					// 				$image								=> '', // image
-					// 				$mainEntityOfPage					=> '', // mainEntityOfPage
-					// 				$name								=> '', // name
-					// 				$potentialAction					=> '', // potentialAction
-					// 				$sameAs								=> '', // sameAs
-					// 				$subjectOf							=> '', // subjectOf
-					// 				$url								=> '' // url
-					// 		)
-					// 	);
-
-					// 	uamswp_fad_schema_construct($uamswp_fad_schema_physician);
+					// Construct the schema script tag (v2)
+					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/provider.php' );
 
 			} // endwhile // end of the loop
 

@@ -49,7 +49,7 @@
 
 				if ( is_array($element) ) {
 
-					if ( multiKeyExists( $element, $key ) ) {
+					if ( uamswp_fad_multi_key_exists( $element, $key ) ) {
 
 						return true;
 
@@ -221,7 +221,7 @@
 		$schema_line_break = "\n"; // the double quotes are important
 
 		// Construct schema JSON
-		$schema_block = uamswp_fad_schema_type_selector($input);
+		// $schema_block = uamswp_fad_schema_type_selector($input);
 
 		// Open script tag
 			echo '<script type="application/ld+json">';
@@ -229,7 +229,7 @@
 
 		// Encode JSON
 
-			echo json_encode($schema_block, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+			echo json_encode($input, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
 		// Close script tag
 
