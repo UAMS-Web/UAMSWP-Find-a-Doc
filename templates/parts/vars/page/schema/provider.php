@@ -235,6 +235,15 @@ $schema_provider = $schema_common_base;
 	// Provider featured video
 	$provider_video = 'foo';
 
+	// Provider ratings and reviews
+
+		$provider_aggregateRating_itemReviewed = array(
+			'@id' => $schema_provider_BreadcrumbList_id
+		);
+		$provider_aggregateRating_ratingCount = 'foo'; // Replace 'foo' with relevant value // Integer (Data Type)
+		$provider_aggregateRating_reviewCount = 'foo'; // Replace 'foo' with relevant value // Integer (Data Type)
+
+
 // Schema JSON Item Arrays
 
 	// Provider as MedicalWebPage
@@ -340,9 +349,9 @@ $schema_provider = $schema_common_base;
 			'aggregateRating' => array(
 				array(
 					'@type' => 'AggregateRating',
-					'itemReviewed' => 'foo', // Replace 'foo' with @id of relevant Thing (Physician or Person) // Thing
-					'ratingCount' => 'foo', // Replace 'foo' with relevant value // Integer (Data Type)
-					'reviewCount' => 'foo', // Replace 'foo' with relevant value // Integer (Data Type)
+					'itemReviewed' => $provider_aggregateRating_itemReviewed,
+					'ratingCount' => $provider_aggregateRating_ratingCount,
+					'reviewCount' => $provider_aggregateRating_reviewCount
 				)
 			),
 			'availableService' => array(
