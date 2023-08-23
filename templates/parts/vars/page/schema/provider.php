@@ -382,8 +382,9 @@ $schema_provider = $schema_common_base;
 						'streetAddress' = 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
-						'@type' => 'AdministrativeArea',
-						'name' => 'Arkansas'
+						'@type' => 'State',
+						'name' => 'Arkansas',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 					),
 					'brand' => array(
 						'@id' => $schema_base_org_uams_health_id // Replace array with relevant Organization (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
@@ -474,8 +475,9 @@ $schema_provider = $schema_common_base;
 						'streetAddress' = 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
-						'@type' => 'AdministrativeArea',
-						'name' => 'Arkansas'
+						'@type' => 'State',
+						'name' => 'Arkansas',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 					),
 					'brand' => array( // Keep if a UAMS location
 						'@id' => $schema_base_org_uams_health_id
@@ -679,8 +681,9 @@ $schema_provider = $schema_common_base;
 						'streetAddress' = 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
-						'@type' => 'AdministrativeArea',
-						'name' => 'Arkansas'
+						'@type' => 'State',
+						'name' => 'Arkansas',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 					),
 					'brand' => array( // Keep if a UAMS location
 						'@id' => $schema_base_org_uams_health_id

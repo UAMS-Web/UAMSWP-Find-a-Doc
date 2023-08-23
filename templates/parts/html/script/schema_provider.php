@@ -155,8 +155,9 @@
 						'streetAddress' = 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
-						'@type' => 'AdministrativeArea',
-						'name' => 'Arkansas'
+						'@type' => 'State',
+						'name' => 'Arkansas',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 					),
 					'brand' => array(
 						'@id' => 'https://uamshealth.com/#MedicalOrganization' // Replace array with relevant Organization (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
@@ -247,8 +248,9 @@
 						'streetAddress' = 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
-						'@type' => 'AdministrativeArea',
-						'name' => 'Arkansas'
+						'@type' => 'State',
+						'name' => 'Arkansas',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 					),
 					'brand' => array( // Keep if a UAMS location
 						'@id' => 'https://uamshealth.com/#MedicalOrganization'
@@ -450,8 +452,9 @@
 						'streetAddress' = 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
-						'@type' => 'AdministrativeArea',
-						'name' => 'Arkansas'
+						'@type' => 'State',
+						'name' => 'Arkansas',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 					),
 					'brand' => array( // Keep if a UAMS location
 						'@id' => 'https://uamshealth.com/#MedicalOrganization'

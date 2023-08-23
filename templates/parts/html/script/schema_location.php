@@ -125,8 +125,9 @@
 				'streetAddress' = 'foo' // Replace 'foo' with street address
 			),
 			'areaServed' => array(
-				'@type' => 'AdministrativeArea',
-				'name' => 'Arkansas'
+				'@type' => 'State',
+				'name' => 'Arkansas',
+				'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
 			),
 			'availableService' => array(
 				array( // Repeat as necessary
