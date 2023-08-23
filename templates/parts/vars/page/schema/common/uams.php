@@ -56,18 +56,11 @@
 
 	// location
 
-		// @id
-
-			$schema_base_org_uams['location']['@id'] = 'https://uams.edu#Location';
-
-			// Define reference to this 'CollegeOrUniversity' item's 'location' property
-	
-				$schema_base_org_uams_location_ref['@id'] = $schema_base_org_uams['location']['@id'] ?: '';
-
 		// Main UAMS campus in Little Rock
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'University of Arkansas for Medical Sciences',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -81,8 +74,9 @@
 
 		// UAMS East Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS East Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -96,8 +90,9 @@
 
 		// UAMS North Central Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS North Central Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -111,8 +106,9 @@
 
 		// UAMS Northeast Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS Northeast Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -126,8 +122,9 @@
 
 		// UAMS Northwest Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS Northwest Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -141,8 +138,9 @@
 
 		// UAMS South Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS South Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -156,8 +154,9 @@
 
 		// UAMS South Central Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS South Central Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -171,8 +170,9 @@
 
 		// UAMS Southwest Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS Southwest Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -186,8 +186,9 @@
 
 		// UAMS West Regional Campus
 
-			$schema_base_org_uams['location'][] = array(
+			$schema_base_org_uams_location[] = array(
 				'@type' => 'Place',
+				'@id' => '', // Defined later
 				'name' => 'UAMS West Regional Campus',
 				'address' => array(
 					'@type' => 'PostalAddress',
@@ -198,6 +199,21 @@
 					'streetAddress' => '1301 South E Street'
 				)
 			);
+
+		// Dynamically add IDs to each node and capture them in a new array
+
+			$schema_base_org_uams_location_ref = array();
+
+			foreach ( $schema_base_org_uams_location as $key => $value) {
+
+				$location_id = 'https://uams.edu#Location-' . str_replace(' ', '-', $schema_base_org_uams_location[$key]['name']);
+				$schema_base_org_uams_location[$key]['@id'] = $location_id;
+				$schema_base_org_uams_location_ref[]['@id'] = $location_id;
+
+			}
+
+		// Add the values to the schema array
+		$schema_base_org_uams['location'] = $schema_base_org_uams_location;
 
 	// logo
 
