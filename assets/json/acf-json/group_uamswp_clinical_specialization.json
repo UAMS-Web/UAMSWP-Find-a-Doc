@@ -709,8 +709,8 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_tab_code_set_extension": {
-			"key": "field_clinical_specialization_tab_code_set_extension",
+		"field_clinical_specialization_code_set_extension": {
+			"key": "field_clinical_specialization_code_set_extension",
 			"name": "",
 			"label": "Field Values for UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
 			"type": "message",
@@ -1038,8 +1038,8 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_clinical_specialization_tab_onet": {
-			"key": "field_clinical_specialization_tab_onet",
+		"field_clinical_specialization_tab_onetsoc": {
+			"key": "field_clinical_specialization_tab_onetsoc",
 			"label": "Related O*Net-SOC Occupation Code",
 			"name": "",
 			"type": "tab",
