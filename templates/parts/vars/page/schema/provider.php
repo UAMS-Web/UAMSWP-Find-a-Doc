@@ -29,6 +29,205 @@ $schema_provider = $schema_common_base;
 
 // Get Values
 
+	// ISCO-08
+
+		$isco_08 = array(
+			'2' => array(
+				'name' => 'Professionals',
+				'description' => 'Professionals increase the existing stock of knowledge; apply scientific or artistic concepts and theories; teach about the foregoing in a systematic manner; or engage in any combination of these activities. Competent performance in most occupations in this major group requires skills at the fourth ISCO skill level.',
+				'sameAs' => array()
+			),
+			'22' => array(
+				'name' => 'Health Professionals',
+				'description' => 'Health professionals conduct research,; improve or develop concepts, theories and operational methods; and apply scientific knowledge relating to medicine, nursing, dentistry, veterinary medicine, pharmacy, and promotion of health.  Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+				'sameAs' => array(
+					'2'
+				)
+			),
+			'221' => array(
+				'name' => 'Medical Doctors',
+				'description' => 'Medical doctors (physicians) study, diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans through the application of the principles and procedures of modern medicine. They plan, supervise and evaluate the implementation of care and treatment plans by other health care providers, and conduct medical education and research activities.',
+				'sameAs' => array(
+					'2',
+					'22'
+				)
+			),
+			'2211' => array(
+				'name' => 'Generalist Medical Practitioners',
+				'description' => 'Generalist medical practitioners (including family and primary care doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments and maintain general health in humans through application of the principles and procedures of modern medicine.  They do not limit their practice to certain disease categories or methods of treatment, and may assume responsibility for the provision of continuing and comprehensive medical care to individuals, families and communities.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'221'
+				)
+			),
+			'2212' => array(
+				'name' => 'Specialist Medical Practitioners',
+				'description' => 'Specialist medical practitioners (medical doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans, using specialized testing, diagnostic, medical, surgical, physical and psychiatric techniques through application of the principles and procedures of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct medical education and research in their chosen areas of specialization.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'221'
+				)
+			),
+			'222' => array(
+				'name' => 'Nursing and Midwifery Professionals',
+				'description' => 'Nursing and midwifery professionals provide treatment and care services for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They assume responsibility for the planning, management and evaluation of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures. ',
+				'sameAs' => array(
+					'2',
+					'22'
+				)
+			),
+			'2221' => array(
+				'name' => 'Nursing Professionals',
+				'description' => 'Nursing professionals provide treatment, support and care services for people who are in need of nursing care due to the effects of ageing, injury, illness or other physical or mental impairment, or potential risks to health. They assume responsibility for the planning and management of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'222'
+				)
+			),
+			'2222' => array(
+				'name' => 'Midwifery Professionals',
+				'description' => 'Midwifery professionals plan, manage, provide and evaluate midwifery care services before, during and after pregnancy and childbirth. They provide delivery care for reducing health risks to women and newborn children, working autonomously or in teams with other health care providers.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'222'
+				)
+			),
+			'223' => array(
+				'name' => 'Traditional and Complementary Medicine Professionals',
+				'description' => 'Traditional and complementary medicine professionals examine patients; prevent and treat illness, disease, injury and other physical and mental impairments; and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences originating in specific cultures.',
+				'sameAs' => array(
+					'2',
+					'22'
+				)
+			),
+			'2230' => array(
+				'name' => 'Traditional and Complementary Medicine Professionals',
+				'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences, originating in specific cultures.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'223'
+				)
+			),
+			'224' => array(
+				'name' => 'Paramedical Practitioners',
+				'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+				'sameAs' => array(
+					'2',
+					'22'
+				)
+			),
+			'2240' => array(
+				'name' => 'Paramedical Practitioners',
+				'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously, or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'224'
+				)
+			),
+			'225' => array(
+				'name' => 'Veterinarians',
+				'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals; specialize in the treatment of a particular animal group or in a particular area of specialization; or provide professional services to commercial firms producing biological and pharmaceutical products.',
+				'sameAs' => array(
+					'2',
+					'22'
+				)
+			),
+			'2250' => array(
+				'name' => 'Veterinarians',
+				'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular speciality area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'225'
+				)
+			),
+			'226' => array(
+				'name' => 'Other Health Professionals',
+				'description' => 'Other health professionals provide health services related to dentistry, pharmacy, environmental health and hygiene, occupational health and safety, physiotherapy, nutrition, hearing, speech, vision and rehabilitation therapies.  This minor group includes all human health professionals except doctors, traditional and complementary medicine practitioners, nurses, midwives and paramedical professionals.',
+				'sameAs' => array(
+					'2',)
+			),
+			'2261' => array(
+				'name' => 'Dentists',
+				'description' => 'Dentists diagnose, treat and prevent diseases, injuries and abnormalities of the teeth, mouth, jaws and associated tissues by applying the principles and procedures of modern dentistry. They use a broad range of specialized diagnostic, surgical and other techniques to promote and restore oral health.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2262' => array(
+				'name' => 'Pharmacists',
+				'description' => 'Pharmacists store, preserve, compound and dispense medicinal products and counsel on the proper use and adverse effects of drugs and medicines following prescriptions issued by medical doctors and other health professionals. They contribute to researching, testing, preparing, prescribing and monitoring medicinal therapies for optimizing human health.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2263' => array(
+				'name' => 'Environmental and Occupational Health and Hygiene Professionals',
+				'description' => 'Environmental and occupational health and hygiene professionals assess, plan and implement programmes to recognize, monitor and control environmental factors that can potentially affect human health, to ensure safe and healthy working conditions and to prevent disease or injury caused by chemical, physical, radiological and biological agents or ergonomic factors.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2264' => array(
+				'name' => 'Physiotherapists',
+				'description' => 'Physiotherapists assess, plan and implement rehabilitative programmes that improve or restore human motor functions, maximize movement ability, relieve pain syndromes, and treat or prevent physical challenges associated with injuries, diseases and other impairments. They apply a broad range of physical therapies and techniques such as movement, ultrasound, heating, laser and other techniques. ',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2265' => array(
+				'name' => 'Dieticians and Nutritionists',
+				'description' => 'Dieticians and nutritionists assess, plan and implement programmes to enhance the impact of food and nutrition on human health.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2266' => array(
+				'name' => 'Audiologists and Speech Therapists',
+				'description' => 'Audiologists and speech therapists evaluate, manage and treat physical disorders affecting human hearing, speech, communication and swallowing. They prescribe corrective devices or rehabilitative therapies for hearing loss, speech disorders and related sensory and neural problems, and provide counselling on hearing safety and communication performance.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2267' => array(
+				'name' => 'Optometrists and Ophthalmic Opticians',
+				'description' => 'Optometrists and ophthalmic opticians provide diagnosis, management and treatment services for disorders of the eyes and visual system. They counsel on eye care and prescribe optical aids or other therapies for visual disturbance.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			),
+			'2269' => array(
+				'name' => 'Health Professionals Not Elsewhere Classified ',
+				'description' => 'This unit group covers health professionals not classified elsewhere in Sub-major Group 22: Health Professionals. For instance, the group includes occupations such as podiatrist, occupational therapist, recreational therapist, chiropractor, osteopath and other professionals providing diagnostic, preventive, curative and rehabilitative health services.',
+				'sameAs' => array(
+					'2',
+					'22',
+					'226'
+				)
+			)
+		);
+
+
 	// Provider URL
 
 		$schema_provider_url = $page_url;
