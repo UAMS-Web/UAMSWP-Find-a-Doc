@@ -811,10 +811,10 @@
 		"field_clinical_specialization_valid": {
 			"key": "field_clinical_specialization_valid",
 			"name": "clinical_specialization_valid",
-			"type": "true_false",
+			"type": "button_group",
 			"label": "Is this clinical specialization a valid selection?",
 			"instructions": "Some taxonomy codes are strictly grouping codes for taxonomy codes within their group, and are not to be used as a taxonomy code (e.g., Pathology [207Z00000X]). One of the other codes within their group that describes provider practice, training and certification must be used instead.",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -829,11 +829,14 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 1,
-			"ui": 1,
-			"ui_on_text": "Yes",
-			"ui_off_text": "No"
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_clinical_specialization_title": {
 			"key": "field_clinical_specialization_title",
