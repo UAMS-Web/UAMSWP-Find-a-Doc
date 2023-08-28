@@ -11074,8 +11074,7 @@ function uamswp_prevent_orphan($string) {
 
 					// Common
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_common_vars = array();
+						global $post;
 
 						// Post Title (if current item is a fake subpage, title of the parent item)
 
@@ -11091,22 +11090,22 @@ function uamswp_prevent_orphan($string) {
 
 							// Add to the variables array
 
-								$expertise_profile_fields_common_vars['page_title'] = isset($page_title) ? $page_title : '';
-								$expertise_profile_fields_common_vars['page_titles'] = isset($page_titles) ? $page_titles : '';
+								$expertise_profile_fields_vars['page_title'] = isset($page_title) ? $page_title : '';
+								$expertise_profile_fields_vars['page_titles'] = isset($page_titles) ? $page_titles : '';
 
 						// Post URL (if current item is a fake subpage, URL of the parent item)
 
 							$page_url = user_trailingslashit(get_permalink());
 
 							// Add to the variables array
-							$expertise_profile_fields_common_vars['page_url'] = isset($page_url) ? $page_url : '';
+							$expertise_profile_fields_vars['page_url'] = isset($page_url) ? $page_url : '';
 
 						// Post Slug (if current item is a fake subpage, slug of the parent item)
 
 							$page_slug = $post->post_name;
 
 							// Add to the variables array
-							$expertise_profile_fields_common_vars['page_slug'] = isset($page_slug) ? $page_slug : '';
+							$expertise_profile_fields_vars['page_slug'] = isset($page_slug) ? $page_slug : '';
 
 						// Ontology / Content Type
 
@@ -11114,7 +11113,7 @@ function uamswp_prevent_orphan($string) {
 							$ontology_type = isset($ontology_type) ? $ontology_type : true; // Check if 'expertise_type' is not null, and if so, set value to true
 
 							// Add to the variables array
-							$expertise_profile_fields_common_vars['ontology_type'] = isset($ontology_type) ? $ontology_type : '';
+							$expertise_profile_fields_vars['ontology_type'] = isset($ontology_type) ? $ontology_type : '';
 
 						// Get system settings for text elements in an area of expertise subsection (or profile)
 
@@ -11122,60 +11121,60 @@ function uamswp_prevent_orphan($string) {
 
 							// Add to the variables array
 
-								$expertise_profile_fields_common_vars['expertise_page_title_options'] = isset($expertise_page_title_options) ? $expertise_page_title_options: '';
-								$expertise_profile_fields_common_vars['expertise_page_title'] = isset($expertise_page_title) ? $expertise_page_title: '';
-								$expertise_profile_fields_common_vars['expertise_page_intro'] = isset($expertise_page_intro) ? $expertise_page_intro: '';
-								$expertise_profile_fields_common_vars['expertise_page_image'] = isset($expertise_page_image) ? $expertise_page_image: '';
-								$expertise_profile_fields_common_vars['expertise_page_image_mobile'] = isset($expertise_page_image_mobile) ? $expertise_page_image_mobile: '';
-								$expertise_profile_fields_common_vars['expertise_short_desc'] = isset($expertise_short_desc) ? $expertise_short_desc: '';
-								$expertise_profile_fields_common_vars['provider_fpage_title_expertise'] = isset($provider_fpage_title_expertise) ? $provider_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_intro_expertise'] = isset($provider_fpage_intro_expertise) ? $provider_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_ref_main_title_expertise'] = isset($provider_fpage_ref_main_title_expertise) ? $provider_fpage_ref_main_title_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_ref_main_intro_expertise'] = isset($provider_fpage_ref_main_intro_expertise) ? $provider_fpage_ref_main_intro_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_ref_main_link_expertise'] = isset($provider_fpage_ref_main_link_expertise) ? $provider_fpage_ref_main_link_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_ref_top_title_expertise'] = isset($provider_fpage_ref_top_title_expertise) ? $provider_fpage_ref_top_title_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_ref_top_intro_expertise'] = isset($provider_fpage_ref_top_intro_expertise) ? $provider_fpage_ref_top_intro_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_ref_top_link_expertise'] = isset($provider_fpage_ref_top_link_expertise) ? $provider_fpage_ref_top_link_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_short_desc_expertise'] = isset($provider_fpage_short_desc_expertise) ? $provider_fpage_short_desc_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_title_expertise'] = isset($location_fpage_title_expertise) ? $location_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_intro_expertise'] = isset($location_fpage_intro_expertise) ? $location_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_short_desc_expertise'] = isset($location_fpage_short_desc_expertise) ? $location_fpage_short_desc_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_ref_main_title_expertise'] = isset($location_fpage_ref_main_title_expertise) ? $location_fpage_ref_main_title_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_ref_main_intro_expertise'] = isset($location_fpage_ref_main_intro_expertise) ? $location_fpage_ref_main_intro_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_ref_main_link_expertise'] = isset($location_fpage_ref_main_link_expertise) ? $location_fpage_ref_main_link_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_ref_top_title_expertise'] = isset($location_fpage_ref_top_title_expertise) ? $location_fpage_ref_top_title_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_ref_top_intro_expertise'] = isset($location_fpage_ref_top_intro_expertise) ? $location_fpage_ref_top_intro_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_ref_top_link_expertise'] = isset($location_fpage_ref_top_link_expertise) ? $location_fpage_ref_top_link_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_title_expertise'] = isset($expertise_descendant_fpage_title_expertise) ? $expertise_descendant_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_intro_expertise'] = isset($expertise_descendant_fpage_intro_expertise) ? $expertise_descendant_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_short_desc_expertise'] = isset($expertise_descendant_fpage_short_desc_expertise) ? $expertise_descendant_fpage_short_desc_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_ref_main_title_expertise'] = isset($expertise_descendant_fpage_ref_main_title_expertise) ? $expertise_descendant_fpage_ref_main_title_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_ref_main_intro_expertise'] = isset($expertise_descendant_fpage_ref_main_intro_expertise) ? $expertise_descendant_fpage_ref_main_intro_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_ref_main_link_expertise'] = isset($expertise_descendant_fpage_ref_main_link_expertise) ? $expertise_descendant_fpage_ref_main_link_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_title_expertise'] = isset($expertise_fpage_title_expertise) ? $expertise_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_intro_expertise'] = isset($expertise_fpage_intro_expertise) ? $expertise_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_short_desc_expertise'] = isset($expertise_fpage_short_desc_expertise) ? $expertise_fpage_short_desc_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_ref_main_title_expertise'] = isset($expertise_fpage_ref_main_title_expertise) ? $expertise_fpage_ref_main_title_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_ref_main_intro_expertise'] = isset($expertise_fpage_ref_main_intro_expertise) ? $expertise_fpage_ref_main_intro_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_ref_main_link_expertise'] = isset($expertise_fpage_ref_main_link_expertise) ? $expertise_fpage_ref_main_link_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_title_expertise'] = isset($clinical_resource_fpage_title_expertise) ? $clinical_resource_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_intro_expertise'] = isset($clinical_resource_fpage_intro_expertise) ? $clinical_resource_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_main_title_expertise'] = isset($clinical_resource_fpage_ref_main_title_expertise) ? $clinical_resource_fpage_ref_main_title_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_main_intro_expertise'] = isset($clinical_resource_fpage_ref_main_intro_expertise) ? $clinical_resource_fpage_ref_main_intro_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_main_link_expertise'] = isset($clinical_resource_fpage_ref_main_link_expertise) ? $clinical_resource_fpage_ref_main_link_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_top_title_expertise'] = isset($clinical_resource_fpage_ref_top_title_expertise) ? $clinical_resource_fpage_ref_top_title_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_top_intro_expertise'] = isset($clinical_resource_fpage_ref_top_intro_expertise) ? $clinical_resource_fpage_ref_top_intro_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_ref_top_link_expertise'] = isset($clinical_resource_fpage_ref_top_link_expertise) ? $clinical_resource_fpage_ref_top_link_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_more_text_expertise'] = isset($clinical_resource_fpage_more_text_expertise) ? $clinical_resource_fpage_more_text_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_more_link_text_expertise'] = isset($clinical_resource_fpage_more_link_text_expertise) ? $clinical_resource_fpage_more_link_text_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_more_link_descr_expertise'] = isset($clinical_resource_fpage_more_link_descr_expertise) ? $clinical_resource_fpage_more_link_descr_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_short_desc_expertise'] = isset($clinical_resource_fpage_short_desc_expertise) ? $clinical_resource_fpage_short_desc_expertise: '';
-								$expertise_profile_fields_common_vars['condition_fpage_title_expertise'] = isset($condition_fpage_title_expertise) ? $condition_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['condition_fpage_intro_expertise'] = isset($condition_fpage_intro_expertise) ? $condition_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['treatment_fpage_title_expertise'] = isset($treatment_fpage_title_expertise) ? $treatment_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['treatment_fpage_intro_expertise'] = isset($treatment_fpage_intro_expertise) ? $treatment_fpage_intro_expertise: '';
-								$expertise_profile_fields_common_vars['condition_treatment_fpage_title_expertise'] = isset($condition_treatment_fpage_title_expertise) ? $condition_treatment_fpage_title_expertise: '';
-								$expertise_profile_fields_common_vars['condition_treatment_fpage_intro_expertise'] = isset($condition_treatment_fpage_intro_expertise) ? $condition_treatment_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['expertise_page_title_options'] = isset($expertise_page_title_options) ? $expertise_page_title_options: '';
+								$expertise_profile_fields_vars['expertise_page_title'] = isset($expertise_page_title) ? $expertise_page_title: '';
+								$expertise_profile_fields_vars['expertise_page_intro'] = isset($expertise_page_intro) ? $expertise_page_intro: '';
+								$expertise_profile_fields_vars['expertise_page_image'] = isset($expertise_page_image) ? $expertise_page_image: '';
+								$expertise_profile_fields_vars['expertise_page_image_mobile'] = isset($expertise_page_image_mobile) ? $expertise_page_image_mobile: '';
+								$expertise_profile_fields_vars['expertise_short_desc'] = isset($expertise_short_desc) ? $expertise_short_desc: '';
+								$expertise_profile_fields_vars['provider_fpage_title_expertise'] = isset($provider_fpage_title_expertise) ? $provider_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_intro_expertise'] = isset($provider_fpage_intro_expertise) ? $provider_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_ref_main_title_expertise'] = isset($provider_fpage_ref_main_title_expertise) ? $provider_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_ref_main_intro_expertise'] = isset($provider_fpage_ref_main_intro_expertise) ? $provider_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_ref_main_link_expertise'] = isset($provider_fpage_ref_main_link_expertise) ? $provider_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_ref_top_title_expertise'] = isset($provider_fpage_ref_top_title_expertise) ? $provider_fpage_ref_top_title_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_ref_top_intro_expertise'] = isset($provider_fpage_ref_top_intro_expertise) ? $provider_fpage_ref_top_intro_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_ref_top_link_expertise'] = isset($provider_fpage_ref_top_link_expertise) ? $provider_fpage_ref_top_link_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_short_desc_expertise'] = isset($provider_fpage_short_desc_expertise) ? $provider_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_title_expertise'] = isset($location_fpage_title_expertise) ? $location_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_intro_expertise'] = isset($location_fpage_intro_expertise) ? $location_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_short_desc_expertise'] = isset($location_fpage_short_desc_expertise) ? $location_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_ref_main_title_expertise'] = isset($location_fpage_ref_main_title_expertise) ? $location_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_ref_main_intro_expertise'] = isset($location_fpage_ref_main_intro_expertise) ? $location_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_ref_main_link_expertise'] = isset($location_fpage_ref_main_link_expertise) ? $location_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_ref_top_title_expertise'] = isset($location_fpage_ref_top_title_expertise) ? $location_fpage_ref_top_title_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_ref_top_intro_expertise'] = isset($location_fpage_ref_top_intro_expertise) ? $location_fpage_ref_top_intro_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_ref_top_link_expertise'] = isset($location_fpage_ref_top_link_expertise) ? $location_fpage_ref_top_link_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_title_expertise'] = isset($expertise_descendant_fpage_title_expertise) ? $expertise_descendant_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_intro_expertise'] = isset($expertise_descendant_fpage_intro_expertise) ? $expertise_descendant_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_short_desc_expertise'] = isset($expertise_descendant_fpage_short_desc_expertise) ? $expertise_descendant_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_ref_main_title_expertise'] = isset($expertise_descendant_fpage_ref_main_title_expertise) ? $expertise_descendant_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_ref_main_intro_expertise'] = isset($expertise_descendant_fpage_ref_main_intro_expertise) ? $expertise_descendant_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_ref_main_link_expertise'] = isset($expertise_descendant_fpage_ref_main_link_expertise) ? $expertise_descendant_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_title_expertise'] = isset($expertise_fpage_title_expertise) ? $expertise_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_intro_expertise'] = isset($expertise_fpage_intro_expertise) ? $expertise_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_short_desc_expertise'] = isset($expertise_fpage_short_desc_expertise) ? $expertise_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_ref_main_title_expertise'] = isset($expertise_fpage_ref_main_title_expertise) ? $expertise_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_ref_main_intro_expertise'] = isset($expertise_fpage_ref_main_intro_expertise) ? $expertise_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_ref_main_link_expertise'] = isset($expertise_fpage_ref_main_link_expertise) ? $expertise_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_title_expertise'] = isset($clinical_resource_fpage_title_expertise) ? $clinical_resource_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_intro_expertise'] = isset($clinical_resource_fpage_intro_expertise) ? $clinical_resource_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_ref_main_title_expertise'] = isset($clinical_resource_fpage_ref_main_title_expertise) ? $clinical_resource_fpage_ref_main_title_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_ref_main_intro_expertise'] = isset($clinical_resource_fpage_ref_main_intro_expertise) ? $clinical_resource_fpage_ref_main_intro_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_ref_main_link_expertise'] = isset($clinical_resource_fpage_ref_main_link_expertise) ? $clinical_resource_fpage_ref_main_link_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_ref_top_title_expertise'] = isset($clinical_resource_fpage_ref_top_title_expertise) ? $clinical_resource_fpage_ref_top_title_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_ref_top_intro_expertise'] = isset($clinical_resource_fpage_ref_top_intro_expertise) ? $clinical_resource_fpage_ref_top_intro_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_ref_top_link_expertise'] = isset($clinical_resource_fpage_ref_top_link_expertise) ? $clinical_resource_fpage_ref_top_link_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_more_text_expertise'] = isset($clinical_resource_fpage_more_text_expertise) ? $clinical_resource_fpage_more_text_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_more_link_text_expertise'] = isset($clinical_resource_fpage_more_link_text_expertise) ? $clinical_resource_fpage_more_link_text_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_more_link_descr_expertise'] = isset($clinical_resource_fpage_more_link_descr_expertise) ? $clinical_resource_fpage_more_link_descr_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_short_desc_expertise'] = isset($clinical_resource_fpage_short_desc_expertise) ? $clinical_resource_fpage_short_desc_expertise: '';
+								$expertise_profile_fields_vars['condition_fpage_title_expertise'] = isset($condition_fpage_title_expertise) ? $condition_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['condition_fpage_intro_expertise'] = isset($condition_fpage_intro_expertise) ? $condition_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['treatment_fpage_title_expertise'] = isset($treatment_fpage_title_expertise) ? $treatment_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['treatment_fpage_intro_expertise'] = isset($treatment_fpage_intro_expertise) ? $treatment_fpage_intro_expertise: '';
+								$expertise_profile_fields_vars['condition_treatment_fpage_title_expertise'] = isset($condition_treatment_fpage_title_expertise) ? $condition_treatment_fpage_title_expertise: '';
+								$expertise_profile_fields_vars['condition_treatment_fpage_intro_expertise'] = isset($condition_treatment_fpage_intro_expertise) ? $condition_treatment_fpage_intro_expertise: '';
 
 						// Get system settings for area of expertise profile image elements
 
@@ -11183,67 +11182,70 @@ function uamswp_prevent_orphan($string) {
 
 							// Add to the variables array
 
-								$expertise_profile_fields_common_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image: '';
-								$expertise_profile_fields_common_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url: '';
-								$expertise_profile_fields_common_vars['provider_fpage_featured_image_expertise'] = isset($provider_fpage_featured_image_expertise) ? $provider_fpage_featured_image_expertise: '';
-								$expertise_profile_fields_common_vars['provider_fpage_featured_image_expertise_url'] = isset($provider_fpage_featured_image_expertise_url) ? $provider_fpage_featured_image_expertise_url: '';
-								$expertise_profile_fields_common_vars['location_fpage_featured_image_expertise'] = isset($location_fpage_featured_image_expertise) ? $location_fpage_featured_image_expertise: '';
-								$expertise_profile_fields_common_vars['location_fpage_featured_image_expertise_url'] = isset($location_fpage_featured_image_expertise_url) ? $location_fpage_featured_image_expertise_url: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_featured_image_expertise'] = isset($expertise_fpage_featured_image_expertise) ? $expertise_fpage_featured_image_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_fpage_featured_image_expertise_url'] = isset($expertise_fpage_featured_image_expertise_url) ? $expertise_fpage_featured_image_expertise_url: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_featured_image_expertise'] = isset($expertise_descendant_fpage_featured_image_expertise) ? $expertise_descendant_fpage_featured_image_expertise: '';
-								$expertise_profile_fields_common_vars['expertise_descendant_fpage_featured_image_expertise_url'] = isset($expertise_descendant_fpage_featured_image_expertise_url) ? $expertise_descendant_fpage_featured_image_expertise_url: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_featured_image_expertise'] = isset($clinical_resource_fpage_featured_image_expertise) ? $clinical_resource_fpage_featured_image_expertise: '';
-								$expertise_profile_fields_common_vars['clinical_resource_fpage_featured_image_expertise_url'] = isset($clinical_resource_fpage_featured_image_expertise_url) ? $clinical_resource_fpage_featured_image_expertise_url: '';
-
+								$expertise_profile_fields_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image: '';
+								$expertise_profile_fields_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url: '';
+								$expertise_profile_fields_vars['provider_fpage_featured_image_expertise'] = isset($provider_fpage_featured_image_expertise) ? $provider_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_vars['provider_fpage_featured_image_expertise_url'] = isset($provider_fpage_featured_image_expertise_url) ? $provider_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_vars['location_fpage_featured_image_expertise'] = isset($location_fpage_featured_image_expertise) ? $location_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_vars['location_fpage_featured_image_expertise_url'] = isset($location_fpage_featured_image_expertise_url) ? $location_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_vars['expertise_fpage_featured_image_expertise'] = isset($expertise_fpage_featured_image_expertise) ? $expertise_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_vars['expertise_fpage_featured_image_expertise_url'] = isset($expertise_fpage_featured_image_expertise_url) ? $expertise_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_featured_image_expertise'] = isset($expertise_descendant_fpage_featured_image_expertise) ? $expertise_descendant_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_vars['expertise_descendant_fpage_featured_image_expertise_url'] = isset($expertise_descendant_fpage_featured_image_expertise_url) ? $expertise_descendant_fpage_featured_image_expertise_url: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_featured_image_expertise'] = isset($clinical_resource_fpage_featured_image_expertise) ? $clinical_resource_fpage_featured_image_expertise: '';
+								$expertise_profile_fields_vars['clinical_resource_fpage_featured_image_expertise_url'] = isset($clinical_resource_fpage_featured_image_expertise_url) ? $clinical_resource_fpage_featured_image_expertise_url: '';
+					
 						// Get the ontology subsection values
 
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 							// Add to the variables array
 
-								$expertise_profile_fields_common_vars['site_nav_id'] = isset($site_nav_id) ? $site_nav_id: '';
-								$expertise_profile_fields_common_vars['site_nav_title'] = isset($site_nav_title) ? $site_nav_title: '';
-								$expertise_profile_fields_common_vars['site_nav_title_attr'] = isset($site_nav_title_attr) ? $site_nav_title_attr: '';
-								$expertise_profile_fields_common_vars['site_nav_url'] = isset($site_nav_url) ? $site_nav_url: '';
-								$expertise_profile_fields_common_vars['navbar_subbrand_title'] = isset($navbar_subbrand_title) ? $navbar_subbrand_title: '';
-								$expertise_profile_fields_common_vars['navbar_subbrand_title_attr'] = isset($navbar_subbrand_title_attr) ? $navbar_subbrand_title_attr: '';
-								$expertise_profile_fields_common_vars['navbar_subbrand_title_url'] = isset($navbar_subbrand_title_url) ? $navbar_subbrand_title_url: '';
-								$expertise_profile_fields_common_vars['navbar_subbrand_parent'] = isset($navbar_subbrand_parent) ? $navbar_subbrand_parent: '';
-								$expertise_profile_fields_common_vars['navbar_subbrand_parent_attr'] = isset($navbar_subbrand_parent_attr) ? $navbar_subbrand_parent_attr: '';
-								$expertise_profile_fields_common_vars['navbar_subbrand_parent_url'] = isset($navbar_subbrand_parent_url) ? $navbar_subbrand_parent_url: '';
-								$expertise_profile_fields_common_vars['providers'] = isset($providers) ? $providers: '';
-								$expertise_profile_fields_common_vars['locations'] = isset($locations) ? $locations: '';
-								$expertise_profile_fields_common_vars['expertises'] = isset($expertises) ? $expertises: '';
-								$expertise_profile_fields_common_vars['expertise_descendants'] = isset($expertise_descendants) ? $expertise_descendants: '';
-								$expertise_profile_fields_common_vars['clinical_resources'] = isset($clinical_resources) ? $clinical_resources: '';
-								$expertise_profile_fields_common_vars['conditions_cpt'] = isset($conditions_cpt) ? $conditions_cpt: '';
-								$expertise_profile_fields_common_vars['treatments_cpt'] = isset($treatments_cpt) ? $treatments_cpt: '';
-								$expertise_profile_fields_common_vars['ancestors_ontology_farthest'] = isset($ancestors_ontology_farthest) ? $ancestors_ontology_farthest: '';
-								$expertise_profile_fields_common_vars['page_top_level_query'] = isset($page_top_level_query) ? $page_top_level_query: '';
-
+								$expertise_profile_fields_vars['site_nav_id'] = isset($site_nav_id) ? $site_nav_id: '';
+								$expertise_profile_fields_vars['site_nav_title'] = isset($site_nav_title) ? $site_nav_title: '';
+								$expertise_profile_fields_vars['site_nav_title_attr'] = isset($site_nav_title_attr) ? $site_nav_title_attr: '';
+								$expertise_profile_fields_vars['site_nav_url'] = isset($site_nav_url) ? $site_nav_url: '';
+								$expertise_profile_fields_vars['navbar_subbrand_title'] = isset($navbar_subbrand_title) ? $navbar_subbrand_title: '';
+								$expertise_profile_fields_vars['navbar_subbrand_title_attr'] = isset($navbar_subbrand_title_attr) ? $navbar_subbrand_title_attr: '';
+								$expertise_profile_fields_vars['navbar_subbrand_title_url'] = isset($navbar_subbrand_title_url) ? $navbar_subbrand_title_url: '';
+								$expertise_profile_fields_vars['navbar_subbrand_parent'] = isset($navbar_subbrand_parent) ? $navbar_subbrand_parent: '';
+								$expertise_profile_fields_vars['navbar_subbrand_parent_attr'] = isset($navbar_subbrand_parent_attr) ? $navbar_subbrand_parent_attr: '';
+								$expertise_profile_fields_vars['navbar_subbrand_parent_url'] = isset($navbar_subbrand_parent_url) ? $navbar_subbrand_parent_url: '';
+								$expertise_profile_fields_vars['providers'] = isset($providers) ? $providers: '';
+								$expertise_profile_fields_vars['locations'] = isset($locations) ? $locations: '';
+								$expertise_profile_fields_vars['expertises'] = isset($expertises) ? $expertises: '';
+								$expertise_profile_fields_vars['expertise_descendants'] = isset($expertise_descendants) ? $expertise_descendants: '';
+								$expertise_profile_fields_vars['clinical_resources'] = isset($clinical_resources) ? $clinical_resources: '';
+								$expertise_profile_fields_vars['conditions_cpt'] = isset($conditions_cpt) ? $conditions_cpt: '';
+								$expertise_profile_fields_vars['treatments_cpt'] = isset($treatments_cpt) ? $treatments_cpt: '';
+								$expertise_profile_fields_vars['ancestors_ontology_farthest'] = isset($ancestors_ontology_farthest) ? $ancestors_ontology_farthest: '';
+								$expertise_profile_fields_vars['page_top_level_query'] = isset($page_top_level_query) ? $page_top_level_query: '';
+					
 						// Post Featured Image (if current item is a fake subpage, featured image of the parent item)
 
 							$featured_image = $expertise_featured_image; // Image ID
 							$featured_image = $featured_image ? $featured_image : '';
 
 							// Add to the variables array
-							$expertise_profile_fields_common_vars['featured_image'] = isset($featured_image) ? $featured_image : '';
+							$expertise_profile_fields_vars['featured_image'] = isset($featured_image) ? $featured_image : '';
 
 						// Page template class
 
 							$template_type = 'default';
 
 							// Add to the variables array
-							$expertise_profile_fields_common_vars['template_type'] = isset($template_type) ? $template_type : '';
+							$expertise_profile_fields_vars['template_type'] = isset($template_type) ? $template_type : '';
 
 						// Meta title
+
+							// Get system settings for area of expertise labels
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 							$meta_title_enhanced_addition = $expertise_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
 							include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
 
 							// Add to the variables array
-							$expertise_profile_fields_common_vars['meta_title'] = isset($meta_title) ? $meta_title : '';
+							$expertise_profile_fields_vars['meta_title'] = isset($meta_title) ? $meta_title : '';
 
 						// Meta Description and Schema Description
 
@@ -11265,17 +11267,17 @@ function uamswp_prevent_orphan($string) {
 
 							// Add to the variables array
 
-								$expertise_profile_fields_common_vars['excerpt'] = isset($excerpt) ? $excerpt : '';
-								$expertise_profile_fields_common_vars['excerpt_attr'] = isset($excerpt_attr) ? $excerpt_attr : '';
-								$expertise_profile_fields_common_vars['excerpt_user'] = isset($excerpt_user) ? $excerpt_user : '';
-								$expertise_profile_fields_common_vars['schema_description'] = isset($schema_description) ? $schema_description : '';
+								$expertise_profile_fields_vars['excerpt'] = isset($excerpt) ? $excerpt : '';
+								$expertise_profile_fields_vars['excerpt_attr'] = isset($excerpt_attr) ? $excerpt_attr : '';
+								$expertise_profile_fields_vars['excerpt_user'] = isset($excerpt_user) ? $excerpt_user : '';
+								$expertise_profile_fields_vars['schema_description'] = isset($schema_description) ? $schema_description : '';
 
 							// Meta Keywords
 
 								$keywords = get_field('expertise_alternate_names');
 
 								// Add to the variables array
-								$expertise_profile_fields_common_vars['keywords'] = isset($keywords) ? $keywords : '';
+								$expertise_profile_fields_vars['keywords'] = isset($keywords) ? $keywords : '';
 
 							// Meta Social Media Tags
 
@@ -11284,43 +11286,43 @@ function uamswp_prevent_orphan($string) {
 
 								// Add to the variables array
 
-									$expertise_profile_fields_common_vars['meta_og_type'] = isset($meta_og_type) ? $meta_og_type : '';
-									$expertise_profile_fields_common_vars['meta_og_type_property'] = isset($meta_og_type_property) ? $meta_og_type_property : '';
-									$expertise_profile_fields_common_vars['meta_og_namespace'] = isset($meta_og_namespace) ? $meta_og_namespace : '';
-									$expertise_profile_fields_common_vars['meta_og_updated_time'] = isset($meta_og_updated_time) ? $meta_og_updated_time : '';
-									$expertise_profile_fields_common_vars['meta_article_author'] = isset($meta_article_author) ? $meta_article_author : '';
-									$expertise_profile_fields_common_vars['meta_article_author_content'] = isset($meta_article_author_content) ? $meta_article_author_content : '';
-									$expertise_profile_fields_common_vars['meta_article_author_count'] = isset($meta_article_author_count) ? $meta_article_author_count : '';
-									$expertise_profile_fields_common_vars['meta_article_publisher'] = isset($meta_article_publisher) ? $meta_article_publisher : '';
-									$expertise_profile_fields_common_vars['meta_article_publisher_content'] = isset($meta_article_publisher_content) ? $meta_article_publisher_content : '';
-									$expertise_profile_fields_common_vars['meta_article_publisher_count'] = isset($meta_article_publisher_count) ? $meta_article_publisher_count : '';
-									$expertise_profile_fields_common_vars['meta_og_locale'] = isset($meta_og_locale) ? $meta_og_locale : '';
-									$expertise_profile_fields_common_vars['meta_og_url'] = isset($meta_og_url) ? $meta_og_url : '';
-									$expertise_profile_fields_common_vars['meta_og_title'] = isset($meta_og_title) ? $meta_og_title : '';
-									$expertise_profile_fields_common_vars['meta_og_image'] = isset($meta_og_image) ? $meta_og_image : '';
-									$expertise_profile_fields_common_vars['meta_og_image_width'] = isset($meta_og_image_width) ? $meta_og_image_width : '';
-									$expertise_profile_fields_common_vars['meta_og_image_height'] = isset($meta_og_image_height) ? $meta_og_image_height : '';
-									$expertise_profile_fields_common_vars['meta_og_site_name'] = isset($meta_og_site_name) ? $meta_og_site_name : '';
-									$expertise_profile_fields_common_vars['meta_og_description'] = isset($meta_og_description) ? $meta_og_description : '';
-									$expertise_profile_fields_common_vars['meta_oembed_title'] = isset($meta_oembed_title) ? $meta_oembed_title : '';
-									$expertise_profile_fields_common_vars['meta_oembed_thumbnail_size'] = isset($meta_oembed_thumbnail_size) ? $meta_oembed_thumbnail_size : '';
-									$expertise_profile_fields_common_vars['meta_oembed_thumbnail'] = isset($meta_oembed_thumbnail) ? $meta_oembed_thumbnail : '';
-									$expertise_profile_fields_common_vars['meta_oembed_thumbnail_width'] = isset($meta_oembed_thumbnail_width) ? $meta_oembed_thumbnail_width : '';
-									$expertise_profile_fields_common_vars['meta_oembed_thumbnail_height'] = isset($meta_oembed_thumbnail_height) ? $meta_oembed_thumbnail_height : '';
-									$expertise_profile_fields_common_vars['meta_twitter_card_type'] = isset($meta_twitter_card_type) ? $meta_twitter_card_type : '';
-									$expertise_profile_fields_common_vars['meta_twitter_site'] = isset($meta_twitter_site) ? $meta_twitter_site : '';
-									$expertise_profile_fields_common_vars['meta_twitter_creator'] = isset($meta_twitter_creator) ? $meta_twitter_creator : '';
-									$expertise_profile_fields_common_vars['meta_twitter_description'] = isset($meta_twitter_description) ? $meta_twitter_description : '';
-									$expertise_profile_fields_common_vars['meta_twitter_title'] = isset($meta_twitter_title) ? $meta_twitter_title : '';
-									$expertise_profile_fields_common_vars['meta_twitter_image'] = isset($meta_twitter_image) ? $meta_twitter_image : '';
-									$expertise_profile_fields_common_vars['meta_twitter_image_alt'] = isset($meta_twitter_image_alt) ? $meta_twitter_image_alt : '';
+									$expertise_profile_fields_vars['meta_og_type'] = isset($meta_og_type) ? $meta_og_type : '';
+									$expertise_profile_fields_vars['meta_og_type_property'] = isset($meta_og_type_property) ? $meta_og_type_property : '';
+									$expertise_profile_fields_vars['meta_og_namespace'] = isset($meta_og_namespace) ? $meta_og_namespace : '';
+									$expertise_profile_fields_vars['meta_og_updated_time'] = isset($meta_og_updated_time) ? $meta_og_updated_time : '';
+									$expertise_profile_fields_vars['meta_article_author'] = isset($meta_article_author) ? $meta_article_author : '';
+									$expertise_profile_fields_vars['meta_article_author_content'] = isset($meta_article_author_content) ? $meta_article_author_content : '';
+									$expertise_profile_fields_vars['meta_article_author_count'] = isset($meta_article_author_count) ? $meta_article_author_count : '';
+									$expertise_profile_fields_vars['meta_article_publisher'] = isset($meta_article_publisher) ? $meta_article_publisher : '';
+									$expertise_profile_fields_vars['meta_article_publisher_content'] = isset($meta_article_publisher_content) ? $meta_article_publisher_content : '';
+									$expertise_profile_fields_vars['meta_article_publisher_count'] = isset($meta_article_publisher_count) ? $meta_article_publisher_count : '';
+									$expertise_profile_fields_vars['meta_og_locale'] = isset($meta_og_locale) ? $meta_og_locale : '';
+									$expertise_profile_fields_vars['meta_og_url'] = isset($meta_og_url) ? $meta_og_url : '';
+									$expertise_profile_fields_vars['meta_og_title'] = isset($meta_og_title) ? $meta_og_title : '';
+									$expertise_profile_fields_vars['meta_og_image'] = isset($meta_og_image) ? $meta_og_image : '';
+									$expertise_profile_fields_vars['meta_og_image_width'] = isset($meta_og_image_width) ? $meta_og_image_width : '';
+									$expertise_profile_fields_vars['meta_og_image_height'] = isset($meta_og_image_height) ? $meta_og_image_height : '';
+									$expertise_profile_fields_vars['meta_og_site_name'] = isset($meta_og_site_name) ? $meta_og_site_name : '';
+									$expertise_profile_fields_vars['meta_og_description'] = isset($meta_og_description) ? $meta_og_description : '';
+									$expertise_profile_fields_vars['meta_oembed_title'] = isset($meta_oembed_title) ? $meta_oembed_title : '';
+									$expertise_profile_fields_vars['meta_oembed_thumbnail_size'] = isset($meta_oembed_thumbnail_size) ? $meta_oembed_thumbnail_size : '';
+									$expertise_profile_fields_vars['meta_oembed_thumbnail'] = isset($meta_oembed_thumbnail) ? $meta_oembed_thumbnail : '';
+									$expertise_profile_fields_vars['meta_oembed_thumbnail_width'] = isset($meta_oembed_thumbnail_width) ? $meta_oembed_thumbnail_width : '';
+									$expertise_profile_fields_vars['meta_oembed_thumbnail_height'] = isset($meta_oembed_thumbnail_height) ? $meta_oembed_thumbnail_height : '';
+									$expertise_profile_fields_vars['meta_twitter_card_type'] = isset($meta_twitter_card_type) ? $meta_twitter_card_type : '';
+									$expertise_profile_fields_vars['meta_twitter_site'] = isset($meta_twitter_site) ? $meta_twitter_site : '';
+									$expertise_profile_fields_vars['meta_twitter_creator'] = isset($meta_twitter_creator) ? $meta_twitter_creator : '';
+									$expertise_profile_fields_vars['meta_twitter_description'] = isset($meta_twitter_description) ? $meta_twitter_description : '';
+									$expertise_profile_fields_vars['meta_twitter_title'] = isset($meta_twitter_title) ? $meta_twitter_title : '';
+									$expertise_profile_fields_vars['meta_twitter_image'] = isset($meta_twitter_image) ? $meta_twitter_image : '';
+									$expertise_profile_fields_vars['meta_twitter_image_alt'] = isset($meta_twitter_image_alt) ? $meta_twitter_image_alt : '';
 
 							// Define the placement for content
 
 								$content_placement = 'subsection'; // Expected values: 'subsection' or 'profile'
 
 								// Add to the variables array
-								$expertise_profile_fields_common_vars['content_placement'] = isset($content_placement) ? $content_placement : '';
+								$expertise_profile_fields_vars['content_placement'] = isset($content_placement) ? $content_placement : '';
 
 							// Page title configuration
 
@@ -11334,13 +11336,13 @@ function uamswp_prevent_orphan($string) {
 
 								// Add to the variables array
 
-									$expertise_profile_fields_common_vars['entry_header_style'] = isset($entry_header_style) ? $entry_header_style : '';
-									$expertise_profile_fields_common_vars['entry_title_text'] = isset($entry_title_text) ? $entry_title_text : '';
-									$expertise_profile_fields_common_vars['entry_title_text_supertitle'] = isset($entry_title_text_supertitle) ? $entry_title_text_supertitle : '';
-									$expertise_profile_fields_common_vars['entry_title_text_subtitle'] = isset($entry_title_text_subtitle) ? $entry_title_text_subtitle : '';
-									$expertise_profile_fields_common_vars['entry_title_text_body'] = isset($entry_title_text_body) ? $entry_title_text_body : '';
-									$expertise_profile_fields_common_vars['entry_title_image_desktop'] = isset($entry_title_image_desktop) ? $entry_title_image_desktop : '';
-									$expertise_profile_fields_common_vars['entry_title_image_mobile'] = isset($entry_title_image_mobile) ? $entry_title_image_mobile : '';
+									$expertise_profile_fields_vars['entry_header_style'] = isset($entry_header_style) ? $entry_header_style : '';
+									$expertise_profile_fields_vars['entry_title_text'] = isset($entry_title_text) ? $entry_title_text : '';
+									$expertise_profile_fields_vars['entry_title_text_supertitle'] = isset($entry_title_text_supertitle) ? $entry_title_text_supertitle : '';
+									$expertise_profile_fields_vars['entry_title_text_subtitle'] = isset($entry_title_text_subtitle) ? $entry_title_text_subtitle : '';
+									$expertise_profile_fields_vars['entry_title_text_body'] = isset($entry_title_text_body) ? $entry_title_text_body : '';
+									$expertise_profile_fields_vars['entry_title_image_desktop'] = isset($entry_title_image_desktop) ? $entry_title_image_desktop : '';
+									$expertise_profile_fields_vars['entry_title_image_mobile'] = isset($entry_title_image_mobile) ? $entry_title_image_mobile : '';
 
 							// Query for whether to conditionally suppress ontology sections based on based on region and service line
 
@@ -11350,7 +11352,7 @@ function uamswp_prevent_orphan($string) {
 								include( UAMS_FAD_PATH . '/templates/parts/vars/page/ontology-hide.php' );
 
 								// Add to the variables array
-								$expertise_profile_fields_common_vars['hide_medical_ontology'] = isset($hide_medical_ontology) ? $hide_medical_ontology : '';
+								$expertise_profile_fields_vars['hide_medical_ontology'] = isset($hide_medical_ontology) ? $hide_medical_ontology : '';
 
 
 							// Queries for whether each of the sections should be displayed
@@ -11361,10 +11363,10 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['provider_query'] = isset($provider_query) ? $provider_query : '';
-										$expertise_profile_fields_common_vars['provider_section_show'] = isset($provider_section_show) ? $provider_section_show : '';
-										$expertise_profile_fields_common_vars['provider_ids'] = isset($provider_ids) ? $provider_ids : '';
-										$expertise_profile_fields_common_vars['provider_count'] = isset($provider_count) ? $provider_count : '';
+										$expertise_profile_fields_vars['provider_query'] = isset($provider_query) ? $provider_query : '';
+										$expertise_profile_fields_vars['provider_section_show'] = isset($provider_section_show) ? $provider_section_show : '';
+										$expertise_profile_fields_vars['provider_ids'] = isset($provider_ids) ? $provider_ids : '';
+										$expertise_profile_fields_vars['provider_count'] = isset($provider_count) ? $provider_count : '';
 
 								// Related Locations Section Query
 
@@ -11372,11 +11374,11 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['location_query'] = isset($location_query) ? $location_query : '';
-										$expertise_profile_fields_common_vars['location_section_show'] = isset($location_section_show) ? $location_section_show : '';
-										$expertise_profile_fields_common_vars['location_ids'] = isset($location_ids) ? $location_ids : '';
-										$expertise_profile_fields_common_vars['location_count'] = isset($location_count) ? $location_count : '';
-										$expertise_profile_fields_common_vars['location_valid'] = isset($location_valid) ? $location_valid : '';
+										$expertise_profile_fields_vars['location_query'] = isset($location_query) ? $location_query : '';
+										$expertise_profile_fields_vars['location_section_show'] = isset($location_section_show) ? $location_section_show : '';
+										$expertise_profile_fields_vars['location_ids'] = isset($location_ids) ? $location_ids : '';
+										$expertise_profile_fields_vars['location_count'] = isset($location_count) ? $location_count : '';
+										$expertise_profile_fields_vars['location_valid'] = isset($location_valid) ? $location_valid : '';
 
 								// Descendant Areas of Expertise Section Query
 
@@ -11384,15 +11386,15 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['expertise_descendant_query'] = isset($expertise_descendant_query) ? $expertise_descendant_query : '';
-										$expertise_profile_fields_common_vars['expertise_descendant_section_show'] = isset($expertise_descendant_section_show) ? $expertise_descendant_section_show : '';
-										$expertise_profile_fields_common_vars['expertise_descendant_ids'] = isset($expertise_descendant_ids) ? $expertise_descendant_ids : '';
-										$expertise_profile_fields_common_vars['expertise_descendant_count'] = isset($expertise_descendant_count) ? $expertise_descendant_count : '';
-										$expertise_profile_fields_common_vars['expertise_content_query'] = isset($expertise_content_query) ? $expertise_content_query : '';
-										$expertise_profile_fields_common_vars['expertise_content_nav_show'] = isset($expertise_content_nav_show) ? $expertise_content_nav_show : '';
-										$expertise_profile_fields_common_vars['expertise_content_ids'] = isset($expertise_content_ids) ? $expertise_content_ids : '';
-										$expertise_profile_fields_common_vars['expertise_content_count'] = isset($expertise_content_count) ? $expertise_content_count : '';
-										$expertise_profile_fields_common_vars['expertise_content_nav'] = isset($expertise_content_nav) ? $expertise_content_nav : '';
+										$expertise_profile_fields_vars['expertise_descendant_query'] = isset($expertise_descendant_query) ? $expertise_descendant_query : '';
+										$expertise_profile_fields_vars['expertise_descendant_section_show'] = isset($expertise_descendant_section_show) ? $expertise_descendant_section_show : '';
+										$expertise_profile_fields_vars['expertise_descendant_ids'] = isset($expertise_descendant_ids) ? $expertise_descendant_ids : '';
+										$expertise_profile_fields_vars['expertise_descendant_count'] = isset($expertise_descendant_count) ? $expertise_descendant_count : '';
+										$expertise_profile_fields_vars['expertise_content_query'] = isset($expertise_content_query) ? $expertise_content_query : '';
+										$expertise_profile_fields_vars['expertise_content_nav_show'] = isset($expertise_content_nav_show) ? $expertise_content_nav_show : '';
+										$expertise_profile_fields_vars['expertise_content_ids'] = isset($expertise_content_ids) ? $expertise_content_ids : '';
+										$expertise_profile_fields_vars['expertise_content_count'] = isset($expertise_content_count) ? $expertise_content_count : '';
+										$expertise_profile_fields_vars['expertise_content_nav'] = isset($expertise_content_nav) ? $expertise_content_nav : '';
 
 								// Related Areas of Expertise Section Query
 
@@ -11400,10 +11402,10 @@ function uamswp_prevent_orphan($string) {
 
 										// Add to the variables array
 
-											$expertise_profile_fields_common_vars['expertise_query'] = isset($expertise_query) ? $expertise_query : '';
-											$expertise_profile_fields_common_vars['expertise_section_show'] = isset($expertise_section_show) ? $expertise_section_show : '';
-											$expertise_profile_fields_common_vars['expertise_ids'] = isset($expertise_ids) ? $expertise_ids : '';
-											$expertise_profile_fields_common_vars['expertise_count'] = isset($expertise_count) ? $expertise_count : '';
+											$expertise_profile_fields_vars['expertise_query'] = isset($expertise_query) ? $expertise_query : '';
+											$expertise_profile_fields_vars['expertise_section_show'] = isset($expertise_section_show) ? $expertise_section_show : '';
+											$expertise_profile_fields_vars['expertise_ids'] = isset($expertise_ids) ? $expertise_ids : '';
+											$expertise_profile_fields_vars['expertise_count'] = isset($expertise_count) ? $expertise_count : '';
 
 								// Related Clinical Resources Section Query
 
@@ -11413,10 +11415,10 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['clinical_resource_query'] = isset($clinical_resource_query) ? $clinical_resource_query : '';
-										$expertise_profile_fields_common_vars['clinical_resource_section_show'] = isset($clinical_resource_section_show) ? $clinical_resource_section_show : '';
-										$expertise_profile_fields_common_vars['clinical_resource_ids'] = isset($clinical_resource_ids) ? $clinical_resource_ids : '';
-										$expertise_profile_fields_common_vars['clinical_resource_count'] = isset($clinical_resource_count) ? $clinical_resource_count : '';
+										$expertise_profile_fields_vars['clinical_resource_query'] = isset($clinical_resource_query) ? $clinical_resource_query : '';
+										$expertise_profile_fields_vars['clinical_resource_section_show'] = isset($clinical_resource_section_show) ? $clinical_resource_section_show : '';
+										$expertise_profile_fields_vars['clinical_resource_ids'] = isset($clinical_resource_ids) ? $clinical_resource_ids : '';
+										$expertise_profile_fields_vars['clinical_resource_count'] = isset($clinical_resource_count) ? $clinical_resource_count : '';
 
 								// Related Conditions Section Query
 
@@ -11424,11 +11426,11 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['condition_cpt_query'] = isset($condition_cpt_query) ? $condition_cpt_query : '';
-										$expertise_profile_fields_common_vars['condition_section_show'] = isset($condition_section_show) ? $condition_section_show : '';
-										$expertise_profile_fields_common_vars['condition_ids'] = isset($condition_ids) ? $condition_ids : '';
-										$expertise_profile_fields_common_vars['condition_count'] = isset($condition_count) ? $condition_count : '';
-										$expertise_profile_fields_common_vars['schema_medical_specialty'] = isset($schema_medical_specialty) ? $schema_medical_specialty : '';
+										$expertise_profile_fields_vars['condition_cpt_query'] = isset($condition_cpt_query) ? $condition_cpt_query : '';
+										$expertise_profile_fields_vars['condition_section_show'] = isset($condition_section_show) ? $condition_section_show : '';
+										$expertise_profile_fields_vars['condition_ids'] = isset($condition_ids) ? $condition_ids : '';
+										$expertise_profile_fields_vars['condition_count'] = isset($condition_count) ? $condition_count : '';
+										$expertise_profile_fields_vars['schema_medical_specialty'] = isset($schema_medical_specialty) ? $schema_medical_specialty : '';
 
 								// Related Treatments Section Query
 
@@ -11436,11 +11438,15 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['treatment_cpt_query'] = isset($treatment_cpt_query) ? $treatment_cpt_query : '';
-										$expertise_profile_fields_common_vars['treatment_section_show'] = isset($treatment_section_show) ? $treatment_section_show : '';
-										$expertise_profile_fields_common_vars['treatment_ids'] = isset($treatment_ids) ? $treatment_ids : '';
-										$expertise_profile_fields_common_vars['treatment_count'] = isset($treatment_count) ? $treatment_count : '';
-										$expertise_profile_fields_common_vars['schema_medical_specialty'] = isset($schema_medical_specialty) ? $schema_medical_specialty : '';
+										$expertise_profile_fields_vars['treatment_cpt_query'] = isset($treatment_cpt_query) ? $treatment_cpt_query : '';
+										$expertise_profile_fields_vars['treatment_section_show'] = isset($treatment_section_show) ? $treatment_section_show : '';
+										$expertise_profile_fields_vars['treatment_ids'] = isset($treatment_ids) ? $treatment_ids : '';
+										$expertise_profile_fields_vars['treatment_count'] = isset($treatment_count) ? $treatment_count : '';
+										$expertise_profile_fields_vars['schema_medical_specialty'] = isset($schema_medical_specialty) ? $schema_medical_specialty : '';
+
+								// Combined Conditions and Treatments Section Query
+
+										$expertise_profile_fields_vars['condition_treatment_section_show'] = isset($condition_treatment_section_show) ? $condition_treatment_section_show : '';
 
 								// Query for whether Make an Appointment section should be displayed
 
@@ -11448,7 +11454,7 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['appointment_section_show'] = isset($appointment_section_show) ? $appointment_section_show : '';
+										$expertise_profile_fields_vars['appointment_section_show'] = isset($appointment_section_show) ? $appointment_section_show : '';
 
 								// Jump links
 
@@ -11456,7 +11462,7 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$expertise_profile_fields_common_vars['jump_link_count'] = isset($jump_link_count) ? $jump_link_count : '';
+										$expertise_profile_fields_vars['jump_link_count'] = isset($jump_link_count) ? $jump_link_count : '';
 
 						// Ontology subsection site header
 						include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
@@ -11469,74 +11475,39 @@ function uamswp_prevent_orphan($string) {
 
 					// Overview / Content Pages
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_overview_vars = array();
+						if ( !$current_fpage ) {
+
+						}
 
 					// Fake Subpage: Related Providers
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_fpage_provider_vars = array();
+						if ( 'providers' == $current_fpage ) {
 
-						// Get the field values
-
-							if ( 'providers' == $current_fpage ) {
-
-							}
+						}
 
 					// Fake Subpage: Related Locations
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_fpage_location_vars = array();
+						if ( 'locations' == $current_fpage ) {
 
-						// Get the field values
-
-							if ( 'locations' == $current_fpage ) {
-
-							}
+						}
 
 					// Fake Subpage: Descendant Areas of Expertise
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_fpage_expertise_descendant_vars = array();
+						if ( 'specialties' == $current_fpage ) {
 
-						// Get the field values
-
-							if ( 'specialties' == $current_fpage ) {
-
-							}
+						}
 
 					// Fake Subpage: Related Areas of Expertise
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_fpage_expertise_vars = array();
+						if ( 'related' == $current_fpage ) {
 
-						// Get the field values
-
-							if ( 'related' == $current_fpage ) {
-
-							}
+						}
 
 					// Fake Subpage: Related Clinical Resources
 
-						// Create a variables array to be used on the templates and template parts
-						$expertise_profile_fields_fpage_clinical_resource_vars = array();
+						if ( 'resources' == $current_fpage ) {
 
-						// Get the field values
-
-							if ( 'resources' == $current_fpage ) {
-
-							}
-
-				// Merge the arrays
-				$expertise_profile_fields_vars = array_merge(
-					$expertise_profile_fields_vars,
-					$expertise_profile_fields_overview_vars,
-					$expertise_profile_fields_fpage_provider_vars,
-					$expertise_profile_fields_fpage_location_vars,
-					$expertise_profile_fields_fpage_expertise_descendant_vars,
-					$expertise_profile_fields_fpage_expertise_vars,
-					$expertise_profile_fields_fpage_clinical_resource_vars
-				);
+						}
 
 				// Set/update the value of the transient
 				uamswp_fad_set_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );

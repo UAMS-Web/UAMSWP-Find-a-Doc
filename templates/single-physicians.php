@@ -1015,7 +1015,11 @@
 
 										// Primary location
 
-											if ( $location_primary_query->have_posts() ) {
+											if (
+												$location_primary_query
+												&&
+												$location_primary_query->have_posts()
+											) {
 
 												// start of the loop. the_post() sets the global $post variable
 												while ( $location_primary_query->have_posts() ) {
@@ -1859,7 +1863,7 @@
 									$affiliation // array (optional) // Hospital affiliation
 								);
 
-					// // Construct the schema script tag
+					// Construct the schema script tag
 
 					// 	include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
 
