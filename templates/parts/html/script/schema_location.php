@@ -118,11 +118,11 @@
 			),
 			'address' => array(
 				'@type' => 'PostalAddress',
-				'addressCountry' = 'USA',
-				'addressLocality' = 'foo', // Replace 'foo' with city
-				'addressRegion' = 'Arkansas',
-				'postalCode' = 'foo', // Replace 'foo' with ZIP code
-				'streetAddress' = 'foo' // Replace 'foo' with street address
+				'addressCountry' => 'USA',
+				'addressLocality' => 'foo', // Replace 'foo' with city
+				'addressRegion' => 'Arkansas',
+				'postalCode' => 'foo', // Replace 'foo' with ZIP code
+				'streetAddress' => 'foo' // Replace 'foo' with street address
 			),
 			'areaServed' => array(
 				'@type' => 'State',

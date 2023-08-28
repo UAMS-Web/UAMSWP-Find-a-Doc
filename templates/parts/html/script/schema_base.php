@@ -8,16 +8,16 @@
 			array(
 				'@type' => 'CollegeOrUniversity',
 				'@id' => 'https://uams.edu/#CollegeOrUniversity',
-				'name' = 'University of Arkansas for Medical Sciences',
+				'name' => 'University of Arkansas for Medical Sciences',
 				'address' => array(
 					'@type' => 'PostalAddress',
-					'addressCountry' = 'USA',
-					'addressLocality' = 'Little Rock',
-					'addressRegion' = 'Arkansas',
-					'postalCode' = '72205',
-					'streetAddress' = '4301 West Markham Street'
+					'addressCountry' => 'USA',
+					'addressLocality' => 'Little Rock',
+					'addressRegion' => 'Arkansas',
+					'postalCode' => '72205',
+					'streetAddress' => '4301 West Markham Street'
 				),
-				'alternateName' = 'UAMS',
+				'alternateName' => 'UAMS',
 				'description' => 'The University of Arkansas for Medical Sciences is the 
 					state\'s only health sciences university, with colleges of Medicine, 
 					Nursing, Pharmacy, Health Professions and Public Health; a graduate school; 
@@ -37,110 +37,110 @@
 				'location' => array(
 					array(
 						'@type' => 'Place',
-						'name' = 'University of Arkansas for Medical Sciences',
+						'name' => 'University of Arkansas for Medical Sciences',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Little Rock',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72205',
-							'streetAddress' = '4301 West Markham Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Little Rock',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72205',
+							'streetAddress' => '4301 West Markham Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS East Regional Campus',
+						'name' => 'UAMS East Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Helena-West Helena',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72390',
-							'streetAddress' = '1393 Highway 242 South'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Helena-West Helena',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72390',
+							'streetAddress' => '1393 Highway 242 South'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS North Central Regional Campus',
+						'name' => 'UAMS North Central Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Batesville',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72501',
-							'streetAddress' = '1993 Harrison Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Batesville',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72501',
+							'streetAddress' => '1993 Harrison Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS Northeast Regional Campus',
+						'name' => 'UAMS Northeast Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = '72401',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72401',
-							'streetAddress' = '311 East Matthews Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => '72401',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72401',
+							'streetAddress' => '311 East Matthews Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS Northwest Regional Campus',
+						'name' => 'UAMS Northwest Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Fayetteville',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72703',
-							'streetAddress' = '1125 North College Avenue'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Fayetteville',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72703',
+							'streetAddress' => '1125 North College Avenue'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS South Regional Campus',
+						'name' => 'UAMS South Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Magnolia',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '71753',
-							'streetAddress' = '1617 North Washington Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Magnolia',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '71753',
+							'streetAddress' => '1617 North Washington Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS South Central Regional Campus',
+						'name' => 'UAMS South Central Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Pine Bluff',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '71603',
-							'streetAddress' = '1601 West 40th Avenue'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Pine Bluff',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '71603',
+							'streetAddress' => '1601 West 40th Avenue'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS Southwest Regional Campus',
+						'name' => 'UAMS Southwest Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Texarkana',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '71854',
-							'streetAddress' = '3417 U of A Way'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Texarkana',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '71854',
+							'streetAddress' => '3417 U of A Way'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS West Regional Campus',
+						'name' => 'UAMS West Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Fort Smith',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72901',
-							'streetAddress' = '1301 South E Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Fort Smith',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72901',
+							'streetAddress' => '1301 South E Street'
 						)
 					)
 				),
@@ -160,121 +160,121 @@
 				'name' => 'UAMS Health',
 				'address' => array(
 					'@type' => 'PostalAddress',
-					'addressCountry' = 'USA',
-					'addressLocality' = 'Little Rock',
-					'addressRegion' = 'Arkansas',
-					'postalCode' = '72205',
-					'streetAddress' = '4301 West Markham Street'
+					'addressCountry' => 'USA',
+					'addressLocality' => 'Little Rock',
+					'addressRegion' => 'Arkansas',
+					'postalCode' => '72205',
+					'streetAddress' => '4301 West Markham Street'
 				),
 				'contactPoint' => 'foo', // Replace foo with __
 				'description' => 'foo', // Replace foo with __
 				'location' => array(
 					array(
 						'@type' => 'Place',
-						'name' = 'University of Arkansas for Medical Sciences',
+						'name' => 'University of Arkansas for Medical Sciences',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Little Rock',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72205',
-							'streetAddress' = '4301 West Markham Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Little Rock',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72205',
+							'streetAddress' => '4301 West Markham Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS East Regional Campus',
+						'name' => 'UAMS East Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Helena-West Helena',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72390',
-							'streetAddress' = '1393 Highway 242 South'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Helena-West Helena',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72390',
+							'streetAddress' => '1393 Highway 242 South'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS North Central Regional Campus',
+						'name' => 'UAMS North Central Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Batesville',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72501',
-							'streetAddress' = '1993 Harrison Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Batesville',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72501',
+							'streetAddress' => '1993 Harrison Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS Northeast Regional Campus',
+						'name' => 'UAMS Northeast Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = '72401',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72401',
-							'streetAddress' = '311 East Matthews Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => '72401',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72401',
+							'streetAddress' => '311 East Matthews Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS Northwest Regional Campus',
+						'name' => 'UAMS Northwest Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Fayetteville',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72703',
-							'streetAddress' = '1125 North College Avenue'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Fayetteville',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72703',
+							'streetAddress' => '1125 North College Avenue'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS South Regional Campus',
+						'name' => 'UAMS South Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Magnolia',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '71753',
-							'streetAddress' = '1617 North Washington Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Magnolia',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '71753',
+							'streetAddress' => '1617 North Washington Street'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS South Central Regional Campus',
+						'name' => 'UAMS South Central Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Pine Bluff',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '71603',
-							'streetAddress' = '1601 West 40th Avenue'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Pine Bluff',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '71603',
+							'streetAddress' => '1601 West 40th Avenue'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS Southwest Regional Campus',
+						'name' => 'UAMS Southwest Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Texarkana',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '71854',
-							'streetAddress' = '3417 U of A Way'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Texarkana',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '71854',
+							'streetAddress' => '3417 U of A Way'
 						)
 					),
 					array(
 						'@type' => 'Place',
-						'name' = 'UAMS West Regional Campus',
+						'name' => 'UAMS West Regional Campus',
 						'address' => array(
 							'@type' => 'PostalAddress',
-							'addressCountry' = 'USA',
-							'addressLocality' = 'Fort Smith',
-							'addressRegion' = 'Arkansas',
-							'postalCode' = '72901',
-							'streetAddress' = '1301 South E Street'
+							'addressCountry' => 'USA',
+							'addressLocality' => 'Fort Smith',
+							'addressRegion' => 'Arkansas',
+							'postalCode' => '72901',
+							'streetAddress' => '1301 South E Street'
 						)
 					)
 				),

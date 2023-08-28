@@ -148,11 +148,11 @@
 					'name' => 'foo', // Replace 'foo' with location name
 					'address' => array(
 						'@type' => 'PostalAddress',
-						'addressCountry' = 'USA',
-						'addressLocality' = 'foo', // Replace 'foo' with city
-						'addressRegion' = 'Arkansas',
-						'postalCode' = 'foo', // Replace 'foo' with ZIP code
-						'streetAddress' = 'foo' // Replace 'foo' with street address
+						'addressCountry' => 'USA',
+						'addressLocality' => 'foo', // Replace 'foo' with city
+						'addressRegion' => 'Arkansas',
+						'postalCode' => 'foo', // Replace 'foo' with ZIP code
+						'streetAddress' => 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
 						'@type' => 'State',
@@ -241,11 +241,11 @@
 					'name' => 'foo', // Replace 'foo' with location name
 					'address' => array(
 						'@type' => 'PostalAddress',
-						'addressCountry' = 'USA',
-						'addressLocality' = 'foo', // Replace 'foo' with city
-						'addressRegion' = 'Arkansas',
-						'postalCode' = 'foo', // Replace 'foo' with ZIP code
-						'streetAddress' = 'foo' // Replace 'foo' with street address
+						'addressCountry' => 'USA',
+						'addressLocality' => 'foo', // Replace 'foo' with city
+						'addressRegion' => 'Arkansas',
+						'postalCode' => 'foo', // Replace 'foo' with ZIP code
+						'streetAddress' => 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
 						'@type' => 'State',
@@ -358,7 +358,7 @@
 			'name' => array(
 				'@id' => 'https://uamshealth.com/provider/foo/#Name', // Replace URL up to the hash with relevant URL
 				'foo', // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
-			)
+			),
 			'affiliation' => array(
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
@@ -374,7 +374,7 @@
 			'description' => 'foo', // Replace 'foo' with provider's clinical short bio // Text (Data Type)
 			'familyName' => 'foo', // Replace 'foo' with provider's last name // Text (Data Type)
 			'gender' => 'foo', // Replace 'foo' with provider's gender // Text (Data Type)
-			'givenName' 'foo', // Replace 'foo' with provider's first name // Text (Data Type)
+			'givenName' => 'foo', // Replace 'foo' with provider's first name // Text (Data Type)
 			'hasCredential' => array(
 				array( // Repeat as necessary
 					'@type' => 'EducationalOccupationalCredential',
@@ -445,11 +445,11 @@
 					'name' => 'foo', // Replace 'foo' with location name
 					'address' => array(
 						'@type' => 'PostalAddress',
-						'addressCountry' = 'USA',
-						'addressLocality' = 'foo', // Replace 'foo' with city
-						'addressRegion' = 'Arkansas',
-						'postalCode' = 'foo', // Replace 'foo' with ZIP code
-						'streetAddress' = 'foo' // Replace 'foo' with street address
+						'addressCountry' => 'USA',
+						'addressLocality' => 'foo', // Replace 'foo' with city
+						'addressRegion' => 'Arkansas',
+						'postalCode' => 'foo', // Replace 'foo' with ZIP code
+						'streetAddress' => 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => array(
 						'@type' => 'State',
