@@ -31,7 +31,7 @@ $schema_provider = $schema_common_base;
 
 	// Provider URL
 
-		$schema_provider_url = 'https://uamshealth.com/provider/foo/'; // Replace with relevant URL
+		$schema_provider_url = $page_url;
 
 	// Related ontology items as schema arrays
 
