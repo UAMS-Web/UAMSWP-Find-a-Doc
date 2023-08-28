@@ -1251,6 +1251,98 @@
 			"search_placeholder": "Select one",
 			"placeholder": ""
 		},
+		"field_clinical_specialization_tab_wikidata": {
+			"key": "field_clinical_specialization_tab_wikidata",
+			"label": "Related Wikidata Item",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_tab_wikidata_about": {
+			"key": "field_clinical_specialization_tab_wikidata_about",
+			"name": "",
+			"label": "About Wikidata",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "Wikidata is a free and open knowledge base that can be read and edited by both humans and machines. Wikidata acts as central storage for the structured data of its Wikimedia sister projects including Wikipedia, Wikivoyage, Wiktionary, Wikisource, and others. Wikidata also provides support to many other sites and services beyond just Wikimedia projects! The content of Wikidata is available under a free license, exported using standard formats, and can be interlinked to other open data sets on the linked data web.",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_tab_wikidata_source": {
+			"key": "field_clinical_specialization_tab_wikidata_source",
+			"name": "",
+			"label": "How to Find the Related Wikidata Item",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "Search for the item at <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a>.",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_wikidata_url_occupation": {
+			"key": "field_clinical_specialization_wikidata_url_occupation",
+			"name": "clinical_specialization_wikidata_url_occupation",
+			"label": "Wikidata Item URL For the Occupation",
+			"type": "url",
+			"instructions": "Example: \"https://www.wikidata.org/wiki/Q28837\" — the URL for \"anesthesiologist\" — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., https://www.wikidata.org/wiki/Q28837"
+		},
+		"field_clinical_specialization_wikidata_url_field": {
+			"key": "field_clinical_specialization_wikidata_url_field",
+			"name": "clinical_specialization_wikidata_url_field",
+			"label": "Wikidata Item URL For the Specialty \/ Field",
+			"type": "url",
+			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.</p><p class='description' style='margin-top: 0.5em;'>Example: \"https://www.wikidata.org/wiki/Q28837\" — the URL for \"anesthesiologist\" — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "e.g., https://www.wikidata.org/wiki/Q615057"
+		},
 		"field_clinical_specialization_tab_endpoint": {
 			"key": "field_clinical_specialization_tab_endpoint",
 			"label": "",
