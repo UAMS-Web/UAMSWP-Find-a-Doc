@@ -679,6 +679,17 @@ $schema_provider = $schema_common_base;
 
 			$schema_provider_Person['honorificSuffix'] = $degree_attr_array;
 
+		// identifier
+
+			$schema_provider_Person['identifier'] = array(
+				'@type' => 'PropertyValue',
+				'name' => 'National Provider Identifier',
+				'description' => 'The National Provider Identifier is a Health Insurance Portability and Accountability Act Administrative Simplification Standard. The NPI is a unique identification number for covered health care providers. Covered health care providers and all health plans and health care clearinghouses must use the NPIs in the administrative and financial transactions adopted under HIPAA. The NPI is a 10-position, intelligence-free numeric identifier (10-digit number). This means that the numbers do not carry other information about health care providers, such as the state in which they live or their medical specialty. The NPI must be used in lieu of legacy provider identifiers in the HIPAA standards transactions. As outlined in the Federal Regulation, The Health Insurance Portability and Accountability Act of 1996, covered providers must also share their NPI with other providers, health plans, clearinghouses, and any entity that may need it for billing purposes.',
+				'propertyID' => 'https://www.wikidata.org/wiki/Q6975101',
+				'url' => 'https://npiregistry.cms.hhs.gov/provider-view/foo', // Replace 'foo' with NPI
+				'value' => 'foo' // Replace 'foo' with NPI
+			);
+	
 		// image
 
 			// Provider standard portrait
@@ -897,6 +908,10 @@ $schema_provider = $schema_common_base;
 					'name' => 'foo' // Replace 'foo' with provider's association organization
 				)
 			);
+
+		// sameAs
+
+			$schema_provider_Person['sameAs'] = 'https://npiregistry.cms.hhs.gov/provider-view/foo'; // Replace 'foo' with NPI
 
 		// subjectOf
 
