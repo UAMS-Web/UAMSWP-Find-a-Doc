@@ -1015,7 +1015,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1110,7 +1118,15 @@
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
