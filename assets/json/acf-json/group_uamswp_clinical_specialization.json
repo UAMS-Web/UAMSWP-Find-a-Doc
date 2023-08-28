@@ -1024,8 +1024,8 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_tab_onetsoc_about": {
-			"key": "field_clinical_specialization_tab_onetsoc_about",
+		"field_clinical_specialization_onetsoc_about": {
+			"key": "field_clinical_specialization_onetsoc_about",
 			"name": "",
 			"label": "About O*Net-SOC",
 			"type": "message",
@@ -1042,8 +1042,8 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_tab_onetsoc_code_source": {
-			"key": "field_clinical_specialization_tab_onetsoc_code_source",
+		"field_clinical_specialization_onetsoc_code_source": {
+			"key": "field_clinical_specialization_onetsoc_code_source",
 			"name": "",
 			"label": "How to Find the O*Net-SOC Occupation Code",
 			"type": "message",
@@ -1060,9 +1060,9 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_tab_onetsoc_code": {
-			"key": "field_clinical_specialization_tab_onetsoc_code",
-			"name": "clinical_specialization_tab_onetsoc_code",
+		"field_clinical_specialization_onetsoc_code": {
+			"key": "field_clinical_specialization_onetsoc_code",
+			"name": "clinical_specialization_onetsoc_code",
 			"label": "Related O*Net-SOC Occupation Code",
 			"type": "text",
 			"instructions": "Example: \"29-1211.00\" — the code for Anesthesiologists — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
@@ -1079,9 +1079,9 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_clinical_specialization_tab_onetsoc_code_name": {
-			"key": "field_clinical_specialization_tab_onetsoc_code_name",
-			"name": "clinical_specialization_tab_onetsoc_code_name",
+		"field_clinical_specialization_onetsoc_code_name": {
+			"key": "field_clinical_specialization_onetsoc_code_name",
+			"name": "clinical_specialization_onetsoc_code_name",
 			"label": "Related O*Net-SOC Occupation Name",
 			"type": "text",
 			"instructions": "Example: \"Anesthesiologists\" — the name associated with the code 29-1211.00 — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
@@ -1119,8 +1119,8 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_tab_isco08_about": {
-			"key": "field_clinical_specialization_tab_isco08_about",
+		"field_clinical_specialization_isco08_about": {
+			"key": "field_clinical_specialization_isco08_about",
 			"name": "",
 			"label": "About ISCO-08",
 			"type": "message",
@@ -1137,8 +1137,8 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_tab_isco08_code_source": {
-			"key": "field_clinical_specialization_tab_isco08_code_source",
+		"field_clinical_specialization_isco08_code_source": {
+			"key": "field_clinical_specialization_isco08_code_source",
 			"name": "",
 			"label": "Information About Each ISCO-08 Code",
 			"type": "message",
@@ -1155,10 +1155,10 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_tab_isco08_code": {
-			"key": "field_clinical_specialization_tab_isco08_code",
+		"field_clinical_specialization_isco08_code": {
+			"key": "field_clinical_specialization_isco08_code",
 			"label": "ISCO-08 Code",
-			"name": "clinical_specialization_tab_isco08_code",
+			"name": "clinical_specialization_isco08_code",
 			"type": "select",
 			"instructions": "",
 			"required": 1,
