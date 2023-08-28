@@ -71,7 +71,7 @@
 						<a href="<?php echo $provider_url; ?>" aria-label="Full profile for <?php echo $provider_full_name_attr; ?>" data-categorytitle="Name" data-itemtitle="<?php echo $provider_full_name_attr; ?>"><span class="name"><?php echo $provider_full_name; ?></span></a>
 						<?php
 
-						// Add subtitle for clinical title
+						// Add subtitle for clinical occupation title
 
 							if ( $provider_title_list ) {
 

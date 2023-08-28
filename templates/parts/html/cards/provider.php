@@ -48,7 +48,7 @@
 			<span class="name"><?php echo $provider_full_name; ?></span>
 			<?php
 
-			// Add subtitle for clinical title
+			// Add subtitle for clinical occupation title
 
 				if ( $provider_title_list ) {
 

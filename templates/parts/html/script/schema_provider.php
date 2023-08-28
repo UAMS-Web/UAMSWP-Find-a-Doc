@@ -416,7 +416,7 @@
 				)
 			),
 			'jobTitle' => array(
-				'foo' // Replace 'foo' with provider's clinical title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
+				'foo' // Replace 'foo' with provider's clinical occupation title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
 			),
 			'knowsLanguage' => array(
 				array( // Repeat as necessary

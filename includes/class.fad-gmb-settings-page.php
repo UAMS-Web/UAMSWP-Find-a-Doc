@@ -715,7 +715,7 @@ function gmb_provider_csv_export() {
 			$phys_title = get_field('physician_title',$post_id);
 			$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
 			$vowels = array('a','e','i','o','u');
-			if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical title starts with vowel
+			if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical occupation title starts with vowel
 				$phys_title_indef_article = 'an';
 			} else {
 				$phys_title_indef_article = 'a';

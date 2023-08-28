@@ -663,7 +663,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 				$regions = array();
 				foreach($providers as $provider) {
 					if ( get_post_status ( $provider ) == 'publish' ) {
-						// Clinical Title
+						// Clinical Occupation Title
 						$provider_resident = get_field('physician_resident',$provider);
 						$provider_resident_title_name = 'Resident Physician';
 						$provider_phys_title = get_field('physician_title',$provider);
@@ -702,9 +702,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 						<!-- <input type="text" name="search" id="search" value="" placeholder="Search Here.."> -->
 						<div class="form-row align-items-center justify-content-center">
 							<div class="col-12 mb-4 col-sm-auto mb-sm-0">
-								<label class="sr-only" for="provider_title">Clinical Title</label>
+								<label class="sr-only" for="provider_title">Clinical Occupation Title</label>
 								<select name="provider_title" id="provider_title" class="form-control">
-									<option value="">Any Clinical Title</option>
+									<option value="">Any Clinical Occupation Title</option>
 									<?php foreach($provider_titles_list as $key => $title) : ?>
 										<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
 									<?php endforeach; ?>
@@ -908,7 +908,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 				$provider_titles_list = array();
 				foreach($providers as $provider) {
 					if ( get_post_status ( $provider ) == 'publish' ) {
-						// Clinical Title
+						// Clinical Occupation Title
 						$provider_resident = get_field('physician_resident',$provider);
 						$provider_resident_title_name = 'Resident Physician';
 						$provider_phys_title = get_field('physician_title',$provider);
@@ -933,9 +933,9 @@ function limit_to_post_parent( $args, $field, $post ) {
 					<form action="" method="get">
 						<div class="form-row align-items-center justify-content-center">
 							<div class="col-12 mb-4 col-sm-auto mb-sm-0">
-								<label class="sr-only" for="provider_title">Clinical Title</label>
+								<label class="sr-only" for="provider_title">Clinical Occupation Title</label>
 								<select name="provider_title" id="provider_title" class="form-control">
-									<option value="">Any Clinical Title</option>
+									<option value="">Any Clinical Occupation Title</option>
 									<?php foreach($provider_titles_list as $key => $title) : ?>
 										<option value="<?= $key; ?>"<?php echo ($key == $provider_title) ? ' selected' : ''; ?>><?= $title; ?></option>
 									<?php endforeach; ?>

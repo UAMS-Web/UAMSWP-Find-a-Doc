@@ -875,7 +875,7 @@ $schema_provider = $schema_common_base;
 			$schema_provider_Person['hasOccupation'] = array( // Occupation
 				array( // Replace values with values relevant to provider // Repeat as necessary
 					'@type' => 'Occupation',
-					'name' => 'foo', // Clinical title value from Specialty item
+					'name' => 'foo', // Clinical occupation title value from Specialty item
 					'alternateName' => 'foo', // Alternate name value from Specialty item
 					'description' => 'foo', // Description value from Specialty item
 					'occupationalCategory' => array( // Replace values with relevant values attached to the Specialty
@@ -1120,7 +1120,7 @@ $schema_provider = $schema_common_base;
 		// jobTitle
 
 			$schema_provider_Person['jobTitle'] = array(
-				'foo' // Replace 'foo' with provider's clinical title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
+				'foo' // Replace 'foo' with provider's clinical occupation title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
 			);
 
 		// knowsLanguage

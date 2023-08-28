@@ -307,7 +307,7 @@
 				$resident = get_field( 'physician_resident', $post->ID ); // bool
 				$resident_title_name = 'Resident Physician';
 
-			// Get clinical title values
+			// Get clinical occupation title values
 
 				if ( $resident ) {
 
@@ -323,7 +323,7 @@
 
 				$phys_title_name_attr = uamswp_attr_conversion($phys_title_name);
 
-				// Defines the indefinite article to precede the clinical title (a or an, based on whether clinical title starts with vowel)
+				// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
 					if (
 						in_array(
@@ -332,12 +332,12 @@
 						)
 					) { 
 
-						// If the clinical title starts with a vowel, use "an"
+						// If the clinical occupation title starts with a vowel, use "an"
 						$phys_title_indef_article = 'an'; 
 
 					} else {
 
-						// If the clinical title does not start with a vowel, use "a"
+						// If the clinical occupation title does not start with a vowel, use "a"
 						$phys_title_indef_article = 'a'; 
 
 					}
@@ -369,7 +369,7 @@
 								) == strtolower($exception)
 							) {
 
-								// If the clinical title begins with the exception key...
+								// If the clinical occupation title begins with the exception key...
 
 								// Use the key's value as the indefinite article
 								$phys_title_indef_article = $indef_article; 
