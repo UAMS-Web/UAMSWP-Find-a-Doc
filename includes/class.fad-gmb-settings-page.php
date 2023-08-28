@@ -712,13 +712,16 @@ function gmb_provider_csv_export() {
 			$medium_name = ($prefix ? $prefix .' ' : '') . get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id);
 			$short_name = $prefix ? $prefix .'&nbsp;' .get_field('physician_last_name',$post_id) : get_field('physician_first_name',$post_id) .' ' .(get_field('physician_middle_name',$post_id) ? get_field('physician_middle_name',$post_id) . ' ' : '') . get_field('physician_last_name',$post_id) . (get_field('physician_pedigree',$post_id) ? '&nbsp;' . get_field('physician_pedigree',$post_id) : '');
 			$resident = get_field('physician_resident',$post_id);
-			$phys_title = get_field('physician_title',$post_id);
-			$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+			$provider_specialty = get_field('physician_title',$post_id);
+			$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+			$provider_specialty_name = $provider_specialty_term->name;
+			$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
+			$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
 			$vowels = array('a','e','i','o','u');
-			if (in_array(strtolower($phys_title_name)[0], $vowels)) { // Defines a or an, based on whether clinical occupation title starts with vowel
-				$phys_title_indef_article = 'an';
+			if (in_array(strtolower($provider_occupation_title)[0], $vowels)) { // Defines a or an, based on whether clinical occupation title starts with vowel
+				$provider_occupation_title_indef_article = 'an';
 			} else {
-				$phys_title_indef_article = 'a';
+				$provider_occupation_title_indef_article = 'a';
 			}
 
 			$provider_gmb_exclude = get_field( 'physician_gmb_exclude', $post_id );
@@ -989,7 +992,7 @@ function gmb_provider_csv_export() {
 									} elseif ($bio) {
 										$excerpt = $bio;
 									} else {
-										$fallback_desc = $medium_name . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') . ' employed by UAMS Health.';
+										$fallback_desc = $medium_name . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($location_title ? ' at ' . $location_title : '') . ' employed by UAMS Health.';
 										$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 747, '...');
 									}
 								}

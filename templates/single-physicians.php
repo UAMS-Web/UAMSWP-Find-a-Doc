@@ -307,38 +307,55 @@
 				$resident = get_field( 'physician_resident', $post->ID ); // bool
 				$resident_title_name = 'Resident Physician';
 
-			// Get clinical occupation title values
+			// Get clinical specialty and occupation title values
+
+				// Eliminate PHP errors
+
+					$provider_specialty = '';
+					$provider_specialty_term = '';
+					$provider_specialty_name = '';
+					$provider_occupation_title = '';
 
 				if ( $resident ) {
 
-					$phys_title_name = $resident_title_name;
+					$provider_occupation_title = $resident_title_name;
 
 				} else {
 
-					// Clinical Job Title
-					$phys_title = get_field( 'physician_title', $post->ID );
-					$phys_title_name = get_term( $phys_title, 'clinical_title' )->name;
+					// Clinical Occupation Title
+
+						$provider_specialty = get_field( 'physician_title', $post->ID );
+
+						if ( $provider_specialty ) {
+
+							$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+							$provider_specialty_name = $provider_specialty_term->name;
+							$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
+							$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
+
+						}
 
 				}
 
-				$phys_title_name_attr = uamswp_attr_conversion($phys_title_name);
+				$provider_specialty_name_attr = uamswp_attr_conversion($provider_specialty_name);
+				$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
 
 				// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
 					if (
 						in_array(
-							strtolower($phys_title_name)[0],
+							strtolower($provider_occupation_title)[0],
 							array( 'a', 'e', 'i', 'o', 'u' )
 						)
 					) { 
 
 						// If the clinical occupation title starts with a vowel, use "an"
-						$phys_title_indef_article = 'an'; 
+						$provider_occupation_title_indef_article = 'an'; 
 
 					} else {
 
 						// If the clinical occupation title does not start with a vowel, use "a"
-						$phys_title_indef_article = 'a'; 
+						$provider_occupation_title_indef_article = 'a'; 
 
 					}
 
@@ -351,19 +368,19 @@
 					 * - Write the value as the indefinite article to use in that case ('a' or 'an').
 					 */
 
-					$phys_title_indef_article_exceptions = array(
+					$provider_occupation_title_indef_article_exceptions = array(
 						'SNF' => 'an',
 						'Urolog' => 'a',
 						'Uveitis' => 'a'
 					);
 
-					if ( !empty($phys_title_indef_article_exceptions) ) {
+					if ( !empty($provider_occupation_title_indef_article_exceptions) ) {
 
-						foreach( $phys_title_indef_article_exceptions as $exception => $indef_article ) {
+						foreach( $provider_occupation_title_indef_article_exceptions as $exception => $indef_article ) {
 
 							if (
 								substr(
-									strtolower($phys_title_name),
+									strtolower($provider_occupation_title),
 									0,
 									strlen($exception)
 								) == strtolower($exception)
@@ -372,7 +389,7 @@
 								// If the clinical occupation title begins with the exception key...
 
 								// Use the key's value as the indefinite article
-								$phys_title_indef_article = $indef_article; 
+								$provider_occupation_title_indef_article = $indef_article; 
 
 							}
 
@@ -382,7 +399,7 @@
 
 		// Construct the title tag value
 
-			$meta_title_enhanced_addition = $phys_title_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title
+			$meta_title_enhanced_addition = $provider_occupation_title_attr; // Word or phrase to inject into base meta title to form enhanced meta title
 			$meta_title_enhanced_x2_addition = $primary_appointment_city_attr; // Second word or phrase to inject into base meta title to form enhanced meta title
 			$meta_title_enhanced_x3_addition = $expertise_primary_name_attr; // Third word or phrase to inject into base meta title to form enhanced meta title
 			$meta_title_enhanced_x3_order = array( $page_title_attr, $meta_title_enhanced_addition, $meta_title_enhanced_x3_addition, $meta_title_enhanced_x2_addition ); // Optional pre-defined array for name order of enhanced meta title level 3 // Expects four values
@@ -426,7 +443,7 @@
 
 				} else {
 
-					$fallback_desc = $medium_name_attr . ' is ' . ($phys_title ? $phys_title_indef_article . ' ' . strtolower($phys_title_name) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
+					$fallback_desc = $medium_name_attr . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
 					$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
 
 				}
@@ -998,13 +1015,13 @@
 											<?php 
 
 											if (
-												$phys_title_name
+												$provider_occupation_title
 												&&
-												!empty($phys_title_name)
+												!empty($provider_occupation_title)
 											) {
 
 												?>
-												<span class="subtitle"><?php echo $phys_title_name ? $phys_title_name : ''; ?></span>
+												<span class="subtitle"><?php echo $provider_occupation_title ?: ''; ?></span>
 												<?php
 
 											}

@@ -495,12 +495,26 @@ function limit_to_post_parent( $args, $field, $post ) {
 						endforeach;
 					}
 					$full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') . (get_field('physician_pedigree') ? '&nbsp;' . get_field('physician_pedigree') : '') . ( $degree_list ? ', ' . $degree_list : '' );
+
 					$recognition_list .= '<tr>';
 					$recognition_list .= '<td><a href="'.get_permalink().'" title="'. $full_name .'">'. $full_name .'</a></td>';
-					$phys_title = get_field('physician_title');
-					if ($phys_title && !empty($phys_title)) {
-						$recognition_list .= '<td>'. ($phys_title ? get_term( $phys_title, 'clinical_title' )->name : '&nbsp;') .'</td>';
+
+					$provider_specialty = get_field('physician_title');
+					$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
+					$provider_specialty_name = $provider_specialty_term->name;
+					$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
+					$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
+
+					if (
+						$provider_occupation_title
+						&&
+						!empty($provider_occupation_title)
+					) {
+
+						$recognition_list .= '<td>'. ($provider_occupation_title ?: '&nbsp;') .'</td>';
+
 					}
+
 					$recognition_list .= '</tr>';
 
 				endwhile;
