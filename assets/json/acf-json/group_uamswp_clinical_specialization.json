@@ -735,6 +735,36 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
+		"field_clinical_specialization_code_query": {
+			"key": "field_clinical_specialization_code_query",
+			"name": "clinical_specialization_code_query",
+			"type": "button_group",
+			"label": "Does this specailization have a taxonomy code in the Health Care Provider Taxonomy Code Set?",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": "1",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
 		"field_clinical_specialization_code": {
 			"key": "field_clinical_specialization_code",
 			"name": "clinical_specialization_code",
@@ -748,6 +778,11 @@
 						"field": "field_clinical_specialization_extension_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_code_query",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
