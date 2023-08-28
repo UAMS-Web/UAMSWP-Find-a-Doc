@@ -562,7 +562,7 @@ $schema_provider = $schema_common_base;
 
 		// additionalType
 
-			$schema_provider_Person['additionalType'] = 'https://www.wikidata.org/wiki/Q11974939'; // health professional (Q11974939)
+			$schema_provider_Person['additionalType'] = 'https://www.wikidata.org/wiki/Q11974939'; // Mirror Wikidata value from Specialty // Default to health professional (Q11974939)
 
 		// @id
 
@@ -986,3 +986,9 @@ $schema_provider = $schema_common_base;
 
 // Construct the schema JSON script tag
 uamswp_fad_schema_construct($schema_provider);
+
+// Display array as development testing
+
+	echo '<pre>'; // test
+	echo print_r($schema_provider); // test
+	echo '</pre>'; // test
