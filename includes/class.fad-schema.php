@@ -756,6 +756,10 @@
 		// Retrieve the value of the transient
 		uamswp_fad_get_transient( 'val_' . $entity_id, $schema, __FUNCTION__ );
 
+		// Eliminate PHP errors
+
+			$type = '';
+
 		if ( !empty( $schema ) ) {
 
 			/* 

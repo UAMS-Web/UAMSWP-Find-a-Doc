@@ -1005,7 +1005,11 @@
 
 										// Primary location
 
-											if ( $location_primary_query->have_posts() ) {
+											if (
+												$location_primary_query
+												&&
+												$location_primary_query->have_posts()
+											) {
 
 												// start of the loop. the_post() sets the global $post variable
 												while ( $location_primary_query->have_posts() ) {
