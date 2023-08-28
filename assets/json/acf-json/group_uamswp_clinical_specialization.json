@@ -969,6 +969,11 @@
 						"field": "field_clinical_specialization_extension_query",
 						"operator": "==",
 						"value": "0"
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
