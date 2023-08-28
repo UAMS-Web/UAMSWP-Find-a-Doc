@@ -671,6 +671,45 @@ $schema_provider = $schema_common_base;
 				)
 			);
 
+		// hasOccupation
+
+			$schema_provider_Person['hasOccupation'] = array( // Occupation
+				array( // Replace values with values relevant to provider // Repeat as necessary
+					'@type' => 'Occupation',
+					'name' => 'foo', // Clinical title value from Specialty item
+					'alternateName' => 'foo', // Alternate name value from Specialty item
+					'description' => 'foo', // Description value from Specialty item
+					'occupationalCategory' => array( // Replace values with relevant values attached to the Specialty
+						array(
+							'@type' => 'CategoryCode',
+							'inCodeSet' => array(
+								'@type' => 'CategoryCodeSet',
+								'name' => 'O*Net-SOC',
+								'dateModified' => '2019',
+								'url' => 'https://www.onetonline.org/'
+							),
+							'codeValue' => '29-1242.00', // O*Net-SOC code value from Specialty item
+							'name' => 'Orthopedic Surgeons, Except Pediatric', // O*Net-SOC name from Specialty item
+							'url' => 'https://www.onetonline.org/link/summary/29-1242.00' // O*Net-SOC URL from Specialty item
+						),
+						array(
+							'@type' => 'CategoryCode',
+							'inCodeSet' => array(
+								'@type' => 'CategoryCodeSet',
+								'name' => 'ISCO-08',
+								'dateModified' => '2016',
+								'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
+							),
+							'codeValue' => '2212', // ISCO-08 code value from Specialty item
+							'description' => 'Specialist medical practitioners diagnose and treat human physical and mental illnesses, disorders and injuries using specialised testing, diagnostic, medical and surgical techniques based on the scientific principles of modern medicine. They specialise in certain disease categories, types of patient or methods of treatment and may conduct research in their chosen areas of specialisation.', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
+							'name' => 'Specialist medical practitioners', // ISCO-08 name from Specialty item
+							'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
+						)
+					),
+					'sameAs' => 'https://www.wikidata.org/wiki/Q16030727' // Wikidata URL from Specialty item
+				)
+			);
+
 		// honorificPrefix
 
 			$schema_provider_Person['honorificPrefix'] = $prefix_attr;
