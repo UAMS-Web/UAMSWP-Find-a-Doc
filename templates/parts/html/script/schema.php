@@ -835,16 +835,6 @@ if ( $schema_fax_number ) {
 
 	}
 
-// Open script tag
-	echo '<script type="application/ld+json">';
-	echo $schema_line_break;
+// Construct the schema JSON script tag
 
-// Encode JSON
-
-	echo json_encode($schema_block, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-
-// Close script tag
-
-	echo $schema_line_break;
-	echo '</script>';
-	echo $schema_line_break;
+	uamswp_fad_schema_construct($schema_block);

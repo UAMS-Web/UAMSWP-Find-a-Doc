@@ -910,3 +910,28 @@
 			}
 
 		}
+
+// Construct the schema script tag
+
+	function uamswp_fad_schema_construct($input) {
+
+		$schema_line_break = "\n"; // the double quotes are important
+
+		// Construct schema JSON
+		// $schema_block = uamswp_fad_schema_type_selector($input);
+
+		// Open script tag
+			echo '<script type="application/ld+json">';
+			echo $schema_line_break;
+
+		// Encode JSON
+
+			echo json_encode($input, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+
+		// Close script tag
+
+			echo $schema_line_break;
+			echo '</script>';
+			echo $schema_line_break;
+
+	}
