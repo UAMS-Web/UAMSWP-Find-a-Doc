@@ -907,15 +907,7 @@
 			"type": "textarea",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_clinical_specialization_valid",
-						"operator": "!=",
-						"value": "0"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -1059,6 +1051,11 @@
 						"field": "field_clinical_specialization_extension_query",
 						"operator": "!=",
 						"value": ""
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
@@ -1162,6 +1159,11 @@
 						"field": "field_clinical_specialization_extension_query",
 						"operator": "!=",
 						"value": ""
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
 					}
 				]
 			],
