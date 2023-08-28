@@ -18,7 +18,7 @@
 // Check/define optional variables
 
 	$jump_link_count = ( isset($jump_link_count) && !empty($jump_link_count) ) ? $jump_link_count : '';
-	$hide_medical_ontology = ( isset($hide_medical_ontology) && !empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
+	$hide_medical_ontology = false; // Never hide related locations
 
 // Call the function
 
