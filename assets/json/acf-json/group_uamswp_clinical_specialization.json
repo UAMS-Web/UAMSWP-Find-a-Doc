@@ -48,8 +48,8 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_condition_tab_extension": {
-			"key": "field_condition_tab_extension",
+		"field_clinical_specialization_tab_extension": {
+			"key": "field_clinical_specialization_tab_extension",
 			"label": "Qualifications for Inclusion in the UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
 			"name": "",
 			"type": "tab",
@@ -685,8 +685,8 @@
 			"ui_on_text": "Yes",
 			"ui_off_text": "No"
 		},
-		"field_condition_tab_code_set": {
-			"key": "field_condition_tab_code_set",
+		"field_clinical_specialization_tab_code_set": {
+			"key": "field_clinical_specialization_tab_code_set",
 			"label": "Health Care Provider Taxonomy Code Set",
 			"name": "",
 			"type": "tab",
@@ -709,8 +709,8 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_condition_tab_code_set_extension": {
-			"key": "field_condition_tab_code_set_extension",
+		"field_clinical_specialization_tab_code_set_extension": {
+			"key": "field_clinical_specialization_tab_code_set_extension",
 			"name": "",
 			"label": "Field Values for UAMS Health Extension to the Health Care Provider Taxonomy Code Set",
 			"type": "message",
@@ -918,8 +918,8 @@
 			"new_lines": "",
 			"acfe_textarea_code": 0
 		},
-		"field_condition_tab_medicare": {
-			"key": "field_condition_tab_medicare",
+		"field_clinical_specialization_tab_medicare": {
+			"key": "field_clinical_specialization_tab_medicare",
 			"label": "Related CMS Specialty Code",
 			"name": "",
 			"type": "tab",
