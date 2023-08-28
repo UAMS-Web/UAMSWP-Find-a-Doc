@@ -22,7 +22,7 @@ if ( have_posts() )  {
 
 		the_post();
 
-		include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 
 	} // endwhile
 

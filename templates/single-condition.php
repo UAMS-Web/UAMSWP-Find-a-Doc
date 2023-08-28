@@ -6,28 +6,28 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 // // Get system settings for this post type's archive page text
-// include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-condition.php' );
+// include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/condition.php' );
 
 // Ontology / Content Type
 
@@ -40,7 +40,7 @@
 // Get the page title
 
 	$page_title = get_the_title();
-	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
+	$page_title_attr = uamswp_attr_conversion($page_title);
 
 	// Array for page titles and section titles
 
@@ -100,23 +100,7 @@
 	$regions = isset($regions) ? $regions : array();
 	$service_lines = isset($service_lines) ? $service_lines : array();
 
-	if (
-		$regions
-		||
-		$service_lines
-		) {
-
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-			$regions, // string|array // Region(s) associated with the item
-			$service_lines // string|array // Service line(s) associated with the item
-		);
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-
-	} else {
-
-		$hide_medical_ontology = false; // bool
-
-	}
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/ontology-hide.php' );
 
 // HEAD
 
@@ -125,14 +109,7 @@
 		// Construct the meta title
 
 			$meta_title_enhanced_addition = $condition_single_name_attr; // Word or phrase to inject into base meta title to form enhanced meta title level 1
-			$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-				$page_title, // string
-				$page_title_attr, // string (optional)
-				'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-				'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-				$meta_title_enhanced_addition // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-			);
-				$meta_title = $meta_title_vars['meta_title']; // string
+			include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
 
 		// Override SEOPress's standard title tag settings
 
@@ -173,7 +150,7 @@
 
 			}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 		// Set schema description
 
@@ -211,7 +188,7 @@
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
 
 // BODY
 
@@ -250,7 +227,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	include( UAMS_FAD_PATH . '/templates/parts/site-header_single-expertise.php');
+				// 	include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
 				// }, 5 );
 
 		// Primary navigation
@@ -268,7 +245,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	include( UAMS_FAD_PATH . '/templates/parts/site-nav_single-expertise.php');
+				// 	include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
 				// }, 5 );
 
 	// Breadcrumbs
@@ -313,7 +290,7 @@
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 			// 
-			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
+			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
 			// 
 			// } );
 
@@ -324,106 +301,55 @@
 			// add_filter( 'genesis_attr_entry', 'uamswp_add_entry_class' );
 
 		// Start count for jump links
-
-			$jump_link_count = 0;
+		$jump_link_count = 0;
 
 		// Queries for whether each of the sections should be displayed
 
-			// Query for whether related providers content section should be displayed on ontology pages/subsections
+			// Related Providers Section Query
 
 				$providers = get_field('condition_physicians');
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-					$providers, // int[]
-					$jump_link_count // int
-				);
-					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-					$provider_ids = $provider_query_vars['provider_ids']; // int[]
-					$provider_count = $provider_query_vars['provider_count']; // int
-					$jump_link_count = $provider_query_vars['jump_link_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
-			// Query for whether related locations content section should be displayed on a page
+			// Related Locations Section Query
 
 				$locations = get_field('condition_locations');
-				$location_query_vars = isset($location_query_vars) ? $location_query_vars : uamswp_fad_location_query(
-					$locations // int[]
-				);
-					$location_query = $location_query_vars['location_query']; // WP_Post[]
-					$location_section_show = $location_query_vars['location_section_show']; // bool
-					$location_ids = $location_query_vars['location_ids']; // int[]
-					$location_count = $location_query_vars['location_count']; // int
-					$location_valid = $location_query_vars['location_valid']; // bool
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
-			// Query for whether related areas of expertise content section should be displayed on a page
+			// Related Areas of Expertise Section Query
 
 				$expertises = get_field('condition_expertise');
-				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
-					$expertises // int[]
-				);
-					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-					$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-					$expertise_count = $expertise_query_vars['expertise_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
-			// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+			// Related Clinical Resources Section Query
 
 				$clinical_resources = get_field('condition_clinical_resources');
-				$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-					$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
-				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-					$clinical_resources,
-					$clinical_resource_posts_per_page,
-					$jump_link_count
-				);
-					$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-					$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-					$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
-					$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
-					$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
-			// Query for whether related treatments content section should be displayed on ontology pages/subsections
+			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('condition_treatments');
-				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
-					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-					$treatment_count = $treatment_query_vars['treatment_count']; // int
-					$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 			// Check if UAMS Health Talk podcast section should be displayed
 
 				$podcast_name = get_field('condition_podcast_name');
-				$podcast_query_vars = isset($podcast_query_vars) ? $podcast_query_vars : uamswp_fad_podcast_query(
-					$podcast_name, // string
-					$jump_link_count // int (optional)
-				);
-					$podcast_section_show = $podcast_query_vars['podcast_section_show']; // bool
-					$jump_link_count = $podcast_query_vars['jump_link_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/podcast.php' );
 
 			// Check if Clinical Trials section should be displayed
 
+				$clinical_trials = get_field('condition_clinical_trials');
+
 				if ( !empty($clinical_trials) ) {
+
 					$clinical_trials_section_show = true;
+					$jump_link_count++;
+
 				} else {
+
 					$clinical_trials_section_show = false;
-				}
 
-			// Check if Jump Links section should be displayed
-
-				if ( $jump_link_count >= $jump_link_count_min ) {
-					$jump_links_section_show = true;
-				} else {
-					$jump_links_section_show = false;
 				}
 
 			// Query for whether Make an Appointment section should be displayed
@@ -431,16 +357,27 @@
 				$appointment_section_show = true;// It should always be displayed.
 				$jump_link_count++;
 
+			// Check if Jump Links section should be displayed
+
+				if ( $jump_link_count >= $jump_link_count_min ) {
+
+					$jump_links_section_show = true;
+
+				} else {
+
+					$jump_links_section_show = false;
+
+				}
+
 		// Get remaining details about this item
 
 			// Get system settings for jump links (a.k.a. anchor links)
 
-				$labels_jump_links_vars = isset($labels_jump_links_vars) ? $labels_jump_links_vars : uamswp_fad_labels_jump_links();
-				$fad_jump_links_title = $labels_jump_links_vars['fad_jump_links_title']; // string
+				if ( $jump_links_section_show ) {
 
-			// Clinical Trials
+					include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/jump-links.php' );
 
-				$clinical_trials = get_field('condition_clinical_trials');
+				}
 
 			// Video
 
@@ -716,12 +653,7 @@
 
 						$podcast_filter = 'tag';
 						$podcast_subject = $page_title;
-						uamswp_fad_podcast(
-							$podcast_name, // string
-							$podcast_section_show, // bool
-							$podcast_filter, // string // Expected values: 'tag' or 'doctor'
-							$podcast_subject // string
-						);
+						include( UAMS_FAD_PATH . '/templates/parts/html/section/podcast.php' );
 
 					// Construct Clinical Resources Section
 
@@ -732,14 +664,14 @@
 						$clinical_resource_section_more_text = 'Want to find more related ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title . '?';
 						$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
 						$clinical_resource_section_more_link_descr = 'View the full list of ' . strtolower($clinical_resource_plural_name) . ' related to ' . $page_title;
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/section/list/clinical-resource.php' );
 
 					// Construct Clinical Trials Section
 
 						if ( $clinical_trials_section_show ) {
 
 							$clinical_trial_title = $page_title;
-							include( UAMS_FAD_PATH . '/templates/blocks/clinical-trials.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/clinical-trials.php' );
 
 						} // endif
 
@@ -747,31 +679,31 @@
 
 						$treatment_section_title = $treatment_plural_name . ' Related to ' . $page_title; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 						$treatment_section_intro = $treatment_fpage_intro_general; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-treatment.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/section/list/treatment.php' );
 
 					// Construct Providers Section
 
 						$provider_section_title = $provider_plural_name . ' Diagnosing or Treating ' . $page_title; // Text to use for the section title
 						$provider_section_intro = 'Note that every ' . strtolower($provider_single_name) . ' listed below may not perform or prescribe all ' . strtolower($treatment_plural_name) . ' related to ' . $page_title . '. Review each ' . strtolower($provider_single_name) . ' for&nbsp;availability.'; // Text to use for the section intro text
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/section/list/provider.php' );
 
 					// Construct Location Section
 
 						$location_section_title = $location_plural_name . ' Where ' . $provider_plural_name . ' Treat ' . $page_title; // Text to use for the section title
 						$location_section_intro = 'Note that the treatment of ' . $page_title . ' may not be <em>performed</em> at every ' . strtolower($location_single_name) . ' listed below. The list may include ' . strtolower($location_plural_name) . ' where the treatment plan is developed during and after a patient visit.'; // Text to use for the section intro text
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/section/list/location.php' );
 
 					// Construct Areas of Expertise Section
 
 						$expertise_section_title = $expertise_plural_name . ' Related to ' . $page_title;
 						$expertise_section_intro = '';
-						include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/section/list/expertise.php' );
 
 					// Construct Appointment Information Section
 
 						if ( $appointment_section_show ) {
 
-							include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );
 
 						}
 					?>

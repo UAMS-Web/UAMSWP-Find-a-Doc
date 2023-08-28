@@ -48,8 +48,8 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "",
+			"default_value": "Call the UAMS Health appointment line",
+			"placeholder": "Call the UAMS Health appointment line",
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
@@ -119,8 +119,8 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "",
+			"default_value": "Call the UAMS Health appointment line",
+			"placeholder": "Call the UAMS Health appointment line",
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
@@ -190,8 +190,8 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "",
+			"default_value": "Call the UAMS Health appointment line",
+			"placeholder": "Call the UAMS Health appointment line",
 			"prepend": "",
 			"append": "",
 			"maxlength": ""

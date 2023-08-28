@@ -3,173 +3,76 @@
  * Template Name: Areas of Expertise Archive
  */
 
-// Add page template class to body element's classes
+// Define variables
 
-	// Do nothing
+	// Variable name slug
 
-// Filter posts_where
+		$variable_slug = 'expertise';
 
-	// Do nothing
+	// Post type
 
-// Filter terms_clauses
+		$post_type = 'expertise';
 
-	// Do nothing
+	// Get system settings for ontology item labels
 
-// Get system settings for ontology item labels
+		// Get system settings for area of expertise labels
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
-	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	// Get system settings for area of expertise archive text
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/expertise.php' );
 
-// Get system settings for this archive page's text
-include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-expertise.php' );
+	// Get the system settings for the image elements of the area of expertise archive
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
 
-// Get the page ID
+	// Meta title variables
 
-	// $page_id = get_the_ID(); // int
+		// Do nothing
 
-// Get the page title
+	// Arguments used in construction
 
-	$page_title = $expertise_archive_headline; // string
-	$page_title_attr = uamswp_attr_conversion($page_title);
-
-	// Array for page titles and section titles
-
-		$page_titles = array(
-			'page_title'		=> $page_title,
-			'page_title_attr'	=> $page_title_attr
+		$archive_construct_args = array(
+			'filters-layout'	=> array(
+				'class'						=> 'expertise',
+				'layout'					=> 'cards', // string enum('filters', 'cards')
+				'plural-name'				=> $expertise_plural_name,
+				'ajaxsearchpro-id'			=> '',
+				'fwp-filters'				=> array(), // array // FacetWP filter slugs
+				'911-disclaimer'			=> false, // bool // Query for whether to include the 911 disclaimer
+				'fwp-template'				=> '', // string // Slug for FacetWP template
+				'fwp-total-rows'			=> 3, // int
+				'provider-ratings-modal'	=> false, // bool // Query for whether to include the providers ratings modal
+				'region-cookie'				=> '' // string // Region cookie slug
+			),
+			'cards-layout'		=> array(
+				'id'				=> 'expertise',
+				'class'				=> 'expertise',
+				'intro-text'		=> $expertise_archive_intro_text,
+				'plural-name'		=> $expertise_plural_name,
+				'fwp-template'		=> 'expertise', // string // Slug for FacetWP template
+				'fwp-total-rows'	=> 3, // int
+			)
 		);
 
-// Get the page URL
+	// Define variables common to all archive pages
+	include( UAMS_FAD_PATH . '/templates/parts/construction/archive/common/vars.php' );
 
-	// $page_url = user_trailingslashit(get_permalink());
+	// Define variables common to all archive pages with the cards layout
+	include( UAMS_FAD_PATH . '/templates/parts/construction/archive/cards-layout/vars.php' );
 
-// alpha
+// Construct HEAD elements
 
-	// Do nothing
+	// Archive Template Common HEAD Elements
+	include( UAMS_FAD_PATH . '/templates/parts/construction/archive/common/construct-head.php' );
 
-// Get system settings for this archive page's featured image
+	// Archive Template Filters Layout HEAD Elements
+	include( UAMS_FAD_PATH . '/templates/parts/construction/archive/cards-layout/construct-head.php' );
 
-	$archive_image_expertise_vars = isset($archive_image_expertise_vars) ? $archive_image_expertise_vars : uamswp_fad_archive_image_expertise();
-		$expertise_archive_image = $archive_image_expertise_vars['expertise_archive_image']; // int
+// Construct BODY elements
 
-// Get the featured image
+	// Archive Template Common BODY Elements
+	include( UAMS_FAD_PATH . '/templates/parts/construction/archive/common/construct-body.php' );
 
-	$featured_image = $expertise_archive_image; // Image ID // int
-
-// Override theme's method of defining the meta page title
-
-	// Construct the meta title
-
-		$meta_title_base_addition = $expertise_plural_name_attr; // Word or phrase to use to form base meta title
-		$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-			$page_title, // string
-			$page_title_attr, // string (optional)
-			$meta_title_base_addition // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-		);
-			$meta_title = $meta_title_vars['meta_title']; // string
-
-	// Modify SEOPress's standard meta title settings
-
-		add_filter( 'seopress_titles_title', function( $html ) use ( $meta_title ) {
-
-			$html = $meta_title;
-
-			return $html;
-
-		}, 15, 2 );
-
-// Set the schema description and the meta description
-
-	// Get excerpt
-
-		$excerpt = $expertise_archive_intro_text;
-		$excerpt_user = true;
-
-		if ( empty( $excerpt ) ) {
-
-			$excerpt_user = false;
-
-		}
-
-	// Set schema description
-
-		$schema_description = $excerpt; // Used for Schema Data. Should ALWAYS have a value
-
-	// Override theme's method of defining the meta description
-
-		add_filter('seopress_titles_desc', function( $html ) use ( $excerpt ) {
-
-			$html = $excerpt;
-
-			return $html;
-
-		} );
-
-// Construct the meta keywords element
-
-	// $keywords = '';
-	// 
-	// add_action( 'wp_head', function() use ($keywords) {
-	// 	uamswp_keyword_hook_header(
-	// 		$keywords // array
-	// 	);
-	// } );
-
-// Override the theme's method of defining the social media meta tags
-
-	// Filter hooks
-	include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
-
-get_header();
-
-add_filter( 'facetwp_template_use_archive', '__return_true' );
+	// Archive Template Cards Layout BODY Elements
+	include( UAMS_FAD_PATH . '/templates/parts/construction/archive/cards-layout/construct-body.php' );
 
 ?>
-<div class="content-sidebar-wrap">
-	<main id="genesis-content">
-		<section class="archive-description">
-			<header class="entry-header">
-				<h1 class="entry-title" itemprop="headline"><?php echo $page_title; ?></h1>
-			</header>
-			<?php echo ($expertise_archive_intro_text ? '<div class="entry-content clearfix" itemprop="text"><div class="archive-intro">' . $expertise_archive_intro_text . '</div></div>' : '' ); ?>
-		</section>
-		<section class="uams-module" id="expertise">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="module-title sr-only">List of <?php echo $expertise_plural_name; ?></h2>
-						<div class="card-list-container">
-							<div class="card-list card-list-expertise">
-								<?php echo facetwp_display( 'template', 'expertise' ); ?>
-								<?php //get_template_part( 'templates/physician-loop' ); ?>
-							</div>
-						</div>
-						<div class="row list-pagination">
-							<div class="col">
-								<?php echo facetwp_display( 'pager' ); ?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<?php // FacetWP Hide elements
-					// Set # value depending on element
-					?>
-			<script>
-				(function($) {
-					$(document).on('facetwp-loaded', function() {
-						if (3 >= FWP.settings.pager.total_rows ) {
-							$('.list-pagination').hide()
-						}
-						if (FWP.loaded) {
-							$('html, body').animate({
-								scrollTop: $('main').offset().top
-							}, 500);
-						}
-					});
-				})(jQuery);
-			</script>
-		</section>
-	</main>
-</div>
-<?php get_footer(); ?>

@@ -11,21 +11,15 @@
  * 	Areas of Expertise	('expertise')
  */
 
-// Check/define variables
-
-	if (
-		!isset($expertise_plural_name) || empty($expertise_plural_name)
-	) {
-		$labels_expertise_vars = isset($labels_expertise_vars) ? $labels_expertise_vars : uamswp_fad_labels_expertise();
-			$expertise_plural_name = $labels_expertise_vars['expertise_plural_name']; // string
-	}
+// Get system settings for area of expertise labels
+include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 if ( have_posts() ) {
 
 	while ( have_posts() ) {
 
 		the_post();
-		include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/cards/expertise.php' );
 
 	} // endwhile
 

@@ -6,31 +6,31 @@
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-provider.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
 
 	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
 	// Get system settings for descendant location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-location-descendant.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location-descendant.php' );
 
 	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-expertise.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-clinical-resource.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
 
 	// Get system settings for combined condition and treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition-treatment.php' );
 
 	// Get system settings for condition labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-condition.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
 
 	// Get system settings for treatment labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars_sys_labels-treatment.php' );
+	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
 
 // // Get system settings for this post type's archive page text
-// include( UAMS_FAD_PATH . '/templates/parts/vars_sys_archive-location.php' );
+// include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/archive/location.php' );
 
 // Ontology / Content Type
 
@@ -57,16 +57,16 @@
 // Get the page title and other name values
 
 	$page_title = get_the_title(); // Title of the location
-	$page_title_attr = $page_title ? uamswp_attr_conversion($page_title) : '';
+	$page_title_attr = uamswp_attr_conversion($page_title);
 	$page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the title for use in phrases
-	$page_title_phrase_attr = $page_title_phrase ? uamswp_attr_conversion($page_title_phrase) : '';
+	$page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 
 	// Parent location
 
 		$parent_title = $parent_location ? $parent_location->post_title : '';
-		$parent_title_attr = $parent_title ? uamswp_attr_conversion($parent_title) : '';
+		$parent_title_attr = uamswp_attr_conversion($parent_title);
 		$parent_title_phrase = ( get_field('location_prepend_the', $location_parent_id ) ? 'the ' : '' ) . $parent_title; // Conditionally prepend "the" to the title for use in phrases
-		$parent_title_phrase_attr = $parent_title_phrase ? uamswp_attr_conversion($parent_title_phrase) : '';
+		$parent_title_phrase_attr = uamswp_attr_conversion($parent_title_phrase);
 
 	// Array for page titles and section titles
 
@@ -83,49 +83,8 @@
 
 	// Get system settings for elements of a fake subpage (or section) in a Location subsection (or profile)
 
-		// Text elements
-
-			$fpage_text_location_vars = isset($fpage_text_location_vars) ? $fpage_text_location_vars : uamswp_fad_fpage_text_location(
-				$page_titles // associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'
-			);
-				$provider_fpage_title_location = $fpage_text_location_vars['provider_fpage_title_location']; // string
-				$provider_fpage_intro_location = $fpage_text_location_vars['provider_fpage_intro_location']; // string
-				$provider_fpage_ref_main_title_location = $fpage_text_location_vars['provider_fpage_ref_main_title_location']; // string
-				$provider_fpage_ref_main_intro_location = $fpage_text_location_vars['provider_fpage_ref_main_intro_location']; // string
-				$provider_fpage_ref_main_link_location = $fpage_text_location_vars['provider_fpage_ref_main_link_location']; // string
-				$provider_fpage_ref_top_title_location = $fpage_text_location_vars['provider_fpage_ref_top_title_location']; // string
-				$provider_fpage_ref_top_intro_location = $fpage_text_location_vars['provider_fpage_ref_top_intro_location']; // string
-				$provider_fpage_ref_top_link_location = $fpage_text_location_vars['provider_fpage_ref_top_link_location']; // string
-				$location_descendant_fpage_title_location = $fpage_text_location_vars['location_descendant_fpage_title_location']; // string
-				$location_descendant_fpage_intro_location = $fpage_text_location_vars['location_descendant_fpage_intro_location']; // string
-				$location_descendant_fpage_ref_main_title_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_title_location']; // string
-				$location_descendant_fpage_ref_main_intro_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_intro_location']; // string
-				$location_descendant_fpage_ref_main_link_location = $fpage_text_location_vars['location_descendant_fpage_ref_main_link_location']; // string
-				$expertise_fpage_title_location = $fpage_text_location_vars['expertise_fpage_title_location']; // string
-				$expertise_fpage_intro_location = $fpage_text_location_vars['expertise_fpage_intro_location']; // string
-				$expertise_fpage_ref_main_title_location = $fpage_text_location_vars['expertise_fpage_ref_main_title_location']; // string
-				$expertise_fpage_ref_main_intro_location = $fpage_text_location_vars['expertise_fpage_ref_main_intro_location']; // string
-				$expertise_fpage_ref_main_link_location = $fpage_text_location_vars['expertise_fpage_ref_main_link_location']; // string
-				$expertise_fpage_ref_top_title_location = $fpage_text_location_vars['expertise_fpage_ref_top_title_location']; // string
-				$expertise_fpage_ref_top_intro_location = $fpage_text_location_vars['expertise_fpage_ref_top_intro_location']; // string
-				$expertise_fpage_ref_top_link_location = $fpage_text_location_vars['expertise_fpage_ref_top_link_location']; // string
-				$clinical_resource_fpage_title_location = $fpage_text_location_vars['clinical_resource_fpage_title_location']; // string
-				$clinical_resource_fpage_intro_location = $fpage_text_location_vars['clinical_resource_fpage_intro_location']; // string
-				$clinical_resource_fpage_ref_main_title_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_title_location']; // string
-				$clinical_resource_fpage_ref_main_intro_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_intro_location']; // string
-				$clinical_resource_fpage_ref_main_link_location = $fpage_text_location_vars['clinical_resource_fpage_ref_main_link_location']; // string
-				$clinical_resource_fpage_ref_top_title_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_title_location']; // string
-				$clinical_resource_fpage_ref_top_intro_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_intro_location']; // string
-				$clinical_resource_fpage_ref_top_link_location = $fpage_text_location_vars['clinical_resource_fpage_ref_top_link_location']; // string
-				$clinical_resource_fpage_more_text_location = $fpage_text_location_vars['clinical_resource_fpage_more_text_location']; // string
-				$clinical_resource_fpage_more_link_text_location = $fpage_text_location_vars['clinical_resource_fpage_more_link_text_location']; // string
-				$clinical_resource_fpage_more_link_descr_location = $fpage_text_location_vars['clinical_resource_fpage_more_link_descr_location']; // string
-				$condition_fpage_title_location = $fpage_text_location_vars['condition_fpage_title_location']; // string
-				$condition_fpage_intro_location = $fpage_text_location_vars['condition_fpage_intro_location']; // string
-				$treatment_fpage_title_location = $fpage_text_location_vars['treatment_fpage_title_location']; // string
-				$treatment_fpage_intro_location = $fpage_text_location_vars['treatment_fpage_intro_location']; // string
-				$condition_treatment_fpage_title_location = $fpage_text_location_vars['condition_treatment_fpage_title_location']; // string
-				$condition_treatment_fpage_intro_location = $fpage_text_location_vars['condition_treatment_fpage_intro_location']; // string
+		// Get system settings for text elements in a location subsection (or profile)
+		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/specific-placement/location.php' );
 
 		// Image elements
 
@@ -252,26 +211,10 @@
 
 // Query for whether to conditionally suppress ontology sections based on Find-a-Doc Settings configuration
 
-	$regions = get_field('physician_region',$post->ID);
-	$service_lines = get_field('physician_service_line',$post->ID);
+	$regions = get_field('location_region',$post_id);
+	$service_lines = get_field('location_service_line',$page_id);
 
-	if (
-		$regions
-		||
-		$service_lines
-		) {
-
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
-			$regions, // string|array // Region(s) associated with the item
-			$service_lines // string|array // Service line(s) associated with the item
-		);
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
-
-	} else {
-
-		$hide_medical_ontology = false; // bool
-
-	}
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/ontology-hide.php' );
 
 // HEAD
 
@@ -282,7 +225,7 @@
 			// Get the location's city
 
 				$location_city = get_field('location_city', $post_id); // Get the location's city
-				$location_city_attr = $location_city ? uamswp_attr_conversion($location_city) : '';
+				$location_city_attr = uamswp_attr_conversion($location_city);
 
 		// Construct the meta title
 
@@ -307,16 +250,7 @@
 
 			}
 
-			$meta_title_vars = isset($meta_title_vars) ? $meta_title_vars : uamswp_fad_meta_title_vars(
-				$page_title, // string
-				$page_title_attr, // string (optional)
-				'', // string (optional) // Word or phrase to use to form base meta title // Defaults to $page_title_attr
-				'', // array (optional) // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number
-				$meta_title_enhanced_addition, // string (optional) // Word or phrase to inject into base meta title to form enhanced meta title level 1
-				'', // array (optional) // Pre-defined array for name order of enhanced meta title level 1 // Expects two values but will accommodate any number
-				$meta_title_enhanced_x2_addition // string (optional) // Second word or phrase to inject into base meta title to form enhanced meta title level 2
-			);
-				$meta_title = $meta_title_vars['meta_title']; // string
+			include( UAMS_FAD_PATH . '/templates/parts/html/meta/title.php' );
 
 		// Override SEOPress's standard title tag settings
 
@@ -358,7 +292,7 @@
 
 			}
 
-		$excerpt_attr = $excerpt ? uamswp_attr_conversion($excerpt) : '';
+		$excerpt_attr = uamswp_attr_conversion($excerpt);
 
 		// Set schema description
 
@@ -398,7 +332,7 @@
 	// Meta Social Media Tags
 
 		// Filter hooks
-		include( UAMS_FAD_PATH . '/templates/parts/meta_social.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/meta/social.php' );
 
 // BODY
 
@@ -437,7 +371,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	include( UAMS_FAD_PATH . '/templates/parts/site-header_single-expertise.php');
+				// 	include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
 				// }, 5 );
 
 		// Primary navigation
@@ -455,7 +389,7 @@
 				// 	$page_title,
 				// 	$page_url
 				// ) {
-				// 	include( UAMS_FAD_PATH . '/templates/parts/site-nav_single-expertise.php');
+				// 	include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
 				// }, 5 );
 
 	// Breadcrumbs
@@ -500,7 +434,7 @@
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
 			// 
-			// 	include( UAMS_FAD_PATH . '/templates/parts/entry-title_' . $entry_header_style . '.php');
+			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
 			// 
 			// } );
 
@@ -883,31 +817,21 @@
 					$portal_section_show = false;
 				}
 
-			// Query for whether related providers content section should be displayed on ontology pages/subsections
+			// Related Providers Section Query
 
 				$providers = get_field('physician_locations');
-				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-				$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
-					$providers,
-					$jump_link_count
-				);
-					$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-					$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-					$provider_ids = $provider_query_vars['provider_ids']; // int[]
-					$provider_count = $provider_query_vars['provider_count']; // int
-					$jump_link_count = $provider_query_vars['jump_link_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
 
 			// Query for whether related descendant locations content section should be displayed on a page
 
-				$current_id = get_the_ID();
 				$location_descendants = get_pages(
 					array(
-						'child_of' => $current_id,
+						'child_of' => $page_id,
 						'post_type' => 'location'
 					)
 				);
-				$location_descendant_query_vars = isset($location_descendant_query_vars) ? $location_descendant_query_vars : uamswp_fad_location_descendant_query(
-					$current_id, // int
+				$location_descendant_query_vars = uamswp_fad_location_descendant_query(
+					$page_id, // int
 					$location_descendants, // int[]
 					$jump_link_count // int
 				);
@@ -916,76 +840,33 @@
 					$location_descendant_ids = $location_descendant_query_vars['location_descendant_ids']; // int[]
 					$location_descendant_count = $location_descendant_query_vars['location_descendant_count']; // int
 					$location_descendant_valid = $location_descendant_query_vars['location_descendant_valid']; // bool
-					$jump_link_count = $location_descendant_query_vars['jump_link_count']; // int
 				$location_query = $location_descendant_query;
 				$location_section_show = $location_descendant_section_show;
 				$location_ids = $location_descendant_ids;
 				$location_count = $location_descendant_count;
 				$location_valid = $location_descendant_valid;
 
-			// Query for whether related areas of expertise content section should be displayed on a page
+			// Related Areas of Expertise Section Query
 
 				$expertises = get_field('location_expertise');
-				$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
-					$expertises // int[]
-				);
-					$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-					$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-					$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-					$expertise_count = $expertise_query_vars['expertise_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
-			// Query for whether related clinical resources content section should be displayed on ontology pages/subsections
+			// Related Clinical Resources Section Query
 
 				$clinical_resources = get_field('location_clinical_resources');
-				$posts_per_page_clinical_resource_general_vars = isset($posts_per_page_clinical_resource_general_vars) ? $posts_per_page_clinical_resource_general_vars : uamswp_fad_posts_per_page_clinical_resource_general();
-					$clinical_resource_posts_per_page_section = $posts_per_page_clinical_resource_general_vars['clinical_resource_posts_per_page_section']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
-				$jump_link_count = isset($jump_link_count) ? $jump_link_count : 0;
-				$clinical_resource_query_vars = isset($clinical_resource_query_vars) ? $clinical_resource_query_vars : uamswp_fad_clinical_resource_query(
-					$clinical_resources,
-					$clinical_resource_posts_per_page,
-					$jump_link_count
-				);
-					$clinical_resource_query = $clinical_resource_query_vars['clinical_resource_query']; // WP_Post[]
-					$clinical_resource_section_show = $clinical_resource_query_vars['clinical_resource_section_show']; // bool
-					$clinical_resource_ids = $clinical_resource_query_vars['clinical_resource_ids']; // int[]
-					$clinical_resource_count = $clinical_resource_query_vars['clinical_resource_count']; // int
-					$jump_link_count = $clinical_resource_query_vars['jump_link_count']; // int
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
-			// Query for whether related conditions content section should be displayed on ontology pages/subsections
+			// Related Conditions Section Query
 
-				// $conditions = get_field('location_conditions');
 				$conditions_cpt = get_field('location_conditions_cpt');
-				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-				$condition_query_vars = isset($condition_query_vars) ? $condition_query_vars : uamswp_fad_condition_query(
-					$conditions_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type // bool (optional)
-				);
-					$condition_cpt_query = $condition_query_vars['condition_cpt_query']; // WP_Post[]
-					$condition_section_show = $condition_query_vars['condition_section_show']; // bool
-					$condition_treatment_section_show = $condition_query_vars['condition_treatment_section_show']; // bool
-					$condition_ids = $condition_query_vars['condition_ids']; // int[]
-					$condition_count = $condition_query_vars['condition_count']; // int
-					$schema_medical_specialty = $condition_query_vars['schema_medical_specialty']; // array
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
-			// Query for whether related treatments content section should be displayed on ontology pages/subsections
+			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('location_treatments_cpt');
-				$condition_treatment_section_show = isset($condition_treatment_section_show) ? $condition_treatment_section_show : false;
-				$ontology_type = isset($ontology_type) ? $ontology_type : true;
-				$treatment_query_vars = isset($treatment_query_vars) ? $treatment_query_vars : uamswp_fad_treatment_query(
-					$treatments_cpt, // int[]
-					$condition_treatment_section_show, // bool (optional)
-					$ontology_type, // bool (optional)
-				);
-					$treatment_cpt_query = $treatment_query_vars['treatment_cpt_query']; // WP_Post[]
-					$treatment_section_show = $treatment_query_vars['treatment_section_show']; // bool
-					$condition_treatment_section_show = $treatment_query_vars['condition_treatment_section_show']; // bool
-					$treatment_ids = $treatment_query_vars['treatment_ids']; // int[]
-					$treatment_count = $treatment_query_vars['treatment_count']; // int
-					$schema_medical_specialty = $treatment_query_vars['schema_medical_specialty']; // array
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 		// Get remaining details about this item
 
@@ -1164,7 +1045,7 @@
 
 												// Add this location's details to the main address schema array
 
-													$schema_address = uamswp_schema_address(
+													$schema_address = uamswp_fad_schema_address(
 														$schema_address, // array (optional) // Main address schema array
 														$location_address_1 . ' '. $location_address_2_schema, // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
 														'', // string (optional) // The post office box number for PO box addresses.
@@ -1173,16 +1054,16 @@
 														$location_zip, // string (optional) // The postal code. For example, 94043.
 													);
 
-											// Geo Schema Data
+											// GeoCoordinates Schema Data
 
-												// Check/define the main geo schema array
+												// Check/define the main GeoCoordinates schema array
 
-													$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
+													$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
 
-												// Add this location's details to the main geo schema array
+												// Add this location's details to the main GeoCoordinates schema array
 
-													$schema_geo = uamswp_schema_geo(
-														$schema_geo, // array (optional) // Main geo schema array
+													$schema_geo_coordinates = uamswp_schema_geo_coordinates(
+														$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
 														$map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 														$map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 													);
@@ -1194,8 +1075,7 @@
 											// Phone values
 
 												$phone_output_id = $page_id;
-												$phone_output = 'location_profile';
-												include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
+												include( UAMS_FAD_PATH . '/templates/parts/html/contacts/phone-numbers_location-profile.php' );
 
 											// Hours values
 
@@ -1341,7 +1221,7 @@
 																					// // Schema.org method: Add all days as an array under the dayOfWeek property
 																					// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
-																					// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+																					// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																					// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																					// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
 																					// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1354,7 +1234,7 @@
 																					// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 
 																						foreach ( $schema_day_of_week as $day) {
-																							$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+																							$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																								$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																								$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																								$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1447,7 +1327,7 @@
 																							// // Schema.org method: Add all days as an array under the dayOfWeek property
 																							// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
 
-																							// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+																							// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																							// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																							// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
 																							// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1460,7 +1340,7 @@
 																							// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
 
 																								foreach ( $schema_day_of_week as $day) {
-																									$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+																									$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																										$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																										$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																										$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1571,7 +1451,7 @@
 
 																		// 	// Add this location's details to the main OpeningHours schema array
 
-																		// 		$schema_opening_hours = uamswp_schema_opening_hours(
+																		// 		$schema_opening_hours = uamswp_fad_schema_opening_hours(
 																		// 			$schema_opening_hours, // array (optional) // Main OpeningHours schema array
 																		// 			$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																		// 			$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1590,7 +1470,7 @@
 																			// Loop through all the days in the array separately
 
 																				foreach ( $schema_day_of_week as $day) {
-																					$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+																					$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1744,7 +1624,7 @@
 
 																				// 	// Add this location's details to the main OpeningHours schema array
 
-																				// 		$schema_opening_hours = uamswp_schema_opening_hours(
+																				// 		$schema_opening_hours = uamswp_fad_schema_opening_hours(
 																				// 			$schema_opening_hours, // array (optional) // Main OpeningHours schema array
 																				// 			$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
 																				// 			$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -1757,7 +1637,7 @@
 																					// Loop through all the days in the array separately
 
 																						foreach ( $schema_day_of_week as $day) {
-																							$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
+																							$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 																								$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 																								$day, // array|string (optional) // The day of the week for which these opening hours are valid.
 																								$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
@@ -2045,7 +1925,7 @@
 
 						// Construct Jump Links Section
 
-							include( UAMS_FAD_PATH . '/templates/parts/nav_jump-links.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/jump-links.php' );
 
 						// Construct Location Alert Section
 
@@ -2613,7 +2493,7 @@
 							$provider_section_title = $provider_fpage_title_location; // Text to use for the section title
 							$provider_section_intro = $provider_fpage_intro_location; // Text to use for the section intro text
 							$provider_section_filter_region = false; // Query whether to add region filter
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-provider.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/provider.php' );
 
 						// Construct Combined Conditions and Treatments Section
 
@@ -2623,13 +2503,13 @@
 							$condition_section_intro = $condition_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for condition section intro text in a general placement)
 							$treatment_section_title = $treatment_fpage_title_location; // Text to use for the section title // string (default: Find-a-Doc Settings value for treatment section title in a general placement)
 							$treatment_section_intro = $treatment_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for treatment section intro text in a general placement)
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-condition-treatment.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/condition-treatment.php' );
 
 						// Construct Areas of Expertise Section
 
 							$expertise_section_title = $expertise_fpage_title_location;
 							$expertise_section_intro = $expertise_fpage_intro_location;
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-expertise.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/expertise.php' );
 
 						// Construct Descendant Locations Section
 
@@ -2637,7 +2517,7 @@
 							$location_section_intro = $location_descendant_fpage_intro_location; // Text to use for the section intro text // string (default: Find-a-Doc Settings value for locations section intro text in a general placement)
 							$location_section_filter = false; // Query whether to add filter(s) // bool (default: true)
 							$location_descendant_list = true; // Query whether this is a list of child locations within a location // bool (default: false)
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-location.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/location.php' );
 
 						// Construct Clinical Resources Section
 
@@ -2648,7 +2528,7 @@
 							$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_location;
 							$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_location;
 							$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_location;
-							include( UAMS_FAD_PATH . '/templates/parts/section_list-clinical-resource.php' );
+							include( UAMS_FAD_PATH . '/templates/parts/html/section/list/clinical-resource.php' );
 
 						// Construct News Section
 
@@ -2738,6 +2618,9 @@
 
 						// Additional Selected Properties
 
+							// Property: availableService
+							$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array(); // array
+
 							// Property: description
 							$schema_description = isset($schema_description) ? $schema_description : ''; // string
 
@@ -2755,7 +2638,7 @@
 
 					// Construct the schema script tag
 
-						include( UAMS_FAD_PATH . '/templates/parts/script_schema.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
 
 			} // endwhile // end of the loop.
 

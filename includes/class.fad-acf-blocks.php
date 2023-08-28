@@ -20,7 +20,7 @@ function uams_fad_register_blocks() {
 			'keywords' => array('uams', 'clinical', 'locations', 'clinics'),
 			'mode' => 'auto',
 			'align' => 'full',
-			'render_template' => UAMS_FAD_PATH . '/templates/blocks/locations.php',
+			'render_template' => UAMS_FAD_PATH . '/templates/parts/html/section/list/location_acf-block.php',
 		));
 		acf_register_block_type(array(
 			'name' => 'fad-providers',
@@ -31,7 +31,7 @@ function uams_fad_register_blocks() {
 			'keywords' => array('uams', 'providers', 'doctors', 'physicians'),
 			'mode' => 'auto',
 			'align' => 'full',
-			'render_template' => UAMS_FAD_PATH . 'templates/blocks/providers.php',
+			'render_template' => UAMS_FAD_PATH . '/templates/parts/html/section/list/provider_acf-block.php',
 		));
 	}
 }
