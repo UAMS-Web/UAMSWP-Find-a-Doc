@@ -1863,12 +1863,13 @@
 									$affiliation // array (optional) // Hospital affiliation
 								);
 
-					// Construct the schema script tag
-
+					// // Construct the schema script tag
+					// 
 					// 	include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
 
 					// Construct the schema script tag (v2)
-					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/provider.php' );
+					
+						include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/provider.php' );
 
 			} // endwhile // end of the loop
 
