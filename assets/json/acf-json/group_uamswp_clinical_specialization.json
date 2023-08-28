@@ -1081,7 +1081,7 @@
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"message": "The Occupational Information Network — or O*NET — is a free online database that contains hundreds of job definitions to help students, job seekers, businesses and workforce development professionals to understand today's world of work in the United States.</p><p class='description' style='margin-top: 0.5em;'>O*NET classifies jobs in job families (functional areas which include workers from entry level to advanced, and may include several sub-specialties).</p><p>All O*NET occupations conform to the Standard Occupational Classification — or SOC — the United States government system of classifying occupations.",
+			"message": "The Occupational Information Network — or O*NET — is a free online database that contains hundreds of job definitions to help students, job seekers, businesses and workforce development professionals to understand today's world of work in the United States.</p><p class='description' style='margin-top: 0.5em;'>O*NET classifies jobs in job families (functional areas which include workers from entry level to advanced, and may include several sub-specialties).</p><p class='description' style='margin-top: 0.5em;'>All O*NET occupations conform to the Standard Occupational Classification — or SOC — the United States government system of classifying occupations.",
 			"new_lines": "",
 			"esc_html": 0
 		},
