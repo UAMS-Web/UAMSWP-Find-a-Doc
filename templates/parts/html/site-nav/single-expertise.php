@@ -42,43 +42,6 @@
  * 	$clinical_resource_plural_name_attr // string // Attribute value friendly version of system setting for Clinical Resources plural item name
  */
 
-// Check/define variables
-
-	// Get the ontology subsection values
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
-
-	// Related Providers Section Query
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
-
-	// Related Locations Section Query
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
-
-	// Related Areas of Expertise Section Query
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
-
-	// Related Clinical Resources Section Query
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
-
-	// Descendant Areas of Expertise Section Query
-
-		$content_placement = 'subsection';
-		include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise-descendant.php' );
-
-	// Get system settings for provider labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
-
-	// Get system settings for location labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
-
-	// Get system settings for area of expertise labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
-
-	// Get system settings for descendant area of expertise item labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise-descendant.php' );
-
-	// Get system settings for clinical resource labels
-	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
-
 require_once( UAMS_FAD_PATH . '/templates/modules/class-wp-bootstrap-pagewalker.php' );
 
 $args = array(

@@ -6,17 +6,14 @@
  * system settings for provider archive text elements
  */
 
- if (
-	!isset($provider_archive_headline) || empty($provider_archive_headline)
-	||
-	!isset($provider_archive_headline_attr) || empty($provider_archive_headline_attr)
-	||
-	!isset($placeholder_provider_archive_headline) || empty($placeholder_provider_archive_headline)
-) {
+// Call the function
 
-	$archive_text_provider_vars = isset($archive_text_provider_vars) ? $archive_text_provider_vars : uamswp_fad_archive_text_provider();
-		$provider_archive_headline = $archive_text_provider_vars['provider_archive_headline']; // string
-		$provider_archive_headline_attr = $archive_text_provider_vars['provider_archive_headline_attr']; // string
-		$placeholder_provider_archive_headline = $archive_text_provider_vars['placeholder_provider_archive_headline']; // string
+	$archive_text_provider_vars = ( isset($archive_text_provider_vars) && !empty($archive_text_provider_vars) ) ? $archive_text_provider_vars : uamswp_fad_archive_text_provider();
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $archive_text_provider_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

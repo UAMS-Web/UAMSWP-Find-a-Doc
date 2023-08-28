@@ -17,7 +17,7 @@ $current_fpage = isset($current_fpage) ? $current_fpage : '';
 
 // Call the function
 
-	$expertise_profile_fields_vars = isset($expertise_profile_fields_vars) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields(
+	$expertise_profile_fields_vars = ( isset($expertise_profile_fields_vars) && !empty($expertise_profile_fields_vars) ) ? $expertise_profile_fields_vars : uamswp_fad_expertise_profile_fields(
 		$page_id,
 		$current_fpage
 	);
@@ -26,6 +26,6 @@ $current_fpage = isset($current_fpage) ? $current_fpage : '';
 
 	foreach ( $expertise_profile_fields_vars as $key => $value ) {
 
-		${$key} = $value; 
+		${$key} = $value; // Create a variable for each item in the array
 
 	}

@@ -1003,187 +1003,24 @@
 										</h1>
 										<?php
 
-										$l = 1;
+										// Primary location
 
-										if (
-											$locations
-											&&
-											$location_valid
-											) {
+											if ( $location_primary_query->have_posts() ) {
 
-											?>
-											<div data-sectiontitle="Primary Location">
-												<?php
+												// start of the loop. the_post() sets the global $post variable
+												while ( $location_primary_query->have_posts() ) {
 
-												if ($eligible_appt) {
+													$location_primary_query->the_post();
 
-													?>
-													<h2 class="h3">Primary Appointment <?php echo $location_single_name; ?></h2>
-													<?php
+													include( UAMS_FAD_PATH . '/templates/parts/html/cards/location_primary-location.php' );
 
-												} else {
+												} // endwhile
+												// end of the loop
 
-													?>
-													<h2 class="h3">Primary <?php echo $location_single_name; ?></h2>
-													<?php
+											} // endif
 
-												} // endif
-
-												foreach ( $locations as $location ) {
-
-													if ( 2 > $l ) {
-
-														if ( get_post_status ( $location ) == 'publish' ) {
-
-															// Reset variables
-
-															$address_id = $location;
-
-															// Parent Location 
-
-																$location_has_parent = get_field('location_parent', $location);
-																$location_parent_id = get_field('location_parent_id', $location);
-																$parent_location = '';
-																$parent_id = '';
-																$parent_title = '';
-																$parent_url = '';
-
-															if ($location_has_parent && $location_parent_id) { 
-
-																$parent_location = get_post( $location_parent_id );
-
-															} // endif ($location_has_parent && $location_parent_id)
-
-															// Get Post ID for Address & Image fields
-
-																if ( $parent_location ) {
-
-																	$parent_id = $parent_location->ID;
-																	$parent_title = $parent_location->post_title;
-																	$parent_url = get_permalink( $parent_id );
-																	$address_id = $parent_id;
-
-																} // endif ($parent_location)
-
-															$location_address_1 = get_field('location_address_1', $address_id );
-															$location_building = get_field('location_building', $address_id );
-
-															if ( $location_building ) {
-
-																$building = get_term($location_building, "building");
-																$building_slug = $building->slug;
-																$building_name = $building->name;
-
-															} //endif ($location_building)
-
-															$location_floor = get_field_object('location_building_floor', $address_id );
-															$location_floor_value = '';
-															$location_floor_label = '';
-
-															if ( $location_floor && is_object($location_floor) ) {
-
-																$location_floor_value = $location_floor['value'];
-																$location_floor_label = $location_floor['choices'][ $location_floor_value ];
-
-															} // endif ( $location_floor && is_object($location_floor) )
-
-															$location_suite = get_field('location_suite', $address_id );
-
-															// Construct Address Line 2
-
-																$location_address_2 =
-																	( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? '<br />' : '' ) : '' )
-																	. ( $location_floor && !empty($location_floor_value) && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ', ' : '' ) : '' )
-																	. ( $location_suite ? $location_suite : '' );
-																$location_address_2_schema =
-																	( ( $location_building && $building_slug != '_none' ) ? $building_name . ( ( ($location_floor && $location_floor_value) || $location_suite ) ? ' ' : '' ) : '' )
-																	. ( $location_floor && $location_floor_value != "0" ? $location_floor_label . ( ( $location_suite ) ? ' ' : '' ) : '' )
-																	. ( $location_suite ? $location_suite : '' );
-																if ( !$location_address_2 ) {
-
-																	$location_address_2_deprecated = get_field('location_address_2', $address_id );
-																	$location_address_2 = $location_address_2_deprecated;
-																	$location_address_2_schema = $location_address_2_deprecated;
-
-																} else {
-
-																	// Eliminate PHP errors
-																	$location_address_2_deprecated = '';
-
-																} // endif (!$location_address_2)
-
-															$location_city = get_field('location_city', $address_id);
-															$location_state = get_field('location_state', $address_id);
-															$location_zip = get_field('location_zip', $address_id);
-
-															?>
-															<p><strong><?php echo $primary_appointment_title; ?></strong><br />
-															<?php
-
-															if ( $parent_location ) {
-
-																?>
-																(Part of <a href="<?php echo $parent_url; ?>" data-categorytitle="Parent Name"><?php echo $parent_title; ?></a>)<br />
-																<?php
-
-															} // endif ( $parent_location )
-
-															echo $location_address_1;
-
-															?><br/>
-															<?php
-
-															echo $location_address_2 ? $location_address_2 . '<br/>' : '';
-															echo $location_city . ', ' . $location_state . ' ' . $location_zip;
-															$map = get_field( 'location_map', $address_id );
-
-															?>
-															<!-- <br /><a class="uams-btn btn-red btn-sm btn-external" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Directions</a> -->
-															</p>
-															<?php
-
-															// Phone values
-
-																$phone_output_id = $location;
-																$phone_output = 'associated_locations';
-																include( UAMS_FAD_PATH . '/templates/blocks/locations-phone.php' );
-
-															?>
-															<div class="btn-container">
-																<a class="btn btn-primary" href="<?php echo get_the_permalink( $location ); ?>" data-itemtitle="<?php echo $primary_appointment_title_attr; ?>" data-categorytitle="View <?php echo $location_single_name_attr; ?>">
-																	View <?php echo $location_single_name; ?>
-																</a>
-																<?php
-
-																if (1 < $location_count) {
-
-																	?>
-																	<a class="btn btn-outline-primary" href="#locations" aria-label="Jump to list of <?php echo strtolower($location_plural_name_attr); ?> for this <?php echo strtolower($provider_single_name_attr); ?>" data-categorytitle="View All <?php echo $location_plural_name_attr; ?>">
-																		View All <?php echo $location_plural_name; ?>
-																	</a>
-																	<?php
-
-																} // endif (1 < $location_count)
-
-																?>
-															</div>
-															<?php
-
-															$l++;
-
-														} // endif ( get_post_status ( $location ) == 'publish' )
-
-													} // if ( 2 > $l )
-
-												} // endforeach ( $locations as $location )
-
-												// wp_reset_postdata();
-
-												?>
-											</div>
-										<?php
-
-										} // endif ( $locations && $location_valid )
+											//reset global post variable. After this point, we are back to the Main Query object
+											wp_reset_postdata();
 
 										?> 
 										<h2 class="h3">Overview</h2>
@@ -1409,7 +1246,7 @@
 							if ( $appointment_section_show ) {
 
 								$appointment_block_instance = 1;
-								include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment_provider.php' );
 
 							}
 
@@ -1950,7 +1787,7 @@
 								)
 							) {
 								$appointment_block_instance = 2;
-								include( UAMS_FAD_PATH . '/templates/blocks/appointment-provider.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment_provider.php' );
 							}
 
 						?>
@@ -1987,12 +1824,15 @@
 							}
 
 							// Property: geo
-							$schema_geo = isset($schema_geo) ? $schema_geo : '';
+							$schema_geo_coordinates = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
 
 							// Property: url
 							$schema_url = $page_url; // string
 
 						// Additional Selected Properties
+
+							// Property: availableService
+							$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array(); // array
 
 							// Property: description
 							$schema_description = isset($schema_description) ? $schema_description : ''; // string
@@ -2002,6 +1842,15 @@
 
 							// Property: medicalSpecialty
 							$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array(); // array
+
+							// Property: hospitalAffiliation
+
+								$schema_hospital_affiliation = ( isset($schema_hospital_affiliation) && is_array($schema_hospital_affiliation) && !empty($schema_hospital_affiliation) ) ? $schema_hospital_affiliation : array(); // array
+
+								$schema_hospital_affiliation = uamswp_fad_schema_hospital_affiliation(
+									$schema_hospital_affiliation, // array (optional) // Main hospitalAffiliation schema array
+									$affiliation // array (optional) // Hospital affiliation
+								);
 
 					// Construct the schema script tag
 

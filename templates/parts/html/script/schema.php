@@ -14,7 +14,8 @@
  * 	$schema_aggregate_rating_value; // string
  * 	$schema_aggregate_rating_count; // int
  * 	$schema_aggregate_rating_review_count; // int
- * 	$schema_geo; // array
+ * 	$schema_geo_coordinates; // array
+ * 	$schema_hospital_affiliation; // array
  * 	$schema_opening_hours_specification // array
  * 	$schema_telephone // array
  * 	$schema_url // string
@@ -82,7 +83,7 @@
 			// Google Structured Data Documentation:
 			// 	- Geographic coordinates of the business
 			// 	- latitude and longitude: The precision must be at least 5 decimal places.
-			$schema_geo = isset($schema_geo) ? $schema_geo : '';
+			$schema_geo_coordinates = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
 
 		// Property: openingHoursSpecification
 			// 	Expected Type: OpeningHoursSpecification
@@ -131,6 +132,12 @@
 
 	// Additional Selected Properties
 
+		// Property: availableService
+			// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
+			// Description: A medical service available from this provider.
+
+			$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array(); // array
+
 		// Property: faxNumber
 			// Expected Type: Text
 			// Description: The fax number.
@@ -142,6 +149,12 @@
 			// 	Description: A description of the item.
 
 			$schema_description = isset($schema_description) ? $schema_description : '';
+
+		// Property: hospitalAffiliation
+			// Expected Type: Hospital
+			// Description: A hospital with which the physician or office is affiliated.
+
+			$schema_hospital_affiliation = isset($schema_hospital_affiliation) ? $schema_hospital_affiliation : '';
 
 		// Property: image
 			// 	Expected Type: ImageObject or URL
@@ -187,16 +200,6 @@
 				// Property: availableService
 					// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
 					// Description: A medical service available from this provider.
-
-			// Properties for Term: Physician
-
-				// Property: availableService
-					// Expected Type: MedicalProcedure or MedicalTest or MedicalTherapy
-					// Description: A medical service available from this provider.
-
-				// Property: hospitalAffiliation
-					// Expected Type: Hospital
-					// Description: A hospital with which the physician or office is affiliated.
 
 			// Properties for Term: LocalBusiness
 
@@ -629,6 +632,18 @@
 		$schema_block['description'] = $schema_description; // Add the relevant 'description' value
 	}
 
+// Add hospitalAffiliation
+
+	if ( $schema_hospital_affiliation ) {
+		$schema_block['hospitalAffiliation'] = $schema_hospital_affiliation; // Add the relevant 'hospitalAffiliation' value
+	}
+
+// Add availableService
+
+	if ( $schema_available_service ) {
+		$schema_block['availableService'] = $schema_available_service; // Add the relevant 'availableService' value
+	}
+
 // Add medicalSpecialty
 
 	if ( $schema_medical_specialty ) {
@@ -677,24 +692,24 @@
 
 // Add geo
 
-if ( $schema_geo ) {
+if ( $schema_geo_coordinates ) {
 
 	// If the geo schema array only contains one top-level item/array, flatten the geo schema array
-	if ( is_array($schema_geo) ) {
+	if ( is_array($schema_geo_coordinates) ) {
 
-		if ( 1 == count($schema_geo) && is_array($schema_geo[0]) ) {
+		if ( 1 == count($schema_geo_coordinates) && is_array($schema_geo_coordinates[0]) ) {
 
-			$schema_geo = array_reduce( $schema_geo, 'array_merge', array() );
+			$schema_geo_coordinates = array_reduce( $schema_geo_coordinates, 'array_merge', array() );
 
-		} elseif ( 1 == count($schema_geo) && !is_array($schema_geo[0]) ) {
+		} elseif ( 1 == count($schema_geo_coordinates) && !is_array($schema_geo_coordinates[0]) ) {
 
-			$schema_geo = $schema_geo[0];
+			$schema_geo_coordinates = $schema_geo_coordinates[0];
 
 		}
 
 	}
 
-	$schema_block['geo'] = $schema_geo; // Add the relevant 'geo' value
+	$schema_block['geo'] = $schema_geo_coordinates; // Add the relevant 'geo' value
 
 }
 

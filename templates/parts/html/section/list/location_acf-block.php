@@ -136,7 +136,7 @@ if($filter_type || $filter_region || $filter_aoe || $filter_ids) {
 							<div class="card-list">
 							<?php while ( $location_query->have_posts() ) : $location_query->the_post();
 								$page_id = get_the_ID();
-								include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+								include( UAMS_FAD_PATH . '/templates/parts/html/cards/location.php' );
 							endwhile;
 							wp_reset_postdata();?>
 						</div>

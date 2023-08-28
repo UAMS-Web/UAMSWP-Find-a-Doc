@@ -147,12 +147,12 @@
 				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
 
 			} else {
-				
+
 				// Descendant Areas of Expertise
 
 				$expertise_section_title = $expertise_descendant_fpage_title_general;
 				$expertise_section_intro = $expertise_descendant_fpage_intro_general;
-				
+
 				// Override area of expertise values with descendant area of expertise item values
 
 					// Get system settings for descendant area of expertise item labels
@@ -214,7 +214,7 @@ if ( $expertise_section_show ) {
 									while ( $expertise_query->have_posts() ) {
 										$expertise_query->the_post();
 										$page_id = get_the_ID();
-										include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+										include( UAMS_FAD_PATH . '/templates/parts/html/cards/expertise.php' );
 									} // endwhile
 								} // endif ( $expertise_count > 0 )
 								wp_reset_postdata();

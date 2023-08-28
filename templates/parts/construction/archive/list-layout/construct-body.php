@@ -77,9 +77,9 @@
 								$per_page = 40;
 								$offset = ( $paged-1 ) * $per_page;
 								$args = array( 'post_type' => $post_type, 'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => $per_page, 'offset' => $offset );
-								
+
 								if ( !empty($alpha) ) {
-								
+
 									$alpha = substr($alpha, 0, 1);
 									$args['starts_with'] = $alpha;
 									$args['posts_per_page'] = -1;

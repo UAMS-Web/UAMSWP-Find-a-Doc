@@ -76,7 +76,7 @@ if ( $treatment_section_show ) {
 		$ontology_type = isset($ontology_type) ? $ontology_type : true;
 
 		// Text elements
-		
+
 			if (
 				!isset($treatment_section_title) || empty($treatment_section_title)
 				||
@@ -161,7 +161,7 @@ if ( $treatment_section_show ) {
 										$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 
 										// Add this location's details to the main medicalSpecialty schema array
-										$schema_medical_specialty = uamswp_schema_medical_specialty(
+										$schema_medical_specialty = uamswp_fad_schema_medical_specialty(
 											$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
 											$treatment_title_attr, // string (optional) // The name of the item.
 											$treatment_url // string (optional) // URL of the item.

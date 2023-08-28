@@ -140,7 +140,7 @@ if($filter_id || $filter_region || $filter_location || $filter_aoe) {
 								<div class="card-list">
 								<?php while ( $provider_query->have_posts() ) : $provider_query->the_post();
 									$page_id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+									include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 								endwhile;
 								wp_reset_postdata();?>
 							</div>

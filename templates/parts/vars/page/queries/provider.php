@@ -15,28 +15,24 @@
  * 	hide_medical_ontology // bool
  */
 
- if (
-	!isset($provider_query) || empty($provider_query)
-	||
-	!isset($provider_section_show) || empty($provider_section_show)
-	||
-	!isset($provider_ids) || empty($provider_ids)
-	||
-	!isset($provider_count) || empty($provider_count)
-) {
+// Check/define optional variables
 
-	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
-	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
+	$jump_link_count = ( isset($jump_link_count) && !empty($jump_link_count) ) ? $jump_link_count : '';
+	$hide_medical_ontology = ( isset($hide_medical_ontology) && !empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
-	$provider_query_vars = isset($provider_query_vars) ? $provider_query_vars : uamswp_fad_provider_query(
+// Call the function
+
+	$provider_query_vars = ( isset($provider_query_vars) && !empty($provider_query_vars) ) ? $provider_query_vars : uamswp_fad_provider_query(
 		$page_id, // int
 		$providers, // int[]
 		$jump_link_count, // int
 		$hide_medical_ontology // bool
 	);
-		$provider_query = $provider_query_vars['provider_query']; // WP_Post[]
-		$provider_section_show = $provider_query_vars['provider_section_show']; // bool
-		$provider_ids = $provider_query_vars['provider_ids']; // int[]
-		$provider_count = $provider_query_vars['provider_count']; // int
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $provider_query_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

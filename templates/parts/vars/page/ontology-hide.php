@@ -17,34 +17,36 @@
  * 	$hide_medical_ontology // bool
  */
 
+// Check/define variables
+
+	$page_id = isset($page_id) ? $page_id : get_the_ID();
+	$regions = isset($regions) ? $regions : array();
+	$service_lines = isset($service_lines) ? $service_lines : array();
 
 if (
-	!isset($hide_medical_ontology) || empty($hide_medical_ontology)
+	$regions
+	||
+	$service_lines
 ) {
 
-	// Check/define variables
+	// Call the function
 
-		$page_id = isset($page_id) ? $page_id : get_the_ID();
-		$regions = isset($regions) ? $regions : array();
-		$service_lines = isset($service_lines) ? $service_lines : array();
-
-	if (
-		$regions
-		||
-		$service_lines
-	) {
-
-		$ontology_hide_vars = isset($ontology_hide_vars) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
+		$ontology_hide_vars = ( isset($ontology_hide_vars) && !empty($ontology_hide_vars) ) ? $ontology_hide_vars : uamswp_fad_ontology_hide(
 			$page_id, // int // ID of the post
 			$regions, // string|array // Region(s) associated with the item
 			$service_lines // string|array // Service line(s) associated with the item
 		);
-			$hide_medical_ontology = $ontology_hide_vars['hide_medical_ontology']; // bool
 
-	} else {
+	// Create a variable for each item in the array
 
-		$hide_medical_ontology = false; // bool
+		foreach ( $ontology_hide_vars as $key => $value ) {
 
-	}
+			${$key} = $value; // Create a variable for each item in the array
+
+		}
+
+} else {
+
+	$hide_medical_ontology = false; // bool
 
 }

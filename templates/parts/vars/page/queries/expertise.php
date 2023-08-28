@@ -16,28 +16,24 @@
  * 	hide_medical_ontology // bool
  */
 
- if (
-	!isset($expertise_query) || empty($expertise_query)
-	||
-	!isset($expertise_section_show) || empty($expertise_section_show)
-	||
-	!isset($expertise_ids) || empty($expertise_ids)
-	||
-	!isset($expertise_count) || empty($expertise_count)
-) {
+// Check/define optional variables
 
-	$jump_link_count = ( isset($jump_link_count) && empty($jump_link_count) ) ? $jump_link_count : '';
-	$hide_medical_ontology = ( isset($hide_medical_ontology) && empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
+	$jump_link_count = ( isset($jump_link_count) && !empty($jump_link_count) ) ? $jump_link_count : '';
+	$hide_medical_ontology = ( isset($hide_medical_ontology) && !empty($hide_medical_ontology) ) ? $hide_medical_ontology : '';
 
-	$expertise_query_vars = isset($expertise_query_vars) ? $expertise_query_vars : uamswp_fad_expertise_query(
+// Call the function
+
+	$expertise_query_vars = ( isset($expertise_query_vars) && !empty($expertise_query_vars) ) ? $expertise_query_vars : uamswp_fad_expertise_query(
 		$page_id, // int
 		$expertises, // int[]
 		$jump_link_count, // int
 		$hide_medical_ontology // bool
 	);
-		$expertise_query = $expertise_query_vars['expertise_query']; // WP_Post[]
-		$expertise_section_show = $expertise_query_vars['expertise_section_show']; // bool
-		$expertise_ids = $expertise_query_vars['expertise_ids']; // int[]
-		$expertise_count = $expertise_query_vars['expertise_count']; // int
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $expertise_query_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

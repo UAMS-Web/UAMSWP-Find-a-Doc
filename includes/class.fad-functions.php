@@ -432,7 +432,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		$out = '';
 		if ($loop -> have_posts()) : while ($loop -> have_posts()) : $loop -> the_post();
 			$page_id = get_the_ID();
-			$out .= include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+			$out .= include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 		endwhile;
 		endif;
 		wp_die();
@@ -879,7 +879,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					// $z=0;
 					while ( $search_query->have_posts() ) : $search_query->the_post();
 						$page_id = get_the_ID();
-						include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 						// $z++;
 					endwhile;
 					echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-regions="'. implode(',', $provider_region_list) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
@@ -1009,7 +1009,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					while ( $search_query->have_posts() ) : $search_query->the_post();
 						$page_id = get_the_ID();
 						$title_list[] = get_field('physician_title', $page_id);
-						include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 					endwhile;
 					echo '<data id="provider_ids" data-postids="'. implode(',', $provider_ids) .'," data-titles="'. implode(',', array_unique($title_list)) .',"></data>';
 				} else {
@@ -1168,7 +1168,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 					$location_ids = $search_query->posts;
 					while ( $search_query->have_posts() ) : $search_query->the_post();
 						$page_id = get_the_ID();
-						include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+						include( UAMS_FAD_PATH . '/templates/parts/html/cards/location.php' );
 					endwhile;
 					echo '<data id="location_ids" data-postids="'. implode(',', $location_ids) .'," data-regions="'. implode(',', $location_region_list) .',"></data>';
 				} else {
@@ -1406,6 +1406,7 @@ function uamswp_attr_conversion($input) {
 		return '';
 	}
 
+	$input_attr = str_replace('&nbsp;', ' ', $input_attr); // Replace non-breaking space with normal space
 	$input_attr = str_replace('&#8220;', '\'', $input_attr); // Replace left double quotation mark with normal space
 	$input_attr = str_replace('&#8221;', '\'', $input_attr); // Replace right double quotation mark with normal space
 	$input_attr = str_replace('&#8216;', '\'', $input_attr); // Replace left single quotation mark with normal space
@@ -1513,9 +1514,9 @@ function uamswp_fad_ontology_site_values(
 				// If the page has the ontology type...
 				// Set the navbar-subbrand title element using the page's values 
 				$site_nav_id = $page_id;
-				$site_nav_title = !empty($page_title) ? $page_title : get_the_title();
+				$site_nav_title = get_the_title($site_nav_id);
 				$site_nav_title_attr = uamswp_attr_conversion($site_nav_title);
-				$site_nav_url = !empty($page_url) ? $page_url : user_trailingslashit(get_permalink());
+				$site_nav_url = user_trailingslashit(get_permalink($site_nav_id));
 				$navbar_subbrand_title = $site_nav_title;
 				$navbar_subbrand_title_attr = $site_nav_title_attr;
 				$navbar_subbrand_title_url = $site_nav_url;
@@ -1536,7 +1537,7 @@ function uamswp_fad_ontology_site_values(
 				// Set the navbar-subbrand title element using the values of the closest ancestor with the ontology type
 				$site_nav_id = $ancestors_ontology_closest;
 				$site_nav_title = $ancestors_ontology_closest_title;
-				$site_nav_title_attr = $uamswp_attr_conversion($site_nav_title);
+				$site_nav_title_attr = uamswp_attr_conversion($site_nav_title);
 				$site_nav_url = $ancestors_ontology_closest_url;
 				$navbar_subbrand_title = $site_nav_title;
 				$navbar_subbrand_title_attr = $site_nav_title_attr;
@@ -1577,18 +1578,12 @@ function uamswp_fad_ontology_site_values(
 				'site_nav_title'				=> $site_nav_title, // string
 				'site_nav_title_attr'			=> $site_nav_title_attr, // string
 				'site_nav_url'					=> $site_nav_url, // string
-				'navbar_subbrand'				=> array (
-					'title'		=> array(
-						'name'	=> $navbar_subbrand_title, // string
-						'attr'	=> $navbar_subbrand_title_attr, // string
-						'url'	=> $navbar_subbrand_title_url, // string
-					),
-					'parent'	=> array(
-						'name'	=> $navbar_subbrand_parent, // string
-						'attr'	=> $navbar_subbrand_parent_attr, // string
-						'url'	=> $navbar_subbrand_parent_url, // string
-					)
-				),
+				'navbar_subbrand_title'			=> $navbar_subbrand_title, // string
+				'navbar_subbrand_title_attr'	=> $navbar_subbrand_title_attr, // string
+				'navbar_subbrand_title_url'		=> $navbar_subbrand_title_url, // string
+				'navbar_subbrand_parent'		=> $navbar_subbrand_parent, // string
+				'navbar_subbrand_parent_attr'	=> $navbar_subbrand_parent_attr, // string
+				'navbar_subbrand_parent_url'	=> $navbar_subbrand_parent_url, // string
 				'providers'						=> $providers, // int[]
 				'locations'						=> $locations, // int[]
 				'expertises'					=> $expertises, // int[]
@@ -1611,6 +1606,342 @@ function uamswp_fad_ontology_site_values(
 }
 
 // Queries for whether each of the related ontology content sections should be displayed on ontology pages/subsections
+
+	// Loop through array of IDs and remove the IDs of unpublished posts
+
+		function uamswp_fad_simple_publish_loop(
+			$array, // int[] // Array of post items,
+			$max = 0 // int // Maximum number of posts to return (0 = all)
+		) {
+
+			// Check/define variables
+				$array = ( isset($array) && is_array($array) && !empty($array) ) ? $array : array();
+				$max = ( isset($max) && !empty($max) ) ? $max : 0;
+
+			// If the array is empty, stop here
+
+				if ( !$array ) {
+
+					return $array;
+
+				}
+
+			// Check for published items
+
+				$i = 0;
+
+				foreach ( $array as $key => $value ) {
+
+					if ( get_post_status ( $value ) != 'publish' ) {
+
+						unset($array[$key]);
+
+					} else {
+
+						$i++;
+
+						if (
+							$max != 0
+							&&
+							$i == $max
+						) {
+
+							$array = array_values($array);
+
+							return $array;
+
+						}
+
+					}
+
+				}
+
+				$array = array_values($array);
+
+			return $array;
+
+		}
+
+	// Create a simple linked text list of related ontology items
+
+		function uamswp_fad_related_list(
+			$page_id, // int // ID of the current ontology item
+			$page_title_attr, // string // Attribute-friendly title of the current ontology item
+			&$related_array, // int[] // List of related ontology item IDs
+			$post_type = '', // string (optional) // Post type of the related ontology items
+			$data_category_title = '', // string (optional) // 'data-categorytitle' attribute value of links
+			$max = 3 // int (optional) // Maximum number of related ontology items to display
+		) {
+
+			// Check/define variables
+
+				$related_array = ( isset($related_array) && is_array($related_array) && !empty($related_array) ) ? $related_array : array();
+				$related_array_list = '';
+
+			// If the array is empty, stop here
+
+				if ( !$related_array ) {
+
+					return $related_array_list;
+				}
+
+			// Get only published IDs
+			$related_array = $related_array ? uamswp_fad_simple_publish_loop($related_array) : array();
+
+			// Count remaining providers
+			$related_array_count = count($related_array);
+
+			// Display reference to more items
+			$more = ( $related_array_count > $max ) ? true : false; // bool
+
+			// Limit number of providers
+			$related_array = array_slice( $related_array, 0, $max );
+
+			// Get field values for provider links
+			$related_array_vals = uamswp_fad_related_list_link_values($related_array);
+
+			// Check/define the post type
+			$post_type = ( isset($post_type) && !empty($post_type) ) ? $post_type : get_post_type( $related_array[0] );
+
+			// Check/define the '$data_category_title' attribute value
+
+				if (
+					!isset($data_category_title)
+					||
+					empty($data_category_title)
+				) {
+
+					$data_category_title_map = array(
+						'provider'			=> 'Related Provider',
+						'location'			=> 'Related Location',
+						'expertise'			=> 'Related Area of Expertise',
+						'clinical-resource'	=> 'Related Clinical Resource',
+						'condition'			=> 'Related Condition',
+						'treatment'			=> 'Related Treatment'
+					);
+
+					$data_category_title = $data_category_title_map[$post_type];
+
+				}
+
+			// Create the comma-separated list of linked provider items
+
+				$related_array_list = uamswp_fad_related_list_html(
+					$related_array_vals, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+					$data_category_title, // string // 'data-categorytitle' attribute value
+					$page_title_attr, // string // 'data-itemtitle' attribute value
+					$more // bool // Query for whether to include reference to more items
+				);
+
+			return $related_array_list;
+
+		}
+
+		// Get published field values from a post used to construct a linked text item in a list
+
+			function uamswp_fad_related_item_link_values(
+				$page_id // int // Post ID
+			) {
+
+				// Retrieve the value of the transient
+				uamswp_fad_get_transient( 'vars_' . $page_id, $output, __FUNCTION__ );
+
+				if ( !empty( $output ) ) {
+
+					/* 
+					* The transient exists.
+					* Return the variable.
+					*/
+
+					return $output;
+
+				} else {
+
+					$output = array();
+
+					if ( get_post_status ( $page_id ) == 'publish' ) {
+
+						// Titles and sort name
+
+							if ( get_post_type($page_id) == 'provider' ) {
+
+								// If provider, get medium name for title
+
+									$output['title'] = get_field( 'physician_medium_name', $page_id ) ?: '';
+
+									if (
+										!isset( $output['title'] )
+										||
+										empty( $output['title'] )
+									) {
+
+										$output['title'] = implode(
+											' ',
+											array_filter(
+												array(
+													( get_field( 'physician_prefix', $page_id ) ?: '' ),
+													( get_field( 'physician_first_name', $page_id ) ?: '' ),
+													( get_field( 'physician_middle_name', $page_id ) ?: '' ),
+													( get_field( 'physician_last_name', $page_id ) ?: '' ),
+													( get_field( 'physician_pedigree', $page_id ) ?: '' )
+												)
+											)
+										) ?: '';
+
+									}
+
+								// Attribute-friendly title
+								$output['title_attr'] = uamswp_attr_conversion($output['title']);
+
+								// Sort name
+								$output['sort_name'] = get_the_title($page_id);
+
+							} else {
+
+								// Otherwise, get the post title
+								$output['title'] = get_the_title($page_id);
+
+								// Attribute-friendly title
+								$output['title_attr'] = uamswp_attr_conversion($output['title']);
+
+								// Sort name
+								$output['sort_name'] = $output['title'];
+
+							}
+
+						// URL
+						$output['url'] = get_permalink($page_id);
+
+					}
+
+					// Set/update the value of the transient
+					uamswp_fad_set_transient( $page_id, $output, __FUNCTION__ );
+
+					// Return the array
+					return $output;
+
+				}
+
+			}
+
+		// Loop through array of IDs and get published field values used to construct the linked text items in a list
+
+			function uamswp_fad_related_list_link_values(
+				$array // int[] // Array of post IDs
+			) {
+
+				// Check/define values
+
+					$array = ( isset($array) && is_array($array) && !empty($array) ) ? $array : array();
+					$output = array();
+
+				// If the array is empty, stop here
+
+					if ( !$array ) {
+
+						return $output;
+
+					}
+
+				// Check for published items
+
+					foreach ( $array as $item ) {
+
+						$output[$item] = uamswp_fad_related_item_link_values($item);
+
+					}
+
+				return $output;
+
+			}
+
+		// Create HTML for a comma-separated list of linked ontology items
+
+			function uamswp_fad_related_list_html(
+				$array, // Multidimensional array where second-level arrays are associative arrays (keys: 'title', 'title_attr', 'url')
+				$data_category_title = '', // string // 'data-categorytitle' attribute value
+				$data_item_title = '', // string // 'data-itemtitle' attribute value
+				$more = false // bool // Query for whether to include reference to more items
+			) {
+
+				// Construct link elements
+
+					foreach ( $array as $item ) {
+
+						if ( $item['url'] ) {
+
+							// Open anchor element
+
+								$item_link_open = '<a';
+								$item_link_open .= ' href="' . $item['url'] . '"';
+								$item_link_open .= $data_category_title ? ( ' data-categorytitle="' . $data_category_title .'"' ) : '';
+								$item_link_open .= $item['title_attr'] ? ( ' data-typetitle="' . $item['title_attr'] . '"' ) : '';
+								$item_link_open .= $data_item_title ? ' data-categorytitle="' . $data_item_title . '"' : '';
+								$item_link_open .= '>';
+
+							// Close anchor element
+
+								$item_link_close = '</a>';
+
+						}
+
+						$output_array[] = $item_link_open . $item['title'] . $item_link_close;
+
+					}
+
+				// Add reference to more items
+				$output_array[] = $more ? 'more' : '';
+
+				// Remove any empty items from the array
+				$output_array = array_filter($output_array);
+
+				// Split lists for serial grammar
+
+					// Final two items in array
+
+						$output_array_split_1 = array_slice(
+							$output_array,
+							-2, // start two items from the end
+							2 // include two items
+						);
+
+					// Remainder of the array (the items at the beginning)
+
+						$output_array_split_0 = array_slice(
+							$output_array,
+							0, // start at the beginning
+							( count($output_array) - count($output_array_split_1) ) // include the remainder
+						);
+
+				// Construct the list as a string
+
+					// Join the final two items with "and"
+
+						$output_string_split_1 = implode(
+							(
+								' and'
+								. ( $more ? '&nbsp;' : ' ' ) // Use non-breaking space if the last item is 'more'
+							),
+							$output_array_split_1
+						);
+
+					// Merge the combined final two items string with the beginning array
+
+						$output_array_merge = array_merge(
+							$output_array_split_0,
+							array($output_string_split_1)
+						); // reset variable
+
+					// Join the items in the array with commas
+
+						$output = implode(
+							', ',
+							$output_array_merge
+						);
+
+				return $output;
+
+			}
 
 	// Query for whether related providers content section should be displayed on ontology pages/subsections
 	function uamswp_fad_provider_query(
@@ -1733,6 +2064,7 @@ function uamswp_fad_ontology_site_values(
 				$location_valid = false;
 				$location_ids = array();
 				$location_count = 0;
+				$location_primary_query = '';
 
 			if (
 				!$hide_medical_ontology
@@ -1763,6 +2095,22 @@ function uamswp_fad_ontology_site_values(
 					$location_count = count($location_query->posts);
 					$jump_link_count++;
 
+					if ( 'provider' == get_post_type($page_id) ) {
+
+						$args = array(
+							'post__in' => $locations,
+							'post_type' => 'location',
+							'post_status' => 'publish',
+							'posts_per_page' => 1,
+							'order' => 'ASC',
+							'orderby' => 'post__in',
+							'fields' => 'ids',
+						);
+
+						$location_primary_query = new WP_Query( $args );
+
+					}
+
 				}
 
 			}
@@ -1770,12 +2118,13 @@ function uamswp_fad_ontology_site_values(
 			// Create an array to be used on the templates and template parts
 
 				$location_query_vars = array(
-					'location_query'		=> $location_query, // WP_Post[]
-					'location_section_show'	=> $location_section_show, // bool
-					'location_ids'			=> $location_ids, // int[]
-					'location_count'		=> $location_count, // int
-					'location_valid'		=> $location_valid, // bool
-					'jump_link_count'		=> $jump_link_count // int
+					'location_query'			=> $location_query, // WP_Post[]
+					'location_section_show'		=> $location_section_show, // bool
+					'location_ids'				=> $location_ids, // int[]
+					'location_count'			=> $location_count, // int
+					'location_valid'			=> $location_valid, // bool
+					'location_primary_query'	=> $location_primary_query, // WP_Post[]
+					'jump_link_count'			=> $jump_link_count // int
 				);
 
 			// Set/update the value of the transient
@@ -7898,20 +8247,22 @@ function uamswp_fad_appointment_patients() {
 
 		// Phone Number Information
 
+			$appointment_patients_phone_number_both_fallback = '(501) 686-8800';
+
 			// New Patients Only
-			$appointment_patients_phone_number_new = format_phone_dash(get_field('appointment_patients_phone_number_new', 'option')) ?: '';
+			$appointment_patients_phone_number_new = format_phone_dash(get_field('appointment_patients_phone_number_new', 'option')) ?: $appointment_patients_phone_number_both_fallback;
 			$appointment_patients_phone_label_new = get_field('appointment_patients_phone_label_new', 'option') ?: '';
 			$appointment_patients_phone_label_new_attr = uamswp_attr_conversion($appointment_patients_phone_label_new);
 			$appointment_patients_phone_info_new = get_field('appointment_patients_phone_info_new', 'option') ?: '';
 
 			// Existing Patients Only
-			$appointment_patients_phone_number_existing = format_phone_dash(get_field('appointment_patients_phone_number_existing', 'option')) ?: '';
+			$appointment_patients_phone_number_existing = format_phone_dash(get_field('appointment_patients_phone_number_existing', 'option')) ?: $appointment_patients_phone_number_both_fallback;
 			$appointment_patients_phone_label_existing = get_field('appointment_patients_phone_label_existing', 'option') ?: '';
 			$appointment_patients_phone_label_existing_attr = uamswp_attr_conversion($appointment_patients_phone_label_existing);
 			$appointment_patients_phone_info_existing = get_field('appointment_patients_phone_info_existing', 'option') ?: '';
 
 			// Both New and Existing Patients
-			$appointment_patients_phone_number_both = format_phone_dash(get_field('appointment_patients_phone_number_both', 'option')) ?: '';
+			$appointment_patients_phone_number_both = format_phone_dash(get_field('appointment_patients_phone_number_both', 'option')) ?: $appointment_patients_phone_number_both_fallback;
 			$appointment_patients_phone_label_both = get_field('appointment_patients_phone_label_both', 'option') ?: '';
 			$appointment_patients_phone_label_both_attr = uamswp_attr_conversion($appointment_patients_phone_label_both);
 			$appointment_patients_phone_info_both = get_field('appointment_patients_phone_info_both', 'option') ?: '';
@@ -8177,444 +8528,6 @@ function uamswp_meta_image_values( $featured_image ) {
 	}
 
 }
-
-// Collect Values For Schema Data Properties
-
-	// Add data to an array defining schema data for address or location
-	function uamswp_schema_address(
-		$schema_address = array(), // array (optional) // Main address or location schema array
-		$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-		$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
-		$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-		$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-		$postal_code = '', // string (optional) // The postal code. For example, 94043.
-		$address_country = 'USA', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-		$name = '', // string (optional) // The name of the item.
-		$telephone = '', // string (optional) // The telephone number.
-		$fax_number = '' // string (optional) // The fax number.
-	) {
-
-		/* Example use:
-		* 
-		* 	// Address Schema Data
-		* 
-		* 		// Check/define the main address or location schema array
-		* 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
-		* 
-		* 		// Add this location's details to the main address or location schema array
-		* 		$schema_address = uamswp_schema_address(
-		* 			$schema_address, // array (optional) // Main address or location schema array
-		* 			'PostalAddress', // string (optional) // Schema type
-		* 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-		* 			'', // string (optional) // The post office box number for PO box addresses.
-		* 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-		* 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-		* 			$location_zip, // string (optional) // The postal code. For example, 94043.
-		* 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-		* 			$location_title, // string (optional) // The name of the item.
-		* 			$location_phone_format_dash, // string (optional) // The telephone number.
-		* 			$location_fax_format_dash // string (optional) // The fax number.
-		* 		);
-		*/
-
-		// Check/define variables
-
-			$schema_address = is_array($schema_address) ? $schema_address : array();
-			$address_country = !empty($address_country) ? $address_country : 'USA';
-
-		// Create an array for this item
-
-			$schema = array();
-
-		// Add values to the array
-
-			if ( $name ) {
-				$schema['name'] = $name;
-			}
-
-			if ( $street_address ) {
-				$schema['streetAddress'] = $street_address;
-			}
-
-			if ( $post_office_box_number ) {
-				$schema['postOfficeBoxNumber'] = $post_office_box_number;
-			}
-
-			if ( $address_locality ) {
-				$schema['addressLocality'] = $address_locality;
-			}
-
-			if ( $address_region ) {
-				$schema['addressRegion'] = $address_region;
-			}
-
-			if ( $postal_code ) {
-				$schema['postalCode'] = $postal_code;
-			}
-
-			if ( $address_country ) {
-				$schema['addressCountry'] = $address_country;
-			}
-
-			if ( $telephone ) {
-				$schema['telephone'] = $telephone;
-			}
-
-			if ( $fax_number ) {
-				$schema['faxNumber'] = $fax_number;
-			}
-
-			if ( !empty($schema) ) {
-				$schema = array('@type' => 'PostalAddress') + $schema;
-			}
-
-		// Add this item's array to the main address or location schema array
-
-			if ( !empty($schema) ) {
-				$schema_address[] = $schema;
-			}
-
-		// Return the main address or location schema array
-
-			return $schema_address;
-
-	}
-
-	// Add data to an array defining schema data for medicalSpecialty
-	function uamswp_schema_medical_specialty(
-		$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
-		$name = '', // string (optional) // The name of the item.
-		$url = '', // string (optional) // URL of the item.
-		$alternate_name = '' // string (optional) // An alias for the item.
-	) {
-
-		/* Example use:
-		* 
-		* 	// MedicalSpecialty Schema Data
-		* 
-		* 		// Check/define the main medicalSpecialty schema array
-		* 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-		* 
-		* 		// Add this location's details to the main medicalSpecialty schema array
-		* 		$schema_medical_specialty = uamswp_schema_medical_specialty(
-		* 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-		* 			$condition_title_attr, // string (optional) // The name of the item.
-		* 			$condition_url // string (optional) // URL of the item.
-		* 		);
-		*/
-
-		// Check/define variables
-
-			$schema_medical_specialty = is_array($schema_medical_specialty) ? $schema_medical_specialty : array();
-
-		// Create an array for this item
-
-			$schema = array();
-
-		// Add values to the array
-
-			if ( $name ) {
-				$schema['name'] = $name;
-			}
-
-			if ( $url ) {
-				$schema['url'] = $url;
-			}
-
-			if ( $alternate_name ) {
-				$schema['alternateName'] = $alternate_name;
-			}
-
-			if ( !empty($schema) ) {
-				$schema = array('@type' => 'MedicalSpecialty') + $schema;
-			}
-
-		// Add this item's array to the main address schema array
-
-			if ( !empty($schema) ) {
-				$schema_medical_specialty[] = $schema;
-			}
-
-		// Return the main address schema array
-
-			return $schema_medical_specialty;
-
-	}
-
-	// Add data to an array defining schema data for faxNumber
-	function uamswp_schema_fax_number(
-		$schema_fax_number = array(), // array (optional) // Main faxNumber schema array
-		$fax_number = '' // string (optional) // The fax number.
-	) {
-
-		/* Example use:
-		* 
-		* 	// FaxNumber Schema Data
-		* 
-		* 		// Check/define the main faxNumber schema array
-		* 		$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
-		* 
-		* 		// Add this location's details to the main faxNumber schema array
-		* 		$schema_fax_number = uamswp_schema_fax_number(
-		* 			$schema_fax_number, // array (optional) // Main faxNumber schema array
-		* 			$location_fax_format_dash // string (optional) // The fax number.
-		* 		);
-		*/
-
-		// Check/define variables
-
-			$schema_fax_number = is_array($schema_fax_number) ? $schema_fax_number : array();
-
-		// Add values to the main faxNumber schema array
-
-			if ( $fax_number ) {
-				$schema_fax_number[] = $fax_number;
-			}
-
-		// Return the main faxNumber schema array
-
-			return $schema_fax_number;
-
-	}
-
-	// Add data to an array defining schema data for telephone
-	function uamswp_schema_telephone(
-		$schema_telephone = array(), // array (optional) // Main telephone schema array
-		$telephone_number = '' // string (optional) // The telephone number.
-	) {
-
-		/* Example use:
-		* 
-		* 	// Telephone Schema Data
-		* 
-		* 		// Check/define the main telephone schema array
-		* 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-		* 
-		* 		// Add this location's details to the main telephone schema array
-		* 		$schema_telephone = uamswp_schema_telephone(
-		* 			$schema_telephone, // array (optional) // Main telephone schema array
-		* 			$telephone_number // string (optional) // The telephone number.
-		* 		);
-		*/
-
-		// Check/define variables
-
-			$schema_telephone = is_array($schema_telephone) ? $schema_telephone : array();
-
-		// Add values to the main telephone schema array
-
-			if ( $telephone_number ) {
-				$schema_telephone[] = $telephone_number;
-			}
-
-		// Return the main telephone schema array
-
-			return $schema_telephone;
-
-	}
-
-	// Add data to an array defining schema data for OpeningHoursSpecification
-	function uamswp_schema_opening_hours_specification(
-		$schema_opening_hours_specification = array(), // array (optional) // Main OpeningHoursSpecification schema array
-		$day_of_week = array(), // array|string (optional) // The day of the week for which these opening hours are valid.
-		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		$closes = '', // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		$valid_from = '', // string (optional) // The date when the item becomes valid.
-		$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-	) {
-
-		/* Example use:
-		* 
-		* 	// OpeningHoursSpecification Schema Data
-		* 
-		* 		// Check/define the main OpeningHoursSpecification schema array
-		* 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
-		* 
-		* 		// Add this location's details to the main OpeningHoursSpecification schema array
-		* 
-		* 			// // Schema.org method: Add all days as an array under the dayOfWeek property
-		* 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-		* 
-		* 			// 	$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
-		* 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-		* 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
-		* 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		* 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		* 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
-		* 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-		* 			// 	);
-		* 
-		* 			// Google method: Loop through all the days defined in the current Hours repeater row separately
-		* 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-		* 
-		* 				foreach ( $schema_day_of_week as $day) {
-		* 					$schema_opening_hours_specification = uamswp_schema_opening_hours_specification(
-		* 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-		* 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
-		* 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		* 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		* 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
-		* 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-		* 					);
-		* 				}
-		*/
-
-		// Check/define variables
-
-			$schema_opening_hours_specification = is_array($schema_opening_hours_specification) ? $schema_opening_hours_specification : array();
-			$day_of_week = !empty($day_of_week) ? $day_of_week : array();
-
-		// Create an array for this item
-
-			$schema = array();
-
-		// Add values to the array
-
-			if ( $day_of_week ) {
-				$schema['dayOfWeek'] = $day_of_week;
-			}
-
-			if ( $opens ) {
-				$schema['opens'] = $opens;
-			}
-
-			if ( $closes ) {
-				$schema['closes'] = $closes;
-			}
-
-			if ( $valid_from ) {
-				$schema['validFrom'] = $valid_from;
-			}
-
-			if ( $valid_through ) {
-				$schema['validThrough'] = $valid_through;
-			}
-
-			if ( !empty($schema) ) {
-				$schema = array('@type' => 'OpeningHoursSpecification') + $schema;
-			}
-
-		// Add this item's array to the main openingHoursSpecification schema array
-
-			if ( !empty($schema) ) {
-				$schema_opening_hours_specification[] = $schema;
-			}
-
-		// Return the main address schema array
-
-			return $schema_opening_hours_specification;
-
-	}
-
-	// Add data to an array defining schema data for OpeningHours
-	function uamswp_schema_opening_hours(
-		$schema_opening_hours = array(), // array (optional) // Main OpeningHours schema array
-		$day_of_week = '', // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-		$opens = '', // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-	) {
-
-		/* Example use:
-		* 
-		* 	// OpeningHours Schema Data
-		* 
-		* 		// Check/define the main OpeningHours schema array
-		* 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
-		* 
-		* 		// Add this location's details to the main OpeningHours schema array
-		* 
-		* 			$schema_opening_hours = uamswp_schema_opening_hours(
-		* 				$schema_opening_hours, // array (optional) // Main OpeningHours schema array
-		* 				$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-		* 				$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		* 				$schema_closes // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-		* 			);
-		*/
-
-		// Check/define variables
-
-			$schema_opening_hours = is_array($schema_opening_hours) ? $schema_opening_hours : array();
-
-		// Add values to the array
-
-			if (
-				$day_of_week
-				&&
-				$opens
-				&&
-				$closes
-			) {
-				$schema_opening_hours[] = $day_of_week . ' ' . $opens . '-' . $closes;
-			}
-
-		// Return the main address schema array
-
-			return $schema_opening_hours;
-
-	}
-
-	// Add data to an array defining schema data for geo
-	function uamswp_schema_geo(
-		$schema_geo = array(), // array (optional) // Main geo schema array
-		$latitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-		$longitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-		$elevation = '' // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
-	) {
-
-		/* Example use:
-		 * 
-		 * 	// Geo Schema Data
-		 * 
-		 * 		// Check/define the main geo schema array
-		 * 		$schema_geo = ( isset($schema_geo) && is_array($schema_geo) && !empty($schema_geo) ) ? $schema_geo : array();
-		 * 
-		 * 		// Add this location's details to the main geo schema array
-		 * 
-		 * 			$schema_geo = uamswp_schema_geo(
-		 * 				$schema_geo, // array (optional) // Main geo schema array
-		 * 				$schema_latitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-		 * 				$schema_longitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-		 * 				$schema_elevation // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
-		 * 			);
-		 */
-
-		// Check/define variables
-
-			$schema_geo = is_array($schema_geo)? $schema_geo : array();
-
-		// Create an array for this item
-
-		$schema = array();
-
-		// Add values to the array
-
-			if ( $latitude ) {
-				$schema['latitude'] = $latitude;
-			}
-
-			if ( $longitude ) {
-				$schema['longitude'] = $longitude;
-			}
-
-			if ( $elevation ) {
-				$schema['elevation'] = $elevation;
-			}
-
-			if ( !empty($schema) ) {
-				$schema = array('@type' => 'GeoCoordinates') + $schema;
-			}
-
-		// Add this item's array to the main geo schema array
-
-			if ( !empty($schema) ) {
-				$schema_geo[] = $schema;
-			}
-
-		// Return the main geo schema array
-
-			return $schema_geo;
-
-	}
 
 // Create array_is_list function that is available in PHP 8
 if ( !function_exists('array_is_list') ) {
@@ -9669,137 +9582,315 @@ function uamswp_prevent_orphan($string) {
 	// Provider card field values
 
 		function uamswp_fad_provider_card_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$provider_card_style = 'basic' // string enum('basic', 'detailed') // Provider card style
 		) {
 
+			// Check optional variables
+			$provider_card_style = ( 'basic' == $provider_card_style || 'detailed' == $provider_card_style ) ? $provider_card_style : 'basic';
+
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $provider_card_style . '_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $provider_card_fields_vars ) ) {
 
 				/* 
-					* The transient exists.
-					* Return the variable.
-					*/
+				 * The transient exists.
+				  Return the variable.
+				 */
 
 				return $provider_card_fields_vars;
 
 			} else {
 
 				/* 
-					* The transient does not exist.
-					* Define the variable again.
-					*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Create a variables array to be used on the templates and template parts
 				$provider_card_fields_vars = array();
 
-
 				// Get the field values
 
-					// First Name
+					// Common
 
-						$provider_first_name = get_field( 'physician_first_name', $page_id ); // string
+						// First Name
 
-						$provider_card_fields_vars['provider_first_name'] = isset($provider_first_name) ? $provider_first_name : ''; // Add to the variables array
+							$provider_first_name = get_field( 'physician_first_name', $page_id ); // string
 
-					// Middle Name
+						// Middle Name
 
-						$provider_middle_name = get_field( 'physician_middle_name', $page_id ); // string
+							$provider_middle_name = get_field( 'physician_middle_name', $page_id ); // string
 
-						$provider_card_fields_vars['provider_middle_name'] = isset($provider_middle_name) ? $provider_middle_name : ''; // Add to the variables array
+						// Last Name
 
-					// Last Name
+							$provider_last_name = get_field( 'physician_last_name', $page_id ); // string
 
-						$provider_last_name = get_field( 'physician_last_name', $page_id ); // string
+						// Generational Suffix
 
-						$provider_card_fields_vars['provider_last_name'] = isset($provider_last_name) ? $provider_last_name : ''; // Add to the variables array
+							$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string 
 
-					// Generational Suffix
+						// Degree and/or Credential (taxonomy multi-select)
 
-						$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string 
+							$provider_degree = get_field( 'physician_degree', $page_id ); // int[]
 
-						$provider_card_fields_vars['provider_pedigree'] = isset($provider_pedigree) ? $provider_pedigree : ''; // Add to the variables array
+							// List degree term names
 
-					// Degree and/or Credential (taxonomy multi-select)
+								if ( $provider_degree ) {
 
-						$provider_degree = get_field( 'physician_degree', $page_id ); // int[]
+									foreach ( $provider_degree as $key => $value ) {
 
-						foreach ( $provider_degree as $item ) {
+										$provider_degree_term = get_term( $value, 'degree' );
 
-							$provider_degree_array[$item] = array(
-								'name'	=> get_term( $item, 'degree')->name // string // Term name
+										if ( is_object( $provider_degree_term ) ) {
+
+											$provider_degree[$key] = $provider_degree_term->name;
+
+										} else {
+
+											unset($provider_degree[$key]);
+											$provider_degree = array_values($provider_degree);
+
+										}
+
+									} // endforeach
+
+									$provider_degree_list = $provider_degree ? implode(", ", $provider_degree) : ''; // string
+
+								} else {
+
+									// Eliminate PHP errors
+									$provider_degree_list = '';
+
+								} // endif
+
+							// Add to the variables array
+
+								$provider_card_fields_vars['provider_degree_list'] = isset($provider_degree_list) ? $provider_degree_list : '';
+
+						// Full name
+
+							$provider_full_name[] = $provider_first_name ?: '';
+							$provider_full_name[] = $provider_middle_name ?: '';
+							$provider_full_name[] = $provider_last_name ?: '';
+							$provider_full_name = array(
+								implode( ' ', array_filter($provider_full_name) )
 							);
-
-						}
-
-						$provider_card_fields_vars['provider_degree'] = isset($provider_degree) ? $provider_degree : ''; // Add to the variables array
-						$provider_card_fields_vars['provider_degree_array'] = isset($provider_degree_array) ? $provider_degree_array : ''; // Add to the variables array
-
-					// Headshot
-
-						$_thumbnail_id = get_field( '_thumbnail_id', $page_id ); // int
-
-						$provider_card_fields_vars['_thumbnail_id'] = isset($_thumbnail_id) ? $_thumbnail_id : ''; // Add to the variables array 
-
-					// Is the Provider a Resident?
-
-						$provider_resident = get_field( 'physician_resident', $page_id ); // bool 
-
-						$provider_card_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
-
-					// Clinical Job Title (taxonomy select)
-
-						$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
-						$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
-
-						foreach ( $provider_title as $item ) {
-
-							$provider_title_array[$item] = array(
-								'name'	=> get_term( $item, 'clinical_title')->name // string // Term name
+							$provider_full_name[] = $provider_pedigree ?: '';
+							$provider_full_name = array(
+								implode( '&nbsp;', array_filter($provider_full_name) )
 							);
+							$provider_full_name[] = $provider_degree_list ?: '';
+							$provider_full_name = implode( ', ', array_filter($provider_full_name) );
+							$provider_full_name_attr = uamswp_attr_conversion( $provider_full_name );
 
-						}
+							// Add to the variables array
 
-						$provider_card_fields_vars['provider_title'] = isset($provider_title) ? $provider_title : ''; // Add to the variables array
-						$provider_card_fields_vars['provider_title_array'] = isset($provider_title_array) ? $provider_title_array : ''; // Add to the variables array
+								$provider_card_fields_vars['provider_full_name'] = isset($provider_full_name) ? $provider_full_name : '';
+								$provider_card_fields_vars['provider_full_name_attr'] = isset($provider_full_name_attr) ? $provider_full_name_attr : '';
 
-					// UAMS Health Service Line (taxonomy select)
+						// Clinical Job Title (taxonomy select)
 
-						$provider_service_line = get_field( 'physician_service_line', $page_id ); // string|int[] // Term ID(s)
-						$provider_service_line = is_array($provider_service_line) ? $provider_service_line : array($provider_service_line); // int[] // Term ID(s)
+							// Is the Provider a Resident?
+							$provider_resident = get_field( 'physician_resident', $page_id ) ?: false; // bool 
 
-						foreach ( $provider_service_line as $item ) {
+							if ( $provider_resident ) {
 
-							$provider_service_line_array[$item] = array(
-								'name'	=> get_term( $item, 'service_line')->name // string // Term name
-							);
+								$provider_title = '';
+								$provider_title_list = 'Resident Physician';
 
-						}
+							} else {
 
-						$provider_card_fields_vars['provider_service_line'] = isset($provider_service_line) ? $provider_service_line : ''; // Add to the variables array
-						$provider_card_fields_vars['provider_service_line_array'] = isset($provider_service_line_array) ? $provider_service_line_array : ''; // Add to the variables array
+								$provider_title = get_field( 'physician_title', $page_id ); // string|int[] // Term ID(s)
+								$provider_title = is_array($provider_title) ? $provider_title : array($provider_title); // int[] // Term ID(s)
 
-					// National Provider Identifier (NPI)
+								// List Clinical Job Title term names
 
-						$provider_npi = get_field( 'physician_npi', $page_id ); // string
+								if ( $provider_title ) {
 
-						$provider_card_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : ''; // Add to the variables array
+									foreach ( $provider_title as $key => $value ) {
 
-					// Short Patient-focused Clinical Biography
+										$provider_title_term = get_term( $value, 'clinical_title' );
 
-						$provider_short_clinical_bio = get_field( 'physician_short_clinical_bio', $page_id ); // string 
+										if ( is_object( $provider_title_term ) ) {
 
-						$provider_card_fields_vars['provider_short_clinical_bio'] = isset($provider_short_clinical_bio) ? $provider_short_clinical_bio : ''; // Add to the variables array
+											$provider_title[$key] = $provider_title_term->name;
 
-					// Locations (relationship)
+										} else {
 
-						$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
+											unset($provider_title[$key]);
+											$provider_title = array_values($provider_title);
 
-						$provider_card_fields_vars['provider_locations'] = isset($provider_locations) ? $provider_locations : ''; // Add to the variables array
+										}
+
+									} // endforeach
+
+									$provider_title_list = $provider_title ? implode(", ", $provider_title) : ''; // string
+
+								} else {
+
+									// Eliminate PHP errors
+									$provider_title_list = '';
+
+								} // endif
+
+							} // endif ( $provider_resident )
+
+							// Add to the variables array
+
+								$provider_card_fields_vars['provider_title'] = isset($provider_title) ? $provider_title : '';
+								$provider_card_fields_vars['provider_title_list'] = isset($provider_title_list) ? $provider_title_list : '';
+
+						// Profile URL
+
+							$provider_url = user_trailingslashit(get_permalink( $page_id ));
+
+							// Add to the variables array
+							$provider_card_fields_vars['provider_url'] = isset($provider_url) ? $provider_url : '';
+
+					// Provider Card Styles
+
+						if ( 'basic' == $provider_card_style ) {
+
+							// Headshot
+
+								$provider_headshot = get_field( '_thumbnail_id', $page_id ); // int
+
+								if (
+									$provider_headshot
+									&&
+									function_exists( 'fly_add_image_size' )
+								) {
+
+									$provider_headshot_url = image_sizer( $provider_headshot, 253, 337, 'center', 'center' );
+
+								} elseif ( $provider_headshot ) {
+
+									$provider_headshot_url = wp_get_attachment_image_url( $provider_headshot, 'medium' );
+
+								} else {
+
+									$provider_headshot_url = '';
+
+								}
+
+								// Add to the variables array
+								$provider_card_fields_vars['provider_headshot_url'] = isset($provider_headshot_url) ? $provider_headshot_url : ''; 
+
+						} elseif ( 'detailed' == $provider_card_style ) {
+
+							// Headshot
+
+								$provider_headshot = get_field( '_thumbnail_id', $page_id ); // int
+
+								if (
+									$provider_headshot
+									&&
+									function_exists( 'fly_add_image_size' )
+								) {
+
+									$provider_headshot_srcset[] = array(
+										'url'				=> image_sizer( $provider_headshot, 243, 324, 'center', 'center' ),
+										'media-min-width'	=> '2054px'
+									);
+
+									$provider_headshot_srcset[] = array(
+										'url'				=> image_sizer( $provider_headshot, 184, 245, 'center', 'center' ),
+										'media-min-width'	=> '1784px'
+									);
+
+									$provider_headshot_srcset[] = array(
+										'url'				=> image_sizer( $provider_headshot, 243, 324, 'center', 'center' ),
+										'media-min-width'	=> '1200px'
+									);
+
+									$provider_headshot_srcset[] = array(
+										'url'				=> image_sizer( $provider_headshot, 184, 245, 'center', 'center' ),
+										'media-min-width'	=> '768px'
+									);
+
+									$provider_headshot_srcset[] = array(
+										'url'				=> image_sizer( $provider_headshot, 95, 127, 'center', 'center' ),
+										'media-min-width'	=> '576px'
+									);
+
+									$provider_headshot_srcset[] = array(
+										'url'				=> image_sizer( $provider_headshot, 184, 245, 'center', 'center' ),
+										'media-min-width'	=> '1px'
+									);
+
+									$provider_headshot_base_url = image_sizer( $provider_headshot, 184, 245, 'center', 'center' );
+
+								} elseif ( $provider_headshot ) {
+
+									$provider_headshot_base_url = wp_get_attachment_image_url( $provider_headshot, 'medium' );
+
+								} else {
+
+									$provider_headshot_base_url = '';
+
+								}
+
+								// Add to the variables array
+
+									$provider_card_fields_vars['provider_headshot_srcset'] = isset($provider_headshot_srcset) ? $provider_headshot_srcset : array(); 
+									$provider_card_fields_vars['provider_headshot_base_url'] = isset($provider_headshot_base_url) ? $provider_headshot_base_url : ''; 
+
+							// National Provider Identifier (NPI)
+
+								$provider_npi = get_field( 'physician_npi', $page_id ); // string
+
+								// Add to the variables array
+								$provider_card_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : '';
+
+							// Post Excerpt
+
+								$provider_excerpt = get_field( 'physician_short_clinical_bio', $page_id ); // string
+								$provider_excerpt = $provider_excerpt ?: wp_strip_all_tags( get_field( 'physician_clinical_bio', $page_id ) ); // string
+								$provider_excerpt = $provider_excerpt ?: ''; // string
+
+								// Truncate the excerpt if it is greater than 160 characters
+
+									if ( strlen($provider_excerpt) > 160 ) {
+
+										$provider_excerpt = wp_trim_words( $provider_excerpt, 23, ' &hellip;' );
+
+									}
+
+								// Add to the variables array
+								$provider_card_fields_vars['provider_excerpt'] = isset($provider_excerpt) ? $provider_excerpt : '';
+
+							// Locations (relationship)
+
+								$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
+
+								// Check for valid locations
+
+									foreach ( $provider_locations as $key => $value ) {
+
+										if ( get_post_status ( $value ) == 'publish' ) {
+
+											$provider_locations_array[$value]['title'] = get_the_title( $value );
+											$provider_locations_array[$value]['title_attr'] = uamswp_attr_conversion($provider_locations_array[$value]['title']);
+											$provider_locations_array[$value]['url'] = get_permalink( $value );
+
+										} else {
+
+											unset($provider_locations[$key]);
+
+										}
+									}
+
+									$provider_locations = array_values($provider_locations);
+
+								// Add to the variables array
+								$provider_card_fields_vars['provider_locations_array'] = isset($provider_locations_array) ? $provider_locations_array : '';
+
+						} // endif
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $provider_card_style . '_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $provider_card_fields_vars;
@@ -9887,11 +9978,21 @@ function uamswp_prevent_orphan($string) {
 	// Location card field values
 
 		function uamswp_fad_location_card_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$location_card_style, // string enum('basic', 'detailed', 'primary-location') // Location card style
+			$schema_address = array(), // array // Schema address data
+			$schema_telephone = array(), // array // Schema telephone data
+			$schema_fax_number = array(), // array // Schema fax number data
+			$schema_geo_coordinates = array(), // array // Schema geo data
+			$location_section_schema_query = false, // bool // Query for whether to add locations to schema
+			$location_descendant_list = false // bool // Query on whether this card is in a list of descendant locations
 		) {
 
+			// Check optional variables
+			$location_card_style = ( 'basic' == $location_card_style || 'detailed' == $location_card_style || 'primary-location' == $location_card_style ) ? $location_card_style : 'basic';
+
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $location_card_style . '_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $location_card_fields_vars ) ) {
 
@@ -9914,45 +10015,1024 @@ function uamswp_prevent_orphan($string) {
 
 				// Get the field values
 
-					// Foo
+					// Common
 
-						$foo = get_field( 'foo', $page_id ); // string
+						// Query on whether this card is in a list of descendant locations
 
-						$location_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+							$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false;
 
-					// Bar (taxonomy multi-select)
+						// Location Title
 
-						$bar = get_field( 'bar', $page_id ); // int[]
+							$location_title = get_the_title($page_id);
+							$location_title_attr = uamswp_attr_conversion($location_title);
 
-						foreach ( $bar as $item ) {
+							// Add to the variables array
 
-							$bar_array[$item] = array(
-								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
-							);
+								$location_card_fields_vars['location_title'] = isset($location_title) ? $location_title : '';
+								$location_card_fields_vars['location_title_attr'] = isset($location_title_attr) ? $location_title_attr : '';
 
-						}
+						// Location URL
+							$location_url = user_trailingslashit(get_permalink($page_id));
 
-						$location_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
-						$location_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
+							// Add to the variables array
+							$location_card_fields_vars['location_url'] = isset($location_url) ? $location_url : '';
 
-					// Baz (taxonomy select/radio/checkbox)
+						// Query on whether the current location has a parent
 
-						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
-						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
+							$location_has_parent = get_field('location_parent', $page_id) ?: '';
 
-						foreach ( $baz as $item ) {
+						// Parent location
 
-							$baz_array[$item] = array(
-								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
-							);
+							// Parent ID
+							$location_parent_id = $location_has_parent ? ( get_field('location_parent_id', $page_id) ?: '' ) : '';
 
-						}
+							// Get the parent post object
+							$location_parent_object = $location_parent_id ? get_post($location_parent_id) : '';
+							$location_parent_display = ( $location_parent_object && !$location_descendant_list ) ? true : false;
 
-						$location_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
-						$location_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
+							if ( $location_parent_object ) {
+
+								// If the parent post object exists...
+
+								// Parent title
+
+									$location_parent_title = $location_parent_object->post_title;
+									$location_parent_title_attr = uamswp_attr_conversion($location_parent_title);
+
+								// Parent URL
+								$location_parent_url = get_permalink($location_parent_id);
+
+								// Set address ID using the parent ID
+								$location_address_id = $location_parent_id;
+
+								// Query on whether to override the photos using the parent's photos
+								$location_override_parent_photo = get_field('location_image_override_parent', $page_id) ?: false;
+
+								// Query on whether to override the featured photo using the parent's featured photo
+								$location_override_parent_photo_featured = $location_override_parent_photo ? get_field('location_image_override_parent_featured', $page_id) : false;
+
+							} else {
+
+								// Eliminate PHP errors
+
+								$location_parent_title = '';
+								$location_parent_title_attr = '';
+								$location_parent_url = '';
+								$location_address_id = $page_id;
+								$location_override_parent_photo = '';
+								$location_override_parent_photo_featured = '';
+
+							}
+
+							// Add to the variables array
+							$location_card_fields_vars['location_parent_object'] = isset($location_parent_object) ? $location_parent_object : '';
+							$location_card_fields_vars['location_parent_display'] = isset($location_parent_display) ? $location_parent_display : '';
+							$location_card_fields_vars['location_parent_title'] = isset($location_parent_title) ? $location_parent_title : '';
+							$location_card_fields_vars['location_parent_title_attr'] = isset($location_parent_title_attr) ? $location_parent_title_attr : '';
+							$location_card_fields_vars['location_parent_url'] = isset($location_parent_url) ? $location_parent_url : '';
+
+						// Featured image
+
+							// Featured image ID
+
+								if (
+									$location_parent_object
+									&&
+									!$location_override_parent_photo_featured
+								) {
+
+									$location_featured_image = get_post_thumbnail_id($location_parent_id) ?: ''; // int
+
+								} else {
+
+									$location_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
+
+								}
+
+							// Featured image URL
+							$location_featured_image_url = $location_featured_image ? wp_get_attachment_image_url( $location_featured_image, 'aspect-16-9-small' ) : ''; // string
+
+							// Add to the variables array
+							$location_card_fields_vars['location_featured_image_url'] = isset($location_featured_image_url) ? $location_featured_image_url : '';
+
+						// Get system settings for location labels
+
+							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+
+						// Get the address attributes of the relevant item
+
+							// Street address (address line 1)
+							$location_address_1 = get_field('location_address_1', $location_address_id ) ?: '';
+
+							// Building, Floor and Suite
+
+								// Building
+
+									$location_building = get_field('location_building', $location_address_id ) ?: '';
+									$location_building_term = $location_building ? get_term( $location_building, 'building' ) : '';
+									$location_building_slug = $location_building_term ? $location_building_term->slug : '';
+									$location_building_name = $location_building_term ? $location_building_term->name : '';
+
+									// If building slug is set to '_none' (standalone building), reset the values
+
+										if ( $location_building_slug == '_none' ) {
+
+											$location_building = '';
+											$location_building_term = '';
+											$location_building_slug = '';
+											$location_building_name = '';
+
+										}
+
+								// Building floor
+
+									$location_floor = get_field_object('location_building_floor', $location_address_id ) ?: '';
+									$location_floor_value = $location_floor ? $location_floor['value'] : '';
+									$location_floor_label = $location_floor ? $location_floor['choices'][$location_floor_value] : '';
+
+									// If floor value is set to '0' (single-story building), reset the values
+
+										if ( $location_floor_value == '0' ) {
+
+											$location_floor = '';
+											$location_floor_value = '';
+											$location_floor_label = '';
+
+										}
+
+								// Suite/unit number
+
+									$location_suite = get_field('location_suite', $location_address_id ) ?: '';
+
+								// Create address detail line(s) string
+
+									$location_address_detail = implode(
+										'<br />',
+										array_filter(
+											array(
+												$location_building_name,
+												implode(
+													', ',
+													array_filter(
+														array(
+															$location_floor_label,
+															$location_suite
+														)
+													)
+												)
+											)
+										)
+									);
+
+								// Construct the schema for address line 2
+
+									$location_address_2_schema = implode(
+										' ',
+										array_filter(
+											array(
+												$location_building_name,
+												$location_floor_label,
+												$location_suite
+											)
+										)
+									);
+
+								// Fall back to the deprecated address line 2 field
+
+									if (
+										!$location_address_detail
+										||
+										!$location_address_2_schema
+									) {
+
+										// Get deprecated address line 2 value
+										$location_address_2_deprecated = get_field('location_address_2', $location_address_id ) ?: '';
+
+										$location_address_detail = $location_address_detail ?: $location_address_2_deprecated;
+										$location_address_2_schema = $location_address_2_schema ?: $location_address_2_deprecated;
+
+									}
+
+								// Construct the full schema address line
+
+									$location_address_schema = implode(
+										' ',
+										array_filter(
+											array(
+												$location_address_1,
+												$location_address_2_schema
+											)
+										)
+									);
+
+							// City, State and ZIP
+
+								// City
+								$location_city = get_field('location_city', $location_address_id) ?: '';
+
+								// State
+								$location_state = get_field('location_state', $location_address_id) ?: '';
+
+								// ZIP
+								$location_zip = get_field('location_zip', $location_address_id) ?: '';
+
+								// Construct final address line string
+
+									$location_address_final_line = implode(
+										', ',
+										array_filter(
+											array(
+												$location_city,
+												implode(
+													' ',
+													array_filter(
+														array(
+															$location_state,
+															$location_zip
+														)
+													)
+												)
+											)
+										)
+									);
+
+						// GPS / Map / Directions
+
+							$location_map = get_field('location_map', $location_address_id) ?: '';
+
+							// Construct directions URL (Google Maps)
+							$location_directions_url = $location_map ? 'https://www.google.com/maps/dir/Current+Location/' . $location_map['lat'] . ',' . $location_map['lng'] : '';
+
+							// Add to the variables array
+							$location_card_fields_vars['location_directions_url'] = isset($location_directions_url) ? $location_directions_url : '';
+
+						// Location Alerts
+
+							// Closure Alert
+
+								// Query for whether the location is closing
+
+									$location_closing = get_field('location_closing', $page_id) ?: false; // bool
+
+								// Eliminate PHP errors
+
+									$location_closing_date = '';
+									$location_closing_date_past = '';
+									$location_closing_length = '';
+									$location_closing_reopen_known = '';
+									$location_closing_reopen_date = '';
+
+								if ( $location_closing ) {
+
+									// Closing Date
+									$location_closing_date = get_field('location_closing_date', $page_id) ?: ''; // Date Format: "F j, Y"
+
+									// Query for whether the closing date is in the past
+
+										if ( new DateTime() >= new DateTime($location_closing_date) ) {
+
+											$location_closing_date_past = true;
+
+										} else {
+
+											$location_closing_date_past = false;
+
+										} // endif
+
+									// Temporary or permanent?
+									$location_closing_length = get_field('location_closing_length', $page_id) ?: ''; // string enum('temporary', 'permanent')
+
+									if ( $location_closing_length == 'temporary' ) {
+
+										// Reopening date known?
+										$location_closing_reopen_known = get_field('location_reopen_known', $page_id) ?: ''; // string enum('tbd', 'date')
+
+										if ( $location_closing_reopen_known == 'date' ) {
+
+											// Reopening date
+											$location_closing_reopen_date = get_field('location_reopen_date', $page_id) ?: ''; // Date Format: "F j, Y"
+
+										} // endif ( $location_closing_reopen_known == 'date' )
+
+									} // endif ( $location_closing_length == 'temporary' )
+
+								} // endif ( $location_closing )
+
+								// Query for whether to display the location closure alert
+
+									if (
+										(
+											$location_closing
+											&&
+											$location_closing_length == 'permanent'
+										)
+										||
+										(
+											$location_closing
+											&&
+											$location_closing_length == 'temporary'
+											&&
+											!$location_closing_reopen_date_past
+										)
+									) {
+
+										$location_closing_display = true;
+
+									} else {
+
+										$location_closing_display = false;
+
+									}
+
+							// Modified Hours Alert
+
+								$location_modified_hours_group = get_field('location_hours_group', $page_id);
+
+								// Datetime references (Unix timestamp)
+
+									$today = strtotime("today");
+									$today_30 = strtotime("+30 days");
+
+								// Modified Clinic Hours
+
+									// Query for whether there are upcoming modified clinic hours
+									$location_modified_clinic_hours = $location_modified_hours_group['location_modified_hours'] ?: false; // bool
+
+									// Eliminate PHP errors
+
+										$location_modified_clinic_hours_start_date = '';
+										$location_modified_clinic_hours_start_date_unix = '';
+										$location_modified_clinic_hours_end = '';
+										$location_modified_clinic_hours_end_date = '';
+										$location_modified_clinic_hours_end_date_unix = '';
+
+									if ( $location_modified_clinic_hours ) {
+
+										// Modified Clinic Hours Start Date
+
+											$location_modified_clinic_hours_start_date = $location_modified_hours_group['location_modified_hours_start_date'] ?: ''; // Date Format: "F j, Y"
+											$location_modified_clinic_hours_start_date_unix = $location_modified_clinic_hours_start_date ? strtotime($location_modified_clinic_hours_start_date) : ''; // (Unix timestamp)
+
+										// Query for whether there is an end date to the modified clinic hours
+										$location_modified_clinic_hours_end = $location_modified_hours_group['location_modified_hours_end'] ?: false; // bool
+
+										if ( $location_modified_clinic_hours_end ) {
+
+											// Modified Clinic Hours End Date
+
+												$location_modified_clinic_hours_end_date = $location_modified_hours_group['location_modified_hours_end_date'] ?: ''; // Date Format: "F j, Y"
+												$location_modified_clinic_hours_end_date_unix = $location_modified_clinic_hours_end_date ? strtotime($location_modified_clinic_hours_end_date) : ''; // (Unix timestamp)
+
+										}
+
+									}
+
+								// Modified Telemedicine Hours
+
+									// Query for whether there are upcoming modified telemedicine hours
+									$location_modified_telemed_hours = $location_modified_hours_group['location_telemed_modified_hours_query'] ?: false; // bool
+
+									// Eliminate PHP errors
+
+										$location_modified_telemed_hours_start_date = '';
+										$location_modified_telemed_hours_start_date_unix = '';
+										$location_modified_telemed_hours_end = '';
+										$location_modified_telemed_hours_end_date = '';
+										$location_modified_telemed_hours_end_date_unix = '';
+
+									if ( $location_modified_telemed_hours ) {
+
+										// Modified Telemedicine Hours Start Date
+
+											$location_modified_telemed_hours_start_date = $location_modified_hours_group['location_telemed_modified_hours_start_date'] ?: ''; // Date Format: "F j, Y"
+											$location_modified_telemed_hours_start_date_unix = $location_modified_telemed_hours_start_date ? strtotime($location_modified_telemed_hours_start_date) : ''; // (Unix timestamp)
+
+										// Query for whether there is an end date to the modified telemedicine hours
+										$location_modified_telemed_hours_end = $location_modified_hours_group['location_telemed_modified_hours_end'] ?: false; // bool
+
+										if ( $location_modified_telemed_hours_end ) {
+
+											// Modified Telemedicine Hours End Date
+
+												$location_modified_telemed_hours_end_date = $location_modified_hours_group['location_telemed_modified_hours_end_date'] ?: ''; // Date Format: "F j, Y"
+												$location_modified_telemed_hours_end_date_unix = $location_modified_telemed_hours_end_date ? strtotime($location_modified_telemed_hours_end_date) : ''; // (Unix timestamp)
+
+										}
+
+									}
+
+								// Query for whether to display the location closure alert
+
+									if (
+										(
+											$location_modified_clinic_hours
+											&&
+											$location_modified_clinic_hours_start_date_unix <= $today_30
+											&&
+											$location_modified_clinic_hours_end_date_unix >= $today
+										)
+										||
+										(
+											$location_modified_clinic_hours
+											&&
+											$location_modified_clinic_hours_start_date_unix <= $today_30
+											&&
+											!$location_modified_clinic_hours_end
+										)
+										||
+										(
+											$location_modified_telemed_hours
+											&&
+											$location_modified_telemed_hours_start_date_unix <= $today_30
+											&&
+											$location_modified_telemed_hours_end_date_unix >= $today
+										)
+										||
+										(
+											$location_modified_telemed_hours
+											&&
+											$location_modified_telemed_hours_start_date_unix <= $today_30
+											&&
+											!$location_modified_telemed_hours_end
+										)
+									) {
+
+										$location_modified_hours_display = true;
+
+									} else {
+
+										$location_modified_hours_display = false;
+
+									}
+
+								// Set start of modified hours based on the earliest of the two (clinic and telemedicine)
+
+									if (
+										$location_modified_clinic_hours_start_date_unix
+										||
+										$location_modified_telemed_hours_start_date_unix
+									) {
+
+										$location_modified_hours_start_date_unix_array = array_filter(
+											array(
+												$location_modified_clinic_hours_start_date_unix,
+												$location_modified_telemed_hours_start_date_unix
+											)
+										);
+
+										$location_modified_hours_start_date_unix = ( count($location_modified_hours_start_date_unix_array) > 1 ) ? min($location_modified_hours_start_date_unix_array) : $location_modified_hours_start_date_unix_array[0];
+
+									} else {
+
+										$location_modified_hours_start_date_unix = '';
+
+									}
+
+								// Format modified hours start date
+
+									if ( $location_modified_hours_start_date_unix ) {
+
+										$location_modified_hours_start_date = date( 'F j, Y', $location_modified_hours_start_date_unix );
+
+									} else {
+
+										$location_modified_hours_start_date = '';
+
+									}
+
+								// Determine if earliest modified hours start date has past
+
+									if ( $location_modified_hours_start_date_unix ) {
+
+										$location_modified_hours_date_past = ( $location_modified_hours_start_date_unix <= $today ) ? true : false;
+
+									} else {
+
+										$location_modified_hours_date_past = '';
+
+									}
+
+							// Construct the location alert elements
+
+								// Link accessible label
+
+									if ( $location_closing_display ) {
+
+										if ( $location_closing_date_past ) {
+
+											$alert_message = 'This ' . strtolower($location_single_name) . ' is ' . ( $location_closing_length == 'temporary' ? 'temporarily' : 'permanently' ) . ' closed.';
+
+										} else {
+
+											$alert_message = 'This ' . strtolower($location_single_name) . ' will be closing ' . ( $location_closing_length == 'temporary' ? 'temporarily beginning' : 'permanently' ) . ' on ' .  $location_closing_date . '.';
+
+										} // endif
+
+										$alert_label_attr = 'Learn more about the closure of ' . $location_title_attr . '.';
+
+									} elseif ( $location_modified_hours_display ) {
+
+										if ( $location_closing_date_past ) {
+
+											$alert_message = 'This ' . strtolower($location_single_name) . '\'s hours have been temporarily modified.';
+
+										} else {
+
+											$alert_message = 'This ' . strtolower($location_single_name) . '\'s hours will be temporarily modified beginning on ' . $location_modified_clinic_hours_start_date . '.';
+
+										} // endif
+
+										$alert_label_attr = 'Learn more about the modified hours.';
+
+									} else {
+
+										$alert_message = '';
+										$alert_label_attr = '';
+
+									} // endif
+
+							// Add to the variables array
+
+								$location_card_fields_vars['location_closing_display'] = isset($location_closing_display) ? $location_closing_display : '';
+								$location_card_fields_vars['location_modified_hours_display'] = isset($location_modified_hours_display) ? $location_modified_hours_display : '';
+								$location_card_fields_vars['alert_message'] = isset($alert_message) ? $alert_message : '';
+								$location_card_fields_vars['alert_label_attr'] = isset($alert_label_attr) ? $alert_label_attr : '';
+
+						// Phone numbers
+
+							// Query for whether this is an Arkansas Children's location
+
+								$location_ac_query = get_field( 'location_ac_query', $page_id ) ?: '';
+
+							// Query for whether a patient can schedule an appointment for services rendered at this location
+
+								$location_appointments_query = get_field( 'location_appointments_query', $page_id ) ?: ''; // Get the input
+
+							// Data attributes
+
+								// 'data-categorytitle' attribute value
+								$location_phone_data_categorytitle = 'Telephone Number';
+
+								// 'data-itemtitle' attribute value
+								$location_phone_data_itemtitle = $location_title_attr;
+
+								// 'data-typetitle' attribute value
+
+									if ( $location_appointments_query ) {
+
+										$location_phone_link_data_typetitle = 'Appointment Phone Number for New and Returning Patients';
+
+									} else {
+
+										$location_phone_link_data_typetitle = 'Location Phone Number';
+									}
+
+							if ( !$location_appointments_query ) {
+
+								// Add general information phone number to location phone numbers array
+
+									// Get the general information phone number
+									$location_phone = get_field( 'location_phone', $page_id ) ?: '';
+
+									// Add the general information phone number (as the appointment phone number) to the location phone numbers array
+
+										if ( $location_phone ) {
+
+											$location_phone_numbers['General Information']['general'] = array(
+												'link'		=> uamswp_fad_create_telephone_link(
+													$location_phone, // string // phone number
+													'icon-phone', // string // class attribute value
+													$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+													$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+													'General Information Phone Number' // string // data-typetitle attribute value
+												),
+												'subtitle'	=> ''
+											);
+
+										}
+
+							} else {
+
+								// Query for whether there are main appointment phone numbers other than the general information phone number
+
+									if (
+										!$location_ac_query
+									) {
+
+										$location_phone_appointment_query = get_field( 'location_clinic_phone_query', $page_id ) ?: false;
+
+									} else {
+
+										$location_phone_appointment_query = false;
+
+									}
+
+								// General information phone number
+
+									// Get the general information phone number
+
+										$location_phone = get_field( 'location_phone', $page_id ) ?: '';
+
+									if (
+										!$location_phone_appointment_query // If there are no main appointment phone numbers other than the general information phone number
+										&&
+										!$location_ac_query // If this is not an Arkansas Children's location
+									) {
+
+										// Add the general information phone number (as the appointment phone number) to the location phone numbers array
+
+											if ( $location_phone ) {
+
+												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+													'link'		=> uamswp_fad_create_telephone_link(
+														$location_phone, // string // phone number
+														'icon-phone', // string // class attribute value
+														$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+														$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+														'Appointment Phone Number for New and Returning Patients' // string // data-typetitle attribute value
+													),
+													'subtitle'	=> 'New and Returning Patients'
+												);
+
+											}
+
+									}
+
+								// Query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments
+
+									if (
+										$location_ac_query // If this is an Arkansas Children's location
+									) {
+
+										// Get field value of query for whether this Arkansas Children's location have separate phone numbers for primary care appointments and specialty care appointments
+										$location_phone_appointment_ac_query = get_field('location_ac_appointments_query', $page_id) ?: false;
+
+										// Arkansas Children's appointment phone number for primary care and for specialty care
+
+											if ( $location_phone_appointment_ac_query ) {
+
+												// Arkansas Children's appointment phone number for primary care
+
+													$location_phone_appointment_ac_primary = get_field('location_ac_appointments_primary', $page_id) ?: '';
+
+													// Add the phone number to the location phone numbers array
+
+														if ( $location_phone_appointment_ac_primary ) {
+
+															$location_phone_numbers['Appointment Phone Numbers']['ac-primary'] = array(
+																'link'		=> uamswp_fad_create_telephone_link(
+																	$location_phone_appointment_ac_primary, // string // phone number
+																	'icon-phone', // string // class attribute value
+																	$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+																	$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+																	'Arkansas Children\'s Primary Care Appointments Phone Number' // string // data-typetitle attribute value
+																),
+																'subtitle'	=> 'Primary Care'
+															);
+
+														}
+
+												// Arkansas Children's appointment phone number for specialty care
+
+													$location_phone_appointment_ac_specialty = get_field('location_ac_appointments_specialty', $page_id) ?: '';
+
+													// Add the phone number to the location phone numbers array
+
+														if ( $location_phone_appointment_ac_specialty ) {
+
+															$location_phone_numbers['Appointment Phone Numbers']['ac-specialty'] = array(
+																'link'		=> uamswp_fad_create_telephone_link(
+																	$location_phone_appointment_ac_specialty, // string // phone number
+																	'icon-phone', // string // class attribute value
+																	$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+																	$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+																	'Arkansas Children\'s Specialty Care Appointments Phone Number' // string // data-typetitle attribute value
+																),
+																'subtitle'	=> 'Specialty Care'
+															);
+
+														}
+
+											}
+
+									} else {
+
+										$location_phone_appointment_ac_query = false;
+
+									}
+
+								// Appointment phone numbers for new and returning patients
+
+									if (
+										$location_phone_appointment_query
+										||
+										(
+											$location_ac_query
+											&&
+											!$location_phone_appointment_ac_query
+										)
+									) {
+
+										// Get appointment phone number for (new) patients
+										$location_phone_appointment_new = get_field('location_new_appointments_phone', $page_id) ?: ''; 
+
+										// Query for whether there is a separate appointment phone number for returning patients
+
+											$location_phone_appointment_returning_query = get_field('location_appointment_phone_query', $page_id) ?: false; 
+
+											// Appointments Phone Number for Returning Patients
+
+												if ( $location_phone_appointment_returning_query ) {
+
+													$location_phone_appointment_returning = get_field('location_return_appointments_phone', $page_id) ?: '';
+
+												} else {
+
+													$location_phone_appointment_returning = '';
+
+												}
+
+									} else {
+
+										$location_phone_appointment_new = '';
+										$location_phone_appointment_returning_query = false;
+										$location_phone_appointment_returning = '';
+
+									}
+
+									// Add the phone numbers to the location phone numbers array
+
+										if ( $location_phone_appointment_new ) {
+
+											if ( $location_phone_appointment_returning_query ) {
+
+												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+													'link'		=> uamswp_fad_create_telephone_link(
+														$location_phone_appointment_new, // string // phone number
+														'icon-phone', // string // class attribute value
+														$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+														$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+														'Appointment Phone Number for New Patients' // string // data-typetitle attribute value
+													),
+													'subtitle'	=> 'New Patients'
+												);
+
+											} else {
+
+												$location_phone_numbers['Appointment Phone Numbers']['new'] = array(
+													'link'		=> uamswp_fad_create_telephone_link(
+														$location_phone_appointment_new, // string // phone number
+														'icon-phone', // string // class attribute value
+														$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+														$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+														'Appointment Phone Number for New and Returning Patients' // string // data-typetitle attribute value
+													),
+													'subtitle'	=> 'New and Returning Patients'
+												);
+
+											} // endif
+
+										} // endif
+
+										if ( $location_phone_appointment_returning ) {
+
+											$location_phone_numbers['Appointment Phone Numbers']['returning'] = array(
+												'link'		=> uamswp_fad_create_telephone_link(
+													$location_phone_appointment_returning, // string // phone number
+													'icon-phone', // string // class attribute value
+													$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+													$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+													'Appointment Phone Number for Returning Patients' // string // data-typetitle attribute value
+												),
+												'subtitle'	=> 'Returning Patients'
+											);
+
+										} // endif
+
+							} // endif
+
+							// Make adjustments to the location phone numbers array
+
+								// Remove general phone number item if there is no phone number value
+
+									if (
+										isset($location_phone_numbers['General Information'])
+										&&
+										(
+											!isset($location_phone_numbers['General Information']['general']['link'])
+											||
+											empty($location_phone_numbers['General Information']['general']['link'])
+										)
+									) {
+
+										// unset($location_phone_numbers['General Information']);
+
+									} // endif
+
+								// Remove appointment phone number item if there is no phone number value
+
+									if ( isset($location_phone_numbers['Appointment Phone Numbers']) ) {
+
+										foreach ( $location_phone_numbers['Appointment Phone Numbers'] as $item ) {
+
+											if (
+												!isset($item['link'])
+												||
+												empty($item['link'])
+											) {
+
+												// unset($item);
+
+											} // endif
+
+										} // endforeach
+
+										// If the appointment phone numbers item is now empty, remove it
+
+											if ( empty($location_phone_numbers['Appointment Phone Numbers']) ) {
+
+												// unset($location_phone_numbers['Appointment Phone Numbers']);
+
+											}
+
+									} // endif
+
+								// Change key of appointment phone numbers item to singular if there is only one phone number sub-item
+
+									if (
+										isset($location_phone_numbers['Appointment Phone Numbers'])
+										&&
+										count($location_phone_numbers['Appointment Phone Numbers']) == 1
+									) {
+
+										$location_phone_numbers['Appointment Phone Number'] = $location_phone_numbers['Appointment Phone Numbers'];
+										unset($location_phone_numbers['Appointment Phone Numbers']);
+
+									}
+
+							// Fax number
+
+								if (
+									!$location_ac_query // If this is not an Arkansas Children's location...
+								) {
+
+									$location_fax = get_field('location_fax', $page_id) ?: ''; 
+
+									// Build the anchor element for the fax number
+
+										$location_fax_link = uamswp_fad_create_telephone_link(
+											$location_fax, // string // phone number
+											'icon-phone', // string // class attribute value
+											$location_phone_data_categorytitle, // string // data-categorytitle attribute value
+											$location_phone_data_itemtitle, // string // data-itemtitle attribute value
+											'Clinic Fax Number' // string // data-typetitle attribute value
+										);
+
+								}
+
+							// Add to the variables array
+
+								$location_card_fields_vars['location_phone_numbers'] = isset($location_phone_numbers) ? $location_phone_numbers : '';
+								$location_card_fields_vars['location_phone_data_categorytitle'] = isset($location_phone_data_categorytitle) ? $location_phone_data_categorytitle : '';
+								$location_card_fields_vars['location_appointments_query'] = isset($location_appointments_query) ? $location_appointments_query : '';
+								$location_card_fields_vars['location_fax_link'] = isset($location_fax_link) ? $location_fax_link : '';
+
+							// Add location details to schema data
+
+								// Query for whether to add locations to schema
+								
+									$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
+
+								if ( $location_section_schema_query ) {
+
+									// Address Schema Data
+
+										// Check/define the main address schema array
+
+											$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+
+										// Add this location's details to the main address schema array
+
+											$schema_address = uamswp_fad_schema_address(
+												$schema_address, // array (optional) // Main address schema array
+												( isset($location_address_schema) ? $location_address_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+												'', // string (optional) // The post office box number for PO box addresses.
+												( isset($location_city) ? $location_city : '' ), // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+												( isset($location_state) ? $location_state : '' ), // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+												( isset($location_zip) ? $location_zip : '' ), // string (optional) // The postal code. For example, 94043.
+												'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+												( isset($location_title) ? $location_title : '' ), // string (optional) // The name of the item.
+												( isset($location_phone) ? $location_phone : '' ), // string (optional) // The telephone number.
+												( isset($location_fax) ? $location_fax : '' ) // string (optional) // The fax number.
+											);
+
+									// Telephone Schema Data
+
+										// Check/define the main telephone schema array
+										
+											$schema_telephone =  (( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array() );
+
+										// Add this location's details to the main telephone schema array
+
+											$schema_telephone = uamswp_fad_schema_telephone(
+												$schema_telephone, // array (optional) // Main telephone schema array
+												( isset($location_phone) ? $location_phone : '' ) // string (optional) // The telephone number.
+											);
+
+									// Fax Schema Data
+
+										// Check/define the main fax number schema array
+										
+											$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_telephone) ) ? $schema_fax_number : array();
+
+										// Add this location's details to the main fax number schema array
+
+											$schema_fax_number = uamswp_fad_schema_fax_number(
+												$schema_fax_number, // array (optional) // Main faxNumber schema array
+												( isset($location_fax) ? $location_fax : '' ) // string (optional) // The fax number.
+											);
+
+									// GeoCoordinates Schema Data
+
+										// Check/define the main GeoCoordinates schema array
+
+											$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
+
+										// Add this location's details to the main GeoCoordinates schema array
+
+											$schema_geo_coordinates = uamswp_schema_geo_coordinates(
+												$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
+												$location_map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+												$location_map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+											);
+
+								} // endif ( $location_section_schema_query )
+
+								// Add to the variables array
+
+									$location_card_fields_vars['schema_address'] = isset($schema_address) ? $schema_address : '';
+									$location_card_fields_vars['schema_telephone'] = isset($schema_telephone) ? $schema_telephone : '';
+									$location_card_fields_vars['schema_fax_number'] = isset($schema_fax_number) ? $schema_fax_number : '';
+									$location_card_fields_vars['schema_geo'] = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
+
+					// Location Card Styles
+
+						if ( 'basic' == $location_card_style ) {
+
+							// Construct address paragraph text
+
+								$location_address_text = implode(
+									'<br />',
+									array_filter(
+										array(
+											$location_address_1,
+											$location_address_detail,
+											$location_address_final_line
+										)
+									)
+								);
+
+							// Add to the variables array
+							$location_card_fields_vars['location_address_text'] = isset($location_address_text) ? $location_address_text : '';
+
+						} elseif ( 'detailed' == $location_card_style ) {
+
+						} elseif ( 'primary-location' == $location_card_style ) {
+
+							// Reference to parent location
+
+								if ( $location_parent_display ) {
+
+									$location_parent_reference = '(Part of <a href="' . $location_parent_url . '" data-categorytitle="Parent Name">' . $location_parent_title . '</a>)';
+
+								} else {
+
+									$location_parent_reference = '';
+
+								}
+
+							// Construct address paragraph text
+
+								$location_address_text = implode(
+									'<br />',
+									array_filter(
+										array(
+											'<strong>' . $location_title . '</strong>',
+											$location_parent_reference,
+											$location_address_1,
+											$location_address_detail,
+											$location_address_final_line
+										)
+									)
+								);
+
+							// Add to the variables array
+							$location_card_fields_vars['location_address_text'] = isset($location_address_text) ? $location_address_text : '';
+
+						} // endif
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $location_card_style . '_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $location_card_fields_vars;
@@ -10000,7 +11080,7 @@ function uamswp_prevent_orphan($string) {
 
 							$page_title = get_the_title();
 							$page_title_attr = uamswp_attr_conversion($page_title);
-				
+
 							// Array for page titles and section titles
 
 								$page_titles = array(
@@ -10150,7 +11230,7 @@ function uamswp_prevent_orphan($string) {
 							$expertise_profile_fields_vars['featured_image'] = isset($featured_image) ? $featured_image : '';
 
 						// Page template class
-						
+
 							$template_type = 'default';
 
 							// Add to the variables array
@@ -10384,6 +11464,15 @@ function uamswp_prevent_orphan($string) {
 
 										$expertise_profile_fields_vars['jump_link_count'] = isset($jump_link_count) ? $jump_link_count : '';
 
+						// Ontology subsection site header
+						include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
+
+						// Ontology subsection primary navigation
+						include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
+
+						// Construct non-standard post title
+						include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
+
 					// Overview / Content Pages
 
 						if ( !$current_fpage ) {
@@ -10433,11 +11522,15 @@ function uamswp_prevent_orphan($string) {
 	// Area of expertise card field values
 
 		function uamswp_fad_expertise_card_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$expertise_card_style = 'basic' // string enum('basic', 'detailed') // Area of expertise card style
 		) {
 
+			// Check optional variables
+			$expertise_card_style = ( 'basic' == $expertise_card_style || 'detailed' == $expertise_card_style ) ? $expertise_card_style : 'basic';
+
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $expertise_card_style . '_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $expertise_card_fields_vars ) ) {
 
@@ -10472,11 +11565,24 @@ function uamswp_prevent_orphan($string) {
 
 					// Post Excerpt
 
-						$expertise_excerpt = get_field( 'expertise_selected_post_excerpt', $page_id ); // string
+						$expertise_excerpt = get_field( 'expertise_selected_post_excerpt', $page_id ) ?: ''; // string
 						$expertise_excerpt = $expertise_excerpt ?: get_the_excerpt($page_id); // string
 						$expertise_excerpt = $expertise_excerpt ?: wp_strip_all_tags( get_the_content($page_id) ); // string
 						$expertise_excerpt = $expertise_excerpt ?: ''; // string
-						$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
+
+						if ( $expertise_excerpt ) {
+
+							// Truncate the excerpt if it is greater than 160 characters
+
+								if ( strlen($expertise_excerpt) > 160 ) {
+
+									$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
+
+								}
+
+							$expertise_excerpt_attr = uamswp_attr_conversion($expertise_excerpt); // string
+
+						}
 
 						// Add to the variables array
 
@@ -10493,47 +11599,58 @@ function uamswp_prevent_orphan($string) {
 					// Post Featured Image
 
 						// Featured image ID
-						$expertise_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
 
-						// Featured image URL
-						$expertise_featured_image_url = $expertise_featured_image ? wp_get_attachment_image_url( $expertise_featured_image, 'aspect-16-9-small' ) : ''; // string
+							$expertise_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
+
+							if ( $expertise_featured_image ) {
+
+								// Featured image URL
+								$expertise_featured_image_url = wp_get_attachment_image_url( $expertise_featured_image, 'aspect-16-9-small' ) ?: ''; // string
+
+							}
 
 						// Add to the variables array
 
 							$expertise_card_fields_vars['expertise_featured_image'] = isset($expertise_featured_image) ? $expertise_featured_image : '';
 							$expertise_card_fields_vars['expertise_featured_image_url'] = isset($expertise_featured_image_url) ? $expertise_featured_image_url : '';
 
-					// Parent
+					// Parent Area of Expertise
 
 						// Parent ID
-						$expertise_parent_id = wp_get_post_parent_id($page_id) ?: ''; // int
 
-						// Query on whether the current item has a parent
-						$expertise_has_parent = $expertise_parent_id ? true : false; // bool
+							$expertise_parent_id = wp_get_post_parent_id($page_id) ?: ''; // int
 
-						// Parent post object
-						$expertise_parent_object = $expertise_has_parent ? get_post($expertise_parent_id) : ''; // object
-						$expertise_has_parent = $expertise_parent_object ? $expertise_has_parent : false; // bool
+							if ( $expertise_parent_id ) {
 
-						// Parent title
+								// Parent post object
 
-							$expertise_parent_title = $expertise_parent_object ? $expertise_parent_object->post_title : ''; // string
-							$expertise_parent_title_attr = uamswp_attr_conversion($expertise_parent_title); // string
+									$expertise_parent_object = get_post($expertise_parent_id) ?: ''; // object
 
-						// Parent URL
-						$expertise_parent_url = $expertise_parent_object ? get_permalink($expertise_parent_id) : ''; // string
+									if ( $expertise_parent_object ) {
+
+										// Parent title
+
+											$expertise_parent_title = $expertise_parent_object->post_title ?: ''; // string
+											$expertise_parent_title_attr = uamswp_attr_conversion($expertise_parent_title); // string
+
+										// Parent URL
+
+											$expertise_parent_url = get_permalink($expertise_parent_id) ?: ''; // string
+
+									}
+
+							}
 
 						// Add to the variables array
 
 							$expertise_card_fields_vars['expertise_parent_id'] = isset($expertise_parent_id) ? $expertise_parent_id : '';
-							$expertise_card_fields_vars['expertise_has_parent'] = isset($expertise_has_parent) ? $expertise_has_parent : '';
 							$expertise_card_fields_vars['expertise_parent_object'] = isset($expertise_parent_object) ? $expertise_parent_object : '';
 							$expertise_card_fields_vars['expertise_parent_title'] = isset($expertise_parent_title) ? $expertise_parent_title : '';
 							$expertise_card_fields_vars['expertise_parent_title_attr'] = isset($expertise_parent_title_attr) ? $expertise_parent_title_attr : '';
 							$expertise_card_fields_vars['expertise_parent_url'] = isset($expertise_parent_url) ? $expertise_parent_url : '';
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $expertise_card_style . '_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $expertise_card_fields_vars;
@@ -10622,11 +11739,15 @@ function uamswp_prevent_orphan($string) {
 	// Clinical resource card field values
 
 		function uamswp_fad_clinical_resource_card_fields(
-			$page_id // int // ID of the profile
+			$page_id, // int // ID of the profile
+			$clinical_resource_card_style = 'basic' // string enum('basic', 'detailed') // Clinical resource card style
 		) {
 
+			// Check optional variables
+			$clinical_resource_card_style = ( 'basic' == $clinical_resource_card_style || 'detailed' == $clinical_resource_card_style ) ? $clinical_resource_card_style : 'basic';
+
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient( 'vars_' . $clinical_resource_card_style . '_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
 
 			if ( !empty( $clinical_resource_card_fields_vars ) ) {
 
@@ -10649,45 +11770,421 @@ function uamswp_prevent_orphan($string) {
 
 				// Get the field values
 
-					// Foo
+					// Common
 
-						$foo = get_field( 'foo', $page_id ); // string
+						// Title
 
-						$clinical_resource_card_fields_vars['foo'] = isset($foo) ? $foo : ''; // Add to the variables array
+							$clinical_resource_title = get_the_title($page_id);
+							$clinical_resource_title_attr = uamswp_attr_conversion($clinical_resource_title);
 
-					// Bar (taxonomy multi-select)
+							// Add to the variables array
 
-						$bar = get_field( 'bar', $page_id ); // int[]
+								$clinical_resource_card_fields_vars['clinical_resource_title'] = isset($clinical_resource_title) ? $clinical_resource_title : '';
+								$clinical_resource_card_fields_vars['clinical_resource_title_attr'] = isset($clinical_resource_title_attr) ? $clinical_resource_title_attr : '';
 
-						foreach ( $bar as $item ) {
+						// Type
 
-							$bar_array[$item] = array(
-								'name'	=> get_term( $item, 'bar_term')->name // string // Term name
-							);
+							$clinical_resource_type = get_field('clinical_resource_type', $page_id);
+							$clinical_resource_type_value = $clinical_resource_type['value']; // value
+							$clinical_resource_type_label = $clinical_resource_type['label']; // label
+
+							// Add to the variables array
+							$clinical_resource_card_fields_vars['clinical_resource_type_label'] = isset($clinical_resource_type_label) ? $clinical_resource_type_label : '';
+
+						// Link Element
+
+							// Build an array of resource type values (keys) with the corresponding link text (values)
+
+								$clinical_resource_link_text_map = array(
+									'text' => 'Read the Article',
+									'infographic' => 'View the Infographic',
+									'video' => 'Watch the Video',
+									'doc' => 'Read the Document'
+								);
+
+							// Link text
+
+								// Get system settings for clinical resource labels
+
+									if ( !$clinical_resource_type_value ) {
+
+										include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/clinical-resource.php' );
+
+									}
+
+								$clinical_resource_link_text = ( $clinical_resource_type_value && $clinical_resource_link_text_map[$clinical_resource_type_value] ) ? $clinical_resource_link_text_map[$clinical_resource_type_value] : 'View the ' . $clinical_resource_single_name;
+
+							// Link accessible label
+
+								$clinical_resource_link_label = implode(
+									', ',
+									array(
+										$clinical_resource_link_text,
+										$clinical_resource_title
+									)
+								);
+								$clinical_resource_link_label = uamswp_attr_conversion($clinical_resource_link_label);
+
+							// Add to the variables array
+
+								$clinical_resource_card_fields_vars['clinical_resource_link_text'] = isset($clinical_resource_link_text) ? $clinical_resource_link_text : '';
+								$clinical_resource_card_fields_vars['clinical_resource_link_label'] = isset($clinical_resource_link_label) ? $clinical_resource_link_label : '';
+
+						// Excerpt
+
+							$clinical_resource_excerpt = get_field( 'clinical_resource_excerpt', $page_id ); // string
+							$clinical_resource_excerpt = $clinical_resource_excerpt ?: get_the_excerpt($page_id); // string
+
+							if ( !$clinical_resource_excerpt ) {
+
+								$clinical_resource_content_map = array(
+									'text' => get_field( 'clinical_resource_text', $page_id ),
+									'infographic' => get_field( 'clinical_resource_infographic_descr', $page_id ),
+									'video' => get_field( 'clinical_resource_video_descr', $page_id ),
+									'doc' => get_field( 'clinical_resource_document_descr', $page_id )
+								);
+
+								$clinical_resource_content = ( $clinical_resource_type_value && $clinical_resource_content_map[$clinical_resource_type_value] ) ? $clinical_resource_content_map[$clinical_resource_type_value] : '';
+
+							}
+							$clinical_resource_excerpt = $clinical_resource_excerpt ?: wp_strip_all_tags( $clinical_resource_content ); // string
+							$clinical_resource_excerpt = $clinical_resource_excerpt ?: ''; // string
+
+							// Truncate the excerpt if it is greater than 160 characters
+
+								if ( strlen($clinical_resource_excerpt) > 160 ) {
+
+									$clinical_resource_excerpt = wp_trim_words( $clinical_resource_excerpt, 23, ' &hellip;' );
+
+								}
+
+							// Add to the variables array
+							$clinical_resource_card_fields_vars['clinical_resource_excerpt'] = isset($clinical_resource_excerpt) ? $clinical_resource_excerpt : '';
+
+						// Clinical Resource URL
+
+							$clinical_resource_url = get_permalink($page_id);
+
+							// Add to the variables array
+							$clinical_resource_card_fields_vars['clinical_resource_url'] = isset($clinical_resource_url) ? $clinical_resource_url : array(); 
+
+					// Clinical Resource Card Styles
+
+						if ( 'basic' == $clinical_resource_card_style ) {
+
+							// Featured image (wide)
+
+								$clinical_resource_featured_image = get_field( '_thumbnail_id', $page_id ); // int
+
+								if (
+									$clinical_resource_featured_image
+									&&
+									function_exists( 'fly_add_image_size' )
+								) {
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' ),
+										'media-min-width'	=> '1921px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 433, 244, 'center', 'center' ),
+										'media-min-width'	=> '1500px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' ),
+										'media-min-width'	=> '992px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 433, 244, 'center', 'center' ),
+										'media-min-width'	=> '768px'
+									);
+
+									$clinical_resource_featured_image_srcset[] = array(
+										'url'				=> image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' ),
+										'media-min-width'	=> '1px'
+									);
+
+									$clinical_resource_featured_image_base_url = image_sizer( $clinical_resource_featured_image, 455, 256, 'center', 'center' );
+
+								} elseif ( $clinical_resource_featured_image ) {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = wp_get_attachment_image_url( $clinical_resource_featured_image, 'aspect-16-9-small' );
+
+								} else {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = '';
+
+								}
+
+								// Add to the variables array
+
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array(); 
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : ''; 
+
+						} elseif ( 'detailed' == $clinical_resource_card_style ) {
+
+							// Featured image (wide and square)
+
+								$clinical_resource_featured_image = get_field( '_thumbnail_id', $page_id ); // int
+								$clinical_resource_featured_image_square = get_field( 'clinical_resource_image_square', $page_id ); // int
+
+								if (
+									$clinical_resource_featured_image
+									&&
+									function_exists( 'fly_add_image_size' )
+								) {
+
+									// srcset
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
+												243, 243,
+												'bar', 'center'
+											),
+											'media-min-width'	=> '2054px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
+												184, 184,
+												'center', 'center'
+											),
+											'media-min-width'	=> '1784px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
+												243, 243,
+												'center', 'center'
+											),
+											'media-min-width'	=> '1200px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
+												184, 184,
+												'center', 'center'
+											),
+											'media-min-width'	=> '930px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												$clinical_resource_featured_image,
+												580, 326,
+												'center', 'center'
+											),
+											'media-min-width'	=> '768px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												( $clinical_resource_featured_image_square ?: $clinical_resource_featured_image ),
+												95, 95,
+												'center', 'center'
+											),
+											'media-min-width'	=> '576px'
+										);
+
+										$clinical_resource_featured_image_srcset[] = array(
+											'url'				=> image_sizer(
+												$clinical_resource_featured_image,
+												510, 286,
+												'center', 'center'
+											),
+											'media-min-width'	=> '1px'
+										);
+
+									// Base image
+
+										$clinical_resource_featured_image_base_url = image_sizer(
+											$clinical_resource_featured_image,
+											510, 286,
+											'center', 'center'
+										);
+
+								} elseif ( $clinical_resource_featured_image ) {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = wp_get_attachment_image_url( $clinical_resource_featured_image, 'aspect-16-9-small' );
+
+								} else {
+
+									$clinical_resource_featured_image_srcset = array();
+									$clinical_resource_featured_image_base_url = '';
+
+								}
+
+								// Add to the variables array
+
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array(); 
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : ''; 
+
+							// Related content
+
+								// Providers
+
+									// Get IDs of related providers
+									$clinical_resource_providers = get_field( 'clinical_resource_providers', $page_id ) ?: array();
+
+									// Construct the list of related providers
+
+										$clinical_resource_provider_list = uamswp_fad_related_list(
+											$page_id, // int // ID of the current ontology item
+											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
+											$clinical_resource_providers, // int[] // List of related ontology item IDs
+											'provider' // string (optional) // Post type of the related ontology items
+										);
+
+									// Define the list label
+
+										if ( $clinical_resource_provider_list ) {
+
+											// Get system settings for provider labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
+
+											$clinical_resource_provider_label = count($clinical_resource_providers) > 1 ? $provider_plural_name : $provider_single_name;
+
+										}
+
+									// Add to the variables array
+
+										$clinical_resource_card_fields_vars['clinical_resource_provider_label'] = isset($clinical_resource_provider_label) ? $clinical_resource_provider_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_provider_list'] = isset($clinical_resource_provider_list) ? $clinical_resource_provider_list : array(); 
+
+								// Locations
+
+									// Get IDs of related locations
+									$clinical_resource_locations = get_field( 'clinical_resource_locations', $page_id ) ?: array();
+
+									// Construct the list of related locations
+
+										$clinical_resource_location_list = uamswp_fad_related_list(
+											$page_id, // int // ID of the current ontology item
+											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
+											$clinical_resource_locations, // int[] // List of related ontology item IDs
+											'location' // string (optional) // Post type of the related ontology items
+										);
+
+									// Define the list label
+
+										if ( $clinical_resource_location_list ) {
+
+											// Get system settings for location labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
+
+											$clinical_resource_location_label = count($clinical_resource_locations) > 1 ? $location_plural_name : $location_single_name;
+
+										}
+
+									// Add to the variables array
+
+										$clinical_resource_card_fields_vars['clinical_resource_location_label'] = isset($clinical_resource_location_label) ? $clinical_resource_location_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_location_list'] = isset($clinical_resource_location_list) ? $clinical_resource_location_list : array(); 
+
+								// Areas of Expertise
+
+									// Get IDs of related areas of expertise
+									$clinical_resource_expertises = get_field( 'clinical_resource_aoe', $page_id ) ?: array();
+
+									// Construct the list of related expertises
+
+										$clinical_resource_expertise_list = uamswp_fad_related_list(
+											$page_id, // int // ID of the current ontology item
+											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
+											$clinical_resource_expertises, // int[] // List of related ontology item IDs
+											'expertise' // string (optional) // Post type of the related ontology items
+										);
+
+									// Define the list label
+
+										if ( $clinical_resource_expertise_list ) {
+
+											// Get system settings for expertise labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/expertise.php' );
+
+											$clinical_resource_expertise_label = count($clinical_resource_expertises) > 1 ? $expertise_plural_name : $expertise_single_name;
+
+										}
+
+									// Add to the variables array
+
+										$clinical_resource_card_fields_vars['clinical_resource_expertise_label'] = isset($clinical_resource_expertise_label) ? $clinical_resource_expertise_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_expertise_list'] = isset($clinical_resource_expertise_list) ? $clinical_resource_expertise_list : array(); 
+
+								// Conditions
+
+									// Get IDs of related conditions
+									$clinical_resource_conditions = get_field( 'clinical_resource_conditions', $page_id ) ?: array();
+
+									// Construct the list of related conditions
+
+										$clinical_resource_condition_list = uamswp_fad_related_list(
+											$page_id, // int // ID of the current ontology item
+											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
+											$clinical_resource_conditions, // int[] // List of related ontology item IDs
+											'condition' // string (optional) // Post type of the related ontology items
+										);
+
+									// Define the list label
+
+										if ( $clinical_resource_condition_list ) {
+
+											// Get system settings for condition labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/condition.php' );
+
+											$clinical_resource_condition_label = count($clinical_resource_conditions) > 1 ? $condition_plural_name : $condition_single_name;
+
+										}
+
+									// Add to the variables array
+
+										$clinical_resource_card_fields_vars['clinical_resource_condition_label'] = isset($clinical_resource_condition_label) ? $clinical_resource_condition_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_condition_list'] = isset($clinical_resource_condition_list) ? $clinical_resource_condition_list : array(); 
+
+								// Treatments
+
+									// Get IDs of related treatments
+									$clinical_resource_treatments = get_field( 'clinical_resource_treatments', $page_id ) ?: array();
+
+									// Construct the list of related treatments
+
+										$clinical_resource_treatment_list = uamswp_fad_related_list(
+											$page_id, // int // ID of the current ontology item
+											$clinical_resource_title, // string // Attribute-friendly title of the current ontology item
+											$clinical_resource_treatments, // int[] // List of related ontology item IDs
+											'treatment' // string (optional) // Post type of the related ontology items
+										);
+
+									// Define the list label
+
+										if ( $clinical_resource_treatment_list ) {
+
+											// Get system settings for treatment labels
+											include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/treatment.php' );
+
+											$clinical_resource_treatment_label = count($clinical_resource_treatments) > 1 ? $treatment_plural_name : $treatment_single_name;
+
+										}
+
+									// Add to the variables array
+
+										$clinical_resource_card_fields_vars['clinical_resource_treatment_label'] = isset($clinical_resource_treatment_label) ? $clinical_resource_treatment_label : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_treatment_list'] = isset($clinical_resource_treatment_list) ? $clinical_resource_treatment_list : array(); 
 
 						}
-
-						$clinical_resource_card_fields_vars['bar'] = isset($bar) ? $bar : ''; // Add to the variables array
-						$clinical_resource_card_fields_vars['bar_array'] = isset($bar_array) ? $bar_array : ''; // Add to the variables array
-
-					// Baz (taxonomy select/radio/checkbox)
-
-						$baz = get_field( 'baz', $page_id ); // string|int[] // Term ID(s)
-						$baz = is_array($baz) ? $baz : array($baz); // int[] // Term ID(s)
-
-						foreach ( $baz as $item ) {
-
-							$baz_array[$item] = array(
-								'name'	=> get_term( $item, 'baz_term')->name // string // Term name
-							);
-
-						}
-
-						$clinical_resource_card_fields_vars['baz'] = isset($baz) ? $baz : ''; // Add to the variables array
-						$clinical_resource_card_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient( 'vars_' . $clinical_resource_card_style . '_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
 
 				// Return the variable
 				return $clinical_resource_card_fields_vars;
@@ -10695,3 +12192,41 @@ function uamswp_prevent_orphan($string) {
 			}
 
 		}
+
+// Create telephone link element
+
+	function uamswp_fad_create_telephone_link(
+		$phone_number, // string
+		$class = '', // string
+		$data_category_title = '', // string // data-categorytitle attribute value
+		$data_item_title = '', // string // data-itemtitle attribute value
+		$data_type_title = '' // string // data-typetitle attribute value
+	) {
+
+		// Check/define optional variables
+
+			$phone_number =  ( isset($phone_number) && !empty($phone_number) ) ? format_phone_dash( $phone_number ) : '';
+			$class = $class ?: '';
+			$data_category_title = $data_category_title ?: '';
+			$data_item_title = $data_item_title ?: '';
+			$data_type_title = $data_type_title ?: '';
+			$output = '';
+
+		if ( !$phone_number ) {
+
+			return $output;
+
+		}
+
+		$output = '<a href="tel:' . $phone_number . '"';
+		$output .= $class ? ' class="' . $class . '"' : '';
+		$output .= $data_category_title ? ' data-categorytitle="' . $data_category_title . '"' : '';
+		$output .= $data_item_title ? ' data-itemtitle="' . $data_item_title . '"' : '';
+		$output .= $data_type_title ? ' data-typetitle="' . $data_type_title . '"' : '';
+		$output .= '>';
+		$output .= $phone_number;
+		$output .= '</a>';
+
+		return $output;
+
+	}

@@ -176,7 +176,7 @@ get_header();
 		ob_clean();
 		while ( $location_query->have_posts() ) : $location_query->the_post();
 			$page_id = get_the_ID();
-			include( UAMS_FAD_PATH . '/templates/loops/location-card.php' );
+			include( UAMS_FAD_PATH . '/templates/parts/html/cards/location.php' );
 		endwhile;
 		$location_content .= ob_get_clean();
 		$location_content .= '</div>';
@@ -327,7 +327,7 @@ get_header();
 									<?php
 										while ($provider_query->have_posts()) : $provider_query->the_post();
 											$page_id = get_the_ID();
-											include( UAMS_FAD_PATH . '/templates/loops/physician-card.php' );
+											include( UAMS_FAD_PATH . '/templates/parts/html/cards/provider.php' );
 										endwhile;
 										wp_reset_postdata();
 									?>
@@ -372,7 +372,7 @@ get_header();
 							<?php 
 								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
 									$page_id = get_the_ID();
-									include( UAMS_FAD_PATH . '/templates/loops/expertise-card.php' );
+									include( UAMS_FAD_PATH . '/templates/parts/html/cards/expertise.php' );
 								endwhile;
 								wp_reset_postdata();
 							?>
@@ -385,7 +385,7 @@ get_header();
 		<?php endif;
 
 		$appointment_section_show = true; // It should always be displayed.
-		include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+		include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );
 
 		?>
 	</main>

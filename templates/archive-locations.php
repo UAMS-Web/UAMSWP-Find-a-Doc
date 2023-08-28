@@ -10,7 +10,7 @@
 		$variable_slug = 'location';
 
 	// Post type
-	
+
 		$post_type = 'location';
 
 	// Get system settings for ontology item labels
@@ -31,7 +31,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/location.php' );
 
 	// Meta title variables
-	
+
 		// Do nothing
 
 	// Arguments used in construction

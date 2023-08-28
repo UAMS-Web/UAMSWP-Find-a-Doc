@@ -7,12 +7,26 @@
  * 
  * Required vars:
  * 	$page_id // int // ID of the profile
+ * 
+ * Optional vars:
+ * 	$expertise_card_style // string enum('basic', 'detailed') // Area of expertise card style
  */
 
-$expertise_card_fields_vars = isset($expertise_card_fields_vars) ? $expertise_card_fields_vars : uamswp_fad_expertise_card_fields( $page_id );
+// Check/define optional variables
 
-foreach ( $expertise_card_fields_vars as $key => $value ) {
+	$expertise_card_style = isset($expertise_card_style) ? $expertise_card_style : '';
 
-	${$key} = $value; // Create a variable for each item in the array
+// Call the function
 
-}
+	$expertise_card_fields_vars = ( isset($expertise_card_fields_vars) && !empty($expertise_card_fields_vars) ) ? $expertise_card_fields_vars : uamswp_fad_expertise_card_fields(
+		$page_id,
+		$expertise_card_style
+	);
+
+// Create a variable for each item in the array
+
+	foreach ( $expertise_card_fields_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

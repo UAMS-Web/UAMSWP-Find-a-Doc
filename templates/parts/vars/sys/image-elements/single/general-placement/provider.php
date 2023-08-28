@@ -8,11 +8,14 @@
  * for providers with no specific placement in mind
  */
 
-if (
-	!isset($provider_fpage_image_general) || empty($provider_fpage_image_general)
-) {
+// Call the function
 
-	$fpage_image_provider_general_vars = isset($fpage_image_provider_general_vars) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
-		$provider_fpage_image_general = $fpage_image_provider_general_vars['provider_fpage_image_general']; // int
+	$fpage_image_provider_general_vars = ( isset($fpage_image_provider_general_vars) && !empty($fpage_image_provider_general_vars) ) ? $fpage_image_provider_general_vars : uamswp_fad_fpage_image_provider_general();
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $fpage_image_provider_general_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

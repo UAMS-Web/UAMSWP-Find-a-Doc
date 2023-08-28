@@ -19,6 +19,8 @@
 	$page_id = get_the_ID();
 
 	// Get the field values for the card
+	$expertise_card_fields_vars = ''; // Reset the variables
+	$expertise_card_style = 'basic'; // Area of expertise card style
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/cards/expertise.php' );
 
 	// Query on whether this card is in a list of descendant areas of expertise
@@ -29,14 +31,6 @@
 
 	// Link accessible label
 	$expertise_label = 'View ' . $expertise_single_name_attr . ' page for ' . $expertise_title_attr;
-
-	// Truncate the excerpt if it is greater than 160 characters
-	
-		if ( strlen($expertise_excerpt) > 160 ) {
-
-			$expertise_excerpt = wp_trim_words( $expertise_excerpt, 23, ' &hellip;' );
-
-		}
 
 // Construct the card
 
@@ -83,7 +77,17 @@
 
 			?>
 		</h3>
-		<p class="card-text"><?php echo $expertise_excerpt; ?></p>
+		<?php
+
+		if ( $expertise_excerpt ) {
+
+			?>
+			<p class="card-text"><?php echo $expertise_excerpt; ?></p>
+			<?php
+
+		} // endif ( $expertise_excerpt )
+
+		?>
 	</div>
 	<div class="btn-container">
 		<div class="inner-container">

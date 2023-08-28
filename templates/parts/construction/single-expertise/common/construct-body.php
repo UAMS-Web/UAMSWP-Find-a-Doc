@@ -43,7 +43,13 @@
 					$page_id,
 					$ontology_type,
 					$page_title,
-					$page_url
+					$page_url,
+					$navbar_subbrand_title,
+					$navbar_subbrand_title_attr,
+					$navbar_subbrand_title_url,
+					$navbar_subbrand_parent,
+					$navbar_subbrand_parent_attr,
+					$navbar_subbrand_parent_url
 				) {
 
 					include( UAMS_FAD_PATH . '/templates/parts/html/site-header/single-expertise.php');
@@ -63,7 +69,31 @@
 					$page_id,
 					$ontology_type,
 					$page_title,
-					$page_url
+					$page_url,
+					$site_nav_id,
+					$content_placement,
+					$providers,
+					$locations,
+					$expertises,
+					$expertise_descendants,
+					$clinical_resources,
+					$provider_section_show,
+					$location_section_show,
+					$expertise_section_show,
+					$clinical_resource_section_show,
+					$expertise_descendant_section_show,
+					$expertise_content_nav_show,
+					$expertise_content_nav,
+					$provider_plural_name,
+					$provider_plural_name_attr,
+					$location_plural_name,
+					$location_plural_name_attr,
+					$expertise_plural_name,
+					$expertise_plural_name_attr,
+					$expertise_descendant_plural_name,
+					$expertise_descendant_plural_name_attr,
+					$clinical_resource_plural_name,
+					$clinical_resource_plural_name_attr
 				) {
 
 					include( UAMS_FAD_PATH . '/templates/parts/html/site-nav/single-expertise.php');
@@ -107,10 +137,13 @@
 
 				add_action( 'genesis_after_entry', function() use (
 					$appointment_section_show,
-					$location_section_show
+					$location_section_show,
+					$content_placement,
+					$page_url,
+					$current_fpage
 				) {
 
-					include( UAMS_FAD_PATH . '/templates/blocks/appointment.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/html/section/appointment.php' );
 
 				}, 26 );
 

@@ -10,7 +10,7 @@
 		$variable_slug = 'expertise';
 
 	// Post type
-	
+
 		$post_type = 'expertise';
 
 	// Get system settings for ontology item labels
@@ -25,7 +25,7 @@
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/image-elements/archive/expertise.php' );
 
 	// Meta title variables
-	
+
 		// Do nothing
 
 	// Arguments used in construction

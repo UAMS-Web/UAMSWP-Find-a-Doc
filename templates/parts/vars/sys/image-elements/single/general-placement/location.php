@@ -8,14 +8,14 @@
  * for locations with no specific placement in mind
  */
 
-if (
-	!isset($location_fpage_image_general) || empty($location_fpage_image_general)
-	||
-	!isset($location_descendant_fpage_image_general) || empty($location_descendant_fpage_image_general)
-) {
+// Call the function
 
-	$fpage_image_location_general_vars = isset($fpage_image_location_general_vars) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
-		$location_fpage_image_general = $fpage_image_location_general_vars['location_fpage_image_general']; // int
-		$location_descendant_fpage_image_general = $fpage_image_location_general_vars['location_descendant_fpage_image_general']; // int
+	$fpage_image_location_general_vars = ( isset($fpage_image_location_general_vars) && !empty($fpage_image_location_general_vars) ) ? $fpage_image_location_general_vars : uamswp_fad_fpage_image_location_general();
 
-}
+// Create a variable for each item in the array
+
+	foreach ( $fpage_image_location_general_vars as $key => $value ) {
+
+		${$key} = $value; // Create a variable for each item in the array
+
+	}

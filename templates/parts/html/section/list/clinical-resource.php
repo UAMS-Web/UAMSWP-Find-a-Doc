@@ -72,7 +72,7 @@
 
 						// Get the system settings for general placement of clinical resource item text elements
 						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-	
+
 						$clinical_resource_section_title = $clinical_resource_fpage_title_general;
 				}
 
@@ -84,7 +84,7 @@
 
 						// Get the system settings for general placement of clinical resource item text elements
 						include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-	
+
 						$clinical_resource_section_intro = $clinical_resource_fpage_intro_general;
 				}
 
@@ -119,7 +119,7 @@
 
 								// Get the system settings for general placement of clinical resource item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-	
+
 								$clinical_resource_section_more_text = $clinical_resource_fpage_more_text_general;
 						}
 
@@ -131,7 +131,7 @@
 
 								// Get the system settings for general placement of clinical resource item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-	
+
 								$clinical_resource_section_more_link_text = $clinical_resource_fpage_more_link_text_general;
 						}
 
@@ -143,7 +143,7 @@
 
 								// Get the system settings for general placement of clinical resource item text elements
 								include( UAMS_FAD_PATH . '/templates/parts/vars/sys/text-elements/single/general-placement/clinical-resource.php' );
-		
+
 								$clinical_resource_section_more_link_descr = $clinical_resource_fpage_more_link_descr_general;
 
 						}
@@ -195,7 +195,7 @@
 									if ( $clinical_resource_count > 0 ) {
 										while ( $clinical_resource_query->have_posts() ) {
 											$clinical_resource_query->the_post();
-											include( UAMS_FAD_PATH . '/templates/loops/resource-card-single.php' );
+											include( UAMS_FAD_PATH . '/templates/parts/html/cards/clinical-resource.php' );
 										} // endwhile
 									} // endif ( $clinical_resource_count > 0 )
 									wp_reset_postdata();

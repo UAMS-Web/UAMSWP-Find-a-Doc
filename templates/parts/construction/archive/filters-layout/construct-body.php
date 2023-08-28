@@ -26,13 +26,13 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 
 						?><h3 class="h6">Search <?php echo $archive_construct_args['filters-layout']['plural-name']; ?></h3>
 						<?php
-						
+
 						echo do_shortcode( '[wpdreams_ajaxsearchpro id=' . $archive_construct_args['filters-layout']['ajaxsearchpro-id'] . ']' );
 
 					}
-					
+
 					// When adding facets, make sure relevant uamswp_fad_labels_*() function is also added to template
-					
+
 					foreach ( $archive_construct_args['filters-layout']['fwp-filters'] as $filter ) {
 
 						?>
@@ -69,23 +69,23 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 					</div>
 					<div class="col sort-select">
 						<?php
-						
+
 						echo facetwp_display( 'sort' );
-						
+
 						?>
 					</div>
 				</div>
 				<?php
-				
+
 				echo facetwp_display( 'template', $archive_construct_args['filters-layout']['fwp-template'] );
-				
+
 				?>
 				<div class="row list-pagination">
 					<div class="col">
 						<?php
-						
+
 						echo facetwp_display( 'pager' );
-						
+
 						?>
 					</div>
 				</div>
@@ -99,7 +99,7 @@ add_filter( 'facetwp_template_use_archive', '__return_true' );
 					})(jQuery);
 				</script>
 				<?php
-				
+
 				if ( $archive_construct_args['filters-layout']['provider-ratings-modal'] ) {
 
 					?>

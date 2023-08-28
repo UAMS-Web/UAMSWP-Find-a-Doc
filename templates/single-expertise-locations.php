@@ -29,7 +29,7 @@
 
 	// Construct main ontology page content
 
-		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false; // Query for whether this is a list of child locations within a location
+		$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false; // Query for whether to add locations to schema
 		$location_descendant_list = isset($location_descendant_list) ? $location_descendant_list : false; // Query for whether this is a list of child locations within a location
 		$location_section_title = 'List of ' . $location_plural_name; // Text to use for the section title
 		$location_section_intro = ''; // Text to use for the section intro text

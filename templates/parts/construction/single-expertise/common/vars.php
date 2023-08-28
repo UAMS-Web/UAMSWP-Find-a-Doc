@@ -13,6 +13,7 @@
 
 		$page_url = user_trailingslashit(get_permalink());
 		$page_slug = $post->post_name;
+		$current_fpage = ''; // Fake subpage slug
 
 // Get system settings for ontology item labels
 

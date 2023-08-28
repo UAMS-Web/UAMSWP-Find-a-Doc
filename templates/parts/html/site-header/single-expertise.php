@@ -14,16 +14,19 @@
  * 	$ontology_type // bool // Ontology type of the area of expertise item (true is ontology type, false is content type)
  * 	$page_title // string // Title of the area of expertise item
  * 	$page_url // string // Permalink of the area of expertise item
+ * 	$navbar_subbrand_title // string
+ * 	$navbar_subbrand_title_attr // string
+ * 	$navbar_subbrand_title_url // string
+ * 	$navbar_subbrand_parent // string
+ * 	$navbar_subbrand_parent_attr // string
+ * 	$navbar_subbrand_parent_url // string
  */
-
-// Get the ontology subsection values
-include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 // Begin Title / Logo
 
 	?>
 	<div class="global-title">
-		<a href="<?php echo network_site_url(); ?>" class="navbar-brand <?php if ( !$navbar_subbrand_title ) { echo 'no-subbrand'; } ?>">
+		<a href="<?php echo network_site_url(); ?>" class="navbar-brand<?php echo !$navbar_subbrand_title ? ' no-subbrand' : ''; ?>">
 			<picture>
 				<source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
 				<source srcset="<?php echo get_stylesheet_directory_uri(); ?>/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
@@ -33,10 +36,18 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 		</a>
 		<div class="navbar-subbrand">
 			<?php
+
 			// If the current item has a top-level ancestor with the ontology type, display the that ancestor
-			if ( $navbar_subbrand_parent ) { ?>
+
+			if ( $navbar_subbrand_parent ) {
+
+				?>
 				<a class="parent" href="<?php echo $navbar_subbrand_parent_url; ?>"><?php echo $navbar_subbrand_parent; ?></a><span class="sr-only">: </span>
-			<?php } // endif ( $navbar_subbrand_parent ) ?>
+				<?php
+
+			} // endif ( $navbar_subbrand_parent )
+
+			?>
 			<a class="title" href="<?php echo $navbar_subbrand_title_url; ?>"><?php echo $navbar_subbrand_title; ?></a>
 		</div>
 	</div>
@@ -49,7 +60,9 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
 				<?php
+
 				// Options - uamshealth
+
 				?>
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
@@ -61,7 +74,9 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
 				</li>
 				<?php
+
 				// End right nav
+
 				?>
 			</ul>
 		</div>

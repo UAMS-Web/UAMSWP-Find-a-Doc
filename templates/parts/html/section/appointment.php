@@ -24,7 +24,18 @@ if ( $appointment_section_show ) {
 		// Check/define variables
 		$location_section_show = isset($location_section_show) ? $location_section_show : false;
 
-		if ( $location_section_show ) {
+		if (
+			$location_section_show
+			&&
+			$content_placement == 'subsection'
+			&&
+			$current_fpage != 'locations'
+		) {
+
+			$appointment_location_url = trailingslashit($page_url) . user_trailingslashit('locations');
+			// $appointment_location_label = 'Go to the list of relevant locations';
+
+		} elseif ($location_section_show ) {
 
 			$appointment_location_url = '#locations';
 			// $appointment_location_label = 'Go to the list of relevant locations';
@@ -77,5 +88,5 @@ if ( $appointment_section_show ) {
 			<?php
 
 		} // endif ( $appointment_location_url || $appointment_patients_phone_number_both )
-		
+
 } // endif ( $appointment_section_show )

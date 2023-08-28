@@ -56,5 +56,5 @@ if ( $podcast_section_show ) {
 		</div>
 	</section>
 	<?php
-	
+
 } // endif ( $podcast_section_show )
