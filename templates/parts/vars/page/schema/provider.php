@@ -273,9 +273,15 @@ $schema_provider = $schema_common_base;
 		// Related Treatments
 
 			$provider_related_treatment = array(
-				array(
-					'@type' => 'MedicalProcedure', // or 'MedicalTest' or their subtypes
-					'foo' => 'bar'
+				array( // Repeat as necessary
+					'@type' => 'MedicalProcedure', // Replace 'MedicalProcedure' with more specific type if relevant
+					'name' => 'foo', // Replace 'foo' with name of associated procedure
+					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
+				),
+				array( // Repeat as necessary
+					'@type' => 'MedicalTest', // Replace 'MedicalProcedure' with more specific type if relevant
+					'name' => 'foo', // Replace 'foo' with name of associated test
+					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
 				)
 			);
 
@@ -697,18 +703,7 @@ $schema_provider = $schema_common_base;
 
 		// availableService
 
-			$schema_provider_Physician['availableService'] = array(
-				array( // Repeat as necessary
-					'@type' => 'MedicalProcedure', // Replace 'MedicalProcedure' with more specific type if relevant
-					'name' => 'foo', // Replace 'foo' with name of associated procedure
-					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
-				),
-				array( // Repeat as necessary
-					'@type' => 'MedicalTest', // Replace 'MedicalProcedure' with more specific type if relevant
-					'name' => 'foo', // Replace 'foo' with name of associated test
-					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
-				)
-			);
+			$schema_provider_Physician['availableService'] = $provider_related_treatment;
 
 		// brand
 
