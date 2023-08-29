@@ -67,10 +67,6 @@ TODO List
 
 // Get Values
 
-	// ISCO-08
-
-
-
 	// Provider URL
 
 		$schema_provider_url = user_trailingslashit($page_url);
