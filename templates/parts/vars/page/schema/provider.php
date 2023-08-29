@@ -725,7 +725,7 @@ $schema_provider = $schema_common_base;
 
 		// isAcceptingNewPatients
 
-			$schema_provider_Physician['isAcceptingNewPatients'] = $accept_new;
+			$schema_provider_Physician['isAcceptingNewPatients'] = $accept_new ? 'True' : 'False';
 
 		// location
 
