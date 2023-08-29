@@ -287,11 +287,15 @@ $schema_provider = $schema_common_base;
 
 	// Provider Medical Specialty (medicalSpecialty)
 
-		$schema_provider_medicalSpecialty = array(
-			'foo',
-			'bar'
-		);
+		// Eliminate PHP errors
 
+			$schema_provider_medicalSpecialty = '';
+
+		if ( $provider_specialty_term ) {
+
+			$schema_provider_medicalSpecialty = get_field('schema_medicalspecialty_single', $provider_specialty_term);
+
+		}
 
 
 	// Provider Hospital Affiliation (hospitalAffiliation)
