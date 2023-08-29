@@ -1360,7 +1360,7 @@
 			"multiple": 0,
 			"ui": 1,
 			"ajax": 0,
-			"return_format": "array",
+			"return_format": "value",
 			"allow_custom": 0,
 			"search_placeholder": "Select one",
 			"placeholder": ""
