@@ -230,7 +230,7 @@ $schema_provider = $schema_common_base;
 
 	// Provider URL
 
-		$schema_provider_url = $page_url;
+		$schema_provider_url = user_trailingslashit($page_url);
 
 	// Related ontology items as schema arrays
 
