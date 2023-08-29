@@ -1186,7 +1186,28 @@ TODO List
 
 		// gender
 
-			$schema_provider_Person['gender'] = $gender_attr; // Replace 'foo' with provider's gender // Text (Data Type)
+			// Capitalize first letter of value
+
+				$schema_provider_gender = ucfirst($gender_attr);
+
+			// Use GenderType if Male/Female
+
+				if (
+					$schema_provider_gender == 'Female'
+					||
+					$schema_provider_gender == 'Male'
+				) {
+
+					$schema_provider_gender = array(
+						'@type' => 'GenderType',
+						'valueReference' => $schema_provider_gender
+					);
+
+				}
+
+			// Add to schema
+
+				$schema_provider_Person['gender'] = $schema_provider_gender; 
 
 		// givenName
 
