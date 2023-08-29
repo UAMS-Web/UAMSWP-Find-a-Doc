@@ -917,25 +917,54 @@
 				$languages = get_field('physician_languages',$post->ID);
 				$language_count = $languages ? count($languages) : 0;
 				$language_list = '';
-				$language_attr_array = array();
+				$schema_provider_languages = array();
 				$i = 1;
 
 				if ( $languages ) {
 
 					foreach ( $languages as $language ) {
 
-						$language_name = get_term_by( 'id', $language, 'language');
+						$language_term = get_term_by( 'id', $language, 'language');
 
-						if ( is_object($language_name) ) {
+						if ( is_object($language_term) ) {
 
-							$language_list .= $language_name->name;
-							$language_attr_array[] = uamswp_attr_conversion($language_name->name);
+							// Language English name
 
-							if ( $language_count > $i ) {
+								$language_name = $language_term->name;
+								$language_name_attr = uamswp_attr_conversion($language_name);
 
-								$language_list .= ", ";
+							// Language native name
 
-							} // endif
+								$language_name_native = get_field( 'language_name_native', $language_term ) ?: '';
+								$language_name_native_attr = uamswp_attr_conversion($language_name_native);
+
+							// Language Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) language tag
+
+								$language_bcp47 = get_field( 'language_bcp47', $language_term ) ?: '';
+								$language_bcp47_attr = uamswp_attr_conversion($language_bcp47);
+
+							// Build the text list
+
+								$language_list .= $language_name;
+
+								if ( $language_count > $i ) {
+
+									$language_list .= ", ";
+
+								} // endif
+
+							// Build the array of language values for schema
+
+								$schema_provider_languages[$language_name_attr] = array(
+									'alternateName' => array_values(
+										array_filter(
+											array(
+												$language_name_native_attr,
+												$language_bcp47_attr
+											)
+										)
+									)
+								);
 
 						} // endif
 
@@ -944,6 +973,30 @@
 					} // endforeach
 
 				} // endif ( $languages ) 
+
+				// Remove empty rows
+
+					if ( is_array($schema_provider_languages) ) {
+
+						$schema_provider_languages = array_filter($schema_provider_languages);
+
+					}
+
+				// // Remove duplicate rows
+				// 
+				// 	if ( is_array($schema_provider_languages) ) {
+				// 
+				// 		$schema_provider_languages = array_unique($schema_provider_languages);
+				// 
+				// 	}
+
+				// Sort array
+
+					if ( is_array($schema_provider_languages) ) {
+
+						ksort($schema_provider_languages);
+
+					}
 
 			// Get the age of the provider portrait
 

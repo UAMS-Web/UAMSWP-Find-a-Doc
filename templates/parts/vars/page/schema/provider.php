@@ -17,7 +17,7 @@
  * 	$comment_count
  * 	$accept_new
  * 	$video
- * 	$language_attr_array
+ * 	$schema_provider_languages
  * 	$featured_image
  * 	$headshot_wide
  * 
@@ -1771,14 +1771,40 @@ TODO List
 
 		// knowsLanguage
 
-			foreach ( $language_attr_array as $item ) {
+			if ( $schema_provider_languages ) {
 
-				$schema_provider_Person['knowsLanguage'][] = array( // Repeat as necessary
-					'@type' => 'Language',
-					'name' => $item
-				);
+				foreach ( $schema_provider_languages as $key => $value ) {
+
+					$schema_provider_language = array( // Repeat as necessary
+						'@type' => 'Language',
+						'name' => $key,
+					);
+
+					if ( !empty($schema_provider_languages[$key]['alternateName']) ) {
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							$schema_provider_language_alternateName = $schema_provider_languages[$key]['alternateName'];
+
+							$schema_provider_language_alternateName = count($schema_provider_language_alternateName) == 1 ? $schema_provider_language_alternateName[0] : $schema_provider_language_alternateName;
+
+						$schema_provider_language['alternateName'] = $schema_provider_language_alternateName;
+
+					}
+
+					if ( $schema_provider_language ) {
+
+					}
+
+					$schema_provider_Person['knowsLanguage'][] = $schema_provider_language;
+
+				}
 
 			}
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+			$schema_provider_Person['knowsLanguage'] = count($schema_provider_Person['knowsLanguage']) == 1 ? $schema_provider_Person['knowsLanguage'][0] : $schema_provider_Person['knowsLanguage'];
 
 		// mainEntityOfPage
 
