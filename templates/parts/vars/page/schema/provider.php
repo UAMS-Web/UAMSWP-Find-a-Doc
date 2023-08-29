@@ -621,8 +621,8 @@ $schema_provider = $schema_common_base;
 				'position' => 1,
 				'item' => array(
 					'@type' => 'WebPage',
-					'@id' => 'https://uamshealth.com#ListItem',
-					'url' => 'https://uamshealth.com',
+					'@id' => $schema_base_org_uams_health_url . '#ListItem',
+					'url' => $schema_base_org_uams_health_url,
 					'name' => 'UAMS Health'
 				)
 			),
@@ -631,8 +631,8 @@ $schema_provider = $schema_common_base;
 				'position' => 2,
 				'item' => array(
 					'@type' => 'WebPage',
-					'@id' => 'https://uamshealth.com/provider/#ListItem',
-					'url' => 'https://uamshealth.com/provider/',
+					'@id' => $schema_base_org_uams_health_url_trailingslashit . user_trailingslashit('provider') . '#ListItem',
+					'url' => $schema_base_org_uams_health_url_trailingslashit . user_trailingslashit('provider'),
 					'name' => 'Providers'
 				)
 				),

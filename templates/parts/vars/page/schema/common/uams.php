@@ -12,6 +12,8 @@
 
 // UAMS
 
+	$schema_base_org_uams_url = user_trailingslashit('https://uams.edu');
+
 	// Base array
 
 		$schema_base_org_uams = array(
@@ -20,7 +22,7 @@
 
 	// @id
 
-		$schema_base_org_uams['@id'] = 'https://uams.edu/#' . $schema_base_org_uams['@type'];
+		$schema_base_org_uams['@id'] = $schema_base_org_uams_url . '#' . $schema_base_org_uams['@type'];
 
 		// Define reference to this 'CollegeOrUniversity' item
 
@@ -34,7 +36,7 @@
 
 		$schema_base_org_uams['address'] = array(
 			'@type' => 'PostalAddress',
-			'@id' => 'https://uams.edu/#Address',
+			'@id' => $schema_base_org_uams_url . '#Address',
 			'addressCountry' => 'USA',
 			'addressLocality' => 'Little Rock',
 			'addressRegion' => 'Arkansas',
@@ -206,7 +208,7 @@
 
 			foreach ( $schema_base_org_uams_location as $key => $value) {
 
-				$location_id = 'https://uams.edu#Location-' . str_replace(' ', '-', $schema_base_org_uams_location[$key]['name']);
+				$location_id = $schema_base_org_uams_url . '#Location-' . str_replace(' ', '-', $schema_base_org_uams_location[$key]['name']);
 				$schema_base_org_uams_location[$key]['@id'] = $location_id;
 				$schema_base_org_uams_location_ref[]['@id'] = $location_id;
 
@@ -241,9 +243,14 @@
 
 	// url
 
-		$schema_base_org_uams['url'][] = 'https://uams.edu';
+		$schema_base_org_uams['url'][] = $schema_base_org_uams_url;
 
 // UAMS Health
+
+	// URL
+
+		$schema_base_org_uams_health_url = user_trailingslashit( get_site_url() );
+		$schema_base_org_uams_health_url_trailingslashit = trailingslashit( get_site_url() );
 
 	// Base array
 
@@ -253,7 +260,7 @@
 
 	// @id
 
-		$schema_base_org_uams_health['@id'] = 'https://uamshealth.com/#' . $schema_base_org_uams_health['@type'];
+		$schema_base_org_uams_health['@id'] = $schema_base_org_uams_health_url . '#' . $schema_base_org_uams_health['@type'];
 
 		// Define reference to this 'MedicalOrganization' item
 
@@ -313,7 +320,7 @@
 
 	// @id
 
-		$schema_base_website_uams_health['@id'] = 'https://uamshealth.com/#' . $schema_base_website_uams_health['@type'];
+		$schema_base_website_uams_health['@id'] = $schema_base_org_uams_health_url . '#' . $schema_base_website_uams_health['@type'];
 
 		// Define reference to this 'MedicalOrganization' item
 
@@ -344,7 +351,7 @@
 	// inLanguage
 
 		$schema_base_website_uams_health['inLanguage'] = array(
-			'@id' => 'https://uamshealth.com#InLanguage',
+			'@id' => $schema_base_org_uams_health_url . '#InLanguage',
 			'English'
 		);
 
@@ -359,8 +366,8 @@
 	// url
 
 		$schema_base_website_uams_health['url'] = array(
-			'@id' => 'https://uamshealth.com#URL',
-			'https://uamshealth.com'
+			'@id' => $schema_base_org_uams_health_url . '#URL',
+			$schema_base_org_uams_health_url
 		);
 
 		// Define reference to this 'url' property
