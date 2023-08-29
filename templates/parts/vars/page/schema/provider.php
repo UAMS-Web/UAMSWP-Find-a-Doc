@@ -1767,9 +1767,11 @@ TODO List
 
 		// jobTitle
 
-			$schema_provider_Person['jobTitle'] = array(
-				'foo' // Replace 'foo' with provider's clinical occupation title (e.g., 'Orthopaedic surgeon') // Repeat as necessary // Text (Data Type)
-			);
+			if ( $provider_occupation_title_attr ) {
+
+				$schema_provider_Person['jobTitle'] = $provider_occupation_title_attr;
+
+			}
 
 		// knowsLanguage
 
