@@ -138,8 +138,8 @@
 			"key": "field_physician_degree",
 			"name": "physician_degree",
 			"type": "taxonomy",
-			"label": "Degree and/or Credential",
-			"instructions": "Select the degrees or credentials that allows the provider to practice their form of health care in the state. Select multiple if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the items in the provider's name is based on the order of the selected items here. You may click and drag to rearrange the selected items in this field.",
+			"label": "Clinical Degrees and Credentials",
+			"instructions": "Select the clinical degrees and credentials that allow the provider to practice their form of health care in the state. Select multiple if necessary.</p><p class='description' style='margin-top: 0.5em;'>The display order of the items in the provider's name is based on the order of the selected items here. You may click and drag to rearrange the selected items in this field.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
