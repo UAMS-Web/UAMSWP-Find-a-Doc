@@ -1093,7 +1093,7 @@ TODO List
 			// Get list of education and training organizations
 
 				$provider_education_organizations = array();
-				$provider_schema_alumniOf = array();
+				$schema_provider_alumniOf = array();
 
 				if (
 					isset($education)
@@ -1129,7 +1129,7 @@ TODO List
 
 					foreach ( $provider_education_organizations as $item ) {
 
-						$provider_schema_alumniOf[] = array(
+						$schema_provider_alumniOf[] = array(
 							'@type' => 'EducationalOrganization',
 							'name' => $item
 						);
@@ -1140,17 +1140,17 @@ TODO List
 
 			// If there is only one item, flatten the multi-dimensional array by one step
 
-				if ( !empty($provider_schema_alumniOf) ) {
+				if ( !empty($schema_provider_alumniOf) ) {
 
-					$provider_schema_alumniOf = count($provider_schema_alumniOf) == 1 ? $provider_schema_alumniOf[0] : $provider_schema_alumniOf;
+					$schema_provider_alumniOf = count($schema_provider_alumniOf) == 1 ? $schema_provider_alumniOf[0] : $schema_provider_alumniOf;
 
 				}
 
 			// Add to the schema
 
-				if ( !empty($provider_schema_alumniOf) ) {
+				if ( !empty($schema_provider_alumniOf) ) {
 
-					$schema_provider_Person['alumniOf'] = $provider_schema_alumniOf;
+					$schema_provider_Person['alumniOf'] = $schema_provider_alumniOf;
 
 				}
 
