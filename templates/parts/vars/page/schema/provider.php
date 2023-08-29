@@ -1164,7 +1164,8 @@ TODO List
 
 			$schema_provider_Person['description'] = array(
 				'@id' => $schema_provider_url . '#Description',
-				$excerpt_attr
+				'@type' => 'Text',
+				'description' => $excerpt_attr
 			);
 
 			// Define reference to this 'description' property
