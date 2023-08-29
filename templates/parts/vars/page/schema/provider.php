@@ -27,6 +27,43 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base.php' );
 
 $schema_provider = $schema_common_base;
 
+/*
+
+TODO List
+
+ * Create means of defining organization schema for third-party institutions (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+ * Create means of associating third-party institutions with provider
+ * Get ISCO-08 values from Clinical Specialization taxonomy items
+ * Get O*Net-SOC values from Clinical Specialization taxonomy items
+ * Define schema for related locations
+ * Define array of just URLs from related locations
+ * Bring locations schema and URLs into relevant properties of provider's schema
+ * Define schema for related areas of expertise
+ * Define array of just URLs from related areas of expertise
+ * Bring areas of expertise schema and URLs into relevant properties of provider's schema
+ * Define schema for related clinical resources
+ * Define array of just URLs from related clinical resources
+ * Bring clinical resources schema and URLs into relevant properties of provider's schema
+ * Define schema for related conditions
+ * Define array of just URLs from related conditions
+ * Bring conditions schema and URLs into relevant properties of provider's schema
+ * Define schema for related treatments
+ * Define array of just URLs from related treatments
+ * Bring treatments schema and URLs into relevant properties of provider's schema
+ * Define schema for affiliated hospital(s)
+ * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
+ * Add fields to Education and Training Organization taxonomy, integrate them into this schema
+	 * Required — Query for whether the organization is a College/University
+	 * Optional — Alternate Name (repeater)
+	 * Required — URL
+	 * Optional — Street Address
+	 * Required — City / Locality (required)
+	 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
+	 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
+	 * Optional — Postal Code
+
+*/
+
 // Get Values
 
 	// ISCO-08
@@ -1053,13 +1090,70 @@ $schema_provider = $schema_common_base;
 		
 		// alumniOf
 
-			$schema_provider_Person['alumniOf'] = array(
-				array( // Repeat as necessary
-					'@type' => 'EducationalOrganization', // Replace with more specific type as relevant
-					'name' => 'foo' // Replace 'foo' with name of the organization from which the provider received education/training
-				)
-			);
-		
+			// Get list of education and training organizations
+
+				$provider_education_organizations = array();
+				$provider_schema_alumniOf = array();
+
+				if (
+					isset($education)
+					&&
+					!empty($education)
+					&&
+					is_array($education)
+				) {
+
+					foreach ( $education as $item ) {
+
+						$provider_education_organizations[] = get_term( $item['school'], 'school')->name;
+
+					}
+
+					// Remove empty items
+
+						$provider_education_organizations = array_filter($provider_education_organizations);
+
+					// Remove duplicate items
+
+						$provider_education_organizations = array_unique($provider_education_organizations);
+
+					// Sort array
+
+						sort($provider_education_organizations);
+
+				}
+
+			// Build alumniOf value
+
+				if ( !empty($provider_education_organizations) ) {
+
+					foreach ( $provider_education_organizations as $item ) {
+
+						$provider_schema_alumniOf[] = array(
+							'@type' => 'EducationalOrganization',
+							'name' => $item
+						);
+
+					}
+
+				}
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				if ( !empty($provider_schema_alumniOf) ) {
+
+					$provider_schema_alumniOf = count($provider_schema_alumniOf) == 1 ? $provider_schema_alumniOf[0] : $provider_schema_alumniOf;
+
+				}
+
+			// Add to the schema
+
+				if ( !empty($provider_schema_alumniOf) ) {
+
+					$schema_provider_Person['alumniOf'] = $provider_schema_alumniOf;
+
+				}
+
 		// brand
 
 			$schema_provider_Person['brand'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
