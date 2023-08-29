@@ -110,6 +110,11 @@
 
 			// Set the "Dr." prefix
 
+				// Eliminate PHP errors
+
+					$prefix = '';
+					$prefix_attr = '';
+
 				if ( in_array( $prefix_degrees, $degree_attr_array, true ) ) {
 
 					$prefix = 'Dr.';
