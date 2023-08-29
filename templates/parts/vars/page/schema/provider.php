@@ -31,201 +31,6 @@ $schema_provider = $schema_common_base;
 
 	// ISCO-08
 
-		$isco_08 = array(
-			'2' => array(
-				'name' => 'Professionals',
-				'description' => 'Professionals increase the existing stock of knowledge; apply scientific or artistic concepts and theories; teach about the foregoing in a systematic manner; or engage in any combination of these activities. Competent performance in most occupations in this major group requires skills at the fourth ISCO skill level.',
-				'sameAs' => array()
-			),
-			'22' => array(
-				'name' => 'Health Professionals',
-				'description' => 'Health professionals conduct research,; improve or develop concepts, theories and operational methods; and apply scientific knowledge relating to medicine, nursing, dentistry, veterinary medicine, pharmacy, and promotion of health.  Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
-				'sameAs' => array(
-					'2'
-				)
-			),
-			'221' => array(
-				'name' => 'Medical Doctors',
-				'description' => 'Medical doctors (physicians) study, diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans through the application of the principles and procedures of modern medicine. They plan, supervise and evaluate the implementation of care and treatment plans by other health care providers, and conduct medical education and research activities.',
-				'sameAs' => array(
-					'2',
-					'22'
-				)
-			),
-			'2211' => array(
-				'name' => 'Generalist Medical Practitioners',
-				'description' => 'Generalist medical practitioners (including family and primary care doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments and maintain general health in humans through application of the principles and procedures of modern medicine.  They do not limit their practice to certain disease categories or methods of treatment, and may assume responsibility for the provision of continuing and comprehensive medical care to individuals, families and communities.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'221'
-				)
-			),
-			'2212' => array(
-				'name' => 'Specialist Medical Practitioners',
-				'description' => 'Specialist medical practitioners (medical doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans, using specialized testing, diagnostic, medical, surgical, physical and psychiatric techniques through application of the principles and procedures of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct medical education and research in their chosen areas of specialization.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'221'
-				)
-			),
-			'222' => array(
-				'name' => 'Nursing and Midwifery Professionals',
-				'description' => 'Nursing and midwifery professionals provide treatment and care services for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They assume responsibility for the planning, management and evaluation of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures. ',
-				'sameAs' => array(
-					'2',
-					'22'
-				)
-			),
-			'2221' => array(
-				'name' => 'Nursing Professionals',
-				'description' => 'Nursing professionals provide treatment, support and care services for people who are in need of nursing care due to the effects of ageing, injury, illness or other physical or mental impairment, or potential risks to health. They assume responsibility for the planning and management of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'222'
-				)
-			),
-			'2222' => array(
-				'name' => 'Midwifery Professionals',
-				'description' => 'Midwifery professionals plan, manage, provide and evaluate midwifery care services before, during and after pregnancy and childbirth. They provide delivery care for reducing health risks to women and newborn children, working autonomously or in teams with other health care providers.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'222'
-				)
-			),
-			'223' => array(
-				'name' => 'Traditional and Complementary Medicine Professionals',
-				'description' => 'Traditional and complementary medicine professionals examine patients; prevent and treat illness, disease, injury and other physical and mental impairments; and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences originating in specific cultures.',
-				'sameAs' => array(
-					'2',
-					'22'
-				)
-			),
-			'2230' => array(
-				'name' => 'Traditional and Complementary Medicine Professionals',
-				'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences, originating in specific cultures.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'223'
-				)
-			),
-			'224' => array(
-				'name' => 'Paramedical Practitioners',
-				'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
-				'sameAs' => array(
-					'2',
-					'22'
-				)
-			),
-			'2240' => array(
-				'name' => 'Paramedical Practitioners',
-				'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously, or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'224'
-				)
-			),
-			'225' => array(
-				'name' => 'Veterinarians',
-				'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals; specialize in the treatment of a particular animal group or in a particular area of specialization; or provide professional services to commercial firms producing biological and pharmaceutical products.',
-				'sameAs' => array(
-					'2',
-					'22'
-				)
-			),
-			'2250' => array(
-				'name' => 'Veterinarians',
-				'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular specialty area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'225'
-				)
-			),
-			'226' => array(
-				'name' => 'Other Health Professionals',
-				'description' => 'Other health professionals provide health services related to dentistry, pharmacy, environmental health and hygiene, occupational health and safety, physiotherapy, nutrition, hearing, speech, vision and rehabilitation therapies.  This minor group includes all human health professionals except doctors, traditional and complementary medicine practitioners, nurses, midwives and paramedical professionals.',
-				'sameAs' => array(
-					'2',)
-			),
-			'2261' => array(
-				'name' => 'Dentists',
-				'description' => 'Dentists diagnose, treat and prevent diseases, injuries and abnormalities of the teeth, mouth, jaws and associated tissues by applying the principles and procedures of modern dentistry. They use a broad range of specialized diagnostic, surgical and other techniques to promote and restore oral health.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2262' => array(
-				'name' => 'Pharmacists',
-				'description' => 'Pharmacists store, preserve, compound and dispense medicinal products and counsel on the proper use and adverse effects of drugs and medicines following prescriptions issued by medical doctors and other health professionals. They contribute to researching, testing, preparing, prescribing and monitoring medicinal therapies for optimizing human health.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2263' => array(
-				'name' => 'Environmental and Occupational Health and Hygiene Professionals',
-				'description' => 'Environmental and occupational health and hygiene professionals assess, plan and implement programmes to recognize, monitor and control environmental factors that can potentially affect human health, to ensure safe and healthy working conditions and to prevent disease or injury caused by chemical, physical, radiological and biological agents or ergonomic factors.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2264' => array(
-				'name' => 'Physiotherapists',
-				'description' => 'Physiotherapists assess, plan and implement rehabilitative programmes that improve or restore human motor functions, maximize movement ability, relieve pain syndromes, and treat or prevent physical challenges associated with injuries, diseases and other impairments. They apply a broad range of physical therapies and techniques such as movement, ultrasound, heating, laser and other techniques. ',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2265' => array(
-				'name' => 'Dieticians and Nutritionists',
-				'description' => 'Dieticians and nutritionists assess, plan and implement programmes to enhance the impact of food and nutrition on human health.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2266' => array(
-				'name' => 'Audiologists and Speech Therapists',
-				'description' => 'Audiologists and speech therapists evaluate, manage and treat physical disorders affecting human hearing, speech, communication and swallowing. They prescribe corrective devices or rehabilitative therapies for hearing loss, speech disorders and related sensory and neural problems, and provide counselling on hearing safety and communication performance.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2267' => array(
-				'name' => 'Optometrists and Ophthalmic Opticians',
-				'description' => 'Optometrists and ophthalmic opticians provide diagnosis, management and treatment services for disorders of the eyes and visual system. They counsel on eye care and prescribe optical aids or other therapies for visual disturbance.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			),
-			'2269' => array(
-				'name' => 'Health Professionals Not Elsewhere Classified ',
-				'description' => 'This unit group covers health professionals not classified elsewhere in Sub-major Group 22: Health Professionals. For instance, the group includes occupations such as podiatrist, occupational therapist, recreational therapist, chiropractor, osteopath and other professionals providing diagnostic, preventive, curative and rehabilitative health services.',
-				'sameAs' => array(
-					'2',
-					'22',
-					'226'
-				)
-			)
-		);
 
 
 	// Provider URL
@@ -285,7 +90,7 @@ $schema_provider = $schema_common_base;
 				)
 			);
 
-	// Provider Medical Specialty (medicalSpecialty)
+	// Provider Medical Specialty (medicalSpecialty) and Associated Values
 
 		// Eliminate PHP errors
 
@@ -293,7 +98,440 @@ $schema_provider = $schema_common_base;
 
 		if ( $provider_specialty_term ) {
 
-			$schema_provider_medicalSpecialty = get_field('schema_medicalspecialty_single', $provider_specialty_term);
+			// Schema.org MedicalSpecialty Enumeration Member
+
+				$schema_provider_medicalSpecialty = get_field('schema_medicalspecialty_single', $provider_specialty_term);
+				$schema_provider_medicalSpecialty = uamswp_attr_conversion($schema_provider_medicalSpecialty);
+
+			// Health Care Provider Taxonomy Code Set (https://taxonomy.nucc.org/)
+
+				// Specialization Taxonomy Code
+
+					$schema_provider_nucc_code = get_field('clinical_specialization_code', $provider_specialty_term);
+					$schema_provider_nucc_code = uamswp_attr_conversion($schema_provider_nucc_code);
+
+				// Specialization Name
+
+					$schema_provider_nucc_name = get_field('clinical_specialty_name', $provider_specialty_term);
+					$schema_provider_nucc_name = uamswp_attr_conversion($schema_provider_nucc_name);
+
+				// Specialization Display Name
+
+					$schema_provider_nucc_name_display = get_field('clinical_specialization_name_display', $provider_specialty_term);
+					$schema_provider_nucc_name_display = uamswp_attr_conversion($schema_provider_nucc_name_display);
+
+				// Specialization Definition
+
+					$schema_provider_nucc_definition = get_field('clinical_specialization_definition', $provider_specialty_term);
+					$schema_provider_nucc_definition = uamswp_attr_conversion($schema_provider_nucc_definition);
+
+				// Source of Specialization Definition
+
+					$schema_provider_nucc_definition_source = get_field('clinical_specialization_definition_source', $provider_specialty_term);
+					$schema_provider_nucc_definition_source = uamswp_attr_conversion($schema_provider_nucc_definition_source);
+
+			// Occupation alternateName
+
+				$schema_provider_Occupation_alternateName = array();
+
+				// Add Specialization Display Name
+
+					$schema_provider_Occupation_alternateName[] = ( isset($schema_provider_nucc_name_display) && !empty($schema_provider_nucc_name_display) ) ? $schema_provider_nucc_name_display : '';
+
+				// Add Alternate Occupational Titles
+
+					// Get Alternate Occupational Titles
+
+						$provider_occupation_title_alt_repeater = get_field('clinical_specialization_title_alt', $provider_specialty_term);
+						$provider_occupation_title_alt = array();
+
+						if ( $provider_occupation_title_alt_repeater ) {
+
+							foreach( $provider_occupation_title_alt_repeater as $title ) { 
+
+								$provider_occupation_title_alt[] = $title['clinical_specialization_title_alt_text'];
+
+							}
+
+						}
+
+					$schema_provider_Occupation_alternateName = array_merge(
+						$schema_provider_Occupation_alternateName,
+						$provider_occupation_title_alt
+					);
+
+				// Remove empty items
+
+					$schema_provider_Occupation_alternateName = array_filter($schema_provider_Occupation_alternateName);
+
+				// Remove duplicate items
+
+					$schema_provider_Occupation_alternateName = array_unique($schema_provider_Occupation_alternateName);
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					if ( !empty($schema_provider_Occupation_alternateName) ) {
+
+						$schema_provider_Occupation_alternateName = count($schema_provider_Occupation_alternateName) == 1 ? $schema_provider_Occupation_alternateName[0] : $schema_provider_Occupation_alternateName;
+
+					}
+
+				// Sort array
+
+					sort($schema_provider_Occupation_alternateName);
+
+			// Centers for Medicare & Medicaid Services (CMS) Specialty Code
+
+				// CMS Specialty Code
+
+					$schema_provider_cms_code = get_field('clinical_specialization_cms_code', $provider_specialty_term);
+					$schema_provider_cms_code = uamswp_attr_conversion($schema_provider_cms_code);
+
+				// CMS Provider/Supplier Type
+
+					$schema_provider_cms_code_type = get_field('clinical_specialization_cms_code_type', $provider_specialty_term);
+					$schema_provider_cms_code_type = uamswp_attr_conversion($schema_provider_cms_code_type);
+
+			// occupationalCategory
+
+				// O*Net-SOC
+
+					// Occupation Code
+
+						$schema_provider_onetsoc_code = get_field('clinical_specialization_onetsoc_code', $provider_specialty_term);
+						$schema_provider_onetsoc_code = uamswp_attr_conversion($schema_provider_onetsoc_code);
+
+					// Occupation Name
+
+						$schema_provider_onetsoc_code_name = get_field('clinical_specialization_onetsoc_code_name', $provider_specialty_term);
+						$schema_provider_onetsoc_code_name = uamswp_attr_conversion($schema_provider_onetsoc_code_name);
+
+					// Array
+
+						$schema_provider_onetsoc = array();
+
+						if ( $schema_provider_onetsoc_code ) {
+
+							$schema_provider_onetsoc = array(
+								'codeValue' => $schema_provider_onetsoc_code, // O*Net-SOC code value from Specialty item
+								'@type' => 'CategoryCode',
+								'inCodeSet' => array(
+									'@type' => 'CategoryCodeSet',
+									'name' => 'O*Net-SOC',
+									'dateModified' => '2019',
+									'url' => 'https://www.onetonline.org/'
+								),
+								'name' => isset($schema_provider_onetsoc_code_name) ? $schema_provider_onetsoc_code_name : '', // O*Net-SOC name from Specialty item
+								'url' => 'https://www.onetonline.org/link/summary/' . $schema_provider_onetsoc_code // O*Net-SOC URL from Specialty item
+							);
+
+							// Remove empty properties
+
+								$schema_provider_onetsoc = array_filter($schema_provider_onetsoc);
+
+							// Sort the array
+
+								ksort($schema_provider_onetsoc);
+
+						}
+
+				// ISCO-08 Code
+
+					$schema_provider_isco08_code = get_field('clinical_specialization_isco08_code', $provider_specialty_term);
+
+					// Make value attribute-friendly, add it to an array if it is not already
+
+						if ( is_array($schema_provider_isco08_code)) {
+
+							foreach ($schema_provider_isco08_code as $code ) {
+
+								$code = uamswp_attr_conversion($code);
+
+							}
+
+						} else {
+
+							$schema_provider_isco08_code = array(uamswp_attr_conversion($schema_provider_isco08_code));
+
+						}
+
+					// Values map
+					
+						$isco08_values = array(
+							'2' => array(
+								'name' => 'Professionals',
+								'description' => 'Professionals increase the existing stock of knowledge; apply scientific or artistic concepts and theories; teach about the foregoing in a systematic manner; or engage in any combination of these activities. Competent performance in most occupations in this major group requires skills at the fourth ISCO skill level.',
+								'sameAs' => array()
+							),
+							'22' => array(
+								'name' => 'Health Professionals',
+								'description' => 'Health professionals conduct research; improve or develop concepts, theories and operational methods; and apply scientific knowledge relating to medicine, nursing, dentistry, veterinary medicine, pharmacy, and promotion of health.  Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+								'sameAs' => array(
+									'2'
+								)
+							),
+							'221' => array(
+								'name' => 'Medical Doctors',
+								'description' => 'Medical doctors (physicians) study, diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans through the application of the principles and procedures of modern medicine. They plan, supervise and evaluate the implementation of care and treatment plans by other health care providers, and conduct medical education and research activities.',
+								'sameAs' => array(
+									'2',
+									'22'
+								)
+							),
+							'2211' => array(
+								'name' => 'Generalist Medical Practitioners',
+								'description' => 'Generalist medical practitioners (including family and primary care doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments and maintain general health in humans through application of the principles and procedures of modern medicine.  They do not limit their practice to certain disease categories or methods of treatment, and may assume responsibility for the provision of continuing and comprehensive medical care to individuals, families and communities.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'221'
+								)
+							),
+							'2212' => array(
+								'name' => 'Specialist Medical Practitioners',
+								'description' => 'Specialist medical practitioners (medical doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans, using specialized testing, diagnostic, medical, surgical, physical and psychiatric techniques through application of the principles and procedures of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct medical education and research in their chosen areas of specialization.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'221'
+								)
+							),
+							'222' => array(
+								'name' => 'Nursing and Midwifery Professionals',
+								'description' => 'Nursing and midwifery professionals provide treatment and care services for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They assume responsibility for the planning, management and evaluation of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures. ',
+								'sameAs' => array(
+									'2',
+									'22'
+								)
+							),
+							'2221' => array(
+								'name' => 'Nursing Professionals',
+								'description' => 'Nursing professionals provide treatment, support and care services for people who are in need of nursing care due to the effects of ageing, injury, illness or other physical or mental impairment, or potential risks to health. They assume responsibility for the planning and management of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'222'
+								)
+							),
+							'2222' => array(
+								'name' => 'Midwifery Professionals',
+								'description' => 'Midwifery professionals plan, manage, provide and evaluate midwifery care services before, during and after pregnancy and childbirth. They provide delivery care for reducing health risks to women and newborn children, working autonomously or in teams with other health care providers.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'222'
+								)
+							),
+							'223' => array(
+								'name' => 'Traditional and Complementary Medicine Professionals',
+								'description' => 'Traditional and complementary medicine professionals examine patients; prevent and treat illness, disease, injury and other physical and mental impairments; and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences originating in specific cultures.',
+								'sameAs' => array(
+									'2',
+									'22'
+								)
+							),
+							'2230' => array(
+								'name' => 'Traditional and Complementary Medicine Professionals',
+								'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences, originating in specific cultures.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'223'
+								)
+							),
+							'224' => array(
+								'name' => 'Paramedical Practitioners',
+								'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+								'sameAs' => array(
+									'2',
+									'22'
+								)
+							),
+							'2240' => array(
+								'name' => 'Paramedical Practitioners',
+								'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously, or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'224'
+								)
+							),
+							'225' => array(
+								'name' => 'Veterinarians',
+								'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals; specialize in the treatment of a particular animal group or in a particular area of specialization; or provide professional services to commercial firms producing biological and pharmaceutical products.',
+								'sameAs' => array(
+									'2',
+									'22'
+								)
+							),
+							'2250' => array(
+								'name' => 'Veterinarians',
+								'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular specialty area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'225'
+								)
+							),
+							'226' => array(
+								'name' => 'Other Health Professionals',
+								'description' => 'Other health professionals provide health services related to dentistry, pharmacy, environmental health and hygiene, occupational health and safety, physiotherapy, nutrition, hearing, speech, vision and rehabilitation therapies.  This minor group includes all human health professionals except doctors, traditional and complementary medicine practitioners, nurses, midwives and paramedical professionals.',
+								'sameAs' => array(
+									'2',)
+							),
+							'2261' => array(
+								'name' => 'Dentists',
+								'description' => 'Dentists diagnose, treat and prevent diseases, injuries and abnormalities of the teeth, mouth, jaws and associated tissues by applying the principles and procedures of modern dentistry. They use a broad range of specialized diagnostic, surgical and other techniques to promote and restore oral health.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2262' => array(
+								'name' => 'Pharmacists',
+								'description' => 'Pharmacists store, preserve, compound and dispense medicinal products and counsel on the proper use and adverse effects of drugs and medicines following prescriptions issued by medical doctors and other health professionals. They contribute to researching, testing, preparing, prescribing and monitoring medicinal therapies for optimizing human health.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2263' => array(
+								'name' => 'Environmental and Occupational Health and Hygiene Professionals',
+								'description' => 'Environmental and occupational health and hygiene professionals assess, plan and implement programmes to recognize, monitor and control environmental factors that can potentially affect human health, to ensure safe and healthy working conditions and to prevent disease or injury caused by chemical, physical, radiological and biological agents or ergonomic factors.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2264' => array(
+								'name' => 'Physiotherapists',
+								'description' => 'Physiotherapists assess, plan and implement rehabilitative programmes that improve or restore human motor functions, maximize movement ability, relieve pain syndromes, and treat or prevent physical challenges associated with injuries, diseases and other impairments. They apply a broad range of physical therapies and techniques such as movement, ultrasound, heating, laser and other techniques. ',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2265' => array(
+								'name' => 'Dieticians and Nutritionists',
+								'description' => 'Dieticians and nutritionists assess, plan and implement programmes to enhance the impact of food and nutrition on human health.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2266' => array(
+								'name' => 'Audiologists and Speech Therapists',
+								'description' => 'Audiologists and speech therapists evaluate, manage and treat physical disorders affecting human hearing, speech, communication and swallowing. They prescribe corrective devices or rehabilitative therapies for hearing loss, speech disorders and related sensory and neural problems, and provide counselling on hearing safety and communication performance.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2267' => array(
+								'name' => 'Optometrists and Ophthalmic Opticians',
+								'description' => 'Optometrists and ophthalmic opticians provide diagnosis, management and treatment services for disorders of the eyes and visual system. They counsel on eye care and prescribe optical aids or other therapies for visual disturbance.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							),
+							'2269' => array(
+								'name' => 'Health Professionals Not Elsewhere Classified ',
+								'description' => 'This unit group covers health professionals not classified elsewhere in Sub-major Group 22: Health Professionals. For instance, the group includes occupations such as podiatrist, occupational therapist, recreational therapist, chiropractor, osteopath and other professionals providing diagnostic, preventive, curative and rehabilitative health services.',
+								'sameAs' => array(
+									'2',
+									'22',
+									'226'
+								)
+							)
+						);
+
+					// // (Optional) Expand ISCO-8 code to include list of ancestors
+					// 
+					// 	if ( $schema_provider_isco08_code ) {
+					// 
+					// 		$schema_provider_isco08_code = array_merge(
+					// 			$schema_provider_isco08_code,
+					// 			$isco08_values[$schema_provider_isco08_code[0]]['sameAs']
+					// 		);
+					// 
+					// 		sort($schema_provider_isco08_code);
+					// 
+					// 	}
+
+					// Array
+
+						$schema_provider_isco08 = array();
+
+						if ( $schema_provider_isco08_code ) {
+
+							foreach ( $schema_provider_isco08_code as $code ) {
+
+								$schema_provider_isco08_array = array(
+									'codeValue' => $code, // ISCO-08 code value from Specialty item
+									'@type' => 'CategoryCode',
+									'description' => isset($isco08_values[$code]['description']) ? $isco08_values[$code]['description'] : '', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
+									'inCodeSet' => array(
+										'@type' => 'CategoryCodeSet',
+										'dateModified' => '2016',
+										'name' => 'ISCO-08',
+										'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
+									),
+									'name' => isset($isco08_values[$code]['name']) ? $isco08_values[$code]['name'] : '', // ISCO-08 name from Specialty item
+									'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
+								);
+
+								// Remove empty properties
+
+									$schema_provider_isco08_array = array_filter($schema_provider_isco08_array);
+
+								// Sort the array
+
+									ksort($schema_provider_isco08_array);
+
+								$schema_provider_isco08[] = $schema_provider_isco08_array;
+
+							}
+
+						}
+				
+				// occupationalCategory Value Array
+
+					$schema_provider_occupationalCategory = array_merge(
+						$schema_provider_isco08,
+						array($schema_provider_onetsoc)
+					);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						if (
+							isset($schema_provider_occupationalCategory)
+							&&
+							!empty($schema_provider_occupationalCategory)
+						) {
+
+							$schema_provider_occupationalCategory = count($schema_provider_occupationalCategory) == 1 ? $schema_provider_occupationalCategory[0] : $schema_provider_occupationalCategory;
+
+						}
+
+			// Wikidata
+
+				// Wikidata Item URL For the Occupation
+
+					$schema_provider_wikidata_occupation = get_field('clinical_specialization_wikidata_url_occupation', $provider_specialty_term);
+					$schema_provider_wikidata_occupation = uamswp_attr_conversion($schema_provider_wikidata_occupation);
+
+				// Wikidata Item URL For the Specialty / Field
+
+					$schema_provider_wikidata_field = get_field('clinical_specialization_wikidata_url_field', $provider_specialty_term);
+					$schema_provider_wikidata_field = uamswp_attr_conversion($schema_provider_wikidata_field);
 
 		}
 
@@ -622,7 +860,6 @@ $schema_provider = $schema_common_base;
 			'@type' => 'BreadcrumbList'
 		);
 
-
 		$schema_provider_BreadcrumbList['@id'] = $schema_provider_url . '#' . $schema_provider_BreadcrumbList['@type'];
 
 		$schema_provider_BreadcrumbList['itemListElement'] = array(
@@ -870,42 +1107,22 @@ $schema_provider = $schema_common_base;
 
 		// hasOccupation
 
-			$schema_provider_Person['hasOccupation'] = array( // Occupation
-				array( // Replace values with values relevant to provider // Repeat as necessary
-					'@type' => 'Occupation',
-					'name' => 'foo', // Clinical occupation title value from Specialty item
-					'alternateName' => 'foo', // Alternate name value from Specialty item
-					'description' => 'foo', // Description value from Specialty item
-					'occupationalCategory' => array( // Replace values with relevant values attached to the Specialty
-						array(
-							'@type' => 'CategoryCode',
-							'inCodeSet' => array(
-								'@type' => 'CategoryCodeSet',
-								'name' => 'O*Net-SOC',
-								'dateModified' => '2019',
-								'url' => 'https://www.onetonline.org/'
-							),
-							'codeValue' => '29-1242.00', // O*Net-SOC code value from Specialty item
-							'name' => 'Orthopedic Surgeons, Except Pediatric', // O*Net-SOC name from Specialty item
-							'url' => 'https://www.onetonline.org/link/summary/29-1242.00' // O*Net-SOC URL from Specialty item
-						),
-						array(
-							'@type' => 'CategoryCode',
-							'inCodeSet' => array(
-								'@type' => 'CategoryCodeSet',
-								'name' => 'ISCO-08',
-								'dateModified' => '2016',
-								'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
-							),
-							'codeValue' => '2212', // ISCO-08 code value from Specialty item
-							'description' => 'Specialist medical practitioners diagnose and treat human physical and mental illnesses, disorders and injuries using specialized testing, diagnostic, medical and surgical techniques based on the scientific principles of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct research in their chosen areas of specialization.', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
-							'name' => 'Specialist medical practitioners', // ISCO-08 name from Specialty item
-							'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
-						)
-					),
-					'sameAs' => 'https://www.wikidata.org/wiki/Q16030727' // Wikidata URL from Specialty item
-				)
+		if (
+			isset($provider_occupation_title)
+			&&
+			!empty($provider_occupation_title)
+		) {
+
+			$schema_provider_Person['hasOccupation'] = array( // Replace values with values relevant to provider // Repeat as necessary
+				'@type' => 'Occupation',
+				'name' => $provider_occupation_title, // Clinical occupation title value from Specialty item
+				'alternateName' => ( isset($schema_provider_Occupation_alternateName) && !empty($schema_provider_Occupation_alternateName) ) ? $schema_provider_Occupation_alternateName : '', // Alternate name value from Specialty item
+				'description' => ( isset($schema_provider_nucc_definition) && !empty($schema_provider_nucc_definition) ) ? $schema_provider_nucc_definition : '', // Description value from Specialty item
+				'occupationalCategory' => ( isset($schema_provider_occupationalCategory) && !empty($schema_provider_occupationalCategory) ) ? $schema_provider_occupationalCategory : '',
+				'sameAs' => ( isset($schema_provider_wikidata_occupation) && !empty($schema_provider_wikidata_occupation) ) ? $schema_provider_wikidata_occupation : '' // Wikidata URL from Specialty item
 			);
+
+		}
 
 		// honorificPrefix
 
