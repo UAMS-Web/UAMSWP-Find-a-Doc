@@ -685,11 +685,11 @@ $schema_provider = $schema_common_base;
 
 				$schema_provider_Physician['aggregateRating'] = array(
 					'@type' => 'AggregateRating',
-					'description' => 'foo', // Get description of the rating/review concept from Patient Experience.
+					'description' => '', // Get description of the rating/review concept from Patient Experience.
 					'itemReviewed' => $schema_provider_Physician_ref,
 					'ratingCount' => $review_count,
 					'ratingValue' => $avg_rating,
-					'reviewAspect' => 'foo', // Get info from Patient Experience about which facets of the provider is rated/reviewed.
+					'reviewAspect' => '', // Get info from Patient Experience about which facets of the provider is rated/reviewed.
 					'reviewCount' => $comment_count
 				);
 
