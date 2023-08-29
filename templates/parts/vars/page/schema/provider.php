@@ -585,9 +585,7 @@ $schema_provider = $schema_common_base;
 
 		// significantLink
 
-			$schema_provider_MedicalWebPage['significantLink'] = array(
-				'foo' // Replace 'foo' with URLs to related ontology items, repeating as necessary
-			);
+			$schema_provider_MedicalWebPage['significantLink'] = array(); // Add URLs of related ontology items, repeating as necessary
 
 		// sourceOrganization
 
