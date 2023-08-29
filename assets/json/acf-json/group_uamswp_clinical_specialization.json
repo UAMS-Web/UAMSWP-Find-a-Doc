@@ -1038,6 +1038,76 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
+		"field_clinical_specialization_tab_medicalspecialty": {
+			"key": "field_clinical_specialization_tab_medicalspecialty",
+			"label": "Related Schema.org MedicalSpecialty",
+			"name": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_specialization_extension_query",
+						"operator": "!=",
+						"value": ""
+					},
+					{
+						"field": "field_clinical_specialization_valid",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_clinical_specialization_medicalspecialty_about": {
+			"key": "field_clinical_specialization_medicalspecialty_about",
+			"name": "",
+			"label": "About the Schema.org MedicalSpecialty Enumeration Type",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "The Schema.org MedicalSpecialty enumeration type is a limited set of possible values for the specific branch of medical science or practice. The enumeration members include clinical specialties that pertain to particular organ systems and their respective disease states, as well as allied health specialties",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_clinical_specialization_medicalspecialty_member": {
+			"key": "field_clinical_specialization_medicalspecialty_member",
+			"name": "clinical_specialization_medicalspecialty_member",
+			"label": "MedicalSpecialty Enumeration Member",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_expertise_schema_medicalspecialty_single"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
+		},
 		"field_clinical_specialization_tab_onetsoc": {
 			"key": "field_clinical_specialization_tab_onetsoc",
 			"label": "Related O*Net-SOC Occupation Code",
