@@ -1574,7 +1574,7 @@ TODO List
 
 					// Image Objects
 
-						// Base object
+						// Pre-define common property values for the ImageObject value arrays
 
 							$provider_portrait_image_object_base = array(
 								'@type' => 'ImageObject',
