@@ -581,7 +581,7 @@ $schema_provider = $schema_common_base;
 
 		// primaryImageOfPage
 
-			$schema_provider_MedicalWebPage['primaryImageOfPage'] = ''; // Defined later
+			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
 
 		// significantLink
 
