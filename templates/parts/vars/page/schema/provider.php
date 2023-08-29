@@ -741,15 +741,6 @@ $schema_provider = $schema_common_base;
 				$schema_base_org_uams_health_ref
 			);
 
-		// review
-
-			$schema_provider_Physician['review'] = array( // Include if NRC API allows for the content of the review to be loaded into this schema
-				array(
-					'@type' => 'Review',
-					'foo' => 'bar' // Replace 'foo' and 'bar' with relevant property/value pairs as necessary
-				)
-			);
-
 		// subjectOf
 
 			$schema_provider_Physician['subjectOf'] = $schema_provider_MedicalWebPage_ref;
