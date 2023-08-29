@@ -595,7 +595,7 @@ $schema_provider = $schema_common_base;
 
 			$schema_provider_MedicalWebPage['url'] = array(
 				'@id' => $schema_provider_url . '#URL',
-				$schema_provider_url
+				'url' => $schema_provider_url
 			);
 
 			// Define reference to this 'url' property
