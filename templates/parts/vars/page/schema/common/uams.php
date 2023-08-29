@@ -351,8 +351,9 @@
 	// inLanguage
 
 		$schema_base_website_uams_health['inLanguage'] = array(
+			'@type' => 'Language',
 			'@id' => $schema_base_org_uams_health_url . '#InLanguage',
-			'English'
+			'name' => 'English'
 		);
 
 		// Define reference to this 'inLanguage' property
@@ -366,8 +367,9 @@
 	// url
 
 		$schema_base_website_uams_health['url'] = array(
+			'@type' => 'URL',
 			'@id' => $schema_base_org_uams_health_url . '#URL',
-			$schema_base_org_uams_health_url
+			'url' => $schema_base_org_uams_health_url
 		);
 
 		// Define reference to this 'url' property
