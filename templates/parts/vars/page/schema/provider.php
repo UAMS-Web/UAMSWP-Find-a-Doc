@@ -1493,9 +1493,17 @@ TODO List
 
 		// honorificSuffix
 
+			// Eliminate PHP errors
+
+				$schema_provider_honorificSuffix = '';
+
 			if ( $degree_attr_array ) {
 
-				$schema_provider_Person['honorificSuffix'] = $degree_attr_array;
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					$schema_provider_honorificSuffix = count($degree_attr_array) == 1 ? $degree_attr_array[0] : $degree_attr_array;
+
+				$schema_provider_Person['honorificSuffix'] = $schema_provider_honorificSuffix;
 
 			}
 
