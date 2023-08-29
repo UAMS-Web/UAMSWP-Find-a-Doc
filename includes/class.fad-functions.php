@@ -9094,6 +9094,7 @@ function uamswp_prevent_orphan($string) {
 					// National Provider Identifier (NPI)
 
 						$provider_npi = get_field( 'physician_npi', $page_id ); // string
+						$provider_npi = str_pad($provider_npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
 
 						$provider_profile_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : ''; // Add to the variables array
 
@@ -9854,6 +9855,7 @@ function uamswp_prevent_orphan($string) {
 							// National Provider Identifier (NPI)
 
 								$provider_npi = get_field( 'physician_npi', $page_id ); // string
+								$provider_npi = str_pad($provider_npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
 
 								// Add to the variables array
 								$provider_card_fields_vars['provider_npi'] = isset($provider_npi) ? $provider_npi : '';

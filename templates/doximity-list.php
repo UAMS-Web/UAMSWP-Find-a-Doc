@@ -117,6 +117,7 @@ function display_provider_image() {
 					$degree_valid = '';
 					$d = 1;
 					$npi = get_field('physician_npi',$post_id);
+					$npi = str_pad($npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
 					$npi_valid = false;
 					if ( !empty($npi) && '0' != $npi ) {
 						$npi_valid = true;
@@ -162,6 +163,7 @@ function display_provider_image() {
 						echo '<tr>';
 						// NPI Number field
 							// $npi = get_field('physician_npi',$post_id); // Added above
+							// $npi = str_pad($npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits // Added above
 							echo '<td class="no-break">';
 							echo $npi; // only display value if value is not empty or zero
 							echo '</td>';

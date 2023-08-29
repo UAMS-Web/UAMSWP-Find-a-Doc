@@ -125,6 +125,7 @@ function doximity_csv_export() {
 			$degree_valid = '';
 			$d = 1;
 			$npi = get_field('physician_npi',$post_id);
+			$npi = str_pad($npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
 			$npi_valid = false;
 			if ( !empty($npi) && '0' != $npi ) {
 				$npi_valid = true;
