@@ -237,36 +237,46 @@ $schema_provider = $schema_common_base;
 		// Related Locations
 
 			$provider_related_location = array(
-				'@type' => 'MedicalClinic', // or 'Hospital'
-				'foo' => 'bar'
+				array(
+					'@type' => 'MedicalClinic', // or 'Hospital'
+					'foo' => 'bar'
+				)
 			);
 
 		// Related Areas of Expertise
 
 			$provider_related_expertise = array(
-				'@type' => 'MedicalEntity',
-				'foo' => 'bar'
+				array(
+					'@type' => 'MedicalEntity',
+					'foo' => 'bar'
+				)
 			);
 
 		// Related Clinical Resources
 
 			$provider_related_clinical_resource = array(
-				'@type' => 'Article', // or 'ImageObject' or 'DigitalDocument' or 'VideoObject'
-				'foo' => 'bar'
+				array(
+					'@type' => 'Article', // or 'ImageObject' or 'DigitalDocument' or 'VideoObject'
+					'foo' => 'bar'
+				)
 			);
 
 		// Related Conditions
 
 			$provider_related_condition = array(
-				'@type' => 'MedicalCondition', // or subtypes
-				'foo' => 'bar'
+				array(
+					'@type' => 'MedicalCondition', // or subtypes
+					'foo' => 'bar'
+				)
 			);
 
 		// Related Treatments
 
 			$provider_related_treatment = array(
-				'@type' => 'MedicalProcedure', // or 'MedicalTest' or their subtypes
-				'foo' => 'bar'
+				array(
+					'@type' => 'MedicalProcedure', // or 'MedicalTest' or their subtypes
+					'foo' => 'bar'
+				)
 			);
 
 	// Provider Medical Specialty (medicalSpecialty)
