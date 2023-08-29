@@ -200,12 +200,19 @@ TODO List
 
 				// Remove empty items
 
-					$schema_provider_Occupation_alternateName = array_filter($schema_provider_Occupation_alternateName);
+					if ( is_array($schema_provider_Occupation_alternateName) ) {
+
+						$schema_provider_Occupation_alternateName = array_filter($schema_provider_Occupation_alternateName);
+
+					}
 
 				// Remove duplicate items
 
-					$schema_provider_Occupation_alternateName = array_unique($schema_provider_Occupation_alternateName);
+					if ( is_array($schema_provider_Occupation_alternateName) ) {
 
+						$schema_provider_Occupation_alternateName = array_unique($schema_provider_Occupation_alternateName);
+
+					}
 				// If there is only one item, flatten the multi-dimensional array by one step
 
 					if ( !empty($schema_provider_Occupation_alternateName) ) {
@@ -216,7 +223,11 @@ TODO List
 
 				// Sort array
 
-					sort($schema_provider_Occupation_alternateName);
+					if ( is_array($schema_provider_Occupation_alternateName) ) {
+
+						sort($schema_provider_Occupation_alternateName);
+
+					}
 
 			// Centers for Medicare & Medicaid Services (CMS) Specialty Code
 
@@ -265,11 +276,19 @@ TODO List
 
 							// Remove empty properties
 
-								$schema_provider_onetsoc = array_filter($schema_provider_onetsoc);
+								if ( is_array($schema_provider_onetsoc) ) {
+
+									ksort($schema_provider_onetsoc);
+
+								}
 
 							// Sort the array
 
-								ksort($schema_provider_onetsoc);
+								if ( is_array($schema_provider_onetsoc) ) {
+
+									ksort($schema_provider_onetsoc);
+
+								}
 
 						}
 
@@ -528,11 +547,19 @@ TODO List
 
 								// Remove empty properties
 
-									$schema_provider_isco08_array = array_filter($schema_provider_isco08_array);
+									if ( is_array($schema_provider_isco08_array) ) {
+
+										$schema_provider_isco08_array = array_filter($schema_provider_isco08_array);
+
+									}
 
 								// Sort the array
 
-									ksort($schema_provider_isco08_array);
+									if ( is_array($schema_provider_isco08_array) ) {
+
+										ksort($schema_provider_isco08_array);
+
+									}
 
 								$schema_provider_isco08[] = $schema_provider_isco08_array;
 
@@ -1112,15 +1139,27 @@ TODO List
 
 					// Remove empty items
 
-						$provider_education_organizations = array_filter($provider_education_organizations);
+						if ( is_array($provider_education_organizations) ) {
+
+							$provider_education_organizations = array_filter($provider_education_organizations);
+
+						}
 
 					// Remove duplicate items
 
-						$provider_education_organizations = array_unique($provider_education_organizations);
+						if ( is_array($provider_education_organizations) ) {
+
+							$provider_education_organizations = array_unique($provider_education_organizations);
+
+						}
 
 					// Sort array
 
-						sort($provider_education_organizations);
+						if ( is_array($provider_education_organizations) ) {
+
+							sort($provider_education_organizations);
+
+						}
 
 				}
 
@@ -1403,7 +1442,11 @@ TODO List
 
 						// Sort array
 
-							ksort($schema_provider_credential);
+							if ( is_array($schema_provider_credential) ) {
+
+								ksort($schema_provider_credential);
+
+							}
 
 					}
 
@@ -1555,7 +1598,17 @@ TODO List
 								)
 							);
 
-							$schema_provider_Person['image'][] = ksort( $schema_provider_Person_image_1_1 );
+							// Sort array
+
+								if ( is_array($schema_provider_Person_image_1_1) ) {
+
+									ksort( $schema_provider_Person_image_1_1 );
+
+								}
+
+							// Add to schema
+
+								$schema_provider_Person['image'][] = $schema_provider_Person_image_1_1;
 
 						// 3:4 Aspect Ratio
 
@@ -1572,7 +1625,17 @@ TODO List
 								)
 							);
 
-							$schema_provider_Person['image'][] = ksort( $schema_provider_Person_image_3_4 );
+							// Sort array
+
+								if ( is_array($schema_provider_Person_image_3_4) ) {
+
+									ksort( $schema_provider_Person_image_3_4 );
+
+								}
+
+							// Add to schema
+
+								$schema_provider_Person['image'][] = $schema_provider_Person_image_3_4;
 
 						// 4:3 Aspect Ratio
 
@@ -1589,7 +1652,17 @@ TODO List
 								)
 							);
 
-							$schema_provider_Person['image'][] = ksort( $schema_provider_Person_image_4_3 );
+							// Sort array
+
+								if ( is_array($schema_provider_Person_image_4_3) ) {
+
+									ksort( $schema_provider_Person_image_4_3 );
+
+								}
+
+							// Add to schema
+
+								$schema_provider_Person['image'][] = $schema_provider_Person_image_4_3;
 
 						// // 16:9 Aspect Ratio
 						// 
@@ -1606,7 +1679,17 @@ TODO List
 						// 		)
 						// 	);
 						// 
-						// 	$schema_provider_Person['image'][] = ksort( $schema_provider_Person_image_16_9 );
+						// 	// Sort array
+						// 
+						// 		if ( is_array($schema_provider_Person_image_16_9) ) {
+						// 
+						// 			ksort( $schema_provider_Person_image_16_9 );
+						// 
+						// 		}
+						// 
+						// 	// Add to schema
+						// 
+						// 		$schema_provider_Person['image'][] = $schema_provider_Person_image_16_9;
 
 						// Define a reference to the standard portrait values
 
@@ -1667,7 +1750,17 @@ TODO List
 								)
 							);
 
-							$schema_provider_Person['image'][] = ksort( $schema_provider_Person_image_wide_16_9 );
+							// Sort array
+
+								if ( is_array($schema_provider_Person_image_wide_16_9) ) {
+
+									ksort( $schema_provider_Person_image_wide_16_9 );
+
+								}
+
+							// Add to schema
+
+								$schema_provider_Person['image'][] = $schema_provider_Person_image_wide_16_9;
 
 				}
 
