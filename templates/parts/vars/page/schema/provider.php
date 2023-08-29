@@ -820,7 +820,7 @@ $schema_provider = $schema_common_base;
 
 			$schema_provider_Person['affiliation'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 				$schema_base_org_uams_health_ref,
-				'foo' // Replace foo with relevant hospital affilation(s)
+				$schema_provider_hospitalAffiliation
 			);
 		
 		// alumniOf
