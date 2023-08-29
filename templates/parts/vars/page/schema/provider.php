@@ -1022,7 +1022,8 @@ $schema_provider = $schema_common_base;
 
 			$schema_provider_Person['name'] = array(
 				'@id' => $schema_provider_url . '#Name',
-				$full_name_attr, // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
+				'@type' => 'Name',
+				'name' => $full_name_attr, // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
 			);
 
 			// Define reference to this 'name' property
