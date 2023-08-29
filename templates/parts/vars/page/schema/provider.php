@@ -293,7 +293,7 @@ TODO List
 						}
 
 					// Values map
-					
+
 						$isco08_values = array(
 							'2' => array(
 								'name' => 'Professionals',
@@ -538,7 +538,7 @@ TODO List
 							}
 
 						}
-				
+
 				// occupationalCategory Value Array
 
 					$schema_provider_occupationalCategory = array_merge(
@@ -938,7 +938,7 @@ TODO List
 	// Provider as Physician
 
 		// Base array
-		
+
 			$schema_provider_Physician = array(
 				'@type' => 'Physician'
 			);
@@ -1026,7 +1026,7 @@ TODO List
 	// Provider as Person
 
 		// Base array
-		
+
 			$schema_provider_Person = array(
 				'@type' => 'Person'
 			);
@@ -1046,7 +1046,7 @@ TODO List
 			// Define the value of 'mainEntity' of 'MedicalWebPage' with this 'Person' reference
 
 				$schema_provider_MedicalWebPage['mainEntity'] = $schema_provider_Person_ref;
-			
+
 			// Define a value of 'about' of 'MedicalWebPage' with this 'Person' reference
 
 				$schema_provider_MedicalWebPage['about'][] = $schema_provider_Person_ref;
@@ -1070,15 +1070,15 @@ TODO List
 			// Define value of other 'name' properties with this 'name' reference
 
 				// MedicalWebPage
-				
+
 					$schema_provider_MedicalWebPage['name'] = $schema_provider_Person_name_ref;
 
 				// Physician
-				
+
 					$schema_provider_Physician['name'] = $schema_provider_Person_name_ref;
 
 			// Define value of 'headline' of 'MedicalWebPage' with this 'name' reference
-			
+
 				$schema_provider_MedicalWebPage['headline'] = $schema_provider_Person_name_ref;
 
 		// affiliation
@@ -1087,7 +1087,7 @@ TODO List
 				$schema_base_org_uams_health_ref,
 				$schema_provider_hospitalAffiliation
 			);
-		
+
 		// alumniOf
 
 			// Get list of education and training organizations
@@ -1159,7 +1159,7 @@ TODO List
 			$schema_provider_Person['brand'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 				$schema_base_org_uams_health_ref
 			);
-		
+
 		// description
 
 			$schema_provider_Person['description'] = array(
@@ -1237,7 +1237,7 @@ TODO List
 				'url' => 'https://npiregistry.cms.hhs.gov/provider-view/foo', // Replace 'foo' with NPI
 				'value' => 'foo' // Replace 'foo' with NPI
 			);
-	
+
 		// image
 
 			// Provider standard portrait
@@ -1246,7 +1246,7 @@ TODO List
 				$provider_portrait = $featured_image;
 
 				if ( $provider_portrait ) {
-						
+
 					// Image Encoding Format
 					$provider_encoding_format = get_post_mime_type( $provider_portrait ); // e.g., 'image/jpeg'
 
