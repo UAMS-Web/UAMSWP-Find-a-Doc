@@ -140,7 +140,7 @@ $schema_provider = $schema_common_base;
 			),
 			'2250' => array(
 				'name' => 'Veterinarians',
-				'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular speciality area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
+				'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular specialty area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
 				'sameAs' => array(
 					'2',
 					'22',
@@ -908,7 +908,7 @@ $schema_provider = $schema_common_base;
 								'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
 							),
 							'codeValue' => '2212', // ISCO-08 code value from Specialty item
-							'description' => 'Specialist medical practitioners diagnose and treat human physical and mental illnesses, disorders and injuries using specialised testing, diagnostic, medical and surgical techniques based on the scientific principles of modern medicine. They specialise in certain disease categories, types of patient or methods of treatment and may conduct research in their chosen areas of specialisation.', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
+							'description' => 'Specialist medical practitioners diagnose and treat human physical and mental illnesses, disorders and injuries using specialized testing, diagnostic, medical and surgical techniques based on the scientific principles of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct research in their chosen areas of specialization.', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
 							'name' => 'Specialist medical practitioners', // ISCO-08 name from Specialty item
 							'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
 						)
