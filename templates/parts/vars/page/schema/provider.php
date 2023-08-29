@@ -1427,22 +1427,22 @@ TODO List
 
 		// hasOccupation
 
-		if (
-			isset($provider_occupation_title)
-			&&
-			!empty($provider_occupation_title)
-		) {
+			if (
+				isset($provider_occupation_title)
+				&&
+				!empty($provider_occupation_title)
+			) {
 
-			$schema_provider_Person['hasOccupation'] = array( // Replace values with values relevant to provider // Repeat as necessary
-				'@type' => 'Occupation',
-				'name' => $provider_occupation_title, // Clinical occupation title value from Specialty item
-				'alternateName' => ( isset($schema_provider_Occupation_alternateName) && !empty($schema_provider_Occupation_alternateName) ) ? $schema_provider_Occupation_alternateName : '', // Alternate name value from Specialty item
-				'description' => ( isset($schema_provider_nucc_definition) && !empty($schema_provider_nucc_definition) ) ? $schema_provider_nucc_definition : '', // Description value from Specialty item
-				'occupationalCategory' => ( isset($schema_provider_occupationalCategory) && !empty($schema_provider_occupationalCategory) ) ? $schema_provider_occupationalCategory : '',
-				'sameAs' => ( isset($schema_provider_wikidata_occupation) && !empty($schema_provider_wikidata_occupation) ) ? $schema_provider_wikidata_occupation : '' // Wikidata URL from Specialty item
-			);
+				$schema_provider_Person['hasOccupation'] = array( // Replace values with values relevant to provider // Repeat as necessary
+					'@type' => 'Occupation',
+					'name' => $provider_occupation_title, // Clinical occupation title value from Specialty item
+					'alternateName' => ( isset($schema_provider_Occupation_alternateName) && !empty($schema_provider_Occupation_alternateName) ) ? $schema_provider_Occupation_alternateName : '', // Alternate name value from Specialty item
+					'description' => ( isset($schema_provider_nucc_definition) && !empty($schema_provider_nucc_definition) ) ? $schema_provider_nucc_definition : '', // Description value from Specialty item
+					'occupationalCategory' => ( isset($schema_provider_occupationalCategory) && !empty($schema_provider_occupationalCategory) ) ? $schema_provider_occupationalCategory : '',
+					'sameAs' => ( isset($schema_provider_wikidata_occupation) && !empty($schema_provider_wikidata_occupation) ) ? $schema_provider_wikidata_occupation : '' // Wikidata URL from Specialty item
+				);
 
-		}
+			}
 
 		// honorificPrefix
 
