@@ -1692,9 +1692,9 @@ TODO List
 
 						// Define a reference to the standard portrait values
 
-							$schema_provider_Person_image_ref[0][]['@id'] = $schema_provider_url . '#Portrait-1-1';
-							$schema_provider_Person_image_ref[0][]['@id'] = $schema_provider_url . '#Portrait-3-4';
-							$schema_provider_Person_image_ref[0][]['@id'] = $schema_provider_url . '#Portrait-4-3';
+							$schema_provider_Person_image_ref[]['@id'] = $schema_provider_url . '#Portrait-1-1';
+							$schema_provider_Person_image_ref[]['@id'] = $schema_provider_url . '#Portrait-3-4';
+							$schema_provider_Person_image_ref[]['@id'] = $schema_provider_url . '#Portrait-4-3';
 							// $schema_provider_Person_image_ref[0][]['@id'] = $schema_provider_url . '#Portrait-1-1';
 
 						// Define value of 'primaryImageOfPage' of 'MedicalWebPage' with this series of 'image' references
