@@ -2,10 +2,10 @@
 	"key": "group_uamswp_schema",
 	"title": "Schema.org Values",
 	"fields": {
-		"field_expertise_schema_medicalspecialty_single": {
-			"key": "field_expertise_schema_medicalspecialty_single",
+		"field_schema_medicalspecialty_single": {
+			"key": "field_schema_medicalspecialty_single",
 			"label": "Schema.org MedicalSpecialty",
-			"name": "expertise_schema_medicalspecialty_single",
+			"name": "schema_medicalspecialty_single",
 			"type": "select",
 			"instructions": "Select one Schema.org MedicalSpecialty enumeration member that is relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
 			"required": 1,
@@ -70,10 +70,10 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_expertise_schema_medicalspecialty_multiple": {
-			"key": "field_expertise_schema_medicalspecialty_multiple",
+		"field_schema_medicalspecialty_multiple": {
+			"key": "field_schema_medicalspecialty_multiple",
 			"label": "Schema.org MedicalSpecialty (Multiple)",
-			"name": "expertise_schema_medicalspecialty_multiple",
+			"name": "schema_medicalspecialty_multiple",
 			"type": "select",
 			"instructions": "Select one or more Schema.org MedicalSpecialty enumeration members that are relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
 			"required": 1,

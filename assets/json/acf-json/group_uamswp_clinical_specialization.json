@@ -1100,7 +1100,7 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_expertise_schema_medicalspecialty_single"
+				"field_schema_medicalspecialty_single"
 			],
 			"display": "seamless",
 			"layout": "block",
