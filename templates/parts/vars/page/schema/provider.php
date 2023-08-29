@@ -684,7 +684,7 @@ TODO List
 						'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
 						'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
 						'height' => 'foo', // Replace 'foo' with the image's height
-						'representativeOfPage' => false,
+						'representativeOfPage' => 'False',
 						'width' => 'foo' // Replace 'foo' with the image's width
 					)
 				),
@@ -769,7 +769,7 @@ TODO List
 						'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
 						'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
 						'height' => 'foo', // Replace 'foo' with the image's height
-						'representativeOfPage' => false,
+						'representativeOfPage' => 'False',
 						'width' => 'foo' // Replace 'foo' with the image's width
 					)
 				),
@@ -1580,9 +1580,8 @@ TODO List
 								'@type' => 'ImageObject',
 								'caption' => $full_name_attr,
 								'encodingFormat' => $provider_encoding_format,
-								'representativeOfPage' => true,
+								'representativeOfPage' => 'True',
 							);
-
 						// 1:1 Aspect Ratio
 
 							$schema_provider_Person_image_1_1 = array_filter(
@@ -1732,7 +1731,7 @@ TODO List
 								'@type' => 'ImageObject',
 								'caption' => $full_name_attr,
 								'encodingFormat' => $provider_wide_portrait_encoding_format,
-								'representativeOfPage' => true,
+								'representativeOfPage' => 'True',
 							);
 
 						// 16:9 Aspect Ratio
