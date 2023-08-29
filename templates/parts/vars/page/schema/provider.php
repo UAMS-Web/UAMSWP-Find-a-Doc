@@ -996,7 +996,7 @@ $schema_provider = $schema_common_base;
 
 		// additionalType
 
-			$schema_provider_Person['additionalType'] = 'https://www.wikidata.org/wiki/Q11974939'; // Mirror Wikidata value from Specialty // Default to health professional (Q11974939)
+			$schema_provider_Person['additionalType'] = ( isset($schema_provider_wikidata_occupation) && !empty($schema_provider_wikidata_occupation) ) ? $schema_provider_wikidata_occupation : 'https://www.wikidata.org/wiki/Q11974939'; // Get Wikidata item URL for occupation from Specialty // Default to health professional (Q11974939)
 
 		// @id
 
