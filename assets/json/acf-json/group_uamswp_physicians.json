@@ -164,36 +164,6 @@
 			"multiple": 1,
 			"allow_null": 0
 		},
-		"field_physician_prefix": {
-			"key": "field_physician_prefix",
-			"name": "physician_prefix",
-			"type": "select",
-			"label": "Prefix",
-			"instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"Dr.": "Dr.",
-				"Mr.": "Mr.",
-				"Mrs.": "Mrs.",
-				"Ms.": "Ms."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
 		"field_physician_gender": {
 			"key": "field_physician_gender",
 			"name": "physician_gender",
@@ -552,7 +522,6 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-
 		"field_physician_appointment_link": {
 			"key": "field_physician_appointment_link",
 			"name": "physician_appointment_link",
@@ -2741,6 +2710,60 @@
 			"toolbar": "full",
 			"media_upload": 1,
 			"delay": 0
+		},
+		"field_physician_deprecated_tab": {
+			"key": "field_physician_deprecated_tab",
+			"name": "",
+			"type": "tab",
+			"label": "Deprecated Fields",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_deprecated_tab",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0
+		},
+		"field_physician_prefix": {
+			"key": "field_physician_prefix",
+			"name": "physician_prefix",
+			"type": "select",
+			"label": "Prefix",
+			"instructions": "Only select \"Dr.\" if the provider has any of the following degrees: M.D., D.D.S., D.O., DPM or O.D.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"Dr.": "Dr.",
+				"Mr.": "Mr.",
+				"Mrs.": "Mrs.",
+				"Ms.": "Ms."
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		}
 	},
 	"modified": false

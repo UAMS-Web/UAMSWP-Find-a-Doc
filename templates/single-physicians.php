@@ -59,11 +59,6 @@
 
 			$pedigree = get_field('physician_pedigree',$post->ID);
 
-		// Prefix (e.g., "Dr.")
-
-			$prefix = get_field('physician_prefix',$post->ID);
-			$prefix_attr = uamswp_attr_conversion($prefix);
-
 		// Degrees and credentials (e.g., M.D., Ph.D.)
 
 			$degrees = get_field('physician_degree',$post->ID);
@@ -91,6 +86,24 @@
 				} // endforeach
 
 			} // endif ( $degrees )
+
+		// Dr. Prefix
+
+			// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
+
+				$prefix_degrees = array(
+					'M.D.',
+					'D.O.'
+				);
+
+			// Set the "Dr." prefix
+
+				if ( in_array( $prefix_degrees, $degree_attr_array, true ) ) {
+
+					$prefix = 'Dr.';
+					$prefix_attr = uamswp_attr_conversion($prefix);
+
+				}
 
 	// Construct the variants of the provider's name
 
