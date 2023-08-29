@@ -1446,7 +1446,11 @@ TODO List
 
 		// honorificPrefix
 
-			$schema_provider_Person['honorificPrefix'] = $prefix_attr;
+			if ( $prefix_attr ) {
+
+				$schema_provider_Person['honorificPrefix'] = $prefix_attr;
+
+			}
 
 		// honorificSuffix
 
