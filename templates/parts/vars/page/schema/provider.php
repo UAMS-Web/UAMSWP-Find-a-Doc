@@ -1454,7 +1454,11 @@ TODO List
 
 		// honorificSuffix
 
-			$schema_provider_Person['honorificSuffix'] = $degree_attr_array;
+			if ( $degree_attr_array ) {
+
+				$schema_provider_Person['honorificSuffix'] = $degree_attr_array;
+
+			}
 
 		// identifier
 

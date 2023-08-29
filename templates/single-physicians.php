@@ -87,6 +87,18 @@
 
 			} // endif ( $degrees )
 
+			// Remove empty rows
+
+				$degree_attr_array = array_filter($degree_attr_array);
+
+			// Remove duplicate rows
+
+				$degree_attr_array = array_unique($degree_attr_array);
+
+			// Reindex array
+
+				$degree_attr_array = array_values($degree_attr_array);
+
 		// Dr. Prefix
 
 			// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
