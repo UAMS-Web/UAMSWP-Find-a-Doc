@@ -209,6 +209,7 @@ TODO List
 						$schema_provider_Occupation_alternateName = array_unique($schema_provider_Occupation_alternateName);
 
 					}
+
 				// If there is only one item, flatten the multi-dimensional array by one step
 
 					if ( !empty($schema_provider_Occupation_alternateName) ) {

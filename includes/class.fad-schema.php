@@ -704,39 +704,39 @@
 						if ( $hospital_affiliation_location_title ) {
 
 							if ( is_array($hospital_affiliation_location_title) ) {
-			
+
 								foreach ( $hospital_affiliation_location_title as $item ) {
-			
+
 									$schema['name'][] = uamswp_attr_conversion($item);
-			
+
 								}
-			
+
 							} else {
-			
+
 								$schema['name'] = uamswp_attr_conversion($hospital_affiliation_location_title);
-			
+
 							}
-			
+
 						}
-			
+
 						if ( $hospital_affiliation_location_url ) {
-			
+
 							if ( is_array($hospital_affiliation_location_url) ) {
-			
+
 								foreach ( $hospital_affiliation_location_url as $item ) {
-			
+
 									$schema['url'][] = user_trailingslashit($item);
-			
+
 								}
-			
+
 							} else {
-			
+
 								$schema['url'] = user_trailingslashit($hospital_affiliation_location_url);
-			
+
 							}
-			
+
 						}
-			
+
 						if ( !empty($schema) ) {
 							$schema = array('@type' => 'Hospital') + $schema;
 						}
@@ -868,7 +868,7 @@
 					if ( $type ) {
 
 						// MedicalEntity Name
-							
+
 							$name = get_the_title($entity_id) ?: '';
 
 							if ( $name ) {
@@ -878,7 +878,7 @@
 							}
 
 						// MedicalEntity Name
-							
+
 							$name = get_the_title($entity_id) ?: '';
 
 							if ( $name ) {

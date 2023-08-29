@@ -40,7 +40,7 @@
 			if ( array_key_exists( $key, $arr ) ) {
 
 				return true;
-				
+
 			}
 
 		// Check arrays contained in this array for the key
@@ -163,7 +163,7 @@
 			foreach ( $input['properties'] as $key => $value ) {
 
 				${$key} = $value;
-	
+
 			}
 
 		// Add values to the schema block array for the properties of this type
@@ -187,7 +187,7 @@
 					foreach ( $type_parent as $parent ) {
 
 						// Construct the name of function relevant to the parent of this type
-						
+
 							$parent_function = 'uamswp_fad_schema_' . strtolower($type_parent);
 
 						// Run the function (if it exists)

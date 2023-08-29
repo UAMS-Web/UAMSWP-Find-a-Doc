@@ -99323,7 +99323,7 @@ function uamswp_fad_schema_org (
 					foreach ( $type_parent as $parent ) {
 
 						// Construct the name of function relevant to the parent of this type
-						
+
 							$parent_function = 'uamswp_fad_schema_' . strtolower($type_parent);
 
 						// Run the function (if it exists)

@@ -10916,7 +10916,7 @@ function uamswp_prevent_orphan($string) {
 							// Add location details to schema data
 
 								// Query for whether to add locations to schema
-								
+
 									$location_section_schema_query = isset($location_section_schema_query) ? $location_section_schema_query : false;
 
 								if ( $location_section_schema_query ) {
@@ -10945,7 +10945,7 @@ function uamswp_prevent_orphan($string) {
 									// Telephone Schema Data
 
 										// Check/define the main telephone schema array
-										
+
 											$schema_telephone =  (( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array() );
 
 										// Add this location's details to the main telephone schema array
@@ -10958,7 +10958,7 @@ function uamswp_prevent_orphan($string) {
 									// Fax Schema Data
 
 										// Check/define the main fax number schema array
-										
+
 											$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_telephone) ) ? $schema_fax_number : array();
 
 										// Add this location's details to the main fax number schema array
@@ -11210,7 +11210,7 @@ function uamswp_prevent_orphan($string) {
 								$expertise_profile_fields_vars['expertise_descendant_fpage_featured_image_expertise_url'] = isset($expertise_descendant_fpage_featured_image_expertise_url) ? $expertise_descendant_fpage_featured_image_expertise_url: '';
 								$expertise_profile_fields_vars['clinical_resource_fpage_featured_image_expertise'] = isset($clinical_resource_fpage_featured_image_expertise) ? $clinical_resource_fpage_featured_image_expertise: '';
 								$expertise_profile_fields_vars['clinical_resource_fpage_featured_image_expertise_url'] = isset($clinical_resource_fpage_featured_image_expertise_url) ? $clinical_resource_fpage_featured_image_expertise_url: '';
-					
+
 						// Get the ontology subsection values
 
 							include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
@@ -11236,7 +11236,7 @@ function uamswp_prevent_orphan($string) {
 								$expertise_profile_fields_vars['treatments_cpt'] = isset($treatments_cpt) ? $treatments_cpt: '';
 								$expertise_profile_fields_vars['ancestors_ontology_farthest'] = isset($ancestors_ontology_farthest) ? $ancestors_ontology_farthest: '';
 								$expertise_profile_fields_vars['page_top_level_query'] = isset($page_top_level_query) ? $page_top_level_query: '';
-					
+
 						// Post Featured Image (if current item is a fake subpage, featured image of the parent item)
 
 							$featured_image = $expertise_featured_image; // Image ID
