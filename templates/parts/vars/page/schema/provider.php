@@ -1462,14 +1462,27 @@ TODO List
 
 		// identifier
 
-			$schema_provider_Person['identifier'] = array(
-				'@type' => 'PropertyValue',
-				'name' => 'National Provider Identifier',
-				'description' => 'The National Provider Identifier is a Health Insurance Portability and Accountability Act Administrative Simplification Standard. The NPI is a unique identification number for covered health care providers. Covered health care providers and all health plans and health care clearinghouses must use the NPIs in the administrative and financial transactions adopted under HIPAA. The NPI is a 10-position, intelligence-free numeric identifier (10-digit number). This means that the numbers do not carry other information about health care providers, such as the state in which they live or their medical specialty. The NPI must be used in lieu of legacy provider identifiers in the HIPAA standards transactions. As outlined in the Federal Regulation, The Health Insurance Portability and Accountability Act of 1996, covered providers must also share their NPI with other providers, health plans, clearinghouses, and any entity that may need it for billing purposes.',
-				'propertyID' => 'https://www.wikidata.org/wiki/Q6975101',
-				'url' => 'https://npiregistry.cms.hhs.gov/provider-view/foo', // Replace 'foo' with NPI
-				'value' => 'foo' // Replace 'foo' with NPI
-			);
+			// National Provider Identifier (NPI)
+
+				if ( $npi ) {
+
+					$schema_provider_Person['identifier'][] = array(
+						'@type' => 'PropertyValue',
+						'name' => 'National Provider Identifier',
+						'propertyID' => 'https://www.wikidata.org/wiki/Q6975101', // Wikidata item page for National Provider Identifier
+						'url' => 'https://npiregistry.cms.hhs.gov/provider-view/' . $npi, // Provider information on NPPES NPI Registry
+						'value' => $npi // NPI value
+					);
+
+				}
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				if ( !empty($schema_provider_Person['identifier']) ) {
+
+					$schema_provider_Person['identifier'] = count($schema_provider_Person['identifier']) == 1 ? $schema_provider_Person['identifier'][0] : $schema_provider_Person['identifier'];
+
+				}
 
 		// image
 
