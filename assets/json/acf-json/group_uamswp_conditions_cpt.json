@@ -119,6 +119,90 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_condition_schema_subtype": {
+			"key": "field_condition_schema_subtype",
+			"name": "condition_schema_subtype",
+			"label": "MedicalCondition Subtype",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcondition_subtype"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
+		},
+		"field_condition_schema_infectiousagent": {
+			"key": "field_condition_schema_infectiousagent",
+			"name": "condition_schema_infectiousagent",
+			"label": "InfectiousAgent",
+			"type": "text",
+			"instructions": "Indicate the name of the actual infectious agent, such as a specific bacterium.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "InfectiousDisease"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "e.g., severe acute respiratory syndrome coronavirus 2",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_condition_schema_infectiousagentclass": {
+			"key": "field_condition_schema_infectiousagentclass",
+			"name": "condition_schema_infectiousagentclass",
+			"label": "InfectiousAgentClass",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalcondition_subtype",
+						"operator": "==",
+						"value": "InfectiousDisease"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_infectiousagentclass"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
 		"field_condition_schema_medicalcode": {
 			"key": "field_condition_schema_medicalcode",
 			"name": "condition_schema_medicalcode",
@@ -142,12 +226,12 @@
 			"prefix_name": 0,
 			"acfe_settings": ""
 		},
-		"field_condition_schema_additional_rdf": {
-			"key": "field_condition_schema_additional_rdf",
-			"name": "condition_schema_additional_rdf",
-			"type": "url",
-			"label": "Specific RDF Class About This Condition",
-			"instructions": "Add a URI-identified RDF class that unambiguously indicates this condition's identity (e.g., <a href='https://www.wikidata.org/wiki/Q729267' target='_blank'>https://www.wikidata.org/wiki/Q729267</a> for radiation oncology).</p><p class='description' style='margin-top: 0.5em;'>This will be used for the additionalType and sameAs Schema.org properties.</p><p class='description' style='margin-top: 0.5em;'>For information on the additionalType Schema.org property, visit <a href='https://schema.org/additionalType' target='_blank'>https://schema.org/additionalType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the sameAs Schema.org property, visit <a href='https://schema.org/sameAs' target='_blank'>https://schema.org/sameAs</a>.",
+		"field_condition_schema_sameas": {
+			"key": "field_condition_schema_sameas",
+			"name": "condition_schema_sameas",
+			"label": "Reference Webpages (sameAs)",
+			"type": "clone",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -155,8 +239,38 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": ""
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
+		},
+		"field_condition_schema_additionalType": {
+			"key": "field_condition_schema_additionalType",
+			"name": "condition_schema_additionalType",
+			"label": "More Specific Type For This Entity From External Vocabularies in Microdata Syntax (additionalType)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
 		},
 		"field_condition_tab_treatments": {
 			"key": "field_condition_tab_treatments",

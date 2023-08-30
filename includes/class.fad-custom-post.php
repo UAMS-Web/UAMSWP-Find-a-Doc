@@ -2205,7 +2205,18 @@ function acf_hide_title() {
 		}
 		.acf-field.pbn {
 			padding-bottom:0;
+		}';
+
+	// Hide second label in clone field where display style is set to 'Group' and one field is cloned (".uamswp-hide-clone-label")
+	echo '
+		.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child {
+			padding-top: 0;
 		}
+		.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child > .acf-label > label {
+			display: none;
+		}';
+	
+	echo '
 	</style>';
 }
 

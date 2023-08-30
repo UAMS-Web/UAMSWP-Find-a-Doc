@@ -141,10 +141,10 @@
 		"field_schema_sameas": {
 			"key": "field_schema_sameas",
 			"name": "schema_sameas",
-			"label": "Reference Webpages",
+			"label": "Reference Webpages (sameAs)",
 			"type": "repeater",
-			"instructions": "Reference webpages that unambiguously indicates the entity's identity (e.g., Wikipedia article, Wikidata entry, Library of Congress Name Authority File).</p><p class='description' style='margin-top: 0.5em;'>Wikipedia: <a href='https://en.wikipedia.org/' target='_blank'>https://en.wikipedia.org/</a></p><p class='description' style='margin-top: 0.5em;'>Wikidata: <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a></p><p class='description' style='margin-top: 0.5em;'>Library of Congress Name Authority File: <a href='https://id.loc.gov/authorities/names.html' target='_blank'>https://id.loc.gov/authorities/names.html</a></p><p class='description' style='margin-top: 0.5em;'>Virtual International Authority File: <a href='https://viaf.org/' target='_blank'>https://viaf.org/</a></p><p class='description' style='margin-top: 0.5em;'>FAST Authority File: <a href='https://experimental.worldcat.org/fast/' target='_blank'>https://experimental.worldcat.org/fast/</a>",
-			"required": 1,
+			"instructions": "Reference webpages (e.g., Wikipedia article) or URI-identified RDF class from an external vocabulary (e.g., Wikidata entry, Library of Congress Name Authority File) that unambiguously indicates the entity's identity.</p><p class='description' style='margin-top: 0.5em;'>Wikipedia: <a href='https://en.wikipedia.org/' target='_blank'>https://en.wikipedia.org/</a></p><p class='description' style='margin-top: 0.5em;'>Wikidata: <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a></p><p class='description' style='margin-top: 0.5em;'>Library of Congress Name Authority File: <a href='https://id.loc.gov/authorities/names.html' target='_blank'>https://id.loc.gov/authorities/names.html</a></p><p class='description' style='margin-top: 0.5em;'>Virtual International Authority File: <a href='https://viaf.org/' target='_blank'>https://viaf.org/</a></p><p class='description' style='margin-top: 0.5em;'>FAST Authority File: <a href='https://experimental.worldcat.org/fast/' target='_blank'>https://experimental.worldcat.org/fast/</a>",
+			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
@@ -153,10 +153,10 @@
 			},
 			"acfe_permissions": "",
 			"collapsed": "field_schema_sameas_url",
-			"min": 1,
+			"min": 0,
 			"max": 0,
 			"layout": "block",
-			"button_label": "Add Reference Webpage",
+			"button_label": "Add URI or URL",
 			"sub_fields": [
 				{
 					"key": "field_schema_sameas_url",
@@ -164,6 +164,44 @@
 					"name": "schema_sameas_url",
 					"type": "url",
 					"instructions": "Add the URI or permalink if it is available. Otherwise, add the URL.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "e.g., https://en.wikipedia.org/w/index.php?title=Breast_cancer&oldid=1172745034"
+				}
+			]
+		},
+		"field_schema_additionalType": {
+			"key": "field_schema_additionalType",
+			"name": "schema_additionalType",
+			"label": "More Specific Type For This Entity From External Vocabularies in Microdata Syntax (additionalType)",
+			"type": "repeater",
+			"instructions": "The available types on Schema.org are not always the most specific. External vocabularies can be used to associate this entity with a more specific type.</p><p class='description' style='margin-top: 0.5em;'>Add the URI-identified RDF class from an external vocabulary (e.g., Wikidata entry, Library of Congress Name Authority File).</p><p class='description' style='margin-top: 0.5em;'>Wikidata: <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a></p><p class='description' style='margin-top: 0.5em;'>Library of Congress Name Authority File: <a href='https://id.loc.gov/authorities/names.html' target='_blank'>https://id.loc.gov/authorities/names.html</a></p><p class='description' style='margin-top: 0.5em;'>Virtual International Authority File: <a href='https://viaf.org/' target='_blank'>https://viaf.org/</a></p><p class='description' style='margin-top: 0.5em;'>FAST Authority File: <a href='https://experimental.worldcat.org/fast/' target='_blank'>https://experimental.worldcat.org/fast/</a>",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_schema_additionalType_uri",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Add URI",
+			"sub_fields": [
+				{
+					"key": "field_schema_additionalType_uri",
+					"label": "URI-identified RDF class",
+					"name": "schema_additionalType_uri",
+					"type": "url",
+					"instructions": "",
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -238,7 +276,7 @@
 			"label": "Medical Code (MedicalCode) for This Entity",
 			"name": "schema_medicalcode",
 			"type": "repeater",
-			"instructions": "A medical code for the entity, taken from a controlled vocabulary or ontology (e.g., ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm).</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.</p><p class='description' style='margin-top: 0.5em;'>ICD-9: <a href='http://icd9.chrisendres.com/' target='_blank'>http://icd9.chrisendres.com/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-9-CM: <a href='http://www.icd9data.com/2015/Volume1/default.htm' target='_blank'>http://www.icd9data.com/2015/Volume1/default.htm</a></p><p class='description' style='margin-top: 0.5em;'>ICD-10: <a href='https://icd.who.int/browse10/' target='_blank'>https://icd.who.int/browse10/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-10-CM: <a href='https://icd10cmtool.cdc.gov/' target='_blank'>https://icd10cmtool.cdc.gov/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-11: <a href='https://icd.who.int/browse11/' target='_blank'>https://icd.who.int/browse11/</a></p><p class='description' style='margin-top: 0.5em;'>DiseasesDB (Diseases Database): <a href='http://www.diseasesdatabase.com/' target='_blank'>http://www.diseasesdatabase.com/</a></p><p class='description' style='margin-top: 0.5em;'>MeSH (Medical Subject Headings): <a href='https://www.ncbi.nlm.nih.gov/mesh/' target='_blank'>https://www.ncbi.nlm.nih.gov/mesh/</a></p><p class='description' style='margin-top: 0.5em;'>SNOMED-CT: <a href='https://browser.ihtsdotools.org/' target='_blank'>https://browser.ihtsdotools.org/</a></p><p class='description' style='margin-top: 0.5em;'>RxNorm: <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>",
+			"instructions": "A medical code for the entity, taken from a controlled vocabulary or ontology (e.g., ICD-11, DiseasesDB, MeSH, SNOMED-CT, RxNorm).</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.</p><p class='description' style='margin-top: 0.5em;'>ICD-10-CM: <a href='https://icd10cmtool.cdc.gov/' target='_blank'>https://icd10cmtool.cdc.gov/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-11: <a href='https://icd.who.int/browse11/' target='_blank'>https://icd.who.int/browse11/</a></p><p class='description' style='margin-top: 0.5em;'>DiseasesDB (Diseases Database): <a href='http://www.diseasesdatabase.com/' target='_blank'>http://www.diseasesdatabase.com/</a></p><p class='description' style='margin-top: 0.5em;'>MeSH (Medical Subject Headings): <a href='https://www.ncbi.nlm.nih.gov/mesh/' target='_blank'>https://www.ncbi.nlm.nih.gov/mesh/</a></p><p class='description' style='margin-top: 0.5em;'>SNOMED-CT: <a href='https://browser.ihtsdotools.org/' target='_blank'>https://browser.ihtsdotools.org/</a></p><p class='description' style='margin-top: 0.5em;'>RxNorm: <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -267,12 +305,10 @@
 						"id": ""
 					},
 					"choices": {
-						"ICD-9": "ICD-9",
-						"ICD-9-CM": "ICD-9-CM",
-						"ICD-10": "ICD-10",
 						"ICD-10-CM": "ICD-10-CM",
 						"ICD-11": "ICD-11",
 						"DiseasesDB": "DiseasesDB",
+						"MeSH": "MeSH",
 						"SNOMED-CT": "SNOMED-CT",
 						"RxNorm": "RxNorm"
 					},
@@ -337,7 +373,7 @@
 					"label": "URI or URL of the Code Description or Detail Page (url)",
 					"type": "url",
 					"instructions": "",
-					"required": 1,
+					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",
@@ -348,6 +384,66 @@
 					"placeholder": ""
 				}
 			]
+		},
+		"field_schema_medicalcondition_subtype": {
+			"key": "field_schema_medicalcondition_subtype",
+			"name": "schema_medicalcondition_subtype",
+			"label": "MedicalCondition Subtype",
+			"type": "select",
+			"instructions": "Select the most appropriate subtype of MedicalCondition.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org MedicalCondition type, visit <a href='https://schema.org/MedicalCondition' target='_blank'>https://schema.org/MedicalCondition</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalCondition#Subtypes' target='_blank'>https://schema.org/MedicalCondition#Subtypes</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"InfectiousDisease": "<strong>InfectiousDisease</strong> &mdash; An infectious disease is a clinically evident human disease resulting from the presence of pathogenic microbial agents, like pathogenic viruses, pathogenic bacteria, fungi, protozoa, multicellular parasites, and prions. To be considered an infectious disease, such pathogens are known to be able to cause this disease.",
+				"MedicalSignOrSymptom": "<strong>MedicalSignOrSymptom</strong> &mdash; Any feature associated or not with a medical condition. In medicine a symptom is generally subjective while a sign is objective."
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"search_placeholder": "Select one",
+			"placeholder": ""
+		},
+		"field_schema_infectiousagentclass": {
+			"key": "field_schema_infectiousagentclass",
+			"name": "schema_infectiousagentclass",
+			"label": "InfectiousAgentClass",
+			"type": "select",
+			"instructions": "Select the class of agents or pathogens that transmits this infectious disease.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org InfectiousAgentClass enumeration type, visit <a href='https://schema.org/InfectiousAgentClass</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each enumeration member, visit the relevant page linked at <a href='https://schema.org/InfectiousAgentClass#subtypes' target='_blank'>https://schema.org/InfectiousAgentClass#subtypes</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"Bacteria": "<strong>Bacteria</strong> &mdash; Pathogenic bacteria that cause bacterial infection.",
+				"Fungus": "<strong>Fungus</strong> &mdash; Pathogenic fungus.",
+				"MulticellularParasite": "<strong>MulticellularParasite</strong> &mdash; Multicellular parasite that causes an infection.",
+				"Prion": "<strong>Prion</strong> &mdash; A prion is an infectious agent composed of protein in a misfolded form.",
+				"Protozoa": "<strong>Protozoa</strong> &mdash; Single-celled organism that causes an infection.",
+				"Virus": "<strong>Virus</strong> &mdash; Pathogenic virus that causes viral infection."
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"search_placeholder": "Select one",
+			"placeholder": ""
 		}
 	},
 	"location": "",
