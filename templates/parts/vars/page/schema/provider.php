@@ -79,7 +79,7 @@ TODO List
 			$provider_related_location = array();
 
 			// Repeat for all associated locations
-			
+
 				$provider_related_location[] = array(
 					'@type' => 'MedicalClinic', // Replace 'MedicalClinic' with 'Hospital' if necessary
 					'name' => 'foo', // Replace 'foo' with location name
@@ -1862,7 +1862,7 @@ TODO List
 				}
 
 			// Add each item to schema value array
-			
+
 				// Eliminate PHP errors
 
 					$schema_provider_memberOf = array();
@@ -1897,7 +1897,7 @@ TODO List
 					$schema_provider_Person['sameAs'][] = 'https://npiregistry.cms.hhs.gov/provider-view/' . $npi;
 
 				}
-			
+
 			// If there is only one item, flatten the multi-dimensional array by one step
 
 				$schema_provider_Person['sameAs'] = count($schema_provider_Person['sameAs']) == 1 ? reset($schema_provider_Person['sameAs']) : $schema_provider_Person['sameAs'];
