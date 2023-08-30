@@ -1780,40 +1780,51 @@ TODO List
 
 		// knowsLanguage
 
+			// Eliminate PHP errors
+
+				$schema_provider_language = '';
+				$schema_provider_language_alternateName = '';
+
 			if ( $schema_provider_languages ) {
 
-				foreach ( $schema_provider_languages as $key => $value ) {
+				// Add each language to the schema
 
-					$schema_provider_language = array( // Repeat as necessary
-						'@type' => 'Language',
-						'name' => $key,
-					);
+					foreach ( $schema_provider_languages as $key => $value ) {
 
-					if ( !empty($schema_provider_languages[$key]['alternateName']) ) {
+						$schema_provider_language = array( // Repeat as necessary
+							'@type' => 'Language',
+							'name' => $key,
+						);
 
-						// If there is only one item, flatten the multi-dimensional array by one step
+						if ( !empty($schema_provider_languages[$key]['alternateName']) ) {
 
-							$schema_provider_language_alternateName = $schema_provider_languages[$key]['alternateName'];
+							// If there is only one item, flatten the multi-dimensional array by one step
 
-							$schema_provider_language_alternateName = count($schema_provider_language_alternateName) == 1 ? $schema_provider_language_alternateName[0] : $schema_provider_language_alternateName;
+								$schema_provider_language_alternateName = $schema_provider_languages[$key]['alternateName'];
 
-						$schema_provider_language['alternateName'] = $schema_provider_language_alternateName;
+								$schema_provider_language_alternateName = count($schema_provider_language_alternateName) == 1 ? $schema_provider_language_alternateName[0] : $schema_provider_language_alternateName;
+
+							$schema_provider_language['alternateName'] = $schema_provider_language_alternateName;
+
+						}
+
+						if ( $schema_provider_language ) {
+
+							$schema_provider_Person['knowsLanguage'][] = $schema_provider_language;
+
+						}
 
 					}
 
-					if ( $schema_provider_language ) {
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					if ( isset($schema_provider_Person['knowsLanguage']) ) {
+
+						$schema_provider_Person['knowsLanguage'] = count($schema_provider_Person['knowsLanguage']) == 1 ? $schema_provider_Person['knowsLanguage'][0] : $schema_provider_Person['knowsLanguage'];
 
 					}
-
-					$schema_provider_Person['knowsLanguage'][] = $schema_provider_language;
-
-				}
 
 			}
-
-			// If there is only one item, flatten the multi-dimensional array by one step
-
-			$schema_provider_Person['knowsLanguage'] = count($schema_provider_Person['knowsLanguage']) == 1 ? $schema_provider_Person['knowsLanguage'][0] : $schema_provider_Person['knowsLanguage'];
 
 		// mainEntityOfPage
 
