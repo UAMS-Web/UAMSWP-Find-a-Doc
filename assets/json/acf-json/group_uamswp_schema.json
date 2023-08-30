@@ -232,6 +232,122 @@
 			},
 			"default_value": "",
 			"placeholder": "e.g., https://www.asahq.org/"
+		},
+		"field_schema_medicalcode": {
+			"key": "field_schema_medicalcode",
+			"label": "Medical Code (MedicalCode) for This Entity",
+			"name": "schema_medicalcode",
+			"type": "repeater",
+			"instructions": "A medical code for the entity, taken from a controlled vocabulary or ontology (e.g., ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm).</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.</p><p class='description' style='margin-top: 0.5em;'>ICD-9: <a href='http://icd9.chrisendres.com/' target='_blank'>http://icd9.chrisendres.com/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-9-CM: <a href='http://www.icd9data.com/2015/Volume1/default.htm' target='_blank'>http://www.icd9data.com/2015/Volume1/default.htm</a></p><p class='description' style='margin-top: 0.5em;'>ICD-10: <a href='https://icd.who.int/browse10/' target='_blank'>https://icd.who.int/browse10/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-10-CM: <a href='https://icd10cmtool.cdc.gov/' target='_blank'>https://icd10cmtool.cdc.gov/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-11: <a href='https://icd.who.int/browse11/' target='_blank'>https://icd.who.int/browse11/</a></p><p class='description' style='margin-top: 0.5em;'>DiseasesDB (Diseases Database): <a href='http://www.diseasesdatabase.com/' target='_blank'>http://www.diseasesdatabase.com/</a></p><p class='description' style='margin-top: 0.5em;'>MeSH (Medical Subject Headings): <a href='https://www.ncbi.nlm.nih.gov/mesh/' target='_blank'>https://www.ncbi.nlm.nih.gov/mesh/</a></p><p class='description' style='margin-top: 0.5em;'>SNOMED-CT: <a href='https://browser.ihtsdotools.org/' target='_blank'>https://browser.ihtsdotools.org/</a></p><p class='description' style='margin-top: 0.5em;'>RxNorm: <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "",
+			"min": 0,
+			"max": "",
+			"layout": "block",
+			"button_label": "Add MedicalCode",
+			"sub_fields": [
+				{
+					"key": "field_schema_medicalcode_codingsystem",
+					"label": "Coding System (codingSystem)",
+					"name": "schema_medicalcode_codingsystem",
+					"type": "select",
+					"instructions": "Select from the list of coding systems or enter a custom option.</p><p class='description' style='margin-top: 0.5em;'>For information on the codingSystem Schema.org property, visit <a href='https://schema.org/codingSystem' target='_blank'>https://schema.org/codingSystem</a>.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"ICD-9": "ICD-9",
+						"ICD-9-CM": "ICD-9-CM",
+						"ICD-10": "ICD-10",
+						"ICD-10-CM": "ICD-10-CM",
+						"ICD-11": "ICD-11",
+						"DiseasesDB": "DiseasesDB",
+						"SNOMED-CT": "SNOMED-CT",
+						"RxNorm": "RxNorm"
+					},
+					"default_value": [],
+					"allow_null": 1,
+					"multiple": 0,
+					"ui": 1,
+					"ajax": 0,
+					"return_format": "value",
+					"allow_custom": 1,
+					"placeholder": "",
+					"acfe_settings": "",
+					"acfe_validate": ""
+				},
+				{
+					"key": "field_schema_medicalcode_codevalue",
+					"label": "Code Value (codeValue)",
+					"name": "schema_medicalcode_codevalue",
+					"type": "text",
+					"instructions": "A short textual code that uniquely identifies the value.</p><p class='description' style='margin-top: 0.5em;'>For information on the codeValue Schema.org property, visit <a href='https://schema.org/codeValue' target='_blank'>https://schema.org/codeValue</a>.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				},
+				{
+					"key": "field_schema_medicalcode_name",
+					"name": "schema_medicalcode_name",
+					"label": "Name Associated With the Code (name)",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"acfe_validate": "",
+					"acfe_update": ""
+				},
+				{
+					"key": "field_schema_medicalcode_url",
+					"name": "schema_medicalcode_url",
+					"label": "URI or URL of the Code Description or Detail Page (url)",
+					"type": "url",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": ""
+				}
+			]
 		}
 	},
 	"location": "",
