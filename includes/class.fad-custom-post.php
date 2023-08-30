@@ -1468,15 +1468,15 @@ function create_boards_taxonomy() {
 
 function create_associations_taxonomy() {
 	$labels = array(
-		'name' => 'Associations',
-		'singular_name' => 'Association',
+		'name' => 'Health Care Professional Associations',
+		'singular_name' => 'Health Care Professional Association',
 		'search_items' => 'Search Associations',
 		'all_items' => 'All Associations',
 		'edit_item' => 'Edit Association',
 		'update_item' => 'Update Association',
 		'add_new_item' => 'Add New Association',
 		'new_item_name' => 'New Association',
-		'menu_name' => 'Academic Associations',
+		'menu_name' => 'Professional Associations',
 		'view_item' => 'View Association',
 		'popular_items' => 'Popular Associations',
 		'separate_items_with_commas' => 'Separate associations with commas',
