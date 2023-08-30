@@ -1101,14 +1101,16 @@ TODO List
 
 			if ($rating_valid) {
 
-				$schema_provider_Physician['aggregateRating'] = array(
-					'@type' => 'AggregateRating',
-					'description' => '', // Get description of the rating/review concept from Patient Experience.
-					'itemReviewed' => $schema_provider_Physician_ref,
-					'ratingCount' => $review_count,
-					'ratingValue' => $avg_rating,
-					'reviewAspect' => '', // Get info from Patient Experience about which facets of the provider is rated/reviewed.
-					'reviewCount' => $comment_count
+				$schema_provider_Physician['aggregateRating'] = array_filter(
+					array(
+						'@type' => 'AggregateRating',
+						'description' => '', // Get description of the rating/review concept from Patient Experience.
+						'itemReviewed' => $schema_provider_Physician_ref,
+						'ratingCount' => $review_count,
+						'ratingValue' => $avg_rating,
+						'reviewAspect' => '', // Get info from Patient Experience about which facets of the provider is rated/reviewed.
+						'reviewCount' => $comment_count
+					)
 				);
 
 			}
