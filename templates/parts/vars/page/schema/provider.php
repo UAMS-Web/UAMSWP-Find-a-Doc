@@ -173,7 +173,7 @@ TODO List
 					'url' => 'foo' // Replace 'foo' with location profile URL
 				);
 
-			// Define reference to each value/row in this 'Physician' property
+			// Define reference to each value/row in this property
 
 				$schema_provider_location_ref = array();
 
@@ -230,16 +230,38 @@ TODO List
 
 			$provider_related_treatment = array(
 				array( // Repeat as necessary
-					'@type' => 'MedicalProcedure', // Replace 'MedicalProcedure' with more specific type if relevant
-					'name' => 'foo', // Replace 'foo' with name of associated procedure
-					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
-				),
-				array( // Repeat as necessary
-					'@type' => 'MedicalTest', // Replace 'MedicalProcedure' with more specific type if relevant
-					'name' => 'foo', // Replace 'foo' with name of associated test
+					'@id' => $schema_provider_url . '#MedicalEntity1', // Increase integer by one each iteration
+					'@type' => 'MedicalEntity', // Replace 'MedicalEntity' with 'MedicalTest' or 'MedicalProcedure' (or more specific type if relevant)
+					'name' => 'foo', // Replace 'foo' with name of associated entity
 					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
 				)
 			);
+
+			// Define reference to each value/row in this property
+
+				$schema_provider_treatment_ref = array();
+
+				foreach ( $provider_related_treatment as $item ) {
+
+					if (
+						isset($item['@id'])
+						&&
+						!empty($item['@id'])
+					) {
+
+						$schema_provider_treatment_ref[]['@id'] = $item['@id'];
+
+					}
+
+				}
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				if ( !empty($provider_related_treatment) ) {
+
+					$provider_related_treatment = count($provider_related_treatment) == 1 ? reset($provider_related_treatment) : $provider_related_treatment;
+
+				}
 
 	// Provider Clinical Specialization and Associated Values (medicalSpecialty, et al.)
 
@@ -923,7 +945,7 @@ TODO List
 
 				$schema_provider_MedicalWebPage['mentions'] = array_merge(
 					$schema_provider_MedicalWebPage['mentions'],
-					$provider_related_treatment
+					$schema_provider_treatment_ref
 				);
 
 			// Remove any empty items from the array
