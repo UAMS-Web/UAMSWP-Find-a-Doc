@@ -21,6 +21,7 @@
  * 	$featured_image
  * 	$headshot_wide
  * 	$provider_associations_values
+ * 	$provider_plural_name_attr
  * 
  */
 
@@ -72,6 +73,10 @@ TODO List
 	// Provider URL
 
 		$schema_provider_url = user_trailingslashit($page_url);
+
+	// Provider archive URL
+
+		$schema_provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
 
 	// Related ontology items as schema arrays
 
@@ -1040,9 +1045,9 @@ TODO List
 				'position' => 2,
 				'item' => array(
 					'@type' => 'WebPage',
-					'@id' => $schema_base_org_uams_health_url_trailingslashit . user_trailingslashit('provider') . '#ListItem',
-					'url' => $schema_base_org_uams_health_url_trailingslashit . user_trailingslashit('provider'),
-					'name' => 'Providers'
+					'@id' => $schema_provider_archive_url . '#ListItem',
+					'url' => $schema_provider_archive_url,
+					'name' => $provider_plural_name_attr
 				)
 				),
 			array(
