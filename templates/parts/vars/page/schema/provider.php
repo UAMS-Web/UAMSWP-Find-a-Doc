@@ -1187,7 +1187,21 @@ TODO List
 
 		// additionalType
 
-			$schema_provider_Person['additionalType'] = ( isset($schema_provider_wikidata_occupation) && !empty($schema_provider_wikidata_occupation) ) ? $schema_provider_wikidata_occupation : 'https://www.wikidata.org/wiki/Q11974939'; // Get Wikidata item URL for occupation from Specialty // Default to health professional (Q11974939)
+			$schema_provider_Person_additionalType_fallback = 'https://www.wikidata.org/wiki/Q11974939'; // Wikidata item URL for health professional (Q11974939)
+
+			if (
+				isset($schema_provider_wikidata_occupation)
+				&&
+				!empty($schema_provider_wikidata_occupation)
+			) {
+
+				$schema_provider_Person['additionalType'] = $schema_provider_wikidata_occupation; // Get Wikidata item URL for occupation from Specialty
+
+			} else {
+
+				$schema_provider_Person['additionalType'] = $schema_provider_Person_additionalType_fallback;
+
+			}
 
 		// @id
 
