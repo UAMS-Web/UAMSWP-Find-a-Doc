@@ -1878,7 +1878,17 @@ TODO List
 
 		// sameAs
 
-			$schema_provider_Person['sameAs'] = 'https://npiregistry.cms.hhs.gov/provider-view/foo'; // Replace 'foo' with NPI
+			// NPPES NPI Registry
+
+				if ( $npi ) {
+
+					$schema_provider_Person['sameAs'][] = 'https://npiregistry.cms.hhs.gov/provider-view/' . $npi;
+
+				}
+			
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				$schema_provider_Person['sameAs'] = count($schema_provider_Person['sameAs']) == 1 ? reset($schema_provider_Person['sameAs']) : $schema_provider_Person['sameAs'];
 
 		// subjectOf
 
