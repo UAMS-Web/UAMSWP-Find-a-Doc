@@ -300,7 +300,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; Either MedicalProcedure is specific enough or no other subtype option is relevant.",
+				"0": "<strong>None</strong> &mdash; Either MedicalProcedure is specific enough or no other subtype option is relevant.",
 				"DiagnosticProcedure": "<strong>Diagnostic Procedure</strong> &mdash; A medical procedure intended primarily for diagnostic, as opposed to therapeutic, purposes.",
 				"PalliativeProcedure": "<strong>Palliative Procedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
 				"PhysicalExam": "<strong>Physical Exam</strong> &mdash; A type of physical examination of a patient performed by a physician.",
@@ -340,7 +340,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; Either TherapeuticProcedure is specific enough or no other subtype option is relevant.",
+				"0": "<strong>None</strong> &mdash; Either TherapeuticProcedure is specific enough or no other subtype option is relevant.",
 				"MedicalTherapy": "<strong>Medical Therapy</strong> &mdash; Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g., hemodialysis) aimed at improving or preventing a health condition.",
 				"PsychologicalTreatment": "<strong>Psychological Treatment</strong> &mdash; A process of care relying upon counseling, dialogue and communication aimed at improving a mental health condition without use of drugs."
 			},
@@ -377,7 +377,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; Either MedicalTherapy is specific enough or no other subtype option is relevant.",
+				"0": "<strong>None</strong> &mdash; Either MedicalTherapy is specific enough or no other subtype option is relevant.",
 				"OccupationalTherapy": "<strong>Occupational Therapy</strong> &mdash; A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.",
 				"PalliativeProcedure": "<strong>Palliative Procedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
 				"PhysicalTherapy": "<strong>Physical Therapy</strong> &mdash; A process of progressive physical care and rehabilitation aimed at improving a health condition.",
@@ -417,7 +417,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; No other option is relevant.",
+				"0": "<strong>None</strong> &mdash; No other option is relevant.",
 				"CT": "<strong>CT</strong> &mdash; X-ray computed tomography imaging.",
 				"MRI": "<strong>MRI</strong> &mdash; Magnetic resonance imaging.",
 				"PET": "<strong>PET</strong> &mdash; Positron emission tomography imaging.",
@@ -797,7 +797,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; No other option is relevant.",
+				"0": "<strong>None</strong> &mdash; No other option is relevant.",
 				"NoninvasiveProcedure": "<strong>NoninvasiveProcedure</strong> &mdash; A type of medical procedure that involves noninvasive techniques.",
 				"PercutaneousProcedure": "<strong>PercutaneousProcedure</strong> &mdash; A type of medical procedure that involves percutaneous techniques, where access to organs or tissue is achieved via needle-puncture of the skin. For example, catheter-based procedures like stent delivery."
 			},

@@ -16,7 +16,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
 				"Anesthesia": "<strong>Anesthesia</strong> &mdash; A specific branch of medical science that pertains to study of anesthetics and their application.",
 				"Cardiovascular": "<strong>Cardiovascular</strong> &mdash; A specific branch of medical science that pertains to diagnosis and treatment of disorders of heart and vasculature.",
 				"CommunityHealth": "<strong>CommunityHealth</strong> &mdash; A field of public health focusing on improving health characteristics of a defined population in relation with their geographical or environment areas.",
@@ -84,7 +84,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
 				"Anesthesia": "<strong>Anesthesia</strong> &mdash; A specific branch of medical science that pertains to study of anesthetics and their application.",
 				"Cardiovascular": "<strong>Cardiovascular</strong> &mdash; A specific branch of medical science that pertains to diagnosis and treatment of disorders of heart and vasculature.",
 				"CommunityHealth": "<strong>CommunityHealth</strong> &mdash; A field of public health focusing on improving health characteristics of a defined population in relation with their geographical or environment areas.",

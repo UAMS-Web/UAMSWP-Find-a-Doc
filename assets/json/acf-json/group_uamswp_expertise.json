@@ -281,7 +281,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; No available option is relevant to this area of expertise",
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this area of expertise",
 				"Ayurvedic": "<strong>Ayurvedic</strong> &mdash; A system of medicine that originated in India over thousands of years and that focuses on integrating and balancing the body, mind, and spirit.",
 				"Chiropractic": "<strong>Chiropractic</strong> &mdash; A system of medicine focused on the relationship between the body's structure, mainly the spine, and its functioning.",
 				"Homeopathic": "<strong>Homeopathic</strong> &mdash; A system of medicine based on the principle that a disease can be cured by a substance that produces similar symptoms in healthy people.",
