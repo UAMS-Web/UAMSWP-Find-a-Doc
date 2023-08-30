@@ -813,7 +813,7 @@
 			// Check if Ratings section should be displayed
 
 				$npi = get_field('physician_npi');
-				$npi = str_pad($npi, 10, '0', STR_PAD_LEFT); // Add enough leading zeroes to reach 10 digits
+				$npi = $npi ? str_pad($npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
 
 				if ( $npi ) {
 
