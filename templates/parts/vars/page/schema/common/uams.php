@@ -227,7 +227,25 @@
 
 	// sameAs
 
-		$schema_base_org_uams['sameAs'][] = 'https://en.wikipedia.org/wiki/University_of_Arkansas_for_Medical_Sciences';
+		// Wikipedia: https://en.wikipedia.org/
+
+			$schema_base_org_uams['sameAs'][] = 'https://en.wikipedia.org/wiki/University_of_Arkansas_for_Medical_Sciences';
+
+		// Wikidata: https://www.wikidata.org/
+
+			$schema_base_org_uams['sameAs'][] = 'https://www.wikidata.org/wiki/Q941298';
+
+		// Library of Congress Name Authority File: https://id.loc.gov/authorities/names.html
+
+			$schema_base_org_uams['sameAs'][] = 'http://id.loc.gov/authorities/names/n79026333';
+
+		// Virtual International Authority File: https://viaf.org/
+
+			$schema_base_org_uams['sameAs'][] = 'http://viaf.org/viaf/140704690';
+
+		// FAST Authority File: https://experimental.worldcat.org/fast/
+
+			$schema_base_org_uams['sameAs'][] = 'http://id.worldcat.org/fast/530628';
 
 	// slogan
 
