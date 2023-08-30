@@ -852,7 +852,10 @@ TODO List
 					'@type' => 'Patient',
 					'geographicArea' => $schema_arkansas
 				),
-				'valueReference' => 'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
+				array(
+					'@type' => 'MedicalAudienceType',
+					'name' => 'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
+				)
 			);
 
 		// mentions
