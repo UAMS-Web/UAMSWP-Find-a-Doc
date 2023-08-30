@@ -1904,9 +1904,25 @@ TODO List
 
 		// worksFor
 
-			$schema_provider_Person['worksFor'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-				$schema_base_org_uams_health_ref
-			);
+			$schema_provider_worksFor = array();
+
+			// Add UAMS Health
+
+				$schema_provider_worksFor[] = $schema_base_org_uams_health_ref;
+
+			// Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+
+			// Add to schema
+
+				if ( $schema_provider_worksFor ) {
+
+					$schema_provider_Person['worksFor'] = $schema_provider_worksFor;
+
+				}
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					$schema_provider_Person['worksFor'] = count($schema_provider_Person['worksFor']) == 1 ? reset($schema_provider_Person['worksFor']) : $schema_provider_Person['worksFor'];
 
 // Add Provider Schema Arrays to Base Array
 
