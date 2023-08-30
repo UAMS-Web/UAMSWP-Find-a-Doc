@@ -214,7 +214,7 @@ TODO List
 				)
 			);
 
-	// Provider Medical Specialty (medicalSpecialty) and Associated Values
+	// Provider Clinical Specialization and Associated Values (medicalSpecialty, et al.)
 
 		// Eliminate PHP errors
 
