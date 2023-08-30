@@ -119,98 +119,6 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_treatment_procedure_schema_medicalcode": {
-			"key": "field_treatment_procedure_schema_medicalcode",
-			"name": "treatment_procedure_schema_medicalcode",
-			"label": "MedicalCode for This Entity",
-			"type": "clone",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_medicalcode"
-			],
-			"display": "seamless",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_settings": ""
-		},
-		"field_treatment_procedure_schema_sameas": {
-			"key": "field_treatment_procedure_schema_sameas",
-			"name": "treatment_procedure_schema_sameas",
-			"label": "Reference Webpages (sameAs)",
-			"type": "clone",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_sameas"
-			],
-			"display": "seamless",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_settings": ""
-		},
-		"field_treatment_procedure_schema_additionalType": {
-			"key": "field_treatment_procedure_schema_additionalType",
-			"name": "treatment_procedure_schema_additionalType",
-			"label": "More Specific Type For This Entity From External Vocabularies in Microdata Syntax (additionalType)",
-			"type": "clone",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_additionalType"
-			],
-			"display": "seamless",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_settings": ""
-		},
-		"field_treatment_procedure_schema_medicalspecialty": {
-			"key": "field_treatment_procedure_schema_medicalspecialty",
-			"name": "treatment_procedure_schema_medicalspecialty",
-			"label": "Schema.org MedicalSpecialty",
-			"type": "clone",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_medicalspecialty_multiple"
-			],
-			"display": "seamless",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_settings": ""
-		},
 		"field_treatment_procedure_schema_medicalentity": {
 			"key": "field_treatment_procedure_schema_medicalentity",
 			"label": "MedicalEntity Subtype",
@@ -261,7 +169,7 @@
 				"id": ""
 			},
 			"choices": {
-				"none": "<strong>None</strong> &mdash; Either MedicalTest is specific enough or no other subtype option is relevant.",
+				"0": "<strong>None</strong> &mdash; Either MedicalTest is specific enough or no other subtype option is relevant.",
 				"BloodTest": "<strong>Blood Test</strong> &mdash; A medical test performed on a sample of a patient's blood.",
 				"ImagingTest": "<strong>Imaging Test</strong> &mdash; Any medical imaging modality typically used for diagnostic purposes.",
 				"MedicalTestPanel": "<strong>Medical Test Panel</strong> &mdash; Any collection of tests commonly ordered together.",
@@ -1016,6 +924,98 @@
 			"acfe_bidirectional": {
 				"acfe_bidirectional_enabled": "0"
 			}
+		},
+		"field_treatment_procedure_schema_additionalType": {
+			"key": "field_treatment_procedure_schema_additionalType",
+			"name": "treatment_procedure_schema_additionalType",
+			"label": "More Specific Type For This Entity From External Vocabularies in Microdata Syntax (additionalType)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_medicalcode": {
+			"key": "field_treatment_procedure_schema_medicalcode",
+			"name": "treatment_procedure_schema_medicalcode",
+			"label": "MedicalCode for This Entity",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcode"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_medicalspecialty": {
+			"key": "field_treatment_procedure_schema_medicalspecialty",
+			"name": "treatment_procedure_schema_medicalspecialty",
+			"label": "Schema.org MedicalSpecialty",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_multiple"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_sameas": {
+			"key": "field_treatment_procedure_schema_sameas",
+			"name": "treatment_procedure_schema_sameas",
+			"label": "Reference Webpages (sameAs)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
 		},
 		"field_treatment_procedure_tab_conditions": {
 			"key": "field_treatment_procedure_tab_conditions",
