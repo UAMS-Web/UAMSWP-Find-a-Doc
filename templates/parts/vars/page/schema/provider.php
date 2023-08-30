@@ -1010,7 +1010,11 @@ TODO List
 
 		// video
 
-			$schema_provider_MedicalWebPage['video'] = $video;
+			if ( $video ) {
+
+				$schema_provider_MedicalWebPage['video'] = $video;
+
+			}
 
 	// BreadcrumbList
 
