@@ -63,6 +63,7 @@ TODO List
 	 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
 	 * Optional — Postal Code
  * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
+ * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
 
 */
 
