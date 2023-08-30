@@ -78,6 +78,12 @@ TODO List
 
 		$schema_provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
 
+	// Significant links (significantLink)
+
+		// Base array
+
+			$schema_provider_significantLink = array();
+
 	// Related ontology items as schema arrays
 
 		// Related Locations (MedicalWebPage[mentions], Physician[location], Person[workLocation])
@@ -170,19 +176,37 @@ TODO List
 					'url' => 'foo' // Replace 'foo' with location profile URL
 				);
 
-			// Define reference to each value/row in this property
+			// Define reference to each value/row in this property // Get URLs for significantLink property
 
 				$schema_provider_location_ref = array();
 
-				foreach ( $provider_related_location as $item ) {
+				if ( $provider_related_location ) {
 
-					if (
-						isset($item['@id'])
-						&&
-						!empty($item['@id'])
-					) {
+					foreach ( $provider_related_location as $item ) {
 
-						$schema_provider_location_ref[]['@id'] = $item['@id'];
+						// Define reference to each value/row in this property
+
+							if (
+								isset($item['@id'])
+								&&
+								!empty($item['@id'])
+							) {
+
+								$schema_provider_location_ref[]['@id'] = $item['@id'];
+
+							}
+
+						// Get URLs for significantLink property
+
+							if (
+								isset($item['url'])
+								&&
+								!empty($item['url'])
+							) {
+
+								$schema_provider_significantLink[] = $item['url'];
+
+							}
 
 					}
 
@@ -194,30 +218,114 @@ TODO List
 
 		// Related Areas of Expertise
 
-			$provider_related_expertise = array(
-				array(
+			// Base array
+
+				$provider_related_expertise = array();
+
+			// Add areas of expertise to the array
+
+				$provider_related_expertise[] = array(
 					'@type' => 'MedicalEntity',
-					'foo' => 'bar'
-				)
-			);
+					'name' => 'foo',
+					'url' => 'bar',
+					'baz' => 'qux'
+				);
+
+			// Get URLs for significantLink property
+
+				if ( $provider_related_expertise ) {
+
+					foreach ( $provider_related_expertise as $item ) {
+
+						// Get URLs for significantLink property
+
+							if (
+								isset($item['url'])
+								&&
+								!empty($item['url'])
+							) {
+
+								$schema_provider_significantLink[] = $item['url'];
+
+							}
+
+					}
+
+				}
 
 		// Related Clinical Resources
 
-			$provider_related_clinical_resource = array(
-				array(
-					'@type' => 'Article', // or 'ImageObject' or 'DigitalDocument' or 'VideoObject'
-					'foo' => 'bar'
-				)
-			);
+			// Base array
+
+				$provider_related_clinical_resource = array();
+
+			// Add clinical resources to the array
+
+				$provider_related_clinical_resource[] = array(
+					'@type' => 'Article', // Replace 'Article' with other type as necessary (e.g., 'ImageObject', 'DigitalDocument', 'VideoObject')
+					'name' => 'foo',
+					'url' => 'bar',
+					'baz' => 'qux'
+				);
+
+			// Get URLs for significantLink property
+
+				if ( $provider_related_clinical_resource ) {
+
+					foreach ( $provider_related_clinical_resource as $item ) {
+
+						// Get URLs for significantLink property
+
+							if (
+								isset($item['url'])
+								&&
+								!empty($item['url'])
+							) {
+
+								$schema_provider_significantLink[] = $item['url'];
+
+							}
+
+					}
+
+				}
 
 		// Related Conditions
 
-			$provider_related_condition = array(
-				array(
-					'@type' => 'MedicalCondition', // or subtypes
-					'foo' => 'bar'
-				)
-			);
+			// Base array
+
+				$provider_related_condition = array();
+
+			// Add conditions to the array
+
+				$provider_related_condition[] = array(
+					'@type' => 'MedicalCondition', // Replace 'MedicalCondition' with appropriate subtype as necessary
+					'name' => 'foo',
+					'url' => 'bar',
+					'baz' => 'qux'
+				);
+
+			// Get URLs for significantLink property
+
+				if ( $provider_related_condition ) {
+
+					foreach ( $provider_related_condition as $item ) {
+
+						// Get URLs for significantLink property
+
+							if (
+								isset($item['url'])
+								&&
+								!empty($item['url'])
+							) {
+
+								$schema_provider_significantLink[] = $item['url'];
+
+							}
+
+					}
+
+				}
 
 		// Related Treatments
 
@@ -234,19 +342,37 @@ TODO List
 					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
 				);
 
-			// Define reference to each value/row in this property
+			// Define reference to each value/row in this property // Get URLs for significantLink property
 
 				$schema_provider_treatment_ref = array();
 
-				foreach ( $provider_related_treatment as $item ) {
+				if ( $provider_related_treatment ) {
 
-					if (
-						isset($item['@id'])
-						&&
-						!empty($item['@id'])
-					) {
+					foreach ( $provider_related_treatment as $item ) {
 
-						$schema_provider_treatment_ref[]['@id'] = $item['@id'];
+						// Define reference to each value/row in this property
+
+							if (
+								isset($item['@id'])
+								&&
+								!empty($item['@id'])
+							) {
+
+								$schema_provider_treatment_ref[]['@id'] = $item['@id'];
+
+							}
+
+						// Get URLs for significantLink property
+
+							if (
+								isset($item['url'])
+								&&
+								!empty($item['url'])
+							) {
+
+								$schema_provider_significantLink[] = $item['url'];
+
+							}
 
 					}
 
@@ -966,7 +1092,15 @@ TODO List
 
 		// significantLink
 
-			$schema_provider_MedicalWebPage['significantLink'] = array(); // Add URLs of related ontology items, repeating as necessary
+			if ( $schema_provider_significantLink ) {
+
+				$schema_provider_MedicalWebPage['significantLink'] = $schema_provider_significantLink;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage['significantLink']);
+
+			}
 
 		// sourceOrganization
 
