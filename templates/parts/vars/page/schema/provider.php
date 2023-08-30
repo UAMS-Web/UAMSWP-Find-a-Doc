@@ -20,6 +20,7 @@
  * 	$schema_provider_languages
  * 	$featured_image
  * 	$headshot_wide
+ * 	$provider_associations_values
  * 
  */
 
@@ -1832,12 +1833,48 @@ TODO List
 
 		// memberOf
 
-			$schema_provider_Person['memberOf'] = array(
-				array( // Repeat as necessary
-					'@type' => 'Organization',
-					'name' => 'foo' // Replace 'foo' with provider's association organization
-				)
-			);
+			// Clean up array
+
+				if (
+					isset($provider_associations_values)
+					&&
+					is_array($provider_associations_values)
+					&&
+					!empty($provider_associations_values)
+				) {
+
+					// Sort array
+
+						ksort($provider_associations_values);
+
+				}
+
+			// Add each item to schema value array
+			
+				// Eliminate PHP errors
+
+					$schema_provider_memberOf = array();
+
+				foreach ( $provider_associations_values as $item ) {
+
+					$schema_provider_memberOf[] = array_merge(
+						array( '@type' => 'Organization' ),
+						array_filter($item)
+					);
+
+				}
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				$schema_provider_memberOf = count($schema_provider_memberOf) == 1 ? reset($schema_provider_memberOf) : $schema_provider_memberOf;
+
+			// Add to schema
+
+				if ( !empty($schema_provider_memberOf) ) {
+
+					$schema_provider_Person['memberOf'] = $schema_provider_memberOf;
+
+				}
 
 		// sameAs
 

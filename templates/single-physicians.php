@@ -909,7 +909,6 @@
 			$provider_clinical_focus = get_field('physician_clinical_focus');
 			$provider_awards = get_field('physician_awards');
 			$provider_additional_info = get_field('physician_additional_info');
-			$associations = get_field( 'physician_associations' );
 			$pubmed_author_number = get_field('physician_author_number');
 
 			// Construct a list of the provider's languages (e.g., "English, Spanish")
@@ -998,6 +997,95 @@
 
 					}
 
+			// Construct a list of the provider's health care professional associations
+
+				$provider_associations = get_field('physician_associations');
+
+				// Eliminate PHP errors
+
+					$provider_associations_names = array();
+					$provider_associations_values = array();
+					$association_term = '';
+					$association_name = '';
+					$association_alternateName_array = array();
+					$association_alternateName = array();
+					$association_sameAs_array = array();
+					$association_sameAs = array();
+					$association_url = '';
+
+				if ( $provider_associations ) {
+
+					foreach ( $provider_associations as $association ) {
+
+						$association_term = get_term( $association, 'association' );
+
+						if ( is_object($association_term) ) {
+
+							// Name (Schema.org name property)
+
+								$association_name = $association_term->name;
+							
+							// Alternate Names (Schema.org alternateName property)
+
+								$association_alternateName_array = get_field( 'schema_alternatename', $association_term ) ?: array();
+
+								if ( count($association_alternateName_array) == 1 ) {
+
+									$association_alternateName = $association_alternateName_array[0]['schema_alternatename_text'];
+
+								} elseif ( count($association_alternateName_array) > 1 ) {
+										
+									foreach ( $association_alternateName_array as $item ) {
+
+										$association_alternateName[] = $item['schema_alternatename_text'];
+
+									}
+
+								}
+
+							// Reference Webpages (Schema.org sameAs property)
+
+								$association_sameAs_array = get_field( 'schema_sameas', $association_term ) ?: array();
+
+								if ( count($association_sameAs_array) == 1 ) {
+
+									$association_sameAs = $association_sameAs_array[0]['schema_sameas_url'];
+
+								} elseif ( count($association_sameAs_array) > 1 ) {
+										
+									foreach ( $association_sameAs_array as $item ) {
+
+										$association_sameAs[] = $item['schema_sameas_url'];
+
+									}
+
+								}
+
+							// Official Website (Schema.org url property)
+
+								$association_url = get_field( 'schema_url', $association_term ) ?: '';
+
+							// Add name to array
+
+								$provider_associations_names[] = $association_name;
+
+							// Add name and field values to array
+
+								$provider_associations_values[$association_name] = array_filter(
+									array(
+										'alternateName' => $association_alternateName,
+										'name' => $association_name,
+										'sameAs' => $association_sameAs,
+										'url' => $association_url
+									)
+								);
+
+						}
+
+					}
+
+				}
+
 			// Get the age of the provider portrait
 
 				// Eliminate PHP errors
@@ -1058,7 +1146,7 @@
 			$provider_field_classes .= ( $education && !empty($education) ) ? ' has-education' : '';
 			// Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
 			$provider_field_classes .= ( $boards && !empty($boards) ) ? ' has-boards' : '';
-			$provider_field_classes .= ( $associations && !empty($associations) ) ? ' has-associations' : '';
+			$provider_field_classes .= ( $provider_associations && !empty($provider_associations) ) ? ' has-associations' : '';
 			$provider_field_classes .= ( $bio_research && !empty($bio_research) ) ? ' has-research-bio' : '';
 			$provider_field_classes .= ( $research_interests && !empty($research_interests) ) ? ' has-research-interests' : '';
 			$provider_field_classes .= ( $research_profile && !empty($research_profile) ) ? ' has-research-profile' : '';
@@ -1654,17 +1742,28 @@
 													</ul>
 												<?php
 												} // end( !empty( $boards ) )
-												if ( !empty( $associations ) ) { ?>
+
+												if ( !empty( $provider_associations_names ) ) {
+
+													?>
 													<h3 class="h4">Associations</h3>
 													<ul>
-														<?php foreach ( $associations as $association ) {
-															$association_name = get_term( $association, 'association'); ?>
-															<li><?php echo $association_name->name; ?></li>
 														<?php
-														} // endforeach; ?>
+														
+														foreach ( $provider_associations_names as $item ) {
+															
+															?>
+															<li><?php echo $item; ?></li>
+															<?php
+
+														} // endforeach
+														
+														?>
 													</ul>
-												<?php
-												} // endif ( !empty( $associations ) )
+													<?php
+
+												} // endif ( !empty( $provider_associations_names ) )
+
 												if ( $provider_academic_split ) { ?>
 													</div>
 													</div>
