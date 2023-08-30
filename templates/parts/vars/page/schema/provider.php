@@ -1324,19 +1324,19 @@ TODO List
 
 				}
 
-			// If there is only one item, flatten the multi-dimensional array by one step
-
-				if ( !empty($schema_provider_alumniOf) ) {
-
-					$schema_provider_alumniOf = count($schema_provider_alumniOf) == 1 ? reset($schema_provider_alumniOf) : $schema_provider_alumniOf;
-
-				}
-
 			// Add to the schema
 
 				if ( !empty($schema_provider_alumniOf) ) {
 
 					$schema_provider_Person['alumniOf'] = $schema_provider_alumniOf;
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						if ( !empty($schema_provider_Person['alumniOf']) ) {
+
+							$schema_provider_Person['alumniOf'] = count($schema_provider_Person['alumniOf']) == 1 ? reset($schema_provider_Person['alumniOf']) : $schema_provider_Person['alumniOf'];
+
+						}
 
 				}
 
