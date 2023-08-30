@@ -975,6 +975,10 @@ TODO List
 
 				$schema_provider_MedicalWebPage['mentions'][] = $schema_provider_Physician_ref;
 
+			// Define the value of 'mainEntity' of 'MedicalWebPage' with this 'Physician' reference
+
+				$schema_provider_MedicalWebPage['mainEntity'] = $schema_provider_Physician_ref;
+
 		// name
 
 			$schema_provider_Physician['name'] = array(); // Defined later
@@ -1037,6 +1041,10 @@ TODO List
 
 			$schema_provider_Physician['location'] = $provider_related_location;
 
+		// mainEntityOfPage
+
+			$schema_provider_Physician['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
+
 		// medicalSpecialty
 
 			$schema_provider_Physician['medicalSpecialty'] = $schema_provider_medicalSpecialty;
@@ -1074,10 +1082,6 @@ TODO List
 			// Define reference to this 'Person' item
 
 				$schema_provider_Person_ref['@id'] = $schema_provider_Person['@id'] ?: '';
-
-			// Define the value of 'mainEntity' of 'MedicalWebPage' with this 'Person' reference
-
-				$schema_provider_MedicalWebPage['mainEntity'] = $schema_provider_Person_ref;
 
 			// Define a value of 'about' of 'MedicalWebPage' with this 'Person' reference
 
@@ -1838,10 +1842,6 @@ TODO List
 					}
 
 			}
-
-		// mainEntityOfPage
-
-			$schema_provider_Person['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
 
 		// memberOf
 
