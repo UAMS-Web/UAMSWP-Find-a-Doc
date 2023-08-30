@@ -369,8 +369,9 @@
 	// inLanguage
 
 		$schema_base_website_uams_health['inLanguage'] = array(
-			'@type' => 'Language',
 			'@id' => $schema_base_org_uams_health_url . '#InLanguage',
+			'@type' => 'Language',
+			'alternateName' => 'en',
 			'name' => 'English'
 		);
 
