@@ -739,8 +739,9 @@ TODO List
 
 	// Provider Hospital Affiliation (hospitalAffiliation)
 
-		$schema_provider_hospitalAffiliation = array(
+		$provider_related_hospital = array(
 			array( // Repeat for all associated locations
+				'@id' => $schema_provider_url . '#Hospital1', // Increase integer by one each iteration
 				'@type' => 'Hospital',
 				'name' => 'foo', // Replace 'foo' with location name
 				'address' => array(
@@ -827,6 +828,32 @@ TODO List
 				'url' => 'foo' // Replace 'foo' with location profile URL
 			)
 		);
+
+		// Define reference to each value/row in this property
+
+			$schema_provider_hospital_ref = array();
+
+			foreach ( $provider_related_hospital as $item ) {
+
+				if (
+					isset($item['@id'])
+					&&
+					!empty($item['@id'])
+				) {
+
+					$schema_provider_hospital_ref[]['@id'] = $item['@id'];
+
+				}
+
+			}
+
+		// If there is only one item, flatten the multi-dimensional array by one step
+
+			if ( !empty($provider_related_hospital) ) {
+
+				$provider_related_hospital = count($provider_related_hospital) == 1 ? reset($provider_related_hospital) : $provider_related_hospital;
+
+			}
 
 // Schema JSON Item Arrays
 
@@ -1109,7 +1136,7 @@ TODO List
 
 		// hospitalAffiliation
 
-			$schema_provider_Physician['hospitalAffiliation'] = $schema_provider_hospitalAffiliation;
+			$schema_provider_Physician['hospitalAffiliation'] = $provider_related_hospital;
 
 		// isAcceptingNewPatients
 
@@ -1197,10 +1224,20 @@ TODO List
 
 		// affiliation
 
-			$schema_provider_Person['affiliation'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-				$schema_base_org_uams_health_ref,
-				$schema_provider_hospitalAffiliation
+			$schema_provider_Person['affiliation'] = array_filter(
+				array_merge( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+					array($schema_base_org_uams_health_ref),
+					$schema_provider_hospital_ref
+				)
 			);
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				if ( !empty($schema_provider_Person['affiliation']) ) {
+
+					$schema_provider_Person['affiliation'] = count($schema_provider_Person['affiliation']) == 1 ? reset($schema_provider_Person['affiliation']) : $schema_provider_Person['affiliation'];
+
+				}
 
 		// alumniOf
 
