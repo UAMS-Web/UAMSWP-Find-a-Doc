@@ -79,9 +79,10 @@ TODO List
 
 			$provider_related_location = array();
 
-			// Repeat for all associated locations
+			// Define values array for each associated location // Repeat for all associated locations
 
 				$provider_related_location[] = array(
+					'@id' => $schema_provider_url . '#Location1', // Increase integer by one each iteration
 					'@type' => 'MedicalClinic', // Replace 'MedicalClinic' with 'Hospital' if necessary
 					'name' => 'foo', // Replace 'foo' with location name
 					'address' => array(
@@ -171,6 +172,32 @@ TODO List
 					),
 					'url' => 'foo' // Replace 'foo' with location profile URL
 				);
+
+			// Define reference to each value/row in this 'Physician' property
+
+				$schema_provider_location_ref = array();
+
+				foreach ( $provider_related_location as $item ) {
+
+					if (
+						isset($item['@id'])
+						&&
+						!empty($item['@id'])
+					) {
+
+						$schema_provider_location_ref[]['@id'] = $item['@id'];
+
+					}
+
+				}
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				if ( !empty($provider_related_location) ) {
+
+					$provider_related_location = count($provider_related_location) == 1 ? reset($provider_related_location) : $provider_related_location;
+
+				}
 
 		// Related Areas of Expertise
 
@@ -860,29 +887,54 @@ TODO List
 
 		// mentions
 
+			// Base array
+
+				$schema_provider_MedicalWebPage['mentions'] = array();
+
 			// Related Locations
 
-				$schema_provider_MedicalWebPage['mentions'] = $provider_related_location;
+				$schema_provider_MedicalWebPage['mentions'] = array_merge(
+					$schema_provider_MedicalWebPage['mentions'],
+					$schema_provider_location_ref
+				);
 
 			// Related Areas of Expertise
 
-				$schema_provider_MedicalWebPage['mentions'] = $provider_related_expertise;
+				$schema_provider_MedicalWebPage['mentions'] = array_merge(
+					$schema_provider_MedicalWebPage['mentions'],
+					$provider_related_expertise
+				);
 
 			// Related Clinical Resources
 
-				$schema_provider_MedicalWebPage['mentions'] = $provider_related_clinical_resource;
+				$schema_provider_MedicalWebPage['mentions'] = array_merge(
+					$schema_provider_MedicalWebPage['mentions'],
+					$provider_related_clinical_resource
+				);
 
 			// Related Conditions
 
-				$schema_provider_MedicalWebPage['mentions'] = $provider_related_condition;
+				$schema_provider_MedicalWebPage['mentions'] = array_merge(
+					$schema_provider_MedicalWebPage['mentions'],
+					$provider_related_condition
+				);
 
 			// Related Treatments
 
-				$schema_provider_MedicalWebPage['mentions'] = $provider_related_treatment;
+				$schema_provider_MedicalWebPage['mentions'] = array_merge(
+					$schema_provider_MedicalWebPage['mentions'],
+					$provider_related_treatment
+				);
 
 			// Remove any empty items from the array
 
 				$schema_provider_MedicalWebPage['mentions'] = array_filter($schema_provider_MedicalWebPage['mentions']);
+
+				if ( empty($schema_provider_MedicalWebPage['mentions']) ) {
+
+					$schema_provider_MedicalWebPage['mentions'];
+
+				}
 
 		// primaryImageOfPage
 
@@ -1916,7 +1968,7 @@ TODO List
 
 		// workLocation
 
-			$schema_provider_Person['workLocation'] = $provider_related_location;
+			$schema_provider_Person['workLocation'] = $schema_provider_location_ref;
 
 		// worksFor
 
