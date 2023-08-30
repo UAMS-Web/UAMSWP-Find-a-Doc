@@ -30,7 +30,7 @@
 
 	// name
 
-		$schema_base_org_uams['name'][] = 'University of Arkansas for Medical Sciences';
+		$schema_base_org_uams['name'] = 'University of Arkansas for Medical Sciences';
 
 	// address
 
@@ -50,11 +50,11 @@
 
 	// alternateName
 
-		$schema_base_org_uams['alternateName'][] = 'UAMS';
+		$schema_base_org_uams['alternateName'] = 'UAMS';
 
 	// description
 
-		$schema_base_org_uams['description'][] = 'The University of Arkansas for Medical Sciences is the state\'s only health sciences university, with colleges of Medicine, Nursing, Pharmacy, Health Professions and Public Health; a graduate school; a hospital; a main campus in Little Rock; a Northwest Arkansas regional campus in Fayetteville; a statewide network of regional campuses; and seven institutes: the Winthrop P. Rockefeller Cancer Institute, Jackson T. Stephens Spine & Neurosciences Institute, Harvey & Bernice Jones Eye Institute, Psychiatric Research Institute, Donald W. Reynolds Institute on Aging, Translational Research Institute and Institute for Digital Health & Innovation. UAMS includes UAMS Health, a statewide health system that encompasses all of UAMS\' clinical enterprise. UAMS is the only adult Level 1 trauma center in the state. UAMS has 3,240 students, 913 medical residents and fellows, and five dental residents. It is the state\'s largest public employer with more than 11,000 employees, including 1,200 physicians who provide care to patients at UAMS, its regional campuses, Arkansas Children\'s, the VA Medical Center and Baptist Health.';
+		$schema_base_org_uams['description'] = 'The University of Arkansas for Medical Sciences is the state\'s only health sciences university, with colleges of Medicine, Nursing, Pharmacy, Health Professions and Public Health; a graduate school; a hospital; a main campus in Little Rock; a Northwest Arkansas regional campus in Fayetteville; a statewide network of regional campuses; and seven institutes: the Winthrop P. Rockefeller Cancer Institute, Jackson T. Stephens Spine & Neurosciences Institute, Harvey & Bernice Jones Eye Institute, Psychiatric Research Institute, Donald W. Reynolds Institute on Aging, Translational Research Institute and Institute for Digital Health & Innovation. UAMS includes UAMS Health, a statewide health system that encompasses all of UAMS\' clinical enterprise. UAMS is the only adult Level 1 trauma center in the state. UAMS has 3,240 students, 913 medical residents and fellows, and five dental residents. It is the state\'s largest public employer with more than 11,000 employees, including 1,200 physicians who provide care to patients at UAMS, its regional campuses, Arkansas Children\'s, the VA Medical Center and Baptist Health.';
 
 	// location
 
@@ -219,11 +219,11 @@
 
 	// logo
 
-		$schema_base_org_uams['logo'][] = 'foo'; // Replace foo with __
+		$schema_base_org_uams['logo'] = 'foo'; // Replace foo with __
 
 	// nonprofitStatus
 
-		$schema_base_org_uams['nonprofitStatus'][] = 'foo'; // Replace foo with __
+		$schema_base_org_uams['nonprofitStatus'] = 'foo'; // Replace foo with __
 
 	// sameAs
 
@@ -231,19 +231,19 @@
 
 	// slogan
 
-		$schema_base_org_uams['slogan'][] = 'For a Better State of Health';
+		$schema_base_org_uams['slogan'] = 'For a Better State of Health';
 
 	// subOrganization
 
-		$schema_base_org_uams['subOrganization'][] = ''; // Defined after UAMS Health 'MedicalOrganization' item is defined
+		$schema_base_org_uams['subOrganization'] = array(); // Defined after UAMS Health 'MedicalOrganization' item is defined
 
 	// telephone
 
-		$schema_base_org_uams['telephone'][] = '501-686-7000';
+		$schema_base_org_uams['telephone'] = '501-686-7000';
 
 	// url
 
-		$schema_base_org_uams['url'][] = $schema_base_org_uams_url;
+		$schema_base_org_uams['url'] = $schema_base_org_uams_url;
 
 // UAMS Health
 
@@ -268,7 +268,7 @@
 
 		// Set value of 'subOrganization' property of 'CollegeOrUniversity' item with this 'MedicalOrganization' reference
 
-			$schema_base_org_uams['subOrganization'][] = $schema_base_org_uams_health_ref;
+			$schema_base_org_uams['subOrganization'] = $schema_base_org_uams_health_ref;
 
 	// name
 
