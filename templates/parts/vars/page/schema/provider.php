@@ -82,7 +82,9 @@ TODO List
 
 		// Related Locations (MedicalWebPage[mentions], Physician[location], Person[workLocation])
 
-			$provider_related_location = array();
+			// Base array
+
+				$provider_related_location = array();
 
 			// Define values array for each associated location // Repeat for all associated locations
 
@@ -99,9 +101,7 @@ TODO List
 						'streetAddress' => 'foo' // Replace 'foo' with street address
 					),
 					'areaServed' => $schema_arkansas,
-					'brand' => array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-						$schema_base_org_uams_health_ref
-					),
+					'brand' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 					'contactPoint' => array(
 						array(
 							'@type' => 'ContactPoint',
@@ -140,40 +140,32 @@ TODO List
 						'latitude' => 'foo', // Replace 'foo' with latitude
 						'longitude' => 'foo' // Replace 'foo' with longitude
 					),
-					'openingHoursSpecification' => array( // The opening hours of a certain place.
-						array( // Repeat as necessary
-							'@type' => 'OpeningHoursSpecification',
-							'closes' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-							'dayOfWeek' => 'foo', // Replace 'foo' necessary value // DayOfWeek (Enumeration Type)
-							'opens' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-							'validFrom' => 'foo', // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-							'validThrough' => 'foo' // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-						)
+					'openingHoursSpecification' => array( // The opening hours of a certain place. // Repeat as necessary
+						'@type' => 'OpeningHoursSpecification',
+						'closes' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
+						'dayOfWeek' => 'foo', // Replace 'foo' necessary value // DayOfWeek (Enumeration Type)
+						'opens' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
+						'validFrom' => 'foo', // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
+						'validThrough' => 'foo' // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
 					),
-					'parentOrganization' => array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-						$schema_base_org_uams_health_ref
+					'parentOrganization' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+					'photo' => array( // Repeat for all photos include in location profile
+						'@type' => 'ImageObject',
+						'caption' => 'foo', // Replace 'foo' with the image's alt text
+						'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+						'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+						'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+						'height' => 'foo', // Replace 'foo' with the image's height
+						'representativeOfPage' => 'False',
+						'width' => 'foo' // Replace 'foo' with the image's width
 					),
-					'photo' => array(
-						array( // Repeat for all photos include in location profile
-							'@type' => 'ImageObject',
-							'caption' => 'foo', // Replace 'foo' with the image's alt text
-							'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
-							'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
-							'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
-							'height' => 'foo', // Replace 'foo' with the image's height
-							'representativeOfPage' => 'False',
-							'width' => 'foo' // Replace 'foo' with the image's width
-						)
-					),
-					'specialOpeningHoursSpecification' => array( // The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours.
-						array( // Repeat as necessary
-							'@type' => 'OpeningHoursSpecification',
-							'closes' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-							'dayOfWeek' => 'foo', // Replace 'foo' necessary value // DayOfWeek (Enumeration Type)
-							'opens' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-							'validFrom' => 'foo', // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-							'validThrough' => 'foo' // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-						)
+					'specialOpeningHoursSpecification' => array( // The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours. // Repeat as necessary
+						'@type' => 'OpeningHoursSpecification',
+						'closes' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
+						'dayOfWeek' => 'foo', // Replace 'foo' necessary value // DayOfWeek (Enumeration Type)
+						'opens' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
+						'validFrom' => 'foo', // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
+						'validThrough' => 'foo' // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
 					),
 					'url' => 'foo' // Replace 'foo' with location profile URL
 				);
@@ -198,11 +190,7 @@ TODO List
 
 			// If there is only one item, flatten the multi-dimensional array by one step
 
-				if ( !empty($provider_related_location) ) {
-
-					$provider_related_location = count($provider_related_location) == 1 ? reset($provider_related_location) : $provider_related_location;
-
-				}
+				uamswp_fad_flatten_multidimensional_array($provider_related_location);
 
 		// Related Areas of Expertise
 
@@ -233,14 +221,18 @@ TODO List
 
 		// Related Treatments
 
-			$provider_related_treatment = array(
-				array( // Repeat as necessary
+			// Base array
+
+				$provider_related_treatment = array();
+
+			// Add treatments to the array // Repeat as necessary
+
+				$provider_related_treatment[] = array(
 					'@id' => $schema_provider_url . '#MedicalEntity1', // Increase integer by one each iteration
 					'@type' => 'MedicalEntity', // Replace 'MedicalEntity' with 'MedicalTest' or 'MedicalProcedure' (or more specific type if relevant)
 					'name' => 'foo', // Replace 'foo' with name of associated entity
 					'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
-				)
-			);
+				);
 
 			// Define reference to each value/row in this property
 
@@ -262,11 +254,7 @@ TODO List
 
 			// If there is only one item, flatten the multi-dimensional array by one step
 
-				if ( !empty($provider_related_treatment) ) {
-
-					$provider_related_treatment = count($provider_related_treatment) == 1 ? reset($provider_related_treatment) : $provider_related_treatment;
-
-				}
+				uamswp_fad_flatten_multidimensional_array($provider_related_treatment);
 
 	// Provider Clinical Specialization and Associated Values (medicalSpecialty, et al.)
 
@@ -356,11 +344,7 @@ TODO List
 
 				// If there is only one item, flatten the multi-dimensional array by one step
 
-					if ( !empty($schema_provider_Occupation_alternateName) ) {
-
-						$schema_provider_Occupation_alternateName = count($schema_provider_Occupation_alternateName) == 1 ? reset($schema_provider_Occupation_alternateName) : $schema_provider_Occupation_alternateName;
-
-					}
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Occupation_alternateName);
 
 				// Sort array
 
@@ -717,15 +701,7 @@ TODO List
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						if (
-							isset($schema_provider_occupationalCategory)
-							&&
-							!empty($schema_provider_occupationalCategory)
-						) {
-
-							$schema_provider_occupationalCategory = count($schema_provider_occupationalCategory) == 1 ? reset($schema_provider_occupationalCategory) : $schema_provider_occupationalCategory;
-
-						}
+						uamswp_fad_flatten_multidimensional_array($schema_provider_occupationalCategory);
 
 			// Wikidata
 
@@ -744,8 +720,13 @@ TODO List
 
 	// Provider Hospital Affiliation (hospitalAffiliation)
 
-		$provider_related_hospital = array(
-			array( // Repeat for all associated locations
+		// Base array
+
+			$provider_related_hospital = array();
+
+		// Add each hospital
+
+			$provider_related_hospital[] = array(
 				'@id' => $schema_provider_url . '#Hospital1', // Increase integer by one each iteration
 				'@type' => 'Hospital',
 				'name' => 'foo', // Replace 'foo' with location name
@@ -758,9 +739,7 @@ TODO List
 					'streetAddress' => 'foo' // Replace 'foo' with street address
 				),
 				'areaServed' => $schema_arkansas,
-				'brand' => array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-					$schema_base_org_uams_health_ref
-				),
+				'brand' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 				'contactPoint' => array(
 					array(
 						'@type' => 'ContactPoint',
@@ -799,44 +778,39 @@ TODO List
 					'latitude' => 'foo', // Replace 'foo' with latitude
 					'longitude' => 'foo' // Replace 'foo' with longitude
 				),
-				'openingHoursSpecification' => array( // The opening hours of a certain place.
-					array( // Repeat as necessary
-						'@type' => 'OpeningHoursSpecification',
-						'closes' => '23:59',
-						'dayOfWeek' => array(
-							'Monday',
-							'Tuesday',
-							'Wednesday',
-							'Thursday',
-							'Friday',
-							'Saturday',
-							'Sunday'
-						),
-						'opens' => '00:00'
-					)
+				'openingHoursSpecification' => array( // The opening hours of a certain place. // Repeat as necessary
+					'@type' => 'OpeningHoursSpecification',
+					'closes' => '23:59',
+					'dayOfWeek' => array(
+						'Monday',
+						'Tuesday',
+						'Wednesday',
+						'Thursday',
+						'Friday',
+						'Saturday',
+						'Sunday'
+					),
+					'opens' => '00:00'
 				),
-				'parentOrganization' => array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-					$schema_base_org_uams_health_ref
-				),
-				'photo' => array(
-					array( // Repeat for all photos include in location profile
-						'@type' => 'ImageObject',
-						'caption' => 'foo', // Replace 'foo' with the image's alt text
-						'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
-						'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
-						'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
-						'height' => 'foo', // Replace 'foo' with the image's height
-						'representativeOfPage' => 'False',
-						'width' => 'foo' // Replace 'foo' with the image's width
-					)
+				'parentOrganization' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+				'photo' => array( // Repeat for all photos include in location profile
+					'@type' => 'ImageObject',
+					'caption' => 'foo', // Replace 'foo' with the image's alt text
+					'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+					'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+					'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+					'height' => 'foo', // Replace 'foo' with the image's height
+					'representativeOfPage' => 'False',
+					'width' => 'foo' // Replace 'foo' with the image's width
 				),
 				'url' => 'foo' // Replace 'foo' with location profile URL
-			)
-		);
+			);
 
 		// Define reference to each value/row in this property
 
-			$schema_provider_hospital_ref = array();
+			// Base array
+
+				$schema_provider_hospital_ref = array();
 
 			foreach ( $provider_related_hospital as $item ) {
 
@@ -854,11 +828,7 @@ TODO List
 
 		// If there is only one item, flatten the multi-dimensional array by one step
 
-			if ( !empty($provider_related_hospital) ) {
-
-				$provider_related_hospital = count($provider_related_hospital) == 1 ? reset($provider_related_hospital) : $provider_related_hospital;
-
-			}
+			uamswp_fad_flatten_multidimensional_array($provider_related_hospital);
 
 // Schema JSON Item Arrays
 
@@ -1121,23 +1091,27 @@ TODO List
 
 		// brand
 
-			$schema_provider_brand = array();
+			// Base array
 
-			// Add UAMS Health
+				$schema_provider_brand = array();
 
-				$schema_provider_brand[] = $schema_base_org_uams_health_ref;
+			// Add relevant organizations
 
-			// Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+				// Add UAMS Health
 
-			// If there is only one item, flatten the multi-dimensional array by one step
+					$schema_provider_brand[] = $schema_base_org_uams_health_ref;
 
-				$schema_provider_brand = count($schema_provider_brand) == 1 ? reset($schema_provider_brand) : $schema_provider_brand;
+				// Add additional Organizations if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 
 			// Add to schema
 
 				if ( $schema_provider_brand ) {
 
 					$schema_provider_Physician['brand'] = $schema_provider_brand;
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($schema_provider_Physician['brand']);
 
 				}
 
@@ -1167,7 +1141,15 @@ TODO List
 
 		// parentOrganization
 
-			$schema_provider_Physician['parentOrganization'] = $schema_provider_brand;
+			if ( $schema_provider_brand ) {
+
+				$schema_provider_Physician['parentOrganization'] = $schema_provider_brand;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Physician['parentOrganization']);
+
+			}
 
 		// subjectOf
 
@@ -1247,20 +1229,45 @@ TODO List
 
 		// affiliation
 
-			$schema_provider_Person['affiliation'] = array_filter(
-				array_merge( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-					array($schema_base_org_uams_health_ref),
-					$schema_provider_hospital_ref
-				)
-			);
+			// Base array
 
-			// If there is only one item, flatten the multi-dimensional array by one step
+				$schema_provider_Person['affiliation'] = array();
 
-				if ( !empty($schema_provider_Person['affiliation']) ) {
+			// Brand organizations
 
-					$schema_provider_Person['affiliation'] = count($schema_provider_Person['affiliation']) == 1 ? reset($schema_provider_Person['affiliation']) : $schema_provider_Person['affiliation'];
+				if ( $schema_provider_brand ) {
+
+					$schema_provider_Person['affiliation'] = array_merge(
+						$schema_provider_Person['affiliation'],
+						$schema_provider_brand
+					);
 
 				}
+
+			// Related hospitals
+
+				if ( $schema_provider_hospital_ref ) {
+
+					$schema_provider_Person['affiliation'] = array_merge(
+						$schema_provider_Person['affiliation'],
+						$schema_provider_hospital_ref
+					);
+
+				}
+
+			if ( !empty($schema_provider_Person['affiliation']) ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['affiliation']);
+
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['affiliation']);
+
+			}
 
 		// alumniOf
 
@@ -1332,11 +1339,7 @@ TODO List
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						if ( !empty($schema_provider_Person['alumniOf']) ) {
-
-							$schema_provider_Person['alumniOf'] = count($schema_provider_Person['alumniOf']) == 1 ? reset($schema_provider_Person['alumniOf']) : $schema_provider_Person['alumniOf'];
-
-						}
+						uamswp_fad_flatten_multidimensional_array($schema_provider_Person['alumniOf']);
 
 				}
 
@@ -1345,6 +1348,10 @@ TODO List
 			if ( $schema_provider_brand ) {
 
 				$schema_provider_Person['brand'] = $schema_provider_brand;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['brand']);
 
 			}
 
@@ -1616,7 +1623,7 @@ TODO List
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						$schema_provider_Person['hasCredential'] = count($schema_provider_Person['hasCredential']) == 1 ? reset($schema_provider_Person['hasCredential']) : $schema_provider_Person['hasCredential'];
+						uamswp_fad_flatten_multidimensional_array($schema_provider_Person['hasCredential']);
 
 				}
 
@@ -1649,21 +1656,19 @@ TODO List
 
 		// honorificSuffix
 
-			// Eliminate PHP errors
-
-				$schema_provider_honorificSuffix = '';
-
 			if ( $degree_attr_array ) {
+
+				$schema_provider_Person['honorificSuffix'] = $degree_attr_array;
 
 				// If there is only one item, flatten the multi-dimensional array by one step
 
-					$schema_provider_honorificSuffix = count($degree_attr_array) == 1 ? reset($degree_attr_array) : $degree_attr_array;
-
-				$schema_provider_Person['honorificSuffix'] = $schema_provider_honorificSuffix;
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['honorificSuffix']);
 
 			}
 
 		// identifier
+
+			$schema_provider_Person['identifier'] = array();
 
 			// National Provider Identifier (NPI)
 
@@ -1679,13 +1684,19 @@ TODO List
 
 				}
 
-			// If there is only one item, flatten the multi-dimensional array by one step
+			if ( !empty($schema_provider_Person['identifier']) ) {
 
-				if ( !empty($schema_provider_Person['identifier']) ) {
+				// If there is only one item, flatten the multi-dimensional array by one step
 
-					$schema_provider_Person['identifier'] = count($schema_provider_Person['identifier']) == 1 ? reset($schema_provider_Person['identifier']) : $schema_provider_Person['identifier'];
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['identifier']);
 
-				}
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['identifier']);
+
+			}
 
 		// image
 
@@ -1935,6 +1946,10 @@ TODO List
 
 		// knowsLanguage
 
+			// Base array
+
+				$schema_provider_Person['knowsLanguage'] = array();
+
 			// Eliminate PHP errors
 
 				$schema_provider_language = '';
@@ -1956,8 +1971,7 @@ TODO List
 							// If there is only one item, flatten the multi-dimensional array by one step
 
 								$schema_provider_language_alternateName = $schema_provider_languages[$key]['alternateName'];
-
-								$schema_provider_language_alternateName = count($schema_provider_language_alternateName) == 1 ? reset($schema_provider_language_alternateName) : $schema_provider_language_alternateName;
+								uamswp_fad_flatten_multidimensional_array($schema_provider_language_alternateName);
 
 							$schema_provider_language['alternateName'] = $schema_provider_language_alternateName;
 
@@ -1973,11 +1987,21 @@ TODO List
 
 				// If there is only one item, flatten the multi-dimensional array by one step
 
-					if ( isset($schema_provider_Person['knowsLanguage']) ) {
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['knowsLanguage']);
 
-						$schema_provider_Person['knowsLanguage'] = count($schema_provider_Person['knowsLanguage']) == 1 ? reset($schema_provider_Person['knowsLanguage']) : $schema_provider_Person['knowsLanguage'];
+			}
 
-					}
+			if ( !empty($schema_provider_Person['knowsLanguage']) ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['knowsLanguage']);
+
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['knowsLanguage']);
 
 			}
 
@@ -2022,11 +2046,15 @@ TODO List
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						$schema_provider_Person['memberOf'] = count($schema_provider_Person['memberOf']) == 1 ? reset($schema_provider_Person['memberOf']) : $schema_provider_Person['memberOf'];
+						uamswp_fad_flatten_multidimensional_array($schema_provider_Person['memberOf']);
 
 				}
 
 		// sameAs
+
+			// Base array
+
+				$schema_provider_Person['sameAs'] = array();
 
 			// NPPES NPI Registry
 
@@ -2036,27 +2064,65 @@ TODO List
 
 				}
 
-			// If there is only one item, flatten the multi-dimensional array by one step
+			if ( !empty($schema_provider_Person['sameAs']) ) {
 
-				$schema_provider_Person['sameAs'] = count($schema_provider_Person['sameAs']) == 1 ? reset($schema_provider_Person['sameAs']) : $schema_provider_Person['sameAs'];
+				// If there is only one item, flatten the multi-dimensional array by one step
 
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['sameAs']);
+
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['sameAs']);
+
+			}
+	
 		// subjectOf
 
-			$schema_provider_Person['subjectOf'] = $schema_provider_MedicalWebPage_ref;
+			if ( $schema_provider_MedicalWebPage_ref ) {
+
+				$schema_provider_Person['subjectOf'] = $schema_provider_MedicalWebPage_ref;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['subjectOf']);
+
+			}
 
 		// url
 
-			$schema_provider_Person['url'] = $schema_provider_MedicalWebPage_url_ref;
+			if ( $schema_provider_MedicalWebPage_url_ref ) {
+
+				$schema_provider_Person['url'] = $schema_provider_MedicalWebPage_url_ref;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['url']);
+
+			}
 
 		// workLocation
 
-			$schema_provider_Person['workLocation'] = $schema_provider_location_ref;
+			if ( $schema_provider_location_ref ) {
+
+				$schema_provider_Person['workLocation'] = $schema_provider_location_ref;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['workLocation']);
+
+			}
 
 		// worksFor
 
 			if ( $schema_provider_brand ) {
 
 				$schema_provider_Person['worksFor'] = $schema_provider_brand;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['worksFor']);
 
 			}
 

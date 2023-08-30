@@ -12246,3 +12246,22 @@ function uamswp_prevent_orphan($string) {
 		return $output;
 
 	}
+
+	
+// Flatten single-row multi-dimensional array by one step
+
+	function uamswp_fad_flatten_multidimensional_array(&$input) {
+
+		if (
+			is_array($input)
+			&&
+			!empty($input)
+			&&
+			count($input) == 1
+		) {
+
+			$input = reset($input);
+
+		}
+
+	}
