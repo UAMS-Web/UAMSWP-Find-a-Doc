@@ -215,7 +215,7 @@ TODO List
 
 					if ( !empty($schema_provider_Occupation_alternateName) ) {
 
-						$schema_provider_Occupation_alternateName = count($schema_provider_Occupation_alternateName) == 1 ? $schema_provider_Occupation_alternateName[0] : $schema_provider_Occupation_alternateName;
+						$schema_provider_Occupation_alternateName = count($schema_provider_Occupation_alternateName) == 1 ? reset($schema_provider_Occupation_alternateName) : $schema_provider_Occupation_alternateName;
 
 					}
 
@@ -580,7 +580,7 @@ TODO List
 							!empty($schema_provider_occupationalCategory)
 						) {
 
-							$schema_provider_occupationalCategory = count($schema_provider_occupationalCategory) == 1 ? $schema_provider_occupationalCategory[0] : $schema_provider_occupationalCategory;
+							$schema_provider_occupationalCategory = count($schema_provider_occupationalCategory) == 1 ? reset($schema_provider_occupationalCategory) : $schema_provider_occupationalCategory;
 
 						}
 
@@ -1011,9 +1011,25 @@ TODO List
 
 		// brand
 
-			$schema_provider_Physician['brand'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-				$schema_base_org_uams_health_ref
-			);
+			$schema_provider_brand = array();
+
+			// Add UAMS Health
+
+				$schema_provider_brand[] = $schema_base_org_uams_health_ref;
+
+			// Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+
+			// If there is only one item, flatten the multi-dimensional array by one step
+
+				$schema_provider_brand = count($schema_provider_brand) == 1 ? reset($schema_provider_brand) : $schema_provider_brand;
+
+			// Add to schema
+
+				if ( $schema_provider_brand ) {
+
+					$schema_provider_Physician['brand'] = $schema_provider_brand;
+
+				}
 
 		// description
 
@@ -1180,7 +1196,7 @@ TODO List
 
 				if ( !empty($schema_provider_alumniOf) ) {
 
-					$schema_provider_alumniOf = count($schema_provider_alumniOf) == 1 ? $schema_provider_alumniOf[0] : $schema_provider_alumniOf;
+					$schema_provider_alumniOf = count($schema_provider_alumniOf) == 1 ? reset($schema_provider_alumniOf) : $schema_provider_alumniOf;
 
 				}
 
@@ -1194,9 +1210,11 @@ TODO List
 
 		// brand
 
-			$schema_provider_Person['brand'] = array( // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-				$schema_base_org_uams_health_ref
-			);
+			if ( $schema_provider_brand ) {
+
+				$schema_provider_Person['brand'] = $schema_provider_brand;
+
+			}
 
 		// description
 
@@ -1464,6 +1482,10 @@ TODO List
 
 					$schema_provider_Person['hasCredential'] = $schema_provider_hasCredential;
 
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						$schema_provider_Person['hasCredential'] = count($schema_provider_Person['hasCredential']) == 1 ? reset($schema_provider_Person['hasCredential']) : $schema_provider_Person['hasCredential'];
+
 				}
 
 		// hasOccupation
@@ -1503,7 +1525,7 @@ TODO List
 
 				// If there is only one item, flatten the multi-dimensional array by one step
 
-					$schema_provider_honorificSuffix = count($degree_attr_array) == 1 ? $degree_attr_array[0] : $degree_attr_array;
+					$schema_provider_honorificSuffix = count($degree_attr_array) == 1 ? reset($degree_attr_array) : $degree_attr_array;
 
 				$schema_provider_Person['honorificSuffix'] = $schema_provider_honorificSuffix;
 
@@ -1529,7 +1551,7 @@ TODO List
 
 				if ( !empty($schema_provider_Person['identifier']) ) {
 
-					$schema_provider_Person['identifier'] = count($schema_provider_Person['identifier']) == 1 ? $schema_provider_Person['identifier'][0] : $schema_provider_Person['identifier'];
+					$schema_provider_Person['identifier'] = count($schema_provider_Person['identifier']) == 1 ? reset($schema_provider_Person['identifier']) : $schema_provider_Person['identifier'];
 
 				}
 
@@ -1803,7 +1825,7 @@ TODO List
 
 								$schema_provider_language_alternateName = $schema_provider_languages[$key]['alternateName'];
 
-								$schema_provider_language_alternateName = count($schema_provider_language_alternateName) == 1 ? $schema_provider_language_alternateName[0] : $schema_provider_language_alternateName;
+								$schema_provider_language_alternateName = count($schema_provider_language_alternateName) == 1 ? reset($schema_provider_language_alternateName) : $schema_provider_language_alternateName;
 
 							$schema_provider_language['alternateName'] = $schema_provider_language_alternateName;
 
@@ -1821,7 +1843,7 @@ TODO List
 
 					if ( isset($schema_provider_Person['knowsLanguage']) ) {
 
-						$schema_provider_Person['knowsLanguage'] = count($schema_provider_Person['knowsLanguage']) == 1 ? $schema_provider_Person['knowsLanguage'][0] : $schema_provider_Person['knowsLanguage'];
+						$schema_provider_Person['knowsLanguage'] = count($schema_provider_Person['knowsLanguage']) == 1 ? reset($schema_provider_Person['knowsLanguage']) : $schema_provider_Person['knowsLanguage'];
 
 					}
 
@@ -1864,15 +1886,15 @@ TODO List
 
 				}
 
-			// If there is only one item, flatten the multi-dimensional array by one step
-
-				$schema_provider_memberOf = count($schema_provider_memberOf) == 1 ? reset($schema_provider_memberOf) : $schema_provider_memberOf;
-
 			// Add to schema
 
 				if ( !empty($schema_provider_memberOf) ) {
 
 					$schema_provider_Person['memberOf'] = $schema_provider_memberOf;
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						$schema_provider_Person['memberOf'] = count($schema_provider_Person['memberOf']) == 1 ? reset($schema_provider_Person['memberOf']) : $schema_provider_Person['memberOf'];
 
 				}
 
@@ -1904,25 +1926,11 @@ TODO List
 
 		// worksFor
 
-			$schema_provider_worksFor = array();
+			if ( $schema_provider_brand ) {
 
-			// Add UAMS Health
+				$schema_provider_Person['worksFor'] = $schema_provider_brand;
 
-				$schema_provider_worksFor[] = $schema_base_org_uams_health_ref;
-
-			// Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-
-			// Add to schema
-
-				if ( $schema_provider_worksFor ) {
-
-					$schema_provider_Person['worksFor'] = $schema_provider_worksFor;
-
-				}
-
-				// If there is only one item, flatten the multi-dimensional array by one step
-
-					$schema_provider_Person['worksFor'] = count($schema_provider_Person['worksFor']) == 1 ? reset($schema_provider_Person['worksFor']) : $schema_provider_Person['worksFor'];
+			}
 
 // Add Provider Schema Arrays to Base Array
 
