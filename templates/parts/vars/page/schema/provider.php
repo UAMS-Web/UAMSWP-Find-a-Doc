@@ -780,9 +780,6 @@ TODO List
 
 										$item_drug_array = get_field( 'treatment_procedure_schema_drug_schema_drug', $treatment ) ?: '';
 
-										echo '<p>$item_drug_array</p>';
-										echo '<pre>'; echo print_r($item_drug_array); echo '</pre>';
-
 									// Base list array
 
 										$item_drug_list = array();
