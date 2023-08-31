@@ -375,33 +375,20 @@ TODO List
 
 								// Get repeater field value
 
-									$item_alternateName_array = get_field( 'condition_alternate', $condition ) ?: '';
+									$item_alternateName_array = get_field( 'condition_alternate', $condition ) ?: array();
 
-								// Base array
+								// Get item values
 
-									$item_alternateName = array();
-
-								// Add each row to the array
-
-									if ( $item_alternateName_array ) {
-
-										foreach ( $item_alternateName_array as $alternateName ) {
-
-											$item_alternateName[] = $alternateName['alternate_text'];
-
-										}
-
-									}
+									$item_alternateName = uamswp_fad_schema_alternatename(
+										$item_alternateName_array,
+										'alternate_text'
+									);
 
 								// Add to schema
 
 									if ( $item_alternateName ) {
 
 										$item_values['alternateName'] = $item_alternateName;
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($item_values['alternateName']);
 
 									}
 
@@ -638,39 +625,22 @@ TODO List
 
 								// Get repeater field value
 
-									$item_alternateName_array = get_field( 'treatment_procedure_alternate', $treatment ) ?: '';
+									$item_alternateName_array = get_field( 'treatment_procedure_alternate', $treatment ) ?: array();
 
-								// Base list array
+								// Get item values
 
-									$item_alternateName_list = array();
+									$item_alternateName = uamswp_fad_schema_alternatename(
+										$item_alternateName_array,
+										'alternate_text'
+									);
 
-								if ( $item_alternateName_array ) {
+								// Add to schema
 
-									foreach ( $item_alternateName_array as $alternateName ) {
+									if ( $item_alternateName ) {
 
-										$item_alternateName_list[] = $alternateName['alternate_text'];
+										$item_values['alternateName'] = $item_alternateName;
 
 									}
-
-									// Clean up list array
-
-										$item_alternateName_list = array_filter($item_alternateName_list);
-										$item_alternateName_list = array_values($item_alternateName_list);
-										sort($item_alternateName_list);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($item_alternateName_list);
-
-									// Add to schema
-
-										if ( $item_alternateName_list ) {
-
-											$item_values['alternateName'] = $item_alternateName_list;
-
-										}
-
-								}
 
 							// code
 
@@ -1234,37 +1204,22 @@ TODO List
 
 												// Get repeater field value
 
-													$item_usesDevice_item_alternateName_array = $usesDevice['schema_medicaldevice_alternatename']['schema_alternatename'];
+													$item_usesDevice_item_alternateName_array = $usesDevice['schema_medicaldevice_alternatename']['schema_alternatename'] ?: array();
 
 												// Get item values
 
-													// Base list array
+													$item_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
+														$item_alternateName_array,
+														'schema_alternatename_text'
+													);
 
-														$item_usesDevice_item_alternateName_list = array();
+												// Add to schema
 
-													// Loop through repeater rows
+													if ( $item_usesDevice_item_alternateName ) {
 
-														if ( $item_usesDevice_item_alternateName_array ) {
+														$item_usesDevice_item['alternateName'] = $item_usesDevice_item_alternateName;
 
-															foreach ( $item_usesDevice_item_alternateName_array as $alternateName ) {
-
-																$item_usesDevice_item_alternateName_list[] = $alternateName['schema_alternatename_text'];
-
-															}
-
-															// Add to schema
-
-																if ( $item_usesDevice_item_alternateName_list ) {
-
-																	$item_usesDevice_item['alternateName'] = $item_usesDevice_item_alternateName_list;
-
-																	// If there is only one item, flatten the multi-dimensional array by one step
-
-																		uamswp_fad_flatten_multidimensional_array($item_usesDevice_item['alternateName']);
-
-																}
-
-														}
+													}
 
 											// code
 
@@ -1394,59 +1349,51 @@ TODO List
 
 			// Occupation alternateName
 
-				$schema_provider_Occupation_alternateName = array();
+				// Build list of values
 
-				// Add Specialization Display Name
+					// Base array
 
-					$schema_provider_Occupation_alternateName[] = ( isset($schema_provider_nucc_name_display) && !empty($schema_provider_nucc_name_display) ) ? $schema_provider_nucc_name_display : '';
+						$schema_provider_Occupation_alternateName = array();
 
-				// Add Alternate Occupational Titles
+					// Add Specialization Display Name
 
-					// Get Alternate Occupational Titles
+						$schema_provider_Occupation_alternateName[] = ( isset($schema_provider_nucc_name_display) && !empty($schema_provider_nucc_name_display) ) ? $schema_provider_nucc_name_display : '';
 
-						$provider_occupation_title_alt_repeater = get_field('clinical_specialization_title_alt', $provider_specialty_term);
-						$provider_occupation_title_alt = array();
+					// Add Alternate Occupational Titles
 
-						if ( $provider_occupation_title_alt_repeater ) {
+						// Get Alternate Occupational Titles
 
-							foreach( $provider_occupation_title_alt_repeater as $title ) { 
+							$provider_occupation_title_alt_repeater = get_field('clinical_specialization_title_alt', $provider_specialty_term);
+							$provider_occupation_title_alt = array();
 
-								$provider_occupation_title_alt[] = $title['clinical_specialization_title_alt_text'];
+							if ( $provider_occupation_title_alt_repeater ) {
+
+								foreach( $provider_occupation_title_alt_repeater as $title ) { 
+
+									$provider_occupation_title_alt[] = $title['clinical_specialization_title_alt_text'];
+
+								}
 
 							}
 
-						}
+						$schema_provider_Occupation_alternateName = array_merge(
+							$schema_provider_Occupation_alternateName,
+							$provider_occupation_title_alt
+						);
 
-					$schema_provider_Occupation_alternateName = array_merge(
-						$schema_provider_Occupation_alternateName,
-						$provider_occupation_title_alt
-					);
 
-				// Remove empty items
+				// Clean up list array
 
 					if ( is_array($schema_provider_Occupation_alternateName) ) {
 
 						$schema_provider_Occupation_alternateName = array_filter($schema_provider_Occupation_alternateName);
-
-					}
-
-				// Remove duplicate items
-
-					if ( is_array($schema_provider_Occupation_alternateName) ) {
-
 						$schema_provider_Occupation_alternateName = array_unique($schema_provider_Occupation_alternateName);
-
-					}
-
-				// If there is only one item, flatten the multi-dimensional array by one step
-
-					uamswp_fad_flatten_multidimensional_array($schema_provider_Occupation_alternateName);
-
-				// Sort array
-
-					if ( is_array($schema_provider_Occupation_alternateName) ) {
-
+						$schema_provider_Occupation_alternateName = array_values($schema_provider_Occupation_alternateName);
 						sort($schema_provider_Occupation_alternateName);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($schema_provider_Occupation_alternateName);
 
 					}
 

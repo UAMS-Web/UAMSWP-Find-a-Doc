@@ -1146,6 +1146,41 @@
 
 		}
 
+	// Add data to an array defining schema data for alternateName
+
+		function uamswp_fad_schema_alternatename(
+			array $repeater, // alternateName repeater field
+			string $field_name = 'alternate_text' // alternateName item field name
+		) {
+
+			// Base list array
+
+				$alternateName_list = array();
+
+			if ( $repeater ) {
+
+				foreach ( $repeater as $alternateName ) {
+
+					$alternateName_list[] = $alternateName[$field_name];
+
+				} // endforeach ( $repeater as $alternateName )
+
+				// Clean up list array
+
+					$alternateName_list = array_filter($alternateName_list);
+					$alternateName_list = array_values($alternateName_list);
+					sort($alternateName_list);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($alternateName_list);
+
+			} // endif ( $repeater )
+
+			return $alternateName_list;
+
+		}
+
 // Construct the schema script tag
 
 	function uamswp_fad_schema_construct($input) {
