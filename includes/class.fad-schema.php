@@ -1140,7 +1140,7 @@
 
 							uamswp_fad_flatten_multidimensional_array($code_list);
 
-				} // endif ( $code )
+				} // endif ( $repeater )
 
 			return $code_list;
 
