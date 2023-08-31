@@ -67,11 +67,7 @@ TODO List
 		 * Bring conditions schema and URLs into relevant properties of provider's schema
 		 * Make the defining of the values array into a function that can be repeated
 	 * Related treatments
-		 * Define schema for related treatments
-		 * Define array of just URLs from related treatments
-		 * Bring treatments schema and URLs into relevant properties of provider's schema
 		 * Make the defining of the values array into a function that can be repeated
-		 * Flatten single-item property arrays
 		 * Properties
 			 * duplicateTherapy
 				 * Filter duplicateTherapy input (on treatments) to only those treatments with MedicalTherapy type (or its subtypes)
@@ -474,29 +470,39 @@ TODO List
 
 									}
 
-							// InfectiousDisease type
+							// infectiousAgent
 
-								if ( $item_type == 'InfectiousDisease' ) {
+								if (
+									$item_type == 'InfectiousDisease'
+									||
+									in_array( 'InfectiousDisease', $item_type_parent )
+								) {
 
-									// infectiousAgent
+									$item_infectiousAgent = get_field( 'schema_infectiousagent', $condition ) ?: '';
 
-										$item_infectiousAgent = get_field( 'schema_infectiousagent', $condition ) ?: '';
+									if ( $item_infectiousAgent ) {
 
-										if ( $item_infectiousAgent ) {
+										$item_values['infectiousAgent'] = $item_infectiousAgent;
 
-											$item_values['infectiousAgent'] = $item_infectiousAgent;
+									}
 
-										}
+								}
+		
+							// infectiousAgentClass
+							
+								if (
+									$item_type == 'InfectiousDisease'
+									||
+									in_array( 'InfectiousDisease', $item_type_parent )
+								) {
 
-									// infectiousAgentClass
+									$item_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $condition ) ?: '';
 
-										$item_infectiousAgentClass =  get_field( 'schema_infectiousagentclass', $condition ) ?: '';
+									if ( $item_infectiousAgentClass ) {
 
-										if ( $item_infectiousAgentClass ) {
+										$item_values['infectiousAgentClass'] = $item_infectiousAgentClass;
 
-											$item_values['infectiousAgentClass'] = $item_infectiousAgentClass;
-
-										}
+									}
 
 								}
 		
