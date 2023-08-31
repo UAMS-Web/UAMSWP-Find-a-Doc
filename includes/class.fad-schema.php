@@ -1113,23 +1113,23 @@
 
 						} // endif ( $codeValue && $codingSystem )
 
-						// Sort code item array
+						if ( $code_item ) {
 
-							if ( is_array($code_item) ) {
+							// Sort code item array
 
-								ksort($code_item);
+								if ( is_array($code_item) ) {
 
-							}
+									ksort($code_item);
 
-						// Add to code item to list of codes
+								} // endif ( is_array($code_item) )
 
-							if ( $code_item ) {
+							// Add to code item to list of codes
 
 								$code_list[] = $code_item;
 
-							}
+							} // endif ( $code_item )
 
-					} // endforeach ( $code_array as $code )
+					} // endforeach ( $repeater as $code )
 
 					// Clean up list array
 
