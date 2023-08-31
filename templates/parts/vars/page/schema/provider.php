@@ -64,6 +64,9 @@ TODO List
 	 * Optional — Postal Code
  * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
  * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
+ * Filter duplicateTherapy input (on treatments) to only those with MedicalTherapy type 
+ * Filter duplicateTherapy input (on treatments) to remove current item
+ * Populate values for usesDevice on related treatments
 
 */
 
@@ -294,6 +297,15 @@ TODO List
 			// Medical Code values map
 
 				$MedicalCode_values = array(
+					'DiseasesDB' => array(
+						'alternateName' => array(
+							'DiseasesDB',
+							'diseasesdatabase.com'
+						),
+						'name' => 'Diseases Database',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q213103',
+						'url' => 'http://www.diseasesdatabase.com/'
+					),
 					'ICD-9' => array(
 						'alternateName' => array(
 							'International Statistical Classification of Diseases, Ninth Revision',
@@ -343,7 +355,21 @@ TODO List
 							'http://id.loc.gov/authorities/names/n2009185486',
 							'https://www.wikidata.org/wiki/Q5969475'
 						),
-						'url' => 'https://www.cdc.gov/nchs/icd/icd-10-cm.htm'
+						'url' => 'https://www.cms.gov/medicare/coding/icd10'
+					),
+					'ICD-10-PCS' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Tenth Revision, Procedure Coding System',
+							'ICD-10 Procedure Coding System',
+							'ICD-10-PCS',
+							'ICD10PCS',
+						),
+						'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Procedure Coding System',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2009185487',
+							'https://www.wikidata.org/wiki/Q9006342'
+						),
+						'url' => 'https://www.cms.gov/medicare/coding/icd10'
 					),
 					'ICD-11' => array(
 						'alternateName' => array(
@@ -358,14 +384,20 @@ TODO List
 						),
 						'url' => 'https://icd.who.int/en'
 					),
-					'DiseasesDB' => array(
-						'alternateName' => array(
-							'DiseasesDB',
-							'diseasesdatabase.com'
-						),
-						'name' => 'Diseases Database',
-						'sameAs' => 'https://www.wikidata.org/wiki/Q213103',
-						'url' => 'http://www.diseasesdatabase.com/'
+					'ICHI' => array(
+						'alternateName' => 'ICHI',
+						'name' => 'International Classification of Health Interventions',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q3505045',
+						'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions'
+					),
+					'ICPC-2' => array(
+						'alternateName' => 'ICPC-2',
+						'name' => 'International Classification of Primary Care, Second Revision',
+					),
+					'ICPC-3' => array(
+						'alternateName' => 'ICPC-3',
+						'name' => 'International Classification of Primary Care, Third Revision',
+						'url' => 'https://www.icpc-3.info/'
 					),
 					'MeSH' => array(
 						'alternateName' => 'MeSH',
@@ -376,15 +408,6 @@ TODO List
 						),
 						'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html'
 					),
-					'SNOMED-CT' => array(
-						'alternateName' => 'SNOMED Clinical Terms',
-						'name' => 'SNOMED CT',
-						'sameAs' => array(
-							'http://id.loc.gov/authorities/names/n2005182509',
-							'https://www.wikidata.org/wiki/Q1753883'
-						),
-						'url' => 'https://www.snomed.org/'
-					),
 					'RxNorm' => array(
 						'name' => 'RxNorm',
 						'sameAs' => array(
@@ -393,6 +416,15 @@ TODO List
 						),
 						'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/'
 					),
+					'SNOMED-CT' => array(
+						'alternateName' => 'SNOMED Clinical Terms',
+						'name' => 'SNOMED CT',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2005182509',
+							'https://www.wikidata.org/wiki/Q1753883'
+						),
+						'url' => 'https://www.snomed.org/'
+					)
 				);
 
 			// Related Conditions
@@ -405,8 +437,11 @@ TODO List
 
 					// Eliminate PHP errors
 
+						$item_alternateName_array = '';
 						$item_alternateName = '';
+						$item_code_array = '';
 						$item_code = '';
+						$item_code_item = '';
 						$item_code_codeValue = '';
 						$item_code_codingSystem = '';
 						$item_code_inCodeSet = '';
@@ -417,6 +452,14 @@ TODO List
 						$item_code_url = '';
 						$item_name = '';
 						$item_sameAs = '';
+						$item_type = '';
+						$item_values = '';
+						$item_additionalType_array = '';
+						$item_additionalType = '';
+						$item_sameAs_array = '';
+						$item_sameAs = '';
+						$item_infectiousAgent = '';
+						$item_infectiousAgentClass = '';
 
 					if (
 						isset($conditions_cpt)
@@ -680,44 +723,417 @@ TODO List
 
 				// Add treatments to the array // Repeat as necessary
 
-					$provider_related_treatment[] = array(
-						'@id' => $schema_provider_url . '#MedicalEntity1', // Increase integer by one each iteration
-						'@type' => 'MedicalEntity', // Replace 'MedicalEntity' with 'MedicalTest' or 'MedicalProcedure' (or more specific type if relevant)
-						'name' => 'foo', // Replace 'foo' with name of associated entity
-						'foo' => 'bar' // Replace 'foo' and 'bar' with necessary property/value pairs, adding more if necessary
-					);
+					// Eliminate PHP errors
 
-				// Define reference to each value/row in this property // Get URLs for significantLink property
+						$item_additionalType = '';
+						$item_additionalType_array = array();
+						$item_alternateName = '';
+						$item_alternateName_array = array();
+						$item_code = '';
+						$item_code_array = array();
+						$item_code_item = '';
+						$item_codeValue = '';
+						$item_codingSystem = '';
+						$item_Drug = '';
+						$item_duplicateTherapy = '';
+						$item_inCodeSet = '';
+						$item_inCodeSet_alternateName = '';
+						$item_inCodeSet_name = '';
+						$item_inCodeSet_sameAs = '';
+						$item_inCodeSet_url = '';
+						$item_MedicalImagingTechnique = '';
+						$item_name = '';
+						$item_procedureType = '';
+						$item_sameAs = '';
+						$item_sameAs_array = array();
+						$item_subTest = '';
+						$item_tissueSample = '';
+						$item_type = '';
+						$item_url = '';
+						$item_usedToDiagnose = '';
+						$item_usesDevice = '';
+						$item_values = '';
 
-					$schema_provider_treatment_ref = array();
+					if (
+						isset($treatments_cpt)
+						&&
+						!empty($treatments_cpt)
+					) {
 
-					if ( $provider_related_treatment ) {
+						foreach ( $treatments_cpt as $treatment ) {
 
-						foreach ( $provider_related_treatment as $item ) {
+							// Base array
 
-							// Define reference to each value/row in this property
+								$item_values = array();
 
-								if (
-									isset($item['@id'])
-									&&
-									!empty($item['@id'])
-								) {
+							// Name
 
-									$schema_provider_treatment_ref[]['@id'] = $item['@id'];
+								$item_name = get_the_title($treatment); // Expects Text
+								$item_values['name'] = $item_name;
+
+							// @type and Related Conditional Fields
+							
+								// Eliminate PHP errors and reset variables
+
+									$item_Drug = '';
+									$item_duplicateTherapy = '';
+									$item_MedicalImagingTechnique = '';
+									$item_procedureType = '';
+									$item_subTest = '';
+									$item_tissueSample = '';
+									$item_type = '';
+									$item_usedToDiagnose = '';
+									$item_usesDevice = '';
+
+								// MedicalEntity Subtype
+
+									$item_type = get_field( 'schema_medicalentity_subtype_availableservice', $treatment ) ?: 'MedicalEntity';
+
+								if ( $item_type == 'MedicalTest' ) {
+
+									// MedicalTest Subtype
+
+										$item_type = get_field( 'schema_medicaltest_subtype', $treatment ) ?: 'MedicalTest';
+
+									if ( $item_type == 'ImagingTest' ) {
+								
+										// ImagingTest MedicalImagingTechnique
+
+											$item_MedicalImagingTechnique = get_field( 'schema_MedicalImagingTechnique', $treatment ) ?: '';
+
+									} elseif ( $item_type == 'MedicalTestPanel' ) {
+
+										// MedicalTestPanel MedicalImagingTechnique
+
+											$item_subTest = get_field( 'schema_subtest', $treatment ) ?: '';
+
+									} elseif ( $item_type == 'PathologyTest' ) {
+
+										// PathologyTest tissueSample
+
+											$item_tissueSample = get_field( 'schema_tissuesample', $treatment ) ?: '';
+
+									}
+		
+									// MedicalTest usesDevice
+
+										$item_usesDevice = get_field( 'schema_usesdevice', $treatment ) ?: '';
+
+									// MedicalTest usedToDiagnose
+
+										$item_usedToDiagnose = get_field( 'schema_usedtodiagnose', $treatment ) ?: '';
+
+								} elseif ( $item_type == 'MedicalProcedure' ) {
+
+									// MedicalProcedure Subtype
+
+										$item_type = get_field( 'schema_medicalprocedure_subtype', $treatment ) ?: 'MedicalProcedure';
+
+									if ( $item_type == 'TherapeuticProcedure' ) {
+										
+										// TherapeuticProcedure Subtype
+
+											$item_type = get_field( 'schema_therapeuticprocedure_subtype', $treatment ) ?: 'TherapeuticProcedure';
+
+										// TherapeuticProcedure Drug
+
+											$item_Drug = get_field( 'schema_drug', $treatment ) ?: '';
+
+										// TherapeuticProcedure duplicateTherapy
+
+											$item_duplicateTherapy = get_field( 'schema_duplicatetherapy', $treatment ) ?: '';
+
+										if ( $item_type == 'MedicalTherapy' ) {
+									
+											// MedicalTherapy Subtype
+	
+												$item_type = get_field( 'schema_medicaltherapy_subtype', $treatment ) ?: 'MedicalTherapy';
+	
+										}
+		
+									}
+
+									// MedicalProcedure procedureType
+
+										if ( $item_type != 'SurgicalProcedure' ) {
+
+											$item_procedureType = get_field( 'schema_medicalproceduretype', $treatment ) ?: '';
+
+										}
 
 								}
 
-							// Get URLs for significantLink property
+								// Add to schema
+								
+									$item_values['@type'] = $item_type;
 
-								if (
-									isset($item['url'])
-									&&
-									!empty($item['url'])
-								) {
+									if ( $item_Drug ) {
 
-									$schema_provider_significantLink[] = $item['url'];
+										$item_values['@type'] = $item_type;
 
-								}
+									}
+
+									if ( $item_duplicateTherapy ) {
+
+										foreach ( $item_duplicateTherapy as $duplicateTherapy ) {
+
+											$item_values['duplicateTherapy'][] = array(
+												'@type' => 'MedicalTherapy', // Replace 'MedicalTherapy' with subtype, if relevant
+												'name' => get_the_title($duplicateTherapy)
+											);
+
+										}
+
+									}
+
+									if ( $item_MedicalImagingTechnique ) {
+
+										$item_values['imagingTechnique'] = $item_MedicalImagingTechnique;
+
+									}
+
+									if ( $item_procedureType ) {
+
+										$item_values['procedureType'] = $item_procedureType;
+
+									}
+
+									if ( $item_subTest ) {
+
+									}
+
+									if ( $item_tissueSample ) {
+
+										$item_values['tissueSample'] = $item_tissueSample;
+
+									}
+
+									if ( $item_usedToDiagnose ) {
+
+										foreach ( $item_usedToDiagnose as $usedToDiagnose ) {
+
+											$item_values['usedToDiagnose'][] = array(
+												'@type' => 'MedicalCondition', // Replace 'MedicalCondition' with subtype, if relevant
+												'name' => get_the_title($usedToDiagnose)
+											);
+
+										}
+
+									}
+
+									if ( $item_usesDevice ) {
+
+										foreach ( $item_usesDevice as $usesDevice ) {
+
+											$item_values['usesDevice'][] = array(
+												'@type' => 'MedicalDevice',
+												'alternateName' => 'foo',
+												'code' => 'foo',
+												'name' => get_the_title($usesDevice)
+											);
+
+										}
+
+									}
+
+
+							// alternateName
+
+								// Get repeater field value
+
+									$item_alternateName_array = get_field( 'treatment_procedure_alternate', $treatment ) ?: '';
+
+								// Base array
+
+									$item_alternateName = array();
+
+								// Add each row to the array
+
+									if ( $item_alternateName_array ) {
+
+										foreach ( $item_alternateName_array as $alternateName ) {
+
+											$item_alternateName[] = $alternateName['alternate_text'];
+
+										}
+
+									}
+
+								// Add to schema
+
+									if ( $item_alternateName ) {
+
+										$item_values['alternateName'] = $item_alternateName;
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($item_values['alternateName']);
+
+									}
+
+							// code
+
+								// Get repeater field value
+
+									$item_code_array = get_field( 'schema_medicalcode', $treatment ) ?: '';
+
+								// Base array
+
+									$item_code = array();
+
+								// Add each row to the array
+
+									if ( $item_code_array ) {
+
+										foreach ( $item_code_array as $code ) {
+
+											$item_codeValue = $code['schema_medicalcode_codevalue'] ?: '';
+											$item_codingSystem = $code['schema_medicalcode_codingsystem'] ?: '';
+											$item_name = $code['schema_medicalcode_name'] ?: '';
+											$item_url = $code['schema_medicalcode_url'] ?: '';
+			
+											if (
+												$item_codeValue
+												&&
+												$item_codingSystem
+											) {
+
+												$item_code_item = array_filter(
+													array(
+														'@type' => 'MedicalCode',
+														'codeValue' => $item_codeValue,
+														'codingSystem' => $item_codingSystem,
+														'name' => $item_codingSystem,
+														'url' => $item_url
+													)
+												);
+
+												$item_inCodeSet = isset($MedicalCode_values[$item_codingSystem]) ? $MedicalCode_values[$item_codingSystem] : array();
+
+												if ( $item_inCodeSet ) {
+
+													$item_inCodeSet_alternateName = $item_inCodeSet['alternateName'] ?: '';
+													$item_inCodeSet_name = $item_inCodeSet['name'] ?: '';
+													$item_inCodeSet_sameAs = $item_inCodeSet['sameAs'] ?: '';
+													$item_inCodeSet_url = $item_inCodeSet['url'] ?: '';
+
+													if ( $item_inCodeSet_name ) {
+
+														$item_code_item['inCodeSet'] = array_filter(
+															array(
+																'@type' => 'CategoryCodeSet',
+																'alternateName' => $item_inCodeSet_alternateName,
+																'name' => $item_inCodeSet_name,
+																'sameAs' => $item_inCodeSet_sameAs,
+																'url' => $item_inCodeSet_url
+															)
+														);
+
+													} // endif ( $item_inCodeSet_name )
+
+												} // endif ( $item_inCodeSet )
+
+											} // endif ( $item_codeValue && $item_codingSystem )
+
+											// Sort code item array
+
+												if ( is_array($item_code_item) ) {
+
+													ksort($item_code_item);
+
+												}
+
+											// Add to code item to list of codes
+
+												if ( $item_code_item ) {
+
+													$item_code[] = $item_code_item;
+
+												}
+
+										} // endforeach ( $item_code_array as $code )
+
+									} // endif ( $item_code )
+
+								// Add to schema
+
+									if ( $item_code ) {
+
+										$item_values['code'] = $item_code;
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($item_values['code']);
+
+									}
+
+							// additionalType
+
+								$item_additionalType_array = get_field( 'schema_additionalType', $treatment ) ?: '';
+
+								// Base array
+
+									$item_additionalType = array();
+
+								// Add each row to the array
+
+									if ( $item_additionalType_array ) {
+
+										foreach ( $item_additionalType_array as $additionalType ) {
+
+											$item_additionalType[] = $additionalType['schema_additionalType_uri'];
+
+										}
+
+									}
+
+								// Add to schema
+
+									if ( $item_additionalType ) {
+
+										$item_values['additionalType'] = $item_additionalType;
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($item_values['additionalType']);
+
+									}
+
+							// sameAs
+
+								$item_sameAs_array = get_field( 'schema_sameas', $treatment );
+
+								// Base array
+
+									$item_sameAs = array();
+
+								// Add each row to the array
+
+									if ( $item_sameAs_array ) {
+
+										foreach ( $item_sameAs_array as $sameAs ) {
+
+											$item_sameAs[] = $sameAs['schema_sameas_url'];
+
+										}
+
+									}
+
+								// Add to schema
+
+									if ( $item_sameAs ) {
+
+										$item_values['sameAs'] = $item_sameAs;
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($item_values['sameAs']);
+
+									}
+
+							// Add to list of treatments
+
+								$provider_related_treatment[] = $item_values;
 
 						}
 

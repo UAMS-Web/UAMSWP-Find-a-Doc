@@ -119,12 +119,12 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_treatment_procedure_schema_medicalentity": {
-			"key": "field_treatment_procedure_schema_medicalentity",
-			"label": "MedicalEntity Subtype",
-			"name": "treatment_procedure_schema_medicalentity",
-			"type": "select",
-			"instructions": "Select the most appropriate subtype of MedicalEntity.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalEntity#subtypes' target='_blank'>https://schema.org/MedicalEntity#subtypes</a>.",
+		"field_treatment_procedure_schema_medicalentity_subtype": {
+			"key": "field_treatment_procedure_schema_medicalentity_subtype",
+			"name": "treatment_procedure_schema_medicalentity_subtype",
+			"label": "MedicalEntity Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -132,32 +132,27 @@
 				"class": "",
 				"id": ""
 			},
-			"choices": {
-				"MedicalTest": "<strong>MedicalTest</strong> &mdash; Any medical test, typically performed for diagnostic purposes.",
-				"MedicalProcedure": "<strong>MedicalProcedure</strong> &mdash; A medical procedure is a process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalentity_subtype_availableservice"
+			],
+			"display": "seamless",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_medicaltest": {
-			"key": "field_treatment_procedure_schema_medicaltest",
-			"name": "treatment_procedure_schema_medicaltest",
-			"label": "MedicalTest Subtype",
-			"type": "select",
-			"instructions": "Select the most appropriate subtype of MedicalTest.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTest#subtypes' target='_blank'>https://schema.org/MedicalTest#subtypes</a>.",
+		"field_treatment_procedure_schema_medicaltest_subtype": {
+			"key": "field_treatment_procedure_schema_medicaltest_subtype",
+			"name": "treatment_procedure_schema_medicaltest_subtype",
+			"label": "MedicalTest Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
 					{
-						"field": "field_treatment_procedure_schema_medicalentity",
+						"field": "field_schema_medicalentity_subtype_availableservice",
 						"operator": "==",
 						"value": "MedicalTest"
 					}
@@ -165,38 +160,32 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
-			"choices": {
-				"0": "<strong>None</strong> &mdash; Either MedicalTest is specific enough or no other subtype option is relevant.",
-				"BloodTest": "<strong>Blood Test</strong> &mdash; A medical test performed on a sample of a patient's blood.",
-				"ImagingTest": "<strong>Imaging Test</strong> &mdash; Any medical imaging modality typically used for diagnostic purposes.",
-				"MedicalTestPanel": "<strong>Medical Test Panel</strong> &mdash; Any collection of tests commonly ordered together.",
-				"PathologyTest": "<strong>Pathology Test</strong> &mdash; A medical test performed by a laboratory that typically involves examination of a tissue sample by a pathologist."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicaltest_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_medical_procedure": {
-			"key": "field_treatment_procedure_schema_medical_procedure",
-			"name": "treatment_procedure_schema_medical_procedure",
-			"label": "MedicalProcedure Subtype",
-			"type": "select",
-			"instructions": "Select the most appropriate subtype of MedicalProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalProcedure#subtypes' target='_blank'>https://schema.org/MedicalProcedure#subtypes</a>.",
+		"field_treatment_procedure_schema_medicalprocedure_subtype": {
+			"key": "field_treatment_procedure_schema_medicalprocedure_subtype",
+			"name": "treatment_procedure_schema_medicalprocedure_subtype",
+			"label": "MedicalProcedure Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
 					{
-						"field": "field_treatment_procedure_schema_medicalentity",
+						"field": "field_schema_medicalentity_subtype_availableservice",
 						"operator": "==",
 						"value": "MedicalProcedure"
 					}
@@ -204,39 +193,32 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
-			"choices": {
-				"0": "<strong>None</strong> &mdash; Either MedicalProcedure is specific enough or no other subtype option is relevant.",
-				"DiagnosticProcedure": "<strong>Diagnostic Procedure</strong> &mdash; A medical procedure intended primarily for diagnostic, as opposed to therapeutic, purposes.",
-				"PalliativeProcedure": "<strong>Palliative Procedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
-				"PhysicalExam": "<strong>Physical Exam</strong> &mdash; A type of physical examination of a patient performed by a physician.",
-				"SurgicalProcedure": "<strong>Surgical Procedure</strong> &mdash; A medical procedure involving an incision with instruments; performed for diagnose, or therapeutic purposes.",
-				"TherapeuticProcedure": "<strong>Therapeutic Procedure</strong> &mdash; A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalprocedure_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_therapeuticprocedure": {
-			"key": "field_treatment_procedure_schema_therapeuticprocedure",
-			"name": "treatment_procedure_schema_therapeuticprocedure",
-			"label": "TherapeuticProcedure Subtype",
-			"type": "select",
-			"instructions": "Select the most appropriate subtype of TherapeuticProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/TherapeuticProcedure#subtypes' target='_blank'>https://schema.org/TherapeuticProcedure#subtypes</a>.",
+		"field_treatment_procedure_schema_therapeuticprocedure_subtype": {
+			"key": "field_treatment_procedure_schema_therapeuticprocedure_subtype",
+			"name": "treatment_procedure_schema_therapeuticprocedure_subtype",
+			"label": "TherapeuticProcedure Subtype (availableService)",
+			"type": "clone",
+			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
 					{
-						"field": "field_treatment_procedure_schema_medical_procedure",
+						"field": "field_schema_medicalprocedure_subtype",
 						"operator": "==",
 						"value": "TherapeuticProcedure"
 					}
@@ -244,36 +226,32 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
-			"choices": {
-				"0": "<strong>None</strong> &mdash; Either TherapeuticProcedure is specific enough or no other subtype option is relevant.",
-				"MedicalTherapy": "<strong>Medical Therapy</strong> &mdash; Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g., hemodialysis) aimed at improving or preventing a health condition.",
-				"PsychologicalTreatment": "<strong>Psychological Treatment</strong> &mdash; A process of care relying upon counseling, dialogue and communication aimed at improving a mental health condition without use of drugs."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_therapeuticprocedure_subtype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_medicaltherapy": {
-			"key": "field_treatment_procedure_schema_medicaltherapy",
-			"name": "treatment_procedure_schema_medicaltherapy",
+		"field_treatment_procedure_schema_medicaltherapy_subtype": {
+			"key": "field_treatment_procedure_schema_medicaltherapy_subtype",
+			"name": "treatment_procedure_schema_medicaltherapy_subtype",
 			"label": "MedicalTherapy Subtype",
-			"type": "select",
-			"instructions": "Select the most appropriate subtype of MedicalTherapy.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTherapy#subtypes' target='_blank'>https://schema.org/MedicalTherapy#subtypes</a>.",
+			"type": "clone",
+			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
 					{
-						"field": "field_treatment_procedure_schema_therapeuticprocedure",
+						"field": "field_schema_therapeuticprocedure_subtype",
 						"operator": "==",
 						"value": "MedicalTherapy"
 					}
@@ -281,649 +259,20 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"0": "<strong>None</strong> &mdash; Either MedicalTherapy is specific enough or no other subtype option is relevant.",
-				"OccupationalTherapy": "<strong>Occupational Therapy</strong> &mdash; A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.",
-				"PalliativeProcedure": "<strong>Palliative Procedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
-				"PhysicalTherapy": "<strong>Physical Therapy</strong> &mdash; A process of progressive physical care and rehabilitation aimed at improving a health condition.",
-				"RadiationTherapy": "<strong>Radiation Therapy</strong> &mdash; A process of care using radiation aimed at improving a health condition.",
-				"RespiratoryTherapy": "<strong>Respiratory Therapy</strong> &mdash; The therapy that is concerned with the maintenance or improvement of respiratory function (as in patients with pulmonary disease)."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 0,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
-		},
-		"field_treatment_procedure_schema_MedicalImagingTechnique": {
-			"key": "field_treatment_procedure_schema_MedicalImagingTechnique",
-			"name": "treatment_procedure_schema_MedicalImagingTechnique",
-			"label": "Imaging Technique Used (MedicalImagingTechnique)",
-			"type": "select",
-			"instructions": "Select the most appropriate MedicalImagingTechnique.</p><p class='description' style='margin-top: 0.5em;'>For information on the imagingTechnique Schema.org property, visit <a href='https://schema.org/imagingTechnique' target='_blank'>https://schema.org/imagingTechnique</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalImagingTechnique Schema.org enumeration type, visit <a href='https://schema.org/MedicalImagingTechnique' target='_blank'>https://schema.org/MedicalImagingTechnique</a>.",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medicaltest",
-						"operator": "==",
-						"value": "ImagingTest"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"0": "<strong>None</strong> &mdash; No other option is relevant.",
-				"CT": "<strong>CT</strong> &mdash; X-ray computed tomography imaging.",
-				"MRI": "<strong>MRI</strong> &mdash; Magnetic resonance imaging.",
-				"PET": "<strong>PET</strong> &mdash; Positron emission tomography imaging.",
-				"Radiography": "<strong>Radiography</strong> &mdash; Radiography is an imaging technique that uses electromagnetic radiation other than visible light, especially X-rays, to view the internal structure of a non-uniformly composed and opaque object such as the human body.",
-				"Ultrasound": "<strong>Ultrasound</strong> &mdash; Ultrasound imaging.",
-				"XRay": "<strong>XRay</strong> &mdash; X-ray imaging."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 1,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
-		},
-		"field_treatment_procedure_schema_subtest": {
-			"key": "field_treatment_procedure_schema_subtest",
-			"label": "Component Tests of the Panel (subTest)",
-			"name": "treatment_procedure_schema_subtest",
-			"type": "relationship",
-			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/subTest' target='_blank'>https://schema.org/subTest</a>.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medicaltest",
-						"operator": "==",
-						"value": "MedicalTestPanel"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			}
-		},
-		"field_treatment_procedure_schema_tissuesample": {
-			"key": "field_treatment_procedure_schema_tissuesample",
-			"name": "treatment_procedure_schema_tissuesample",
-			"label": "Tissue Sample Type (tissueSample)",
-			"type": "repeater",
-			"instructions": "The type of tissue sample required for the test.</p><p class='description' style='margin-top: 0.5em;'>For information on the tissueSample Schema.org property, visit <a href='https://schema.org/tissueSample' target='_blank'>https://schema.org/tissueSample</a>.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medicaltest",
-						"operator": "==",
-						"value": "PathologyTest"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"collapsed": "",
-			"min": 0,
-			"max": "",
+			"clone": [
+				"field_schema_medicaltherapy_subtype"
+			],
+			"display": "group",
 			"layout": "block",
-			"button_label": "Add Tissue Sample",
-			"sub_fields": [
-				{
-					"key": "field_treatment_procedure_schema_tissuesample_item",
-					"label": "Individual Tissue Sample Type",
-					"name": "treatment_procedure_schema_tissuesample_item",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": "",
-					"acfe_validate": "",
-					"acfe_update": ""
-				}
-			]
-		},
-		"field_treatment_procedure_schema_usedtodiagnose": {
-			"key": "field_treatment_procedure_schema_usedtodiagnose",
-			"label": "Condition(s) the Test Is Used to Diagnose (usedToDiagnose)",
-			"name": "treatment_procedure_schema_usedtodiagnose",
-			"type": "relationship",
-			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/usedToDiagnose' target='_blank'>https://schema.org/usedToDiagnose</a>.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medicalentity",
-						"operator": "==",
-						"value": "MedicalTest"
-					},
-					{
-						"field": "field_treatment_procedure_schema_medicaltest",
-						"operator": "!=",
-						"value": ""
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"condition"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			}
-		},
-		"field_treatment_procedure_schema_usesdevice": {
-			"key": "field_treatment_procedure_schema_usesdevice",
-			"name": "treatment_procedure_schema_usesdevice",
-			"label": "Device Used (usesDevice)",
-			"type": "repeater",
-			"instructions": "For information on the usesDevice Schema.org property, visit <a href='https://schema.org/usesDevice' target='_blank'>https://schema.org/usesDevice</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalDevice Schema.org type, visit <a href='https://schema.org/MedicalDevice' target='_blank'>https://schema.org/MedicalDevice</a>.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medicalentity",
-						"operator": "==",
-						"value": "MedicalTest"
-					},
-					{
-						"field": "field_treatment_procedure_schema_medicaltest",
-						"operator": "!=",
-						"value": ""
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"collapsed": "",
-			"min": 0,
-			"max": "",
-			"layout": "block",
-			"button_label": "Add Device",
-			"sub_fields": [
-				{
-					"key": "field_treatment_procedure_schema_usesdevice_name",
-					"name": "treatment_procedure_schema_usesdevice_name",
-					"label": "Device Name (name)",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": "",
-					"acfe_validate": "",
-					"acfe_update": ""
-				},
-				{
-					"key": "field_treatment_procedure_schema_usesdevice_alt_name",
-					"name": "treatment_procedure_schema_usesdevice_alt_name",
-					"label": "Alternate Name(s)",
-					"type": "repeater",
-					"instructions": "",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"collapsed": "",
-					"min": 0,
-					"max": "",
-					"layout": "block",
-					"button_label": "Add Alternate Name",
-					"sub_fields": [
-						{
-							"key": "field_treatment_procedure_schema_usesdevice_alt_name_item",
-							"name": "treatment_procedure_schema_usesdevice_alt_name_item",
-							"label": "Individual Alternate Name",
-							"type": "text",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						}
-					]
-				},
-				{
-					"key": "field_treatment_procedure_schema_usesdevice_code",
-					"name": "treatment_procedure_schema_usesdevice_code",
-					"label": "Code (code)",
-					"type": "repeater",
-					"instructions": "For information on the usesDevice Schema.org property, visit <a href='https://schema.org/code' target='_blank'>https://schema.org/code</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"collapsed": "",
-					"min": 0,
-					"max": "",
-					"layout": "block",
-					"button_label": "Add Code",
-					"sub_fields": [
-						{
-							"key": "field_treatment_procedure_schema_usesdevice_code_codingsystem",
-							"name": "treatment_procedure_schema_usesdevice_code_codingsystem",
-							"label": "Coding System (codingSystem)",
-							"type": "text",
-							"instructions": "For information on the codingSystem Schema.org property, visit <a href='https://schema.org/codingSystem' target='_blank'>https://schema.org/codingSystem</a>.",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						},
-						{
-							"key": "field_treatment_procedure_schema_usesdevice_code_code",
-							"name": "treatment_procedure_schema_usesdevice_code_code",
-							"label": "Individual Device Code (codeValue)",
-							"type": "text",
-							"instructions": "For information on the usesDevice Schema.org property, visit <a href='https://schema.org/code' target='_blank'>https://schema.org/code</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						},
-						{
-							"key": "field_treatment_procedure_schema_usesdevice_code_name",
-							"name": "treatment_procedure_schema_usesdevice_code_name",
-							"label": "Name Associated With the Device Code (name)",
-							"type": "text",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						},
-						{
-							"key": "field_treatment_procedure_schema_usesdevice_code_url",
-							"name": "treatment_procedure_schema_usesdevice_code_url",
-							"label": "URL of Device Code Description or Detail Page (url)",
-							"type": "url",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"default_value": "",
-							"placeholder": ""
-						}
-					]
-				}
-			]
-		},
-		"field_treatment_procedure_schema_medicalproceduretype": {
-			"key": "field_treatment_procedure_schema_medicalproceduretype",
-			"name": "treatment_procedure_schema_medicalproceduretype",
-			"label": "Type of Procedure (procedureType)",
-			"type": "select",
-			"instructions": "Select the most appropriate MedicalProcedureType.</p><p class='description' style='margin-top: 0.5em;'>For information on the medicalProcedureType Schema.org property, visit <a href='https://schema.org/procedureType' target='_blank'>https://schema.org/procedureType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalProcedureType Schema.org enumeration type, visit <a href='https://schema.org/MedicalProcedureType' target='_blank'>https://schema.org/MedicalProcedureType</a>.",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medicalentity",
-						"operator": "==",
-						"value": "MedicalProcedure"
-					},
-					{
-						"field": "field_treatment_procedure_schema_medical_procedure",
-						"operator": "!=",
-						"value": "SurgicalProcedure"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"0": "<strong>None</strong> &mdash; No other option is relevant.",
-				"NoninvasiveProcedure": "<strong>NoninvasiveProcedure</strong> &mdash; A type of medical procedure that involves noninvasive techniques.",
-				"PercutaneousProcedure": "<strong>PercutaneousProcedure</strong> &mdash; A type of medical procedure that involves percutaneous techniques, where access to organs or tissue is achieved via needle-puncture of the skin. For example, catheter-based procedures like stent delivery."
-			},
-			"default_value": [],
-			"allow_null": 1,
-			"multiple": 1,
-			"ui": 1,
-			"ajax": 0,
-			"return_format": "value",
-			"allow_custom": 0,
-			"placeholder": "",
-			"acfe_settings": "",
-			"acfe_validate": ""
-		},
-		"field_treatment_procedure_schema_drug": {
-			"key": "field_treatment_procedure_schema_drug",
-			"label": "Drug or Medicine Used (Drug)",
-			"name": "treatment_procedure_schema_drug",
-			"type": "repeater",
-			"instructions": "If relevant, add the drug or medicine used in the medication procedure.</p><p class='description' style='margin-top: 0.5em;'>For information on the Drug Schema.org type, visit <a href='https://schema.org/Drug' target='_blank'>https://schema.org/Drug</a>.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_medical_procedure",
-						"operator": "==",
-						"value": "TherapeuticProcedure"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"collapsed": "",
-			"min": 0,
-			"max": "",
-			"layout": "block",
-			"button_label": "Add Drug",
-			"sub_fields": [
-				{
-					"key": "field_treatment_procedure_schema_drug_proprietaryname",
-					"label": "Proprietary Name (proprietaryName)",
-					"name": "treatment_procedure_schema_drug_proprietaryname",
-					"type": "repeater",
-					"instructions": "Proprietary name(s) given to the drug, typically by its originator(s) or creator(s). Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a> to find or confirm this information.</p><p class='description' style='margin-top: 0.5em;'>For information on the proprietaryName Schema.org property, visit <a href='https://schema.org/proprietaryName' target='_blank'>https://schema.org/proprietaryName</a>.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"collapsed": "",
-					"min": 1,
-					"max": "",
-					"layout": "block",
-					"button_label": "Add Name",
-					"sub_fields": [
-						{
-							"key": "field_treatment_procedure_schema_drug_proprietaryname_item",
-							"label": "Individual Proprietary Name",
-							"name": "treatment_procedure_schema_drug_proprietaryname_item",
-							"type": "text",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						}
-					]
-				},
-				{
-					"key": "field_treatment_procedure_schema_drug_nonproprietaryname",
-					"label": "Generic Name (nonProprietaryName)",
-					"name": "treatment_procedure_schema_drug_nonproprietaryname",
-					"type": "repeater",
-					"instructions": "The generic name(s) of this drug or supplement. Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a> to find or confirm this information.</p><p class='description' style='margin-top: 0.5em;'>For information on the nonProprietaryName Schema.org property, visit <a href='https://schema.org/nonProprietaryName' target='_blank'>https://schema.org/nonProprietaryName</a>.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"collapsed": "",
-					"min": 1,
-					"max": "",
-					"layout": "block",
-					"button_label": "Add Name",
-					"sub_fields": [
-						{
-							"key": "field_treatment_procedure_schema_drug_nonproprietaryname_item",
-							"label": "Individual nonProprietaryName",
-							"name": "treatment_procedure_schema_drug_nonproprietaryname_item",
-							"type": "text",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						}
-					]
-				},
-				{
-					"key": "field_treatment_procedure_schema_drug_drugprescriptionstatus",
-					"label": "DrugPrescriptionStatus",
-					"name": "treatment_procedure_schema_drug_drugprescriptionstatus",
-					"type": "select",
-					"instructions": "Indicate whether this drug is available by prescription or over-the-counter.</p><p class='description' style='margin-top: 0.5em;'>For information on the DrugPrescriptionStatus Schema.org enumeration type, visit <a href='https://schema.org/DrugPrescriptionStatus' target='_blank'>https://schema.org/DrugPrescriptionStatus</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the enumeration members of the DrugPrescriptionStatus Schema.org enumeration type, visit the links at <a href='https://schema.org/DrugPrescriptionStatus#subtypes' target='_blank'>https://schema.org/DrugPrescriptionStatus#subtypes</a>.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"choices": {
-						"OTC": "OTC",
-						"PrescriptionOnly": "PrescriptionOnly",
-						"none": "Neither"
-					},
-					"default_value": [],
-					"allow_null": 1,
-					"multiple": 0,
-					"ui": 1,
-					"ajax": 0,
-					"return_format": "value",
-					"allow_custom": 1,
-					"placeholder": "",
-					"acfe_settings": "",
-					"acfe_validate": ""
-				},
-				{
-					"key": "field_treatment_procedure_schema_drug_rxcui",
-					"label": "rxcui",
-					"name": "treatment_procedure_schema_drug_rxcui",
-					"type": "text",
-					"instructions": "The RxCUI drug identifier from RxNorm. Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the rxcui Schema.org property, visit <a href='https://schema.org/rxcui' target='_blank'>https://schema.org/rxcui</a>.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": "",
-					"acfe_validate": "",
-					"acfe_update": ""
-				}
-			]
-		},
-		"field_treatment_procedure_schema_duplicatetherapy": {
-			"key": "field_treatment_procedure_schema_duplicatetherapy",
-			"label": "Duplicate Therapy (duplicateTherapy)",
-			"name": "treatment_procedure_schema_duplicatetherapy",
-			"type": "relationship",
-			"instructions": "Select any other therapies that duplicate or overlaps this one.</p><p class='description' style='margin-top: 0.5em;'>For information on the duplicateTherapy Schema.org property, visit <a href='https://schema.org/duplicateTherapy' target='_blank'>https://schema.org/duplicateTherapy</a>.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_treatment_procedure_schema_therapeuticprocedure",
-						"operator": "==",
-						"value": "MedicalTherapy"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"post_type": [
-				"treatment"
-			],
-			"taxonomy": "",
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			}
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
 		},
 		"field_treatment_procedure_schema_additionalType": {
 			"key": "field_treatment_procedure_schema_additionalType",
@@ -946,6 +295,285 @@
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_MedicalImagingTechnique": {
+			"key": "field_treatment_procedure_schema_MedicalImagingTechnique",
+			"name": "treatment_procedure_schema_MedicalImagingTechnique",
+			"label": "Imaging Technique Used (MedicalImagingTechnique)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "==",
+						"value": "ImagingTest"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_MedicalImagingTechnique"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_subtest": {
+			"key": "field_treatment_procedure_schema_subtest",
+			"label": "Component Tests of the Panel (subTest)",
+			"name": "treatment_procedure_schema_subtest",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "==",
+						"value": "MedicalTestPanel"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_subtest"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_tissuesample": {
+			"key": "field_treatment_procedure_schema_tissuesample",
+			"name": "treatment_procedure_schema_tissuesample",
+			"label": "Tissue Sample Type (tissueSample)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "==",
+						"value": "PathologyTest"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_tissuesample"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_usesdevice": {
+			"key": "field_treatment_procedure_schema_usesdevice",
+			"name": "treatment_procedure_schema_usesdevice",
+			"label": "Device Used (usesDevice)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_usesdevice"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_usedtodiagnose": {
+			"key": "field_treatment_procedure_schema_usedtodiagnose",
+			"label": "Condition(s) the Test Is Used to Diagnose (usedToDiagnose)",
+			"name": "treatment_procedure_schema_usedtodiagnose",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
+					{
+						"field": "field_schema_medicaltest_subtype",
+						"operator": "!=",
+						"value": ""
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_usedtodiagnose"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_medicalproceduretype": {
+			"key": "field_treatment_procedure_schema_medicalproceduretype",
+			"name": "treatment_procedure_schema_medicalproceduretype",
+			"label": "Type of Procedure (procedureType)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "!=",
+						"value": "SurgicalProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalproceduretype"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_drug": {
+			"key": "field_treatment_procedure_schema_drug",
+			"label": "Drug or Medicine Used (Drug)",
+			"name": "treatment_procedure_schema_drug",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_drug"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_duplicatetherapy": {
+			"key": "field_treatment_procedure_schema_duplicatetherapy",
+			"label": "Duplicate Therapy (duplicateTherapy)",
+			"name": "treatment_procedure_schema_duplicatetherapy",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_duplicatetherapy"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
 		"field_treatment_procedure_schema_medicalcode": {
