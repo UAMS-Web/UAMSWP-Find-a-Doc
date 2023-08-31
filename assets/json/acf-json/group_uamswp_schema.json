@@ -4,8 +4,8 @@
 	"fields": {
 		"field_schema_medicalspecialty_single": {
 			"key": "field_schema_medicalspecialty_single",
-			"label": "Schema.org MedicalSpecialty",
 			"name": "schema_medicalspecialty_single",
+			"label": "Medical Specialty, Single (MedicalSpecialty)",
 			"type": "select",
 			"instructions": "Select one Schema.org MedicalSpecialty enumeration member that is relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
 			"required": 1,
@@ -72,8 +72,8 @@
 		},
 		"field_schema_medicalspecialty_multiple": {
 			"key": "field_schema_medicalspecialty_multiple",
-			"label": "Schema.org MedicalSpecialty (Multiple)",
 			"name": "schema_medicalspecialty_multiple",
+			"label": "MedicalSpecialty, Multiple (MedicalSpecialty)",
 			"type": "select",
 			"instructions": "Select one or more Schema.org MedicalSpecialty enumeration members that are relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalSpecialty Schema.org enumeration type, visit <a href='https://schema.org/MedicalSpecialty' target='_blank'>https://schema.org/MedicalSpecialty</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicalSpecialty Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicalSpecialty#subtypes' target='_blank'>https://schema.org/MedicalSpecialty#subtypes</a>.",
 			"required": 1,
@@ -141,7 +141,7 @@
 		"field_schema_sameas": {
 			"key": "field_schema_sameas",
 			"name": "schema_sameas",
-			"label": "Reference Webpages (sameAs)",
+			"label": "Reference Webpage(s) About This Entity (sameAs > URL)",
 			"type": "repeater",
 			"instructions": "Reference webpages (e.g., Wikipedia article) or URI-identified RDF class from an external vocabulary (e.g., Wikidata entry, Library of Congress Name Authority File) that unambiguously indicates the entity's identity.</p><p class='description' style='margin-top: 0.5em;'>Wikipedia: <a href='https://en.wikipedia.org/' target='_blank'>https://en.wikipedia.org/</a></p><p class='description' style='margin-top: 0.5em;'>Wikidata: <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a></p><p class='description' style='margin-top: 0.5em;'>Library of Congress Name Authority File: <a href='https://id.loc.gov/authorities/names.html' target='_blank'>https://id.loc.gov/authorities/names.html</a></p><p class='description' style='margin-top: 0.5em;'>Virtual International Authority File: <a href='https://viaf.org/' target='_blank'>https://viaf.org/</a></p><p class='description' style='margin-top: 0.5em;'>FAST Authority File: <a href='https://experimental.worldcat.org/fast/' target='_blank'>https://experimental.worldcat.org/fast/</a>",
 			"required": 0,
@@ -160,8 +160,8 @@
 			"sub_fields": [
 				{
 					"key": "field_schema_sameas_url",
-					"label": "Reference Webpage URI or URL",
 					"name": "schema_sameas_url",
+					"label": "Reference Webpage URI or URL",
 					"type": "url",
 					"instructions": "Add the URI or permalink if it is available. Otherwise, add the URL.",
 					"required": 1,
@@ -179,7 +179,7 @@
 		"field_schema_additionalType": {
 			"key": "field_schema_additionalType",
 			"name": "schema_additionalType",
-			"label": "More Specific Type For This Entity From External Vocabularies in Microdata Syntax (additionalType)",
+			"label": "More Specific Type(s) for This Entity From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
 			"type": "repeater",
 			"instructions": "The available types on Schema.org are not always the most specific. External vocabularies can be used to associate this entity with a more specific type.</p><p class='description' style='margin-top: 0.5em;'>Add the URI-identified RDF class from an external vocabulary (e.g., Wikidata entry, Library of Congress Name Authority File).</p><p class='description' style='margin-top: 0.5em;'>Wikidata: <a href='https://www.wikidata.org/' target='_blank'>https://www.wikidata.org/</a></p><p class='description' style='margin-top: 0.5em;'>Library of Congress Name Authority File: <a href='https://id.loc.gov/authorities/names.html' target='_blank'>https://id.loc.gov/authorities/names.html</a></p><p class='description' style='margin-top: 0.5em;'>Virtual International Authority File: <a href='https://viaf.org/' target='_blank'>https://viaf.org/</a></p><p class='description' style='margin-top: 0.5em;'>FAST Authority File: <a href='https://experimental.worldcat.org/fast/' target='_blank'>https://experimental.worldcat.org/fast/</a>",
 			"required": 0,
@@ -198,8 +198,8 @@
 			"sub_fields": [
 				{
 					"key": "field_schema_additionalType_uri",
-					"label": "URI-identified RDF class",
 					"name": "schema_additionalType_uri",
+					"label": "URI-identified RDF class",
 					"type": "url",
 					"instructions": "",
 					"required": 1,
@@ -217,7 +217,7 @@
 		"field_schema_alternatename": {
 			"key": "field_schema_alternatename",
 			"name": "schema_alternatename",
-			"label": "Alternate Names",
+			"label": "Alternate Name(s)",
 			"type": "repeater",
 			"instructions": "Acronyms, shortened names or alternate spellings of the entity",
 			"required": 0,
@@ -258,7 +258,7 @@
 		"field_schema_url": {
 			"key": "field_schema_url",
 			"name": "schema_url",
-			"label": "Official Website URL",
+			"label": "Official Website URL (URL)",
 			"type": "url",
 			"instructions": "Official website of the entity",
 			"required": 0,
@@ -273,8 +273,8 @@
 		},
 		"field_schema_medicalcode": {
 			"key": "field_schema_medicalcode",
-			"label": "Medical Code (MedicalCode) for This Entity",
 			"name": "schema_medicalcode",
+			"label": "Medical Code(s) for This Entity (MedicalCode)",
 			"type": "repeater",
 			"instructions": "A medical code for the entity, taken from a controlled vocabulary or ontology (e.g., ICD-11, DiseasesDB, MeSH, SNOMED-CT, RxNorm).</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.</p><p class='description' style='margin-top: 0.5em;'>DiseasesDB (Diseases Database): <a href='http://www.diseasesdatabase.com/' target='_blank'>http://www.diseasesdatabase.com/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-10-CM (International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Clinical Modification): <a href='https://icd10cmtool.cdc.gov/' target='_blank'>https://icd10cmtool.cdc.gov/</a> or <a href='https://www.icd10data.com/' target='_blank'>https://www.icd10data.com/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-10-PCS (International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Procedure Coding System): <a href='https://www.icd10data.com/' target='_blank'>https://www.icd10data.com/</a></p><p class='description' style='margin-top: 0.5em;'>ICD-11 (International Statistical Classification of Diseases and Related Health Problems, Eleventh Revision): <a href='https://icd.who.int/browse11/' target='_blank'>https://icd.who.int/browse11/</a></p><p class='description' style='margin-top: 0.5em;'>ICHI (International Classification of Health Interventions): <a href='https://icd.who.int/dev11/l-ichi/en' target='_blank'>https://icd.who.int/dev11/l-ichi/en</a></p><p class='description' style='margin-top: 0.5em;'>ICPC-3 (International Classification of Primary Care, Third Revision): <a href='https://browser.icpc-3.info/' target='_blank'>https://browser.icpc-3.info/</a></p><p class='description' style='margin-top: 0.5em;'>MeSH (Medical Subject Headings): <a href='https://www.ncbi.nlm.nih.gov/mesh/' target='_blank'>https://www.ncbi.nlm.nih.gov/mesh/</a></p><p class='description' style='margin-top: 0.5em;'>RxNorm: <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a></p><p class='description' style='margin-top: 0.5em;'>SNOMED-CT: <a href='https://browser.ihtsdotools.org/' target='_blank'>https://browser.ihtsdotools.org/</a></p>",
 			"required": 0,
@@ -293,8 +293,8 @@
 			"sub_fields": [
 				{
 					"key": "field_schema_medicalcode_codingsystem",
-					"label": "Coding System (codingSystem)",
 					"name": "schema_medicalcode_codingsystem",
+					"label": "Coding System (codingSystem > Text)",
 					"type": "select",
 					"instructions": "Select from the list of coding systems or enter a custom option.</p><p class='description' style='margin-top: 0.5em;'>For information on the codingSystem Schema.org property, visit <a href='https://schema.org/codingSystem' target='_blank'>https://schema.org/codingSystem</a>.",
 					"required": 1,
@@ -328,8 +328,8 @@
 				},
 				{
 					"key": "field_schema_medicalcode_codevalue",
-					"label": "Code Value (codeValue)",
 					"name": "schema_medicalcode_codevalue",
+					"label": "Code Value (codeValue > Text)",
 					"type": "text",
 					"instructions": "A short textual code that uniquely identifies the value.</p><p class='description' style='margin-top: 0.5em;'>For information on the codeValue Schema.org property, visit <a href='https://schema.org/codeValue' target='_blank'>https://schema.org/codeValue</a>.",
 					"required": 1,
@@ -351,7 +351,7 @@
 				{
 					"key": "field_schema_medicalcode_name",
 					"name": "schema_medicalcode_name",
-					"label": "Name Associated With the Code (name)",
+					"label": "Name Associated With the Code (name > Text)",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -373,7 +373,7 @@
 				{
 					"key": "field_schema_medicalcode_url",
 					"name": "schema_medicalcode_url",
-					"label": "URI or URL of the Code Description or Detail Page (url)",
+					"label": "URI or URL of the Code Description or Detail Page (url > URL)",
 					"type": "url",
 					"instructions": "",
 					"required": 0,
@@ -387,6 +387,51 @@
 					"placeholder": ""
 				}
 			]
+		},
+		"field_schema_medicalentity_subtype": {
+			"key": "field_schema_medicalentity_subtype",
+			"name": "schema_medicalentity_subtype",
+			"label": "MedicalEntity Subtype",
+			"type": "select",
+			"instructions": "Select the most appropriate subtype of MedicalEntity.</p><p class='description' style='margin-top: 0.5em;'>For information on each subtype, visit the relevant page linked at <a href='https://schema.org/MedicalEntity#subtypes' target='_blank'>https://schema.org/MedicalEntity#subtypes</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"AnatomicalStructure": "<strong>AnatomicalStructure</strong> &mdash; Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures.",
+				"AnatomicalSystem": "<strong>AnatomicalSystem</strong> &mdash; An anatomical system is a group of anatomical structures that work together to perform a certain task. Anatomical systems, such as organ systems, are one organizing principle of anatomy, and can include circulatory, digestive, endocrine, integumentary, immune, lymphatic, muscular, nervous, reproductive, respiratory, skeletal, urinary, vestibular, and other systems.",
+				"DrugClass": "<strong>DrugClass</strong> &mdash; A class of medical drugs, e.g., statins. Classes can represent general pharmacological class, common mechanisms of action, common physiological effects, etc.",
+				"DrugCost": "<strong>DrugCost</strong> &mdash; The cost per unit of a medical drug. Note that this type is not meant to represent the price in an offer of a drug for sale; see the Offer type for that. This type will typically be used to tag wholesale or average retail cost of a drug, or maximum reimbursable cost. Costs of medical drugs vary widely depending on how and where they are paid for, so while this type captures some of the variables, costs should be used with caution by consumers of this schema's markup.",
+				"LifestyleModification": "<strong>LifestyleModification</strong> &mdash; A process of care involving exercise, changes to diet, fitness routines, and other lifestyle changes aimed at improving a health condition.",
+				"MedicalCause": "<strong>MedicalCause</strong> &mdash; The causative agent(s) that are responsible for the pathophysiologic process that eventually results in a medical condition, symptom or sign. In this schema, unless otherwise specified this is meant to be the proximate cause of the medical condition, symptom or sign. The proximate cause is defined as the causative agent that most directly results in the medical condition, symptom or sign. For example, the HIV virus could be considered a cause of AIDS. Or in a diagnostic context, if a patient fell and sustained a hip fracture and two days later sustained a pulmonary embolism which eventuated in a cardiac arrest, the cause of the cardiac arrest (the proximate cause) would be the pulmonary embolism and not the fall. Medical causes can include cardiovascular, chemical, dermatologic, endocrine, environmental, gastroenterologic, genetic, hematologic, gynecologic, iatrogenic, infectious, musculoskeletal, neurologic, nutritional, obstetric, oncologic, otolaryngologic, pharmacologic, psychiatric, pulmonary, renal, rheumatologic, toxic, traumatic, or urologic causes; medical conditions can be causes as well.",
+				"MedicalCondition": "<strong>MedicalCondition</strong> &mdash; Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc.",
+				"MedicalContraindication": "<strong>MedicalContraindication</strong> &mdash; A condition or factor that serves as a reason to withhold a certain medical therapy. Contraindications can be absolute (there are no reasonable circumstances for undertaking a course of action) or relative (the patient is at higher risk of complications, but these risks may be outweighed by other considerations or mitigated by other measures).",
+				"MedicalDevice": "<strong>MedicalDevice</strong> &mdash; Any object used in a medical capacity, such as to diagnose or treat a patient.",
+				"MedicalGuideline": "<strong>MedicalGuideline</strong> &mdash; Any recommendation made by a standard society (e.g. ACC/AHA) or consensus statement that denotes how to diagnose and treat a particular condition. Note: this type should be used to tag the actual guideline recommendation; if the guideline recommendation occurs in a larger scholarly article, use MedicalScholarlyArticle to tag the overall article, not this type. Note also: the organization making the recommendation should be captured in the recognizingAuthority base property of MedicalEntity.",
+				"MedicalIndication": "<strong>MedicalIndication</strong> &mdash; A condition or factor that indicates use of a medical therapy, including signs, symptoms, risk factors, anatomical states, etc.",
+				"MedicalIntangible": "<strong>MedicalIntangible</strong> &mdash; A utility class that serves as the umbrella for a number of 'intangible' things in the medical space.",
+				"MedicalProcedure": "<strong>MedicalProcedure</strong> &mdash; A medical procedure is a process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques.",
+				"MedicalRiskEstimator": "<strong>MedicalRiskEstimator</strong> &mdash; Any rule set or interactive tool for estimating the risk of developing a complication or condition.",
+				"MedicalRiskFactor": "<strong>MedicalRiskFactor</strong> &mdash; A risk factor is anything that increases a person's likelihood of developing or contracting a disease, medical condition, or complication.",
+				"MedicalStudy": "<strong>MedicalStudy</strong> &mdash; A medical study is an umbrella type covering all kinds of research studies relating to human medicine or health, including observational studies and interventional trials and registries, randomized, controlled or not. When the specific type of study is known, use one of the extensions of this type, such as MedicalTrial or MedicalObservationalStudy. Also, note that this type should be used to mark up data that describes the study itself; to tag an article that publishes the results of a study, use MedicalScholarlyArticle. Note: use the code property of MedicalEntity to store study IDs, e.g. clinicaltrials.gov ID.",
+				"MedicalTest": "<strong>MedicalTest</strong> &mdash; Any medical test, typically performed for diagnostic purposes.",
+				"Substance": "<strong>Substance</strong> &mdash; Any matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical.",
+				"SuperficialAnatomy": "<strong>SuperficialAnatomy</strong> &mdash; Anatomical features that can be observed by sight (without dissection), including the form and proportions of the human body as well as surface landmarks that correspond to deeper subcutaneous structures. Superficial anatomy plays an important role in sports medicine, phlebotomy, and other medical specialties as underlying anatomical structures can be identified through surface palpation. For example, during back surgery, superficial anatomy can be used to palpate and count vertebrae to find the site of incision. Or in phlebotomy, superficial anatomy can be used to locate an underlying vein; for example, the median cubital vein can be located by palpating the borders of the cubital fossa (such as the epicondyles of the humerus) and then looking for the superficial signs of the vein, such as size, prominence, ability to refill after depression, and feel of surrounding tissue support. As another example, in a subluxation (dislocation) of the glenohumeral joint, the bony structure becomes pronounced with the deltoid muscle failing to cover the glenohumeral joint allowing the edges of the scapula to be superficially visible. Here, the superficial anatomy is the visible edges of the scapula, implying the underlying dislocation of the joint (the related anatomical structure)."
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
 		},
 		"field_schema_medicalentity_subtype_availableservice": {
 			"key": "field_schema_medicalentity_subtype_availableservice",
@@ -402,8 +447,8 @@
 				"id": ""
 			},
 			"choices": {
-				"MedicalTest": "<strong>MedicalTest</strong> &mdash; Any medical test, typically performed for diagnostic purposes.",
-				"MedicalProcedure": "<strong>MedicalProcedure</strong> &mdash; A medical procedure is a process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques."
+				"MedicalProcedure": "<strong>MedicalProcedure</strong> &mdash; A medical procedure is a process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques.",
+				"MedicalTest": "<strong>MedicalTest</strong> &mdash; Any medical test, typically performed for diagnostic purposes."
 			},
 			"default_value": [],
 			"allow_null": 1,
@@ -419,7 +464,7 @@
 		"field_schema_medicaltest_subtype": {
 			"key": "field_schema_medicaltest_subtype",
 			"name": "schema_medicaltest_subtype",
-			"label": "MedicalTest Subtype (availableService)",
+			"label": "MedicalTest Subtype",
 			"type": "select",
 			"instructions": "Select the most appropriate subtype of MedicalTest.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalTest#subtypes' target='_blank'>https://schema.org/MedicalTest#subtypes</a>.",
 			"required": 1,
@@ -431,10 +476,10 @@
 			},
 			"choices": {
 				"0": "<strong>None</strong> &mdash; Either MedicalTest is specific enough or no other subtype option is relevant.",
-				"BloodTest": "<strong>Blood Test</strong> &mdash; A medical test performed on a sample of a patient's blood.",
-				"ImagingTest": "<strong>Imaging Test</strong> &mdash; Any medical imaging modality typically used for diagnostic purposes.",
-				"MedicalTestPanel": "<strong>Medical Test Panel</strong> &mdash; Any collection of tests commonly ordered together.",
-				"PathologyTest": "<strong>Pathology Test</strong> &mdash; A medical test performed by a laboratory that typically involves examination of a tissue sample by a pathologist."
+				"BloodTest": "<strong>BloodTest</strong> &mdash; A medical test performed on a sample of a patient's blood.",
+				"ImagingTest": "<strong>ImagingTest</strong> &mdash; Any medical imaging modality typically used for diagnostic purposes.",
+				"MedicalTestPanel": "<strong>MedicalTestPanel</strong> &mdash; Any collection of tests commonly ordered together.",
+				"PathologyTest": "<strong>PathologyTest</strong> &mdash; A medical test performed by a laboratory that typically involves examination of a tissue sample by a pathologist."
 			},
 			"default_value": [],
 			"allow_null": 1,
@@ -450,7 +495,7 @@
 		"field_schema_medicalprocedure_subtype": {
 			"key": "field_schema_medicalprocedure_subtype",
 			"name": "schema_medicalprocedure_subtype",
-			"label": "MedicalProcedure Subtype (availableService)",
+			"label": "MedicalProcedure Subtype",
 			"type": "select",
 			"instructions": "Select the most appropriate subtype of MedicalProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/MedicalProcedure#subtypes' target='_blank'>https://schema.org/MedicalProcedure#subtypes</a>.",
 			"required": 1,
@@ -462,11 +507,11 @@
 			},
 			"choices": {
 				"0": "<strong>None</strong> &mdash; Either MedicalProcedure is specific enough or no other subtype option is relevant.",
-				"DiagnosticProcedure": "<strong>Diagnostic Procedure</strong> &mdash; A medical procedure intended primarily for diagnostic, as opposed to therapeutic, purposes.",
-				"PalliativeProcedure": "<strong>Palliative Procedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
+				"DiagnosticProcedure": "<strong>DiagnosticProcedure</strong> &mdash; A medical procedure intended primarily for diagnostic, as opposed to therapeutic, purposes.",
+				"PalliativeProcedure": "<strong>PalliativeProcedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
 				"PhysicalExam": "<strong>Physical Exam</strong> &mdash; A type of physical examination of a patient performed by a physician.",
-				"SurgicalProcedure": "<strong>Surgical Procedure</strong> &mdash; A medical procedure involving an incision with instruments; performed for diagnose, or therapeutic purposes.",
-				"TherapeuticProcedure": "<strong>Therapeutic Procedure</strong> &mdash; A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition."
+				"SurgicalProcedure": "<strong>SurgicalProcedure</strong> &mdash; A medical procedure involving an incision with instruments; performed for diagnose, or therapeutic purposes.",
+				"TherapeuticProcedure": "<strong>TherapeuticProcedure</strong> &mdash; A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition."
 			},
 			"default_value": [],
 			"allow_null": 1,
@@ -482,7 +527,7 @@
 		"field_schema_therapeuticprocedure_subtype": {
 			"key": "field_schema_therapeuticprocedure_subtype",
 			"name": "schema_therapeuticprocedure_subtype",
-			"label": "TherapeuticProcedure Subtype (availableService)",
+			"label": "TherapeuticProcedure Subtype",
 			"type": "select",
 			"instructions": "Select the most appropriate subtype of TherapeuticProcedure.</p><p class='description' style='margin-top: 0.5em;'>For descriptions of each, visit the relevant page linked at <a href='https://schema.org/TherapeuticProcedure#subtypes' target='_blank'>https://schema.org/TherapeuticProcedure#subtypes</a>.",
 			"required": 1,
@@ -494,8 +539,8 @@
 			},
 			"choices": {
 				"0": "<strong>None</strong> &mdash; Either TherapeuticProcedure is specific enough or no other subtype option is relevant.",
-				"MedicalTherapy": "<strong>Medical Therapy</strong> &mdash; Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g., hemodialysis) aimed at improving or preventing a health condition.",
-				"PsychologicalTreatment": "<strong>Psychological Treatment</strong> &mdash; A process of care relying upon counseling, dialogue and communication aimed at improving a mental health condition without use of drugs."
+				"MedicalTherapy": "<strong>MedicalTherapy</strong> &mdash; Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g., hemodialysis) aimed at improving or preventing a health condition.",
+				"PsychologicalTreatment": "<strong>PsychologicalTreatment</strong> &mdash; A process of care relying upon counseling, dialogue and communication aimed at improving a mental health condition without use of drugs."
 			},
 			"default_value": [],
 			"allow_null": 1,
@@ -523,11 +568,11 @@
 			},
 			"choices": {
 				"0": "<strong>None</strong> &mdash; Either MedicalTherapy is specific enough or no other subtype option is relevant.",
-				"OccupationalTherapy": "<strong>Occupational Therapy</strong> &mdash; A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.",
-				"PalliativeProcedure": "<strong>Palliative Procedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
-				"PhysicalTherapy": "<strong>Physical Therapy</strong> &mdash; A process of progressive physical care and rehabilitation aimed at improving a health condition.",
-				"RadiationTherapy": "<strong>Radiation Therapy</strong> &mdash; A process of care using radiation aimed at improving a health condition.",
-				"RespiratoryTherapy": "<strong>Respiratory Therapy</strong> &mdash; The therapy that is concerned with the maintenance or improvement of respiratory function (as in patients with pulmonary disease)."
+				"OccupationalTherapy": "<strong>OccupationalTherapy</strong> &mdash; A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.",
+				"PalliativeProcedure": "<strong>PalliativeProcedure</strong> &mdash; A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.",
+				"PhysicalTherapy": "<strong>PhysicalTherapy</strong> &mdash; A process of progressive physical care and rehabilitation aimed at improving a health condition.",
+				"RadiationTherapy": "<strong>RadiationTherapy</strong> &mdash; A process of care using radiation aimed at improving a health condition.",
+				"RespiratoryTherapy": "<strong>RespiratoryTherapy</strong> &mdash; The therapy that is concerned with the maintenance or improvement of respiratory function (as in patients with pulmonary disease)."
 			},
 			"default_value": [],
 			"allow_null": 1,
@@ -540,9 +585,9 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_schema_MedicalImagingTechnique": {
-			"key": "field_schema_MedicalImagingTechnique",
-			"name": "schema_MedicalImagingTechnique",
+		"field_schema_medicalimagingtechnique": {
+			"key": "field_schema_medicalimagingtechnique",
+			"name": "schema_medicalimagingtechnique",
 			"label": "Imaging Technique Used (MedicalImagingTechnique)",
 			"type": "select",
 			"instructions": "Select the most appropriate MedicalImagingTechnique enumeration member.</p><p class='description' style='margin-top: 0.5em;'>For information on the imagingTechnique Schema.org property, visit <a href='https://schema.org/imagingTechnique' target='_blank'>https://schema.org/imagingTechnique</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalImagingTechnique Schema.org enumeration type, visit <a href='https://schema.org/MedicalImagingTechnique' target='_blank'>https://schema.org/MedicalImagingTechnique</a>.",
@@ -575,8 +620,8 @@
 		},
 		"field_schema_subtest": {
 			"key": "field_schema_subtest",
-			"label": "Component Tests of the Panel (subTest)",
 			"name": "schema_subtest",
+			"label": "Component Test(s) of This Test Panel (MedicalTest)",
 			"type": "relationship",
 			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/subTest' target='_blank'>https://schema.org/subTest</a>.",
 			"required": 0,
@@ -604,9 +649,9 @@
 		"field_schema_tissuesample": {
 			"key": "field_schema_tissuesample",
 			"name": "schema_tissuesample",
-			"label": "Tissue Sample Type (tissueSample)",
+			"label": "Tissue Sample Type(s) (tissueSample > Text)",
 			"type": "repeater",
-			"instructions": "The type of tissue sample required for the test.</p><p class='description' style='margin-top: 0.5em;'>For information on the tissueSample Schema.org property, visit <a href='https://schema.org/tissueSample' target='_blank'>https://schema.org/tissueSample</a>.",
+			"instructions": "List the tissue sample type(s) required for the test.</p><p class='description' style='margin-top: 0.5em;'>For information on the tissueSample Schema.org property, visit <a href='https://schema.org/tissueSample' target='_blank'>https://schema.org/tissueSample</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -623,8 +668,8 @@
 			"sub_fields": [
 				{
 					"key": "field_schema_tissuesample_text",
-					"label": "Individual Tissue Sample Type",
 					"name": "schema_tissuesample_text",
+					"label": "Individual Tissue Sample Type",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -645,12 +690,12 @@
 				}
 			]
 		},
-		"field_schema_usedtodiagnose": {
-			"key": "field_schema_usedtodiagnose",
-			"label": "Condition(s) the Test Is Used to Diagnose (usedToDiagnose)",
-			"name": "schema_usedtodiagnose",
+		"field_schema_medicalcondition": {
+			"key": "field_schema_medicalcondition",
+			"name": "schema_medicalcondition",
+			"label": "Medical Condition(s) (MedicalCondition)",
 			"type": "relationship",
-			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/usedToDiagnose' target='_blank'>https://schema.org/usedToDiagnose</a>.",
+			"instructions": "Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCondition Schema.org type, visit <a href='https://schema.org/MedicalCondition' target='_blank'>https://schema.org/usedToDiagnose</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -673,10 +718,10 @@
 				"acfe_bidirectional_enabled": "0"
 			}
 		},
-		"field_schema_usesdevice": {
-			"key": "field_schema_usesdevice",
-			"name": "schema_usesdevice",
-			"label": "Device Used (usesDevice)",
+		"field_schema_medicaldevice": {
+			"key": "field_schema_medicaldevice",
+			"name": "schema_medicaldevice",
+			"label": "Object(s) Used in a Medical Capacity, Such As to Diagnose or Treat a Patient (MedicalDevice)",
 			"type": "repeater",
 			"instructions": "For information on the usesDevice Schema.org property, visit <a href='https://schema.org/usesDevice' target='_blank'>https://schema.org/usesDevice</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalDevice Schema.org type, visit <a href='https://schema.org/MedicalDevice' target='_blank'>https://schema.org/MedicalDevice</a>.",
 			"required": 0,
@@ -694,9 +739,9 @@
 			"button_label": "Add Device",
 			"sub_fields": [
 				{
-					"key": "field_schema_usesdevice_name",
-					"name": "schema_usesdevice_name",
-					"label": "Device Name (name)",
+					"key": "field_schema_medicaldevice_name",
+					"name": "schema_medicaldevice_name",
+					"label": "Name of the Medical Device (name > Text)",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -716,159 +761,59 @@
 					"acfe_update": ""
 				},
 				{
-					"key": "field_schema_usesdevice_alt_name",
-					"name": "schema_usesdevice_alt_name",
-					"label": "Alternate Name(s)",
-					"type": "repeater",
+					"key": "field_schema_medicaldevice_alternatename",
+					"name": "schema_medicaldevice_alternatename",
+					"label": "Alternate Name(s) for the Medical Device (alternateName > Text)",
+					"type": "clone",
 					"instructions": "",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",
-						"class": "",
+						"class": "uamswp-hide-clone-label",
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"collapsed": "",
-					"min": 0,
-					"max": "",
+					"clone": [
+						"field_schema_alternatename"
+					],
+					"display": "group",
 					"layout": "block",
-					"button_label": "Add Alternate Name",
-					"sub_fields": [
-						{
-							"key": "field_schema_usesdevice_alt_name_item",
-							"name": "schema_usesdevice_alt_name_item",
-							"label": "Individual Alternate Name",
-							"type": "text",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						}
-					]
+					"prefix_label": 0,
+					"prefix_name": 1,
+					"acfe_seamless_style": 1,
+					"acfe_settings": ""
 				},
 				{
-					"key": "field_schema_usesdevice_code",
-					"name": "schema_usesdevice_code",
-					"label": "Code (code)",
-					"type": "repeater",
-					"instructions": "For information on the usesDevice Schema.org property, visit <a href='https://schema.org/code' target='_blank'>https://schema.org/code</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
+					"key": "field_schema_medicaldevice_code",
+					"name": "schema_medicaldevice_code",
+					"label": "Medical Code(s) for the Medical Device (code > MedicalCode)",
+					"type": "clone",
+					"instructions": "",
 					"required": 0,
 					"conditional_logic": 0,
 					"wrapper": {
 						"width": "",
-						"class": "",
+						"class": "uamswp-hide-clone-label",
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"collapsed": "",
-					"min": 0,
-					"max": "",
+					"clone": [
+						"field_schema_medicalcode"
+					],
+					"display": "group",
 					"layout": "block",
-					"button_label": "Add Code",
-					"sub_fields": [
-						{
-							"key": "field_schema_usesdevice_code_codingsystem",
-							"name": "schema_usesdevice_code_codingsystem",
-							"label": "Coding System (codingSystem)",
-							"type": "text",
-							"instructions": "For information on the codingSystem Schema.org property, visit <a href='https://schema.org/codingSystem' target='_blank'>https://schema.org/codingSystem</a>.",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						},
-						{
-							"key": "field_schema_usesdevice_code_code",
-							"name": "schema_usesdevice_code_code",
-							"label": "Individual Device Code (codeValue)",
-							"type": "text",
-							"instructions": "For information on the usesDevice Schema.org property, visit <a href='https://schema.org/code' target='_blank'>https://schema.org/code</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						},
-						{
-							"key": "field_schema_usesdevice_code_name",
-							"name": "schema_usesdevice_code_name",
-							"label": "Name Associated With the Device Code (name)",
-							"type": "text",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"acfe_permissions": "",
-							"default_value": "",
-							"placeholder": "",
-							"prepend": "",
-							"append": "",
-							"maxlength": "",
-							"acfe_validate": "",
-							"acfe_update": ""
-						},
-						{
-							"key": "field_schema_usesdevice_code_url",
-							"name": "schema_usesdevice_code_url",
-							"label": "URL of Device Code Description or Detail Page (url)",
-							"type": "url",
-							"instructions": "",
-							"required": 1,
-							"conditional_logic": 0,
-							"wrapper": {
-								"width": "",
-								"class": "",
-								"id": ""
-							},
-							"default_value": "",
-							"placeholder": ""
-						}
-					]
+					"prefix_label": 0,
+					"prefix_name": 1,
+					"acfe_seamless_style": 1,
+					"acfe_settings": ""
 				}
 			]
 		},
 		"field_schema_medicalproceduretype": {
 			"key": "field_schema_medicalproceduretype",
 			"name": "schema_medicalproceduretype",
-			"label": "Type of Procedure (procedureType)",
+			"label": "Type of Procedure (MedicalProcedureType)",
 			"type": "select",
 			"instructions": "Select the most appropriate MedicalProcedureType.</p><p class='description' style='margin-top: 0.5em;'>For information on the medicalProcedureType Schema.org property, visit <a href='https://schema.org/procedureType' target='_blank'>https://schema.org/procedureType</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalProcedureType Schema.org enumeration type, visit <a href='https://schema.org/MedicalProcedureType' target='_blank'>https://schema.org/MedicalProcedureType</a>.",
 			"required": 1,
@@ -894,12 +839,41 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
+		"field_schema_drugprescriptionstatus": {
+			"key": "field_schema_drugprescriptionstatus",
+			"name": "schema_drugprescriptionstatus",
+			"label": "Drug Prescription Status (DrugPrescriptionStatus)",
+			"type": "select",
+			"instructions": "Indicate whether this drug is available by prescription or over-the-counter.</p><p class='description' style='margin-top: 0.5em;'>For information on the DrugPrescriptionStatus Schema.org enumeration type, visit <a href='https://schema.org/DrugPrescriptionStatus' target='_blank'>https://schema.org/DrugPrescriptionStatus</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the enumeration members of the DrugPrescriptionStatus Schema.org enumeration type, visit the links at <a href='https://schema.org/DrugPrescriptionStatus#subtypes' target='_blank'>https://schema.org/DrugPrescriptionStatus#subtypes</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"OTC": "OTC",
+				"PrescriptionOnly": "PrescriptionOnly",
+				"none": "Neither"
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 1,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
 		"field_schema_drug": {
 			"key": "field_schema_drug",
-			"label": "Drug or Medicine Used (Drug)",
 			"name": "schema_drug",
+			"label": "Chemical or Biologic Substance(s), Used As a Medical Therapy, That Has a Physiological Effect on an Organism (Drug)",
 			"type": "repeater",
-			"instructions": "If relevant, add the drug or medicine used in the medication procedure.</p><p class='description' style='margin-top: 0.5em;'>For information on the Drug Schema.org type, visit <a href='https://schema.org/Drug' target='_blank'>https://schema.org/Drug</a>.",
+			"instructions": "Here the term drug is used interchangeably with the term medicine although clinical knowledge makes a clear difference between them.</p><p class='description' style='margin-top: 0.5em;'>For information on the Drug Schema.org type, visit <a href='https://schema.org/Drug' target='_blank'>https://schema.org/Drug</a>.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -916,8 +890,8 @@
 			"sub_fields": [
 				{
 					"key": "field_schema_drug_proprietaryname",
-					"label": "Proprietary Name (proprietaryName)",
 					"name": "schema_drug_proprietaryname",
+					"label": "Proprietary Name (proprietaryName > Text)",
 					"type": "repeater",
 					"instructions": "Proprietary name(s) given to the drug, typically by its originator(s) or creator(s). Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a> to find or confirm this information.</p><p class='description' style='margin-top: 0.5em;'>For information on the proprietaryName Schema.org property, visit <a href='https://schema.org/proprietaryName' target='_blank'>https://schema.org/proprietaryName</a>.",
 					"required": 1,
@@ -935,9 +909,9 @@
 					"button_label": "Add Name",
 					"sub_fields": [
 						{
-							"key": "field_schema_drug_proprietaryname_item",
+							"key": "field_schema_drug_proprietaryname_text",
+							"name": "schema_drug_proprietaryname_text",
 							"label": "Individual Proprietary Name",
-							"name": "schema_drug_proprietaryname_item",
 							"type": "text",
 							"instructions": "",
 							"required": 1,
@@ -949,7 +923,7 @@
 							},
 							"acfe_permissions": "",
 							"default_value": "",
-							"placeholder": "",
+							"placeholder": "e.g., Lipitor",
 							"prepend": "",
 							"append": "",
 							"maxlength": "",
@@ -960,8 +934,8 @@
 				},
 				{
 					"key": "field_schema_drug_nonproprietaryname",
-					"label": "Generic Name (nonProprietaryName)",
 					"name": "schema_drug_nonproprietaryname",
+					"label": "Generic Name (nonProprietaryName > Text)",
 					"type": "repeater",
 					"instructions": "The generic name(s) of this drug or supplement. Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a> to find or confirm this information.</p><p class='description' style='margin-top: 0.5em;'>For information on the nonProprietaryName Schema.org property, visit <a href='https://schema.org/nonProprietaryName' target='_blank'>https://schema.org/nonProprietaryName</a>.",
 					"required": 1,
@@ -979,9 +953,9 @@
 					"button_label": "Add Name",
 					"sub_fields": [
 						{
-							"key": "field_schema_drug_nonproprietaryname_item",
-							"label": "Individual nonProprietaryName",
-							"name": "schema_drug_nonproprietaryname_item",
+							"key": "field_schema_drug_nonproprietaryname_text",
+							"name": "schema_drug_nonproprietaryname_text",
+							"label": "Individual Generic Name",
 							"type": "text",
 							"instructions": "",
 							"required": 1,
@@ -993,7 +967,7 @@
 							},
 							"acfe_permissions": "",
 							"default_value": "",
-							"placeholder": "",
+							"placeholder": "e.g., atorvastatin",
 							"prepend": "",
 							"append": "",
 							"maxlength": "",
@@ -1003,11 +977,36 @@
 					]
 				},
 				{
-					"key": "field_schema_drug_drugprescriptionstatus",
-					"label": "DrugPrescriptionStatus",
-					"name": "schema_drug_drugprescriptionstatus",
+					"key": "field_schema_drug_prescriptionstatus",
+					"name": "schema_drug_prescriptionstatus",
+					"label": "Drug Prescription Status (prescriptionStatus > DrugPrescriptionStatus)",
+					"type": "clone",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "uamswp-hide-clone-label",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"clone": [
+						"field_schema_drugprescriptionstatus"
+					],
+					"display": "group",
+					"layout": "block",
+					"prefix_label": 0,
+					"prefix_name": 1,
+					"acfe_seamless_style": 1,
+					"acfe_clone_modal": 0,
+					"acfe_settings": ""
+				},
+				{
+					"key": "field_schema_drug_prescriptionstatus",
+					"name": "schema_drug_prescriptionstatus",
+					"label": "Drug Prescription Status (prescriptionStatus > DrugPrescriptionStatus)",
 					"type": "select",
-					"instructions": "Indicate whether this drug is available by prescription or over-the-counter.</p><p class='description' style='margin-top: 0.5em;'>For information on the DrugPrescriptionStatus Schema.org enumeration type, visit <a href='https://schema.org/DrugPrescriptionStatus' target='_blank'>https://schema.org/DrugPrescriptionStatus</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the enumeration members of the DrugPrescriptionStatus Schema.org enumeration type, visit the links at <a href='https://schema.org/DrugPrescriptionStatus#subtypes' target='_blank'>https://schema.org/DrugPrescriptionStatus#subtypes</a>.",
+					"instructions": "",
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -1033,10 +1032,10 @@
 				},
 				{
 					"key": "field_schema_drug_rxcui",
-					"label": "rxcui",
 					"name": "schema_drug_rxcui",
+					"label": "RxCUI drug identifier from RXNORM (rxcui > Text)",
 					"type": "text",
-					"instructions": "The RxCUI drug identifier from RxNorm. Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the rxcui Schema.org property, visit <a href='https://schema.org/rxcui' target='_blank'>https://schema.org/rxcui</a>.",
+					"instructions": "Search RxNorm at <a href='https://mor.nlm.nih.gov/RxNav/' target='_blank'>https://mor.nlm.nih.gov/RxNav/</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on the rxcui Schema.org property, visit <a href='https://schema.org/rxcui' target='_blank'>https://schema.org/rxcui</a>.",
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
@@ -1046,7 +1045,7 @@
 					},
 					"acfe_permissions": "",
 					"default_value": "",
-					"placeholder": "",
+					"placeholder": "e.g., 153165",
 					"prepend": "",
 					"append": "",
 					"maxlength": "",
@@ -1055,10 +1054,10 @@
 				}
 			]
 		},
-		"field_schema_duplicatetherapy": {
-			"key": "field_schema_duplicatetherapy",
-			"label": "Duplicate Therapy (duplicateTherapy)",
-			"name": "schema_duplicatetherapy",
+		"field_schema_medicaltherapy": {
+			"key": "field_schema_medicaltherapy",
+			"name": "schema_medicaltherapy",
+			"label": "Medical Intervention(s) Designed to Prevent, Treat, and Cure Human Diseases and Medical Conditions, Including Both Curative and Palliative Therapies (MedicalTherapy)",
 			"type": "relationship",
 			"instructions": "Select any other therapies that duplicate or overlaps this one.</p><p class='description' style='margin-top: 0.5em;'>For information on the duplicateTherapy Schema.org property, visit <a href='https://schema.org/duplicateTherapy' target='_blank'>https://schema.org/duplicateTherapy</a>.",
 			"required": 0,
@@ -1114,7 +1113,7 @@
 		"field_schema_infectiousagentclass": {
 			"key": "field_schema_infectiousagentclass",
 			"name": "schema_infectiousagentclass",
-			"label": "InfectiousAgentClass",
+			"label": "Infectious Agent Class (InfectiousAgentClass)",
 			"type": "select",
 			"instructions": "Select the class of agents or pathogens that transmits this infectious disease.</p><p class='description' style='margin-top: 0.5em;'>For information on the Schema.org InfectiousAgentClass enumeration type, visit <a href='https://schema.org/InfectiousAgentClass</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each enumeration member, visit the relevant page linked at <a href='https://schema.org/InfectiousAgentClass#subtypes' target='_blank'>https://schema.org/InfectiousAgentClass#subtypes</a>.",
 			"required": 1,

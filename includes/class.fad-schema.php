@@ -1,6 +1,6 @@
 <?php
 
-// Collect Values For Schema Data Properties
+// Collect Values for Schema Data Properties
 
 	// Add data to an array defining schema data for address or location
 
@@ -908,6 +908,241 @@
 					return $schema_available_service;
 
 			}
+
+		}
+
+	// Add data to an array defining schema data for code (MedicalCode)
+
+		function uamswp_fad_schema_code(
+			array $repeater // code repeater field
+		) {
+
+			// Medical Code values map
+
+				$MedicalCode_values = array(
+					'DiseasesDB' => array(
+						'alternateName' => array(
+							'DiseasesDB',
+							'diseasesdatabase.com'
+						),
+						'name' => 'Diseases Database',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q213103',
+						'url' => 'http://www.diseasesdatabase.com/'
+					),
+					'ICD-9' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Ninth Revision',
+							'ICD-9',
+							'ICD9',
+						),
+						'name' => 'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q14067712',
+						'url' => 'https://www.cdc.gov/nchs/icd/icd9.htm'
+					),
+					'ICD-9-CM' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Ninth Revision, Clinical Modification',
+							'ICD-9 Clinical Modification',
+							'ICD-9-CM',
+							'ICD9CM',
+						),
+						'dateModified' => 'International Statistical Classification of Diseases and Related Health Problems, Ninth Revision, Clinical Modification',
+						'sameAs' => array(
+							'https://id.loc.gov/authorities/names/n2009185485.html',
+							'https://www.wikidata.org/wiki/Q5737131'
+						),
+						'url' => 'https://www.cdc.gov/nchs/icd/icd9cm.htm'
+					),
+					'ICD-10' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Tenth Revision',
+							'ICD-10',
+							'ICD10',
+						),
+						'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2009019647',
+							'https://www.wikidata.org/wiki/Q45127'
+						),
+						'url' => 'https://icd.who.int/browse10/'
+					),
+					'ICD-10-CM' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Tenth Revision, Clinical Modification',
+							'ICD-10 Clinical Modification',
+							'ICD-10-CM',
+							'ICD10CM',
+						),
+						'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Clinical Modification',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2009185486',
+							'https://www.wikidata.org/wiki/Q5969475'
+						),
+						'url' => 'https://www.cms.gov/medicare/coding/icd10'
+					),
+					'ICD-10-PCS' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Tenth Revision, Procedure Coding System',
+							'ICD-10 Procedure Coding System',
+							'ICD-10-PCS',
+							'ICD10PCS',
+						),
+						'name' => 'International Statistical Classification of Diseases and Related Health Problems, Tenth Revision, Procedure Coding System',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2009185487',
+							'https://www.wikidata.org/wiki/Q9006342'
+						),
+						'url' => 'https://www.cms.gov/medicare/coding/icd10'
+					),
+					'ICD-11' => array(
+						'alternateName' => array(
+							'International Statistical Classification of Diseases, Eleventh Revision',
+							'ICD-11',
+							'ICD11',
+						),
+						'name' => 'International Statistical Classification of Diseases and Related Health Problems, Eleventh Revision',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2010022952',
+							'https://www.wikidata.org/wiki/Q55695727'
+						),
+						'url' => 'https://icd.who.int/en'
+					),
+					'ICHI' => array(
+						'alternateName' => 'ICHI',
+						'name' => 'International Classification of Health Interventions',
+						'sameAs' => 'https://www.wikidata.org/wiki/Q3505045',
+						'url' => 'https://www.who.int/standards/classifications/international-classification-of-health-interventions'
+					),
+					'ICPC-2' => array(
+						'alternateName' => 'ICPC-2',
+						'name' => 'International Classification of Primary Care, Second Revision',
+					),
+					'ICPC-3' => array(
+						'alternateName' => 'ICPC-3',
+						'name' => 'International Classification of Primary Care, Third Revision',
+						'url' => 'https://www.icpc-3.info/'
+					),
+					'MeSH' => array(
+						'alternateName' => 'MeSH',
+						'name' => 'Medical Subject Headings',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2013188677',
+							'https://www.wikidata.org/wiki/Q199897'
+						),
+						'url' => 'https://www.nlm.nih.gov/mesh/meshhome.html'
+					),
+					'RxNorm' => array(
+						'name' => 'RxNorm',
+						'sameAs' => array(
+							'https://www.wikidata.org/wiki/Q7383767',
+							'https://id.nlm.nih.gov/mesh/D062245.html'
+						),
+						'url' => 'https://www.nlm.nih.gov/research/umls/rxnorm/'
+					),
+					'SNOMED-CT' => array(
+						'alternateName' => 'SNOMED Clinical Terms',
+						'name' => 'SNOMED CT',
+						'sameAs' => array(
+							'http://id.loc.gov/authorities/names/n2005182509',
+							'https://www.wikidata.org/wiki/Q1753883'
+						),
+						'url' => 'https://www.snomed.org/'
+					)
+				);
+
+			// Base list array
+
+				$code_list = array();
+
+			// Add each row to the array
+
+				if ( $repeater ) {
+
+					foreach ( $repeater as $code ) {
+
+						// Base item array
+
+							$code_item = array();
+
+						$codeValue = $code['schema_medicalcode_codevalue'] ?: '';
+						$codingSystem = $code['schema_medicalcode_codingsystem'] ?: '';
+						$name = $code['schema_medicalcode_name'] ?: '';
+						$url = $code['schema_medicalcode_url'] ?: '';
+
+						if (
+							$codeValue
+							&&
+							$codingSystem
+						) {
+
+							$code_item = array_filter(
+								array(
+									'@type' => 'MedicalCode',
+									'codeValue' => $codeValue,
+									'codingSystem' => $codingSystem,
+									'name' => $name,
+									'url' => $url
+								)
+							);
+
+							$inCodeSet = isset($MedicalCode_values[$codingSystem]) ? $MedicalCode_values[$codingSystem] : array();
+
+							if ( $inCodeSet ) {
+
+								$inCodeSet_alternateName = $inCodeSet['alternateName'] ?: '';
+								$inCodeSet_name = $inCodeSet['name'] ?: '';
+								$code_item['codingSystem'] = $inCodeSet_name ?: $code_item['codingSystem']; // Update base code 'codingSystem' value with 'name' value from 'inCodeSet' property
+								$inCodeSet_sameAs = $inCodeSet['sameAs'] ?: '';
+								$inCodeSet_url = $inCodeSet['url'] ?: '';
+
+								if ( $inCodeSet_name ) {
+
+									$code_item['inCodeSet'] = array_filter(
+										array(
+											'@type' => 'CategoryCodeSet',
+											'alternateName' => $inCodeSet_alternateName,
+											'name' => $inCodeSet_name,
+											'sameAs' => $inCodeSet_sameAs,
+											'url' => $inCodeSet_url
+										)
+									);
+
+								} // endif ( $inCodeSet_name )
+
+							} // endif ( $inCodeSet )
+
+						} // endif ( $codeValue && $codingSystem )
+
+						// Sort code item array
+
+							if ( is_array($code_item) ) {
+
+								ksort($code_item);
+
+							}
+
+						// Add to code item to list of codes
+
+							if ( $code_item ) {
+
+								$code_list[] = $code_item;
+
+							}
+
+					} // endforeach ( $code_array as $code )
+
+					// Clean up list array
+
+						$code_list = array_filter($code_list);
+						$code_list = array_values($code_list);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($code_list);
+
+				} // endif ( $code )
+
+			return $code_list;
 
 		}
 

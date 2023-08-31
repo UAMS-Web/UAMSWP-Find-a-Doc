@@ -1428,7 +1428,7 @@
 		"field_clinical_specialization_wikidata_url_occupation": {
 			"key": "field_clinical_specialization_wikidata_url_occupation",
 			"name": "clinical_specialization_wikidata_url_occupation",
-			"label": "Wikidata Item URL For the Occupation",
+			"label": "Wikidata Item URL for the Occupation",
 			"type": "url",
 			"instructions": "Example: \"https://www.wikidata.org/wiki/Q28837\" — the URL for \"anesthesiologist\" — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
 			"required": 1,
@@ -1444,7 +1444,7 @@
 		"field_clinical_specialization_wikidata_url_field": {
 			"key": "field_clinical_specialization_wikidata_url_field",
 			"name": "clinical_specialization_wikidata_url_field",
-			"label": "Wikidata Item URL For the Specialty \/ Field",
+			"label": "Wikidata Item URL for the Specialty \/ Field",
 			"type": "url",
 			"instructions": "The field is often linked from a section titled \"field of this occupation\" on the Wikidata item page for the occupation.</p><p class='description' style='margin-top: 0.5em;'>Example: \"https://www.wikidata.org/wiki/Q28837\" — the URL for \"anesthesiologist\" — for taxonomy code 207LA0401X (Addiction Medicine [Anesthesiology] Physician).",
 			"required": 1,

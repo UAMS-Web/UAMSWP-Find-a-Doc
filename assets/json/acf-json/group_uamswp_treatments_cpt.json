@@ -4,8 +4,8 @@
 	"fields": {
 		"field_treatment_tab_general": {
 			"key": "field_treatment_tab_general",
-			"label": "General Information",
 			"name": "",
+			"label": "General Information",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -39,8 +39,8 @@
 		},
 		"field_treatment_procedure_alternate": {
 			"key": "field_treatment_procedure_alternate",
-			"label": "Alternate Names for This Treatment or Procedure",
 			"name": "treatment_procedure_alternate",
+			"label": "Alternate Name(s) for This Treatment or Procedure",
 			"type": "repeater",
 			"instructions": "Insert any other names, phrases or acronyms that this treatment or procedure may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
 			"required": 0,
@@ -59,8 +59,8 @@
 			"sub_fields": [
 				{
 					"key": "field_treatment_procedure_alternate_text",
-					"label": "Alternate Name",
 					"name": "alternate_text",
+					"label": "Alternate Name",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -81,8 +81,8 @@
 				},
 				{
 					"key": "field_alternate_text",
-					"label": "Alternate Name [Deprecated]",
 					"name": "text",
+					"label": "Alternate Name [Deprecated]",
 					"type": "hidden",
 					"instructions": "",
 					"required": 0,
@@ -105,8 +105,8 @@
 		},
 		"field_treatment_procedure_tab_schema": {
 			"key": "field_treatment_procedure_tab_schema",
-			"label": "Schema Data",
 			"name": "",
+			"label": "Schema Data",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -129,17 +129,18 @@
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_medicalentity_subtype_availableservice"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
 		"field_treatment_procedure_schema_medicaltest_subtype": {
@@ -218,6 +219,11 @@
 			"conditional_logic": [
 				[
 					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
 						"field": "field_schema_medicalprocedure_subtype",
 						"operator": "==",
 						"value": "TherapeuticProcedure"
@@ -244,12 +250,17 @@
 		"field_treatment_procedure_schema_medicaltherapy_subtype": {
 			"key": "field_treatment_procedure_schema_medicaltherapy_subtype",
 			"name": "treatment_procedure_schema_medicaltherapy_subtype",
-			"label": "MedicalTherapy Subtype",
+			"label": "MedicalTherapy Subtype (availableService)",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
 					{
 						"field": "field_schema_therapeuticprocedure_subtype",
 						"operator": "==",
@@ -277,35 +288,41 @@
 		"field_treatment_procedure_schema_additionalType": {
 			"key": "field_treatment_procedure_schema_additionalType",
 			"name": "treatment_procedure_schema_additionalType",
-			"label": "More Specific Type For This Entity From External Vocabularies in Microdata Syntax (additionalType)",
+			"label": "More Specific Type(s) for This Entity From External Vocabularies in Microdata Syntax (additionalType > Text or URL)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_additionalType"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_MedicalImagingTechnique": {
-			"key": "field_treatment_procedure_schema_MedicalImagingTechnique",
-			"name": "treatment_procedure_schema_MedicalImagingTechnique",
-			"label": "Imaging Technique Used (MedicalImagingTechnique)",
+		"field_treatment_procedure_schema_imagingtechnique": {
+			"key": "field_treatment_procedure_schema_imagingtechnique",
+			"name": "treatment_procedure_schema_imagingtechnique",
+			"label": "Imaging Technique Used (imagingTechnique > MedicalImagingTechnique)",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
 					{
 						"field": "field_schema_medicaltest_subtype",
 						"operator": "==",
@@ -320,7 +337,7 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_schema_MedicalImagingTechnique"
+				"field_schema_medicalimagingtechnique"
 			],
 			"display": "group",
 			"layout": "block",
@@ -332,13 +349,18 @@
 		},
 		"field_treatment_procedure_schema_subtest": {
 			"key": "field_treatment_procedure_schema_subtest",
-			"label": "Component Tests of the Panel (subTest)",
 			"name": "treatment_procedure_schema_subtest",
+			"label": "Component Test(s) of This Test Panel (subTest > MedicalTest)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
 					{
 						"field": "field_schema_medicaltest_subtype",
 						"operator": "==",
@@ -358,7 +380,7 @@
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 0,
+			"prefix_name": 1,
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
@@ -366,12 +388,17 @@
 		"field_treatment_procedure_schema_tissuesample": {
 			"key": "field_treatment_procedure_schema_tissuesample",
 			"name": "treatment_procedure_schema_tissuesample",
-			"label": "Tissue Sample Type (tissueSample)",
+			"label": "Tissue Sample Type(s) (tissueSample > Text)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalTest"
+					},
 					{
 						"field": "field_schema_medicaltest_subtype",
 						"operator": "==",
@@ -399,7 +426,7 @@
 		"field_treatment_procedure_schema_usesdevice": {
 			"key": "field_treatment_procedure_schema_usesdevice",
 			"name": "treatment_procedure_schema_usesdevice",
-			"label": "Device Used (usesDevice)",
+			"label": "Medical Device(s) Used to Perform the Test (usesDevice > MedicalDevice)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -424,22 +451,22 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_schema_usesdevice"
+				"field_schema_medicaldevice"
 			],
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 0,
+			"prefix_name": 1,
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
 		"field_treatment_procedure_schema_usedtodiagnose": {
 			"key": "field_treatment_procedure_schema_usedtodiagnose",
-			"label": "Condition(s) the Test Is Used to Diagnose (usedToDiagnose)",
 			"name": "treatment_procedure_schema_usedtodiagnose",
+			"label": "Condition(s) the Test Is Used to Diagnose (usedToDiagnose > MedicalCondition)",
 			"type": "clone",
-			"instructions": "",
+			"instructions": "Select all relevant conditions from the available list.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -462,20 +489,20 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_schema_usedtodiagnose"
+				"field_schema_medicalcondition"
 			],
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 0,
+			"prefix_name": 1,
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_medicalproceduretype": {
-			"key": "field_treatment_procedure_schema_medicalproceduretype",
-			"name": "treatment_procedure_schema_medicalproceduretype",
-			"label": "Type of Procedure (procedureType)",
+		"field_treatment_procedure_schema_proceduretype": {
+			"key": "field_treatment_procedure_schema_proceduretype",
+			"name": "treatment_procedure_schema_proceduretype",
+			"label": "Type of Procedure (procedureType > MedicalProcedureType)",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
@@ -512,13 +539,18 @@
 		},
 		"field_treatment_procedure_schema_drug": {
 			"key": "field_treatment_procedure_schema_drug",
-			"label": "Drug or Medicine Used (Drug)",
 			"name": "treatment_procedure_schema_drug",
+			"label": "Drug(s) or Medicine(s) Used (drug > Drug)",
 			"type": "clone",
-			"instructions": "",
+			"instructions": "If this is a medication procedure, add the drug(s) or medicine(s) used.</p><p class='description' style='margin-top: 0.5em;'>For information on the Drug Schema.org type, visit <a href='https://schema.org/Drug' target='_blank'>https://schema.org/Drug</a>.",
 			"required": 0,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
 					{
 						"field": "field_schema_medicalprocedure_subtype",
 						"operator": "==",
@@ -538,20 +570,25 @@
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 0,
+			"prefix_name": 1,
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
 		"field_treatment_procedure_schema_duplicatetherapy": {
 			"key": "field_treatment_procedure_schema_duplicatetherapy",
-			"label": "Duplicate Therapy (duplicateTherapy)",
 			"name": "treatment_procedure_schema_duplicatetherapy",
+			"label": "Duplicate Therapies (duplicateTherapy > MedicalTherapy)",
 			"type": "clone",
-			"instructions": "",
+			"instructions": "Select any other therapies that duplicate or overlap this one.</p><p class='description' style='margin-top: 0.5em;'>For information on the duplicateTherapy Schema.org property, visit <a href='https://schema.org/duplicateTherapy' target='_blank'>https://schema.org/duplicateTherapy</a>.",
 			"required": 0,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
 					{
 						"field": "field_schema_medicalprocedure_subtype",
 						"operator": "==",
@@ -566,89 +603,92 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_schema_duplicatetherapy"
+				"field_schema_medicaltherapy"
 			],
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 0,
+			"prefix_name": 1,
 			"acfe_seamless_style": 1,
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
-		"field_treatment_procedure_schema_medicalcode": {
-			"key": "field_treatment_procedure_schema_medicalcode",
-			"name": "treatment_procedure_schema_medicalcode",
-			"label": "MedicalCode for This Entity",
-			"type": "clone",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_medicalcode"
-			],
-			"display": "seamless",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_settings": ""
-		},
-		"field_treatment_procedure_schema_medicalspecialty": {
-			"key": "field_treatment_procedure_schema_medicalspecialty",
-			"name": "treatment_procedure_schema_medicalspecialty",
-			"label": "Schema.org MedicalSpecialty",
-			"type": "clone",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_medicalspecialty_multiple"
-			],
-			"display": "seamless",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_settings": ""
-		},
-		"field_treatment_procedure_schema_sameas": {
-			"key": "field_treatment_procedure_schema_sameas",
-			"name": "treatment_procedure_schema_sameas",
-			"label": "Reference Webpages (sameAs)",
+		"field_treatment_procedure_schema_code": {
+			"key": "field_treatment_procedure_schema_code",
+			"name": "treatment_procedure_schema_code",
+			"label": "Medical Code(s) for This Entity (code > MedicalCode)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalcode"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_relevantspecialty": {
+			"key": "field_treatment_procedure_schema_relevantspecialty",
+			"name": "treatment_procedure_schema_relevantspecialty",
+			"label": "Relevant Medical Specialties (relevantSpecialty > MedicalSpecialty)",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 1,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_treatment_procedure_schema_sameas": {
+			"key": "field_treatment_procedure_schema_sameas",
+			"name": "treatment_procedure_schema_sameas",
+			"label": "Reference Webpage(s) About This Entity (sameAs > URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_sameas"
 			],
-			"display": "seamless",
+			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
 			"prefix_name": 0,
+			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
 		"field_treatment_procedure_tab_conditions": {
 			"key": "field_treatment_procedure_tab_conditions",
-			"label": "Related Conditions",
 			"name": "",
+			"label": "Related Conditions",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -663,8 +703,8 @@
 		},
 		"field_treatment_conditions": {
 			"key": "field_treatment_conditions",
-			"label": "Conditions",
 			"name": "treatment_conditions",
+			"label": "Conditions",
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
@@ -696,8 +736,8 @@
 		},
 		"field_treatment_procedure_tab_expertise": {
 			"key": "field_treatment_procedure_tab_expertise",
-			"label": "Related Areas of Expertise",
 			"name": "",
+			"label": "Related Areas of Expertise",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -712,8 +752,8 @@
 		},
 		"field_treatment_procedure_expertise": {
 			"key": "field_treatment_procedure_expertise",
-			"label": "Related Areas of Expertise",
 			"name": "treatment_procedure_expertise",
+			"label": "Related Areas of Expertise",
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
@@ -745,8 +785,8 @@
 		},
 		"field_treatment_procedure_tab_locations": {
 			"key": "field_treatment_procedure_tab_locations",
-			"label": "Related Locations",
 			"name": "",
+			"label": "Related Locations",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -761,8 +801,8 @@
 		},
 		"field_treatment_procedure_locations": {
 			"key": "field_treatment_procedure_locations",
-			"label": "Locations for this Treatment or Procedure",
 			"name": "treatment_procedure_locations",
+			"label": "Locations for this Treatment or Procedure",
 			"type": "relationship",
 			"instructions": "",
 			"required": 0,
@@ -794,8 +834,8 @@
 		},
 		"field_treatment_procedure_tab_providers": {
 			"key": "field_treatment_procedure_tab_providers",
-			"label": "Related Providers",
 			"name": "",
+			"label": "Related Providers",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -810,8 +850,8 @@
 		},
 		"field_treatment_procedure_physicians": {
 			"key": "field_treatment_procedure_physicians",
-			"label": "Providers performing or prescribing this treatment or procedure",
 			"name": "treatment_procedure_physicians",
+			"label": "Providers performing or prescribing this treatment or procedure",
 			"type": "relationship",
 			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
 			"required": 0,
@@ -843,8 +883,8 @@
 		},
 		"field_treatment_procedure_tab_clinical_resources": {
 			"key": "field_treatment_procedure_tab_clinical_resources",
-			"label": "Related Clinical Resources",
 			"name": "",
+			"label": "Related Clinical Resources",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -859,8 +899,8 @@
 		},
 		"field_treatment_procedure_clinical_resources": {
 			"key": "field_treatment_procedure_clinical_resources",
-			"label": "Clinical Resources",
 			"name": "treatment_procedure_clinical_resources",
+			"label": "Clinical Resources",
 			"type": "relationship",
 			"instructions": "Resources will be displayed on the page in the order in which they were published, with the most recently published resources showing first.",
 			"required": 0,
@@ -892,8 +932,8 @@
 		},
 		"field_treatment_procedure_tab_deprecated": {
 			"key": "field_treatment_procedure_tab_deprecated",
-			"label": "Deprecated Fields",
 			"name": "",
+			"label": "Deprecated Fields",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -916,8 +956,8 @@
 		},
 		"field_treatment_procedure_content": {
 			"key": "field_treatment_procedure_content",
-			"label": "Content",
 			"name": "treatment_procedure_content",
+			"label": "Content",
 			"type": "wysiwyg",
 			"instructions": "",
 			"required": 0,
@@ -938,8 +978,8 @@
 		},
 		"field_medline_code_type": {
 			"key": "field_medline_code_type",
-			"label": "Code Type for Medline Plus",
 			"name": "medline_code_type",
+			"label": "Code Type for Medline Plus",
 			"type": "button_group",
 			"instructions": "Pick which code type to choose",
 			"required": 0,
@@ -966,8 +1006,8 @@
 		},
 		"field_medline_code_id": {
 			"key": "field_medline_code_id",
-			"label": "Medline Code ID #",
 			"name": "medline_code_id",
+			"label": "Medline Code ID #",
 			"type": "text",
 			"instructions": "Find Codes: <a href=\"https://icd10cmtool.cdc.gov/\" target=\"_blank\">ICD-10</a> | <a href=\"https://ndclist.com/\" target=\"_blank\">NDC</a> | <a href=\"https://search.loinc.org/searchLOINC/\" target=\"_blank\">LONIC</a>",
 			"required": 1,
@@ -994,8 +1034,8 @@
 		},
 		"field_medline_view_data": {
 			"key": "field_medline_view_data",
-			"label": "Medline Data Verification",
 			"name": "",
+			"label": "Medline Data Verification",
 			"type": "message",
 			"instructions": "",
 			"required": 0,
@@ -1074,8 +1114,8 @@
 		},
 		"field_treatment_procedure_cta": {
 			"key": "field_treatment_procedure_cta",
-			"label": "Call-to-Action (CTA) Bar(s)",
 			"name": "treatment_procedure_cta",
+			"label": "Call-to-Action (CTA) Bar(s)",
 			"type": "repeater",
 			"instructions": "Define up to two CTA Bar blocks",
 			"required": 0,
@@ -1094,8 +1134,8 @@
 			"sub_fields": [
 				{
 					"key": "field_treatment_procedure_cta_bar_heading",
-					"label": "Heading",
 					"name": "cta_bar_heading",
+					"label": "Heading",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -1113,8 +1153,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_body",
-					"label": "Body",
 					"name": "cta_bar_body",
+					"label": "Body",
 					"type": "wysiwyg",
 					"instructions": "",
 					"required": 1,
@@ -1132,8 +1172,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_action_type",
-					"label": "Action Type",
 					"name": "cta_bar_action_type",
+					"label": "Action Type",
 					"type": "button_group",
 					"instructions": "Only choose None if your action is contained within your body text.",
 					"required": 1,
@@ -1155,8 +1195,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_action_url_open",
-					"label": "URL Action",
 					"name": "",
+					"label": "URL Action",
 					"type": "accordion",
 					"instructions": "All fields must be populated or your link will not display.",
 					"required": 0,
@@ -1180,8 +1220,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_button_text",
-					"label": "Button Text",
 					"name": "cta_bar_button_text",
+					"label": "Button Text",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -1207,8 +1247,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_button_url",
-					"label": "Button URL",
 					"name": "cta_bar_button_url",
+					"label": "Button URL",
 					"type": "link",
 					"instructions": "",
 					"required": 1,
@@ -1230,8 +1270,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_button_description",
-					"label": "Button Link Description",
 					"name": "cta_bar_button_description",
+					"label": "Button Link Description",
 					"type": "text",
 					"instructions": "This is needed for accessibility. It helps differentiate between multiple links that use the same text like \"Learn more\". Describe the intent of the link, like \"Learn more about the ABC Department\".",
 					"required": 1,
@@ -1257,8 +1297,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_action_url_close",
-					"label": "URL Action Close",
 					"name": "",
+					"label": "URL Action Close",
 					"type": "accordion",
 					"instructions": "",
 					"required": 0,
@@ -1275,8 +1315,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_action_phone_open",
-					"label": "Phone Action",
 					"name": "",
+					"label": "Phone Action",
 					"type": "accordion",
 					"instructions": "All fields must be populated or your telephone number will not display.",
 					"required": 0,
@@ -1300,8 +1340,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_phone_prepend",
-					"label": "Text before phone number",
 					"name": "cta_bar_phone_prepend",
+					"label": "Text before phone number",
 					"type": "text",
 					"instructions": "This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: \"Call\", \"Fax Referrals to\".",
 					"required": 1,
@@ -1327,8 +1367,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_phone",
-					"label": "Phone Number",
 					"name": "cta_bar_phone",
+					"label": "Phone Number",
 					"type": "text",
 					"instructions": "Format your phone number using dashes. Include the area code. Example: 999-999-9999",
 					"required": 1,
@@ -1354,8 +1394,8 @@
 				},
 				{
 					"key": "field_treatment_procedure_cta_bar_action_URL_close",
-					"label": "Accordion Close",
 					"name": "",
+					"label": "Accordion Close",
 					"type": "accordion",
 					"instructions": "",
 					"required": 0,
