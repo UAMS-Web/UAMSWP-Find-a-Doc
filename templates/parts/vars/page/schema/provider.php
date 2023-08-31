@@ -32,41 +32,47 @@ $schema_provider = $schema_common_base;
 
 TODO List
 
- * Create means of defining organization schema for third-party institutions (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
- * Create means of associating third-party institutions with provider
- * Get ISCO-08 values from Clinical Specialization taxonomy items
- * Get O*Net-SOC values from Clinical Specialization taxonomy items
- * Define schema for related locations
- * Define array of just URLs from related locations
- * Bring locations schema and URLs into relevant properties of provider's schema
- * Define schema for related areas of expertise
- * Define array of just URLs from related areas of expertise
- * Bring areas of expertise schema and URLs into relevant properties of provider's schema
- * Define schema for related clinical resources
- * Define array of just URLs from related clinical resources
- * Bring clinical resources schema and URLs into relevant properties of provider's schema
- * Define schema for related conditions
- * Define array of just URLs from related conditions
- * Bring conditions schema and URLs into relevant properties of provider's schema
- * Define schema for related treatments
- * Define array of just URLs from related treatments
- * Bring treatments schema and URLs into relevant properties of provider's schema
- * Define schema for affiliated hospital(s)
- * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
- * Add fields to Education and Training Organization taxonomy, integrate them into this schema
-	 * Required — Query for whether the organization is a College/University
-	 * Optional — Alternate Name (repeater)
-	 * Required — URL
-	 * Optional — Street Address
-	 * Required — City / Locality (required)
-	 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
-	 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
-	 * Optional — Postal Code
- * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
- * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
- * Filter duplicateTherapy input (on treatments) to only those with MedicalTherapy type 
- * Filter duplicateTherapy input (on treatments) to remove current item
- * Populate values for usesDevice on related treatments
+ * Provider
+	 * Create means of defining organization schema for third-party institutions (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+	 * Create means of associating third-party institutions with provider
+	 * Define schema for affiliated hospital(s)
+	 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
+		 * Required — Query for whether the organization is a College/University
+		 * Optional — Alternate Name (repeater)
+		 * Required — URL
+		 * Optional — Street Address
+		 * Required — City / Locality (required)
+		 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
+		 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
+		 * Optional — Postal Code
+	 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
+ * Related ontology items
+	 * Related locations
+		 * Define schema for related locations
+		 * Define array of just URLs from related locations
+		 * Bring locations schema and URLs into relevant properties of provider's schema
+	 * Related areas of expertise
+		 * Define schema for related areas of expertise
+		 * Define array of just URLs from related areas of expertise
+		 * Bring areas of expertise schema and URLs into relevant properties of provider's schema
+	 * Related clinical resources
+		 * Define schema for related clinical resources
+		 * Define array of just URLs from related clinical resources
+		 * Bring clinical resources schema and URLs into relevant properties of provider's schema
+	 * Related conditions
+		 * Define schema for related conditions
+		 * Define array of just URLs from related conditions
+		 * Bring conditions schema and URLs into relevant properties of provider's schema
+	 * Related treatments
+		 * Define schema for related treatments
+		 * Define array of just URLs from related treatments
+		 * Bring treatments schema and URLs into relevant properties of provider's schema
+		 * Populate values for usesDevice on related treatments
+		 * Filter duplicateTherapy input (on treatments) to only those with MedicalTherapy type 
+		 * Filter duplicateTherapy input (on treatments) to remove current item
+ * General
+	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
+	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
 
 */
 
