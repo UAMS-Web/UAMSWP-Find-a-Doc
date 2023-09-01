@@ -63,22 +63,19 @@ TODO List
 		 * Bring clinical resources schema and URLs into relevant properties of provider's schema
 		 * Make the defining of the values array into a function that can be repeated, cached, based on the clinical resource ID
 	 * Related conditions
-		 * Make the defining of the values array into a function that can be repeated, cached, based on the condition ID
+		 * Add transients inside foreach loop of defining function
 	 * Related treatments
-		 * Make the defining of the values array into a function that can be repeated, cached, based on the treatment ID
-		 * Properties
-			 * subTest
-				 * Add full (or additional) values to the subTest item value arrays
-			 * usedToDiagnose
-				 * Replace Type in each treatment's usedToDiagnose value with the usedToDiagnose:Treatment's type
+		 * Add transients inside foreach loop of defining function
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
  * Filter ACF fields
-	 * field_schema_medicaltest (just treatments with MedicalTest type or its subtypes)
-	 * field_schema_medicaltest (exclude current item)
-	 * field_schema_medicaltherapy (just treatments with MedicalTherapy type or its subtypes)
-	 * field_schema_medicaltherapy (exclude current item)
+	 * Fields referencing MedicalTest type
+		 * Just treatments with MedicalTest type or its subtypes
+		 * Exclude current item
+	 * Fields referencing MedicalTherapy type
+		 * Just treatments with MedicalTherapy type or its subtypes
+		 * Exclude current item
 
 */
 
