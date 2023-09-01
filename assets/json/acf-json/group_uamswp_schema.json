@@ -1059,7 +1059,7 @@
 			"name": "schema_medicaltherapy",
 			"label": "Medical Intervention(s) Designed to Prevent, Treat, and Cure Human Diseases and Medical Conditions, Including Both Curative and Palliative Therapies (MedicalTherapy)",
 			"type": "relationship",
-			"instructions": "Select any other therapies that duplicate or overlaps this one.</p><p class='description' style='margin-top: 0.5em;'>For information on the duplicateTherapy Schema.org property, visit <a href='https://schema.org/duplicateTherapy' target='_blank'>https://schema.org/duplicateTherapy</a>.",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
