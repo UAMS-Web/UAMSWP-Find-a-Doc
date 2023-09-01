@@ -1,5 +1,9 @@
 <?php
 
+// Common property values
+
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
 // Location-specific schema
 // Merge into $schema_base['@graph']
 
@@ -36,13 +40,7 @@
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
 			),
-			'medicalAudience' => array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => 'Arkansas'
-				),
-				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			),
+			'medicalAudience' => $schema_common_medicalAudience,
 			'mentions' => array(
 				array(
 					'@id' => 'https://uamshealth.com/location/foo/#MedicalClinic' // Replace URL up to the hash with relevant URL // Replace 'MedicalClinic' with 'Hospital' if necessary

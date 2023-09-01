@@ -1,14 +1,8 @@
 <?php
 
-// Common variables
+// Common property values
 
-	// Arkansas as State
-
-		$schema_arkansas = array(
-			'@type' => 'State',
-			'name' => 'Arkansas',
-			'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
-		);
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
 
 // UAMS
 
@@ -350,17 +344,7 @@
 
 	// audience
 
-		$schema_base_website_uams_health['audience'][] = array(
-			'@type' => 'Audience',
-			'name' => 'Patients',
-			'geographicArea' => $schema_arkansas
-		);
-
-		$schema_base_website_uams_health['audience'][] = array(
-			'@type' => 'Audience',
-			'name' => 'Referring physicians',
-			'geographicArea' => $schema_arkansas
-		);
+		$schema_base_website_uams_health['audience'] = $schema_common_audience;
 
 	// creator
 

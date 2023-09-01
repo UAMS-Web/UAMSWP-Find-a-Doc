@@ -1,5 +1,9 @@
 <?php
 
+// Common property values
+
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
 // Base schema to be used on all UAMSHealth.com pages
 
 	$schema_base = array(
@@ -290,18 +294,7 @@
 				'@type' => 'WebSite',
 				'@id' => 'https://uamshealth.com/#WebSite',
 				'name' => 'UAMS Health',
-				'audience' => array(
-					array(
-						'@type' => 'Audience',
-						'name' => 'Patients',
-						'geographicArea' => 'Arkansas'
-					),
-					array(
-						'@type' => 'Audience',
-						'name' => 'Referring physicians',
-						'geographicArea' => 'Arkansas'
-					)
-				),
+				'audience' => $schema_common_audience,
 				'creator' => array(
 					'@id' => 'https://uams.edu/#CollegeOrUniversity'
 				),

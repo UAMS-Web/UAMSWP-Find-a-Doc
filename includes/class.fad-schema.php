@@ -1191,6 +1191,14 @@
 			int $CreativeWork_i = 1 // Iteration counter
 		) {
 
+			// Common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+			// UAMS organization values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+
 			// Base list array
 
 				$CreativeWork_list = array();
@@ -1286,7 +1294,7 @@
 
 							// Merge common property values into each resource type's property values
 
-								foreach ( $CreativeWork_type_values as $item ) {
+								foreach ( $CreativeWork_type_values as &$item ) {
 
 									if ( $item != 'all ') {
 
@@ -1339,6 +1347,18 @@
 
 					// name
 
+						/*
+						 * The name of the item.
+						 * 
+						 * Subproperty of:
+						 * 
+						 *     - rdfs:label
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_name = '';
@@ -1361,6 +1381,17 @@
 
 					// abstract
 
+						/*
+						 * An abstract is a short description that summarizes a CreativeWork.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 * 
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+						 * feedback and adoption from applications and websites can help improve their definitions.
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_abstract = '';
@@ -1369,7 +1400,7 @@
 
 							// Get values
 
-								$CreativeWork_abstract = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_abstract = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
 
 							// Add to item values
 
@@ -1383,15 +1414,37 @@
 
 					// articleBody
 
+						/*
+						 * The actual body of the article.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_articleBody = '';
 
-						if ( in_array( 'articleBody', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'articleBody', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
+							
+								$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $CreativeWork ) ?: false;
 
-								$CreativeWork_articleBody = get_field( 'foo', $CreativeWork ) ?: '';
+								if ( $CreativeWork_nci_query ) {
+
+									$CreativeWork_articleBody = get_field( 'clinical_resource_nci_embed', $CreativeWork ) ?: '';
+
+								} else {
+
+									$CreativeWork_articleBody = get_field( 'clinical_resource_text', $CreativeWork )  ?: '';
+
+								}
 
 							// Add to item values
 
@@ -1405,15 +1458,27 @@
 
 					// audience
 
+						/*
+						 * An intended audience, i.e. a group for whom something was created.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Audience
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_audience = '';
 
-						if ( in_array( 'audience', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'audience', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_audience = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_audience = $schema_common_audience;
 
 							// Add to item values
 
@@ -1425,17 +1490,57 @@
 
 						}
 
+					// Asset ID
+
+						// Eliminate PHP errors
+
+							$CreativeWork_asset_id = '';
+						
+						if ( $nesting_level == 0 ) {
+
+							if ( $CreativeWork_resource_type == 'infographic' ) {
+
+								// Infographic image id
+
+									$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $CreativeWork ) ?: '';
+
+							}
+
+						}
+
 					// contentSize
+
+						/*
+						 * File size in (mega/kilo)bytes.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
 
 						// Eliminate PHP errors
 
 							$CreativeWork_contentSize = '';
 
-						if ( in_array( 'contentSize', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'contentSize', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_contentSize = get_field( 'foo', $CreativeWork ) ?: '';
+								// Asset file path
+
+									$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
+
+								// Asset file size
+
+									$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
+
+								// Formatted asset file size
+
+									$CreativeWork_contentSize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
 
 							// Add to item values
 
@@ -1449,15 +1554,27 @@
 
 					// contentUrl
 
+						/*
+						 * Actual bytes of the media object, for example the image file or video file.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_contentUrl = '';
 
-						if ( in_array( 'contentUrl', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'contentUrl', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_contentUrl = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_contentUrl = wp_get_attachment_url( $CreativeWork_asset_id ) ?: '';
 
 							// Add to item values
 
@@ -1469,17 +1586,90 @@
 
 						}
 
+					// Syndication values
+
+						// Eliminate PHP errors
+
+							$CreativeWork_syndication_query = '';
+							$CreativeWork_nci_query = '';
+							$CreativeWork_syndication_URL = '';
+							$CreativeWork_syndication_org = '';
+
+						if ( $nesting_level == 0 ) {
+
+							$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $CreativeWork ) ?: false;
+
+							// NCI syndication query
+
+								if ( $CreativeWork_syndication_query ) {
+
+									$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $CreativeWork ) ?: false;
+
+								}
+
+							// Syndication source URL
+
+								if ( $CreativeWork_syndication_query ) {
+
+									$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $CreativeWork ) ?: false;
+
+								}
+
+							// Syndication source organization
+
+								if (
+									$CreativeWork_syndication_query
+									&&
+									$CreativeWork_nci_query
+								) {
+
+									$CreativeWork_syndication_org = array(
+										'@type' => 'ResearchOrganization',
+										'name' => 'National Cancer Institute',
+										'sameAs' => array(
+											'http://id.loc.gov/authorities/names/n79107940',
+											'https://www.wikidata.org/wiki/Q664846'
+										),
+										'url' => 'https://www.cancer.gov/'
+									);
+
+								}
+
+						}
+
 					// creator
+
+						/*
+						 * The creator/author of this CreativeWork. This is the same as the Author 
+						 * property for CreativeWork.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Organization
+						 *     - Person
+						 */
 
 						// Eliminate PHP errors
 
 							$CreativeWork_creator = '';
 
-						if ( in_array( 'creator', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'creator', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_creator = get_field( 'foo', $CreativeWork ) ?: '';
+								if ( $CreativeWork_syndication_query ) {
+
+									$CreativeWork_creator = $CreativeWork_syndication_org;
+
+								} else {
+
+									$CreativeWork_creator = $schema_base_org_uams_health_ref;
+
+								}
 
 							// Add to item values
 
@@ -1487,21 +1677,39 @@
 
 									$CreativeWork_item['creator'] = $CreativeWork_creator;
 
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($CreativeWork_item['creator']);
+
 								}
 
 						}
 
 					// dateModified
 
+						/*
+						 * The date on which the CreativeWork was most recently modified or when the 
+						 * item's entry was modified within a DataFeed.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Date
+						 *     - DateTime
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_dateModified = '';
 
-						if ( in_array( 'dateModified', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'dateModified', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_dateModified = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_dateModified = get_the_modified_date( 'Y-m-d', $CreativeWork ); // ISO 8601 date format
 
 							// Add to item values
 
@@ -1515,15 +1723,28 @@
 
 					// datePublished
 
+						/*
+						 * Date of first broadcast/publication.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Date
+						 *     - DateTime
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_datePublished = '';
 
-						if ( in_array( 'datePublished', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'datePublished', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_datePublished = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_datePublished = get_the_date( 'Y-m-d', $CreativeWork ); // ISO 8601 date format
 
 							// Add to item values
 
@@ -1537,6 +1758,15 @@
 
 					// description
 
+						/*
+						 * A description of the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 *     - TextObject
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_description = '';
@@ -1545,7 +1775,15 @@
 
 							// Get values
 
-								$CreativeWork_description = get_field( 'foo', $CreativeWork ) ?: '';
+								if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+									$CreativeWork_description = $CreativeWork_abstract ?: '';
+
+								} else {
+
+									$CreativeWork_description = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
+
+								}
 
 							// Add to item values
 
@@ -1557,17 +1795,109 @@
 
 						}
 
+					// Get video info
+
+						// Eliminate PHP errors
+
+							$CreativeWork_video = '';
+							$CreativeWork_video_parsed = '';
+							$CreativeWork_video_info = '';
+						
+						if (
+							$CreativeWork_resource_type == 'video'
+							// &&
+							// $nesting_level == 0
+						) {
+
+							// Video URL
+
+								$CreativeWork_video = get_field( 'clinical_resource_video', $CreativeWork ) ?: '';
+								$CreativeWork_video_parsed = parse_url($CreativeWork_video);
+
+							// Video info
+
+								$CreativeWork_video_parsed = parse_url($CreativeWork_video);
+
+								if (
+									str_contains( 'youtube', $CreativeWork_video_parsed['host'] )
+									||
+									str_contains( 'youtu.be', $CreativeWork_video_parsed['host'] )
+									||
+									'a' == 'a'
+								) {
+
+									// YouTube
+
+										$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
+
+										// Embed URL
+
+											$CreativeWork_video_embed = 'https://www.youtube.com/embed/' . 'foo';
+
+										// Title (snippet.title)
+
+											$CreativeWork_video_title = $CreativeWork_video_info['title'];
+
+										// Default Thumbnail URL, 120x90 (snippet.thumbnails.default.url)
+
+										// Medium Thumbnail URL, 240x240 (snippet.thumbnails.medium.url)
+
+										// High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+											$CreativeWork_video_thumb_high = $CreativeWork_video_info['thumbUrl'];
+
+										// Standard Thumbnail URL, 640x480 (snippet.thumbnails.standard.url)
+
+										// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+
+											$CreativeWork_video_thumb_max = $CreativeWork_video_info['HQthumbUrl'];
+
+										// Published date and time (snippet.publishedAt)
+
+											$CreativeWork_video_published = $CreativeWork_video_info['dateField'];
+
+										// Duration (contentDetails.duration)
+
+											$CreativeWork_video_duration = $CreativeWork_video_info['duration'];
+
+										// Description (snippet.description)
+
+											$CreativeWork_video_description = $CreativeWork_video_info['description'];
+
+										// Whether captions are available for the video (contentDetails.caption)
+
+											$CreativeWork_video_caption = $CreativeWork_video_info['captions_data'];
+											$CreativeWork_video_caption = ( $CreativeWork_video_caption == 'true' ) ? true : false;
+
+										// Whether the video is available in high definition (HD) or only in standard definition (contentDetails.definition)
+
+								}
+						}
+
 					// duration
+
+						/*
+						 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
+						 * format.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Duration
+						 */
 
 						// Eliminate PHP errors
 
 							$CreativeWork_duration = '';
 
-						if ( in_array( 'duration', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'duration', $CreativeWork_properties )
+							// &&
+							// $nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_duration = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_duration = $CreativeWork_video_duration ?: '';
 
 							// Add to item values
 
@@ -1580,6 +1910,18 @@
 						}
 
 					// embeddedTextCaption
+
+						/*
+						 * Represents textual captioning from a MediaObject, e.g. text of a 'meme'.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 * 
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+						 * feedback and adoption from applications and websites can help improve their 
+						 * definitions.
+						 */
 
 						// Eliminate PHP errors
 
@@ -1603,15 +1945,29 @@
 
 					// embedUrl
 
+						/*
+						 * A URL pointing to a player for a specific video. In general, this is the 
+						 * information in the src element of an embed tag and should not be the same as 
+						 * the content of the loc tag.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_embedUrl = '';
 
-						if ( in_array( 'embedUrl', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'embedUrl', $CreativeWork_properties )
+							// &&
+							// $nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_embedUrl = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_embedUrl = $CreativeWork_video_embed ?: '';
 
 							// Add to item values
 
@@ -1625,11 +1981,33 @@
 
 					// encodingFormat
 
+						/*
+						 * Media type typically expressed using a MIME format (see IANA site and MDN 
+						 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
+						 * for .mp3).
+						 * 
+						 * In cases where a CreativeWork has several media type representations, encoding 
+						 * can be used to indicate each MediaObject alongside particular encodingFormat 
+						 * information.
+						 * 
+						 * Unregistered or niche encoding and file formats can be indicated instead via 
+						 * the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 *     - URL
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_encodingFormat = '';
 
-						if ( in_array( 'encodingFormat', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'encodingFormat', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1647,11 +2025,25 @@
 
 					// hasDigitalDocumentPermission
 
+						/*
+						 * A permission related to the access to this document (e.g. permission to read or 
+						 * write an electronic document). For a public document, specify a grantee with an 
+						 * Audience with audienceType equal to "public".
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - DigitalDocumentPermission
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_hasDigitalDocumentPermission = '';
 
-						if ( in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1669,11 +2061,24 @@
 
 					// height
 
+						/*
+						 * The height of the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Distance
+						 *     - QuantitativeValue
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_height = '';
 
-						if ( in_array( 'height', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'height', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1690,6 +2095,15 @@
 						}
 
 					// image
+
+						/*
+						 * An image of the item. This can be a URL or a fully described ImageObject.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - ImageObject
+						 *     - URL
+						 */
 
 						// Eliminate PHP errors
 
@@ -1713,6 +2127,14 @@
 
 					// isAccessibleForFree
 
+						/*
+						 * A flag to signal that the item, event, or place is accessible for free.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Boolean
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_isAccessibleForFree = '';
@@ -1734,6 +2156,18 @@
 						}
 
 					// isPartOf
+
+						/*
+						 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
+						 * sense), is part of.
+						 * 
+						 * Inverse-property: hasPart
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - CreativeWork
+						 *     - URL
+						 */
 
 						// Eliminate PHP errors
 
@@ -1757,6 +2191,18 @@
 
 					// mainEntityOfPage
 
+						/*
+						 * Indicates a page (or other CreativeWork) for which this thing is the main 
+						 * entity being described. See background notes for details.
+						 * 
+						 * Inverse-property: mainEntity
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - CreativeWork
+						 *     - URL
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_mainEntityOfPage = '';
@@ -1779,11 +2225,23 @@
 
 					// representativeOfPage
 
+						/*
+						 * Indicates whether this image is representative of the content of the page.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Boolean
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_representativeOfPage = '';
 
-						if ( in_array( 'representativeOfPage', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'representativeOfPage', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1800,6 +2258,16 @@
 						}
 
 					// sameAs
+
+						/*
+						 * URL of a reference Web page that unambiguously indicates the item's identity 
+						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+						 * website).
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
 
 						// Eliminate PHP errors
 
@@ -1823,11 +2291,23 @@
 
 					// sourceOrganization
 
+						/*
+						 * The Organization on whose behalf the creator was working.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Organization
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_sourceOrganization = '';
 
-						if ( in_array( 'sourceOrganization', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'sourceOrganization', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1845,11 +2325,45 @@
 
 					// speakable
 
+						/*
+						 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+						 * of being highlighted as being especially appropriate for text-to-speech 
+						 * conversion. Other sections of a page may also be usefully spoken in particular 
+						 * circumstances; the 'speakable' property serves to indicate the parts most 
+						 * likely to be generally useful for speech.
+						 * 
+						 * The speakable property can be repeated an arbitrary number of times, with three 
+						 * kinds of possible 'content-locator' values:
+						 *     
+						 *     1.) id-value URL references - uses id-value of an element in the page being 
+						 *         annotated. The simplest use of speakable has (potentially relative) URL 
+						 *         values, referencing identified sections of the document concerned.
+						 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+						 *         class attribute. Use the cssSelector property).
+						 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+						 *         content). Use the xpath property.
+						 * 
+						 * For more sophisticated markup of speakable sections beyond simple ID 
+						 * references, either CSS selectors or XPath expressions to pick out document 
+						 * section(s) as speakable. For this we define a supporting type, 
+						 * SpeakableSpecification which is defined to be a possible value of the speakable 
+						 * property.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - SpeakableSpecification
+						 *     - URL
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_speakable = '';
 
-						if ( in_array( 'speakable', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'speakable', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1866,6 +2380,17 @@
 						}
 
 					// subjectOf
+
+						/*
+						 * A CreativeWork or Event about this Thing.
+						 * 
+						 * Inverse-property: about
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - CreativeWork
+						 *     - Event
+						 */
 
 						// Eliminate PHP errors
 
@@ -1889,6 +2414,14 @@
 
 					// thumbnail
 
+						/*
+						 * Thumbnail image for an image or video.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - ImageObject
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_thumbnail = '';
@@ -1897,7 +2430,7 @@
 
 							// Get values
 
-								$CreativeWork_thumbnail = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_thumbnail = $CreativeWork_video_thumb_max ?: '';
 
 							// Add to item values
 
@@ -1911,11 +2444,24 @@
 
 					// timeRequired
 
+						/*
+						 * Approximate or typical time it usually takes to work with or through the 
+						 * content of this work for the typical or target audience.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Duration
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_timeRequired = '';
 
-						if ( in_array( 'timeRequired', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'timeRequired', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1933,11 +2479,24 @@
 
 					// transcript
 
+						/*
+						 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+						 * object.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_transcript = '';
 
-						if ( in_array( 'transcript', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'transcript', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1955,11 +2514,23 @@
 
 					// videoFrameSize
 
+						/*
+						 * The frame size of the video.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_videoFrameSize = '';
 
-						if ( in_array( 'videoFrameSize', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'videoFrameSize', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1977,11 +2548,23 @@
 
 					// videoQuality
 
+						/*
+						 * The quality of the video.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_videoQuality = '';
 
-						if ( in_array( 'videoQuality', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'videoQuality', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -1999,11 +2582,24 @@
 
 					// width
 
+						/*
+						 * The width of the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Distance
+						 *     - QuantitativeValue
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_width = '';
 
-						if ( in_array( 'width', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'width', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
@@ -2021,11 +2617,22 @@
 
 					// wordCount
 
+						/*
+						 * The number of words in the text of the Article.
+						 * 
+						 * Values expected to be one of these types:
+						 *     - Integer
+						 */
+
 						// Eliminate PHP errors
 
 							$CreativeWork_wordCount = '';
 
-						if ( in_array( 'wordCount', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'wordCount', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 

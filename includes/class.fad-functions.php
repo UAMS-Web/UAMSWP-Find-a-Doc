@@ -12265,3 +12265,55 @@ function uamswp_prevent_orphan($string) {
 		}
 
 	}
+
+// Get the info from a YouTube video
+
+	function uamswp_fad_youtube_info(
+		string $url // YouTube video URL
+	){
+
+		/* 
+		 * Requires YouTube Lyte plugin
+		 * 
+		 * Source: https://github.com/futtta/wp-youtube-lyte/blob/main/wp-youtube-lyte.php
+		 * 
+		 * Additional information: https://developers.google.com/youtube/v3/docs/videos
+		 */
+
+		if ( function_exists('lyte_get_YT_resp') ) {
+
+			// Get video ID
+
+				parse_str( // Parses the string into variables
+					parse_url( // Parse a URL and return its components
+						$url,
+						PHP_URL_QUERY // Outputs the query string of the URL parsed
+					),
+					$arr
+				);
+
+				$video_id = $arr['v'];
+
+			// Get video info from cache or get it from YouTube and set it
+
+				$data = lyte_get_YT_resp( $video_id, false, '_lyte_' . $video_id ); // Get video info from cache or get it from YouTube and set it
+
+			if (
+				!isset($data)
+				||
+				empty($data)
+			) {
+
+				return false;
+
+			}
+
+			return $data;
+
+		} else {
+
+			return false;
+
+		}
+
+	}

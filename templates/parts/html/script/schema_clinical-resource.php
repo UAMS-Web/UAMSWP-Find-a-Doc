@@ -1,5 +1,9 @@
 <?php
 
+// Common property values
+
+	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
 // Clinical resource-specific schema
 // Merge into $schema_base['@graph']
 
@@ -36,13 +40,7 @@
 			'maintainer' => array(
 				'@id' => 'https://uams.edu/#CollegeOrUniversity'
 			),
-			'medicalAudience' => array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => 'Arkansas'
-				),
-				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			),
+			'medicalAudience' => $schema_common_medicalAudience,
 			'mentions' => array(
 				array(
 					'@id' => 'https://uamshealth.com/clinical-resource/foo/#Article' // Replace URL up to the hash with relevant URL
@@ -118,13 +116,7 @@
 			),
 			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
 			'articleBody' => 'foo', // Replace 'foo' with content of the article text
-			'audience' => array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => 'Arkansas'
-				),
-				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			),
+			'audience' => $schema_common_audience,
 			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
@@ -175,13 +167,7 @@
 				'foo', // Replace 'foo' with title of the clinical resource item
 			),
 			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
-			'audience' => array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => 'Arkansas'
-				),
-				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			),
+			'audience' => $schema_common_audience,
 			'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
 			'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
 			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
@@ -232,13 +218,7 @@
 				'foo', // Replace 'foo' with title of the clinical resource item
 			),
 			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
-			'audience' => array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => 'Arkansas'
-				),
-				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			),
+			'audience' => $schema_common_audience,
 			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),
@@ -287,13 +267,7 @@
 				'foo', // Replace 'foo' with title of the clinical resource item
 			),
 			'abstract' => 'foo', // Replace 'foo' with content of Short Description input
-			'audience' => array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => 'Arkansas'
-				),
-				'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-			),
+			'audience' => $schema_common_audience,
 			'creator' => array( // Remove or replace this if the item's content is syndicated from another source
 				'@id' => 'https://uamshealth.com/#MedicalOrganization'
 			),

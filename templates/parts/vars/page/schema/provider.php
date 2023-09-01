@@ -81,6 +81,10 @@ TODO List
 
 // Get Values
 
+	// Common property values
+
+		include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
 	// Provider URL
 
 		$schema_provider_url = user_trailingslashit($page_url);
@@ -117,7 +121,7 @@ TODO List
 						'postalCode' => 'foo', // Replace 'foo' with ZIP code
 						'streetAddress' => 'foo' // Replace 'foo' with street address
 					),
-					'areaServed' => $schema_arkansas,
+					'areaServed' => $schema_common_arkansas,
 					'brand' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 					'contactPoint' => array(
 						array(
@@ -741,7 +745,7 @@ TODO List
 					'postalCode' => 'foo', // Replace 'foo' with ZIP code
 					'streetAddress' => 'foo' // Replace 'foo' with street address
 				),
-				'areaServed' => $schema_arkansas,
+				'areaServed' => $schema_common_arkansas,
 				'brand' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
 				'contactPoint' => array(
 					array(
@@ -881,16 +885,7 @@ TODO List
 
 		// medicalAudience
 
-			$schema_provider_MedicalWebPage['medicalAudience'] = array(
-				array(
-					'@type' => 'Patient',
-					'geographicArea' => $schema_arkansas
-				),
-				array(
-					'@type' => 'MedicalAudienceType',
-					'name' => 'Clinician' // MedicalAudienceType (Enumeration Type) :: Clinician (Enumeration Member)
-				)
-			);
+			$schema_provider_MedicalWebPage['medicalAudience'] = $schema_common_medicalAudience;
 
 		// mentions
 
