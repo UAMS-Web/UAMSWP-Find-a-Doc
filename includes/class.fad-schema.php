@@ -1213,9 +1213,13 @@
 
 					// @id
 
-						$condition_id = $page_url . '#' . $page_fragment . $condition_i;
-						$condition_item['@id'] = $condition_id;
-						$condition_i++;
+						if ( $nesting_level == 1 ) {
+
+							$condition_id = $page_url . '#' . $page_fragment . $condition_i;
+							$condition_item['@id'] = $condition_id;
+							$condition_i++;
+
+						}
 
 					// @type
 
@@ -1594,9 +1598,13 @@
 
 					// @id
 
-						$service_id = $page_url . '#' . $page_fragment . $service_i;
-						$service_item['@id'] = $service_id;
-						$service_i++;
+						if ( $nesting_level == 1 ) {
+
+							$service_id = $page_url . '#' . $page_fragment . $service_i;
+							$service_item['@id'] = $service_id;
+							$service_i++;
+
+						}
 
 					// @type
 					
