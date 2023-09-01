@@ -593,6 +593,11 @@
 						"field": "field_schema_medicalprocedure_subtype",
 						"operator": "==",
 						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
 					}
 				]
 			],
