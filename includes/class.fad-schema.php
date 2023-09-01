@@ -1221,15 +1221,89 @@
 						// Values Map
 
 							$CreativeWork_type_values = array(
-								'text' => 'Article',
-								'infographic' => 'ImageObject',
-								'video' => 'VideoObject',
-								'doc' => 'DigitalDocument'
+								'all' => array(
+									'@type' => 'CreativeWork',
+									'properties' => array(
+										'audience',
+										'creator',
+										'dateModified',
+										'datePublished',
+										'description',
+										'isAccessibleForFree',
+										'isPartOf',
+										'mainEntityOfPage',
+										'name',
+										'sameAs',
+										'sourceOrganization',
+										'speakable',
+										'subjectOf',
+										'url'
+									)
+								),
+								'text' => array(
+									'@type' => 'Article',
+									'properties' => array(
+										'articleBody',
+										'image',
+										'timeRequired',
+										'wordCount'
+									)
+								),
+								'infographic' => array(
+									'@type' => 'ImageObject',
+									'properties' => array(
+										'abstract',
+										'contentSize',
+										'contentUrl',
+										'embeddedTextCaption',
+										'encodingFormat',
+										'height',
+										'representativeOfPage',
+										'thumbnail',
+										'timeRequired',
+										'width'
+									)
+								),
+								'video' => array(
+									'@type' => 'VideoObject',
+									'properties' => array(
+										'abstract',
+										'duration',
+										'embedUrl',
+										'thumbnail',
+										'timeRequired',
+										'transcript',
+										'videoFrameSize',
+										'videoQuality'
+									)
+								),
+								'doc' => array(
+									'@type' => 'DigitalDocument',
+									'properties' => array(
+										'abstract',
+										'hasDigitalDocumentPermission'
+									)
+								)
 							);
+
+							// Merge common property values into each resource type's property values
+
+								foreach ( $CreativeWork_type_values as $item ) {
+
+									if ( $item != 'all ') {
+
+										$item['properties'] = array_merge(
+											$item['properties'],
+											$CreativeWork_type_values['all']['properties']
+										);
+
+									}
+								}
 
 						// Base value
 
-							$CreativeWork_type = $page_fragment;
+							$CreativeWork_type = $CreativeWork_type_values['all']['@type'];
+							$CreativeWork_properties = $CreativeWork_type_values['all']['properties'];
 
 						// Get value based on clinical resource type
 
@@ -1241,7 +1315,8 @@
 
 								if ( $CreativeWork_resource_type ) {
 
-									$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type] ) ? $CreativeWork_type_values[$CreativeWork_resource_type] : $CreativeWork_type;
+									$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] : $CreativeWork_type;
+									$CreativeWork_properties = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] : $CreativeWork_properties;
 
 								}
 
@@ -1262,127 +1337,251 @@
 
 					// name
 
-						$CreativeWork_item['name'] = get_the_title($CreativeWork);
+						if ( in_array( 'name', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['name'] = get_the_title($CreativeWork);
+
+						}
 
 					// abstract
 
-						$CreativeWork_item['abstract'] = 'foo';
+						if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['abstract'] = get_the_title($CreativeWork);
+
+						}
 
 					// articleBody
 
-						$CreativeWork_item['articleBody'] = 'foo';
+						if ( in_array( 'articleBody', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['articleBody'] = get_the_title($CreativeWork);
+
+						}
 
 					// audience
 
-						$CreativeWork_item['audience'] = 'foo';
+						if ( in_array( 'audience', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['audience'] = get_the_title($CreativeWork);
+
+						}
 
 					// contentSize
 
-						$CreativeWork_item['contentSize'] = 'foo';
+						if ( in_array( 'contentSize', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['contentSize'] = get_the_title($CreativeWork);
+
+						}
 
 					// contentUrl
 
-						$CreativeWork_item['contentUrl'] = 'foo';
+						if ( in_array( 'contentUrl', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['contentUrl'] = get_the_title($CreativeWork);
+
+						}
 
 					// creator
 
-						$CreativeWork_item['creator'] = 'foo';
+						if ( in_array( 'creator', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['creator'] = get_the_title($CreativeWork);
+
+						}
 
 					// dateModified
 
-						$CreativeWork_item['dateModified'] = 'foo';
+						if ( in_array( 'dateModified', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['dateModified'] = get_the_title($CreativeWork);
+
+						}
 
 					// datePublished
 
-						$CreativeWork_item['datePublished'] = 'foo';
+						if ( in_array( 'datePublished', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['datePublished'] = get_the_title($CreativeWork);
+
+						}
 
 					// duration
 
-						$CreativeWork_item['duration'] = 'foo';
+						if ( in_array( 'duration', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['duration'] = get_the_title($CreativeWork);
+
+						}
 
 					// embeddedTextCaption
 
-						$CreativeWork_item['embeddedTextCaption'] = 'foo';
+						if ( in_array( 'embeddedTextCaption', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['embeddedTextCaption'] = get_the_title($CreativeWork);
+
+						}
 
 					// embedUrl
 
-						$CreativeWork_item['embedUrl'] = 'foo';
+						if ( in_array( 'embedUrl', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['embedUrl'] = get_the_title($CreativeWork);
+
+						}
 
 					// encodingFormat
 
-						$CreativeWork_item['encodingFormat'] = 'foo';
+						if ( in_array( 'encodingFormat', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['encodingFormat'] = get_the_title($CreativeWork);
+
+						}
 
 					// hasDigitalDocumentPermission
 
-						$CreativeWork_item['hasDigitalDocumentPermission'] = 'foo';
+						if ( in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['hasDigitalDocumentPermission'] = get_the_title($CreativeWork);
+
+						}
 
 					// height
 
-						$CreativeWork_item['height'] = 'foo';
+						if ( in_array( 'height', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['height'] = get_the_title($CreativeWork);
+
+						}
 
 					// image
 
-						$CreativeWork_item['image'] = 'foo';
+						if ( in_array( 'image', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['image'] = get_the_title($CreativeWork);
+
+						}
 
 					// isAccessibleForFree
 
-						$CreativeWork_item['isAccessibleForFree'] = 'foo';
+						if ( in_array( 'isAccessibleForFree', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['isAccessibleForFree'] = get_the_title($CreativeWork);
+
+						}
 
 					// isPartOf
 
-						$CreativeWork_item['isPartOf'] = 'foo';
+						if ( in_array( 'isPartOf', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['isPartOf'] = get_the_title($CreativeWork);
+
+						}
 
 					// mainEntityOfPage
 
-						$CreativeWork_item['mainEntityOfPage'] = 'foo';
+						if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['mainEntityOfPage'] = get_the_title($CreativeWork);
+
+						}
 
 					// representativeOfPage
 
-						$CreativeWork_item['representativeOfPage'] = 'foo';
+						if ( in_array( 'representativeOfPage', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['representativeOfPage'] = get_the_title($CreativeWork);
+
+						}
 
 					// sameAs
 
-						$CreativeWork_item['sameAs'] = 'foo';
+						if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['sameAs'] = get_the_title($CreativeWork);
+
+						}
 
 					// sourceOrganization
 
-						$CreativeWork_item['sourceOrganization'] = 'foo';
+						if ( in_array( 'sourceOrganization', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['sourceOrganization'] = get_the_title($CreativeWork);
+
+						}
 
 					// speakable
 
-						$CreativeWork_item['speakable'] = 'foo';
+						if ( in_array( 'speakable', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['speakable'] = get_the_title($CreativeWork);
+
+						}
 
 					// subjectOf
 
-						$CreativeWork_item['subjectOf'] = 'foo';
+						if ( in_array( 'subjectOf', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['subjectOf'] = get_the_title($CreativeWork);
+
+						}
 
 					// thumbnail
 
-						$CreativeWork_item['thumbnail'] = 'foo';
+						if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['thumbnail'] = get_the_title($CreativeWork);
+
+						}
 
 					// timeRequired
 
-						$CreativeWork_item['timeRequired'] = 'foo';
+						if ( in_array( 'timeRequired', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['timeRequired'] = get_the_title($CreativeWork);
+
+						}
 
 					// transcript
 
-						$CreativeWork_item['transcript'] = 'foo';
+						if ( in_array( 'transcript', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['transcript'] = get_the_title($CreativeWork);
+
+						}
 
 					// videoFrameSize
 
-						$CreativeWork_item['videoFrameSize'] = 'foo';
+						if ( in_array( 'videoFrameSize', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['videoFrameSize'] = get_the_title($CreativeWork);
+
+						}
 
 					// videoQuality
 
-						$CreativeWork_item['videoQuality'] = 'foo';
+						if ( in_array( 'videoQuality', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['videoQuality'] = get_the_title($CreativeWork);
+
+						}
 
 					// width
 
-						$CreativeWork_item['width'] = 'foo';
+						if ( in_array( 'width', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['width'] = get_the_title($CreativeWork);
+
+						}
 
 					// wordCount
 
-						$CreativeWork_item['wordCount'] = 'foo';
+						if ( in_array( 'wordCount', $CreativeWork_properties ) ) {
+
+							$CreativeWork_item['wordCount'] = get_the_title($CreativeWork);
+
+						}
 
 					// Sort array
 
