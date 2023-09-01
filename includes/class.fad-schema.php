@@ -2289,6 +2289,37 @@
 
 		}
 
+	// Create list of URLs from property value items
+
+		function uamswp_fad_schema_property_urls(
+			array $input, // Property values from which to extract URLs
+			array &$output = array() // Existing list of URLs
+		) {
+
+			if ( $input ) {
+
+				foreach ( $input as $item ) {
+
+					// Get URLs for significantLink property
+
+						if (
+							isset($item['url'])
+							&&
+							!empty($item['url'])
+						) {
+
+							$output[] = $item['url'];
+
+						}
+
+				}
+
+			}
+
+			return $output;
+
+		}
+
 // Construct the schema script tag
 
 	function uamswp_fad_schema_construct($input) {

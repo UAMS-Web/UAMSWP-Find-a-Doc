@@ -187,7 +187,7 @@ TODO List
 					'url' => 'foo' // Replace 'foo' with location profile URL
 				);
 
-			// Define reference to each value/row in this property // Get URLs for significantLink property
+			// Define reference to each value/row in this property
 
 				$schema_provider_location_ref = array();
 
@@ -207,21 +207,16 @@ TODO List
 
 							}
 
-						// Get URLs for significantLink property
-
-							if (
-								isset($item['url'])
-								&&
-								!empty($item['url'])
-							) {
-
-								$schema_provider_significantLink[] = $item['url'];
-
-							}
-
 					}
 
 				}
+
+			// Get URLs for significantLink property
+
+				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
+					$provider_related_location, // Property values from which to extract URLs
+					$schema_provider_significantLink // Existing list of URLs
+				);
 
 			// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -244,25 +239,10 @@ TODO List
 
 			// Get URLs for significantLink property
 
-				if ( $provider_related_expertise ) {
-
-					foreach ( $provider_related_expertise as $item ) {
-
-						// Get URLs for significantLink property
-
-							if (
-								isset($item['url'])
-								&&
-								!empty($item['url'])
-							) {
-
-								$schema_provider_significantLink[] = $item['url'];
-
-							}
-
-					}
-
-				}
+				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
+					$provider_related_expertise, // Property values from which to extract URLs
+					$schema_provider_significantLink // Existing list of URLs
+				);
 
 		// Related Clinical Resources
 
@@ -281,25 +261,10 @@ TODO List
 
 			// Get URLs for significantLink property
 
-				if ( $provider_related_clinical_resource ) {
-
-					foreach ( $provider_related_clinical_resource as $item ) {
-
-						// Get URLs for significantLink property
-
-							if (
-								isset($item['url'])
-								&&
-								!empty($item['url'])
-							) {
-
-								$schema_provider_significantLink[] = $item['url'];
-
-							}
-
-					}
-
-				}
+				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
+					$provider_related_clinical_resource, // Property values from which to extract URLs
+					$schema_provider_significantLink // Existing list of URLs
+				);
 
 		// Related Conditions and Treatments
 
