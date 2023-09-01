@@ -375,7 +375,7 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_schema_subtest"
+				"field_schema_medicaltest"
 			],
 			"display": "group",
 			"layout": "block",
