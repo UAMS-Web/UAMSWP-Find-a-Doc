@@ -978,7 +978,7 @@ TODO List
 
 									// Get relationship field array
 
-										$item_subTest_array = get_field( 'treatment_procedure_schema_subtest_schema_subtest', $treatment ) ?: '';
+										$item_subTest_array = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $treatment ) ?: '';
 
 									// Base list array
 

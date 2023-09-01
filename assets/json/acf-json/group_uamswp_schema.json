@@ -618,12 +618,12 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_schema_subtest": {
-			"key": "field_schema_subtest",
-			"name": "schema_subtest",
-			"label": "Component Test(s) of This Test Panel (MedicalTest)",
+		"field_schema_medicaltest": {
+			"key": "field_schema_medicaltest",
+			"name": "schema_medicaltest",
+			"label": "Medical Test(s) (MedicalTest)",
 			"type": "relationship",
-			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/subTest' target='_blank'>https://schema.org/subTest</a>.",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {

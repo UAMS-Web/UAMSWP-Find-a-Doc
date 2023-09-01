@@ -352,7 +352,7 @@
 			"name": "treatment_procedure_schema_subtest",
 			"label": "Component Test(s) of This Test Panel (subTest > MedicalTest)",
 			"type": "clone",
-			"instructions": "",
+			"instructions": "For information on the subTest Schema.org property, visit <a href='https://schema.org/subTest' target='_blank'>https://schema.org/subTest</a>.",
 			"required": 0,
 			"conditional_logic": [
 				[
