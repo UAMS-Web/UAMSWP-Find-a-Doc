@@ -1181,7 +1181,235 @@
 
 		}
 
-	// Add data to an array defining schema data for MedicalCondition
+	// Add data to an array defining schema data for CreativeWork (a.k.a. related clinical resources)
+
+		function uamswp_fad_schema_creativework(
+			array $repeater, // List of IDs of the clinical resource items
+			string $page_url, // Page URL
+			int $nesting_level = 1, // Nesting level within the main schema
+			string $page_fragment = 'CreativeWork', // Base fragment identifier
+			int $CreativeWork_i = 1 // Iteration counter
+		) {
+
+			// Base list array
+
+				$CreativeWork_list = array();
+
+			if ( !empty($repeater) ) {
+
+				foreach ( $repeater as $CreativeWork ) {
+
+					// If post is not published, skip to the next iteration
+
+						if ( get_post_status($CreativeWork) != 'publish' ) {
+
+							continue;
+
+						}
+
+					// Base array
+
+						$CreativeWork_item = array();
+
+					// url
+
+						$CreativeWork_url = user_trailingslashit( get_permalink($CreativeWork) );
+						$CreativeWork_item['url'] = $CreativeWork_url;
+
+					// @type
+
+						// Values Map
+
+							$CreativeWork_type_values = array(
+								'text' => 'Article',
+								'infographic' => 'ImageObject',
+								'video' => 'VideoObject',
+								'doc' => 'DigitalDocument'
+							);
+
+						// Base value
+
+							$CreativeWork_type = $page_fragment;
+
+						// Get value based on clinical resource type
+
+							// Resource type
+
+								$CreativeWork_resource_type = get_field( 'clinical_resource_type', $CreativeWork )['value'] ?: '';
+
+							// Get value from values map
+
+								if ( $CreativeWork_resource_type ) {
+
+									$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type] ) ? $CreativeWork_type_values[$CreativeWork_resource_type] : $CreativeWork_type;
+
+								}
+
+						// Add to schema
+
+							$CreativeWork_item['@type'] = $CreativeWork_type;
+
+					// @id
+
+						if ( $nesting_level <= 1 ) {
+
+							$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
+							// $CreativeWork_id .= $CreativeWork_i;
+							$CreativeWork_item['@id'] = $CreativeWork_id;
+							// $CreativeWork_i++;
+
+						} // endif ( $nesting_level == 1 )
+
+					// name
+
+						$CreativeWork_item['name'] = get_the_title($CreativeWork);
+
+					// abstract
+
+						$CreativeWork_item['abstract'] = 'foo';
+
+					// articleBody
+
+						$CreativeWork_item['articleBody'] = 'foo';
+
+					// audience
+
+						$CreativeWork_item['audience'] = 'foo';
+
+					// contentSize
+
+						$CreativeWork_item['contentSize'] = 'foo';
+
+					// contentUrl
+
+						$CreativeWork_item['contentUrl'] = 'foo';
+
+					// creator
+
+						$CreativeWork_item['creator'] = 'foo';
+
+					// dateModified
+
+						$CreativeWork_item['dateModified'] = 'foo';
+
+					// datePublished
+
+						$CreativeWork_item['datePublished'] = 'foo';
+
+					// duration
+
+						$CreativeWork_item['duration'] = 'foo';
+
+					// embeddedTextCaption
+
+						$CreativeWork_item['embeddedTextCaption'] = 'foo';
+
+					// embedUrl
+
+						$CreativeWork_item['embedUrl'] = 'foo';
+
+					// encodingFormat
+
+						$CreativeWork_item['encodingFormat'] = 'foo';
+
+					// hasDigitalDocumentPermission
+
+						$CreativeWork_item['hasDigitalDocumentPermission'] = 'foo';
+
+					// height
+
+						$CreativeWork_item['height'] = 'foo';
+
+					// image
+
+						$CreativeWork_item['image'] = 'foo';
+
+					// isAccessibleForFree
+
+						$CreativeWork_item['isAccessibleForFree'] = 'foo';
+
+					// isPartOf
+
+						$CreativeWork_item['isPartOf'] = 'foo';
+
+					// mainEntityOfPage
+
+						$CreativeWork_item['mainEntityOfPage'] = 'foo';
+
+					// representativeOfPage
+
+						$CreativeWork_item['representativeOfPage'] = 'foo';
+
+					// sameAs
+
+						$CreativeWork_item['sameAs'] = 'foo';
+
+					// sourceOrganization
+
+						$CreativeWork_item['sourceOrganization'] = 'foo';
+
+					// speakable
+
+						$CreativeWork_item['speakable'] = 'foo';
+
+					// subjectOf
+
+						$CreativeWork_item['subjectOf'] = 'foo';
+
+					// thumbnail
+
+						$CreativeWork_item['thumbnail'] = 'foo';
+
+					// timeRequired
+
+						$CreativeWork_item['timeRequired'] = 'foo';
+
+					// transcript
+
+						$CreativeWork_item['transcript'] = 'foo';
+
+					// videoFrameSize
+
+						$CreativeWork_item['videoFrameSize'] = 'foo';
+
+					// videoQuality
+
+						$CreativeWork_item['videoQuality'] = 'foo';
+
+					// width
+
+						$CreativeWork_item['width'] = 'foo';
+
+					// wordCount
+
+						$CreativeWork_item['wordCount'] = 'foo';
+
+					// Sort array
+
+						ksort($CreativeWork_item);
+
+					// Add to list of conditions
+
+						$CreativeWork_list[] = $CreativeWork_item;
+
+				} // endforeach ( $repeater as $CreativeWork )
+
+				// Clean up list array
+
+					$CreativeWork_list = array_filter($CreativeWork_list);
+					$CreativeWork_list = array_values($CreativeWork_list);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($CreativeWork_list);
+
+			} // endif ( !empty($repeater) )
+
+			return $CreativeWork_list;
+
+		}
+
+	// Add data to an array defining schema data for MedicalCondition (a.k.a. related conditions)
 
 		function uamswp_fad_schema_medicalcondition(
 			array $repeater, // List of IDs of the MedicalCondition items

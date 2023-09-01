@@ -226,18 +226,12 @@ TODO List
 
 		// Related Clinical Resources
 
-			// Base array
-
-				$provider_related_clinical_resource = array();
-
-			// Add clinical resources to the array
-
-				$provider_related_clinical_resource[] = array(
-					'@type' => 'Article', // Replace 'Article' with other type as necessary (e.g., 'ImageObject', 'DigitalDocument', 'VideoObject')
-					'name' => 'foo',
-					'url' => 'bar',
-					'baz' => 'qux'
-				);
+			$provider_related_clinical_resource = uamswp_fad_schema_creativework(
+				$clinical_resources, // List of IDs of the clinical resource items
+				$page_url, // Page URL
+				1, // Nesting level within the main schema
+				'CreativeWork' // Base fragment identifier
+			);
 
 			// Get URLs for significantLink property
 
