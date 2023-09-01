@@ -189,27 +189,7 @@ TODO List
 
 			// Define reference to each value/row in this property
 
-				$schema_provider_location_ref = array();
-
-				if ( $provider_related_location ) {
-
-					foreach ( $provider_related_location as $item ) {
-
-						// Define reference to each value/row in this property
-
-							if (
-								isset($item['@id'])
-								&&
-								!empty($item['@id'])
-							) {
-
-								$schema_provider_location_ref[]['@id'] = $item['@id'];
-
-							}
-
-					}
-
-				}
+				$schema_provider_location_ref = uamswp_fad_schema_node_references( $provider_related_location );
 
 			// Get URLs for significantLink property
 
@@ -837,27 +817,7 @@ TODO List
 
 		// Define reference to each value/row in this property
 
-			// Base array
-
-				$schema_provider_hospital_ref = array();
-
-			foreach ( $provider_related_hospital as $item ) {
-
-				if (
-					isset($item['@id'])
-					&&
-					!empty($item['@id'])
-				) {
-
-					$schema_provider_hospital_ref[]['@id'] = $item['@id'];
-
-				}
-
-			}
-
-		// If there is only one item, flatten the multi-dimensional array by one step
-
-			uamswp_fad_flatten_multidimensional_array($provider_related_hospital);
+			$schema_provider_hospital_ref = uamswp_fad_schema_node_references( $provider_related_hospital );
 
 // Schema JSON Item Arrays
 
