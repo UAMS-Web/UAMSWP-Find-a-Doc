@@ -1324,6 +1324,10 @@
 
 					// @id
 
+						// Eliminate PHP errors
+
+							$CreativeWork_id = '';
+
 						if ( $nesting_level <= 1 ) {
 
 							$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
@@ -1335,249 +1339,705 @@
 
 					// name
 
+						// Eliminate PHP errors
+
+							$CreativeWork_name = '';
+
 						if ( in_array( 'name', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['name'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_name = get_the_title($CreativeWork) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_name ) {
+
+									$CreativeWork_item['name'] = $CreativeWork_name;
+
+								}
 
 						}
 
 					// abstract
 
+						// Eliminate PHP errors
+
+							$CreativeWork_abstract = '';
+
 						if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['abstract'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_abstract = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_abstract ) {
+
+									$CreativeWork_item['abstract'] = $CreativeWork_abstract;
+
+								}
 
 						}
 
 					// articleBody
 
+						// Eliminate PHP errors
+
+							$CreativeWork_articleBody = '';
+
 						if ( in_array( 'articleBody', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['articleBody'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_articleBody = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_articleBody ) {
+
+									$CreativeWork_item['articleBody'] = $CreativeWork_articleBody;
+
+								}
 
 						}
 
 					// audience
 
+						// Eliminate PHP errors
+
+							$CreativeWork_audience = '';
+
 						if ( in_array( 'audience', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['audience'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_audience = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_audience ) {
+
+									$CreativeWork_item['audience'] = $CreativeWork_audience;
+
+								}
 
 						}
 
 					// contentSize
 
+						// Eliminate PHP errors
+
+							$CreativeWork_contentSize = '';
+
 						if ( in_array( 'contentSize', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['contentSize'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_contentSize = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_contentSize ) {
+
+									$CreativeWork_item['contentSize'] = $CreativeWork_contentSize;
+
+								}
 
 						}
 
 					// contentUrl
 
+						// Eliminate PHP errors
+
+							$CreativeWork_contentUrl = '';
+
 						if ( in_array( 'contentUrl', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['contentUrl'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_contentUrl = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_contentUrl ) {
+
+									$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
+
+								}
 
 						}
 
 					// creator
 
+						// Eliminate PHP errors
+
+							$CreativeWork_creator = '';
+
 						if ( in_array( 'creator', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['creator'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_creator = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_creator ) {
+
+									$CreativeWork_item['creator'] = $CreativeWork_creator;
+
+								}
 
 						}
 
 					// dateModified
 
+						// Eliminate PHP errors
+
+							$CreativeWork_dateModified = '';
+
 						if ( in_array( 'dateModified', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['dateModified'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_dateModified = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_dateModified ) {
+
+									$CreativeWork_item['dateModified'] = $CreativeWork_dateModified;
+
+								}
 
 						}
 
 					// datePublished
 
+						// Eliminate PHP errors
+
+							$CreativeWork_datePublished = '';
+
 						if ( in_array( 'datePublished', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['datePublished'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_datePublished = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_datePublished ) {
+
+									$CreativeWork_item['datePublished'] = $CreativeWork_datePublished;
+
+								}
+
+						}
+
+					// description
+
+						// Eliminate PHP errors
+
+							$CreativeWork_description = '';
+
+						if ( in_array( 'description', $CreativeWork_properties ) ) {
+
+							// Get values
+
+								$CreativeWork_description = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_description ) {
+
+									$CreativeWork_item['description'] = $CreativeWork_description;
+
+								}
 
 						}
 
 					// duration
 
+						// Eliminate PHP errors
+
+							$CreativeWork_duration = '';
+
 						if ( in_array( 'duration', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['duration'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_duration = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_duration ) {
+
+									$CreativeWork_item['duration'] = $CreativeWork_duration;
+
+								}
 
 						}
 
 					// embeddedTextCaption
 
+						// Eliminate PHP errors
+
+							$CreativeWork_embeddedTextCaption = '';
+
 						if ( in_array( 'embeddedTextCaption', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['embeddedTextCaption'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_embeddedTextCaption = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_embeddedTextCaption ) {
+
+									$CreativeWork_item['embeddedTextCaption'] = $CreativeWork_embeddedTextCaption;
+
+								}
 
 						}
 
 					// embedUrl
 
+						// Eliminate PHP errors
+
+							$CreativeWork_embedUrl = '';
+
 						if ( in_array( 'embedUrl', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['embedUrl'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_embedUrl = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_embedUrl ) {
+
+									$CreativeWork_item['embedUrl'] = $CreativeWork_embedUrl;
+
+								}
 
 						}
 
 					// encodingFormat
 
+						// Eliminate PHP errors
+
+							$CreativeWork_encodingFormat = '';
+
 						if ( in_array( 'encodingFormat', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['encodingFormat'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_encodingFormat = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_encodingFormat ) {
+
+									$CreativeWork_item['encodingFormat'] = $CreativeWork_encodingFormat;
+
+								}
 
 						}
 
 					// hasDigitalDocumentPermission
 
+						// Eliminate PHP errors
+
+							$CreativeWork_hasDigitalDocumentPermission = '';
+
 						if ( in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['hasDigitalDocumentPermission'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_hasDigitalDocumentPermission = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_hasDigitalDocumentPermission ) {
+
+									$CreativeWork_item['hasDigitalDocumentPermission'] = $CreativeWork_hasDigitalDocumentPermission;
+
+								}
 
 						}
 
 					// height
 
+						// Eliminate PHP errors
+
+							$CreativeWork_height = '';
+
 						if ( in_array( 'height', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['height'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_height = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_height ) {
+
+									$CreativeWork_item['height'] = $CreativeWork_height;
+
+								}
 
 						}
 
 					// image
 
+						// Eliminate PHP errors
+
+							$CreativeWork_image = '';
+
 						if ( in_array( 'image', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['image'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_image = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_image ) {
+
+									$CreativeWork_item['image'] = $CreativeWork_image;
+
+								}
 
 						}
 
 					// isAccessibleForFree
 
+						// Eliminate PHP errors
+
+							$CreativeWork_isAccessibleForFree = '';
+
 						if ( in_array( 'isAccessibleForFree', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['isAccessibleForFree'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_isAccessibleForFree = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_isAccessibleForFree ) {
+
+									$CreativeWork_item['isAccessibleForFree'] = $CreativeWork_isAccessibleForFree;
+
+								}
 
 						}
 
 					// isPartOf
 
+						// Eliminate PHP errors
+
+							$CreativeWork_isPartOf = '';
+
 						if ( in_array( 'isPartOf', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['isPartOf'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_isPartOf = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_isPartOf ) {
+
+									$CreativeWork_item['isPartOf'] = $CreativeWork_isPartOf;
+
+								}
 
 						}
 
 					// mainEntityOfPage
 
+						// Eliminate PHP errors
+
+							$CreativeWork_mainEntityOfPage = '';
+
 						if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['mainEntityOfPage'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_mainEntityOfPage = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_mainEntityOfPage ) {
+
+									$CreativeWork_item['mainEntityOfPage'] = $CreativeWork_mainEntityOfPage;
+
+								}
 
 						}
 
 					// representativeOfPage
 
+						// Eliminate PHP errors
+
+							$CreativeWork_representativeOfPage = '';
+
 						if ( in_array( 'representativeOfPage', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['representativeOfPage'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_representativeOfPage = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_representativeOfPage ) {
+
+									$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
+
+								}
 
 						}
 
 					// sameAs
 
+						// Eliminate PHP errors
+
+							$CreativeWork_sameAs = '';
+
 						if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['sameAs'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_sameAs = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_sameAs ) {
+
+									$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
+
+								}
 
 						}
 
 					// sourceOrganization
 
+						// Eliminate PHP errors
+
+							$CreativeWork_sourceOrganization = '';
+
 						if ( in_array( 'sourceOrganization', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['sourceOrganization'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_sourceOrganization = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_sourceOrganization ) {
+
+									$CreativeWork_item['sourceOrganization'] = $CreativeWork_sourceOrganization;
+
+								}
 
 						}
 
 					// speakable
 
+						// Eliminate PHP errors
+
+							$CreativeWork_speakable = '';
+
 						if ( in_array( 'speakable', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['speakable'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_speakable = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_speakable ) {
+
+									$CreativeWork_item['speakable'] = $CreativeWork_speakable;
+
+								}
 
 						}
 
 					// subjectOf
 
+						// Eliminate PHP errors
+
+							$CreativeWork_subjectOf = '';
+
 						if ( in_array( 'subjectOf', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['subjectOf'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_subjectOf = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_subjectOf ) {
+
+									$CreativeWork_item['subjectOf'] = $CreativeWork_subjectOf;
+
+								}
 
 						}
 
 					// thumbnail
 
+						// Eliminate PHP errors
+
+							$CreativeWork_thumbnail = '';
+
 						if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['thumbnail'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_thumbnail = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_thumbnail ) {
+
+									$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
+
+								}
 
 						}
 
 					// timeRequired
 
+						// Eliminate PHP errors
+
+							$CreativeWork_timeRequired = '';
+
 						if ( in_array( 'timeRequired', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['timeRequired'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_timeRequired = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_timeRequired ) {
+
+									$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
+
+								}
 
 						}
 
 					// transcript
 
+						// Eliminate PHP errors
+
+							$CreativeWork_transcript = '';
+
 						if ( in_array( 'transcript', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['transcript'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_transcript = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_transcript ) {
+
+									$CreativeWork_item['transcript'] = $CreativeWork_transcript;
+
+								}
 
 						}
 
 					// videoFrameSize
 
+						// Eliminate PHP errors
+
+							$CreativeWork_videoFrameSize = '';
+
 						if ( in_array( 'videoFrameSize', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['videoFrameSize'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_videoFrameSize = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_videoFrameSize ) {
+
+									$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
+
+								}
 
 						}
 
 					// videoQuality
 
+						// Eliminate PHP errors
+
+							$CreativeWork_videoQuality = '';
+
 						if ( in_array( 'videoQuality', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['videoQuality'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_videoQuality = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_videoQuality ) {
+
+									$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
+
+								}
 
 						}
 
 					// width
 
+						// Eliminate PHP errors
+
+							$CreativeWork_width = '';
+
 						if ( in_array( 'width', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['width'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_width = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_width ) {
+
+									$CreativeWork_item['width'] = $CreativeWork_width;
+
+								}
 
 						}
 
 					// wordCount
 
+						// Eliminate PHP errors
+
+							$CreativeWork_wordCount = '';
+
 						if ( in_array( 'wordCount', $CreativeWork_properties ) ) {
 
-							$CreativeWork_item['wordCount'] = get_the_title($CreativeWork);
+							// Get values
+
+								$CreativeWork_wordCount = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_wordCount ) {
+
+									$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
+
+								}
 
 						}
 
