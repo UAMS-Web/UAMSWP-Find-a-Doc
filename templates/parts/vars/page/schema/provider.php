@@ -51,35 +51,34 @@ TODO List
 		 * Define schema for related locations
 		 * Define array of just URLs from related locations
 		 * Bring locations schema and URLs into relevant properties of provider's schema
+		 * Make the defining of the values array into a function that can be repeated, cached, based on the location ID
 	 * Related areas of expertise
 		 * Define schema for related areas of expertise
 		 * Define array of just URLs from related areas of expertise
 		 * Bring areas of expertise schema and URLs into relevant properties of provider's schema
+		 * Make the defining of the values array into a function that can be repeated, cached, based on the area of expertise ID
 	 * Related clinical resources
 		 * Define schema for related clinical resources
 		 * Define array of just URLs from related clinical resources
 		 * Bring clinical resources schema and URLs into relevant properties of provider's schema
-	 * Related conditions and treatments
-		 * Replace codingSystem value with name from values map, if it exists
+		 * Make the defining of the values array into a function that can be repeated, cached, based on the clinical resource ID
 	 * Related conditions
-		 * Define schema for related conditions
-		 * Define array of just URLs from related conditions
-		 * Bring conditions schema and URLs into relevant properties of provider's schema
-		 * Make the defining of the values array into a function that can be repeated
+		 * Make the defining of the values array into a function that can be repeated, cached, based on the condition ID
 	 * Related treatments
-		 * Make the defining of the values array into a function that can be repeated
+		 * Make the defining of the values array into a function that can be repeated, cached, based on the treatment ID
 		 * Properties
-			 * duplicateTherapy
-				 * Filter duplicateTherapy input (on treatments) to only those treatments with MedicalTherapy type (or its subtypes)
-				 * Filter duplicateTherapy input (on treatments) to remove current item
 			 * subTest
-				 * Filter subTest input (on treatments) to only those treatments with MedicalTest type (or its subtypes)
 				 * Add full (or additional) values to the subTest item value arrays
 			 * usedToDiagnose
 				 * Replace Type in each treatment's usedToDiagnose value with the usedToDiagnose:Treatment's type
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
+ * Filter ACF fields
+	 * field_schema_medicaltest (just treatments with MedicalTest type or its subtypes)
+	 * field_schema_medicaltest (exclude current item)
+	 * field_schema_medicaltherapy (just treatments with MedicalTherapy type or its subtypes)
+	 * field_schema_medicaltherapy (exclude current item)
 
 */
 
