@@ -1224,6 +1224,7 @@
 								'all' => array(
 									'@type' => 'CreativeWork',
 									'properties' => array(
+										'abstract',
 										'audience',
 										'creator',
 										'dateModified',
@@ -1252,7 +1253,6 @@
 								'infographic' => array(
 									'@type' => 'ImageObject',
 									'properties' => array(
-										'abstract',
 										'contentSize',
 										'contentUrl',
 										'embeddedTextCaption',
@@ -1267,7 +1267,6 @@
 								'video' => array(
 									'@type' => 'VideoObject',
 									'properties' => array(
-										'abstract',
 										'duration',
 										'embedUrl',
 										'thumbnail',
@@ -1280,7 +1279,6 @@
 								'doc' => array(
 									'@type' => 'DigitalDocument',
 									'properties' => array(
-										'abstract',
 										'hasDigitalDocumentPermission'
 									)
 								)
