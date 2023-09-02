@@ -1822,8 +1822,6 @@
 									str_contains( 'youtube', $CreativeWork_video_parsed['host'] )
 									||
 									str_contains( 'youtu.be', $CreativeWork_video_parsed['host'] )
-									||
-									'a' == 'a'
 								) {
 
 									// YouTube
