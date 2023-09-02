@@ -1632,13 +1632,23 @@
 							
 								$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $CreativeWork ) ?: false;
 
-								if ( $CreativeWork_nci_query ) {
-
-									$CreativeWork_articleBody = get_field( 'clinical_resource_nci_embed', $CreativeWork ) ?: '';
-
-								} else {
+								if ( !$CreativeWork_nci_query ) {
 
 									$CreativeWork_articleBody = get_field( 'clinical_resource_text', $CreativeWork )  ?: '';
+
+								}
+
+							// Clean up values
+
+								if ( $CreativeWork_articleBody ) {
+
+									// Strip all tags
+
+										$CreativeWork_articleBody = wp_strip_all_tags($CreativeWork_articleBody);
+
+									// Make attribute-friendly
+
+										$CreativeWork_articleBody = uamswp_attr_conversion($CreativeWork_articleBody);
 
 								}
 
