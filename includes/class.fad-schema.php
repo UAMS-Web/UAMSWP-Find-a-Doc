@@ -1819,9 +1819,9 @@
 								$CreativeWork_video_parsed = parse_url($CreativeWork_video);
 
 								if (
-									str_contains( 'youtube', $CreativeWork_video_parsed['host'] )
+									str_contains( $CreativeWork_video_parsed['host'], 'youtube' )
 									||
-									str_contains( 'youtu.be', $CreativeWork_video_parsed['host'] )
+									str_contains( $CreativeWork_video_parsed['host'], 'youtu.be' )
 								) {
 
 									// YouTube
