@@ -2165,7 +2165,7 @@
 
 							// Get values
 
-								$CreativeWork_encodingFormat = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_encodingFormat = get_post_mime_type( $CreativeWork_asset_id ) ?: ''; // e.g., 'image/jpeg'
 
 							// Add to item values
 
