@@ -2071,7 +2071,21 @@
 
 							// Get values
 
-								$CreativeWork_embeddedTextCaption = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_embeddedTextCaption = get_field( 'clinical_resource_infographic_transcript', $CreativeWork ) ?: '';
+
+							// Clean up values
+
+								if ( $CreativeWork_embeddedTextCaption ) {
+
+									// Strip all tags
+
+										$CreativeWork_embeddedTextCaption = wp_strip_all_tags($CreativeWork_embeddedTextCaption);
+
+									// Make attribute-friendly
+
+										$CreativeWork_embeddedTextCaption = uamswp_attr_conversion($CreativeWork_embeddedTextCaption);
+
+								}
 
 							// Add to item values
 
