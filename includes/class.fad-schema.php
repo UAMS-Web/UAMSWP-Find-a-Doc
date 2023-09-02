@@ -1812,11 +1812,16 @@
 							// Video URL
 
 								$CreativeWork_video = get_field( 'clinical_resource_video', $CreativeWork ) ?: '';
-								$CreativeWork_video_parsed = parse_url($CreativeWork_video);
 
 							// Video info
 
-								$CreativeWork_video_parsed = parse_url($CreativeWork_video);
+								// Parse the URL and return its components
+
+									$CreativeWork_video_parsed = parse_url($CreativeWork_video);
+
+									// Parse the query string into variables
+									
+										parse_str($CreativeWork_video_parsed['query'], $CreativeWork_video_parsed['query']);
 
 								if (
 									str_contains( $CreativeWork_video_parsed['host'], 'youtube' )
@@ -1827,14 +1832,6 @@
 									// YouTube
 
 										$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
-
-										// Video ID
-
-											$CreativeWork_video_id = $CreativeWork_video_info['id'];
-
-										// Embed URL
-
-											$CreativeWork_video_embed = $CreativeWork_video_id ? 'https://www.youtube.com/embed/' . $CreativeWork_video_id : '';
 
 										// Title (snippet.title)
 
@@ -1969,7 +1966,7 @@
 
 							// Get values
 
-								$CreativeWork_embedUrl = $CreativeWork_video_embed ?: '';
+								$CreativeWork_embedUrl = $CreativeWork_video_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['query']['v'] : '';
 
 							// Add to item values
 
