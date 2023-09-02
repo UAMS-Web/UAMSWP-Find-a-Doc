@@ -1829,7 +1829,7 @@
 									str_contains( $CreativeWork_video_parsed['host'], 'youtu.be' )
 								) {
 
-									// YouTube
+									// If YouTube
 
 										$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
 
