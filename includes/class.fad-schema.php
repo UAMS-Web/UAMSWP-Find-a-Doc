@@ -1264,6 +1264,7 @@
 							'video' => array(
 								'@type' => 'VideoObject',
 								'properties' => array(
+									'alternateName',
 									'duration',
 									'embedUrl',
 									'thumbnail',
@@ -1564,6 +1565,44 @@
 								if ( $CreativeWork_abstract ) {
 
 									$CreativeWork_item['abstract'] = $CreativeWork_abstract;
+
+								}
+
+						}
+
+					// alternateName
+
+						/*
+						 * An alias for the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
+						// Eliminate PHP errors
+
+							$CreativeWork_alternateName = '';
+
+						if (
+							in_array( 'alternateName', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
+
+							// Get values
+
+								if ( $CreativeWork_resource_type == 'video' ) {
+
+									$CreativeWork_alternateName = $CreativeWork_video_title ?: '';
+
+								}
+
+							// Add to item values
+
+								if ( $CreativeWork_alternateName ) {
+
+									$CreativeWork_item['alternateName'] = $CreativeWork_alternateName;
 
 								}
 
