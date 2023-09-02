@@ -2414,11 +2414,15 @@
 
 							$CreativeWork_isPartOf = '';
 
-						if ( in_array( 'isPartOf', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'isPartOf', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_isPartOf = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_isPartOf = $schema_clinical_resource_MedicalWebPage_ref ?: '';
 
 							// Add to item values
 
