@@ -12308,6 +12308,10 @@ function uamswp_prevent_orphan($string) {
 
 			}
 
+			// Add ID to data
+
+				$data['id'] = $video_id;
+
 			return $data;
 
 		} else {

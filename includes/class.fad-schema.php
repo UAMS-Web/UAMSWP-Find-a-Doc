@@ -1830,9 +1830,13 @@
 
 										$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
 
+										// Video ID
+
+											$CreativeWork_video_id = $CreativeWork_video_info['id'];
+
 										// Embed URL
 
-											$CreativeWork_video_embed = 'https://www.youtube.com/embed/' . 'foo';
+											$CreativeWork_video_embed = $CreativeWork_video_id ? 'https://www.youtube.com/embed/' . $CreativeWork_video_id : '';
 
 										// Title (snippet.title)
 
