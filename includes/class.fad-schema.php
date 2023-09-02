@@ -1215,6 +1215,86 @@
 
 						}
 
+					// Values Map
+
+						$CreativeWork_type_values = array(
+							'all' => array(
+								'@type' => 'CreativeWork',
+								'properties' => array(
+									'abstract',
+									'audience',
+									'creator',
+									'dateModified',
+									'datePublished',
+									'description',
+									'isAccessibleForFree',
+									'isPartOf',
+									'mainEntityOfPage',
+									'name',
+									'sameAs',
+									'sourceOrganization',
+									'speakable',
+									'subjectOf',
+									'url'
+								)
+							),
+							'text' => array(
+								'@type' => 'Article',
+								'properties' => array(
+									'articleBody',
+									'image',
+									'timeRequired',
+									'wordCount'
+								)
+							),
+							'infographic' => array(
+								'@type' => 'ImageObject',
+								'properties' => array(
+									'contentSize',
+									'contentUrl',
+									'embeddedTextCaption',
+									'encodingFormat',
+									'height',
+									'representativeOfPage',
+									'thumbnail',
+									'timeRequired',
+									'width'
+								)
+							),
+							'video' => array(
+								'@type' => 'VideoObject',
+								'properties' => array(
+									'duration',
+									'embedUrl',
+									'thumbnail',
+									'timeRequired',
+									'transcript',
+									'videoFrameSize',
+									'videoQuality'
+								)
+							),
+							'doc' => array(
+								'@type' => 'DigitalDocument',
+								'properties' => array(
+									'hasDigitalDocumentPermission'
+								)
+							)
+						);
+
+						// Merge common property values into each resource type's property values
+
+							foreach ( $CreativeWork_type_values as &$item ) {
+
+								if ( $item != 'all ') {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$CreativeWork_type_values['all']['properties']
+									);
+
+								}
+							}
+
 					// Base array
 
 						$CreativeWork_item = array();
@@ -1225,86 +1305,6 @@
 						$CreativeWork_item['url'] = $CreativeWork_url;
 
 					// @type
-
-						// Values Map
-
-							$CreativeWork_type_values = array(
-								'all' => array(
-									'@type' => 'CreativeWork',
-									'properties' => array(
-										'abstract',
-										'audience',
-										'creator',
-										'dateModified',
-										'datePublished',
-										'description',
-										'isAccessibleForFree',
-										'isPartOf',
-										'mainEntityOfPage',
-										'name',
-										'sameAs',
-										'sourceOrganization',
-										'speakable',
-										'subjectOf',
-										'url'
-									)
-								),
-								'text' => array(
-									'@type' => 'Article',
-									'properties' => array(
-										'articleBody',
-										'image',
-										'timeRequired',
-										'wordCount'
-									)
-								),
-								'infographic' => array(
-									'@type' => 'ImageObject',
-									'properties' => array(
-										'contentSize',
-										'contentUrl',
-										'embeddedTextCaption',
-										'encodingFormat',
-										'height',
-										'representativeOfPage',
-										'thumbnail',
-										'timeRequired',
-										'width'
-									)
-								),
-								'video' => array(
-									'@type' => 'VideoObject',
-									'properties' => array(
-										'duration',
-										'embedUrl',
-										'thumbnail',
-										'timeRequired',
-										'transcript',
-										'videoFrameSize',
-										'videoQuality'
-									)
-								),
-								'doc' => array(
-									'@type' => 'DigitalDocument',
-									'properties' => array(
-										'hasDigitalDocumentPermission'
-									)
-								)
-							);
-
-							// Merge common property values into each resource type's property values
-
-								foreach ( $CreativeWork_type_values as &$item ) {
-
-									if ( $item != 'all ') {
-
-										$item['properties'] = array_merge(
-											$item['properties'],
-											$CreativeWork_type_values['all']['properties']
-										);
-
-									}
-								}
 
 						// Base value
 
