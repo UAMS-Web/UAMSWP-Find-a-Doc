@@ -1420,8 +1420,15 @@
 						// Eliminate PHP errors
 
 							$CreativeWork_video = '';
-							$CreativeWork_video_parsed = '';
-							$CreativeWork_video_info = '';
+							$CreativeWork_asset_parsed = '';
+							$CreativeWork_asset_embedUrl = '';
+							$CreativeWork_asset_info = '';
+							$CreativeWork_asset_title = '';
+							$CreativeWork_asset_thumbnail = '';
+							$CreativeWork_asset_published = '';
+							$CreativeWork_asset_duration = '';
+							$CreativeWork_asset_description = '';
+							$CreativeWork_asset_caption_query = '';
 						
 						if (
 							$CreativeWork_resource_type == 'video'
@@ -1437,70 +1444,77 @@
 
 								// Parse the URL and return its components
 
-									$CreativeWork_video_parsed = parse_url($CreativeWork_video);
+									$CreativeWork_asset_parsed = parse_url($CreativeWork_video);
 
 									// Parse the query string into variables
 									
-										parse_str($CreativeWork_video_parsed['query'], $CreativeWork_video_parsed['query']);
+										parse_str($CreativeWork_asset_parsed['query'], $CreativeWork_asset_parsed['query']);
 
 								if (
-									str_contains( $CreativeWork_video_parsed['host'], 'youtube' )
+									str_contains( $CreativeWork_asset_parsed['host'], 'youtube' )
 									||
-									str_contains( $CreativeWork_video_parsed['host'], 'youtu.be' )
+									str_contains( $CreativeWork_asset_parsed['host'], 'youtu.be' )
 								) {
 
 									// If YouTube
 
 										// Embed URL
 
-											$CreativeWork_video_embed = $CreativeWork_video_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['query']['v'] : '';
+											$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['query']['v'] : '';
 
 										// Get info from video
 
-											$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
+											$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
 
 											// Title (snippet.title)
 
-												$CreativeWork_video_title = $CreativeWork_video_info['title'];
+												$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?: '';
 
-											// High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+											// Thumbnail URL
 
-												$CreativeWork_video_thumb_high = $CreativeWork_video_info['thumbUrl'];
+												// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
 
-											// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+													$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?: ''; 
 
-												$CreativeWork_video_thumb_max = $CreativeWork_video_info['HQthumbUrl'];
+												// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+													if ( !$CreativeWork_thumbnail ) {
+
+														$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?: ''; // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+													}
 
 											// Published date and time (snippet.publishedAt)
 
-												$CreativeWork_video_published = $CreativeWork_video_info['dateField'];
+												$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?: '';
 
 											// Duration (contentDetails.duration)
 
-												$CreativeWork_video_duration = $CreativeWork_video_info['duration'];
+												$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?: '';
 
 											// Description (snippet.description)
 
-												$CreativeWork_video_description = $CreativeWork_video_info['description'];
+												$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?: '';
 
 											// Whether captions are available for the video (contentDetails.caption)
 
-												$CreativeWork_video_caption = $CreativeWork_video_info['captions_data'];
-												$CreativeWork_video_caption = ( $CreativeWork_video_caption == 'true' ) ? true : false;
+												$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?: '';
+												$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
 
 											// Whether the video is available in high definition (HD) or only in standard definition (contentDetails.definition)
 
 												/* No info on this returned from function */
 
-								} elseif ( str_contains( $CreativeWork_video_parsed['host'], 'vimeo' ) ) {
+								} elseif ( str_contains( $CreativeWork_asset_parsed['host'], 'vimeo' ) ) {
 
 									// If Vimeo
 
 										// Embed URL
 
-											$CreativeWork_video_embed = $CreativeWork_video_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['path']: '';
+											$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['path']: '';
 
 								}
+
 						}
 
 					// name
@@ -1594,7 +1608,7 @@
 
 								if ( $CreativeWork_resource_type == 'video' ) {
 
-									$CreativeWork_alternateName = $CreativeWork_video_title ?: '';
+									$CreativeWork_alternateName = $CreativeWork_asset_title ?: '';
 
 								}
 
@@ -2037,7 +2051,7 @@
 
 							// Get values
 
-								$CreativeWork_duration = $CreativeWork_video_duration ?: '';
+								$CreativeWork_duration = $CreativeWork_asset_duration ?: '';
 
 							// Add to item values
 
@@ -2121,7 +2135,7 @@
 
 							// Get values
 
-								$CreativeWork_embedUrl = $CreativeWork_video_embed ?: '';
+								$CreativeWork_embedUrl = $CreativeWork_asset_embedUrl ?: '';
 
 							// Add to item values
 
@@ -2591,7 +2605,7 @@
 
 							// Get values
 
-								$CreativeWork_thumbnail = $CreativeWork_video_thumb_max ?: '';
+								$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: '';
 
 							// Add to item values
 
