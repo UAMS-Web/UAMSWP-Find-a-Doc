@@ -2384,7 +2384,7 @@
 
 							// Get values
 
-								$CreativeWork_isAccessibleForFree = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_isAccessibleForFree = 'True';
 
 							// Add to item values
 
