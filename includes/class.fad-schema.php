@@ -1908,29 +1908,111 @@
 
 							$CreativeWork_description = '';
 
-						if ( in_array( 'description', $CreativeWork_properties ) ) {
+						// Get values
 
-							// Get values
+							if ( $CreativeWork_resource_type == 'article' ) {
 
-								if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+								// Article
 
-									$CreativeWork_description = $CreativeWork_abstract ?: '';
+									if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-								} else {
+										$CreativeWork_description = $CreativeWork_abstract ?: '';
 
-									$CreativeWork_description = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
+									} else {
 
-								}
+										$CreativeWork_description = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
 
-							// Add to item values
+									}
 
-								if ( $CreativeWork_description ) {
+							} elseif ( $CreativeWork_resource_type == 'infographic' ) {
 
-									$CreativeWork_item['description'] = $CreativeWork_description;
+								// Infographic
 
-								}
+									$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $CreativeWork ) ?: '';
 
-						}
+									// Fallback value
+
+										if ( !$CreativeWork_description ) {
+
+											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+												$CreativeWork_description = $CreativeWork_abstract ?: '';
+
+											} else {
+
+												$CreativeWork_description = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
+
+											}
+
+										}
+
+							} elseif ( $CreativeWork_resource_type == 'video' ) {
+
+								// Video
+
+									$CreativeWork_description = get_field( 'clinical_resource_video_descr', $CreativeWork ) ?: '';
+
+									// Fallback value
+
+										if ( !$CreativeWork_description ) {
+
+											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+												$CreativeWork_description = $CreativeWork_abstract ?: '';
+
+											} else {
+
+												$CreativeWork_description = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
+
+											}
+
+										}
+
+							} elseif ( $CreativeWork_resource_type == 'document' ) {
+
+								// Document
+
+									$CreativeWork_description = get_field( 'clinical_resource_document_descr', $CreativeWork ) ?: '';
+
+									// Fallback value
+
+										if ( !$CreativeWork_description ) {
+
+											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+												$CreativeWork_description = $CreativeWork_abstract ?: '';
+
+											} else {
+
+												$CreativeWork_description = get_field( 'clinical_resource_excerpt', $CreativeWork ) ?: '';
+
+											}
+
+										}
+
+							}
+
+						// Clean up values
+
+							if ( $CreativeWork_description ) {
+
+								// Strip all tags
+
+									$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
+
+								// Make attribute-friendly
+
+									$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
+
+							}
+
+						// Add to item values
+
+							if ( $CreativeWork_description ) {
+
+								$CreativeWork_item['description'] = $CreativeWork_description;
+
+							}
 
 					// duration
 
