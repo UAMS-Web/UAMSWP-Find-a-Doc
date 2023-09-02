@@ -1345,6 +1345,163 @@
 
 						} // endif ( $nesting_level == 1 )
 
+					// Asset ID
+
+						// Eliminate PHP errors
+
+							$CreativeWork_asset_id = '';
+						
+						if ( $nesting_level == 0 ) {
+
+							if ( $CreativeWork_resource_type == 'infographic' ) {
+
+								// Infographic image id
+
+									$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $CreativeWork ) ?: '';
+
+							}
+
+						}
+
+					// Syndication values
+
+						// Eliminate PHP errors
+
+							$CreativeWork_syndication_query = '';
+							$CreativeWork_nci_query = '';
+							$CreativeWork_syndication_URL = '';
+							$CreativeWork_syndication_org = '';
+
+						if ( $nesting_level == 0 ) {
+
+							$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $CreativeWork ) ?: false;
+
+							// NCI syndication query
+
+								if ( $CreativeWork_syndication_query ) {
+
+									$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $CreativeWork ) ?: false;
+
+								}
+
+							// Syndication source URL
+
+								if ( $CreativeWork_syndication_query ) {
+
+									$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $CreativeWork ) ?: false;
+
+								}
+
+							// Syndication source organization
+
+								if (
+									$CreativeWork_syndication_query
+									&&
+									$CreativeWork_nci_query
+								) {
+
+									$CreativeWork_syndication_org = array(
+										'@type' => 'ResearchOrganization',
+										'name' => 'National Cancer Institute',
+										'sameAs' => array(
+											'http://id.loc.gov/authorities/names/n79107940',
+											'https://www.wikidata.org/wiki/Q664846'
+										),
+										'url' => 'https://www.cancer.gov/'
+									);
+
+								}
+
+						}
+
+					// Get video info
+
+						// Eliminate PHP errors
+
+							$CreativeWork_video = '';
+							$CreativeWork_video_parsed = '';
+							$CreativeWork_video_info = '';
+						
+						if (
+							$CreativeWork_resource_type == 'video'
+							// &&
+							// $nesting_level == 0
+						) {
+
+							// Video URL
+
+								$CreativeWork_video = get_field( 'clinical_resource_video', $CreativeWork ) ?: '';
+
+							// Video info
+
+								// Parse the URL and return its components
+
+									$CreativeWork_video_parsed = parse_url($CreativeWork_video);
+
+									// Parse the query string into variables
+									
+										parse_str($CreativeWork_video_parsed['query'], $CreativeWork_video_parsed['query']);
+
+								if (
+									str_contains( $CreativeWork_video_parsed['host'], 'youtube' )
+									||
+									str_contains( $CreativeWork_video_parsed['host'], 'youtu.be' )
+								) {
+
+									// If YouTube
+
+										// Embed URL
+
+											$CreativeWork_video_embed = $CreativeWork_video_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['query']['v'] : '';
+
+										// Get info from video
+
+											$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
+
+											// Title (snippet.title)
+
+												$CreativeWork_video_title = $CreativeWork_video_info['title'];
+
+											// High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+												$CreativeWork_video_thumb_high = $CreativeWork_video_info['thumbUrl'];
+
+											// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+
+												$CreativeWork_video_thumb_max = $CreativeWork_video_info['HQthumbUrl'];
+
+											// Published date and time (snippet.publishedAt)
+
+												$CreativeWork_video_published = $CreativeWork_video_info['dateField'];
+
+											// Duration (contentDetails.duration)
+
+												$CreativeWork_video_duration = $CreativeWork_video_info['duration'];
+
+											// Description (snippet.description)
+
+												$CreativeWork_video_description = $CreativeWork_video_info['description'];
+
+											// Whether captions are available for the video (contentDetails.caption)
+
+												$CreativeWork_video_caption = $CreativeWork_video_info['captions_data'];
+												$CreativeWork_video_caption = ( $CreativeWork_video_caption == 'true' ) ? true : false;
+
+											// Whether the video is available in high definition (HD) or only in standard definition (contentDetails.definition)
+
+												/* No info on this returned from function */
+
+								} elseif ( str_contains( $CreativeWork_video_parsed['host'], 'vimeo' ) ) {
+
+									// If Vimeo
+
+										// Embed URL
+
+											$CreativeWork_video_embed = $CreativeWork_video_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['path']: '';
+
+								}
+						}
+
 					// name
 
 						/*
@@ -1490,24 +1647,6 @@
 
 						}
 
-					// Asset ID
-
-						// Eliminate PHP errors
-
-							$CreativeWork_asset_id = '';
-						
-						if ( $nesting_level == 0 ) {
-
-							if ( $CreativeWork_resource_type == 'infographic' ) {
-
-								// Infographic image id
-
-									$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $CreativeWork ) ?: '';
-
-							}
-
-						}
-
 					// contentSize
 
 						/*
@@ -1581,57 +1720,6 @@
 								if ( $CreativeWork_contentUrl ) {
 
 									$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
-
-								}
-
-						}
-
-					// Syndication values
-
-						// Eliminate PHP errors
-
-							$CreativeWork_syndication_query = '';
-							$CreativeWork_nci_query = '';
-							$CreativeWork_syndication_URL = '';
-							$CreativeWork_syndication_org = '';
-
-						if ( $nesting_level == 0 ) {
-
-							$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $CreativeWork ) ?: false;
-
-							// NCI syndication query
-
-								if ( $CreativeWork_syndication_query ) {
-
-									$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $CreativeWork ) ?: false;
-
-								}
-
-							// Syndication source URL
-
-								if ( $CreativeWork_syndication_query ) {
-
-									$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $CreativeWork ) ?: false;
-
-								}
-
-							// Syndication source organization
-
-								if (
-									$CreativeWork_syndication_query
-									&&
-									$CreativeWork_nci_query
-								) {
-
-									$CreativeWork_syndication_org = array(
-										'@type' => 'ResearchOrganization',
-										'name' => 'National Cancer Institute',
-										'sameAs' => array(
-											'http://id.loc.gov/authorities/names/n79107940',
-											'https://www.wikidata.org/wiki/Q664846'
-										),
-										'url' => 'https://www.cancer.gov/'
-									);
 
 								}
 
@@ -1793,94 +1881,6 @@
 
 								}
 
-						}
-
-					// Get video info
-
-						// Eliminate PHP errors
-
-							$CreativeWork_video = '';
-							$CreativeWork_video_parsed = '';
-							$CreativeWork_video_info = '';
-						
-						if (
-							$CreativeWork_resource_type == 'video'
-							// &&
-							// $nesting_level == 0
-						) {
-
-							// Video URL
-
-								$CreativeWork_video = get_field( 'clinical_resource_video', $CreativeWork ) ?: '';
-
-							// Video info
-
-								// Parse the URL and return its components
-
-									$CreativeWork_video_parsed = parse_url($CreativeWork_video);
-
-									// Parse the query string into variables
-									
-										parse_str($CreativeWork_video_parsed['query'], $CreativeWork_video_parsed['query']);
-
-								if (
-									str_contains( $CreativeWork_video_parsed['host'], 'youtube' )
-									||
-									str_contains( $CreativeWork_video_parsed['host'], 'youtu.be' )
-								) {
-
-									// If YouTube
-
-										// Embed URL
-
-											$CreativeWork_video_embed = $CreativeWork_video_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['query']['v'] : '';
-
-										// Get info from video
-
-											$CreativeWork_video_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
-
-											// Title (snippet.title)
-
-												$CreativeWork_video_title = $CreativeWork_video_info['title'];
-
-											// High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-												$CreativeWork_video_thumb_high = $CreativeWork_video_info['thumbUrl'];
-
-											// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
-
-												$CreativeWork_video_thumb_max = $CreativeWork_video_info['HQthumbUrl'];
-
-											// Published date and time (snippet.publishedAt)
-
-												$CreativeWork_video_published = $CreativeWork_video_info['dateField'];
-
-											// Duration (contentDetails.duration)
-
-												$CreativeWork_video_duration = $CreativeWork_video_info['duration'];
-
-											// Description (snippet.description)
-
-												$CreativeWork_video_description = $CreativeWork_video_info['description'];
-
-											// Whether captions are available for the video (contentDetails.caption)
-
-												$CreativeWork_video_caption = $CreativeWork_video_info['captions_data'];
-												$CreativeWork_video_caption = ( $CreativeWork_video_caption == 'true' ) ? true : false;
-
-											// Whether the video is available in high definition (HD) or only in standard definition (contentDetails.definition)
-
-												/* No info on this returned from function */
-
-								} elseif ( str_contains( $CreativeWork_video_parsed['host'], 'vimeo' ) ) {
-
-									// If Vimeo
-
-										// Embed URL
-
-											$CreativeWork_video_embed = $CreativeWork_video_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_video_parsed['path']: '';
-
-								}
 						}
 
 					// duration
