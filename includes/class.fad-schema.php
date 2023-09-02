@@ -2201,7 +2201,14 @@
 
 							// Get values
 
-								$CreativeWork_hasDigitalDocumentPermission = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_hasDigitalDocumentPermission = array(
+									'@type' => 'DigitalDocumentPermission',
+									'permissionType' => 'ReadPermission', // Thing > Intangible > Enumeration > DigitalDocumentPermissionType
+									'grantee' => array(
+										'@type' => 'Audience',
+										'audienceType' => 'public'
+									)
+								);
 
 							// Add to item values
 

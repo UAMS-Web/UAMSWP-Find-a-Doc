@@ -280,7 +280,7 @@
 					'@type' => 'Audience',
 					'audienceType' => 'public'
 				)
-			)
+			),
 			'isAccessibleForFree' => true,
 			'isPartOf' => array(
 				'@id' => 'https://uamshealth.com/clinical-resource/foo/#MedicalWebPage' // Replace URL up to the hash with relevant URL
