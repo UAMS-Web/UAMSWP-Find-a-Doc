@@ -1415,6 +1415,51 @@
 
 						}
 
+					// Get image info
+
+						// Eliminate PHP errors
+
+							$CreativeWork_asset_info = '';
+							$CreativeWork_asset_url = '';
+							$CreativeWork_asset_width = '';
+							$CreativeWork_asset_height = '';
+							$CreativeWork_asset_path = '';
+							$CreativeWork_asset_filesize = '';
+						
+						if (
+							$CreativeWork_resource_type == 'infographic'
+							// &&
+							// $nesting_level == 0
+						) {
+
+							// URL, width, height
+
+								$CreativeWork_asset_info = wp_get_attachment_image_src( $$CreativeWork_asset_id, 'full' ) ?: '';
+
+								if ( $CreativeWork_asset_info ) {
+
+									$CreativeWork_asset_url = $provider_portrait_16_9[0];
+									$CreativeWork_asset_width = $provider_portrait_16_9[1];
+									$CreativeWork_asset_height = $provider_portrait_16_9[2];
+
+								}
+							
+							// File size
+
+								// Asset file path
+
+									$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
+
+								// Asset file size
+
+									$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
+
+								// Formatted asset file size
+
+									$CreativeWork_asset_filesize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
+
+						}
+
 					// Get video info
 
 						// Eliminate PHP errors
@@ -1720,10 +1765,6 @@
 						 *     - Text
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_contentSize = '';
-
 						if (
 							in_array( 'contentSize', $CreativeWork_properties )
 							&&
@@ -1732,17 +1773,7 @@
 
 							// Get values
 
-								// Asset file path
-
-									$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
-
-								// Asset file size
-
-									$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
-
-								// Formatted asset file size
-
-									$CreativeWork_contentSize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
+								$CreativeWork_contentSize = $CreativeWork_asset_filesize ?: '';
 
 							// Add to item values
 
@@ -1776,7 +1807,7 @@
 
 							// Get values
 
-								$CreativeWork_contentUrl = wp_get_attachment_url( $CreativeWork_asset_id ) ?: '';
+								$CreativeWork_contentUrl = $CreativeWork_asset_url ?: '';
 
 							// Add to item values
 
@@ -2257,7 +2288,7 @@
 
 							// Get values
 
-								$CreativeWork_height = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_height = $CreativeWork_asset_height ?: '';
 
 							// Add to item values
 
@@ -2778,7 +2809,7 @@
 
 							// Get values
 
-								$CreativeWork_width = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_width = $CreativeWork_asset_width ?: '';
 
 							// Add to item values
 
