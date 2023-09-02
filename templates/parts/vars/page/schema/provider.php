@@ -62,6 +62,8 @@ TODO List
 		 * Define array of just URLs from related clinical resources
 		 * Bring clinical resources schema and URLs into relevant properties of provider's schema
 		 * Make the defining of the values array into a function that can be repeated, cached, based on the clinical resource ID
+		 * Get more info from YouTube API through YouTube Lyte plugin (e.g., quality, frame size)
+		 * Get info from Vimeo API (e.g., title, description, quality, frame size)
 	 * Related conditions
 		 * Add transients inside foreach loop of defining function
 	 * Related treatments
