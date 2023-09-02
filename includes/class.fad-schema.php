@@ -2319,13 +2319,48 @@
 
 							// Get values
 
-								$CreativeWork_image = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_image = get_field( '_thumbnail_id', $CreativeWork ) ?: '';
+
+								// Create ImageObject
+
+									$CreativeWork_image_ImageObject = $CreativeWork_image ? array(
+										array( // Featured image (16:9)
+											'@type' => 'ImageObject',
+											'caption' => 'foo', // Replace 'foo' with the image's alt text
+											'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+											'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+											'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+											'height' => 'foo', // Replace 'foo' with the image's height
+											'representativeOfPage' => 'False', // Boolean (Data Type)
+											'width' => 'foo' // Replace 'foo' with the image's width
+										),
+										array( // Featured image (4:3)
+											'@type' => 'ImageObject',
+											'caption' => 'foo', // Replace 'foo' with the image's alt text
+											'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+											'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+											'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+											'height' => 'foo', // Replace 'foo' with the image's height
+											'representativeOfPage' => 'False', // Boolean (Data Type)
+											'width' => 'foo' // Replace 'foo' with the image's width
+										),
+										array( // Featured image (1:1)
+											'@type' => 'ImageObject',
+											'caption' => 'foo', // Replace 'foo' with the image's alt text
+											'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
+											'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
+											'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
+											'height' => 'foo', // Replace 'foo' with the image's height
+											'representativeOfPage' => 'False', // Boolean (Data Type)
+											'width' => 'foo' // Replace 'foo' with the image's width
+										)
+									) : '';
 
 							// Add to item values
 
-								if ( $CreativeWork_image ) {
+								if ( $CreativeWork_image_ImageObject ) {
 
-									$CreativeWork_item['image'] = $CreativeWork_image;
+									$CreativeWork_item['image'] = $CreativeWork_image_ImageObject;
 
 								}
 
