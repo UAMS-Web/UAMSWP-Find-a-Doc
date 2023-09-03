@@ -12321,3 +12321,49 @@ function uamswp_prevent_orphan($string) {
 		}
 
 	}
+
+// Convert seconds to ISO 8601 duration format
+
+	function uamswp_fad_iso8601_duration( int $seconds ) {
+
+		/* Source: https://stackoverflow.com/a/13301472 */
+
+		$units = array(
+			'Y' => 365*24*3600,
+			'D' =>     24*3600,
+			'H' =>        3600,
+			'M' =>          60,
+			'S' =>           1,
+		);
+
+		$str = 'P';
+		$istime = false;
+
+		foreach ( $units as $unitName => &$unit ) {
+
+			$quot = intval($seconds / $unit);
+			$seconds -= $quot * $unit;
+			$unit = $quot;
+
+			if ( $unit > 0 ) {
+
+				if (
+					!$istime
+					&&
+					in_array( $unitName, array('H', 'M', 'S') )
+				) { // There may be a better way to do this
+
+					$str .= 'T';
+					$istime = true;
+
+				}
+
+				$str .= strval($unit) . $unitName;
+
+			}
+
+		}
+
+		return $str;
+
+	}

@@ -2827,7 +2827,7 @@
 						 * 
 						 * Values expected to be one of these types:
 						 * 
-						 *     - Duration
+						 *     - Duration (use ISO 8601 duration format).
 						 */
 
 						// Eliminate PHP errors
@@ -2842,7 +2842,35 @@
 
 							// Get values
 
-								$CreativeWork_timeRequired = get_field( 'foo', $CreativeWork ) ?: '';
+								// Count words
+
+									// Base value
+
+										$CreativeWork_word_count = 0;
+
+									// Introduction / Description
+
+										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_description)
+
+									// Article body
+
+										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_articleBody)
+
+									// Video transcript
+
+										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_transcript)
+
+									// Infographic transcript
+
+										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_embeddedTextCaption)
+
+								// Calculate time to read all words
+
+									$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
+									$wps = $wpm / 60; // words per second
+
+									$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : ''
+									$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : ''
 
 							// Add to item values
 
