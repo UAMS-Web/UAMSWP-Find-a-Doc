@@ -2893,19 +2893,23 @@
 
 									// Introduction / Description
 
-										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_description)
+										$CreativeWork_description_count = str_word_count($CreativeWork_description);
+										$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
 
 									// Article body
 
-										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_articleBody)
+										$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
+										$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
 
 									// Video transcript
 
-										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_transcript)
+										$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
+										$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
 
 									// Infographic transcript
 
-										$CreativeWork_word_count = $CreativeWork_word_count + str_word_count($CreativeWork_embeddedTextCaption)
+										$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
+										$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
 
 								// Calculate time to read all words
 
@@ -3049,7 +3053,11 @@
 
 							// Get values
 
-								$CreativeWork_wordCount = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_wordCount = $CreativeWork_articleBody_count ?: '';
+
+								// Fallback value
+
+									$CreativeWork_wordCount = !$CreativeWork_articleBody_count && $CreativeWork_articleBody ? str_word_count($CreativeWork_articleBody) : '';
 
 							// Add to item values
 
