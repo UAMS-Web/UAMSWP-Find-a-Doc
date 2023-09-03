@@ -2842,7 +2842,7 @@
 
 							// Get values
 
-								$CreativeWork_transcript = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $CreativeWork ) ?: '';
 
 							// Add to item values
 
