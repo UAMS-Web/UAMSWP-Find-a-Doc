@@ -2631,7 +2631,15 @@
 
 							// Get values
 
-								$CreativeWork_sourceOrganization = get_field( 'foo', $CreativeWork ) ?: '';
+								if ( $CreativeWork_syndication_query ) {
+
+									$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?: '';
+
+								} else {
+
+									$CreativeWork_sourceOrganization = $schema_base_org_uams_health_ref ?: '';
+
+								}
 
 							// Add to item values
 
