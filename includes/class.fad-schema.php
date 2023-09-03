@@ -1547,9 +1547,17 @@
 												$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?: '';
 												$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
 
-											// Whether the video is available in high definition (HD) or only in standard definition (contentDetails.definition)
+											// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
 
 												/* No info on this returned from function */
+
+												$CreativeWork_asset_videoQuality = '';
+
+											// Frame size
+
+												/* No info on this returned from function */
+
+												$CreativeWork_asset_videoFrameSize = '';
 
 								} elseif ( str_contains( $CreativeWork_asset_parsed['host'], 'vimeo' ) ) {
 
@@ -2939,7 +2947,7 @@
 
 							// Get values
 
-								$CreativeWork_videoFrameSize = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?: '';
 
 							// Add to item values
 
@@ -2973,7 +2981,7 @@
 
 							// Get values
 
-								$CreativeWork_videoQuality = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?: '';
 
 							// Add to item values
 
