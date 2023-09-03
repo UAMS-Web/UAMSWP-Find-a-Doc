@@ -1250,6 +1250,7 @@
 							'infographic' => array(
 								'@type' => 'ImageObject',
 								'properties' => array(
+									'additionalType',
 									'contentSize',
 									'contentUrl',
 									'embeddedTextCaption',
@@ -1624,6 +1625,50 @@
 								if ( $CreativeWork_abstract ) {
 
 									$CreativeWork_item['abstract'] = $CreativeWork_abstract;
+
+								}
+
+						}
+
+					// additionalType
+
+						/*
+						 * An additional type for the item, typically used for adding more specific types 
+						 * from external vocabularies in microdata syntax. This is a relationship between 
+						 * something and a class that the thing is in. Typically the value is a 
+						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+						 * in RDF. Text values can be used sparingly, for cases where useful information 
+						 * can be added without their being an appropriate schema to reference. In the 
+						 * case of text values, the class label should follow the schema.org style guide.
+						 * 
+						 * Subproperty of:
+						 *     - rdf:type
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 *     - URL
+						 */
+
+						// Eliminate PHP errors
+
+							$CreativeWork_additionalType = '';
+
+						if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
+
+							// Get values
+
+								if ( $CreativeWork_resource_type == 'infographic' ) {
+
+									$CreativeWork_additionalType = 'https://www.wikidata.org/wiki/Q845734'; // Wikidata entry for 'infographic'
+
+								}
+
+							// Add to item values
+
+								if ( $CreativeWork_additionalType ) {
+
+									$CreativeWork_item['additionalType'] = $CreativeWork_additionalType;
 
 								}
 
