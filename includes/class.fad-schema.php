@@ -2819,6 +2819,41 @@
 
 						}
 
+					// transcript
+
+						/*
+						 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+						 * object.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
+						// Eliminate PHP errors
+
+							$CreativeWork_transcript = '';
+
+						if (
+							in_array( 'transcript', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
+
+							// Get values
+
+								$CreativeWork_transcript = get_field( 'foo', $CreativeWork ) ?: '';
+
+							// Add to item values
+
+								if ( $CreativeWork_transcript ) {
+
+									$CreativeWork_item['transcript'] = $CreativeWork_transcript;
+
+								}
+
+						}
+
 					// timeRequired
 
 						/*
@@ -2877,41 +2912,6 @@
 								if ( $CreativeWork_timeRequired ) {
 
 									$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
-
-								}
-
-						}
-
-					// transcript
-
-						/*
-						 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
-						 * object.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_transcript = '';
-
-						if (
-							in_array( 'transcript', $CreativeWork_properties )
-							&&
-							$nesting_level == 0
-						) {
-
-							// Get values
-
-								$CreativeWork_transcript = get_field( 'foo', $CreativeWork ) ?: '';
-
-							// Add to item values
-
-								if ( $CreativeWork_transcript ) {
-
-									$CreativeWork_item['transcript'] = $CreativeWork_transcript;
 
 								}
 
