@@ -2494,7 +2494,7 @@
 
 							// Get values
 
-								$CreativeWork_representativeOfPage = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_representativeOfPage = 'True';
 
 							// Add to item values
 
