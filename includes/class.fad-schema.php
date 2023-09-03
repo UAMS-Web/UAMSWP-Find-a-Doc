@@ -2058,7 +2058,7 @@
 
 										}
 
-							} elseif ( $CreativeWork_resource_type == 'document' ) {
+							} elseif ( $CreativeWork_resource_type == 'doc' ) {
 
 								// Document
 
