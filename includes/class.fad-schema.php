@@ -2569,15 +2569,41 @@
 
 						if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
 
+							// Base array
+
+								$CreativeWork_sameAs = array();
+
 							// Get values
 
-								$CreativeWork_sameAs = get_field( 'foo', $CreativeWork ) ?: '';
+								// Syndication URL
 
+									if ( $CreativeWork_syndication_URL ) {
+
+										$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
+
+									}
+
+								// Video URL
+
+									if (
+										$CreativeWork_resource_type == 'video'
+										&&
+										$CreativeWork_video
+									) {
+
+										$CreativeWork_sameAs[] = $CreativeWork_video;
+	
+									}
+	
 							// Add to item values
 
 								if ( $CreativeWork_sameAs ) {
 
 									$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($CreativeWork_item['sameAs']);
 
 								}
 
