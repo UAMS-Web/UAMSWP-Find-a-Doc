@@ -2452,11 +2452,15 @@
 
 							$CreativeWork_mainEntityOfPage = '';
 
-						if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
+						if (
+							in_array( 'mainEntityOfPage', $CreativeWork_properties )
+							&&
+							$nesting_level == 0
+						) {
 
 							// Get values
 
-								$CreativeWork_mainEntityOfPage = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_mainEntityOfPage = $schema_clinical_resource_MedicalWebPage_ref ?: '';
 
 							// Add to item values
 
