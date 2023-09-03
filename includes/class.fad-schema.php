@@ -2693,15 +2693,64 @@
 							$nesting_level == 0
 						) {
 
+							// Base array
+
+								$CreativeWork_speakable = array();
+
 							// Get values
 
-								$CreativeWork_speakable = get_field( 'foo', $CreativeWork ) ?: '';
+								// Introduction / Description
+
+									if (
+										$CreativeWork_resource_type == 'infographic'
+										||
+										$CreativeWork_resource_type == 'video'
+										||
+										$CreativeWork_resource_type == 'doc'
+									) {
+
+										$CreativeWork_speakable[] = array(
+											'@type' => 'SpeakableSpecification',
+											'cssSelector' => '#resource-description-body'
+										);
+
+									}
+
+								// Content
+
+									if ( $CreativeWork_resource_type == 'article' ) {
+
+										$CreativeWork_speakable[] = array(
+											'@type' => 'SpeakableSpecification',
+											'cssSelector' => '#resource-content-body'
+										);
+
+									}
+
+								// Transcript
+
+									if (
+										$CreativeWork_resource_type == 'infographic'
+										||
+										$CreativeWork_resource_type == 'video'
+									) {
+
+										$CreativeWork_speakable[] = array(
+											'@type' => 'SpeakableSpecification',
+											'cssSelector' => '#resource-transcript-body'
+										);
+
+									}
 
 							// Add to item values
 
 								if ( $CreativeWork_speakable ) {
 
 									$CreativeWork_item['speakable'] = $CreativeWork_speakable;
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
 
 								}
 
