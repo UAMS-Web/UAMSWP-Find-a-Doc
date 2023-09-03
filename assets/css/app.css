@@ -1135,6 +1135,32 @@
   margin-bottom: .5em;
 }
 
+.single-clinical-resource #resource-content:not(:first-child),
+.single-clinical-resource #resource-transcript:not(:first-child) {
+  margin-top: 2rem;
+}
+
+.single-clinical-resource.clinical-resource-type-doc #resource-description>h2,
+.single-clinical-resource.clinical-resource-type-infographic #resource-content>h2,
+.single-clinical-resource.clinical-resource-type-infographic #resource-description>h2,
+.single-clinical-resource.clinical-resource-type-video #resource-content>h2,
+.single-clinical-resource.clinical-resource-type-video #resource-description>h2 {
+  clip: rect(0,0,0,0);
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.single-clinical-resource.clinical-resource-type-doc #resource-content:not(:first-child) {
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding-top: 2rem;
+}
+
 .single-clinical-resource ul.attachments {
   font-size: 1.40625rem;
   list-style: none;
@@ -1573,6 +1599,15 @@ html.poppedOut {
 
   .parking-map-container {
     margin-top: 3rem;
+  }
+
+  .single-clinical-resource #resource-content:not(:first-child),
+  .single-clinical-resource #resource-transcript:not(:first-child) {
+    margin-top: 3rem;
+  }
+
+  .single-clinical-resource.clinical-resource-type-doc #resource-content:not(:first-child) {
+    padding-top: 3rem;
   }
 
   #providers.overflow:not(.expanded) .card-list-container {

@@ -149,41 +149,67 @@
 
 				$content = '';
 				$text = '';
-				$infographic_descr = '';
-				$video_descr = '';
-				$document_descr = '';
+				$resource_description = '';
+				$resource_content_heading = '';
+				$resource_transcript = '';
 
 			if ( 'text' == $resource_type_value ) {
 
 				// Resource type: article
 
-				$text = get_field('clinical_resource_text');
-				$content = $text;
+					// Article body
+
+						$text = get_field('clinical_resource_text') ?: '';
+						$content = $text;
 
 			} elseif ( 'infographic' == $resource_type_value ) {
 
 				// Resource type: infographic
 
-				$infographic_descr = get_field('clinical_resource_infographic_descr');
-				$content = $infographic_descr;
+					// Introduction / Description
 
+						$resource_description = get_field('clinical_resource_infographic_descr') ?: '';
+						$content = $resource_description;
+
+					// Content heading
+
+						$resource_content_heading = 'Infographic';
+
+					// Transcript
+
+						$resource_transcript = get_field('clinical_resource_infographic_transcript') ?: '';
 
 			} elseif ( 'video' == $resource_type_value ) {
 
 				// Resource type: video
 
-				$video_descr = get_field('clinical_resource_video_descr');
-				$content = $video_descr;
+					// Introduction / Description
+
+						$resource_description = get_field('clinical_resource_video_descr') ?: '';
+						$content = $resource_description;
+
+					// Content heading
+
+						$resource_content_heading = 'Video Player';
+
+					// Transcript
+
+						$resource_transcript = get_field('clinical_resource_video_transcript') ?: '';
 
 			} elseif ( 'doc' == $resource_type_value ) {
 
 				// Resource type: document
 
-				$document_descr = get_field('clinical_resource_document_descr');
-				$content = $document_descr;
+					// Introduction / Description
+
+						$resource_description = get_field('clinical_resource_document_descr') ?: '';
+						$content = $resource_description;
+
+					// Content heading
+
+						$resource_content_heading = 'Attachments';
 
 			}
-
 
 		// Create excerpt if none exists
 
@@ -278,13 +304,24 @@
 	// Add page template class to body element's classes
 
 		$template_type = 'default';
-		add_filter( 'body_class', function( $classes ) use ( $template_type ) {
+		add_filter( 'body_class', function( $classes ) use (
+			$template_type,
+			$resource_type_value
+		) {
 
 			// Add page template class to body class array
 
 				if ( $template_type ) {
 
 					$classes[] = 'page-template-' . $template_type;
+
+				}
+
+			// Add clinical resource type to body class array
+
+				if ( $resource_type_value ) {
+
+					$classes[] = 'clinical-resource-type-' . $resource_type_value;
 
 				}
 
@@ -448,218 +485,237 @@
 				add_action( 'genesis_entry_content', function() use (
 					$resource_type_value,
 					$text,
-					$infographic_descr,
-					$video_descr,
-					$document_descr
+					$resource_description,
+					$resource_content_heading,
+					$resource_transcript
 				) {
 
-					if ( 'text' == $resource_type_value ) {
+					// Introduction / Description
 
-						// Resource type: article
+						if ( $resource_description ) {
 
-						$nci_query = get_field('clinical_resource_text_nci_query');
-						$nci_embed = $nci_query ? get_field('clinical_resource_nci_embed') : '';
+							?>
+							<div id="resource-description">
+								<h2>Description</h2>
+								<div id="resource-description-body">
+									<?php echo $resource_description; ?>
+								</div>
+							</div>
+							<?php
 
-						if( $text && !$nci_query ) { // $show_text_section ) {
-							echo $text;
-						} elseif ( $nci_query && $nci_embed ) {
-							echo $nci_embed;
 						}
 
-					} elseif ( 'infographic' == $resource_type_value ) {
+					// Primary content (i.e., article body, infographic image, video embed, document attachments)
 
-						// Resource type: infographic
+						?>
+						<div id="resource-content">
+							<?php
 
-						$infographic = get_field('clinical_resource_infographic');
+							if ( $resource_content_heading ) {
 
-						if ( $infographic ) {
-
-							$infographic_transcript = get_field('clinical_resource_infographic_transcript');
-							$size = 'content-image-wide';
-
-							if ( $infographic_descr ) {
-
-								echo '<h2 class="sr-only">Description</h2>';
-								echo $infographic_descr;
+								?>
+								<h2><?php echo $resource_content_heading; ?></h2>
+								<?php
 
 							}
 
-							echo '<h2 class="sr-only">Infographic</h2>';
-							echo '<div class="alignwide">';
-							echo wp_get_attachment_image( $infographic, $size );
-							echo '</div>';
+							?>
+							<div id="resource-content-body">
+								<?php
 
-							if ( $infographic_transcript ) {
+								if ( 'text' == $resource_type_value ) {
 
-								echo '<h2>Transcript</h2>';
-								echo $infographic_transcript;
+									// Resource type: article
 
-							}
+										$nci_query = get_field('clinical_resource_text_nci_query') ?: false;
+										$nci_embed = $nci_query ? get_field('clinical_resource_nci_embed') : '';
 
-						}
+										if (
+											$text
+											&&
+											!$nci_query
+										) {
 
-					} elseif ( 'video' == $resource_type_value ) {
+											echo $text;
 
-						// Resource type: video
+										} elseif (
+											$nci_query
+											&&
+											$nci_embed
+										) {
 
-						$video = get_field('clinical_resource_video');
+											echo $nci_embed;
 
-						if ( $video ) {
+										}
 
-							// Check video source
+								} elseif ( 'infographic' == $resource_type_value ) {
 
-								if (
-									strpos( $video, 'youtube' ) !== false
-									||
-									strpos( $video, 'youtu.be' ) !== false
-								) {
+									// Resource type: infographic
 
-									$video_source = 'youtube';
+										$infographic = get_field('clinical_resource_infographic');
+										$infographic_size = 'content-image-wide';
 
-								} else {
-
-									$video_source = '';
-
-								}
-
-							// Display video description
-
-								if ( $video_descr ) {
-
-									echo '<h2 class="sr-only">Description</h2>';
-									echo $video_descr;
-
-								}
-
-							// Display video player
-
-								echo '<h2 class="sr-only">Video Player</h2>';
-
-								if (
-									function_exists('lyte_preparse')
-									&&
-									$video_source == 'youtube'
-								) {
-
-									echo '<div class="alignwide">';
-									echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
-									echo '</div>';
-
-								} else {
-
-									echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-									echo wp_oembed_get( $video );
-									echo '</div>';
-
-								}
-
-							// Display video transcript
-
-								$video_transcript = get_field('clinical_resource_video_transcript');
-
-								if ( $video_transcript ) {
-
-									echo '<h2>Transcript</h2>';
-									echo $video_transcript;
-
-								}
-
-						}
-
-					} elseif ( 'doc' == $resource_type_value ) {
-
-						// Resource type: document
-
-							$documents = get_field('clinical_resource_document');
-
-							if ( $documents ) {
-
-								// Display document description
-
-									echo $document_descr;
-
-								// Display document attachments
-
-									$icon_file = 'far fa-file';
-									$icon_pdf = 'far fa-file-pdf';
-									$icon_word = 'far fa-file-word';
-									$icon_powerpoint = 'far fa-file-powerpoint';
-									$icon_excel = 'far fa-file-excel';
-									$icon_image = 'far fa-file-image';
-
-									echo '<hr />';
-									echo '<h2>Attachments</h2>';
-									echo '<ul class="attachments">';
-
-									foreach ( $documents as $document ) {
-
-										// Get file attributes
-
-											$document_title = $document['document_title'];
-											$document_file = $document['document_file'];
-												$document_url = $document_file['url'];
-													$document_url_path = pathinfo($document_url);
-														$document_url_extension = $document_url_path['extension'];
-
-										// Set icon
-
-											if ( $document_url_extension == 'pdf' ) {
-
-												$icon_file = $icon_pdf;
-
-											} elseif (
-												$document_url_extension == 'doc'
-												||
-												$document_url_extension == 'docx'
-											) {
-
-												$icon_file = $icon_word;
-
-											} elseif (
-												$document_url_extension == 'ppt'
-												||
-												$document_url_extension == 'pptx'
-											) {
-
-												$icon_file = $icon_powerpoint;
-
-											} elseif (
-												$document_url_extension == 'xls'
-												||
-												$document_url_extension == 'xlsx'
-											) {
-
-												$icon_file = $icon_excel;
-
-											} elseif (
-												$document_url_extension == 'jpg'
-												||
-												$document_url_extension == 'jpeg'
-												||
-												$document_url_extension == 'gif'
-												||
-												$document_url_extension == 'png'
-												||
-												$document_url_extension == 'bmp'
-											) {
-
-												$icon_file = $icon_image;
-
-											}
-
-										// Construct list item
+										if ( $infographic ) {
 
 											?>
-											<li><a class="attachment-link" href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><span class="<?php echo $icon_file; ?> fa-fw"></span><span class="attachment-label"><?php echo $document_title; ?></span></a></li>
+											<div class="alignwide">
+												<?php echo wp_get_attachment_image( $infographic, $infographic_size ); ?>
+											</div>
 											<?php
 
-									} // endwhile
+										}
 
-									echo '</ul>';
+								} elseif ( 'video' == $resource_type_value ) {
 
-							} // endif
+									// Resource type: video
 
-					}
+										$video = get_field('clinical_resource_video');
+
+										if ( $video ) {
+
+											// Check video source
+
+												if (
+													strpos( $video, 'youtube' ) !== false
+													||
+													strpos( $video, 'youtu.be' ) !== false
+												) {
+
+													$video_source = 'youtube';
+
+												} else {
+
+													$video_source = '';
+
+												}
+
+											// Display video player
+
+												if (
+													function_exists('lyte_preparse')
+													&&
+													$video_source == 'youtube'
+												) {
+
+													?>
+													<div class="alignwide">
+														<?php echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); ?>
+													</div>
+													<?php
+
+												} else {
+
+													?>
+													<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+														<?php echo wp_oembed_get( $video ); ?>
+													</div>
+													<?php
+
+												}
+
+										}
+
+								} elseif ( 'doc' == $resource_type_value ) {
+
+									// Resource type: document
+
+										$documents = get_field('clinical_resource_document');
+
+										if ( $documents ) {
+
+											// Icon classes
+
+												$icon_file = 'far fa-file';
+												$icon_pdf = 'far fa-file-pdf';
+												$icon_word = 'far fa-file-word';
+												$icon_powerpoint = 'far fa-file-powerpoint';
+												$icon_excel = 'far fa-file-excel';
+												$icon_image = 'far fa-file-image';
+
+												// Icon classes map
+
+													$resource_icon_map = array(
+
+														// PDF
+
+															'pdf'	=> $icon_pdf,
+
+														// Word
+
+															'doc'	=> $icon_word,
+															'docx'	=> $icon_word,
+
+														// Powerpoint
+
+															'ppt'	=> $icon_powerpoint,
+															'pptx'	=> $icon_powerpoint,
+
+														// Excel
+
+															'xls'	=> $icon_excel,
+															'xlsx'	=> $icon_excel,
+
+														// Image
+
+															'jpg'	=> $icon_image,
+															'jpeg'	=> $icon_image,
+															'gif'	=> $icon_image,
+															'png'	=> $icon_image,
+															'bmp'	=> $icon_image
+
+													);
+
+												?>
+												<ul class="attachments">
+													<?php
+
+													foreach ( $documents as $document ) {
+
+														// Get file attributes
+
+															$document_title = $document['document_title'];
+															$document_url = $document['document_file']['url'];
+															$document_extension = pathinfo($document_url)['extension'];
+
+														// Set icon
+
+															$document_icon = $resource_icon_map[$document_extension] ?: $icon_file;
+
+														// Construct list item
+
+															?>
+															<li><a class="attachment-link" href="<?php echo $document_url; ?>" title="<?php echo $document_title; ?>" target="_blank"><span class="<?php echo $document_icon; ?> fa-fw"></span><span class="attachment-label"><?php echo $document_title; ?></span></a></li>
+															<?php
+
+													} // endforeach
+
+													?>
+												</ul>
+												<?php
+
+										} // endif
+
+								}
+
+								?>
+							</div>
+						</div>
+						<?php
+
+					// Transcript
+
+						if ( $resource_transcript ) {
+
+							?>
+							<div id="resource-transcript">
+								<h2>Transcript</h2>
+								<div id="resource-transcript-body">
+									<?php echo $resource_transcript; ?>
+								</div>
+							</div>
+							<?php
+
+						}
 
 				}, 10 );
 

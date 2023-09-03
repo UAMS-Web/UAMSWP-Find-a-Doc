@@ -1,4 +1,54 @@
 .single-clinical-resource {
+	#resource-content,
+	#resource-transcript {
+		&:not(:first-child) {
+			margin-top: $uams-module-padding-mobile;
+
+			@include media-breakpoint-up(sm) {
+				margin-top: $uams-module-padding;
+			}
+		}
+	}
+
+	&.clinical-resource-type-infographic {
+		#resource-description,
+		#resource-content {
+			> h2 {
+				@include sr-only;
+			}
+		}
+	}
+
+	&.clinical-resource-type-video {
+		#resource-description,
+		#resource-content {
+			> h2 {
+				@include sr-only;
+			}
+		}
+	}
+
+	&.clinical-resource-type-doc {
+		#resource-description {
+			> h2 {
+				@include sr-only;
+			}
+		}
+
+		#resource-content {
+			&:not(:first-child) {
+				border-top: $hr-border-width solid $hr-border-color;
+				padding-top: $uams-module-padding-mobile;
+
+				@include media-breakpoint-up(sm) {
+					padding-top: $uams-module-padding;
+				}
+			}
+
+		}
+
+	}
+
 	ul.attachments {
 		margin: 0;
 		padding: 0;
@@ -53,6 +103,7 @@
 			margin-left: 0.25em;
 		}
 	}
+
 	div.syndicate {
 		h1 {
 			//@include pagetitle();
