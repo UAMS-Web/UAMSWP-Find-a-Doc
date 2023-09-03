@@ -2777,7 +2777,7 @@
 
 							// Get values
 
-								$CreativeWork_subjectOf = get_field( 'foo', $CreativeWork ) ?: '';
+								$CreativeWork_subjectOf = $schema_clinical_resource_MedicalWebPage_ref ?: '';
 
 							// Add to item values
 
