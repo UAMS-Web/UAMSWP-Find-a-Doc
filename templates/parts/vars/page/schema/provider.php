@@ -58,13 +58,16 @@ TODO List
 		 * Bring areas of expertise schema and URLs into relevant properties of provider's schema
 		 * Make the defining of the values array into a function that can be repeated, cached, based on the area of expertise ID
 	 * Related clinical resources
-		 * Define array of just URLs from related clinical resources
 		 * Apply the clinical resources schema function to the single clinical resource template
-		 * Test all the properties of the clinical resource schema function
-		 * Add transients inside foreach loop of defining function
 		 * Separate resource types (e.g., ImageObject) into separate functions, calling them in the clinical resource schema function
-		 * Get more info from YouTube API through YouTube Lyte plugin (e.g., quality, frame size)
-		 * Get info from Vimeo API (e.g., title, description, quality, frame size)
+		 * Get more info from YouTube API through YouTube Lyte plugin
+			 * videoQuality
+			 * videoFrameSize
+		 * Get info from Vimeo API
+			 * duration
+			 * thumbnail
+			 * videoQuality
+			 * videoFrameSize
 	 * Related conditions
 		 * Add transients inside foreach loop of defining function
 	 * Related treatments
