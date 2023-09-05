@@ -1710,6 +1710,27 @@
 							}
 
 					// alternateName
+
+						/*
+						 * An alias for the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
+						// Get values
+
+							$MedicalEntity_alternateName = 'foo' ?? '';
+
+						// Add to item values
+
+							if ( $MedicalEntity_alternateName ) {
+
+								$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
+
+							}
+
 					// code
 					// description
 					// disambiguatingDescription
