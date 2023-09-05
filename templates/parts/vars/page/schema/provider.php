@@ -1702,34 +1702,35 @@ TODO List
 					// Image Values
 
 						// 1:1 Aspect Ratio
+
 							$provider_portrait_1_1 = wp_get_attachment_image_src( $provider_portrait, 'aspect-1-1' );
-							$provider_portrait_1_1_url = $provider_portrait_1_1[0];
-							$provider_portrait_1_1_width = $provider_portrait_1_1[1] ? $provider_portrait_1_1[1] . ' px' : '';
-							$provider_portrait_1_1_height = $provider_portrait_1_1[2] ? $provider_portrait_1_1[2] . ' px' : '';
+							$provider_portrait_1_1_url = $provider_portrait_1_1[0] ?? '';
+							$provider_portrait_1_1_width = $provider_portrait_1_1[1] ?? '';
+							$provider_portrait_1_1_height = $provider_portrait_1_1[2] ?? '';
 							$provider_portrait_1_1_size = '';
 
 						// 3:4 Aspect Ratio
 
 							$provider_portrait_3_4 = wp_get_attachment_image_src( $provider_portrait, 'aspect-3-4' );
-							$provider_portrait_3_4_url = $provider_portrait_3_4[0];
-							$provider_portrait_3_4_width = $provider_portrait_3_4[1] ? $provider_portrait_3_4[1] . ' px' : '';
-							$provider_portrait_3_4_height = $provider_portrait_3_4[2] ? $provider_portrait_3_4[2] . ' px' : '';
+							$provider_portrait_3_4_url = $provider_portrait_3_4[0] ?? '';
+							$provider_portrait_3_4_width = $provider_portrait_3_4[1] ?? '';
+							$provider_portrait_3_4_height = $provider_portrait_3_4[2] ?? '';
 							$provider_portrait_3_4_size = '';
 
 						// 4:3 Aspect Ratio
 
 							$provider_portrait_4_3 = wp_get_attachment_image_src( $provider_portrait, 'aspect-4-3' );
-							$provider_portrait_4_3_url = $provider_portrait_4_3[0];
-							$provider_portrait_4_3_width = $provider_portrait_4_3[1] ? $provider_portrait_4_3[1] . ' px' : '';
-							$provider_portrait_4_3_height = $provider_portrait_4_3[2] ? $provider_portrait_4_3[2] . ' px' : '';
+							$provider_portrait_4_3_url = $provider_portrait_4_3[0] ?? '';
+							$provider_portrait_4_3_width = $provider_portrait_4_3[1] ?? '';
+							$provider_portrait_4_3_height = $provider_portrait_4_3[2] ?? '';
 							$provider_portrait_4_3_size = '';
 
 						// 16:9 Aspect Ratio
 
 							$provider_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
-							$provider_portrait_16_9_url = $provider_portrait_16_9[0];
-							$provider_portrait_16_9_width = $provider_portrait_16_9[1] ? $provider_portrait_16_9[1] . ' px' : '';
-							$provider_portrait_16_9_height = $provider_portrait_16_9[2] ? $provider_portrait_16_9[2] . ' px' : '';
+							$provider_portrait_16_9_url = $provider_portrait_16_9[0] ?? '';
+							$provider_portrait_16_9_width = $provider_portrait_16_9[1] ?? '';
+							$provider_portrait_16_9_height = $provider_portrait_16_9[2] ?? '';
 							$provider_portrait_16_9_size = '';
 
 					// Image Objects
@@ -1744,16 +1745,17 @@ TODO List
 							);
 						// 1:1 Aspect Ratio
 
+							$schema_provider_Person_image_1_1 = array();
+							$schema_provider_Person_image_1_1['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
+							$schema_provider_Person_image_1_1['contentSize'] = $provider_portrait_1_1_size ?: '';
+							$schema_provider_Person_image_1_1['contentUrl'] = $provider_portrait_1_1_url ?: '';
+							$schema_provider_Person_image_1_1['height'] = $provider_portrait_1_1_height ? $provider_portrait_1_1_height . ' px' : '';
+							$schema_provider_Person_image_1_1['width'] = $provider_portrait_1_1_width ? $provider_portrait_1_1_width . ' px' : '';
+
 							$schema_provider_Person_image_1_1 = array_filter(
 								array_merge(
 									$provider_portrait_image_object_base,
-									array(
-										'@id' => $schema_provider_url . '#Portrait-1-1',
-										'contentSize' => $provider_portrait_1_1_size,
-										'contentUrl' => $provider_portrait_1_1_url,
-										'height' => $provider_portrait_1_1_height,
-										'width' => $provider_portrait_1_1_width
-									)
+									$schema_provider_Person_image_1_1
 								)
 							);
 
@@ -1771,16 +1773,17 @@ TODO List
 
 						// 3:4 Aspect Ratio
 
+							$schema_provider_Person_image_3_4 = array();
+							$schema_provider_Person_image_3_4['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
+							$schema_provider_Person_image_3_4['contentSize'] = $provider_portrait_3_4_size ?: '';
+							$schema_provider_Person_image_3_4['contentUrl'] = $provider_portrait_3_4_url ?: '';
+							$schema_provider_Person_image_3_4['height'] = $provider_portrait_3_4_height ? $provider_portrait_3_4_height . ' px' : '';
+							$schema_provider_Person_image_3_4['width'] = $provider_portrait_3_4_width ? $provider_portrait_3_4_width . ' px' : '';
+
 							$schema_provider_Person_image_3_4 = array_filter(
 								array_merge(
 									$provider_portrait_image_object_base,
-									array(
-										'@id' => $schema_provider_url . '#Portrait-3-4',
-										'contentSize' => $provider_portrait_3_4_size,
-										'contentUrl' => $provider_portrait_3_4_url,
-										'height' => $provider_portrait_3_4_height,
-										'width' => $provider_portrait_3_4_width
-									)
+									$schema_provider_Person_image_3_4
 								)
 							);
 
@@ -1798,16 +1801,17 @@ TODO List
 
 						// 4:3 Aspect Ratio
 
+							$schema_provider_Person_image_4_3 = array();
+							$schema_provider_Person_image_4_3['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
+							$schema_provider_Person_image_4_3['contentSize'] = $provider_portrait_4_3_size ?: '';
+							$schema_provider_Person_image_4_3['contentUrl'] = $provider_portrait_4_3_url ?: '';
+							$schema_provider_Person_image_4_3['height'] = $provider_portrait_4_3_height ? $provider_portrait_4_3_height . ' px' : '';
+							$schema_provider_Person_image_4_3['width'] = $provider_portrait_4_3_width ? $provider_portrait_4_3_width . ' px' : '';
+
 							$schema_provider_Person_image_4_3 = array_filter(
 								array_merge(
 									$provider_portrait_image_object_base,
-									array(
-										'@id' => $schema_provider_url . '#Portrait-4-3',
-										'contentSize' => $provider_portrait_4_3_size,
-										'contentUrl' => $provider_portrait_4_3_url,
-										'height' => $provider_portrait_4_3_height,
-										'width' => $provider_portrait_4_3_width
-									)
+									$schema_provider_Person_image_4_3
 								)
 							);
 
@@ -1825,16 +1829,17 @@ TODO List
 
 						// // 16:9 Aspect Ratio
 						// 
+						// 	$schema_provider_Person_image_16_9 = array();
+						// 	$schema_provider_Person_image_16_9['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
+						// 	$schema_provider_Person_image_16_9['contentSize'] = $provider_portrait_16_9_size ?: '';
+						// 	$schema_provider_Person_image_16_9['contentUrl'] = $provider_portrait_16_9_url ?: '';
+						// 	$schema_provider_Person_image_16_9['height'] = $provider_portrait_16_9_height ? $provider_portrait_16_9_height . ' px' : '';
+						// 	$schema_provider_Person_image_16_9['width'] = $provider_portrait_16_9_width ? $provider_portrait_16_9_width . ' px' : '';
+						// 
 						// 	$schema_provider_Person_image_16_9 = array_filter(
 						// 		array_merge(
 						// 			$provider_portrait_image_object_base,
-						// 			array(
-						// 				'@id' => $schema_provider_url . '#Portrait-16-9',
-						// 				'contentSize' => $provider_portrait_16_9_size,
-						// 				'contentUrl' => $provider_portrait_16_9_url,
-						// 				'height' => $provider_portrait_16_9_height,
-						// 				'width' => $provider_portrait_16_9_width
-						// 			)
+						// 			$schema_provider_Person_image_16_9
 						// 		)
 						// 	);
 						// 
@@ -1878,9 +1883,9 @@ TODO List
 						// 16:9 Aspect Ratio
 
 							$provider_wide_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
-							$provider_wide_portrait_16_9_url = $provider_portrait_16_9[0];
-							$provider_wide_portrait_16_9_width = $provider_portrait_16_9[1] ? $provider_portrait_16_9[1] . ' px' : '';
-							$provider_wide_portrait_16_9_height = $provider_portrait_16_9[2] ? $provider_portrait_16_9[2] . ' px' : '';
+							$provider_wide_portrait_16_9_url = $provider_portrait_16_9[0] ?? '';
+							$provider_wide_portrait_16_9_width = $provider_portrait_16_9[1] ?? '';
+							$provider_wide_portrait_16_9_height = $provider_portrait_16_9[2] ?? '';
 							$provider_wide_portrait_16_9_size = '';
 
 					// Image Objects
@@ -1896,16 +1901,17 @@ TODO List
 
 						// 16:9 Aspect Ratio
 
+							$schema_provider_Person_image_wide_16_9 = array();
+							$schema_provider_Person_image_wide_16_9['@id'] = $schema_provider_url ? $schema_provider_url . '#Wide-Portrait-16-9' : '';
+							$schema_provider_Person_image_wide_16_9['contentSize'] = $provider_wide_portrait_16_9_size ?: '';
+							$schema_provider_Person_image_wide_16_9['contentUrl'] = $provider_wide_portrait_16_9_url ?: '';
+							$schema_provider_Person_image_wide_16_9['height'] = $provider_wide_portrait_16_9_height ? $provider_wide_portrait_16_9_height . ' px' : '';
+							$schema_provider_Person_image_wide_16_9['width'] = $provider_wide_portrait_16_9_width ? $provider_wide_portrait_16_9_width . ' px' : '';
+
 							$schema_provider_Person_image_wide_16_9 = array_filter(
 								array_merge(
 									$provider_wide_portrait_image_object_base,
-									array(
-										'@id' => $schema_provider_url . '#Wide-Portrait-16-9',
-										'contentSize' => $provider_wide_portrait_16_9_size,
-										'contentUrl' => $provider_wide_portrait_16_9_url,
-										'height' => $provider_wide_portrait_16_9_height,
-										'width' => $provider_wide_portrait_16_9_width
-									)
+									$schema_provider_Person_image_wide_16_9
 								)
 							);
 

@@ -1439,9 +1439,9 @@
 
 								if ( $CreativeWork_asset_info ) {
 
-									$CreativeWork_asset_url = $CreativeWork_asset_info[0];
-									$CreativeWork_asset_width = $CreativeWork_asset_info[1] ? $CreativeWork_asset_info[1] . ' px' : '';
-									$CreativeWork_asset_height = $CreativeWork_asset_info[2] ? $CreativeWork_asset_info[2] . ' px' : '';
+									$CreativeWork_asset_url = $CreativeWork_asset_info[0] ?? '';
+									$CreativeWork_asset_width = $CreativeWork_asset_info[1] ?? '';
+									$CreativeWork_asset_height = $CreativeWork_asset_info[2] ?? '';
 
 								}
 							
@@ -1510,41 +1510,41 @@
 
 										// Get info from video
 
-											$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?: '';
+											$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?? array();
 
 											// Title (snippet.title)
 
-												$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?: '';
+												$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?? '';
 
 											// Thumbnail URL
 
 												// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
 
-													$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?: ''; 
+													$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?? array();
 
 												// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
 
-													if ( !$CreativeWork_thumbnail ) {
+													if ( !$CreativeWork_asset_thumbnail ) {
 
-														$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?: ''; // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+														$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
 
 													}
 
 											// Published date and time (snippet.publishedAt)
 
-												$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?: '';
+												$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?? '';
 
 											// Duration (contentDetails.duration)
 
-												$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?: '';
+												$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?? '';
 
 											// Description (snippet.description)
 
-												$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?: '';
+												$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?? '';
 
 											// Whether captions are available for the video (contentDetails.caption)
 
-												$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?: '';
+												$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?? '';
 												$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
 
 											// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
@@ -2344,7 +2344,7 @@
 
 							// Get values
 
-								$CreativeWork_height = ( isset($CreativeWork_asset_height) && !empty($CreativeWork_asset_height) ) ? $CreativeWork_asset_height : '';
+								$CreativeWork_height = ( isset($CreativeWork_asset_height) && !empty($CreativeWork_asset_height) ) ? $CreativeWork_asset_height . ' px' : '';
 
 							// Add to item values
 
@@ -2840,13 +2840,214 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_thumbnail = $CreativeWork_thumbnail ?? '';
+							$CreativeWork_thumbnail = $CreativeWork_thumbnail ?? array();
 
 						if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
 
 							// Get values
 
-								$CreativeWork_thumbnail = ( isset($CreativeWork_asset_thumbnail) && !empty($CreativeWork_asset_thumbnail) ) ? $CreativeWork_asset_thumbnail : '';
+								$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?? array();
+
+								// Fallback values
+
+									if ( !$CreativeWork_thumbnail ) {
+
+										$CreativeWork_thumbnail = ( isset($CreativeWork_asset_thumbnail) && !empty($CreativeWork_asset_thumbnail) ) ? $CreativeWork_asset_thumbnail : array();
+
+										if ( !$CreativeWork_thumbnail) {
+
+											$CreativeWork_thumbnail_id = $CreativeWork_thumbnail_id ?? get_field( '_thumbnail_id', $CreativeWork );
+											$CreativeWork_thumbnail_square_id = $CreativeWork_thumbnail_id ?? get_field( 'clinical_resource_image_square', $CreativeWork );
+
+											// Image Values
+
+												// Common
+
+													// Image Encoding Format
+
+														$CreativeWork_thumbnail_encodingFormat = get_post_mime_type( $CreativeWork_thumbnail_id ); // e.g., 'image/jpeg'
+														$CreativeWork_thumbnail_square_encodingFormat = get_post_mime_type( $CreativeWork_thumbnail_square_id ); // e.g., 'image/jpeg'
+
+													// Image Alt Text
+
+														$CreativeWork_thumbnail_caption = get_post_meta( $CreativeWork_thumbnail_id, '_wp_attachment_image_alt', TRUE );
+
+													// Base object
+
+														$CreativeWork_thumbnail_image_object_base = array(
+															'@type' => 'ImageObject'
+														);
+														$CreativeWork_thumbnail_image_object_base['caption'] = $CreativeWork_thumbnail_caption ?? '';
+														$CreativeWork_thumbnail_image_object_base['encodingFormat'] = $CreativeWork_thumbnail_square_encodingFormat ?? '';
+														$CreativeWork_thumbnail_image_object_base['representativeOfPage'] = 'True';
+
+												// 1:1 Aspect Ratio
+												
+													$CreativeWork_thumbnail_1_1_src = $nesting_level == 0 ? wp_get_attachment_image_src( $CreativeWork_thumbnail_square_id, 'aspect-1-1' ) : '';
+
+													if ( $CreativeWork_thumbnail_1_1_src ) {
+
+														$CreativeWork_thumbnail_1_1_url = $CreativeWork_thumbnail_1_1_src[0] ?? '';
+														$CreativeWork_thumbnail_1_1_width = $CreativeWork_thumbnail_1_1_src[1] ?? '';
+														$CreativeWork_thumbnail_1_1_height = $CreativeWork_thumbnail_1_1_src[2] ?? '';
+														$CreativeWork_thumbnail_1_1_size = '';
+
+														// ImageObject
+														
+															$CreativeWork_thumbnail_1_1 = array();
+															$CreativeWork_thumbnail_1_1['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-1-1' : '';
+															$CreativeWork_thumbnail_1_1['contentSize'] = $CreativeWork_thumbnail_1_1_size ?: '';
+															$CreativeWork_thumbnail_1_1['contentUrl'] = $CreativeWork_thumbnail_1_1_url ?: '';
+															$CreativeWork_thumbnail_1_1['height'] = $CreativeWork_thumbnail_1_1_height ? $CreativeWork_thumbnail_1_1_height . ' px' : '';
+															$CreativeWork_thumbnail_1_1['width'] = $CreativeWork_thumbnail_1_1_width ? $CreativeWork_thumbnail_1_1_width . ' px' : '';
+
+															$CreativeWork_thumbnail_1_1 = array_filter(
+																array_merge(
+																	$CreativeWork_thumbnail_image_object_base,
+																	$CreativeWork_thumbnail_1_1
+																)
+															);
+
+															// Sort the array
+
+																if ( is_array($CreativeWork_thumbnail_1_1) ) {
+
+																	ksort($CreativeWork_thumbnail_1_1);
+
+																}
+															
+															// Add to schema
+
+																$CreativeWork_thumbnail[] = $CreativeWork_thumbnail_1_1;
+
+													}
+
+												// 3:4 Aspect Ratio
+
+													$CreativeWork_thumbnail_3_4_src =  $nesting_level == 0 ? wp_get_attachment_image_src( $CreativeWork_thumbnail_id, 'aspect-3-4' ) : '';
+
+													if ( $CreativeWork_thumbnail_3_4_src ) {
+
+														$CreativeWork_thumbnail_3_4_url = $CreativeWork_thumbnail_3_4_src[0] ?? '';
+														$CreativeWork_thumbnail_3_4_width = $CreativeWork_thumbnail_3_4_src[1] ?? '';
+														$CreativeWork_thumbnail_3_4_height = $CreativeWork_thumbnail_3_4_src[2] ?? '';
+														$CreativeWork_thumbnail_3_4_size = '';
+
+														// // ImageObject
+														// 
+														// 	$CreativeWork_thumbnail_3_4 = array();
+														// 	$CreativeWork_thumbnail_3_4['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-3-4' : '';
+														// 	$CreativeWork_thumbnail_3_4['contentSize'] = $CreativeWork_thumbnail_3_4_size ?: '';
+														// 	$CreativeWork_thumbnail_3_4['contentUrl'] = $CreativeWork_thumbnail_3_4_url ?: '';
+														// 	$CreativeWork_thumbnail_3_4['height'] = $CreativeWork_thumbnail_3_4_height ? $CreativeWork_thumbnail_3_4_height . ' px' : '';
+														// 	$CreativeWork_thumbnail_3_4['width'] = $CreativeWork_thumbnail_3_4_width ? $CreativeWork_thumbnail_3_4_width . ' px' : '';
+														// 
+														// 	$CreativeWork_thumbnail_3_4 = array_filter(
+														// 		array_merge(
+														// 			$CreativeWork_thumbnail_image_object_base,
+														// 			$CreativeWork_thumbnail_3_4
+														// 		)
+														// 	);
+														// 
+														// 	// Sort the array
+														// 
+														// 		if ( is_array($CreativeWork_thumbnail_3_4) ) {
+														// 
+														// 			ksort($CreativeWork_thumbnail_3_4);
+														// 
+														// 		}
+														// 
+														// 	// Add to schema
+														// 
+														// 		$CreativeWork_thumbnail[] = $CreativeWork_thumbnail_3_4;
+
+													}
+
+												// 4:3 Aspect Ratio
+
+													$CreativeWork_thumbnail_4_3_src =  $nesting_level == 0 ? wp_get_attachment_image_src( $CreativeWork_thumbnail_id, 'aspect-4-3' ) : '';
+
+													if ( $CreativeWork_thumbnail_4_3_src ) {
+
+														$CreativeWork_thumbnail_4_3_url = $CreativeWork_thumbnail_4_3_src[0] ?? '';
+														$CreativeWork_thumbnail_4_3_width = $CreativeWork_thumbnail_4_3_src[1] ?? '';
+														$CreativeWork_thumbnail_4_3_height = $CreativeWork_thumbnail_4_3_src[2] ?? '';
+														$CreativeWork_thumbnail_4_3_size = '';
+
+														// ImageObject
+
+															$CreativeWork_thumbnail_4_3 = array();
+															$CreativeWork_thumbnail_4_3['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-4-3' : '';
+															$CreativeWork_thumbnail_4_3['contentSize'] = $CreativeWork_thumbnail_4_3_size ?: '';
+															$CreativeWork_thumbnail_4_3['contentUrl'] = $CreativeWork_thumbnail_4_3_url ?: '';
+															$CreativeWork_thumbnail_4_3['height'] = $CreativeWork_thumbnail_4_3_height ? $CreativeWork_thumbnail_4_3_height . ' px' : '';
+															$CreativeWork_thumbnail_4_3['width'] = $CreativeWork_thumbnail_4_3_width ? $CreativeWork_thumbnail_4_3_width . ' px' : '';
+
+															$CreativeWork_thumbnail_4_3 = array_filter(
+																array_merge(
+																	$CreativeWork_thumbnail_image_object_base,
+																	$CreativeWork_thumbnail_4_3
+																)
+															);
+
+															// Sort the array
+
+																if ( is_array($CreativeWork_thumbnail_4_3) ) {
+
+																	ksort($CreativeWork_thumbnail_4_3);
+
+																}
+															
+															// Add to schema
+
+																$CreativeWork_thumbnail[] = $CreativeWork_thumbnail_4_3;
+
+													}
+
+												// 16:9 Aspect Ratio
+
+													$CreativeWork_thumbnail_16_9_src = wp_get_attachment_image_src( $CreativeWork_thumbnail_id, 'aspect-16-9' );
+
+													if ( $CreativeWork_thumbnail_16_9_src ) {
+
+														$CreativeWork_thumbnail_16_9_url = $CreativeWork_thumbnail_16_9_src[0] ?? '';
+														$CreativeWork_thumbnail_16_9_width = $CreativeWork_thumbnail_16_9_src[1] ?? '';
+														$CreativeWork_thumbnail_16_9_height = $CreativeWork_thumbnail_16_9_src[2] ?? '';
+														$CreativeWork_thumbnail_16_9_size = '';
+
+														// ImageObject
+
+															$CreativeWork_thumbnail_16_9 = array();
+															$CreativeWork_thumbnail_16_9['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-16-9' : '';
+															$CreativeWork_thumbnail_16_9['contentSize'] = $CreativeWork_thumbnail_16_9_size ?: '';
+															$CreativeWork_thumbnail_16_9['contentUrl'] = $CreativeWork_thumbnail_16_9_url ?: '';
+															$CreativeWork_thumbnail_16_9['height'] = $CreativeWork_thumbnail_16_9_height ? $CreativeWork_thumbnail_16_9_height . ' px' : '';
+															$CreativeWork_thumbnail_16_9['width'] = $CreativeWork_thumbnail_16_9_width ? $CreativeWork_thumbnail_16_9_width . ' px' : '';
+
+															$CreativeWork_thumbnail_16_9 = array_filter(
+																array_merge(
+																	$CreativeWork_thumbnail_image_object_base,
+																	$CreativeWork_thumbnail_16_9
+																)
+															);
+
+															// Sort the array
+
+																if ( is_array($CreativeWork_thumbnail_16_9) ) {
+
+																	ksort($CreativeWork_thumbnail_16_9);
+
+																}
+															
+															// Add to schema
+
+																$CreativeWork_thumbnail[] = $CreativeWork_thumbnail_16_9;
+
+													}
+
+												}
+
+									}
 
 							// Add to item values
 
@@ -3066,7 +3267,7 @@
 
 							// Get values
 
-								$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width : '';
+								$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
 
 							// Add to item values
 
