@@ -2619,15 +2619,21 @@
 	
 									}
 	
+							// Clean up values array
+
+								$CreativeWork_sameAs = array_unique($CreativeWork_sameAs);
+								$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
+								$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
+
+								// If there is only one item, flatten the multi-dimensional array by one step
+
+									uamswp_fad_flatten_multidimensional_array($CreativeWork_item['sameAs']);
+
 							// Add to item values
 
 								if ( $CreativeWork_sameAs ) {
 
 									$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
-
-									// If there is only one item, flatten the multi-dimensional array by one step
-
-										uamswp_fad_flatten_multidimensional_array($CreativeWork_item['sameAs']);
 
 								}
 
