@@ -1472,8 +1472,8 @@
 
 						if (
 							$CreativeWork_resource_type == 'infographic'
-							// &&
-							// $nesting_level == 0
+							&&
+							$nesting_level == 0
 						) {
 
 							// URL, width, height
@@ -1508,8 +1508,8 @@
 
 						if (
 							$CreativeWork_resource_type == 'video'
-							// &&
-							// $nesting_level == 0
+							&&
+							$nesting_level == 0
 						) {
 
 							// Video URL
@@ -2113,8 +2113,8 @@
 
 						if (
 							in_array( 'duration', $CreativeWork_properties )
-							// &&
-							// $nesting_level == 0
+							&&
+							$nesting_level == 0
 						) {
 
 							// Get values
@@ -2190,8 +2190,8 @@
 
 						if (
 							in_array( 'embedUrl', $CreativeWork_properties )
-							// &&
-							// $nesting_level == 0
+							&&
+							$nesting_level == 0
 						) {
 
 							// Get values
