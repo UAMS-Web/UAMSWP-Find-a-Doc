@@ -1215,6 +1215,73 @@
 
 						}
 
+					// Eliminate PHP errors
+
+						$CreativeWork_abstract = '';
+						$CreativeWork_additionalType = '';
+						$CreativeWork_alternateName = '';
+						$CreativeWork_articleBody = '';
+						$CreativeWork_articleBody_count = '';
+						$CreativeWork_asset_caption_query = '';
+						$CreativeWork_asset_description = '';
+						$CreativeWork_asset_duration = '';
+						$CreativeWork_asset_embedUrl = '';
+						$CreativeWork_asset_filesize = '';
+						$CreativeWork_asset_height = '';
+						$CreativeWork_asset_id = '';
+						$CreativeWork_asset_info = '';
+						$CreativeWork_asset_info = '';
+						$CreativeWork_asset_parsed = '';
+						$CreativeWork_asset_path = '';
+						$CreativeWork_asset_published = '';
+						$CreativeWork_asset_thumbnail = '';
+						$CreativeWork_asset_title = '';
+						$CreativeWork_asset_url = '';
+						$CreativeWork_asset_width = '';
+						$CreativeWork_contentUrl = '';
+						$CreativeWork_creator = '';
+						$CreativeWork_dateModified = '';
+						$CreativeWork_datePublished = '';
+						$CreativeWork_description = '';
+						$CreativeWork_description_count = '';
+						$CreativeWork_duration = '';
+						$CreativeWork_embeddedTextCaption = '';
+						$CreativeWork_embeddedTextCaption_count = '';
+						$CreativeWork_embedUrl = '';
+						$CreativeWork_encodingFormat = '';
+						$CreativeWork_hasDigitalDocumentPermission = '';
+						$CreativeWork_height = '';
+						$CreativeWork_id = '';
+						$CreativeWork_image = '';
+						$CreativeWork_isAccessibleForFree = '';
+						$CreativeWork_isPartOf = '';
+						$CreativeWork_mainEntityOfPage = '';
+						$CreativeWork_name = '';
+						$CreativeWork_nci_query = '';
+						$CreativeWork_representativeOfPage = '';
+						$CreativeWork_sameAs = '';
+						$CreativeWork_sourceOrganization = '';
+						$CreativeWork_speakable = '';
+						$CreativeWork_subjectOf = '';
+						$CreativeWork_syndication_org = '';
+						$CreativeWork_syndication_query = '';
+						$CreativeWork_syndication_URL = '';
+						$CreativeWork_thumbnail = '';
+						$CreativeWork_timeRequired = '';
+						$CreativeWork_timeRequired_seconds = '';
+						$CreativeWork_transcript = '';
+						$CreativeWork_transcript_count = '';
+						$CreativeWork_video = '';
+						$CreativeWork_videoFrameSize = '';
+						$CreativeWork_videoQuality = '';
+						$CreativeWork_width = '';
+						$CreativeWork_word_count = 0;
+						$CreativeWork_wordCount = '';
+
+						// Reused variables
+
+							$CreativeWork_audience = $CreativeWork_audience ?? '';
+
 					// Values Map
 
 						$CreativeWork_type_values = array(
@@ -1334,10 +1401,6 @@
 
 					// @id
 
-						// Eliminate PHP errors
-
-							$CreativeWork_id = $CreativeWork_id ?? '';
-
 						if ( $nesting_level <= 1 ) {
 
 							$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
@@ -1349,10 +1412,6 @@
 
 					// Asset ID
 
-						// Eliminate PHP errors
-
-							$CreativeWork_asset_id = $CreativeWork_asset_id ?? '';
-						
 						if ( $nesting_level == 0 ) {
 
 							if ( $CreativeWork_resource_type == 'infographic' ) {
@@ -1366,13 +1425,6 @@
 						}
 
 					// Syndication values
-
-						// Eliminate PHP errors
-
-							$CreativeWork_syndication_query = $CreativeWork_syndication_query ?? '';
-							$CreativeWork_nci_query = $CreativeWork_nci_query ?? '';
-							$CreativeWork_syndication_URL = $CreativeWork_syndication_URL ?? '';
-							$CreativeWork_syndication_org = $CreativeWork_syndication_org ?? '';
 
 						if ( $nesting_level == 0 ) {
 
@@ -1418,15 +1470,6 @@
 
 					// Get image info
 
-						// Eliminate PHP errors
-
-							$CreativeWork_asset_info = $CreativeWork_asset_info ?? '';
-							$CreativeWork_asset_url = $CreativeWork_asset_url ?? '';
-							$CreativeWork_asset_width = $CreativeWork_asset_width ?? '';
-							$CreativeWork_asset_height = $CreativeWork_asset_height ?? '';
-							$CreativeWork_asset_path = $CreativeWork_asset_path ?? '';
-							$CreativeWork_asset_filesize = $CreativeWork_asset_filesize ?? '';
-						
 						if (
 							$CreativeWork_resource_type == 'infographic'
 							// &&
@@ -1463,19 +1506,6 @@
 
 					// Get video info
 
-						// Eliminate PHP errors
-
-							$CreativeWork_video = $CreativeWork_video ?? '';
-							$CreativeWork_asset_parsed = $CreativeWork_asset_parsed ?? '';
-							$CreativeWork_asset_embedUrl = $CreativeWork_asset_embedUrl ?? '';
-							$CreativeWork_asset_info = $CreativeWork_asset_info ?? '';
-							$CreativeWork_asset_title = $CreativeWork_asset_title ?? '';
-							$CreativeWork_asset_thumbnail = $CreativeWork_asset_thumbnail ?? '';
-							$CreativeWork_asset_published = $CreativeWork_asset_published ?? '';
-							$CreativeWork_asset_duration = $CreativeWork_asset_duration ?? '';
-							$CreativeWork_asset_description = $CreativeWork_asset_description ?? '';
-							$CreativeWork_asset_caption_query = $CreativeWork_asset_caption_query ?? '';
-						
 						if (
 							$CreativeWork_resource_type == 'video'
 							// &&
@@ -1585,10 +1615,6 @@
 						 *     - Text
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_name = $CreativeWork_name ?? '';
-
 						if ( in_array( 'name', $CreativeWork_properties ) ) {
 
 							// Get values
@@ -1617,10 +1643,6 @@
 						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 						 * feedback and adoption from applications and websites can help improve their definitions.
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_abstract = $CreativeWork_abstract ?? '';
 
 						if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
@@ -1658,10 +1680,6 @@
 						 *     - URL
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_additionalType = $CreativeWork_additionalType ?? '';
-
 						if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
 
 							// Get values
@@ -1691,10 +1709,6 @@
 						 * 
 						 *     - Text
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_alternateName = $CreativeWork_alternateName ?? '';
 
 						if (
 							in_array( 'alternateName', $CreativeWork_properties )
@@ -1729,10 +1743,6 @@
 						 * 
 						 *     - Text
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_articleBody = $CreativeWork_articleBody ?? '';
 
 						if (
 							in_array( 'articleBody', $CreativeWork_properties )
@@ -1785,10 +1795,6 @@
 						 *     - Audience
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_audience = $CreativeWork_audience ?? '';
-
 						if (
 							in_array( 'audience', $CreativeWork_properties )
 							&&
@@ -1797,7 +1803,7 @@
 
 							// Get values
 
-								$CreativeWork_audience = $schema_common_audience;
+								$CreativeWork_audience = $CreativeWork_audience ?? $schema_common_audience;
 
 							// Add to item values
 
@@ -1849,10 +1855,6 @@
 						 *     - URL
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_contentUrl = $CreativeWork_contentUrl ?? '';
-
 						if (
 							in_array( 'contentUrl', $CreativeWork_properties )
 							&&
@@ -1884,10 +1886,6 @@
 						 *     - Organization
 						 *     - Person
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_creator = $CreativeWork_creator ?? '';
 
 						if (
 							in_array( 'creator', $CreativeWork_properties )
@@ -1933,10 +1931,6 @@
 						 *     - DateTime
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_dateModified = $CreativeWork_dateModified ?? '';
-
 						if (
 							in_array( 'dateModified', $CreativeWork_properties )
 							&&
@@ -1968,10 +1962,6 @@
 						 *     - DateTime
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_datePublished = $CreativeWork_datePublished ?? '';
-
 						if (
 							in_array( 'datePublished', $CreativeWork_properties )
 							&&
@@ -2002,10 +1992,6 @@
 						 *     - Text
 						 *     - TextObject
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_description = $CreativeWork_description ?? '';
 
 						// Get values
 
@@ -2125,10 +2111,6 @@
 						 *     - Duration
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_duration = $CreativeWork_duration ?? '';
-
 						if (
 							in_array( 'duration', $CreativeWork_properties )
 							// &&
@@ -2162,10 +2144,6 @@
 						 * feedback and adoption from applications and websites can help improve their 
 						 * definitions.
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_embeddedTextCaption = $CreativeWork_embeddedTextCaption ?? '';
 
 						if ( in_array( 'embeddedTextCaption', $CreativeWork_properties ) ) {
 
@@ -2210,10 +2188,6 @@
 						 *     - URL
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_embedUrl = $CreativeWork_embedUrl ?? '';
-
 						if (
 							in_array( 'embedUrl', $CreativeWork_properties )
 							// &&
@@ -2254,10 +2228,6 @@
 						 *     - URL
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_encodingFormat = $CreativeWork_encodingFormat ?? '';
-
 						if (
 							in_array( 'encodingFormat', $CreativeWork_properties )
 							&&
@@ -2289,10 +2259,6 @@
 						 * 
 						 *     - DigitalDocumentPermission
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_hasDigitalDocumentPermission = $CreativeWork_hasDigitalDocumentPermission ?? '';
 
 						if (
 							in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
@@ -2332,10 +2298,6 @@
 						 *     - QuantitativeValue
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_height = $CreativeWork_height ?? '';
-
 						if (
 							in_array( 'height', $CreativeWork_properties )
 							&&
@@ -2366,10 +2328,6 @@
 						 *     - ImageObject
 						 *     - URL
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_image = $CreativeWork_image ?? '';
 
 						if ( in_array( 'image', $CreativeWork_properties ) ) {
 
@@ -2432,10 +2390,6 @@
 						 *     - Boolean
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_isAccessibleForFree = $CreativeWork_isAccessibleForFree ?? '';
-
 						if ( in_array( 'isAccessibleForFree', $CreativeWork_properties ) ) {
 
 							// Get values
@@ -2465,10 +2419,6 @@
 						 *     - CreativeWork
 						 *     - URL
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_isPartOf = $CreativeWork_isPartOf ?? '';
 
 						if (
 							in_array( 'isPartOf', $CreativeWork_properties )
@@ -2510,10 +2460,6 @@
 						 *     - URL
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_mainEntityOfPage = $CreativeWork_mainEntityOfPage ?? '';
-
 						if (
 							in_array( 'mainEntityOfPage', $CreativeWork_properties )
 							&&
@@ -2550,10 +2496,6 @@
 						 *     - Boolean
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_representativeOfPage = $CreativeWork_representativeOfPage ?? '';
-
 						if (
 							in_array( 'representativeOfPage', $CreativeWork_properties )
 							&&
@@ -2585,10 +2527,6 @@
 						 * 
 						 *     - URL
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_sameAs = $CreativeWork_sameAs ?? '';
 
 						if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
 
@@ -2652,10 +2590,6 @@
 						 *     - Organization
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_sourceOrganization = $CreativeWork_sourceOrganization ?? '';
-
 						if (
 							in_array( 'sourceOrganization', $CreativeWork_properties )
 							&&
@@ -2715,10 +2649,6 @@
 						 *     - SpeakableSpecification
 						 *     - URL
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_speakable = $CreativeWork_speakable ?? '';
 
 						if (
 							in_array( 'speakable', $CreativeWork_properties )
@@ -2802,10 +2732,6 @@
 						 *     - Event
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_subjectOf = $CreativeWork_subjectOf ?? '';
-
 						if ( in_array( 'subjectOf', $CreativeWork_properties ) ) {
 
 							// Get values
@@ -2837,10 +2763,6 @@
 						 * 
 						 *     - ImageObject
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_thumbnail = $CreativeWork_thumbnail ?? array();
 
 						if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
 
@@ -3070,10 +2992,6 @@
 						 *     - Text
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_transcript = $CreativeWork_transcript ?? '';
-
 						if (
 							in_array( 'transcript', $CreativeWork_properties )
 							&&
@@ -3120,10 +3038,6 @@
 						 *     - Duration (use ISO 8601 duration format).
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_timeRequired = $CreativeWork_timeRequired ?? '';
-
 						if (
 							in_array( 'timeRequired', $CreativeWork_properties )
 							&&
@@ -3161,7 +3075,7 @@
 								// Calculate time to read all words
 
 									$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
-									$wps = $wpm / 60; // words per second
+									$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
 
 									$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
 									$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
@@ -3185,10 +3099,6 @@
 						 * 
 						 *     - Text
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_videoFrameSize = $CreativeWork_videoFrameSize ?? '';
 
 						if (
 							in_array( 'videoFrameSize', $CreativeWork_properties )
@@ -3219,10 +3129,6 @@
 						 * 
 						 *     - Text
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_videoQuality = $CreativeWork_videoQuality ?? '';
 
 						if (
 							in_array( 'videoQuality', $CreativeWork_properties )
@@ -3255,10 +3161,6 @@
 						 *     - QuantitativeValue
 						 */
 
-						// Eliminate PHP errors
-
-							$CreativeWork_width = $CreativeWork_width ?? '';
-
 						if (
 							in_array( 'width', $CreativeWork_properties )
 							&&
@@ -3287,10 +3189,6 @@
 						 * Values expected to be one of these types:
 						 *     - Integer
 						 */
-
-						// Eliminate PHP errors
-
-							$CreativeWork_wordCount = $CreativeWork_wordCount ?? '';
 
 						if (
 							in_array( 'wordCount', $CreativeWork_properties )
