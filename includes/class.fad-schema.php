@@ -3103,7 +3103,11 @@
 
 								// Fallback value
 
-									$CreativeWork_wordCount = !$CreativeWork_articleBody_count && $CreativeWork_articleBody ? str_word_count($CreativeWork_articleBody) : '';
+									if ( !$CreativeWork_wordCount ) {
+
+										$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
+
+									}
 
 							// Add to item values
 
