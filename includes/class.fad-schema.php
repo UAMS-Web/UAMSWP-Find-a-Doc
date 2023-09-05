@@ -1336,7 +1336,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_id = '';
+							$CreativeWork_id = $CreativeWork_id ?? '';
 
 						if ( $nesting_level <= 1 ) {
 
@@ -1351,7 +1351,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_asset_id = '';
+							$CreativeWork_asset_id = $CreativeWork_asset_id ?? '';
 						
 						if ( $nesting_level == 0 ) {
 
@@ -1369,10 +1369,10 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_syndication_query = '';
-							$CreativeWork_nci_query = '';
-							$CreativeWork_syndication_URL = '';
-							$CreativeWork_syndication_org = '';
+							$CreativeWork_syndication_query = $CreativeWork_syndication_query ?? '';
+							$CreativeWork_nci_query = $CreativeWork_nci_query ?? '';
+							$CreativeWork_syndication_URL = $CreativeWork_syndication_URL ?? '';
+							$CreativeWork_syndication_org = $CreativeWork_syndication_org ?? '';
 
 						if ( $nesting_level == 0 ) {
 
@@ -1420,12 +1420,12 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_asset_info = '';
-							$CreativeWork_asset_url = '';
-							$CreativeWork_asset_width = '';
-							$CreativeWork_asset_height = '';
-							$CreativeWork_asset_path = '';
-							$CreativeWork_asset_filesize = '';
+							$CreativeWork_asset_info = $CreativeWork_asset_info ?? '';
+							$CreativeWork_asset_url = $CreativeWork_asset_url ?? '';
+							$CreativeWork_asset_width = $CreativeWork_asset_width ?? '';
+							$CreativeWork_asset_height = $CreativeWork_asset_height ?? '';
+							$CreativeWork_asset_path = $CreativeWork_asset_path ?? '';
+							$CreativeWork_asset_filesize = $CreativeWork_asset_filesize ?? '';
 						
 						if (
 							$CreativeWork_resource_type == 'infographic'
@@ -1465,16 +1465,16 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_video = '';
-							$CreativeWork_asset_parsed = '';
-							$CreativeWork_asset_embedUrl = '';
-							$CreativeWork_asset_info = '';
-							$CreativeWork_asset_title = '';
-							$CreativeWork_asset_thumbnail = '';
-							$CreativeWork_asset_published = '';
-							$CreativeWork_asset_duration = '';
-							$CreativeWork_asset_description = '';
-							$CreativeWork_asset_caption_query = '';
+							$CreativeWork_video = $CreativeWork_video ?? '';
+							$CreativeWork_asset_parsed = $CreativeWork_asset_parsed ?? '';
+							$CreativeWork_asset_embedUrl = $CreativeWork_asset_embedUrl ?? '';
+							$CreativeWork_asset_info = $CreativeWork_asset_info ?? '';
+							$CreativeWork_asset_title = $CreativeWork_asset_title ?? '';
+							$CreativeWork_asset_thumbnail = $CreativeWork_asset_thumbnail ?? '';
+							$CreativeWork_asset_published = $CreativeWork_asset_published ?? '';
+							$CreativeWork_asset_duration = $CreativeWork_asset_duration ?? '';
+							$CreativeWork_asset_description = $CreativeWork_asset_description ?? '';
+							$CreativeWork_asset_caption_query = $CreativeWork_asset_caption_query ?? '';
 						
 						if (
 							$CreativeWork_resource_type == 'video'
@@ -1587,7 +1587,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_name = '';
+							$CreativeWork_name = $CreativeWork_name ?? '';
 
 						if ( in_array( 'name', $CreativeWork_properties ) ) {
 
@@ -1620,7 +1620,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_abstract = '';
+							$CreativeWork_abstract = $CreativeWork_abstract ?? '';
 
 						if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
@@ -1660,7 +1660,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_additionalType = '';
+							$CreativeWork_additionalType = $CreativeWork_additionalType ?? '';
 
 						if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
 
@@ -1694,7 +1694,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_alternateName = '';
+							$CreativeWork_alternateName = $CreativeWork_alternateName ?? '';
 
 						if (
 							in_array( 'alternateName', $CreativeWork_properties )
@@ -1732,7 +1732,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_articleBody = '';
+							$CreativeWork_articleBody = $CreativeWork_articleBody ?? '';
 
 						if (
 							in_array( 'articleBody', $CreativeWork_properties )
@@ -1787,7 +1787,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_audience = '';
+							$CreativeWork_audience = $CreativeWork_audience ?? '';
 
 						if (
 							in_array( 'audience', $CreativeWork_properties )
@@ -1851,7 +1851,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_contentUrl = '';
+							$CreativeWork_contentUrl = $CreativeWork_contentUrl ?? '';
 
 						if (
 							in_array( 'contentUrl', $CreativeWork_properties )
@@ -1887,7 +1887,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_creator = '';
+							$CreativeWork_creator = $CreativeWork_creator ?? '';
 
 						if (
 							in_array( 'creator', $CreativeWork_properties )
@@ -1935,7 +1935,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_dateModified = '';
+							$CreativeWork_dateModified = $CreativeWork_dateModified ?? '';
 
 						if (
 							in_array( 'dateModified', $CreativeWork_properties )
@@ -1970,7 +1970,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_datePublished = '';
+							$CreativeWork_datePublished = $CreativeWork_datePublished ?? '';
 
 						if (
 							in_array( 'datePublished', $CreativeWork_properties )
@@ -2005,7 +2005,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_description = '';
+							$CreativeWork_description = $CreativeWork_description ?? '';
 
 						// Get values
 
@@ -2127,7 +2127,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_duration = '';
+							$CreativeWork_duration = $CreativeWork_duration ?? '';
 
 						if (
 							in_array( 'duration', $CreativeWork_properties )
@@ -2165,7 +2165,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_embeddedTextCaption = '';
+							$CreativeWork_embeddedTextCaption = $CreativeWork_embeddedTextCaption ?? '';
 
 						if ( in_array( 'embeddedTextCaption', $CreativeWork_properties ) ) {
 
@@ -2212,7 +2212,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_embedUrl = '';
+							$CreativeWork_embedUrl = $CreativeWork_embedUrl ?? '';
 
 						if (
 							in_array( 'embedUrl', $CreativeWork_properties )
@@ -2256,7 +2256,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_encodingFormat = '';
+							$CreativeWork_encodingFormat = $CreativeWork_encodingFormat ?? '';
 
 						if (
 							in_array( 'encodingFormat', $CreativeWork_properties )
@@ -2292,7 +2292,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_hasDigitalDocumentPermission = '';
+							$CreativeWork_hasDigitalDocumentPermission = $CreativeWork_hasDigitalDocumentPermission ?? '';
 
 						if (
 							in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
@@ -2334,7 +2334,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_height = '';
+							$CreativeWork_height = $CreativeWork_height ?? '';
 
 						if (
 							in_array( 'height', $CreativeWork_properties )
@@ -2369,7 +2369,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_image = '';
+							$CreativeWork_image = $CreativeWork_image ?? '';
 
 						if ( in_array( 'image', $CreativeWork_properties ) ) {
 
@@ -2434,7 +2434,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_isAccessibleForFree = '';
+							$CreativeWork_isAccessibleForFree = $CreativeWork_isAccessibleForFree ?? '';
 
 						if ( in_array( 'isAccessibleForFree', $CreativeWork_properties ) ) {
 
@@ -2468,7 +2468,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_isPartOf = '';
+							$CreativeWork_isPartOf = $CreativeWork_isPartOf ?? '';
 
 						if (
 							in_array( 'isPartOf', $CreativeWork_properties )
@@ -2512,7 +2512,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_mainEntityOfPage = '';
+							$CreativeWork_mainEntityOfPage = $CreativeWork_mainEntityOfPage ?? '';
 
 						if (
 							in_array( 'mainEntityOfPage', $CreativeWork_properties )
@@ -2552,7 +2552,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_representativeOfPage = '';
+							$CreativeWork_representativeOfPage = $CreativeWork_representativeOfPage ?? '';
 
 						if (
 							in_array( 'representativeOfPage', $CreativeWork_properties )
@@ -2588,7 +2588,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_sameAs = '';
+							$CreativeWork_sameAs = $CreativeWork_sameAs ?? '';
 
 						if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
 
@@ -2654,7 +2654,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_sourceOrganization = '';
+							$CreativeWork_sourceOrganization = $CreativeWork_sourceOrganization ?? '';
 
 						if (
 							in_array( 'sourceOrganization', $CreativeWork_properties )
@@ -2718,7 +2718,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_speakable = '';
+							$CreativeWork_speakable = $CreativeWork_speakable ?? '';
 
 						if (
 							in_array( 'speakable', $CreativeWork_properties )
@@ -2804,7 +2804,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_subjectOf = '';
+							$CreativeWork_subjectOf = $CreativeWork_subjectOf ?? '';
 
 						if ( in_array( 'subjectOf', $CreativeWork_properties ) ) {
 
@@ -2840,7 +2840,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_thumbnail = '';
+							$CreativeWork_thumbnail = $CreativeWork_thumbnail ?? '';
 
 						if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
 
@@ -2871,7 +2871,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_transcript = '';
+							$CreativeWork_transcript = $CreativeWork_transcript ?? '';
 
 						if (
 							in_array( 'transcript', $CreativeWork_properties )
@@ -2921,7 +2921,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_timeRequired = '';
+							$CreativeWork_timeRequired = $CreativeWork_timeRequired ?? '';
 
 						if (
 							in_array( 'timeRequired', $CreativeWork_properties )
@@ -2987,7 +2987,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_videoFrameSize = '';
+							$CreativeWork_videoFrameSize = $CreativeWork_videoFrameSize ?? '';
 
 						if (
 							in_array( 'videoFrameSize', $CreativeWork_properties )
@@ -3021,7 +3021,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_videoQuality = '';
+							$CreativeWork_videoQuality = $CreativeWork_videoQuality ?? '';
 
 						if (
 							in_array( 'videoQuality', $CreativeWork_properties )
@@ -3056,7 +3056,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_width = '';
+							$CreativeWork_width = $CreativeWork_width ?? '';
 
 						if (
 							in_array( 'width', $CreativeWork_properties )
@@ -3089,7 +3089,7 @@
 
 						// Eliminate PHP errors
 
-							$CreativeWork_wordCount = '';
+							$CreativeWork_wordCount = $CreativeWork_wordCount ?? '';
 
 						if (
 							in_array( 'wordCount', $CreativeWork_properties )
