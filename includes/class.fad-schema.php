@@ -1253,10 +1253,6 @@
 
 							$foo = $foo ?? '';
 
-					// Base array
-
-						$MedicalEntity_item = array();
-
 					// url
 
 						$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
