@@ -214,18 +214,12 @@ TODO List
 
 		// Related Areas of Expertise
 
-			// Base array
-
-				$provider_related_expertise = array();
-
-			// Add areas of expertise to the array
-
-				$provider_related_expertise[] = array(
-					'@type' => 'MedicalEntity',
-					'name' => 'foo',
-					'url' => 'bar',
-					'baz' => 'qux'
-				);
+			$provider_related_expertise = uamswp_fad_schema_expertise(
+				$expertises, // List of IDs of the clinical resource items
+				$page_url, // Page URL
+				1, // Nesting level within the main schema
+				'MedicalEntity' // Base fragment identifier
+			);
 
 			// Get URLs for significantLink property
 

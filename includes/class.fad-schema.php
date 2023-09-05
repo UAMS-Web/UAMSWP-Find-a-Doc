@@ -1181,6 +1181,144 @@
 
 		}
 
+	// Add data to an array defining schema data for related areas of expertise
+
+		function uamswp_fad_schema_expertise(
+			array $repeater, // List of IDs of the area of expertise items
+			string $page_url, // Page URL
+			int $nesting_level = 1, // Nesting level within the main schema
+			string $page_fragment = 'MedicalEntity', // Base fragment identifier
+			int $MedicalEntity_i = 1 // Iteration counter
+		) {
+
+			// Common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+			// UAMS organization values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+
+			// Base list array
+
+				$MedicalEntity_list = array();
+
+			if ( !empty($repeater) ) {
+
+				foreach ( $repeater as $MedicalEntity ) {
+
+					// Eliminate PHP errors / reset variables
+
+						$MedicalEntity_url = '';
+						$MedicalEntity_type = '';
+						$MedicalEntity_id = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+						$foo = '';
+
+						// Reused variables
+
+							$foo = $foo ?? '';
+
+					// Base array
+
+						$MedicalEntity_item = array();
+
+					// url
+
+						$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
+						$MedicalEntity_item['url'] = $MedicalEntity_url;
+
+					// @type
+
+						$MedicalEntity_type = 'MedicalEntity';
+
+						// Add to schema
+
+							$MedicalEntity_item['@type'] = $MedicalEntity_type;
+
+					// @id
+
+						$MedicalEntity_item['@id'] = $MedicalEntity_url;
+
+						if ( $nesting_level <= 1 ) {
+
+							$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
+							// $MedicalEntity_id .= $MedicalEntity_i;
+							$MedicalEntity_item['@id'] = $MedicalEntity_id;
+							// $MedicalEntity_id++;
+
+						} // endif ( $nesting_level == 1 )
+
+					// name
+					// additionalType
+					// alternateName
+					// code
+					// description
+					// disambiguatingDescription
+					// funding
+					// guideline
+					// identifier
+					// image
+					// legalStatus
+					// mainEntityOfPage
+					// medicineSystem
+					// potentialAction
+					// recognizingAuthority
+					// relevantSpecialty
+					// sameAs
+					// study
+					// subjectOf
+
+					// Sort array
+
+						ksort($MedicalEntity_item);
+
+					// Add to list of conditions
+
+						$MedicalEntity_list[] = $MedicalEntity_item;
+
+				} // endforeach ( $repeater as $MedicalEntity )
+
+				// Clean up list array
+
+					$MedicalEntity_list = array_filter($MedicalEntity_list);
+					$MedicalEntity_list = array_values($MedicalEntity_list);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($MedicalEntity_list);
+
+			} // endif ( !empty($repeater) )
+
+			return $MedicalEntity_list;
+	
+		}
+
 	// Add data to an array defining schema data for CreativeWork (a.k.a. related clinical resources)
 
 		function uamswp_fad_schema_creativework(
@@ -1237,7 +1375,7 @@
 
 							}
 
-						// Eliminate PHP errors
+						// Eliminate PHP errors / reset variables
 
 							$CreativeWork_abstract = '';
 							$CreativeWork_additionalType = '';
