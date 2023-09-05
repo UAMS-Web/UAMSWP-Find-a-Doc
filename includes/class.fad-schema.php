@@ -1439,9 +1439,9 @@
 
 								if ( $CreativeWork_asset_info ) {
 
-									$CreativeWork_asset_url = $provider_portrait_16_9[0];
-									$CreativeWork_asset_width = $provider_portrait_16_9[1];
-									$CreativeWork_asset_height = $provider_portrait_16_9[2];
+									$CreativeWork_asset_url = $CreativeWork_asset_info[0];
+									$CreativeWork_asset_width = $CreativeWork_asset_info[1];
+									$CreativeWork_asset_height = $CreativeWork_asset_info[2];
 
 								}
 							
