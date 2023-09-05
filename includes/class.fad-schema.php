@@ -1733,11 +1733,30 @@
 
 					// code
 					// description
+
+						/*
+						 * A description of the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 *     - TextObject
+						 */
+
 					// disambiguatingDescription
 					// funding
 					// guideline
 					// identifier
 					// image
+
+						/*
+						 * An image of the item. This can be a URL or a fully described ImageObject.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - ImageObject
+						 *     - URL
+						 */
 
 						// Get values
 
@@ -1801,13 +1820,48 @@
 
 					// legalStatus
 					// mainEntityOfPage
+
+						/*
+						 * Indicates a page (or other CreativeWork) for which this thing is the main 
+						 * entity being described. See background notes for details.
+						 * 
+						 * Inverse-property: mainEntity
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - CreativeWork
+						 *     - URL
+						 */
+
 					// medicineSystem
 					// potentialAction
 					// recognizingAuthority
 					// relevantSpecialty
 					// sameAs
+
+						/*
+						 * URL of a reference Web page that unambiguously indicates the item's identity 
+						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+						 * website).
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
+
 					// study
 					// subjectOf
+
+						/*
+						 * A CreativeWork or Event about this Thing.
+						 * 
+						 * Inverse-property: about
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - CreativeWork
+						 *     - Event
+						 */
 
 					// Sort array
 
