@@ -2597,7 +2597,11 @@
 
 								// Syndication URL
 
-									if ( $CreativeWork_syndication_URL ) {
+									if (
+										isset($CreativeWork_syndication_URL)
+										&&
+										!empty($CreativeWork_syndication_URL)
+									) {
 
 										$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
 
