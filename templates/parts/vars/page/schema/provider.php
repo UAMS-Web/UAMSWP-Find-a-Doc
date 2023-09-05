@@ -218,7 +218,8 @@ TODO List
 				$expertises, // List of IDs of the clinical resource items
 				$page_url, // Page URL
 				1, // Nesting level within the main schema
-				'MedicalEntity' // Base fragment identifier
+				'MedicalEntity', // Base fragment identifier
+				'overview' // Identify which type of area of expertise page
 			);
 
 			// Get URLs for significantLink property

@@ -1188,6 +1188,7 @@
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
 			string $page_fragment = 'MedicalEntity', // Base fragment identifier
+			string $expertise_page = 'overview', // Identify which type of area of expertise page
 			int $MedicalEntity_i = 1 // Iteration counter
 		) {
 
