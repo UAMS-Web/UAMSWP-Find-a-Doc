@@ -1181,6 +1181,360 @@
 
 		}
 
+	// Add data to an array defining schema data for ImageObject from thumbnails
+
+		function uamswp_fad_schema_imageobject_thumbnails(
+			string $url, // URL of entity with which the image is associated
+			int $nesting_level, // Nesting level within the main schema
+			string $single_aspect_ratio, // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9', 'full')
+			string $page_fragment = 'Image', // Base fragment identifier
+			int $input_1_1 = 0, // ID of image to use for 1:1 aspect ratio
+			int $input_3_4 = 0, // ID of image to use for 3:4 aspect ratio
+			int $input_4_3 = 0, // ID of image to use for 4:3 aspect ratio
+			int $input_16_9 = 0, // ID of image to use for 16:9 aspect ratio
+			int $input_full = 0 // ID of image to use for full image
+		) {
+
+			// Check variables
+
+				// If values are 0 or empty, end now
+
+					if (
+						!$input_1_1
+						&&
+						!$input_3_4
+						&&
+						!$input_4_3
+						&&
+						!$input_16_9
+					) {
+
+						return;
+
+					}
+
+			// Base array
+
+				$image_ImageObject = array();
+
+			// Image attributes
+
+				// Base ImageObject
+
+					$image_ImageObject_base = array(
+						'@type' => 'ImageObject'
+					);
+					$image_ImageObject_base['representativeOfPage'] = $nesting_level == 0 ? 'True' : 'False';
+
+				// 1:1 aspect ratio source image
+
+					if (
+						$input_1_1
+						&&
+						(
+							$nesting_level == 0
+							||
+							$single_aspect_ratio == '1:1'
+						)
+					) {
+
+						// Encoding Format (e.g., 'image/jpeg')
+
+							$image_encodingFormat_1_1 = get_post_mime_type( $input_1_1 ) ?? '';
+
+						// Alt Text
+
+							$image_caption_1_1 = get_post_meta( $input_1_1, '_wp_attachment_image_alt', TRUE ) ?? '';
+
+						// Image data
+							
+							$image_1_1_src = wp_get_attachment_image_src( $input_1_1, 'aspect-1-1' ) ?? array();
+
+							if ( $image_1_1_src ) {
+
+								$image_1_1_url = $image_1_1_src[0] ?? '';
+								$image_1_1_width = $image_1_1_src[1] ?? '';
+								$image_1_1_height = $image_1_1_src[2] ?? '';
+								$image_1_1_size = '';
+
+							}
+
+						// Create ImageObject
+
+							$image_1_1 = array();
+							$image_1_1['@id'] = $url . '#' . $page_fragment .  '-1-1';
+							$image_1_1['caption'] = $image_caption_1_1 ?? '';
+							$image_1_1['contentSize'] = $image_1_1_size ?: '';
+							$image_1_1['contentUrl'] = $image_1_1_url ?: '';
+							$image_1_1['encodingFormat'] = $image_encodingFormat_1_1 ?? '';
+							$image_1_1['height'] = $image_1_1_height ? $image_1_1_height . ' px' : '';
+							$image_1_1['width'] = $image_1_1_width ? $image_1_1_width . ' px' : '';
+
+							$image_1_1 = array_filter(
+								array_merge(
+									$image_ImageObject_base,
+									$image_1_1
+								)
+							);
+
+							// Sort the item array
+
+								ksort($image_1_1);
+
+							// Add to list array
+
+								$image_ImageObject[] = $image_1_1;
+
+					}
+
+				// 3:4 aspect ratio source image
+
+					if (
+						$input_3_4
+						&&
+						(
+							$nesting_level == 0
+							||
+							$single_aspect_ratio == '3:4'
+						)
+					) {
+				
+						// Encoding Format (e.g., 'image/jpeg')
+
+							$image_encodingFormat_3_4 = get_post_mime_type( $input_3_4 ) ?? '';
+
+						// Alt Text
+
+							$image_caption_3_4 = get_post_meta( $input_3_4, '_wp_attachment_image_alt', TRUE ) ?? '';
+
+						// Image Data
+
+							$image_3_4_src = wp_get_attachment_image_src( $input_3_4, 'aspect-3-4' ) ?? array();
+					
+							if ( $image_3_4_src ) {
+					
+								$image_3_4_url = $image_3_4_src[0] ?? '';
+								$image_3_4_width = $image_3_4_src[1] ?? '';
+								$image_3_4_height = $image_3_4_src[2] ?? '';
+								$image_3_4_size = '';
+					
+							}
+			
+						// ImageObject
+			
+							$image_3_4 = array();
+							$image_3_4['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-3-4' : '';
+							$image_3_4['caption'] = $image_caption_3_4 ?? '';
+							$image_3_4['contentSize'] = $image_3_4_size ?: '';
+							$image_3_4['contentUrl'] = $image_3_4_url ?: '';
+							$image_3_4['encodingFormat'] = $image_encodingFormat_3_4 ?? '';
+							$image_3_4['height'] = $image_3_4_height ? $image_3_4_height . ' px' : '';
+							$image_3_4['width'] = $image_3_4_width ? $image_3_4_width . ' px' : '';
+			
+							$image_3_4 = array_filter(
+								array_merge(
+									$image_ImageObject_base,
+									$image_3_4
+								)
+							);
+			
+							// Sort the item array
+			
+								ksort($image_3_4);
+			
+							// Add to list array
+			
+								$image_ImageObject[] = $image_3_4;
+			
+					}
+
+				// 4:3 aspect ratio source image
+
+					if (
+						$input_4_3
+						&&
+						(
+							$nesting_level == 0
+							||
+							$single_aspect_ratio == '4:3'
+						)
+					) {
+
+						// Encoding Format (e.g., 'image/jpeg')
+
+							$image_encodingFormat_4_3 = get_post_mime_type( $input_4_3 ) ?? '';
+
+						// Alt Text
+
+							$image_caption_4_3 = get_post_meta( $input_4_3, '_wp_attachment_image_alt', TRUE ) ?? '';
+
+						// Image Data
+
+							$image_4_3_src = wp_get_attachment_image_src( $input_4_3, 'aspect-4-3' ) ?? array();
+
+							if ( $image_4_3_src ) {
+
+								$image_4_3_url = $image_4_3_src[0] ?? '';
+								$image_4_3_width = $image_4_3_src[1] ?? '';
+								$image_4_3_height = $image_4_3_src[2] ?? '';
+								$image_4_3_size = '';
+
+							}
+
+						// ImageObject
+
+							$image_4_3 = array();
+							$image_4_3['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-4-3' : '';
+							$image_4_3['caption'] = $image_caption_4_3 ?? '';
+							$image_4_3['contentSize'] = $image_4_3_size ?: '';
+							$image_4_3['contentUrl'] = $image_4_3_url ?: '';
+							$image_4_3['encodingFormat'] = $image_encodingFormat_4_3 ?? '';
+							$image_4_3['height'] = $image_4_3_height ? $image_4_3_height . ' px' : '';
+							$image_4_3['width'] = $image_4_3_width ? $image_4_3_width . ' px' : '';
+
+							$image_4_3 = array_filter(
+								array_merge(
+									$image_ImageObject_base,
+									$image_4_3
+								)
+							);
+
+							// Sort the item array
+
+								ksort($image_4_3);
+
+							// Add to list array
+
+								$image_ImageObject[] = $image_4_3;
+
+					}
+
+				// 16:9 aspect ratio source image
+
+					if (
+						$input_16_9
+						&&
+						(
+							$nesting_level == 0
+							||
+							$single_aspect_ratio == '16:9'
+						)
+					) {
+
+						// Encoding Format (e.g., 'image/jpeg')
+
+							$image_encodingFormat_16_9 = get_post_mime_type( $input_16_9 ) ?? '';
+
+						// Alt Text
+
+							$image_caption_16_9 = get_post_meta( $input_16_9, '_wp_attachment_image_alt', TRUE ) ?? '';
+
+						// Image Data
+
+							$image_16_9_src = wp_get_attachment_image_src( $input_16_9, 'aspect-16-9' ) ?? array();
+
+							if ( $image_16_9_src ) {
+
+								$image_16_9_url = $image_16_9_src[0] ?? '';
+								$image_16_9_width = $image_16_9_src[1] ?? '';
+								$image_16_9_height = $image_16_9_src[2] ?? '';
+								$image_16_9_size = '';
+
+							}
+
+						// ImageObject
+
+							$image_16_9 = array();
+							$image_16_9['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-16-9' : '';
+							$image_16_9['caption'] = $image_caption_16_9 ?? '';
+							$image_16_9['contentSize'] = $image_16_9_size ?: '';
+							$image_16_9['contentUrl'] = $image_16_9_url ?: '';
+							$image_16_9['encodingFormat'] = $image_encodingFormat_16_9 ?? '';
+							$image_16_9['height'] = $image_16_9_height ? $image_16_9_height . ' px' : '';
+							$image_16_9['width'] = $image_16_9_width ? $image_16_9_width . ' px' : '';
+
+							$image_16_9 = array_filter(
+								array_merge(
+									$image_ImageObject_base,
+									$image_16_9
+								)
+							);
+
+							// Sort the item array
+
+								ksort($image_16_9);
+
+							// Add to list array
+
+								$image_ImageObject[] = $image_16_9;
+
+					}
+
+				// Full-size image output
+				
+					if (
+						$input_full
+						&&
+						$single_aspect_ratio == 'full'
+					) {
+
+						// Encoding Format (e.g., 'image/jpeg')
+
+							$image_encodingFormat_full = get_post_mime_type( $input_full ) ?? '';
+
+						// Alt Text
+
+							$image_caption_full = get_post_meta( $input_full, '_wp_attachment_image_alt', TRUE ) ?? '';
+
+						// ImageObject
+
+							$image_ImageObject_base_full = $image_ImageObject_base;
+
+						// Image Data
+
+							$image_full_src = wp_get_attachment_image_src( $input_full, 'aspect-16-9' ) ?? array();
+
+							if ( $image_full_src ) {
+
+								$image_full_url = $image_full_src[0] ?? '';
+								$image_full_width = $image_full_src[1] ?? '';
+								$image_full_height = $image_full_src[2] ?? '';
+								$image_full_size = '';
+
+							}
+
+						// ImageObject
+
+							$image_full = array();
+							$image_full['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-16-9' : '';
+							$image_full['caption'] = $image_caption_full ?? '';
+							$image_full['contentSize'] = $image_full_size ?: '';
+							$image_full['contentUrl'] = $image_full_url ?: '';
+							$image_full['encodingFormat'] = $image_encodingFormat_full ?? '';
+							$image_full['height'] = $image_full_height ? $image_full_height . ' px' : '';
+							$image_full['width'] = $image_full_width ? $image_full_width . ' px' : '';
+
+							$image_full = array_filter(
+								array_merge(
+									$image_ImageObject_base,
+									$image_full
+								)
+							);
+
+							// Sort the item array
+
+								ksort($image_full);
+
+							// Add to list array
+
+								$image_ImageObject[] = $image_full;
+
+					}
+
+			return $image_ImageObject;
+
+		}
+
 	// Add data to an array defining schema data for related areas of expertise
 
 		function uamswp_fad_schema_expertise(
@@ -1221,8 +1575,8 @@
 						$MedicalEntity_url = '';
 						$MedicalEntity_type = '';
 						$MedicalEntity_id = '';
-						$foo = '';
-						$foo = '';
+						$MedicalEntity_image = '';
+						$MedicalEntity_featured_image = '';
 						$foo = '';
 						$foo = '';
 						$foo = '';
@@ -1706,213 +2060,29 @@
 
 								// Get featured image values
 
-									// Image IDs
+									// 16:9 aspect ratio source image
 
-										// 16:9 aspect ratio source image
+										$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $CreativeWork ) ?? '';
 
-											$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $CreativeWork ) ?? '';
+									// 1:1 aspect ratio source image
+									
+										$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $CreativeWork ) ?? $CreativeWork_featured_image_id;
 
-										// 1:1 aspect ratio source image
-										
-											$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $CreativeWork ) ?? $CreativeWork_featured_image_id;
+								// Create ImageObject values arrays
 
-									// Image attributes
-
-										// Common
-
-											// Image Encoding Format
-
-												$CreativeWork_featured_image_encodingFormat = get_post_mime_type( $CreativeWork_featured_image_id ) ?? ''; // e.g., 'image/jpeg'
-												$CreativeWork_featured_image_square_encodingFormat = get_post_mime_type( $CreativeWork_featured_image_square_id ) ?? ''; // e.g., 'image/jpeg'
-
-											// Image Alt Text
-
-												$CreativeWork_featured_image_caption = get_post_meta( $CreativeWork_featured_image_id, '_wp_attachment_image_alt', TRUE ) ?? '';
-
-											// Base object
-
-												$CreativeWork_featured_image_ImageObject_base = array(
-													'@type' => 'ImageObject'
-												);
-												$CreativeWork_featured_image_ImageObject_base['caption'] = $CreativeWork_featured_image_caption ?? '';
-												$CreativeWork_featured_image_ImageObject_base['encodingFormat'] = $CreativeWork_featured_image_square_encodingFormat ?? '';
-												$CreativeWork_featured_image_ImageObject_base['representativeOfPage'] = 'True';
-
-										// 1:1 Aspect Ratio
-
-											if ( $nesting_level == 0 ) {
-
-												$CreativeWork_featured_image_1_1_src = wp_get_attachment_image_src( $CreativeWork_featured_image_square_id, 'aspect-1-1' ) ?? array();
-
-												if ( $CreativeWork_featured_image_1_1_src ) {
-
-													$CreativeWork_featured_image_1_1_url = $CreativeWork_featured_image_1_1_src[0] ?? '';
-													$CreativeWork_featured_image_1_1_width = $CreativeWork_featured_image_1_1_src[1] ?? '';
-													$CreativeWork_featured_image_1_1_height = $CreativeWork_featured_image_1_1_src[2] ?? '';
-													$CreativeWork_featured_image_1_1_size = '';
-
-													// ImageObject
-
-														$CreativeWork_featured_image_1_1 = array();
-														$CreativeWork_featured_image_1_1['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-1-1' : '';
-														$CreativeWork_featured_image_1_1['contentSize'] = $CreativeWork_featured_image_1_1_size ?: '';
-														$CreativeWork_featured_image_1_1['contentUrl'] = $CreativeWork_featured_image_1_1_url ?: '';
-														$CreativeWork_featured_image_1_1['height'] = $CreativeWork_featured_image_1_1_height ? $CreativeWork_featured_image_1_1_height . ' px' : '';
-														$CreativeWork_featured_image_1_1['width'] = $CreativeWork_featured_image_1_1_width ? $CreativeWork_featured_image_1_1_width . ' px' : '';
-
-														$CreativeWork_featured_image_1_1 = array_filter(
-															array_merge(
-																$CreativeWork_featured_image_ImageObject_base,
-																$CreativeWork_featured_image_1_1
-															)
-														);
-
-														// Sort the item array
-
-															if ( is_array($CreativeWork_featured_image_1_1) ) {
-
-																ksort($CreativeWork_featured_image_1_1);
-
-															}
-
-														// Add to list array
-
-															$CreativeWork_featured_image_ImageObject[] = $CreativeWork_featured_image_1_1;
-
-												}
-
-											}
-
-										// // 3:4 Aspect Ratio
-										// 
-										// 	if ( $nesting_level == 0 ) {
-										// 
-										// 		$CreativeWork_featured_image_3_4_src = wp_get_attachment_image_src( $CreativeWork_featured_image_id, 'aspect-3-4' ) ?? array();
-										// 
-										// 		if ( $CreativeWork_featured_image_3_4_src ) {
-										// 
-										// 			$CreativeWork_featured_image_3_4_url = $CreativeWork_featured_image_3_4_src[0] ?? '';
-										// 			$CreativeWork_featured_image_3_4_width = $CreativeWork_featured_image_3_4_src[1] ?? '';
-										// 			$CreativeWork_featured_image_3_4_height = $CreativeWork_featured_image_3_4_src[2] ?? '';
-										// 			$CreativeWork_featured_image_3_4_size = '';
-										// 
-										// 			// ImageObject
-										// 
-										// 				$CreativeWork_featured_image_3_4 = array();
-										// 				$CreativeWork_featured_image_3_4['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-3-4' : '';
-										// 				$CreativeWork_featured_image_3_4['contentSize'] = $CreativeWork_featured_image_3_4_size ?: '';
-										// 				$CreativeWork_featured_image_3_4['contentUrl'] = $CreativeWork_featured_image_3_4_url ?: '';
-										// 				$CreativeWork_featured_image_3_4['height'] = $CreativeWork_featured_image_3_4_height ? $CreativeWork_featured_image_3_4_height . ' px' : '';
-										// 				$CreativeWork_featured_image_3_4['width'] = $CreativeWork_featured_image_3_4_width ? $CreativeWork_featured_image_3_4_width . ' px' : '';
-										// 
-										// 				$CreativeWork_featured_image_3_4 = array_filter(
-										// 					array_merge(
-										// 						$CreativeWork_featured_image_ImageObject_base,
-										// 						$CreativeWork_featured_image_3_4
-										// 					)
-										// 				);
-										// 
-										// 				// Sort the item array
-										// 
-										// 					if ( is_array($CreativeWork_featured_image_3_4) ) {
-										// 
-										// 						ksort($CreativeWork_featured_image_3_4);
-										// 
-										// 					}
-										// 
-										// 				// Add to list array
-										// 
-										// 					$CreativeWork_featured_image_ImageObject[] = $CreativeWork_featured_image_3_4;
-										// 
-										// 		}
-										// 
-										// 	}
-
-										// 4:3 Aspect Ratio
-
-											if ( $nesting_level == 0 ) {
-
-												$CreativeWork_featured_image_4_3_src = wp_get_attachment_image_src( $CreativeWork_featured_image_id, 'aspect-4-3' ) ?? array();
-
-												if ( $CreativeWork_featured_image_4_3_src ) {
-
-													$CreativeWork_featured_image_4_3_url = $CreativeWork_featured_image_4_3_src[0] ?? '';
-													$CreativeWork_featured_image_4_3_width = $CreativeWork_featured_image_4_3_src[1] ?? '';
-													$CreativeWork_featured_image_4_3_height = $CreativeWork_featured_image_4_3_src[2] ?? '';
-													$CreativeWork_featured_image_4_3_size = '';
-
-													// ImageObject
-
-														$CreativeWork_featured_image_4_3 = array();
-														$CreativeWork_featured_image_4_3['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-4-3' : '';
-														$CreativeWork_featured_image_4_3['contentSize'] = $CreativeWork_featured_image_4_3_size ?: '';
-														$CreativeWork_featured_image_4_3['contentUrl'] = $CreativeWork_featured_image_4_3_url ?: '';
-														$CreativeWork_featured_image_4_3['height'] = $CreativeWork_featured_image_4_3_height ? $CreativeWork_featured_image_4_3_height . ' px' : '';
-														$CreativeWork_featured_image_4_3['width'] = $CreativeWork_featured_image_4_3_width ? $CreativeWork_featured_image_4_3_width . ' px' : '';
-
-														$CreativeWork_featured_image_4_3 = array_filter(
-															array_merge(
-																$CreativeWork_featured_image_ImageObject_base,
-																$CreativeWork_featured_image_4_3
-															)
-														);
-
-														// Sort the item array
-
-															if ( is_array($CreativeWork_featured_image_4_3) ) {
-
-																ksort($CreativeWork_featured_image_4_3);
-
-															}
-
-														// Add to list array
-
-															$CreativeWork_featured_image_ImageObject[] = $CreativeWork_featured_image_4_3;
-
-												}
-
-											}
-
-										// 16:9 Aspect Ratio
-
-											$CreativeWork_featured_image_16_9_src = wp_get_attachment_image_src( $CreativeWork_featured_image_id, 'aspect-16-9' ) ?? array();
-
-											if ( $CreativeWork_featured_image_16_9_src ) {
-
-												$CreativeWork_featured_image_16_9_url = $CreativeWork_featured_image_16_9_src[0] ?? '';
-												$CreativeWork_featured_image_16_9_width = $CreativeWork_featured_image_16_9_src[1] ?? '';
-												$CreativeWork_featured_image_16_9_height = $CreativeWork_featured_image_16_9_src[2] ?? '';
-												$CreativeWork_featured_image_16_9_size = '';
-
-												// ImageObject
-
-													$CreativeWork_featured_image_16_9 = array();
-													$CreativeWork_featured_image_16_9['@id'] = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#Thumbnail-16-9' : '';
-													$CreativeWork_featured_image_16_9['contentSize'] = $CreativeWork_featured_image_16_9_size ?: '';
-													$CreativeWork_featured_image_16_9['contentUrl'] = $CreativeWork_featured_image_16_9_url ?: '';
-													$CreativeWork_featured_image_16_9['height'] = $CreativeWork_featured_image_16_9_height ? $CreativeWork_featured_image_16_9_height . ' px' : '';
-													$CreativeWork_featured_image_16_9['width'] = $CreativeWork_featured_image_16_9_width ? $CreativeWork_featured_image_16_9_width . ' px' : '';
-
-													$CreativeWork_featured_image_16_9 = array_filter(
-														array_merge(
-															$CreativeWork_featured_image_ImageObject_base,
-															$CreativeWork_featured_image_16_9
-														)
-													);
-
-													// Sort the item array
-
-														if ( is_array($CreativeWork_featured_image_16_9) ) {
-
-															ksort($CreativeWork_featured_image_16_9);
-
-														}
-
-													// Add to list array
-
-														$CreativeWork_featured_image_ImageObject[] = $CreativeWork_featured_image_16_9;
-
-											}
+									$CreativeWork_image = uamswp_fad_schema_imageobject_thumbnails(
+										$CreativeWork_url, // URL of entity with which the image is associated
+										$nesting_level, // Nesting level within the main schema
+										'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+										'Image', // Base fragment identifier
+										$CreativeWork_featured_image_square_id, // ID of image to use for 1:1 aspect ratio
+										0, // ID of image to use for 3:4 aspect ratio
+										$CreativeWork_featured_image_id, // ID of image to use for 4:3 aspect ratio
+										$CreativeWork_featured_image_id, // ID of image to use for 16:9 aspect ratio
+										0 // ID of image to use for full image
+									) ?? array();
+									
+									$CreativeWork_thumbnail = $CreativeWork_image;
 
 							}
 
@@ -2745,12 +2915,9 @@
 
 								// Get values
 
-									$CreativeWork_image = $CreativeWork_featured_image_ImageObject ?? array();
+									$CreativeWork_image = $CreativeWork_image ?? array();
 
 								// Clean up list array
-
-									$CreativeWork_image = array_filter($CreativeWork_image);
-									$CreativeWork_image = array_values($CreativeWork_image);
 
 									// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -2882,15 +3049,11 @@
 							*     - Boolean
 							*/
 
-							if (
-								in_array( 'representativeOfPage', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
+							if ( in_array( 'representativeOfPage', $CreativeWork_properties ) ) {
 
 								// Get values
 
-									$CreativeWork_representativeOfPage = 'True';
+									$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
 
 								// Add to item values
 
@@ -3154,20 +3317,9 @@
 
 								// Get values
 
-									$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?? array();
-
-									// Fallback values
-
-										if ( !$CreativeWork_thumbnail ) {
-
-											$CreativeWork_thumbnail = $CreativeWork_featured_image_ImageObject ?? array();
-
-										}
+									$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
 
 								// Clean up list array
-
-									$CreativeWork_thumbnail = array_filter($CreativeWork_thumbnail);
-									$CreativeWork_thumbnail = array_values($CreativeWork_thumbnail);
 
 									// If there is only one item, flatten the multi-dimensional array by one step
 

@@ -57,6 +57,8 @@ TODO List
 		 * Define array of just URLs from related areas of expertise
 		 * Bring areas of expertise schema and URLs into relevant properties of provider's schema
 		 * Make the defining of the values array into a function that can be repeated, cached, based on the area of expertise ID
+		 * Add system fallback images to schema if relevant featured image is blank
+		 * Add system fallback text to schema if relevant text is blank
 	 * Related clinical resources
 		 * Apply the clinical resources schema function to the single clinical resource template
 		 * Separate resource types (e.g., ImageObject) into separate functions, calling them in the clinical resource schema function
@@ -1687,247 +1689,34 @@ TODO List
 
 		// image
 
-			// Provider standard portrait
+			// Get portrait values
+				$provider_portrait = uamswp_fad_schema_imageobject_thumbnails(
+					$schema_provider_url, // URL of entity with which the image is associated
+					0, // Nesting level within the main schema
+					'3:4', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+					'Portrait', // Base fragment identifier
+					$featured_image ?: 0, // ID of image to use for 1:1 aspect ratio
+					$featured_image ?: 0, // ID of image to use for 3:4 aspect ratio
+					$headshot_wide ?: 0, // ID of image to use for 4:3 aspect ratio
+					$headshot_wide ?: 0, // ID of image to use for 16:9 aspect ratio
+					0 // ID of image to use for full image
+				) ?? array();
 
-				// Image ID
-				$provider_portrait = $featured_image;
+			// Add to schema
 
 				if ( $provider_portrait ) {
 
-					// Image Encoding Format
-					$provider_encoding_format = get_post_mime_type( $provider_portrait ); // e.g., 'image/jpeg'
+					$schema_provider_Person['image'] = $provider_portrait;
 
-					// Image Values
+					// Define reference to each value/row in this property
 
-						// 1:1 Aspect Ratio
+						$schema_provider_Person_image_ref = uamswp_fad_schema_node_references( $provider_portrait );
 
-							$provider_portrait_1_1 = wp_get_attachment_image_src( $provider_portrait, 'aspect-1-1' );
-							$provider_portrait_1_1_url = $provider_portrait_1_1[0] ?? '';
-							$provider_portrait_1_1_width = $provider_portrait_1_1[1] ?? '';
-							$provider_portrait_1_1_height = $provider_portrait_1_1[2] ?? '';
-							$provider_portrait_1_1_size = '';
+					// Define value of 'primaryImageOfPage' of 'MedicalWebPage' with this series of 'image' references
 
-						// 3:4 Aspect Ratio
-
-							$provider_portrait_3_4 = wp_get_attachment_image_src( $provider_portrait, 'aspect-3-4' );
-							$provider_portrait_3_4_url = $provider_portrait_3_4[0] ?? '';
-							$provider_portrait_3_4_width = $provider_portrait_3_4[1] ?? '';
-							$provider_portrait_3_4_height = $provider_portrait_3_4[2] ?? '';
-							$provider_portrait_3_4_size = '';
-
-						// 4:3 Aspect Ratio
-
-							$provider_portrait_4_3 = wp_get_attachment_image_src( $provider_portrait, 'aspect-4-3' );
-							$provider_portrait_4_3_url = $provider_portrait_4_3[0] ?? '';
-							$provider_portrait_4_3_width = $provider_portrait_4_3[1] ?? '';
-							$provider_portrait_4_3_height = $provider_portrait_4_3[2] ?? '';
-							$provider_portrait_4_3_size = '';
-
-						// 16:9 Aspect Ratio
-
-							$provider_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
-							$provider_portrait_16_9_url = $provider_portrait_16_9[0] ?? '';
-							$provider_portrait_16_9_width = $provider_portrait_16_9[1] ?? '';
-							$provider_portrait_16_9_height = $provider_portrait_16_9[2] ?? '';
-							$provider_portrait_16_9_size = '';
-
-					// Image Objects
-
-						// Pre-define common property values for the ImageObject value arrays
-
-							$provider_portrait_image_object_base = array(
-								'@type' => 'ImageObject',
-								'caption' => $full_name_attr,
-								'encodingFormat' => $provider_encoding_format,
-								'representativeOfPage' => 'True',
-							);
-						// 1:1 Aspect Ratio
-
-							$schema_provider_Person_image_1_1 = array();
-							$schema_provider_Person_image_1_1['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
-							$schema_provider_Person_image_1_1['contentSize'] = $provider_portrait_1_1_size ?: '';
-							$schema_provider_Person_image_1_1['contentUrl'] = $provider_portrait_1_1_url ?: '';
-							$schema_provider_Person_image_1_1['height'] = $provider_portrait_1_1_height ? $provider_portrait_1_1_height . ' px' : '';
-							$schema_provider_Person_image_1_1['width'] = $provider_portrait_1_1_width ? $provider_portrait_1_1_width . ' px' : '';
-
-							$schema_provider_Person_image_1_1 = array_filter(
-								array_merge(
-									$provider_portrait_image_object_base,
-									$schema_provider_Person_image_1_1
-								)
-							);
-
-							// Sort array
-
-								if ( is_array($schema_provider_Person_image_1_1) ) {
-
-									ksort( $schema_provider_Person_image_1_1 );
-
-								}
-
-							// Add to schema
-
-								$schema_provider_Person['image'][] = $schema_provider_Person_image_1_1;
-
-						// 3:4 Aspect Ratio
-
-							$schema_provider_Person_image_3_4 = array();
-							$schema_provider_Person_image_3_4['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
-							$schema_provider_Person_image_3_4['contentSize'] = $provider_portrait_3_4_size ?: '';
-							$schema_provider_Person_image_3_4['contentUrl'] = $provider_portrait_3_4_url ?: '';
-							$schema_provider_Person_image_3_4['height'] = $provider_portrait_3_4_height ? $provider_portrait_3_4_height . ' px' : '';
-							$schema_provider_Person_image_3_4['width'] = $provider_portrait_3_4_width ? $provider_portrait_3_4_width . ' px' : '';
-
-							$schema_provider_Person_image_3_4 = array_filter(
-								array_merge(
-									$provider_portrait_image_object_base,
-									$schema_provider_Person_image_3_4
-								)
-							);
-
-							// Sort array
-
-								if ( is_array($schema_provider_Person_image_3_4) ) {
-
-									ksort( $schema_provider_Person_image_3_4 );
-
-								}
-
-							// Add to schema
-
-								$schema_provider_Person['image'][] = $schema_provider_Person_image_3_4;
-
-						// 4:3 Aspect Ratio
-
-							$schema_provider_Person_image_4_3 = array();
-							$schema_provider_Person_image_4_3['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
-							$schema_provider_Person_image_4_3['contentSize'] = $provider_portrait_4_3_size ?: '';
-							$schema_provider_Person_image_4_3['contentUrl'] = $provider_portrait_4_3_url ?: '';
-							$schema_provider_Person_image_4_3['height'] = $provider_portrait_4_3_height ? $provider_portrait_4_3_height . ' px' : '';
-							$schema_provider_Person_image_4_3['width'] = $provider_portrait_4_3_width ? $provider_portrait_4_3_width . ' px' : '';
-
-							$schema_provider_Person_image_4_3 = array_filter(
-								array_merge(
-									$provider_portrait_image_object_base,
-									$schema_provider_Person_image_4_3
-								)
-							);
-
-							// Sort array
-
-								if ( is_array($schema_provider_Person_image_4_3) ) {
-
-									ksort( $schema_provider_Person_image_4_3 );
-
-								}
-
-							// Add to schema
-
-								$schema_provider_Person['image'][] = $schema_provider_Person_image_4_3;
-
-						// // 16:9 Aspect Ratio
-						// 
-						// 	$schema_provider_Person_image_16_9 = array();
-						// 	$schema_provider_Person_image_16_9['@id'] = $schema_provider_url ? $schema_provider_url . '#Portrait-4-3' : '';
-						// 	$schema_provider_Person_image_16_9['contentSize'] = $provider_portrait_16_9_size ?: '';
-						// 	$schema_provider_Person_image_16_9['contentUrl'] = $provider_portrait_16_9_url ?: '';
-						// 	$schema_provider_Person_image_16_9['height'] = $provider_portrait_16_9_height ? $provider_portrait_16_9_height . ' px' : '';
-						// 	$schema_provider_Person_image_16_9['width'] = $provider_portrait_16_9_width ? $provider_portrait_16_9_width . ' px' : '';
-						// 
-						// 	$schema_provider_Person_image_16_9 = array_filter(
-						// 		array_merge(
-						// 			$provider_portrait_image_object_base,
-						// 			$schema_provider_Person_image_16_9
-						// 		)
-						// 	);
-						// 
-						// 	// Sort array
-						// 
-						// 		if ( is_array($schema_provider_Person_image_16_9) ) {
-						// 
-						// 			ksort( $schema_provider_Person_image_16_9 );
-						// 
-						// 		}
-						// 
-						// 	// Add to schema
-						// 
-						// 		$schema_provider_Person['image'][] = $schema_provider_Person_image_16_9;
-
-						// Define a reference to the standard portrait values
-
-							$schema_provider_Person_image_ref[]['@id'] = $schema_provider_url . '#Portrait-1-1';
-							$schema_provider_Person_image_ref[]['@id'] = $schema_provider_url . '#Portrait-3-4';
-							$schema_provider_Person_image_ref[]['@id'] = $schema_provider_url . '#Portrait-4-3';
-							// $schema_provider_Person_image_ref[0][]['@id'] = $schema_provider_url . '#Portrait-1-1';
-
-						// Define value of 'primaryImageOfPage' of 'MedicalWebPage' with this series of 'image' references
-
-							$schema_provider_MedicalWebPage['primaryImageOfPage'] = $schema_provider_Person_image_ref;
+						$schema_provider_MedicalWebPage['primaryImageOfPage'] = $schema_provider_Person_image_ref;
 
 				}
-
-			// Provider wide portrait
-
-				// Image ID
-				$provider_wide_portrait = $headshot_wide;
-
-				if ( $provider_wide_portrait ) {
-
-					// Image Encoding Format
-					$provider_wide_portrait_encoding_format = get_post_mime_type( $provider_wide_portrait ); // e.g., 'image/jpeg'
-
-					// Image Values
-
-						// 16:9 Aspect Ratio
-
-							$provider_wide_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
-							$provider_wide_portrait_16_9_url = $provider_portrait_16_9[0] ?? '';
-							$provider_wide_portrait_16_9_width = $provider_portrait_16_9[1] ?? '';
-							$provider_wide_portrait_16_9_height = $provider_portrait_16_9[2] ?? '';
-							$provider_wide_portrait_16_9_size = '';
-
-					// Image Objects
-
-						// Base object
-
-							$provider_wide_portrait_image_object_base = array(
-								'@type' => 'ImageObject',
-								'caption' => $full_name_attr,
-								'encodingFormat' => $provider_wide_portrait_encoding_format,
-								'representativeOfPage' => 'True',
-							);
-
-						// 16:9 Aspect Ratio
-
-							$schema_provider_Person_image_wide_16_9 = array();
-							$schema_provider_Person_image_wide_16_9['@id'] = $schema_provider_url ? $schema_provider_url . '#Wide-Portrait-16-9' : '';
-							$schema_provider_Person_image_wide_16_9['contentSize'] = $provider_wide_portrait_16_9_size ?: '';
-							$schema_provider_Person_image_wide_16_9['contentUrl'] = $provider_wide_portrait_16_9_url ?: '';
-							$schema_provider_Person_image_wide_16_9['height'] = $provider_wide_portrait_16_9_height ? $provider_wide_portrait_16_9_height . ' px' : '';
-							$schema_provider_Person_image_wide_16_9['width'] = $provider_wide_portrait_16_9_width ? $provider_wide_portrait_16_9_width . ' px' : '';
-
-							$schema_provider_Person_image_wide_16_9 = array_filter(
-								array_merge(
-									$provider_wide_portrait_image_object_base,
-									$schema_provider_Person_image_wide_16_9
-								)
-							);
-
-							// Sort array
-
-								if ( is_array($schema_provider_Person_image_wide_16_9) ) {
-
-									ksort( $schema_provider_Person_image_wide_16_9 );
-
-								}
-
-							// Add to schema
-
-								$schema_provider_Person['image'][] = $schema_provider_Person_image_wide_16_9;
-
-				}
-
-
 
 		// jobTitle
 
