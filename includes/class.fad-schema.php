@@ -3054,8 +3054,12 @@
 
 									// Introduction / Description
 
-										$CreativeWork_description_count = str_word_count($CreativeWork_description);
-										$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
+										if ( $CreativeWork_resource_type != 'text' ) {
+
+											$CreativeWork_description_count = str_word_count($CreativeWork_description);
+											$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
+
+										}
 
 									// Article body
 
