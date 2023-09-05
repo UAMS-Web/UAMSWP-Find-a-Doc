@@ -1652,6 +1652,31 @@
 						}
 
 					// name
+
+						/*
+						 * The name of the item.
+						 * 
+						 * Subproperty of:
+						 * 
+						 *     - rdfs:label
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
+						// Get values
+
+							$MedicalEntity_name = get_the_title($MedicalEntity) ?: '';
+
+						// Add to item values
+
+							if ( $MedicalEntity_name ) {
+
+								$MedicalEntity_item['name'] = $MedicalEntity_name;
+
+							}
+
 					// additionalType
 					// alternateName
 					// code
