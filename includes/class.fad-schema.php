@@ -1207,6 +1207,14 @@
 
 				foreach ( $repeater as $MedicalEntity ) {
 
+					// If post is not published, skip to the next iteration
+
+						if ( get_post_status($MedicalEntity) != 'publish' ) {
+
+							continue;
+
+						}
+
 					// Eliminate PHP errors / reset variables
 
 						$MedicalEntity_url = '';
