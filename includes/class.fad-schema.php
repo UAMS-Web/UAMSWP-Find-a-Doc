@@ -2008,7 +2008,7 @@
 
 						// Get values
 
-							if ( $CreativeWork_resource_type == 'article' ) {
+							if ( $CreativeWork_resource_type == 'text' ) {
 
 								// Article
 
@@ -2726,7 +2726,7 @@
 
 								// Content
 
-									if ( $CreativeWork_resource_type == 'article' ) {
+									if ( $CreativeWork_resource_type == 'text' ) {
 
 										$CreativeWork_speakable[] = array(
 											'@type' => 'SpeakableSpecification',
