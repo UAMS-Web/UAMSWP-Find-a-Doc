@@ -18,27 +18,27 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// Address Schema Data
-			* 
-			* 		// Check/define the main address or location schema array
-			* 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
-			* 
-			* 		// Add this location's details to the main address or location schema array
-			* 		$schema_address = uamswp_fad_schema_address(
-			* 			$schema_address, // array (optional) // Main address or location schema array
-			* 			'PostalAddress', // string (optional) // Schema type
-			* 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-			* 			'', // string (optional) // The post office box number for PO box addresses.
-			* 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-			* 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-			* 			$location_zip, // string (optional) // The postal code. For example, 94043.
-			* 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-			* 			$location_title, // string (optional) // The name of the item.
-			* 			$location_phone_format_dash, // string (optional) // The telephone number.
-			* 			$location_fax_format_dash // string (optional) // The fax number.
-			* 		);
-			*/
+			 * 
+			 * 	// Address Schema Data
+			 * 
+			 * 		// Check/define the main address or location schema array
+			 * 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+			 * 
+			 * 		// Add this location's details to the main address or location schema array
+			 * 		$schema_address = uamswp_fad_schema_address(
+			 * 			$schema_address, // array (optional) // Main address or location schema array
+			 * 			'PostalAddress', // string (optional) // Schema type
+			 * 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
+			 * 			'', // string (optional) // The post office box number for PO box addresses.
+			 * 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
+			 * 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+			 * 			$location_zip, // string (optional) // The postal code. For example, 94043.
+			 * 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+			 * 			$location_title, // string (optional) // The name of the item.
+			 * 			$location_phone_format_dash, // string (optional) // The telephone number.
+			 * 			$location_fax_format_dash // string (optional) // The fax number.
+			 * 		);
+			 */
 
 			// Check/define variables
 
@@ -239,19 +239,19 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// MedicalSpecialty Schema Data
-			* 
-			* 		// Check/define the main medicalSpecialty schema array
-			* 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-			* 
-			* 		// Add this location's details to the main medicalSpecialty schema array
-			* 		$schema_medical_specialty = uamswp_fad_schema_medical_specialty(
-			* 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-			* 			$condition_title_attr, // string (optional) // The name of the item.
-			* 			$condition_url // string (optional) // URL of the item.
-			* 		);
-			*/
+			 * 
+			 * 	// MedicalSpecialty Schema Data
+			 * 
+			 * 		// Check/define the main medicalSpecialty schema array
+			 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+			 * 
+			 * 		// Add this location's details to the main medicalSpecialty schema array
+			 * 		$schema_medical_specialty = uamswp_fad_schema_medical_specialty(
+			 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+			 * 			$condition_title_attr, // string (optional) // The name of the item.
+			 * 			$condition_url // string (optional) // URL of the item.
+			 * 		);
+			 */
 
 			// Check/define variables
 
@@ -341,18 +341,18 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// FaxNumber Schema Data
-			* 
-			* 		// Check/define the main faxNumber schema array
-			* 		$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
-			* 
-			* 		// Add this location's details to the main faxNumber schema array
-			* 		$schema_fax_number = uamswp_fad_schema_fax_number(
-			* 			$schema_fax_number, // array (optional) // Main faxNumber schema array
-			* 			$location_fax_format_dash // string (optional) // The fax number.
-			* 		);
-			*/
+			 * 
+			 * 	// FaxNumber Schema Data
+			 * 
+			 * 		// Check/define the main faxNumber schema array
+			 * 		$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
+			 * 
+			 * 		// Add this location's details to the main faxNumber schema array
+			 * 		$schema_fax_number = uamswp_fad_schema_fax_number(
+			 * 			$schema_fax_number, // array (optional) // Main faxNumber schema array
+			 * 			$location_fax_format_dash // string (optional) // The fax number.
+			 * 		);
+			 */
 
 			// Check/define variables
 
@@ -392,18 +392,18 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// Telephone Schema Data
-			* 
-			* 		// Check/define the main telephone schema array
-			* 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-			* 
-			* 		// Add this location's details to the main telephone schema array
-			* 		$schema_telephone = uamswp_fad_schema_telephone(
-			* 			$schema_telephone, // array (optional) // Main telephone schema array
-			* 			$telephone_number // string (optional) // The telephone number.
-			* 		);
-			*/
+			 * 
+			 * 	// Telephone Schema Data
+			 * 
+			 * 		// Check/define the main telephone schema array
+			 * 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
+			 * 
+			 * 		// Add this location's details to the main telephone schema array
+			 * 		$schema_telephone = uamswp_fad_schema_telephone(
+			 * 			$schema_telephone, // array (optional) // Main telephone schema array
+			 * 			$telephone_number // string (optional) // The telephone number.
+			 * 		);
+			 */
 
 			// Check/define variables
 
@@ -447,40 +447,40 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// OpeningHoursSpecification Schema Data
-			* 
-			* 		// Check/define the main OpeningHoursSpecification schema array
-			* 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
-			* 
-			* 		// Add this location's details to the main OpeningHoursSpecification schema array
-			* 
-			* 			// // Schema.org method: Add all days as an array under the dayOfWeek property
-			* 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-			* 
-			* 			// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
-			* 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-			* 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
-			* 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			* 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			* 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
-			* 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			* 			// 	);
-			* 
-			* 			// Google method: Loop through all the days defined in the current Hours repeater row separately
-			* 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-			* 
-			* 				foreach ( $schema_day_of_week as $day) {
-			* 					$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
-			* 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
-			* 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
-			* 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			* 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			* 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
-			* 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-			* 					);
-			* 				}
-			*/
+			 * 
+			 * 	// OpeningHoursSpecification Schema Data
+			 * 
+			 * 		// Check/define the main OpeningHoursSpecification schema array
+			 * 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
+			 * 
+			 * 		// Add this location's details to the main OpeningHoursSpecification schema array
+			 * 
+			 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
+			 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
+			 * 
+			 * 			// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+			 * 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
+			 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
+			 * 			// 		$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 			// 		$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
+			 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			 * 			// 	);
+			 * 
+			 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
+			 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
+			 * 
+			 * 				foreach ( $schema_day_of_week as $day) {
+			 * 					$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
+			 * 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
+			 * 						$day, // array|string (optional) // The day of the week for which these opening hours are valid.
+			 * 						$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 						$schema_closes, // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 						$schema_valid_from, // string (optional) // The date when the item becomes valid.
+			 * 						$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
+			 * 					);
+			 * 				}
+			 */
 
 			// Check/define variables
 
@@ -539,21 +539,21 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// OpeningHours Schema Data
-			* 
-			* 		// Check/define the main OpeningHours schema array
-			* 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
-			* 
-			* 		// Add this location's details to the main OpeningHours schema array
-			* 
-			* 			$schema_opening_hours = uamswp_fad_schema_opening_hours(
-			* 				$schema_opening_hours, // array (optional) // Main OpeningHours schema array
-			* 				$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
-			* 				$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			* 				$schema_closes // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
-			* 			);
-			*/
+			 * 
+			 * 	// OpeningHours Schema Data
+			 * 
+			 * 		// Check/define the main OpeningHours schema array
+			 * 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
+			 * 
+			 * 		// Add this location's details to the main OpeningHours schema array
+			 * 
+			 * 			$schema_opening_hours = uamswp_fad_schema_opening_hours(
+			 * 				$schema_opening_hours, // array (optional) // Main OpeningHours schema array
+			 * 				$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
+			 * 				$schema_opens, // string (optional) // The opening hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 				$schema_closes // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
+			 * 			);
+			 */
 
 			// Check/define variables
 
@@ -587,21 +587,21 @@
 		) {
 
 			/* Example use:
-			* 
-			* 	// GeoCoordinates Schema Data
-			* 
-			* 		// Check/define the main GeoCoordinates schema array
-			* 		$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
-			* 
-			* 		// Add this location's details to the main GeoCoordinates schema array
-			* 
-			* 			$schema_geo_coordinates = uamswp_schema_geo_coordinates(
-			* 				$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
-			* 				$schema_latitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			* 				$schema_longitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			* 				$schema_elevation // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
-			* 			);
-			*/
+			 * 
+			 * 	// GeoCoordinates Schema Data
+			 * 
+			 * 		// Check/define the main GeoCoordinates schema array
+			 * 		$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
+			 * 
+			 * 		// Add this location's details to the main GeoCoordinates schema array
+			 * 
+			 * 			$schema_geo_coordinates = uamswp_schema_geo_coordinates(
+			 * 				$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
+			 * 				$schema_latitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			 * 				$schema_longitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			 * 				$schema_elevation // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+			 * 			);
+			 */
 
 			// Check/define variables
 
@@ -772,18 +772,18 @@
 			if ( !empty( $schema ) ) {
 
 				/* 
-				* The transient exists.
-				* Return the variable.
-				*/
+				 * The transient exists.
+				 * Return the variable.
+				 */
 
 				return $schema;
 
 			} else {
 
 				/* 
-				* The transient does not exist.
-				* Define the variable again.
-				*/
+				 * The transient does not exist.
+				 * Define the variable again.
+				 */
 
 				// Check/define variables
 
@@ -1558,7 +1558,7 @@
 				'fpage_clinical_resource' = Fake subpage for related clinical resources
 				'content' = Content page
 
-			*/
+			 */
 
 			// Common property values
 
@@ -1867,9 +1867,9 @@
 					if ( !empty( $CreativeWork_item ) ) {
 
 						/* 
-						* The transient exists.
-						* Return the variable.
-						*/
+						 * The transient exists.
+						 * Return the variable.
+						 */
 
 						// Add to list of conditions
 
@@ -1878,9 +1878,9 @@
 					} else {
 
 						/* 
-						* The transient does not exist.
-						* Define the variable again.
-						*/
+						 * The transient does not exist.
+						 * Define the variable again.
+						 */
 
 						// If post is not published, skip to the next iteration
 
@@ -2339,16 +2339,16 @@
 						// name
 
 							/*
-							* The name of the item.
-							* 
-							* Subproperty of:
-							* 
-							*     - rdfs:label
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * The name of the item.
+							 * 
+							 * Subproperty of:
+							 * 
+							 *     - rdfs:label
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if ( in_array( 'name', $CreativeWork_properties ) ) {
 
@@ -2369,15 +2369,15 @@
 						// abstract
 
 							/*
-							* An abstract is a short description that summarizes a CreativeWork.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							* 
-							* As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-							* feedback and adoption from applications and websites can help improve their definitions.
-							*/
+							 * An abstract is a short description that summarizes a CreativeWork.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 * 
+							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+							 * feedback and adoption from applications and websites can help improve their definitions.
+							 */
 
 							if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
@@ -2398,22 +2398,22 @@
 						// additionalType
 
 							/*
-							* An additional type for the item, typically used for adding more specific types 
-							* from external vocabularies in microdata syntax. This is a relationship between 
-							* something and a class that the thing is in. Typically the value is a 
-							* URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-							* in RDF. Text values can be used sparingly, for cases where useful information 
-							* can be added without their being an appropriate schema to reference. In the 
-							* case of text values, the class label should follow the schema.org style guide.
-							* 
-							* Subproperty of:
-							*     - rdf:type
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*     - URL
-							*/
+							 * An additional type for the item, typically used for adding more specific types 
+							 * from external vocabularies in microdata syntax. This is a relationship between 
+							 * something and a class that the thing is in. Typically the value is a 
+							 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+							 * in RDF. Text values can be used sparingly, for cases where useful information 
+							 * can be added without their being an appropriate schema to reference. In the 
+							 * case of text values, the class label should follow the schema.org style guide.
+							 * 
+							 * Subproperty of:
+							 *     - rdf:type
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 *     - URL
+							 */
 
 							if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
 
@@ -2438,12 +2438,12 @@
 						// alternateName
 
 							/*
-							* An alias for the item.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * An alias for the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if (
 								in_array( 'alternateName', $CreativeWork_properties )
@@ -2472,12 +2472,12 @@
 						// articleBody
 
 							/*
-							* The actual body of the article.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * The actual body of the article.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if (
 								in_array( 'articleBody', $CreativeWork_properties )
@@ -2523,12 +2523,12 @@
 						// audience
 
 							/*
-							* An intended audience, i.e. a group for whom something was created.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Audience
-							*/
+							 * An intended audience, i.e. a group for whom something was created.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Audience
+							 */
 
 							if (
 								in_array( 'audience', $CreativeWork_properties )
@@ -2553,12 +2553,12 @@
 						// contentSize
 
 							/*
-							* File size in (mega/kilo)bytes.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * File size in (mega/kilo)bytes.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if (
 								in_array( 'contentSize', $CreativeWork_properties )
@@ -2583,12 +2583,12 @@
 						// contentUrl
 
 							/*
-							* Actual bytes of the media object, for example the image file or video file.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - URL
-							*/
+							 * Actual bytes of the media object, for example the image file or video file.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							 */
 
 							if (
 								in_array( 'contentUrl', $CreativeWork_properties )
@@ -2613,14 +2613,14 @@
 						// creator
 
 							/*
-							* The creator/author of this CreativeWork. This is the same as the Author 
-							* property for CreativeWork.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Organization
-							*     - Person
-							*/
+							 * The creator/author of this CreativeWork. This is the same as the Author 
+							 * property for CreativeWork.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Organization
+							 *     - Person
+							 */
 
 							if (
 								in_array( 'creator', $CreativeWork_properties )
@@ -2657,14 +2657,14 @@
 						// dateModified
 
 							/*
-							* The date on which the CreativeWork was most recently modified or when the 
-							* item's entry was modified within a DataFeed.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Date
-							*     - DateTime
-							*/
+							 * The date on which the CreativeWork was most recently modified or when the 
+							 * item's entry was modified within a DataFeed.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Date
+							 *     - DateTime
+							 */
 
 							if (
 								in_array( 'dateModified', $CreativeWork_properties )
@@ -2689,13 +2689,13 @@
 						// datePublished
 
 							/*
-							* Date of first broadcast/publication.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Date
-							*     - DateTime
-							*/
+							 * Date of first broadcast/publication.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Date
+							 *     - DateTime
+							 */
 
 							if (
 								in_array( 'datePublished', $CreativeWork_properties )
@@ -2720,13 +2720,13 @@
 						// description
 
 							/*
-							* A description of the item.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*     - TextObject
-							*/
+							 * A description of the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 *     - TextObject
+							 */
 
 							// Get values
 
@@ -2838,13 +2838,13 @@
 						// duration
 
 							/*
-							* The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
-							* format.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Duration
-							*/
+							 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
+							 * format.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Duration
+							 */
 
 							if (
 								in_array( 'duration', $CreativeWork_properties )
@@ -2869,16 +2869,16 @@
 						// embeddedTextCaption
 
 							/*
-							* Represents textual captioning from a MediaObject, e.g. text of a 'meme'.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							* 
-							* As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-							* feedback and adoption from applications and websites can help improve their 
-							* definitions.
-							*/
+							 * Represents textual captioning from a MediaObject, e.g. text of a 'meme'.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 * 
+							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+							 * feedback and adoption from applications and websites can help improve their 
+							 * definitions.
+							 */
 
 							if ( in_array( 'embeddedTextCaption', $CreativeWork_properties ) ) {
 
@@ -2914,14 +2914,14 @@
 						// embedUrl
 
 							/*
-							* A URL pointing to a player for a specific video. In general, this is the 
-							* information in the src element of an embed tag and should not be the same as 
-							* the content of the loc tag.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - URL
-							*/
+							 * A URL pointing to a player for a specific video. In general, this is the 
+							 * information in the src element of an embed tag and should not be the same as 
+							 * the content of the loc tag.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							 */
 
 							if (
 								in_array( 'embedUrl', $CreativeWork_properties )
@@ -2946,22 +2946,22 @@
 						// encodingFormat
 
 							/*
-							* Media type typically expressed using a MIME format (see IANA site and MDN 
-							* reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
-							* for .mp3).
-							* 
-							* In cases where a CreativeWork has several media type representations, encoding 
-							* can be used to indicate each MediaObject alongside particular encodingFormat 
-							* information.
-							* 
-							* Unregistered or niche encoding and file formats can be indicated instead via 
-							* the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*     - URL
-							*/
+							 * Media type typically expressed using a MIME format (see IANA site and MDN 
+							 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
+							 * for .mp3).
+							 * 
+							 * In cases where a CreativeWork has several media type representations, encoding 
+							 * can be used to indicate each MediaObject alongside particular encodingFormat 
+							 * information.
+							 * 
+							 * Unregistered or niche encoding and file formats can be indicated instead via 
+							 * the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 *     - URL
+							 */
 
 							if (
 								in_array( 'encodingFormat', $CreativeWork_properties )
@@ -2986,14 +2986,14 @@
 						// hasDigitalDocumentPermission
 
 							/*
-							* A permission related to the access to this document (e.g. permission to read or 
-							* write an electronic document). For a public document, specify a grantee with an 
-							* Audience with audienceType equal to "public".
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - DigitalDocumentPermission
-							*/
+							 * A permission related to the access to this document (e.g. permission to read or 
+							 * write an electronic document). For a public document, specify a grantee with an 
+							 * Audience with audienceType equal to "public".
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - DigitalDocumentPermission
+							 */
 
 							if (
 								in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
@@ -3025,13 +3025,13 @@
 						// height
 
 							/*
-							* The height of the item.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Distance
-							*     - QuantitativeValue
-							*/
+							 * The height of the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Distance
+							 *     - QuantitativeValue
+							 */
 
 							if (
 								in_array( 'height', $CreativeWork_properties )
@@ -3056,13 +3056,13 @@
 						// image
 
 							/*
-							* An image of the item. This can be a URL or a fully described ImageObject.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - ImageObject
-							*     - URL
-							*/
+							 * An image of the item. This can be a URL or a fully described ImageObject.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - ImageObject
+							 *     - URL
+							 */
 
 							if ( in_array( 'image', $CreativeWork_properties ) ) {
 
@@ -3089,12 +3089,12 @@
 						// isAccessibleForFree
 
 							/*
-							* A flag to signal that the item, event, or place is accessible for free.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Boolean
-							*/
+							 * A flag to signal that the item, event, or place is accessible for free.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Boolean
+							 */
 
 							if ( in_array( 'isAccessibleForFree', $CreativeWork_properties ) ) {
 
@@ -3115,16 +3115,16 @@
 						// isPartOf
 
 							/*
-							* Indicates an item or CreativeWork that this item, or CreativeWork (in some 
-							* sense), is part of.
-							* 
-							* Inverse-property: hasPart
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - CreativeWork
-							*     - URL
-							*/
+							 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
+							 * sense), is part of.
+							 * 
+							 * Inverse-property: hasPart
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - CreativeWork
+							 *     - URL
+							 */
 
 							if (
 								in_array( 'isPartOf', $CreativeWork_properties )
@@ -3155,16 +3155,16 @@
 						// mainEntityOfPage
 
 							/*
-							* Indicates a page (or other CreativeWork) for which this thing is the main 
-							* entity being described. See background notes for details.
-							* 
-							* Inverse-property: mainEntity
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - CreativeWork
-							*     - URL
-							*/
+							 * Indicates a page (or other CreativeWork) for which this thing is the main 
+							 * entity being described. See background notes for details.
+							 * 
+							 * Inverse-property: mainEntity
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - CreativeWork
+							 *     - URL
+							 */
 
 							if (
 								in_array( 'mainEntityOfPage', $CreativeWork_properties )
@@ -3195,12 +3195,12 @@
 						// representativeOfPage
 
 							/*
-							* Indicates whether this image is representative of the content of the page.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Boolean
-							*/
+							 * Indicates whether this image is representative of the content of the page.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Boolean
+							 */
 
 							if ( in_array( 'representativeOfPage', $CreativeWork_properties ) ) {
 
@@ -3221,14 +3221,14 @@
 						// sameAs
 
 							/*
-							* URL of a reference Web page that unambiguously indicates the item's identity 
-							* (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-							* website).
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - URL
-							*/
+							 * URL of a reference Web page that unambiguously indicates the item's identity 
+							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+							 * website).
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							 */
 
 							if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
 
@@ -3285,12 +3285,12 @@
 						// sourceOrganization
 
 							/*
-							* The Organization on whose behalf the creator was working.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Organization
-							*/
+							 * The Organization on whose behalf the creator was working.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Organization
+							 */
 
 							if (
 								in_array( 'sourceOrganization', $CreativeWork_properties )
@@ -3323,34 +3323,34 @@
 						// speakable
 
 							/*
-							* Indicates sections of a Web page that are particularly 'speakable' in the sense 
-							* of being highlighted as being especially appropriate for text-to-speech 
-							* conversion. Other sections of a page may also be usefully spoken in particular 
-							* circumstances; the 'speakable' property serves to indicate the parts most 
-							* likely to be generally useful for speech.
-							* 
-							* The speakable property can be repeated an arbitrary number of times, with three 
-							* kinds of possible 'content-locator' values:
-							*     
-							*     1.) id-value URL references - uses id-value of an element in the page being 
-							*         annotated. The simplest use of speakable has (potentially relative) URL 
-							*         values, referencing identified sections of the document concerned.
-							*     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
-							*         class attribute. Use the cssSelector property).
-							*     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
-							*         content). Use the xpath property.
-							* 
-							* For more sophisticated markup of speakable sections beyond simple ID 
-							* references, either CSS selectors or XPath expressions to pick out document 
-							* section(s) as speakable. For this we define a supporting type, 
-							* SpeakableSpecification which is defined to be a possible value of the speakable 
-							* property.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - SpeakableSpecification
-							*     - URL
-							*/
+							 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+							 * of being highlighted as being especially appropriate for text-to-speech 
+							 * conversion. Other sections of a page may also be usefully spoken in particular 
+							 * circumstances; the 'speakable' property serves to indicate the parts most 
+							 * likely to be generally useful for speech.
+							 * 
+							 * The speakable property can be repeated an arbitrary number of times, with three 
+							 * kinds of possible 'content-locator' values:
+							 *     
+							 *     1.) id-value URL references - uses id-value of an element in the page being 
+							 *         annotated. The simplest use of speakable has (potentially relative) URL 
+							 *         values, referencing identified sections of the document concerned.
+							 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+							 *         class attribute. Use the cssSelector property).
+							 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+							 *         content). Use the xpath property.
+							 * 
+							 * For more sophisticated markup of speakable sections beyond simple ID 
+							 * references, either CSS selectors or XPath expressions to pick out document 
+							 * section(s) as speakable. For this we define a supporting type, 
+							 * SpeakableSpecification which is defined to be a possible value of the speakable 
+							 * property.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - SpeakableSpecification
+							 *     - URL
+							 */
 
 							if (
 								in_array( 'speakable', $CreativeWork_properties )
@@ -3424,15 +3424,15 @@
 						// subjectOf
 
 							/*
-							* A CreativeWork or Event about this Thing.
-							* 
-							* Inverse-property: about
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - CreativeWork
-							*     - Event
-							*/
+							 * A CreativeWork or Event about this Thing.
+							 * 
+							 * Inverse-property: about
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - CreativeWork
+							 *     - Event
+							 */
 
 							if ( in_array( 'subjectOf', $CreativeWork_properties ) ) {
 
@@ -3459,12 +3459,12 @@
 						// thumbnail
 
 							/*
-							* Thumbnail image for an image or video.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - ImageObject
-							*/
+							 * Thumbnail image for an image or video.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - ImageObject
+							 */
 
 							if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
 
@@ -3491,13 +3491,13 @@
 						// transcript
 
 							/*
-							* If this MediaObject is an AudioObject or VideoObject, the transcript of that 
-							* object.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+							 * object.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if (
 								in_array( 'transcript', $CreativeWork_properties )
@@ -3537,13 +3537,13 @@
 						// timeRequired
 
 							/*
-							* Approximate or typical time it usually takes to work with or through the 
-							* content of this work for the typical or target audience.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Duration (use ISO 8601 duration format).
-							*/
+							 * Approximate or typical time it usually takes to work with or through the 
+							 * content of this work for the typical or target audience.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Duration (use ISO 8601 duration format).
+							 */
 
 							if (
 								in_array( 'timeRequired', $CreativeWork_properties )
@@ -3604,12 +3604,12 @@
 						// videoFrameSize
 
 							/*
-							* The frame size of the video.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * The frame size of the video.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if (
 								in_array( 'videoFrameSize', $CreativeWork_properties )
@@ -3634,12 +3634,12 @@
 						// videoQuality
 
 							/*
-							* The quality of the video.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Text
-							*/
+							 * The quality of the video.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
 							if (
 								in_array( 'videoQuality', $CreativeWork_properties )
@@ -3664,13 +3664,13 @@
 						// width
 
 							/*
-							* The width of the item.
-							* 
-							* Values expected to be one of these types:
-							* 
-							*     - Distance
-							*     - QuantitativeValue
-							*/
+							 * The width of the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Distance
+							 *     - QuantitativeValue
+							 */
 
 							if (
 								in_array( 'width', $CreativeWork_properties )
@@ -3695,11 +3695,11 @@
 						// wordCount
 
 							/*
-							* The number of words in the text of the Article.
-							* 
-							* Values expected to be one of these types:
-							*     - Integer
-							*/
+							 * The number of words in the text of the Article.
+							 * 
+							 * Values expected to be one of these types:
+							 *     - Integer
+							 */
 
 							if (
 								in_array( 'wordCount', $CreativeWork_properties )
