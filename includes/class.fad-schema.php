@@ -1720,7 +1720,7 @@
 
 								if ( $CreativeWork_resource_type == 'video' ) {
 
-									$CreativeWork_alternateName = ( isset($CreativeWork_asset_title) && !empty($CreativeWork_asset_title) ) ? $CreativeWork_asset_title : '';
+									$CreativeWork_alternateName = $CreativeWork_asset_title ?? '';
 
 								}
 
@@ -1833,7 +1833,7 @@
 
 							// Get values
 
-								$CreativeWork_contentSize = ( isset($CreativeWork_asset_filesize) && !empty($CreativeWork_asset_filesize) ) ? $CreativeWork_asset_filesize : '';
+								$CreativeWork_contentSize = $CreativeWork_asset_filesize ?? '';
 
 							// Add to item values
 
@@ -1863,7 +1863,7 @@
 
 							// Get values
 
-								$CreativeWork_contentUrl = ( isset($CreativeWork_asset_url) && !empty($CreativeWork_asset_url) ) ? $CreativeWork_asset_url : '';
+								$CreativeWork_contentUrl = $CreativeWork_asset_url ?? '';
 
 							// Add to item values
 
@@ -2001,7 +2001,7 @@
 
 									if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-										$CreativeWork_description = ( isset($CreativeWork_abstract) && !empty($CreativeWork_abstract) ) ? $CreativeWork_abstract : '';
+										$CreativeWork_description = $CreativeWork_abstract ?? '';
 
 									} else {
 
@@ -2021,7 +2021,7 @@
 
 											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-												$CreativeWork_description = ( isset($CreativeWork_abstract) && !empty($CreativeWork_abstract) ) ? $CreativeWork_abstract : '';
+												$CreativeWork_description = $CreativeWork_abstract ?? '';
 
 											} else {
 
@@ -2043,7 +2043,7 @@
 
 											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-												$CreativeWork_description = ( isset($CreativeWork_abstract) && !empty($CreativeWork_abstract) ) ? $CreativeWork_abstract : '';
+												$CreativeWork_description = $CreativeWork_abstract ?? '';
 
 											} else {
 
@@ -2065,7 +2065,7 @@
 
 											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-												$CreativeWork_description = ( isset($CreativeWork_abstract) && !empty($CreativeWork_abstract) ) ? $CreativeWork_abstract : '';
+												$CreativeWork_description = $CreativeWork_abstract ?? '';
 
 											} else {
 
@@ -2119,7 +2119,7 @@
 
 							// Get values
 
-								$CreativeWork_duration = ( isset($CreativeWork_asset_duration) && !empty($CreativeWork_asset_duration) ) ? $CreativeWork_asset_duration : '';
+								$CreativeWork_duration = $CreativeWork_asset_duration ?? '';
 
 							// Add to item values
 
@@ -2196,7 +2196,7 @@
 
 							// Get values
 
-								$CreativeWork_embedUrl = ( isset($CreativeWork_asset_embedUrl) && !empty($CreativeWork_asset_embedUrl) ) ? $CreativeWork_asset_embedUrl : '';
+								$CreativeWork_embedUrl = $CreativeWork_asset_embedUrl ?? '';
 
 							// Add to item values
 
@@ -2428,7 +2428,7 @@
 
 							// Get values
 
-								$CreativeWork_isPartOf = ( isset($schema_clinical_resource_MedicalWebPage_ref) && !empty($schema_clinical_resource_MedicalWebPage_ref) ) ? $schema_clinical_resource_MedicalWebPage_ref : '';
+								$CreativeWork_isPartOf = $schema_clinical_resource_MedicalWebPage_ref ?? '';
 
 								if ( !$CreativeWork_isPartOf ) {
 
@@ -2468,7 +2468,7 @@
 
 							// Get values
 
-								$CreativeWork_mainEntityOfPage = ( isset($schema_clinical_resource_MedicalWebPage_ref) && !empty($schema_clinical_resource_MedicalWebPage_ref) ) ? $schema_clinical_resource_MedicalWebPage_ref : '';
+								$CreativeWork_mainEntityOfPage = $schema_clinical_resource_MedicalWebPage_ref ?? '';
 
 								if ( !$CreativeWork_mainEntityOfPage ) {
 
@@ -2600,11 +2600,11 @@
 
 								if ( $CreativeWork_syndication_query ) {
 
-									$CreativeWork_sourceOrganization = ( isset($CreativeWork_syndication_org) && !empty($CreativeWork_syndication_org) ) ? $CreativeWork_syndication_org : '';
+									$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?? '';
 
 								} else {
 
-									$CreativeWork_sourceOrganization = ( isset($schema_base_org_uams_health_ref) && !empty($schema_base_org_uams_health_ref) ) ? $schema_base_org_uams_health_ref : '';
+									$CreativeWork_sourceOrganization = $schema_base_org_uams_health_ref ?? '';
 
 								}
 
@@ -2736,7 +2736,7 @@
 
 							// Get values
 
-								$CreativeWork_subjectOf = ( isset($schema_clinical_resource_MedicalWebPage_ref) && !empty($schema_clinical_resource_MedicalWebPage_ref) ) ? $schema_clinical_resource_MedicalWebPage_ref : '';
+								$CreativeWork_subjectOf = $schema_clinical_resource_MedicalWebPage_ref ?? '';
 
 								if ( !$CreativeWork_subjectOf ) {
 
@@ -3112,7 +3112,7 @@
 
 							// Get values
 
-								$CreativeWork_videoFrameSize = ( isset($CreativeWork_asset_videoFrameSize) && !empty($CreativeWork_asset_videoFrameSize) ) ? $CreativeWork_asset_videoFrameSize : '';
+								$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
 
 							// Add to item values
 
@@ -3142,7 +3142,7 @@
 
 							// Get values
 
-								$CreativeWork_videoQuality = ( isset($CreativeWork_asset_videoQuality) && !empty($CreativeWork_asset_videoQuality) ) ? $CreativeWork_asset_videoQuality : '';
+								$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
 
 							// Add to item values
 
@@ -3202,7 +3202,7 @@
 
 							// Get values
 
-								$CreativeWork_wordCount = ( isset($CreativeWork_articleBody_count) && !empty($CreativeWork_articleBody_count) ) ? $CreativeWork_articleBody_count : '';
+								$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
 
 								// Fallback value
 
