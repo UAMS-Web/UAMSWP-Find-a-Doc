@@ -1757,6 +1757,7 @@
 									// Strip all tags
 
 										$CreativeWork_articleBody = wp_strip_all_tags($CreativeWork_articleBody);
+										$CreativeWork_articleBody = str_replace("\n", ' ', $CreativeWork_articleBody); // Strip line breaks
 
 									// Make attribute-friendly
 
@@ -2097,6 +2098,7 @@
 								// Strip all tags
 
 									$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
+									$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
 
 								// Make attribute-friendly
 
@@ -2178,6 +2180,7 @@
 									// Strip all tags
 
 										$CreativeWork_embeddedTextCaption = wp_strip_all_tags($CreativeWork_embeddedTextCaption);
+										$CreativeWork_embeddedTextCaption = str_replace("\n", ' ', $CreativeWork_embeddedTextCaption); // Strip line breaks
 
 									// Make attribute-friendly
 
@@ -2879,6 +2882,21 @@
 							// Get values
 
 								$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $CreativeWork ) ?: '';
+
+							// Clean up values
+
+								if ( $CreativeWork_transcript ) {
+
+									// Strip all tags
+
+										$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
+										$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
+
+									// Make attribute-friendly
+
+										$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
+
+								}
 
 							// Add to item values
 
