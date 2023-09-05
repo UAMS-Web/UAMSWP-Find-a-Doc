@@ -2477,6 +2477,12 @@
 
 								$CreativeWork_isPartOf = ( isset($schema_clinical_resource_MedicalWebPage_ref) && !empty($schema_clinical_resource_MedicalWebPage_ref) ) ? $schema_clinical_resource_MedicalWebPage_ref : '';
 
+								if ( !$CreativeWork_isPartOf ) {
+
+									$CreativeWork_isPartOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#' . 'MedicalWebPage' : '';
+
+								}
+
 							// Add to item values
 
 								if ( $CreativeWork_isPartOf ) {
@@ -2514,6 +2520,12 @@
 							// Get values
 
 								$CreativeWork_mainEntityOfPage = ( isset($schema_clinical_resource_MedicalWebPage_ref) && !empty($schema_clinical_resource_MedicalWebPage_ref) ) ? $schema_clinical_resource_MedicalWebPage_ref : '';
+
+								if ( !$CreativeWork_mainEntityOfPage ) {
+
+									$CreativeWork_mainEntityOfPage = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#' . 'MedicalWebPage' : '';
+
+								}
 
 							// Add to item values
 
