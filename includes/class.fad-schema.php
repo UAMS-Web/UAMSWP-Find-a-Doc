@@ -1440,8 +1440,8 @@
 								if ( $CreativeWork_asset_info ) {
 
 									$CreativeWork_asset_url = $CreativeWork_asset_info[0];
-									$CreativeWork_asset_width = $CreativeWork_asset_info[1];
-									$CreativeWork_asset_height = $CreativeWork_asset_info[2];
+									$CreativeWork_asset_width = $CreativeWork_asset_info[1] ? $CreativeWork_asset_info[1] . ' px' : '';
+									$CreativeWork_asset_height = $CreativeWork_asset_info[2] ? $CreativeWork_asset_info[2] . ' px' : '';
 
 								}
 							

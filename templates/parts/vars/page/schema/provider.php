@@ -1704,32 +1704,32 @@ TODO List
 						// 1:1 Aspect Ratio
 							$provider_portrait_1_1 = wp_get_attachment_image_src( $provider_portrait, 'aspect-1-1' );
 							$provider_portrait_1_1_url = $provider_portrait_1_1[0];
-							$provider_portrait_1_1_width = $provider_portrait_1_1[1];
-							$provider_portrait_1_1_height = $provider_portrait_1_1[2];
+							$provider_portrait_1_1_width = $provider_portrait_1_1[1] ? $provider_portrait_1_1[1] . ' px' : '';
+							$provider_portrait_1_1_height = $provider_portrait_1_1[2] ? $provider_portrait_1_1[2] . ' px' : '';
 							$provider_portrait_1_1_size = '';
 
 						// 3:4 Aspect Ratio
 
 							$provider_portrait_3_4 = wp_get_attachment_image_src( $provider_portrait, 'aspect-3-4' );
 							$provider_portrait_3_4_url = $provider_portrait_3_4[0];
-							$provider_portrait_3_4_width = $provider_portrait_3_4[1];
-							$provider_portrait_3_4_height = $provider_portrait_3_4[2];
+							$provider_portrait_3_4_width = $provider_portrait_3_4[1] ? $provider_portrait_3_4[1] . ' px' : '';
+							$provider_portrait_3_4_height = $provider_portrait_3_4[2] ? $provider_portrait_3_4[2] . ' px' : '';
 							$provider_portrait_3_4_size = '';
 
 						// 4:3 Aspect Ratio
 
 							$provider_portrait_4_3 = wp_get_attachment_image_src( $provider_portrait, 'aspect-4-3' );
 							$provider_portrait_4_3_url = $provider_portrait_4_3[0];
-							$provider_portrait_4_3_width = $provider_portrait_4_3[1];
-							$provider_portrait_4_3_height = $provider_portrait_4_3[2];
+							$provider_portrait_4_3_width = $provider_portrait_4_3[1] ? $provider_portrait_4_3[1] . ' px' : '';
+							$provider_portrait_4_3_height = $provider_portrait_4_3[2] ? $provider_portrait_4_3[2] . ' px' : '';
 							$provider_portrait_4_3_size = '';
 
 						// 16:9 Aspect Ratio
 
 							$provider_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
 							$provider_portrait_16_9_url = $provider_portrait_16_9[0];
-							$provider_portrait_16_9_width = $provider_portrait_16_9[1];
-							$provider_portrait_16_9_height = $provider_portrait_16_9[2];
+							$provider_portrait_16_9_width = $provider_portrait_16_9[1] ? $provider_portrait_16_9[1] . ' px' : '';
+							$provider_portrait_16_9_height = $provider_portrait_16_9[2] ? $provider_portrait_16_9[2] . ' px' : '';
 							$provider_portrait_16_9_size = '';
 
 					// Image Objects
@@ -1879,8 +1879,8 @@ TODO List
 
 							$provider_wide_portrait_16_9 = wp_get_attachment_image_src( $provider_portrait, 'aspect-16-9' );
 							$provider_wide_portrait_16_9_url = $provider_portrait_16_9[0];
-							$provider_wide_portrait_16_9_width = $provider_portrait_16_9[1];
-							$provider_wide_portrait_16_9_height = $provider_portrait_16_9[2];
+							$provider_wide_portrait_16_9_width = $provider_portrait_16_9[1] ? $provider_portrait_16_9[1] . ' px' : '';
+							$provider_wide_portrait_16_9_height = $provider_portrait_16_9[2] ? $provider_portrait_16_9[2] . ' px' : '';
 							$provider_wide_portrait_16_9_size = '';
 
 					// Image Objects
