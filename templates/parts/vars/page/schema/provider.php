@@ -325,7 +325,7 @@ TODO List
 
 					// Add Specialization Display Name
 
-						$schema_provider_Occupation_alternateName[] = ( isset($schema_provider_nucc_name_display) && !empty($schema_provider_nucc_name_display) ) ? $schema_provider_nucc_name_display : '';
+						$schema_provider_Occupation_alternateName[] = $schema_provider_nucc_name_display ?? '';
 
 					// Add Alternate Occupational Titles
 
