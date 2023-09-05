@@ -21,7 +21,7 @@
 			array(
 				'@type' => 'MedicalAudience', // Thing > Intangible > Audience > PeopleAudience > MedicalAudience
 				'additionalType' => 'https://www.wikidata.org/wiki/Q12722854', // Wikidata entry for 'sick person'
-				'audienceType' => 'Sick person', // DataType > Text
+				'audienceType' => 'sick person', // DataType > Text
 				'geographicArea' => $schema_common_arkansas,
 				'sameAs' => 'https://www.wikidata.org/wiki/Q12722854' // Wikidata entry for 'sick person'
 			),
@@ -32,7 +32,7 @@
 					'https://www.wikidata.org/wiki/Q6500773', // Wikidata entry for 'general practitioner'
 					'https://www.wikidata.org/wiki/Q55379489' // Wikidata entry for 'primary care physician'
 				),
-				'audienceType' => 'Referring physician', // DataType > Text
+				'audienceType' => 'referring clinician', // DataType > Text
 				'geographicArea' => $schema_common_arkansas
 			)
 		);
