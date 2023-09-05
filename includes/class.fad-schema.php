@@ -1268,16 +1268,19 @@
 
 					// @id
 
-						$MedicalEntity_item['@id'] = $MedicalEntity_url;
-
 						if ( $nesting_level <= 1 ) {
 
-							$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
-							// $MedicalEntity_id .= $MedicalEntity_i;
-							$MedicalEntity_item['@id'] = $MedicalEntity_id;
-							// $MedicalEntity_id++;
+							// Get values
 
-						} // endif ( $nesting_level == 1 )
+								$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
+								// $MedicalEntity_id .= $MedicalEntity_i;
+								// $MedicalEntity_id++;
+
+							// Add to schema
+
+								$MedicalEntity_item['@id'] = $MedicalEntity_id;
+
+						}
 
 					// name
 					// additionalType
