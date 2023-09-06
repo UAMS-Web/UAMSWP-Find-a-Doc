@@ -3905,45 +3905,51 @@
 
 							if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
 
-								// Base array
-
-									$CreativeWork_sameAs = array();
-
 								// Get values
 
-									// Syndication URL
+									// Base list array
 
-										if (
-											isset($CreativeWork_syndication_URL)
-											&&
-											!empty($CreativeWork_syndication_URL)
-										) {
+										$CreativeWork_sameAs = array();
 
-											$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
+									// Add values to the list array
 
-										}
+										// Syndication URL
 
-									// Video URL
+											if (
+												isset($CreativeWork_syndication_URL)
+												&&
+												!empty($CreativeWork_syndication_URL)
+											) {
 
-										if (
-											$CreativeWork_resource_type == 'video'
-											&&
-											$CreativeWork_video
-										) {
+												$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
 
-											$CreativeWork_sameAs[] = $CreativeWork_video;
+											}
+
+										// Video URL
+
+											if (
+												$CreativeWork_resource_type == 'video'
+												&&
+												$CreativeWork_video
+											) {
+
+												$CreativeWork_sameAs[] = $CreativeWork_video;
+			
+											}
 		
-										}
-		
-								// Clean up values array
+								// Clean up list array
 
-									$CreativeWork_sameAs = array_unique($CreativeWork_sameAs);
-									$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
-									$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
+									if ( $CreativeWork_sameAs ) {
 
-									// If there is only one item, flatten the multi-dimensional array by one step
+										$CreativeWork_sameAs = array_unique($CreativeWork_sameAs);
+										$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
+										$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
 
-										uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
+
+									}
 
 								// Add to item values
 
@@ -4626,21 +4632,39 @@
 						 *     - URL
 						 */
 
-						$condition_sameAs_array = get_field( 'schema_sameas', $condition );
+						// Get values
 
-						// Base array
+							// Get repeater field value
 
-							$condition_sameAs = array();
+								$condition_sameAs_array = get_field( 'schema_sameas', $condition );
 
-						// Add each row to the array
+							// Base list array
 
-							if ( $condition_sameAs_array ) {
+								$condition_sameAs = array();
 
-								foreach ( $condition_sameAs_array as $sameAs ) {
+							// Add each repeater row to the list array
 
-									$condition_sameAs[] = $sameAs['schema_sameas_url'];
+								if ( $condition_sameAs_array ) {
+
+									foreach ( $condition_sameAs_array as $sameAs ) {
+
+										$condition_sameAs[] = $sameAs['schema_sameas_url'];
+
+									}
 
 								}
+
+						// Clean up list array
+
+							if ( $condition_sameAs ) {
+
+								$condition_sameAs = array_unique($condition_sameAs);
+								$condition_sameAs = array_filter($condition_sameAs);
+								$condition_sameAs = array_values($condition_sameAs);
+
+								// If there is only one item, flatten the multi-dimensional array by one step
+
+									uamswp_fad_flatten_multidimensional_array($condition_sameAs);
 
 							}
 
@@ -4649,10 +4673,6 @@
 							if ( $condition_sameAs ) {
 
 								$condition_item['sameAs'] = $condition_sameAs;
-
-								// If there is only one item, flatten the multi-dimensional array by one step
-
-									uamswp_fad_flatten_multidimensional_array($condition_item['sameAs']);
 
 							}
 
@@ -5115,42 +5135,49 @@
 						 *     - URL
 						 */
 
+						// Get values
 
-						// Get repeater field value
+							// Get repeater field value
 
-							$service_sameAs_array = get_field( 'schema_sameas', $service );
+								$service_sameAs_array = get_field( 'schema_sameas', $service );
 
-						// Base list array
+							// Base list array
 
-							$service_sameAs_list = array();
+								$service_sameAs_list = array();
 
-						if ( $service_sameAs_array ) {
+							// Add each repeater row to the list array
 
-							foreach ( $service_sameAs_array as $sameAs ) {
+								if ( $service_sameAs_array ) {
 
-								$service_sameAs_list[] = $sameAs['schema_sameas_url'];
+									foreach ( $service_sameAs_array as $sameAs ) {
 
-							}
+										$service_sameAs_list[] = $sameAs['schema_sameas_url'];
 
-							// Clean up list array
+									}
 
+								}
+
+						// Clean up list array
+
+							if ( $service_sameAs_list ) {
+
+								$service_sameAs_list = array_unique($service_sameAs_list);
 								$service_sameAs_list = array_filter($service_sameAs_list);
 								$service_sameAs_list = array_values($service_sameAs_list);
-								sort($service_sameAs_list);
 
 								// If there is only one item, flatten the multi-dimensional array by one step
 
 									uamswp_fad_flatten_multidimensional_array($service_sameAs_list);
 
-							// Add to schema
+							}
 
-								if ( $service_sameAs_list ) {
+						// Add to schema
 
-									$service_item['sameAs'] = $service_sameAs_list;
+							if ( $service_sameAs_list ) {
 
-								}
+								$service_item['sameAs'] = $service_sameAs_list;
 
-						}
+							}
 
 					// drug
 
