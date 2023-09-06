@@ -1902,30 +1902,30 @@
 								// Featured image
 
 									if (
-										$expertise_page = 'overview'
+										$expertise_page == 'overview'
 										||
-										$expertise_page = 'content'
+										$expertise_page == 'content'
 									) {
 
 										$MedicalEntity_image_id = get_field( '_thumbnail_id', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page = 'fpage_provider' ) {
+									} elseif ( $expertise_page == 'fpage_provider' ) {
 
 										$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page = 'fpage_location' ) {
+									} elseif ( $expertise_page == 'fpage_location' ) {
 
 										$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page = 'fpage_expertise_descendant' ) {
+									} elseif ( $expertise_page == 'fpage_expertise_descendant' ) {
 
 										$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page = 'fpage_expertise' ) {
+									} elseif ( $expertise_page == 'fpage_expertise' ) {
 
 										$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page = 'fpage_clinical_resource' ) {
+									} elseif ( $expertise_page == 'fpage_clinical_resource' ) {
 
 										$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $MedicalEntity ) ?? '';
 
