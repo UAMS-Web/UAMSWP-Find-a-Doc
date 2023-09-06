@@ -1606,7 +1606,7 @@
 						$MedicalEntity_medicineSystem = '';
 						$MedicalEntity_potentialAction = '';
 						$MedicalEntity_recognizingAuthority = '';
-						$MedicalEntity_relevantSpecialty = '';
+						$MedicalEntity_relevantSpecialty = array();
 						$MedicalEntity_sameAs = '';
 						$MedicalEntity_study = '';
 						$MedicalEntity_subjectOf = '';
@@ -2147,7 +2147,16 @@
 
 							// Get values
 
-								$MedicalEntity_relevantSpecialty = 'foo' ?? '';
+								$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $MedicalEntity ) ?? array();
+
+								// Clean up list array
+
+									$MedicalEntity_relevantSpecialty = array_filter($MedicalEntity_relevantSpecialty);
+									$MedicalEntity_relevantSpecialty = array_values($MedicalEntity_relevantSpecialty);
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($MedicalEntity_relevantSpecialty);
 
 								// Add to item values
 	
