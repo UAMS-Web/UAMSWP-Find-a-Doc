@@ -1535,7 +1535,7 @@
 
 		}
 
-	// Add data to an array defining schema data for related areas of expertise
+	// Add data to an array defining schema data for related areas of expertise (MedicalEntity)
 
 		function uamswp_fad_schema_expertise(
 			array $repeater, // List of IDs of the area of expertise items
@@ -1623,6 +1623,14 @@
 							$foo = $foo ?? '';
 
 					// url
+
+						/*
+						 * URL of the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
 
 						$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
 						$MedicalEntity_item['url'] = $MedicalEntity_url;
@@ -1732,6 +1740,16 @@
 							}
 
 					// code
+
+						/*
+						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalCode
+						 */
+
 					// description
 
 						/*
@@ -1744,9 +1762,63 @@
 						 */
 
 					// disambiguatingDescription
+
+						/*
+						 * A sub property of description. A short description of the item used to 
+						 * disambiguate from other, similar items. Information from other properties (in 
+						 * particular, name) may be necessary for the description to be useful for 
+						 * disambiguation.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 					// funding
+
+						/*
+						 * A Grant that directly or indirectly provide funding or sponsorship for this 
+						 * item. See also ownershipFundingInfo.
+						 * 
+						 * Inverse-property:
+						 * 
+						 *     - fundedItem
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Grant
+						 * 
+						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+						 * feedback and adoption from applications and websites can help improve their 
+						 * definitions.
+						 */
+
 					// guideline
+
+						/*
+						 * A medical guideline related to this entity.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalGuideline
+						 */
+
 					// identifier
+
+						/* 
+						 * The identifier property represents any kind of identifier for any kind of 
+						 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+						 * properties for representing many of these, either as textual strings or as 
+						 * URL (URI) links. See background notes at 
+						 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - PropertyValue
+						 *     - Text
+						 *     - URL
+						 */
+
 					// image
 
 						/*
@@ -1819,11 +1891,24 @@
 							}
 
 					// legalStatus
+
+						/*
+						 * The drug or supplement's legal status, including any controlled substance 
+						 * schedules that apply.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - DrugLegalStatus
+						 *     - MedicalEnumeration
+						 *     - Text
+						 */
+
 					// mainEntityOfPage
 
 						/*
 						 * Indicates a page (or other CreativeWork) for which this thing is the main 
-						 * entity being described. See background notes for details.
+						 * entity being described. See background notes at 
+						 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
 						 * 
 						 * Inverse-property: mainEntity
 						 * 
@@ -1834,9 +1919,48 @@
 						 */
 
 					// medicineSystem
+
+						/*
+						 * The system of medicine that includes this MedicalEntity 
+						 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicineSystem
+						 */
+
 					// potentialAction
+
+						/*
+						 * Indicates a potential Action, which describes an idealized action in which this 
+						 * thing would play an 'object' role.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Action
+						 */
+
 					// recognizingAuthority
+
+						/*
+						 * If applicable, the organization that officially recognizes this entity as part 
+						 * of its endorsed system of medicine.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Organization
+						 */
+
 					// relevantSpecialty
+
+						/*
+						 * If applicable, a medical specialty in which this entity is relevant.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalSpecialty
+						 */
+
 					// sameAs
 
 						/*
@@ -1850,6 +1974,15 @@
 						 */
 
 					// study
+
+						/*
+						 * A medical study or trial related to this entity.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalStudy
+						 */
+
 					// subjectOf
 
 						/*
@@ -2124,6 +2257,14 @@
 							$CreativeWork_item = array();
 
 						// url
+
+							/*
+							 * URL of the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							 */
 
 							$CreativeWork_url = user_trailingslashit( get_permalink($CreativeWork) );
 							$CreativeWork_item['url'] = $CreativeWork_url;
@@ -2430,7 +2571,8 @@
 							 *     - Text
 							 * 
 							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-							 * feedback and adoption from applications and websites can help improve their definitions.
+							 * feedback and adoption from applications and websites can help improve their 
+							 * definitions.
 							 */
 
 							if ( in_array( 'abstract', $CreativeWork_properties ) ) {
@@ -3210,7 +3352,8 @@
 
 							/*
 							 * Indicates a page (or other CreativeWork) for which this thing is the main 
-							 * entity being described. See background notes for details.
+							 * entity being described. See background notes at 
+							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
 							 * 
 							 * Inverse-property: mainEntity
 							 * 
@@ -3869,6 +4012,18 @@
 
 					// name
 
+						/*
+						 * The name of the item.
+						 * 
+						 * Subproperty of:
+						 * 
+						 *     - rdfs:label
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						$condition_name = get_the_title($condition); // Expects Text
 
 						// Add to array
@@ -3876,6 +4031,14 @@
 							$condition_item['name'] = $condition_name;
 
 					// alternateName
+
+						/*
+						 * An alias for the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
 
 						// Get repeater field value
 
@@ -3898,6 +4061,15 @@
 
 					// code
 
+						/*
+						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalCode
+						 */
+
 						// Get repeater field value
 
 							$condition_code_array = get_field( 'condition_schema_code_schema_medicalcode', $condition ) ?: array();
@@ -3915,6 +4087,24 @@
 							}
 
 					// additionalType
+
+						/*
+						 * An additional type for the item, typically used for adding more specific types 
+						 * from external vocabularies in microdata syntax. This is a relationship between 
+						 * something and a class that the thing is in. Typically the value is a 
+						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+						 * in RDF. Text values can be used sparingly, for cases where useful information 
+						 * can be added without their being an appropriate schema to reference. In the 
+						 * case of text values, the class label should follow the schema.org style guide.
+						 * 
+						 * Subproperty of:
+						 *     - rdf:type
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 *     - URL
+						 */
 
 						$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: '';
 
@@ -3947,6 +4137,16 @@
 							}
 
 					// sameAs
+
+						/*
+						 * URL of a reference Web page that unambiguously indicates the item's identity 
+						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+						 * website).
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
 
 						$condition_sameAs_array = get_field( 'schema_sameas', $condition );
 
@@ -4294,10 +4494,30 @@
 
 					// Name
 
+						/*
+						 * The name of the item.
+						 * 
+						 * Subproperty of:
+						 * 
+						 *     - rdfs:label
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
+
 						$service_name = get_the_title($service); // Expects Text
 						$service_item['name'] = $service_name;
 
 					// alternateName
+
+						/*
+						 * An alias for the item.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 */
 
 						// Get repeater field value
 
@@ -4320,6 +4540,15 @@
 
 					// code
 
+						/*
+						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalCode
+						 */
+
 						// Get repeater field value
 
 							$service_code_array = get_field( 'treatment_procedure_schema_code_schema_medicalcode', $service ) ?: array();
@@ -4337,6 +4566,24 @@
 							}
 
 					// additionalType
+
+						/*
+						 * An additional type for the item, typically used for adding more specific types 
+						 * from external vocabularies in microdata syntax. This is a relationship between 
+						 * something and a class that the thing is in. Typically the value is a 
+						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+						 * in RDF. Text values can be used sparingly, for cases where useful information 
+						 * can be added without their being an appropriate schema to reference. In the 
+						 * case of text values, the class label should follow the schema.org style guide.
+						 * 
+						 * Subproperty of:
+						 *     - rdf:type
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - Text
+						 *     - URL
+						 */
 
 						// Get repeater field value
 
@@ -4377,6 +4624,17 @@
 							}
 
 					// sameAs
+
+						/*
+						 * URL of a reference Web page that unambiguously indicates the item's identity 
+						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+						 * website).
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - URL
+						 */
+
 
 						// Get repeater field value
 
@@ -4651,6 +4909,14 @@
 
 					// relevantSpecialty
 
+						/*
+						 * If applicable, a medical specialty in which this entity is relevant.
+						 * 
+						 * Values expected to be one of these types:
+						 * 
+						 *     - MedicalSpecialty
+						 */
+
 						// Get relationship field value
 
 							$service_relevantSpecialty_array = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $service ) ?: array();
@@ -4796,9 +5062,29 @@
 
 									// name
 
+										/*
+										 * The name of the item.
+										 * 
+										 * Subproperty of:
+										 * 
+										 *     - rdfs:label
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Text
+										 */
+
 										$service_usesDevice_item['name'] = $usesDevice['schema_medicaldevice_name'];
 
 									// alternateName
+
+										/*
+										 * An alias for the item.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Text
+										 */
 
 										// Get repeater field value
 
@@ -4820,6 +5106,15 @@
 											}
 
 									// code
+
+										/*
+										 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+										 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - MedicalCode
+										 */
 
 										// Get repeater field value
 

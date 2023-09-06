@@ -840,6 +840,18 @@ TODO List
 
 		// name
 
+			/*
+			 * The name of the item.
+			 * 
+			 * Subproperty of:
+			 * 
+			 *     - rdfs:label
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 */
+
 			$schema_provider_MedicalWebPage['name'] = array(); // Defined later
 
 		// headline
@@ -867,6 +879,15 @@ TODO List
 			$schema_provider_MedicalWebPage['datePublished'] = get_the_date( 'c', $page_id ); // ISO 8601 date format
 
 		// description
+
+			/*
+			 * A description of the item.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 *     - TextObject
+			 */
 
 			$schema_provider_MedicalWebPage['description'] = array(); // Defined later
 
@@ -963,6 +984,14 @@ TODO List
 
 		// url
 
+			/*
+			 * URL of the item.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
+
 			$schema_provider_MedicalWebPage['url'] = array(
 				'@id' => $schema_provider_url . '#URL',
 				'url' => $schema_provider_url
@@ -1054,6 +1083,18 @@ TODO List
 
 		// name
 
+			/*
+			 * The name of the item.
+			 * 
+			 * Subproperty of:
+			 * 
+			 *     - rdfs:label
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 */
+
 			$schema_provider_Physician['name'] = array(); // Defined later
 
 		// aggregateRating
@@ -1122,6 +1163,19 @@ TODO List
 
 		// mainEntityOfPage
 
+			/*
+			 * Indicates a page (or other CreativeWork) for which this thing is the main 
+			 * entity being described. See background notes at 
+			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+			 * 
+			 * Inverse-property: mainEntity
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - CreativeWork
+			 *     - URL
+			 */
+
 			$schema_provider_Physician['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
 
 		// medicalSpecialty
@@ -1146,6 +1200,14 @@ TODO List
 
 		// url
 
+			/*
+			 * URL of the item.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
+
 			$schema_provider_Physician['url'] = $schema_provider_MedicalWebPage_url_ref;
 
 	// Provider as Person
@@ -1157,6 +1219,24 @@ TODO List
 			);
 
 		// additionalType
+
+			/*
+			 * An additional type for the item, typically used for adding more specific types 
+			 * from external vocabularies in microdata syntax. This is a relationship between 
+			 * something and a class that the thing is in. Typically the value is a 
+			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+			 * in RDF. Text values can be used sparingly, for cases where useful information 
+			 * can be added without their being an appropriate schema to reference. In the 
+			 * case of text values, the class label should follow the schema.org style guide.
+			 * 
+			 * Subproperty of:
+			 *     - rdf:type
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 *     - URL
+			 */
 
 			$schema_provider_Person_additionalType_fallback = 'https://www.wikidata.org/wiki/Q11974939'; // Wikidata item URL for health professional (Q11974939)
 
@@ -1191,6 +1271,18 @@ TODO List
 				$schema_provider_MedicalWebPage['mentions'][] = $schema_provider_Person_ref;
 
 		// name
+
+			/*
+			 * The name of the item.
+			 * 
+			 * Subproperty of:
+			 * 
+			 *     - rdfs:label
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 */
 
 			$schema_provider_Person['name'] = array(
 				'@id' => $schema_provider_url . '#Name',
@@ -1657,6 +1749,20 @@ TODO List
 
 		// identifier
 
+			/* 
+			 * The identifier property represents any kind of identifier for any kind of 
+			 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+			 * properties for representing many of these, either as textual strings or as 
+			 * URL (URI) links. See background notes at 
+			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - PropertyValue
+			 *     - Text
+			 *     - URL
+			 */
+
 			$schema_provider_Person['identifier'] = array();
 
 			// National Provider Identifier (NPI)
@@ -1688,6 +1794,15 @@ TODO List
 			}
 
 		// image
+
+			/*
+			 * An image of the item. This can be a URL or a fully described ImageObject.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - ImageObject
+			 *     - URL
+			 */
 
 			// Get portrait values
 				$provider_portrait = uamswp_fad_schema_imageobject_thumbnails(
@@ -1834,6 +1949,16 @@ TODO List
 
 		// sameAs
 
+			/*
+			 * URL of a reference Web page that unambiguously indicates the item's identity 
+			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+			 * website).
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
+
 			// Base array
 
 				$schema_provider_Person['sameAs'] = array();
@@ -1862,6 +1987,17 @@ TODO List
 	
 		// subjectOf
 
+			/*
+			 * A CreativeWork or Event about this Thing.
+			 * 
+			 * Inverse-property: about
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - CreativeWork
+			 *     - Event
+			 */
+
 			if ( $schema_provider_MedicalWebPage_ref ) {
 
 				$schema_provider_Person['subjectOf'] = $schema_provider_MedicalWebPage_ref;
@@ -1873,6 +2009,14 @@ TODO List
 			}
 
 		// url
+
+			/*
+			 * URL of the item.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
 
 			if ( $schema_provider_MedicalWebPage_url_ref ) {
 
