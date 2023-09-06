@@ -2383,16 +2383,48 @@
 
 							// Get values
 
-								$MedicalEntity_sameAs = 'foo' ?? '';
+								// Get repeater field value
+								
+									$MedicalEntity_sameAs_array = get_field( 'schema_sameas', $MedicalEntity );
 
-								// Add to item values
-	
-									if ( $MedicalEntity_sameAs ) {
-	
-										$MedicalEntity_item['sameAs'] = $MedicalEntity_sameAs;
-	
+								// Base list array
+		
+									$MedicalEntity_sameAs = array();
+		
+								// Add each row to the list array
+		
+									if ( $MedicalEntity_sameAs_array ) {
+		
+										foreach ( $MedicalEntity_sameAs_array as $sameAs ) {
+		
+											$MedicalEntity_sameAs[] = $sameAs['schema_sameas_url'];
+		
+										}
+		
 									}
+	
+							// Clean up list array
 
+								if ( $MedicalEntity_sameAs ) {
+
+									$MedicalEntity_sameAs = array_unique($MedicalEntity_sameAs);
+									$MedicalEntity_sameAs = array_filter($MedicalEntity_sameAs);
+									$MedicalEntity_sameAs = array_values($MedicalEntity_sameAs);
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($MedicalEntity_sameAs);
+
+								}
+
+							// Add to schema
+	
+								if ( $MedicalEntity_sameAs ) {
+	
+									$MedicalEntity_item['sameAs'] = $MedicalEntity_sameAs;
+	
+								}
+			
 						// study
 
 							/*
