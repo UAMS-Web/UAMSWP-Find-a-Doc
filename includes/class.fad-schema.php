@@ -1614,6 +1614,7 @@
 						$ontology_type = '';
 						$current_fpage = '';
 						$fpage_query = '';
+						$MedicalEntity_alternateName_array = '';
 
 						// Reused variables
 
