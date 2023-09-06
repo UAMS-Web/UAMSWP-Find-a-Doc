@@ -2143,7 +2143,7 @@
 
 								// Add to item values
 	
-									if ( $MedicalEntity_foo ) {
+									if ( $MedicalEntity_relevantSpecialty ) {
 	
 										$MedicalEntity_item['relevantSpecialty'] = $MedicalEntity_relevantSpecialty;
 	
