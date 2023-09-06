@@ -1771,11 +1771,18 @@
 							 *     - Text
 							 */
 
-							// Get values
+							// Get repeater field value
 
-								$MedicalEntity_alternateName = 'foo' ?? '';
+								$MedicalEntity_alternateName_array = get_field( 'expertise_alternate_names', $MedicalEntity ) ?: array();
 
-							// Add to item values
+							// Get item values
+
+								$MedicalEntity_alternateName = uamswp_fad_schema_alternatename(
+									$MedicalEntity_alternateName_array, // alternateName repeater field
+									'alternate_text' // alternateName item field name
+								);
+
+							// Add to schema
 
 								if ( $MedicalEntity_alternateName ) {
 
@@ -4271,8 +4278,8 @@
 						// Get item values
 
 							$condition_alternateName = uamswp_fad_schema_alternatename(
-								$condition_alternateName_array,
-								'alternate_text'
+								$condition_alternateName_array, // alternateName repeater field
+								'alternate_text' // alternateName item field name
 							);
 
 						// Add to schema
@@ -4750,8 +4757,8 @@
 						// Get item values
 
 							$service_alternateName = uamswp_fad_schema_alternatename(
-								$service_alternateName_array,
-								'alternate_text'
+								$service_alternateName_array, // alternateName repeater field
+								'alternate_text' // alternateName item field name
 							);
 
 						// Add to schema
@@ -5317,8 +5324,8 @@
 										// Get item values
 
 											$service_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
-												$service_alternateName_array,
-												'schema_alternatename_text'
+												$service_alternateName_array, // alternateName repeater field
+												'schema_alternatename_text' // alternateName item field name
 											);
 
 										// Add to schema
