@@ -739,7 +739,7 @@
 			"key": "field_clinical_specialization_code_query",
 			"name": "clinical_specialization_code_query",
 			"type": "button_group",
-			"label": "Does this specailization have a taxonomy code in the Health Care Provider Taxonomy Code Set?",
+			"label": "Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
@@ -1389,8 +1389,8 @@
 			"placement": "left",
 			"endpoint": 0
 		},
-		"field_clinical_specialization_tab_wikidata_about": {
-			"key": "field_clinical_specialization_tab_wikidata_about",
+		"field_clinical_specialization_wikidata_about": {
+			"key": "field_clinical_specialization_wikidata_about",
 			"name": "",
 			"label": "About Wikidata",
 			"type": "message",
@@ -1407,8 +1407,8 @@
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_clinical_specialization_tab_wikidata_source": {
-			"key": "field_clinical_specialization_tab_wikidata_source",
+		"field_clinical_specialization_wikidata_source": {
+			"key": "field_clinical_specialization_wikidata_source",
 			"name": "",
 			"label": "How to Find the Related Wikidata Item",
 			"type": "message",
