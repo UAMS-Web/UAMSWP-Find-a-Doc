@@ -1622,379 +1622,381 @@
 
 							$foo = $foo ?? '';
 
-					// url
+					// Add property values
 
-						/*
-						 * URL of the item.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - URL
-						 */
+						// url
 
-						$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
-						$MedicalEntity_item['url'] = $MedicalEntity_url;
+							/*
+							 * URL of the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							 */
 
-					// @type
+							$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
+							$MedicalEntity_item['url'] = $MedicalEntity_url;
 
-						$MedicalEntity_type = 'MedicalEntity';
+						// @type
 
-						// Add to schema
-
-							$MedicalEntity_item['@type'] = $MedicalEntity_type;
-
-					// @id
-
-						if ( $nesting_level <= 1 ) {
-
-							// Get values
-
-								$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
-								// $MedicalEntity_id .= $MedicalEntity_i;
-								// $MedicalEntity_id++;
+							$MedicalEntity_type = 'MedicalEntity';
 
 							// Add to schema
 
-								$MedicalEntity_item['@id'] = $MedicalEntity_id;
+								$MedicalEntity_item['@type'] = $MedicalEntity_type;
 
-						}
+						// @id
 
-					// name
+							if ( $nesting_level <= 1 ) {
 
-						/*
-						 * The name of the item.
-						 * 
-						 * Subproperty of:
-						 * 
-						 *     - rdfs:label
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 */
+								// Get values
 
-						// Get values
+									$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
+									// $MedicalEntity_id .= $MedicalEntity_i;
+									// $MedicalEntity_id++;
 
-							$MedicalEntity_name = get_the_title($MedicalEntity) ?: '';
+								// Add to schema
 
-						// Add to item values
-
-							if ( $MedicalEntity_name ) {
-
-								$MedicalEntity_item['name'] = $MedicalEntity_name;
+									$MedicalEntity_item['@id'] = $MedicalEntity_id;
 
 							}
 
-					// additionalType
+						// name
 
-						/*
-						 * An additional type for the item, typically used for adding more specific types 
-						 * from external vocabularies in microdata syntax. This is a relationship between 
-						 * something and a class that the thing is in. Typically the value is a 
-						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-						 * in RDF. Text values can be used sparingly, for cases where useful information 
-						 * can be added without their being an appropriate schema to reference. In the 
-						 * case of text values, the class label should follow the schema.org style guide.
-						 * 
-						 * Subproperty of:
-						 *     - rdf:type
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 *     - URL
-						 */
+							/*
+							 * The name of the item.
+							 * 
+							 * Subproperty of:
+							 * 
+							 *     - rdfs:label
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
-						// Get values
+							// Get values
 
-							$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q930752'; // Wikidata entry for 'medical specialty'
+								$MedicalEntity_name = get_the_title($MedicalEntity) ?: '';
 
-						// Add to item values
+							// Add to item values
 
-							if ( $MedicalEntity_additionalType ) {
+								if ( $MedicalEntity_name ) {
 
-								$MedicalEntity_item['additionalType'] = $MedicalEntity_additionalType;
-
-							}
-
-					// alternateName
-
-						/*
-						 * An alias for the item.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 */
-
-						// Get values
-
-							$MedicalEntity_alternateName = 'foo' ?? '';
-
-						// Add to item values
-
-							if ( $MedicalEntity_alternateName ) {
-
-								$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
-
-							}
-
-					// code
-
-						/*
-						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - MedicalCode
-						 */
-
-					// description
-
-						/*
-						 * A description of the item.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 *     - TextObject
-						 */
-
-					// disambiguatingDescription
-
-						/*
-						 * A sub property of description. A short description of the item used to 
-						 * disambiguate from other, similar items. Information from other properties (in 
-						 * particular, name) may be necessary for the description to be useful for 
-						 * disambiguation.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 */
-
-					// funding
-
-						/*
-						 * A Grant that directly or indirectly provide funding or sponsorship for this 
-						 * item. See also ownershipFundingInfo.
-						 * 
-						 * Inverse-property:
-						 * 
-						 *     - fundedItem
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Grant
-						 * 
-						 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-						 * feedback and adoption from applications and websites can help improve their 
-						 * definitions.
-						 */
-
-					// guideline
-
-						/*
-						 * A medical guideline related to this entity.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - MedicalGuideline
-						 */
-
-					// identifier
-
-						/* 
-						 * The identifier property represents any kind of identifier for any kind of 
-						 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-						 * properties for representing many of these, either as textual strings or as 
-						 * URL (URI) links. See background notes at 
-						 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - PropertyValue
-						 *     - Text
-						 *     - URL
-						 */
-
-					// image
-
-						/*
-						 * An image of the item. This can be a URL or a fully described ImageObject.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - ImageObject
-						 *     - URL
-						 */
-
-						// Get values
-
-							// Featured image
-
-								if (
-									$expertise_page = 'overview'
-									||
-									$expertise_page = 'content'
-								) {
-
-									$MedicalEntity_image_id = get_field( '_thumbnail_id', $MedicalEntity ) ?? '';
-
-								} elseif ( $expertise_page = 'fpage_provider' ) {
-
-									$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $MedicalEntity ) ?? '';
-
-								} elseif ( $expertise_page = 'fpage_location' ) {
-
-									$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $MedicalEntity ) ?? '';
-
-								} elseif ( $expertise_page = 'fpage_expertise_descendant' ) {
-
-									$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $MedicalEntity ) ?? '';
-
-								} elseif ( $expertise_page = 'fpage_expertise' ) {
-
-									$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $MedicalEntity ) ?? '';
-
-								} elseif ( $expertise_page = 'fpage_clinical_resource' ) {
-
-									$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $MedicalEntity ) ?? '';
+									$MedicalEntity_item['name'] = $MedicalEntity_name;
 
 								}
 
-							// Create ImageObject values array
+						// additionalType
 
-								if ( $MedicalEntity_image_id ) {
+							/*
+							 * An additional type for the item, typically used for adding more specific types 
+							 * from external vocabularies in microdata syntax. This is a relationship between 
+							 * something and a class that the thing is in. Typically the value is a 
+							 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+							 * in RDF. Text values can be used sparingly, for cases where useful information 
+							 * can be added without their being an appropriate schema to reference. In the 
+							 * case of text values, the class label should follow the schema.org style guide.
+							 * 
+							 * Subproperty of:
+							 *     - rdf:type
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 *     - URL
+							 */
 
-									$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
-										$MedicalEntity_url, // URL of entity with which the image is associated
-										$nesting_level, // Nesting level within the main schema
-										'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
-										'Image', // Base fragment identifier
-										$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
-										0, // ID of image to use for 3:4 aspect ratio
-										$MedicalEntity_image_id, // ID of image to use for 4:3 aspect ratio
-										$MedicalEntity_image_id, // ID of image to use for 16:9 aspect ratio
-										0 // ID of image to use for full image
-									) ?? array();
+							// Get values
+
+								$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q930752'; // Wikidata entry for 'medical specialty'
+
+							// Add to item values
+
+								if ( $MedicalEntity_additionalType ) {
+
+									$MedicalEntity_item['additionalType'] = $MedicalEntity_additionalType;
 
 								}
 
-						// Add to schema
+						// alternateName
 
-							if ( $MedicalEntity_image ) {
+							/*
+							 * An alias for the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
-								$MedicalEntity_item['image'] = $MedicalEntity_image;
+							// Get values
 
-							}
+								$MedicalEntity_alternateName = 'foo' ?? '';
 
-					// legalStatus
+							// Add to item values
 
-						/*
-						 * The drug or supplement's legal status, including any controlled substance 
-						 * schedules that apply.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - DrugLegalStatus
-						 *     - MedicalEnumeration
-						 *     - Text
-						 */
+								if ( $MedicalEntity_alternateName ) {
 
-					// mainEntityOfPage
+									$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
 
-						/*
-						 * Indicates a page (or other CreativeWork) for which this thing is the main 
-						 * entity being described. See background notes at 
-						 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-						 * 
-						 * Inverse-property: mainEntity
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - CreativeWork
-						 *     - URL
-						 */
+								}
 
-					// medicineSystem
+						// code
 
-						/*
-						 * The system of medicine that includes this MedicalEntity 
-						 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - MedicineSystem
-						 */
+							/*
+							 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+							 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - MedicalCode
+							 */
 
-					// potentialAction
+						// description
 
-						/*
-						 * Indicates a potential Action, which describes an idealized action in which this 
-						 * thing would play an 'object' role.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Action
-						 */
+							/*
+							 * A description of the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 *     - TextObject
+							 */
 
-					// recognizingAuthority
+						// disambiguatingDescription
 
-						/*
-						 * If applicable, the organization that officially recognizes this entity as part 
-						 * of its endorsed system of medicine.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Organization
-						 */
+							/*
+							 * A sub property of description. A short description of the item used to 
+							 * disambiguate from other, similar items. Information from other properties (in 
+							 * particular, name) may be necessary for the description to be useful for 
+							 * disambiguation.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 */
 
-					// relevantSpecialty
+						// funding
 
-						/*
-						 * If applicable, a medical specialty in which this entity is relevant.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - MedicalSpecialty
-						 */
+							/*
+							 * A Grant that directly or indirectly provide funding or sponsorship for this 
+							 * item. See also ownershipFundingInfo.
+							 * 
+							 * Inverse-property:
+							 * 
+							 *     - fundedItem
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Grant
+							 * 
+							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+							 * feedback and adoption from applications and websites can help improve their 
+							 * definitions.
+							 */
 
-					// sameAs
+						// guideline
 
-						/*
-						 * URL of a reference Web page that unambiguously indicates the item's identity 
-						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-						 * website).
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - URL
-						 */
+							/*
+							 * A medical guideline related to this entity.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - MedicalGuideline
+							 */
 
-					// study
+						// identifier
 
-						/*
-						 * A medical study or trial related to this entity.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - MedicalStudy
-						 */
+							/* 
+							 * The identifier property represents any kind of identifier for any kind of 
+							 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+							 * properties for representing many of these, either as textual strings or as 
+							 * URL (URI) links. See background notes at 
+							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - PropertyValue
+							 *     - Text
+							 *     - URL
+							 */
 
-					// subjectOf
+						// image
 
-						/*
-						 * A CreativeWork or Event about this Thing.
-						 * 
-						 * Inverse-property: about
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - CreativeWork
-						 *     - Event
-						 */
+							/*
+							 * An image of the item. This can be a URL or a fully described ImageObject.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - ImageObject
+							 *     - URL
+							 */
+
+							// Get values
+
+								// Featured image
+
+									if (
+										$expertise_page = 'overview'
+										||
+										$expertise_page = 'content'
+									) {
+
+										$MedicalEntity_image_id = get_field( '_thumbnail_id', $MedicalEntity ) ?? '';
+
+									} elseif ( $expertise_page = 'fpage_provider' ) {
+
+										$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $MedicalEntity ) ?? '';
+
+									} elseif ( $expertise_page = 'fpage_location' ) {
+
+										$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $MedicalEntity ) ?? '';
+
+									} elseif ( $expertise_page = 'fpage_expertise_descendant' ) {
+
+										$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $MedicalEntity ) ?? '';
+
+									} elseif ( $expertise_page = 'fpage_expertise' ) {
+
+										$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $MedicalEntity ) ?? '';
+
+									} elseif ( $expertise_page = 'fpage_clinical_resource' ) {
+
+										$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $MedicalEntity ) ?? '';
+
+									}
+
+								// Create ImageObject values array
+
+									if ( $MedicalEntity_image_id ) {
+
+										$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
+											$MedicalEntity_url, // URL of entity with which the image is associated
+											$nesting_level, // Nesting level within the main schema
+											'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+											'Image', // Base fragment identifier
+											$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
+											0, // ID of image to use for 3:4 aspect ratio
+											$MedicalEntity_image_id, // ID of image to use for 4:3 aspect ratio
+											$MedicalEntity_image_id, // ID of image to use for 16:9 aspect ratio
+											0 // ID of image to use for full image
+										) ?? array();
+
+									}
+
+							// Add to schema
+
+								if ( $MedicalEntity_image ) {
+
+									$MedicalEntity_item['image'] = $MedicalEntity_image;
+
+								}
+
+						// legalStatus
+
+							/*
+							 * The drug or supplement's legal status, including any controlled substance 
+							 * schedules that apply.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - DrugLegalStatus
+							 *     - MedicalEnumeration
+							 *     - Text
+							 */
+
+						// mainEntityOfPage
+
+							/*
+							 * Indicates a page (or other CreativeWork) for which this thing is the main 
+							 * entity being described. See background notes at 
+							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+							 * 
+							 * Inverse-property: mainEntity
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - CreativeWork
+							 *     - URL
+							 */
+
+						// medicineSystem
+
+							/*
+							 * The system of medicine that includes this MedicalEntity 
+							 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - MedicineSystem
+							 */
+
+						// potentialAction
+
+							/*
+							 * Indicates a potential Action, which describes an idealized action in which this 
+							 * thing would play an 'object' role.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Action
+							 */
+
+						// recognizingAuthority
+
+							/*
+							 * If applicable, the organization that officially recognizes this entity as part 
+							 * of its endorsed system of medicine.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Organization
+							 */
+
+						// relevantSpecialty
+
+							/*
+							 * If applicable, a medical specialty in which this entity is relevant.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - MedicalSpecialty
+							 */
+
+						// sameAs
+
+							/*
+							 * URL of a reference Web page that unambiguously indicates the item's identity 
+							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+							 * website).
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							 */
+
+						// study
+
+							/*
+							 * A medical study or trial related to this entity.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - MedicalStudy
+							 */
+
+						// subjectOf
+
+							/*
+							 * A CreativeWork or Event about this Thing.
+							 * 
+							 * Inverse-property: about
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - CreativeWork
+							 *     - Event
+							 */
 
 					// Sort array
 
