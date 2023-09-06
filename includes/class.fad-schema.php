@@ -1592,8 +1592,8 @@
 						$MedicalEntity_id = '';
 						$MedicalEntity_image = '';
 						$MedicalEntity_featured_image = '';
-						$foo = '';
-						$foo = '';
+						$MedicalEntity_name = '';
+						$MedicalEntity_alternateName = '';
 						$foo = '';
 						$foo = '';
 						$foo = '';
@@ -1620,7 +1620,7 @@
 
 						// Reused variables
 
-							$foo = $foo ?? '';
+							$MedicalEntity_additionalType = $MedicalEntity_additionalType ?? '';
 
 					// Add property values
 
@@ -1752,6 +1752,18 @@
 							 *     - MedicalCode
 							 */
 
+							// Get values
+
+								$MedicalEntity_code = 'foo' ?? '';
+
+							// Add to item values
+
+								if ( $MedicalEntity_code ) {
+
+									$MedicalEntity_item['code'] = $MedicalEntity_code;
+
+								}
+
 						// description
 
 							/*
@@ -1762,6 +1774,18 @@
 							 *     - Text
 							 *     - TextObject
 							 */
+
+							// Get values
+
+								$MedicalEntity_description = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_description ) {
+	
+										$MedicalEntity_item['description'] = $MedicalEntity_description;
+	
+									}
 
 						// disambiguatingDescription
 
@@ -1775,6 +1799,18 @@
 							 * 
 							 *     - Text
 							 */
+
+							// Get values
+
+								$MedicalEntity_disambiguatingDescription = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_disambiguatingDescription ) {
+	
+										$MedicalEntity_item['disambiguatingDescription'] = $MedicalEntity_disambiguatingDescription;
+	
+									}
 
 						// funding
 
@@ -1795,6 +1831,18 @@
 							 * definitions.
 							 */
 
+							// Get values
+
+								$MedicalEntity_funding = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_funding ) {
+	
+										$MedicalEntity_item['funding'] = $MedicalEntity_funding;
+	
+									}
+
 						// guideline
 
 							/*
@@ -1804,6 +1852,18 @@
 							 * 
 							 *     - MedicalGuideline
 							 */
+
+							// Get values
+
+								$MedicalEntity_guideline = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_guideline ) {
+	
+										$MedicalEntity_item['guideline'] = $MedicalEntity_guideline;
+	
+									}
 
 						// identifier
 
@@ -1820,6 +1880,18 @@
 							 *     - Text
 							 *     - URL
 							 */
+
+							// Get values
+
+								$MedicalEntity_identifier = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_identifier ) {
+	
+										$MedicalEntity_item['identifier'] = $MedicalEntity_identifier;
+	
+									}
 
 						// image
 
@@ -1905,6 +1977,18 @@
 							 *     - Text
 							 */
 
+							// Get values
+
+								$MedicalEntity_legalStatus = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_legalStatus ) {
+	
+										$MedicalEntity_item['legalStatus'] = $MedicalEntity_legalStatus;
+	
+									}
+
 						// mainEntityOfPage
 
 							/*
@@ -1920,6 +2004,18 @@
 							 *     - URL
 							 */
 
+							// Get values
+
+								$MedicalEntity_mainEntityOfPage = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_mainEntityOfPage ) {
+	
+										$MedicalEntity_item['mainEntityOfPage'] = $MedicalEntity_mainEntityOfPage;
+	
+									}
+
 						// medicineSystem
 
 							/*
@@ -1930,6 +2026,18 @@
 							 * 
 							 *     - MedicineSystem
 							 */
+
+							// Get values
+
+								$MedicalEntity_medicineSystem = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_medicineSystem ) {
+	
+										$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
+	
+									}
 
 						// potentialAction
 
@@ -1942,6 +2050,18 @@
 							 *     - Action
 							 */
 
+							// Get values
+
+								$MedicalEntity_potentialAction = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_potentialAction ) {
+	
+										$MedicalEntity_item['potentialAction'] = $MedicalEntity_potentialAction;
+	
+									}
+
 						// recognizingAuthority
 
 							/*
@@ -1953,6 +2073,18 @@
 							 *     - Organization
 							 */
 
+							// Get values
+
+								$MedicalEntity_recognizingAuthority = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_recognizingAuthority ) {
+	
+										$MedicalEntity_item['recognizingAuthority'] = $MedicalEntity_recognizingAuthority;
+	
+									}
+
 						// relevantSpecialty
 
 							/*
@@ -1962,6 +2094,18 @@
 							 * 
 							 *     - MedicalSpecialty
 							 */
+
+							// Get values
+
+								$MedicalEntity_relevantSpecialty = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_foo ) {
+	
+										$MedicalEntity_item['relevantSpecialty'] = $MedicalEntity_relevantSpecialty;
+	
+									}
 
 						// sameAs
 
@@ -1975,6 +2119,18 @@
 							 *     - URL
 							 */
 
+							// Get values
+
+								$MedicalEntity_sameAs = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_sameAs ) {
+	
+										$MedicalEntity_item['sameAs'] = $MedicalEntity_sameAs;
+	
+									}
+
 						// study
 
 							/*
@@ -1984,6 +2140,18 @@
 							 * 
 							 *     - MedicalStudy
 							 */
+
+							// Get values
+
+								$MedicalEntity_study = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_study ) {
+	
+										$MedicalEntity_item['study'] = $MedicalEntity_study;
+	
+									}
 
 						// subjectOf
 
@@ -1997,6 +2165,18 @@
 							 *     - CreativeWork
 							 *     - Event
 							 */
+
+							// Get values
+
+								$MedicalEntity_subjectOf = 'foo' ?? '';
+
+								// Add to item values
+	
+									if ( $MedicalEntity_subjectOf ) {
+	
+										$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
+	
+									}
 
 					// Sort array
 
