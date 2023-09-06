@@ -1594,29 +1594,22 @@
 						$MedicalEntity_featured_image = '';
 						$MedicalEntity_name = '';
 						$MedicalEntity_alternateName = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
-						$foo = '';
+						$MedicalEntity_code = '';
+						$MedicalEntity_description = '';
+						$MedicalEntity_disambiguatingDescription = '';
+						$MedicalEntity_funding = '';
+						$MedicalEntity_guideline = '';
+						$MedicalEntity_identifier = '';
+						$MedicalEntity_image_id = '';
+						$MedicalEntity_legalStatus = '';
+						$MedicalEntity_mainEntityOfPage = '';
+						$MedicalEntity_medicineSystem = '';
+						$MedicalEntity_potentialAction = '';
+						$MedicalEntity_recognizingAuthority = '';
+						$MedicalEntity_relevantSpecialty = '';
+						$MedicalEntity_sameAs = '';
+						$MedicalEntity_study = '';
+						$MedicalEntity_subjectOf = '';
 
 						// Reused variables
 
