@@ -4507,7 +4507,9 @@
 
 						// Get item values
 
-							$condition_code = uamswp_fad_schema_code( $condition_code_array );
+							$condition_code = uamswp_fad_schema_code(
+								$condition_code_array // code repeater field
+							);
 
 						// Add to schema
 						
@@ -4986,7 +4988,9 @@
 
 						// Get item values
 
-							$service_code = uamswp_fad_schema_code( $service_code_array );
+							$service_code = uamswp_fad_schema_code(
+								$service_code_array // code repeater field
+							);
 
 						// Add to schema
 						
@@ -5553,7 +5557,9 @@
 
 										// Get item values
 
-											$service_usesDevice_item_code = uamswp_fad_schema_code( $service_usesDevice_item_code_array );
+											$service_usesDevice_item_code = uamswp_fad_schema_code(
+												$service_usesDevice_item_code_array // code repeater field
+											);
 
 										// Add to schema
 										
