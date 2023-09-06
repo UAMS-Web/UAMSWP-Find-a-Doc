@@ -2453,7 +2453,7 @@
 
 							// Get values
 
-								$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $MedicalEntity ) ?? array();
+								$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $MedicalEntity ) ?: array();
 
 								// Clean up list array
 
@@ -2486,7 +2486,7 @@
 
 							// Get repeater field value
 
-								$MedicalEntity_sameAs_array = get_field( 'schema_sameas', $MedicalEntity ) ?? array();
+								$MedicalEntity_sameAs_array = get_field( 'schema_sameas', $MedicalEntity ) ?: array();
 
 							// Add each row to the list array
 	
@@ -4712,7 +4712,7 @@
 
 						// Get repeater field value
 
-							$condition_sameAs_array = get_field( 'schema_sameas', $MedicalconditionEntity ) ?? array();
+							$condition_sameAs_array = get_field( 'schema_sameas', $condition ) ?: array();
 
 						// Add each row to the list array
 
@@ -5190,7 +5190,7 @@
 
 						// Get repeater field value
 
-							$service_sameAs_array = get_field( 'schema_sameas', $service ) ?? array();
+							$service_sameAs_array = get_field( 'schema_sameas', $service ) ?: array();
 
 						// Add each row to the list array
 
