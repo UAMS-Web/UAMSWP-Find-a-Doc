@@ -1610,6 +1610,7 @@
 						$MedicalEntity_sameAs = '';
 						$MedicalEntity_study = '';
 						$MedicalEntity_subjectOf = '';
+						$MedicalEntity_level = '';
 						$ontology_type = '';
 						$current_fpage = '';
 						$fpage_query = '';
@@ -1726,7 +1727,31 @@
 
 							// Get values
 
-								$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q930752'; // Wikidata entry for 'medical specialty'
+								// Get level of the item within the area of expertise page hierarchy
+
+									$MedicalEntity_level = 1 + count(
+										get_ancestors(
+											$MedicalEntity, // $object_id  // int // Optional // The ID of the object // Default: 0
+											'expertise', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+											'post_type' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+										)
+									) ?? '';
+
+								// Set value relevant to level
+									
+									if ( $MedicalEntity_level ) {
+
+										if ( $MedicalEntity_level == 1 ) {
+
+											$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q930752'; // Wikidata entry for 'medical specialty'
+
+										} else {
+
+											$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q7632042'; // Wikidata entry for 'subspecialty'
+
+										}
+
+									}
 
 							// Add to item values
 
