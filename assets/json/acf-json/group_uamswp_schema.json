@@ -1162,11 +1162,11 @@
 			"search_placeholder": "Select one",
 			"placeholder": ""
 		},
-		"field_schema_nucc": {
-			"key": "field_schema_nucc",
-			"name": "schema_nucc",
-			"type": "taxonomy",
+		"field_schema_nucc_single": {
+			"key": "field_schema_nucc_single",
+			"name": "schema_nucc_single",
 			"label": "Classifications and Specializations From the Health Care Provider Taxonomy Code Set (MedicalCode)",
+			"type": "taxonomy",
 			"instructions": "Select one or more provider classifications and/or specializations from the Health Care Provider Taxonomy Code Set that are relevant to this entity. This will be used in the MedicalCode Schema.org type.</p><p class='description' style='margin-top: 0.5em;'>For information on the Health Care Provider Taxonomy Code Set, visit <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>To easily select the proper item, copy the 10-character code for the desired taxonomy item, paste it into this input, and select the item that is returned.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
 			"required": 1,
 			"conditional_logic": 0,
@@ -1175,8 +1175,35 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"taxonomy": "clinical_title",
 			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_schema_nucc_multiple": {
+			"key": "field_schema_nucc_multiple",
+			"name": "schema_nucc_multiple",
+			"label": "Classifications and Specializations From the Health Care Provider Taxonomy Code Set, Multiple (MedicalCode)",
+			"type": "taxonomy",
+			"instructions": "Select one or more provider classifications and/or specializations from the Health Care Provider Taxonomy Code Set that are relevant to this entity. This will be used in the MedicalCode Schema.org type.</p><p class='description' style='margin-top: 0.5em;'>For information on the Health Care Provider Taxonomy Code Set, visit <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>To easily select the proper item, copy the 10-character code for the desired taxonomy item, paste it into this input, and select the item that is returned.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "clinical_title",
+			"field_type": "multi_select",
 			"allow_null": 1,
 			"add_term": 0,
 			"save_terms": 1,

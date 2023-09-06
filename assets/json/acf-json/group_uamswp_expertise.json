@@ -242,7 +242,7 @@
 			},
 			"acfe_permissions": "",
 			"clone": [
-				"field_schema_nucc"
+				"field_schema_nucc_multiple"
 			],
 			"display": "group",
 			"layout": "block",
