@@ -1161,6 +1161,64 @@
 			"allow_custom": 0,
 			"search_placeholder": "Select one",
 			"placeholder": ""
+		},
+		"field_schema_nucc": {
+			"key": "field_schema_nucc",
+			"name": "schema_nucc",
+			"type": "taxonomy",
+			"label": "Classifications and Specializations From the Health Care Provider Taxonomy Code Set (MedicalCode)",
+			"instructions": "Select one or more provider classifications and/or specializations from the Health Care Provider Taxonomy Code Set that are relevant to this entity. This will be used in the MedicalCode Schema.org type.</p><p class='description' style='margin-top: 0.5em;'>For information on the Health Care Provider Taxonomy Code Set, visit <a href='https://taxonomy.nucc.org/' target='_blank'>https://taxonomy.nucc.org/</a>.</p><p class='description' style='margin-top: 0.5em;'>To easily select the proper item, copy the 10-character code for the desired taxonomy item, paste it into this input, and select the item that is returned.</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicalCode Schema.org type, visit <a href='https://schema.org/MedicalCode' target='_blank'>https://schema.org/MedicalCode</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "clinical_title",
+			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_schema_medicinesystem": {
+			"key": "field_schema_medicinesystem",
+			"label": "Related System(s) of Medical Practice (MedicineSystem)",
+			"name": "schema_medicinesystem",
+			"type": "select",
+			"instructions": "Select one or more Schema.org MedicineSystem enumeration members that identify the system(s) of medical practice relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicineSystem Schema.org enumeration type, visit <a href='https://schema.org/MedicineSystem' target='_blank'>https://schema.org/MedicineSystem</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicineSystem Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicineSystem#subtypes' target='_blank'>https://schema.org/MedicineSystem#subtypes</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"Ayurvedic": "<strong>Ayurvedic</strong> &mdash; A system of medicine that originated in India over thousands of years and that focuses on integrating and balancing the body, mind, and spirit.",
+				"Chiropractic": "<strong>Chiropractic</strong> &mdash; A system of medicine focused on the relationship between the body's structure, mainly the spine, and its functioning.",
+				"Homeopathic": "<strong>Homeopathic</strong> &mdash; A system of medicine based on the principle that a disease can be cured by a substance that produces similar symptoms in healthy people.",
+				"Osteopathic": "<strong>Osteopathic</strong> &mdash; A system of medicine focused on promoting the body's innate ability to heal itself.",
+				"TraditionalChinese": "<strong>TraditionalChinese</strong> &mdash; A system of medicine based on common theoretical concepts that originated in China and evolved over thousands of years, that uses herbs, acupuncture, exercise, massage, dietary therapy, and other methods to treat a wide range of conditions.",
+				"WesternConventional": "<strong>WesternConventional</strong> &mdash; The conventional Western system of medicine, that aims to apply the best available evidence gained from the scientific method to clinical decision making. Also known as conventional or Western medicine."
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 1,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
 		}
 	},
 	"location": "",
