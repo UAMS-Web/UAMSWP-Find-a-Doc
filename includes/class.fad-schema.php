@@ -1610,10 +1610,34 @@
 						$MedicalEntity_sameAs = '';
 						$MedicalEntity_study = '';
 						$MedicalEntity_subjectOf = '';
+						$ontology_type = '';
+						$current_fpage = '';
+						$fpage_query = '';
 
 						// Reused variables
 
 							$MedicalEntity_additionalType = $MedicalEntity_additionalType ?? '';
+
+					// Get ontology type
+
+						$ontology_type = get_field( 'expertise_type', $MedicalEntity ) ?? true; // Check if 'expertise_type' is not null, and if so, set value to true
+
+					// If the page is not an ontology type, skip to the next iteration
+
+						if ( !$ontology_type ) {
+
+							continue;
+
+						}
+
+					// Fake subpage query and get fake subpage slug
+
+						if ( $ontology_type ) {
+
+							$current_fpage = get_query_var( 'fpage', $MedicalEntity ) ?? ''; // Fake subpage slug
+							$fpage_query = $current_fpage ? true : false;
+
+						}
 
 					// Add property values
 
