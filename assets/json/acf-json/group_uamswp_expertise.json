@@ -480,7 +480,7 @@
 		},
 		"field_expertise_alternate_names": {
 			"key": "field_expertise_alternate_names",
-			"label": "Alternate Names for This Area of Expertise",
+			"label": "Alternate Name(s) for This Area of Expertise",
 			"name": "expertise_alternate_names",
 			"type": "repeater",
 			"instructions": "Insert any other names, phrases or acronyms that this area of expertise may be known by. Separate each alternate name into its own item.</p><p class='description' style='margin-top: 0.5em;'>These alternate names will be used to help this page appear in search results for those terms.",
