@@ -1371,6 +1371,55 @@
 
 		}
 
+	// Add data to an array defining schema data for MedicineSystem
+
+		function uamswp_fad_schema_medicinesystem(
+			array $input // array of MedicineSystem values
+		) {
+
+			/*
+			 * The system of medicine that includes this MedicalEntity 
+			 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - MedicineSystem
+			 */
+
+			// Base list array
+
+				$MedicineSystem_list = array();
+
+			// Add each item to the list array
+
+				if ( $input ) {
+
+					foreach ( $input as $MedicineSystem ) {
+
+						$MedicineSystem_list[] = $MedicineSystem;
+
+					} // endforeach ( $input as $MedicineSystem )
+
+					// Clean up list array
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($MedicineSystem_list);
+
+						// Sort list array
+
+							if ( is_array( $MedicineSystem_list ) ) {
+
+								sort($MedicineSystem_list);
+
+							}
+
+				} // endif ( $input )
+
+			return $MedicineSystem_list;
+
+		}
+
 	// Add data to an array defining schema data for sameAs
 
 		function uamswp_fad_schema_sameas(
@@ -2328,17 +2377,23 @@
 							 *     - MedicineSystem
 							 */
 
-							// Get values
+							// Get field value
 
-								$MedicalEntity_medicineSystem = 'foo' ?? '';
+								$MedicalEntity_medicineSystems_array = get_field( 'schema_medicinesystem', $MedicalEntity ) ?: array();
 
-								// Add to item values
+							// Add each item to the list array
 	
-									if ( $MedicalEntity_medicineSystem ) {
+								$MedicalEntity_medicineSystem = uamswp_fad_schema_medicinesystem(
+									$MedicalEntity_medicineSystems_array // array of MedicineSystem values
+								);
 	
-										$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
+							// Add to schema
 	
-									}
+								if ( $MedicalEntity_medicineSystem ) {
+	
+									$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
+	
+								}
 
 						// potentialAction
 
