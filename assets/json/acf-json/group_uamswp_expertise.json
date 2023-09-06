@@ -230,7 +230,7 @@
 		"field_expertise_schema_code_nucc": {
 			"key": "field_expertise_schema_code_nucc",
 			"name": "expertise_schema_code_nucc",
-			"label": "Classifications and Specializations From the Health Care Provider Taxonomy Code Set (code > MedicalCode)",
+			"label": "Related Classifications and Specializations From the Health Care Provider Taxonomy Code Set (code > MedicalCode)",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
