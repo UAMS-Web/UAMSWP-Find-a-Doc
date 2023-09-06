@@ -1994,10 +1994,23 @@
 
 							// Get values
 
-								$MedicalEntity_code = 'foo' ?? '';
+								// Code repeater
 
-							// Add to item values
+									$MedicalEntity_code_array = get_field( 'schema_medicalcode', $MedicalEntity ) ?: array();
 
+								// Health Care Provider Taxonomy Code Set taxonomy field
+
+									$MedicalEntity_nucc_array = get_field( 'schema_nucc_multiple', $MedicalEntity ) ?: array();
+
+							// Get item values
+
+								$MedicalEntity_code = uamswp_fad_schema_code(
+									$MedicalEntity_code_array, // code repeater field
+									$MedicalEntity_nucc_array // Health Care Provider Taxonomy Code Set taxonomy field
+								);
+
+							// Add to schema
+							
 								if ( $MedicalEntity_code ) {
 
 									$MedicalEntity_item['code'] = $MedicalEntity_code;
