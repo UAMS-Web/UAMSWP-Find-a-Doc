@@ -49,11 +49,14 @@ TODO List
  * Related ontology items
 	 * Related locations
 		 * Define schema for related locations
-		 * Define array of just URLs from related locations ('significantLink')
 		 * Bring locations schema and URLs into relevant properties of provider's schema
-		 * Make the defining of the values array into a function that can be repeated, cached, based on the location ID
+		 * Make the defining of the values array into a function that can be repeated.
+			 * Add transient in location schema function's foreach loop
+		 * Apply the location schema function to the single location template
 	 * Related areas of expertise
-		 * Add transients inside foreach loop of defining function
+		 * Apply the areas of expertise schema function to the single area of expertise template
+		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
+			 * Apply the areas of expertise schema function to the area of expertise fake subpages templates
 		 * Add system fallback images to schema if relevant featured image is blank
 		 * Add system fallback text to schema if relevant text is blank
 	 * Related clinical resources
