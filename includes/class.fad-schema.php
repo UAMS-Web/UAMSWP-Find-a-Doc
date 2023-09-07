@@ -1975,7 +1975,6 @@
 						$MedicalEntity_code = '';
 						$MedicalEntity_description = '';
 						$MedicalEntity_image_id = '';
-						$MedicalEntity_legalStatus = '';
 						$MedicalEntity_mainEntityOfPage = '';
 						$MedicalEntity_medicineSystem = '';
 						$MedicalEntity_potentialAction = '';
@@ -2322,31 +2321,6 @@
 									$MedicalEntity_item['image'] = $MedicalEntity_image;
 
 								}
-
-						// legalStatus
-
-							/*
-							 * The drug or supplement's legal status, including any controlled substance 
-							 * schedules that apply.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - DrugLegalStatus
-							 *     - MedicalEnumeration
-							 *     - Text
-							 */
-
-							// Get values
-
-								$MedicalEntity_legalStatus = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_legalStatus ) {
-	
-										$MedicalEntity_item['legalStatus'] = $MedicalEntity_legalStatus;
-	
-									}
 
 						// mainEntityOfPage
 
