@@ -2339,15 +2339,21 @@
 
 							// Get values
 
-								$MedicalEntity_mainEntityOfPage = 'foo' ?? '';
+								$MedicalEntity_mainEntityOfPage = $schema_expertise_MedicalWebPage_ref ?? '';
 
-								// Add to item values
-	
-									if ( $MedicalEntity_mainEntityOfPage ) {
-	
-										$MedicalEntity_item['mainEntityOfPage'] = $MedicalEntity_mainEntityOfPage;
-	
-									}
+								if ( !$MedicalEntity_mainEntityOfPage ) {
+
+									$MedicalEntity_mainEntityOfPage = ( isset($MedicalEntity_url) && !empty($MedicalEntity_url) ) ? $MedicalEntity_url . '#MedicalWebPage' : '';
+
+								}
+
+							// Add to item values
+
+								if ( $MedicalEntity_mainEntityOfPage ) {
+
+									$MedicalEntity_item['mainEntityOfPage'] = $MedicalEntity_mainEntityOfPage;
+
+								}
 
 						// medicineSystem
 
@@ -4182,8 +4188,14 @@
 
 									if ( !$CreativeWork_subjectOf ) {
 
-										$CreativeWork_subjectOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#' . 'MedicalWebPage' : '';
+										$CreativeWork_subjectOf = $CreativeWork_mainEntityOfPage ?? '';
 
+										if ( !$CreativeWork_subjectOf ) {
+
+											$CreativeWork_subjectOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
+	
+										}
+	
 									}
 
 								// Add to item values
