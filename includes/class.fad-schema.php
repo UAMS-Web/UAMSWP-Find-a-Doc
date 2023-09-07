@@ -1974,7 +1974,6 @@
 						$MedicalEntity_alternateName = '';
 						$MedicalEntity_code = '';
 						$MedicalEntity_description = '';
-						$MedicalEntity_identifier = '';
 						$MedicalEntity_image_id = '';
 						$MedicalEntity_legalStatus = '';
 						$MedicalEntity_mainEntityOfPage = '';
@@ -2250,34 +2249,6 @@
 									if ( $MedicalEntity_description ) {
 	
 										$MedicalEntity_item['description'] = $MedicalEntity_description;
-	
-									}
-
-						// identifier
-
-							/* 
-							 * The identifier property represents any kind of identifier for any kind of 
-							 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-							 * properties for representing many of these, either as textual strings or as 
-							 * URL (URI) links. See background notes at 
-							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - PropertyValue
-							 *     - Text
-							 *     - URL
-							 */
-
-							// Get values
-
-								$MedicalEntity_identifier = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_identifier ) {
-	
-										$MedicalEntity_item['identifier'] = $MedicalEntity_identifier;
 	
 									}
 
