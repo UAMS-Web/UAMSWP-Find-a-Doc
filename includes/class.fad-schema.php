@@ -1979,7 +1979,6 @@
 						$MedicalEntity_medicineSystem = '';
 						$MedicalEntity_relevantSpecialty = array();
 						$MedicalEntity_sameAs = '';
-						$MedicalEntity_study = '';
 						$MedicalEntity_subjectOf = '';
 						$MedicalEntity_level = '';
 						$ontology_type = '';
@@ -2519,28 +2518,6 @@
 	
 								}
 			
-						// study
-
-							/*
-							 * A medical study or trial related to this entity.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - MedicalStudy
-							 */
-
-							// Get values
-
-								$MedicalEntity_study = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_study ) {
-	
-										$MedicalEntity_item['study'] = $MedicalEntity_study;
-	
-									}
-
 						// subjectOf
 
 							/*
