@@ -407,7 +407,7 @@
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 1,
+			"prefix_name": 0,
 			"acfe_settings": ""
 		},
 		"field_expertise_page_title_landingpage": {
@@ -445,7 +445,7 @@
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 1,
+			"prefix_name": 0,
 			"acfe_settings": ""
 		},
 		"field_expertise_page_title_hero": {
@@ -476,7 +476,7 @@
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 1,
+			"prefix_name": 0,
 			"acfe_settings": ""
 		},
 		"field_expertise_tab_details": {
