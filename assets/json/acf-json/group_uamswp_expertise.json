@@ -123,8 +123,8 @@
 		"field_expertise_selected_post_excerpt": {
 			"key": "field_expertise_selected_post_excerpt",
 			"name": "expertise_selected_post_excerpt",
-			"type": "text",
 			"label": "Selected Post Excerpt",
+			"type": "textarea",
 			"instructions": "Dynamically populated by an 'acf/save_post' action",
 			"required": 0,
 			"conditional_logic": [
@@ -143,9 +143,11 @@
 			},
 			"default_value": "",
 			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
+			"maxlength": "",
+			"rows": 4,
+			"new_lines": "",
+			"acfe_textarea_code": 0,
+			"readonly": 1
 		},
 		"field_expertise_featured_image": {
 			"key": "field_expertise_featured_image",
