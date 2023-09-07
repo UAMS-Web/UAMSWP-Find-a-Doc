@@ -2218,7 +2218,35 @@
 
 							// Get values
 
-								$MedicalEntity_description = 'foo' ?? '';
+								// Get the Selected Short Description for This Page
+
+									$MedicalEntity_description = get_field( 'expertise_selected_post_excerpt', $MedicalEntity ) ?? '';
+
+									// Fallback values
+
+										if ( !$MedicalEntity_description ) {
+
+											// Get the excerpt
+											
+												$MedicalEntity_description = get_the_excerpt($MedicalEntity) ?? '';
+
+												// Get the Short Description
+		
+													if ( !$MedicalEntity_description ) {
+
+														$MedicalEntity_description = get_field( 'post_excerpt', $MedicalEntity ) ?? '';
+			
+														// Get the Intro Text (Marketing Landing Page Header style)
+			
+															if ( !$MedicalEntity_description ) {
+
+																$MedicalEntity_description = get_field( 'page_header_landingpage_intro', $MedicalEntity ) ?? '';
+
+															}
+				
+													}
+			
+										}
 
 								// Add to item values
 	
