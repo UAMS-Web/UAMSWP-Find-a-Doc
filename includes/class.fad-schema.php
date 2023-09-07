@@ -1974,7 +1974,6 @@
 						$MedicalEntity_alternateName = '';
 						$MedicalEntity_code = '';
 						$MedicalEntity_description = '';
-						$MedicalEntity_funding = '';
 						$MedicalEntity_guideline = '';
 						$MedicalEntity_identifier = '';
 						$MedicalEntity_image_id = '';
@@ -2252,37 +2251,6 @@
 									if ( $MedicalEntity_description ) {
 	
 										$MedicalEntity_item['description'] = $MedicalEntity_description;
-	
-									}
-
-						// funding
-
-							/*
-							 * A Grant that directly or indirectly provide funding or sponsorship for this 
-							 * item. See also ownershipFundingInfo.
-							 * 
-							 * Inverse-property:
-							 * 
-							 *     - fundedItem
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Grant
-							 * 
-							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-							 * feedback and adoption from applications and websites can help improve their 
-							 * definitions.
-							 */
-
-							// Get values
-
-								$MedicalEntity_funding = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_funding ) {
-	
-										$MedicalEntity_item['funding'] = $MedicalEntity_funding;
 	
 									}
 
