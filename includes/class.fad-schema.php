@@ -1,6 +1,6 @@
 <?php
 
-// Collect Values for Schema Data Properties
+// Format values for common schema data properties and types
 
 	// Add data to an array defining schema data for address or location
 
@@ -1921,7 +1921,9 @@
 
 		}
 
-	// Add data to an array defining schema data for related areas of expertise (MedicalEntity)
+// Generate schema arrays of ontology page types
+
+	// Areas of expertise (MedicalEntity)
 
 		function uamswp_fad_schema_expertise(
 			array $repeater, // List of IDs of the area of expertise items
@@ -2610,7 +2612,7 @@
 	
 		}
 
-	// Add data to an array defining schema data for CreativeWork (a.k.a. related clinical resources)
+	// Clinical resources (CreativeWork)
 
 		function uamswp_fad_schema_creativework(
 			array $repeater, // List of IDs of the clinical resource items
@@ -4566,7 +4568,7 @@
 
 		}
 
-	// Add data to an array defining schema data for MedicalCondition (a.k.a. related conditions)
+	// Conditions (MedicalCondition)
 
 		function uamswp_fad_schema_medicalcondition(
 			array $repeater, // List of IDs of the MedicalCondition items
@@ -4978,7 +4980,7 @@
 
 		}
 
-	// Add data to an array defining schema data for a service (a.k.a. treatments and procedures)
+	// Treatments and procedures (MedicalProcedure, MedicalTest)
 
 		function uamswp_fad_schema_service(
 			array $repeater, // List of IDs of the service items
@@ -5832,6 +5834,8 @@
 			return $service_list;
 
 		}
+
+// Utility functions
 
 	// Define @id references to each top-level node in an array
 
