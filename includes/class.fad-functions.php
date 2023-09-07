@@ -9365,7 +9365,7 @@ function uamswp_prevent_orphan($string) {
 
 		function uamswp_fad_set_transient(
 			string $string, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
-			mixed $value, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			$value, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 			string $function = '' // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
 		) {
 
