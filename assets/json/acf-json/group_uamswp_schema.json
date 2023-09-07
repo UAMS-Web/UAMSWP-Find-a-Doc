@@ -217,7 +217,7 @@
 		"field_schema_alternatename": {
 			"key": "field_schema_alternatename",
 			"name": "schema_alternatename",
-			"label": "Alternate Name(s)",
+			"label": "Alternate Name(s) (alternateName > Text)",
 			"type": "repeater",
 			"instructions": "Acronyms, shortened names or alternate spellings of the entity",
 			"required": 0,
