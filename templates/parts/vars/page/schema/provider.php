@@ -114,86 +114,9 @@ TODO List
 
 			// Define values array for each associated location // Repeat for all associated locations
 
-				$provider_related_location[] = array(
-					'@id' => $schema_provider_url . '#Location1', // Increase integer by one each iteration
-					'@type' => 'MedicalClinic', // Replace 'MedicalClinic' with 'Hospital' if necessary
-					'name' => 'foo', // Replace 'foo' with location name
-					'address' => array(
-						'@type' => 'PostalAddress',
-						'addressCountry' => 'USA',
-						'addressLocality' => 'foo', // Replace 'foo' with city
-						'addressRegion' => 'Arkansas',
-						'postalCode' => 'foo', // Replace 'foo' with ZIP code
-						'streetAddress' => 'foo' // Replace 'foo' with street address
-					),
-					'areaServed' => $schema_common_arkansas,
-					'brand' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-					'contactPoint' => array(
-						array(
-							'@type' => 'ContactPoint',
-							'contactType' => 'General information',
-							'telephone' => 'foo' // Replace 'foo' with phone number
-						),
-						array(
-							'@type' => 'ContactPoint',
-							'contactType' => 'Appointments for new patients',
-							'telephone' => 'foo' // Replace 'foo' with phone number
-						),
-						array(
-							'@type' => 'ContactPoint',
-							'contactType' => 'Appointments for existing patients',
-							'telephone' => 'foo' // Replace 'foo' with phone number
-						),
-						array(
-							'@type' => 'ContactPoint',
-							'contactType' => 'Appointments for new and existing patients',
-							'telephone' => 'foo' // Replace 'foo' with phone number
-						),
-						array(
-							'@type' => 'ContactPoint',
-							'contactType' => 'foo', // Replace 'foo' with additional phone number label
-							'telephone' => 'foo' // Replace 'foo' with phone number
-						),
-						array(
-							'@type' => 'ContactPoint',
-							'contactType' => 'Fax',
-							'faxNumber' => 'foo' // Replace 'foo' with fax number
-						),
-					),
-					'description' => 'foo', // Replace 'foo' with location description
-					'geo' => array(
-						'@type' => 'GeoCoordinates',
-						'latitude' => 'foo', // Replace 'foo' with latitude
-						'longitude' => 'foo' // Replace 'foo' with longitude
-					),
-					'openingHoursSpecification' => array( // The opening hours of a certain place. // Repeat as necessary
-						'@type' => 'OpeningHoursSpecification',
-						'closes' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-						'dayOfWeek' => 'foo', // Replace 'foo' necessary value // DayOfWeek (Enumeration Type)
-						'opens' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-						'validFrom' => 'foo', // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-						'validThrough' => 'foo' // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-					),
-					'parentOrganization' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-					'photo' => array( // Repeat for all photos include in location profile
-						'@type' => 'ImageObject',
-						'caption' => 'foo', // Replace 'foo' with the image's alt text
-						'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
-						'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
-						'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
-						'height' => 'foo', // Replace 'foo' with the image's height
-						'representativeOfPage' => 'False',
-						'width' => 'foo' // Replace 'foo' with the image's width
-					),
-					'specialOpeningHoursSpecification' => array( // The special opening hours of a certain place. Use this to explicitly override general opening hours brought in scope by openingHoursSpecification or openingHours. // Repeat as necessary
-						'@type' => 'OpeningHoursSpecification',
-						'closes' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-						'dayOfWeek' => 'foo', // Replace 'foo' necessary value // DayOfWeek (Enumeration Type)
-						'opens' => 'foo', // Replace 'foo' necessary value // Time (Data Type)
-						'validFrom' => 'foo', // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-						'validThrough' => 'foo' // Replace 'foo' necessary value // Date (Data Type) or DateTime (Data Type)
-					),
-					'url' => 'foo' // Replace 'foo' with location profile URL
+				$provider_related_location = uamswp_fad_schema_location(
+					$locations, // List of IDs of the location items
+					$schema_provider_url, // Page URL
 				);
 
 			// Define reference to each value/row in this property
@@ -2069,8 +1992,8 @@ uamswp_fad_schema_construct($schema_provider);
 
 	echo '<pre>'; // test
 
-	// // Full
-	// echo print_r($schema_provider['@graph']); // test
+	// Full
+	echo print_r($schema_provider['@graph']); // test
 
 	// // UAMS
 	// echo print_r($schema_provider['@graph'][0]); // test
@@ -2081,8 +2004,8 @@ uamswp_fad_schema_construct($schema_provider);
 	// // UAMSHealth.com
 	// echo print_r($schema_provider['@graph'][1]); // test
 
-	// MedicalWebPage
-	echo print_r($schema_provider['@graph'][3]); // test
+	// // MedicalWebPage
+	// echo print_r($schema_provider['@graph'][3]); // test
 
 	// // BreadcrumbList
 	// echo print_r($schema_provider['@graph'][4]); // test

@@ -1923,6 +1923,2381 @@
 
 // Generate schema arrays of ontology page types
 
+	// Locations (LocalBusiness)
+
+		function uamswp_fad_schema_location(
+			array $repeater, // List of IDs of the location items
+			string $page_url, // Page URL
+			int $nesting_level = 1, // Nesting level within the main schema
+			int $LocalBusiness_i = 1 // Iteration counter
+		) {
+
+			// Common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+			// UAMS organization values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+
+			// Base list array
+
+				$LocalBusiness_list = array();
+
+			if ( !empty($repeater) ) {
+
+				// LocalBusiness Subtype Properties Map
+
+					/* 
+
+					Listing the properties valid for each schema type.
+
+					*/
+
+					$LocalBusiness_subtype_map = array(
+						'all' => array(
+							'MedicalBusiness' => false,
+							'properties' => array(
+								'actionableFeedbackPolicy',
+								'additionalProperty',
+								'additionalType',
+								'address',
+								'aggregateRating',
+								'alternateName',
+								'alumni',
+								'amenityFeature',
+								'areaServed',
+								'award',
+								'awards',
+								'branchCode',
+								'branchOf',
+								'brand',
+								'contactPoint',
+								'contactPoints',
+								'containedIn',
+								'containedInPlace',
+								'containsPlace',
+								'correctionsPolicy',
+								'currenciesAccepted',
+								'department',
+								'description',
+								'disambiguatingDescription',
+								'dissolutionDate',
+								'diversityPolicy',
+								'diversityStaffingReport',
+								'duns',
+								'email',
+								'employee',
+								'employees',
+								'ethicsPolicy',
+								'event',
+								'events',
+								'faxNumber',
+								'founder',
+								'founders',
+								'foundingDate',
+								'foundingLocation',
+								'funder',
+								'funding',
+								'geo',
+								'geoContains',
+								'geoCoveredBy',
+								'geoCovers',
+								'geoCrosses',
+								'geoDisjoint',
+								'geoEquals',
+								'geoIntersects',
+								'geoOverlaps',
+								'geoTouches',
+								'geoWithin',
+								'globalLocationNumber',
+								'hasCredential',
+								'hasDriveThroughService',
+								'hasMap',
+								'hasMerchantReturnPolicy',
+								'hasOfferCatalog',
+								'hasPOS',
+								'hasProductReturnPolicy',
+								'identifier',
+								'image',
+								'interactionStatistic',
+								'isAccessibleForFree',
+								'isicV4',
+								'iso6523Code',
+								'keywords',
+								'knowsAbout',
+								'knowsLanguage',
+								'latitude',
+								'legalName',
+								'leiCode',
+								'location',
+								'logo',
+								'longitude',
+								'mainEntityOfPage',
+								'makesOffer',
+								'map',
+								'maps',
+								'maximumAttendeeCapacity',
+								'member',
+								'memberOf',
+								'members',
+								'naics',
+								'name',
+								'nonprofitStatus',
+								'numberOfEmployees',
+								'openingHours',
+								'openingHoursSpecification',
+								'ownershipFundingInfo',
+								'owns',
+								'parentOrganization',
+								'paymentAccepted',
+								'photo',
+								'photos',
+								'potentialAction',
+								'priceRange',
+								'publicAccess',
+								'publishingPrinciples',
+								'review',
+								'reviews',
+								'sameAs',
+								'seeks',
+								'serviceArea',
+								'slogan',
+								'smokingAllowed',
+								'specialOpeningHoursSpecification',
+								'sponsor',
+								'subjectOf',
+								'subOrganization',
+								'taxID',
+								'telephone',
+								'tourBookingPage',
+								'unnamedSourcesPolicy',
+								'url',
+								'vatID'
+							)
+						),
+						'Hospital' => array(
+							'MedicalBusiness' => false,
+							'properties' => array(
+								'availableService',
+								'healthPlanNetworkId',
+								'healthcareReportingData',
+								'isAcceptingNewPatients',
+								'medicalSpecialty'
+							)
+						),
+						'MedicalBusiness' => array(
+							'MedicalBusiness' => true,
+							'properties' => array()
+						),
+						'Dentist' => array(
+							'MedicalBusiness' => true,
+							'properties' => array(
+								'healthPlanNetworkId',
+								'isAcceptingNewPatients',
+								'medicalSpecialty'
+							)
+						),
+						'MedicalClinic' => array(
+							'MedicalBusiness' => true,
+							'properties' => array(
+								'availableService',
+								'healthPlanNetworkId',
+								'isAcceptingNewPatients',
+								'medicalSpecialty'
+							)
+						),
+						'Optician' => array(
+							'MedicalBusiness' => true,
+							'properties' => array()
+						),
+						'Pharmacy' => array(
+							'MedicalBusiness' => true,
+							'properties' => array(
+								'healthPlanNetworkId',
+								'isAcceptingNewPatients',
+								'medicalSpecialty'
+							)
+						)
+					);
+
+					// Merge common property values into each LocalBusiness Subtype's property values
+
+						foreach ( $LocalBusiness_subtype_map as &$item ) {
+
+							if ( $item != 'all ') {
+
+								$item['properties'] = array_merge(
+									$item['properties'],
+									$LocalBusiness_subtype_map['all']['properties']
+								);
+
+							}
+						}
+
+				// LocalBusiness additionalType MedicalSpecialty values
+
+					/* 
+
+					Listing the MedicalSpecialty enumeration members that are also 
+					subtypes of the MedicalBusiness type.
+
+					*/
+
+					$LocalBusiness_additionalType_MedicalSpecialty = array(
+						'CommunityHealth',
+						'Dermatology',
+						'DietNutrition',
+						'Emergency',
+						'Geriatric',
+						'Gynecologic',
+						'Midwifery',
+						'Nursing',
+						'Obstetric',
+						'Oncologic',
+						'Optometric',
+						'Otolaryngologic',
+						'Pediatric',
+						'Physiotherapy',
+						'PlasticSurgery',
+						'Podiatric',
+						'PrimaryCare',
+						'Psychiatric',
+						'PublicHealth'
+					);
+
+				foreach ( $repeater as $LocalBusiness ) {
+
+					// Retrieve the value of the item transient
+
+						uamswp_fad_get_transient(
+							'item_' . $LocalBusiness, // Required // String added to transient name for disambiguation.
+							$LocalBusiness_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+						);
+
+					if ( !empty( $LocalBusiness_item ) ) {
+
+						/* 
+						 * The transient exists.
+						 * Return the variable.
+						 */
+
+						// Add to list of areas of expertise
+
+							$LocalBusiness_list[] = $LocalBusiness_item;
+
+					} else {
+
+						// If post is not published, skip to the next iteration
+
+							if ( get_post_status($LocalBusiness) != 'publish' ) {
+
+								continue;
+
+							}
+
+						// Eliminate PHP errors / reset variables
+
+							$LocalBusiness_item = array(); // Base array
+							$ontology_type = '';
+							$current_fpage = '';
+							$fpage_query = '';
+							$LocalBusiness_url = '';
+							$LocalBusiness_type = '';
+							$LocalBusiness_id = '';
+							$LocalBusiness_name = '';
+							$LocalBusiness_medicalSpecialty = array();
+							$LocalBusiness_additionalType = array();
+							$LocalBusiness_address = array();
+							$LocalBusiness_aggregateRating = array();
+							$LocalBusiness_alternateName_array = array();
+							$LocalBusiness_alternateName = array();
+							$LocalBusiness_areaServed = array();
+							$LocalBusiness_treatments = array();
+							$LocalBusiness_availableService = array();
+							$LocalBusiness_award = array();
+							$LocalBusiness_brand = array();
+							$LocalBusiness_contactPoint = array();
+							$LocalBusiness_containedInPlace = array();
+							$LocalBusiness_containsPlace = array();
+							$LocalBusiness_currenciesAccepted = array();
+							$LocalBusiness_department = array();
+							$LocalBusiness_description = array();
+							$LocalBusiness_diversityPolicy = array();
+							$LocalBusiness_diversityStaffingReport = array();
+							$LocalBusiness_duns = array();
+							$LocalBusiness_email = array();
+							$LocalBusiness_employee = array();
+							$LocalBusiness_ethicsPolicy = array();
+							$LocalBusiness_event = array();
+							$LocalBusiness_faxNumber = array();
+							$LocalBusiness_foundingDate = array();
+							$LocalBusiness_funding = array();
+							$LocalBusiness_geo = array();
+							$LocalBusiness_globalLocationNumber = array();
+							$LocalBusiness_hasCredential = array();
+							$LocalBusiness_hasDriveThroughService = array();
+							$LocalBusiness_hasMap = array();
+							$LocalBusiness_healthcareReportingData = array();
+							$LocalBusiness_healthPlanNetworkId = array();
+							$LocalBusiness_identifier = array();
+							$LocalBusiness_image_id = array();
+							$LocalBusiness_image = array();
+							$LocalBusiness_isAcceptingNewPatients = array();
+							$LocalBusiness_isAccessibleForFree = array();
+							$LocalBusiness_isicV4 = array();
+							$LocalBusiness_iso6523Code = array();
+							$LocalBusiness_keywords = array();
+							$LocalBusiness_knowsAbout = array();
+							$LocalBusiness_knowsLanguage = array();
+							$LocalBusiness_latitude = array();
+							$LocalBusiness_legalName = array();
+							$LocalBusiness_leiCode = array();
+							$LocalBusiness_logo = array();
+							$LocalBusiness_longitude = array();
+							$LocalBusiness_mainEntityOfPage = array();
+							$LocalBusiness_makesOffer = array();
+							$LocalBusiness_maximumAttendeeCapacity = array();
+							$LocalBusiness_memberOf = array();
+							$LocalBusiness_naics = array();
+							$LocalBusiness_nonprofitStatus = array();
+							$LocalBusiness_numberOfEmployees = array();
+							$LocalBusiness_openingHours = array();
+							$LocalBusiness_openingHoursSpecification = array();
+							$LocalBusiness_parentOrganization = array();
+							$LocalBusiness_paymentAccepted = array();
+							$LocalBusiness_photo = array();
+							$LocalBusiness_potentialAction = array();
+							$LocalBusiness_publicAccess = array();
+							$LocalBusiness_review = array();
+							$LocalBusiness_sameAs_array = array();
+							$LocalBusiness_sameAs = array();
+							$LocalBusiness_specialOpeningHoursSpecification = array();
+							$LocalBusiness_subjectOf = array();
+							$LocalBusiness_subOrganization = array();
+							$LocalBusiness_taxID = array();
+							$LocalBusiness_telephone = array();
+							$LocalBusiness_vatID = array();
+
+							// Reused variables
+
+								$LocalBusiness_smokingAllowed = $LocalBusiness_smokingAllowed ?? 'False';
+
+						// Get ontology type
+
+							$ontology_type = true;
+
+						// If the page is not an ontology type, skip to the next iteration
+
+							if ( !$ontology_type ) {
+
+								continue;
+
+							}
+
+						// Fake subpage query and get fake subpage slug
+
+							if ( $ontology_type ) {
+
+								$current_fpage = get_query_var( 'fpage', $LocalBusiness ) ?? ''; // Fake subpage slug
+								$fpage_query = $current_fpage ? true : false;
+
+							}
+
+						// Add property values
+
+							// url
+
+								/*
+								 * URL of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								$LocalBusiness_url = user_trailingslashit( get_permalink($LocalBusiness) );
+								$LocalBusiness_item['url'] = $LocalBusiness_url;
+
+							// @type
+
+								// Get values
+
+									// LocalBusiness Subtype
+
+										$LocalBusiness_type = get_field( 'schema_localbusiness_single', $LocalBusiness ) ?? array();
+
+									// Fallback value
+
+										if ( !$LocalBusiness_type ) {
+
+											$LocalBusiness_type = 'MedicalBusiness';
+
+										}
+
+								// Add to schema
+
+									$LocalBusiness_item['@type'] = $LocalBusiness_type;
+
+							// @id
+
+								if ( $nesting_level <= 1 ) {
+
+									// Get values
+
+										$LocalBusiness_id = $LocalBusiness_url . '#' . $LocalBusiness_type;
+										// $LocalBusiness_id .= $LocalBusiness_i;
+										// $LocalBusiness_id++;
+
+									// Add to schema
+
+										$LocalBusiness_item['@id'] = $LocalBusiness_id;
+
+								}
+
+							// name
+
+								/*
+								 * The name of the item.
+								 * 
+								 * Subproperty of:
+								 * 
+								 *     - rdfs:label
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								// Get values
+
+									$LocalBusiness_name = get_the_title($LocalBusiness) ?? array();
+
+								// Add to item values
+
+									if ( $LocalBusiness_name ) {
+
+										$LocalBusiness_item['name'] = $LocalBusiness_name;
+
+									}
+
+							// medicalSpecialty
+
+								if (
+									in_array(
+										'medicalSpecialty',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_medicalSpecialty = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
+
+										// Remove empty / '0' values
+
+											$LocalBusiness_medicalSpecialty = $LocalBusiness_medicalSpecialty ? array_filter($LocalBusiness_medicalSpecialty) : $LocalBusiness_medicalSpecialty;
+
+									// Add to item values
+
+										if ( $LocalBusiness_medicalSpecialty ) {
+
+											$LocalBusiness_item['medicalSpecialty'] = $LocalBusiness_medicalSpecialty;
+
+										}
+
+								}
+
+							// additionalType
+
+								/*
+								 * An additional type for the item, typically used for adding more specific types 
+								 * from external vocabularies in microdata syntax. This is a relationship between 
+								 * something and a class that the thing is in. Typically the value is a 
+								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+								 * in RDF. Text values can be used sparingly, for cases where useful information 
+								 * can be added without their being an appropriate schema to reference. In the 
+								 * case of text values, the class label should follow the schema.org style guide.
+								 * 
+								 * Subproperty of:
+								 *     - rdf:type
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - URL
+								 */
+
+								if (
+									in_array(
+										'additionalType',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										// Base property values array
+
+											$LocalBusiness_additionalType = array();
+
+										// Get medicalSpecialty values that match MedicalBusiness subtypes
+
+											if ( $LocalBusiness_medicalSpecialty ) {
+
+												$LocalBusiness_additionalType = array_merge(
+													$LocalBusiness_additionalType,
+													array_intersect(
+														$LocalBusiness_medicalSpecialty,
+														$LocalBusiness_additionalType_MedicalSpecialty
+													)
+												);
+
+											}
+
+									// Add to item values
+
+										if ( $LocalBusiness_additionalType ) {
+
+											$LocalBusiness_item['additionalType'] = $LocalBusiness_additionalType;
+
+										}
+
+								}
+
+							// address
+
+								if (
+									in_array(
+										'address',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_address = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_address ) {
+
+											$LocalBusiness_item['address'] = $LocalBusiness_address;
+
+										}
+
+								}
+
+							// aggregateRating
+
+								if (
+									in_array(
+										'aggregateRating',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_aggregateRating = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_aggregateRating ) {
+
+											$LocalBusiness_item['aggregateRating'] = $LocalBusiness_aggregateRating;
+
+										}
+
+								}
+
+							// alternateName
+
+								/*
+								 * An alias for the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array(
+										'alternateName',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get repeater field value
+
+										$LocalBusiness_alternateName_array = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
+
+									// Get item values
+
+										$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
+											$LocalBusiness_alternateName_array, // alternateName repeater field
+											'schema_alternatename_text' // alternateName item field name
+										);
+
+									// Add to schema
+
+										if ( $LocalBusiness_alternateName ) {
+
+											$LocalBusiness_item['alternateName'] = $LocalBusiness_alternateName;
+
+										}
+
+								}
+
+							// areaServed
+
+								if (
+									in_array(
+										'areaServed',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_areaServed = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_areaServed ) {
+
+											$LocalBusiness_item['areaServed'] = $LocalBusiness_areaServed;
+
+										}
+
+								}
+
+							// availableService
+
+								if (
+									in_array(
+										'availableService',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										// Get related treatments
+
+											$LocalBusiness_treatments = get_field('location_treatments_cpt');
+
+										// Format values
+
+											$LocalBusiness_availableService = uamswp_fad_schema_service(
+												$LocalBusiness_treatments, // List of IDs of the service items
+												$LocalBusiness_url, // Page URL
+												( $nesting_level + 1 ), // Nesting level within the main schema
+												'Service' // Fragment identifier
+											) ?? array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_availableService ) {
+
+											$LocalBusiness_item['availableService'] = $LocalBusiness_availableService;
+
+										}
+
+								}
+
+							// award
+
+								if (
+									in_array(
+										'award',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_award = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_award ) {
+
+											$LocalBusiness_item['award'] = $LocalBusiness_award;
+
+										}
+
+								}
+
+							// brand
+
+								if (
+									in_array(
+										'brand',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_brand = $schema_base_org_uams_health_ref ?? array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_brand ) {
+
+											$LocalBusiness_item['brand'] = $LocalBusiness_brand;
+
+										}
+
+								}
+
+							// contactPoint
+
+								if (
+									in_array(
+										'contactPoint',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_contactPoint = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_contactPoint ) {
+
+											$LocalBusiness_item['contactPoint'] = $LocalBusiness_contactPoint;
+
+										}
+
+								}
+
+							// containedInPlace
+
+								if (
+									in_array(
+										'containedInPlace',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_containedInPlace = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_containedInPlace ) {
+
+											$LocalBusiness_item['containedInPlace'] = $LocalBusiness_containedInPlace;
+
+										}
+
+								}
+
+							// containsPlace
+
+								if (
+									in_array(
+										'containsPlace',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_containsPlace = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_containsPlace ) {
+
+											$LocalBusiness_item['containsPlace'] = $LocalBusiness_containsPlace;
+
+										}
+
+								}
+
+							// currenciesAccepted
+
+								if (
+									in_array(
+										'currenciesAccepted',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_currenciesAccepted = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_currenciesAccepted ) {
+
+											$LocalBusiness_item['currenciesAccepted'] = $LocalBusiness_currenciesAccepted;
+
+										}
+
+								}
+
+							// department
+
+								if (
+									in_array(
+										'department',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_department = $LocalBusiness_containsPlace ?? array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_department ) {
+
+											$LocalBusiness_item['department'] = $LocalBusiness_department;
+
+										}
+
+								}
+
+							// description
+
+								/*
+								 * A description of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - TextObject
+								 */
+
+								if (
+									in_array(
+										'description',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										// Get the Selected Short Description for This Page
+
+											$LocalBusiness_description = get_field( 'location_short_desc', $LocalBusiness ) ?? array();
+
+											// Fallback values
+
+												if ( !$LocalBusiness_description ) {
+
+													// Get the full description
+													
+														$LocalBusiness_description = get_field( 'location_about', $LocalBusiness ) ?? array();
+
+														// Clean up value
+
+															if ( $LocalBusiness_description ) {
+
+																$LocalBusiness_description = wp_strip_all_tags($LocalBusiness_description);
+																$LocalBusiness_description = str_replace("\n", ' ', $LocalBusiness_description); // Strip line breaks
+																$LocalBusiness_description = strlen($LocalBusiness_description) > 160 ? mb_strimwidth($LocalBusiness_description, 0, 156, '...') : $LocalBusiness_description; // Limit to 160 characters
+
+															}
+
+												}
+
+									// Add to item values
+		
+										if ( $LocalBusiness_description ) {
+		
+											$LocalBusiness_item['description'] = $LocalBusiness_description;
+		
+										}
+
+								}
+
+							// diversityPolicy
+
+								if (
+									in_array(
+										'diversityPolicy',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_diversityPolicy = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_diversityPolicy ) {
+
+											$LocalBusiness_item['diversityPolicy'] = $LocalBusiness_diversityPolicy;
+
+										}
+
+								}
+
+							// diversityStaffingReport
+
+								if (
+									in_array(
+										'diversityStaffingReport',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_diversityStaffingReport = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_diversityStaffingReport ) {
+
+											$LocalBusiness_item['diversityStaffingReport'] = $LocalBusiness_diversityStaffingReport;
+
+										}
+
+								}
+
+							// duns
+
+								if (
+									in_array(
+										'duns',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_duns = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_duns ) {
+
+											$LocalBusiness_item['duns'] = $LocalBusiness_duns;
+
+										}
+
+								}
+
+							// email
+
+								if (
+									in_array(
+										'email',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_email = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_email ) {
+
+											$LocalBusiness_item['email'] = $LocalBusiness_email;
+
+										}
+
+								}
+
+							// employee
+
+								if (
+									in_array(
+										'employee',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_employee = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_employee ) {
+
+											$LocalBusiness_item['employee'] = $LocalBusiness_employee;
+
+										}
+
+								}
+
+							// ethicsPolicy
+
+								if (
+									in_array(
+										'ethicsPolicy',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_ethicsPolicy = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_ethicsPolicy ) {
+
+											$LocalBusiness_item['ethicsPolicy'] = $LocalBusiness_ethicsPolicy;
+
+										}
+
+								}
+
+							// event
+
+								if (
+									in_array(
+										'event',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_event = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_event ) {
+
+											$LocalBusiness_item['event'] = $LocalBusiness_event;
+
+										}
+
+								}
+
+							// faxNumber
+
+								if (
+									in_array(
+										'faxNumber',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_faxNumber = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_faxNumber ) {
+
+											$LocalBusiness_item['faxNumber'] = $LocalBusiness_faxNumber;
+
+										}
+
+								}
+
+							// foundingDate
+
+								if (
+									in_array(
+										'foundingDate',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_foundingDate = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_foundingDate ) {
+
+											$LocalBusiness_item['foundingDate'] = $LocalBusiness_foundingDate;
+
+										}
+
+								}
+
+							// funding
+
+								if (
+									in_array(
+										'funding',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_funding = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_funding ) {
+
+											$LocalBusiness_item['funding'] = $LocalBusiness_funding;
+
+										}
+
+								}
+
+							// geo
+
+								if (
+									in_array(
+										'geo',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_geo = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_geo ) {
+
+											$LocalBusiness_item['geo'] = $LocalBusiness_geo;
+
+										}
+
+								}
+
+							// globalLocationNumber
+
+								if (
+									in_array(
+										'globalLocationNumber',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_globalLocationNumber = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_globalLocationNumber ) {
+
+											$LocalBusiness_item['globalLocationNumber'] = $LocalBusiness_globalLocationNumber;
+
+										}
+
+								}
+
+							// hasCredential
+
+								if (
+									in_array(
+										'hasCredential',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_hasCredential = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_hasCredential ) {
+
+											$LocalBusiness_item['hasCredential'] = $LocalBusiness_hasCredential;
+
+										}
+
+								}
+
+							// hasDriveThroughService
+
+								if (
+									in_array(
+										'hasDriveThroughService',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_hasDriveThroughService = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_hasDriveThroughService ) {
+
+											$LocalBusiness_item['hasDriveThroughService'] = $LocalBusiness_hasDriveThroughService;
+
+										}
+
+								}
+
+							// hasMap
+
+								if (
+									in_array(
+										'hasMap',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_hasMap = get_field( 'schema_google_cid', $LocalBusiness ) ?? array();
+
+									// Format values
+
+										if ( $LocalBusiness_hasMap ) {
+
+											$LocalBusiness_hasMap = 'https://www.google.com/maps?cid=' . $LocalBusiness_hasMap;
+
+										}
+
+									// Add to item values
+
+										if ( $LocalBusiness_hasMap ) {
+
+											$LocalBusiness_item['hasMap'] = $LocalBusiness_hasMap;
+
+										}
+
+								}
+
+							// healthcareReportingData
+
+								if (
+									in_array(
+										'healthcareReportingData',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_healthcareReportingData = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_healthcareReportingData ) {
+
+											$LocalBusiness_item['healthcareReportingData'] = $LocalBusiness_healthcareReportingData;
+
+										}
+
+								}
+
+							// healthPlanNetworkId
+
+								if (
+									in_array(
+										'healthPlanNetworkId',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_healthPlanNetworkId = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_healthPlanNetworkId ) {
+
+											$LocalBusiness_item['healthPlanNetworkId'] = $LocalBusiness_healthPlanNetworkId;
+
+										}
+
+								}
+
+							// identifier
+
+								if (
+									in_array(
+										'identifier',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_identifier = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_identifier ) {
+
+											$LocalBusiness_item['identifier'] = $LocalBusiness_identifier;
+
+										}
+
+								}
+
+							// image
+
+								/*
+								 * An image of the item. This can be a URL or a fully described ImageObject.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - ImageObject
+								 *     - URL
+								 */
+
+								if (
+									in_array(
+										'image',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get featured image ID
+
+										if ( !$fpage_query ) {
+
+											/* Overview page */
+
+											$LocalBusiness_image_id = get_field( '_thumbnail_id', $LocalBusiness ) ?? '';
+
+										} elseif ( $current_fpage == 'providers' ) {
+
+											/* Fake subpage for related providers */
+
+											$LocalBusiness_image_id = get_field( 'expertise_providers_fpage_featured_image', $LocalBusiness ) ?? '';
+
+										} elseif ( $current_fpage == 'locations' ) {
+
+											/* Fake subpage for related locations */
+
+											$LocalBusiness_image_id = get_field( 'expertise_locations_fpage_featured_image', $LocalBusiness ) ?? '';
+
+										} elseif ( $current_fpage == 'specialties' ) {
+
+											/* Fake subpage for descendant areas of expertise */
+
+											$LocalBusiness_image_id = get_field( 'expertise_descendant_fpage_featured_image', $LocalBusiness ) ?? '';
+
+										} elseif ( $current_fpage == 'resources' ) {
+
+											/* Fake subpage for related areas of expertise */
+
+											$LocalBusiness_image_id = get_field( 'expertise_associated_fpage_featured_image', $LocalBusiness ) ?? '';
+
+										} elseif ( $current_fpage == 'related' ) {
+
+											/* Fake subpage for related clinical resources */
+
+											$LocalBusiness_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $LocalBusiness ) ?? '';
+
+										}
+
+									// Create ImageObject values array
+
+										if ( $LocalBusiness_image_id ) {
+
+											$LocalBusiness_image = uamswp_fad_schema_imageobject_thumbnails(
+												$LocalBusiness_url, // URL of entity with which the image is associated
+												$nesting_level, // Nesting level within the main schema
+												'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+												'Image', // Base fragment identifier
+												$LocalBusiness_image_id, // ID of image to use for 1:1 aspect ratio
+												0, // ID of image to use for 3:4 aspect ratio
+												$LocalBusiness_image_id, // ID of image to use for 4:3 aspect ratio
+												$LocalBusiness_image_id, // ID of image to use for 16:9 aspect ratio
+												0 // ID of image to use for full image
+											) ?? array();
+
+										}
+
+									// Add to schema
+
+										if ( $LocalBusiness_image ) {
+
+											$LocalBusiness_item['image'] = $LocalBusiness_image;
+
+										}
+
+								}
+
+							// isAcceptingNewPatients
+
+								if (
+									in_array(
+										'isAcceptingNewPatients',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_isAcceptingNewPatients = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_isAcceptingNewPatients ) {
+
+											$LocalBusiness_item['isAcceptingNewPatients'] = $LocalBusiness_isAcceptingNewPatients;
+
+										}
+
+								}
+
+							// isAccessibleForFree
+
+								if (
+									in_array(
+										'isAccessibleForFree',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_isAccessibleForFree = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_isAccessibleForFree ) {
+
+											$LocalBusiness_item['isAccessibleForFree'] = $LocalBusiness_isAccessibleForFree;
+
+										}
+
+								}
+
+							// isicV4
+
+								if (
+									in_array(
+										'isicV4',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_isicV4 = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_isicV4 ) {
+
+											$LocalBusiness_item['isicV4'] = $LocalBusiness_isicV4;
+
+										}
+
+								}
+
+							// iso6523Code
+
+								if (
+									in_array(
+										'iso6523Code',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_iso6523Code = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_iso6523Code ) {
+
+											$LocalBusiness_item['iso6523Code'] = $LocalBusiness_iso6523Code;
+
+										}
+
+								}
+
+							// keywords
+
+								if (
+									in_array(
+										'keywords',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_keywords = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_keywords ) {
+
+											$LocalBusiness_item['keywords'] = $LocalBusiness_keywords;
+
+										}
+
+								}
+
+							// knowsAbout
+
+								if (
+									in_array(
+										'knowsAbout',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_knowsAbout = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_knowsAbout ) {
+
+											$LocalBusiness_item['knowsAbout'] = $LocalBusiness_knowsAbout;
+
+										}
+
+								}
+
+							// knowsLanguage
+
+								if (
+									in_array(
+										'knowsLanguage',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_knowsLanguage = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_knowsLanguage ) {
+
+											$LocalBusiness_item['knowsLanguage'] = $LocalBusiness_knowsLanguage;
+
+										}
+
+								}
+
+							// latitude
+
+								if (
+									in_array(
+										'latitude',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_latitude = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_latitude ) {
+
+											$LocalBusiness_item['latitude'] = $LocalBusiness_latitude;
+
+										}
+
+								}
+
+							// legalName
+
+								if (
+									in_array(
+										'legalName',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_legalName = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_legalName ) {
+
+											$LocalBusiness_item['legalName'] = $LocalBusiness_legalName;
+
+										}
+
+								}
+
+							// leiCode
+
+								if (
+									in_array(
+										'leiCode',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_leiCode = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_leiCode ) {
+
+											$LocalBusiness_item['leiCode'] = $LocalBusiness_leiCode;
+
+										}
+
+								}
+
+							// logo
+
+								if (
+									in_array(
+										'logo',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_logo = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_logo ) {
+
+											$LocalBusiness_item['logo'] = $LocalBusiness_logo;
+
+										}
+
+								}
+
+							// longitude
+
+								if (
+									in_array(
+										'longitude',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_longitude = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_longitude ) {
+
+											$LocalBusiness_item['longitude'] = $LocalBusiness_longitude;
+
+										}
+
+								}
+
+							// mainEntityOfPage
+
+								/*
+								 * Indicates a page (or other CreativeWork) for which this thing is the main 
+								 * entity being described. See background notes at 
+								 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+								 * 
+								 * Inverse-property: mainEntity
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - URL
+								 */
+
+								if (
+									in_array(
+										'mainEntityOfPage',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_mainEntityOfPage = $schema_location_MedicalWebPage_ref ?? '';
+
+										if ( !$LocalBusiness_mainEntityOfPage ) {
+
+											$LocalBusiness_mainEntityOfPage = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
+
+										}
+
+									// Add to item values
+
+										if ( $LocalBusiness_mainEntityOfPage ) {
+
+											$LocalBusiness_item['mainEntityOfPage'] = $LocalBusiness_mainEntityOfPage;
+
+										}
+
+								}
+
+							// makesOffer
+
+								if (
+									in_array(
+										'makesOffer',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_makesOffer = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_makesOffer ) {
+
+											$LocalBusiness_item['makesOffer'] = $LocalBusiness_makesOffer;
+
+										}
+
+								}
+
+							// maximumAttendeeCapacity
+
+								if (
+									in_array(
+										'maximumAttendeeCapacity',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_maximumAttendeeCapacity = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_maximumAttendeeCapacity ) {
+
+											$LocalBusiness_item['maximumAttendeeCapacity'] = $LocalBusiness_maximumAttendeeCapacity;
+
+										}
+
+								}
+
+							// memberOf
+
+								if (
+									in_array(
+										'memberOf',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_memberOf = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_memberOf ) {
+
+											$LocalBusiness_item['memberOf'] = $LocalBusiness_memberOf;
+
+										}
+
+								}
+
+							// naics
+
+								if (
+									in_array(
+										'naics',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_naics = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_naics ) {
+
+											$LocalBusiness_item['naics'] = $LocalBusiness_naics;
+
+										}
+
+								}
+
+							// nonprofitStatus
+
+								if (
+									in_array(
+										'nonprofitStatus',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_nonprofitStatus = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_nonprofitStatus ) {
+
+											$LocalBusiness_item['nonprofitStatus'] = $LocalBusiness_nonprofitStatus;
+
+										}
+
+								}
+
+							// numberOfEmployees
+
+								if (
+									in_array(
+										'numberOfEmployees',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_numberOfEmployees = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_numberOfEmployees ) {
+
+											$LocalBusiness_item['numberOfEmployees'] = $LocalBusiness_numberOfEmployees;
+
+										}
+
+								}
+
+							// openingHours
+
+								if (
+									in_array(
+										'openingHours',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_openingHours = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_openingHours ) {
+
+											$LocalBusiness_item['openingHours'] = $LocalBusiness_openingHours;
+
+										}
+
+								}
+
+							// openingHoursSpecification
+
+								if (
+									in_array(
+										'openingHoursSpecification',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_openingHoursSpecification = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_openingHoursSpecification ) {
+
+											$LocalBusiness_item['openingHoursSpecification'] = $LocalBusiness_openingHoursSpecification;
+
+										}
+
+								}
+
+							// parentOrganization
+
+								if (
+									in_array(
+										'parentOrganization',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_parentOrganization = $schema_base_org_uams_health_ref ?? array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_parentOrganization ) {
+
+											$LocalBusiness_item['parentOrganization'] = $LocalBusiness_parentOrganization;
+
+										}
+
+								}
+
+							// paymentAccepted
+
+								if (
+									in_array(
+										'paymentAccepted',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_paymentAccepted = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_paymentAccepted ) {
+
+											$LocalBusiness_item['paymentAccepted'] = $LocalBusiness_paymentAccepted;
+
+										}
+
+								}
+
+							// photo
+
+								if (
+									in_array(
+										'photo',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_photo = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_photo ) {
+
+											$LocalBusiness_item['photo'] = $LocalBusiness_photo;
+
+										}
+
+								}
+
+							// potentialAction
+
+								/*
+								 * Indicates a potential Action, which describes an idealized action in which this 
+								 * thing would play an 'object' role.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Action
+								 */
+
+								/* 
+
+									Create one or more Action arrays, likely 'CreateAction' type
+
+										 * Make an appointment, new or existing patient, by phone
+										 * Make an appointment, new patient, by phone
+										 * Make an appointment, existing patient, by phone
+										 * Make an appointment, new or existing patient, online
+										 * Make an appointment, new patient, online
+										 * Make an appointment, existing patient, online
+										 * Refer a patient, by phone
+										 * Refer a patient, by fax
+										 * Refer a patient, through Epic thing
+
+									Property descriptions:
+
+										 * 'actionStatus'
+											 * Indicates the current disposition of the Action
+										 * 'agent'
+											 * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											wrote a book)
+										 * 'endTime'
+											 * The endTime of something. For a reserved event or service 
+											(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+											actions that span a period of time, when the action was performed (e.g., John 
+											wrote a book from January to December). For media, including audio and video, 
+											it's the time offset of the end of a clip within a larger file. Note that Event 
+											uses startDate/endDate instead of startTime/endTime, even when describing dates 
+											with times. This situation may be clarified in future revisions.
+										 * 'error'
+											 * For failed actions, more information on the cause of the failure.
+										 * 'instrument'
+											 * The object that helped the agent perform the action (e.g., John wrote a book 
+											with a pen).
+										 * 'location'
+											 * The location of, for example, where an event is happening, where an 
+											organization is located, or where an action takes place.
+										 * 'object'
+											 * The object upon which the action is carried out, whose state is kept intact or 
+											changed. Also known as the semantic roles patient, affected or undergoer — 
+											which change their state — or theme — which doesn't (e.g., John read a book).
+										 * 'participant'
+											 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+											book with Steve).
+										 * 'provider'
+											 * The service provider, service operator, or service performer; the goods 
+											producer. Another party (a seller) may offer those services or goods on behalf 
+											of the provider. A provider may also serve as the seller. Supersedes carrier.
+										 * 'result'
+											 * The result produced in the action (e.g., John wrote a book).
+										 * 'startTime'
+											 * The startTime of something. For a reserved event or service 
+											(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+											For actions that span a period of time, when the action was performed 
+											(e.g., John wrote a book from January to December). For media, including audio 
+											and video, it's the time offset of the start of a clip within a larger file. 
+											Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+											describing dates with times. This situation may be clarified in future 
+											revisions.
+										 * 'target'
+											 * Indicates a target EntryPoint, or url, for an Action.
+
+								 */
+
+								if (
+									in_array(
+										'potentialAction',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_potentialAction = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_potentialAction ) {
+
+											$LocalBusiness_item['potentialAction'] = $LocalBusiness_potentialAction;
+
+										}
+
+								}
+
+							// publicAccess
+
+								if (
+									in_array(
+										'publicAccess',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_publicAccess = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_publicAccess ) {
+
+											$LocalBusiness_item['publicAccess'] = $LocalBusiness_publicAccess;
+
+										}
+
+								}
+
+							// review
+
+								if (
+									in_array(
+										'review',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_review = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_review ) {
+
+											$LocalBusiness_item['review'] = $LocalBusiness_review;
+
+										}
+
+								}
+
+							// sameAs
+
+								/*
+								 * URL of a reference Web page that unambiguously indicates the item's identity 
+								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+								 * website).
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								if (
+									in_array(
+										'sameAs',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get repeater field value
+
+										$LocalBusiness_sameAs_array = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
+
+									// Add each row to the list array
+			
+										$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
+											$LocalBusiness_sameAs_array, // sameAs repeater field
+											'schema_sameas_url' // sameAs item field name
+										);
+			
+									// Add to schema
+			
+										if ( $LocalBusiness_sameAs ) {
+			
+											$LocalBusiness_item['sameAs'] = $LocalBusiness_sameAs;
+			
+										}
+				
+								}
+	
+							// smokingAllowed
+
+								if (
+									in_array(
+										'smokingAllowed',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Add to item values
+
+										if ( $LocalBusiness_smokingAllowed ) {
+
+											$LocalBusiness_item['smokingAllowed'] = $LocalBusiness_smokingAllowed;
+
+										}
+
+								}
+
+							// specialOpeningHoursSpecification
+
+								if (
+									in_array(
+										'specialOpeningHoursSpecification',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_specialOpeningHoursSpecification = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_specialOpeningHoursSpecification ) {
+
+											$LocalBusiness_item['specialOpeningHoursSpecification'] = $LocalBusiness_specialOpeningHoursSpecification;
+
+										}
+
+								}
+
+							// subjectOf
+
+								/*
+								 * A CreativeWork or Event about this Thing.
+								 * 
+								 * Inverse-property: about
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - Event
+								 */
+
+								if (
+									in_array(
+										'subjectOf',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
+
+										if ( !$LocalBusiness_subjectOf ) {
+
+											$LocalBusiness_subjectOf = $LocalBusiness_mainEntityOfPage ?? '';
+
+											if ( !$LocalBusiness_subjectOf ) {
+
+												$LocalBusiness_subjectOf = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
+
+											}
+
+										}
+
+									// Add to item values
+
+										if ( $LocalBusiness_subjectOf ) {
+
+											$LocalBusiness_item['subjectOf'] = $LocalBusiness_subjectOf;
+
+										}
+
+								}
+
+							// subOrganization
+
+								if (
+									in_array(
+										'subOrganization',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_subOrganization = $LocalBusiness_containsPlace ?? array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_subOrganization ) {
+
+											$LocalBusiness_item['subOrganization'] = $LocalBusiness_subOrganization;
+
+										}
+
+								}
+
+							// taxID
+
+								if (
+									in_array(
+										'taxID',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_taxID = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_taxID ) {
+
+											$LocalBusiness_item['taxID'] = $LocalBusiness_taxID;
+
+										}
+
+								}
+
+							// telephone
+
+								if (
+									in_array(
+										'telephone',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_telephone = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_telephone ) {
+
+											$LocalBusiness_item['telephone'] = $LocalBusiness_telephone;
+
+										}
+
+								}
+
+							// vatID
+
+								if (
+									in_array(
+										'vatID',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_vatID = array();
+
+									// Add to item values
+
+										if ( $LocalBusiness_vatID ) {
+
+											$LocalBusiness_item['vatID'] = $LocalBusiness_vatID;
+
+										}
+
+								}
+
+						// Sort array
+
+							ksort($LocalBusiness_item);
+
+						// Set/update the value of the item transient
+
+							uamswp_fad_set_transient(
+								'item_' . $LocalBusiness, // Required // String added to transient name for disambiguation.
+								$LocalBusiness_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+							);
+
+						// Add to list of conditions
+
+							$LocalBusiness_list[] = $LocalBusiness_item;
+
+					}
+
+				} // endforeach ( $repeater as $LocalBusiness )
+
+				// Clean up list array
+
+					$LocalBusiness_list = array_filter($LocalBusiness_list);
+					$LocalBusiness_list = array_values($LocalBusiness_list);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($LocalBusiness_list);
+
+			} // endif ( !empty($repeater) )
+
+			return $LocalBusiness_list;
+	
+		}
+
 	// Areas of expertise (MedicalEntity)
 
 		function uamswp_fad_schema_expertise(
