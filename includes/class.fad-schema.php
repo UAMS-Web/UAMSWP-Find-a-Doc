@@ -7226,7 +7226,7 @@
 										$condition_possibleTreatment_array,
 										$page_url,
 										( $nesting_level + 1 ),
-										'possibleTreatment'
+										'possibleTreatment' // Fragment identifier
 									);
 
 								// Add to schema
@@ -7253,7 +7253,7 @@
 										$condition_primaryPrevention_array,
 										$page_url,
 										( $nesting_level + 1 ),
-										'primaryPrevention'
+										'primaryPrevention' // Fragment identifier
 									);
 
 								// Add to schema
@@ -7280,7 +7280,7 @@
 										$condition_secondaryPrevention_array,
 										$page_url,
 										( $nesting_level + 1 ),
-										'secondaryPrevention'
+										'secondaryPrevention' // Fragment identifier
 									);
 
 								// Add to schema
@@ -7307,7 +7307,7 @@
 										$condition_typicalTest_array,
 										$page_url,
 										( $nesting_level + 1 ),
-										'typicalTest'
+										'typicalTest' // Fragment identifier
 									);
 
 								// Add to schema
@@ -7830,7 +7830,7 @@
 										$service_duplicateTherapy_array,
 										$page_url,
 										( $nesting_level + 1 ),
-										'duplicateTherapy'
+										'duplicateTherapy' // Fragment identifier
 									);
 
 								// Add to schema
@@ -7907,7 +7907,7 @@
 										$service_subTest_array,
 										$page_url,
 										( $nesting_level + 1 ),
-										'subTest'
+										'subTest' // Fragment identifier
 									);
 
 								// Add to schema
