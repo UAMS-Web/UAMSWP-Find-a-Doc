@@ -1308,7 +1308,11 @@ function uamswp_fad_ontology_hide(
 ) {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars_' . $page_id, $ontology_hide_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$ontology_hide_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $ontology_hide_vars ) ) {
 
@@ -1402,7 +1406,11 @@ function uamswp_fad_ontology_hide(
 			);
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars_' . $page_id, $ontology_hide_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$ontology_hide_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $ontology_hide_vars;
@@ -1443,7 +1451,11 @@ function uamswp_fad_ontology_site_values(
 ) {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars_' . $page_id, $ontology_site_values_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$ontology_site_values_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $ontology_site_values_vars ) ) {
 
@@ -1610,7 +1622,11 @@ function uamswp_fad_ontology_site_values(
 			);
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars_' . $page_id, $ontology_site_values_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$ontology_site_values_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $ontology_site_values_vars;
@@ -1758,7 +1774,11 @@ function uamswp_fad_ontology_site_values(
 			) {
 
 				// Retrieve the value of the transient
-				uamswp_fad_get_transient( 'vars_' . $page_id, $output, __FUNCTION__ );
+				uamswp_fad_get_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				if ( !empty( $output ) ) {
 
@@ -1829,7 +1849,11 @@ function uamswp_fad_ontology_site_values(
 					}
 
 					// Set/update the value of the transient
-					uamswp_fad_set_transient( $page_id, $output, __FUNCTION__ );
+					uamswp_fad_set_transient(
+						$page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+						$output, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+						__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+					);
 
 					// Return the array
 					return $output;
@@ -1966,7 +1990,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$provider_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $provider_query_vars ) ) {
 
@@ -2035,7 +2063,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $provider_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$provider_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $provider_query_vars;
@@ -2053,7 +2085,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$location_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $location_query_vars ) ) {
 
@@ -2142,7 +2178,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $location_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$location_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $location_query_vars;
@@ -2160,7 +2200,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$location_descendant_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $location_descendant_query_vars ) ) {
 
@@ -2238,7 +2282,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $location_descendant_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$location_descendant_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $location_descendant_query_vars;
@@ -2261,7 +2309,11 @@ function uamswp_fad_ontology_site_values(
 		include( UAMS_FAD_PATH . '/templates/parts/vars/sys/ontology-subsection.php' );
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $site_nav_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$expertise_descendant_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $expertise_descendant_query_vars ) ) {
 
@@ -2431,7 +2483,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $site_nav_id, $expertise_descendant_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $site_nav_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$expertise_descendant_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $expertise_descendant_query_vars;
@@ -2449,7 +2505,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$expertise_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $expertise_query_vars ) ) {
 
@@ -2513,7 +2573,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $expertise_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$expertise_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $expertise_query_vars;
@@ -2532,7 +2596,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$clinical_resource_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $clinical_resource_query_vars ) ) {
 
@@ -2622,7 +2690,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$clinical_resource_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $clinical_resource_query_vars;
@@ -2642,7 +2714,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$condition_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $condition_query_vars ) ) {
 
@@ -2719,7 +2795,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $condition_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$condition_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $condition_query_vars;
@@ -2739,7 +2819,11 @@ function uamswp_fad_ontology_site_values(
 	) {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars_' . $page_id, $treatment_query_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$treatment_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $treatment_query_vars ) ) {
 
@@ -2816,7 +2900,11 @@ function uamswp_fad_ontology_site_values(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars_' . $page_id, $treatment_query_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$treatment_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $treatment_query_vars;
@@ -2867,7 +2955,11 @@ function uamswp_fad_podcast_query(
 ) {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars_' . $page_id, $podcast_query_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$podcast_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $podcast_query_vars ) ) {
 
@@ -2906,7 +2998,11 @@ function uamswp_fad_podcast_query(
 			);
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars_' . $page_id, $podcast_query_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$podcast_query_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $podcast_query_vars;
@@ -3115,7 +3211,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_provider() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_provider_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_provider_vars ) ) {
 
@@ -3171,7 +3271,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_provider_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_provider_vars;
@@ -3184,7 +3288,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_location() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_location_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_location_vars ) ) {
 
@@ -3246,7 +3354,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_location_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_location_vars;
@@ -3259,7 +3371,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_location_descendant() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_location_descendant_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_location_descendant_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_location_descendant_vars ) ) {
 
@@ -3298,7 +3414,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_location_descendant_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_location_descendant_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_location_descendant_vars;
@@ -3311,7 +3431,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_expertise() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_expertise_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_expertise_vars ) ) {
 
@@ -3377,7 +3501,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_expertise_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_expertise_vars;
@@ -3390,7 +3518,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_expertise_descendant() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_expertise_descendant_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_expertise_descendant_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_expertise_descendant_vars ) ) {
 
@@ -3429,7 +3561,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_expertise_descendant_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_expertise_descendant_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_expertise_descendant_vars;
@@ -3442,7 +3578,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_clinical_resource() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_clinical_resource_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_clinical_resource_vars ) ) {
 
@@ -3481,7 +3621,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_clinical_resource_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_clinical_resource_vars;
@@ -3494,7 +3638,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_clinical_resource_facet() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_clinical_resource_facet_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_clinical_resource_facet_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_clinical_resource_facet_vars ) ) {
 
@@ -3546,7 +3694,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_clinical_resource_facet_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_clinical_resource_facet_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_clinical_resource_facet_vars;
@@ -3559,7 +3711,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_condition_treatment() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_condition_treatment_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_condition_treatment_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_condition_treatment_vars ) ) {
 
@@ -3598,7 +3754,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_condition_treatment_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_condition_treatment_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_condition_treatment_vars;
@@ -3611,7 +3771,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_condition() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_condition_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_condition_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_condition_vars ) ) {
 
@@ -3668,7 +3832,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_condition_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_condition_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_condition_vars;
@@ -3681,7 +3849,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_labels_treatment() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $labels_treatment_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_treatment_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $labels_treatment_vars ) ) {
 
@@ -3739,7 +3911,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $labels_treatment_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$labels_treatment_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $labels_treatment_vars;
@@ -3754,7 +3930,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_text_provider() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_text_provider_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_text_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_text_provider_vars ) ) {
 
@@ -3787,7 +3967,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_text_provider_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_text_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_text_provider_vars;
@@ -3800,7 +3984,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_text_location() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_text_location_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_text_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_text_location_vars ) ) {
 
@@ -3833,7 +4021,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_text_location_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_text_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_text_location_vars;
@@ -3846,7 +4038,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_text_expertise() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_text_expertise_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_text_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_text_expertise_vars ) ) {
 
@@ -3883,7 +4079,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_text_expertise_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_text_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_text_expertise_vars;
@@ -3896,7 +4096,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_text_clinical_resource() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_text_clinical_resource_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_text_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_text_clinical_resource_vars ) ) {
 
@@ -3929,7 +4133,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_text_clinical_resource_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_text_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_text_clinical_resource_vars;
@@ -3942,7 +4150,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_text_condition() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_text_condition_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_text_condition_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_text_condition_vars ) ) {
 
@@ -3979,7 +4191,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_text_condition_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_text_condition_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_text_condition_vars;
@@ -3992,7 +4208,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_text_treatment() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_text_treatment_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_text_treatment_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_text_treatment_vars ) ) {
 
@@ -4029,7 +4249,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_text_treatment_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_text_treatment_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_text_treatment_vars;
@@ -4049,7 +4273,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_provider_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_provider_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_provider_general_vars ) ) {
 
@@ -4115,7 +4343,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_provider_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_provider_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_provider_general_vars;
@@ -4132,7 +4364,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_location_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_location_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_location_general_vars ) ) {
 
@@ -4244,7 +4480,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_location_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_location_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_location_general_vars;
@@ -4260,7 +4500,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_expertise_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_expertise_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_expertise_general_vars ) ) {
 
@@ -4372,7 +4616,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_expertise_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_expertise_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_expertise_general_vars;
@@ -4388,7 +4636,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_clinical_resource_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_clinical_resource_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_clinical_resource_general_vars ) ) {
 
@@ -4465,7 +4717,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_clinical_resource_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_clinical_resource_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_clinical_resource_general_vars;
@@ -4481,7 +4737,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_condition_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_condition_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_condition_general_vars ) ) {
 
@@ -4520,7 +4780,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_condition_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_condition_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_condition_general_vars;
@@ -4536,7 +4800,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_treatment_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_treatment_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_treatment_general_vars ) ) {
 
@@ -4578,7 +4846,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_treatment_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_treatment_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_treatment_general_vars;
@@ -4593,7 +4865,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_condition_treatment_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_condition_treatment_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_condition_treatment_general_vars ) ) {
 
@@ -4635,7 +4911,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_condition_treatment_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_condition_treatment_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_condition_treatment_general_vars;
@@ -4653,7 +4933,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_provider_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_provider_vars ) ) {
 
@@ -5089,7 +5373,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_provider_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_provider_vars;
@@ -5105,7 +5393,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_location_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_location_vars ) ) {
 
@@ -5675,7 +5967,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_location_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_location_vars;
@@ -5692,7 +5988,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_expertise_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_expertise_vars ) ) {
 
@@ -6708,7 +7008,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_expertise_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_expertise_vars;
@@ -6724,7 +7028,11 @@ function uamswp_fad_fpage_text_replace(
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_text_clinical_resource_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_text_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_text_clinical_resource_vars ) ) {
 
@@ -7238,7 +7546,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_text_clinical_resource_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_text_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_text_clinical_resource_vars;
@@ -7253,7 +7565,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_image_provider() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_image_provider_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_image_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_image_provider_vars ) ) {
 
@@ -7285,7 +7601,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_image_provider_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_image_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_image_provider_vars;
@@ -7298,7 +7618,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_image_location() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_image_location_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_image_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_image_location_vars ) ) {
 
@@ -7330,7 +7654,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_image_location_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_image_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_image_location_vars;
@@ -7343,7 +7671,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_image_expertise() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_image_expertise_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_image_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_image_expertise_vars ) ) {
 
@@ -7375,7 +7707,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_image_expertise_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_image_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_image_expertise_vars;
@@ -7388,7 +7724,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_archive_image_clinical_resource() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $archive_image_clinical_resource_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$archive_image_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $archive_image_clinical_resource_vars ) ) {
 
@@ -7420,7 +7760,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $archive_image_clinical_resource_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$archive_image_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $archive_image_clinical_resource_vars;
@@ -7437,7 +7781,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_provider_general() {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_provider_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_provider_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_provider_general_vars ) ) {
 
@@ -7469,7 +7817,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_provider_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_provider_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_provider_general_vars;
@@ -7482,7 +7834,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_location_general() {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_location_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_location_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_location_general_vars ) ) {
 
@@ -7526,7 +7882,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_location_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_location_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_location_general_vars;
@@ -7539,7 +7899,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_expertise_general() {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_expertise_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_expertise_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_expertise_general_vars ) ) {
 
@@ -7583,7 +7947,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_expertise_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_expertise_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_expertise_general_vars;
@@ -7596,7 +7964,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_clinical_resource_general() {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars', $fpage_image_clinical_resource_general_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_clinical_resource_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_clinical_resource_general_vars ) ) {
 
@@ -7628,7 +8000,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars', $fpage_image_clinical_resource_general_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_clinical_resource_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_clinical_resource_general_vars;
@@ -7643,7 +8019,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_provider( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_provider_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_provider_vars ) ) {
 
@@ -7718,7 +8098,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_provider_vars, __FUNCTION__ );
+				uamswp_fad_get_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_provider_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_provider_vars;
@@ -7731,7 +8115,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_location( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_location_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_location_vars ) ) {
 
@@ -7822,7 +8210,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_location_vars, __FUNCTION__ );
+				uamswp_fad_get_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_location_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_location_vars;
@@ -7835,7 +8227,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_expertise( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_expertise_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_expertise_vars ) ) {
 
@@ -8039,7 +8435,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_image_expertise_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_expertise_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_expertise_vars;
@@ -8052,7 +8452,11 @@ function uamswp_fad_fpage_text_replace(
 		function uamswp_fad_fpage_image_clinical_resource( $page_id ) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $fpage_image_clinical_resource_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$fpage_image_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $fpage_image_clinical_resource_vars ) ) {
 
@@ -8144,7 +8548,11 @@ function uamswp_fad_fpage_text_replace(
 					);
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $fpage_image_clinical_resource_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$fpage_image_clinical_resource_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $fpage_image_clinical_resource_vars;
@@ -8159,7 +8567,11 @@ function uamswp_fad_fpage_text_replace(
 	function uamswp_fad_posts_per_page_clinical_resource_general() {
 
 		// Retrieve the value of the transient
-		uamswp_fad_get_transient( 'vars', $posts_per_page_clinical_resource_general_vars, __FUNCTION__ );
+		uamswp_fad_get_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$posts_per_page_clinical_resource_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		if ( !empty( $posts_per_page_clinical_resource_general_vars ) ) {
 
@@ -8191,7 +8603,11 @@ function uamswp_fad_fpage_text_replace(
 				);
 
 			// Set/update the value of the transient
-			uamswp_fad_set_transient( 'vars', $posts_per_page_clinical_resource_general_vars, __FUNCTION__ );
+			uamswp_fad_set_transient(
+				'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$posts_per_page_clinical_resource_general_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			// Return the variable
 			return $posts_per_page_clinical_resource_general_vars;
@@ -8241,7 +8657,11 @@ function uamswp_fad_fpage_text_replace(
 function uamswp_fad_appointment_patients() {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars', $appointment_patients_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$appointment_patients_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $appointment_patients_vars ) ) {
 
@@ -8331,7 +8751,11 @@ function uamswp_fad_appointment_patients() {
 			);
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars', $appointment_patients_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$appointment_patients_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $appointment_patients_vars;
@@ -8344,7 +8768,11 @@ function uamswp_fad_appointment_patients() {
 function uamswp_fad_appointment_refer() {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars', $appointment_refer_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$appointment_refer_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $appointment_refer_vars ) ) {
 
@@ -8402,7 +8830,11 @@ function uamswp_fad_appointment_refer() {
 			);
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars', $appointment_refer_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$appointment_refer_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $appointment_refer_vars;
@@ -8415,7 +8847,11 @@ function uamswp_fad_appointment_refer() {
 function uamswp_fad_labels_jump_links() {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars', $labels_jump_links_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$labels_jump_links_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $labels_jump_links_vars ) ) {
 
@@ -8444,7 +8880,11 @@ function uamswp_fad_labels_jump_links() {
 			return $labels_jump_links_vars;
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars', $labels_jump_links_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars', // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$labels_jump_links_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $labels_jump_links_vars;
@@ -8457,7 +8897,11 @@ function uamswp_fad_labels_jump_links() {
 function uamswp_meta_image_values( $featured_image ) {
 
 	// Retrieve the value of the transient
-	uamswp_fad_get_transient( 'vars_' . $featured_image, $meta_image_values_vars, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'vars_' . $featured_image, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$meta_image_values_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if ( !empty( $meta_image_values_vars ) ) {
 
@@ -8534,7 +8978,11 @@ function uamswp_meta_image_values( $featured_image ) {
 			);
 
 		// Set/update the value of the transient
-		uamswp_fad_set_transient( 'vars_' . $featured_image, $meta_image_values_vars, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'vars_' . $featured_image, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$meta_image_values_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		// Return the variable
 		return $meta_image_values_vars;
@@ -8576,8 +9024,16 @@ function uamswp_fad_fpage_text_image_overlay(
 ) {
 
 	// Retrieve the value of the transients
-	uamswp_fad_get_transient( 'row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
-	uamswp_fad_get_transient( 'row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
+	uamswp_fad_get_transient(
+		'row_0_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$text_image_overlay_row_0, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
+	uamswp_fad_get_transient(
+		'row_1_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+		$text_image_overlay_row_1, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+		__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+	);
 
 	if (
 		!empty( $text_image_overlay_row_0 )
@@ -8803,8 +9259,16 @@ function uamswp_fad_fpage_text_image_overlay(
 			}
 
 		// Set/update the value of the transients
-		uamswp_fad_set_transient( 'row_0_' . $page_id, $text_image_overlay_row_0, __FUNCTION__ );
-		uamswp_fad_set_transient( 'row_1_' . $page_id, $text_image_overlay_row_1, __FUNCTION__ );
+		uamswp_fad_set_transient(
+			'row_0_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$text_image_overlay_row_0, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
+		uamswp_fad_set_transient(
+			'row_1_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			$text_image_overlay_row_1, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		);
 
 		include( UAMS_FAD_PATH . '/templates/parts/html/section/text-image-overlay.php' );
 
@@ -8833,7 +9297,10 @@ function uamswp_prevent_orphan($string) {
 
 	// Transient name
 
-		function uamswp_fad_transient_name( $input, $function = '' ) {
+		function uamswp_fad_transient_name(
+			string $string, // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			string $function = '' // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores. // Optional
+		) {
 
 			/* 
 			 * Combines various elements to avoid transient name collisions and to make the 
@@ -8843,7 +9310,7 @@ function uamswp_prevent_orphan($string) {
 			 * current function in the transient name.
 			 */
 
-			$transient_name = isset($input) ? $input : '';
+			$transient_name = isset($string) ? $string : '';
 
 			if ( empty($transient_name) ) {
 
@@ -8868,7 +9335,11 @@ function uamswp_prevent_orphan($string) {
 
 	// Get transient
 
-		function uamswp_fad_get_transient( $string, &$var, $function = '' ) {
+		function uamswp_fad_get_transient(
+			string $string, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			&$var, // Required // Input the variable that should be populated with the value stored in the transient
+			$function = '' // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		) {
 
 			/* 
 			 * Combines with the uamswp_fad_transient_name() function to streamline the code.
@@ -8880,14 +9351,23 @@ function uamswp_prevent_orphan($string) {
 			 * current function in the transient name.
 			 */
 
-			$var = get_transient( uamswp_fad_transient_name( $string, $function ) );
+			$var = get_transient( // WordPress function that retrieves the value of a transient
+				uamswp_fad_transient_name(
+					$string, // string // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$function // string // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				)
+			);
 
 			return;
 		}
 
 	// Set transient
 
-		function uamswp_fad_set_transient( $string, $value, $function = '' ) {
+		function uamswp_fad_set_transient(
+			string $string, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+			mixed $value, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+			string $function = '' // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+		) {
 
 			/* 
 			 * Combines with the uamswp_fad_transient_name() function to streamline the code.
@@ -8899,7 +9379,14 @@ function uamswp_prevent_orphan($string) {
 			 * current function in the transient name.
 			 */
 
-			set_transient( uamswp_fad_transient_name( $string, $function ), $value, DAY_IN_SECONDS );
+			set_transient( // WordPress function that sets/updates the value of a transient
+				uamswp_fad_transient_name(
+					$string, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$function // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				), // string // Required // Transient name. Expected to not be SQL-escaped. Must be 172 characters or fewer in length.
+				$value, // mixed // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				DAY_IN_SECONDS // int // Optional // Time until expiration in seconds // Default 0 (no expiration)
+			);
 
 			return;
 		}
@@ -8913,7 +9400,11 @@ function uamswp_prevent_orphan($string) {
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $provider_profile_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id,
+				$provider_profile_fields_vars,
+				__FUNCTION__
+			);
 
 			if ( !empty( $provider_profile_fields_vars ) ) {
 
@@ -9585,7 +10076,11 @@ function uamswp_prevent_orphan($string) {
 						$provider_profile_fields_vars['provider_additional_info'] = isset($provider_additional_info) ? $provider_additional_info : ''; // Add to the variables array
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $provider_profile_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$provider_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $provider_profile_fields_vars;
@@ -9605,7 +10100,11 @@ function uamswp_prevent_orphan($string) {
 			$provider_card_style = ( 'basic' == $provider_card_style || 'detailed' == $provider_card_style ) ? $provider_card_style : 'basic';
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $provider_card_style . '_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $provider_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$provider_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $provider_card_fields_vars ) ) {
 
@@ -9906,7 +10405,11 @@ function uamswp_prevent_orphan($string) {
 						} // endif
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $provider_card_style . '_' . $page_id, $provider_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $provider_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$provider_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $provider_card_fields_vars;
@@ -9922,7 +10425,11 @@ function uamswp_prevent_orphan($string) {
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $location_profile_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$location_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $location_profile_fields_vars ) ) {
 
@@ -9983,7 +10490,11 @@ function uamswp_prevent_orphan($string) {
 						$location_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $location_profile_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$location_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $location_profile_fields_vars;
@@ -10008,7 +10519,11 @@ function uamswp_prevent_orphan($string) {
 			$location_card_style = ( 'basic' == $location_card_style || 'detailed' == $location_card_style || 'primary-location' == $location_card_style ) ? $location_card_style : 'basic';
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $location_card_style . '_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $location_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$location_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $location_card_fields_vars ) ) {
 
@@ -11048,7 +11563,11 @@ function uamswp_prevent_orphan($string) {
 						} // endif
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $location_card_style . '_' . $page_id, $location_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $location_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$location_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $location_card_fields_vars;
@@ -11065,7 +11584,11 @@ function uamswp_prevent_orphan($string) {
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$expertise_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $expertise_profile_fields_vars ) ) {
 
@@ -11526,7 +12049,11 @@ function uamswp_prevent_orphan($string) {
 						}
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), $expertise_profile_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id . ( $current_fpage ? '_' . $current_fpage : ''), // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$expertise_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $expertise_profile_fields_vars;
@@ -11546,7 +12073,11 @@ function uamswp_prevent_orphan($string) {
 			$expertise_card_style = ( 'basic' == $expertise_card_style || 'detailed' == $expertise_card_style ) ? $expertise_card_style : 'basic';
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $expertise_card_style . '_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $expertise_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$expertise_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $expertise_card_fields_vars ) ) {
 
@@ -11666,7 +12197,11 @@ function uamswp_prevent_orphan($string) {
 							$expertise_card_fields_vars['expertise_parent_url'] = isset($expertise_parent_url) ? $expertise_parent_url : '';
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $expertise_card_style . '_' . $page_id, $expertise_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $expertise_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$expertise_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $expertise_card_fields_vars;
@@ -11682,7 +12217,11 @@ function uamswp_prevent_orphan($string) {
 		) {
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $page_id, $clinical_resource_profile_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$clinical_resource_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $clinical_resource_profile_fields_vars ) ) {
 
@@ -11743,7 +12282,11 @@ function uamswp_prevent_orphan($string) {
 						$clinical_resource_profile_fields_vars['baz_array'] = isset($baz_array) ? $baz_array : ''; // Add to the variables array
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $page_id, $clinical_resource_profile_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$clinical_resource_profile_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $clinical_resource_profile_fields_vars;
@@ -11763,7 +12306,11 @@ function uamswp_prevent_orphan($string) {
 			$clinical_resource_card_style = ( 'basic' == $clinical_resource_card_style || 'detailed' == $clinical_resource_card_style ) ? $clinical_resource_card_style : 'basic';
 
 			// Retrieve the value of the transient
-			uamswp_fad_get_transient( 'vars_' . $clinical_resource_card_style . '_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+			uamswp_fad_get_transient(
+				'vars_' . $clinical_resource_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				$clinical_resource_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+			);
 
 			if ( !empty( $clinical_resource_card_fields_vars ) ) {
 
@@ -12200,7 +12747,11 @@ function uamswp_prevent_orphan($string) {
 						}
 
 				// Set/update the value of the transient
-				uamswp_fad_set_transient( 'vars_' . $clinical_resource_card_style . '_' . $page_id, $clinical_resource_card_fields_vars, __FUNCTION__ );
+				uamswp_fad_set_transient(
+					'vars_' . $clinical_resource_card_style . '_' . $page_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+					$clinical_resource_card_fields_vars, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+					__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				);
 
 				// Return the variable
 				return $clinical_resource_card_fields_vars;
