@@ -1920,23 +1920,8 @@
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
 			string $page_fragment = 'MedicalEntity', // Base fragment identifier
-			string $expertise_page = 'overview', // Identify which type of area of expertise page
 			int $MedicalEntity_i = 1 // Iteration counter
 		) {
-
-			/*
-
-				Expected $expertise_page values:
-
-				'overview' = The root page of an area of expertise or descendant area of expertise
-				'fpage_provider' = Fake subpage for related providers
-				'fpage_location' = Fake subpage for related locations
-				'fpage_expertise_descendant' = Fake subpage for descendant areas of expertise
-				'fpage_expertise' = Fake subpage for related areas of expertise
-				'fpage_clinical_resource' = Fake subpage for related clinical resources
-				'content' = Content page
-
-			 */
 
 			// Common property values
 
@@ -2259,57 +2244,63 @@
 							 *     - URL
 							 */
 
-							// Get values
+							// Get featured image ID
 
-								// Featured image
+								if ( !$fpage_query ) {
 
-									if (
-										$expertise_page == 'overview'
-										||
-										$expertise_page == 'content'
-									) {
+									/* Overview page */
 
-										$MedicalEntity_image_id = get_field( '_thumbnail_id', $MedicalEntity ) ?? '';
+									$MedicalEntity_image_id = get_field( '_thumbnail_id', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page == 'fpage_provider' ) {
+								} elseif ( $current_fpage == 'providers' ) {
 
-										$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $MedicalEntity ) ?? '';
+									/* Fake subpage for related providers */
 
-									} elseif ( $expertise_page == 'fpage_location' ) {
+									$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $MedicalEntity ) ?? '';
 
-										$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $MedicalEntity ) ?? '';
+								} elseif ( $current_fpage == 'locations' ) {
 
-									} elseif ( $expertise_page == 'fpage_expertise_descendant' ) {
+									/* Fake subpage for related locations */
 
-										$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $MedicalEntity ) ?? '';
+									$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $expertise_page == 'fpage_expertise' ) {
+								} elseif ( $current_fpage == 'specialties' ) {
 
-										$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $MedicalEntity ) ?? '';
+									/* Fake subpage for descendant areas of expertise */
 
-									} elseif ( $expertise_page == 'fpage_clinical_resource' ) {
+									$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $MedicalEntity ) ?? '';
 
-										$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $MedicalEntity ) ?? '';
+								} elseif ( $current_fpage == 'resources' ) {
 
-									}
+									/* Fake subpage for related areas of expertise */
 
-								// Create ImageObject values array
+									$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									if ( $MedicalEntity_image_id ) {
+								} elseif ( $current_fpage == 'related' ) {
 
-										$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
-											$MedicalEntity_url, // URL of entity with which the image is associated
-											$nesting_level, // Nesting level within the main schema
-											'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
-											'Image', // Base fragment identifier
-											$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
-											0, // ID of image to use for 3:4 aspect ratio
-											$MedicalEntity_image_id, // ID of image to use for 4:3 aspect ratio
-											$MedicalEntity_image_id, // ID of image to use for 16:9 aspect ratio
-											0 // ID of image to use for full image
-										) ?? array();
+									/* Fake subpage for related clinical resources */
 
-									}
+									$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $MedicalEntity ) ?? '';
+
+								}
+
+							// Create ImageObject values array
+
+								if ( $MedicalEntity_image_id ) {
+
+									$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
+										$MedicalEntity_url, // URL of entity with which the image is associated
+										$nesting_level, // Nesting level within the main schema
+										'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+										'Image', // Base fragment identifier
+										$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
+										0, // ID of image to use for 3:4 aspect ratio
+										$MedicalEntity_image_id, // ID of image to use for 4:3 aspect ratio
+										$MedicalEntity_image_id, // ID of image to use for 16:9 aspect ratio
+										0 // ID of image to use for full image
+									) ?? array();
+
+								}
 
 							// Add to schema
 
