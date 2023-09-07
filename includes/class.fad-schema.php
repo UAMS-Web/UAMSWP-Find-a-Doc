@@ -2035,7 +2035,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - URL
-								*/
+								 */
 
 								$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
 								$MedicalEntity_item['url'] = $MedicalEntity_url;
@@ -2076,7 +2076,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - Text
-								*/
+								 */
 
 								// Get values
 
@@ -2108,7 +2108,7 @@
 								 * 
 								 *     - Text
 								 *     - URL
-								*/
+								 */
 
 								// Get values
 
@@ -2154,7 +2154,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - Text
-								*/
+								 */
 
 								// Get repeater field value
 
@@ -2184,7 +2184,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - MedicalCode
-								*/
+								 */
 
 								// Get values
 
@@ -2220,7 +2220,7 @@
 								 * 
 								 *     - Text
 								 *     - TextObject
-								*/
+								 */
 
 								// Get values
 
@@ -2271,7 +2271,7 @@
 								 * 
 								 *     - ImageObject
 								 *     - URL
-								*/
+								 */
 
 								// Get featured image ID
 
@@ -2352,7 +2352,7 @@
 								 * 
 								 *     - CreativeWork
 								 *     - URL
-								*/
+								 */
 
 								// Get values
 
@@ -2381,7 +2381,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - MedicineSystem
-								*/
+								 */
 
 								// Get field value
 
@@ -2410,7 +2410,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - Action
-								*/
+								 */
 
 								/* 
 
@@ -2474,7 +2474,7 @@
 										 * 'target'
 											 * Indicates a target EntryPoint, or url, for an Action.
 
-								*/
+								 */
 
 							// relevantSpecialty
 
@@ -2484,7 +2484,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - MedicalSpecialty
-								*/
+								 */
 
 								// Get values
 
@@ -2517,7 +2517,7 @@
 								 * Values expected to be one of these types:
 								 * 
 								 *     - URL
-								*/
+								 */
 
 								// Get repeater field value
 
@@ -2549,7 +2549,7 @@
 								 * 
 								 *     - CreativeWork
 								 *     - Event
-								*/
+								 */
 
 								// Get values
 
@@ -4652,7 +4652,7 @@
 							 * Values expected to be one of these types:
 							 * 
 							 *     - Text
-							*/
+							 */
 
 							$condition_name = get_the_title($condition); // Expects Text
 
@@ -4668,7 +4668,7 @@
 							 * Values expected to be one of these types:
 							 * 
 							 *     - Text
-							*/
+							 */
 
 							// Get repeater field value
 
@@ -4698,7 +4698,7 @@
 							 * Values expected to be one of these types:
 							 * 
 							 *     - MedicalCode
-							*/
+							 */
 
 							// Get repeater field value
 
@@ -4736,7 +4736,7 @@
 							 * 
 							 *     - Text
 							 *     - URL
-							*/
+							 */
 
 							$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: '';
 
@@ -4778,7 +4778,7 @@
 							 * Values expected to be one of these types:
 							 * 
 							 *     - URL
-							*/
+							 */
 
 							// Get repeater field value
 
