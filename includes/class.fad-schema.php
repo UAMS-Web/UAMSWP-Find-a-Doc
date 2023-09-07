@@ -3889,7 +3889,7 @@
 
 									if ( !$CreativeWork_isPartOf ) {
 
-										$CreativeWork_isPartOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#' . 'MedicalWebPage' : '';
+										$CreativeWork_isPartOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
 
 									}
 
@@ -3930,7 +3930,7 @@
 
 									if ( !$CreativeWork_mainEntityOfPage ) {
 
-										$CreativeWork_mainEntityOfPage = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#' . 'MedicalWebPage' : '';
+										$CreativeWork_mainEntityOfPage = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
 
 									}
 
