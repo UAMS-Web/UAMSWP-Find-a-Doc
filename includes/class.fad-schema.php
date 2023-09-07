@@ -764,9 +764,9 @@
 
 			// Retrieve the value of the transient
 			uamswp_fad_get_transient(
-				'val_' . $entity_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+				'val_' . $entity_id, // Required // String added to transient name for disambiguation.
 				$schema, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-				__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+				__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 			);
 
 			// Eliminate PHP errors
@@ -899,9 +899,9 @@
 
 					// Set/update the value of the transient
 					uamswp_fad_set_transient(
-						'val_' . $entity_id, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+						'val_' . $entity_id, // Required // String added to transient name for disambiguation.
 						$schema, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-						__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+						__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 					);
 
 				// Add this item's array to the main availableService schema array
@@ -1950,9 +1950,9 @@
 					// Retrieve the value of the item transient
 
 						uamswp_fad_get_transient(
-							'item_' . $MedicalEntity, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+							'item_' . $MedicalEntity, // Required // String added to transient name for disambiguation.
 							$MedicalEntity_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
 
 					if ( !empty( $MedicalEntity_item ) ) {
@@ -2582,9 +2582,9 @@
 						// Set/update the value of the item transient
 
 							uamswp_fad_set_transient(
-								'item_' . $MedicalEntity, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+								'item_' . $MedicalEntity, // Required // String added to transient name for disambiguation.
 								$MedicalEntity_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-								__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
 						// Add to list of conditions
@@ -2639,9 +2639,9 @@
 					// Retrieve the value of the item transient
 
 						uamswp_fad_get_transient(
-							'item_' . $CreativeWork, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+							'item_' . $CreativeWork, // Required // String added to transient name for disambiguation.
 							$CreativeWork_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
 
 					if ( !empty( $CreativeWork_item ) ) {
@@ -4538,9 +4538,9 @@
 						// Set/update the value of the item transient
 
 							uamswp_fad_set_transient(
-								'item_' . $CreativeWork, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+								'item_' . $CreativeWork, // Required // String added to transient name for disambiguation.
 								$CreativeWork_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-								__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
 						// Add to list of conditions
@@ -4587,9 +4587,9 @@
 					// Retrieve the value of the item transient
 
 						uamswp_fad_get_transient(
-							'item_' . $condition, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+							'item_' . $condition, // Required // String added to transient name for disambiguation.
 							$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
 
 					if ( !empty( $condition_item ) ) {
@@ -4950,9 +4950,9 @@
 						// Set/update the value of the item transient
 
 							uamswp_fad_set_transient(
-								'item_' . $condition, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+								'item_' . $condition, // Required // String added to transient name for disambiguation.
 								$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-								__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
 						// Add to list of conditions
@@ -4999,9 +4999,9 @@
 					// Retrieve the value of the item transient
 
 						uamswp_fad_get_transient(
-							'item_' . $service, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+							'item_' . $service, // Required // String added to transient name for disambiguation.
 							$service_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 						);
 
 					if ( !empty( $service_item ) ) {
@@ -5805,9 +5805,9 @@
 						// Set/update the value of the item transient
 
 							uamswp_fad_set_transient(
-								'item_' . $service, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+								'item_' . $service, // Required // String added to transient name for disambiguation.
 								$service_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-								__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
 						// Add to list of treatments
