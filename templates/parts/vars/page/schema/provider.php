@@ -70,10 +70,6 @@ TODO List
 			 * thumbnail
 			 * videoQuality
 			 * videoFrameSize
-	 * Related conditions
-		 * Add transients inside foreach loop of defining function
-	 * Related treatments
-		 * Add transients inside foreach loop of defining function
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
