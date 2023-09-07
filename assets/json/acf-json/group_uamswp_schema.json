@@ -1216,8 +1216,8 @@
 		},
 		"field_schema_medicinesystem": {
 			"key": "field_schema_medicinesystem",
-			"label": "Related System(s) of Medical Practice (MedicineSystem)",
 			"name": "schema_medicinesystem",
+			"label": "Related System(s) of Medical Practice (MedicineSystem)",
 			"type": "select",
 			"instructions": "Select one or more Schema.org MedicineSystem enumeration members that identify the system(s) of medical practice relevant to this entity. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on the MedicineSystem Schema.org enumeration type, visit <a href='https://schema.org/MedicineSystem' target='_blank'>https://schema.org/MedicineSystem</a>.</p><p class='description' style='margin-top: 0.5em;'>For information on each of the MedicineSystem Schema.org enumeration members, visit the relevant page linked at <a href='https://schema.org/MedicineSystem#subtypes' target='_blank'>https://schema.org/MedicineSystem#subtypes</a>.",
 			"required": 1,

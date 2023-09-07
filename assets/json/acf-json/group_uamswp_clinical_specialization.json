@@ -922,8 +922,8 @@
 			"sub_fields": [
 				{
 					"key": "field_clinical_specialization_title_alt_text",
-					"label": "Alternate Title",
 					"name": "clinical_specialization_title_alt_text",
+					"label": "Alternate Title",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -1327,8 +1327,8 @@
 		},
 		"field_clinical_specialization_isco08_code": {
 			"key": "field_clinical_specialization_isco08_code",
-			"label": "ISCO-08 Code",
 			"name": "clinical_specialization_isco08_code",
+			"label": "ISCO-08 Code",
 			"type": "select",
 			"instructions": "",
 			"required": 1,
