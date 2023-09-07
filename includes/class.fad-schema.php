@@ -1974,7 +1974,6 @@
 						$MedicalEntity_alternateName = '';
 						$MedicalEntity_code = '';
 						$MedicalEntity_description = '';
-						$MedicalEntity_guideline = '';
 						$MedicalEntity_identifier = '';
 						$MedicalEntity_image_id = '';
 						$MedicalEntity_legalStatus = '';
@@ -2251,28 +2250,6 @@
 									if ( $MedicalEntity_description ) {
 	
 										$MedicalEntity_item['description'] = $MedicalEntity_description;
-	
-									}
-
-						// guideline
-
-							/*
-							 * A medical guideline related to this entity.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - MedicalGuideline
-							 */
-
-							// Get values
-
-								$MedicalEntity_guideline = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_guideline ) {
-	
-										$MedicalEntity_item['guideline'] = $MedicalEntity_guideline;
 	
 									}
 
