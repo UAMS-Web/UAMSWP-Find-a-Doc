@@ -4584,351 +4584,382 @@
 
 				foreach ( $repeater as $condition ) {
 
-					// If post is not published, skip to the next iteration
+					// Retrieve the value of the item transient
 
-						if ( get_post_status($condition) != 'publish' ) {
+						uamswp_fad_get_transient(
+							'item_' . $condition, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+							$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+							__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
+						);
 
-							continue;
+					if ( !empty( $condition_item ) ) {
 
-						}
-
-					// Base array
-
-						$condition_item = array();
-
-					// @id
-
-						if ( $nesting_level == 1 ) {
-
-							$condition_id = $page_url . '#' . $page_fragment . $condition_i;
-							$condition_item['@id'] = $condition_id;
-							$condition_i++;
-
-						}
-
-					// @type
-
-						$condition_type = 'MedicalCondition';
-
-						// MedicalCondition Subtype
-
-							$condition_type = get_field( 'schema_medicalcondition_subtype', $condition ) ?: $condition_type;
-							$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
-
-						// Add to array
-
-							$condition_item['@type'] = $condition_type;
-
-					// name
-
-						/*
-						 * The name of the item.
-						 * 
-						 * Subproperty of:
-						 * 
-						 *     - rdfs:label
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
+						/* 
+						 * The transient exists.
+						 * Return the variable.
 						 */
 
-						$condition_name = get_the_title($condition); // Expects Text
+						// Add to list of conditions
 
-						// Add to array
+							$condition_list[] = $condition_item;
 
-							$condition_item['name'] = $condition_name;
+					} else {
 
-					// alternateName
+						// If post is not published, skip to the next iteration
 
-						/*
-						 * An alias for the item.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 */
+							if ( get_post_status($condition) != 'publish' ) {
 
-						// Get repeater field value
-
-							$condition_alternateName_array = get_field( 'condition_alternate', $condition ) ?: array();
-
-						// Get item values
-
-							$condition_alternateName = uamswp_fad_schema_alternatename(
-								$condition_alternateName_array, // alternateName repeater field
-								'alternate_text' // alternateName item field name
-							);
-
-						// Add to schema
-
-							if ( $condition_alternateName ) {
-
-								$condition_item['alternateName'] = $condition_alternateName;
+								continue;
 
 							}
-
-					// code
-
-						/*
-						 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-						 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - MedicalCode
-						 */
-
-						// Get repeater field value
-
-							$condition_code_array = get_field( 'condition_schema_code_schema_medicalcode', $condition ) ?: array();
-
-						// Get item values
-
-							$condition_code = uamswp_fad_schema_code(
-								$condition_code_array // code repeater field
-							);
-
-						// Add to schema
-						
-							if ( $condition_code ) {
-
-								$condition_item['code'] = $condition_code;
-
-							}
-
-					// additionalType
-
-						/*
-						 * An additional type for the item, typically used for adding more specific types 
-						 * from external vocabularies in microdata syntax. This is a relationship between 
-						 * something and a class that the thing is in. Typically the value is a 
-						 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-						 * in RDF. Text values can be used sparingly, for cases where useful information 
-						 * can be added without their being an appropriate schema to reference. In the 
-						 * case of text values, the class label should follow the schema.org style guide.
-						 * 
-						 * Subproperty of:
-						 *     - rdf:type
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - Text
-						 *     - URL
-						 */
-
-						$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: '';
 
 						// Base array
 
-							$condition_additionalType = array();
+							$condition_item = array();
 
-						// Add each row to the array
+						// @id
 
-							if ( $condition_additionalType_array ) {
+							if ( $nesting_level == 1 ) {
 
-								foreach ( $condition_additionalType_array as $additionalType ) {
+								$condition_id = $page_url . '#' . $page_fragment . $condition_i;
+								$condition_item['@id'] = $condition_id;
+								$condition_i++;
 
-									$condition_additionalType[] = $additionalType['schema_additionalType_uri'];
+							}
+
+						// @type
+
+							$condition_type = 'MedicalCondition';
+
+							// MedicalCondition Subtype
+
+								$condition_type = get_field( 'schema_medicalcondition_subtype', $condition ) ?: $condition_type;
+								$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
+
+							// Add to array
+
+								$condition_item['@type'] = $condition_type;
+
+						// name
+
+							/*
+							 * The name of the item.
+							 * 
+							 * Subproperty of:
+							 * 
+							 *     - rdfs:label
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							*/
+
+							$condition_name = get_the_title($condition); // Expects Text
+
+							// Add to array
+
+								$condition_item['name'] = $condition_name;
+
+						// alternateName
+
+							/*
+							 * An alias for the item.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							*/
+
+							// Get repeater field value
+
+								$condition_alternateName_array = get_field( 'condition_alternate', $condition ) ?: array();
+
+							// Get item values
+
+								$condition_alternateName = uamswp_fad_schema_alternatename(
+									$condition_alternateName_array, // alternateName repeater field
+									'alternate_text' // alternateName item field name
+								);
+
+							// Add to schema
+
+								if ( $condition_alternateName ) {
+
+									$condition_item['alternateName'] = $condition_alternateName;
+
+								}
+
+						// code
+
+							/*
+							 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+							 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - MedicalCode
+							*/
+
+							// Get repeater field value
+
+								$condition_code_array = get_field( 'condition_schema_code_schema_medicalcode', $condition ) ?: array();
+
+							// Get item values
+
+								$condition_code = uamswp_fad_schema_code(
+									$condition_code_array // code repeater field
+								);
+
+							// Add to schema
+							
+								if ( $condition_code ) {
+
+									$condition_item['code'] = $condition_code;
+
+								}
+
+						// additionalType
+
+							/*
+							 * An additional type for the item, typically used for adding more specific types 
+							 * from external vocabularies in microdata syntax. This is a relationship between 
+							 * something and a class that the thing is in. Typically the value is a 
+							 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+							 * in RDF. Text values can be used sparingly, for cases where useful information 
+							 * can be added without their being an appropriate schema to reference. In the 
+							 * case of text values, the class label should follow the schema.org style guide.
+							 * 
+							 * Subproperty of:
+							 *     - rdf:type
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - Text
+							 *     - URL
+							*/
+
+							$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: '';
+
+							// Base array
+
+								$condition_additionalType = array();
+
+							// Add each row to the array
+
+								if ( $condition_additionalType_array ) {
+
+									foreach ( $condition_additionalType_array as $additionalType ) {
+
+										$condition_additionalType[] = $additionalType['schema_additionalType_uri'];
+
+									}
+
+								}
+
+							// Add to schema
+
+								if ( $condition_additionalType ) {
+
+									$condition_item['additionalType'] = $condition_additionalType;
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($condition_item['additionalType']);
+
+								}
+
+						// sameAs
+
+							/*
+							 * URL of a reference Web page that unambiguously indicates the item's identity 
+							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+							 * website).
+							 * 
+							 * Values expected to be one of these types:
+							 * 
+							 *     - URL
+							*/
+
+							// Get repeater field value
+
+								$condition_sameAs_array = get_field( 'schema_sameas', $condition ) ?: array();
+
+							// Add each row to the list array
+
+								$condition_sameAs = uamswp_fad_schema_sameas(
+									$condition_sameAs_array, // sameAs repeater field
+									'schema_sameas_url' // sameAs item field name
+								);
+
+							// Add to schema
+
+								if ( $condition_sameAs ) {
+
+									$condition_item['sameAs'] = $condition_sameAs;
+
+								}
+
+						// infectiousAgent
+
+							if (
+								$condition_type == 'InfectiousDisease'
+								||
+								in_array( 'InfectiousDisease', $condition_type_parent )
+							) {
+
+								$condition_infectiousAgent = get_field( 'schema_infectiousagent', $condition ) ?: '';
+
+								if ( $condition_infectiousAgent ) {
+
+									$condition_item['infectiousAgent'] = $condition_infectiousAgent;
 
 								}
 
 							}
 
-						// Add to schema
+						// infectiousAgentClass
+						
+							if (
+								$condition_type == 'InfectiousDisease'
+								||
+								in_array( 'InfectiousDisease', $condition_type_parent )
+							) {
 
-							if ( $condition_additionalType ) {
+								$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $condition ) ?: '';
 
-								$condition_item['additionalType'] = $condition_additionalType;
+								if ( $condition_infectiousAgentClass ) {
 
-								// If there is only one item, flatten the multi-dimensional array by one step
+									$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
 
-									uamswp_fad_flatten_multidimensional_array($condition_item['additionalType']);
+								}
 
 							}
 
-					// sameAs
+						// possibleTreatment
 
-						/*
-						 * URL of a reference Web page that unambiguously indicates the item's identity 
-						 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-						 * website).
-						 * 
-						 * Values expected to be one of these types:
-						 * 
-						 *     - URL
-						 */
+							if ( $nesting_level == 1 ) {
 
-						// Get repeater field value
+								// Get relationship field value
 
-							$condition_sameAs_array = get_field( 'schema_sameas', $condition ) ?: array();
+									$condition_possibleTreatment_array = get_field( 'condition_schema_possibletreatment', $condition ) ?: array();
 
-						// Add each row to the list array
+								// Get item values
 
-							$condition_sameAs = uamswp_fad_schema_sameas(
-								$condition_sameAs_array, // sameAs repeater field
-								'schema_sameas_url' // sameAs item field name
+									$condition_possibleTreatment = uamswp_fad_schema_service(
+										$condition_possibleTreatment_array,
+										$page_url,
+										( $nesting_level + 1 ),
+										'possibleTreatment'
+									);
+
+								// Add to schema
+
+									if ( $condition_possibleTreatment ) {
+
+										$condition_item['possibleTreatment'] = $condition_possibleTreatment;
+
+									}
+
+							}
+
+						// primaryPrevention
+
+							if ( $nesting_level == 1 ) {
+
+								// Get relationship field value
+
+									$condition_primaryPrevention_array = get_field( 'condition_schema_primaryprevention', $condition ) ?: array();
+
+								// Get item values
+
+									$condition_primaryPrevention = uamswp_fad_schema_service(
+										$condition_primaryPrevention_array,
+										$page_url,
+										( $nesting_level + 1 ),
+										'primaryPrevention'
+									);
+
+								// Add to schema
+
+									if ( $condition_primaryPrevention ) {
+
+										$condition_item['primaryPrevention'] = $condition_primaryPrevention;
+
+									}
+
+							}
+
+						// secondaryPrevention
+
+							if ( $nesting_level == 1 ) {
+
+								// Get relationship field value
+
+									$condition_secondaryPrevention_array = get_field( 'condition_schema_secondaryprevention', $condition ) ?: array();
+
+								// Get item values
+
+									$condition_secondaryPrevention = uamswp_fad_schema_service(
+										$condition_secondaryPrevention_array,
+										$page_url,
+										( $nesting_level + 1 ),
+										'secondaryPrevention'
+									);
+
+								// Add to schema
+
+									if ( $condition_secondaryPrevention ) {
+
+										$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
+
+									}
+
+							}
+
+						// typicalTest
+
+							if ( $nesting_level == 1 ) {
+
+								// Get relationship field value
+
+									$condition_typicalTest_array = get_field( 'condition_schema_typicaltest', $condition ) ?: array();
+
+								// Get item values
+
+									$condition_typicalTest = uamswp_fad_schema_service(
+										$condition_typicalTest_array,
+										$page_url,
+										( $nesting_level + 1 ),
+										'typicalTest'
+									);
+
+								// Add to schema
+
+									if ( $condition_typicalTest ) {
+
+										$condition_item['typicalTest'] = $condition_typicalTest;
+
+									}
+
+							}
+
+						// Sort array
+
+							ksort($condition_item);
+
+						// Set/update the value of the item transient
+
+							uamswp_fad_set_transient(
+								'item_' . $condition, // Required // String added to the end of transient name. Follows UAMS Find-a-Doc transient prefix constant and (optionally) the function name. All separated by underscores.
+								$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+								__FUNCTION__ // Optional // Function name added to middle of transient name. Follows UAMS Find-a-Doc transient prefix constant. Precedes the custom string. All separated by underscores.
 							);
 
-						// Add to schema
+						// Add to list of conditions
 
-							if ( $condition_sameAs ) {
+							$condition_list[] = $condition_item;
 
-								$condition_item['sameAs'] = $condition_sameAs;
-
-							}
-
-					// infectiousAgent
-
-						if (
-							$condition_type == 'InfectiousDisease'
-							||
-							in_array( 'InfectiousDisease', $condition_type_parent )
-						) {
-
-							$condition_infectiousAgent = get_field( 'schema_infectiousagent', $condition ) ?: '';
-
-							if ( $condition_infectiousAgent ) {
-
-								$condition_item['infectiousAgent'] = $condition_infectiousAgent;
-
-							}
-
-						}
-
-					// infectiousAgentClass
-					
-						if (
-							$condition_type == 'InfectiousDisease'
-							||
-							in_array( 'InfectiousDisease', $condition_type_parent )
-						) {
-
-							$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $condition ) ?: '';
-
-							if ( $condition_infectiousAgentClass ) {
-
-								$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
-
-							}
-
-						}
-
-					// possibleTreatment
-
-						if ( $nesting_level == 1 ) {
-
-							// Get relationship field value
-
-								$condition_possibleTreatment_array = get_field( 'condition_schema_possibletreatment', $condition ) ?: array();
-
-							// Get item values
-
-								$condition_possibleTreatment = uamswp_fad_schema_service(
-									$condition_possibleTreatment_array,
-									$page_url,
-									( $nesting_level + 1 ),
-									'possibleTreatment'
-								);
-
-							// Add to schema
-
-								if ( $condition_possibleTreatment ) {
-
-									$condition_item['possibleTreatment'] = $condition_possibleTreatment;
-
-								}
-
-						}
-
-					// primaryPrevention
-
-						if ( $nesting_level == 1 ) {
-
-							// Get relationship field value
-
-								$condition_primaryPrevention_array = get_field( 'condition_schema_primaryprevention', $condition ) ?: array();
-
-							// Get item values
-
-								$condition_primaryPrevention = uamswp_fad_schema_service(
-									$condition_primaryPrevention_array,
-									$page_url,
-									( $nesting_level + 1 ),
-									'primaryPrevention'
-								);
-
-							// Add to schema
-
-								if ( $condition_primaryPrevention ) {
-
-									$condition_item['primaryPrevention'] = $condition_primaryPrevention;
-
-								}
-
-						}
-
-					// secondaryPrevention
-
-						if ( $nesting_level == 1 ) {
-
-							// Get relationship field value
-
-								$condition_secondaryPrevention_array = get_field( 'condition_schema_secondaryprevention', $condition ) ?: array();
-
-							// Get item values
-
-								$condition_secondaryPrevention = uamswp_fad_schema_service(
-									$condition_secondaryPrevention_array,
-									$page_url,
-									( $nesting_level + 1 ),
-									'secondaryPrevention'
-								);
-
-							// Add to schema
-
-								if ( $condition_secondaryPrevention ) {
-
-									$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
-
-								}
-
-						}
-
-					// typicalTest
-
-						if ( $nesting_level == 1 ) {
-
-							// Get relationship field value
-
-								$condition_typicalTest_array = get_field( 'condition_schema_typicaltest', $condition ) ?: array();
-
-							// Get item values
-
-								$condition_typicalTest = uamswp_fad_schema_service(
-									$condition_typicalTest_array,
-									$page_url,
-									( $nesting_level + 1 ),
-									'typicalTest'
-								);
-
-							// Add to schema
-
-								if ( $condition_typicalTest ) {
-
-									$condition_item['typicalTest'] = $condition_typicalTest;
-
-								}
-
-						}
-
-					// Sort array
-
-						ksort($condition_item);
-
-					// Add to list of conditions
-
-						$condition_list[] = $condition_item;
+					}
 
 				} // endforeach ( $repeater as $condition )
 
