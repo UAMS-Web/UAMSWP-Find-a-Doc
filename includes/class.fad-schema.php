@@ -1974,7 +1974,6 @@
 						$MedicalEntity_alternateName = '';
 						$MedicalEntity_code = '';
 						$MedicalEntity_description = '';
-						$MedicalEntity_disambiguatingDescription = '';
 						$MedicalEntity_funding = '';
 						$MedicalEntity_guideline = '';
 						$MedicalEntity_identifier = '';
@@ -2253,31 +2252,6 @@
 									if ( $MedicalEntity_description ) {
 	
 										$MedicalEntity_item['description'] = $MedicalEntity_description;
-	
-									}
-
-						// disambiguatingDescription
-
-							/*
-							 * A sub property of description. A short description of the item used to 
-							 * disambiguate from other, similar items. Information from other properties (in 
-							 * particular, name) may be necessary for the description to be useful for 
-							 * disambiguation.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							// Get values
-
-								$MedicalEntity_disambiguatingDescription = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_disambiguatingDescription ) {
-	
-										$MedicalEntity_item['disambiguatingDescription'] = $MedicalEntity_disambiguatingDescription;
 	
 									}
 
