@@ -2067,5 +2067,29 @@ uamswp_fad_schema_construct($schema_provider);
 // Display array as development testing
 
 	echo '<pre>'; // test
-	echo print_r($schema_provider); // test
+
+	// // Full
+	// echo print_r($schema_provider['@graph']); // test
+
+	// // UAMS
+	// echo print_r($schema_provider['@graph'][0]); // test
+
+	// // UAMS Health
+	// echo print_r($schema_provider['@graph'][1]); // test
+
+	// // UAMSHealth.com
+	// echo print_r($schema_provider['@graph'][1]); // test
+
+	// MedicalWebPage
+	echo print_r($schema_provider['@graph'][3]); // test
+
+	// // BreadcrumbList
+	// echo print_r($schema_provider['@graph'][4]); // test
+
+	// // Physician
+	// echo print_r($schema_provider['@graph'][5]); // test
+
+	// // Person
+	// echo print_r($schema_provider['@graph'][6]); // test
+
 	echo '</pre>'; // test
