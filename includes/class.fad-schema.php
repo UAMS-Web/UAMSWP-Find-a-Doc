@@ -2529,15 +2529,27 @@
 
 							// Get values
 
-								$MedicalEntity_subjectOf = 'foo' ?? '';
+								$MedicalEntity_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
 
-								// Add to item values
-	
-									if ( $MedicalEntity_subjectOf ) {
-	
-										$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
-	
+								if ( !$MedicalEntity_subjectOf ) {
+
+									$MedicalEntity_subjectOf = $MedicalEntity_mainEntityOfPage ?? '';
+
+									if ( !$MedicalEntity_subjectOf ) {
+
+										$MedicalEntity_subjectOf = ( isset($MedicalEntity_url) && !empty($MedicalEntity_url) ) ? $MedicalEntity_url . '#MedicalWebPage' : '';
+
 									}
+
+								}
+
+							// Add to item values
+
+								if ( $MedicalEntity_subjectOf ) {
+
+									$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
+
+								}
 
 					// Sort array
 
