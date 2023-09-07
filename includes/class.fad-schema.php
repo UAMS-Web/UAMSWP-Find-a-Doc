@@ -2030,11 +2030,11 @@
 							// url
 
 								/*
-								* URL of the item.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - URL
+								 * URL of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
 								*/
 
 								$MedicalEntity_url = user_trailingslashit( get_permalink($MedicalEntity) );
@@ -2067,15 +2067,15 @@
 							// name
 
 								/*
-								* The name of the item.
-								* 
-								* Subproperty of:
-								* 
-								*     - rdfs:label
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - Text
+								 * The name of the item.
+								 * 
+								 * Subproperty of:
+								 * 
+								 *     - rdfs:label
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
 								*/
 
 								// Get values
@@ -2093,21 +2093,21 @@
 							// additionalType
 
 								/*
-								* An additional type for the item, typically used for adding more specific types 
-								* from external vocabularies in microdata syntax. This is a relationship between 
-								* something and a class that the thing is in. Typically the value is a 
-								* URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-								* in RDF. Text values can be used sparingly, for cases where useful information 
-								* can be added without their being an appropriate schema to reference. In the 
-								* case of text values, the class label should follow the schema.org style guide.
-								* 
-								* Subproperty of:
-								*     - rdf:type
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - Text
-								*     - URL
+								 * An additional type for the item, typically used for adding more specific types 
+								 * from external vocabularies in microdata syntax. This is a relationship between 
+								 * something and a class that the thing is in. Typically the value is a 
+								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+								 * in RDF. Text values can be used sparingly, for cases where useful information 
+								 * can be added without their being an appropriate schema to reference. In the 
+								 * case of text values, the class label should follow the schema.org style guide.
+								 * 
+								 * Subproperty of:
+								 *     - rdf:type
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - URL
 								*/
 
 								// Get values
@@ -2149,11 +2149,11 @@
 							// alternateName
 
 								/*
-								* An alias for the item.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - Text
+								 * An alias for the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
 								*/
 
 								// Get repeater field value
@@ -2178,12 +2178,12 @@
 							// code
 
 								/*
-								* A medical code for the entity, taken from a controlled vocabulary or ontology 
-								* such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - MedicalCode
+								 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+								 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - MedicalCode
 								*/
 
 								// Get values
@@ -2214,12 +2214,12 @@
 							// description
 
 								/*
-								* A description of the item.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - Text
-								*     - TextObject
+								 * A description of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - TextObject
 								*/
 
 								// Get values
@@ -2265,12 +2265,12 @@
 							// image
 
 								/*
-								* An image of the item. This can be a URL or a fully described ImageObject.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - ImageObject
-								*     - URL
+								 * An image of the item. This can be a URL or a fully described ImageObject.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - ImageObject
+								 *     - URL
 								*/
 
 								// Get featured image ID
@@ -2342,16 +2342,16 @@
 							// mainEntityOfPage
 
 								/*
-								* Indicates a page (or other CreativeWork) for which this thing is the main 
-								* entity being described. See background notes at 
-								* https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-								* 
-								* Inverse-property: mainEntity
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - CreativeWork
-								*     - URL
+								 * Indicates a page (or other CreativeWork) for which this thing is the main 
+								 * entity being described. See background notes at 
+								 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+								 * 
+								 * Inverse-property: mainEntity
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - URL
 								*/
 
 								// Get values
@@ -2375,12 +2375,12 @@
 							// medicineSystem
 
 								/*
-								* The system of medicine that includes this MedicalEntity 
-								* (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - MedicineSystem
+								 * The system of medicine that includes this MedicalEntity 
+								 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - MedicineSystem
 								*/
 
 								// Get field value
@@ -2404,66 +2404,66 @@
 							// potentialAction
 
 								/*
-								* Indicates a potential Action, which describes an idealized action in which this 
-								* thing would play an 'object' role.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - Action
+								 * Indicates a potential Action, which describes an idealized action in which this 
+								 * thing would play an 'object' role.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Action
 								*/
 
 								/* 
 
 									Create one or more Action arrays, likely 'CreateAction' type
 
-										* Make an appointment, new or existing patient, by phone
-										* Make an appointment, new patient, by phone
-										* Make an appointment, existing patient, by phone
-										* Make an appointment, new or existing patient, online
-										* Make an appointment, new patient, online
-										* Make an appointment, existing patient, online
-										* Refer a patient, by phone
-										* Refer a patient, by fax
-										* Refer a patient, through Epic thing
+										 * Make an appointment, new or existing patient, by phone
+										 * Make an appointment, new patient, by phone
+										 * Make an appointment, existing patient, by phone
+										 * Make an appointment, new or existing patient, online
+										 * Make an appointment, new patient, online
+										 * Make an appointment, existing patient, online
+										 * Refer a patient, by phone
+										 * Refer a patient, by fax
+										 * Refer a patient, through Epic thing
 
 									Property descriptions:
 
-										* 'actionStatus'
-											* Indicates the current disposition of the Action
-										* 'agent'
-											* The direct performer or driver of the action — animate or inanimate (e.g., John 
+										 * 'actionStatus'
+											 * Indicates the current disposition of the Action
+										 * 'agent'
+											 * The direct performer or driver of the action — animate or inanimate (e.g., John 
 											wrote a book)
-										* 'endTime'
-											* The endTime of something. For a reserved event or service 
+										 * 'endTime'
+											 * The endTime of something. For a reserved event or service 
 											(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
 											actions that span a period of time, when the action was performed (e.g., John 
 											wrote a book from January to December). For media, including audio and video, 
 											it's the time offset of the end of a clip within a larger file. Note that Event 
 											uses startDate/endDate instead of startTime/endTime, even when describing dates 
 											with times. This situation may be clarified in future revisions.
-										* 'error'
-											* For failed actions, more information on the cause of the failure.
-										* 'instrument'
-											* The object that helped the agent perform the action (e.g., John wrote a book 
+										 * 'error'
+											 * For failed actions, more information on the cause of the failure.
+										 * 'instrument'
+											 * The object that helped the agent perform the action (e.g., John wrote a book 
 											with a pen).
-										* 'location'
-											* The location of, for example, where an event is happening, where an 
+										 * 'location'
+											 * The location of, for example, where an event is happening, where an 
 											organization is located, or where an action takes place.
-										* 'object'
-											* The object upon which the action is carried out, whose state is kept intact or 
+										 * 'object'
+											 * The object upon which the action is carried out, whose state is kept intact or 
 											changed. Also known as the semantic roles patient, affected or undergoer — 
 											which change their state — or theme — which doesn't (e.g., John read a book).
-										* 'participant'
-											* Other co-agents that participated in the action indirectly (e.g., John wrote a 
+										 * 'participant'
+											 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
 											book with Steve).
-										* 'provider'
-											* The service provider, service operator, or service performer; the goods 
+										 * 'provider'
+											 * The service provider, service operator, or service performer; the goods 
 											producer. Another party (a seller) may offer those services or goods on behalf 
 											of the provider. A provider may also serve as the seller. Supersedes carrier.
-										* 'result'
-											* The result produced in the action (e.g., John wrote a book).
-										* 'startTime'
-											* The startTime of something. For a reserved event or service 
+										 * 'result'
+											 * The result produced in the action (e.g., John wrote a book).
+										 * 'startTime'
+											 * The startTime of something. For a reserved event or service 
 											(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
 											For actions that span a period of time, when the action was performed 
 											(e.g., John wrote a book from January to December). For media, including audio 
@@ -2471,19 +2471,19 @@
 											Note that Event uses startDate/endDate instead of startTime/endTime, even when 
 											describing dates with times. This situation may be clarified in future 
 											revisions.
-										* 'target'
-											* Indicates a target EntryPoint, or url, for an Action.
+										 * 'target'
+											 * Indicates a target EntryPoint, or url, for an Action.
 
 								*/
 
 							// relevantSpecialty
 
 								/*
-								* If applicable, a medical specialty in which this entity is relevant.
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - MedicalSpecialty
+								 * If applicable, a medical specialty in which this entity is relevant.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - MedicalSpecialty
 								*/
 
 								// Get values
@@ -2510,13 +2510,13 @@
 							// sameAs
 
 								/*
-								* URL of a reference Web page that unambiguously indicates the item's identity 
-								* (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-								* website).
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - URL
+								 * URL of a reference Web page that unambiguously indicates the item's identity 
+								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+								 * website).
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
 								*/
 
 								// Get repeater field value
@@ -2541,14 +2541,14 @@
 							// subjectOf
 
 								/*
-								* A CreativeWork or Event about this Thing.
-								* 
-								* Inverse-property: about
-								* 
-								* Values expected to be one of these types:
-								* 
-								*     - CreativeWork
-								*     - Event
+								 * A CreativeWork or Event about this Thing.
+								 * 
+								 * Inverse-property: about
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - Event
 								*/
 
 								// Get values
