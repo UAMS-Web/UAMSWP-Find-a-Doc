@@ -1977,7 +1977,6 @@
 						$MedicalEntity_image_id = '';
 						$MedicalEntity_mainEntityOfPage = '';
 						$MedicalEntity_medicineSystem = '';
-						$MedicalEntity_recognizingAuthority = '';
 						$MedicalEntity_relevantSpecialty = array();
 						$MedicalEntity_sameAs = '';
 						$MedicalEntity_study = '';
@@ -2457,29 +2456,6 @@
 										 * Indicates a target EntryPoint, or url, for an Action.
 
 							 */
-
-						// recognizingAuthority
-
-							/*
-							 * If applicable, the organization that officially recognizes this entity as part 
-							 * of its endorsed system of medicine.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Organization
-							 */
-
-							// Get values
-
-								$MedicalEntity_recognizingAuthority = 'foo' ?? '';
-
-								// Add to item values
-	
-									if ( $MedicalEntity_recognizingAuthority ) {
-	
-										$MedicalEntity_item['recognizingAuthority'] = $MedicalEntity_recognizingAuthority;
-	
-									}
 
 						// relevantSpecialty
 
