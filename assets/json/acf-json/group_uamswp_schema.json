@@ -1246,6 +1246,38 @@
 			"placeholder": "",
 			"acfe_settings": "",
 			"acfe_validate": ""
+		},
+		"field_schema_localbusiness_single": {
+			"key": "field_schema_localbusiness_single",
+			"name": "schema_localbusiness_single",
+			"label": "LocalBusiness Subtype",
+			"type": "select",
+			"instructions": "Select the LocalBusiness type that most closely matches this location. If there is no match, then select \"None.\"</p><p class='description' style='margin-top: 0.5em;'>For information on each type, visit <a href='https://schema.org/' target='_blank'>https://schema.org/</a>.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
+				"Hospital": "<strong>Hospital</strong> &mdash; A hospital.",
+				"Dentist": "<strong>Dentist</strong> &mdash; A dentist.",
+				"MedicalClinic": "<strong>MedicalClinic</strong> &mdash; A facility, often associated with a hospital or medical school, that is devoted to the specific diagnosis and/or healthcare. Previously limited to outpatients but with evolution it may be open to inpatients as well.",
+				"Optician": "<strong>Optician</strong> &mdash; A store that sells reading glasses and similar devices for improving vision.",
+				"Pharmacy": "<strong>Pharmacy</strong> &mdash; A pharmacy or drugstore."
+			},
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 1,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"allow_custom": 0,
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
 		}
 	},
 	"location": "",
