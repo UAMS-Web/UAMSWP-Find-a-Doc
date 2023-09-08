@@ -123,6 +123,12 @@
 
 				}
 
+			// Clean up the array
+			
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_PostalAddress);
+
 			// Return the main address or location schema array
 
 				return $schema_PostalAddress;
@@ -2407,9 +2413,160 @@
 									)
 								) {
 
+									$LocalBusiness_address_1 = '';
+									$LocalBusiness_streetAddress_array = array();
+									$LocalBusiness_address_2_array = array();
+									$LocalBusiness_building = '';
+									$LocalBusiness_building_term = '';
+									$LocalBusiness_building_slug = '';
+									$LocalBusiness_building_name = '';
+									$LocalBusiness_floor = array();
+									$LocalBusiness_floor_value = '';
+									$LocalBusiness_floor_label = '';
+									$LocalBusiness_suite = '';
+									$LocalBusiness_streetAddress = '';
+									$LocalBusiness_addressLocality = '';
+									$LocalBusiness_addressRegion = '';
+									$LocalBusiness_postalCode = '';
+
 									// Get values
 
-										$LocalBusiness_address = array();
+										// Address line 1
+
+											$LocalBusiness_address_1 = get_field( 'location_address_1', $LocalBusiness ) ?? '';
+
+											if ( $LocalBusiness_address_1 ) {
+
+												$LocalBusiness_streetAddress_array[] = $LocalBusiness_address_1;
+
+											}
+
+										// Address line 2
+
+											// Base array
+											
+												$LocalBusiness_address_2_array = array();
+
+											// Building values
+
+												$LocalBusiness_building = get_field( 'location_building', $LocalBusiness ) ?? '';
+
+												if ( $LocalBusiness_building ) {
+
+													$LocalBusiness_building_term = get_term( $LocalBusiness_building, 'building' ) ?? '';
+
+													if ( $LocalBusiness_building_term ) {
+
+														$LocalBusiness_building_slug = $LocalBusiness_building_term->slug;
+														$LocalBusiness_building_name = $LocalBusiness_building_term->name;
+
+													}
+
+													if (
+														$LocalBusiness_building_name
+														&&
+														$LocalBusiness_building_slug != '_none'
+													)  {
+
+														$LocalBusiness_address_2_array[] = $LocalBusiness_building_name;
+
+													}
+
+												}
+
+											// Floor values
+
+												$LocalBusiness_floor = get_field_object( 'location_building_floor', $LocalBusiness ) ?? array();
+
+												if (
+													$LocalBusiness_floor
+													&&
+													array_key_exists( 'value', $LocalBusiness_floor )
+													&&
+													array_key_exists( 'choices', $LocalBusiness_floor )
+												) {
+
+													// Floor label
+
+														$LocalBusiness_floor_value = $LocalBusiness_floor['value'];
+
+														// Check floor value
+
+															if (
+																$LocalBusiness_floor_value == '0'
+																||
+																$LocalBusiness_floor_value == 'false'
+																||
+																!$LocalBusiness_floor_value
+															) {
+																$LocalBusiness_floor_value = '';
+															}
+
+													// Floor label
+
+														$LocalBusiness_floor_label = $LocalBusiness_floor_value ? $LocalBusiness_floor['choices'][$LocalBusiness_floor_value] : '';
+
+													// Add to the address 2 array
+
+														if (
+															$LocalBusiness_floor_label
+															&&
+															$LocalBusiness_floor_value
+														)  {
+
+															$LocalBusiness_address_2_array[] = $LocalBusiness_floor_label;
+
+														}
+
+												}
+
+											// Suite value
+
+												$LocalBusiness_suite = get_field(' location_suite', $LocalBusiness ) ?? '';
+
+												if ( $LocalBusiness_suite ) {
+
+													$LocalBusiness_address_2_array[] = $LocalBusiness_suite;
+
+												}
+
+											// Explode the array and add to streetAddress values array
+
+												if ( $LocalBusiness_address_2_array ) {
+
+													$LocalBusiness_streetAddress_array[] = implode(
+														' ',
+														$LocalBusiness_address_2_array
+													);
+
+												}
+
+										// Combine the lines
+
+											if ( $LocalBusiness_streetAddress_array ) {
+
+												$LocalBusiness_streetAddress = implode(
+													' ',
+													$LocalBusiness_streetAddress_array
+												);
+
+											}
+
+										// City, State, ZIP
+
+											$LocalBusiness_addressLocality = get_field( 'location_city', $LocalBusiness ) ?? '';
+											$LocalBusiness_addressRegion = get_field( 'location_state', $LocalBusiness ) ?? '';
+											$LocalBusiness_postalCode = get_field( 'location_zip', $LocalBusiness ) ?? '';
+
+									// Format values
+
+										$LocalBusiness_address = uamswp_fad_schema_postaladdress(
+											$LocalBusiness_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
+											true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+											$LocalBusiness_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+											$LocalBusiness_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+											$LocalBusiness_postalCode // string // Required // The postal code (e.g., 94043).
+										);
 
 									// Add to item values
 
