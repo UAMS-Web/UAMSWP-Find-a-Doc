@@ -2390,6 +2390,8 @@
 										'medicalSpecialty',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2435,6 +2437,8 @@
 										'additionalType',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2497,6 +2501,8 @@
 										'aggregateRating',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2528,6 +2534,8 @@
 										'alternateName',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get repeater field value
@@ -2558,6 +2566,8 @@
 										'areaServed',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2581,6 +2591,8 @@
 										'availableService',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2615,6 +2627,8 @@
 										'award',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2707,6 +2721,8 @@
 										'containsPlace',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2730,6 +2746,8 @@
 										'currenciesAccepted',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2753,6 +2771,8 @@
 										'department',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2785,6 +2805,8 @@
 										'description',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2830,6 +2852,8 @@
 										'diversityPolicy',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2853,6 +2877,8 @@
 										'diversityStaffingReport',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2876,6 +2902,8 @@
 										'duns',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2899,6 +2927,8 @@
 										'email',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2922,6 +2952,8 @@
 										'employee',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2945,6 +2977,8 @@
 										'ethicsPolicy',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -2968,6 +3002,8 @@
 										'event',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3014,6 +3050,8 @@
 										'foundingDate',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3037,6 +3075,8 @@
 										'funding',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3106,6 +3146,8 @@
 										'hasCredential',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3129,6 +3171,8 @@
 										'hasDriveThroughService',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3183,6 +3227,8 @@
 										'healthcareReportingData',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3338,6 +3384,8 @@
 										'isAcceptingNewPatients',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3361,6 +3409,8 @@
 										'isAccessibleForFree',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3430,6 +3480,8 @@
 										'keywords',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3453,6 +3505,8 @@
 										'knowsAbout',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3476,6 +3530,8 @@
 										'knowsLanguage',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3568,6 +3624,8 @@
 										'logo',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3656,6 +3714,8 @@
 										'makesOffer',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3679,6 +3739,8 @@
 										'maximumAttendeeCapacity',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3702,6 +3764,8 @@
 										'memberOf',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3748,6 +3812,8 @@
 										'nonprofitStatus',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3771,6 +3837,8 @@
 										'numberOfEmployees',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3794,6 +3862,8 @@
 										'openingHours',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3817,6 +3887,8 @@
 										'openingHoursSpecification',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3863,6 +3935,8 @@
 										'paymentAccepted',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -3982,6 +4056,8 @@
 										'potentialAction',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -4005,6 +4081,8 @@
 										'publicAccess',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -4028,6 +4106,8 @@
 										'review',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -4091,6 +4171,8 @@
 										'smokingAllowed',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Add to item values
@@ -4110,6 +4192,8 @@
 										'specialOpeningHoursSpecification',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
@@ -4179,6 +4263,8 @@
 										'subOrganization',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
+									&&
+									$nesting_level == 0
 								) {
 
 									// Get values
