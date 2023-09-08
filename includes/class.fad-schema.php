@@ -3120,7 +3120,7 @@
 
 								}
 
-							// geo (general)
+							// geo (common use)
 
 								if (
 									in_array(
