@@ -2243,6 +2243,9 @@
 							$LocalBusiness_healthPlanNetworkId = array();
 							$LocalBusiness_identifier = array();
 							$LocalBusiness_image_id = array();
+							$LocalBusiness_featured_image_id = '';
+							$LocalBusiness_wayfinding_image_id = '';
+							$LocalBusiness_gallery_image_id = array();
 							$LocalBusiness_image = array();
 							$LocalBusiness_isAcceptingNewPatients = array();
 							$LocalBusiness_isAccessibleForFree = array();
@@ -3313,61 +3316,127 @@
 									)
 								) {
 
-									// Get featured image ID
+									// Get the various images
 
-										if ( !$fpage_query ) {
+										// Base list array
 
-											/* Overview page */
+											$LocalBusiness_image_id = array();
 
-											$LocalBusiness_image_id = get_field( '_thumbnail_id', $LocalBusiness ) ?? '';
+										// Get featured image ID
 
-										} elseif ( $current_fpage == 'providers' ) {
+											if ( !$fpage_query ) {
 
-											/* Fake subpage for related providers */
+												/* Overview page */
 
-											$LocalBusiness_image_id = get_field( 'expertise_providers_fpage_featured_image', $LocalBusiness ) ?? '';
+												$LocalBusiness_featured_image_id = get_field( '_thumbnail_id', $LocalBusiness ) ?? '';
 
-										} elseif ( $current_fpage == 'locations' ) {
+											} elseif ( $current_fpage == 'providers' ) {
 
-											/* Fake subpage for related locations */
+												/* Fake subpage for related providers */
 
-											$LocalBusiness_image_id = get_field( 'expertise_locations_fpage_featured_image', $LocalBusiness ) ?? '';
+												$LocalBusiness_featured_image_id = '';
 
-										} elseif ( $current_fpage == 'specialties' ) {
+											} elseif ( $current_fpage == 'locations' ) {
 
-											/* Fake subpage for descendant areas of expertise */
+												/* Fake subpage for related locations */
 
-											$LocalBusiness_image_id = get_field( 'expertise_descendant_fpage_featured_image', $LocalBusiness ) ?? '';
+												$LocalBusiness_featured_image_id = '';
 
-										} elseif ( $current_fpage == 'resources' ) {
+											} elseif ( $current_fpage == 'specialties' ) {
 
-											/* Fake subpage for related areas of expertise */
+												/* Fake subpage for descendant areas of expertise */
 
-											$LocalBusiness_image_id = get_field( 'expertise_associated_fpage_featured_image', $LocalBusiness ) ?? '';
+												$LocalBusiness_featured_image_id = '';
 
-										} elseif ( $current_fpage == 'related' ) {
+											} elseif ( $current_fpage == 'resources' ) {
 
-											/* Fake subpage for related clinical resources */
+												/* Fake subpage for related areas of expertise */
 
-											$LocalBusiness_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $LocalBusiness ) ?? '';
+												$LocalBusiness_featured_image_id = '';
 
-										}
+											} elseif ( $current_fpage == 'related' ) {
 
-									// Create ImageObject values array
+												/* Fake subpage for related clinical resources */
+
+												$LocalBusiness_featured_image_id = '';
+
+											}
+
+											// Add to the list of image IDs
+
+												if ( $LocalBusiness_featured_image_id ) {
+
+													$LocalBusiness_image_id[] = $LocalBusiness_featured_image_id;
+
+												}
+
+										// Get wayfinding photo ID
+
+											if ( $nesting_level == 0 ) {
+
+												$LocalBusiness_wayfinding_image_id = get_field( 'location_wayfinding_photo', $LocalBusiness ) ?? '';
+
+											}
+
+											// Add to the list of image IDs
+
+												if ( $LocalBusiness_wayfinding_image_id ) {
+
+													$LocalBusiness_image_id[] = $LocalBusiness_wayfinding_image_id;
+
+												}
+
+										// Get gallery photo IDs
+
+											if ( $nesting_level == 0 ) {
+
+												$LocalBusiness_gallery_image_id = get_field( 'location_photo_gallery', $LocalBusiness ) ?? array();
+
+											}
+
+											// Add to the list of image IDs
+
+												if ( $LocalBusiness_wayfinding_image_id ) {
+
+													$LocalBusiness_image_id = array_merge(
+														$LocalBusiness_image_id,
+														$LocalBusiness_gallery_image_id
+													);
+
+												}
+
+										// Clean up the list
+
+											$LocalBusiness_image_id = array_filter($LocalBusiness_image_id);
+											$LocalBusiness_image_id = array_unique($LocalBusiness_image_id);
+											$LocalBusiness_image_id = array_values($LocalBusiness_image_id);
+
+									// Create ImageObject values array for each image
 
 										if ( $LocalBusiness_image_id ) {
 
-											$LocalBusiness_image = uamswp_fad_schema_imageobject_thumbnails(
-												$LocalBusiness_url, // URL of entity with which the image is associated
-												$nesting_level, // Nesting level within the main schema
-												'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
-												'Image', // Base fragment identifier
-												$LocalBusiness_image_id, // ID of image to use for 1:1 aspect ratio
-												0, // ID of image to use for 3:4 aspect ratio
-												$LocalBusiness_image_id, // ID of image to use for 4:3 aspect ratio
-												$LocalBusiness_image_id, // ID of image to use for 16:9 aspect ratio
-												0 // ID of image to use for full image
-											) ?? array();
+											// Base array
+
+												$LocalBusiness_image = array();
+
+											foreach ( $LocalBusiness_image_id as $id ) {
+
+												$LocalBusiness_image = array_merge(
+													$LocalBusiness_image,
+													uamswp_fad_schema_imageobject_thumbnails(
+														$LocalBusiness_url, // URL of entity with which the image is associated
+														$nesting_level, // Nesting level within the main schema
+														'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+														'Image', // Base fragment identifier
+														$id, // ID of image to use for 1:1 aspect ratio
+														0, // ID of image to use for 3:4 aspect ratio
+														$id, // ID of image to use for 4:3 aspect ratio
+														$id, // ID of image to use for 16:9 aspect ratio
+														0 // ID of image to use for full image
+													)
+												);
+
+											}
 
 										}
 
