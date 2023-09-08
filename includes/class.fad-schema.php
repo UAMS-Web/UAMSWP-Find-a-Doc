@@ -2282,6 +2282,13 @@
 							$LocalBusiness_taxID = array();
 							$LocalBusiness_telephone = array();
 							$LocalBusiness_vatID = array();
+							$LocalBusiness_has_parent = '';
+							$LocalBusiness_parent_id = '';
+							$LocalBusiness_has_parent = '';
+							$LocalBusiness_override_parent_photo = '';
+							$LocalBusiness_override_parent_photo_featured = '';
+							$LocalBusiness_override_parent_photo_wayfinding = '';
+							$LocalBusiness_override_parent_photo_gallery = '';
 
 							// Reused variables
 
@@ -3322,13 +3329,45 @@
 
 											$LocalBusiness_image_id = array();
 
+										// Parent location overrides
+
+											// Query for whether the location has a parent
+
+												$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
+												$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
+												$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
+							
+											if ( $LocalBusiness_has_parent ) {
+
+												// Query on whether to override any of the parent location's photos
+												
+													$LocalBusiness_override_parent_photo = get_field('location_image_override_parent') ?? false;
+
+												if ( $LocalBusiness_override_parent_photo ) {
+
+													// Query on whether to override the parent location's featured image
+													
+														$LocalBusiness_override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $LocalBusiness) ?? false;
+
+													// Query on whether to override the parent location's wayfinding photo
+													
+														$LocalBusiness_override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $LocalBusiness) ?? false;
+
+													// Query on whether to override the parent location's gallery photos
+													
+														$LocalBusiness_override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $LocalBusiness) ?? false;
+
+												}
+
+											}
+
 										// Get featured image ID
 
 											if ( !$fpage_query ) {
 
 												/* Overview page */
 
-												$LocalBusiness_featured_image_id = get_field( '_thumbnail_id', $LocalBusiness ) ?? '';
+												$LocalBusiness_featured_image_id = $LocalBusiness_override_parent_photo_featured ? get_field( '_thumbnail_id', $LocalBusiness_parent_id ) : get_field( '_thumbnail_id', $LocalBusiness ); // int
 
 											} elseif ( $current_fpage == 'providers' ) {
 
@@ -3374,7 +3413,7 @@
 
 											if ( $nesting_level == 0 ) {
 
-												$LocalBusiness_wayfinding_image_id = get_field( 'location_wayfinding_photo', $LocalBusiness ) ?? '';
+												$LocalBusiness_wayfinding_image_id = $LocalBusiness_override_parent_photo_wayfinding ? get_field( 'location_wayfinding_photo', $LocalBusiness_parent_id ) : get_field('location_wayfinding_photo', $LocalBusiness); // int
 
 											}
 
@@ -3390,7 +3429,7 @@
 
 											if ( $nesting_level == 0 ) {
 
-												$LocalBusiness_gallery_image_id = get_field( 'location_photo_gallery', $LocalBusiness ) ?? array();
+												$LocalBusiness_gallery_image_id = $LocalBusiness_override_parent_photo_wayfinding ? get_field( 'location_photo_gallery', $LocalBusiness_parent_id ) : get_field('location_photo_gallery', $LocalBusiness); // array
 
 											}
 
