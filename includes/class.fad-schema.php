@@ -77,11 +77,11 @@
 
 				if (
 					!$address
-					&&
+					||
 					!$addressLocality
-					&&
+					||
 					!$addressRegion
-					&&
+					||
 					!$postalCode
 				) {
 
