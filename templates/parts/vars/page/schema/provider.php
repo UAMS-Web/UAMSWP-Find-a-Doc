@@ -2009,8 +2009,8 @@ uamswp_fad_schema_construct($schema_provider);
 
 	echo '<pre>'; // test
 
-	// Full
-	echo print_r($schema_provider['@graph']); // test
+	// // Full
+	// echo print_r($schema_provider); // test
 
 	// // UAMS
 	// echo print_r($schema_provider['@graph'][0]); // test
@@ -2024,13 +2024,24 @@ uamswp_fad_schema_construct($schema_provider);
 	// // MedicalWebPage
 	// echo print_r($schema_provider['@graph'][3]); // test
 
+		// // MedicalWebPage[mentions]
+		// echo print_r($schema_provider['@graph'][3]['mentions']); // test
+
 	// // BreadcrumbList
 	// echo print_r($schema_provider['@graph'][4]); // test
 
 	// // Physician
 	// echo print_r($schema_provider['@graph'][5]); // test
 
+		// Physician
+		echo print_r($schema_provider['@graph'][5]['location']); // test
+
 	// // Person
 	// echo print_r($schema_provider['@graph'][6]); // test
 
 	echo '</pre>'; // test
+
+// Reusable test display lines
+
+		// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : $foo ) . '</p>'; // test
+		// if ( is_array($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
