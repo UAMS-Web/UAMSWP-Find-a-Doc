@@ -52,9 +52,7 @@ TODO List
  * Related ontology items
 	 * Related locations
 		 * Define schema for related locations
-		 * Bring locations schema and URLs into relevant properties of provider's schema
-		 * Make the defining of the values array into a function that can be repeated.
-			 * Add transient in location schema function's foreach loop
+		 * Get parent location address information on descendant location schema
 		 * Apply the location schema function to the single location template
 		 * Make medicalSpecialty input conditional based on LocalBusiness subtype input (not empty; not only Optician)
 	 * Related areas of expertise
