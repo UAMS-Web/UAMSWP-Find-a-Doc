@@ -2289,6 +2289,7 @@
 							$LocalBusiness_override_parent_photo_featured = '';
 							$LocalBusiness_override_parent_photo_wayfinding = '';
 							$LocalBusiness_override_parent_photo_gallery = '';
+							$LocalBusiness_image_general = array();
 
 							// Reused variables
 
@@ -3305,18 +3306,14 @@
 
 								}
 
-							// image
-
-								/*
-								 * An image of the item. This can be a URL or a fully described ImageObject.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - ImageObject
-								 *     - URL
-								 */
+							// image (common use)
 
 								if (
+									in_array(
+										'image',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+									||
 									in_array(
 										'image',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
@@ -3456,11 +3453,11 @@
 
 											// Base array
 
-												$LocalBusiness_image = array();
+												$LocalBusiness_image_general = array();
 
 											foreach ( $LocalBusiness_image_id as $id ) {
 
-												$LocalBusiness_image = array_merge(
+												$LocalBusiness_image_general = array_merge(
 													$LocalBusiness_image,
 													uamswp_fad_schema_imageobject_thumbnails(
 														$LocalBusiness_url, // URL of entity with which the image is associated
@@ -3478,6 +3475,36 @@
 											}
 
 										}
+
+									// Clean up the array
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($LocalBusiness_image_general);
+
+								}
+
+							// image (specific property)
+
+								/*
+								 * An image of the item. This can be a URL or a fully described ImageObject.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - ImageObject
+								 *     - URL
+								 */
+
+								if (
+									in_array(
+										'image',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get the values
+
+										$LocalBusiness_image = $LocalBusiness_image_general ?? array();
 
 									// Add to schema
 
@@ -4076,7 +4103,7 @@
 
 									// Get values
 
-										$LocalBusiness_photo = array();
+										$LocalBusiness_photo = $LocalBusiness_image_general ?? array();
 
 									// Add to item values
 
