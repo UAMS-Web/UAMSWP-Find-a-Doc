@@ -1063,9 +1063,10 @@
 												// Add this location's details to the main GeoCoordinates schema array
 
 													$schema_geo_coordinates = uamswp_schema_geo_coordinates(
-														$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
-														$map['lat'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-														$map['lng'], // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+														$map['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+														$map['lng'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+														'', // string // Optional // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+														$schema_geo_coordinates // array // Optional // Existing main GeoCoordinates schema array
 													);
 
 											?>

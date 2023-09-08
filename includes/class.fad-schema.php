@@ -580,53 +580,58 @@
 	// Add data to an array defining schema data for GeoCoordinates
 
 		function uamswp_schema_geo_coordinates(
-			$schema_geo_coordinates = array(), // array (optional) // main GeoCoordinates schema array
-			$latitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			$longitude = '', // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			$elevation = '' // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+			string $latitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			string $longitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			string $elevation = '', // string // Optional // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+			array $schema_geo_coordinates = array() // array // Optional // Existing main GeoCoordinates schema array
 		) {
 
-			/* Example use:
+			/* 
+			 * 
+			 * 
+			 * Example use:
 			 * 
 			 * 	// GeoCoordinates Schema Data
 			 * 
 			 * 		// Check/define the main GeoCoordinates schema array
-			 * 		$schema_geo_coordinates = ( isset($schema_geo_coordinates) && is_array($schema_geo_coordinates) && !empty($schema_geo_coordinates) ) ? $schema_geo_coordinates : array();
+			 * 
+			 * 			$schema_geo_coordinates = $schema_geo_coordinates ?? array();
+			 * 			$schema_geo_coordinates = $schema_geo_coordinates && !is_array($schema_geo_coordinates) ?? array($schema_geo_coordinates) : $schema_geo_coordinates;
 			 * 
 			 * 		// Add this location's details to the main GeoCoordinates schema array
 			 * 
 			 * 			$schema_geo_coordinates = uamswp_schema_geo_coordinates(
-			 * 				$schema_geo_coordinates, // array (optional) // main GeoCoordinates schema array
-			 * 				$schema_latitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			 * 				$schema_longitude, // string (optional) // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-			 * 				$schema_elevation // string (optional) // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+			 * 				$schema_latitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			 * 				$schema_longitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+			 * 				$schema_elevation, // string // Optional // The elevation of a location (WGS 84). Values may be of the form 'NUMBER UNIT_OF_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters.
+			 * 				$schema_geo_coordinates // array // Optional // Main GeoCoordinates schema array
 			 * 			);
 			 */
 
-			// Check/define variables
+			// Check existing array
 
-				$schema_geo_coordinates = is_array($schema_geo_coordinates) ? $schema_geo_coordinates : array();
+				if ( $schema_geo_coordinates ) {
 
-			// Create an array for this item
+					// If the existing array is flat, nest it in an additional layer
 
-			$schema = array();
+						if ( array_key_exists( '@type', $schema_geo_coordinates ) ) {
+
+							$schema_geo_coordinates = array($schema_geo_coordinates);
+
+						}
+
+				}
 
 			// Add values to the array
 
-				if ( $latitude ) {
-					$schema['latitude'] = $latitude;
-				}
-
-				if ( $longitude ) {
-					$schema['longitude'] = $longitude;
-				}
+				$schema = array(
+					'@type' => 'GeoCoordinates',
+					'latitude' => $latitude,
+					'longitude' => $longitude
+				);
 
 				if ( $elevation ) {
 					$schema['elevation'] = $elevation;
-				}
-
-				if ( !empty($schema) ) {
-					$schema = array('@type' => 'GeoCoordinates') + $schema;
 				}
 
 			// Add this item's array to the main GeoCoordinates schema array
@@ -634,6 +639,12 @@
 				if ( !empty($schema) ) {
 					$schema_geo_coordinates[] = $schema;
 				}
+
+			// Clean up the array
+			
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_geo_coordinates);
 
 			// Return the main GeoCoordinates schema array
 
@@ -2290,6 +2301,7 @@
 							$LocalBusiness_override_parent_photo_wayfinding = '';
 							$LocalBusiness_override_parent_photo_gallery = '';
 							$LocalBusiness_image_general = array();
+							$LocalBusiness_geo_value = array();
 
 							// Reused variables
 
@@ -3108,7 +3120,38 @@
 
 								}
 
-							// geo
+							// geo (general)
+
+								if (
+									in_array(
+										'geo',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+									||
+									in_array(
+										'latitude',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+									||
+									in_array(
+										'longitude',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Get values
+
+										$LocalBusiness_geo_value = get_field( 'location_map', $LocalBusiness ) ?? array();
+
+										if ( $LocalBusiness_geo_value ) {
+
+											$LocalBusiness_geo_value = ( array_key_exists( 'lat', $LocalBusiness_geo_value ) && array_key_exists( 'lng', $LocalBusiness_geo_value ) ) ? $LocalBusiness_geo_value : array();
+
+										}
+
+								}
+
+							// geo (specific)
 
 								if (
 									in_array(
@@ -3117,9 +3160,16 @@
 									)
 								) {
 
-									// Get values
+									// Format values
 
-										$LocalBusiness_geo = array();
+										if ( $LocalBusiness_geo_value ) {
+
+											$LocalBusiness_geo = uamswp_schema_geo_coordinates(
+												$LocalBusiness_geo_value['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+												$LocalBusiness_geo_value['lng'] // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+											);
+
+										}
 
 									// Add to item values
 
@@ -3698,7 +3748,11 @@
 
 									// Get values
 
-										$LocalBusiness_latitude = array();
+										if ( $LocalBusiness_geo_value ) {
+
+											$LocalBusiness_latitude = $LocalBusiness_geo_value['lat'];
+
+										}
 
 									// Add to item values
 
@@ -3792,7 +3846,11 @@
 
 									// Get values
 
-										$LocalBusiness_longitude = array();
+										if ( $LocalBusiness_geo_value ) {
+
+											$LocalBusiness_longitude = $LocalBusiness_geo_value['lng'];
+
+										}
 
 									// Add to item values
 
