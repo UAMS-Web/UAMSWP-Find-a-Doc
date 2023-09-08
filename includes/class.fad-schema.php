@@ -2298,9 +2298,13 @@
 
 						// Fake subpage query and get fake subpage slug
 
-							if ( $ontology_type ) {
+							if (
+								$ontology_type
+								&&
+								$nesting_level == 0
+							) {
 
-								$current_fpage = get_query_var( 'fpage', $LocalBusiness ) ?? ''; // Fake subpage slug
+								$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
 								$fpage_query = $current_fpage ? true : false;
 
 							}
@@ -4482,9 +4486,13 @@
 
 						// Fake subpage query and get fake subpage slug
 
-							if ( $ontology_type ) {
+							if (
+								$ontology_type
+								&&
+								$nesting_level == 0
+							) {
 
-								$current_fpage = get_query_var( 'fpage', $MedicalEntity ) ?? ''; // Fake subpage slug
+								$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
 								$fpage_query = $current_fpage ? true : false;
 
 							}
