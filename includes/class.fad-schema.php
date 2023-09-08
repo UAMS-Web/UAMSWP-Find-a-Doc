@@ -2326,7 +2326,8 @@
 
 									// LocalBusiness Subtype
 
-										$LocalBusiness_type = get_field( 'schema_localbusiness_single', $LocalBusiness ) ?? array();
+										$LocalBusiness_type = get_field( 'schema_localbusiness_single', $LocalBusiness ) ?? '';
+										$LocalBusiness_type = is_array($LocalBusiness_type) ? reset($LocalBusiness_type) : $LocalBusiness_type;
 
 									// Fallback value
 
@@ -2586,7 +2587,7 @@
 
 										// Get related treatments
 
-											$LocalBusiness_treatments = get_field('location_treatments_cpt');
+											$LocalBusiness_treatments = get_field( 'location_treatments_cpt', $LocalBusiness ) ?: array();
 
 										// Format values
 

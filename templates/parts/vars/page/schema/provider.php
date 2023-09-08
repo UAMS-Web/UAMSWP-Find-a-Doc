@@ -28,6 +28,9 @@ include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base.php' );
 
 $schema_provider = $schema_common_base;
 
+// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+$page_id = get_the_ID();
+
 /*
 
 TODO List
@@ -74,6 +77,7 @@ TODO List
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
+	 * Resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
  * Filter ACF fields
 	 * Fields referencing MedicalTest type
 		 * Just treatments with MedicalTest type or its subtypes
@@ -114,6 +118,9 @@ TODO List
 
 			// Define values array for each associated location // Repeat for all associated locations
 
+				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+				$locations = get_field( 'physician_locations', $page_id );
+
 				$provider_related_location = uamswp_fad_schema_location(
 					$locations, // List of IDs of the location items
 					$schema_provider_url, // Page URL
@@ -136,6 +143,9 @@ TODO List
 
 		// Related Areas of Expertise
 
+			// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+			$expertises = get_field( 'physician_expertise', $page_id );
+
 			$provider_related_expertise = uamswp_fad_schema_expertise(
 				$expertises, // List of IDs of the clinical resource items
 				$page_url, // Page URL
@@ -151,6 +161,9 @@ TODO List
 				);
 
 		// Related Clinical Resources
+
+			// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+			$clinical_resources = get_field( 'physician_clinical_resources', $page_id );
 
 			$provider_related_clinical_resource = uamswp_fad_schema_creativework(
 				$clinical_resources, // List of IDs of the clinical resource items
@@ -170,6 +183,9 @@ TODO List
 
 			// Related Conditions
 
+				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+				$conditions_cpt = get_field( 'physician_conditions_cpt', $page_id );
+
 				$provider_related_condition = uamswp_fad_schema_medicalcondition(
 					$conditions_cpt, // List of IDs of the MedicalCondition items
 					$schema_provider_url, // Page URL
@@ -182,6 +198,9 @@ TODO List
 					$provider_related_condition_ref = uamswp_fad_schema_node_references( $provider_related_condition );
 
 			// Related Treatments
+
+				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+				$treatments_cpt = get_field( 'physician_treatments_cpt', $page_id );
 
 				$provider_related_treatment = uamswp_fad_schema_service(
 					$treatments_cpt, // List of IDs of the service items

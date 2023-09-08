@@ -1270,7 +1270,7 @@
 			},
 			"default_value": [],
 			"allow_null": 1,
-			"multiple": 1,
+			"multiple": 0,
 			"ui": 1,
 			"ajax": 0,
 			"return_format": "value",
