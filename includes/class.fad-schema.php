@@ -3336,25 +3336,25 @@
 
 												$LocalBusiness_featured_image_id = '';
 
-											} elseif ( $current_fpage == 'locations' ) {
+											} elseif ( $current_fpage == 'clinics' ) {
+
+												/* Fake subpage for descendant locations */
+
+												$LocalBusiness_featured_image_id = '';
+
+											} elseif ( $current_fpage == 'related' ) {
 
 												/* Fake subpage for related locations */
 
 												$LocalBusiness_featured_image_id = '';
 
-											} elseif ( $current_fpage == 'specialties' ) {
-
-												/* Fake subpage for descendant areas of expertise */
-
-												$LocalBusiness_featured_image_id = '';
-
-											} elseif ( $current_fpage == 'resources' ) {
+											} elseif ( $current_fpage == 'expertises' ) {
 
 												/* Fake subpage for related areas of expertise */
 
 												$LocalBusiness_featured_image_id = '';
 
-											} elseif ( $current_fpage == 'related' ) {
+											} elseif ( $current_fpage == 'resources' ) {
 
 												/* Fake subpage for related clinical resources */
 
@@ -4840,13 +4840,13 @@
 
 										$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $current_fpage == 'resources' ) {
+									} elseif ( $current_fpage == 'related' ) {
 
 										/* Fake subpage for related areas of expertise */
 
 										$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $MedicalEntity ) ?? '';
 
-									} elseif ( $current_fpage == 'related' ) {
+									} elseif ( $current_fpage == 'resources' ) {
 
 										/* Fake subpage for related clinical resources */
 
