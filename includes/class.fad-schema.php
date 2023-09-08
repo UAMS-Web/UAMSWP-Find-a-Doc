@@ -2,230 +2,130 @@
 
 // Format values for common schema data properties and types
 
-	// Add data to an array defining schema data for address or location
+	// Add data to an array defining schema data for PostalAddress
 
-		function uamswp_fad_schema_address(
-			$schema_address = array(), // array (optional) // Main address or location schema array
-			$street_address = '', // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-			$post_office_box_number = '', // string (optional) // The post office box number for PO box addresses.
-			$address_locality = '', // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-			$address_region = '', // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-			$postal_code = '', // string (optional) // The postal code. For example, 94043.
-			$address_country = 'USA', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-			$name = '', // string (optional) // The name of the item.
-			$telephone = '', // string (optional) // The telephone number.
-			$fax_number = '' // string (optional) // The fax number.
+		function uamswp_fad_schema_postaladdress(
+			string $address, // string // Required // The street address or the post office box number for PO box addresses.
+			bool $address_query, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+			string $addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+			string $addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+			string $postalCode, // string // Required // The postal code (e.g., 94043).
+			string $addressCountry = 'US', // string // Optional // The country's ISO 3166-1 alpha-2 country code. // Default: 'US'
+			string $name = '', // string // Optional // The name of the item.
+			string $telephone = '', // string // Optional // The telephone number.
+			string $faxNumber = '', // string // Optional // The fax number.
+			array $schema_PostalAddress = array() // array // Optional // Main address or location schema array
 		) {
 
-			/* Example use:
+			/* 
+			 * Example use:
 			 * 
-			 * 	// Address Schema Data
+			 * 	// address Schema Data
 			 * 
-			 * 		// Check/define the main address or location schema array
-			 * 		$schema_address = ( isset($schema_address) && is_array($schema_address) ) ? $schema_address : array();
+			 * 		// Check/define the main PostalAddress schema array
+			 * 
+			 * 			$schema_PostalAddress = $schema_PostalAddress ?? array();
 			 * 
 			 * 		// Add this location's details to the main address or location schema array
-			 * 		$schema_address = uamswp_fad_schema_address(
-			 * 			$schema_address, // array (optional) // Main address or location schema array
-			 * 			'PostalAddress', // string (optional) // Schema type
-			 * 			$location_address_1 . ( $location_address_2_schema ? ' ' . $location_address_2_schema : '' ), // string (optional) // The street address. For example, 1600 Amphitheatre Pkwy.
-			 * 			'', // string (optional) // The post office box number for PO box addresses.
-			 * 			$location_city, // string (optional) // The locality in which the street address is, and which is in the region. For example, Mountain View.
-			 * 			$location_state, // string (optional) // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-			 * 			$location_zip, // string (optional) // The postal code. For example, 94043.
-			 * 			'', // string (optional) // The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
-			 * 			$location_title, // string (optional) // The name of the item.
-			 * 			$location_phone_format_dash, // string (optional) // The telephone number.
-			 * 			$location_fax_format_dash // string (optional) // The fax number.
-			 * 		);
+			 * 
+			 * 			$schema_address = uamswp_fad_schema_postaladdress(
+			 * 				$location_postOfficeBoxNumber, // string // Required // The street address or the post office box number for PO box addresses.
+			 * 				false, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+			 * 				$location_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+			 * 				$location_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+			 * 				$location_postalCode, // string // Required // The postal code (e.g., 94043).
+			 * 				'', // string // Optional // The country's ISO 3166-1 alpha-2 country code. // Default: 'US'
+			 * 				$location_title = '', // string // Optional // The name of the item.
+			 * 				$location_phone_format_dash = '', // string // Optional // The telephone number.
+			 * 				$location_fax_format_dash = '', // string // Optional // The fax number.
+			 * 				$schema_PostalAddress = array() // array // Optional // Main address or location schema array
+			 * 			);
 			 */
 
 			// Check/define variables
 
-				$schema_address = is_array($schema_address) ? $schema_address : array();
-				$address_country = !empty($address_country) ? $address_country : 'USA';
+				$addressCountry = $addressCountry ?: 'US';
 
-			// Create an array for this item
+				// Check streetAddress vs. postOfficeBoxNumber
 
-				$schema = array();
+					$streetAddress = '';
+					$postOfficeBoxNumber = '';
+
+					if ( $address_query ) {
+
+						$streetAddress = $address;
+
+					} else {
+
+						$postOfficeBoxNumber = $address;
+
+					}
+
+				// If the existing array is flat, nest it in an additional layer
+
+					if ( $schema_PostalAddress ) {
+
+						if ( array_key_exists( '@type', $schema_PostalAddress ) ) {
+
+							$schema_PostalAddress = array($schema_PostalAddress);
+
+						}
+
+					}
+
+			// If the required fields are empty, end now
+
+				if (
+					!$address
+					&&
+					!$addressLocality
+					&&
+					!$addressRegion
+					&&
+					!$postalCode
+				) {
+
+					return $schema_PostalAddress;
+
+				}
 
 			// Add values to the array
 
-				if ( $name ) {
-
-					if ( is_array($name) ) {
-
-						foreach ( $name as $item ) {
-
-							$schema['name'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['name'] = uamswp_attr_conversion($name);
-
-					}
-
-				}
-
-				if ( $street_address ) {
-
-					if ( is_array($street_address) ) {
-
-						foreach ( $street_address as $item ) {
-
-							$schema['streetAddress'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['streetAddress'] = uamswp_attr_conversion($street_address);
-
-					}
-
-				}
-
-				if ( $post_office_box_number ) {
-
-					if ( is_array($post_office_box_number) ) {
-
-						foreach ( $post_office_box_number as $item ) {
-
-							$schema['postOfficeBoxNumber'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['postOfficeBoxNumber'] = uamswp_attr_conversion($post_office_box_number);
-
-					}
-
-				}
-
-				if ( $address_locality ) {
-
-					if ( is_array($address_locality) ) {
-
-						foreach ( $address_locality as $item ) {
-
-							$schema['addressLocality'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['addressLocality'] = uamswp_attr_conversion($address_locality);
-
-					}
-
-				}
-
-				if ( $address_region ) {
-
-					if ( is_array($address_region) ) {
-
-						foreach ( $address_region as $item ) {
-
-							$schema['addressRegion'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['addressRegion'] = uamswp_attr_conversion($address_region);
-
-					}
-
-				}
-
-				if ( $postal_code ) {
-
-					if ( is_array($postal_code) ) {
-
-						foreach ( $postal_code as $item ) {
-
-							$schema['postalCode'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['postalCode'] = uamswp_attr_conversion($postal_code);
-
-					}
-
-				}
-
-				if ( $address_country ) {
-
-					if ( is_array($address_country) ) {
-
-						foreach ( $address_country as $item ) {
-
-							$schema['addressCountry'][] = uamswp_attr_conversion($item);
-
-						}
-
-					} else {
-
-						$schema['addressCountry'] = uamswp_attr_conversion($address_country);
-
-					}
-
-				}
-
-				if ( $telephone ) {
-
-					if ( is_array($telephone) ) {
-
-						foreach ( $telephone as $item ) {
-
-							$schema['telephone'][] = format_phone_dash($item);
-
-						}
-
-					} else {
-
-						$schema['telephone'] = format_phone_dash($telephone);
-
-					}
-
-				}
-
-				if ( $fax_number ) {
-
-					if ( is_array($fax_number) ) {
-
-						foreach ( $fax_number as $item ) {
-
-							$schema['faxNumber'][] = format_phone_dash($item);
-
-						}
-
-					} else {
-
-						$schema['faxNumber'] = format_phone_dash($fax_number);
-
-					}
-
-				}
+				$schema = array(
+					'addressCountry' => $addressCountry,
+					'addressLocality' => $addressLocality,
+					'addressRegion' => $addressRegion,
+					'faxNumber' => $faxNumber,
+					'name' => $name,
+					'postOfficeBoxNumber' => $postOfficeBoxNumber,
+					'postalCode' => $postalCode,
+					'streetAddress' => $streetAddress,
+					'telephone' => $telephone
+				);
+
+			// Clean up the array
+
+				$schema = array_filter($schema);
+
+			// Add @type
 
 				if ( !empty($schema) ) {
-					$schema = array('@type' => 'PostalAddress') + $schema;
+
+					$schema = array( '@type' => 'PostalAddress' ) + $schema;
+
 				}
 
-			// Add this item's array to the main address or location schema array
+			// Add this item's array to the main PostalAddress schema array
 
 				if ( !empty($schema) ) {
-					$schema_address[] = $schema;
+
+					$schema_PostalAddress[] = $schema;
+
 				}
 
 			// Return the main address or location schema array
 
-				return $schema_address;
+				return $schema_PostalAddress;
 
 		}
 
