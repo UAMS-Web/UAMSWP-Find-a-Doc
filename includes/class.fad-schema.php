@@ -2007,14 +2007,6 @@
 							'MedicalBusiness' => true,
 							'properties' => array()
 						),
-						'Dentist' => array(
-							'MedicalBusiness' => true,
-							'properties' => array(
-								'healthPlanNetworkId',
-								'isAcceptingNewPatients',
-								'medicalSpecialty'
-							)
-						),
 						'MedicalClinic' => array(
 							'MedicalBusiness' => true,
 							'properties' => array(
@@ -2023,10 +2015,6 @@
 								'isAcceptingNewPatients',
 								'medicalSpecialty'
 							)
-						),
-						'Optician' => array(
-							'MedicalBusiness' => true,
-							'properties' => array()
 						),
 						'Pharmacy' => array(
 							'MedicalBusiness' => true,
@@ -2808,6 +2796,15 @@
 									&&
 									$nesting_level == 0
 								) {
+
+									/* 
+
+										 * Provider as 'Physician' type
+										 * Provider as 'Dentist' type
+										 * Provider as 'Optician' type
+										 * Descendant locations (LocalBusiness subtypes)
+
+									*/
 
 									// Get values
 

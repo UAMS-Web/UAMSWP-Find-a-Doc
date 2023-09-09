@@ -49,6 +49,8 @@ TODO List
 		 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
 		 * Optional — Postal Code
 	 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
+	 * Define Provider-as-Dentist type array
+	 * Define Provider-as-Optician type array
  * Related ontology items
 	 * Related locations
 		 * Define schema for related locations
@@ -1081,6 +1083,10 @@ TODO List
 
 				}
 
+		// containedInPlace
+
+			$schema_provider_Physician['containedInPlace'] = $provider_related_location;
+
 		// description
 
 			$schema_provider_Physician['description'] = array(); // Defined later
@@ -1095,7 +1101,15 @@ TODO List
 
 		// location
 
-			$schema_provider_Physician['location'] = $provider_related_location;
+			if (
+				isset($schema_provider_location_ref)
+				&&
+				!empty($schema_provider_location_ref)
+			) {
+
+				$schema_provider_Physician['location'] = $schema_provider_location_ref;
+
+			}
 
 		// mainEntityOfPage
 

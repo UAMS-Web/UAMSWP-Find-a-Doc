@@ -1263,9 +1263,7 @@
 			"choices": {
 				"0": "<strong>None</strong> &mdash; No available option is relevant to this entity",
 				"Hospital": "<strong>Hospital</strong> &mdash; A hospital.",
-				"Dentist": "<strong>Dentist</strong> &mdash; A dentist.",
 				"MedicalClinic": "<strong>MedicalClinic</strong> &mdash; A facility, often associated with a hospital or medical school, that is devoted to the specific diagnosis and/or healthcare. Previously limited to outpatients but with evolution it may be open to inpatients as well.",
-				"Optician": "<strong>Optician</strong> &mdash; A store that sells reading glasses and similar devices for improving vision.",
 				"Pharmacy": "<strong>Pharmacy</strong> &mdash; A pharmacy or drugstore."
 			},
 			"default_value": [],
