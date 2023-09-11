@@ -61,7 +61,6 @@ TODO List
 				 * areaServed
 				 * contactPoint
 					 * email
-						 * PENDING QUESTIONS @ https://uamsweb.atlassian.net/browse/FD20-3482
 				 * currenciesAccepted
 				 * diversityPolicy
 				 * diversityStaffingReport
