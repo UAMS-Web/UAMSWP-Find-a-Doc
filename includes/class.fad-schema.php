@@ -1487,6 +1487,62 @@
 
 		}
 
+	// Add data to an array defining schema data for additionalType
+
+		function uamswp_fad_schema_additionaltype(
+			array $repeater, // additionalType repeater field
+			string $field_name = 'schema_additionalType_uri' // additionalType item field name
+		) {
+
+			/* 
+			 * An additional type for the item, typically used for adding more specific types 
+			 * from external vocabularies in microdata syntax. This is a relationship between 
+			 * something and a class that the thing is in. Typically the value is a 
+			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+			 * in RDF. Text values can be used sparingly, for cases where useful information 
+			 * can be added without their being an appropriate schema to reference. In the 
+			 * case of text values, the class label should follow the schema.org style guide.
+			 * 
+			 * Subproperty of:
+			 *     - rdf:type
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 *     - URL
+			 */
+
+			// Base list array
+
+				$additionalType_list = array();
+
+			// Add each repeater row to the list array
+
+				if ( $repeater ) {
+
+					foreach ( $repeater as $additionalType ) {
+
+						$additionalType_list[] = $additionalType[$field_name];
+
+					} // endforeach ( $repeater as $additionalType )
+
+					// Clean up list array
+
+						$additionalType_list = array_unique($additionalType_list);
+						$additionalType_list = array_filter($additionalType_list);
+						$additionalType_list = array_values($additionalType_list);
+						sort($additionalType_list);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($additionalType_list);
+
+				} // endif ( $repeater )
+
+			return $additionalType_list;
+
+		}
+
 	// Add data to an array defining schema data for ImageObject from thumbnails
 
 		function uamswp_fad_schema_imageobject_thumbnails(
@@ -2216,6 +2272,8 @@
 								$LocalBusiness_addressLocality = '';
 								$LocalBusiness_addressRegion = '';
 								$LocalBusiness_postalCode = '';
+								$LocalBusiness_additionalType_field_array = array();
+								$LocalBusiness_additionalType_field = array();
 
 								// Reused variables
 
@@ -2330,6 +2388,14 @@
 
 								// medicalSpecialty
 
+									/* 
+									 * A medical specialty of the provider.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSpecialty
+									 */
+
 									if (
 										in_array(
 											'medicalSpecialty',
@@ -2392,7 +2458,7 @@
 
 												$LocalBusiness_additionalType = array();
 
-											// Get medicalSpecialty values that match MedicalBusiness subtypes
+											// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
 												if ( $LocalBusiness_medicalSpecialty ) {
 
@@ -2405,6 +2471,32 @@
 													);
 
 												}
+
+											// Get additionalType repeater field value
+
+												$LocalBusiness_additionalType_field_array = get_field( 'location_schema_additionalType', $LocalBusiness ) ?: array();
+
+												// Add each row to the list array
+
+													if ( $LocalBusiness_additionalType_field_array ) {
+
+														$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
+															$LocalBusiness_additionalType_field_array, // additionalType repeater field
+															'schema_additionalType_uri' // additionalType item field name
+														);
+
+													}
+
+												// Add to property values
+					
+													if ( $LocalBusiness_additionalType_field ) {
+					
+														$LocalBusiness_additionalType = array_merge(
+															$LocalBusiness_additionalType,
+															$LocalBusiness_additionalType_field
+														);
+					
+													}
 
 										// Add to item values
 
@@ -2444,6 +2536,18 @@
 									}
 
 								// address
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -2615,6 +2719,18 @@
 
 								// aggregateRating
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'aggregateRating',
@@ -2680,6 +2796,18 @@
 
 								// areaServed
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'areaServed',
@@ -2704,6 +2832,18 @@
 									}
 
 								// availableService
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -2741,6 +2881,18 @@
 
 								// award
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'award',
@@ -2766,6 +2918,18 @@
 
 								// brand
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'brand',
@@ -2788,6 +2952,18 @@
 									}
 
 								// contactPoint
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -2812,6 +2988,18 @@
 
 								// containedInPlace
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'containedInPlace',
@@ -2834,6 +3022,18 @@
 									}
 
 								// containsPlace
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -2869,6 +3069,18 @@
 
 								// currenciesAccepted
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'currenciesAccepted',
@@ -2893,6 +3105,18 @@
 									}
 
 								// department
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -2975,6 +3199,18 @@
 
 								// diversityPolicy
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'diversityPolicy',
@@ -2999,6 +3235,18 @@
 									}
 
 								// diversityStaffingReport
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3025,6 +3273,18 @@
 
 								// duns
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'duns',
@@ -3049,6 +3309,18 @@
 									}
 
 								// email
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3075,6 +3347,18 @@
 
 								// employee
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'employee',
@@ -3099,6 +3383,18 @@
 									}
 
 								// ethicsPolicy
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3125,6 +3421,18 @@
 
 								// event
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'event',
@@ -3150,6 +3458,18 @@
 
 								// faxNumber
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'faxNumber',
@@ -3172,6 +3492,18 @@
 									}
 
 								// foundingDate
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3197,6 +3529,18 @@
 									}
 
 								// funding
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3254,6 +3598,18 @@
 
 								// geo (specific)
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'geo',
@@ -3284,6 +3640,18 @@
 
 								// globalLocationNumber
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'globalLocationNumber',
@@ -3306,6 +3674,18 @@
 									}
 
 								// hasCredential
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3332,6 +3712,18 @@
 
 								// hasDriveThroughService
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'hasDriveThroughService',
@@ -3356,6 +3748,18 @@
 									}
 
 								// hasMap
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3388,6 +3792,18 @@
 
 								// healthcareReportingData
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'healthcareReportingData',
@@ -3413,6 +3829,18 @@
 
 								// healthPlanNetworkId
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'healthPlanNetworkId',
@@ -3435,6 +3863,18 @@
 									}
 
 								// identifier
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3669,6 +4109,18 @@
 
 								// isAcceptingNewPatients
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'isAcceptingNewPatients',
@@ -3693,6 +4145,18 @@
 									}
 
 								// isAccessibleForFree
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3719,6 +4183,18 @@
 
 								// isicV4
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'isicV4',
@@ -3742,6 +4218,18 @@
 
 								// iso6523Code
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'iso6523Code',
@@ -3764,6 +4252,18 @@
 									}
 
 								// keywords
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3790,6 +4290,18 @@
 
 								// knowsAbout
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'knowsAbout',
@@ -3815,6 +4327,18 @@
 
 								// knowsLanguage
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'knowsLanguage',
@@ -3839,6 +4363,18 @@
 									}
 
 								// latitude
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3867,6 +4403,18 @@
 
 								// legalName
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'legalName',
@@ -3890,6 +4438,18 @@
 
 								// leiCode
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'leiCode',
@@ -3912,6 +4472,18 @@
 									}
 
 								// logo
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -3937,6 +4509,18 @@
 									}
 
 								// longitude
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4007,6 +4591,18 @@
 
 								// makesOffer
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'makesOffer',
@@ -4031,6 +4627,18 @@
 									}
 
 								// maximumAttendeeCapacity
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4057,6 +4665,18 @@
 
 								// memberOf
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'memberOf',
@@ -4082,6 +4702,18 @@
 
 								// naics
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'naics',
@@ -4104,6 +4736,18 @@
 									}
 
 								// nonprofitStatus
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4130,6 +4774,18 @@
 
 								// numberOfEmployees
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'numberOfEmployees',
@@ -4154,6 +4810,18 @@
 									}
 
 								// openingHours
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4180,6 +4848,18 @@
 
 								// openingHoursSpecification
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'openingHoursSpecification',
@@ -4205,6 +4885,18 @@
 
 								// parentOrganization
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'parentOrganization',
@@ -4227,6 +4919,18 @@
 									}
 
 								// paymentAccepted
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4252,6 +4956,18 @@
 									}
 
 								// photo
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4374,6 +5090,18 @@
 
 								// publicAccess
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'publicAccess',
@@ -4398,6 +5126,18 @@
 									}
 
 								// review
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4464,6 +5204,18 @@
 
 								// smokingAllowed
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'smokingAllowed',
@@ -4484,6 +5236,18 @@
 									}
 
 								// specialOpeningHoursSpecification
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -4556,6 +5320,18 @@
 
 								// subOrganization
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'subOrganization',
@@ -4581,6 +5357,18 @@
 
 								// taxID
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'taxID',
@@ -4604,6 +5392,18 @@
 
 								// telephone
 
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
 									if (
 										in_array(
 											'telephone',
@@ -4626,6 +5426,18 @@
 									}
 
 								// vatID
+
+									/* 
+									 * foo
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
 
 									if (
 										in_array(
@@ -7504,21 +8316,18 @@
 							 *     - URL
 							 */
 
-							$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: '';
+							// Get repeater field value
 
-							// Base array
+								$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: array();
 
-								$condition_additionalType = array();
-
-							// Add each row to the array
+							// Add each row to the list array
 
 								if ( $condition_additionalType_array ) {
 
-									foreach ( $condition_additionalType_array as $additionalType ) {
-
-										$condition_additionalType[] = $additionalType['schema_additionalType_uri'];
-
-									}
+									$condition_additionalType = uamswp_fad_schema_additionaltype(
+										$condition_additionalType_array, // additionalType repeater field
+										'schema_additionalType_uri' // additionalType item field name
+									);
 
 								}
 
@@ -7526,11 +8335,7 @@
 
 								if ( $condition_additionalType ) {
 
-									$condition_item['additionalType'] = $condition_additionalType;
-
-									// If there is only one item, flatten the multi-dimensional array by one step
-
-										uamswp_fad_flatten_multidimensional_array($condition_item['additionalType']);
+									$service_item['additionalType'] = $condition_additionalType;
 
 								}
 
@@ -7801,7 +8606,7 @@
 							$relevantSpecialty = '';
 							$sameAs = '';
 							$service_additionalType_array = array();
-							$service_additionalType_list = array();
+							$service_additionalType = array();
 							$service_alternateName = '';
 							$service_alternateName_array = array();
 							$service_item = array();
@@ -8009,37 +8814,22 @@
 
 								$service_additionalType_array = get_field( 'schema_additionalType', $service ) ?: array();
 
-							// Base list array
-
-								$service_additionalType_list = array();
-
-							// Add each row to the array
+							// Add each row to the list array
 
 								if ( $service_additionalType_array ) {
 
-									foreach ( $service_additionalType_array as $additionalType ) {
+									$service_additionalType = uamswp_fad_schema_additionaltype(
+										$service_additionalType_array, // additionalType repeater field
+										'schema_additionalType_uri' // additionalType item field name
+									);
 
-										$service_additionalType_list[] = $additionalType['schema_additionalType_uri'];
+								}
 
-									}
+							// Add to schema
 
-									// Clean up list array
+								if ( $service_additionalType ) {
 
-										$service_additionalType_list = array_filter($service_additionalType_list);
-										$service_additionalType_list = array_values($service_additionalType_list);
-										sort($service_additionalType_list);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($service_additionalType_list);
-
-									// Add to schema
-
-										if ( $service_additionalType_list ) {
-
-											$service_item['additionalType'] = $service_additionalType_list;
-
-										}
+									$service_item['additionalType'] = $service_additionalType;
 
 								}
 
