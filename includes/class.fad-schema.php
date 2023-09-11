@@ -3652,45 +3652,6 @@
 
 									}
 
-								// healthcareReportingData
-
-									/* 
-									 * Indicates data describing a hospital (e.g., a CDC CDCPMDRecord or as some kind 
-									 * of Dataset).
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CDCPMDRecord
-									 *     - Dataset
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 */
-
-									if (
-										in_array(
-											'healthcareReportingData',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$LocalBusiness_healthcareReportingData = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_healthcareReportingData ) {
-
-												$LocalBusiness_item['healthcareReportingData'] = $LocalBusiness_healthcareReportingData;
-
-											}
-
-									}
-
 								// identifiers (multiple properties)
 
 									if ( $nesting_level == 0 ) {

@@ -114,7 +114,6 @@ TODO List
 					 * Add input for date the location first opened (regardless of physical location)
 				 * hasCredential
 				 * hasDriveThroughService
-				 * healthcareReportingData
 				 * image
 				 * keywords
 				 * knowsAbout
