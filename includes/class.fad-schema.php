@@ -2196,6 +2196,21 @@
 							$LocalBusiness_override_parent_photo_gallery = '';
 							$LocalBusiness_image_general = array();
 							$LocalBusiness_geo_value = array();
+							$LocalBusiness_address_1 = '';
+							$LocalBusiness_streetAddress_array = array();
+							$LocalBusiness_address_2_array = array();
+							$LocalBusiness_building = '';
+							$LocalBusiness_building_term = '';
+							$LocalBusiness_building_slug = '';
+							$LocalBusiness_building_name = '';
+							$LocalBusiness_floor = array();
+							$LocalBusiness_floor_value = '';
+							$LocalBusiness_floor_label = '';
+							$LocalBusiness_suite = '';
+							$LocalBusiness_streetAddress = '';
+							$LocalBusiness_addressLocality = '';
+							$LocalBusiness_addressRegion = '';
+							$LocalBusiness_postalCode = '';
 
 							// Reused variables
 
@@ -2427,22 +2442,6 @@
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
 								) {
-
-									$LocalBusiness_address_1 = '';
-									$LocalBusiness_streetAddress_array = array();
-									$LocalBusiness_address_2_array = array();
-									$LocalBusiness_building = '';
-									$LocalBusiness_building_term = '';
-									$LocalBusiness_building_slug = '';
-									$LocalBusiness_building_name = '';
-									$LocalBusiness_floor = array();
-									$LocalBusiness_floor_value = '';
-									$LocalBusiness_floor_label = '';
-									$LocalBusiness_suite = '';
-									$LocalBusiness_streetAddress = '';
-									$LocalBusiness_addressLocality = '';
-									$LocalBusiness_addressRegion = '';
-									$LocalBusiness_postalCode = '';
 
 									// Get values
 
