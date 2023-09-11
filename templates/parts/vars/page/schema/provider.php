@@ -86,13 +86,23 @@ TODO List
 				 * nonprofitStatus
 				 * numberOfEmployees
 				 * paymentAccepted
-			 * Other properties
+			 * Needing new data inputs
 				 * award
 					 * Create taxonomy similar to provider's 'Recognition List', but for locations
 						 * Add a section to the location profile / subsection to display said information
 				 * brand
 					 * Create method of defining values for UAMS Health and UAMS
 					 * Create method of defining values for third-party organizations (e.g., Arkansas Children's)
+				 * event
+					 * Find means of populating values from relevant LiveWhale calendar events
+				 * foundingDate
+					 * Add input for date the location first opened (regardless of physical location)
+				 * hasCredential
+				 * hasDriveThroughService
+				 * potentialAction
+				 * publicAccess
+				 * review
+			 * Other properties
 				 * contactPoint
 					 * faxNumber
 					 * telephone
@@ -108,13 +118,6 @@ TODO List
 					 * Include provider as 'Optician' type 
 				 * employee
 					 * Include each provider associated with the location
-				 * event
-					 * Find means of populating values from relevant LiveWhale calendar events
-				 * foundingDate
-					 * Add input for date the location first opened (regardless of physical location)
-				 * hasCredential
-				 * hasDriveThroughService
-				 * image
 				 * keywords
 				 * knowsAbout
 				 * mainEntityOfPage
@@ -126,9 +129,6 @@ TODO List
 					 * For top-level locations, add UAMS Health as the 'Organization'
 				 * photo
 					 * Amend values from ImageObject to accommodate properties particular to 'Photograph' type
-				 * potentialAction
-				 * publicAccess
-				 * review
 				 * specialOpeningHoursSpecification
 	 * Related areas of expertise
 		 * Apply the areas of expertise schema function to the single area of expertise template
@@ -148,7 +148,11 @@ TODO List
 			 * videoQuality
 			 * videoFrameSize
 	 * Provider
-		 * Provider as 'Physician' type
+		 * Make adjustments to convert 'Physician' type to 'MedicalBusiness' or a subtype of 'MedicalBusiness' relevant to the particular provider
+			 * A dentist -> 'Dentist'
+			 * An optician -> 'Optician'
+			 * A women's health nurse practitioner -> 'Gynecologic'
+		 * Provider as 'MedicalBusiness' type and its subtypes
 			 * 'employee' property
 				 * Add Provider as 'Person' type
  * General
