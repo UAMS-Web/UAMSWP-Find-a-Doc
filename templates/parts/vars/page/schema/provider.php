@@ -54,9 +54,7 @@ TODO List
  * Related ontology items
 	 * Related locations
 		 * Define schema for related locations
-		 * Get parent location address information on descendant location schema
 		 * Apply the location schema function to the single location template
-		 * Make medicalSpecialty input conditional based on LocalBusiness subtype input (not empty; not only Optician)
 	 * Related areas of expertise
 		 * Apply the areas of expertise schema function to the single area of expertise template
 		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
