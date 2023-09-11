@@ -2197,11 +2197,9 @@
 								$LocalBusiness_diversityPolicy = array();
 								$LocalBusiness_diversityStaffingReport = array();
 								$LocalBusiness_duns = array();
-								$LocalBusiness_email = array();
 								$LocalBusiness_employee = array();
 								$LocalBusiness_ethicsPolicy = array();
 								$LocalBusiness_event = array();
-								$LocalBusiness_faxNumber = array();
 								$LocalBusiness_foundingDate = array();
 								$LocalBusiness_funding = array();
 								$LocalBusiness_geo = array();
@@ -2224,11 +2222,9 @@
 								$LocalBusiness_keywords = array();
 								$LocalBusiness_knowsAbout = array();
 								$LocalBusiness_knowsLanguage = array();
-								$LocalBusiness_latitude = array();
 								$LocalBusiness_legalName = array();
 								$LocalBusiness_leiCode = array();
 								$LocalBusiness_logo = array();
-								$LocalBusiness_longitude = array();
 								$LocalBusiness_mainEntityOfPage = array();
 								$LocalBusiness_makesOffer = array();
 								$LocalBusiness_maximumAttendeeCapacity = array();
@@ -2250,7 +2246,6 @@
 								$LocalBusiness_subjectOf = array();
 								$LocalBusiness_subOrganization = array();
 								$LocalBusiness_taxID = array();
-								$LocalBusiness_telephone = array();
 								$LocalBusiness_vatID = array();
 								$LocalBusiness_has_parent = '';
 								$LocalBusiness_parent_id = '';
@@ -2566,15 +2561,12 @@
 								// address
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Physical address of the item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - PostalAddress
+									 *     - Text
 									 */
 
 									if (
@@ -2748,15 +2740,11 @@
 								// aggregateRating
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The overall rating, based on a collection of reviews or ratings, of the item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - AggregateRating
 									 */
 
 									if (
@@ -2825,15 +2813,14 @@
 								// areaServed
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The geographic area where a service or offered item is provided.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - AdministrativeArea
+									 *     - GeoShape
+									 *     - Place
+									 *     - Text
 									 */
 
 									if (
@@ -2862,15 +2849,12 @@
 								// availableService
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A medical service available from this provider.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - MedicalProcedure
+									 *     - MedicalTest
 									 */
 
 									if (
@@ -2910,15 +2894,11 @@
 								// award
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * An award won by or for this item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Text
 									 */
 
 									if (
@@ -2947,15 +2927,13 @@
 								// brand
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The brand(s) associated with a product or service, or the brand(s) maintained 
+									 * by an organization or business person.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Brand
+									 *     - Organization
 									 */
 
 									if (
@@ -2982,16 +2960,18 @@
 								// contactPoint
 
 									/* 
-									 * foo
+									 * A contact point for a person or organization.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
+									 *     - ContactPoint
 									 */
+
+									/*
+
+										email
+										faxNumber
+										telephone
+
+									*/
 
 									if (
 										in_array(
@@ -3017,15 +2997,10 @@
 								// containedInPlace
 
 									/* 
-									 * foo
+									 * The basic containment relation between a place and one that contains it.
+									 * expected to be one of these types:
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
+									 *     - Place
 									 */
 
 									if (
@@ -3052,15 +3027,13 @@
 								// containsPlace
 
 									/* 
-									 * foo
+									 * The basic containment relation between a place and another that it contains.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Inverse property: 'containedInPlace'
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Place
 									 */
 
 									if (
@@ -3098,15 +3071,17 @@
 								// currenciesAccepted
 
 									/* 
-									 * foo
+									 * The currency accepted.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Use standard formats:
+									 *     - ISO 4217 currency format (e.g., "USD")
+									 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
+									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other 
+									 *       currency types (e.g., "Ithaca HOUR")
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Text
 									 */
 
 									if (
@@ -3135,15 +3110,13 @@
 								// department
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A relationship between an organization and a department of that organization, 
+									 * also described as an organization (allowing different urls, logos, opening 
+									 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Organization
 									 */
 
 									if (
@@ -3228,15 +3201,20 @@
 								// diversityPolicy
 
 									/* 
-									 * foo
+									 * Statement on diversity policy by an Organization 
+									 * (e.g., a NewsMediaOrganization).
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * For a NewsMediaOrganization, a statement  describing the newsroom’s diversity 
+									 * policy on both staffing and sources, typically providing staffing data.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - CreativeWork
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3265,15 +3243,18 @@
 								// diversityStaffingReport
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * For an Organization (often but not necessarily a NewsMediaOrganization), a 
+									 * report on staffing diversity issues. In a news context this might be for 
+									 * example ASNE or RTDNA (US) reports, or self-reported.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Article
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3299,92 +3280,14 @@
 
 									}
 
-								// duns
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'duns',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$LocalBusiness_duns = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_duns ) {
-
-												$LocalBusiness_item['duns'] = $LocalBusiness_duns;
-
-											}
-
-									}
-
-								// email
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'email',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$LocalBusiness_email = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_email ) {
-
-												$LocalBusiness_item['email'] = $LocalBusiness_email;
-
-											}
-
-									}
-
 								// employee
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Someone working for this organization.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Person
 									 */
 
 									if (
@@ -3413,15 +3316,21 @@
 								// ethicsPolicy
 
 									/* 
-									 * foo
+									 * Statement about ethics policy, (e.g., journalistic and publishing practices of 
+									 * a NewsMediaOrganization; food source policies of a Restaurant).
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * In the case of a NewsMediaOrganization, an ethicsPolicy is typically a 
+									 * statement describing the personal, organizational, and corporate standards of 
+									 * behavior expected by the organization.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - CreativeWork
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3450,15 +3359,11 @@
 								// event
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Upcoming or past event associated with this place, organization, or action.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Event
 									 */
 
 									if (
@@ -3484,53 +3389,14 @@
 
 									}
 
-								// faxNumber
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'faxNumber',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_faxNumber = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_faxNumber ) {
-
-												$LocalBusiness_item['faxNumber'] = $LocalBusiness_faxNumber;
-
-											}
-
-									}
-
 								// foundingDate
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The date that this organization was founded.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Date
 									 */
 
 									if (
@@ -3559,15 +3425,17 @@
 								// funding
 
 									/* 
-									 * foo
+									 * A Grant that directly or indirectly provide funding or sponsorship for this item. See also ownershipFundingInfo.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Inverse-property: fundedItem
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Grant
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3624,18 +3492,15 @@
 
 									}
 
-								// geo (specific)
+								// geo (specific property)
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The geo coordinates of the place.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - GeoCoordinates
+									 *     - GeoShape
 									 */
 
 									if (
@@ -3666,53 +3531,18 @@
 
 									}
 
-								// globalLocationNumber
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'globalLocationNumber',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_globalLocationNumber = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_globalLocationNumber ) {
-
-												$LocalBusiness_item['globalLocationNumber'] = $LocalBusiness_globalLocationNumber;
-
-											}
-
-									}
-
 								// hasCredential
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A credential awarded to the Person or Organization.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - EducationalOccupationalCredential
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3741,15 +3571,19 @@
 								// hasDriveThroughService
 
 									/* 
-									 * foo
+									 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility) 
+									 * offers a service that can be used by driving through in a car.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * In the case of CovidTestingFacility such facilities could potentially help with 
+									 * social distancing from other potentially-infected users.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Boolean
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3778,15 +3612,15 @@
 								// hasMap
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A URL to a map of the place.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Map
+									 *     - URL
+									 * 
+									 * The examples on Schema.org indicate that a URL to the location on Google Maps 
+									 * is acceptable.
 									 */
 
 									if (
@@ -3821,15 +3655,17 @@
 								// healthcareReportingData
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Indicates data describing a hospital (e.g., a CDC CDCPMDRecord or as some kind 
+									 * of Dataset).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - CDCPMDRecord
+									 *     - Dataset
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -3855,71 +3691,460 @@
 
 									}
 
-								// healthPlanNetworkId
+								// identifiers (multiple properties)
 
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
+									if ( $nesting_level == 0 ) {
 
-									if (
-										in_array(
-											'healthPlanNetworkId',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
+										// 'duns' property
 
-										// Get values
+											/* 
+											 * The Dun & Bradstreet DUNS number for identifying an organization or business 
+											 * person.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
 
-											$LocalBusiness_healthPlanNetworkId = array();
+											// Define values
 
-										// Add to item values
+												if (
+													in_array(
+														'duns',
+														$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+													)
+													&&
+													$nesting_level == 0
+												) {
 
-											if ( $LocalBusiness_healthPlanNetworkId ) {
+													// Base 'duns' property value array
 
-												$LocalBusiness_item['healthPlanNetworkId'] = $LocalBusiness_healthPlanNetworkId;
+														$LocalBusiness_duns = array();
+
+													// Get values
+
+														$LocalBusiness_duns = array();
+
+													// Add to item values
+
+														if ( $LocalBusiness_duns ) {
+
+															$LocalBusiness_item['duns'] = $LocalBusiness_duns;
+
+														}
+
+												}
+
+										// globalLocationNumber
+
+											/* 
+											 * The Global Location Number (GLN, sometimes also referred to as International 
+											 * Location Number or ILN) of the respective organization, person, or place. The 
+											 * GLN is a 13-digit number used to identify parties and physical locations.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											// Define values
+
+												if (
+													in_array(
+														'globalLocationNumber',
+														$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+													)
+												) {
+
+													// Base 'globalLocationNumber' property value array
+
+														$LocalBusiness_globalLocationNumber = array();
+
+													// Get values
+
+														$LocalBusiness_globalLocationNumber = array();
+
+													// Add to item values
+
+														if ( $LocalBusiness_globalLocationNumber ) {
+
+															$LocalBusiness_item['globalLocationNumber'] = $LocalBusiness_globalLocationNumber;
+
+														}
+
+												}
+
+										// isicV4
+
+											/* 
+											 * The International Standard of Industrial Classification of All Economic 
+											 * Activities (ISIC), Revision 4 code for a particular organization, business 
+											 * person, or place.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												in_array(
+													'isicV4',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Base 'isicV4' property value array
+
+													$LocalBusiness_identifier = array();
+
+												// Get values
+
+													$LocalBusiness_isicV4 = array();
+
+												// Add to item values
+
+													if ( $LocalBusiness_isicV4 ) {
+
+														$LocalBusiness_item['isicV4'] = $LocalBusiness_isicV4;
+
+													}
 
 											}
 
-									}
+										// leiCode
 
-								// identifier
+											/* 
+											 * An organization identifier that uniquely identifies a legal entity as defined 
+											 * in ISO 17442.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
 
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
+											if (
+												in_array(
+													'leiCode',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
 
-									if (
-										in_array(
-											'identifier',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
+												// Base 'leiCode' property value array
 
-										// Get values
+													$LocalBusiness_leiCode = array();
 
-											$LocalBusiness_identifier = array();
+												// Get values
 
-										// Add to item values
+													$LocalBusiness_leiCode = array();
 
-											if ( $LocalBusiness_identifier ) {
+												// Add to item values
 
-												$LocalBusiness_item['identifier'] = $LocalBusiness_identifier;
+													if ( $LocalBusiness_leiCode ) {
+
+														$LocalBusiness_item['leiCode'] = $LocalBusiness_leiCode;
+
+													}
+
+											}
+
+										// naics
+
+											/* 
+											 * The North American Industry Classification System (NAICS) code for a particular 
+											 * organization or business person.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												in_array(
+													'naics',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Base 'naics' property value array
+
+													$LocalBusiness_naics = array();
+
+												// Get values
+
+													$LocalBusiness_naics = array();
+
+												// Add to item values
+
+													if ( $LocalBusiness_naics ) {
+
+														$LocalBusiness_item['naics'] = $LocalBusiness_naics;
+
+													}
+
+											}
+
+										// taxID
+
+											/* 
+											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US; 
+											 * the CIF/NIF in Spain).
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												in_array(
+													'taxID',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Base arrays
+
+													// Base 'taxID' property value array
+
+														/* https://schema.org/taxID */
+
+														$LocalBusiness_taxID = array();
+
+													// Base Taxpayer Identification Number value array
+
+														/* https://www.wikidata.org/wiki/Q1444804 */
+
+														$LocalBusiness_taxID_taxpayer = array();
+
+													// Base Employer Identification Number value array
+
+														/* https://www.wikidata.org/wiki/Q2397748 */
+
+														$LocalBusiness_taxID_employer = array();
+
+												// Get values
+
+													$LocalBusiness_taxID = array();
+
+												// Add to item values
+
+													if ( $LocalBusiness_taxID ) {
+
+														$LocalBusiness_item['taxID'] = $LocalBusiness_taxID;
+
+													}
+
+											}
+
+										// vatID
+
+											/* 
+											 * The Value-added Tax ID of the organization or person.
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												in_array(
+													'vatID',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Base 'taxID' property value array
+
+													$LocalBusiness_vatID = array();
+
+												// Get values
+
+													$LocalBusiness_vatID = array();
+
+												// Add to item values
+
+													if ( $LocalBusiness_vatID ) {
+
+														$LocalBusiness_item['vatID'] = $LocalBusiness_vatID;
+
+													}
+
+											}
+
+										// iso6523Code
+
+											/* 
+											 * An organization identifier as defined in ISO 6523(-1). Note that many existing 
+											 * organization identifiers such as leiCode, duns and vatID can be expressed as an 
+											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier 
+											 * accordingly.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 * 
+											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+											 * feedback and adoption from applications and websites can help improve their 
+											 * definitions.
+											 */
+
+											if (
+												in_array(
+													'iso6523Code',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Base 'iso6523Code' property value array
+
+													$LocalBusiness_iso6523Code = array();
+
+												// Get values
+
+													$LocalBusiness_iso6523Code = array();
+
+												// Add to item values
+
+													if ( $LocalBusiness_iso6523Code ) {
+
+														$LocalBusiness_item['iso6523Code'] = $LocalBusiness_iso6523Code;
+
+													}
+
+											}
+
+										// 'identifier' property
+
+											if (
+												in_array(
+													'identifier',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												/* 
+												 * The identifier property represents any kind of identifier for any kind of 
+												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+												 * properties for representing many of these, either as textual strings or as 
+												 * URL (URI) links.
+												 * 
+												 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
+												 * 
+												 * Values expected to be one of these types:
+												 * 
+												 *     - PropertyValue
+												 *     - Text
+												 *     - URL
+												 */
+
+												// Base 'identifier' property value array
+
+													$LocalBusiness_identifier = array();
+
+												// Get values
+
+													// Dun & Bradstreet DUNS number
+
+														if ( $LocalBusiness_duns ) {
+
+															$LocalBusiness_identifier[] = array(
+																'@type' => 'PropertyValue',
+																'propertyID' => 'https://www.wikidata.org/wiki/Q246386',
+																'value' => $LocalBusiness_duns
+															);
+
+														}
+
+													// Global Location Number
+
+														if ( $LocalBusiness_globalLocationNumber ) {
+
+															$LocalBusiness_identifier[] = array(
+																'@type' => 'PropertyValue',
+																'propertyID' => 'https://www.wikidata.org/wiki/Q1258830',
+																'value' => $LocalBusiness_globalLocationNumber
+															);
+
+														}
+
+													// International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
+
+														if ( $LocalBusiness_isicV4 ) {
+
+															$LocalBusiness_identifier[] = array(
+																'@type' => 'PropertyValue',
+																'propertyID' => 'https://www.wikidata.org/wiki/Q112111674',
+																'value' => $LocalBusiness_isicV4
+															);
+
+														}
+
+													// Legal Entity Identifier (LEI)
+
+														if ( $LocalBusiness_leiCode ) {
+
+															$LocalBusiness_identifier[] = array(
+																'@type' => 'PropertyValue',
+																'propertyID' => 'https://www.wikidata.org/wiki/Q6517388',
+																'value' => $LocalBusiness_leiCode
+															);
+
+														}
+
+													// North American Industry Classification System (NAICS) code
+
+														if ( $LocalBusiness_naics ) {
+
+															$LocalBusiness_identifier[] = array(
+																'@type' => 'PropertyValue',
+																'propertyID' => 'https://www.wikidata.org/wiki/Q3509282',
+																'value' => $LocalBusiness_naics
+															);
+
+														}
+
+													// Tax / Fiscal ID
+
+														// Taxpayer Identification Number
+
+															if ( $LocalBusiness_taxID_taxpayer ) {
+
+																$LocalBusiness_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q1444804',
+																	'value' => $LocalBusiness_taxID_taxpayer
+																);
+
+															}
+
+														// Employer Identification Number
+
+															if ( $LocalBusiness_taxID_employer ) {
+
+																$LocalBusiness_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q2397748',
+																	'value' => $LocalBusiness_taxID_employer
+																);
+
+															}
+
+													// Value-added tax (VAT) identification number
+
+														if ( $LocalBusiness_vatID ) {
+
+															$LocalBusiness_identifier[] = array(
+																'@type' => 'PropertyValue',
+																'propertyID' => 'https://www.wikidata.org/wiki/Q2319042',
+																'value' => $LocalBusiness_vatID
+															);
+
+														}
+
+												// Add to item values
+
+													if ( $LocalBusiness_identifier ) {
+
+														$LocalBusiness_item['identifier'] = $LocalBusiness_identifier;
+
+													}
 
 											}
 
@@ -4138,15 +4363,15 @@
 								// isAcceptingNewPatients
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Whether the provider is accepting new patients.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Boolean
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -4175,15 +4400,11 @@
 								// isAccessibleForFree
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A flag to signal that the item, event, or place is accessible for free.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Boolean
 									 */
 
 									if (
@@ -4209,88 +4430,17 @@
 
 									}
 
-								// isicV4
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'isicV4',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_isicV4 = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_isicV4 ) {
-
-												$LocalBusiness_item['isicV4'] = $LocalBusiness_isicV4;
-
-											}
-
-									}
-
-								// iso6523Code
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'iso6523Code',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_iso6523Code = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_iso6523Code ) {
-
-												$LocalBusiness_item['iso6523Code'] = $LocalBusiness_iso6523Code;
-
-											}
-
-									}
-
 								// keywords
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									 * keywords list are typically delimited by commas, or by repeating the property.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - DefinedTerm
+									 *     - Text
+									 *     - URL
 									 */
 
 									if (
@@ -4319,15 +4469,20 @@
 								// knowsAbout
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Of a Person, and less typically of an Organization, to indicate a topic that is 
+									 * known about — suggesting possible expertise but not implying it. We do not 
+									 * distinguish skill levels here, or relate this to educational content, events, 
+									 * objectives or JobPosting descriptions.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Text
+									 *     - Thing
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -4356,15 +4511,14 @@
 								// knowsLanguage
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Of a Person, and less typically of an Organization, to indicate a known 
+									 * language. We do not distinguish skill levels or reading / writing / speaking / 
+									 * signing here. Use language codes from the IETF BCP 47 standard.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Language
+									 *     - Text
 									 */
 
 									if (
@@ -4390,57 +4544,12 @@
 
 									}
 
-								// latitude
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'latitude',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											if ( $LocalBusiness_geo_value ) {
-
-												$LocalBusiness_latitude = $LocalBusiness_geo_value['lat'];
-
-											}
-
-										// Add to item values
-
-											if ( $LocalBusiness_latitude ) {
-
-												$LocalBusiness_item['latitude'] = $LocalBusiness_latitude;
-
-											}
-
-									}
-
 								// legalName
 
 									/* 
-									 * foo
+									 * The official name of the organization (e.g., the registered company name).
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
+									 *     - Text
 									 */
 
 									if (
@@ -4464,53 +4573,15 @@
 
 									}
 
-								// leiCode
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'leiCode',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_leiCode = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_leiCode ) {
-
-												$LocalBusiness_item['leiCode'] = $LocalBusiness_leiCode;
-
-											}
-
-									}
-
 								// logo
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * An associated logo.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - ImageObject
+									 *     - URL
 									 */
 
 									if (
@@ -4531,45 +4602,6 @@
 											if ( $LocalBusiness_logo ) {
 
 												$LocalBusiness_item['logo'] = $LocalBusiness_logo;
-
-											}
-
-									}
-
-								// longitude
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'longitude',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											if ( $LocalBusiness_geo_value ) {
-
-												$LocalBusiness_longitude = $LocalBusiness_geo_value['lng'];
-
-											}
-
-										// Add to item values
-
-											if ( $LocalBusiness_longitude ) {
-
-												$LocalBusiness_item['longitude'] = $LocalBusiness_longitude;
 
 											}
 
@@ -4620,15 +4652,13 @@
 								// makesOffer
 
 									/* 
-									 * foo
+									 * A pointer to products or services offered by the organization or person.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Inverse-property: offeredBy
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Offer
 									 */
 
 									if (
@@ -4657,15 +4687,11 @@
 								// maximumAttendeeCapacity
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The total number of individuals that may attend an event or venue.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Integer
 									 */
 
 									if (
@@ -4694,7 +4720,9 @@
 								// memberOf
 
 									/* 
-									 * foo
+									 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+									 * 
+									 * Inverse-property: member
 									 * 
 									 * Subproperty of:
 									 * 
@@ -4702,7 +4730,8 @@
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Organization
+									 *     - ProgramMembership
 									 */
 
 									if (
@@ -4728,53 +4757,19 @@
 
 									}
 
-								// naics
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'naics',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_naics = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_naics ) {
-
-												$LocalBusiness_item['naics'] = $LocalBusiness_naics;
-
-											}
-
-									}
-
 								// nonprofitStatus
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * nonprofitStatus indicates the legal status of a non-profit organization in its 
+									 * primary place of business.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - NonprofitType
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -4803,15 +4798,11 @@
 								// numberOfEmployees
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The number of employees in an organization (e.g., business).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - QuantitativeValue
 									 */
 
 									if (
@@ -4840,15 +4831,26 @@
 								// openingHours
 
 									/* 
-									 * foo
+									 * The general opening hours for a business. Opening hours can be specified as a 
+									 * weekly time range, starting with days, then times per day. Multiple days can be 
+									 * listed with commas ',' separating each day. Day or time ranges are specified 
+									 * using a hyphen '-'.
 									 * 
-									 * Subproperty of:
+									 * Days are specified using the following two-letter combinations: 
+									 * Mo, Tu, We, Th, Fr, Sa, Su.
 									 * 
-									 *     - foo
+									 * Times are specified using 24:00 format. For example, 3 p.m. is specified as 
+									 * 15:00, 10 a.m. as 10:00.
+									 * 
+									 * Here is an example: 
+									 * <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
+									 * 
+									 * If a business is open 7 days a week, then it can be specified as 
+									 * <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Text
 									 */
 
 									if (
@@ -4877,15 +4879,11 @@
 								// openingHoursSpecification
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The opening hours of a certain place.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - OpeningHoursSpecification
 									 */
 
 									if (
@@ -4914,15 +4912,11 @@
 								// parentOrganization
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * The larger organization that this organization is a subOrganization of, if any.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Organization
 									 */
 
 									if (
@@ -4934,7 +4928,7 @@
 
 										// Get values
 
-											$LocalBusiness_parentOrganization = $schema_base_org_uams_health_ref ?? array();
+											$LocalBusiness_parentOrganization = array();
 
 										// Add to item values
 
@@ -4949,15 +4943,11 @@
 								// paymentAccepted
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Text
 									 */
 
 									if (
@@ -4986,15 +4976,12 @@
 								// photo
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A photograph of this place.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - ImageObject
+									 *     - Photograph
 									 */
 
 									if (
@@ -5119,15 +5106,12 @@
 								// publicAccess
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A flag to signal that the Place is open to public visitors. If this property is 
+									 * omitted there is no assumed default boolean value.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Boolean
 									 */
 
 									if (
@@ -5156,15 +5140,11 @@
 								// review
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * A review of the item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Review
 									 */
 
 									if (
@@ -5237,15 +5217,12 @@
 								// smokingAllowed
 
 									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant, 
+									 * hotel or hotel room).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Boolean
 									 */
 
 									if (
@@ -5278,15 +5255,14 @@
 								// specialOpeningHoursSpecification
 
 									/* 
-									 * foo
+									 * The special opening hours of a certain place.
 									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
+									 * Use this to explicitly override general opening hours brought in scope by 
+									 * openingHoursSpecification or openingHours.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - OpeningHoursSpecification
 									 */
 
 									if (
@@ -5361,15 +5337,16 @@
 								// subOrganization
 
 									/* 
-									 * foo
+									 * A relationship between two organizations where the first includes the second 
+									 * (e.g., as a subsidiary).
 									 * 
-									 * Subproperty of:
+									 * See also: the more specific 'department' property.
 									 * 
-									 *     - foo
+									 * Inverse-property: parentOrganization
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - foo
+									 *     - Organization
 									 */
 
 									if (
@@ -5390,111 +5367,6 @@
 											if ( $LocalBusiness_subOrganization ) {
 
 												$LocalBusiness_item['subOrganization'] = $LocalBusiness_subOrganization;
-
-											}
-
-									}
-
-								// taxID
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'taxID',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_taxID = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_taxID ) {
-
-												$LocalBusiness_item['taxID'] = $LocalBusiness_taxID;
-
-											}
-
-									}
-
-								// telephone
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'telephone',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_telephone = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_telephone ) {
-
-												$LocalBusiness_item['telephone'] = $LocalBusiness_telephone;
-
-											}
-
-									}
-
-								// vatID
-
-									/* 
-									 * foo
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - foo
-									 */
-
-									if (
-										in_array(
-											'vatID',
-											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$LocalBusiness_vatID = array();
-
-										// Add to item values
-
-											if ( $LocalBusiness_vatID ) {
-
-												$LocalBusiness_item['vatID'] = $LocalBusiness_vatID;
 
 											}
 
