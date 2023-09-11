@@ -2392,6 +2392,33 @@
 
 								}
 
+							// Parent location information (common use)
+
+								if (
+									in_array(
+										'address',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+									||
+									in_array(
+										'image',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+									||
+									in_array(
+										'photo',
+										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+									)
+								) {
+
+									// Query for whether the location has a parent
+
+										$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
+										$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
+										$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
+							
+								}
+
 							// address
 
 								if (
