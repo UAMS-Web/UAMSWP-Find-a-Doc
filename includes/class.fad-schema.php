@@ -5187,10 +5187,14 @@
 
 										// Add each row to the list array
 
-											$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
-												$LocalBusiness_sameAs_array, // sameAs repeater field
-												'schema_sameas_url' // sameAs item field name
-											);
+											if ( $LocalBusiness_sameAs_array ) {
+
+												$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
+													$LocalBusiness_sameAs_array, // sameAs repeater field
+													'schema_sameas_url' // sameAs item field name
+												);
+
+											}
 
 										// Add to schema
 
@@ -6103,10 +6107,14 @@
 
 								// Add each row to the list array
 
-									$MedicalEntity_sameAs = uamswp_fad_schema_sameas(
-										$MedicalEntity_sameAs_array, // sameAs repeater field
-										'schema_sameas_url' // sameAs item field name
-									);
+									if ( $MedicalEntity_sameAs_array ) {
+
+										$MedicalEntity_sameAs = uamswp_fad_schema_sameas(
+											$MedicalEntity_sameAs_array, // sameAs repeater field
+											'schema_sameas_url' // sameAs item field name
+										);
+
+									}
 
 								// Add to schema
 
@@ -8357,10 +8365,14 @@
 
 							// Add each row to the list array
 
-								$condition_sameAs = uamswp_fad_schema_sameas(
-									$condition_sameAs_array, // sameAs repeater field
-									'schema_sameas_url' // sameAs item field name
-								);
+								if ( $condition_sameAs_array ) {
+
+									$condition_sameAs = uamswp_fad_schema_sameas(
+										$condition_sameAs_array, // sameAs repeater field
+										'schema_sameas_url' // sameAs item field name
+									);
+
+								}
 
 							// Add to schema
 
@@ -8851,10 +8863,14 @@
 
 							// Add each row to the list array
 
-								$service_sameAs = uamswp_fad_schema_sameas(
-									$service_sameAs_array, // sameAs repeater field
-									'schema_sameas_url' // sameAs item field name
-								);
+								if ( $service_sameAs_array ) {
+
+									$service_sameAs = uamswp_fad_schema_sameas(
+										$service_sameAs_array, // sameAs repeater field
+										'schema_sameas_url' // sameAs item field name
+									);
+
+								}
 
 							// Add to schema
 
