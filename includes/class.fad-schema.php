@@ -1518,7 +1518,11 @@
 
 			// Add each repeater row to the list array
 
-				if ( $repeater ) {
+				if (
+					$repeater
+					&&
+					$field_name
+				) {
 
 					foreach ( $repeater as $additionalType ) {
 
@@ -2474,7 +2478,7 @@
 
 											// Get additionalType repeater field value
 
-												$LocalBusiness_additionalType_repeater = get_field( 'location_schema_additionalType', $LocalBusiness ) ?: array();
+												$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
 
 												// Add each item to an array
 
@@ -2489,14 +2493,38 @@
 
 												// Merge array into the additionalType property values array
 					
-													if ( $LocalBusiness_additionalType_field ) {
+													if (
+														$LocalBusiness_additionalType
+														&&
+														$LocalBusiness_additionalType_field
+													) {
+
+														$LocalBusiness_additionalType_field = is_array($LocalBusiness_additionalType_field) ? $LocalBusiness_additionalType_field : array($LocalBusiness_additionalType_field);
 					
 														$LocalBusiness_additionalType = array_merge(
 															$LocalBusiness_additionalType,
 															$LocalBusiness_additionalType_field
 														);
 					
+													} elseif ( $LocalBusiness_additionalType_field ) {
+
+														$LocalBusiness_additionalType = $LocalBusiness_additionalType_field;
+
 													}
+
+										// Clean up additionalType property values array
+
+											if (
+												$LocalBusiness_additionalType
+												&&
+												is_array($LocalBusiness_additionalType)
+											) {
+												
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($LocalBusiness_additionalType);
+
+											}
 
 										// Add to item values
 
@@ -8375,7 +8403,7 @@
 
 							// Get additionalType repeater field value
 
-								$condition_additionalType_repeater = get_field( 'schema_additionalType', $condition ) ?: array();
+								$condition_additionalType_repeater = get_field( 'schema_additionalType', $condition ) ?? array();
 
 								// Add each item to additionalType property values array
 
@@ -8900,7 +8928,7 @@
 
 							// Get additionalType repeater field value
 
-								$service_additionalType_repeater = get_field( 'schema_additionalType', $service ) ?: array();
+								$service_additionalType_repeater = get_field( 'schema_additionalType', $service ) ?? array();
 
 								// Add each item to additionalType property values array
 
