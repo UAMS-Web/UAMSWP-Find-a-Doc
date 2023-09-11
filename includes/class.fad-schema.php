@@ -2405,8 +2405,6 @@
 											'medicalSpecialty',
 											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 										)
-										&&
-										$nesting_level == 0
 									) {
 
 										// Get values
@@ -2419,7 +2417,11 @@
 
 										// Add to item values
 
-											if ( $LocalBusiness_medicalSpecialty ) {
+											if (
+												$LocalBusiness_medicalSpecialty
+												&&
+												$nesting_level == 0
+											) {
 
 												$LocalBusiness_item['medicalSpecialty'] = $LocalBusiness_medicalSpecialty;
 
@@ -2452,8 +2454,6 @@
 											'additionalType',
 											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 										)
-										&&
-										$nesting_level == 0
 									) {
 
 										// Base property values array
