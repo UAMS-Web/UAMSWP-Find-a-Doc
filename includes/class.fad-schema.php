@@ -124,7 +124,7 @@
 				}
 
 			// Clean up the array
-			
+
 				// If there is only one item, flatten the multi-dimensional array by one step
 
 					uamswp_fad_flatten_multidimensional_array($schema_PostalAddress);
@@ -547,7 +547,7 @@
 				}
 
 			// Clean up the array
-			
+
 				// If there is only one item, flatten the multi-dimensional array by one step
 
 					uamswp_fad_flatten_multidimensional_array($schema_geo_coordinates);
@@ -1173,7 +1173,7 @@
 
 												}
 										}
-									
+
 									// If code value still does not exist, get the code from the nearest valid ancestor
 
 										if ( !$specialization_code ) {
@@ -1197,7 +1197,7 @@
 														if (
 															$specialization_term // The term exists
 														) {
-						
+
 															$specialization_extension_query = get_field( 'clinical_specialization_extension_query', $specialization_term ) ?? false; // Is this clinical specialization part of the UAMS Health extension to the Health Care Provider Taxonomy Code Set?
 
 															if (
@@ -1205,7 +1205,7 @@
 															) {
 
 																$specialization_code_query = get_field( 'clinical_specialization_code_query', $specialization_term ) ?? true; // Does this specialization have a taxonomy code in the Health Care Provider Taxonomy Code Set?
-							
+
 																if (
 																	$specialization_code_query // The specialization has a taxonomy code in the Health Care Provider Taxonomy code set
 																) {
@@ -1218,7 +1218,7 @@
 																		break;
 
 																	} else {
-																		
+
 																		// Set fallback value (slug)
 
 																			$specialization_code = $specialization_term->post_name ?? '';
@@ -1329,7 +1329,7 @@
 									$code_list[] = $code_item;
 
 								} // endif ( $code_item )
-		
+
 						} // endforeach ( $nucc as $code )
 
 				}
@@ -1550,7 +1550,7 @@
 							$image_caption_1_1 = get_post_meta( $input_1_1, '_wp_attachment_image_alt', TRUE ) ?? '';
 
 						// Image data
-							
+
 							$image_1_1_src = wp_get_attachment_image_src( $input_1_1, 'aspect-1-1' ) ?? array();
 
 							if ( $image_1_1_src ) {
@@ -1601,7 +1601,7 @@
 							$single_aspect_ratio == '3:4'
 						)
 					) {
-				
+
 						// Encoding Format (e.g., 'image/jpeg')
 
 							$image_encodingFormat_3_4 = get_post_mime_type( $input_3_4 ) ?? '';
@@ -1613,18 +1613,18 @@
 						// Image Data
 
 							$image_3_4_src = wp_get_attachment_image_src( $input_3_4, 'aspect-3-4' ) ?? array();
-					
+
 							if ( $image_3_4_src ) {
-					
+
 								$image_3_4_url = $image_3_4_src[0] ?? '';
 								$image_3_4_width = $image_3_4_src[1] ?? '';
 								$image_3_4_height = $image_3_4_src[2] ?? '';
 								$image_3_4_size = '';
-					
+
 							}
-			
+
 						// ImageObject
-			
+
 							$image_3_4 = array();
 							$image_3_4['@id'] = ( isset($url) && !empty($url) ) ? $url . '#' . $page_fragment .  '-3-4' : '';
 							$image_3_4['caption'] = $image_caption_3_4 ?? '';
@@ -1633,22 +1633,22 @@
 							$image_3_4['encodingFormat'] = $image_encodingFormat_3_4 ?? '';
 							$image_3_4['height'] = $image_3_4_height ? $image_3_4_height . ' px' : '';
 							$image_3_4['width'] = $image_3_4_width ? $image_3_4_width . ' px' : '';
-			
+
 							$image_3_4 = array_filter(
 								array_merge(
 									$image_ImageObject_base,
 									$image_3_4
 								)
 							);
-			
+
 							// Sort the item array
-			
+
 								ksort($image_3_4);
-			
+
 							// Add to list array
-			
+
 								$image_ImageObject[] = $image_3_4;
-			
+
 					}
 
 				// 4:3 aspect ratio source image
@@ -1774,7 +1774,7 @@
 					}
 
 				// Full-size image output
-				
+
 					if (
 						$input_full
 						&&
@@ -2416,7 +2416,7 @@
 										$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
 										$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
 										$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
-							
+
 								}
 
 							// address
@@ -2459,7 +2459,7 @@
 										// Address line 2
 
 											// Base array
-											
+
 												$LocalBusiness_address_2_array = array();
 
 											// Building values
@@ -2928,7 +2928,7 @@
 												if ( !$LocalBusiness_description ) {
 
 													// Get the full description
-													
+
 														$LocalBusiness_description = get_field( 'location_about', $LocalBusiness ) ?? array();
 
 														// Clean up value
@@ -2944,11 +2944,11 @@
 												}
 
 									// Add to item values
-		
+
 										if ( $LocalBusiness_description ) {
-		
+
 											$LocalBusiness_item['description'] = $LocalBusiness_description;
-		
+
 										}
 
 								}
@@ -3464,25 +3464,25 @@
 												$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
 												$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
 												$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
-							
+
 											if ( $LocalBusiness_has_parent ) {
 
 												// Query on whether to override any of the parent location's photos
-												
+
 													$LocalBusiness_override_parent_photo = get_field('location_image_override_parent') ?? false;
 
 												if ( $LocalBusiness_override_parent_photo ) {
 
 													// Query on whether to override the parent location's featured image
-													
+
 														$LocalBusiness_override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $LocalBusiness) ?? false;
 
 													// Query on whether to override the parent location's wayfinding photo
-													
+
 														$LocalBusiness_override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $LocalBusiness) ?? false;
 
 													// Query on whether to override the parent location's gallery photos
-													
+
 														$LocalBusiness_override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $LocalBusiness) ?? false;
 
 												}
@@ -4426,22 +4426,22 @@
 										$LocalBusiness_sameAs_array = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
 
 									// Add each row to the list array
-			
+
 										$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
 											$LocalBusiness_sameAs_array, // sameAs repeater field
 											'schema_sameas_url' // sameAs item field name
 										);
-			
+
 									// Add to schema
-			
+
 										if ( $LocalBusiness_sameAs ) {
-			
+
 											$LocalBusiness_item['sameAs'] = $LocalBusiness_sameAs;
-			
+
 										}
-				
+
 								}
-	
+
 							// smokingAllowed
 
 								if (
@@ -4660,7 +4660,7 @@
 			} // endif ( !empty($repeater) )
 
 			return $LocalBusiness_list;
-	
+
 		}
 
 	// Areas of expertise (MedicalEntity)
@@ -4869,7 +4869,7 @@
 										) ?? '';
 
 									// Set value relevant to level
-										
+
 										if ( $MedicalEntity_level ) {
 
 											if ( $MedicalEntity_level == 1 ) {
@@ -4950,7 +4950,7 @@
 									);
 
 								// Add to schema
-								
+
 									if ( $MedicalEntity_code ) {
 
 										$MedicalEntity_item['code'] = $MedicalEntity_code;
@@ -4979,33 +4979,33 @@
 											if ( !$MedicalEntity_description ) {
 
 												// Get the excerpt
-												
+
 													$MedicalEntity_description = get_the_excerpt($MedicalEntity) ?? '';
 
 													// Get the Short Description
-			
+
 														if ( !$MedicalEntity_description ) {
 
 															$MedicalEntity_description = get_field( 'post_excerpt', $MedicalEntity ) ?? '';
-				
+
 															// Get the Intro Text (Marketing Landing Page Header style)
-				
+
 																if ( !$MedicalEntity_description ) {
 
 																	$MedicalEntity_description = get_field( 'page_header_landingpage_intro', $MedicalEntity ) ?? '';
 
 																}
-					
+
 														}
-				
+
 											}
 
 									// Add to item values
-		
+
 										if ( $MedicalEntity_description ) {
-		
+
 											$MedicalEntity_item['description'] = $MedicalEntity_description;
-		
+
 										}
 
 							// image
@@ -5134,17 +5134,17 @@
 									$MedicalEntity_medicineSystems_array = get_field( 'schema_medicinesystem', $MedicalEntity ) ?: array();
 
 								// Add each item to the list array
-		
+
 									$MedicalEntity_medicineSystem = uamswp_fad_schema_medicinesystem(
 										$MedicalEntity_medicineSystems_array // array of MedicineSystem values
 									);
-		
+
 								// Add to schema
-		
+
 									if ( $MedicalEntity_medicineSystem ) {
-		
+
 										$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
-		
+
 									}
 
 							// potentialAction
@@ -5246,11 +5246,11 @@
 											uamswp_fad_flatten_multidimensional_array($MedicalEntity_relevantSpecialty);
 
 									// Add to item values
-		
+
 										if ( $MedicalEntity_relevantSpecialty ) {
-		
+
 											$MedicalEntity_item['relevantSpecialty'] = $MedicalEntity_relevantSpecialty;
-		
+
 										}
 
 							// sameAs
@@ -5270,20 +5270,20 @@
 									$MedicalEntity_sameAs_array = get_field( 'schema_sameas', $MedicalEntity ) ?: array();
 
 								// Add each row to the list array
-		
+
 									$MedicalEntity_sameAs = uamswp_fad_schema_sameas(
 										$MedicalEntity_sameAs_array, // sameAs repeater field
 										'schema_sameas_url' // sameAs item field name
 									);
-		
+
 								// Add to schema
-		
+
 									if ( $MedicalEntity_sameAs ) {
-		
+
 										$MedicalEntity_item['sameAs'] = $MedicalEntity_sameAs;
-		
+
 									}
-				
+
 							// subjectOf
 
 								/*
@@ -5353,7 +5353,7 @@
 			} // endif ( !empty($repeater) )
 
 			return $MedicalEntity_list;
-	
+
 		}
 
 	// Clinical resources (CreativeWork)
@@ -5752,7 +5752,7 @@
 										$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $CreativeWork ) ?? '';
 
 									// 1:1 aspect ratio source image
-									
+
 										$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $CreativeWork ) ?? $CreativeWork_featured_image_id;
 
 								// Create ImageObject values arrays
@@ -5768,7 +5768,7 @@
 										$CreativeWork_featured_image_id, // ID of image to use for 16:9 aspect ratio
 										0 // ID of image to use for full image
 									) ?? array();
-									
+
 									$CreativeWork_thumbnail = $CreativeWork_image;
 
 							}
@@ -5790,7 +5790,7 @@
 												$CreativeWork_asset_parsed = parse_url($CreativeWork_video);
 
 												// Parse the query string into variables
-												
+
 													parse_str($CreativeWork_asset_parsed['query'], $CreativeWork_asset_parsed['query']);
 
 											if (
@@ -6021,7 +6021,7 @@
 							) {
 
 								// Get values
-								
+
 									$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $CreativeWork ) ?: false;
 
 									if ( !$CreativeWork_nci_query ) {
@@ -6797,9 +6797,9 @@
 											) {
 
 												$CreativeWork_sameAs[] = $CreativeWork_video;
-			
+
 											}
-		
+
 								// Clean up list array
 
 									if ( $CreativeWork_sameAs ) {
@@ -6989,9 +6989,9 @@
 										if ( !$CreativeWork_subjectOf ) {
 
 											$CreativeWork_subjectOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
-	
+
 										}
-	
+
 									}
 
 								// Add to item values
@@ -7321,7 +7321,7 @@
 			string $page_fragment = 'MedicalCondition', // Fragment identifier
 			int $condition_i = 1 // Iteration counter
 		) {
-			
+
 			// Base list array
 
 				$condition_list = array();
@@ -7457,7 +7457,7 @@
 								);
 
 							// Add to schema
-							
+
 								if ( $condition_code ) {
 
 									$condition_item['code'] = $condition_code;
@@ -7564,7 +7564,7 @@
 							}
 
 						// infectiousAgentClass
-						
+
 							if (
 								$condition_type == 'InfectiousDisease'
 								||
@@ -7733,7 +7733,7 @@
 			string $page_fragment = 'Service', // Fragment identifier
 			int $service_i = 1 // Iteration counter
 		) {
-			
+
 			// Base list array
 
 				$service_list = array();
@@ -7838,7 +7838,7 @@
 							}
 
 						// @type
-						
+
 							// Base value
 
 								$service_type = 'MedicalEntity';
@@ -7867,27 +7867,27 @@
 										$service_type_parent[] = 'MedicalProcedure';
 
 										if ( $service_type == 'TherapeuticProcedure' ) {
-											
+
 											// TherapeuticProcedure Subtype
 
 												$service_type = get_field( 'schema_therapeuticprocedure_subtype', $service ) ?: $service_type;
 												$service_type_parent[] = 'TherapeuticProcedure';
 
 												if ( $service_type == 'MedicalTherapy' ) {
-											
+
 													// MedicalTherapy Subtype
-			
+
 														$service_type = get_field( 'schema_medicaltherapy_subtype', $service ) ?: $service_type;
 														$service_type_parent[] = 'MedicalTherapy';
-			
+
 												}
-			
+
 										}
 
 								}
 
 							// Add to schema
-							
+
 								$service_item['@type'] = $service_type;
 
 						// Name
@@ -7958,7 +7958,7 @@
 								);
 
 							// Add to schema
-							
+
 								if ( $service_code ) {
 
 									$service_item['code'] = $service_code;
@@ -8061,7 +8061,7 @@
 								||
 								in_array( 'TherapeuticProcedure', $service_type_parent )
 							) {
-						
+
 								// Get repeater field value
 
 									$service_drug_array = get_field( 'treatment_procedure_schema_drug_schema_drug', $service ) ?: array();
@@ -8188,7 +8188,7 @@
 								&&
 								$nesting_level == 1
 							) {
-							
+
 								// Get relationship field value
 
 									$service_duplicateTherapy_array = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $service ) ?: array();
@@ -8509,7 +8509,7 @@
 												);
 
 											// Add to schema
-											
+
 												if ( $service_usesDevice_item_code ) {
 
 													$service_usesDevice_item['code'] = $service_usesDevice_item_code;
