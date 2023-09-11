@@ -3419,7 +3419,7 @@
 									)
 									||
 									in_array(
-										'image',
+										'photo',
 										$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 									)
 								) {
