@@ -2449,9 +2449,21 @@
 
 									// Get values
 
+										// Conditionally get parent location ID
+
+											if ( $LocalBusiness_has_parent ) {
+
+												$LocalBusiness_address_id = $LocalBusiness_parent_id;
+
+											} else {
+
+												$LocalBusiness_address_id = $LocalBusiness;
+
+											}
+
 										// Address line 1
 
-											$LocalBusiness_address_1 = get_field( 'location_address_1', $LocalBusiness ) ?? '';
+											$LocalBusiness_address_1 = get_field( 'location_address_1', $LocalBusiness_address_id ) ?? '';
 
 											if ( $LocalBusiness_address_1 ) {
 
@@ -2467,7 +2479,7 @@
 
 											// Building values
 
-												$LocalBusiness_building = get_field( 'location_building', $LocalBusiness ) ?? '';
+												$LocalBusiness_building = get_field( 'location_building', $LocalBusiness_address_id ) ?? '';
 
 												if ( $LocalBusiness_building ) {
 
@@ -2494,7 +2506,7 @@
 
 											// Floor values
 
-												$LocalBusiness_floor = get_field_object( 'location_building_floor', $LocalBusiness ) ?? array();
+												$LocalBusiness_floor = get_field_object( 'location_building_floor', $LocalBusiness_address_id ) ?? array();
 
 												if (
 													$LocalBusiness_floor
@@ -2540,7 +2552,7 @@
 
 											// Suite value
 
-												$LocalBusiness_suite = get_field(' location_suite', $LocalBusiness ) ?? '';
+												$LocalBusiness_suite = get_field(' location_suite', $LocalBusiness_address_id ) ?? '';
 
 												if ( $LocalBusiness_suite ) {
 
@@ -2572,9 +2584,9 @@
 
 										// City, State, ZIP
 
-											$LocalBusiness_addressLocality = get_field( 'location_city', $LocalBusiness ) ?? '';
-											$LocalBusiness_addressRegion = get_field( 'location_state', $LocalBusiness ) ?? '';
-											$LocalBusiness_postalCode = get_field( 'location_zip', $LocalBusiness ) ?? '';
+											$LocalBusiness_addressLocality = get_field( 'location_city', $LocalBusiness_address_id ) ?? '';
+											$LocalBusiness_addressRegion = get_field( 'location_state', $LocalBusiness_address_id ) ?? '';
+											$LocalBusiness_postalCode = get_field( 'location_zip', $LocalBusiness_address_id ) ?? '';
 
 									// Format values
 
