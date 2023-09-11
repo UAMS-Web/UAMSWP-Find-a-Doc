@@ -2267,7 +2267,11 @@
 
 									// Fallback value
 
-										if ( !$LocalBusiness_type ) {
+										if (
+											!$LocalBusiness_type
+											||
+											!array_key_exists( $LocalBusiness_type, $LocalBusiness_subtype_map )
+										) {
 
 											$LocalBusiness_type = 'MedicalBusiness';
 
