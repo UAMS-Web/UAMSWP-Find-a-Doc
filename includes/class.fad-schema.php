@@ -2177,7 +2177,7 @@
 								$LocalBusiness_additionalType = array();
 								$LocalBusiness_address = array();
 								$LocalBusiness_aggregateRating = array();
-								$LocalBusiness_alternateName_array = array();
+								$LocalBusiness_alternateName_repeater = array();
 								$LocalBusiness_alternateName = array();
 								$LocalBusiness_areaServed = array();
 								$LocalBusiness_treatments = array();
@@ -2240,7 +2240,7 @@
 								$LocalBusiness_potentialAction = array();
 								$LocalBusiness_publicAccess = array();
 								$LocalBusiness_review = array();
-								$LocalBusiness_sameAs_array = array();
+								$LocalBusiness_sameAs_repeater = array();
 								$LocalBusiness_sameAs = array();
 								$LocalBusiness_specialOpeningHoursSpecification = array();
 								$LocalBusiness_subjectOf = array();
@@ -2272,7 +2272,7 @@
 								$LocalBusiness_addressLocality = '';
 								$LocalBusiness_addressRegion = '';
 								$LocalBusiness_postalCode = '';
-								$LocalBusiness_additionalType_field_array = array();
+								$LocalBusiness_additionalType_repeater = array();
 								$LocalBusiness_additionalType_field = array();
 
 								// Reused variables
@@ -2452,11 +2452,11 @@
 										$nesting_level == 0
 									) {
 
+										// Base property values array
+
+											$LocalBusiness_additionalType = array();
+
 										// Get values
-
-											// Base property values array
-
-												$LocalBusiness_additionalType = array();
 
 											// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
@@ -2474,20 +2474,20 @@
 
 											// Get additionalType repeater field value
 
-												$LocalBusiness_additionalType_field_array = get_field( 'location_schema_additionalType', $LocalBusiness ) ?: array();
+												$LocalBusiness_additionalType_repeater = get_field( 'location_schema_additionalType', $LocalBusiness ) ?: array();
 
-												// Add each row to the list array
+												// Add each item to an array
 
-													if ( $LocalBusiness_additionalType_field_array ) {
+													if ( $LocalBusiness_additionalType_repeater ) {
 
 														$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
-															$LocalBusiness_additionalType_field_array, // additionalType repeater field
+															$LocalBusiness_additionalType_repeater, // additionalType repeater field
 															'schema_additionalType_uri' // additionalType item field name
 														);
 
 													}
 
-												// Add to property values
+												// Merge array into the additionalType property values array
 					
 													if ( $LocalBusiness_additionalType_field ) {
 					
@@ -2773,16 +2773,16 @@
 										$nesting_level == 0
 									) {
 
-										// Get repeater field value
+										// Get alternateName repeater field value
 
-											$LocalBusiness_alternateName_array = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
+											$LocalBusiness_alternateName_repeater = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
 
-										// Get item values
+											// Add each item to alternateName property values array
 
-											$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
-												$LocalBusiness_alternateName_array, // alternateName repeater field
-												'schema_alternatename_text' // alternateName item field name
-											);
+												$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
+													$LocalBusiness_alternateName_repeater, // alternateName repeater field
+													'schema_alternatename_text' // alternateName item field name
+												);
 
 										// Add to schema
 
@@ -5181,20 +5181,20 @@
 										)
 									) {
 
-										// Get repeater field value
+										// Get sameAs repeater field value
 
-											$LocalBusiness_sameAs_array = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
+											$LocalBusiness_sameAs_repeater = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
 
-										// Add each row to the list array
+											// Add each item to sameAs property values array
 
-											if ( $LocalBusiness_sameAs_array ) {
+												if ( $LocalBusiness_sameAs_repeater ) {
 
-												$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
-													$LocalBusiness_sameAs_array, // sameAs repeater field
-													'schema_sameas_url' // sameAs item field name
-												);
+													$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
+														$LocalBusiness_sameAs_repeater, // sameAs repeater field
+														'schema_sameas_url' // sameAs item field name
+													);
 
-											}
+												}
 
 										// Add to schema
 
@@ -5229,9 +5229,17 @@
 										$nesting_level == 0
 									) {
 
+										// Define value
+
+											$LocalBusiness_smokingAllowed = 'False';
+
 										// Add to item values
 
-											if ( $LocalBusiness_smokingAllowed ) {
+											if (
+												isset($LocalBusiness_smokingAllowed)
+												&&
+												!empty($LocalBusiness_smokingAllowed)
+											) {
 
 												$LocalBusiness_item['smokingAllowed'] = $LocalBusiness_smokingAllowed;
 
@@ -8199,19 +8207,50 @@
 
 							}
 
-						// Base array
+						// Eliminate PHP errors / reset variables
 
-							$condition_item = array();
+							$condition_item = array(); // Base array
+							$condition_additionalType_repeater = array();
+							$condition_additionalType = array();
+							$condition_alternateName = array();
+							$condition_alternateName_repeater = array();
+							$condition_code = array();
+							$condition_code_repeater = array();
+							$condition_id = '';
+							$condition_infectiousAgent = '';
+							$condition_infectiousAgentClass = '';
+							$condition_name = '';
+							$condition_possibleTreatment = array();
+							$condition_possibleTreatment_relationship = array();
+							$condition_primaryPrevention = array();
+							$condition_primaryPrevention_relationship = array();
+							$condition_sameAs = array();
+							$condition_sameAs_repeater = array();
+							$condition_secondaryPrevention = array();
+							$condition_secondaryPrevention_relationship = array();
+							$condition_type = '';
+							$condition_type_parent = array();
+							$condition_typicalTest = array();
+							$condition_typicalTest_relationship = array();
 
 						// @id
 
-							if ( $nesting_level == 1 ) {
+							// Define value
 
-								$condition_id = $page_url . '#' . $page_fragment . $condition_i;
-								$condition_item['@id'] = $condition_id;
-								$condition_i++;
+								if ( $nesting_level == 1 ) {
 
-							}
+									$condition_id = $page_url . '#' . $page_fragment . $condition_i;
+									$condition_i++;
+
+								}
+
+							// Add to schema
+
+								if ( $condition_id ) {
+
+									$condition_item['@id'] = $condition_id;
+
+								}
 
 						// @type
 
@@ -8222,9 +8261,13 @@
 								$condition_type = get_field( 'schema_medicalcondition_subtype', $condition ) ?: $condition_type;
 								$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
 
-							// Add to array
+							// Add to schema
 
-								$condition_item['@type'] = $condition_type;
+								if ( $condition_type ) {
+
+									$condition_item['@type'] = $condition_type;
+
+								}
 
 						// name
 
@@ -8240,11 +8283,17 @@
 							 *     - Text
 							 */
 
-							$condition_name = get_the_title($condition); // Expects Text
+							// Get value
+
+								$condition_name = get_the_title($condition); // Expects Text
 
 							// Add to array
 
-								$condition_item['name'] = $condition_name;
+								if ( $condition_name ) {
+
+									$condition_item['name'] = $condition_name;
+
+								}
 
 						// alternateName
 
@@ -8256,16 +8305,16 @@
 							 *     - Text
 							 */
 
-							// Get repeater field value
+							// Get alternateName repeater field value
 
-								$condition_alternateName_array = get_field( 'condition_alternate', $condition ) ?: array();
+								$condition_alternateName_repeater = get_field( 'condition_alternate', $condition ) ?: array();
 
-							// Get item values
+								// Add each item to alternateName property values array
 
-								$condition_alternateName = uamswp_fad_schema_alternatename(
-									$condition_alternateName_array, // alternateName repeater field
-									'alternate_text' // alternateName item field name
-								);
+									$condition_alternateName = uamswp_fad_schema_alternatename(
+										$condition_alternateName_repeater, // alternateName repeater field
+										'alternate_text' // alternateName item field name
+									);
 
 							// Add to schema
 
@@ -8286,15 +8335,15 @@
 							 *     - MedicalCode
 							 */
 
-							// Get repeater field value
+							// Get code repeater field value
 
-								$condition_code_array = get_field( 'condition_schema_code_schema_medicalcode', $condition ) ?: array();
+								$condition_code_repeater = get_field( 'schema_medicalcode', $condition ) ?: array();
 
-							// Get item values
+								// Add each item to code property values array
 
-								$condition_code = uamswp_fad_schema_code(
-									$condition_code_array // code repeater field
-								);
+									$condition_code = uamswp_fad_schema_code(
+										$condition_code_repeater // code repeater field
+									);
 
 							// Add to schema
 
@@ -8324,20 +8373,20 @@
 							 *     - URL
 							 */
 
-							// Get repeater field value
+							// Get additionalType repeater field value
 
-								$condition_additionalType_array = get_field( 'schema_additionalType', $condition ) ?: array();
+								$condition_additionalType_repeater = get_field( 'schema_additionalType', $condition ) ?: array();
 
-							// Add each row to the list array
+								// Add each item to additionalType property values array
 
-								if ( $condition_additionalType_array ) {
+									if ( $condition_additionalType_repeater ) {
 
-									$condition_additionalType = uamswp_fad_schema_additionaltype(
-										$condition_additionalType_array, // additionalType repeater field
-										'schema_additionalType_uri' // additionalType item field name
-									);
+										$condition_additionalType = uamswp_fad_schema_additionaltype(
+											$condition_additionalType_repeater, // additionalType repeater field
+											'schema_additionalType_uri' // additionalType item field name
+										);
 
-								}
+									}
 
 							// Add to schema
 
@@ -8359,20 +8408,20 @@
 							 *     - URL
 							 */
 
-							// Get repeater field value
+							// Get sameAs repeater field value
 
-								$condition_sameAs_array = get_field( 'schema_sameas', $condition ) ?: array();
+								$condition_sameAs_repeater = get_field( 'schema_sameas', $condition ) ?: array();
 
-							// Add each row to the list array
+								// Add each item to sameAs property values array
 
-								if ( $condition_sameAs_array ) {
+									if ( $condition_sameAs_repeater ) {
 
-									$condition_sameAs = uamswp_fad_schema_sameas(
-										$condition_sameAs_array, // sameAs repeater field
-										'schema_sameas_url' // sameAs item field name
-									);
+										$condition_sameAs = uamswp_fad_schema_sameas(
+											$condition_sameAs_repeater, // sameAs repeater field
+											'schema_sameas_url' // sameAs item field name
+										);
 
-								}
+									}
 
 							// Add to schema
 
@@ -8390,13 +8439,17 @@
 								in_array( 'InfectiousDisease', $condition_type_parent )
 							) {
 
-								$condition_infectiousAgent = get_field( 'schema_infectiousagent', $condition ) ?: '';
+								// Get field value
 
-								if ( $condition_infectiousAgent ) {
+									$condition_infectiousAgent = get_field( 'schema_infectiousagent', $condition ) ?: '';
 
-									$condition_item['infectiousAgent'] = $condition_infectiousAgent;
+								// Add to schema
 
-								}
+									if ( $condition_infectiousAgent ) {
+
+										$condition_item['infectiousAgent'] = $condition_infectiousAgent;
+
+									}
 
 							}
 
@@ -8408,13 +8461,17 @@
 								in_array( 'InfectiousDisease', $condition_type_parent )
 							) {
 
-								$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $condition ) ?: '';
+								// Get field value
 
-								if ( $condition_infectiousAgentClass ) {
+									$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $condition ) ?: '';
 
-									$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
+								// Add to schema
 
-								}
+									if ( $condition_infectiousAgentClass ) {
+
+										$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
+
+									}
 
 							}
 
@@ -8422,18 +8479,22 @@
 
 							if ( $nesting_level == 1 ) {
 
-								// Get relationship field value
+								// Get possibleTreatment relationship field value
 
-									$condition_possibleTreatment_array = get_field( 'condition_schema_possibletreatment', $condition ) ?: array();
+									$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $condition ) ?: array();
 
-								// Get item values
+									// Add each item to possibleTreatment property values array
 
-									$condition_possibleTreatment = uamswp_fad_schema_service(
-										$condition_possibleTreatment_array,
-										$page_url,
-										( $nesting_level + 1 ),
-										'possibleTreatment' // Fragment identifier
-									);
+										if ( $condition_possibleTreatment_relationship ) {
+
+											$condition_possibleTreatment = uamswp_fad_schema_service(
+												$condition_possibleTreatment_relationship,
+												$page_url,
+												( $nesting_level + 1 ),
+												'possibleTreatment' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -8449,18 +8510,22 @@
 
 							if ( $nesting_level == 1 ) {
 
-								// Get relationship field value
+								// Get primaryPrevention relationship field value
 
-									$condition_primaryPrevention_array = get_field( 'condition_schema_primaryprevention', $condition ) ?: array();
+									$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $condition ) ?: array();
 
-								// Get item values
+									// Add each item to primaryPrevention property values array
 
-									$condition_primaryPrevention = uamswp_fad_schema_service(
-										$condition_primaryPrevention_array,
-										$page_url,
-										( $nesting_level + 1 ),
-										'primaryPrevention' // Fragment identifier
-									);
+										if ( $condition_primaryPrevention_relationship ) {
+
+											$condition_primaryPrevention = uamswp_fad_schema_service(
+												$condition_primaryPrevention_relationship,
+												$page_url,
+												( $nesting_level + 1 ),
+												'primaryPrevention' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -8476,18 +8541,22 @@
 
 							if ( $nesting_level == 1 ) {
 
-								// Get relationship field value
+								// Get secondaryPrevention relationship field value
 
-									$condition_secondaryPrevention_array = get_field( 'condition_schema_secondaryprevention', $condition ) ?: array();
+									$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $condition ) ?: array();
 
-								// Get item values
+									// Add each item to secondaryPrevention property values array
 
-									$condition_secondaryPrevention = uamswp_fad_schema_service(
-										$condition_secondaryPrevention_array,
-										$page_url,
-										( $nesting_level + 1 ),
-										'secondaryPrevention' // Fragment identifier
-									);
+										if ( $condition_secondaryPrevention_relationship ) {
+
+											$condition_secondaryPrevention = uamswp_fad_schema_service(
+												$condition_secondaryPrevention_relationship,
+												$page_url,
+												( $nesting_level + 1 ),
+												'secondaryPrevention' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -8503,18 +8572,22 @@
 
 							if ( $nesting_level == 1 ) {
 
-								// Get relationship field value
+								// Get typicalTest relationship field value
 
-									$condition_typicalTest_array = get_field( 'condition_schema_typicaltest', $condition ) ?: array();
+									$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $condition ) ?: array();
 
-								// Get item values
+									// Add each item to typicalTest property values array
 
-									$condition_typicalTest = uamswp_fad_schema_service(
-										$condition_typicalTest_array,
-										$page_url,
-										( $nesting_level + 1 ),
-										'typicalTest' // Fragment identifier
-									);
+										if ( $condition_typicalTest_relationship ) {
+
+											$condition_typicalTest = uamswp_fad_schema_service(
+												$condition_typicalTest_relationship,
+												$page_url,
+												( $nesting_level + 1 ),
+												'typicalTest' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -8610,59 +8683,45 @@
 
 						// Eliminate PHP errors and reset variables
 
-							$additionalType = '';
-							$drug = '';
-							$duplicateTherapy = '';
-							$nonProprietaryName = '';
-							$proprietaryName = '';
-							$relevantSpecialty = '';
-							$sameAs = '';
-							$service_additionalType_array = array();
+							$service_item = array(); // Base array
 							$service_additionalType = array();
-							$service_alternateName = '';
-							$service_alternateName_array = array();
-							$service_item = array();
-							$service_code = '';
-							$service_code_array = array();
-							$service_drug_array = array();
+							$service_additionalType_repeater = array();
+							$service_alternateName = array();
+							$service_alternateName_repeater = array();
+							$service_code = array();
+							$service_code_repeater = array();
 							$service_drug_item = array();
 							$service_drug_item_nonProprietaryName_list = array();
 							$service_drug_item_proprietaryName_list = array();
-							$service_drug_list = array();
-							$service_duplicateTherapy = '';
-							$service_duplicateTherapy_array = array();
+							$service_drug = array();
+							$service_drug_repeater = array();
+							$service_duplicateTherapy = array();
+							$service_duplicateTherapy_relationship = array();
+							$service_id = '';
 							$service_MedicalImagingTechnique = '';
 							$service_name = '';
 							$service_procedureType = '';
-							$service_relevantSpecialty_array = array();
-							$service_relevantSpecialty_list = array();
-							$service_sameAs_array = array();
-							$service_sameAs_list = array();
+							$service_relevantSpecialty = array();
+							$service_relevantSpecialty_multiselect = array();
+							$service_sameAs = array();
+							$service_sameAs_repeater = array();
+							$service_subTest = array();
 							$service_subTest_array = array();
-							$service_subTest_item = array();
-							$service_subTest_list = array();
-							$service_tissueSample_array = array();
-							$service_tissueSample_list = array();
+							$service_subTest_relationship = array();
+							$service_tissueSample = array();
+							$service_tissueSample_repeater = array();
 							$service_type = '';
 							$service_type_parent = array();
-							$service_usedToDiagnose_array = array();
-							$service_usedToDiagnose_item = array();
-							$service_usedToDiagnose_list = array();
-							$service_usesDevice_array = array();
+							$service_usedToDiagnose = array();
+							$service_usedToDiagnose_relationship = array();
 							$service_usesDevice_item = array();
-							$service_usesDevice_item_alternateName = '';
-							$service_usesDevice_item_alternateName_array = array();
-							$service_usesDevice_item_code = '';
-							$service_usesDevice_item_code_array = array();
-							$service_usesDevice_list = array();
-							$subTest = '';
-							$tissueSample = '';
-							$usedToDiagnose = '';
-							$usesDevice = '';
-
-						// Base array
-
-							$service_item = array();
+							$service_usesDevice_item_alternateName = array();
+							$service_usesDevice_item_alternateName_repeater = array();
+							$service_usesDevice_item_code = array();
+							$service_usesDevice_item_code_repeater = array();
+							$service_usesDevice = array();
+							$service_usesDevice_repeater = array();
+							$usesDevice = array();
 
 						// @id
 
@@ -8727,7 +8786,7 @@
 
 								$service_item['@type'] = $service_type;
 
-						// Name
+						// name
 
 							/* 
 							 * The name of the item.
@@ -8741,8 +8800,17 @@
 							 *     - Text
 							 */
 
-							$service_name = get_the_title($service); // Expects Text
-							$service_item['name'] = $service_name;
+							// Get value
+
+								$service_name = get_the_title($service) ?? ''; // Expects Text
+
+							// Add to schema
+
+								if ( $service_name ) {
+
+									$service_item['name'] = $service_name;
+
+								}
 
 						// alternateName
 
@@ -8754,16 +8822,20 @@
 							 *     - Text
 							 */
 
-							// Get repeater field value
+							// Get alternateName repeater field value
 
-								$service_alternateName_array = get_field( 'treatment_procedure_alternate', $service ) ?: array();
+								$service_alternateName_repeater = get_field( 'treatment_procedure_alternate', $service ) ?: array();
 
-							// Get item values
+								// Add each item to alternateName property values array
 
-								$service_alternateName = uamswp_fad_schema_alternatename(
-									$service_alternateName_array, // alternateName repeater field
-									'alternate_text' // alternateName item field name
-								);
+									if ( $service_alternateName_repeater ) {
+
+										$service_alternateName = uamswp_fad_schema_alternatename(
+											$service_alternateName_repeater, // alternateName repeater field
+											'alternate_text' // alternateName item field name
+										);
+
+									}
 
 							// Add to schema
 
@@ -8784,15 +8856,19 @@
 							 *     - MedicalCode
 							 */
 
-							// Get repeater field value
+							// Get code repeater field value
 
-								$service_code_array = get_field( 'treatment_procedure_schema_code_schema_medicalcode', $service ) ?: array();
+								$service_code_repeater = get_field( 'schema_medicalcode', $service ) ?: array();
 
-							// Get item values
+								// Add each item to code property values array
 
-								$service_code = uamswp_fad_schema_code(
-									$service_code_array // code repeater field
-								);
+									if ( $service_code_repeater ) {
+
+										$service_code = uamswp_fad_schema_code(
+											$service_code_repeater // code repeater field
+										);
+
+									}
 
 							// Add to schema
 
@@ -8822,20 +8898,20 @@
 							 *     - URL
 							 */
 
-							// Get repeater field value
+							// Get additionalType repeater field value
 
-								$service_additionalType_array = get_field( 'schema_additionalType', $service ) ?: array();
+								$service_additionalType_repeater = get_field( 'schema_additionalType', $service ) ?: array();
 
-							// Add each row to the list array
+								// Add each item to additionalType property values array
 
-								if ( $service_additionalType_array ) {
+									if ( $service_additionalType_repeater ) {
 
-									$service_additionalType = uamswp_fad_schema_additionaltype(
-										$service_additionalType_array, // additionalType repeater field
-										'schema_additionalType_uri' // additionalType item field name
-									);
+										$service_additionalType = uamswp_fad_schema_additionaltype(
+											$service_additionalType_repeater, // additionalType repeater field
+											'schema_additionalType_uri' // additionalType item field name
+										);
 
-								}
+									}
 
 							// Add to schema
 
@@ -8857,20 +8933,20 @@
 							 *     - URL
 							 */
 
-							// Get repeater field value
+							// Get sameAs repeater field value
 
-								$service_sameAs_array = get_field( 'schema_sameas', $service ) ?: array();
+								$service_sameAs_repeater = get_field( 'schema_sameas', $service ) ?: array();
 
-							// Add each row to the list array
+								// Add each item to sameAs property values array
 
-								if ( $service_sameAs_array ) {
+									if ( $service_sameAs_repeater ) {
 
-									$service_sameAs = uamswp_fad_schema_sameas(
-										$service_sameAs_array, // sameAs repeater field
-										'schema_sameas_url' // sameAs item field name
-									);
+										$service_sameAs = uamswp_fad_schema_sameas(
+											$service_sameAs_repeater, // sameAs repeater field
+											'schema_sameas_url' // sameAs item field name
+										);
 
-								}
+									}
 
 							// Add to schema
 
@@ -8888,118 +8964,150 @@
 								in_array( 'TherapeuticProcedure', $service_type_parent )
 							) {
 
-								// Get repeater field value
+								// Base drug property values array
 
-									$service_drug_array = get_field( 'treatment_procedure_schema_drug_schema_drug', $service ) ?: array();
+									$service_drug = array();
 
-								// Base list array
+								// Get drug repeater field value — Drug(s) or Medicine(s) Used
 
-									$service_drug_list = array();
+									$service_drug_repeater = get_field( 'schema_drug', $service ) ?? array();
 
-								if ( $service_drug_array ) {
+									// Add each item to drug property values array
+											
+										if ( $service_drug_repeater ) {
 
-									foreach ( $service_drug_array as $drug ) {
+											foreach ( $service_drug_repeater as $drug ) {
 
-										// Base item array
+												// Base drug property value item array
 
-											$service_drug_item = array();
+													$service_drug_item = array();
 
-										// proprietaryName
+												// Define property values of drug items
 
-											// Get repeater field value
+													// Define proprietaryName schema property value
 
-												$service_drug_item['proprietaryName'] = $drug['schema_drug_proprietaryname'] ?: array();
+														// Base proprietaryName list array
 
-											// Base list array
+															$service_drug_item_proprietaryName_list = array();
 
-												$service_drug_item_proprietaryName_list = array();
+														// Get proprietaryName repeater value
 
-											if ( $service_drug_item['proprietaryName'] ) {
+															$service_drug_item['proprietaryName'] = $drug['schema_drug_proprietaryname'] ?? array();
 
-												foreach ( $service_drug_item['proprietaryName'] as $proprietaryName ) {
+														// Loop through rows of proprietaryName repeater value
 
-													$service_drug_item_proprietaryName_list[] = $proprietaryName['schema_drug_proprietaryname_text'];
+															if ( $service_drug_item['proprietaryName'] ) {
 
-												}
+																foreach ( $service_drug_item['proprietaryName'] as $proprietaryName ) {
 
-												// Add to schema
+																	// Add subfield value to base proprietaryName list array
 
-													if ( $service_drug_item_proprietaryName_list ) {
+																		$service_drug_item_proprietaryName_list[] = $proprietaryName['schema_drug_proprietaryname_text'];
 
-														$service_drug_item['proprietaryName'] = $service_drug_item_proprietaryName_list;
+																}
 
-														// If there is only one item, flatten the multi-dimensional array by one step
+															}
 
-															uamswp_fad_flatten_multidimensional_array($service_drug_item['proprietaryName']);
+														// Clean up base proprietaryName list array
+
+															if ( $service_drug_item_proprietaryName_list ) {
+
+																// If there is only one item, flatten the multi-dimensional array by one step
+
+																	uamswp_fad_flatten_multidimensional_array($service_drug_item_proprietaryName_list);
+
+															}
+
+														// Add proprietaryName values to drug property value item array
+
+															if ( $service_drug_item_proprietaryName_list ) {
+
+																$service_drug_item['proprietaryName'] = $service_drug_item_proprietaryName_list;
+
+															}
+
+													// Define nonProprietaryName schema property value
+
+														// Base nonProprietaryName list array
+
+															$service_drug_item_nonProprietaryName_list = array();
+
+														// Get nonProprietaryName subfield value
+
+															$service_drug_item['nonProprietaryName'] = $drug['schema_drug_nonproprietaryname'] ?? array();
+
+														// Loop through rows of proprietaryName repeater value
+
+															if ( $service_drug_item['nonProprietaryName'] ) {
+
+																foreach ( $service_drug_item['nonProprietaryName'] as $nonProprietaryName ) {
+
+																	// Add subfield value to base nonProprietaryName list array
+
+																		$service_drug_item_nonProprietaryName_list[] = $nonProprietaryName['schema_drug_nonproprietaryname_text'];
+
+																}
+
+															}
+
+														// Clean up base nonProprietaryName list array
+
+															if ( $service_drug_item_nonProprietaryName_list ) {
+
+																// If there is only one item, flatten the multi-dimensional array by one step
+
+																	uamswp_fad_flatten_multidimensional_array($service_drug_item_nonProprietaryName_list);
+
+															}
+
+														// Add nonProprietaryName values to drug property value item array
+
+															if ( $service_drug_item_nonProprietaryName_list ) {
+
+																$service_drug_item['nonProprietaryName'] = $service_drug_item_nonProprietaryName_list;
+
+															}
+
+													// Define prescriptionStatus schema property value, add to drug property value item array
+
+														$service_drug_item['prescriptionStatus'] = $drug['schema_drug_prescriptionstatus'] ?? '';
+
+													// Define rxcui schema property value, add to drug property value item array
+
+														$service_drug_item['rxcui'] = $drug['schema_drug_rxcui'] ?? '';
+
+												// Add drug property value item array to the drug property values array
+
+													if ( $service_drug_item ) {
+
+														$service_drug[] = $service_drug_item;
 
 													}
 
 											}
-
-										// nonProprietaryName
-
-											// Get repeater field value
-
-												$service_drug_item['nonProprietaryName'] = $drug['schema_drug_nonproprietaryname'] ?: array();
-
-											// Base list array
-
-												$service_drug_item_nonProprietaryName_list = array();
-
-											if ( $service_drug_item['nonProprietaryName'] ) {
-
-												foreach ( $service_drug_item['nonProprietaryName'] as $nonProprietaryName ) {
-
-													$service_drug_item_nonProprietaryName_list[] = $nonProprietaryName['schema_drug_nonproprietaryname_text'];
-
-												}
-
-												// Add to schema
-
-													if ( $service_drug_item_nonProprietaryName_list ) {
-
-														$service_drug_item['nonProprietaryName'] = $service_drug_item_nonProprietaryName_list;
-
-														// If there is only one item, flatten the multi-dimensional array by one step
-
-															uamswp_fad_flatten_multidimensional_array($service_drug_item['nonProprietaryName']);
-
-													}
-
-											}
-
-										// prescriptionStatus
-
-											$service_drug_item['prescriptionStatus'] = $drug['schema_drug_prescriptionstatus'] ?: '';
-
-										// rxcui
-
-											$service_drug_item['rxcui'] = $drug['schema_drug_rxcui'] ?: '';
-
-										// Add item to the list array
-
-											$service_drug_list[] = $service_drug_item;
-
-									}
-
-									// Clean up list array
-
-										$service_drug_list = array_filter($service_drug_list);
-										$service_drug_list = array_values($service_drug_list);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($service_drug_list);
-
-									// Add to schema
-
-										if ( $service_drug_list ) {
-
-											$service_item['drug'] = $service_drug_list;
 
 										}
 
-								}
+								// Clean up drug property values array
+
+									if ( $service_drug ) {
+
+										$service_drug = array_filter($service_drug);
+										$service_drug = array_values($service_drug);
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($service_drug);
+
+									}
+
+								// Add to schema
+
+									if ( $service_drug ) {
+
+										$service_item['drug'] = $service_drug;
+
+									}
 
 							}
 
@@ -9015,18 +9123,22 @@
 								$nesting_level == 1
 							) {
 
-								// Get relationship field value
+								// Get duplicateTherapy relationship repeater value (clones 'field_schema_medicaltherapy')
 
-									$service_duplicateTherapy_array = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $service ) ?: array();
+									$service_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $service ) ?: array();
 
-								// Get item values
+									// Add each item to duplicateTherapy property values array
 
-									$service_duplicateTherapy = uamswp_fad_schema_service(
-										$service_duplicateTherapy_array,
-										$page_url,
-										( $nesting_level + 1 ),
-										'duplicateTherapy' // Fragment identifier
-									);
+										if ( $service_duplicateTherapy_relationship ) {
+
+											$service_duplicateTherapy = uamswp_fad_schema_service(
+												$service_duplicateTherapy_relationship,
+												$page_url,
+												( $nesting_level + 1 ),
+												'duplicateTherapy' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -9046,13 +9158,17 @@
 								in_array( 'ImagingTest', $service_type_parent )
 							) {
 
-								$service_MedicalImagingTechnique = get_field( 'schema_medicalimagingtechnique', $service ) ?: '';
+								// Get field value
 
-								if ( $service_MedicalImagingTechnique ) {
+									$service_MedicalImagingTechnique = get_field( 'schema_medicalimagingtechnique', $service ) ?: '';
 
-									$service_item['imagingTechnique'] = $service_MedicalImagingTechnique;
+								// Add to schema
 
-								}
+									if ( $service_MedicalImagingTechnique ) {
+
+										$service_item['imagingTechnique'] = $service_MedicalImagingTechnique;
+
+									}
 
 							}
 
@@ -9070,13 +9186,17 @@
 								)
 							) {
 
-								$service_procedureType = get_field( 'schema_medicalproceduretype', $service ) ?: '';
+								// Get field value
 
-								if ( $service_procedureType ) {
+									$service_procedureType = get_field( 'schema_medicalproceduretype', $service ) ?: '';
 
-									$service_item['procedureType'] = $service_procedureType;
+								// Add to schema
 
-								}
+									if ( $service_procedureType ) {
+
+										$service_item['procedureType'] = $service_procedureType;
+
+									}
 
 							}
 
@@ -9092,18 +9212,22 @@
 								$nesting_level == 1
 							) {
 
-								// Get relationship field array
+								// Get subTest relationship field value (clone field referencing 'field_schema_medicaltest')
 
-									$service_subTest_array = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $service ) ?: array();
+									$service_subTest_relationship = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $service ) ?: array();
 
-								// Get item values
+									// Add each item to subTest property values array
 
-									$service_subTest = uamswp_fad_schema_service(
-										$service_subTest_array,
-										$page_url,
-										( $nesting_level + 1 ),
-										'subTest' // Fragment identifier
-									);
+										if ( $service_subTest_relationship ) {
+
+											$service_subTest = uamswp_fad_schema_service(
+												$service_subTest_relationship,
+												$page_url,
+												( $nesting_level + 1 ),
+												'subTest' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -9125,43 +9249,47 @@
 							 *     - MedicalSpecialty
 							 */
 
-							// Get relationship field value
+							// Base relevantSpecialty property values array
 
-								$service_relevantSpecialty_array = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $service ) ?: array();
+								$service_relevantSpecialty = array();
 
-							// Base list array
+							// Get relevantSpecialty multi-select field value (clone of 'field_schema_medicalspecialty_multiple')
 
-								$service_relevantSpecialty_list = array();
+								$service_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $service ) ?: array();
 
-							if ( $service_relevantSpecialty_array ) {
+								// Add each item to relevantSpecialty property values array
 
-								foreach ( $service_relevantSpecialty_array as $relevantSpecialty ) {
+									if ( $service_relevantSpecialty_multiselect ) {
 
-									// Add item to the list array
+										foreach ( $service_relevantSpecialty_multiselect as $relevantSpecialty ) {
 
-										$service_relevantSpecialty_list[] = ( isset($relevantSpecialty) && !empty($relevantSpecialty) ) ? $relevantSpecialty : '';
+												$service_relevantSpecialty[] = $relevantSpecialty ?? '';
 
-								}
-
-								// Clean up list array
-
-									$service_relevantSpecialty_list = array_filter($service_relevantSpecialty_list);
-									$service_relevantSpecialty_list = array_values($service_relevantSpecialty_list);
-									sort($service_relevantSpecialty_list);
-
-									// If there is only one item, flatten the multi-dimensional array by one step
-
-										uamswp_fad_flatten_multidimensional_array($service_relevantSpecialty_list);
-
-								// Add to schema
-
-									if ( !empty($service_relevantSpecialty_list) ) {
-
-										$service_item['relevantspecialty'] = $service_relevantSpecialty_list;
+										}
 
 									}
 
-							}
+							// Clean up relevantSpecialty property values array
+
+								if ( $service_relevantSpecialty ) {
+
+									$service_relevantSpecialty = array_filter($service_relevantSpecialty);
+									$service_relevantSpecialty = array_values($service_relevantSpecialty);
+									sort($service_relevantSpecialty);
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($service_relevantSpecialty);
+
+								}
+
+							// Add to schema
+
+								if ( $service_relevantSpecialty ) {
+
+									$service_item['relevantspecialty'] = $service_relevantSpecialty;
+
+								}
 
 						// tissueSample
 
@@ -9171,41 +9299,47 @@
 								in_array( 'PathologyTest', $service_type_parent )
 							) {
 
-								// Get repeater field value
+								// Base tissueSample property values array
 
-									$service_tissueSample_array = get_field( 'schema_tissuesample', $service ) ?: array();
+									$service_tissueSample = array();
 
-								// Base list array
+								// Get tissueSample repeater field value 
 
-									$service_tissueSample_list = array();
+									$service_tissueSample_repeater = get_field( 'schema_tissuesample', $service ) ?: array();
 
-								if ( $service_tissueSample_array ) {
+									// Add each item to tissueSample property values array
 
-									foreach ( $service_tissueSample_array as $tissueSample ) {
+										if ( $service_tissueSample_repeater ) {
 
-										$service_tissueSample_list[] = $tissueSample['schema_tissuesample_text'];
+											foreach ( $service_tissueSample_repeater as $tissueSample ) {
 
-									}
+												$service_tissueSample[] = $tissueSample['schema_tissuesample_text'];
 
-									// Clean up list array
-
-										$service_tissueSample_list = array_filter($service_tissueSample_list);
-										$service_tissueSample_list = array_values($service_tissueSample_list);
-										sort($service_tissueSample_list);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($service_tissueSample_list);
-
-									// Add to schema
-
-										if ( $service_tissueSample_list ) {
-
-											$service_item['tissueSample'] = $service_tissueSample_list;
+											}
 
 										}
 
-								}
+								// Clean up tissueSample property values array
+
+									if ( $service_tissueSample ) {
+
+										$service_tissueSample = array_filter($service_tissueSample);
+										$service_tissueSample = array_values($service_tissueSample);
+										sort($service_tissueSample);
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($service_tissueSample);
+
+									}
+
+								// Add to schema
+
+									if ( $service_tissueSample ) {
+
+										$service_item['tissueSample'] = $service_tissueSample;
+
+									}
 
 							}
 
@@ -9217,18 +9351,22 @@
 								in_array( 'MedicalTest', $service_type_parent )
 							) {
 
-								// Get relationship field value
+								// Get usedToDiagnose relationship field value (clone of 'field_schema_medicalcondition')
 
-									$service_usedToDiagnose_array = get_field( 'treatment_procedure_schema_usedtodiagnose_schema_medicalcondition', $service ) ?: array();
+									$service_usedToDiagnose_relationship = get_field( 'treatment_procedure_schema_usedtodiagnose_schema_medicalcondition', $service ) ?: array();
 
-								// Get item values
+									// Add each item to usedToDiagnose property values array
 
-									$service_usedToDiagnose = uamswp_fad_schema_medicalcondition(
-										$service_usedToDiagnose_array, // List of IDs of the MedicalCondition items
-										$page_url, // Page URL
-										( $nesting_level + 1 ), // Nesting level within the main schema
-										'usedToDiagnose' // Fragment identifier
-									);
+										if ( $service_usedToDiagnose_relationship ) {
+
+											$service_usedToDiagnose = uamswp_fad_schema_medicalcondition(
+												$service_usedToDiagnose_relationship, // List of IDs of the MedicalCondition items
+												$page_url, // Page URL
+												( $nesting_level + 1 ), // Nesting level within the main schema
+												'usedToDiagnose' // Fragment identifier
+											);
+
+										}
 
 								// Add to schema
 
@@ -9248,125 +9386,127 @@
 								in_array( 'MedicalTest', $service_type_parent )
 							) {
 
-								// Get relationship field value
+								// Base usesDevice property values array
 
-									$service_usesDevice_array = get_field( 'treatment_procedure_schema_usesdevice_schema_medicaldevice', $service ) ?: array();
+									$service_usesDevice = array();
 
-								// Base list array
+								// Get usesDevice repeater field value
 
-									$service_usesDevice_list = array();
+									$service_usesDevice_repeater = get_field( 'schema_medicaldevice', $service ) ?: array();
 
-								if ( $service_usesDevice_array ) {
+									// Add each item to usesDevice property values array
 
-									foreach ( $service_usesDevice_array as $usesDevice ) {
+										if ( $service_usesDevice_repeater ) {
 
-										// Base item array
+											foreach ( $service_usesDevice_repeater as $usesDevice ) {
 
-											$service_usesDevice_item = array();
+												// Base usesDevice property value item array
 
-										// @type
+													$service_usesDevice_item = array();
 
-											$service_usesDevice_item['@type'] = 'MedicalDevice'; // Replace 'MedicalDevice' with subtype, if relevant
+												// @type
 
-										// name
+													$service_usesDevice_item['@type'] = 'MedicalDevice'; // Replace 'MedicalDevice' with subtype, if relevant
 
-											/* 
-											 * The name of the item.
-											 * 
-											 * Subproperty of:
-											 * 
-											 *     - rdfs:label
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - Text
-											 */
+												// name
 
-											$service_usesDevice_item['name'] = $usesDevice['schema_medicaldevice_name'];
+													/* 
+													* The name of the item.
+													* 
+													* Subproperty of:
+													* 
+													*     - rdfs:label
+													* 
+													* Values expected to be one of these types:
+													* 
+													*     - Text
+													*/
 
-										// alternateName
+													$service_usesDevice_item['name'] = $usesDevice['schema_medicaldevice_name'];
 
-											/* 
-											 * An alias for the item.
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - Text
-											 */
+												// alternateName
 
-											// Get repeater field value
+													/* 
+													* An alias for the item.
+													* 
+													* Values expected to be one of these types:
+													* 
+													*     - Text
+													*/
 
-												$service_usesDevice_item_alternateName_array = $usesDevice['schema_medicaldevice_alternatename']['schema_alternatename'] ?: array();
+													// Get alternateName repeater field value
 
-											// Get item values
+														$service_usesDevice_item_alternateName_repeater = $usesDevice['schema_medicaldevice_alternatename']['schema_alternatename'] ?: array();
 
-												$service_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
-													$service_alternateName_array, // alternateName repeater field
-													'schema_alternatename_text' // alternateName item field name
-												);
+														// Add each item to alternateName property value array
+
+															$service_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
+																$service_alternateName_repeater, // alternateName repeater field
+																'schema_alternatename_text' // alternateName item field name
+															);
+
+													// Add to usesDevice property value item array
+
+														if ( $service_usesDevice_item_alternateName ) {
+
+															$service_usesDevice_item['alternateName'] = $service_usesDevice_item_alternateName;
+
+														}
+
+												// code
+
+													/* 
+													* A medical code for the entity, taken from a controlled vocabulary or ontology 
+													* such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+													* 
+													* Values expected to be one of these types:
+													* 
+													*     - MedicalCode
+													*/
+
+													// Get code repeater field value
+
+														$service_usesDevice_item_code_repeater = $usesDevice['schema_medicaldevice_code']['schema_medicalcode'] ?: array();
+
+														// Add each item to code property value array
+
+															$service_usesDevice_item_code = uamswp_fad_schema_code(
+																$service_usesDevice_item_code_repeater // code repeater field
+															);
+
+													// Add to usesDevice property value item array
+
+														if ( $service_usesDevice_item_code ) {
+
+															$service_usesDevice_item['code'] = $service_usesDevice_item_code;
+
+														}
+
+												// Add item to the list array
+
+													$service_usesDevice[] = $service_usesDevice_item;
+
+											}
+
+											// Clean up list array
+
+												$service_usesDevice = array_filter($service_usesDevice);
+												$service_usesDevice = array_values($service_usesDevice);
+												sort($service_usesDevice);
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($service_usesDevice);
 
 											// Add to schema
 
-												if ( $service_usesDevice_item_alternateName ) {
+												if ( $service_usesDevice ) {
 
-													$service_usesDevice_item['alternateName'] = $service_usesDevice_item_alternateName;
-
-												}
-
-										// code
-
-											/* 
-											 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-											 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - MedicalCode
-											 */
-
-											// Get repeater field value
-
-												$service_usesDevice_item_code_array = $usesDevice['schema_medicaldevice_code']['schema_medicalcode'] ?: array();
-
-											// Get item values
-
-												$service_usesDevice_item_code = uamswp_fad_schema_code(
-													$service_usesDevice_item_code_array // code repeater field
-												);
-
-											// Add to schema
-
-												if ( $service_usesDevice_item_code ) {
-
-													$service_usesDevice_item['code'] = $service_usesDevice_item_code;
+													$service_item['usesDevice'] = $service_usesDevice;
 
 												}
-
-										// Add item to the list array
-
-											$service_usesDevice_list[] = $service_usesDevice_item;
-
-									}
-
-									// Clean up list array
-
-										$service_usesDevice_list = array_filter($service_usesDevice_list);
-										$service_usesDevice_list = array_values($service_usesDevice_list);
-										sort($service_usesDevice_list);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($service_usesDevice_list);
-
-									// Add to schema
-
-										if ( $service_usesDevice_list ) {
-
-											$service_item['usesDevice'] = $service_usesDevice_list;
 
 										}
-
-								}
 
 							}
 

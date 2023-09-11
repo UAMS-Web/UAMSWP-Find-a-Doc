@@ -345,7 +345,7 @@
 			"display": "group",
 			"layout": "block",
 			"prefix_label": 0,
-			"prefix_name": 1,
+			"prefix_name": 0,
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
