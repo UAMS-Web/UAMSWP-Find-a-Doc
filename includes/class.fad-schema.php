@@ -144,7 +144,8 @@
 			$alternate_name = '' // string (optional) // An alias for the item.
 		) {
 
-			/* Example use:
+			/* 
+			 * Example use:
 			 * 
 			 * 	// MedicalSpecialty Schema Data
 			 * 
@@ -246,7 +247,8 @@
 			$fax_number = '' // string (optional) // The fax number.
 		) {
 
-			/* Example use:
+			/* 
+			 * Example use:
 			 * 
 			 * 	// FaxNumber Schema Data
 			 * 
@@ -297,7 +299,8 @@
 			$telephone_number = '' // string (optional) // The telephone number.
 		) {
 
-			/* Example use:
+			/* 
+			 * Example use:
 			 * 
 			 * 	// Telephone Schema Data
 			 * 
@@ -352,7 +355,8 @@
 			$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 		) {
 
-			/* Example use:
+			/* 
+			 * Example use:
 			 * 
 			 * 	// OpeningHoursSpecification Schema Data
 			 * 
@@ -444,7 +448,8 @@
 			$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		) {
 
-			/* Example use:
+			/* 
+			 * Example use:
 			 * 
 			 * 	// OpeningHours Schema Data
 			 * 
@@ -493,8 +498,6 @@
 		) {
 
 			/* 
-			 * 
-			 * 
 			 * Example use:
 			 * 
 			 * 	// GeoCoordinates Schema Data
@@ -1393,7 +1396,7 @@
 			array $input // array of MedicineSystem values
 		) {
 
-			/*
+			/* 
 			 * The system of medicine that includes this MedicalEntity 
 			 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
 			 * 
@@ -1443,7 +1446,7 @@
 			string $field_name = 'schema_sameas_url' // sameAs item field name
 		) {
 
-			/*
+			/* 
 			 * URL of a reference Web page that unambiguously indicates the item's identity 
 			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
 			 * website).
@@ -1865,7 +1868,7 @@
 
 				// LocalBusiness Subtype Properties Map
 
-					/* 
+					/*
 
 					Listing the properties valid for each schema type.
 
@@ -2042,7 +2045,7 @@
 
 				// LocalBusiness additionalType MedicalSpecialty values
 
-					/* 
+					/*
 
 					Listing the MedicalSpecialty enumeration members that are also 
 					subtypes of the MedicalBusiness type.
@@ -2086,9 +2089,9 @@
 						if ( !empty( $LocalBusiness_item ) ) {
 
 							/* 
-							* The transient exists.
-							* Return the variable.
-							*/
+							 * The transient exists.
+							 * Return the variable.
+							 */
 
 							// Add to list of areas of expertise
 
@@ -2247,13 +2250,13 @@
 
 								// url
 
-									/*
-									* URL of the item.
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - URL
-									*/
+									/* 
+									 * URL of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
 
 									$LocalBusiness_url = user_trailingslashit( get_permalink($LocalBusiness) );
 									$LocalBusiness_item['url'] = $LocalBusiness_url;
@@ -2301,17 +2304,17 @@
 
 								// name
 
-									/*
-									* The name of the item.
-									* 
-									* Subproperty of:
-									* 
-									*     - rdfs:label
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - Text
-									*/
+									/* 
+									 * The name of the item.
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - rdfs:label
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
 
 									// Get values
 
@@ -2356,23 +2359,23 @@
 
 								// additionalType
 
-									/*
-									* An additional type for the item, typically used for adding more specific types 
-									* from external vocabularies in microdata syntax. This is a relationship between 
-									* something and a class that the thing is in. Typically the value is a 
-									* URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									* in RDF. Text values can be used sparingly, for cases where useful information 
-									* can be added without their being an appropriate schema to reference. In the 
-									* case of text values, the class label should follow the schema.org style guide.
-									* 
-									* Subproperty of:
-									*     - rdf:type
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - Text
-									*     - URL
-									*/
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
 
 									if (
 										in_array(
@@ -2637,13 +2640,13 @@
 
 								// alternateName
 
-									/*
-									* An alias for the item.
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - Text
-									*/
+									/* 
+									 * An alias for the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
 
 									if (
 										in_array(
@@ -2841,12 +2844,12 @@
 										$nesting_level == 0
 									) {
 
-										/* 
+										/*
 
-											* Provider as 'Physician' type
-											* Provider as 'Dentist' type
-											* Provider as 'Optician' type
-											* Descendant locations (LocalBusiness subtypes)
+											 * Provider as 'Physician' type
+											 * Provider as 'Dentist' type
+											 * Provider as 'Optician' type
+											 * Descendant locations (LocalBusiness subtypes)
 
 										*/
 
@@ -2916,14 +2919,14 @@
 
 								// description
 
-									/*
-									* A description of the item.
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - Text
-									*     - TextObject
-									*/
+									/* 
+									 * A description of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - TextObject
+									 */
 
 									if (
 										in_array(
@@ -3634,14 +3637,14 @@
 
 								// image (specific property)
 
-									/*
-									* An image of the item. This can be a URL or a fully described ImageObject.
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - ImageObject
-									*     - URL
-									*/
+									/* 
+									 * An image of the item. This can be a URL or a fully described ImageObject.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - URL
+									 */
 
 									if (
 										in_array(
@@ -3962,18 +3965,18 @@
 
 								// mainEntityOfPage
 
-									/*
-									* Indicates a page (or other CreativeWork) for which this thing is the main 
-									* entity being described. See background notes at 
-									* https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-									* 
-									* Inverse-property: mainEntity
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - CreativeWork
-									*     - URL
-									*/
+									/* 
+									 * Indicates a page (or other CreativeWork) for which this thing is the main 
+									 * entity being described. See background notes at 
+									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * 
+									 * Inverse-property: mainEntity
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 */
 
 									if (
 										in_array(
@@ -4273,67 +4276,67 @@
 
 								// potentialAction
 
-									/*
-									* Indicates a potential Action, which describes an idealized action in which this 
-									* thing would play an 'object' role.
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - Action
-									*/
-
 									/* 
+									 * Indicates a potential Action, which describes an idealized action in which this 
+									 * thing would play an 'object' role.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Action
+									 */
+
+									/*
 
 										Create one or more Action arrays, likely 'CreateAction' type
 
-											* Make an appointment, new or existing patient, by phone
-											* Make an appointment, new patient, by phone
-											* Make an appointment, existing patient, by phone
-											* Make an appointment, new or existing patient, online
-											* Make an appointment, new patient, online
-											* Make an appointment, existing patient, online
-											* Refer a patient, by phone
-											* Refer a patient, by fax
-											* Refer a patient, through Epic thing
+											 * Make an appointment, new or existing patient, by phone
+											 * Make an appointment, new patient, by phone
+											 * Make an appointment, existing patient, by phone
+											 * Make an appointment, new or existing patient, online
+											 * Make an appointment, new patient, online
+											 * Make an appointment, existing patient, online
+											 * Refer a patient, by phone
+											 * Refer a patient, by fax
+											 * Refer a patient, through Epic thing
 
 										Property descriptions:
 
-											* 'actionStatus'
-												* Indicates the current disposition of the Action
-											* 'agent'
-												* The direct performer or driver of the action — animate or inanimate (e.g., John 
+											 * 'actionStatus'
+												 * Indicates the current disposition of the Action
+											 * 'agent'
+												 * The direct performer or driver of the action — animate or inanimate (e.g., John 
 												wrote a book)
-											* 'endTime'
-												* The endTime of something. For a reserved event or service 
+											 * 'endTime'
+												 * The endTime of something. For a reserved event or service 
 												(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
 												actions that span a period of time, when the action was performed (e.g., John 
 												wrote a book from January to December). For media, including audio and video, 
 												it's the time offset of the end of a clip within a larger file. Note that Event 
 												uses startDate/endDate instead of startTime/endTime, even when describing dates 
 												with times. This situation may be clarified in future revisions.
-											* 'error'
-												* For failed actions, more information on the cause of the failure.
-											* 'instrument'
-												* The object that helped the agent perform the action (e.g., John wrote a book 
+											 * 'error'
+												 * For failed actions, more information on the cause of the failure.
+											 * 'instrument'
+												 * The object that helped the agent perform the action (e.g., John wrote a book 
 												with a pen).
-											* 'location'
-												* The location of, for example, where an event is happening, where an 
+											 * 'location'
+												 * The location of, for example, where an event is happening, where an 
 												organization is located, or where an action takes place.
-											* 'object'
-												* The object upon which the action is carried out, whose state is kept intact or 
+											 * 'object'
+												 * The object upon which the action is carried out, whose state is kept intact or 
 												changed. Also known as the semantic roles patient, affected or undergoer — 
 												which change their state — or theme — which doesn't (e.g., John read a book).
-											* 'participant'
-												* Other co-agents that participated in the action indirectly (e.g., John wrote a 
+											 * 'participant'
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
 												book with Steve).
-											* 'provider'
-												* The service provider, service operator, or service performer; the goods 
+											 * 'provider'
+												 * The service provider, service operator, or service performer; the goods 
 												producer. Another party (a seller) may offer those services or goods on behalf 
 												of the provider. A provider may also serve as the seller. Supersedes carrier.
-											* 'result'
-												* The result produced in the action (e.g., John wrote a book).
-											* 'startTime'
-												* The startTime of something. For a reserved event or service 
+											 * 'result'
+												 * The result produced in the action (e.g., John wrote a book).
+											 * 'startTime'
+												 * The startTime of something. For a reserved event or service 
 												(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
 												For actions that span a period of time, when the action was performed 
 												(e.g., John wrote a book from January to December). For media, including audio 
@@ -4341,8 +4344,8 @@
 												Note that Event uses startDate/endDate instead of startTime/endTime, even when 
 												describing dates with times. This situation may be clarified in future 
 												revisions.
-											* 'target'
-												* Indicates a target EntryPoint, or url, for an Action.
+											 * 'target'
+												 * Indicates a target EntryPoint, or url, for an Action.
 
 									*/
 
@@ -4421,15 +4424,15 @@
 
 								// sameAs
 
-									/*
-									* URL of a reference Web page that unambiguously indicates the item's identity 
-									* (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-									* website).
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - URL
-									*/
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
 
 									if (
 										in_array(
@@ -4507,16 +4510,16 @@
 
 								// subjectOf
 
-									/*
-									* A CreativeWork or Event about this Thing.
-									* 
-									* Inverse-property: about
-									* 
-									* Values expected to be one of these types:
-									* 
-									*     - CreativeWork
-									*     - Event
-									*/
+									/* 
+									 * A CreativeWork or Event about this Thing.
+									 * 
+									 * Inverse-property: about
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Event
+									 */
 
 									if (
 										in_array(
@@ -4792,7 +4795,7 @@
 
 							// url
 
-								/*
+								/* 
 								 * URL of the item.
 								 * 
 								 * Values expected to be one of these types:
@@ -4829,7 +4832,7 @@
 
 							// name
 
-								/*
+								/* 
 								 * The name of the item.
 								 * 
 								 * Subproperty of:
@@ -4855,7 +4858,7 @@
 
 							// additionalType
 
-								/*
+								/* 
 								 * An additional type for the item, typically used for adding more specific types 
 								 * from external vocabularies in microdata syntax. This is a relationship between 
 								 * something and a class that the thing is in. Typically the value is a 
@@ -4911,7 +4914,7 @@
 
 							// alternateName
 
-								/*
+								/* 
 								 * An alias for the item.
 								 * 
 								 * Values expected to be one of these types:
@@ -4940,7 +4943,7 @@
 
 							// code
 
-								/*
+								/* 
 								 * A medical code for the entity, taken from a controlled vocabulary or ontology 
 								 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 								 * 
@@ -4976,7 +4979,7 @@
 
 							// description
 
-								/*
+								/* 
 								 * A description of the item.
 								 * 
 								 * Values expected to be one of these types:
@@ -5027,7 +5030,7 @@
 
 							// image
 
-								/*
+								/* 
 								 * An image of the item. This can be a URL or a fully described ImageObject.
 								 * 
 								 * Values expected to be one of these types:
@@ -5104,7 +5107,7 @@
 
 							// mainEntityOfPage
 
-								/*
+								/* 
 								 * Indicates a page (or other CreativeWork) for which this thing is the main 
 								 * entity being described. See background notes at 
 								 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
@@ -5137,7 +5140,7 @@
 
 							// medicineSystem
 
-								/*
+								/* 
 								 * The system of medicine that includes this MedicalEntity 
 								 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
 								 * 
@@ -5166,7 +5169,7 @@
 
 							// potentialAction
 
-								/*
+								/* 
 								 * Indicates a potential Action, which describes an idealized action in which this 
 								 * thing would play an 'object' role.
 								 * 
@@ -5175,7 +5178,7 @@
 								 *     - Action
 								 */
 
-								/* 
+								/*
 
 									Create one or more Action arrays, likely 'CreateAction' type
 
@@ -5237,11 +5240,11 @@
 										 * 'target'
 											 * Indicates a target EntryPoint, or url, for an Action.
 
-								 */
+								*/
 
 							// relevantSpecialty
 
-								/*
+								/* 
 								 * If applicable, a medical specialty in which this entity is relevant.
 								 * 
 								 * Values expected to be one of these types:
@@ -5272,7 +5275,7 @@
 
 							// sameAs
 
-								/*
+								/* 
 								 * URL of a reference Web page that unambiguously indicates the item's identity 
 								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
 								 * website).
@@ -5303,7 +5306,7 @@
 
 							// subjectOf
 
-								/*
+								/* 
 								 * A CreativeWork or Event about this Thing.
 								 * 
 								 * Inverse-property: about
@@ -5614,7 +5617,7 @@
 
 						// url
 
-							/*
+							/* 
 							 * URL of the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -5889,7 +5892,7 @@
 
 						// name
 
-							/*
+							/* 
 							 * The name of the item.
 							 * 
 							 * Subproperty of:
@@ -5919,7 +5922,7 @@
 
 						// abstract
 
-							/*
+							/* 
 							 * An abstract is a short description that summarizes a CreativeWork.
 							 * 
 							 * Values expected to be one of these types:
@@ -5949,7 +5952,7 @@
 
 						// additionalType
 
-							/*
+							/* 
 							 * An additional type for the item, typically used for adding more specific types 
 							 * from external vocabularies in microdata syntax. This is a relationship between 
 							 * something and a class that the thing is in. Typically the value is a 
@@ -5989,7 +5992,7 @@
 
 						// alternateName
 
-							/*
+							/* 
 							 * An alias for the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -6023,7 +6026,7 @@
 
 						// articleBody
 
-							/*
+							/* 
 							 * The actual body of the article.
 							 * 
 							 * Values expected to be one of these types:
@@ -6074,7 +6077,7 @@
 
 						// audience
 
-							/*
+							/* 
 							 * An intended audience, i.e. a group for whom something was created.
 							 * 
 							 * Values expected to be one of these types:
@@ -6104,7 +6107,7 @@
 
 						// contentSize
 
-							/*
+							/* 
 							 * File size in (mega/kilo)bytes.
 							 * 
 							 * Values expected to be one of these types:
@@ -6134,7 +6137,7 @@
 
 						// contentUrl
 
-							/*
+							/* 
 							 * Actual bytes of the media object, for example the image file or video file.
 							 * 
 							 * Values expected to be one of these types:
@@ -6164,7 +6167,7 @@
 
 						// creator
 
-							/*
+							/* 
 							 * The creator/author of this CreativeWork. This is the same as the Author 
 							 * property for CreativeWork.
 							 * 
@@ -6208,7 +6211,7 @@
 
 						// dateModified
 
-							/*
+							/* 
 							 * The date on which the CreativeWork was most recently modified or when the 
 							 * item's entry was modified within a DataFeed.
 							 * 
@@ -6240,7 +6243,7 @@
 
 						// datePublished
 
-							/*
+							/* 
 							 * Date of first broadcast/publication.
 							 * 
 							 * Values expected to be one of these types:
@@ -6271,7 +6274,7 @@
 
 						// description
 
-							/*
+							/* 
 							 * A description of the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -6389,7 +6392,7 @@
 
 						// duration
 
-							/*
+							/* 
 							 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
 							 * format.
 							 * 
@@ -6420,7 +6423,7 @@
 
 						// embeddedTextCaption
 
-							/*
+							/* 
 							 * Represents textual captioning from a MediaObject, e.g. text of a 'meme'.
 							 * 
 							 * Values expected to be one of these types:
@@ -6465,7 +6468,7 @@
 
 						// embedUrl
 
-							/*
+							/* 
 							 * A URL pointing to a player for a specific video. In general, this is the 
 							 * information in the src element of an embed tag and should not be the same as 
 							 * the content of the loc tag.
@@ -6497,7 +6500,7 @@
 
 						// encodingFormat
 
-							/*
+							/* 
 							 * Media type typically expressed using a MIME format (see IANA site and MDN 
 							 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
 							 * for .mp3).
@@ -6537,7 +6540,7 @@
 
 						// hasDigitalDocumentPermission
 
-							/*
+							/* 
 							 * A permission related to the access to this document (e.g. permission to read or 
 							 * write an electronic document). For a public document, specify a grantee with an 
 							 * Audience with audienceType equal to "public".
@@ -6576,7 +6579,7 @@
 
 						// height
 
-							/*
+							/* 
 							 * The height of the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -6607,7 +6610,7 @@
 
 						// image
 
-							/*
+							/* 
 							 * An image of the item. This can be a URL or a fully described ImageObject.
 							 * 
 							 * Values expected to be one of these types:
@@ -6640,7 +6643,7 @@
 
 						// isAccessibleForFree
 
-							/*
+							/* 
 							 * A flag to signal that the item, event, or place is accessible for free.
 							 * 
 							 * Values expected to be one of these types:
@@ -6666,7 +6669,7 @@
 
 						// isPartOf
 
-							/*
+							/* 
 							 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
 							 * sense), is part of.
 							 * 
@@ -6706,7 +6709,7 @@
 
 						// mainEntityOfPage
 
-							/*
+							/* 
 							 * Indicates a page (or other CreativeWork) for which this thing is the main 
 							 * entity being described. See background notes at 
 							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
@@ -6747,7 +6750,7 @@
 
 						// representativeOfPage
 
-							/*
+							/* 
 							 * Indicates whether this image is representative of the content of the page.
 							 * 
 							 * Values expected to be one of these types:
@@ -6773,7 +6776,7 @@
 
 						// sameAs
 
-							/*
+							/* 
 							 * URL of a reference Web page that unambiguously indicates the item's identity 
 							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
 							 * website).
@@ -6843,7 +6846,7 @@
 
 						// sourceOrganization
 
-							/*
+							/* 
 							 * The Organization on whose behalf the creator was working.
 							 * 
 							 * Values expected to be one of these types:
@@ -6881,7 +6884,7 @@
 
 						// speakable
 
-							/*
+							/* 
 							 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
 							 * of being highlighted as being especially appropriate for text-to-speech 
 							 * conversion. Other sections of a page may also be usefully spoken in particular 
@@ -6982,7 +6985,7 @@
 
 						// subjectOf
 
-							/*
+							/* 
 							 * A CreativeWork or Event about this Thing.
 							 * 
 							 * Inverse-property: about
@@ -7023,7 +7026,7 @@
 
 						// thumbnail
 
-							/*
+							/* 
 							 * Thumbnail image for an image or video.
 							 * 
 							 * Values expected to be one of these types:
@@ -7055,7 +7058,7 @@
 
 						// transcript
 
-							/*
+							/* 
 							 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
 							 * object.
 							 * 
@@ -7101,7 +7104,7 @@
 
 						// timeRequired
 
-							/*
+							/* 
 							 * Approximate or typical time it usually takes to work with or through the 
 							 * content of this work for the typical or target audience.
 							 * 
@@ -7168,7 +7171,7 @@
 
 						// videoFrameSize
 
-							/*
+							/* 
 							 * The frame size of the video.
 							 * 
 							 * Values expected to be one of these types:
@@ -7198,7 +7201,7 @@
 
 						// videoQuality
 
-							/*
+							/* 
 							 * The quality of the video.
 							 * 
 							 * Values expected to be one of these types:
@@ -7228,7 +7231,7 @@
 
 						// width
 
-							/*
+							/* 
 							 * The width of the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -7259,7 +7262,7 @@
 
 						// wordCount
 
-							/*
+							/* 
 							 * The number of words in the text of the Article.
 							 * 
 							 * Values expected to be one of these types:
@@ -7405,7 +7408,7 @@
 
 						// name
 
-							/*
+							/* 
 							 * The name of the item.
 							 * 
 							 * Subproperty of:
@@ -7425,7 +7428,7 @@
 
 						// alternateName
 
-							/*
+							/* 
 							 * An alias for the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -7454,7 +7457,7 @@
 
 						// code
 
-							/*
+							/* 
 							 * A medical code for the entity, taken from a controlled vocabulary or ontology 
 							 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 							 * 
@@ -7483,7 +7486,7 @@
 
 						// additionalType
 
-							/*
+							/* 
 							 * An additional type for the item, typically used for adding more specific types 
 							 * from external vocabularies in microdata syntax. This is a relationship between 
 							 * something and a class that the thing is in. Typically the value is a 
@@ -7533,7 +7536,7 @@
 
 						// sameAs
 
-							/*
+							/* 
 							 * URL of a reference Web page that unambiguously indicates the item's identity 
 							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
 							 * website).
@@ -7909,7 +7912,7 @@
 
 						// Name
 
-							/*
+							/* 
 							 * The name of the item.
 							 * 
 							 * Subproperty of:
@@ -7926,7 +7929,7 @@
 
 						// alternateName
 
-							/*
+							/* 
 							 * An alias for the item.
 							 * 
 							 * Values expected to be one of these types:
@@ -7955,7 +7958,7 @@
 
 						// code
 
-							/*
+							/* 
 							 * A medical code for the entity, taken from a controlled vocabulary or ontology 
 							 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 							 * 
@@ -7984,7 +7987,7 @@
 
 						// additionalType
 
-							/*
+							/* 
 							 * An additional type for the item, typically used for adding more specific types 
 							 * from external vocabularies in microdata syntax. This is a relationship between 
 							 * something and a class that the thing is in. Typically the value is a 
@@ -8042,7 +8045,7 @@
 
 						// sameAs
 
-							/*
+							/* 
 							 * URL of a reference Web page that unambiguously indicates the item's identity 
 							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
 							 * website).
@@ -8308,7 +8311,7 @@
 
 						// relevantSpecialty
 
-							/*
+							/* 
 							 * If applicable, a medical specialty in which this entity is relevant.
 							 * 
 							 * Values expected to be one of these types:
@@ -8461,7 +8464,7 @@
 
 										// name
 
-											/*
+											/* 
 											 * The name of the item.
 											 * 
 											 * Subproperty of:
@@ -8477,7 +8480,7 @@
 
 										// alternateName
 
-											/*
+											/* 
 											 * An alias for the item.
 											 * 
 											 * Values expected to be one of these types:
@@ -8506,7 +8509,7 @@
 
 										// code
 
-											/*
+											/* 
 											 * A medical code for the entity, taken from a controlled vocabulary or ontology 
 											 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 											 * 
