@@ -2048,7 +2048,10 @@ uamswp_fad_schema_construct($schema_provider);
 	// echo print_r($schema_provider['@graph'][5]); // test
 
 		// Physician
-		echo print_r($schema_provider['@graph'][5]['location']); // test
+		echo print_r($schema_provider['@graph'][5]['containedInPlace']); // test
+
+		// // Physician
+		// echo print_r($schema_provider['@graph'][5]['location']); // test
 
 	// // Person
 	// echo print_r($schema_provider['@graph'][6]); // test
