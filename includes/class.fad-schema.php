@@ -240,6 +240,401 @@
 
 		}
 
+	// Add data to an array defining schema data for ContactPoint
+
+		function uamswp_fad_schema_contactpoint(
+			$input
+		) {
+
+			/*
+				Expected structure:
+
+				$input = array(
+					array(
+						'availableLanguage' => array(
+							array(
+								'name' => 'English',
+								'alternateName' => 'en'
+							)
+						),
+						'contactOption' => array(
+							'HearingImpairedSupported',
+							'TollFree'
+						),
+						'contactType' => 'appointment scheduing for new and existing patients',
+						'email' => '',
+						'faxNumber' => '',
+						'telephone' => '+1 8008675309',
+						'url' => ''
+					),
+					array(
+						'availableLanguage' => array(
+							array(
+								'name' => 'English',
+								'alternateName' => 'en'
+							)
+						),
+						'contactOption' => '',
+						'contactType' => 'appointment scheduing for new and existing patients',
+						'email' => '',
+						'faxNumber' => '',
+						'telephone' => '+1 5015551111',
+						'url' => ''
+					),
+					array(
+						'availableLanguage' => array(
+							array(
+								'name' => 'Spanish',
+								'alternateName' => 'es'
+							)
+						),
+						'contactOption' => '',
+						'contactType' => 'appointment scheduing for new and existing patients',
+						'email' => '',
+						'faxNumber' => '',
+						'telephone' => '+1 5015552222',
+						'url' => ''
+					),
+					array(
+						'availableLanguage' => array(
+							array(
+								'name' => 'English',
+								'alternateName' => 'en'
+							)
+						),
+						'contactOption' => '',
+						'contactType' => 'patient referral',
+						'email' => '',
+						'faxNumber' => '+1 5015553333',
+						'telephone' => '+1 5015554444',
+						'url' => 'https://test.com/'
+					),
+					array(
+						'availableLanguage' => array(
+							array(
+								'name' => 'English',
+								'alternateName' => 'en'
+							)
+						),
+						'contactOption' => array(
+							'HearingImpairedSupported',
+							'TollFree'
+						),
+						'contactType' => 'patient referral',
+						'email' => '',
+						'faxNumber' => '',
+						'telephone' => '+1 8005556666',
+						'url' => ''
+					)
+				);
+			*/
+
+			// Base arrays
+
+				// contactPoint property value array
+
+					$schema_ContactPoint_list = array();
+
+				// ContactPoint item value array
+
+					$schema_ContactPoint_base = array(
+						'availableLanguage' => '',
+						'contactOption' => '',
+						'contactType' => '',
+						'email' => '',
+						'faxNumber' => '',
+						'hoursAvailable' => '',
+						'telephone' => '',
+						'url' => ''
+					);
+
+			// Add values to the property value array
+
+				if ( $input ) {
+
+					foreach ( $input as $item ) {
+
+						// Intersect input with base ContactPoint item value array
+
+							$input = array_filter(
+								array_intersect(
+									$input,
+									$schema_ContactPoint_base
+								)
+							);
+
+						// If array is empty, skip this iteration
+
+							if ( !$input ) {
+
+								continue;
+
+							}
+
+						// Base item array
+
+							$schema_ContactPoint = $schema_ContactPoint_base;
+
+						// Add property values
+
+							// availableLanguage
+
+								/*
+
+									A language someone may use with or at the item, service or place.
+
+									Please use one of the language codes from the IETF BCP 47 standard.
+									
+									See also inLanguage.
+
+									Expected Type:
+
+										- Language
+										- Text
+
+								*/
+
+								if ( $item['availableLanguage'] ) {
+
+									if ( is_array($item['availableLanguage']) ) {
+
+										foreach ( $item['availableLanguage'] as $item) {
+
+											$schema_ContactPoint['availableLanguage'][] = array(
+												'@type' => 'Language',
+												'name' => $item['name'],
+												'alternateName' => $item['alternateName']
+											);
+
+										}
+
+									} else {
+
+										$schema_ContactPoint['availableLanguage'][] = array(
+											'@type' => 'Language',
+											'name' => $item['name'],
+											'alternateName' => $item['alternateName']
+										);
+
+									}
+
+								}
+
+								$schema_ContactPoint['availableLanguage'] = $item['availableLanguage'] ?? '';
+
+							// contactOption
+
+								/*
+
+									An option available on this contact point (e.g., a toll-free number or support for hearing-impaired callers).
+
+									Expected Type:
+
+										- ContactPointOption (enumeration type)
+										      - HearingImpairedSupported
+										      - TollFree
+
+								*/
+
+								// Define valid values
+
+									$schema_ContactPoint_contactOption_valid = array(
+										'HearingImpairedSupported',
+										'TollFree'
+									);
+
+								// Add values to the schema
+
+									if (
+										is_array($item['contactOption'])
+									) {
+
+										$item['contactOption'] = array_intersect(
+											$item['contactOption'],
+											$schema_ContactPoint_contactOption_valid
+										);
+
+										$schema_ContactPoint['contactOption'] = $item['contactOption'] ?: '';
+
+									} elseif (
+										in_array(
+											$item['contactOption'],
+											$schema_ContactPoint_contactOption_valid
+										)
+									) {
+
+										$schema_ContactPoint['contactOption'] = $item['contactOption'];
+
+									}
+
+							// contactType
+
+								/*
+
+									A person or organization can have different contact points, for different purposes.
+									
+									For example, a sales contact point, a PR contact point and so on.
+									
+									This property is used to specify the kind of contact point.
+
+									Examples from schema.org:
+
+										- 'customer service'
+										- 'technical support'
+										- 'bill payment'
+										- 'mailing address'
+
+									Expected Type:
+
+										- Text
+
+								*/
+
+								$schema_ContactPoint['contactType'] = $item['contactType'] ?? '';
+
+							// email
+
+								/*
+
+									Email address.
+
+									Expected Type:
+
+										- Text
+
+								*/
+
+								$schema_ContactPoint['email'] = $item['email'] ?? '';
+
+							// faxNumber
+
+								/*
+
+									The fax number.
+
+									Expected Type:
+
+										- Text
+
+								*/
+
+								$schema_ContactPoint['faxNumber'] = $item['faxNumber'] ?? '';
+
+							// hoursAvailable
+
+								/*
+
+									The hours during which this service or contact is available.
+
+									Expected Type:
+
+										- OpeningHoursSpecification
+
+								*/
+
+								$schema_ContactPoint['hoursAvailable'] = $item['hoursAvailable'] ?? '';
+
+							// potentialAction
+
+								/*
+
+									Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+
+									Expected Type:
+
+										- Action
+
+								*/
+
+								$schema_ContactPoint['potentialAction'] = $item['potentialAction'] ?? '';
+
+							// productSupported
+
+								/*
+
+									The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").
+
+									Expected Type:
+
+										- Product
+										- Text
+
+								*/
+
+								$schema_ContactPoint['productSupported'] = $item['productSupported'] ?? '';
+
+							// telephone
+
+								/*
+
+									The telephone number.
+
+									Expected Type:
+
+										- Text
+
+								*/
+
+								$schema_ContactPoint['telephone'] = $item['telephone'] ?? '';
+
+							// url
+
+								/*
+
+									URL of the item.
+
+									Expected Type:
+
+										- Text
+
+								*/
+
+								$schema_ContactPoint['url'] = $item['url'] ?? '';
+
+						// Clean up item array
+
+							if ( $schema_ContactPoint ) {
+
+								$schema_ContactPoint = array_filter($schema_ContactPoint);
+
+							}
+
+						// Add @type
+
+							if ( $schema_ContactPoint ) {
+
+								$schema_ContactPoint = array( '@type' => 'ContactPoint' ) + $schema_ContactPoint;
+								
+							}
+
+						// Add to the contactPoint property value array
+
+							if ( $schema_ContactPoint ) {
+
+								$schema_ContactPoint_list[] = $schema_ContactPoint;
+								
+							}
+
+					}
+
+				}
+
+			// Clean up the contactPoint property value array
+
+				if ( $schema_ContactPoint_list ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($schema_ContactPoint_list);
+
+				}
+
+			// Return the contactPoint property value array
+
+				return $schema_ContactPoint_list;
+
+		}
+
 	// Add data to an array defining schema data for faxNumber
 
 		function uamswp_fad_schema_fax_number(
