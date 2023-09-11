@@ -55,6 +55,77 @@ TODO List
 	 * Related locations
 		 * Define schema for related locations
 		 * Apply the location schema function to the single location template
+		 * Add values for remaining properties:
+			 * aggregateRating
+			 * areaServed
+			 * award
+				 * Create taxonomy similar to provider's 'Recognition List', but for locations
+					 * Add a section to the location profile / subsection to display said information
+			 * brand
+				 * Create method of defining values for UAMS Health and UAMS
+				 * Create method of defining values for third-party organizations (e.g., Arkansas Children's)
+			 * contactPoint
+				 * Cover 'faxNumber' and 'telephone' here rather than in distinct properties
+			 * containedInPlace
+				 * For descendant locations, add parent location as the 'Place'
+				 * For top-level locations with a building value, add info on its building
+					 * Add additional inputs to 'Building' taxonomy for 'Place' schema
+						 * Include Google CID
+			 * containsPlace
+				 * Include descendant locations
+				 * Include provider as 'Physician' type 
+				 * Include provider as 'Dentist' type 
+				 * Include provider as 'Optician' type 
+			 * currenciesAccepted
+			 * diversityPolicy
+			 * diversityStaffingReport
+			 * email
+			 * employee
+				 * Include each provider associated with the location
+			 * ethicsPolicy
+			 * event
+				 * Find means of populating values from relevant LiveWhale calendar events
+			 * foundingDate
+				 * Add input for date the location first opened (regardless of physical location)
+			 * funding
+			 * hasCredential
+			 * hasDriveThroughService
+			 * healthcareReportingData
+			 * identifier
+				 * duns
+				 * globalLocationNumber
+				 * isicV4
+				 * iso6523Code
+				 * leiCode
+				 * naics
+				 * taxID
+				 * vatID
+			 * image
+			 * isAcceptingNewPatients
+			 * isAccessibleForFree
+			 * keywords
+			 * knowsAbout
+			 * knowsLanguage
+			 * legalName
+			 * logo
+			 * mainEntityOfPage
+			 * makesOffer
+			 * maximumAttendeeCapacity
+			 * memberOf
+			 * nonprofitStatus
+			 * numberOfEmployees
+			 * openingHours
+			 * openingHoursSpecification
+			 * parentOrganization
+				 * For descendant locations, add the parent location as the 'Organization'
+				 * For top-level locations, add UAMS Health as the 'Organization'
+			 * paymentAccepted
+			 * photo
+				 * Amend values from ImageObject to accommodate properties particular to 'Photograph' type
+			 * potentialAction
+			 * publicAccess
+			 * review
+			 * specialOpeningHoursSpecification
 	 * Related areas of expertise
 		 * Apply the areas of expertise schema function to the single area of expertise template
 		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
@@ -72,6 +143,10 @@ TODO List
 			 * thumbnail
 			 * videoQuality
 			 * videoFrameSize
+	 * Provider
+		 * Provider as 'Physician' type
+			 * 'employee' property
+				 * Add Provider as 'Person' type
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
