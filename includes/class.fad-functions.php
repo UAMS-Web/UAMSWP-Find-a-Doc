@@ -10576,6 +10576,7 @@ function uamswp_prevent_orphan($string) {
 
 							// Parent ID
 							$location_parent_id = $location_has_parent ? ( get_field('location_parent_id', $page_id) ?: '' ) : '';
+							$location_has_parent = $location_parent_id ? true : false;
 
 							// Get the parent post object
 							$location_parent_object = $location_parent_id ? get_post($location_parent_id) : '';
@@ -10616,6 +10617,10 @@ function uamswp_prevent_orphan($string) {
 							}
 
 							// Add to the variables array
+							$location_card_fields_vars['location_override_parent_photo'] = isset($location_override_parent_photo) ? $location_override_parent_photo : '';
+							$location_card_fields_vars['location_override_parent_photo_featured'] = isset($location_override_parent_photo_featured) ? $location_override_parent_photo_featured : '';
+							$location_card_fields_vars['location_has_parent'] = isset($location_has_parent) ? $location_has_parent : '';
+							$location_card_fields_vars['location_parent_id'] = isset($location_parent_id) ? $location_parent_id : '';
 							$location_card_fields_vars['location_parent_object'] = isset($location_parent_object) ? $location_parent_object : '';
 							$location_card_fields_vars['location_parent_display'] = isset($location_parent_display) ? $location_parent_display : '';
 							$location_card_fields_vars['location_parent_title'] = isset($location_parent_title) ? $location_parent_title : '';
@@ -10632,13 +10637,15 @@ function uamswp_prevent_orphan($string) {
 									!$location_override_parent_photo_featured
 								) {
 
-									$location_featured_image = get_post_thumbnail_id($location_parent_id) ?: ''; // int
+									$location_featured_image = get_field( '_thumbnail_id', $location_parent_id ) ?: ''; // int
 
 								} else {
 
-									$location_featured_image = get_post_thumbnail_id($page_id) ?: ''; // int
+									$location_featured_image = get_field( '_thumbnail_id', $page_id ) ?: ''; // int
 
 								}
+
+								$location_card_fields_vars['location_featured_image'] = isset($location_featured_image) ? $location_featured_image : '';
 
 							// Featured image URL
 							$location_featured_image_url = $location_featured_image ? wp_get_attachment_image_url( $location_featured_image, 'aspect-16-9-small' ) : ''; // string
@@ -10654,6 +10661,9 @@ function uamswp_prevent_orphan($string) {
 
 							// Street address (address line 1)
 							$location_address_1 = get_field('location_address_1', $location_address_id ) ?: '';
+
+								// Add to the variables array
+								$location_card_fields_vars['location_address_1'] = isset($location_address_1) ? $location_address_1 : '';
 
 							// Building, Floor and Suite
 
@@ -10675,6 +10685,12 @@ function uamswp_prevent_orphan($string) {
 
 										}
 
+									// Add to the variables array
+
+										$location_card_fields_vars['location_building'] = isset($location_building) ? $location_building : '';
+										$location_card_fields_vars['location_building_slug'] = isset($location_building_slug) ? $location_building_slug : '';
+										$location_card_fields_vars['location_building_name'] = isset($location_building_name) ? $location_building_name : '';
+
 								// Building floor
 
 									$location_floor = get_field_object('location_building_floor', $location_address_id ) ?: '';
@@ -10691,9 +10707,18 @@ function uamswp_prevent_orphan($string) {
 
 										}
 
+									// Add to the variables array
+
+										$location_card_fields_vars['location_floor_value'] = isset($location_floor_value) ? $location_floor_value : '';
+										$location_card_fields_vars['location_floor_label'] = isset($location_floor_label) ? $location_floor_label : '';
+
 								// Suite/unit number
 
 									$location_suite = get_field('location_suite', $location_address_id ) ?: '';
+
+									// Add to the variables array
+
+										$location_card_fields_vars['location_suite'] = isset($location_suite) ? $location_suite : '';
 
 								// Create address detail line(s) string
 
@@ -10787,6 +10812,12 @@ function uamswp_prevent_orphan($string) {
 										)
 									);
 
+								// Add to the variables array
+
+									$location_card_fields_vars['location_city'] = isset($location_city) ? $location_city : '';
+									$location_card_fields_vars['location_state'] = isset($location_state) ? $location_state : '';
+									$location_card_fields_vars['location_zip'] = isset($location_zip) ? $location_zip : '';
+
 						// GPS / Map / Directions
 
 							$location_map = get_field('location_map', $location_address_id) ?: '';
@@ -10795,7 +10826,9 @@ function uamswp_prevent_orphan($string) {
 							$location_directions_url = $location_map ? 'https://www.google.com/maps/dir/Current+Location/' . $location_map['lat'] . ',' . $location_map['lng'] : '';
 
 							// Add to the variables array
-							$location_card_fields_vars['location_directions_url'] = isset($location_directions_url) ? $location_directions_url : '';
+
+								$location_card_fields_vars['location_map'] = isset($location_map) ? $location_map : '';
+								$location_card_fields_vars['location_directions_url'] = isset($location_directions_url) ? $location_directions_url : '';
 
 						// Location Alerts
 
@@ -12799,7 +12832,7 @@ function uamswp_prevent_orphan($string) {
 
 	}
 
-	
+
 // Flatten single-row multi-dimensional array by one step
 
 	function uamswp_fad_flatten_multidimensional_array(&$input) {

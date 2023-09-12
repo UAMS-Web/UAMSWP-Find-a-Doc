@@ -384,7 +384,7 @@
 									A language someone may use with or at the item, service or place.
 
 									Please use one of the language codes from the IETF BCP 47 standard.
-									
+
 									See also inLanguage.
 
 									Expected Type:
@@ -472,9 +472,9 @@
 								/*
 
 									A person or organization can have different contact points, for different purposes.
-									
+
 									For example, a sales contact point, a PR contact point and so on.
-									
+
 									This property is used to specify the kind of contact point.
 
 									Examples from schema.org:
@@ -604,7 +604,7 @@
 							if ( $schema_ContactPoint ) {
 
 								$schema_ContactPoint = array( '@type' => 'ContactPoint' ) + $schema_ContactPoint;
-								
+
 							}
 
 						// Add to the contactPoint property value array
@@ -612,7 +612,7 @@
 							if ( $schema_ContactPoint ) {
 
 								$schema_ContactPoint_list[] = $schema_ContactPoint;
-								
+
 							}
 
 					}
@@ -2305,7 +2305,8 @@
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
 			int $LocalBusiness_i = 1, // Iteration counter
-			array $LocalBusiness_list = array() // Pre-existing list array
+			array $LocalBusiness_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
+			array $LocalBusiness_list = array() // Pre-existing list array to which to add additional items
 		) {
 
 			// Common property values
@@ -2561,118 +2562,133 @@
 
 							// Eliminate PHP errors / reset variables
 
-								$LocalBusiness_additionalType = array();
-								$LocalBusiness_additionalType_field = array();
-								$LocalBusiness_additionalType_repeater = array();
-								$LocalBusiness_address = array();
-								$LocalBusiness_address_1 = '';
-								$LocalBusiness_address_2_array = array();
-								$LocalBusiness_addressLocality = '';
-								$LocalBusiness_addressRegion = '';
-								$LocalBusiness_aggregateRating = array();
-								$LocalBusiness_alternateName = array();
-								$LocalBusiness_alternateName_repeater = array();
-								$LocalBusiness_areaServed = array();
-								$LocalBusiness_availableService = array();
-								$LocalBusiness_award = array();
-								$LocalBusiness_brand = array();
-								$LocalBusiness_building = '';
-								$LocalBusiness_building_name = '';
-								$LocalBusiness_building_slug = '';
-								$LocalBusiness_building_term = '';
-								$LocalBusiness_contactPoint = array();
-								$LocalBusiness_containedInPlace = array();
-								$LocalBusiness_containsPlace = array();
-								$LocalBusiness_currenciesAccepted = array();
-								$LocalBusiness_current_fpage = '';
-								$LocalBusiness_department = array();
-								$LocalBusiness_description = array();
-								$LocalBusiness_diversityPolicy = array();
-								$LocalBusiness_diversityStaffingReport = array();
-								$LocalBusiness_duns = array();
-								$LocalBusiness_employee = array();
-								$LocalBusiness_ethicsPolicy = array();
-								$LocalBusiness_event = array();
-								$LocalBusiness_featured_image_id = '';
-								$LocalBusiness_floor = array();
-								$LocalBusiness_floor_label = '';
-								$LocalBusiness_floor_value = '';
-								$LocalBusiness_foundingDate = array();
-								$LocalBusiness_fpage_query = '';
-								$LocalBusiness_funding = array();
-								$LocalBusiness_gallery_image_id = array();
-								$LocalBusiness_geo = array();
-								$LocalBusiness_geo_value = array();
-								$LocalBusiness_globalLocationNumber = array();
-								$LocalBusiness_has_parent = '';
-								$LocalBusiness_has_parent = '';
-								$LocalBusiness_hasCredential = array();
-								$LocalBusiness_hasDriveThroughService = array();
-								$LocalBusiness_hasMap = array();
-								$LocalBusiness_healthcareReportingData = array();
-								$LocalBusiness_healthPlanNetworkId = array();
-								$LocalBusiness_id = '';
-								$LocalBusiness_identifier = array();
-								$LocalBusiness_image = array();
-								$LocalBusiness_image_general = array();
-								$LocalBusiness_image_id = array();
-								$LocalBusiness_isAcceptingNewPatients = array();
-								$LocalBusiness_isAccessibleForFree = array();
-								$LocalBusiness_isicV4 = array();
-								$LocalBusiness_iso6523Code = array();
 								$LocalBusiness_item = array(); // Base array
-								$LocalBusiness_keywords = array();
-								$LocalBusiness_knowsAbout = array();
-								$LocalBusiness_knowsLanguage = array();
-								$LocalBusiness_legalName = array();
-								$LocalBusiness_leiCode = array();
-								$LocalBusiness_logo = array();
-								$LocalBusiness_mainEntityOfPage = array();
-								$LocalBusiness_makesOffer = array();
-								$LocalBusiness_maximumAttendeeCapacity = array();
-								$LocalBusiness_medicalSpecialty = array();
-								$LocalBusiness_memberOf = array();
-								$LocalBusiness_naics = array();
-								$LocalBusiness_name = '';
-								$LocalBusiness_nonprofitStatus = array();
-								$LocalBusiness_numberOfEmployees = array();
-								$LocalBusiness_ontology_type = '';
-								$LocalBusiness_openingHours = array();
-								$LocalBusiness_openingHoursSpecification = array();
-								$LocalBusiness_override_parent_photo = '';
-								$LocalBusiness_override_parent_photo_featured = '';
-								$LocalBusiness_override_parent_photo_gallery = '';
-								$LocalBusiness_override_parent_photo_wayfinding = '';
-								$LocalBusiness_parent_id = '';
-								$LocalBusiness_parentOrganization = array();
-								$LocalBusiness_paymentAccepted = array();
-								$LocalBusiness_photo = array();
-								$LocalBusiness_postalCode = '';
-								$LocalBusiness_potentialAction = array();
-								$LocalBusiness_publicAccess = array();
-								$LocalBusiness_review = array();
-								$LocalBusiness_sameAs = array();
-								$LocalBusiness_sameAs_repeater = array();
-								$LocalBusiness_specialOpeningHoursSpecification = array();
-								$LocalBusiness_streetAddress = '';
-								$LocalBusiness_streetAddress_array = array();
-								$LocalBusiness_subjectOf = array();
-								$LocalBusiness_subOrganization = array();
-								$LocalBusiness_suite = '';
-								$LocalBusiness_taxID = array();
-								$LocalBusiness_treatments = array();
-								$LocalBusiness_type = '';
-								$LocalBusiness_url = '';
-								$LocalBusiness_vatID = array();
-								$LocalBusiness_wayfinding_image_id = '';
+								$LocalBusiness_additionalType = null;
+								$LocalBusiness_additionalType_field = null;
+								$LocalBusiness_additionalType_repeater = null;
+								$LocalBusiness_address = null;
+								$LocalBusiness_address_1 = null;
+								$LocalBusiness_address_2_array = null;
+								$LocalBusiness_addressLocality = null;
+								$LocalBusiness_addressRegion = null;
+								$LocalBusiness_aggregateRating = null;
+								$LocalBusiness_alternateName = null;
+								$LocalBusiness_alternateName_repeater = null;
+								$LocalBusiness_areaServed = null;
+								$LocalBusiness_availableService = null;
+								$LocalBusiness_award = null;
+								$LocalBusiness_brand = null;
+								$LocalBusiness_building = null;
+								$LocalBusiness_building_name = null;
+								$LocalBusiness_building_slug = null;
+								$LocalBusiness_building_term = null;
+								$LocalBusiness_contactPoint = null;
+								$LocalBusiness_containedInPlace = null;
+								$LocalBusiness_containsPlace = null;
+								$LocalBusiness_currenciesAccepted = null;
+								$LocalBusiness_current_fpage = null;
+								$LocalBusiness_department = null;
+								$LocalBusiness_description = null;
+								$LocalBusiness_diversityPolicy = null;
+								$LocalBusiness_diversityStaffingReport = null;
+								$LocalBusiness_duns = null;
+								$LocalBusiness_employee = null;
+								$LocalBusiness_ethicsPolicy = null;
+								$LocalBusiness_event = null;
+								$LocalBusiness_featured_image_id = null;
+								$LocalBusiness_floor = null;
+								$LocalBusiness_floor_label = null;
+								$LocalBusiness_floor_value = null;
+								$LocalBusiness_foundingDate = null;
+								$LocalBusiness_fpage_query = null;
+								$LocalBusiness_funding = null;
+								$LocalBusiness_gallery_image_id = null;
+								$LocalBusiness_geo = null;
+								$LocalBusiness_geo_value = null;
+								$LocalBusiness_globalLocationNumber = null;
+								$LocalBusiness_has_parent = null;
+								$LocalBusiness_hasCredential = null;
+								$LocalBusiness_hasDriveThroughService = null;
+								$LocalBusiness_hasMap = null;
+								$LocalBusiness_id = null;
+								$LocalBusiness_identifier = null;
+								$LocalBusiness_image = null;
+								$LocalBusiness_image_general = null;
+								$LocalBusiness_image_id = null;
+								$LocalBusiness_isAcceptingNewPatients = null;
+								$LocalBusiness_isAccessibleForFree = null;
+								$LocalBusiness_isicV4 = null;
+								$LocalBusiness_iso6523Code = null;
+								$LocalBusiness_keywords = null;
+								$LocalBusiness_knowsAbout = null;
+								$LocalBusiness_knowsLanguage = null;
+								$LocalBusiness_legalName = null;
+								$LocalBusiness_leiCode = null;
+								$LocalBusiness_logo = null;
+								$LocalBusiness_mainEntityOfPage = null;
+								$LocalBusiness_makesOffer = null;
+								$LocalBusiness_maximumAttendeeCapacity = null;
+								$LocalBusiness_medicalSpecialty = null;
+								$LocalBusiness_memberOf = null;
+								$LocalBusiness_naics = null;
+								$LocalBusiness_name = null;
+								$LocalBusiness_nonprofitStatus = null;
+								$LocalBusiness_numberOfEmployees = null;
+								$LocalBusiness_ontology_type = null;
+								$LocalBusiness_openingHours = null;
+								$LocalBusiness_openingHoursSpecification = null;
+								$LocalBusiness_override_parent_photo = null;
+								$LocalBusiness_override_parent_photo_featured = null;
+								$LocalBusiness_override_parent_photo_gallery = null;
+								$LocalBusiness_override_parent_photo_wayfinding = null;
+								$LocalBusiness_parent_id = null;
+								$LocalBusiness_parentOrganization = null;
+								$LocalBusiness_paymentAccepted = null;
+								$LocalBusiness_photo = null;
+								$LocalBusiness_postalCode = null;
+								$LocalBusiness_potentialAction = null;
+								$LocalBusiness_publicAccess = null;
+								$LocalBusiness_review = null;
+								$LocalBusiness_sameAs = null;
+								$LocalBusiness_sameAs_repeater = null;
+								$LocalBusiness_specialOpeningHoursSpecification = null;
+								$LocalBusiness_streetAddress = null;
+								$LocalBusiness_streetAddress_array = null;
+								$LocalBusiness_subjectOf = null;
+								$LocalBusiness_subOrganization = null;
+								$LocalBusiness_suite = null;
+								$LocalBusiness_taxID = null;
+								$LocalBusiness_taxID_taxpayer = null;
+								$LocalBusiness_taxID_employer = null;
+								$LocalBusiness_treatments = null;
+								$LocalBusiness_type = null;
+								$LocalBusiness_url = null;
+								$LocalBusiness_vatID = null;
+								$LocalBusiness_wayfinding_image_id = null;
 
 								// Reused variables
 
-									$LocalBusiness_smokingAllowed = $LocalBusiness_smokingAllowed ?? 'False';
+									$LocalBusiness_smokingAllowed = 'False';
+
+							// Load variables from pre-existing field values array
+
+								if ( $LocalBusiness_fields[$LocalBusiness] ) {
+
+									foreach ( $LocalBusiness_fields[$LocalBusiness] as $key => $value ) {
+
+										${$key} = $value; // Create a variable for each item in the array
+
+									}
+
+								}
 
 							// Get ontology type
 
-								$LocalBusiness_ontology_type = true;
+								if ( !isset($LocalBusiness_ontology_type) ) {
+
+									$LocalBusiness_ontology_type = true;
+
+								}
 
 							// If the page is not an ontology type, skip to the next iteration
 
@@ -2690,8 +2706,17 @@
 									$nesting_level == 0
 								) {
 
-									$LocalBusiness_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
-									$LocalBusiness_fpage_query = $LocalBusiness_current_fpage ? true : false;
+									if ( !isset($LocalBusiness_current_fpage) ) {
+
+										$LocalBusiness_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+
+									}
+
+									if ( !isset($LocalBusiness_fpage_query) ) {
+
+										$LocalBusiness_fpage_query = $LocalBusiness_current_fpage ? true : false;
+
+									}
 
 								}
 
@@ -2707,8 +2732,23 @@
 									 *     - URL
 									 */
 
-									$LocalBusiness_url = user_trailingslashit( get_permalink($LocalBusiness) );
-									$LocalBusiness_item['url'] = $LocalBusiness_url;
+									// Get values
+
+										if ( !isset($LocalBusiness_url) ) {
+
+											$LocalBusiness_url = get_permalink($LocalBusiness);
+
+										}
+
+										$LocalBusiness_url = $LocalBusiness_url ? user_trailingslashit( $LocalBusiness_url ) : '';
+
+									// Add to schema
+
+										if ( $LocalBusiness_url ) {
+
+											$LocalBusiness_item['url'] = $LocalBusiness_url;
+
+										}
 
 								// @type
 
@@ -2716,20 +2756,25 @@
 
 										// LocalBusiness Subtype
 
-											$LocalBusiness_type = get_field( 'schema_localbusiness_single', $LocalBusiness ) ?? '';
-											$LocalBusiness_type = is_array($LocalBusiness_type) ? reset($LocalBusiness_type) : $LocalBusiness_type;
+											if ( !isset($LocalBusiness_type) ) {
 
-										// Fallback value
-
-											if (
-												!$LocalBusiness_type
-												||
-												!array_key_exists( $LocalBusiness_type, $LocalBusiness_subtype_map )
-											) {
-
-												$LocalBusiness_type = 'MedicalBusiness';
+												$LocalBusiness_type = get_field( 'schema_localbusiness_single', $LocalBusiness ) ?? '';
 
 											}
+
+											$LocalBusiness_type = is_array($LocalBusiness_type) ? reset($LocalBusiness_type) : $LocalBusiness_type;
+
+											// Fallback value
+
+												if (
+													!$LocalBusiness_type
+													||
+													!array_key_exists( $LocalBusiness_type, $LocalBusiness_subtype_map )
+												) {
+
+													$LocalBusiness_type = 'MedicalBusiness';
+
+												}
 
 									// Add to schema
 
@@ -2767,7 +2812,11 @@
 
 									// Get values
 
-										$LocalBusiness_name = get_the_title($LocalBusiness) ?? array();
+										if ( !isset($LocalBusiness_name) ) {
+
+											$LocalBusiness_name = get_the_title($LocalBusiness) ?? '';
+
+										}
 
 									// Add to item values
 
@@ -2796,7 +2845,11 @@
 
 										// Get values
 
-											$LocalBusiness_medicalSpecialty = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
+											if ( !isset($LocalBusiness_medicalSpecialty) ) {
+
+												$LocalBusiness_medicalSpecialty = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
+
+											}
 
 											// Remove empty / '0' values
 
@@ -2843,61 +2896,73 @@
 										)
 									) {
 
-										// Base property values array
-
-											$LocalBusiness_additionalType = array();
-
 										// Get values
 
-											// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
+											if ( !isset($LocalBusiness_additionalType) ) {
 
-												if ( $LocalBusiness_medicalSpecialty ) {
+												// Base property values array
 
-													$LocalBusiness_additionalType = array_merge(
-														$LocalBusiness_additionalType,
-														array_intersect(
-															$LocalBusiness_medicalSpecialty,
-															$LocalBusiness_additionalType_MedicalSpecialty
-														)
-													);
+													$LocalBusiness_additionalType = array();
 
-												}
+												// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-											// Get additionalType repeater field value
+													if ( $LocalBusiness_medicalSpecialty ) {
 
-												$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
-
-												// Add each item to an array
-
-													if ( $LocalBusiness_additionalType_repeater ) {
-
-														$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
-															$LocalBusiness_additionalType_repeater, // additionalType repeater field
-															'schema_additionalType_uri' // additionalType item field name
-														);
-
-													}
-
-												// Merge array into the additionalType property values array
-					
-													if (
-														$LocalBusiness_additionalType
-														&&
-														$LocalBusiness_additionalType_field
-													) {
-
-														$LocalBusiness_additionalType_field = is_array($LocalBusiness_additionalType_field) ? $LocalBusiness_additionalType_field : array($LocalBusiness_additionalType_field);
-					
 														$LocalBusiness_additionalType = array_merge(
 															$LocalBusiness_additionalType,
-															$LocalBusiness_additionalType_field
+															array_intersect(
+																$LocalBusiness_medicalSpecialty,
+																$LocalBusiness_additionalType_MedicalSpecialty
+															)
 														);
-					
-													} elseif ( $LocalBusiness_additionalType_field ) {
-
-														$LocalBusiness_additionalType = $LocalBusiness_additionalType_field;
 
 													}
+
+												// Get additionalType repeater field value
+
+													if ( !isset($LocalBusiness_additionalType_repeater) ) {
+
+														$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
+
+													}
+
+													// Add each item to an array
+
+														if ( !isset($LocalBusiness_additionalType_field) ) {
+
+															if ( $LocalBusiness_additionalType_repeater ) {
+
+																$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
+																	$LocalBusiness_additionalType_repeater, // additionalType repeater field
+																	'schema_additionalType_uri' // additionalType item field name
+																);
+
+															}
+
+														}
+
+													// Merge array into the additionalType property values array
+
+														if (
+															$LocalBusiness_additionalType
+															&&
+															$LocalBusiness_additionalType_field
+														) {
+
+															$LocalBusiness_additionalType_field = is_array($LocalBusiness_additionalType_field) ? $LocalBusiness_additionalType_field : array($LocalBusiness_additionalType_field);
+
+															$LocalBusiness_additionalType = array_merge(
+																$LocalBusiness_additionalType,
+																$LocalBusiness_additionalType_field
+															);
+
+														} elseif ( $LocalBusiness_additionalType_field ) {
+
+															$LocalBusiness_additionalType = $LocalBusiness_additionalType_field;
+
+														}
+
+											}
 
 										// Clean up additionalType property values array
 
@@ -2906,7 +2971,7 @@
 												&&
 												is_array($LocalBusiness_additionalType)
 											) {
-												
+
 												// If there is only one item, flatten the multi-dimensional array by one step
 
 													uamswp_fad_flatten_multidimensional_array($LocalBusiness_additionalType);
@@ -2944,9 +3009,21 @@
 
 										// Query for whether the location has a parent
 
-											$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
-											$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
-											$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
+											if (
+												!isset($LocalBusiness_has_parent)
+												||
+												(
+													$LocalBusiness_has_parent
+													&&
+													!isset($LocalBusiness_parent_id)
+												)
+											) {
+
+												$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
+												$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
+												$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
+
+											}
 
 									}
 
@@ -2968,6 +3045,10 @@
 										)
 									) {
 
+										// Base array
+
+											$LocalBusiness_streetAddress_array = array();
+
 										// Get values
 
 											// Conditionally get parent location ID
@@ -2984,7 +3065,11 @@
 
 											// Address line 1
 
-												$LocalBusiness_address_1 = get_field( 'location_address_1', $LocalBusiness_address_id ) ?? '';
+												if ( !isset($LocalBusiness_address_1) ) {
+
+													$LocalBusiness_address_1 = get_field( 'location_address_1', $LocalBusiness_address_id ) ?? '';
+
+												}
 
 												if ( $LocalBusiness_address_1 ) {
 
@@ -3000,86 +3085,100 @@
 
 												// Building values
 
-													$LocalBusiness_building = get_field( 'location_building', $LocalBusiness_address_id ) ?? '';
+													if ( !isset($LocalBusiness_building_name) ) {
 
-													if ( $LocalBusiness_building ) {
+														$LocalBusiness_building = get_field( 'location_building', $LocalBusiness_address_id ) ?? '';
 
-														$LocalBusiness_building_term = get_term( $LocalBusiness_building, 'building' ) ?? '';
+														if ( $LocalBusiness_building ) {
 
-														if ( $LocalBusiness_building_term ) {
+															$LocalBusiness_building_term = get_term( $LocalBusiness_building, 'building' ) ?? '';
 
-															$LocalBusiness_building_slug = $LocalBusiness_building_term->slug;
-															$LocalBusiness_building_name = $LocalBusiness_building_term->name;
+															if ( $LocalBusiness_building_term ) {
+
+																$LocalBusiness_building_slug = $LocalBusiness_building_term->slug;
+																$LocalBusiness_building_name = $LocalBusiness_building_term->name;
+
+																if ( $LocalBusiness_building_slug != '_none' ) {
+
+																	$LocalBusiness_building_name = '';
+
+																}
+
+															}
 
 														}
 
-														if (
-															$LocalBusiness_building_name
-															&&
-															$LocalBusiness_building_slug != '_none'
-														)  {
+													}
+
+													// Add to the address 2 array
+
+														if ( $LocalBusiness_building_name ) {
 
 															$LocalBusiness_address_2_array[] = $LocalBusiness_building_name;
 
 														}
 
-													}
-
 												// Floor values
 
-													$LocalBusiness_floor = get_field_object( 'location_building_floor', $LocalBusiness_address_id ) ?? array();
+													if ( !isset($LocalBusiness_floor_label) ) {
 
-													if (
-														$LocalBusiness_floor
-														&&
-														array_key_exists( 'value', $LocalBusiness_floor )
-														&&
-														array_key_exists( 'choices', $LocalBusiness_floor )
-													) {
+														$LocalBusiness_floor = get_field_object( 'location_building_floor', $LocalBusiness_address_id ) ?? array();
 
-														// Floor label
+														if (
+															$LocalBusiness_floor
+															&&
+															array_key_exists( 'value', $LocalBusiness_floor )
+															&&
+															array_key_exists( 'choices', $LocalBusiness_floor )
+														) {
 
-															$LocalBusiness_floor_value = $LocalBusiness_floor['value'];
+															// Floor label
 
-															// Check floor value
+																$LocalBusiness_floor_value = $LocalBusiness_floor['value'];
 
-																if (
-																	$LocalBusiness_floor_value == '0'
-																	||
-																	$LocalBusiness_floor_value == 'false'
-																	||
-																	!$LocalBusiness_floor_value
-																) {
-																	$LocalBusiness_floor_value = '';
-																}
+																// Check floor value
 
-														// Floor label
+																	if (
+																		$LocalBusiness_floor_value == '0'
+																		||
+																		$LocalBusiness_floor_value == 'false'
+																		||
+																		!$LocalBusiness_floor_value
+																	) {
+																		$LocalBusiness_floor_value = '';
+																	}
 
-															$LocalBusiness_floor_label = $LocalBusiness_floor_value ? $LocalBusiness_floor['choices'][$LocalBusiness_floor_value] : '';
+															// Floor label
 
-														// Add to the address 2 array
+																$LocalBusiness_floor_label = $LocalBusiness_floor_value ? $LocalBusiness_floor['choices'][$LocalBusiness_floor_value] : '';
 
-															if (
-																$LocalBusiness_floor_label
-																&&
-																$LocalBusiness_floor_value
-															)  {
-
-																$LocalBusiness_address_2_array[] = $LocalBusiness_floor_label;
-
-															}
+														}
 
 													}
+
+													// Add to the address 2 array
+
+														if ( $LocalBusiness_floor_label ) {
+
+															$LocalBusiness_address_2_array[] = $LocalBusiness_floor_label;
+
+														}
 
 												// Suite value
 
-													$LocalBusiness_suite = get_field(' location_suite', $LocalBusiness_address_id ) ?? '';
+													if ( !isset($LocalBusiness_suite) ) {
 
-													if ( $LocalBusiness_suite ) {
-
-														$LocalBusiness_address_2_array[] = $LocalBusiness_suite;
+														$LocalBusiness_suite = get_field(' location_suite', $LocalBusiness_address_id ) ?? '';
 
 													}
+
+													// Add to the address 2 array
+
+														if ( $LocalBusiness_suite ) {
+
+															$LocalBusiness_address_2_array[] = $LocalBusiness_suite;
+
+														}
 
 												// Explode the array and add to streetAddress values array
 
@@ -3103,21 +3202,55 @@
 
 												}
 
-											// City, State, ZIP
+											// City
 
-												$LocalBusiness_addressLocality = get_field( 'location_city', $LocalBusiness_address_id ) ?? '';
-												$LocalBusiness_addressRegion = get_field( 'location_state', $LocalBusiness_address_id ) ?? '';
-												$LocalBusiness_postalCode = get_field( 'location_zip', $LocalBusiness_address_id ) ?? '';
+												if ( !isset($LocalBusiness_addressLocality) ) {
+
+													$LocalBusiness_addressLocality = get_field( 'location_city', $LocalBusiness_address_id ) ?? '';
+
+												}
+
+											// State
+
+												if ( !isset($LocalBusiness_addressRegion) ) {
+
+													$LocalBusiness_addressRegion = get_field( 'location_state', $LocalBusiness_address_id ) ?? '';
+
+												}
+
+											// ZIP
+
+												if ( !isset($LocalBusiness_postalCode) ) {
+
+													$LocalBusiness_postalCode = get_field( 'location_zip', $LocalBusiness_address_id ) ?? '';
+
+												}
 
 										// Format values
 
-											$LocalBusiness_address = uamswp_fad_schema_postaladdress(
-												$LocalBusiness_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
-												true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
-												$LocalBusiness_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
-												$LocalBusiness_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
-												$LocalBusiness_postalCode // string // Required // The postal code (e.g., 94043).
-											);
+											if ( !isset($LocalBusiness_address) ) {
+
+												if (
+													$LocalBusiness_streetAddress
+													&&
+													$LocalBusiness_addressLocality
+													&&
+													$LocalBusiness_addressRegion
+													&&
+													$LocalBusiness_postalCode
+												) {
+
+													$LocalBusiness_address = uamswp_fad_schema_postaladdress(
+														$LocalBusiness_streetAddress, // string // Required // The street address or the post office box number for PO box addresses.
+														true, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
+														$LocalBusiness_addressLocality, // string // Required // The locality in which the street address is, and which is in the region. For example, Mountain View.
+														$LocalBusiness_addressRegion, // string // Required // The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+														$LocalBusiness_postalCode // string // Required // The postal code (e.g., 94043).
+													);
+
+												}
+
+											}
 
 										// Add to item values
 
@@ -3150,7 +3283,11 @@
 
 										// Get values
 
-											$LocalBusiness_aggregateRating = array();
+											if ( !isset($LocalBusiness_aggregateRating) ) {
+
+												$LocalBusiness_aggregateRating = array();
+
+											}
 
 										// Add to item values
 
@@ -3183,14 +3320,26 @@
 
 										// Get alternateName repeater field value
 
-											$LocalBusiness_alternateName_repeater = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
+											if ( !isset($LocalBusiness_alternateName_repeater) ) {
+
+												$LocalBusiness_alternateName_repeater = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
+
+											}
 
 											// Add each item to alternateName property values array
 
-												$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
-													$LocalBusiness_alternateName_repeater, // alternateName repeater field
-													'schema_alternatename_text' // alternateName item field name
-												);
+												if ( !isset($LocalBusiness_alternateName) ) {
+
+													if ( $LocalBusiness_alternateName_repeater ) {
+
+														$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
+															$LocalBusiness_alternateName_repeater, // alternateName repeater field
+															'schema_alternatename_text' // alternateName item field name
+														);
+
+													}
+
+												}
 
 										// Add to schema
 
@@ -3226,7 +3375,11 @@
 
 										// Get values
 
-											$LocalBusiness_areaServed = array();
+											if ( !isset($LocalBusiness_areaServed) ) {
+
+												$LocalBusiness_areaServed = array();
+
+											}
 
 										// Add to item values
 
@@ -3258,20 +3411,30 @@
 										$nesting_level == 0
 									) {
 
-										// Get values
+										// Get related treatments
 
-											// Get related treatments
+											if ( !isset($LocalBusiness_treatments) ) {
 
 												$LocalBusiness_treatments = get_field( 'location_treatments_cpt', $LocalBusiness ) ?: array();
 
-											// Format values
+											}
 
-												$LocalBusiness_availableService = uamswp_fad_schema_service(
-													$LocalBusiness_treatments, // List of IDs of the service items
-													$LocalBusiness_url, // Page URL
-													( $nesting_level + 1 ), // Nesting level within the main schema
-													'Service' // Fragment identifier
-												) ?? array();
+										// Format values
+
+											if ( !isset($LocalBusiness_availableService) ) {
+
+												if ( $LocalBusiness_treatments ) {
+
+													$LocalBusiness_availableService = uamswp_fad_schema_service(
+														$LocalBusiness_treatments, // List of IDs of the service items
+														$LocalBusiness_url, // Page URL
+														( $nesting_level + 1 ), // Nesting level within the main schema
+														'Service' // Fragment identifier
+													) ?? array();
+
+												}
+
+											}
 
 										// Add to item values
 
@@ -3304,7 +3467,11 @@
 
 										// Get values
 
-											$LocalBusiness_award = array();
+											if ( !isset($LocalBusiness_award) ) {
+
+												$LocalBusiness_award = array();
+
+											}
 
 										// Add to item values
 
@@ -3337,7 +3504,11 @@
 
 										// Get values
 
-											$LocalBusiness_brand = $schema_base_org_uams_health_ref ?? array();
+											if ( !isset($LocalBusiness_brand) ) {
+
+												$LocalBusiness_brand = $schema_base_org_uams_health_ref ?? array();
+
+											}
 
 										// Add to item values
 
@@ -3374,7 +3545,11 @@
 
 										// Get values
 
-											$LocalBusiness_contactPoint = array();
+											if ( !isset($LocalBusiness_contactPoint) ) {
+
+												$LocalBusiness_contactPoint = array();
+
+											}
 
 										// Add to item values
 
@@ -3404,7 +3579,11 @@
 
 										// Get values
 
-											$LocalBusiness_containedInPlace = array();
+											if ( !isset($LocalBusiness_containedInPlace) ) {
+
+												$LocalBusiness_containedInPlace = array();
+
+											}
 
 										// Add to item values
 
@@ -3448,7 +3627,11 @@
 
 										// Get values
 
-											$LocalBusiness_containsPlace = array();
+											if ( !isset($LocalBusiness_containsPlace) ) {
+
+												$LocalBusiness_containsPlace = array();
+
+											}
 
 										// Add to item values
 
@@ -3487,7 +3670,11 @@
 
 										// Get values
 
-											$LocalBusiness_currenciesAccepted = array();
+											if ( !isset($LocalBusiness_currenciesAccepted) ) {
+
+												$LocalBusiness_currenciesAccepted = array();
+
+											}
 
 										// Add to item values
 
@@ -3522,7 +3709,11 @@
 
 										// Get values
 
-											$LocalBusiness_department = $LocalBusiness_containsPlace ?? array();
+											if ( !isset($LocalBusiness_department) ) {
+
+												$LocalBusiness_department = $LocalBusiness_containsPlace ?? array();
+
+											}
 
 										// Add to item values
 
@@ -3554,9 +3745,9 @@
 										$nesting_level == 0
 									) {
 
-										// Get values
+										// Get the Selected Short Description for This Page
 
-											// Get the Selected Short Description for This Page
+											if ( !isset($LocalBusiness_description) ) {
 
 												$LocalBusiness_description = get_field( 'location_short_desc', $LocalBusiness ) ?? array();
 
@@ -3568,17 +3759,19 @@
 
 															$LocalBusiness_description = get_field( 'location_about', $LocalBusiness ) ?? array();
 
-															// Clean up value
-
-																if ( $LocalBusiness_description ) {
-
-																	$LocalBusiness_description = wp_strip_all_tags($LocalBusiness_description);
-																	$LocalBusiness_description = str_replace("\n", ' ', $LocalBusiness_description); // Strip line breaks
-																	$LocalBusiness_description = strlen($LocalBusiness_description) > 160 ? mb_strimwidth($LocalBusiness_description, 0, 156, '...') : $LocalBusiness_description; // Limit to 160 characters
-
-																}
-
 													}
+
+											}
+
+										// Clean up value
+
+											if ( $LocalBusiness_description ) {
+
+												$LocalBusiness_description = wp_strip_all_tags($LocalBusiness_description);
+												$LocalBusiness_description = str_replace("\n", ' ', $LocalBusiness_description); // Strip line breaks
+												$LocalBusiness_description = strlen($LocalBusiness_description) > 160 ? mb_strimwidth($LocalBusiness_description, 0, 156, '...') : $LocalBusiness_description; // Limit to 160 characters
+
+											}
 
 										// Add to item values
 
@@ -3620,7 +3813,11 @@
 
 										// Get values
 
-											$LocalBusiness_diversityPolicy = array();
+											if ( !isset($LocalBusiness_diversityPolicy) ) {
+
+												$LocalBusiness_diversityPolicy = array();
+
+											}
 
 										// Add to item values
 
@@ -3660,7 +3857,11 @@
 
 										// Get values
 
-											$LocalBusiness_diversityStaffingReport = array();
+											if ( !isset($LocalBusiness_diversityStaffingReport) ) {
+
+												$LocalBusiness_diversityStaffingReport = array();
+
+											}
 
 										// Add to item values
 
@@ -3693,7 +3894,11 @@
 
 										// Get values
 
-											$LocalBusiness_employee = array();
+											if ( !isset($LocalBusiness_employee) ) {
+
+												$LocalBusiness_employee = array();
+
+											}
 
 										// Add to item values
 
@@ -3736,7 +3941,11 @@
 
 										// Get values
 
-											$LocalBusiness_ethicsPolicy = array();
+											if ( !isset($LocalBusiness_ethicsPolicy) ) {
+
+												$LocalBusiness_ethicsPolicy = array();
+
+											}
 
 										// Add to item values
 
@@ -3769,7 +3978,11 @@
 
 										// Get values
 
-											$LocalBusiness_event = array();
+											if ( !isset($LocalBusiness_event) ) {
+
+												$LocalBusiness_event = array();
+
+											}
 
 										// Add to item values
 
@@ -3802,7 +4015,11 @@
 
 										// Get values
 
-											$LocalBusiness_foundingDate = array();
+											if ( !isset($LocalBusiness_foundingDate) ) {
+
+												$LocalBusiness_foundingDate = array();
+
+											}
 
 										// Add to item values
 
@@ -3841,7 +4058,11 @@
 
 										// Get values
 
-											$LocalBusiness_funding = array();
+											if ( !isset($LocalBusiness_funding) ) {
+
+												$LocalBusiness_funding = array();
+
+											}
 
 										// Add to item values
 
@@ -3874,13 +4095,19 @@
 
 										// Get values
 
-											$LocalBusiness_geo_value = get_field( 'location_map', $LocalBusiness ) ?? array();
+											if ( !isset($LocalBusiness_geo_value) ) {
 
-											if ( $LocalBusiness_geo_value ) {
-
-												$LocalBusiness_geo_value = ( array_key_exists( 'lat', $LocalBusiness_geo_value ) && array_key_exists( 'lng', $LocalBusiness_geo_value ) ) ? $LocalBusiness_geo_value : array();
+												$LocalBusiness_geo_value = get_field( 'location_map', $LocalBusiness ) ?? array();
 
 											}
+
+											// Check values
+
+												if ( $LocalBusiness_geo_value ) {
+
+													$LocalBusiness_geo_value = ( array_key_exists( 'lat', $LocalBusiness_geo_value ) && array_key_exists( 'lng', $LocalBusiness_geo_value ) ) ? $LocalBusiness_geo_value : array();
+
+												}
 
 									}
 
@@ -3904,12 +4131,16 @@
 
 										// Format values
 
-											if ( $LocalBusiness_geo_value ) {
+											if ( !isset($LocalBusiness_geo) ) {
 
-												$LocalBusiness_geo = uamswp_schema_geo_coordinates(
-													$LocalBusiness_geo_value['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-													$LocalBusiness_geo_value['lng'] // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-												);
+												if ( $LocalBusiness_geo_value ) {
+
+													$LocalBusiness_geo = uamswp_schema_geo_coordinates(
+														$LocalBusiness_geo_value['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+														$LocalBusiness_geo_value['lng'] // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+													);
+
+												}
 
 											}
 
@@ -3948,7 +4179,11 @@
 
 										// Get values
 
-											$LocalBusiness_hasCredential = array();
+											if ( !isset($LocalBusiness_hasCredential) ) {
+
+												$LocalBusiness_hasCredential = array();
+
+											}
 
 										// Add to item values
 
@@ -3989,7 +4224,11 @@
 
 										// Get values
 
-											$LocalBusiness_hasDriveThroughService = array();
+											if ( !isset($LocalBusiness_hasDriveThroughService) ) {
+
+												$LocalBusiness_hasDriveThroughService = array();
+
+											}
 
 										// Add to item values
 
@@ -4024,7 +4263,11 @@
 
 										// Get values
 
-											$LocalBusiness_hasMap = get_field( 'schema_google_cid', $LocalBusiness ) ?? array();
+											if ( !isset($LocalBusiness_hasMap) ) {
+
+												$LocalBusiness_hasMap = get_field( 'schema_google_cid', $LocalBusiness ) ?? array();
+
+											}
 
 										// Format values
 
@@ -4070,13 +4313,17 @@
 													$nesting_level == 0
 												) {
 
-													// Base 'duns' property value array
+													if ( !isset($LocalBusiness_duns) ) {
 
-														$LocalBusiness_duns = array();
+														// Base 'duns' property value array
 
-													// Get values
+															$LocalBusiness_duns = array();
 
-														$LocalBusiness_duns = array();
+														// Get values
+
+															$LocalBusiness_duns = array();
+
+													}
 
 													// Add to item values
 
@@ -4109,13 +4356,17 @@
 													)
 												) {
 
-													// Base 'globalLocationNumber' property value array
+													if ( !isset($LocalBusiness_globalLocationNumber) ) {
 
-														$LocalBusiness_globalLocationNumber = array();
+														// Base 'globalLocationNumber' property value array
 
-													// Get values
+															$LocalBusiness_globalLocationNumber = array();
 
-														$LocalBusiness_globalLocationNumber = array();
+														// Get values
+
+															$LocalBusiness_globalLocationNumber = array();
+
+													}
 
 													// Add to item values
 
@@ -4146,13 +4397,17 @@
 												)
 											) {
 
-												// Base 'isicV4' property value array
+												if ( !isset($LocalBusiness_isicV4) ) {
 
-													$LocalBusiness_identifier = array();
+													// Base 'isicV4' property value array
 
-												// Get values
+														$LocalBusiness_isicV4 = array();
 
-													$LocalBusiness_isicV4 = array();
+													// Get values
+
+														$LocalBusiness_isicV4 = array();
+
+												}
 
 												// Add to item values
 
@@ -4182,13 +4437,17 @@
 												)
 											) {
 
-												// Base 'leiCode' property value array
+												if ( !isset($LocalBusiness_leiCode) ) {
 
-													$LocalBusiness_leiCode = array();
+													// Base 'leiCode' property value array
 
-												// Get values
+														$LocalBusiness_leiCode = array();
 
-													$LocalBusiness_leiCode = array();
+													// Get values
+
+														$LocalBusiness_leiCode = array();
+
+												}
 
 												// Add to item values
 
@@ -4218,13 +4477,17 @@
 												)
 											) {
 
-												// Base 'naics' property value array
+												if ( !isset($LocalBusiness_naics) ) {
 
-													$LocalBusiness_naics = array();
+													// Base 'naics' property value array
 
-												// Get values
+														$LocalBusiness_naics = array();
 
-													$LocalBusiness_naics = array();
+													// Get values
+
+														$LocalBusiness_naics = array();
+
+												}
 
 												// Add to item values
 
@@ -4254,29 +4517,53 @@
 												)
 											) {
 
-												// Base arrays
+												// taxID
 
-													// Base 'taxID' property value array
+													if ( !isset($LocalBusiness_taxID) ) {
 
-														/* https://schema.org/taxID */
+														// Base 'taxID' property value array
 
-														$LocalBusiness_taxID = array();
+															/* https://schema.org/taxID */
 
-													// Base Taxpayer Identification Number value array
+															$LocalBusiness_taxID = array();
 
-														/* https://www.wikidata.org/wiki/Q1444804 */
+														// Get values
 
-														$LocalBusiness_taxID_taxpayer = array();
+															$LocalBusiness_taxID = array();
 
-													// Base Employer Identification Number value array
+													}
 
-														/* https://www.wikidata.org/wiki/Q2397748 */
+												// Taxpayer Identification Number
 
-														$LocalBusiness_taxID_employer = array();
+													if ( !isset($LocalBusiness_taxID_taxpayer) ) {
 
-												// Get values
+														// Base Taxpayer Identification Number value array
 
-													$LocalBusiness_taxID = array();
+															/* https://www.wikidata.org/wiki/Q1444804 */
+
+															$LocalBusiness_taxID_taxpayer = array();
+
+														// Get values
+
+															$LocalBusiness_taxID_taxpayer = array();
+
+													}
+
+												// Employer Identification Number
+
+													if ( !isset($LocalBusiness_taxID_employer) ) {
+
+														// Base Employer Identification Number value array
+
+															/* https://www.wikidata.org/wiki/Q2397748 */
+
+															$LocalBusiness_taxID_employer = array();
+
+														// Get values
+
+															$LocalBusiness_taxID_employer = array();
+
+													}
 
 												// Add to item values
 
@@ -4303,13 +4590,17 @@
 												)
 											) {
 
-												// Base 'taxID' property value array
+												if ( !isset($LocalBusiness_vatID) ) {
 
-													$LocalBusiness_vatID = array();
+													// Base 'vatID' property value array
 
-												// Get values
+														$LocalBusiness_vatID = array();
 
-													$LocalBusiness_vatID = array();
+													// Get values
+
+														$LocalBusiness_vatID = array();
+
+												}
 
 												// Add to item values
 
@@ -4345,13 +4636,17 @@
 												)
 											) {
 
-												// Base 'iso6523Code' property value array
+												if ( !isset($LocalBusiness_iso6523Code) ) {
 
-													$LocalBusiness_iso6523Code = array();
+													// Base 'iso6523Code' property value array
 
-												// Get values
+														$LocalBusiness_iso6523Code = array();
 
-													$LocalBusiness_iso6523Code = array();
+													// Get values
+
+														$LocalBusiness_iso6523Code = array();
+
+												}
 
 												// Add to item values
 
@@ -4387,109 +4682,113 @@
 												 *     - URL
 												 */
 
-												// Base 'identifier' property value array
+												if ( !isset($LocalBusiness_identifier) ) {
 
-													$LocalBusiness_identifier = array();
+													// Base 'identifier' property value array
 
-												// Get values
+														$LocalBusiness_identifier = array();
 
-													// Dun & Bradstreet DUNS number
+													// Get values
 
-														if ( $LocalBusiness_duns ) {
+														// Dun & Bradstreet DUNS number
 
-															$LocalBusiness_identifier[] = array(
-																'@type' => 'PropertyValue',
-																'propertyID' => 'https://www.wikidata.org/wiki/Q246386',
-																'value' => $LocalBusiness_duns
-															);
-
-														}
-
-													// Global Location Number
-
-														if ( $LocalBusiness_globalLocationNumber ) {
-
-															$LocalBusiness_identifier[] = array(
-																'@type' => 'PropertyValue',
-																'propertyID' => 'https://www.wikidata.org/wiki/Q1258830',
-																'value' => $LocalBusiness_globalLocationNumber
-															);
-
-														}
-
-													// International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
-
-														if ( $LocalBusiness_isicV4 ) {
-
-															$LocalBusiness_identifier[] = array(
-																'@type' => 'PropertyValue',
-																'propertyID' => 'https://www.wikidata.org/wiki/Q112111674',
-																'value' => $LocalBusiness_isicV4
-															);
-
-														}
-
-													// Legal Entity Identifier (LEI)
-
-														if ( $LocalBusiness_leiCode ) {
-
-															$LocalBusiness_identifier[] = array(
-																'@type' => 'PropertyValue',
-																'propertyID' => 'https://www.wikidata.org/wiki/Q6517388',
-																'value' => $LocalBusiness_leiCode
-															);
-
-														}
-
-													// North American Industry Classification System (NAICS) code
-
-														if ( $LocalBusiness_naics ) {
-
-															$LocalBusiness_identifier[] = array(
-																'@type' => 'PropertyValue',
-																'propertyID' => 'https://www.wikidata.org/wiki/Q3509282',
-																'value' => $LocalBusiness_naics
-															);
-
-														}
-
-													// Tax / Fiscal ID
-
-														// Taxpayer Identification Number
-
-															if ( $LocalBusiness_taxID_taxpayer ) {
+															if ( $LocalBusiness_duns ) {
 
 																$LocalBusiness_identifier[] = array(
 																	'@type' => 'PropertyValue',
-																	'propertyID' => 'https://www.wikidata.org/wiki/Q1444804',
-																	'value' => $LocalBusiness_taxID_taxpayer
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q246386',
+																	'value' => $LocalBusiness_duns
 																);
 
 															}
 
-														// Employer Identification Number
+														// Global Location Number
 
-															if ( $LocalBusiness_taxID_employer ) {
+															if ( $LocalBusiness_globalLocationNumber ) {
 
 																$LocalBusiness_identifier[] = array(
 																	'@type' => 'PropertyValue',
-																	'propertyID' => 'https://www.wikidata.org/wiki/Q2397748',
-																	'value' => $LocalBusiness_taxID_employer
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q1258830',
+																	'value' => $LocalBusiness_globalLocationNumber
 																);
 
 															}
 
-													// Value-added tax (VAT) identification number
+														// International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
 
-														if ( $LocalBusiness_vatID ) {
+															if ( $LocalBusiness_isicV4 ) {
 
-															$LocalBusiness_identifier[] = array(
-																'@type' => 'PropertyValue',
-																'propertyID' => 'https://www.wikidata.org/wiki/Q2319042',
-																'value' => $LocalBusiness_vatID
-															);
+																$LocalBusiness_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q112111674',
+																	'value' => $LocalBusiness_isicV4
+																);
 
-														}
+															}
+
+														// Legal Entity Identifier (LEI)
+
+															if ( $LocalBusiness_leiCode ) {
+
+																$LocalBusiness_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q6517388',
+																	'value' => $LocalBusiness_leiCode
+																);
+
+															}
+
+														// North American Industry Classification System (NAICS) code
+
+															if ( $LocalBusiness_naics ) {
+
+																$LocalBusiness_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q3509282',
+																	'value' => $LocalBusiness_naics
+																);
+
+															}
+
+														// Tax / Fiscal ID
+
+															// Taxpayer Identification Number
+
+																if ( $LocalBusiness_taxID_taxpayer ) {
+
+																	$LocalBusiness_identifier[] = array(
+																		'@type' => 'PropertyValue',
+																		'propertyID' => 'https://www.wikidata.org/wiki/Q1444804',
+																		'value' => $LocalBusiness_taxID_taxpayer
+																	);
+
+																}
+
+															// Employer Identification Number
+
+																if ( $LocalBusiness_taxID_employer ) {
+
+																	$LocalBusiness_identifier[] = array(
+																		'@type' => 'PropertyValue',
+																		'propertyID' => 'https://www.wikidata.org/wiki/Q2397748',
+																		'value' => $LocalBusiness_taxID_employer
+																	);
+
+																}
+
+														// Value-added tax (VAT) identification number
+
+															if ( $LocalBusiness_vatID ) {
+
+																$LocalBusiness_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q2319042',
+																	'value' => $LocalBusiness_vatID
+																);
+
+															}
+
+												}
 
 												// Add to item values
 
@@ -4517,157 +4816,187 @@
 										)
 									) {
 
-										// Get the various images
+										if ( !isset($LocalBusiness_image_id) ) {
 
-											// Base list array
+											// Get the various images
 
-												$LocalBusiness_image_id = array();
+												// Base list array
 
-											// Parent location overrides
+													$LocalBusiness_image_id = array();
 
-												// Query for whether the location has a parent
+												// Parent location overrides
 
-													$LocalBusiness_has_parent = get_field( 'location_parent', $LocalBusiness );
-													$LocalBusiness_parent_id = $LocalBusiness_has_parent ? get_field( 'location_parent_id', $LocalBusiness ) : '';
-													$LocalBusiness_has_parent = $LocalBusiness_parent_id ? true : false;
+													if ( $LocalBusiness_has_parent ) {
 
-												if ( $LocalBusiness_has_parent ) {
+														// Query on whether to override any of the parent location's photos
 
-													// Query on whether to override any of the parent location's photos
+															if ( !isset($LocalBusiness_override_parent_photo) ) {
 
-														$LocalBusiness_override_parent_photo = get_field('location_image_override_parent') ?? false;
+																$LocalBusiness_override_parent_photo = get_field('location_image_override_parent') ?? false;
 
-													if ( $LocalBusiness_override_parent_photo ) {
+															}
 
-														// Query on whether to override the parent location's featured image
+														if ( $LocalBusiness_override_parent_photo ) {
 
-															$LocalBusiness_override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $LocalBusiness) ?? false;
+															// Query on whether to override the parent location's featured image
 
-														// Query on whether to override the parent location's wayfinding photo
+																if ( !isset($LocalBusiness_override_parent_photo_featured) ) {
 
-															$LocalBusiness_override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $LocalBusiness) ?? false;
+																	$LocalBusiness_override_parent_photo_featured = get_field( 'location_image_override_parent_featured', $LocalBusiness) ?? false;
 
-														// Query on whether to override the parent location's gallery photos
+																}
 
-															$LocalBusiness_override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $LocalBusiness) ?? false;
+															// Query on whether to override the parent location's wayfinding photo
 
-													}
+																if ( !isset($LocalBusiness_override_parent_photo_wayfinding) ) {
 
-												}
+																	$LocalBusiness_override_parent_photo_wayfinding = get_field( 'location_image_override_parent_wayfinding', $LocalBusiness) ?? false;
 
-											// Get featured image ID
+																}
 
-												if ( !$LocalBusiness_fpage_query ) {
+															// Query on whether to override the parent location's gallery photos
 
-													/* Overview page */
+																if ( !isset($LocalBusiness_override_parent_photo_gallery) ) {
 
-													$LocalBusiness_featured_image_id = $LocalBusiness_override_parent_photo_featured ? get_field( '_thumbnail_id', $LocalBusiness_parent_id ) : get_field( '_thumbnail_id', $LocalBusiness ); // int
+																	$LocalBusiness_override_parent_photo_gallery = get_field( 'location_image_override_parent_gallery', $LocalBusiness) ?? false;
 
-												} elseif ( $LocalBusiness_current_fpage == 'providers' ) {
+																}
 
-													/* Fake subpage for related providers */
-
-													$LocalBusiness_featured_image_id = '';
-
-												} elseif ( $LocalBusiness_current_fpage == 'clinics' ) {
-
-													/* Fake subpage for descendant locations */
-
-													$LocalBusiness_featured_image_id = '';
-
-												} elseif ( $LocalBusiness_current_fpage == 'related' ) {
-
-													/* Fake subpage for related locations */
-
-													$LocalBusiness_featured_image_id = '';
-
-												} elseif ( $LocalBusiness_current_fpage == 'expertises' ) {
-
-													/* Fake subpage for related areas of expertise */
-
-													$LocalBusiness_featured_image_id = '';
-
-												} elseif ( $LocalBusiness_current_fpage == 'resources' ) {
-
-													/* Fake subpage for related clinical resources */
-
-													$LocalBusiness_featured_image_id = '';
-
-												}
-
-												// Add to the list of image IDs
-
-													if ( $LocalBusiness_featured_image_id ) {
-
-														$LocalBusiness_image_id[] = $LocalBusiness_featured_image_id;
+														}
 
 													}
 
-											// Get wayfinding photo ID
+												// Get featured image ID
 
-												if ( $nesting_level == 0 ) {
+													if ( !isset($LocalBusiness_featured_image_id) ) {
 
-													$LocalBusiness_wayfinding_image_id = $LocalBusiness_override_parent_photo_wayfinding ? get_field( 'location_wayfinding_photo', $LocalBusiness_parent_id ) : get_field('location_wayfinding_photo', $LocalBusiness); // int
+														if ( !$LocalBusiness_fpage_query ) {
 
-												}
+															/* Overview page */
 
-												// Add to the list of image IDs
+															$LocalBusiness_featured_image_id = $LocalBusiness_override_parent_photo_featured ? get_field( '_thumbnail_id', $LocalBusiness_parent_id ) : get_field( '_thumbnail_id', $LocalBusiness ); // int
 
-													if ( $LocalBusiness_wayfinding_image_id ) {
+														} elseif ( $LocalBusiness_current_fpage == 'providers' ) {
 
-														$LocalBusiness_image_id[] = $LocalBusiness_wayfinding_image_id;
+															/* Fake subpage for related providers */
+
+															$LocalBusiness_featured_image_id = '';
+
+														} elseif ( $LocalBusiness_current_fpage == 'clinics' ) {
+
+															/* Fake subpage for descendant locations */
+
+															$LocalBusiness_featured_image_id = '';
+
+														} elseif ( $LocalBusiness_current_fpage == 'related' ) {
+
+															/* Fake subpage for related locations */
+
+															$LocalBusiness_featured_image_id = '';
+
+														} elseif ( $LocalBusiness_current_fpage == 'expertises' ) {
+
+															/* Fake subpage for related areas of expertise */
+
+															$LocalBusiness_featured_image_id = '';
+
+														} elseif ( $LocalBusiness_current_fpage == 'resources' ) {
+
+															/* Fake subpage for related clinical resources */
+
+															$LocalBusiness_featured_image_id = '';
+
+														}
 
 													}
 
-											// Get gallery photo IDs
+													// Add to the list of image IDs
 
-												if ( $nesting_level == 0 ) {
+														if ( $LocalBusiness_featured_image_id ) {
 
-													$LocalBusiness_gallery_image_id = $LocalBusiness_override_parent_photo_wayfinding ? get_field( 'location_photo_gallery', $LocalBusiness_parent_id ) : get_field('location_photo_gallery', $LocalBusiness); // array
+															$LocalBusiness_image_id[] = $LocalBusiness_featured_image_id;
 
-												}
+														}
 
-												// Add to the list of image IDs
+												// Get wayfinding photo ID
 
-													if ( $LocalBusiness_wayfinding_image_id ) {
+													if ( !isset($LocalBusiness_wayfinding_image_id) ) {
 
-														$LocalBusiness_image_id = array_merge(
-															$LocalBusiness_image_id,
-															$LocalBusiness_gallery_image_id
-														);
+														if ( $nesting_level == 0 ) {
+
+															$LocalBusiness_wayfinding_image_id = $LocalBusiness_override_parent_photo_wayfinding ? get_field( 'location_wayfinding_photo', $LocalBusiness_parent_id ) : get_field('location_wayfinding_photo', $LocalBusiness); // int
+
+														}
 
 													}
 
-											// Clean up the list
+													// Add to the list of image IDs
 
-												$LocalBusiness_image_id = array_filter($LocalBusiness_image_id);
-												$LocalBusiness_image_id = array_unique($LocalBusiness_image_id);
-												$LocalBusiness_image_id = array_values($LocalBusiness_image_id);
+														if ( $LocalBusiness_wayfinding_image_id ) {
+
+															$LocalBusiness_image_id[] = $LocalBusiness_wayfinding_image_id;
+
+														}
+
+												// Get gallery photo IDs
+
+													if ( !isset($LocalBusiness_gallery_image_id) ) {
+
+														if ( $nesting_level == 0 ) {
+
+															$LocalBusiness_gallery_image_id = $LocalBusiness_override_parent_photo_wayfinding ? get_field( 'location_photo_gallery', $LocalBusiness_parent_id ) : get_field('location_photo_gallery', $LocalBusiness); // array
+
+														}
+
+													}
+
+													// Add to the list of image IDs
+
+														if ( $LocalBusiness_wayfinding_image_id ) {
+
+															$LocalBusiness_image_id = array_merge(
+																$LocalBusiness_image_id,
+																$LocalBusiness_gallery_image_id
+															);
+
+														}
+
+												// Clean up the list
+
+													$LocalBusiness_image_id = array_filter($LocalBusiness_image_id);
+													$LocalBusiness_image_id = array_unique($LocalBusiness_image_id);
+													$LocalBusiness_image_id = array_values($LocalBusiness_image_id);
+
+										}
 
 										// Create ImageObject values array for each image
 
-											if ( $LocalBusiness_image_id ) {
+											if ( !isset($LocalBusiness_image_general) ) {
 
-												// Base array
+												if ( $LocalBusiness_image_id ) {
 
-													$LocalBusiness_image_general = array();
+													// Base array
 
-												foreach ( $LocalBusiness_image_id as $id ) {
+														$LocalBusiness_image_general = array();
 
-													$LocalBusiness_image_general = array_merge(
-														$LocalBusiness_image,
-														uamswp_fad_schema_imageobject_thumbnails(
-															$LocalBusiness_url, // URL of entity with which the image is associated
-															$nesting_level, // Nesting level within the main schema
-															'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
-															'Image', // Base fragment identifier
-															$id, // ID of image to use for 1:1 aspect ratio
-															0, // ID of image to use for 3:4 aspect ratio
-															$id, // ID of image to use for 4:3 aspect ratio
-															$id, // ID of image to use for 16:9 aspect ratio
-															0 // ID of image to use for full image
-														)
-													);
+													foreach ( $LocalBusiness_image_id as $id ) {
+
+														$LocalBusiness_image_general = array_merge(
+															$LocalBusiness_image_general,
+															uamswp_fad_schema_imageobject_thumbnails(
+																$LocalBusiness_url, // URL of entity with which the image is associated
+																$nesting_level, // Nesting level within the main schema
+																'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+																'Image', // Base fragment identifier
+																$id, // ID of image to use for 1:1 aspect ratio
+																0, // ID of image to use for 3:4 aspect ratio
+																$id, // ID of image to use for 4:3 aspect ratio
+																$id, // ID of image to use for 16:9 aspect ratio
+																0 // ID of image to use for full image
+															)
+														);
+
+													}
 
 												}
 
@@ -4701,7 +5030,11 @@
 
 										// Get the values
 
-											$LocalBusiness_image = $LocalBusiness_image_general ?? array();
+											if ( !isset($LocalBusiness_image) ) {
+
+												$LocalBusiness_image = $LocalBusiness_image_general ?? array();
+
+											}
 
 										// Add to schema
 
@@ -4738,7 +5071,11 @@
 
 										// Get values
 
-											$LocalBusiness_isAcceptingNewPatients = array();
+											if ( !isset($LocalBusiness_isAcceptingNewPatients) ) {
+
+												$LocalBusiness_isAcceptingNewPatients = array();
+
+											}
 
 										// Add to item values
 
@@ -4771,7 +5108,11 @@
 
 										// Get values
 
-											$LocalBusiness_isAccessibleForFree = array();
+											if ( !isset($LocalBusiness_isAccessibleForFree) ) {
+
+												$LocalBusiness_isAccessibleForFree = array();
+
+											}
 
 										// Add to item values
 
@@ -4807,7 +5148,11 @@
 
 										// Get values
 
-											$LocalBusiness_keywords = array();
+											if ( !isset($LocalBusiness_keywords) ) {
+
+												$LocalBusiness_keywords = array();
+
+											}
 
 										// Add to item values
 
@@ -4849,7 +5194,11 @@
 
 										// Get values
 
-											$LocalBusiness_knowsAbout = array();
+											if ( !isset($LocalBusiness_knowsAbout) ) {
+
+												$LocalBusiness_knowsAbout = array();
+
+											}
 
 										// Add to item values
 
@@ -4885,7 +5234,11 @@
 
 										// Get values
 
-											$LocalBusiness_knowsLanguage = array();
+											if ( !isset($LocalBusiness_knowsLanguage) ) {
+
+												$LocalBusiness_knowsLanguage = array();
+
+											}
 
 										// Add to item values
 
@@ -4914,7 +5267,11 @@
 
 										// Get values
 
-											$LocalBusiness_legalName = array();
+											if ( !isset($LocalBusiness_legalName) ) {
+
+												$LocalBusiness_legalName = array();
+
+											}
 
 										// Add to item values
 
@@ -4948,7 +5305,11 @@
 
 										// Get values
 
-											$LocalBusiness_logo = array();
+											if ( !isset($LocalBusiness_logo) ) {
+
+												$LocalBusiness_logo = array();
+
+											}
 
 										// Add to item values
 
@@ -4984,11 +5345,15 @@
 
 										// Get values
 
-											$LocalBusiness_mainEntityOfPage = $schema_location_MedicalWebPage_ref ?? '';
+											if ( !isset($LocalBusiness_mainEntityOfPage) ) {
 
-											if ( !$LocalBusiness_mainEntityOfPage ) {
+												$LocalBusiness_mainEntityOfPage = $schema_location_MedicalWebPage_ref ?? '';
 
-												$LocalBusiness_mainEntityOfPage = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
+												if ( !$LocalBusiness_mainEntityOfPage ) {
+
+													$LocalBusiness_mainEntityOfPage = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
+
+												}
 
 											}
 
@@ -5025,7 +5390,11 @@
 
 										// Get values
 
-											$LocalBusiness_makesOffer = array();
+											if ( !isset($LocalBusiness_makesOffer) ) {
+
+												$LocalBusiness_makesOffer = array();
+
+											}
 
 										// Add to item values
 
@@ -5058,7 +5427,11 @@
 
 										// Get values
 
-											$LocalBusiness_maximumAttendeeCapacity = array();
+											if ( !isset($LocalBusiness_maximumAttendeeCapacity) ) {
+
+												$LocalBusiness_maximumAttendeeCapacity = array();
+
+											}
 
 										// Add to item values
 
@@ -5098,7 +5471,11 @@
 
 										// Get values
 
-											$LocalBusiness_memberOf = array();
+											if ( !isset($LocalBusiness_memberOf) ) {
+
+												$LocalBusiness_memberOf = array();
+
+											}
 
 										// Add to item values
 
@@ -5136,7 +5513,11 @@
 
 										// Get values
 
-											$LocalBusiness_nonprofitStatus = array();
+											if ( !isset($LocalBusiness_nonprofitStatus) ) {
+
+												$LocalBusiness_nonprofitStatus = array();
+
+											}
 
 										// Add to item values
 
@@ -5169,7 +5550,11 @@
 
 										// Get values
 
-											$LocalBusiness_numberOfEmployees = array();
+											if ( !isset($LocalBusiness_numberOfEmployees) ) {
+
+												$LocalBusiness_numberOfEmployees = array();
+
+											}
 
 										// Add to item values
 
@@ -5217,7 +5602,11 @@
 
 										// Get values
 
-											$LocalBusiness_openingHours = array();
+											if ( !isset($LocalBusiness_openingHours) ) {
+
+												$LocalBusiness_openingHours = array();
+
+											}
 
 										// Add to item values
 
@@ -5250,7 +5639,11 @@
 
 										// Get values
 
-											$LocalBusiness_openingHoursSpecification = array();
+											if ( !isset($LocalBusiness_openingHoursSpecification) ) {
+
+												$LocalBusiness_openingHoursSpecification = array();
+
+											}
 
 										// Add to item values
 
@@ -5281,7 +5674,11 @@
 
 										// Get values
 
-											$LocalBusiness_parentOrganization = array();
+											if ( !isset($LocalBusiness_parentOrganization) ) {
+
+												$LocalBusiness_parentOrganization = array();
+
+											}
 
 										// Add to item values
 
@@ -5314,7 +5711,11 @@
 
 										// Get values
 
-											$LocalBusiness_paymentAccepted = array();
+											if ( !isset($LocalBusiness_paymentAccepted) ) {
+
+												$LocalBusiness_paymentAccepted = array();
+
+											}
 
 										// Add to item values
 
@@ -5346,7 +5747,11 @@
 
 										// Get values
 
-											$LocalBusiness_photo = $LocalBusiness_image_general ?? array();
+											if ( !isset($LocalBusiness_photo) ) {
+
+												$LocalBusiness_photo = $LocalBusiness_image_general ?? array();
+
+											}
 
 										// Add to item values
 
@@ -5444,7 +5849,11 @@
 
 										// Get values
 
-											$LocalBusiness_potentialAction = array();
+											if ( !isset($LocalBusiness_potentialAction) ) {
+
+												$LocalBusiness_potentialAction = array();
+
+											}
 
 										// Add to item values
 
@@ -5478,7 +5887,11 @@
 
 										// Get values
 
-											$LocalBusiness_publicAccess = array();
+											if ( !isset($LocalBusiness_publicAccess) ) {
+
+												$LocalBusiness_publicAccess = array();
+
+											}
 
 										// Add to item values
 
@@ -5511,7 +5924,11 @@
 
 										// Get values
 
-											$LocalBusiness_review = array();
+											if ( !isset($LocalBusiness_review) ) {
+
+												$LocalBusiness_review = array();
+
+											}
 
 										// Add to item values
 
@@ -5544,16 +5961,24 @@
 
 										// Get sameAs repeater field value
 
-											$LocalBusiness_sameAs_repeater = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
+											if ( !isset($LocalBusiness_sameAs_repeater) ) {
+
+												$LocalBusiness_sameAs_repeater = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
+
+											}
 
 											// Add each item to sameAs property values array
 
-												if ( $LocalBusiness_sameAs_repeater ) {
+												if ( !isset($LocalBusiness_sameAs) ) {
 
-													$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
-														$LocalBusiness_sameAs_repeater, // sameAs repeater field
-														'schema_sameas_url' // sameAs item field name
-													);
+													if ( $LocalBusiness_sameAs_repeater ) {
+
+														$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
+															$LocalBusiness_sameAs_repeater, // sameAs repeater field
+															'schema_sameas_url' // sameAs item field name
+														);
+
+													}
 
 												}
 
@@ -5589,7 +6014,11 @@
 
 										// Define value
 
-											$LocalBusiness_smokingAllowed = 'False';
+											if ( !isset($LocalBusiness_smokingAllowed) ) {
+
+												$LocalBusiness_smokingAllowed = 'False';
+
+											}
 
 										// Add to item values
 
@@ -5629,7 +6058,11 @@
 
 										// Get values
 
-											$LocalBusiness_specialOpeningHoursSpecification = array();
+											if ( !isset($LocalBusiness_specialOpeningHoursSpecification) ) {
+
+												$LocalBusiness_specialOpeningHoursSpecification = array();
+
+											}
 
 										// Add to item values
 
@@ -5663,15 +6096,19 @@
 
 										// Get values
 
-											$LocalBusiness_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
+											if ( !isset($LocalBusiness_subjectOf) ) {
 
-											if ( !$LocalBusiness_subjectOf ) {
-
-												$LocalBusiness_subjectOf = $LocalBusiness_mainEntityOfPage ?? '';
+												$LocalBusiness_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
 
 												if ( !$LocalBusiness_subjectOf ) {
 
-													$LocalBusiness_subjectOf = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
+													$LocalBusiness_subjectOf = $LocalBusiness_mainEntityOfPage ?? '';
+
+													if ( !$LocalBusiness_subjectOf ) {
+
+														$LocalBusiness_subjectOf = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
+
+													}
 
 												}
 
@@ -5713,7 +6150,11 @@
 
 										// Get values
 
-											$LocalBusiness_subOrganization = $LocalBusiness_containsPlace ?? array();
+											if ( !isset($LocalBusiness_subOrganization) ) {
+
+												$LocalBusiness_subOrganization = $LocalBusiness_containsPlace ?? array();
+
+											}
 
 										// Add to item values
 
@@ -9226,7 +9667,7 @@
 									$service_drug_repeater = get_field( 'schema_drug', $service ) ?? array();
 
 									// Add each item to drug property values array
-											
+
 										if ( $service_drug_repeater ) {
 
 											foreach ( $service_drug_repeater as $drug ) {

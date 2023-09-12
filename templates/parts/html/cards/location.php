@@ -27,6 +27,59 @@
 	// Get system settings for location labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
 
+// Add to related location schema
+
+	// Base list array
+
+		if (
+			isset($LocalBusiness_list)
+			&&
+			!empty($LocalBusiness_list)
+			&&
+			is_array($LocalBusiness_list)
+		) {
+
+			$LocalBusiness_list = array_is_list($LocalBusiness_list) ? $LocalBusiness_list : array($LocalBusiness_list);
+
+		} else {
+
+			$LocalBusiness_list = array();
+
+		}
+
+	// Pre-existing field values array
+
+		$LocalBusiness_fields = ( isset($LocalBusiness_fields) && !empty($LocalBusiness_list) && is_array($LocalBusiness_fields) ) ? $LocalBusiness_fields : array();
+
+		$LocalBusiness_fields[$page_id] = array(
+			'LocalBusiness_address_1' => $location_address_1,
+			'LocalBusiness_addressLocality' => $location_city,
+			'LocalBusiness_addressRegion' => $location_state,
+			'LocalBusiness_building' => $location_building,
+			'LocalBusiness_building_name' => $location_building_name,
+			'LocalBusiness_featured_image_id' => $location_featured_image,
+			'LocalBusiness_floor_label' => $location_floor_label,
+			'LocalBusiness_floor_value' => $location_floor_value,
+			'LocalBusiness_geo_value' => $location_map,
+			'LocalBusiness_has_parent' => $location_has_parent,
+			'LocalBusiness_name' => $location_title_attr,
+			'LocalBusiness_parent_id' => $location_parent_id,
+			'LocalBusiness_postalCode' => $location_zip,
+			'LocalBusiness_suite' => $location_suite,
+			'LocalBusiness_url' => $location_url
+		);
+
+	// Construct the schema for this location
+
+		$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
+			array($page_id), // List of IDs of the location items
+			$location_url, // Page URL
+			1, // Nesting level within the main schema
+			1, // Iteration counter
+			$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided
+			$LocalBusiness_list // Pre-existing list array to which to add additional items
+		);
+
 // Construct the card
 
 ?>

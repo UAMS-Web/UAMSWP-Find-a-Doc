@@ -199,12 +199,27 @@ TODO List
 			// Define values array for each associated location // Repeat for all associated locations
 
 				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
-				$locations = get_field( 'physician_locations', $page_id );
 
-				$provider_related_location = uamswp_fad_schema_location(
-					$locations, // List of IDs of the location items
-					$schema_provider_url, // Page URL
-				);
+					$locations = get_field( 'physician_locations', $page_id );
+
+				if (
+					isset($LocalBusiness_list)
+					&&
+					!empty($LocalBusiness_list)
+					&&
+					is_array($LocalBusiness_list)
+				) {
+
+					$provider_related_location = $LocalBusiness_list;
+
+				} else {
+
+					$provider_related_location = uamswp_fad_schema_location(
+						$locations, // List of IDs of the location items
+						$schema_provider_url, // Page URL
+					);
+
+				}
 
 			// Define reference to each value/row in this property
 
