@@ -2304,7 +2304,8 @@
 			array $repeater, // List of IDs of the location items
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
-			int $LocalBusiness_i = 1 // Iteration counter
+			int $LocalBusiness_i = 1, // Iteration counter
+			array $LocalBusiness_list = array() // Pre-existing list array
 		) {
 
 			// Common property values
@@ -2314,10 +2315,6 @@
 			// UAMS organization values
 
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
-
-			// Base list array
-
-				$LocalBusiness_list = array();
 
 			if ( !empty($repeater) ) {
 
