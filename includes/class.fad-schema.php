@@ -6092,6 +6092,8 @@
 											'subjectOf',
 											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
