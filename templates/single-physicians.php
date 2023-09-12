@@ -1024,7 +1024,7 @@
 							// Name (Schema.org name property)
 
 								$association_name = $association_term->name;
-							
+
 							// Alternate Names (Schema.org alternateName property)
 
 								$association_alternateName_array = get_field( 'schema_alternatename', $association_term ) ?: array();
@@ -1034,7 +1034,7 @@
 									$association_alternateName = $association_alternateName_array[0]['schema_alternatename_text'];
 
 								} elseif ( count($association_alternateName_array) > 1 ) {
-										
+
 									foreach ( $association_alternateName_array as $item ) {
 
 										$association_alternateName[] = $item['schema_alternatename_text'];
@@ -1052,7 +1052,7 @@
 									$association_sameAs = $association_sameAs_array[0]['schema_sameas_url'];
 
 								} elseif ( count($association_sameAs_array) > 1 ) {
-										
+
 									foreach ( $association_sameAs_array as $item ) {
 
 										$association_sameAs[] = $item['schema_sameas_url'];
@@ -1749,15 +1749,15 @@
 													<h3 class="h4">Associations</h3>
 													<ul>
 														<?php
-														
+
 														foreach ( $provider_associations_names as $item ) {
-															
+
 															?>
 															<li><?php echo $item; ?></li>
 															<?php
 
 														} // endforeach
-														
+
 														?>
 													</ul>
 													<?php

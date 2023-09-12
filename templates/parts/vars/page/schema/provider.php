@@ -2029,7 +2029,7 @@ TODO List
 					unset($schema_provider_Person['sameAs']);
 
 			}
-	
+
 		// subjectOf
 
 			/*

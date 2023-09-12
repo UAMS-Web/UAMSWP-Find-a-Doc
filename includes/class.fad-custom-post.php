@@ -2215,7 +2215,7 @@ function acf_hide_title() {
 		.acf-fields > .uamswp-hide-clone-label.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style > .acf-input > .acf-clone-fields > .acf-field:first-child:last-child > .acf-label > label {
 			display: none;
 		}';
-	
+
 	echo '
 	</style>';
 }
