@@ -273,12 +273,19 @@ TODO List
 
 				$clinical_resources = get_field( 'physician_clinical_resources', $page_id );
 
-			$provider_related_clinical_resource = uamswp_fad_schema_creativework(
-				$clinical_resources, // List of IDs of the clinical resource items
-				$page_url, // Page URL
-				1, // Nesting level within the main schema
-				'CreativeWork' // Base fragment identifier
-			);
+			// Define the schema for nesting in 'MedicalWebPage'['mentions']
+
+				/*
+					Nesting level 1 = 'MedicalWebPage'
+					Nesting level 2 = 'MedicalWebPage'['mentions']
+				*/
+
+				$provider_related_clinical_resource = uamswp_fad_schema_creativework(
+					$clinical_resources, // List of IDs of the clinical resource items
+					$page_url, // Page URL
+					2, // Nesting level within the main schema
+					'CreativeWork' // Base fragment identifier
+				);
 
 			// Define reference to each value/row in this property
 
@@ -299,12 +306,19 @@ TODO List
 
 					$conditions_cpt = get_field( 'physician_conditions_cpt', $page_id );
 
-				$provider_related_condition = uamswp_fad_schema_medicalcondition(
-					$conditions_cpt, // List of IDs of the MedicalCondition items
-					$schema_provider_url, // Page URL
-					1, // Nesting level within the main schema
-					'MedicalCondition' // Fragment identifier
-				);
+				// Define the schema for nesting in 'MedicalWebPage'['mentions']
+
+					/*
+						Nesting level 1 = 'MedicalWebPage'
+						Nesting level 2 = 'MedicalWebPage'['mentions']
+					*/
+
+					$provider_related_condition = uamswp_fad_schema_medicalcondition(
+						$conditions_cpt, // List of IDs of the MedicalCondition items
+						$schema_provider_url, // Page URL
+						2, // Nesting level within the main schema
+						'MedicalCondition' // Fragment identifier
+					);
 
 				// Define reference to each value/row in this property
 
@@ -316,12 +330,19 @@ TODO List
 
 					$treatments_cpt = get_field( 'physician_treatments_cpt', $page_id );
 
-				$provider_related_treatment = uamswp_fad_schema_service(
-					$treatments_cpt, // List of IDs of the service items
-					$schema_provider_url, // Page URL
-					1, // Nesting level within the main schema
-					'Service' // Fragment identifier
-				);
+				// Define the schema for nesting in 'Physician'['availableService']
+
+					/*
+						Nesting level 1 = 'Physician'
+						Nesting level 2 = 'Physician'['availableService']
+					*/
+
+					$provider_related_treatment = uamswp_fad_schema_service(
+						$treatments_cpt, // List of IDs of the service items
+						$schema_provider_url, // Page URL
+						2, // Nesting level within the main schema
+						'Service' // Fragment identifier
+					);
 
 				// Define reference to each value/row in this property
 
