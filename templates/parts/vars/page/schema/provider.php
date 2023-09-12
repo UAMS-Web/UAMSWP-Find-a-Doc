@@ -53,7 +53,6 @@ TODO List
 	 * Define Provider-as-Optician type array
  * Related ontology items
 	 * Related locations
-		 * Define schema for related locations
 		 * Apply the location schema function to the single location template
 		 * Add values for remaining properties:
 			 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
