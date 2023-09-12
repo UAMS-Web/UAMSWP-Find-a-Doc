@@ -6470,30 +6470,34 @@
 								 *     - MedicalCode
 								 */
 
-								// Get values
+								if ( $nesting_level <= 1 ) {
 
-									// Code repeater
+									// Get values
 
-										$MedicalEntity_code_array = get_field( 'schema_medicalcode', $MedicalEntity ) ?: array();
+										// Code repeater
 
-									// Health Care Provider Taxonomy Code Set taxonomy field
+											$MedicalEntity_code_array = get_field( 'schema_medicalcode', $MedicalEntity ) ?: array();
 
-										$MedicalEntity_nucc_array = get_field( 'schema_nucc_multiple', $MedicalEntity ) ?: array();
+										// Health Care Provider Taxonomy Code Set taxonomy field
 
-								// Get item values
+											$MedicalEntity_nucc_array = get_field( 'schema_nucc_multiple', $MedicalEntity ) ?: array();
 
-									$MedicalEntity_code = uamswp_fad_schema_code(
-										$MedicalEntity_code_array, // code repeater field
-										$MedicalEntity_nucc_array // Health Care Provider Taxonomy Code Set taxonomy field
-									);
+									// Get item values
 
-								// Add to schema
+										$MedicalEntity_code = uamswp_fad_schema_code(
+											$MedicalEntity_code_array, // code repeater field
+											$MedicalEntity_nucc_array // Health Care Provider Taxonomy Code Set taxonomy field
+										);
 
-									if ( $MedicalEntity_code ) {
+									// Add to schema
 
-										$MedicalEntity_item['code'] = $MedicalEntity_code;
+										if ( $MedicalEntity_code ) {
 
-									}
+											$MedicalEntity_item['code'] = $MedicalEntity_code;
+
+										}
+
+								}
 
 							// description
 
@@ -6506,37 +6510,39 @@
 								 *     - TextObject
 								 */
 
-								// Get values
+								if ( $nesting_level <= 1 ) {
 
-									// Get the Selected Short Description for This Page
+									// Get values
 
-										$MedicalEntity_description = get_field( 'expertise_selected_post_excerpt', $MedicalEntity ) ?? '';
+										// Get the Selected Short Description for This Page
 
-										// Fallback values
+											$MedicalEntity_description = get_field( 'expertise_selected_post_excerpt', $MedicalEntity ) ?? '';
 
-											if ( !$MedicalEntity_description ) {
+											// Fallback values
 
-												// Get the excerpt
+												if ( !$MedicalEntity_description ) {
 
-													$MedicalEntity_description = get_the_excerpt($MedicalEntity) ?? '';
+													// Get the excerpt
 
-													// Get the Short Description
+														$MedicalEntity_description = get_the_excerpt($MedicalEntity) ?? '';
 
-														if ( !$MedicalEntity_description ) {
+														// Get the Short Description
 
-															$MedicalEntity_description = get_field( 'post_excerpt', $MedicalEntity ) ?? '';
+															if ( !$MedicalEntity_description ) {
 
-															// Get the Intro Text (Marketing Landing Page Header style)
+																$MedicalEntity_description = get_field( 'post_excerpt', $MedicalEntity ) ?? '';
 
-																if ( !$MedicalEntity_description ) {
+																// Get the Intro Text (Marketing Landing Page Header style)
 
-																	$MedicalEntity_description = get_field( 'page_header_landingpage_intro', $MedicalEntity ) ?? '';
+																	if ( !$MedicalEntity_description ) {
 
-																}
+																		$MedicalEntity_description = get_field( 'page_header_landingpage_intro', $MedicalEntity ) ?? '';
 
-														}
+																	}
 
-											}
+															}
+
+												}
 
 									// Add to item values
 
@@ -6545,6 +6551,8 @@
 											$MedicalEntity_item['description'] = $MedicalEntity_description;
 
 										}
+
+								}
 
 							// image
 
@@ -6667,23 +6675,27 @@
 								 *     - MedicineSystem
 								 */
 
-								// Get field value
+								if ( $nesting_level <= 1 ) {
 
-									$MedicalEntity_medicineSystems_array = get_field( 'schema_medicinesystem', $MedicalEntity ) ?: array();
+									// Get field value
 
-								// Add each item to the list array
+										$MedicalEntity_medicineSystems_array = get_field( 'schema_medicinesystem', $MedicalEntity ) ?: array();
 
-									$MedicalEntity_medicineSystem = uamswp_fad_schema_medicinesystem(
-										$MedicalEntity_medicineSystems_array // array of MedicineSystem values
-									);
+									// Add each item to the list array
 
-								// Add to schema
+										$MedicalEntity_medicineSystem = uamswp_fad_schema_medicinesystem(
+											$MedicalEntity_medicineSystems_array // array of MedicineSystem values
+										);
 
-									if ( $MedicalEntity_medicineSystem ) {
+									// Add to schema
 
-										$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
+										if ( $MedicalEntity_medicineSystem ) {
 
-									}
+											$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
+
+										}
+
+								}
 
 							// potentialAction
 
@@ -6760,6 +6772,10 @@
 
 								*/
 
+								if ( $nesting_level <= 1 ) {
+
+								}
+
 							// relevantSpecialty
 
 								/* 
@@ -6770,9 +6786,11 @@
 								 *     - MedicalSpecialty
 								 */
 
-								// Get values
+								if ( $nesting_level <= 1 ) {
 
-									$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $MedicalEntity ) ?: array();
+									// Get values
+
+										$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $MedicalEntity ) ?: array();
 
 									// Clean up list array
 
@@ -6790,6 +6808,8 @@
 											$MedicalEntity_item['relevantSpecialty'] = $MedicalEntity_relevantSpecialty;
 
 										}
+
+								}
 
 							// sameAs
 
@@ -6839,29 +6859,33 @@
 								 *     - Event
 								 */
 
-								// Get values
+								if ( $nesting_level <= 1 ) {
 
-									$MedicalEntity_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
+									// Get values
 
-									if ( !$MedicalEntity_subjectOf ) {
-
-										$MedicalEntity_subjectOf = $MedicalEntity_mainEntityOfPage ?? '';
+										$MedicalEntity_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
 
 										if ( !$MedicalEntity_subjectOf ) {
 
-											$MedicalEntity_subjectOf = ( isset($MedicalEntity_url) && !empty($MedicalEntity_url) ) ? $MedicalEntity_url . '#MedicalWebPage' : '';
+											$MedicalEntity_subjectOf = $MedicalEntity_mainEntityOfPage ?? '';
+
+											if ( !$MedicalEntity_subjectOf ) {
+
+												$MedicalEntity_subjectOf = ( isset($MedicalEntity_url) && !empty($MedicalEntity_url) ) ? $MedicalEntity_url . '#MedicalWebPage' : '';
+
+											}
 
 										}
 
-									}
+									// Add to item values
 
-								// Add to item values
+										if ( $MedicalEntity_subjectOf ) {
 
-									if ( $MedicalEntity_subjectOf ) {
+											$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
 
-										$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
+										}
 
-									}
+								}
 
 						// Sort array
 
