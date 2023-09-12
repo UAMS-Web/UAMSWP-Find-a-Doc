@@ -2298,6 +2298,4259 @@
 
 // Generate schema arrays of ontology page types
 
+	// Providers (Person; Physician / Dentist / Optician)
+
+		function uamswp_fad_schema_provider(
+			array $repeater, // List of IDs of the provider items
+			string $page_url, // Page URL
+			int $nesting_level = 1, // Nesting level within the main schema
+			int $MedicalBusiness_i = 1, // Iteration counter for provider-as-MedicalBusiness
+			int $Person_i = 1, // Iteration counter for provider-as-Person
+			array $provider_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
+			array $MedicalBusiness_list = array(), // Pre-existing list array for provider-as-MedicalBusiness to which to add additional items
+			array $Person_list = array() // Pre-existing list array for provider-as-Person to which to add additional items
+		) {
+
+			// Common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+				// UAMS organization values
+
+					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+
+			if ( !empty($repeater) ) {
+
+				// Person and MedicalBusiness Subtype Properties Map
+
+					/*
+
+					Listing the properties valid for each schema type.
+
+					*/
+
+					$provider_properties_map = array(
+						'Thing' => array(
+							'Thing' => true,
+							'Organization' => false,
+							'Place' => false,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'additionalType',
+								'alternateName',
+								'description',
+								'disambiguatingDescription',
+								'identifier',
+								'image',
+								'mainEntityOfPage',
+								'name',
+								'potentialAction',
+								'sameAs',
+								'subjectOf',
+								'url'
+							)
+						),
+						'Organization' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => false,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'actionableFeedbackPolicy',
+								'address',
+								'aggregateRating',
+								'alumni',
+								'areaServed',
+								'award',
+								'brand',
+								'contactPoint',
+								'correctionsPolicy',
+								'department',
+								'dissolutionDate',
+								'diversityPolicy',
+								'diversityStaffingReport',
+								'duns',
+								'email',
+								'employee',
+								'ethicsPolicy',
+								'event',
+								'events',
+								'faxNumber',
+								'founder',
+								'foundingDate',
+								'foundingLocation',
+								'funder',
+								'funding',
+								'globalLocationNumber',
+								'hasCredential',
+								'hasMerchantReturnPolicy',
+								'hasOfferCatalog',
+								'hasPOS',
+								'hasProductReturnPolicy',
+								'interactionStatistic',
+								'isicV4',
+								'iso6523Code',
+								'keywords',
+								'knowsAbout',
+								'knowsLanguage',
+								'legalName',
+								'leiCode',
+								'location',
+								'logo',
+								'makesOffer',
+								'member',
+								'memberOf',
+								'naics',
+								'nonprofitStatus',
+								'numberOfEmployees',
+								'ownershipFundingInfo',
+								'owns',
+								'parentOrganization',
+								'publishingPrinciples',
+								'review',
+								'seeks',
+								'serviceArea',
+								'slogan',
+								'sponsor',
+								'subOrganization',
+								'taxID',
+								'telephone',
+								'unnamedSourcesPolicy',
+								'vatID'
+							)
+						),
+						'Place' => array(
+							'Thing' => true,
+							'Organization' => false,
+							'Place' => true,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'additionalProperty',
+								'address',
+								'aggregateRating',
+								'amenityFeature',
+								'branchCode',
+								'containedInPlace',
+								'containsPlace',
+								'event',
+								'events',
+								'faxNumber',
+								'geo',
+								'geoContains',
+								'geoCoveredBy',
+								'geoCovers',
+								'geoCrosses',
+								'geoDisjoint',
+								'geoEquals',
+								'geoIntersects',
+								'geoOverlaps',
+								'geoTouches',
+								'geoWithin',
+								'globalLocationNumber',
+								'hasDriveThroughService',
+								'hasMap',
+								'isAccessibleForFree',
+								'isicV4',
+								'keywords',
+								'latitude',
+								'logo',
+								'longitude',
+								'map',
+								'maps',
+								'maximumAttendeeCapacity',
+								'openingHoursSpecification',
+								'photo',
+								'publicAccess',
+								'review',
+								'slogan',
+								'smokingAllowed',
+								'specialOpeningHoursSpecification',
+								'telephone',
+								'tourBookingPage'
+							)
+						),
+						'LocalBusiness' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => true,
+							'LocalBusiness' => true,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'currenciesAccepted',
+								'openingHours',
+								'paymentAccepted',
+								'priceRange'
+							)
+						),
+						'MedicalBusiness' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => true,
+							'LocalBusiness' => true,
+							'MedicalBusiness' => true,
+							'MedicalOrganization' => false,
+							'properties' => array()
+						),
+						'MedicalOrganization' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => false,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => true,
+							'properties' => array(
+								'healthPlanNetworkId',
+								'isAcceptingNewPatients',
+								'medicalSpecialty'
+							)
+						),
+						'Physician' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => true,
+							'LocalBusiness' => true,
+							'MedicalBusiness' => true,
+							'MedicalOrganization' => true,
+							'properties' => array(
+								'availableService',
+								'hospitalAffiliation',
+								'medicalSpecialty'
+							),
+							'degrees' => array(
+								'M.D.',
+								'D.O.'
+							)
+						),
+						'Dentist' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => true,
+							'LocalBusiness' => true,
+							'MedicalBusiness' => true,
+							'MedicalOrganization' => true,
+							'properties' => array(),
+							'degrees' => array(
+								'D.D.S.',
+								'D.M.D.'
+							)
+						),
+						'Optician' => array(
+							'Thing' => true,
+							'Organization' => true,
+							'Place' => true,
+							'LocalBusiness' => true,
+							'MedicalBusiness' => true,
+							'MedicalOrganization' => false,
+							'properties' => array(),
+							'degrees' => array()
+						)
+					);
+
+					// Merge common properties into each type's properties
+
+						foreach ( $provider_properties_map as &$item ) {
+
+							// Thing properties
+
+								if (
+									$item != 'Thing'
+									&&
+									$item['Thing']
+								) {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$provider_properties_map['Thing']['properties']
+									);
+									$item['properties'] = array_unique($item['properties']);
+									$item['properties'] = array_values($item['properties']);
+
+								}
+
+							// Organization properties
+
+								if (
+									$item != 'Organization'
+									&&
+									$item['Organization']
+								) {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$provider_properties_map['Organization']['properties']
+									);
+									$item['properties'] = array_unique($item['properties']);
+									$item['properties'] = array_values($item['properties']);
+
+								}
+
+							// Place properties
+
+								if (
+									$item != 'Place'
+									&&
+									$item['Place']
+								) {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$provider_properties_map['Place']['properties']
+									);
+									$item['properties'] = array_unique($item['properties']);
+									$item['properties'] = array_values($item['properties']);
+
+								}
+
+							// LocalBusiness properties
+
+								if (
+									$item != 'LocalBusiness'
+									&&
+									$item['LocalBusiness']
+								) {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$provider_properties_map['LocalBusiness']['properties']
+									);
+									$item['properties'] = array_unique($item['properties']);
+									$item['properties'] = array_values($item['properties']);
+
+								}
+
+							// MedicalBusiness properties
+
+								if (
+									$item != 'MedicalBusiness'
+									&&
+									$item['MedicalBusiness']
+								) {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$provider_properties_map['MedicalBusiness']['properties']
+									);
+									$item['properties'] = array_unique($item['properties']);
+									$item['properties'] = array_values($item['properties']);
+
+								}
+
+							// MedicalOrganization properties
+
+								if (
+									$item != 'MedicalOrganization'
+									&&
+									$item['MedicalOrganization']
+								) {
+
+									$item['properties'] = array_merge(
+										$item['properties'],
+										$provider_properties_map['MedicalOrganization']['properties']
+									);
+									$item['properties'] = array_unique($item['properties']);
+									$item['properties'] = array_values($item['properties']);
+
+								}
+
+						}
+
+				// LocalBusiness additionalType MedicalSpecialty values
+
+					/*
+
+					Listing the MedicalSpecialty enumeration members that are also 
+					subtypes of the MedicalBusiness type.
+
+					*/
+
+					$provider_additionalType_MedicalSpecialty = array(
+						'CommunityHealth',
+						'Dermatology',
+						'DietNutrition',
+						'Emergency',
+						'Geriatric',
+						'Gynecologic',
+						'Midwifery',
+						'Nursing',
+						'Obstetric',
+						'Oncologic',
+						'Optometric',
+						'Otolaryngologic',
+						'Pediatric',
+						'Physiotherapy',
+						'PlasticSurgery',
+						'Podiatric',
+						'PrimaryCare',
+						'Psychiatric',
+						'PublicHealth'
+					);
+
+				// Loop through each location to add values
+
+					foreach ( $repeater as $provider ) {
+
+						// Retrieve the value of the item transient
+
+							uamswp_fad_get_transient(
+								'item_' . $provider, // Required // String added to transient name for disambiguation.
+								$provider_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+							);
+
+						if (
+							!empty( $provider_item )
+							&&
+							(
+								(
+									isset($provider_item['MedicalBusiness'])
+									&&
+									!empty($provider_item['MedicalBusiness'])
+								)
+								||
+								(
+									isset($provider_item['Person'])
+									&&
+									!empty($provider_item['Person'])
+								)
+							)
+						) {
+
+							/* 
+							 * The transient exists.
+							 * Return the variable.
+							 */
+
+							// Add to list of MedicalBusiness items
+
+								if (
+									isset($provider_item['MedicalBusiness'])
+									&&
+									!empty($provider_item['MedicalBusiness'])
+								) {
+
+									$MedicalBusiness_list[] = $provider_item['MedicalBusiness'];
+
+								}
+
+							// Add to list of Person items
+
+								if (
+									isset($provider_item['Person'])
+									&&
+									!empty($provider_item['Person'])
+								) {
+
+									$Person_list[] = $provider_item['Person'];
+
+								}
+
+						} else {
+
+							// If post is not published, skip to the next iteration
+
+								if ( get_post_status($provider) != 'publish' ) {
+
+									continue;
+
+								}
+
+							// Eliminate PHP errors / reset variables
+
+								$provider_item = array(); // Base array
+								$provider_item_MedicalBusiness = array(); // Base MedicalBusiness array
+								$provider_item_Person = array(); // Base Person array
+								$provider_ontology_type = null;
+								$provider_current_fpage = null;
+								$provider_fpage_query = null;
+								$provider_url = null;
+								$MedicalBusiness_type = null;
+								$provider_degrees = null;
+								$provider_degree_array = null;
+								$Physician_degree_query = null;
+								$Dentist_degree_query = null;
+								$Optician_degree_query = null;
+								$Person_type = null;
+								$provider_alternateName = null;
+								$provider_areaServed = null;
+								$provider_medicalSpecialty = null;
+								$provider_additionalType = null;
+								$provider_additionalType_clinical_specialization = null;
+								$provider_aggregateRating = null;
+								$provider_areaServed = null;
+								$provider_treatments = null;
+								$provider_availableService = null;
+								$provider_award = null;
+								$provider_brand = null;
+								$provider_containedInPlace = null;
+								$provider_currenciesAccepted = null;
+								$provider_description = null;
+								$provider_hasCredential = null;
+								$provider_hasMap_repeater = null;
+								$provider_hasMap = null;
+								$provider_hospitalAffiliation_multiselect = null;
+								$provider_hospitalAffiliation = null;
+								$provider_duns = null;
+								$provider_globalLocationNumber = null;
+								$provider_isicV4 = null;
+								$provider_leiCode = null;
+								$provider_naics = null;
+								$provider_taxID = null;
+								$provider_taxID_taxpayer = null;
+								$provider_taxID_employer = null;
+								$provider_vatID = null;
+								$provider_iso6523Code = null;
+								$provider_identifier = null;
+								$provider_image_id = null;
+								$provider_has_parent = null;
+								$provider_image_general = null;
+								$provider_image = null;
+								$provider_isAcceptingNewPatients = null;
+								$provider_isAccessibleForFree = null;
+								$provider_keywords = null;
+								$provider_knowsAbout = null;
+								$provider_knowsLanguage = null;
+								$provider_legalName = null;
+								$provider_location = null;
+								$provider_mainEntityOfPage = null;
+								$provider_makesOffer = null;
+								$provider_memberOf = null;
+								$provider_parentOrganization = null;
+								$provider_paymentAccepted = null;
+								$provider_photo = null;
+								$provider_potentialAction = null;
+								$provider_review = null;
+								$provider_sameAs_repeater = null;
+								$provider_sameAs = null;
+								$provider_smokingAllowed = null;
+								$provider_subjectOf = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+								$foo = null;
+
+								// Reused variables
+
+									$foo = '';
+
+							// Load variables from pre-existing field values array
+
+								if ( $provider_fields[$provider] ) {
+
+									foreach ( $provider_fields[$provider] as $key => $value ) {
+
+										${$key} = $value; // Create a variable for each item in the array
+
+									}
+
+								}
+
+							// Get ontology type
+
+								if ( !isset($provider_ontology_type) ) {
+
+									$provider_ontology_type = true;
+
+								}
+
+							// If the page is not an ontology type, skip to the next iteration
+
+								if ( !$provider_ontology_type ) {
+
+									continue;
+
+								}
+
+							// Fake subpage query and get fake subpage slug
+
+								if (
+									$provider_ontology_type
+									&&
+									$nesting_level == 0
+								) {
+
+									if ( !isset($provider_current_fpage) ) {
+
+										$provider_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+
+									}
+
+									if ( !isset($provider_fpage_query) ) {
+
+										$provider_fpage_query = $provider_current_fpage ? true : false;
+
+									}
+
+								}
+
+							// Add property values
+
+								// url
+
+									/* 
+									 * URL of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									// Get values
+
+										if ( !isset($provider_url) ) {
+
+											$provider_url = get_permalink($provider);
+
+										}
+
+										$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
+
+									// Add to schema
+
+										if ( $provider_url ) {
+
+											$provider_item_MedicalBusiness['url'] = $provider_url;
+											$provider_item_Person['url'] = $provider_url;
+
+										}
+
+								// @type
+
+									// MedicalBusiness Subtype
+
+										// Get values
+
+											if ( !isset($MedicalBusiness_type) ) {
+
+												// Base value
+
+													$MedicalBusiness_type = 'MedicalBusiness';
+
+												// Get list of the provider's degrees
+
+													if ( !isset($provider_degree_array) ) {
+
+														$provider_degrees = get_field( 'physician_degree', $provider );
+
+														// Base degree list array
+
+															$provider_degree_array = array();
+
+														// Add names of each degree to the degree list array
+
+															if ( $provider_degrees ) {
+																
+																foreach ( $provider_degrees as $degree ) {
+												
+																	$provider_degree_array[] = uamswp_attr_conversion( get_term( $degree, 'degree' )->name );
+												
+																} // endforeach
+												
+															} // endif ( $degrees )
+											
+													}
+
+												// Check the list of degrees against the Physician degrees
+
+													if ( $provider_degree_array ) {
+
+														$Physician_degree_query = !empty(
+															array_intersect(
+																$provider_degree_array,
+																$provider_properties_map['Physician']['degrees']
+															)
+														);
+
+														$MedicalBusiness_type = $Physician_degree_query ? 'Physician' : $MedicalBusiness_type;
+
+													}
+
+												// Check the list of degrees against the Dentist degrees
+
+													if ( $provider_degree_array ) {
+
+														$Dentist_degree_query = !empty(
+															array_intersect(
+																$provider_degree_array,
+																$provider_properties_map['Dentist']['degrees']
+															)
+														);
+
+														$MedicalBusiness_type = $Dentist_degree_query ? 'Dentist' : $MedicalBusiness_type;
+
+													}
+
+												// Check the list of degrees against the Optician degrees
+
+													if ( $provider_degree_array ) {
+
+														$Optician_degree_query = !empty(
+															array_intersect(
+																$provider_degree_array,
+																$provider_properties_map['Optician']['degrees']
+															)
+														);
+
+														$MedicalBusiness_type = $Optician_degree_query ? 'Optician' : $MedicalBusiness_type;
+
+													}
+
+											}
+
+										// Add to schema
+
+											if ( $MedicalBusiness_type ) {
+
+												$provider_item_MedicalBusiness['@type'] = $MedicalBusiness_type;
+
+											}
+
+									// Person type
+
+										// Get values
+
+											$Person_type = 'Person';
+
+										// Add to schema
+
+											if ( $Person_type ) {
+
+												$provider_item_Person['@type'] = $Person_type;
+
+											}
+
+								// @id
+
+									if ( $nesting_level <= 1 ) {
+
+										// MedicalBusiness
+
+											// Get values
+
+												$MedicalBusiness_id = $provider_url . '#' . $MedicalBusiness_type;
+												// $MedicalBusiness_id .= $MedicalBusiness_i;
+												// $MedicalBusiness_i++;
+
+											// Add to schema
+
+												if ( $MedicalBusiness_id ) {
+
+													$provider_item_MedicalBusiness['@id'] = $MedicalBusiness_id;
+
+												}
+
+										// Person
+
+											// Get values
+
+												$Person_id = $provider_url . '#' . $Person_type;
+												// $Person_id .= $Person_i;
+												// $Person_i++;
+
+											// Add to schema
+
+												if ( $Person_id ) {
+
+													$provider_item_Person['@id'] = $Person_id;
+
+												}
+
+									}
+
+								// name
+
+									/* 
+									 * The name of the item.
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - rdfs:label
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									// Get values
+
+										if ( !isset($provider_name) ) {
+
+											$provider_name = get_the_title($provider) ?? '';
+
+										}
+
+									// Add to item values
+
+										// MedicalBusiness
+
+											if (
+												in_array(
+													'name',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+												&&
+												$provider_name
+											) {
+
+												$provider_item_MedicalBusiness['name'] = $provider_name;
+
+											}
+
+										// Person
+
+											if (
+												in_array(
+													'name',
+													$provider_properties_map[$Person_type]['properties']
+												)
+												&&
+												$provider_name
+											) {
+
+												$provider_item_Person['name'] = $provider_name;
+
+											}
+
+								// medicalSpecialty
+
+									/* 
+									 * A medical specialty of the provider.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSpecialty
+									 */
+
+									if (
+										in_array(
+											'medicalSpecialty',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'medicalSpecialty',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get MedicalSpecialty value(s) from associated Clinical Specialization item(s)
+
+											if ( !isset($provider_medicalSpecialty) ) {
+
+												$provider_medicalSpecialty = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'medicalSpecialty',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_medicalSpecialty
+												) {
+
+													$provider_item_MedicalBusiness['medicalSpecialty'] = $provider_medicalSpecialty;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'medicalSpecialty',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_medicalSpecialty
+												) {
+
+													$provider_item_Person['medicalSpecialty'] = $provider_medicalSpecialty;
+
+												}
+
+									}
+
+								// additionalType
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'additionalType',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'additionalType',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_additionalType) ) {
+
+												// Base property values array
+
+													$provider_additionalType = array();
+
+												// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
+
+													if ( $provider_medicalSpecialty ) {
+
+														$provider_additionalType = array_merge(
+															$provider_additionalType,
+															array_intersect(
+																$provider_medicalSpecialty,
+																$provider_additionalType_MedicalSpecialty
+															)
+														);
+
+													}
+
+												// Get Wikidata occupation entry URL from associated Clinical Specialization items
+
+													if ( !isset($provider_additionalType_clinical_specialization) ) {
+
+														$provider_additionalType_clinical_specialization = array();
+
+													}
+
+													// Merge array into the additionalType property values array
+
+														if (
+															$provider_additionalType
+															&&
+															$provider_additionalType_clinical_specialization
+														) {
+
+															$provider_additionalType_clinical_specialization = is_array($provider_additionalType_clinical_specialization) ? $provider_additionalType_clinical_specialization : array($provider_additionalType_clinical_specialization);
+
+															$provider_additionalType = array_merge(
+																$provider_additionalType,
+																$provider_additionalType_clinical_specialization
+															);
+
+														} elseif ( $provider_additionalType_clinical_specialization ) {
+
+															$provider_additionalType = $provider_additionalType_clinical_specialization;
+
+														}
+
+											}
+
+										// Clean up additionalType property values array
+
+											if (
+												$provider_additionalType
+												&&
+												is_array($provider_additionalType)
+											) {
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($provider_additionalType);
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'additionalType',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_additionalType
+												) {
+
+													$provider_item_MedicalBusiness['additionalType'] = $provider_additionalType;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'additionalType',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_additionalType
+												) {
+
+													$provider_item_Person['additionalType'] = $provider_additionalType;
+
+												}
+
+									}
+
+								// aggregateRating
+
+									/* 
+									 * The overall rating, based on a collection of reviews or ratings, of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - AggregateRating
+									 */
+
+									if (
+										(
+											in_array(
+												'aggregateRating',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'aggregateRating',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_aggregateRating) ) {
+
+												$provider_aggregateRating = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'aggregateRating',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_aggregateRating
+												) {
+
+													$provider_item_MedicalBusiness['aggregateRating'] = $provider_aggregateRating;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'aggregateRating',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_aggregateRating
+												) {
+
+													$provider_item_Person['aggregateRating'] = $provider_aggregateRating;
+
+												}
+
+									}
+
+								// alternateName
+
+									/* 
+									 * An alias for the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'alternateName',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'alternateName',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_alternateName) ) {
+
+												$provider_alternateName = array();
+
+											}
+
+										// Add to schema
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'alternateName',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_alternateName
+												) {
+
+													$provider_item_MedicalBusiness['alternateName'] = $provider_alternateName;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'alternateName',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_alternateName
+												) {
+
+													$provider_item_Person['alternateName'] = $provider_alternateName;
+
+												}
+
+									}
+
+								// areaServed
+
+									/* 
+									 * The geographic area where a service or offered item is provided.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - AdministrativeArea
+									 *     - GeoShape
+									 *     - Place
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'areaServed',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'areaServed',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_areaServed) ) {
+
+												$provider_areaServed = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'areaServed',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_areaServed
+												) {
+
+													$provider_item_MedicalBusiness['areaServed'] = $provider_areaServed;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'areaServed',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_areaServed
+												) {
+
+													$provider_item_Person['areaServed'] = $provider_areaServed;
+
+												}
+
+									}
+
+								// availableService
+
+									/* 
+									 * A medical service available from this provider.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalProcedure
+									 *     - MedicalTest
+									 */
+
+									if (
+										(
+											in_array(
+												'availableService',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'availableService',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get related treatments
+
+											if ( !isset($provider_treatments) ) {
+
+												$provider_treatments = get_field( 'physician_treatments_cpt', $provider ) ?: array();
+
+											}
+
+										// Format values
+
+											if ( !isset($provider_availableService) ) {
+
+												if ( $provider_treatments ) {
+
+													$provider_availableService = uamswp_fad_schema_service(
+														$provider_treatments, // List of IDs of the service items
+														$provider_url, // Page URL
+														( $nesting_level + 1 ), // Nesting level within the main schema
+														'Service' // Fragment identifier
+													) ?? array();
+
+												}
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'availableService',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_availableService
+												) {
+
+													$provider_item_MedicalBusiness['availableService'] = $provider_availableService;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'availableService',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_availableService
+												) {
+
+													$provider_item_Person['availableService'] = $provider_availableService;
+
+												}
+
+									}
+
+								// award
+
+									/* 
+									 * An award won by or for this item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'award',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'award',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_award) ) {
+
+												$provider_award = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'award',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_award
+												) {
+
+													$provider_item_MedicalBusiness['award'] = $provider_award;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'award',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_award
+												) {
+
+													$provider_item_Person['award'] = $provider_award;
+
+												}
+
+									}
+
+								// brand
+
+									/* 
+									 * The brand(s) associated with a product or service, or the brand(s) maintained 
+									 * by an organization or business person.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Brand
+									 *     - Organization
+									 */
+
+									if (
+										in_array(
+											'brand',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'brand',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_brand) ) {
+
+												$provider_brand = $schema_base_org_uams_health_ref ?? array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'brand',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_brand
+												) {
+
+													$provider_item_MedicalBusiness['brand'] = $provider_brand;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'brand',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_brand
+												) {
+
+													$provider_item_Person['brand'] = $provider_brand;
+
+												}
+
+									}
+
+								// containedInPlace
+
+									/* 
+									 * The basic containment relation between a place and one that contains it.
+									 * expected to be one of these types:
+									 * 
+									 *     - Place
+									 */
+
+									if (
+										in_array(
+											'containedInPlace',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'containedInPlace',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_containedInPlace) ) {
+
+												/*
+
+													Reference 'location'
+
+												*/
+
+												$provider_containedInPlace = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'containedInPlace',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_containedInPlace
+												) {
+
+													$provider_item_MedicalBusiness['containedInPlace'] = $provider_containedInPlace;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'containedInPlace',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_containedInPlace
+												) {
+
+													$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
+
+												}
+
+									}
+
+								// currenciesAccepted
+
+									/* 
+									 * The currency accepted.
+									 * 
+									 * Use standard formats:
+									 *     - ISO 4217 currency format (e.g., "USD")
+									 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
+									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other 
+									 *       currency types (e.g., "Ithaca HOUR")
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'currenciesAccepted',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'currenciesAccepted',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_currenciesAccepted) ) {
+
+												/*
+
+													Reference properties on associated locations
+
+												*/
+
+												$provider_currenciesAccepted = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'currenciesAccepted',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_currenciesAccepted
+												) {
+
+													$provider_item_MedicalBusiness['currenciesAccepted'] = $provider_currenciesAccepted;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'currenciesAccepted',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_currenciesAccepted
+												) {
+
+													$provider_item_Person['currenciesAccepted'] = $provider_currenciesAccepted;
+
+												}
+
+									}
+
+								// description
+
+									/* 
+									 * A description of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - TextObject
+									 */
+
+									if (
+										(
+											in_array(
+												'description',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'description',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get the Selected Short Description for This Page
+
+											if ( !isset($provider_description) ) {
+
+												$provider_description = get_field( 'physician_short_clinical_bio', $provider ) ?? array();
+
+												// Fallback — Get clinical bio
+
+													if ( !$provider_description ) {
+
+														$provider_description = get_field( 'physician_clinical_bio', $provider ) ?? array();
+
+													}
+
+											}
+
+										// Clean up value
+
+											if ( $provider_description ) {
+
+												$provider_description = wp_strip_all_tags($provider_description);
+												$provider_description = str_replace("\n", ' ', $provider_description); // Strip line breaks
+												$provider_description = strlen($provider_description) > 160 ? mb_strimwidth($provider_description, 0, 156, '...') : $provider_description; // Limit to 160 characters
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'description',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_description
+												) {
+
+													$provider_item_MedicalBusiness['description'] = $provider_description;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'description',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_description
+												) {
+
+													$provider_item_Person['description'] = $provider_description;
+
+												}
+
+									}
+
+								// hasCredential
+
+									/* 
+									 * A credential awarded to the Person or Organization.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - EducationalOccupationalCredential
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'hasCredential',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'hasCredential',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_hasCredential) ) {
+
+												$provider_hasCredential = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'hasCredential',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_hasCredential
+												) {
+
+													$provider_item_MedicalBusiness['hasCredential'] = $provider_hasCredential;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'hasCredential',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_hasCredential
+												) {
+
+													$provider_item_Person['hasCredential'] = $provider_hasCredential;
+
+												}
+
+									}
+
+								// hasMap
+
+									/* 
+									 * A URL to a map of the place.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Map
+									 *     - URL
+									 * 
+									 * The examples on Schema.org indicate that a URL to the location on Google Maps 
+									 * is acceptable.
+									 */
+
+									if (
+										in_array(
+											'hasMap',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'hasMap',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get hasMap repeater field value
+
+											if ( !isset($provider_hasMap_repeater) ) {
+
+												$provider_hasMap_repeater = array();
+
+											}
+
+											// Add each item to hasMap property values array
+
+												if ( !isset($provider_hasMap) ) {
+
+													if ( $provider_hasMap_repeater ) {
+
+														/*
+														
+															foreach loop to get the text field value from each row.
+
+															Prepend 'https://www.google.com/maps?cid=' to each value.
+
+															Add each value to a list array
+
+														*/
+
+														$provider_hasMap = array();
+
+													}
+
+												}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'hasMap',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_hasMap
+												) {
+
+													$provider_item_MedicalBusiness['hasMap'] = $provider_hasMap;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'hasMap',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_hasMap
+												) {
+
+													$provider_item_Person['hasMap'] = $provider_hasMap;
+
+												}
+
+									}
+
+								// hospitalAffiliation
+
+									/* 
+									 * A hospital with which the physician or office is affiliated.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Hospital
+									 */
+
+									if (
+										in_array(
+											'hospitalAffiliation',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'hospitalAffiliation',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get hospitalAffiliation multi-select field values
+
+											if ( !isset($provider_hospitalAffiliation_multiselect) ) {
+
+												$provider_hospitalAffiliation_multiselect = array();
+
+											}
+
+											// Add each item to hospitalAffiliation property values array
+
+												if ( !isset($provider_hospitalAffiliation) ) {
+
+													if ( $provider_hospitalAffiliation_multiselect ) {
+
+														$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
+															array(),
+															$provider_hospitalAffiliation_multiselect
+														);
+
+													}
+
+												}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'hospitalAffiliation',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_hospitalAffiliation
+												) {
+
+													$provider_item_MedicalBusiness['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'hospitalAffiliation',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_hospitalAffiliation
+												) {
+
+													$provider_item_Person['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+												}
+
+									}
+
+								// identifiers (multiple properties)
+
+									if ( $nesting_level == 0 ) {
+
+										// 'duns' property
+
+											/* 
+											 * The Dun & Bradstreet DUNS number for identifying an organization or business 
+											 * person.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												(
+													in_array(
+														'duns',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'duns',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Define values
+
+													if ( !isset($provider_duns) ) {
+
+														// Base 'duns' property value array
+
+															$provider_duns = array();
+
+														// Get values
+
+															$provider_duns = array();
+
+													}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'duns',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_duns
+														) {
+
+															$provider_item_MedicalBusiness['duns'] = $provider_duns;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'duns',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_duns
+														) {
+
+															$provider_item_Person['duns'] = $provider_duns;
+
+														}
+
+											}
+
+										// globalLocationNumber
+
+											/* 
+											 * The Global Location Number (GLN, sometimes also referred to as International 
+											 * Location Number or ILN) of the respective organization, person, or place. The 
+											 * GLN is a 13-digit number used to identify parties and physical locations.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												(
+													in_array(
+														'globalLocationNumber',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'globalLocationNumber',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Define values
+
+													if ( !isset($provider_globalLocationNumber) ) {
+
+														// Base 'globalLocationNumber' property value array
+
+															$provider_globalLocationNumber = array();
+
+														// Get values
+
+															$provider_globalLocationNumber = array();
+
+													}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'globalLocationNumber',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_globalLocationNumber
+														) {
+
+															$provider_item_MedicalBusiness['globalLocationNumber'] = $provider_globalLocationNumber;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'globalLocationNumber',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_globalLocationNumber
+														) {
+
+															$provider_item_Person['globalLocationNumber'] = $provider_globalLocationNumber;
+
+														}
+
+											}
+
+										// isicV4
+
+											/* 
+											 * The International Standard of Industrial Classification of All Economic 
+											 * Activities (ISIC), Revision 4 code for a particular organization, business 
+											 * person, or place.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											// Define values
+
+											if (
+												(
+													in_array(
+														'isicV4',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'isicV4',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												if ( !isset($provider_isicV4) ) {
+
+													// Base 'isicV4' property value array
+
+														$provider_isicV4 = array();
+
+													// Get values
+
+														$provider_isicV4 = array();
+
+												}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'isicV4',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_isicV4
+														) {
+
+															$provider_item_MedicalBusiness['isicV4'] = $provider_isicV4;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'isicV4',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_isicV4
+														) {
+
+															$provider_item_Person['isicV4'] = $provider_isicV4;
+
+														}
+
+											}
+
+										// leiCode
+
+											/* 
+											 * An organization identifier that uniquely identifies a legal entity as defined 
+											 * in ISO 17442.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												(
+													in_array(
+														'leiCode',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'leiCode',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												if ( !isset($provider_leiCode) ) {
+
+													// Base 'leiCode' property value array
+
+														$provider_leiCode = array();
+
+													// Get values
+
+														$provider_leiCode = array();
+
+												}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'leiCode',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_leiCode
+														) {
+
+															$provider_item_MedicalBusiness['leiCode'] = $provider_leiCode;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'leiCode',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_leiCode
+														) {
+
+															$provider_item_Person['leiCode'] = $provider_leiCode;
+
+														}
+
+											}
+
+										// naics
+
+											/* 
+											 * The North American Industry Classification System (NAICS) code for a particular 
+											 * organization or business person.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												(
+													in_array(
+														'naics',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'naics',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												if ( !isset($provider_naics) ) {
+
+													// Base 'naics' property value array
+
+														$provider_naics = array();
+
+													// Get values
+
+														$provider_naics = array();
+
+												}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'naics',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_naics
+														) {
+
+															$provider_item_MedicalBusiness['naics'] = $provider_naics;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'naics',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_naics
+														) {
+
+															$provider_item_Person['naics'] = $provider_naics;
+
+														}
+
+											}
+
+										// taxID
+
+											/* 
+											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US; 
+											 * the CIF/NIF in Spain).
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												(
+													in_array(
+														'taxID',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'taxID',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// taxID
+
+													if ( !isset($provider_taxID) ) {
+
+														// Base 'taxID' property value array
+
+															/* https://schema.org/taxID */
+
+															$provider_taxID = array();
+
+														// Get values
+
+															$provider_taxID = array();
+
+													}
+
+												// Taxpayer Identification Number
+
+													if ( !isset($provider_taxID_taxpayer) ) {
+
+														// Base Taxpayer Identification Number value array
+
+															/* https://www.wikidata.org/wiki/Q1444804 */
+
+															$provider_taxID_taxpayer = array();
+
+														// Get values
+
+															$provider_taxID_taxpayer = array();
+
+													}
+
+												// Employer Identification Number
+
+													if ( !isset($provider_taxID_employer) ) {
+
+														// Base Employer Identification Number value array
+
+															/* https://www.wikidata.org/wiki/Q2397748 */
+
+															$provider_taxID_employer = array();
+
+														// Get values
+
+															$provider_taxID_employer = array();
+
+													}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'taxID',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_taxID
+														) {
+
+															$provider_item_MedicalBusiness['taxID'] = $provider_taxID;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'taxID',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_taxID
+														) {
+
+															$provider_item_Person['taxID'] = $provider_taxID;
+
+														}
+
+											}
+
+										// vatID
+
+											/* 
+											 * The Value-added Tax ID of the organization or person.
+											 * 
+											 *     - Text
+											 */
+
+											if (
+												(
+													in_array(
+														'vatID',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'vatID',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												if ( !isset($provider_vatID) ) {
+
+													// Base 'vatID' property value array
+
+														$provider_vatID = array();
+
+													// Get values
+
+														$provider_vatID = array();
+
+												}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'vatID',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_vatID
+														) {
+
+															$provider_item_MedicalBusiness['vatID'] = $provider_vatID;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'vatID',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_vatID
+														) {
+
+															$provider_item_Person['vatID'] = $provider_vatID;
+
+														}
+
+											}
+
+										// iso6523Code
+
+											/* 
+											 * An organization identifier as defined in ISO 6523(-1). Note that many existing 
+											 * organization identifiers such as leiCode, duns and vatID can be expressed as an 
+											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier 
+											 * accordingly.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Text
+											 * 
+											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+											 * feedback and adoption from applications and websites can help improve their 
+											 * definitions.
+											 */
+
+											if (
+												(
+													in_array(
+														'iso6523Code',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'iso6523Code',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												if ( !isset($provider_iso6523Code) ) {
+
+													// Base 'iso6523Code' property value array
+
+														$provider_iso6523Code = array();
+
+													// Get values
+
+														$provider_iso6523Code = array();
+
+												}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'iso6523Code',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_iso6523Code
+														) {
+
+															$provider_item_MedicalBusiness['iso6523Code'] = $provider_iso6523Code;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'iso6523Code',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_iso6523Code
+														) {
+
+															$provider_item_Person['iso6523Code'] = $provider_iso6523Code;
+
+														}
+
+											}
+
+										// 'identifier' property
+
+											if (
+												(
+													in_array(
+														'identifier',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'identifier',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												/* 
+												 * The identifier property represents any kind of identifier for any kind of 
+												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+												 * properties for representing many of these, either as textual strings or as 
+												 * URL (URI) links.
+												 * 
+												 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
+												 * 
+												 * Values expected to be one of these types:
+												 * 
+												 *     - PropertyValue
+												 *     - Text
+												 *     - URL
+												 */
+
+												if ( !isset($provider_identifier) ) {
+
+													// Base 'identifier' property value array
+
+														$provider_identifier = array();
+
+													// Get values
+
+														// Dun & Bradstreet DUNS number
+
+															if ( $provider_duns ) {
+
+																$provider_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q246386',
+																	'value' => $provider_duns
+																);
+
+															}
+
+														// Global Location Number
+
+															if ( $provider_globalLocationNumber ) {
+
+																$provider_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q1258830',
+																	'value' => $provider_globalLocationNumber
+																);
+
+															}
+
+														// International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
+
+															if ( $provider_isicV4 ) {
+
+																$provider_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q112111674',
+																	'value' => $provider_isicV4
+																);
+
+															}
+
+														// Legal Entity Identifier (LEI)
+
+															if ( $provider_leiCode ) {
+
+																$provider_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q6517388',
+																	'value' => $provider_leiCode
+																);
+
+															}
+
+														// North American Industry Classification System (NAICS) code
+
+															if ( $provider_naics ) {
+
+																$provider_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q3509282',
+																	'value' => $provider_naics
+																);
+
+															}
+
+														// Tax / Fiscal ID
+
+															// Taxpayer Identification Number
+
+																if ( $provider_taxID_taxpayer ) {
+
+																	$provider_identifier[] = array(
+																		'@type' => 'PropertyValue',
+																		'propertyID' => 'https://www.wikidata.org/wiki/Q1444804',
+																		'value' => $provider_taxID_taxpayer
+																	);
+
+																}
+
+															// Employer Identification Number
+
+																if ( $provider_taxID_employer ) {
+
+																	$provider_identifier[] = array(
+																		'@type' => 'PropertyValue',
+																		'propertyID' => 'https://www.wikidata.org/wiki/Q2397748',
+																		'value' => $provider_taxID_employer
+																	);
+
+																}
+
+														// Value-added tax (VAT) identification number
+
+															if ( $provider_vatID ) {
+
+																$provider_identifier[] = array(
+																	'@type' => 'PropertyValue',
+																	'propertyID' => 'https://www.wikidata.org/wiki/Q2319042',
+																	'value' => $provider_vatID
+																);
+
+															}
+
+												}
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'identifier',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_identifier
+														) {
+
+															$provider_item_MedicalBusiness['identifier'] = $provider_identifier;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'identifier',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_identifier
+														) {
+
+															$provider_item_Person['identifier'] = $provider_identifier;
+
+														}
+
+											}
+
+									}
+
+								// image (common use)
+
+									if (
+										(
+											in_array(
+												'image',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'image',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										||
+										(
+											in_array(
+												'photo',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'photo',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+									) {
+
+										if ( !isset($provider_image_id) ) {
+
+											// Get the various images
+
+												$provider_image_id = array();
+
+										}
+
+										// Create ImageObject values array for each image
+
+											if ( !isset($provider_image_general) ) {
+
+												if ( $provider_image_id ) {
+
+													// Base array
+
+														$provider_image_general = array();
+
+													foreach ( $provider_image_id as $id ) {
+
+														$provider_image_general = array_merge(
+															$provider_image_general,
+															uamswp_fad_schema_imageobject_thumbnails(
+																$provider_url, // URL of entity with which the image is associated
+																$nesting_level, // Nesting level within the main schema
+																'16:9', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+																'Image', // Base fragment identifier
+																$id, // ID of image to use for 1:1 aspect ratio
+																0, // ID of image to use for 3:4 aspect ratio
+																$id, // ID of image to use for 4:3 aspect ratio
+																$id, // ID of image to use for 16:9 aspect ratio
+																0 // ID of image to use for full image
+															)
+														);
+
+													}
+
+												}
+
+											}
+
+										// Clean up the array
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($provider_image_general);
+
+									}
+
+								// image (specific property)
+
+									/* 
+									 * An image of the item. This can be a URL or a fully described ImageObject.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'image',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'image',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get the values
+
+											if ( !isset($provider_image) ) {
+
+												$provider_image = $provider_image_general ?? array();
+
+											}
+
+										// Add to schema
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'image',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_image
+												) {
+
+													$provider_item_MedicalBusiness['image'] = $provider_image;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'image',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_image
+												) {
+
+													$provider_item_Person['image'] = $provider_image;
+
+												}
+
+									}
+
+								// isAcceptingNewPatients
+
+									/* 
+									 * Whether the provider is accepting new patients.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'isAcceptingNewPatients',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'isAcceptingNewPatients',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_isAcceptingNewPatients) ) {
+
+												$provider_isAcceptingNewPatients = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'isAcceptingNewPatients',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_isAcceptingNewPatients
+												) {
+
+													$provider_item_MedicalBusiness['isAcceptingNewPatients'] = $provider_isAcceptingNewPatients;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'isAcceptingNewPatients',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_isAcceptingNewPatients
+												) {
+
+													$provider_item_Person['isAcceptingNewPatients'] = $provider_isAcceptingNewPatients;
+
+												}
+
+									}
+
+								// isAccessibleForFree
+
+									/* 
+									 * A flag to signal that the item, event, or place is accessible for free.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 */
+
+									if (
+										(
+											in_array(
+												'isAccessibleForFree',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'isAccessibleForFree',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_isAccessibleForFree) ) {
+
+												$provider_isAccessibleForFree = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'isAccessibleForFree',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_isAccessibleForFree
+												) {
+
+													$provider_item_MedicalBusiness['isAccessibleForFree'] = $provider_isAccessibleForFree;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'isAccessibleForFree',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_isAccessibleForFree
+												) {
+
+													$provider_item_Person['isAccessibleForFree'] = $provider_isAccessibleForFree;
+
+												}
+
+									}
+
+								// keywords
+
+									/* 
+									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									 * keywords list are typically delimited by commas, or by repeating the property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DefinedTerm
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'keywords',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'keywords',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_keywords) ) {
+
+												$provider_keywords = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'keywords',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_keywords
+												) {
+
+													$provider_item_MedicalBusiness['keywords'] = $provider_keywords;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'keywords',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_keywords
+												) {
+
+													$provider_item_Person['keywords'] = $provider_keywords;
+
+												}
+
+									}
+
+								// knowsAbout
+
+									/* 
+									 * Of a Person, and less typically of an Organization, to indicate a topic that is 
+									 * known about — suggesting possible expertise but not implying it. We do not 
+									 * distinguish skill levels here, or relate this to educational content, events, 
+									 * objectives or JobPosting descriptions.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - Thing
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'knowsAbout',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_knowsAbout) ) {
+
+												$provider_knowsAbout = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'knowsAbout',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_knowsAbout
+												) {
+
+													$provider_item_MedicalBusiness['knowsAbout'] = $provider_knowsAbout;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'knowsAbout',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_knowsAbout
+												) {
+
+													$provider_item_Person['knowsAbout'] = $provider_knowsAbout;
+
+												}
+
+									}
+
+								// knowsLanguage
+
+									/* 
+									 * Of a Person, and less typically of an Organization, to indicate a known 
+									 * language. We do not distinguish skill levels or reading / writing / speaking / 
+									 * signing here. Use language codes from the IETF BCP 47 standard.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Language
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'knowsLanguage',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'knowsLanguage',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_knowsLanguage) ) {
+
+												$provider_knowsLanguage = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'knowsLanguage',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_knowsLanguage
+												) {
+
+													$provider_item_MedicalBusiness['knowsLanguage'] = $provider_knowsLanguage;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'knowsLanguage',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_knowsLanguage
+												) {
+
+													$provider_item_Person['knowsLanguage'] = $provider_knowsLanguage;
+
+												}
+
+									}
+
+								// legalName
+
+									/* 
+									 * The official name of the organization (e.g., the registered company name).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array(
+											'legalName',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'legalName',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_legalName) ) {
+
+												$provider_legalName = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'legalName',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_legalName
+												) {
+
+													$provider_item_MedicalBusiness['legalName'] = $provider_legalName;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'legalName',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_legalName
+												) {
+
+													$provider_item_Person['legalName'] = $provider_legalName;
+
+												}
+
+									}
+
+								// location
+
+									/* 
+									 * The location of, for example, where an event is happening, where an 
+									 * organization is located, or where an action takes place.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Place
+									 *     - PostalAddress
+									 *     - Text
+									 *     - VirtualLocation
+									 */
+
+									if (
+										in_array(
+											'location',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'location',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_location) ) {
+
+												$provider_location = array();
+
+												// Place
+
+													/* 
+													* Entities that have a somewhat fixed, physical extension.
+													*/
+
+
+													// contactPoint
+
+														/* 
+														* A contact point for a person or organization.
+														* 
+														* Values expected to be one of these types:
+														* 
+														*     - ContactPoint
+														*/
+
+														/*
+
+															address
+															email
+															faxNumber
+															telephone
+
+														*/
+
+													// geo
+
+														/*
+
+															latitude
+															longitude
+
+														*/
+
+											}
+
+									}
+
+								// mainEntityOfPage
+
+									/* 
+									 * Indicates a page (or other CreativeWork) for which this thing is the main 
+									 * entity being described. See background notes at 
+									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * 
+									 * Inverse-property: mainEntity
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'mainEntityOfPage',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'mainEntityOfPage',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_mainEntityOfPage) ) {
+
+												$provider_mainEntityOfPage = $schema_provider_MedicalWebPage_ref ?? '';
+
+												if ( !$provider_mainEntityOfPage ) {
+
+													$provider_mainEntityOfPage = ( isset($provider_url) && !empty($provider_url) ) ? $provider_url . '#MedicalWebPage' : '';
+
+												}
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'mainEntityOfPage',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_mainEntityOfPage
+												) {
+
+													$provider_item_MedicalBusiness['mainEntityOfPage'] = $provider_mainEntityOfPage;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'mainEntityOfPage',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_mainEntityOfPage
+												) {
+
+													$provider_item_Person['mainEntityOfPage'] = $provider_mainEntityOfPage;
+
+												}
+
+									}
+
+								// makesOffer
+
+									/* 
+									 * A pointer to products or services offered by the organization or person.
+									 * 
+									 * Inverse-property: offeredBy
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Offer
+									 */
+
+									if (
+										(
+											in_array(
+												'makesOffer',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'makesOffer',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_makesOffer) ) {
+
+												$provider_makesOffer = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'makesOffer',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_makesOffer
+												) {
+
+													$provider_item_MedicalBusiness['makesOffer'] = $provider_makesOffer;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'makesOffer',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_makesOffer
+												) {
+
+													$provider_item_Person['makesOffer'] = $provider_makesOffer;
+
+												}
+
+									}
+
+								// memberOf
+
+									/* 
+									 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+									 * 
+									 * Inverse-property: member
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - ProgramMembership
+									 */
+
+									if (
+										(
+											in_array(
+												'memberOf',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'memberOf',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_memberOf) ) {
+
+												$provider_memberOf = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'memberOf',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_memberOf
+												) {
+
+													$provider_item_MedicalBusiness['memberOf'] = $provider_memberOf;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'memberOf',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_memberOf
+												) {
+
+													$provider_item_Person['memberOf'] = $provider_memberOf;
+
+												}
+
+									}
+
+								// parentOrganization
+
+									/* 
+									 * The larger organization that this organization is a subOrganization of, if any.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 */
+
+									if (
+										in_array(
+											'parentOrganization',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'parentOrganization',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_parentOrganization) ) {
+
+												$provider_parentOrganization = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'parentOrganization',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_parentOrganization
+												) {
+
+													$provider_item_MedicalBusiness['parentOrganization'] = $provider_parentOrganization;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'parentOrganization',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_parentOrganization
+												) {
+
+													$provider_item_Person['parentOrganization'] = $provider_parentOrganization;
+
+												}
+
+									}
+
+								// paymentAccepted
+
+									/* 
+									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'paymentAccepted',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'paymentAccepted',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_paymentAccepted) ) {
+
+												/*
+												
+													Reference values from 'location'
+
+												*/
+												$provider_paymentAccepted = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'paymentAccepted',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_paymentAccepted
+												) {
+
+													$provider_item_MedicalBusiness['paymentAccepted'] = $provider_paymentAccepted;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'paymentAccepted',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_paymentAccepted
+												) {
+
+													$provider_item_Person['paymentAccepted'] = $provider_paymentAccepted;
+
+												}
+
+									}
+
+								// photo
+
+									/* 
+									 * A photograph of this place.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - Photograph
+									 */
+
+									if (
+										in_array(
+											'photo',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'photo',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											if ( !isset($provider_photo) ) {
+
+												$provider_photo = $provider_image_general ?? array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'photo',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_photo
+												) {
+
+													$provider_item_MedicalBusiness['photo'] = $provider_photo;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'photo',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_photo
+												) {
+
+													$provider_item_Person['photo'] = $provider_photo;
+
+												}
+
+									}
+
+								// potentialAction
+
+									/* 
+									 * Indicates a potential Action, which describes an idealized action in which this 
+									 * thing would play an 'object' role.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Action
+									 */
+
+									/*
+
+										Create one or more Action arrays, likely 'CreateAction' type
+
+											 * Make an appointment, new or existing patient, by phone
+											 * Make an appointment, new patient, by phone
+											 * Make an appointment, existing patient, by phone
+											 * Make an appointment, new or existing patient, online
+											 * Make an appointment, new patient, online
+											 * Make an appointment, existing patient, online
+											 * Refer a patient, by phone
+											 * Refer a patient, by fax
+											 * Refer a patient, through Epic thing
+
+										Property descriptions:
+
+											 * 'actionStatus'
+												 * Indicates the current disposition of the Action
+											 * 'agent'
+												 * The direct performer or driver of the action — animate or inanimate (e.g., John 
+												wrote a book)
+											 * 'endTime'
+												 * The endTime of something. For a reserved event or service 
+												(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+												actions that span a period of time, when the action was performed (e.g., John 
+												wrote a book from January to December). For media, including audio and video, 
+												it's the time offset of the end of a clip within a larger file. Note that Event 
+												uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												with times. This situation may be clarified in future revisions.
+											 * 'error'
+												 * For failed actions, more information on the cause of the failure.
+											 * 'instrument'
+												 * The object that helped the agent perform the action (e.g., John wrote a book 
+												with a pen).
+											 * 'location'
+												 * The location of, for example, where an event is happening, where an 
+												organization is located, or where an action takes place.
+											 * 'object'
+												 * The object upon which the action is carried out, whose state is kept intact or 
+												changed. Also known as the semantic roles patient, affected or undergoer — 
+												which change their state — or theme — which doesn't (e.g., John read a book).
+											 * 'participant'
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												book with Steve).
+											 * 'provider'
+												 * The service provider, service operator, or service performer; the goods 
+												producer. Another party (a seller) may offer those services or goods on behalf 
+												of the provider. A provider may also serve as the seller. Supersedes carrier.
+											 * 'result'
+												 * The result produced in the action (e.g., John wrote a book).
+											 * 'startTime'
+												 * The startTime of something. For a reserved event or service 
+												(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+												For actions that span a period of time, when the action was performed 
+												(e.g., John wrote a book from January to December). For media, including audio 
+												and video, it's the time offset of the start of a clip within a larger file. 
+												Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+												describing dates with times. This situation may be clarified in future 
+												revisions.
+											 * 'target'
+												 * Indicates a target EntryPoint, or url, for an Action.
+
+									*/
+
+									if (
+										(
+											in_array(
+												'potentialAction',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'potentialAction',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_potentialAction) ) {
+
+												$provider_potentialAction = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'potentialAction',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_potentialAction
+												) {
+
+													$provider_item_MedicalBusiness['potentialAction'] = $provider_potentialAction;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'potentialAction',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_potentialAction
+												) {
+
+													$provider_item_Person['potentialAction'] = $provider_potentialAction;
+
+												}
+
+									}
+
+								// review
+
+									/* 
+									 * A review of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Review
+									 */
+
+									if (
+										(
+											in_array(
+												'review',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'review',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_review) ) {
+
+												$provider_review = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'review',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_review
+												) {
+
+													$provider_item_MedicalBusiness['review'] = $provider_review;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'review',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_review
+												) {
+
+													$provider_item_Person['review'] = $provider_review;
+
+												}
+
+									}
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'sameAs',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'sameAs',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get sameAs repeater field value
+
+											if ( !isset($provider_sameAs_repeater) ) {
+
+												$provider_sameAs_repeater = array();
+
+											}
+
+											// Add each item to sameAs property values array
+
+												if ( !isset($provider_sameAs) ) {
+
+													if ( $provider_sameAs_repeater ) {
+
+														$provider_sameAs = uamswp_fad_schema_sameas(
+															$provider_sameAs_repeater, // sameAs repeater field
+															'schema_sameas_url' // sameAs item field name
+														);
+
+													}
+
+												}
+
+										// Add to schema
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'sameAs',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_sameAs
+												) {
+
+													$provider_item_MedicalBusiness['sameAs'] = $provider_sameAs;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'sameAs',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_sameAs
+												) {
+
+													$provider_item_Person['sameAs'] = $provider_sameAs;
+
+												}
+
+									}
+
+								// smokingAllowed
+
+									/* 
+									 * Indicates whether it is allowed to smoke in the place (e.g., in the restaurant, 
+									 * hotel or hotel room).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 */
+
+									if (
+										(
+											in_array(
+												'smokingAllowed',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'smokingAllowed',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Define value
+
+											if ( !isset($provider_smokingAllowed) ) {
+
+												$provider_smokingAllowed = 'False';
+
+											}
+
+										// Add to item values
+
+											if (
+												isset($provider_smokingAllowed)
+												&&
+												!empty($provider_smokingAllowed)
+											) {
+
+												$provider_item['smokingAllowed'] = $provider_smokingAllowed;
+
+											}
+
+									}
+
+								// subjectOf
+
+									/* 
+									 * A CreativeWork or Event about this Thing.
+									 * 
+									 * Inverse-property: about
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Event
+									 */
+
+									if (
+										(
+											in_array(
+												'subjectOf',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'subjectOf',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_subjectOf) ) {
+
+												$provider_subjectOf = $schema_provider_MedicalWebPage_ref ?? '';
+
+												if ( !$provider_subjectOf ) {
+
+													$provider_subjectOf = $provider_mainEntityOfPage ?? '';
+
+													if ( !$provider_subjectOf ) {
+
+														$provider_subjectOf = ( isset($provider_url) && !empty($provider_url) ) ? $provider_url . '#MedicalWebPage' : '';
+
+													}
+
+												}
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'subjectOf',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_subjectOf
+												) {
+
+													$provider_item_MedicalBusiness['subjectOf'] = $provider_subjectOf;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'subjectOf',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_subjectOf
+												) {
+
+													$provider_item_Person['subjectOf'] = $provider_subjectOf;
+
+												}
+
+									}
+
+							// Sort arrays
+
+								ksort($provider_item_MedicalBusiness);
+								ksort($provider_item_Person);
+
+							// Combine the arrays
+
+								$provider_item = array(
+									'MedicalBusiness' => $provider_item_MedicalBusiness,
+									'Person' => $provider_item_Person
+								);
+
+							// Set/update the value of the item transient
+
+								uamswp_fad_set_transient(
+									'item_' . $provider, // Required // String added to transient name for disambiguation.
+									$provider_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+								);
+
+							// Add to list of conditions
+
+								$provider_list[] = $provider_item;
+
+						}
+
+					} // endforeach ( $repeater as $provider )
+
+				// Clean up list array
+
+					$provider_list = array_filter($provider_list);
+					$provider_list = array_values($provider_list);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($provider_list);
+
+			} // endif ( !empty($repeater) )
+
+			return $provider_list;
+
+		}
+
 	// Locations (LocalBusiness)
 
 		function uamswp_fad_schema_location(
@@ -2343,11 +6596,8 @@
 								'award',
 								'awards',
 								'branchCode',
-								'branchOf',
 								'brand',
 								'contactPoint',
-								'contactPoints',
-								'containedIn',
 								'containedInPlace',
 								'containsPlace',
 								'correctionsPolicy',
@@ -2361,13 +6611,11 @@
 								'duns',
 								'email',
 								'employee',
-								'employees',
 								'ethicsPolicy',
 								'event',
 								'events',
 								'faxNumber',
 								'founder',
-								'founders',
 								'foundingDate',
 								'foundingLocation',
 								'funder',
@@ -2413,7 +6661,6 @@
 								'maximumAttendeeCapacity',
 								'member',
 								'memberOf',
-								'members',
 								'naics',
 								'name',
 								'nonprofitStatus',
@@ -2425,13 +6672,11 @@
 								'parentOrganization',
 								'paymentAccepted',
 								'photo',
-								'photos',
 								'potentialAction',
 								'priceRange',
 								'publicAccess',
 								'publishingPrinciples',
 								'review',
-								'reviews',
 								'sameAs',
 								'seeks',
 								'serviceArea',
