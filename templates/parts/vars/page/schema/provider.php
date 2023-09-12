@@ -994,35 +994,35 @@ TODO List
 
 				$schema_provider_MedicalWebPage['mentions'] = array_merge(
 					$schema_provider_MedicalWebPage['mentions'],
-					$schema_provider_location_ref
+					( array_is_list($schema_provider_location_ref) ? $schema_provider_location_ref : array($schema_provider_location_ref) )
 				);
 
 			// Related Areas of Expertise
 
 				$schema_provider_MedicalWebPage['mentions'] = array_merge(
 					$schema_provider_MedicalWebPage['mentions'],
-					$provider_related_expertise
+					( array_is_list($provider_related_expertise) ? $provider_related_expertise : array($provider_related_expertise) )
 				);
 
 			// Related Clinical Resources
 
 				$schema_provider_MedicalWebPage['mentions'] = array_merge(
 					$schema_provider_MedicalWebPage['mentions'],
-					$provider_related_clinical_resource
+					( array_is_list($provider_related_clinical_resource) ? $provider_related_clinical_resource : array($provider_related_clinical_resource) )
 				);
 
 			// Related Conditions
 
 				$schema_provider_MedicalWebPage['mentions'] = array_merge(
 					$schema_provider_MedicalWebPage['mentions'],
-					$provider_related_condition
+					( array_is_list($provider_related_condition) ? $provider_related_condition : array($provider_related_condition) )
 				);
 
 			// Related Treatments
 
 				$schema_provider_MedicalWebPage['mentions'] = array_merge(
 					$schema_provider_MedicalWebPage['mentions'],
-					$schema_provider_treatment_ref
+					( array_is_list($schema_provider_treatment_ref) ? $schema_provider_treatment_ref : array($schema_provider_treatment_ref) )
 				);
 
 			// Remove any empty items from the array
