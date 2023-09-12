@@ -146,11 +146,13 @@ TODO List
 			 * videoQuality
 			 * videoFrameSize
 	 * Provider
+		 * Make function for provider schema
 		 * Make adjustments to convert 'Physician' type to 'MedicalBusiness' or a subtype of 'MedicalBusiness' relevant to the particular provider
 			 * A dentist -> 'Dentist'
 			 * An optician -> 'Optician'
 			 * A women's health nurse practitioner -> 'Gynecologic'
 		 * Provider as 'MedicalBusiness' type and its subtypes
+			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
 			 * 'employee' property
 				 * Add Provider as 'Person' type
  * General
