@@ -6440,24 +6440,28 @@
 								 *     - Text
 								 */
 
-								// Get repeater field value
+								if ( $nesting_level <= 1 ) {
 
-									$MedicalEntity_alternateName_array = get_field( 'expertise_alternate_names', $MedicalEntity ) ?: array();
+									// Get repeater field value
 
-								// Get item values
+										$MedicalEntity_alternateName_array = get_field( 'expertise_alternate_names', $MedicalEntity ) ?: array();
 
-									$MedicalEntity_alternateName = uamswp_fad_schema_alternatename(
-										$MedicalEntity_alternateName_array, // alternateName repeater field
-										'alternate_text' // alternateName item field name
-									);
+									// Get item values
 
-								// Add to schema
+										$MedicalEntity_alternateName = uamswp_fad_schema_alternatename(
+											$MedicalEntity_alternateName_array, // alternateName repeater field
+											'alternate_text' // alternateName item field name
+										);
 
-									if ( $MedicalEntity_alternateName ) {
+									// Add to schema
 
-										$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
+										if ( $MedicalEntity_alternateName ) {
 
-									}
+											$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
+
+										}
+
+								}
 
 							// code
 
