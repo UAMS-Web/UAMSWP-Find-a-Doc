@@ -26,25 +26,26 @@
 
 		$schema_base_org_uams['name'] = 'University of Arkansas for Medical Sciences';
 
-	// address
+	// alternateName
 
-		$schema_base_org_uams['address'] = array(
-			'@type' => 'PostalAddress',
-			'@id' => $schema_base_org_uams_url . '#Address',
+		$schema_base_org_uams['alternateName'] = 'UAMS';
+
+	// contactPoint
+
+		$schema_base_org_uams['contactPoint'] = array(
+			'@type' => 'ContactPoint',
+			'@id' => $schema_base_org_uams_url . '#ContactPoint',
 			'addressCountry' => 'USA',
 			'addressLocality' => 'Little Rock',
 			'addressRegion' => 'Arkansas',
+			'contactType' => 'main campus address',
 			'postalCode' => '72205',
 			'streetAddress' => '4301 West Markham Street'
 		);
 
-		// Define reference to this 'CollegeOrUniversity' item's 'address' property
+		// Define reference to this 'CollegeOrUniversity' item's 'contactPoint' property
 
-			$schema_base_org_uams_address_ref['@id'] = $schema_base_org_uams['address']['@id'] ?: '';
-
-	// alternateName
-
-		$schema_base_org_uams['alternateName'] = 'UAMS';
+			$schema_base_org_uams_contactPoint_ref['@id'] = $schema_base_org_uams['contactPoint']['@id'] ?: '';
 
 	// description
 
@@ -52,164 +53,164 @@
 
 	// location
 
-		// Main UAMS campus in Little Rock
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'University of Arkansas for Medical Sciences',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Little Rock',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '72205',
-					'streetAddress' => '4301 West Markham Street'
-				)
-			);
-
-		// UAMS East Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS East Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Helena-West Helena',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '72390',
-					'streetAddress' => '1393 Highway 242 South'
-				)
-			);
-
-		// UAMS North Central Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS North Central Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Batesville',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '72501',
-					'streetAddress' => '1993 Harrison Street'
-				)
-			);
-
-		// UAMS Northeast Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS Northeast Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => '72401',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '72401',
-					'streetAddress' => '311 East Matthews Street'
-				)
-			);
-
-		// UAMS Northwest Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS Northwest Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Fayetteville',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '72703',
-					'streetAddress' => '1125 North College Avenue'
-				)
-			);
-
-		// UAMS South Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS South Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Magnolia',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '71753',
-					'streetAddress' => '1617 North Washington Street'
-				)
-			);
-
-		// UAMS South Central Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS South Central Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Pine Bluff',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '71603',
-					'streetAddress' => '1601 West 40th Avenue'
-				)
-			);
-
-		// UAMS Southwest Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS Southwest Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Texarkana',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '71854',
-					'streetAddress' => '3417 U of A Way'
-				)
-			);
-
-		// UAMS West Regional Campus
-
-			$schema_base_org_uams_location[] = array(
-				'@type' => 'Place',
-				'@id' => '', // Defined later
-				'name' => 'UAMS West Regional Campus',
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'Fort Smith',
-					'addressRegion' => 'Arkansas',
-					'postalCode' => '72901',
-					'streetAddress' => '1301 South E Street'
-				)
-			);
-
-		// Dynamically add IDs to each node and capture them in a new array
-
-			$schema_base_org_uams_location_ref = array();
-
-			foreach ( $schema_base_org_uams_location as $key => $value) {
-
-				$location_id = $schema_base_org_uams_url . '#Location-' . str_replace(' ', '-', $schema_base_org_uams_location[$key]['name']);
-				$schema_base_org_uams_location[$key]['@id'] = $location_id;
-				$schema_base_org_uams_location_ref[]['@id'] = $location_id;
-
-			}
-
-		// Add the values to the schema array
-		$schema_base_org_uams['location'] = $schema_base_org_uams_location;
+		// // Main UAMS campus in Little Rock
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'University of Arkansas for Medical Sciences',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Little Rock',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '72205',
+		// 			'streetAddress' => '4301 West Markham Street'
+		// 		)
+		// 	);
+		// 
+		// // UAMS East Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS East Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Helena-West Helena',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '72390',
+		// 			'streetAddress' => '1393 Highway 242 South'
+		// 		)
+		// 	);
+		// 
+		// // UAMS North Central Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS North Central Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Batesville',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '72501',
+		// 			'streetAddress' => '1993 Harrison Street'
+		// 		)
+		// 	);
+		// 
+		// // UAMS Northeast Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS Northeast Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => '72401',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '72401',
+		// 			'streetAddress' => '311 East Matthews Street'
+		// 		)
+		// 	);
+		// 
+		// // UAMS Northwest Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS Northwest Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Fayetteville',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '72703',
+		// 			'streetAddress' => '1125 North College Avenue'
+		// 		)
+		// 	);
+		// 
+		// // UAMS South Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS South Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Magnolia',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '71753',
+		// 			'streetAddress' => '1617 North Washington Street'
+		// 		)
+		// 	);
+		// 
+		// // UAMS South Central Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS South Central Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Pine Bluff',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '71603',
+		// 			'streetAddress' => '1601 West 40th Avenue'
+		// 		)
+		// 	);
+		// 
+		// // UAMS Southwest Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS Southwest Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Texarkana',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '71854',
+		// 			'streetAddress' => '3417 U of A Way'
+		// 		)
+		// 	);
+		// 
+		// // UAMS West Regional Campus
+		// 
+		// 	$schema_base_org_uams_location[] = array(
+		// 		'@type' => 'Place',
+		// 		'@id' => '', // Defined later
+		// 		'name' => 'UAMS West Regional Campus',
+		// 		'address' => array(
+		// 			'@type' => 'PostalAddress',
+		// 			'addressCountry' => 'USA',
+		// 			'addressLocality' => 'Fort Smith',
+		// 			'addressRegion' => 'Arkansas',
+		// 			'postalCode' => '72901',
+		// 			'streetAddress' => '1301 South E Street'
+		// 		)
+		// 	);
+		// 
+		// // Dynamically add IDs to each node and capture them in a new array
+		// 
+		// 	$schema_base_org_uams_location_ref = array();
+		// 
+		// 	foreach ( $schema_base_org_uams_location as $key => $value) {
+		// 
+		// 		$location_id = $schema_base_org_uams_url . '#Location-' . str_replace(' ', '-', $schema_base_org_uams_location[$key]['name']);
+		// 		$schema_base_org_uams_location[$key]['@id'] = $location_id;
+		// 		$schema_base_org_uams_location_ref[]['@id'] = $location_id;
+		// 
+		// 	}
+		// 
+		// // Add the values to the schema array
+		// $schema_base_org_uams['location'] = $schema_base_org_uams_location;
 
 	// logo
 
@@ -286,13 +287,9 @@
 
 		$schema_base_org_uams_health['name'] = 'UAMS Health';
 
-	// address
-
-		$schema_base_org_uams_health['address'] =  $schema_base_org_uams_address_ref;
-
 	// contactPoint
 
-		$schema_base_org_uams_health['contactPoint'] = 'foo'; // Replace foo with __
+		$schema_base_org_uams_health['contactPoint'] = $schema_base_org_uams_contactPoint_ref;
 
 	// description
 
@@ -300,7 +297,15 @@
 
 	// location
 
-		$schema_base_org_uams_health['location'] = $schema_base_org_uams_location_ref;
+		if (
+			isset($schema_base_org_uams_location_ref)
+			&&
+			!empty($schema_base_org_uams_location_ref)
+		) {
+
+			$schema_base_org_uams_health['location'] = $schema_base_org_uams_location_ref;
+
+		}
 
 	// logo
 
