@@ -7985,7 +7985,11 @@
 							 * definitions.
 							 */
 
-							if ( in_array( 'embeddedTextCaption', $CreativeWork_properties ) ) {
+							if (
+								in_array( 'embeddedTextCaption', $CreativeWork_properties )
+								&&
+								$nesting_level == 0
+							) {
 
 								// Get values
 
@@ -8201,7 +8205,11 @@
 							 *     - Boolean
 							 */
 
-							if ( in_array( 'isAccessibleForFree', $CreativeWork_properties ) ) {
+							if (
+								in_array( 'isAccessibleForFree', $CreativeWork_properties )
+								&&
+								$nesting_level == 0
+							) {
 
 								// Get values
 
@@ -8272,11 +8280,7 @@
 							 *     - URL
 							 */
 
-							if (
-								in_array( 'mainEntityOfPage', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
+							if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
 
 								// Get values
 
@@ -8308,7 +8312,11 @@
 							 *     - Boolean
 							 */
 
-							if ( in_array( 'representativeOfPage', $CreativeWork_properties ) ) {
+							if (
+								in_array( 'representativeOfPage', $CreativeWork_properties )
+								&&
+								$nesting_level == 0
+							) {
 
 								// Get values
 
@@ -8336,7 +8344,11 @@
 							 *     - URL
 							 */
 
-							if ( in_array( 'sameAs', $CreativeWork_properties ) ) {
+							if (
+								in_array( 'sameAs', $CreativeWork_properties )
+								&&
+								$nesting_level == 0
+							) {
 
 								// Get values
 
@@ -8546,7 +8558,11 @@
 							 *     - Event
 							 */
 
-							if ( in_array( 'subjectOf', $CreativeWork_properties ) ) {
+							if (
+								in_array( 'subjectOf', $CreativeWork_properties )
+								&&
+								$nesting_level == 0
+							) {
 
 								// Get values
 
