@@ -2565,9 +2565,9 @@
 							// Eliminate PHP errors / reset variables
 
 								$LocalBusiness_item = array(); // Base array
-								$ontology_type = '';
-								$current_fpage = '';
-								$fpage_query = '';
+								$LocalBusiness_ontology_type = '';
+								$LocalBusiness_current_fpage = '';
+								$LocalBusiness_fpage_query = '';
 								$LocalBusiness_url = '';
 								$LocalBusiness_type = '';
 								$LocalBusiness_id = '';
@@ -2675,11 +2675,11 @@
 
 							// Get ontology type
 
-								$ontology_type = true;
+								$LocalBusiness_ontology_type = true;
 
 							// If the page is not an ontology type, skip to the next iteration
 
-								if ( !$ontology_type ) {
+								if ( !$LocalBusiness_ontology_type ) {
 
 									continue;
 
@@ -2688,13 +2688,13 @@
 							// Fake subpage query and get fake subpage slug
 
 								if (
-									$ontology_type
+									$LocalBusiness_ontology_type
 									&&
 									$nesting_level == 0
 								) {
 
-									$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
-									$fpage_query = $current_fpage ? true : false;
+									$LocalBusiness_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+									$LocalBusiness_fpage_query = $LocalBusiness_current_fpage ? true : false;
 
 								}
 
@@ -4560,37 +4560,37 @@
 
 											// Get featured image ID
 
-												if ( !$fpage_query ) {
+												if ( !$LocalBusiness_fpage_query ) {
 
 													/* Overview page */
 
 													$LocalBusiness_featured_image_id = $LocalBusiness_override_parent_photo_featured ? get_field( '_thumbnail_id', $LocalBusiness_parent_id ) : get_field( '_thumbnail_id', $LocalBusiness ); // int
 
-												} elseif ( $current_fpage == 'providers' ) {
+												} elseif ( $LocalBusiness_current_fpage == 'providers' ) {
 
 													/* Fake subpage for related providers */
 
 													$LocalBusiness_featured_image_id = '';
 
-												} elseif ( $current_fpage == 'clinics' ) {
+												} elseif ( $LocalBusiness_current_fpage == 'clinics' ) {
 
 													/* Fake subpage for descendant locations */
 
 													$LocalBusiness_featured_image_id = '';
 
-												} elseif ( $current_fpage == 'related' ) {
+												} elseif ( $LocalBusiness_current_fpage == 'related' ) {
 
 													/* Fake subpage for related locations */
 
 													$LocalBusiness_featured_image_id = '';
 
-												} elseif ( $current_fpage == 'expertises' ) {
+												} elseif ( $LocalBusiness_current_fpage == 'expertises' ) {
 
 													/* Fake subpage for related areas of expertise */
 
 													$LocalBusiness_featured_image_id = '';
 
-												} elseif ( $current_fpage == 'resources' ) {
+												} elseif ( $LocalBusiness_current_fpage == 'resources' ) {
 
 													/* Fake subpage for related clinical resources */
 
