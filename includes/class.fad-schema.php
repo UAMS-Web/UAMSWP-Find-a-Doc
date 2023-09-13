@@ -135,9 +135,9 @@
 
 		}
 
-	// Add data to an array defining schema data for medicalSpecialty
+	// Add data to an array defining schema data for medicalSpecialty from associated conditions and treatments
 
-		function uamswp_fad_schema_medical_specialty(
+		function uamswp_fad_schema_medicalSpecialty_old(
 			$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
 			$name = '', // string (optional) // The name of the item.
 			$url = '', // string (optional) // URL of the item.
@@ -153,7 +153,7 @@
 			 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
 			 * 
 			 * 		// Add this location's details to the main medicalSpecialty schema array
-			 * 		$schema_medical_specialty = uamswp_fad_schema_medical_specialty(
+			 * 		$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
 			 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
 			 * 			$condition_title_attr, // string (optional) // The name of the item.
 			 * 			$condition_url // string (optional) // URL of the item.
