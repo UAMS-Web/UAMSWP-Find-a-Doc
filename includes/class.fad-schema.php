@@ -7112,6 +7112,144 @@
 
 									}
 
+								// workLocation
+
+									/* 
+									 * A contact location for a person's place of work.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ContactPoint
+									 *     - Place
+									 */
+
+									if (
+										(
+											in_array(
+												'workLocation',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'workLocation',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_workLocation) ) {
+
+												$provider_workLocation = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'workLocation',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_workLocation
+												) {
+
+													$provider_item_MedicalBusiness['workLocation'] = $provider_workLocation;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'workLocation',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_workLocation
+												) {
+
+													$provider_item_Person['workLocation'] = $provider_workLocation;
+
+												}
+
+									}
+
+								// worksFor
+
+									/* 
+									 * Organizations that the person works for.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 */
+
+									if (
+										(
+											in_array(
+												'worksFor',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'worksFor',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_worksFor) ) {
+
+												$provider_worksFor[] = $schema_base_org_uams_health_ref ?? '';
+												$provider_worksFor[] = $schema_base_org_uams_ref ?? '';
+
+											}
+
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'workLocation',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_worksFor
+												) {
+
+													$provider_item_MedicalBusiness['workLocation'] = $provider_worksFor;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'worksFor',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_worksFor
+												) {
+
+													$provider_item_Person['worksFor'] = $provider_worksFor;
+
+												}
+
+									}
+
 							// Sort arrays
 
 								ksort($provider_item_MedicalBusiness);
