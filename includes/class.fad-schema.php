@@ -3497,7 +3497,7 @@
 
 												// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-													if ( $provider_medicalSpecialty ) {
+													if ( $provider_medicalSpecialty_list ) {
 
 														$provider_additionalType = array_merge(
 															$provider_additionalType,
@@ -7435,7 +7435,7 @@
 
 												// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-													if ( $LocalBusiness_medicalSpecialty ) {
+													if ( $LocalBusiness_medicalSpecialty_list ) {
 
 														$LocalBusiness_additionalType = array_merge(
 															$LocalBusiness_additionalType,
