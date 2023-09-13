@@ -2204,9 +2204,12 @@ uamswp_fad_schema_construct($schema_provider);
 	// // Person
 	// echo print_r($schema_provider['@graph'][6]); // test
 
+	// // Specific variable
+	// echo print_r($schema_provider_location_ref); // test
+
 	echo '</pre>'; // test
 
 // Reusable test display lines
 
-		// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : $foo ) . '</p>'; // test
-		// if ( is_array($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
+	// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : ( is_object($foo) ? 'Object' : ( $foo ) ) ) . '</p>'; // test
+	// if ( is_array($foo) || is_object($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
