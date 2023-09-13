@@ -3497,27 +3497,84 @@
 
 												// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-													if ( $provider_medicalSpecialty_list ) {
+													// Get values
 
-														$provider_additionalType = array_merge(
-															$provider_additionalType,
-															array_intersect(
-																$provider_additionalType_MedicalSpecialty,
-																( is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list) )
-															)
-														);
+														if ( !isset($provider_medicalSpecialty) ) {
 
-													}
+															// Get Clinical Specialization value
 
-												// Get Wikidata occupation entry URL from associated Clinical Specialization items
+																if ( !isset($provider_clinical_specialization) ) {
 
-													if ( !isset($provider_additionalType_clinical_specialization) ) {
+																	$provider_clinical_specialization = get_field( 'physician_title', $provider );
 
-														$provider_additionalType_clinical_specialization = array();
+																}
 
-													}
+															// Get MedicalSpecialty from Clinical Specialization value
 
-													// Merge array into the additionalType property values array
+																// Simple list of MedicalSpecialty values
+
+																	$provider_medicalSpecialty_list = array();
+
+																// Schema property values
+
+																	$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+																		$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+																		$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+																	);
+
+														}
+
+													// Merge into property values array
+
+														if ( $provider_medicalSpecialty_list ) {
+
+															$provider_additionalType = array_merge(
+																$provider_additionalType,
+																array_intersect(
+																	$provider_additionalType_MedicalSpecialty,
+																	( is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list) )
+																)
+															);
+
+														}
+
+												// Get Wikidata item URL for the occupation from associated Clinical Specialization items
+
+													// Get values
+
+														if ( !isset($provider_additionalType_clinical_specialization) ) {
+
+															// Get Clinical Specialization value
+
+																if ( !isset($provider_clinical_specialization_term) ) {
+
+																	if ( !isset($provider_clinical_specialization) ) {
+
+																		$provider_clinical_specialization = get_field( 'physician_title', $provider );
+				
+																	}
+
+																	if ( $provider_clinical_specialization ) {
+
+																		$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
+					
+																	}
+
+																	// Get Wikidata Item URL for the Occupation field value
+
+																		$provider_additionalType_clinical_specialization = '';
+
+																		if ( is_object($provider_clinical_specialization_term) ) {
+
+																			$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $item_term ) ?? '';
+
+																		}
+
+																}
+
+														}
+
+													// Merge into property values array
 
 														if (
 															$provider_additionalType
@@ -3525,11 +3582,9 @@
 															$provider_additionalType_clinical_specialization
 														) {
 
-															$provider_additionalType_clinical_specialization = is_array($provider_additionalType_clinical_specialization) ? $provider_additionalType_clinical_specialization : array($provider_additionalType_clinical_specialization);
-
 															$provider_additionalType = array_merge(
 																$provider_additionalType,
-																$provider_additionalType_clinical_specialization
+																( is_array($provider_additionalType_clinical_specialization) ? $provider_additionalType_clinical_specialization : array($provider_additionalType_clinical_specialization) )
 															);
 
 														} elseif ( $provider_additionalType_clinical_specialization ) {
