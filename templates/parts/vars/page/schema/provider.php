@@ -155,10 +155,12 @@ TODO List
 			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
 			 * 'employee' property
 				 * Add Provider as 'Person' type
+		 * Consider adding 'ProfilePage' as an additional type on one of the items in @graph
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
 	 * Resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+	 * Consider shifting to the use of the 'Thing > CreativeWork > WebContent > HealthTopicContent' type in place of 'MedicalWebPage' and/or the 'CreativeWork' subtypes used for clinical resources.
  * Filter ACF fields
 	 * Fields referencing MedicalTest type
 		 * Just treatments with MedicalTest type or its subtypes
