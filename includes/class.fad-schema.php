@@ -3067,6 +3067,17 @@
 								$provider_sameAs = null;
 								$provider_smokingAllowed = null;
 								$provider_subjectOf = null;
+								$provider_aggregateRating_query = null;
+								$provider_npi = null;
+								$provider_aggregateRating_api = null;
+								$provider_aggregateRating_ratingCount = null;
+								$provider_aggregateRating_ratingValue = null;
+								$provider_aggregateRating_reviewCount = null;
+								$provider_aggregateRating_description = null;
+								$provider_aggregateRating_itemReviewed = null;
+								$schema_provider_MedicalBusiness_ref = null;
+								$schema_provider_Person_ref = null;
+								$provider_aggregateRating_reviewAspect = null;
 
 							// Load variables from pre-existing field values array
 
@@ -3274,6 +3285,10 @@
 
 												}
 
+											// Define reference to the @id
+
+												$schema_provider_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
+
 										// Person
 
 											// Get values
@@ -3289,6 +3304,10 @@
 													$provider_item_Person['@id'] = $Person_id;
 
 												}
+
+											// Define reference to the @id
+
+												$schema_provider_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
 
 									}
 
@@ -3539,13 +3558,13 @@
 																	if ( !isset($provider_clinical_specialization) ) {
 
 																		$provider_clinical_specialization = get_field( 'physician_title', $provider );
-				
+
 																	}
 
 																	if ( $provider_clinical_specialization ) {
 
 																		$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
-					
+
 																	}
 
 																	// Get Wikidata Item URL for the Occupation field value
@@ -3657,13 +3676,140 @@
 										$nesting_level == 0
 									) {
 
-										// Get values
+										if ( !isset($provider_aggregateRating) ) {
 
-											if ( !isset($provider_aggregateRating) ) {
+											// Get values
 
-												$provider_aggregateRating = array();
+												// Query for whether there are valid ratings ($rating_valid)
 
-											}
+													if ( !isset($provider_aggregateRating_query) ) {
+
+														// Get NPI value ($npi)
+
+															if ( !isset($provider_npi) ) {
+
+																$provider_npi = get_field( 'physician_npi', $provider );
+
+															}
+
+														// Get ratings data from NRC JSON API and decode ($rating_data)
+
+															if ( !isset($provider_aggregateRating_api) ) {
+
+																$provider_aggregateRating_api = json_decode( wp_nrc_cached_api($provider_npi) );
+
+															}
+
+														// Check if ratings data is valid
+
+															if ( !empty($provider_aggregateRating_api) ) {
+
+																$provider_aggregateRating_query = $provider_aggregateRating_api->valid ?? false;
+																$provider_aggregateRating_query = $provider_aggregateRating_query ? true : false;
+
+															} else {
+
+																$provider_aggregateRating_query = false;
+
+															}
+
+													}
+
+												// Get values from ratings data
+
+													if (
+														$provider_aggregateRating_query
+														&&
+														$provider_aggregateRating_api
+													) {
+
+														// ratingCount ($review_count)
+
+															if ( !isset($provider_aggregateRating_ratingCount) ) {
+
+																$provider_aggregateRating_ratingCount = $provider_aggregateRating_api->profile->reviewcount;
+
+															}
+
+														// ratingValue ($avg_rating)
+
+															if ( !isset($provider_aggregateRating_ratingValue) ) {
+
+																$provider_aggregateRating_ratingValue = $provider_aggregateRating_api->profile->averageRatingStr;
+
+															}
+
+														// reviewCount ($comment_count)
+
+															if ( !isset($provider_aggregateRating_reviewCount) ) {
+
+																$provider_aggregateRating_reviewCount = $provider_aggregateRating_api->profile->bodycount;
+
+															}
+
+													}
+
+												// description
+
+													/*
+
+														Get description of the rating/review concept from Patient Experience.
+
+													*/
+
+													if ( !isset($provider_aggregateRating_description) ) {
+
+														$provider_aggregateRating_description = '';
+
+													}
+
+												// itemReviewed
+
+													if ( !isset($provider_aggregateRating_itemReviewed) ) {
+
+														$provider_aggregateRating_itemReviewed = array(
+															( is_array($schema_provider_MedicalBusiness_ref) ? $schema_provider_MedicalBusiness_ref : array($schema_provider_MedicalBusiness_ref) ),
+															( is_array($schema_provider_Person_ref) ? $schema_provider_Person_ref : array($schema_provider_Person_ref) )
+														);
+
+													}
+
+												// reviewAspect
+
+													/*
+
+														Get info from Patient Experience about which facets of the provider is rated/reviewed.
+
+													*/
+
+													if ( !isset($provider_aggregateRating_reviewAspect) ) {
+
+														$provider_aggregateRating_reviewAspect = '';
+
+													}
+
+											// Format values
+
+												$provider_aggregateRating = array_filter(
+													array(
+														'description' => $provider_aggregateRating_description,
+														'itemReviewed' => $provider_aggregateRating_itemReviewed,
+														'ratingCount' => $provider_aggregateRating_ratingCount,
+														'ratingValue' => $provider_aggregateRating_ratingValue,
+														'reviewAspect' => $provider_aggregateRating_reviewAspect,
+														'reviewCount' => $provider_aggregateRating_reviewCount
+													)
+												);
+
+												// Add @type
+
+													if ( $provider_aggregateRating ) {
+
+														$provider_aggregateRating = array( '@type' => 'AggregateRating' ) + $provider_aggregateRating;
+
+													}
+
+										}
 
 										// Add to item values
 
