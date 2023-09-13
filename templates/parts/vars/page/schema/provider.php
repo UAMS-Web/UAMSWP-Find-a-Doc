@@ -156,6 +156,29 @@ TODO List
 			 * 'employee' property
 				 * Add Provider as 'Person' type
 		 * Consider adding 'ProfilePage' as an additional type on one of the items in @graph
+		 * Add new set of inputs for name
+			 * Message instructing editors to fully populate all fields and to not use initials
+			 * Required inputs:
+				 * Full first name
+				 * Button group to confirm presence/absence of middle name (default: null)
+				 * Full middle name
+				 * Button group to confirm presence/absence of nickname (default: null)
+				 * Nickname
+				 * Full last name
+				 * Button group to confirm presence/absence of generational suffix (default: null)
+				 * Generational suffix
+				 * Name display format selector with a message instructing editors to mirror the external name value defined in Epic (default: 'First Middle Last')
+					 * First Middle Last
+					 * First Middle "Nickname" Last
+					 * First M. Last
+					 * First M. "Nickname" Last
+					 * F. Middle Last
+					 * F. Middle "Nickname" Last
+					 * F. M. Last
+					 * F. M. "Nickname" Last
+			 * Optional inputs
+				 * Alternate name repeater (e.g., former names, variant names)
+			 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'

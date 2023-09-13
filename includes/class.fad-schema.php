@@ -3078,6 +3078,9 @@
 								$schema_provider_MedicalBusiness_ref = null;
 								$schema_provider_Person_ref = null;
 								$provider_aggregateRating_reviewAspect = null;
+								$provider_display_name = null;
+								$provider_alternateName_additional_repeater = null;
+								$provider_alternateName_additional = null;
 
 							// Load variables from pre-existing field values array
 
@@ -3875,7 +3878,119 @@
 
 											if ( !isset($provider_alternateName) ) {
 
-												$provider_alternateName = array();
+												// Base array
+
+													$provider_alternateName = array();
+
+												// Name variations
+
+													// Selected display name
+
+														if ( !isset($provider_display_name) ) {
+
+															$provider_display_name = '';
+
+														}
+
+													// First Middle "Nickname" Last
+
+														$provider_alternateName[] = '';
+
+													// First Middle Last
+
+														$provider_alternateName[] = '';
+
+													// First "Nickname" Last
+
+														$provider_alternateName[] = '';
+
+													// First Last
+
+														$provider_alternateName[] = '';
+
+													// Middle Last
+
+														$provider_alternateName[] = '';
+
+													// Middle "Nickname" Last
+
+														$provider_alternateName[] = '';
+
+													// Nickname Last
+
+														$provider_alternateName[] = '';
+
+													// First M. "Nickname" Last
+
+														$provider_alternateName[] = '';
+
+													// First M. Last
+
+														$provider_alternateName[] = '';
+
+													// F. Middle "Nickname" Last
+
+														$provider_alternateName[] = '';
+
+													// F. Middle Last
+
+														$provider_alternateName[] = '';
+
+													// F. M. "Nickname" Last
+
+														$provider_alternateName[] = '';
+
+													// F. M. Last
+
+														$provider_alternateName[] = '';
+
+												// Additional alternate names
+
+													// Get values
+
+														if ( !isset($provider_alternateName_additional) ) {
+
+															// Get the alternateName repeater field value
+
+																$provider_alternateName_additional_repeater = array();
+
+															// Get the item values
+
+																if ( $provider_alternateName_additional_repeater ) {
+
+																	$provider_alternateName_additional = uamswp_fad_schema_alternatename(
+																		$provider_alternateName_additional_repeater, // alternateName repeater field
+																		'alternate_text' // alternateName item field name
+																	);
+
+																}
+
+														}
+
+													// Merge values
+
+														if ( $provider_alternateName_additional ) {
+
+															$provider_alternateName = $provider_alternateName + $provider_alternateName_additional;
+
+														}
+
+												// Clean up values
+
+													// Remove display name from list
+
+														if (
+															$provider_alternateName
+															&&
+															array_search( $provider_name, $provider_alternateName, true ) !== false
+														) {
+															unset($provider_alternateName[array_search( $provider_name, $provider_alternateName, true )]);
+														}
+
+													$provider_alternateName = array_filter($provider_alternateName);
+													$provider_alternateName = array_unique($provider_alternateName);
+													$provider_alternateName = array_values($provider_alternateName);
+
 
 											}
 
