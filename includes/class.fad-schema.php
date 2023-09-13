@@ -3083,45 +3083,59 @@
 									 *     - Text
 									 */
 
-									// Get values
+									if (
+										in_array(
+											'medicalSpecialty',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'medicalSpecialty',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
 
-										if ( !isset($provider_name) ) {
+										// Get values
 
-											$provider_name = get_the_title($provider) ?? '';
+											if ( !isset($provider_name) ) {
 
-										}
-
-									// Add to item values
-
-										// MedicalBusiness
-
-											if (
-												in_array(
-													'name',
-													$provider_properties_map[$MedicalBusiness_type]['properties']
-												)
-												&&
-												$provider_name
-											) {
-
-												$provider_item_MedicalBusiness['name'] = $provider_name;
+												$provider_name = get_the_title($provider) ?? '';
 
 											}
 
-										// Person
+										// Add to item values
 
-											if (
-												in_array(
-													'name',
-													$provider_properties_map[$Person_type]['properties']
-												)
-												&&
-												$provider_name
-											) {
+											// MedicalBusiness
 
-												$provider_item_Person['name'] = $provider_name;
+												if (
+													in_array(
+														'name',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_name
+												) {
 
-											}
+													$provider_item_MedicalBusiness['name'] = $provider_name;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'name',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_name
+												) {
+
+													$provider_item_Person['name'] = $provider_name;
+
+												}
+
+									}
 
 								// medicalSpecialty
 
