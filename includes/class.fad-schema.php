@@ -2917,7 +2917,7 @@
 
 										$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
 
-									// Add to schema
+									// Add to item values
 
 										if ( $provider_url ) {
 
@@ -3009,7 +3009,7 @@
 
 											}
 
-										// Add to schema
+										// Add to item values
 
 											if ( $MedicalBusiness_type ) {
 
@@ -3023,7 +3023,7 @@
 
 											$Person_type = 'Person';
 
-										// Add to schema
+										// Add to item values
 
 											if ( $Person_type ) {
 
@@ -3043,7 +3043,7 @@
 												// $MedicalBusiness_id .= $MedicalBusiness_i;
 												// $MedicalBusiness_i++;
 
-											// Add to schema
+											// Add to item values
 
 												if ( $MedicalBusiness_id ) {
 
@@ -3059,7 +3059,7 @@
 												// $Person_id .= $Person_i;
 												// $Person_i++;
 
-											// Add to schema
+											// Add to item values
 
 												if ( $Person_id ) {
 
@@ -3436,7 +3436,7 @@
 
 											}
 
-										// Add to schema
+										// Add to item values
 
 											// MedicalBusiness
 
@@ -5158,7 +5158,7 @@
 
 											}
 
-										// Add to schema
+										// Add to item values
 
 											// MedicalBusiness
 
@@ -6356,7 +6356,7 @@
 
 												}
 
-										// Add to schema
+										// Add to item values
 
 											// MedicalBusiness
 
