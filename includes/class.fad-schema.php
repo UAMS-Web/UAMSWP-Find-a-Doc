@@ -3014,7 +3014,9 @@
 								$provider_alternateName = null;
 								$provider_areaServed = null;
 								$provider_medicalSpecialty = null;
+								$provider_medicalSpecialty_list = null;
 								$provider_clinical_specialization = null;
+								$provider_clinical_specialization_term = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
 								$provider_aggregateRating = null;
