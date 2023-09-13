@@ -89,8 +89,6 @@ TODO List
 					 * Create taxonomy similar to provider's 'Recognition List', but for locations
 						 * Add a section to the location profile / subsection to display said information
 				 * brand
-					 * Create method of defining values for UAMS Health and UAMS
-					 * Create method of defining values for third-party organizations (e.g., Arkansas Children's)
 				 * event
 					 * Find means of populating values from relevant LiveWhale calendar events
 				 * foundingDate
@@ -197,23 +195,31 @@ TODO List
 			 * Needing new data inputs
 				 * alternateName
 				 * award
+				 * brand
 				 * makesOffer
 				 * potentialAction
 				 * review
 				 * sameAs
+				 * worksFor
 			 * Other properties
-				 * availableService
-				 * brand
+				 * additionalName
+				 * affiliation
 				 * containedInPlace
 				 * description
+				 * familyName
+				 * givenName
 				 * hasCredential
+				 * hasOccupation
 				 * hasMap
+				 * honorificPrefix
+				 * honorificSuffix
 				 * hospitalAffiliation
 				 * identifier
 					 * the NPI value
 					 * the taxonomy code value(s)?
 				 * image
 				 * isAcceptingNewPatients
+				 * jobTitle
 				 * keywords
 				 * knowsAbout
 				 * knowsLanguage
@@ -221,15 +227,21 @@ TODO List
 				 * location
 				 * mainEntityOfPage
 				 * memberOf
+				 * name
 				 * parentOrganization
 				 * photo
 				 * smokingAllowed
 				 * subjectOf
+				 * workLocation
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
 	 * Resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
 	 * Consider shifting to the use of the 'Thing > CreativeWork > WebContent > HealthTopicContent' type in place of 'MedicalWebPage' and/or the 'CreativeWork' subtypes used for clinical resources.
+	 * 'Organization' values (for properties like 'brand', 'parentOrganization' and 'worksFor')
+		 * Create method of defining 'Organization' property values for UAMS Health and UAMS
+		 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
+		 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
  * Filter ACF fields
 	 * Fields referencing MedicalTest type
 		 * Just treatments with MedicalTest type or its subtypes
