@@ -2895,7 +2895,7 @@
 
 						}
 
-				// LocalBusiness additionalType MedicalSpecialty values
+				// MedicalBusiness additionalType MedicalSpecialty values
 
 					/*
 
