@@ -135,110 +135,305 @@
 
 		}
 
-	// Add data to an array defining schema data for medicalSpecialty from associated conditions and treatments
+	// Add data to an array defining schema data for medicalSpecialty
 
-		function uamswp_fad_schema_medicalSpecialty_old(
-			$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
-			$name = '', // string (optional) // The name of the item.
-			$url = '', // string (optional) // URL of the item.
-			$alternate_name = '' // string (optional) // An alias for the item.
-		) {
+		// Base function
 
-			/* 
-			 * Example use:
-			 * 
-			 * 	// MedicalSpecialty Schema Data
-			 * 
-			 * 		// Check/define the main medicalSpecialty schema array
-			 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-			 * 
-			 * 		// Add this location's details to the main medicalSpecialty schema array
-			 * 		$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
-			 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
-			 * 			$condition_title_attr, // string (optional) // The name of the item.
-			 * 			$condition_url // string (optional) // URL of the item.
-			 * 		);
-			 */
+			function uamswp_fad_schema_medicalSpecialty(
+				$input, // mixed // Required // MedicalSpecialty value(s)
+				array $schema_medicalSpecialty = array() // Optional // Pre-existing list array to which to add additional items
+			) {
 
-			// Check/define variables
+				// Base arrays
 
-				$schema_medical_specialty = is_array($schema_medical_specialty) ? $schema_medical_specialty : array();
+					$output = array();
 
-			// Create an array for this item
+				// Check variables
 
-				$schema = array();
+					// If input is empty, end here
 
-			// Add values to the array
+						if ( empty($input) ) {
 
-				if ( $name ) {
-
-					if ( is_array($name) ) {
-
-						foreach ( $name as $item ) {
-
-							$schema['name'][] = uamswp_attr_conversion($item);
+							return $output;
 
 						}
 
-					} else {
+					// If input is not an array, then add it to an array
 
-						$schema['name'] = uamswp_attr_conversion($name);
+						if ( !is_array($input) ) {
 
-					}
-
-				}
-
-				if ( $url ) {
-
-					if ( is_array($url) ) {
-
-						foreach ( $url as $item ) {
-
-							$schema['url'][] = uamswp_attr_conversion($item);
+							$input = array($input);
 
 						}
 
-					} else {
+					// If pre-existing list array is not an indexed array, then add it to one
 
-						$schema['url'] = uamswp_attr_conversion($url);
+						if ( !array_is_list($schema_medicalSpecialty) ) {
 
-					}
-
-				}
-
-				if ( $alternate_name ) {
-
-					if ( is_array($alternate_name) ) {
-
-						foreach ( $alternate_name as $item ) {
-
-							$schema['alternateName'][] = uamswp_attr_conversion($item);
+							$schema_medicalSpecialty = array($schema_medicalSpecialty);
 
 						}
 
-					} else {
+					// Populate base output array with pre-existing list array
 
-						$schema['alternateName'] = uamswp_attr_conversion($alternate_name);
+						$output = $schema_medicalSpecialty;
+
+				// Construct output
+
+					foreach ( $input as $item ) {
+
+						if (
+							!empty($item)
+							&&
+							!is_array($item)
+						) {
+
+							$output[] = array(
+								'@id' => 'https://schema.org/' . $item,
+								'@type' => 'MedicalSpecialty'
+							);
+
+						}
 
 					}
 
-				}
+				// Clean up output array
 
-				if ( !empty($schema) ) {
-					$schema = array('@type' => 'MedicalSpecialty') + $schema;
-				}
+					if ( $output ) {
 
-			// Add this item's array to the main address schema array
+						// If there is only one item, flatten the multi-dimensional array by one step
 
-				if ( !empty($schema) ) {
-					$schema_medical_specialty[] = $schema;
-				}
+							uamswp_fad_flatten_multidimensional_array($output);
 
-			// Return the main address schema array
+					}
 
-				return $schema_medical_specialty;
+				return $output;
 
-		}
+			}
+
+		// Add data from associated clinical specialization
+
+			function uamswp_fad_schema_medicalSpecialty_specialization(
+				$clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+				array &$medicalSpecialty_list = array(), // Optional // Array to populate with the list of MedicalSpecialty values
+				array $schema_medicalSpecialty = array() // Optional // Pre-existing list array to which to add additional items
+			) {
+
+				// Base arrays
+
+					$output = array();
+					$values = array();
+
+				// Check variables
+
+					// If input is empty, end here
+
+						if ( empty($clinical_specialization) ) {
+
+							return $output;
+
+						}
+
+					// If input is not an array, then add it to an array
+
+						if ( !is_array($clinical_specialization) ) {
+
+							$clinical_specialization = array($clinical_specialization);
+
+						}
+
+				// Get MedicalSpecialty value from Clinical Specialization terms
+
+					foreach ( $clinical_specialization as $item ) {
+
+						if ( $item ) {
+
+							// Get Clinical Specialization term
+
+								$item_term = get_term( $item, 'clinical_title' ) ?? '';
+
+							// Get MedicalSpecialty field value
+
+								$item_MedicalSpecialty = '';
+
+								if ( is_object($item_term) ) {
+
+									$item_MedicalSpecialty = get_field( 'schema_medicalspecialty_single', $item_term ) ?? '';
+
+								}
+
+							// Add MedicalSpecialty field value to values list
+
+								if ( $item_MedicalSpecialty ) {
+
+									$values[] = $item_MedicalSpecialty;
+
+								}
+
+						}
+
+					}
+
+				// Construct simple list of MedicalSpecialty values
+
+					$medicalSpecialty_list = $medicalSpecialty_list + $values;
+					sort($medicalSpecialty_list);
+
+				// Construct output for base MedicalSpecialty schema function
+
+					$output = uamswp_fad_schema_medicalSpecialty(
+						$values, // mixed // Required // MedicalSpecialty value(s)
+						$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
+					);
+
+				return $output;
+
+			}
+
+		// Add data from select or multi-select field
+
+			function uamswp_fad_schema_medicalSpecialty_select(
+				$medicalSpecialty_select, // mixed // Required // MedicalSpecialty select or multi-select field value
+				array $schema_medicalSpecialty = array() // Optional // Pre-existing list array to which to add additional items
+			) {
+
+				// Base arrays
+
+					$output = array();
+
+				// Check variables
+
+					// If input is empty, end here
+
+						if ( empty($medicalSpecialty_select) ) {
+
+							return $output;
+
+						}
+
+					// If input is not an array, then add it to an array
+
+						if ( !is_array($medicalSpecialty_select) ) {
+
+							$medicalSpecialty_select = array($medicalSpecialty_select);
+
+						}
+ 
+				// Construct output for base MedicalSpecialty schema function
+
+					$output = uamswp_fad_schema_medicalSpecialty(
+						$medicalSpecialty_select, // mixed // Required // MedicalSpecialty value(s)
+						$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
+					);
+
+				return $output;
+
+			}
+
+		// Add data from associated conditions and treatments
+
+			function uamswp_fad_schema_medicalSpecialty_old(
+				$schema_medical_specialty = array(), // array (optional) // Main medicalSpecialty schema array
+				$name = '', // string (optional) // The name of the item.
+				$url = '', // string (optional) // URL of the item.
+				$alternate_name = '' // string (optional) // An alias for the item.
+			) {
+
+				/* 
+				 * Example use:
+				 * 
+				 * 	// MedicalSpecialty Schema Data
+				 * 
+				 * 		// Check/define the main medicalSpecialty schema array
+				 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
+				 * 
+				 * 		// Add this location's details to the main medicalSpecialty schema array
+				 * 		$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
+				 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
+				 * 			$condition_title_attr, // string (optional) // The name of the item.
+				 * 			$condition_url // string (optional) // URL of the item.
+				 * 		);
+				 */
+
+				// Check/define variables
+
+					$schema_medical_specialty = is_array($schema_medical_specialty) ? $schema_medical_specialty : array();
+
+				// Create an array for this item
+
+					$schema = array();
+
+				// Add values to the array
+
+					if ( $name ) {
+
+						if ( is_array($name) ) {
+
+							foreach ( $name as $item ) {
+
+								$schema['name'][] = uamswp_attr_conversion($item);
+
+							}
+
+						} else {
+
+							$schema['name'] = uamswp_attr_conversion($name);
+
+						}
+
+					}
+
+					if ( $url ) {
+
+						if ( is_array($url) ) {
+
+							foreach ( $url as $item ) {
+
+								$schema['url'][] = uamswp_attr_conversion($item);
+
+							}
+
+						} else {
+
+							$schema['url'] = uamswp_attr_conversion($url);
+
+						}
+
+					}
+
+					if ( $alternate_name ) {
+
+						if ( is_array($alternate_name) ) {
+
+							foreach ( $alternate_name as $item ) {
+
+								$schema['alternateName'][] = uamswp_attr_conversion($item);
+
+							}
+
+						} else {
+
+							$schema['alternateName'] = uamswp_attr_conversion($alternate_name);
+
+						}
+
+					}
+
+					if ( !empty($schema) ) {
+						$schema = array('@type' => 'MedicalSpecialty') + $schema;
+					}
+
+				// Add this item's array to the main address schema array
+
+					if ( !empty($schema) ) {
+						$schema_medical_specialty[] = $schema;
+					}
+
+				// Return the main address schema array
+
+					return $schema_medical_specialty;
+
+			}
 
 	// Add data to an array defining schema data for ContactPoint
 
@@ -2780,6 +2975,7 @@
 								$provider_alternateName = null;
 								$provider_areaServed = null;
 								$provider_medicalSpecialty = null;
+								$provider_clinical_specialization = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
 								$provider_aggregateRating = null;
@@ -2951,15 +3147,15 @@
 														// Add names of each degree to the degree list array
 
 															if ( $provider_degrees ) {
-																
+
 																foreach ( $provider_degrees as $degree ) {
-												
+
 																	$provider_degree_array[] = uamswp_attr_conversion( get_term( $degree, 'degree' )->name );
-												
+
 																} // endforeach
-												
+
 															} // endif ( $degrees )
-											
+
 													}
 
 												// Check the list of degrees against the Physician degrees
@@ -3163,7 +3359,26 @@
 
 											if ( !isset($provider_medicalSpecialty) ) {
 
-												$provider_medicalSpecialty = array();
+												// Get Clinical Specialization value
+
+													if ( !isset($provider_clinical_specialization) ) {
+
+														$provider_clinical_specialization = get_field( 'physician_title', $provider );
+
+													}
+
+												// Get MedicalSpecialty from Clinical Specialization value
+
+													// Simple list of MedicalSpecialty values
+
+														$provider_medicalSpecialty_list = array();
+
+													// Schema property values
+
+														$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+															$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+															$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+														);
 
 											}
 
@@ -3248,8 +3463,8 @@
 														$provider_additionalType = array_merge(
 															$provider_additionalType,
 															array_intersect(
-																$provider_medicalSpecialty,
-																$provider_additionalType_MedicalSpecialty
+																$provider_additionalType_MedicalSpecialty,
+																( is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list) )
 															)
 														);
 
@@ -4110,7 +4325,7 @@
 													if ( $provider_hasMap_repeater ) {
 
 														/*
-														
+
 															foreach loop to get the text field value from each row.
 
 															Prepend 'https://www.google.com/maps?cid=' to each value.
@@ -6001,7 +6216,7 @@
 											if ( !isset($provider_paymentAccepted) ) {
 
 												/*
-												
+
 													Reference values from 'location'
 
 												*/
@@ -6887,6 +7102,7 @@
 								$LocalBusiness_mainEntityOfPage = null;
 								$LocalBusiness_makesOffer = null;
 								$LocalBusiness_maximumAttendeeCapacity = null;
+								$LocalBusiness_medicalSpecialty_multiselect = null;
 								$LocalBusiness_medicalSpecialty = null;
 								$LocalBusiness_memberOf = null;
 								$LocalBusiness_naics = null;
@@ -7104,15 +7320,23 @@
 
 										// Get values
 
-											if ( !isset($LocalBusiness_medicalSpecialty) ) {
+											// Get medicalSpecialty multiselect field value
 
-												$LocalBusiness_medicalSpecialty = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
+												if ( !isset($LocalBusiness_medicalSpecialty_multiselect) ) {
 
-											}
+													$LocalBusiness_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
 
-											// Remove empty / '0' values
+												}
 
-												$LocalBusiness_medicalSpecialty = $LocalBusiness_medicalSpecialty ? array_filter($LocalBusiness_medicalSpecialty) : $LocalBusiness_medicalSpecialty;
+											// Format value
+
+												if ( $LocalBusiness_medicalSpecialty_multiselect ) {
+
+													$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+														$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+													);
+
+												}
 
 										// Add to item values
 
@@ -7170,8 +7394,8 @@
 														$LocalBusiness_additionalType = array_merge(
 															$LocalBusiness_additionalType,
 															array_intersect(
-																$LocalBusiness_medicalSpecialty,
-																$LocalBusiness_additionalType_MedicalSpecialty
+																$LocalBusiness_additionalType_MedicalSpecialty,
+																( is_array($LocalBusiness_medicalSpecialty_multiselect) ? $LocalBusiness_medicalSpecialty_multiselect : array($LocalBusiness_medicalSpecialty_multiselect) )
 															)
 														);
 

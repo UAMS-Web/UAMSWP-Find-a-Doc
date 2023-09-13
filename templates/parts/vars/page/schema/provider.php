@@ -355,12 +355,22 @@ TODO List
 
 			$schema_provider_medicalSpecialty = '';
 
-		if ( $provider_specialty_term ) {
+		if ( $provider_specialty ) {
 
 			// Schema.org MedicalSpecialty Enumeration Member
 
-				$schema_provider_medicalSpecialty = get_field('schema_medicalspecialty_single', $provider_specialty_term);
-				$schema_provider_medicalSpecialty = uamswp_attr_conversion($schema_provider_medicalSpecialty);
+				$schema_provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+					$provider_specialty // mixed // Required // Clinical Specialization value(s)
+				);
+
+		}
+
+		if ( $provider_specialty_term ) {
+
+			// // Schema.org MedicalSpecialty Enumeration Member
+			// 
+			// 	$schema_provider_medicalSpecialty = get_field('schema_medicalspecialty_single', $provider_specialty_term);
+			// 	$schema_provider_medicalSpecialty = uamswp_attr_conversion($schema_provider_medicalSpecialty);
 
 			// Health Care Provider Taxonomy Code Set (https://taxonomy.nucc.org/)
 
