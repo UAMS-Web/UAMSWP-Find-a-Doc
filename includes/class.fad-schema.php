@@ -3067,20 +3067,6 @@
 								$provider_sameAs = null;
 								$provider_smokingAllowed = null;
 								$provider_subjectOf = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-								$foo = null;
-
-								// Reused variables
-
-									$foo = '';
 
 							// Load variables from pre-existing field values array
 
