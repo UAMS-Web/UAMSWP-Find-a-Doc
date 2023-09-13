@@ -1367,7 +1367,7 @@
 		},
 		"field_clinical_specialization_tab_wikidata": {
 			"key": "field_clinical_specialization_tab_wikidata",
-			"label": "Related Wikidata Item",
+			"label": "Related Wikidata Items",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -1410,7 +1410,7 @@
 		"field_clinical_specialization_wikidata_source": {
 			"key": "field_clinical_specialization_wikidata_source",
 			"name": "",
-			"label": "How to Find the Related Wikidata Item",
+			"label": "How to Find the Related Wikidata Items",
 			"type": "message",
 			"instructions": "",
 			"required": 0,
