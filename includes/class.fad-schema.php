@@ -6242,6 +6242,38 @@
 
 											}
 
+										// Add to item values
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'location',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_location
+												) {
+
+													$provider_item_MedicalBusiness['location'] = $provider_location;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'location',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_location
+												) {
+
+													$provider_item_Person['location'] = $provider_location;
+
+												}
+
 									}
 
 								// mainEntityOfPage
