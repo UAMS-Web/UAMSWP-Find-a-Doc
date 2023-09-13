@@ -189,7 +189,7 @@
 						) {
 
 							$output[] = array(
-								'@id' => 'https://schema.org/' . $item,
+								'@id' => $item,
 								'@type' => 'MedicalSpecialty'
 							);
 
@@ -266,7 +266,7 @@
 
 								if ( $item_MedicalSpecialty ) {
 
-									$values[] = $item_MedicalSpecialty;
+									$values[] = 'https://schema.org/' . $item_MedicalSpecialty . '/';
 
 								}
 
@@ -276,15 +276,23 @@
 
 				// Construct simple list of MedicalSpecialty values
 
-					$medicalSpecialty_list = $medicalSpecialty_list + $values;
-					sort($medicalSpecialty_list);
+					if ( $values ) {
+
+						$medicalSpecialty_list = $medicalSpecialty_list + $values;
+						sort($medicalSpecialty_list);
+
+					}
 
 				// Construct output for base MedicalSpecialty schema function
 
-					$output = uamswp_fad_schema_medicalSpecialty(
-						$values, // mixed // Required // MedicalSpecialty value(s)
-						$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
-					);
+					if ( $values ) {
+
+						$output = uamswp_fad_schema_medicalSpecialty(
+							$values, // mixed // Required // MedicalSpecialty value(s)
+							$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
+						);
+
+					}
 
 				return $output;
 
@@ -294,12 +302,14 @@
 
 			function uamswp_fad_schema_medicalSpecialty_select(
 				$medicalSpecialty_select, // mixed // Required // MedicalSpecialty select or multi-select field value
+				array &$medicalSpecialty_list = array(), // Optional // Array to populate with the list of MedicalSpecialty values
 				array $schema_medicalSpecialty = array() // Optional // Pre-existing list array to which to add additional items
 			) {
 
 				// Base arrays
 
 					$output = array();
+					$values = array();
 
 				// Check variables
 
@@ -319,12 +329,41 @@
 
 						}
  
+				// Format value
+
+					foreach ( $medicalSpecialty_select as $item ) {
+
+						if (
+							!empty($item)
+							&&
+							!is_array($item)
+						) {
+
+							$values[] = 'https://schema.org/' . $item . '/';
+
+						}
+
+					}
+
+				// Construct simple list of MedicalSpecialty values
+
+					if ( $values ) {
+
+						$medicalSpecialty_list = $medicalSpecialty_list + $values;
+						sort($medicalSpecialty_list);
+
+					}
+
 				// Construct output for base MedicalSpecialty schema function
 
-					$output = uamswp_fad_schema_medicalSpecialty(
-						$medicalSpecialty_select, // mixed // Required // MedicalSpecialty value(s)
-						$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
-					);
+					if ( $values ) {
+
+						$output = uamswp_fad_schema_medicalSpecialty(
+							$values, // mixed // Required // MedicalSpecialty value(s)
+							$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
+						);
+
+					}
 
 				return $output;
 
@@ -2866,25 +2905,25 @@
 					*/
 
 					$provider_additionalType_MedicalSpecialty = array(
-						'CommunityHealth',
-						'Dermatology',
-						'DietNutrition',
-						'Emergency',
-						'Geriatric',
-						'Gynecologic',
-						'Midwifery',
-						'Nursing',
-						'Obstetric',
-						'Oncologic',
-						'Optometric',
-						'Otolaryngologic',
-						'Pediatric',
-						'Physiotherapy',
-						'PlasticSurgery',
-						'Podiatric',
-						'PrimaryCare',
-						'Psychiatric',
-						'PublicHealth'
+						'https://schema.org/CommunityHealth/',
+						'https://schema.org/Dermatology/',
+						'https://schema.org/DietNutrition/',
+						'https://schema.org/Emergency/',
+						'https://schema.org/Geriatric/',
+						'https://schema.org/Gynecologic/',
+						'https://schema.org/Midwifery/',
+						'https://schema.org/Nursing/',
+						'https://schema.org/Obstetric/',
+						'https://schema.org/Oncologic/',
+						'https://schema.org/Optometric/',
+						'https://schema.org/Otolaryngologic/',
+						'https://schema.org/Pediatric/',
+						'https://schema.org/Physiotherapy/',
+						'https://schema.org/PlasticSurgery/',
+						'https://schema.org/Podiatric/',
+						'https://schema.org/PrimaryCare/',
+						'https://schema.org/Psychiatric/',
+						'https://schema.org/PublicHealth/'
 					);
 
 				// Loop through each location to add values
@@ -6980,25 +7019,25 @@
 					*/
 
 					$LocalBusiness_additionalType_MedicalSpecialty = array(
-						'CommunityHealth',
-						'Dermatology',
-						'DietNutrition',
-						'Emergency',
-						'Geriatric',
-						'Gynecologic',
-						'Midwifery',
-						'Nursing',
-						'Obstetric',
-						'Oncologic',
-						'Optometric',
-						'Otolaryngologic',
-						'Pediatric',
-						'Physiotherapy',
-						'PlasticSurgery',
-						'Podiatric',
-						'PrimaryCare',
-						'Psychiatric',
-						'PublicHealth'
+						'https://schema.org/CommunityHealth/',
+						'https://schema.org/Dermatology/',
+						'https://schema.org/DietNutrition/',
+						'https://schema.org/Emergency/',
+						'https://schema.org/Geriatric/',
+						'https://schema.org/Gynecologic/',
+						'https://schema.org/Midwifery/',
+						'https://schema.org/Nursing/',
+						'https://schema.org/Obstetric/',
+						'https://schema.org/Oncologic/',
+						'https://schema.org/Optometric/',
+						'https://schema.org/Otolaryngologic/',
+						'https://schema.org/Pediatric/',
+						'https://schema.org/Physiotherapy/',
+						'https://schema.org/PlasticSurgery/',
+						'https://schema.org/Podiatric/',
+						'https://schema.org/PrimaryCare/',
+						'https://schema.org/Psychiatric/',
+						'https://schema.org/PublicHealth/'
 					);
 
 				// Loop through each location to add values
@@ -7330,13 +7369,20 @@
 
 											// Format value
 
-												if ( $LocalBusiness_medicalSpecialty_multiselect ) {
+												// Simple list of MedicalSpecialty values
 
-													$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
-														$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
-													);
+													$LocalBusiness_medicalSpecialty_list = array();
 
-												}
+												// Schema property values
+
+													if ( $LocalBusiness_medicalSpecialty_multiselect ) {
+
+														$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+															$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+															$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+														);
+
+													}
 
 										// Add to item values
 
@@ -7395,7 +7441,7 @@
 															$LocalBusiness_additionalType,
 															array_intersect(
 																$LocalBusiness_additionalType_MedicalSpecialty,
-																( is_array($LocalBusiness_medicalSpecialty_multiselect) ? $LocalBusiness_medicalSpecialty_multiselect : array($LocalBusiness_medicalSpecialty_multiselect) )
+																( is_array($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list) )
 															)
 														);
 
