@@ -179,6 +179,52 @@ TODO List
 			 * Optional inputs
 				 * Alternate name repeater (e.g., former names, variant names)
 			 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
+		 * Add values for remaining properties:
+			 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+				 * areaServed
+				 * currenciesAccepted
+				 * identifiers
+					 * duns
+					 * globalLocationNumber
+					 * isicV4
+					 * leiCode
+					 * naics
+					 * taxID
+					 * vatID
+					 * iso6523Code
+				 * isAccessibleForFree
+				 * paymentAccepted
+			 * Needing new data inputs
+				 * alternateName
+				 * award
+				 * makesOffer
+				 * potentialAction
+				 * review
+				 * sameAs
+			 * Other properties
+				 * availableService
+				 * brand
+				 * containedInPlace
+				 * description
+				 * hasCredential
+				 * hasMap
+				 * hospitalAffiliation
+				 * identifier
+					 * the NPI value
+					 * the taxonomy code value(s)?
+				 * image
+				 * isAcceptingNewPatients
+				 * keywords
+				 * knowsAbout
+				 * knowsLanguage
+				 * legalName
+				 * location
+				 * mainEntityOfPage
+				 * memberOf
+				 * parentOrganization
+				 * photo
+				 * smokingAllowed
+				 * subjectOf
  * General
 	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
 	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
