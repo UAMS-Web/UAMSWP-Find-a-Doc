@@ -3085,12 +3085,12 @@
 
 									if (
 										in_array(
-											'medicalSpecialty',
+											'name',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
 										||
 										in_array(
-											'medicalSpecialty',
+											'name',
 											$provider_properties_map[$Person_type]['properties']
 										)
 									) {
