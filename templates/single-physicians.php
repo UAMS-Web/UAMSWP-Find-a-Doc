@@ -3,6 +3,12 @@
  * Template Name: Single Provider
  */
 
+// Pass fields to schema function
+
+	// Base array
+
+		$provider_schema_fields = array();
+
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
@@ -45,25 +51,39 @@
 
 			$first_name = get_field('physician_first_name',$post->ID);
 			$first_name_attr = uamswp_attr_conversion($first_name);
+			$provider_schema_fields['provider_givenName'] = $first_name_attr; // Add to schema fields
 
 		// Middle name
 
 			$middle_name = get_field('physician_middle_name',$post->ID);
+			$middle_name_attr = $middle_name ? uamswp_attr_conversion($middle_name) : '';
+			$provider_schema_fields['provider_additionalName'] = $middle_name_attr; // Add to schema fields
+
+		// Nickname
+
+			$nickname = null;
+			$nickname_attr = $nickname ? uamswp_attr_conversion($nickname) : null;
+			$provider_schema_fields['provider_nickname'] = $nickname_attr; // Add to schema fields
 
 		// Last name
 
 			$last_name = get_field('physician_last_name',$post->ID);
 			$last_name_attr = uamswp_attr_conversion($last_name);
+			$provider_schema_fields['provider_familyName'] = $last_name_attr; // Add to schema fields
 
 		// Generational suffix (e.g., Jr.)
 
 			$pedigree = get_field('physician_pedigree',$post->ID);
+			$pedigree_attr = $pedigree ? uamswp_attr_conversion($pedigree) : '';
+			$provider_schema_fields['provider_generational_suffix'] = $pedigree_attr; // Add to schema fields
 
 		// Degrees and credentials (e.g., M.D., Ph.D.)
 
 			$degrees = get_field('physician_degree',$post->ID);
+			$provider_schema_fields['provider_degrees'] = $degrees; // Add to schema fields
 			$degree_count = $degrees ? count($degrees) : 0;
 			$degree_list = '';
+			$degree_list_attr = '';
 			$degree_attr_array = array();
 			$i = 1;
 
@@ -71,21 +91,36 @@
 
 				foreach ( $degrees as $degree ) {
 
-					$degree_name = get_term( $degree, 'degree');
-					$degree_list .= $degree_name->name;
-					$degree_attr_array[] = uamswp_attr_conversion($degree_name->name);
+					$degree_term = get_term( $degree, 'degree');
 
-					if ( $degree_count > $i ) {
+					if ( is_object($degree_term) ) {
 
-						$degree_list .= ', ';
+						$degree_name = $degree_term->name;
+						$degree_list .= $degree_name;
+						$degree_attr_array[] = uamswp_attr_conversion($degree_name);
 
-					} // endif ( count($degrees) > $i )
+						if ( $degree_count > $i ) {
 
-					$i++;
+							$degree_list .= ', ';
+
+						} // endif ( count($degrees) > $i )
+
+						$i++;
+
+					}
 
 				} // endforeach
 
 			} // endif ( $degrees )
+
+			if ( $degree_list ) {
+
+				$degree_list_attr = uamswp_attr_conversion($degree_list);
+
+			}
+
+			$provider_schema_fields['provider_degree_array'] = $degree_attr_array; // Add to schema fields
+			$provider_schema_fields['provider_degree_list'] = $degree_list_attr; // Add to schema fields
 
 			// Remove empty rows
 
@@ -122,12 +157,20 @@
 
 				}
 
+				$provider_schema_fields['provider_honorificPrefix'] = $prefix_attr; // Add to schema fields
+
 	// Construct the variants of the provider's name
 
 		// Full name (e.g., "Leonard H. McCoy, M.D.")
 
 			$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
 			$full_name_attr = uamswp_attr_conversion($full_name);
+
+		// Legal name (for schema)
+
+			$legal_name = null;
+			$legal_name_attr = $full_name_attr ? uamswp_attr_conversion($legal_name) : null;
+			$provider_schema_fields['provider_legalName'] = $legal_name_attr; // Add to schema fields
 
 		// Medium name (e.g., "Dr. Leonard H. McCoy")
 
@@ -161,6 +204,7 @@
 
 			$page_title = $full_name;
 			$page_title_attr = $full_name_attr;
+			$provider_schema_fields['provider_name'] = $page_title_attr; // Add to schema fields
 
 		// Sort name (e.g., "McCoy, Leonard H.")
 
@@ -178,6 +222,8 @@
 			'page_title_attr'				=> $page_title_attr,
 			'full_name'						=> $full_name,
 			'full_name_attr'				=> $full_name_attr,
+			'legal_name'					=> $legal_name,
+			'legal_name_attr'				=> $legal_name_attr,
 			'medium_name'					=> $medium_name,
 			'medium_name_attr'				=> $medium_name_attr,
 			'sort_name'						=> $sort_name,
@@ -213,6 +259,7 @@
 // Get the page URL and slug
 
 	$page_url = user_trailingslashit(get_permalink());
+	$provider_schema_fields['provider_url'] = $page_url; // Add to schema fields
 	$page_slug = $post->post_name;
 
 	// Fake subpage
@@ -227,13 +274,15 @@
 
 	// Get the featured image ID
 
-		$featured_image = get_post_thumbnail_id(); // int // Featured image ID
+		$featured_image = get_field('_thumbnail_id', $post->ID); // int // Featured image ID
 		$featured_image = $featured_image ? : '';
+		$provider_schema_fields['provider_image_id'] = ''; // Add to schema fields
 
 	// Get the wide image ID
 
 		$headshot_wide = get_field('physician_image_wide', $post->ID);
 		$headshot_wide = $headshot_wide ?: '';
+		$provider_schema_fields['provider_image_wide_id'] = $headshot_wide; // Add to schema fields
 
 	// Schema image
 
@@ -355,13 +404,21 @@
 					// Clinical Occupation Title
 
 						$provider_specialty = get_field( 'physician_title', $post->ID );
+						$provider_schema_fields['provider_clinical_specialization'] = $provider_specialty; // Add to schema fields
 
 						if ( $provider_specialty ) {
 
 							$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
-							$provider_specialty_name = $provider_specialty_term->name;
-							$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
-							$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
+							$provider_schema_fields['provider_clinical_specialization_term'] = $provider_specialty_term; // Add to schema fields
+
+							if ( is_object($provider_specialty_term) ) {
+
+								$provider_specialty_name = $provider_specialty_term->name;
+								$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
+								$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
+								$provider_schema_fields['Physician_degree_query'] = $provider_occupation_title; // Add to schema fields
+
+							}
 
 						}
 
@@ -453,7 +510,8 @@
 
 		// Get excerpt
 
-			$excerpt = get_field('physician_short_clinical_bio',$post->ID);
+			$bio_short = get_field( 'physician_short_clinical_bio',$post->ID );
+			$excerpt = $bio_short;
 			$excerpt_user = true;
 
 		// Get clinical bio
@@ -469,18 +527,24 @@
 
 				if ( $content ) {
 
-					$excerpt = mb_strimwidth(wp_strip_all_tags($content), 0, 155, '...');
+					$excerpt = wp_strip_all_tags($content);
+					$excerpt = str_replace("\n", ' ', $excerpt); // Strip line breaks
+					$excerpt = strlen($excerpt) > 160 ? mb_strimwidth($excerpt, 0, 156, '...') : $excerpt; // Limit to 160 characters
 
 				} else {
 
 					$fallback_desc = $medium_name_attr . ' is ' . ($provider_occupation_title ? $provider_occupation_title_indef_article . ' ' . strtolower($provider_occupation_title) : 'a health care provider' ) . ($primary_appointment_title_attr ? ' at ' . $primary_appointment_title_attr : '') . ' employed by UAMS Health.';
-					$excerpt = mb_strimwidth(wp_strip_all_tags($fallback_desc), 0, 155, '...');
+
+					$excerpt = wp_strip_all_tags($fallback_desc);
+					$excerpt = str_replace("\n", ' ', $excerpt); // Strip line breaks
+					$excerpt = strlen($excerpt) > 160 ? mb_strimwidth($excerpt, 0, 156, '...') : $excerpt; // Limit to 160 characters
 
 				}
 
 			}
 
 		$excerpt_attr = uamswp_attr_conversion($excerpt);
+		$provider_schema_fields['provider_description'] = $excerpt_attr; // Add to schema fields
 
 		// Set schema description
 
@@ -724,6 +788,7 @@
 			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('physician_treatments_cpt');
+				$provider_schema_fields['provider_treatments'] = $treatments_cpt; // Add to schema fields
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 			// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections
@@ -814,6 +879,7 @@
 
 				$npi = get_field('physician_npi');
 				$npi = $npi ? str_pad($npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
+				$provider_schema_fields['provider_npi'] = $npi; // Add to schema fields
 
 				if ( $npi ) {
 
@@ -831,6 +897,9 @@
 						$rating_valid = false;
 
 				}
+
+				$provider_schema_fields['provider_aggregateRating_api'] = $rating_data; // Add to schema fields
+				$provider_schema_fields['provider_aggregateRating_query'] = $rating_valid; // Add to schema fields
 
 				if ( $rating_valid ) {
 
@@ -863,8 +932,8 @@
 		// Get remaining details about this item
 
 			$service_line = get_field('physician_service_line');
-			$bio_short = get_field('physician_short_clinical_bio');
 			$affiliation = get_field('physician_affiliation');
+			$provider_schema_fields['provider_hospitalAffiliation_multiselect'] = $affiliation; // Add to schema fields
 			$hidden = get_field('physician_hidden');
 
 			if ( $resident ) {
@@ -903,6 +972,7 @@
 			$patients = get_field('physician_patient_types');
 			$refer_req = get_field('physician_referral_required');
 			$accept_new = get_field('physician_accepting_patients');
+			$provider_schema_fields['provider_isAcceptingNewPatients'] = $accept_new; // Add to schema fields
 			$provider_portal = get_field('physician_portal');
 			// $provider_youtube_link = get_field('physician_youtube_link');
 			$provider_clinical_admin_title = get_field('physician_clinical_admin_title');
@@ -914,88 +984,14 @@
 			// Construct a list of the provider's languages (e.g., "English, Spanish")
 
 				$languages = get_field('physician_languages',$post->ID);
+				$provider_schema_fields['provider_languages'] = $languages; // Add to schema fields
 				$language_count = $languages ? count($languages) : 0;
 				$language_list = '';
-				$schema_provider_languages = array();
-				$i = 1;
-
-				if ( $languages ) {
-
-					foreach ( $languages as $language ) {
-
-						$language_term = get_term_by( 'id', $language, 'language');
-
-						if ( is_object($language_term) ) {
-
-							// Language English name
-
-								$language_name = $language_term->name;
-								$language_name_attr = uamswp_attr_conversion($language_name);
-
-							// Language native name
-
-								$language_name_native = get_field( 'language_name_native', $language_term ) ?: '';
-								$language_name_native_attr = uamswp_attr_conversion($language_name_native);
-
-							// Language Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) language tag
-
-								$language_bcp47 = get_field( 'language_bcp47', $language_term ) ?: '';
-								$language_bcp47_attr = uamswp_attr_conversion($language_bcp47);
-
-							// Build the text list
-
-								$language_list .= $language_name;
-
-								if ( $language_count > $i ) {
-
-									$language_list .= ", ";
-
-								} // endif
-
-							// Build the array of language values for schema
-
-								$schema_provider_languages[$language_name_attr] = array(
-									'alternateName' => array_values(
-										array_filter(
-											array(
-												$language_name_native_attr,
-												$language_bcp47_attr
-											)
-										)
-									)
-								);
-
-						} // endif
-
-						$i++;
-
-					} // endforeach
-
-				} // endif ( $languages ) 
-
-				// Remove empty rows
-
-					if ( is_array($schema_provider_languages) ) {
-
-						$schema_provider_languages = array_filter($schema_provider_languages);
-
-					}
-
-				// // Remove duplicate rows
-				// 
-				// 	if ( is_array($schema_provider_languages) ) {
-				// 
-				// 		$schema_provider_languages = array_unique($schema_provider_languages);
-				// 
-				// 	}
-
-				// Sort array
-
-					if ( is_array($schema_provider_languages) ) {
-
-						ksort($schema_provider_languages);
-
-					}
+				$schema_provider_languages = uamswp_fad_schema_language(
+					$languages, // mixed // Required // Language ID values
+					$language_list // string // Optional // Pre-existing string variable to populate with a comma-separated list of language names
+				);
+				$provider_schema_fields['provider_knowsLanguage'] = $schema_provider_languages; // Add to schema fields
 
 			// Construct a list of the provider's health care professional associations
 
@@ -1355,11 +1351,20 @@
 
 											} else {
 
+												$avg_rating = '';
+												$avg_rating_dec = '';
+												$review_count = '';
+												$comment_count = '';
+
 												?>
 												<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
 												<?php
 
 											} // endif ( $rating_valid ) else
+
+											$provider_schema_fields['provider_aggregateRating_ratingCount'] = $review_count; // Add to schema fields
+											$provider_schema_fields['provider_aggregateRating_ratingValue'] = $avg_rating; // Add to schema fields
+											$provider_schema_fields['provider_aggregateRating_reviewCount'] = $comment_count; // Add to schema fields
 
 											?>
 										</div>
