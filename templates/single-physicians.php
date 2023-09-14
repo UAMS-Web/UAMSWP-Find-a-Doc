@@ -50,7 +50,7 @@
 		// First name
 
 			$first_name = get_field('physician_first_name',$post->ID);
-			$first_name_attr = uamswp_attr_conversion($first_name);
+			$first_name_attr = $first_name ? uamswp_attr_conversion($first_name) : '';
 			$provider_schema_fields['provider_givenName'] = $first_name_attr; // Add to schema fields
 
 		// Middle name
@@ -68,7 +68,7 @@
 		// Last name
 
 			$last_name = get_field('physician_last_name',$post->ID);
-			$last_name_attr = uamswp_attr_conversion($last_name);
+			$last_name_attr = $last_name ? uamswp_attr_conversion($last_name) : '';
 			$provider_schema_fields['provider_familyName'] = $last_name_attr; // Add to schema fields
 
 		// Generational suffix (e.g., Jr.)
@@ -164,7 +164,7 @@
 		// Full name (e.g., "Leonard H. McCoy, M.D.")
 
 			$full_name = $first_name . ' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '') . ( $degree_list ? ', ' . $degree_list : '' );
-			$full_name_attr = uamswp_attr_conversion($full_name);
+			$full_name_attr = $full_name ? uamswp_attr_conversion($full_name) : '';
 
 		// Legal name (for schema)
 
@@ -175,12 +175,12 @@
 		// Medium name (e.g., "Dr. Leonard H. McCoy")
 
 			$medium_name = ($prefix ? $prefix .' ' : '') . $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name;
-			$medium_name_attr = uamswp_attr_conversion($medium_name);
+			$medium_name_attr = $medium_name ? uamswp_attr_conversion($medium_name) : '';
 
 		// Short name (e.g., "Dr. McCoy")
 
 			$short_name = $prefix ? $prefix .'&nbsp;' .$last_name : $first_name .' ' . ($middle_name ? $middle_name . ' ' : '') . $last_name . ($pedigree ? '&nbsp;' . $pedigree : '');
-			$short_name_attr = uamswp_attr_conversion($short_name);
+			$short_name_attr = $short_name ? uamswp_attr_conversion($short_name) : '';
 
 		// Short name possessive (e.g., "Dr. McCoy's")
 
@@ -198,7 +198,7 @@
 
 			}
 
-			$short_name_possessive_attr = uamswp_attr_conversion($short_name_possessive);
+			$short_name_possessive_attr = $short_name_possessive ? uamswp_attr_conversion($short_name_possessive) : '';
 
 		// Page title
 
@@ -209,7 +209,7 @@
 		// Sort name (e.g., "McCoy, Leonard H.")
 
 			$sort_name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-			$sort_name_attr = uamswp_attr_conversion($sort_name);
+			$sort_name_attr = $sort_name ? uamswp_attr_conversion($sort_name) : '';
 
 		// Sort name parameter (e.g., "mccoy-leonard-h")
 
@@ -916,7 +916,15 @@
 
 				// Check if the provider sees patients via appointments
 
-					$eligible_appt = $resident ? 0 : get_field('physician_eligible_appointments',$post->ID);
+					if ( $resident ) {
+
+						$eligible_appt = false;
+
+					} else {
+
+						$eligible_appt = get_field('physician_eligible_appointments',$post->ID) ?? false;
+
+					}
 
 				if ( $eligible_appt ) {
 
@@ -968,10 +976,10 @@
 			$research_interests = get_field('physician_research_interests');
 			$research_profile = get_field('physician_research_profiles_link');
 			$additional_info = get_field('physician_additional_info');
-			$second_opinion = get_field('physician_second_opinion');
+			$second_opinion = get_field('physician_second_opinion') ?? false;
 			$patients = get_field('physician_patient_types');
-			$refer_req = get_field('physician_referral_required');
-			$accept_new = get_field('physician_accepting_patients');
+			$refer_req = get_field('physician_referral_required') ?? false;
+			$accept_new = get_field('physician_accepting_patients') ?? false;
 			$provider_schema_fields['provider_isAcceptingNewPatients'] = $accept_new; // Add to schema fields
 			$provider_portal = get_field('physician_portal');
 			// $provider_youtube_link = get_field('physician_youtube_link');
