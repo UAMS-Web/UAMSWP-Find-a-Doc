@@ -3188,26 +3188,55 @@
 
 												// Get list of the provider's degrees
 
-													if ( !isset($provider_degree_array) ) {
+													if (
+														!isset($provider_degree_array)
+														||
+														!isset($provider_degree_list)
+													) {
 
-														$provider_degrees = get_field( 'physician_degree', $provider );
+														$provider_degree_array = array();
+														$provider_degree_list = '';
+														$provider_degree_list_i = 1;
 
-														// Base degree list array
+														if ( !isset($provider_degrees) ) {
 
-															$provider_degree_array = array();
+															$provider_degrees = get_field( 'physician_degree', $provider );
+															$provider_degree_count = $degrees ? count($degrees) : 0;
 
-														// Add names of each degree to the degree list array
+														}
 
-															if ( $provider_degrees ) {
+														if ( $provider_degrees ) {
 
-																foreach ( $provider_degrees as $degree ) {
+															foreach ( $provider_degrees as $item ) {
 
-																	$provider_degree_array[] = uamswp_attr_conversion( get_term( $degree, 'degree' )->name );
+																$item_term = get_term( $item, 'degree' );
 
-																} // endforeach
+																if ( is_object($item_term) ) {
 
-															} // endif ( $degrees )
+																	$item_name = $item_term->name;
+																	$provider_degree_list .= $item_name;
+																	$provider_degree_array[] = uamswp_attr_conversion($item_name);
+												
+																	if ( $provider_degree_count > $provider_degree_list_i ) {
+												
+																		$provider_degree_list .= ', ';
+												
+																	} // endif
+												
+																	$provider_degree_list_i++;
+												
+																} // endif
 
+															} // endforeach
+
+														} // endif
+
+														if ( $provider_degree_list ) {
+
+															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
+
+														} // endif
+										
 													}
 
 												// Check the list of degrees against the Physician degrees
