@@ -3619,6 +3619,7 @@
 								$provider_legalName = null;
 								$provider_leiCode = null;
 								$provider_location = null;
+								$provider_location_array = null;
 								$provider_mainEntityOfPage = null;
 								$provider_makesOffer = null;
 								$provider_medicalSpecialty = null;
@@ -7853,42 +7854,17 @@
 
 											if ( !isset($provider_location) ) {
 
-												$provider_location = array();
+												if ( !isset($provider_location_array) ) {
 
-												// Place
+													$provider_location_array = get_field( 'physician_locations', $provider ) ?? array(); // array
 
-													/* 
-													* Entities that have a somewhat fixed, physical extension.
-													*/
+												}
 
-
-													// contactPoint
-
-														/* 
-														* A contact point for a person or organization.
-														* 
-														* Values expected to be one of these types:
-														* 
-														*     - ContactPoint
-														*/
-
-														/*
-
-															address
-															email
-															faxNumber
-															telephone
-
-														*/
-
-													// geo
-
-														/*
-
-															latitude
-															longitude
-
-														*/
+												$provider_location = uamswp_fad_schema_location(
+													$provider_location_array, // List of IDs of the location items
+													$provider_url, // Page URL
+													$nesting_level + 1 // Nesting level within the main schema
+												);
 
 											}
 

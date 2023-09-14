@@ -321,7 +321,8 @@
 
 			// Related Locations Section Query
 
-				$locations = get_field( 'physician_locations', $post->ID ); // array
+				$locations = get_field( 'physician_locations', $post->ID ) ?? array();
+				$provider_schema_fields['provider_location_array'] = $locations; // Add to schema fields
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/location.php' );
 
 			// Get the name of the provider's primary location
