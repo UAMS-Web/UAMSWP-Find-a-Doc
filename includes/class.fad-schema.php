@@ -3334,6 +3334,7 @@
 								$provider_brand = null;
 								$provider_cid = null;
 								$provider_clinical_specialization = null;
+								$provider_clinical_specialization_name = null;
 								$provider_clinical_specialization_term = null;
 								$provider_containedInPlace = null;
 								$provider_currenciesAccepted = null;
@@ -3364,6 +3365,7 @@
 								$provider_isAccessibleForFree = null;
 								$provider_isicV4 = null;
 								$provider_iso6523Code = null;
+								$provider_jobTitle = null;
 								$provider_keywords = null;
 								$provider_knowsAbout = null;
 								$provider_knowsLanguage = null;
@@ -7286,6 +7288,30 @@
 											if ( !isset($provider_jobTitle) ) {
 
 												$provider_jobTitle = array();
+
+												if ( !isset($provider_clinical_specialization_term) ) {
+
+													if ( !isset($provider_clinical_specialization) ) {
+
+														$provider_clinical_specialization = get_field( 'physician_title', $provider );
+
+													}
+		
+													if ( $provider_clinical_specialization ) {
+
+														$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' );
+
+													}
+
+												}
+
+												if ( is_object($provider_clinical_specialization_term) ) {
+
+													$provider_clinical_specialization_name = $provider_clinical_specialization_term->name;
+													$provider_jobTitle = get_field( 'clinical_specialization_title', $provider_clinical_specialization_term );
+													$provider_jobTitle = $provider_jobTitle ?: $provider_clinical_specialization_name;
+
+												}
 
 											}
 
