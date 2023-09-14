@@ -8521,20 +8521,28 @@
 
 											// Format value
 
-												// Simple list of MedicalSpecialty values
+												if (
+													!isset($LocalBusiness_medicalSpecialty_list)
+													||
+													!isset($LocalBusiness_medicalSpecialty)
+												) {
 
-													$LocalBusiness_medicalSpecialty_list = array();
+													// Simple list of MedicalSpecialty values
 
-												// Schema property values
+														$LocalBusiness_medicalSpecialty_list = array();
 
-													if ( $LocalBusiness_medicalSpecialty_multiselect ) {
+													// Schema property values
 
-														$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
-															$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
-															$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-														);
+														if ( $LocalBusiness_medicalSpecialty_multiselect ) {
 
-													}
+															$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+																$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+																$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+															);
+
+														}
+
+												}
 
 										// Add to item values
 
