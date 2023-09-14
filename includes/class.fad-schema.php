@@ -3008,6 +3008,7 @@
 								$Optician_degree_query = null;
 								$Person_type = null;
 								$Physician_degree_query = null;
+								$provider_additionalName = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
 								$provider_aggregateRating = null;
@@ -3037,12 +3038,17 @@
 								$provider_description = null;
 								$provider_display_name = null;
 								$provider_duns = null;
+								$provider_familyName = null;
 								$provider_fpage_query = null;
+								$provider_givenName = null;
+								$provider_generational_suffix = null;
 								$provider_globalLocationNumber = null;
 								$provider_has_parent = null;
 								$provider_hasCredential = null;
 								$provider_hasMap = null;
 								$provider_hasMap_repeater = null;
+								$provider_honorificPrefix = null;
+								$provider_honorificSuffix = null;
 								$provider_hospitalAffiliation = null;
 								$provider_hospitalAffiliation_multiselect = null;
 								$provider_identifier = null;
@@ -3065,6 +3071,8 @@
 								$provider_medicalSpecialty_list = null;
 								$provider_memberOf = null;
 								$provider_naics = null;
+								$provider_name = null;
+								$provider_nickname = null;
 								$provider_npi = null;
 								$provider_ontology_type = null;
 								$provider_parentOrganization = null;
@@ -3349,6 +3357,124 @@
 										)
 									) {
 
+										// Get values for name parts
+
+											// Degrees
+
+												if (
+													!isset($provider_degree_array)
+													||
+													!isset($provider_degree_list)
+												) {
+
+													$provider_degree_array = array();
+													$provider_degree_list = '';
+													$provider_degree_list_i = 1;
+
+													if ( !isset($provider_degrees) ) {
+
+														$provider_degrees = get_field( 'physician_degree', $provider );
+														$provider_degree_count = $degrees ? count($degrees) : 0;
+
+													}
+
+													if ( $provider_degrees ) {
+
+														foreach ( $provider_degrees as $item ) {
+
+															$item_term = get_term( $item, 'degree' );
+
+															if ( is_object($item_term) ) {
+
+																$item_name = $item_term->name;
+																$provider_degree_list .= $item_name;
+																$provider_degree_array[] = uamswp_attr_conversion($item_name);
+											
+																if ( $provider_degree_count > $provider_degree_list_i ) {
+											
+																	$provider_degree_list .= ', ';
+											
+																} // endif
+											
+																$provider_degree_list_i++;
+											
+															} // endif
+
+														} // endforeach
+
+													} // endif
+
+													if ( $provider_degree_list ) {
+
+														$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
+
+													} // endif
+									
+												}
+
+											// Prefix
+
+												if ( !isset($provider_honorificPrefix) ) {
+
+													// Define list of degrees or credentials need for "Dr." prefix (per UAMS Health clinical administration)
+
+														$provider_honorificPrefix_degree_valid = array(
+															'M.D.',
+															'D.O.'
+														);
+
+													// Set the "Dr." prefix
+
+														$provider_honorificPrefix = '';
+
+														if ( in_array( $provider_honorificPrefix_degree_valid, $provider_degree_array, true ) ) {
+
+															$provider_honorificPrefix = uamswp_attr_conversion('Dr.');
+
+														}
+
+												}
+
+											// First name
+
+												if ( !isset($provider_givenName) ) {
+
+													$provider_givenName = get_field( 'physician_first_name', $provider );
+
+												}
+
+											// Middle name
+
+												if ( !isset($provider_additionalName) ) {
+
+													$provider_additionalName = get_field( 'physician_middle_name', $provider );
+
+												}
+
+											// Nickname
+
+												if ( !isset($provider_nickname) ) {
+
+													$provider_nickname = '';
+
+												}
+
+											// Last name
+
+												if ( !isset($provider_familyName) ) {
+
+													$provider_familyName = get_field( 'physician_last_name', $provider );
+
+												}
+
+											// Generational suffix
+
+												if ( !isset($provider_generational_suffix) ) {
+
+													$provider_generational_suffix = get_field( 'physician_pedigree', $provider );
+
+												}
+
 										// givenName
 
 											/* 
@@ -3358,14 +3484,6 @@
 											 * 
 											 *     - Text
 											 */
-
-											// Get values
-
-												if ( !isset($provider_givenName) ) {
-
-													$provider_givenName = array();
-
-												}
 
 											// Add to item values
 
@@ -3409,14 +3527,6 @@
 											 *     - Text
 											 */
 
-											// Get values
-
-												if ( !isset($provider_additionalName) ) {
-
-													$provider_additionalName = array();
-
-												}
-
 											// Add to item values
 
 												// MedicalBusiness
@@ -3458,14 +3568,6 @@
 											 * 
 											 *     - Text
 											 */
-
-											// Get values
-
-												if ( !isset($provider_familyName) ) {
-
-													$provider_familyName = array();
-
-												}
 
 											// Add to item values
 
@@ -3513,7 +3615,7 @@
 
 												if ( !isset($provider_legalName) ) {
 
-													$provider_legalName = array();
+													$provider_legalName = '';
 
 												}
 
@@ -3558,14 +3660,6 @@
 											 * 
 											 *     - Text
 											 */
-
-											// Get values
-
-												if ( !isset($provider_honorificPrefix) ) {
-
-													$provider_honorificPrefix = array();
-
-												}
 
 											// Add to item values
 
@@ -3615,11 +3709,7 @@
 
 											// Get values
 
-												if ( !isset($provider_honorificSuffix) ) {
-
-													$provider_honorificSuffix = array();
-
-												}
+												$provider_honorificSuffix = $provider_degree_list;
 
 											// Add to item values
 
@@ -3671,7 +3761,48 @@
 
 												if ( !isset($provider_name) ) {
 
-													$provider_name = array();
+													$provider_name_parts = array();
+
+													if ( $provider_givenName ) {
+
+														$provider_name_parts[] = $provider_givenName;
+
+													}
+
+													if ( $provider_additionalName ) {
+
+														$provider_name_parts[] = $provider_additionalName;
+
+													}
+
+													if ( $provider_nickname ) {
+
+														$provider_name_parts[] = '\'' . $provider_nickname . '\'';
+
+													}
+
+													if ( $provider_familyName ) {
+
+														$provider_name_parts[] = $provider_familyName;
+
+													}
+
+													if ( $provider_generational_suffix ) {
+
+														$provider_name_parts[] = $provider_generational_suffix;
+
+													}
+
+													$provider_name = implode(
+														' ',
+														$provider_name_parts
+													);
+
+													if ( $provider_degree_list ) {
+
+														$provider_name .= ', ' . $provider_degree_list;
+
+													}
 
 												}
 
@@ -3817,6 +3948,40 @@
 																	$provider_alternateName = $provider_alternateName + $provider_alternateName_additional;
 
 																}
+
+														// Create more variants using prefix and degrees
+
+															if ( $provider_alternateName ) {
+
+																$provider_alternateName_variants = array();
+
+																foreach ( $provider_alternateName as $item ) {
+
+																	// Add prefix
+
+																		if ( $provider_honorificPrefix ) {
+
+																			$provider_alternateName_variants[] = $provider_honorificPrefix . ' ' . $item;
+
+																		}
+				
+																	// Add degrees
+
+																		if ( $provider_degree_list ) {
+
+																			$provider_alternateName_variants[] = $item . ', ' . $provider_degree_list;
+					
+																		}
+				
+																}
+
+																if ( $provider_alternateName_variants ) {
+
+																	$provider_alternateName = $provider_alternateName + $provider_alternateName_variants;
+
+																}
+
+															}
 
 														// Clean up values
 
