@@ -2543,6 +2543,7 @@
 			array $provider_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $MedicalBusiness_list = array(), // Pre-existing list array for provider-as-MedicalBusiness to which to add additional items
 			array $Person_list = array() // Pre-existing list array for provider-as-Person to which to add additional items
+			array $provider_list = array() // Pre-existing list array for both provider-as-MedicalBusiness and provider-as-Person to which to add additional items
 		) {
 
 			// Common property values
@@ -2961,29 +2962,31 @@
 							 * Return the variable.
 							 */
 
-							// Add to list of MedicalBusiness items
+							// Add to lists of providers
 
-								if (
-									isset($provider_item['MedicalBusiness'])
-									&&
-									!empty($provider_item['MedicalBusiness'])
-								) {
+								// Add to list of MedicalBusiness items
 
-									$MedicalBusiness_list[] = $provider_item['MedicalBusiness'];
+									if (
+										isset($provider_item['MedicalBusiness'])
+										&&
+										!empty($provider_item['MedicalBusiness'])
+									) {
 
-								}
+										$MedicalBusiness_list[] = $provider_item['MedicalBusiness'];
 
-							// Add to list of Person items
+									}
 
-								if (
-									isset($provider_item['Person'])
-									&&
-									!empty($provider_item['Person'])
-								) {
+								// Add to list of Person items
 
-									$Person_list[] = $provider_item['Person'];
+									if (
+										isset($provider_item['Person'])
+										&&
+										!empty($provider_item['Person'])
+									) {
 
-								}
+										$Person_list[] = $provider_item['Person'];
+
+									}
 
 						} else {
 
@@ -7868,22 +7871,99 @@
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
 
-							// Add to list of conditions
+							// Add to lists of providers
 
 								$provider_list[] = $provider_item;
+
+								// Add to list of MedicalBusiness items
+
+									if (
+										isset($provider_item['MedicalBusiness'])
+										&&
+										!empty($provider_item['MedicalBusiness'])
+									) {
+
+										$MedicalBusiness_list[] = $provider_item['MedicalBusiness'];
+
+									}
+
+								// Add to list of Person items
+
+									if (
+										isset($provider_item['Person'])
+										&&
+										!empty($provider_item['Person'])
+									) {
+
+										$Person_list[] = $provider_item['Person'];
+
+									}
 
 						}
 
 					} // endforeach ( $repeater as $provider )
 
-				// Clean up list array
+				// Clean up list arrays
 
-					$provider_list = array_filter($provider_list);
-					$provider_list = array_values($provider_list);
+					// MedicalBusiness
 
-					// If there is only one item, flatten the multi-dimensional array by one step
+						$MedicalBusiness_list = array_filter($MedicalBusiness_list);
+						$MedicalBusiness_list = array_values($MedicalBusiness_list);
 
-						uamswp_fad_flatten_multidimensional_array($provider_list);
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($MedicalBusiness_list);
+
+					// Person
+
+						$Person_list = array_filter($Person_list);
+						$Person_list = array_values($Person_list);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($Person_list);
+
+				// Combine lists for return
+
+					// MedicalBusiness
+
+						if ( $MedicalBusiness_list ) {
+
+							// Check if pre-existing list is an indexed array
+
+								if (
+									isset($provider_list['MedicalBusiness'])
+									&&
+									!empty($provider_list['MedicalBusiness'])
+								) {
+
+									$provider_list['MedicalBusiness'] = array_is_list($provider_list['MedicalBusiness']) ? $provider_list['MedicalBusiness'] : array($provider_list['MedicalBusiness']);
+
+								}
+
+							$provider_list['MedicalBusiness'] = $MedicalBusiness_list;
+
+						}
+
+					// Person
+
+						if ( $Person_list ) {
+
+							// Check if pre-existing list is an indexed array
+
+								if (
+									isset($provider_list['Person'])
+									&&
+									!empty($provider_list['Person'])
+								) {
+
+									$provider_list['Person'] = array_is_list($provider_list['Person']) ? $provider_list['Person'] : array($provider_list['Person']);
+
+								}
+
+							$provider_list['Person'] = $Person_list;
+
+						}
 
 			} // endif ( !empty($repeater) )
 
