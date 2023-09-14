@@ -2059,8 +2059,10 @@
 								$schema_hospital_affiliation = ( isset($schema_hospital_affiliation) && is_array($schema_hospital_affiliation) && !empty($schema_hospital_affiliation) ) ? $schema_hospital_affiliation : array(); // array
 
 								$schema_hospital_affiliation = uamswp_fad_schema_hospital_affiliation(
-									$schema_hospital_affiliation, // array (optional) // Main hospitalAffiliation schema array
-									$affiliation // array (optional) // Hospital affiliation
+									$affiliation, // array // Required // Hospital affiliation ID values
+									$page_url, // string // Required // Page URL
+									1, // int // Optional // Nesting level within the main schema
+									$schema_hospital_affiliation // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 								);
 
 					// // Construct the schema script tag

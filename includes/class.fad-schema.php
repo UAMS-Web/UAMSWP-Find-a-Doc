@@ -1193,110 +1193,98 @@
 	// Add data to an array defining schema data for hospitalAffiliation
 
 		function uamswp_fad_schema_hospital_affiliation(
-			$schema_hospital_affiliation = array(), // array (optional) // Main hospitalAffiliation schema array
-			$hospital_affiliation = array() // array (optional) // Hospital affiliation
+			array $hospital_affiliation, // array // Required // Hospital affiliation ID values
+			string $page_url, // string // Required // Page URL
+			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
+			array $schema_hospital_affiliation = array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 		) {
 
 			// Check/define variables
 
-				$schema_hospital_affiliation = is_array($schema_hospital_affiliation) ? $schema_hospital_affiliation : array();
+				$schema_hospital_affiliation_i = 1;
+
+				if ( $schema_hospital_affiliation ) {
+
+					$schema_hospital_affiliation = array_is_list($schema_hospital_affiliation) ? $schema_hospital_affiliation : array($schema_hospital_affiliation);
+					$schema_hospital_affiliation_i = $schema_hospital_affiliation_i ? count($schema_hospital_affiliation) + 1 : 1;
+
+				}
 
 			// Create an array for this item
 
-			$schema = array();
+				$schema = array();
 
 			// Loop through each hospital affiliation
 
-				foreach ( $hospital_affiliation as $hospital ) {
+				if ( $hospital_affiliation ) {
 
-					// Eliminate PHP errors
+					foreach ( $hospital_affiliation as $hospital ) {
 
-						$hospital_affiliation_term = '';
-						$hospital_affiliation_location = '';
-						$hospital_affiliation_location_title = '';
-						$hospital_affiliation_location_url = '';
+						// Eliminate PHP errors / reset variables
 
-					// Get the Hospital Affiliation term from the ID
+							$hospital_term = '';
+							$hospital_location = '';
+						// Get the Hospital Affiliation term from the ID
 
-						$hospital_affiliation_term = get_term( $hospital, 'affiliation' ) ?: array();
-
-					// Associated location
+							$hospital_term = get_term( $hospital, 'affiliation' ) ?? array();
 
 						// Get the ID of the location profile associated with the Affiliated Location
 
-							if ( is_object($hospital_affiliation_term) ) {
+							if ( is_object($hospital_term) ) {
 
-								$hospital_affiliation_location = get_field( 'affiliation_location', $hospital_affiliation_term ) ?: array();
-								$hospital_affiliation_location = is_array($hospital_affiliation_location) && !empty($hospital_affiliation_location) ? $hospital_affiliation_location[0] : '';
+								$hospital_location = get_field( 'affiliation_location', $hospital_term ) ?? array();
 
-								if ( $hospital_affiliation_location ) {
+								// Check location value
+								
+									if ( $hospital_location ) {
 
-									// Get the name of the associated location profile
+										$hospital_location = ( is_array($hospital_location) && !empty($hospital_location) ) ? reset($hospital_location) : $hospital_location;
 
-										$hospital_affiliation_location_title = get_the_title($hospital_affiliation_location);
-
-									// Get the URL of the associated location profile
-
-										$hospital_affiliation_location_url = get_permalink($hospital_affiliation_location);
-
-								} else {
-
-									// Skip the rest of the current loop iteration
-									continue;
-
-								}
+									}
 
 							}
 
-					// Add values to the array
+						// Get hospital location's attribute values
 
-						if ( $hospital_affiliation_location_title ) {
+							if ( !$hospital_location ) {
 
-							if ( is_array($hospital_affiliation_location_title) ) {
-
-								foreach ( $hospital_affiliation_location_title as $item ) {
-
-									$schema['name'][] = uamswp_attr_conversion($item);
-
-								}
+								// Skip the rest of the current loop iteration
+								continue;
 
 							} else {
-
-								$schema['name'] = uamswp_attr_conversion($hospital_affiliation_location_title);
-
-							}
-
-						}
-
-						if ( $hospital_affiliation_location_url ) {
-
-							if ( is_array($hospital_affiliation_location_url) ) {
-
-								foreach ( $hospital_affiliation_location_url as $item ) {
-
-									$schema['url'][] = user_trailingslashit($item);
-
-								}
-
-							} else {
-
-								$schema['url'] = user_trailingslashit($hospital_affiliation_location_url);
+								
+								$schema = uamswp_fad_schema_location(
+									array($hospital_location), // List of IDs of the location items
+									$page_url, // Page URL
+									$nesting_level, // Nesting level within the main schema
+									$schema_hospital_affiliation_i, // Iteration counter
+									array(), // Pre-existing field values array so duplicate calls can be avoided
+									$schema_hospital_affiliation // Pre-existing list array to which to add additional items
+								);
 
 							}
 
-						}
+						// Add this item to the list array
 
-						if ( !empty($schema) ) {
-							$schema = array('@type' => 'Hospital') + $schema;
-						}
+							if ( $schema ) {
 
-					// Add this item's array to the main hospitalAffiliation schema array
+								$schema_hospital_affiliation[] = $schema;
 
-						if ( !empty($schema) ) {
-							$schema_hospital_affiliation[] = $schema;
-						}
+							}
 
-				} // endforeach
+					} // endforeach
+
+				} // endif ( $hospital_affiliation )
+			
+			// Clean up the list array
+
+				if ( $schema_hospital_affiliation ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($schema_hospital_affiliation);
+
+				}
 
 			// Return the main hospitalAffiliation schema array
 
@@ -3011,6 +2999,7 @@
 								$provider_additionalName = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
+								$provider_affiliation = null;
 								$provider_aggregateRating = null;
 								$provider_aggregateRating_api = null;
 								$provider_aggregateRating_description = null;
@@ -3023,6 +3012,7 @@
 								$provider_alternateName = null;
 								$provider_alternateName_additional = null;
 								$provider_alternateName_additional_repeater = null;
+								$provider_alternateName_variants = null;
 								$provider_areaServed = null;
 								$provider_areaServed = null;
 								$provider_availableService = null;
@@ -3036,7 +3026,6 @@
 								$provider_degree_array = null;
 								$provider_degrees = null;
 								$provider_description = null;
-								$provider_display_name = null;
 								$provider_duns = null;
 								$provider_familyName = null;
 								$provider_fpage_query = null;
@@ -3090,6 +3079,7 @@
 								$provider_treatments = null;
 								$provider_url = null;
 								$provider_vatID = null;
+								$schema_provider_hospitalAffiliation_ref = null;
 								$schema_provider_MedicalBusiness_ref = null;
 								$schema_provider_Person_ref = null;
 
@@ -3887,14 +3877,6 @@
 
 														// Name variations
 
-															// Selected display name
-
-																if ( !isset($provider_display_name) ) {
-
-																	$provider_display_name = '';
-
-																}
-
 															// First Middle "Nickname" Last
 
 																$provider_alternateName[] = '';
@@ -3955,7 +3937,11 @@
 
 																	// Get the alternateName repeater field value
 
-																		$provider_alternateName_additional_repeater = array();
+																		if ( !isset($provider_alternateName_additional_repeater) ) {
+
+																			$provider_alternateName_additional_repeater = array();
+
+																		}
 
 																	// Get the item values
 
@@ -4093,7 +4079,11 @@
 
 										// Get MedicalSpecialty value(s) from associated Clinical Specialization item(s)
 
-											if ( !isset($provider_medicalSpecialty) ) {
+											if (
+												!isset($provider_medicalSpecialty)
+												||
+												!isset($provider_medicalSpecialty_list)
+											) {
 
 												// Get Clinical Specialization value
 
@@ -4196,7 +4186,11 @@
 
 													// Get values
 
-														if ( !isset($provider_medicalSpecialty) ) {
+														if (
+															!isset($provider_medicalSpecialty)
+															||
+															!isset($provider_medicalSpecialty_list)
+														) {
 
 															// Get Clinical Specialization value
 
@@ -4335,75 +4329,6 @@
 												) {
 
 													$provider_item_Person['additionalType'] = $provider_additionalType;
-
-												}
-
-									}
-
-								// affiliation
-
-									/* 
-									 * An organization that this person is affiliated with. For example, a 
-									 * school/university, a club, or a team.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										(
-											in_array(
-												'affiliation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'affiliation',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($provider_affiliation) ) {
-
-												$provider_affiliation = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'affiliation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_affiliation
-												) {
-
-													$provider_item_MedicalBusiness['affiliation'] = $provider_affiliation;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'affiliation',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_affiliation
-												) {
-
-													$provider_item_Person['affiliation'] = $provider_affiliation;
 
 												}
 
@@ -5507,82 +5432,197 @@
 
 									}
 
-								// hospitalAffiliation
-
-									/* 
-									 * A hospital with which the physician or office is affiliated.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Hospital
-									 */
+								// hospitalAffiliation and affiliation
 
 									if (
-										in_array(
-											'hospitalAffiliation',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											in_array(
+												'hospitalAffiliation',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'hospitalAffiliation',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'hospitalAffiliation',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											in_array(
+												'affiliation',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'affiliation',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
-										// Get hospitalAffiliation multi-select field values
+										// Get hospital affiliation multi-select field values
 
 											if ( !isset($provider_hospitalAffiliation_multiselect) ) {
 
-												$provider_hospitalAffiliation_multiselect = array();
+												$provider_hospitalAffiliation_multiselect = get_field( 'physician_affiliation', $provider ) ?? '';
 
 											}
 
 											// Add each item to hospitalAffiliation property values array
 
-												if ( !isset($provider_hospitalAffiliation) ) {
+												if (
+													!isset($provider_hospitalAffiliation)
+													||
+													!isset($provider_affiliation)
+												) {
 
-													if ( $provider_hospitalAffiliation_multiselect ) {
+													if ( !isset($provider_hospitalAffiliation) ) {
 
-														$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
-															array(),
-															$provider_hospitalAffiliation_multiselect
-														);
+														if ( $provider_hospitalAffiliation_multiselect ) {
+	
+															$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
+																$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
+																$provider_url, // string // Required // Page URL
+																$nesting_level, // int // Optional // Nesting level within the main schema
+																array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
+															);
+	
+														}
 
 													}
 
+													// Define reference to hospitalAffiliation IDs if both hospitalAffiliation and affiliation are valid properties
+
+														if (
+															$provider_hospitalAffiliation
+															&&
+															(
+																in_array(
+																	'hospitalAffiliation',
+																	$provider_properties_map[$MedicalBusiness_type]['properties']
+																)
+																||
+																in_array(
+																	'hospitalAffiliation',
+																	$provider_properties_map[$Person_type]['properties']
+																)
+															)
+															&&
+															(
+																in_array(
+																	'affiliation',
+																	$provider_properties_map[$MedicalBusiness_type]['properties']
+																)
+																||
+																in_array(
+																	'affiliation',
+																	$provider_properties_map[$Person_type]['properties']
+																)
+															)
+														) {
+
+															$schema_provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references(
+																$provider_hospitalAffiliation
+															);
+															
+														}
+
+													if ( !isset($provider_affiliation) ) {
+
+														if ( $provider_hospitalAffiliation ) {
+	
+															$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
+	
+														}
+	
+													}
+	
 												}
 
-										// Add to item values
+										// hospitalAffiliation
 
-											// MedicalBusiness
+											/* 
+											 * A hospital with which the physician or office is affiliated.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Hospital
+											 */
 
-												if (
-													in_array(
-														'hospitalAffiliation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_hospitalAffiliation
-												) {
+											// Add to item values
 
-													$provider_item_MedicalBusiness['hospitalAffiliation'] = $provider_hospitalAffiliation;
+												// MedicalBusiness
 
-												}
+													if (
+														in_array(
+															'hospitalAffiliation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_hospitalAffiliation
+													) {
 
-											// Person
+														$provider_item_MedicalBusiness['hospitalAffiliation'] = $provider_hospitalAffiliation;
 
-												if (
-													in_array(
-														'hospitalAffiliation',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_hospitalAffiliation
-												) {
+													}
 
-													$provider_item_Person['hospitalAffiliation'] = $provider_hospitalAffiliation;
+												// Person
 
-												}
+													if (
+														in_array(
+															'hospitalAffiliation',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_hospitalAffiliation
+													) {
+
+														$provider_item_Person['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+													}
+
+										// affiliation
+
+											/* 
+											 * An organization that this person is affiliated with. For example, a 
+											 * school/university, a club, or a team.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Organization
+											 */
+
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'affiliation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_affiliation
+													) {
+
+														$provider_item_MedicalBusiness['affiliation'] = $provider_affiliation;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'affiliation',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_affiliation
+													) {
+
+														$provider_item_Person['affiliation'] = $provider_affiliation;
+
+													}
 
 									}
 
@@ -16205,7 +16245,13 @@
 			array $input
 		) {
 
-			$output = array();
+			// Check or define variables
+
+				$input = array_is_list($input) ? $input : array($input);
+
+			// Base array
+
+				$output = array();
 
 			if ( $input ) {
 

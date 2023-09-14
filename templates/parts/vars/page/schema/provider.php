@@ -897,95 +897,30 @@ TODO List
 
 	// Provider Hospital Affiliation (hospitalAffiliation)
 
-		// Base array
+		// Get hospital affiliation multi-select field value
 
-			$provider_related_hospital = array();
+			$provider_hospitalAffiliation_multiselect = get_field( 'physician_affiliation', $page_id ) ?? '';
 
-		// Add each hospital
+		// Add each hospital to the hospitalAffiliation property value list
 
-			$provider_related_hospital[] = array(
-				'@id' => $schema_provider_url . '#Hospital1', // Increase integer by one each iteration
-				'@type' => 'Hospital',
-				'name' => 'foo', // Replace 'foo' with location name
-				'address' => array(
-					'@type' => 'PostalAddress',
-					'addressCountry' => 'USA',
-					'addressLocality' => 'foo', // Replace 'foo' with city
-					'addressRegion' => 'Arkansas',
-					'postalCode' => 'foo', // Replace 'foo' with ZIP code
-					'streetAddress' => 'foo' // Replace 'foo' with street address
-				),
-				'areaServed' => $schema_common_arkansas,
-				'brand' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-				'contactPoint' => array(
-					array(
-						'@type' => 'ContactPoint',
-						'contactType' => 'General information',
-						'telephone' => 'foo' // Replace 'foo' with phone number
-					),
-					array(
-						'@type' => 'ContactPoint',
-						'contactType' => 'Appointments for new patients',
-						'telephone' => 'foo' // Replace 'foo' with phone number
-					),
-					array(
-						'@type' => 'ContactPoint',
-						'contactType' => 'Appointments for existing patients',
-						'telephone' => 'foo' // Replace 'foo' with phone number
-					),
-					array(
-						'@type' => 'ContactPoint',
-						'contactType' => 'Appointments for new and existing patients',
-						'telephone' => 'foo' // Replace 'foo' with phone number
-					),
-					array(
-						'@type' => 'ContactPoint',
-						'contactType' => 'foo', // Replace 'foo' with additional phone number label
-						'telephone' => 'foo' // Replace 'foo' with phone number
-					),
-					array(
-						'@type' => 'ContactPoint',
-						'contactType' => 'Fax',
-						'faxNumber' => 'foo' // Replace 'foo' with fax number
-					),
-				),
-				'description' => 'foo', // Replace 'foo' with location description
-				'geo' => array(
-					'@type' => 'GeoCoordinates',
-					'latitude' => 'foo', // Replace 'foo' with latitude
-					'longitude' => 'foo' // Replace 'foo' with longitude
-				),
-				'openingHoursSpecification' => array( // The opening hours of a certain place. // Repeat as necessary
-					'@type' => 'OpeningHoursSpecification',
-					'closes' => '23:59',
-					'dayOfWeek' => array(
-						'Monday',
-						'Tuesday',
-						'Wednesday',
-						'Thursday',
-						'Friday',
-						'Saturday',
-						'Sunday'
-					),
-					'opens' => '00:00'
-				),
-				'parentOrganization' => $schema_base_org_uams_health_ref, // Append arrays with relevant Organization if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-				'photo' => array( // Repeat for all photos include in location profile
-					'@type' => 'ImageObject',
-					'caption' => 'foo', // Replace 'foo' with the image's alt text
-					'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
-					'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
-					'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
-					'height' => 'foo', // Replace 'foo' with the image's height
-					'representativeOfPage' => 'False',
-					'width' => 'foo' // Replace 'foo' with the image's width
-				),
-				'url' => 'foo' // Replace 'foo' with location profile URL
-			);
+			// Base array
+
+				$provider_hospitalAffiliation = array();
+
+			if ( $provider_hospitalAffiliation_multiselect ) {
+		
+				$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
+					$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
+					$page_url, // string // Required // Page URL
+					1, // int // Optional // Nesting level within the main schema
+					$provider_hospitalAffiliation // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
+				);
+
+			}
 
 		// Define reference to each value/row in this property
 
-			$schema_provider_hospital_ref = uamswp_fad_schema_node_references( $provider_related_hospital );
+			$schema_provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references( $provider_hospitalAffiliation );
 
 // Schema JSON Item Arrays
 
@@ -1322,7 +1257,7 @@ TODO List
 
 		// hospitalAffiliation
 
-			$schema_provider_Physician['hospitalAffiliation'] = $provider_related_hospital;
+			$schema_provider_Physician['hospitalAffiliation'] = $provider_hospitalAffiliation;
 
 		// isAcceptingNewPatients
 
@@ -1491,14 +1426,16 @@ TODO List
 
 			// Base array
 
-				$schema_provider_Person['affiliation'] = array();
+				$provider_affiliation = array();
 
 			// Brand organizations
 
 				if ( $schema_provider_brand ) {
 
-					$schema_provider_Person['affiliation'] = array_merge(
-						$schema_provider_Person['affiliation'],
+					$schema_provider_brand = array_is_list($schema_provider_brand) ? $schema_provider_brand : array($schema_provider_brand);
+
+					$provider_affiliation = array_merge(
+						$provider_affiliation,
 						$schema_provider_brand
 					);
 
@@ -1506,28 +1443,40 @@ TODO List
 
 			// Related hospitals
 
-				if ( $schema_provider_hospital_ref ) {
+				if ( $schema_provider_hospitalAffiliation_ref ) {
 
-					$schema_provider_Person['affiliation'] = array_merge(
-						$schema_provider_Person['affiliation'],
-						$schema_provider_hospital_ref
+					$schema_provider_hospitalAffiliation_ref = array_is_list($schema_provider_hospitalAffiliation_ref) ? $schema_provider_hospitalAffiliation_ref : array($schema_provider_hospitalAffiliation_ref);
+
+					$provider_affiliation = array_merge(
+						$provider_affiliation,
+						$schema_provider_hospitalAffiliation_ref
 					);
 
 				}
 
-			if ( !empty($schema_provider_Person['affiliation']) ) {
+				echo '<p>$provider_affiliation = ' . ( is_array($provider_affiliation) ? 'Array' : ( is_object($provider_affiliation) ? 'Object' : ( $provider_affiliation ) ) ) . '</p>'; // test
+				if ( is_array($provider_affiliation) || is_object($provider_affiliation) ) { echo '<pre>'; print_r($provider_affiliation); echo '</pre>'; } // test
 
-				// If there is only one item, flatten the multi-dimensional array by one step
+			// Clean up list array
 
-					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['affiliation']);
+				if ( $provider_affiliation ) {
 
-			} else {
+					$provider_affiliation = array_filter($provider_affiliation);
+					$provider_affiliation = array_unique( $provider_affiliation, SORT_REGULAR );
 
-				// If there are no items, remove the property from the schema
+					// If there is only one item, flatten the multi-dimensional array by one step
 
-					unset($schema_provider_Person['affiliation']);
+						uamswp_fad_flatten_multidimensional_array($provider_affiliation);
 
-			}
+				}
+
+			// Add to schema
+
+				if ( $provider_affiliation ) {
+
+					$schema_provider_Person['affiliation'] = $provider_affiliation;
+
+				}
 
 		// alumniOf
 
