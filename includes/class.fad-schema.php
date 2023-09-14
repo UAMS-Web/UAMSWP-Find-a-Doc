@@ -5468,7 +5468,7 @@
 
 											}
 
-											// Add each item to hospitalAffiliation property values array
+											// Add each item to hospitalAffiliation and affiliation property values array
 
 												if (
 													!isset($provider_hospitalAffiliation)
@@ -5476,20 +5476,22 @@
 													!isset($provider_affiliation)
 												) {
 
-													if ( !isset($provider_hospitalAffiliation) ) {
+													// Define hospitalAffiliation value
 
-														if ( $provider_hospitalAffiliation_multiselect ) {
-	
-															$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
-																$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
-																$provider_url, // string // Required // Page URL
-																$nesting_level, // int // Optional // Nesting level within the main schema
-																array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
-															);
-	
+														if ( !isset($provider_hospitalAffiliation) ) {
+
+															if ( $provider_hospitalAffiliation_multiselect ) {
+		
+																$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
+																	$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
+																	$provider_url, // string // Required // Page URL
+																	$nesting_level, // int // Optional // Nesting level within the main schema
+																	array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
+																);
+		
+															}
+
 														}
-
-													}
 
 													// Define reference to hospitalAffiliation IDs if both hospitalAffiliation and affiliation are valid properties
 
@@ -5527,15 +5529,17 @@
 															
 														}
 
-													if ( !isset($provider_affiliation) ) {
+													// Define affiliation value
 
-														if ( $provider_hospitalAffiliation ) {
-	
-															$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
-	
+														if ( !isset($provider_affiliation) ) {
+
+															if ( $provider_hospitalAffiliation ) {
+		
+																$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
+		
+															}
+		
 														}
-	
-													}
 	
 												}
 
