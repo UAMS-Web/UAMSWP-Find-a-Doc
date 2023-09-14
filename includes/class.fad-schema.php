@@ -5390,140 +5390,695 @@
 
 									}
 
-								// brand
+								// locations and organizations (common)
+									
+									// brand
 
-									/* 
-									 * The brand(s) associated with a product or service, or the brand(s) maintained 
-									 * by an organization or business person.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Brand
-									 *     - Organization
-									 */
+										/* 
+										 * The brand(s) associated with a product or service, or the brand(s) maintained 
+										 * by an organization or business person.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Brand
+										 *     - Organization
+										 */
 
-									if (
-										in_array(
-											'brand',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
-										)
-										||
-										in_array(
-											'brand',
-											$provider_properties_map[$Person_type]['properties']
-										)
-									) {
+										if (
+											in_array(
+												'brand',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'brand',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										) {
 
-										// Get values
+											// Get values
 
-											if ( !isset($provider_brand) ) {
+												if ( !isset($provider_brand) ) {
 
-												$provider_brand = $schema_base_org_uams_health_ref ?? array();
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'brand',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_brand
-												) {
-
-													$provider_item_MedicalBusiness['brand'] = $provider_brand;
+													$provider_brand = $schema_base_org_uams_health_ref ?? array();
 
 												}
 
-											// Person
+											// Add to item values
 
-												if (
-													in_array(
-														'brand',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_brand
-												) {
+												// MedicalBusiness
 
-													$provider_item_Person['brand'] = $provider_brand;
+													if (
+														in_array(
+															'brand',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_brand
+													) {
 
-												}
+														$provider_item_MedicalBusiness['brand'] = $provider_brand;
 
-									}
+													}
 
-								// containedInPlace
+												// Person
 
-									/* 
-									 * The basic containment relation between a place and one that contains it.
-									 * expected to be one of these types:
-									 * 
-									 *     - Place
-									 */
+													if (
+														in_array(
+															'brand',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_brand
+													) {
 
-									if (
-										in_array(
-											'containedInPlace',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
-										)
-										||
-										in_array(
-											'containedInPlace',
-											$provider_properties_map[$Person_type]['properties']
-										)
-									) {
+														$provider_item_Person['brand'] = $provider_brand;
 
-										// Get values
+													}
 
-											if ( !isset($provider_containedInPlace) ) {
+										}
 
-												/*
+									// containedInPlace
 
-													Reference 'location'
+										/* 
+										 * The basic containment relation between a place and one that contains it.
+										 * expected to be one of these types:
+										 * 
+										 *     - Place
+										 */
 
-												*/
+										if (
+											in_array(
+												'containedInPlace',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'containedInPlace',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										) {
 
-												$provider_containedInPlace = array();
+											// Get values
 
-											}
+												if ( !isset($provider_containedInPlace) ) {
 
-										// Add to item values
+													/*
 
-											// MedicalBusiness
+														Reference 'location'
 
-												if (
-													in_array(
-														'containedInPlace',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_containedInPlace
-												) {
+													*/
 
-													$provider_item_MedicalBusiness['containedInPlace'] = $provider_containedInPlace;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'containedInPlace',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_containedInPlace
-												) {
-
-													$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
+													$provider_containedInPlace = array();
 
 												}
 
-									}
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'containedInPlace',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_containedInPlace
+													) {
+
+														$provider_item_MedicalBusiness['containedInPlace'] = $provider_containedInPlace;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'containedInPlace',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_containedInPlace
+													) {
+
+														$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
+
+													}
+
+										}
+
+									// hospitalAffiliation and affiliation
+
+										if (
+											(
+												in_array(
+													'hospitalAffiliation',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+												||
+												in_array(
+													'hospitalAffiliation',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+											||
+											(
+												in_array(
+													'affiliation',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+												||
+												in_array(
+													'affiliation',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+										) {
+
+											// Get hospital affiliation multi-select field values
+
+												if ( !isset($provider_hospitalAffiliation_multiselect) ) {
+
+													$provider_hospitalAffiliation_multiselect = get_field( 'physician_affiliation', $provider ) ?? '';
+
+												}
+
+												// Add each item to hospitalAffiliation and affiliation property values array
+
+													if (
+														!isset($provider_hospitalAffiliation)
+														||
+														!isset($provider_affiliation)
+													) {
+
+														// Define hospitalAffiliation value
+
+															if ( !isset($provider_hospitalAffiliation) ) {
+
+																if ( $provider_hospitalAffiliation_multiselect ) {
+			
+																	$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
+																		$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
+																		$provider_url, // string // Required // Page URL
+																		$nesting_level, // int // Optional // Nesting level within the main schema
+																		array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
+																	);
+			
+																}
+
+															}
+
+														// Define reference to hospitalAffiliation IDs if both hospitalAffiliation and affiliation are valid properties
+
+															if (
+																$provider_hospitalAffiliation
+																&&
+																(
+																	in_array(
+																		'hospitalAffiliation',
+																		$provider_properties_map[$MedicalBusiness_type]['properties']
+																	)
+																	||
+																	in_array(
+																		'hospitalAffiliation',
+																		$provider_properties_map[$Person_type]['properties']
+																	)
+																)
+																&&
+																(
+																	in_array(
+																		'affiliation',
+																		$provider_properties_map[$MedicalBusiness_type]['properties']
+																	)
+																	||
+																	in_array(
+																		'affiliation',
+																		$provider_properties_map[$Person_type]['properties']
+																	)
+																)
+															) {
+
+																$schema_provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references(
+																	$provider_hospitalAffiliation
+																);
+																
+															}
+
+														// Define affiliation value
+
+															if ( !isset($provider_affiliation) ) {
+
+																if ( $provider_hospitalAffiliation ) {
+			
+																	$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
+			
+																}
+			
+															}
+		
+													}
+
+											// hospitalAffiliation
+
+												/* 
+												 * A hospital with which the physician or office is affiliated.
+												 * 
+												 * Values expected to be one of these types:
+												 * 
+												 *     - Hospital
+												 */
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'hospitalAffiliation',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_hospitalAffiliation
+														) {
+
+															$provider_item_MedicalBusiness['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'hospitalAffiliation',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_hospitalAffiliation
+														) {
+
+															$provider_item_Person['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+														}
+
+											// affiliation
+
+												/* 
+												 * An organization that this person is affiliated with. For example, a 
+												 * school/university, a club, or a team.
+												 * 
+												 * Values expected to be one of these types:
+												 * 
+												 *     - Organization
+												 */
+
+												// Add to item values
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'affiliation',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_affiliation
+														) {
+
+															$provider_item_MedicalBusiness['affiliation'] = $provider_affiliation;
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'affiliation',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_affiliation
+														) {
+
+															$provider_item_Person['affiliation'] = $provider_affiliation;
+
+														}
+
+										}
+
+									// location
+
+										/* 
+										 * The location of, for example, where an event is happening, where an 
+										 * organization is located, or where an action takes place.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Place
+										 *     - PostalAddress
+										 *     - Text
+										 *     - VirtualLocation
+										 */
+
+										if (
+											in_array(
+												'location',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'location',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										) {
+
+											// Get values
+
+												if ( !isset($provider_location) ) {
+
+													if ( !isset($provider_location_array) ) {
+
+														$provider_location_array = get_field( 'physician_locations', $provider ) ?? array(); // array
+
+													}
+
+													$provider_location = uamswp_fad_schema_location(
+														$provider_location_array, // List of IDs of the location items
+														$provider_url, // Page URL
+														$nesting_level + 1 // Nesting level within the main schema
+													);
+
+												}
+
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'location',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_location
+													) {
+
+														$provider_item_MedicalBusiness['location'] = $provider_location;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'location',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_location
+													) {
+
+														$provider_item_Person['location'] = $provider_location;
+
+													}
+
+										}
+
+									// memberOf
+
+										/* 
+										 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+										 * 
+										 * Inverse-property: member
+										 * 
+										 * Subproperty of:
+										 * 
+										 *     - foo
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Organization
+										 *     - ProgramMembership
+										 */
+
+										if (
+											(
+												in_array(
+													'memberOf',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+												||
+												in_array(
+													'memberOf',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												if ( !isset($provider_memberOf) ) {
+
+													$provider_memberOf = array();
+
+												}
+
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'memberOf',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_memberOf
+													) {
+
+														$provider_item_MedicalBusiness['memberOf'] = $provider_memberOf;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'memberOf',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_memberOf
+													) {
+
+														$provider_item_Person['memberOf'] = $provider_memberOf;
+
+													}
+
+										}
+
+									// parentOrganization
+
+										/* 
+										 * The larger organization that this organization is a subOrganization of, if any.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Organization
+										 */
+
+										if (
+											in_array(
+												'parentOrganization',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'parentOrganization',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										) {
+
+											// Get values
+
+												if ( !isset($provider_parentOrganization) ) {
+
+													$provider_parentOrganization = array();
+
+												}
+
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'parentOrganization',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_parentOrganization
+													) {
+
+														$provider_item_MedicalBusiness['parentOrganization'] = $provider_parentOrganization;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'parentOrganization',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_parentOrganization
+													) {
+
+														$provider_item_Person['parentOrganization'] = $provider_parentOrganization;
+
+													}
+
+										}
+
+									// workLocation
+
+										/* 
+										 * A contact location for a person's place of work.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - ContactPoint
+										 *     - Place
+										 */
+
+										if (
+											(
+												in_array(
+													'workLocation',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+												||
+												in_array(
+													'workLocation',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												if ( !isset($provider_workLocation) ) {
+
+													$provider_workLocation = array();
+
+												}
+
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'workLocation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_workLocation
+													) {
+
+														$provider_item_MedicalBusiness['workLocation'] = $provider_workLocation;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'workLocation',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_workLocation
+													) {
+
+														$provider_item_Person['workLocation'] = $provider_workLocation;
+
+													}
+
+										}
+
+									// worksFor
+
+										/* 
+										 * Organizations that the person works for.
+										 * 
+										 * Values expected to be one of these types:
+										 * 
+										 *     - Organization
+										 */
+
+										if (
+											(
+												in_array(
+													'worksFor',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
+												||
+												in_array(
+													'worksFor',
+													$provider_properties_map[$Person_type]['properties']
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												if ( !isset($provider_worksFor) ) {
+
+													$provider_worksFor[] = $schema_base_org_uams_health_ref ?? '';
+													$provider_worksFor[] = $schema_base_org_uams_ref ?? '';
+
+												}
+
+											// Add to item values
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'workLocation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_worksFor
+													) {
+
+														$provider_item_MedicalBusiness['workLocation'] = $provider_worksFor;
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'worksFor',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_worksFor
+													) {
+
+														$provider_item_Person['worksFor'] = $provider_worksFor;
+
+													}
+
+										}
 
 								// currenciesAccepted
 
@@ -5994,204 +6549,6 @@
 													$provider_item_Person['hasMap'] = $provider_hasMap;
 
 												}
-
-									}
-
-								// hospitalAffiliation and affiliation
-
-									if (
-										(
-											in_array(
-												'hospitalAffiliation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'hospitalAffiliation',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										||
-										(
-											in_array(
-												'affiliation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'affiliation',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-									) {
-
-										// Get hospital affiliation multi-select field values
-
-											if ( !isset($provider_hospitalAffiliation_multiselect) ) {
-
-												$provider_hospitalAffiliation_multiselect = get_field( 'physician_affiliation', $provider ) ?? '';
-
-											}
-
-											// Add each item to hospitalAffiliation and affiliation property values array
-
-												if (
-													!isset($provider_hospitalAffiliation)
-													||
-													!isset($provider_affiliation)
-												) {
-
-													// Define hospitalAffiliation value
-
-														if ( !isset($provider_hospitalAffiliation) ) {
-
-															if ( $provider_hospitalAffiliation_multiselect ) {
-		
-																$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
-																	$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
-																	$provider_url, // string // Required // Page URL
-																	$nesting_level, // int // Optional // Nesting level within the main schema
-																	array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
-																);
-		
-															}
-
-														}
-
-													// Define reference to hospitalAffiliation IDs if both hospitalAffiliation and affiliation are valid properties
-
-														if (
-															$provider_hospitalAffiliation
-															&&
-															(
-																in_array(
-																	'hospitalAffiliation',
-																	$provider_properties_map[$MedicalBusiness_type]['properties']
-																)
-																||
-																in_array(
-																	'hospitalAffiliation',
-																	$provider_properties_map[$Person_type]['properties']
-																)
-															)
-															&&
-															(
-																in_array(
-																	'affiliation',
-																	$provider_properties_map[$MedicalBusiness_type]['properties']
-																)
-																||
-																in_array(
-																	'affiliation',
-																	$provider_properties_map[$Person_type]['properties']
-																)
-															)
-														) {
-
-															$schema_provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references(
-																$provider_hospitalAffiliation
-															);
-															
-														}
-
-													// Define affiliation value
-
-														if ( !isset($provider_affiliation) ) {
-
-															if ( $provider_hospitalAffiliation ) {
-		
-																$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
-		
-															}
-		
-														}
-	
-												}
-
-										// hospitalAffiliation
-
-											/* 
-											 * A hospital with which the physician or office is affiliated.
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - Hospital
-											 */
-
-											// Add to item values
-
-												// MedicalBusiness
-
-													if (
-														in_array(
-															'hospitalAffiliation',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
-														)
-														&&
-														$provider_hospitalAffiliation
-													) {
-
-														$provider_item_MedicalBusiness['hospitalAffiliation'] = $provider_hospitalAffiliation;
-
-													}
-
-												// Person
-
-													if (
-														in_array(
-															'hospitalAffiliation',
-															$provider_properties_map[$Person_type]['properties']
-														)
-														&&
-														$provider_hospitalAffiliation
-													) {
-
-														$provider_item_Person['hospitalAffiliation'] = $provider_hospitalAffiliation;
-
-													}
-
-										// affiliation
-
-											/* 
-											 * An organization that this person is affiliated with. For example, a 
-											 * school/university, a club, or a team.
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - Organization
-											 */
-
-											// Add to item values
-
-												// MedicalBusiness
-
-													if (
-														in_array(
-															'affiliation',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
-														)
-														&&
-														$provider_affiliation
-													) {
-
-														$provider_item_MedicalBusiness['affiliation'] = $provider_affiliation;
-
-													}
-
-												// Person
-
-													if (
-														in_array(
-															'affiliation',
-															$provider_properties_map[$Person_type]['properties']
-														)
-														&&
-														$provider_affiliation
-													) {
-
-														$provider_item_Person['affiliation'] = $provider_affiliation;
-
-													}
 
 									}
 
@@ -7823,84 +8180,6 @@
 
 									}
 
-								// location
-
-									/* 
-									 * The location of, for example, where an event is happening, where an 
-									 * organization is located, or where an action takes place.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Place
-									 *     - PostalAddress
-									 *     - Text
-									 *     - VirtualLocation
-									 */
-
-									if (
-										in_array(
-											'location',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
-										)
-										||
-										in_array(
-											'location',
-											$provider_properties_map[$Person_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											if ( !isset($provider_location) ) {
-
-												if ( !isset($provider_location_array) ) {
-
-													$provider_location_array = get_field( 'physician_locations', $provider ) ?? array(); // array
-
-												}
-
-												$provider_location = uamswp_fad_schema_location(
-													$provider_location_array, // List of IDs of the location items
-													$provider_url, // Page URL
-													$nesting_level + 1 // Nesting level within the main schema
-												);
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'location',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_location
-												) {
-
-													$provider_item_MedicalBusiness['location'] = $provider_location;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'location',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_location
-												) {
-
-													$provider_item_Person['location'] = $provider_location;
-
-												}
-
-									}
-
 								// mainEntityOfPage
 
 									/* 
@@ -8048,145 +8327,6 @@
 												) {
 
 													$provider_item_Person['makesOffer'] = $provider_makesOffer;
-
-												}
-
-									}
-
-								// memberOf
-
-									/* 
-									 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
-									 * 
-									 * Inverse-property: member
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 *     - ProgramMembership
-									 */
-
-									if (
-										(
-											in_array(
-												'memberOf',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'memberOf',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($provider_memberOf) ) {
-
-												$provider_memberOf = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'memberOf',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_memberOf
-												) {
-
-													$provider_item_MedicalBusiness['memberOf'] = $provider_memberOf;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'memberOf',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_memberOf
-												) {
-
-													$provider_item_Person['memberOf'] = $provider_memberOf;
-
-												}
-
-									}
-
-								// parentOrganization
-
-									/* 
-									 * The larger organization that this organization is a subOrganization of, if any.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										in_array(
-											'parentOrganization',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
-										)
-										||
-										in_array(
-											'parentOrganization',
-											$provider_properties_map[$Person_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											if ( !isset($provider_parentOrganization) ) {
-
-												$provider_parentOrganization = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'parentOrganization',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_parentOrganization
-												) {
-
-													$provider_item_MedicalBusiness['parentOrganization'] = $provider_parentOrganization;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'parentOrganization',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_parentOrganization
-												) {
-
-													$provider_item_Person['parentOrganization'] = $provider_parentOrganization;
 
 												}
 
@@ -8740,144 +8880,6 @@
 												) {
 
 													$provider_item_Person['subjectOf'] = $provider_subjectOf;
-
-												}
-
-									}
-
-								// workLocation
-
-									/* 
-									 * A contact location for a person's place of work.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - ContactPoint
-									 *     - Place
-									 */
-
-									if (
-										(
-											in_array(
-												'workLocation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'workLocation',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($provider_workLocation) ) {
-
-												$provider_workLocation = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'workLocation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_workLocation
-												) {
-
-													$provider_item_MedicalBusiness['workLocation'] = $provider_workLocation;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'workLocation',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_workLocation
-												) {
-
-													$provider_item_Person['workLocation'] = $provider_workLocation;
-
-												}
-
-									}
-
-								// worksFor
-
-									/* 
-									 * Organizations that the person works for.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										(
-											in_array(
-												'worksFor',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'worksFor',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($provider_worksFor) ) {
-
-												$provider_worksFor[] = $schema_base_org_uams_health_ref ?? '';
-												$provider_worksFor[] = $schema_base_org_uams_ref ?? '';
-
-											}
-
-										// Add to item values
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'workLocation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_worksFor
-												) {
-
-													$provider_item_MedicalBusiness['workLocation'] = $provider_worksFor;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'worksFor',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_worksFor
-												) {
-
-													$provider_item_Person['worksFor'] = $provider_worksFor;
 
 												}
 
