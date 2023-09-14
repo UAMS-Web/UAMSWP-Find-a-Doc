@@ -6870,41 +6870,63 @@
 
 														// Google Company ID (CID)
 
-															// Get values
+															// Get Google Company ID repeater field value
 
-																if ( !isset($provider_cid) ) {
+																if ( !isset($provider_cid_repeater) ) {
 
-																	$provider_cid = '';
+																	$provider_cid_repeater = array();
 
 																}
 
-															if ( $provider_cid ) {
+																// Add each item to Google Company ID value array
 
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																	array(
-																		'Google Ads customer ID',
-																		'Google Ads CID',
-																		'Google Maps customer ID',
-																		'Google Maps CID',
-																		'Google CID',
-																		'CID'
-																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'Google customer ID', // string // Optional // name property value
-																	'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_cid, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
+																	if ( !isset($provider_cid) ) {
 
-															}
+																		if ( $provider_cid_repeater ) {
+
+																			/*
+
+																				foreach loop to get the text field value from each row.
+
+																				Add each value to a list array
+
+																			*/
+
+																			$provider_cid = array();
+
+																		}
+
+																	}
+
+															// Add value to identifier property value list
+
+																if ( $provider_cid ) {
+
+																	$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																		array(
+																			'Google Ads customer ID',
+																			'Google Ads CID',
+																			'Google Maps customer ID',
+																			'Google Maps CID',
+																			'Google CID',
+																			'CID'
+																		), // mixed // Optional // alternateName property value
+																		null, // string // Optional // description property value
+																		null, // int // Optional // maxValue property value
+																		null, // mixed // Optional // measurementMethod property value
+																		null, // mixed // Optional // measurementTechnique property value
+																		null, // int // Optional // minValue property value
+																		'Google customer ID', // string // Optional // name property value
+																		'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
+																		null, // string // Optional // unitCode property value
+																		null, // string // Optional // unitText property value
+																		null, // string // Optional // url property value
+																		$provider_cid, // mixed // Optional // value property value
+																		null, // mixed // Optional // valueReference property value
+																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	);
+
+																}
 
 												}
 
