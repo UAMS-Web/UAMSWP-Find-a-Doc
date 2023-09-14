@@ -2542,7 +2542,7 @@
 			int $Person_i = 1, // Iteration counter for provider-as-Person
 			array $provider_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $MedicalBusiness_list = array(), // Pre-existing list array for provider-as-MedicalBusiness to which to add additional items
-			array $Person_list = array() // Pre-existing list array for provider-as-Person to which to add additional items
+			array $Person_list = array(), // Pre-existing list array for provider-as-Person to which to add additional items
 			array $provider_list = array() // Pre-existing list array for both provider-as-MedicalBusiness and provider-as-Person to which to add additional items
 		) {
 
