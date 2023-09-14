@@ -8595,6 +8595,35 @@
 
 												// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
+													if ( !isset($LocalBusiness_medicalSpecialty_list) ) {
+																	
+														// Get medicalSpecialty multiselect field value
+
+															if ( !isset($LocalBusiness_medicalSpecialty_multiselect) ) {
+
+																$LocalBusiness_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
+
+															}
+
+														// Format value
+
+															// Simple list of MedicalSpecialty values
+
+																$LocalBusiness_medicalSpecialty_list = array();
+
+															// Schema property values
+
+																if ( $LocalBusiness_medicalSpecialty_multiselect ) {
+
+																	$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+																		$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+																		$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+																	);
+
+																}
+
+													}
+
 													if ( $LocalBusiness_medicalSpecialty_list ) {
 
 														$LocalBusiness_additionalType = array_merge(
