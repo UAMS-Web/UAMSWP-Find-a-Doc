@@ -4762,7 +4762,7 @@
 
 															}
 
-														// Get ratings data from NRC JSON API and decode ($rating_data)
+														// Get ratings data from NRC JSON API and decode
 
 															if ( !isset($provider_aggregateRating_api) ) {
 
@@ -4793,7 +4793,7 @@
 														$provider_aggregateRating_api
 													) {
 
-														// ratingCount ($review_count)
+														// ratingCount
 
 															if ( !isset($provider_aggregateRating_ratingCount) ) {
 
