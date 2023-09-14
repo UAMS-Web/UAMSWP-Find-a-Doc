@@ -2478,6 +2478,252 @@
 
 		}
 
+	// Add data to an array defining schema data for Language
+
+		function uamswp_fad_schema_language(
+			$languages, // mixed // Required // Language ID values
+			string &$language_string = null, // string // Optional // Pre-existing string variable to populate with a comma-separated list of language names
+			string &$language_string_attr = null, // string // Optional // Pre-existing string variable to populate with an attribute-friendly comma-separated list of language names
+			array &$language_array = array(), // array // Optional // Pre-existing array variable to populate with a list of language names
+			array &$language_array_attr = array(), // array // Optional // Pre-existing array variable to populate with an attribute-friendly list of language names
+			array $language_schema = array() // array // Optional // Pre-existing schema array for Language to which to add additional items
+		) {
+
+			/*
+
+				Natural languages such as Spanish, Tamil, Hindi, English, etc.
+				
+				Formal language code tags expressed in BCP 47 can be used via 
+				the alternateName property.
+				
+				The Language type previously also covered programming 
+				languages such as Scheme and Lisp, which are now best represented using 
+				ComputerLanguage.
+
+				$name
+
+					English name for this language (exonym / xenonym)
+					
+					Examples:
+					
+						 * 'Persian' is the English name, while 'Farsi' is the native name
+
+					Expected Type:
+
+						 * Text
+
+				$alternateName
+
+					Alternate name(s) of the language
+
+						 * Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) Language Tag
+						 * Native Name of Language (Endonym / Autonym)
+
+					Examples:
+					
+						 * 'fa' is the BCP 47 code for Persian / Farsi
+						 * 'Farsi' is the native name, while 'Persian' is the English name
+
+					Expected Type:
+
+						 * Text
+
+				$sameAs
+
+					URL of a reference Web page that unambiguously indicates the item's identity 
+					(e.g., the URL of the item's Wikipedia page, the URL of the item's Wikidata 
+					entry, the URL of the item's official website).
+					
+					Examples:
+					
+						 * 'https://en.wikipedia.org/wiki/Persian_language' (Wikipedia page for Persian)
+						 * 'https://www.wikidata.org/wiki/Q9168' (Wikidata entry for Persian)
+
+					Expected Type:
+
+						 * Text
+						 * URL
+
+			 */
+
+			// Check/define variables
+
+				// Format input values
+
+					if ( is_array($languages) ) {
+
+						$languages = array_filter($languages);
+
+						if ( $languages ) {
+
+							$languages = array_is_list($languages) ? $languages : array($languages);
+
+						}
+
+					} else {
+						
+						$languages = array($languages);
+
+					}
+
+				// If the arguments are all empty, end here
+
+					if ( !$languages ) {
+
+						return $language_list;
+
+					}
+
+				// Format pre-existing output values
+
+					// Explode string variables
+
+						$language_string = array_filter(
+							explode(
+								', ',
+								$language_string
+							)
+						);
+
+						$language_string_attr = array_filter(
+							explode(
+								', ',
+								$language_string_attr
+							)
+						);
+
+					if ( $language_array ) {
+
+						$language_array = array_is_list($language_array) ? $language_array : array($language_array);
+
+					}
+
+					if ( $language_array_attr ) {
+
+						$language_array_attr = array_is_list($language_array_attr) ? $language_array_attr : array($language_array_attr);
+
+					}
+
+					if ( $language_schema ) {
+
+						$language_schema = array_is_list($language_schema) ? $language_schema : array($language_schema);
+
+					}
+
+			// Get values
+
+				foreach ( $languages as $item ) {
+
+					if ( $item ) {
+
+						$item_term = get_term_by( 'id', $item, 'language');
+
+						if ( is_object($item_term) ) {
+
+							// Language English name
+
+								$item_name = $item_term->name ?? '';
+								$item_name_attr = $item_name ? uamswp_attr_conversion($item_name) : '';
+								$language_array[] = $item_name;
+								$language_string[] = $item_name;
+								$language_array_attr[] = $item_name_attr;
+								$language_string_attr[] = $item_name;
+								$item_schema['name'] = '';
+
+							// alternateName
+
+								// Language native name
+
+									$item_name_native = get_field( 'language_name_native', $item_term ) ?? '';
+									$item_name_native_attr = $item_name_native ? uamswp_attr_conversion($item_name_native) : '';
+									$item_schema['alternateName'][] = $item_name_native_attr;
+
+								// Language Internet Engineering Task Force Best Current Practice 47 (IETF BCP 47) language tag
+
+									$item_bcp47 = get_field( 'language_bcp47', $item_term ) ?? '';
+									$item_bcp47_attr = $item_bcp47 ? uamswp_attr_conversion($item_bcp47) : '';
+									$item_schema['alternateName'][] = $item_bcp47_attr;
+
+								// Clean up array
+
+									if ( $item_schema['alternateName'] ) {
+
+										$item_schema['alternateName'] = array_filter($item_schema['alternateName']);
+										$item_schema['alternateName'] = array_unique($item_schema['alternateName']);
+										$item_schema['alternateName'] = array_values($item_schema['alternateName']);
+
+									}
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($item_schema['alternateName']);
+
+									// Sort array
+
+										if ( is_array($item_schema['alternateName']) ) {
+
+											sort($item_schema['alternateName']);
+
+										}
+
+							// sameAs
+
+								$item_sameAs = array();
+
+								if ( $item_sameAs ) {
+
+									$item_schema['sameAs'] = uamswp_fad_schema_sameas(
+										$item_sameAs, // sameAs repeater field
+										'schema_sameas_url' // sameAs item field name
+									);
+
+								} // endif
+
+						} // endif
+
+						// Add @type
+
+							if ( $item_schema ) {
+
+								$item_schema = array( '@type' => 'Language' ) + $item_schema;
+
+							} // endif
+
+						// Add item to schema list
+
+							if ( $item_schema ) {
+
+								$language_schema[] = $item_schema;
+
+							} // endif
+
+					}
+
+				} // endforeach
+
+			// Format values
+
+				// Sort
+
+					sort($language_string);
+					sort($language_string_attr);
+					sort($language_array);
+					sort($language_array_attr);
+
+				// String lists
+
+					// Standard
+
+						$language_string = $language_string ? implode( ', ', $language_string ) : '';
+		
+					// Attribute-friendly
+
+						$language_string_attr = $language_string_attr ? implode( ', ', $language_string_attr ) : '';
+
+			return $language_schema;
+
+		}
+
 	// Add data to an array defining schema data for ImageObject from thumbnails
 
 		function uamswp_fad_schema_imageobject_thumbnails(
@@ -3369,6 +3615,7 @@
 								$provider_keywords = null;
 								$provider_knowsAbout = null;
 								$provider_knowsLanguage = null;
+								$provider_languages = null;
 								$provider_legalName = null;
 								$provider_leiCode = null;
 								$provider_location = null;
@@ -7530,8 +7777,16 @@
 
 											if ( !isset($provider_knowsLanguage) ) {
 
-												$provider_knowsLanguage = array();
+												if ( !isset($provider_languages) ) {
 
+													$provider_languages = get_field( 'physician_languages', $provider );
+												
+												}
+
+												$provider_knowsLanguage = uamswp_fad_schema_language(
+													$languages // mixed // Required // Language ID values
+												);
+								
 											}
 
 										// Add to item values
