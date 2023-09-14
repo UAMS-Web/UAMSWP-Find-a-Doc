@@ -7144,9 +7144,13 @@
 
 											if ( !isset($provider_isAcceptingNewPatients) ) {
 
-												$provider_isAcceptingNewPatients = array();
+												$provider_isAcceptingNewPatients = get_field( 'physician_accepting_patients', $provider ) ?? false;
 
 											}
+
+										// Format values
+
+											$provider_isAcceptingNewPatients = $provider_isAcceptingNewPatients ? 'True' : 'False';
 
 										// Add to item values
 
