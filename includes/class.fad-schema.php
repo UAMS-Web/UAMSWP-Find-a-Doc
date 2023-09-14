@@ -3716,10 +3716,9 @@
 										if ( !isset($provider_url) ) {
 
 											$provider_url = get_permalink($provider);
+											$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
 
 										}
-
-										$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
 
 									// Add to item values
 
@@ -7933,13 +7932,20 @@
 
 											if ( !isset($provider_mainEntityOfPage) ) {
 
-												$provider_mainEntityOfPage = $schema_provider_MedicalWebPage_ref ?? '';
+												if ( !isset($schema_provider_MedicalWebPage_ref) ) {
 
-												if ( !$provider_mainEntityOfPage ) {
+													if ( !isset($provider_url) ) {
 
-													$provider_mainEntityOfPage = ( isset($provider_url) && !empty($provider_url) ) ? $provider_url . '#MedicalWebPage' : '';
+														$provider_url = get_permalink($provider);
+														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
+			
+													}
+			
+													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : '';
 
 												}
+
+												$provider_mainEntityOfPage = $schema_provider_MedicalWebPage_ref ?? '';
 
 											}
 
@@ -8688,19 +8694,20 @@
 
 											if ( !isset($provider_subjectOf) ) {
 
-												$provider_subjectOf = $schema_provider_MedicalWebPage_ref ?? '';
+												if ( !isset($schema_provider_MedicalWebPage_ref) ) {
 
-												if ( !$provider_subjectOf ) {
+													if ( !isset($provider_url) ) {
 
-													$provider_subjectOf = $provider_mainEntityOfPage ?? '';
-
-													if ( !$provider_subjectOf ) {
-
-														$provider_subjectOf = ( isset($provider_url) && !empty($provider_url) ) ? $provider_url . '#MedicalWebPage' : '';
-
+														$provider_url = get_permalink($provider);
+														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
+			
 													}
+			
+													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : '';
 
 												}
+
+												$provider_subjectOf = $schema_provider_MedicalWebPage_ref ?? '';
 
 											}
 
