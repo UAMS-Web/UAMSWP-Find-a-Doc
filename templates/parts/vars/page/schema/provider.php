@@ -1936,7 +1936,7 @@ TODO List
 				$provider_portrait = uamswp_fad_schema_imageobject_thumbnails(
 					$schema_provider_url, // URL of entity with which the image is associated
 					0, // Nesting level within the main schema
-					'3:4', // Aspect ratio to use if only on image is included // enum('1:1', '3:4', '4:3', '16:9')
+					'3:4', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
 					'Portrait', // Base fragment identifier
 					$featured_image ?: 0, // ID of image to use for 1:1 aspect ratio
 					$featured_image ?: 0, // ID of image to use for 3:4 aspect ratio
