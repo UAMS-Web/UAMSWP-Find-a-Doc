@@ -11861,7 +11861,7 @@
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
 
-							// Add to list of conditions
+							// Add to list of locations
 
 								$LocalBusiness_list[] = $LocalBusiness_item;
 
@@ -12586,7 +12586,7 @@
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-						// Add to list of conditions
+						// Add to list of areas of expertise
 
 							$MedicalEntity_list[] = $MedicalEntity_item;
 
@@ -12650,7 +12650,7 @@
 						 * Return the variable.
 						 */
 
-						// Add to list of conditions
+						// Add to list of clinical resources
 
 							$CreativeWork_list[] = $CreativeWork_item;
 
@@ -14558,7 +14558,7 @@
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-						// Add to list of conditions
+						// Add to list of clinical resources
 
 							$CreativeWork_list[] = $CreativeWork_item;
 
