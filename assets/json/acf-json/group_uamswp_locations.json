@@ -1061,8 +1061,8 @@
 			},
 			"acfe_permissions": "",
 			"choices": {
-				"1": "Yes",
-				"0": "No"
+				"0": "No",
+				"1": "Yes"
 			},
 			"allow_null": 0,
 			"default_value": 0,
@@ -4648,8 +4648,8 @@
 			},
 			"acfe_permissions": "",
 			"choices": {
-				"1": "Yes",
-				"0": "No"
+				"0": "No",
+				"1": "Yes"
 			},
 			"allow_null": 1,
 			"default_value": "",
