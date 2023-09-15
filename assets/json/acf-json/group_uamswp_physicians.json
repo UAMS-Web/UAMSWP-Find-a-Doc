@@ -1298,31 +1298,6 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_physician_recognitions": {
-			"key": "field_physician_recognitions",
-			"name": "physician_recognitions",
-			"type": "taxonomy",
-			"label": "Recognition Lists",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "recognition",
-			"field_type": "multi_select",
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 1,
-			"allow_null": 1
-		},
 		"field_physician_hidden": {
 			"key": "field_physician_hidden",
 			"name": "physician_hidden",
@@ -2637,11 +2612,11 @@
 			"multiple": "0",
 			"allow_null": "0"
 		},
-		"field_physician_extra_tab": {
-			"key": "field_physician_extra_tab",
+		"field_physician_recognition_tab": {
+			"key": "field_physician_recognition_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Extra",
+			"label": "<i class=\"dashicons dashicons-awards\"><\/i> Recognition and Awards",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2652,6 +2627,31 @@
 			},
 			"placement": "left",
 			"endpoint": 0
+		},
+		"field_physician_recognitions": {
+			"key": "field_physician_recognitions",
+			"name": "physician_recognitions",
+			"type": "taxonomy",
+			"label": "Recognition Lists",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "recognition",
+			"field_type": "multi_select",
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 1,
+			"allow_null": 1
 		},
 		"field_physician_awards": {
 			"key": "field_physician_awards",
@@ -2730,6 +2730,22 @@
 					"maxlength": ""
 				}
 			]
+		},
+		"field_physician_extra_tab": {
+			"key": "field_physician_extra_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons dashicons-info\"><\/i> Additional Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_physician_additional_info": {
 			"key": "field_physician_additional_info",
