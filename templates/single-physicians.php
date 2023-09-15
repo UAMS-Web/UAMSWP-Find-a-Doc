@@ -634,6 +634,7 @@
 
 					$gender = get_field('physician_gender',$post->ID);
 					$gender_attr = uamswp_attr_conversion($gender);
+					$provider_schema_fields['provider_gender_value'] = $gender_attr; // Add to schema fields
 
 				$meta_profile_gender = $gender_attr ? strtolower($gender_attr) : '';
 				$meta_profile_gender = ( $meta_profile_gender == 'male' || $meta_profile_gender == 'female' ) ? $meta_profile_gender : ''; // Check against enum(male, female)

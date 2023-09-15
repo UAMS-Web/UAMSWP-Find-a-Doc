@@ -6847,11 +6847,40 @@
 
 										// Get values
 
-											if ( !isset($provider_gender) ) {
+											if ( !isset($provider_gender_value) ) {
 
-												$provider_gender = array();
+												$provider_gender_value = get_field( 'physician_gender', $provider );
+												$provider_gender_value = ucfirst($provider_gender_value);
+												$provider_gender_value_attr = uamswp_attr_conversion($provider_gender_value);
 
 											}
+
+											// Define list of GenderType enumeration members
+
+												$GenderType_valid = array(
+													'Female',
+													'Male'
+												);
+
+											// Format values
+
+												if (
+													array_intersect(
+														$GenderType_valid,
+														$provider_gender_value_attr
+													)
+												) {
+
+													$provider_gender = array(
+														'@id' => 'https://schema.org/' . $provider_gender_value_attr,
+														'@type' => 'GenderType'
+													);
+
+												} else {
+
+													$provider_gender = strtolower($provider_gender_value_attr);
+
+												}
 
 										// Add to item values
 
