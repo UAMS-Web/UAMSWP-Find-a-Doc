@@ -1282,7 +1282,7 @@
 			"name": "schema_google_cid",
 			"label": "Google CID Number",
 			"type": "text",
-			"instructions": "A Google customer ID (CID) is a unique number used to identify an entity in Google My Business. Follow these steps to locate the CID for this location's Google My Business listing.</p><ol class='description' style='margin-top: 0.5em;'><li>Find the listing on <a href='https://www.google.com/maps' target='_blank'>Google Maps</a>.</li><li>Click \"Share\" and copy the link.</li><li>Go to the link in the browser.</li><li>Copy the resulting full URL.</li><li>Go to <a href='https://pleper.com/index.php?do=tools&sdo=cid_converter' target='_blank'>https://pleper.com/index.php?do=tools&sdo=cid_converter</a>.</li><li>Paste the full URL into the \"CID or Link to maps\" field.</li><li>Click \"Convert and generate.\"</li><li>Copy the value from the \"CID decimal\" field.</li></ol><p class='description' style='margin-top: 0.5em;'>Once you've done that, paste the value into this field.",
+			"instructions": "A Google customer ID (CID) is a unique number used to identify an entity in Google My Business. Follow these steps to locate the CID for this entity's Google My Business listing.</p><ol class='description' style='margin-top: 0.5em;'><li>Find the listing on <a href='https://www.google.com/maps' target='_blank'>Google Maps</a>.</li><li>Click \"Share\" and copy the link.</li><li>Go to the link in the browser.</li><li>Copy the resulting full URL.</li><li>Go to <a href='https://pleper.com/index.php?do=tools&sdo=cid_converter' target='_blank'>https://pleper.com/index.php?do=tools&sdo=cid_converter</a>.</li><li>Paste the full URL into the \"CID or Link to maps\" field.</li><li>Click \"Convert and generate.\"</li><li>Copy the value from the \"CID decimal\" field.</li></ol><p class='description' style='margin-top: 0.5em;'>Once you've done that, paste the value into this field.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1296,6 +1296,47 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		"field_schema_google_cid_multiple": {
+			"key": "field_schema_google_cid_multiple",
+			"name": "schema_google_cid_multiple",
+			"label": "Google CID Numbers",
+			"type": "repeater",
+			"instructions": "A Google customer ID (CID) is a unique number used to identify an entity in Google My Business. Follow these steps to locate the CID for each of this entity's Google My Business listings.</p><ol class='description' style='margin-top: 0.5em;'><li>Find the listing on <a href='https://www.google.com/maps' target='_blank'>Google Maps</a>.</li><li>Click \"Share\" and copy the link.</li><li>Go to the link in the browser.</li><li>Copy the resulting full URL.</li><li>Go to <a href='https://pleper.com/index.php?do=tools&sdo=cid_converter' target='_blank'>https://pleper.com/index.php?do=tools&sdo=cid_converter</a>.</li><li>Paste the full URL into the \"CID or Link to maps\" field.</li><li>Click \"Convert and generate.\"</li><li>Copy the value from the \"CID decimal\" field.</li></ol><p class='description' style='margin-top: 0.5em;'>Once you've done that, paste the value into this field.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"collapsed": "field_schema_google_cid_text",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Add Google CID Number",
+			"sub_fields": [
+				{
+					"key": "field_schema_google_cid_text",
+					"name": "schema_google_cid_text",
+					"label": "Individual Google CID Number",
+					"type": "text",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
 		}
 	},
 	"location": "",

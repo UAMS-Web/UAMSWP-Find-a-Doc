@@ -4659,7 +4659,7 @@
 		"field_location_schema_google_cid": {
 			"key": "field_location_schema_google_cid",
 			"name": "location_schema_google_cid",
-			"label": "Google CID Number (hasMap)",
+			"label": "Google CID Number (hasMap, identifier)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

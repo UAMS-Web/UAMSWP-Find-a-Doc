@@ -2676,7 +2676,7 @@
 		"field_physician_alternatename": {
 			"key": "field_physician_alternatename",
 			"name": "physician_alternatename",
-			"label": "Alternate Names for the Provider",
+			"label": "Alternate Names for the Provider (alternateName > URL)",
 			"type": "clone",
 			"instructions": "Do not include degrees and credentials in the alternate names.",
 			"required": 0,
@@ -2700,7 +2700,7 @@
 		"field_physician_sameas": {
 			"key": "field_physician_sameas",
 			"name": "physician_sameas",
-			"label": "Reference Webpages for the Provider",
+			"label": "Reference Webpages for the Provider (sameAs > URL)",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -2745,9 +2745,64 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_physician_schema_gmb_query": {
+			"key": "field_physician_schema_gmb_query",
+			"name": "physician_schema_gmb_query",
+			"label": "Does this provider have one or more listings on Google My Business?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_physician_schema_google_cid": {
+			"key": "field_physician_schema_google_cid",
+			"name": "physician_schema_google_cid",
+			"label": "Google CID Numbers (hasMap, identifier)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_schema_gmb_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_google_cid_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
 		"field_physician_gmb_exclude": {
 			"key": "field_physician_gmb_exclude",
-			"label": "Exclude Listing in Google My Business",
+			"label": "Exclude Listing in Bulk Imports to Google My Business?",
 			"name": "physician_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
