@@ -10308,22 +10308,18 @@
 
 											if ( !isset($provider_sameAs_repeater) ) {
 
-												$provider_sameAs_repeater = array();
+												$provider_sameAs_repeater = get_field( 'schema_sameas', $provider );
 
 											}
 
 											// Add each item to sameAs property values array
 
-												if ( !isset($provider_sameAs) ) {
+												if ( $provider_sameAs_repeater ) {
 
-													if ( $provider_sameAs_repeater ) {
-
-														$provider_sameAs = uamswp_fad_schema_sameas(
-															$provider_sameAs_repeater, // sameAs repeater field
-															'schema_sameas_url' // sameAs item field name
-														);
-
-													}
+													$provider_sameAs = uamswp_fad_schema_sameas(
+														$provider_sameAs_repeater, // sameAs repeater field
+														'schema_sameas_url' // sameAs item field name
+													);
 
 												}
 
