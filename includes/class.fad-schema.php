@@ -1997,22 +1997,28 @@
 
 				$alternateName_schema = array_is_list($alternateName_schema) ? $alternateName_schema : array($alternateName_schema);
 
-			// Base list array
+			// Add each repeater row to the list array
 
-				$alternateName_schema = array();
+				if ( $repeater ) {
 
-			if ( $repeater ) {
+					foreach ( $repeater as $alternateName ) {
 
-				foreach ( $repeater as $alternateName ) {
+						$alternateName_schema[] = $alternateName[$field_name];
 
-					$alternateName_schema[] = $alternateName[$field_name];
+					} // endforeach ( $repeater as $alternateName )
 
-				} // endforeach ( $repeater as $alternateName )
+				} // endif ( $repeater )
 
-				// Clean up list array
+			// Clean up list array
 
-					$alternateName_schema = array_filter($alternateName_schema);
+				if ( $alternateName_schema ) {
+
 					$alternateName_schema = array_unique($alternateName_schema);
+					$alternateName_schema = array_filter($alternateName_schema);
+				}
+
+				if ( $alternateName_schema ) {
+
 					$alternateName_schema = array_values($alternateName_schema);
 					sort($alternateName_schema);
 
@@ -2020,7 +2026,7 @@
 
 						uamswp_fad_flatten_multidimensional_array($alternateName_schema);
 
-			} // endif ( $repeater )
+				}
 
 			return $alternateName_schema;
 
@@ -2078,8 +2084,9 @@
 	// Add data to an array defining schema data for sameAs
 
 		function uamswp_fad_schema_sameas(
-			array $repeater, // sameAs repeater field
-			string $field_name = 'schema_sameas_url' // sameAs item field name
+			array $repeater, // array // Required // sameAs repeater field
+			string $field_name = 'schema_sameas_url', // string // Optional // sameAs item field name
+			array $sameAs_schema = array() // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
 		) {
 
 			/* 
@@ -2092,9 +2099,22 @@
 			 *     - URL
 			 */
 
-			// Base list array
+			// Check / define variables
 
-				$sameAs_list = array();
+				$repeater = is_array($repeater) ? $repeater : array($repeater);
+				$repeater = array_is_list($repeater) ? $repeater : array($repeater);
+				$repeater = array_filter($repeater);
+				$repeater = array_values($repeater);
+
+				// If the input is empty, end now
+
+					if ( !$repeater ) {
+
+						return $sameAs_schema;
+
+					}
+
+				$sameAs_schema = array_is_list($sameAs_schema) ? $sameAs_schema : array($sameAs_schema);
 
 			// Add each repeater row to the list array
 
@@ -2102,24 +2122,32 @@
 
 					foreach ( $repeater as $sameAs ) {
 
-						$sameAs_list[] = $sameAs[$field_name];
+						$sameAs_schema[] = $sameAs[$field_name];
 
 					} // endforeach ( $repeater as $sameAs )
 
-					// Clean up list array
-
-						$sameAs_list = array_unique($sameAs_list);
-						$sameAs_list = array_filter($sameAs_list);
-						$sameAs_list = array_values($sameAs_list);
-						sort($sameAs_list);
-
-						// If there is only one item, flatten the multi-dimensional array by one step
-
-							uamswp_fad_flatten_multidimensional_array($sameAs_list);
-
 				} // endif ( $repeater )
 
-			return $sameAs_list;
+			// Clean up list array
+
+				if ( $sameAs_schema ) {
+
+					$sameAs_schema = array_unique($sameAs_schema);
+					$sameAs_schema = array_filter($sameAs_schema);
+				}
+
+				if ( $sameAs_schema ) {
+
+					$sameAs_schema = array_values($sameAs_schema);
+					sort($sameAs_schema);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($sameAs_schema);
+
+				}
+
+			return $sameAs_schema;
 
 		}
 
@@ -3289,6 +3317,545 @@
 				}
 
 			return $hasCredential_schema;
+
+		}
+
+	// Add data to an array defining schema data for hasOccupation
+
+		function uamswp_fad_schema_hasoccupation(
+			$specializations, // mixed // Required // Clinical Specialization ID values
+			array $hasOccupation_schema = array() // array // Optional // Pre-existing schema array for hasOccupation to which to add hasOccupation items
+		) {
+
+			/*
+
+				'hasOccupation' property:
+
+					The Person's occupation. For past professions, use Role for expressing dates.
+
+					Values expected to be one of these types:
+
+						 * Occupation
+
+				'Occupation' type:
+
+					A profession, may involve prolonged training and/or a formal qualification.
+
+			*/
+
+			// Check / define variables
+
+				$specializations = is_array($specializations) ? $specializations : array($specializations);
+				$specializations = array_is_list($specializations) ? $specializations : array($specializations);
+				$specializations = array_filter($specializations);
+				$specializations = array_values($specializations);
+
+				// If the input is empty, end now
+
+					if ( !$specializations ) {
+
+						return $hasOccupation_schema;
+
+					}
+
+				$hasOccupation_schema = array_is_list($hasOccupation_schema) ? $hasOccupation_schema : array($hasOccupation_schema);
+
+			// Get values
+
+				foreach ( $specializations as $specialization ) {
+
+					// Eliminate PHP errors / reset variables
+
+						$specialization_term = null;
+						$specialization_name = null;
+						$specialization_alternateName_array = null;
+						$specialization_alternateName = null;
+						$specialization_sameAs_array = null;
+						$specialization_sameAs = null;
+						$specialization_url = null;
+
+					// Base array
+
+						$specialization_schema = array(
+							'name' => '',
+							'alternateName' => '',
+							'description' => '',
+							'occupationalCategory' => '',
+							'sameAs' => ''
+						);
+
+					$specialization_term = get_term( $specialization, 'clinical_title' ) ?? '';
+
+					if ( is_object($specialization_term) ) {
+
+						// name (clinical occupation title value from Clinical Specialization item)
+
+							$specialization_name = get_field( 'clinical_specialization_title', $specialization_term ) ?? '';
+							$specialization_schema['name'] = $specialization_name;
+
+						// alternateName (alternate clinical occupation title value from Clinical Specialization item)
+
+							// Base array
+
+								$specialization_alternateName = array();
+
+							// Get alternateName repeater field value
+
+								$specialization_alternateName_array = get_field( 'schema_alternatename', $specialization_term ) ?? array();
+
+							// Add each item to alternateName property values array
+
+								if ( $specialization_alternateName_array ) {
+
+									$specialization_alternateName = uamswp_fad_schema_alternatename(
+										$specialization_alternateName_array, // alternateName repeater field
+										'schema_alternatename_text', // alternateName item field name
+										$specialization_alternateName // array // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+									);
+
+								}
+
+							// Add to schema item
+
+								if ( $specialization_alternateName ) {
+
+									$specialization_schema['alternateName'] = $specialization_alternateName;
+
+								}
+
+						// description
+
+							$specialization_description = get_field( 'clinical_specialization_definition', $specialization_term ) ?? '';
+
+							// Add to schema item
+
+								if ( $specialization_description ) {
+
+									$specialization_schema['description'] = $specialization_description;
+
+								}
+
+						// occupationalCategory
+
+							// O*Net-SOC
+
+								// Occupation Code
+
+								$specialization_onetsoc_code = get_field( 'clinical_specialization_onetsoc_code', $specialization_term ) ?? '';
+								$specialization_onetsoc_code = $specialization_onetsoc_code ? uamswp_attr_conversion($specialization_onetsoc_code) : '';
+
+								// Occupation Name
+
+									$specialization_onetsoc_code_name = get_field( 'clinical_specialization_onetsoc_code_name', $specialization_term );
+									$specialization_onetsoc_code_name = $specialization_onetsoc_code_name ? uamswp_attr_conversion($specialization_onetsoc_code_name) : '';
+
+								// Array
+
+									$specialization_onetsoc = array();
+
+									if ( $specialization_onetsoc_code ) {
+
+										$specialization_onetsoc = array(
+											'@type' => 'CategoryCode',
+											'codeValue' => $specialization_onetsoc_code, // O*Net-SOC code value from Specialty item
+											'inCodeSet' => array(
+												'@type' => 'CategoryCodeSet',
+												'dateModified' => '2019',
+												'name' => 'O*Net-SOC',
+												'url' => 'https://www.onetonline.org/'
+											),
+											'name' => $specialization_onetsoc_code_name ?? '', // O*Net-SOC name from Specialty item
+											'url' => 'https://www.onetonline.org/link/summary/' . $specialization_onetsoc_code // O*Net-SOC URL from Specialty item
+										);
+
+										// Clean up array
+
+											$specialization_onetsoc = array_filter($specialization_onetsoc);
+
+									}
+
+							// ISCO-08 Code
+
+								$specialization_isco08_code = get_field( 'clinical_specialization_isco08_code', $specialization_term ) ?? array();
+								$specialization_isco08_code = is_array($specialization_isco08_code) ? $specialization_isco08_code : array($specialization_isco08_code);
+								$specialization_isco08_code = array_filter($specialization_isco08_code);
+
+								// Make value attribute-friendly, add it to an array if it is not already
+
+									if ( $specialization_isco08_code ) {
+
+										foreach ($specialization_isco08_code as &$code ) {
+
+											$code = uamswp_attr_conversion($code);
+
+										}
+
+									}
+
+								// Values map
+
+									$isco08_values = array(
+										'2' => array(
+											'name' => 'Professionals',
+											'description' => 'Professionals increase the existing stock of knowledge; apply scientific or artistic concepts and theories; teach about the foregoing in a systematic manner; or engage in any combination of these activities. Competent performance in most occupations in this major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array()
+										),
+										'22' => array(
+											'name' => 'Health Professionals',
+											'description' => 'Health professionals conduct research; improve or develop concepts, theories and operational methods; and apply scientific knowledge relating to medicine, nursing, dentistry, veterinary medicine, pharmacy, and promotion of health.  Competent performance in most occupations in this sub-major group requires skills at the fourth ISCO skill level.',
+											'sameAs' => array(
+												'2'
+											)
+										),
+										'221' => array(
+											'name' => 'Medical Doctors',
+											'description' => 'Medical doctors (physicians) study, diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans through the application of the principles and procedures of modern medicine. They plan, supervise and evaluate the implementation of care and treatment plans by other health care providers, and conduct medical education and research activities.',
+											'sameAs' => array(
+												'2',
+												'22'
+											)
+										),
+										'2211' => array(
+											'name' => 'Generalist Medical Practitioners',
+											'description' => 'Generalist medical practitioners (including family and primary care doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments and maintain general health in humans through application of the principles and procedures of modern medicine.  They do not limit their practice to certain disease categories or methods of treatment, and may assume responsibility for the provision of continuing and comprehensive medical care to individuals, families and communities.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'221'
+											)
+										),
+										'2212' => array(
+											'name' => 'Specialist Medical Practitioners',
+											'description' => 'Specialist medical practitioners (medical doctors) diagnose, treat and prevent illness, disease, injury and other physical and mental impairments in humans, using specialized testing, diagnostic, medical, surgical, physical and psychiatric techniques through application of the principles and procedures of modern medicine. They specialize in certain disease categories, types of patient or methods of treatment and may conduct medical education and research in their chosen areas of specialization.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'221'
+											)
+										),
+										'222' => array(
+											'name' => 'Nursing and Midwifery Professionals',
+											'description' => 'Nursing and midwifery professionals provide treatment and care services for people who are physically or mentally ill, disabled or infirm, and others in need of care due to potential risks to health including before, during and after childbirth. They assume responsibility for the planning, management and evaluation of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures. ',
+											'sameAs' => array(
+												'2',
+												'22'
+											)
+										),
+										'2221' => array(
+											'name' => 'Nursing Professionals',
+											'description' => 'Nursing professionals provide treatment, support and care services for people who are in need of nursing care due to the effects of ageing, injury, illness or other physical or mental impairment, or potential risks to health. They assume responsibility for the planning and management of the care of patients, including the supervision of other health care workers, working autonomously or in teams with medical doctors and others in the practical application of preventive and curative measures.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'222'
+											)
+										),
+										'2222' => array(
+											'name' => 'Midwifery Professionals',
+											'description' => 'Midwifery professionals plan, manage, provide and evaluate midwifery care services before, during and after pregnancy and childbirth. They provide delivery care for reducing health risks to women and newborn children, working autonomously or in teams with other health care providers.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'222'
+											)
+										),
+										'223' => array(
+											'name' => 'Traditional and Complementary Medicine Professionals',
+											'description' => 'Traditional and complementary medicine professionals examine patients; prevent and treat illness, disease, injury and other physical and mental impairments; and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences originating in specific cultures.',
+											'sameAs' => array(
+												'2',
+												'22'
+											)
+										),
+										'2230' => array(
+											'name' => 'Traditional and Complementary Medicine Professionals',
+											'description' => 'Traditional and complementary medicine professionals examine patients, prevent and treat illness, disease, injury and other physical and mental impairments and maintain general health in humans by applying knowledge, skills and practices acquired through extensive study of  the theories, beliefs and experiences, originating in specific cultures.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'223'
+											)
+										),
+										'224' => array(
+											'name' => 'Paramedical Practitioners',
+											'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+											'sameAs' => array(
+												'2',
+												'22'
+											)
+										),
+										'2240' => array(
+											'name' => 'Paramedical Practitioners',
+											'description' => 'Paramedical practitioners provide advisory, diagnostic, curative and preventive medical services more limited in scope and complexity than those carried out by medical doctors. They work autonomously, or with limited supervision of medical doctors, and apply advanced clinical procedures for treating and preventing diseases, injuries and other physical or mental impairments common to specific communities.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'224'
+											)
+										),
+										'225' => array(
+											'name' => 'Veterinarians',
+											'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals; specialize in the treatment of a particular animal group or in a particular area of specialization; or provide professional services to commercial firms producing biological and pharmaceutical products.',
+											'sameAs' => array(
+												'2',
+												'22'
+											)
+										),
+										'2250' => array(
+											'name' => 'Veterinarians',
+											'description' => 'Veterinarians diagnose, prevent and treat diseases, injuries and dysfunctions of animals. They may provide care to a wide range of animals or specialize in the treatment of a particular animal group or in a particular specialty area, or provide professional services to commercial firms producing biological and pharmaceutical products.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'225'
+											)
+										),
+										'226' => array(
+											'name' => 'Other Health Professionals',
+											'description' => 'Other health professionals provide health services related to dentistry, pharmacy, environmental health and hygiene, occupational health and safety, physiotherapy, nutrition, hearing, speech, vision and rehabilitation therapies.  This minor group includes all human health professionals except doctors, traditional and complementary medicine practitioners, nurses, midwives and paramedical professionals.',
+											'sameAs' => array(
+												'2',)
+										),
+										'2261' => array(
+											'name' => 'Dentists',
+											'description' => 'Dentists diagnose, treat and prevent diseases, injuries and abnormalities of the teeth, mouth, jaws and associated tissues by applying the principles and procedures of modern dentistry. They use a broad range of specialized diagnostic, surgical and other techniques to promote and restore oral health.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2262' => array(
+											'name' => 'Pharmacists',
+											'description' => 'Pharmacists store, preserve, compound and dispense medicinal products and counsel on the proper use and adverse effects of drugs and medicines following prescriptions issued by medical doctors and other health professionals. They contribute to researching, testing, preparing, prescribing and monitoring medicinal therapies for optimizing human health.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2263' => array(
+											'name' => 'Environmental and Occupational Health and Hygiene Professionals',
+											'description' => 'Environmental and occupational health and hygiene professionals assess, plan and implement programmes to recognize, monitor and control environmental factors that can potentially affect human health, to ensure safe and healthy working conditions and to prevent disease or injury caused by chemical, physical, radiological and biological agents or ergonomic factors.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2264' => array(
+											'name' => 'Physiotherapists',
+											'description' => 'Physiotherapists assess, plan and implement rehabilitative programmes that improve or restore human motor functions, maximize movement ability, relieve pain syndromes, and treat or prevent physical challenges associated with injuries, diseases and other impairments. They apply a broad range of physical therapies and techniques such as movement, ultrasound, heating, laser and other techniques. ',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2265' => array(
+											'name' => 'Dieticians and Nutritionists',
+											'description' => 'Dieticians and nutritionists assess, plan and implement programmes to enhance the impact of food and nutrition on human health.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2266' => array(
+											'name' => 'Audiologists and Speech Therapists',
+											'description' => 'Audiologists and speech therapists evaluate, manage and treat physical disorders affecting human hearing, speech, communication and swallowing. They prescribe corrective devices or rehabilitative therapies for hearing loss, speech disorders and related sensory and neural problems, and provide counselling on hearing safety and communication performance.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2267' => array(
+											'name' => 'Optometrists and Ophthalmic Opticians',
+											'description' => 'Optometrists and ophthalmic opticians provide diagnosis, management and treatment services for disorders of the eyes and visual system. They counsel on eye care and prescribe optical aids or other therapies for visual disturbance.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										),
+										'2269' => array(
+											'name' => 'Health Professionals Not Elsewhere Classified ',
+											'description' => 'This unit group covers health professionals not classified elsewhere in Sub-major Group 22: Health Professionals. For instance, the group includes occupations such as podiatrist, occupational therapist, recreational therapist, chiropractor, osteopath and other professionals providing diagnostic, preventive, curative and rehabilitative health services.',
+											'sameAs' => array(
+												'2',
+												'22',
+												'226'
+											)
+										)
+									);
+
+								// // (Optional) Expand ISCO-8 code to include list of ancestors
+								// 
+								// 	if ( $specialization_isco08_code ) {
+								// 
+								// 		$specialization_isco08_code = array_merge(
+								// 			$specialization_isco08_code,
+								// 			$isco08_values[$specialization_isco08_code[0]]['sameAs']
+								// 		);
+								// 
+								// 		sort($specialization_isco08_code);
+								// 
+								// 	}
+
+								// Format values
+
+									$specialization_isco08 = array();
+
+									if ( $specialization_isco08_code ) {
+
+										foreach ( $specialization_isco08_code as $code ) {
+
+											if ( $code ) {
+
+												$code_schema = array(
+													'@type' => 'CategoryCode',
+													'codeValue' => $code, // ISCO-08 code value from Specialty item
+													'description' => $isco08_values[$code]['description'] ?? '', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
+													'inCodeSet' => array(
+														'@type' => 'CategoryCodeSet',
+														'dateModified' => '2016',
+														'name' => 'ISCO-08',
+														'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
+													),
+													'name' => $isco08_values[$code]['name'] ?? '', // ISCO-08 name from Specialty item
+													'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
+												);
+
+												// Clean up the array
+
+													$code_schema = array_filter($code_schema);
+
+												// Add to the list array
+
+													if (  $code_schema ) {
+
+														$specialization_isco08[] = $code_schema;
+
+													}
+
+											}
+
+										}
+
+									}
+
+							// occupationalCategory Value Array
+
+								$schema_provider_occupationalCategory = array_merge(
+									( ( is_array($specialization_isco08) && array_is_list($specialization_isco08) ) ? $specialization_isco08 : array($specialization_isco08) ),
+									( ( is_array($specialization_onetsoc) && array_is_list($specialization_onetsoc) ) ? $specialization_onetsoc : array($specialization_onetsoc) )
+								);
+
+								// If there is only one item, flatten the multi-dimensional array by one step
+
+									if ( $schema_provider_occupationalCategory ) {
+
+										uamswp_fad_flatten_multidimensional_array($schema_provider_occupationalCategory);
+
+									}
+
+							// Add to schema item
+
+								if ( $schema_provider_occupationalCategory ) {
+
+									$specialization_schema['occupationalCategory'] = $schema_provider_occupationalCategory;
+
+								}
+
+						// sameAs
+
+							// Base array
+
+								$specialization_sameAs = array();
+
+							// Get Wikidata entry URL for occupation
+
+								$specialization_sameAs_wikidata = get_field( 'clinical_specialization_wikidata_url_occupation', $specialization_term ) ?? '';
+
+								if ( $specialization_sameAs_wikidata ) {
+
+									$specialization_sameAs[] = $specialization_sameAs_wikidata;
+
+								}
+
+								// Clean up the array
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+								
+										uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
+							
+
+							// Get sameAs repeater field value
+
+								// $specialization_sameAs_array = get_field( 'schema_sameas', $specialization_term ) ?? array();
+								// 
+								// // Add each item to sameAs property values array
+								// 
+								// 	if ( $specialization_sameAs_array ) {
+								// 
+								// 		$specialization_sameAs = uamswp_fad_schema_sameas(
+								// 			$specialization_sameAs_array, // sameAs repeater field
+								// 			'schema_sameas_url', // sameAs item field name
+								// 			$specialization_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
+								// 		);
+								// 
+								// 	} else {
+								// 
+								// 	// If there is only one item, flatten the multi-dimensional array by one step
+								// 
+								// 		uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
+								// 
+								// }
+
+							// Add to schema item
+
+								if ( $specialization_sameAs ) {
+
+									$specialization_schema['sameAs'] = $specialization_sameAs;
+
+								}
+
+						// Clean up schema item array
+
+							$specialization_schema = array_filter($specialization_schema);
+
+						// Add @type
+
+							if ( $specialization_schema ) {
+
+								$specialization_schema = array( '@type' => 'EducationalOccupationalCredential' ) + $specialization_schema;
+
+							}
+
+						// Add to the list array
+
+							if ( $specialization_schema ) {
+
+								$hasOccupation_schema[] = $specialization_schema;
+
+							}
+
+					} // endif
+
+				} // endforeach
+
+			// Clean up schema list array
+
+				if ( $hasOccupation_schema ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($hasOccupation_schema);
+
+				}
+
+			return $hasOccupation_schema;
 
 		}
 
@@ -7401,9 +7968,19 @@
 
 										// Get values
 
-											if ( !isset($provider_hasOccupation) ) {
+											if ( !isset($provider_clinical_specialization) ) {
 
-												$provider_hasOccupation = array();
+												$provider_clinical_specialization = get_field( 'physician_title', $provider ) ?? '';
+
+											}
+
+										// Format values
+
+											if ( $provider_clinical_specialization ) {
+
+												$provider_hasOccupation = uamswp_fad_schema_hasoccupation(
+													$provider_clinical_specialization // mixed // Required // Clinical Specialization ID values
+												);
 
 											}
 

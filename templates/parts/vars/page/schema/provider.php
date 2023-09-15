@@ -472,66 +472,6 @@ TODO List
 					$schema_provider_nucc_name_display = get_field('clinical_specialization_name_display', $provider_specialty_term);
 					$schema_provider_nucc_name_display = uamswp_attr_conversion($schema_provider_nucc_name_display);
 
-				// Specialization Definition
-
-					$schema_provider_nucc_definition = get_field('clinical_specialization_definition', $provider_specialty_term);
-					$schema_provider_nucc_definition = uamswp_attr_conversion($schema_provider_nucc_definition);
-
-				// Source of Specialization Definition
-
-					$schema_provider_nucc_definition_source = get_field('clinical_specialization_definition_source', $provider_specialty_term);
-					$schema_provider_nucc_definition_source = uamswp_attr_conversion($schema_provider_nucc_definition_source);
-
-			// Occupation alternateName
-
-				// Build list of values
-
-					// Base array
-
-						$schema_provider_Occupation_alternateName = array();
-
-					// Add Specialization Display Name
-
-						$schema_provider_Occupation_alternateName[] = $schema_provider_nucc_name_display ?? '';
-
-					// Add Alternate Occupational Titles
-
-						// Get Alternate Occupational Titles
-
-							$provider_occupation_title_alt_repeater = get_field('clinical_specialization_title_alt', $provider_specialty_term);
-							$provider_occupation_title_alt = array();
-
-							if ( $provider_occupation_title_alt_repeater ) {
-
-								foreach( $provider_occupation_title_alt_repeater as $title ) { 
-
-									$provider_occupation_title_alt[] = $title['clinical_specialization_title_alt_text'];
-
-								}
-
-							}
-
-						$schema_provider_Occupation_alternateName = array_merge(
-							$schema_provider_Occupation_alternateName,
-							$provider_occupation_title_alt
-						);
-
-
-				// Clean up list array
-
-					if ( is_array($schema_provider_Occupation_alternateName) ) {
-
-						$schema_provider_Occupation_alternateName = array_filter($schema_provider_Occupation_alternateName);
-						$schema_provider_Occupation_alternateName = array_unique($schema_provider_Occupation_alternateName);
-						$schema_provider_Occupation_alternateName = array_values($schema_provider_Occupation_alternateName);
-						sort($schema_provider_Occupation_alternateName);
-
-						// If there is only one item, flatten the multi-dimensional array by one step
-
-							uamswp_fad_flatten_multidimensional_array($schema_provider_Occupation_alternateName);
-
-					}
-
 			// Centers for Medicare & Medicaid Services (CMS) Specialty Code
 
 				// CMS Specialty Code
@@ -1454,9 +1394,6 @@ TODO List
 
 				}
 
-				echo '<p>$provider_affiliation = ' . ( is_array($provider_affiliation) ? 'Array' : ( is_object($provider_affiliation) ? 'Object' : ( $provider_affiliation ) ) ) . '</p>'; // test
-				if ( is_array($provider_affiliation) || is_object($provider_affiliation) ) { echo '<pre>'; print_r($provider_affiliation); echo '</pre>'; } // test
-
 			// Clean up list array
 
 				if ( $provider_affiliation ) {
@@ -1642,18 +1579,13 @@ TODO List
 		// hasOccupation
 
 			if (
-				isset($provider_occupation_title)
+				isset($provider_specialty)
 				&&
-				!empty($provider_occupation_title)
+				!empty($provider_specialty)
 			) {
 
-				$schema_provider_Person['hasOccupation'] = array( // Replace values with values relevant to provider // Repeat as necessary
-					'@type' => 'Occupation',
-					'name' => $provider_occupation_title, // Clinical occupation title value from Specialty item
-					'alternateName' => ( isset($schema_provider_Occupation_alternateName) && !empty($schema_provider_Occupation_alternateName) ) ? $schema_provider_Occupation_alternateName : '', // Alternate name value from Specialty item
-					'description' => ( isset($schema_provider_nucc_definition) && !empty($schema_provider_nucc_definition) ) ? $schema_provider_nucc_definition : '', // Description value from Specialty item
-					'occupationalCategory' => ( isset($schema_provider_occupationalCategory) && !empty($schema_provider_occupationalCategory) ) ? $schema_provider_occupationalCategory : '',
-					'sameAs' => ( isset($schema_provider_wikidata_occupation) && !empty($schema_provider_wikidata_occupation) ) ? $schema_provider_wikidata_occupation : '' // Wikidata URL from Specialty item
+				$schema_provider_Person['hasOccupation'] = uamswp_fad_schema_hasoccupation(
+					$provider_specialty // mixed // Required // Clinical Specialization ID values
 				);
 
 			}

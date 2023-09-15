@@ -904,45 +904,25 @@
 			"key": "field_clinical_specialization_title_alt",
 			"name": "clinical_specialization_title_alt",
 			"label": "Alternate Names for the Clinical Occupation Title",
-			"type": "repeater",
-			"instructions": "Insert any other clinical occupational titles a practitioner of this clinical specialization may be known by. Separate each alternate name into its own item.",
+			"type": "clone",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
-				"class": "",
+				"class": "uamswp-hide-clone-label",
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"collapsed": "field_expertise_alternate_text",
-			"min": 0,
-			"max": 10,
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
 			"layout": "block",
-			"button_label": "Add Alternate Title",
-			"sub_fields": [
-				{
-					"key": "field_clinical_specialization_title_alt_text",
-					"name": "clinical_specialization_title_alt_text",
-					"label": "Alternate Title",
-					"type": "text",
-					"instructions": "",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": "",
-					"acfe_validate": "",
-					"acfe_update": ""
-				}
-			]
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		},
 		"field_clinical_specialization_definition": {
 			"key": "field_clinical_specialization_definition",
