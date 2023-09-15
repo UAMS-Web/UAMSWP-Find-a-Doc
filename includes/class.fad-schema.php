@@ -9245,7 +9245,7 @@
 														$provider_image_id, // ID of image to use for 3:4 aspect ratio
 														$provider_image_wide_id, // ID of image to use for 4:3 aspect ratio
 														$provider_image_wide_id, // ID of image to use for 16:9 aspect ratio
-														null // ID of image to use for full image
+														0 // ID of image to use for full image
 													);
 
 												}

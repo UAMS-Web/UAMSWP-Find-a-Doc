@@ -2,9 +2,26 @@
 
 /*
  * Required vars:
- * 
- * 	$schema_common_base
- * 	$page_id
+ * 	$full_name_attr
+ * 	$last_name_attr
+ * 	$first_name_attr
+ * 	$prefix_attr
+ * 	$degree_array
+ * 	$gender_attr
+ * 	$excerpt_attr
+ * 	$rating_valid
+ * 	$accept_new
+ * 	$review_count
+ * 	$avg_rating
+ * 	$comment_count
+ * 	$accept_new
+ * 	$video
+ * 	$schema_provider_languages
+ * 	$featured_image
+ * 	$headshot_wide
+ * 	$provider_associations_values
+ * 	$provider_plural_name_attr
+ * 	$conditions_cpt
  */
 
 include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base.php' );
@@ -13,227 +30,6 @@ $schema_provider = $schema_common_base;
 
 // Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
 $page_id = get_the_ID();
-
-/*
-
-TODO List
-
- * Provider
-	 * Create means of defining organization schema for third-party institutions (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-	 * Create means of associating third-party institutions with provider
-	 * Define schema for affiliated hospital(s)
-	 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
-		 * Required — Query for whether the organization is a College/University
-		 * Optional — Alternate Name (repeater)
-		 * Required — URL
-		 * Optional — Street Address
-		 * Required — City / Locality (required)
-		 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
-		 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
-		 * Optional — Postal Code
-	 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
-	 * Define Provider-as-Dentist type array
-	 * Define Provider-as-Optician type array
- * Related ontology items
-	 * Related locations
-		 * Apply the location schema function to the single location template
-		 * Add values for remaining properties:
-			 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-				 * aggregateRating
-				 * areaServed
-				 * contactPoint
-					 * email
-				 * currenciesAccepted
-				 * diversityPolicy
-				 * diversityStaffingReport
-				 * ethicsPolicy
-				 * funding
-				 * identifier
-					 * duns
-					 * globalLocationNumber
-					 * isicV4
-					 * iso6523Code
-					 * leiCode
-					 * naics
-					 * taxID
-					 * vatID
-				 * isAcceptingNewPatients
-				 * isAccessibleForFree
-				 * knowsLanguage
-				 * legalName
-				 * logo
-				 * maximumAttendeeCapacity
-				 * memberOf
-				 * nonprofitStatus
-				 * numberOfEmployees
-				 * paymentAccepted
-			 * Needing new data inputs
-				 * award
-					 * Create taxonomy similar to provider's 'Recognition List', but for locations
-						 * Add a section to the location profile / subsection to display said information
-				 * brand
-				 * event
-					 * Find means of populating values from relevant LiveWhale calendar events
-				 * foundingDate
-					 * Add input for date the location first opened (regardless of physical location)
-				 * hasCredential
-				 * hasDriveThroughService
-				 * potentialAction
-				 * publicAccess
-				 * review
-			 * Other properties
-				 * contactPoint
-					 * faxNumber
-					 * telephone
-				 * containedInPlace
-					 * For descendant locations, add parent location as the 'Place'
-					 * For top-level locations with a building value, add info on its building
-						 * Add additional inputs to 'Building' taxonomy for 'Place' schema
-							 * Include Google CID
-				 * containsPlace
-					 * Include descendant locations
-					 * Include provider as 'Physician' type 
-					 * Include provider as 'Dentist' type 
-					 * Include provider as 'Optician' type 
-				 * employee
-					 * Include each provider associated with the location
-				 * keywords
-				 * knowsAbout
-				 * mainEntityOfPage
-				 * makesOffer
-				 * openingHours
-				 * openingHoursSpecification
-				 * parentOrganization
-					 * For descendant locations, add the parent location as the 'Organization'
-					 * For top-level locations, add UAMS Health as the 'Organization'
-				 * photo
-					 * Amend values from ImageObject to accommodate properties particular to 'Photograph' type
-				 * specialOpeningHoursSpecification
-	 * Related areas of expertise
-		 * Apply the areas of expertise schema function to the single area of expertise template
-		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
-			 * Apply the areas of expertise schema function to the area of expertise fake subpages templates
-		 * Add system fallback images to schema if relevant featured image is blank
-		 * Add system fallback text to schema if relevant text is blank
-	 * Related clinical resources
-		 * Apply the clinical resources schema function to the single clinical resource template
-		 * Separate resource types (e.g., ImageObject) into separate functions, calling them in the clinical resource schema function
-		 * Get more info from YouTube API through YouTube Lyte plugin
-			 * videoQuality
-			 * videoFrameSize
-		 * Get info from Vimeo API
-			 * duration
-			 * thumbnail
-			 * videoQuality
-			 * videoFrameSize
-	 * Provider
-		 * Make function for provider schema
-		 * Make adjustments to convert 'Physician' type to 'MedicalBusiness' or a subtype of 'MedicalBusiness' relevant to the particular provider
-			 * A dentist -> 'Dentist'
-			 * An optician -> 'Optician'
-			 * A women's health nurse practitioner -> 'Gynecologic'
-		 * Provider as 'MedicalBusiness' type and its subtypes
-			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
-			 * 'employee' property
-				 * Add Provider as 'Person' type
-		 * Consider adding 'ProfilePage' as an additional type on one of the items in @graph
-		 * Add new set of inputs for name
-			 * Message instructing editors to fully populate all fields and to not use initials
-			 * Required inputs:
-				 * Full first name
-				 * Button group to confirm presence/absence of middle name (default: null)
-				 * Full middle name
-				 * Button group to confirm presence/absence of nickname (default: null)
-				 * Nickname
-				 * Full last name
-				 * Button group to confirm presence/absence of generational suffix (default: null)
-				 * Generational suffix
-				 * Name display format selector with a message instructing editors to mirror the external name value defined in Epic (default: 'First Middle Last')
-					 * First Middle Last
-					 * First Middle "Nickname" Last
-					 * First M. Last
-					 * First M. "Nickname" Last
-					 * F. Middle Last
-					 * F. Middle "Nickname" Last
-					 * F. M. Last
-					 * F. M. "Nickname" Last
-			 * Optional inputs
-				 * Alternate name repeater (e.g., former names, variant names)
-			 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
-		 * Add values for remaining properties:
-			 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-				 * areaServed
-				 * currenciesAccepted
-				 * identifiers
-					 * duns
-					 * globalLocationNumber
-					 * isicV4
-					 * leiCode
-					 * naics
-					 * taxID
-					 * vatID
-					 * iso6523Code
-				 * isAccessibleForFree
-				 * paymentAccepted
-			 * Needing new data inputs
-				 * alternateName
-				 * award
-				 * brand
-				 * makesOffer
-				 * potentialAction
-				 * review
-				 * sameAs
-				 * worksFor
-			 * Other properties
-				 * additionalName
-				 * affiliation
-				 * containedInPlace
-				 * description
-				 * familyName
-				 * givenName
-				 * hasCredential
-				 * hasOccupation
-				 * hasMap
-				 * honorificPrefix
-				 * honorificSuffix
-				 * hospitalAffiliation
-				 * identifier
-					 * the NPI value
-					 * the taxonomy code value(s)?
-				 * image
-				 * isAcceptingNewPatients
-				 * jobTitle
-				 * keywords
-				 * knowsAbout
-				 * knowsLanguage
-				 * legalName
-				 * location
-				 * mainEntityOfPage
-				 * memberOf
-				 * name
-				 * parentOrganization
-				 * photo
-				 * smokingAllowed
-				 * subjectOf
-				 * workLocation
- * General
-	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
-	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
-	 * Resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
-	 * Consider shifting to the use of the 'Thing > CreativeWork > WebContent > HealthTopicContent' type in place of 'MedicalWebPage' and/or the 'CreativeWork' subtypes used for clinical resources.
-	 * 'Organization' values (for properties like 'brand', 'parentOrganization' and 'worksFor')
-		 * Create method of defining 'Organization' property values for UAMS Health and UAMS
-		 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
-		 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
- * Filter ACF fields
-	 * Fields referencing MedicalTest type
-		 * Just treatments with MedicalTest type or its subtypes
-		 * Exclude current item
-	 * Fields referencing MedicalTherapy type
-		 * Just treatments with MedicalTherapy type or its subtypes
-		 * Exclude current item
-
-*/
 
 // Get Values
 
@@ -1078,16 +874,788 @@ TODO List
 
 			$schema_provider_MedicalWebPage['breadcrumb'] = $schema_provider_BreadcrumbList_ref ?: '';
 
-	// Provider as Physician and as Person
+	// Provider as Physician
 
-		$schema_provider_combined = uamswp_fad_schema_provider(
-			array($page_id), // List of IDs of the provider items
-			$page_url, // Page URL
-			0, // Nesting level within the main schema
-			1, // Iteration counter for provider-as-MedicalBusiness
-			1, // Iteration counter for provider-as-Person
-			$provider_schema_fields // Pre-existing field values array so duplicate calls can be avoided
-		);
+		// Base array
+
+			$schema_provider_Physician = array(
+				'@type' => 'Physician'
+			);
+
+		// @id
+
+			$schema_provider_Physician['@id'] = $schema_provider_url . '#' . $schema_provider_Physician['@type'];
+
+			// Define reference to this 'Physician' item
+
+				$schema_provider_Physician_ref['@id'] = $schema_provider_Physician['@id'] ?: '';
+
+			// Define a value of 'about' of 'MedicalWebPage' with this 'Physician' reference
+
+				$schema_provider_MedicalWebPage['about'][] = $schema_provider_Physician_ref;
+
+			// Define a value of 'mentions' of 'MedicalWebPage' with this 'Physician' reference
+
+				$schema_provider_MedicalWebPage['mentions'][] = $schema_provider_Physician_ref;
+
+			// Define the value of 'mainEntity' of 'MedicalWebPage' with this 'Physician' reference
+
+				$schema_provider_MedicalWebPage['mainEntity'] = $schema_provider_Physician_ref;
+
+		// name
+
+			/*
+			 * The name of the item.
+			 * 
+			 * Subproperty of:
+			 * 
+			 *     - rdfs:label
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 */
+
+			$schema_provider_Physician['name'] = array(); // Defined later
+
+		// aggregateRating
+
+			if ($rating_valid) {
+
+				$schema_provider_Physician['aggregateRating'] = array_filter(
+					array(
+						'@type' => 'AggregateRating',
+						'description' => '', // Get description of the rating/review concept from Patient Experience.
+						'itemReviewed' => $schema_provider_Physician_ref,
+						'ratingCount' => $review_count,
+						'ratingValue' => $avg_rating,
+						'reviewAspect' => '', // Get info from Patient Experience about which facets of the provider is rated/reviewed.
+						'reviewCount' => $comment_count
+					)
+				);
+
+			}
+
+		// availableService
+
+			$schema_provider_Physician['availableService'] = $provider_related_treatment;
+
+		// brand
+
+			// Base array
+
+				$schema_provider_brand = array();
+
+			// Add relevant organizations
+
+				// Add UAMS Health
+
+					$schema_provider_brand[] = $schema_base_org_uams_health_ref;
+
+				// Add additional Organizations if necessary (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+
+			// Add to schema
+
+				if ( $schema_provider_brand ) {
+
+					$schema_provider_Physician['brand'] = $schema_provider_brand;
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($schema_provider_Physician['brand']);
+
+				}
+
+		// containedInPlace
+
+			$schema_provider_Physician['containedInPlace'] = $provider_related_location;
+
+		// description
+
+			$schema_provider_Physician['description'] = array(); // Defined later
+
+		// hospitalAffiliation
+
+			$schema_provider_Physician['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+		// isAcceptingNewPatients
+
+			$schema_provider_Physician['isAcceptingNewPatients'] = $accept_new ? 'True' : 'False';
+
+		// location
+
+			if (
+				isset($schema_provider_location_ref)
+				&&
+				!empty($schema_provider_location_ref)
+			) {
+
+				$schema_provider_Physician['location'] = $schema_provider_location_ref;
+
+			}
+
+		// mainEntityOfPage
+
+			/*
+			 * Indicates a page (or other CreativeWork) for which this thing is the main 
+			 * entity being described. See background notes at 
+			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+			 * 
+			 * Inverse-property: mainEntity
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - CreativeWork
+			 *     - URL
+			 */
+
+			$schema_provider_Physician['mainEntityOfPage'] = $schema_provider_MedicalWebPage_ref;
+
+		// medicalSpecialty
+
+			$schema_provider_Physician['medicalSpecialty'] = $schema_provider_medicalSpecialty;
+
+		// parentOrganization
+
+			if ( $schema_provider_brand ) {
+
+				$schema_provider_Physician['parentOrganization'] = $schema_provider_brand;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Physician['parentOrganization']);
+
+			}
+
+		// subjectOf
+
+			$schema_provider_Physician['subjectOf'] = $schema_provider_MedicalWebPage_ref;
+
+		// url
+
+			/*
+			 * URL of the item.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
+
+			$schema_provider_Physician['url'] = $schema_provider_MedicalWebPage_url_ref;
+
+	// Provider as Person
+
+		// Base array
+
+			$schema_provider_Person = array(
+				'@type' => 'Person'
+			);
+
+		// additionalType
+
+			/*
+			 * An additional type for the item, typically used for adding more specific types 
+			 * from external vocabularies in microdata syntax. This is a relationship between 
+			 * something and a class that the thing is in. Typically the value is a 
+			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+			 * in RDF. Text values can be used sparingly, for cases where useful information 
+			 * can be added without their being an appropriate schema to reference. In the 
+			 * case of text values, the class label should follow the schema.org style guide.
+			 * 
+			 * Subproperty of:
+			 *     - rdf:type
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 *     - URL
+			 */
+
+			$schema_provider_Person_additionalType_fallback = 'https://www.wikidata.org/wiki/Q11974939'; // Wikidata item URL for health professional (Q11974939)
+
+			if (
+				isset($schema_provider_wikidata_occupation)
+				&&
+				!empty($schema_provider_wikidata_occupation)
+			) {
+
+				$schema_provider_Person['additionalType'] = $schema_provider_wikidata_occupation; // Get Wikidata item URL for occupation from Specialty
+
+			} else {
+
+				$schema_provider_Person['additionalType'] = $schema_provider_Person_additionalType_fallback;
+
+			}
+
+		// @id
+
+			$schema_provider_Person['@id'] = $schema_provider_url . '#' . $schema_provider_Person['@type'];
+
+			// Define reference to this 'Person' item
+
+				$schema_provider_Person_ref['@id'] = $schema_provider_Person['@id'] ?: '';
+
+			// Define a value of 'about' of 'MedicalWebPage' with this 'Person' reference
+
+				$schema_provider_MedicalWebPage['about'][] = $schema_provider_Person_ref;
+
+			// Define a value of 'mentions' of 'MedicalWebPage' with this 'Person' reference
+
+				$schema_provider_MedicalWebPage['mentions'][] = $schema_provider_Person_ref;
+
+		// name
+
+			/*
+			 * The name of the item.
+			 * 
+			 * Subproperty of:
+			 * 
+			 *     - rdfs:label
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - Text
+			 */
+
+			$schema_provider_Person['name'] = array(
+				'@id' => $schema_provider_url . '#Name',
+				'@type' => 'Name',
+				'name' => $full_name_attr, // Replace 'foo' with long provider name (e.g., "Leonard H. McCoy Jr., M.D.")
+			);
+
+			// Define reference to this 'name' property
+
+				$schema_provider_Person_name_ref['@id'] = $schema_provider_Person['name']['@id'] ?: '';
+
+			// Define value of other 'name' properties with this 'name' reference
+
+				// MedicalWebPage
+
+					$schema_provider_MedicalWebPage['name'] = $schema_provider_Person_name_ref;
+
+				// Physician
+
+					$schema_provider_Physician['name'] = $schema_provider_Person_name_ref;
+
+			// Define value of 'headline' of 'MedicalWebPage' with this 'name' reference
+
+				$schema_provider_MedicalWebPage['headline'] = $schema_provider_Person_name_ref;
+
+		// affiliation
+
+			// Base array
+
+				$provider_affiliation = array();
+
+			// Brand organizations
+
+				if ( $schema_provider_brand ) {
+
+					$schema_provider_brand = array_is_list($schema_provider_brand) ? $schema_provider_brand : array($schema_provider_brand);
+
+					$provider_affiliation = array_merge(
+						$provider_affiliation,
+						$schema_provider_brand
+					);
+
+				}
+
+			// Related hospitals
+
+				if ( $schema_provider_hospitalAffiliation_ref ) {
+
+					$schema_provider_hospitalAffiliation_ref = array_is_list($schema_provider_hospitalAffiliation_ref) ? $schema_provider_hospitalAffiliation_ref : array($schema_provider_hospitalAffiliation_ref);
+
+					$provider_affiliation = array_merge(
+						$provider_affiliation,
+						$schema_provider_hospitalAffiliation_ref
+					);
+
+				}
+
+			// Clean up list array
+
+				if ( $provider_affiliation ) {
+
+					$provider_affiliation = array_filter($provider_affiliation);
+					$provider_affiliation = array_unique( $provider_affiliation, SORT_REGULAR );
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($provider_affiliation);
+
+				}
+
+			// Add to schema
+
+				if ( $provider_affiliation ) {
+
+					$schema_provider_Person['affiliation'] = $provider_affiliation;
+
+				}
+
+		// alumniOf
+
+			// Get list of education and training organizations
+
+				$provider_education_organizations = array();
+				$schema_provider_alumniOf = array();
+
+				if (
+					isset($education)
+					&&
+					!empty($education)
+					&&
+					is_array($education)
+				) {
+
+					foreach ( $education as $item ) {
+
+						$provider_education_organizations[] = get_term( $item['school'], 'school')->name;
+
+					}
+
+					// Remove empty items
+
+						if ( is_array($provider_education_organizations) ) {
+
+							$provider_education_organizations = array_filter($provider_education_organizations);
+
+						}
+
+					// Remove duplicate items
+
+						if ( is_array($provider_education_organizations) ) {
+
+							$provider_education_organizations = array_unique($provider_education_organizations);
+
+						}
+
+					// Sort array
+
+						if ( is_array($provider_education_organizations) ) {
+
+							sort($provider_education_organizations);
+
+						}
+
+				}
+
+			// Build alumniOf value
+
+				if ( !empty($provider_education_organizations) ) {
+
+					foreach ( $provider_education_organizations as $item ) {
+
+						$schema_provider_alumniOf[] = array(
+							'@type' => 'EducationalOrganization',
+							'name' => $item
+						);
+
+					}
+
+				}
+
+			// Add to the schema
+
+				if ( !empty($schema_provider_alumniOf) ) {
+
+					$schema_provider_Person['alumniOf'] = $schema_provider_alumniOf;
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($schema_provider_Person['alumniOf']);
+
+				}
+
+		// brand
+
+			if ( $schema_provider_brand ) {
+
+				$schema_provider_Person['brand'] = $schema_provider_brand;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['brand']);
+
+			}
+
+		// description
+
+			$schema_provider_Person['description'] = array(
+				'@id' => $schema_provider_url . '#Description',
+				'@type' => 'Text',
+				'description' => $excerpt_attr
+			);
+
+			// Define reference to this 'description' property
+
+				$schema_provider_Person_description_ref['@id'] = $schema_provider_Person['description']['@id'] ?: '';
+
+			// Define value of 'description' of 'Physician' with this 'description' reference
+
+				$schema_provider_Physician['description'] = $schema_provider_Person_description_ref;
+
+			// Define value of 'description' of 'MedicalWebPage' with this 'description' reference
+
+				$schema_provider_MedicalWebPage['description'] = $schema_provider_Person_description_ref;
+
+		// familyName
+
+			$schema_provider_Person['familyName'] = $last_name_attr;
+
+		// gender
+
+			// Capitalize first letter of value
+
+				$schema_provider_gender = ucfirst($gender_attr);
+
+			// Use GenderType if Male/Female
+
+				if (
+					$schema_provider_gender == 'Female'
+					||
+					$schema_provider_gender == 'Male'
+				) {
+
+					$schema_provider_gender = array(
+						'@type' => 'GenderType',
+						'valueReference' => $schema_provider_gender
+					);
+
+				}
+
+			// Add to schema
+
+				$schema_provider_Person['gender'] = $schema_provider_gender; 
+
+		// givenName
+
+			$schema_provider_Person['givenName'] = $first_name_attr;
+
+		// hasCredential
+
+			// Format values
+
+				$provider_hasCredential = array();
+
+				if ( $degrees ) {
+
+					$provider_hasCredential = uamswp_fad_schema_hascredential(
+						$degrees // mixed // Required // Degrees and credentials ID values
+					);
+
+				}
+
+			// Add to schema
+
+				if ( $provider_hasCredential ) {
+
+					$schema_provider_Person['hasCredential'] = $provider_hasCredential;
+
+				}
+
+		// hasOccupation
+
+			if (
+				isset($provider_specialty)
+				&&
+				!empty($provider_specialty)
+			) {
+
+				$schema_provider_Person['hasOccupation'] = uamswp_fad_schema_hasoccupation(
+					$provider_specialty // mixed // Required // Clinical Specialization ID values
+				);
+
+			}
+
+		// honorificPrefix
+
+			if ( $prefix_attr ) {
+
+				$schema_provider_Person['honorificPrefix'] = $prefix_attr;
+
+			}
+
+		// honorificSuffix
+
+			if ( $degree_attr_array ) {
+
+				$schema_provider_Person['honorificSuffix'] = $degree_attr_array;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['honorificSuffix']);
+
+			}
+
+		// identifier
+
+			/* 
+			 * The identifier property represents any kind of identifier for any kind of 
+			 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+			 * properties for representing many of these, either as textual strings or as 
+			 * URL (URI) links. See background notes at 
+			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - PropertyValue
+			 *     - Text
+			 *     - URL
+			 */
+
+			$schema_provider_Person['identifier'] = array();
+
+			// National Provider Identifier (NPI)
+
+				if ( $npi ) {
+
+					$schema_provider_Person['identifier'][] = array(
+						'@type' => 'PropertyValue',
+						'name' => 'National Provider Identifier',
+						'propertyID' => 'https://www.wikidata.org/wiki/Q6975101', // Wikidata item page for National Provider Identifier
+						'url' => 'https://npiregistry.cms.hhs.gov/provider-view/' . $npi, // Provider information on NPPES NPI Registry
+						'value' => $npi // NPI value
+					);
+
+				}
+
+			if ( !empty($schema_provider_Person['identifier']) ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['identifier']);
+
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['identifier']);
+
+			}
+
+		// image
+
+			/*
+			 * An image of the item. This can be a URL or a fully described ImageObject.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - ImageObject
+			 *     - URL
+			 */
+
+			// Get portrait values
+				$provider_portrait = uamswp_fad_schema_imageobject_thumbnails(
+					$schema_provider_url, // URL of entity with which the image is associated
+					0, // Nesting level within the main schema
+					'3:4', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
+					'Portrait', // Base fragment identifier
+					$featured_image ?: 0, // ID of image to use for 1:1 aspect ratio
+					$featured_image ?: 0, // ID of image to use for 3:4 aspect ratio
+					$headshot_wide ?: 0, // ID of image to use for 4:3 aspect ratio
+					$headshot_wide ?: 0, // ID of image to use for 16:9 aspect ratio
+					0 // ID of image to use for full image
+				) ?? array();
+
+			// Add to schema
+
+				if ( $provider_portrait ) {
+
+					$schema_provider_Person['image'] = $provider_portrait;
+
+					// Define reference to each value/row in this property
+
+						$schema_provider_Person_image_ref = uamswp_fad_schema_node_references( $provider_portrait );
+
+					// Define value of 'primaryImageOfPage' of 'MedicalWebPage' with this series of 'image' references
+
+						$schema_provider_MedicalWebPage['primaryImageOfPage'] = $schema_provider_Person_image_ref;
+
+				}
+
+		// jobTitle
+
+			if ( $provider_occupation_title_attr ) {
+
+				$schema_provider_Person['jobTitle'] = $provider_occupation_title_attr;
+
+			}
+
+		// knowsLanguage
+
+			// Base array
+
+				$schema_provider_Person['knowsLanguage'] = array();
+
+			// Eliminate PHP errors
+
+				$schema_provider_language = '';
+				$schema_provider_language_alternateName = '';
+
+			if ( $schema_provider_languages ) {
+
+				// Add each language to the schema
+
+					foreach ( $schema_provider_languages as $key => $value ) {
+
+						$schema_provider_language = array( // Repeat as necessary
+							'@type' => 'Language',
+							'name' => $key,
+						);
+
+						if ( !empty($schema_provider_languages[$key]['alternateName']) ) {
+
+							// If there is only one item, flatten the multi-dimensional array by one step
+
+								$schema_provider_language_alternateName = $schema_provider_languages[$key]['alternateName'];
+								uamswp_fad_flatten_multidimensional_array($schema_provider_language_alternateName);
+
+							$schema_provider_language['alternateName'] = $schema_provider_language_alternateName;
+
+						}
+
+						if ( $schema_provider_language ) {
+
+							$schema_provider_Person['knowsLanguage'][] = $schema_provider_language;
+
+						}
+
+					}
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['knowsLanguage']);
+
+			}
+
+			if ( !empty($schema_provider_Person['knowsLanguage']) ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['knowsLanguage']);
+
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['knowsLanguage']);
+
+			}
+
+		// memberOf
+
+			if ( $provider_schema_fields['provider_memberOf'] ) {
+
+				$schema_provider_Person['memberOf'] = $provider_schema_fields['provider_memberOf'];
+
+			}
+
+		// sameAs
+
+			/*
+			 * URL of a reference Web page that unambiguously indicates the item's identity 
+			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+			 * website).
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
+
+			// Base array
+
+				$schema_provider_Person['sameAs'] = array();
+
+			// NPPES NPI Registry
+
+				if ( $npi ) {
+
+					$schema_provider_Person['sameAs'][] = 'https://npiregistry.cms.hhs.gov/provider-view/' . $npi;
+
+				}
+
+			if ( !empty($schema_provider_Person['sameAs']) ) {
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['sameAs']);
+
+			} else {
+
+				// If there are no items, remove the property from the schema
+
+					unset($schema_provider_Person['sameAs']);
+
+			}
+
+		// subjectOf
+
+			/*
+			 * A CreativeWork or Event about this Thing.
+			 * 
+			 * Inverse-property: about
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - CreativeWork
+			 *     - Event
+			 */
+
+			if ( $schema_provider_MedicalWebPage_ref ) {
+
+				$schema_provider_Person['subjectOf'] = $schema_provider_MedicalWebPage_ref;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['subjectOf']);
+
+			}
+
+		// url
+
+			/*
+			 * URL of the item.
+			 * 
+			 * Values expected to be one of these types:
+			 * 
+			 *     - URL
+			 */
+
+			if ( $schema_provider_MedicalWebPage_url_ref ) {
+
+				$schema_provider_Person['url'] = $schema_provider_MedicalWebPage_url_ref;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['url']);
+
+			}
+
+		// workLocation
+
+			if ( $schema_provider_location_ref ) {
+
+				$schema_provider_Person['workLocation'] = $schema_provider_location_ref;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['workLocation']);
+
+			}
+
+		// worksFor
+
+			if ( $schema_provider_brand ) {
+
+				$schema_provider_Person['worksFor'] = $schema_provider_brand;
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($schema_provider_Person['worksFor']);
+
+			}
 
 // Add Provider Schema Arrays to Base Array
 
@@ -1097,11 +1665,11 @@ TODO List
 	// BreadcrumbList
 	$schema_provider['@graph'][] = $schema_provider_BreadcrumbList;
 
-	// Provider as MedicalBusiness
-	$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
+	// Provider as Physician
+	$schema_provider['@graph'][] = $schema_provider_Physician;
 
 	// Provider as Person
-	$schema_provider['@graph'][] = $schema_provider_combined['Person'];
+	$schema_provider['@graph'][] = $schema_provider_Person;
 
 // Construct the schema JSON script tag
 uamswp_fad_schema_construct($schema_provider);
