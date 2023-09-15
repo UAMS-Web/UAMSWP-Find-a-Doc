@@ -1976,34 +1976,53 @@
 
 		function uamswp_fad_schema_alternatename(
 			array $repeater, // alternateName repeater field
-			string $field_name = 'alternate_text' // alternateName item field name
+			string $field_name = 'alternate_text', // alternateName item field name
+			array $alternateName_schema = array() // array // Optional // Pre-existing schema array for alternateName to which to add alternateName items
 		) {
+
+			// Check / define variables
+
+				$repeater = is_array($repeater) ? $repeater : array($repeater);
+				$repeater = array_is_list($repeater) ? $repeater : array($repeater);
+				$repeater = array_filter($repeater);
+				$repeater = array_values($repeater);
+
+				// If the input is empty, end now
+
+					if ( !$repeater ) {
+
+						return $alternateName_schema;
+
+					}
+
+				$alternateName_schema = array_is_list($alternateName_schema) ? $alternateName_schema : array($alternateName_schema);
 
 			// Base list array
 
-				$alternateName_list = array();
+				$alternateName_schema = array();
 
 			if ( $repeater ) {
 
 				foreach ( $repeater as $alternateName ) {
 
-					$alternateName_list[] = $alternateName[$field_name];
+					$alternateName_schema[] = $alternateName[$field_name];
 
 				} // endforeach ( $repeater as $alternateName )
 
 				// Clean up list array
 
-					$alternateName_list = array_filter($alternateName_list);
-					$alternateName_list = array_values($alternateName_list);
-					sort($alternateName_list);
+					$alternateName_schema = array_filter($alternateName_schema);
+					$alternateName_schema = array_unique($alternateName_schema);
+					$alternateName_schema = array_values($alternateName_schema);
+					sort($alternateName_schema);
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						uamswp_fad_flatten_multidimensional_array($alternateName_list);
+						uamswp_fad_flatten_multidimensional_array($alternateName_schema);
 
 			} // endif ( $repeater )
 
-			return $alternateName_list;
+			return $alternateName_schema;
 
 		}
 
