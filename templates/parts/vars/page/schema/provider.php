@@ -1619,220 +1619,23 @@ TODO List
 
 		// hasCredential
 
-			$schema_provider_degrees = array_unique($degrees);
-			$schema_provider_hasCredential = array();
-			$schema_provider_credential = array();
+			// Format values
 
-			// Credential Transparency Description Language Values Map
+				$provider_hasCredential = array();
 
-				$ctdl_values = array(
-					'ApprenticeshipCertificate' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Assessment' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'AssociateDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'AssociateOfAppliedArtsDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'AssociateOfAppliedScienceDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'AssociateOfArtsDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'AssociateOfScienceDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'BachelorDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'BachelorOfArtsDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'BachelorOfScienceDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Badge' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Certificate' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'CertificateOfCompletion' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Certification' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Course' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Credential' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Degree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'DigitalBadge' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'Diploma' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'DoctoralDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'GeneralEducationDevelopment' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'JourneymanCertificate' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'LearningProgram' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'License' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'MasterCertificate' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'MasterDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'MasterOfArtsDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'MasterOfScienceDegree' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'MicroCredential' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'ProfessionalDoctorate' => array(
-						'label' => 'Professional Doctorate',
-						'definition' => 'Doctoral degree conferred upon completion of a program providing the knowledge and skills for the recognition, credential, or license required for professional practice.'
-					),
-					'QualityAssuranceCredential' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'ResearchDoctorate' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'SecondarySchoolDiploma' => array(
-						'label' => '',
-						'definition' => ''
-					),
-					'SpecialistDegree' => array(
-						'label' => '',
-						'definition' => ''
-					)
-				);
+				if ( $degrees ) {
 
+					$provider_hasCredential = uamswp_fad_schema_hascredential(
+						$degrees // mixed // Required // Degrees and credentials ID values
+					);
 
-			foreach ( $schema_provider_degrees as $item ) {
+				}
 
-				$schema_provider_credential = array(); // reset array
-				$item_term = get_term( $item, 'degree');
-				$item_name = get_field( 'degree_name', $item_term );
-				$item_abbreviation = $item_term->name;
-				$item_ctdl = get_field( 'degree_ctdl', $item_term );
+			// Add to schema
 
-				// Build value for individual degree or credential
+				if ( $provider_hasCredential ) {
 
-					if ( $item_name ) {
-
-						$schema_provider_credential = array(
-							'@type' => 'EducationalOccupationalCredential',
-							'alternateName' => $item_abbreviation, // Abbreviation of degree or credential (e.g., 'M.D.')
-							'name' => $item_name, // Full name of degree or credential (e.g., 'Doctor of Medicine')
-						);
-
-						if ( $item_ctdl ) {
-
-							$schema_provider_credential['credentialCategory'] = array(
-								'@type' => 'DefinedTerm',
-								'description' => isset($ctdl_values[$item_ctdl]['definition']) ? $ctdl_values[$item_ctdl]['definition'] : '', // Credential Transparency Description Language term definition
-								'inDefinedTermSet' => array(
-									'@type' => 'DefinedTermSet',
-									'name' => 'Credential Transparency Description Language',
-									'url' => 'http://purl.org/ctdl/terms/'
-								),
-								'name' => isset($ctdl_values[$item_ctdl]['label']) ? $ctdl_values[$item_ctdl]['label'] : '', // Credential Transparency Description Language term label
-								'termCode' => $item_ctdl, // Credential Transparency Description Language term definition
-								'url' => 'https://purl.org/ctdl/terms/' . $item_ctdl // Credential Transparency Description Language term URI
-							);
-
-							// Remove empty rows
-
-								$schema_provider_credential['credentialCategory'] = array_filter($schema_provider_credential['credentialCategory']);
-
-						}
-
-						// Sort array
-
-							if ( is_array($schema_provider_credential) ) {
-
-								ksort($schema_provider_credential);
-
-							}
-
-					}
-
-				// Add value to list
-
-					if ( $schema_provider_credential ) {
-
-						$schema_provider_hasCredential[] = $schema_provider_credential;
-
-					}
-
-			}
-
-			// Add list to schema
-
-				if ( $schema_provider_hasCredential ) {
-
-					$schema_provider_Person['hasCredential'] = $schema_provider_hasCredential;
-
-					// If there is only one item, flatten the multi-dimensional array by one step
-
-						uamswp_fad_flatten_multidimensional_array($schema_provider_Person['hasCredential']);
+					$schema_provider_Person['hasCredential'] = $provider_hasCredential;
 
 				}
 

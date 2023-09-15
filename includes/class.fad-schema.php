@@ -2943,6 +2943,355 @@
 
 		}
 
+	// Add data to an array defining schema data for hasCredential
+
+		function uamswp_fad_schema_hascredential(
+			$credentials, // mixed // Required // Degrees and credentials ID values
+			array $hasCredential_schema = array() // array // Optional // Pre-existing schema array for hasCredential to which to add credential items
+		) {
+
+			/*
+
+				'hasCredential' property:
+
+					A credential awarded to the Person or Organization.
+
+					Values expected to be one of these types:
+
+						 * EducationalOccupationalCredential
+
+				'EducationalOccupationalCredential' type:
+
+					An educational or occupational credential. A diploma, academic degree, 
+					certification, qualification, badge, etc., that may be awarded to a person 
+					or other entity that meets the requirements defined by the credentialer.
+
+			*/
+
+			// Check / define variables
+
+				$credentials = is_array($credentials) ? $credentials : array($credentials);
+				$credentials = array_is_list($credentials) ? $credentials : array($credentials);
+				$credentials = array_filter($credentials);
+				$credentials = array_values($credentials);
+
+				// If the input is empty, end now
+
+					if ( !$credentials ) {
+
+						return $hasCredential_schema;
+
+					}
+
+				$hasCredential_schema = array_is_list($hasCredential_schema) ? $hasCredential_schema : array($hasCredential_schema);
+
+			// Credential Transparency Description Language Values Map
+
+				$ctdl_values = array(
+					'ApprenticeshipCertificate' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Assessment' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'AssociateDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'AssociateOfAppliedArtsDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'AssociateOfAppliedScienceDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'AssociateOfArtsDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'AssociateOfScienceDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'BachelorDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'BachelorOfArtsDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'BachelorOfScienceDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Badge' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Certificate' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'CertificateOfCompletion' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Certification' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Course' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Credential' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Degree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'DigitalBadge' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'Diploma' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'DoctoralDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'GeneralEducationDevelopment' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'JourneymanCertificate' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'LearningProgram' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'License' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'MasterCertificate' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'MasterDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'MasterOfArtsDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'MasterOfScienceDegree' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'MicroCredential' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'ProfessionalDoctorate' => array(
+						'label' => 'Professional Doctorate',
+						'definition' => 'Doctoral degree conferred upon completion of a program providing the knowledge and skills for the recognition, credential, or license required for professional practice.'
+					),
+					'QualityAssuranceCredential' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'ResearchDoctorate' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'SecondarySchoolDiploma' => array(
+						'label' => '',
+						'definition' => ''
+					),
+					'SpecialistDegree' => array(
+						'label' => '',
+						'definition' => ''
+					)
+				);
+
+			// Get values
+
+				foreach ( $credentials as $credential ) {
+
+					// Eliminate PHP errors / reset variables
+
+						$credential_term = null;
+						$credential_name = null;
+						$credential_alternateName_array = null;
+						$credential_alternateName = null;
+						$credential_sameAs_array = null;
+						$credential_sameAs = null;
+						$credential_url = null;
+
+					// Base array
+
+						$credential_schema = array(
+							'alternateName' => '',
+							'credentialCategory' => array(
+								'description' => '',
+								'inDefinedTermSet' => array(
+									'@type' => 'DefinedTermSet',
+									'name' => 'Credential Transparency Description Language',
+									'url' => 'http://purl.org/ctdl/terms/'
+								),
+								'name' => '',
+								'termCode' => '',
+								'url' => '',
+							),
+							'name' => '',
+						);
+
+					$credential_term = get_term( $credential, 'degree' ) ?? '';
+
+					if ( is_object($credential_term) ) {
+
+						// name (full name of the clinical degree or credential)
+
+							$credential_name = get_field( 'degree_name', $credential_term ) ?? '';
+							$credential_schema['name'] = $credential_name;
+
+						// alternateName (e.g., abbreviation of the clinical degree or credential)
+
+							// Base array
+
+								$credential_alternateName = array();
+
+							// Get abbreviation of clinical degree or credential
+
+								$credential_abbreviation = $credential_term->name ?? '';
+								$credential_alternateName[] = $credential_abbreviation;
+
+							// Get alternateName repeater field value
+
+								$credential_alternateName_array = get_field( 'schema_alternatename', $credential_term ) ?? array();
+
+							// Add each item to alternateName property values array
+
+								if ( $credential_alternateName_array ) {
+
+									$credential_alternateName = uamswp_fad_schema_alternatename(
+										$credential_alternateName_array, // alternateName repeater field
+										'schema_alternatename_text', // alternateName item field name
+										$credential_alternateName // array // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+									);
+
+								} else {
+
+									// If there is only one item, flatten the multi-dimensional array by one step
+
+										uamswp_fad_flatten_multidimensional_array($credential_alternateName);
+
+								}
+
+							// Add to schema item
+
+								if ( $credential_alternateName ) {
+
+									$credential_schema['alternateName'] = $credential_alternateName;
+
+								}
+
+						// sameAs
+
+							// Get sameAs repeater field value
+
+								$credential_sameAs_array = get_field( 'schema_sameas', $credential_term ) ?? array();
+
+							// Add each item to sameAs property values array
+
+								if ( $credential_sameAs_array ) {
+
+									$credential_sameAs = uamswp_fad_schema_sameas(
+										$credential_sameAs_array, // sameAs repeater field
+										'schema_sameas_url' // sameAs item field name
+									);
+
+								}
+
+							// Add to schema item
+
+								if ( $credential_sameAs ) {
+
+									$credential_schema['sameAs'] = $credential_sameAs;
+
+								}
+
+						// credentialCategory (Credential Transparency Description Language schema term of clinical degree or credential)
+
+							$credential_ctdl = get_field( 'degree_ctdl', $credential_term ) ?? '';
+
+							if ( $credential_ctdl ) {
+
+								$credential_schema['credentialCategory']['description'] = $ctdl_values[$credential_ctdl]['definition'] ?? '';
+								$credential_schema['credentialCategory']['name'] = $ctdl_values[$credential_ctdl]['label'] ?? '';
+								$credential_schema['credentialCategory']['termCode'] = $credential_ctdl;
+								$credential_schema['credentialCategory']['url'] = 'https://purl.org/ctdl/terms/' . $credential_ctdl;
+
+								// Clean up array
+
+									$credential_schema['credentialCategory'] = array_filter($credential_schema['credentialCategory']);
+
+							} else {
+
+								unset($credential_schema['credentialCategory']);
+
+							}
+
+						// Clean up schema item array
+
+							$credential_schema = array_filter($credential_schema);
+
+						// Add @type
+
+							if ( $credential_schema ) {
+
+								$credential_schema = array( '@type' => 'EducationalOccupationalCredential' ) + $credential_schema;
+
+							}
+
+						// Add to the list array
+
+							if ( $credential_schema ) {
+
+								$hasCredential_schema[] = $credential_schema;
+
+							}
+
+					} // endif
+
+				} // endforeach
+
+			// Clean up schema list array
+
+				if ( $hasCredential_schema ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($hasCredential_schema);
+
+				}
+
+			return $hasCredential_schema;
+
+		}
+
 	// Add data to an array defining schema data for ImageObject from thumbnails
 
 		function uamswp_fad_schema_imageobject_thumbnails(
@@ -6969,11 +7318,26 @@
 
 										// Get values
 
-											if ( !isset($provider_hasCredential) ) {
+											// Get IDs of degrees and credentials
 
-												$provider_hasCredential = array();
+												if ( !isset($provider_degrees) ) {
 
-											}
+													$provider_degrees = get_field( 'physician_degree', $provider );
+													$provider_degrees = array_filter($provider_degrees);
+													$provider_degrees = array_unique($provider_degrees);
+													$provider_degrees = array_values($provider_degrees);
+
+												}
+
+											// Format values
+
+												if ( $provider_degrees ) {
+
+													$provider_hasCredential = uamswp_fad_schema_hascredential(
+														$provider_degrees // mixed // Required // Degrees and credentials ID values
+													);
+
+												}
 
 										// Add to item values
 
