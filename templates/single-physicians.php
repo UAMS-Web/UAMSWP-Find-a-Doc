@@ -80,6 +80,9 @@
 		// Degrees and credentials (e.g., M.D., Ph.D.)
 
 			$degrees = get_field('physician_degree',$post->ID);
+			$degrees = array_filter($degrees);
+			$degrees = array_unique($degrees);
+			$degrees = array_values($degrees);
 			$provider_schema_fields['provider_degrees'] = $degrees; // Add to schema fields
 			$degree_count = $degrees ? count($degrees) : 0;
 			$degree_list = '';
