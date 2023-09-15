@@ -2533,85 +2533,6 @@
 				}
 			]
 		},
-		"field_physician_gmb_tab": {
-			"key": "field_physician_gmb_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_physician_gmb_exclude": {
-			"key": "field_physician_gmb_exclude",
-			"label": "Exclude Listing in Google My Business",
-			"name": "physician_gmb_exclude",
-			"type": "button_group",
-			"instructions": "",
-			"required": "1",
-			"conditional_logic": "0",
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"0": "No",
-				"1": "Yes"
-			},
-			"allow_null": "1",
-			"default_value": "0",
-			"layout": "horizontal",
-			"return_format": "value"
-		},
-		"field_physician_gmb_cat": {
-			"key": "field_physician_gmb_cat",
-			"label": "Google My Business Category",
-			"name": "physician_gmb_cat",
-			"type": "taxonomy",
-			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
-			"required": "1",
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_gmb_exclude",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "gmb_cat_provider",
-			"field_type": "multi_select",
-			"add_term": "0",
-			"save_terms": "1",
-			"load_terms": "1",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": "0",
-			"allow_null": "0"
-		},
 		"field_physician_recognition_tab": {
 			"key": "field_physician_recognition_tab",
 			"name": "",
@@ -2730,6 +2651,85 @@
 					"maxlength": ""
 				}
 			]
+		},
+		"field_physician_gmb_tab": {
+			"key": "field_physician_gmb_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_resident",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_gmb_exclude": {
+			"key": "field_physician_gmb_exclude",
+			"label": "Exclude Listing in Google My Business",
+			"name": "physician_gmb_exclude",
+			"type": "button_group",
+			"instructions": "",
+			"required": "1",
+			"conditional_logic": "0",
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": "1",
+			"default_value": "0",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_physician_gmb_cat": {
+			"key": "field_physician_gmb_cat",
+			"label": "Google My Business Category",
+			"name": "physician_gmb_cat",
+			"type": "taxonomy",
+			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Doctor\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
+			"required": "1",
+			"conditional_logic": [
+				[
+					{
+						"field": "field_physician_gmb_exclude",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "gmb_cat_provider",
+			"field_type": "multi_select",
+			"add_term": "0",
+			"save_terms": "1",
+			"load_terms": "1",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": "0",
+			"allow_null": "0"
 		},
 		"field_physician_extra_tab": {
 			"key": "field_physician_extra_tab",
