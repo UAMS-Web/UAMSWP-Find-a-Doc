@@ -2720,6 +2720,16 @@
 
 						$language_string_attr = $language_string_attr ? implode( ', ', $language_string_attr ) : '';
 
+			// Clean up schema list array
+
+				if ( $language_schema ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($language_schema);
+
+				}
+
 			return $language_schema;
 
 		}
