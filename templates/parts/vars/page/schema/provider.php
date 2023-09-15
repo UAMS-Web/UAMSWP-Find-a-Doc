@@ -2032,48 +2032,11 @@ TODO List
 
 		// memberOf
 
-			// Clean up array
+			if ( $provider_schema_fields['provider_memberOf'] ) {
 
-				if (
-					isset($provider_associations_values)
-					&&
-					is_array($provider_associations_values)
-					&&
-					!empty($provider_associations_values)
-				) {
+				$schema_provider_Person['memberOf'] = $provider_schema_fields['provider_memberOf'];
 
-					// Sort array
-
-						ksort($provider_associations_values);
-
-				}
-
-			// Add each item to schema value array
-
-				// Eliminate PHP errors
-
-					$schema_provider_memberOf = array();
-
-				foreach ( $provider_associations_values as $item ) {
-
-					$schema_provider_memberOf[] = array_merge(
-						array( '@type' => 'Organization' ),
-						array_filter($item)
-					);
-
-				}
-
-			// Add to schema
-
-				if ( !empty($schema_provider_memberOf) ) {
-
-					$schema_provider_Person['memberOf'] = $schema_provider_memberOf;
-
-					// If there is only one item, flatten the multi-dimensional array by one step
-
-						uamswp_fad_flatten_multidimensional_array($schema_provider_Person['memberOf']);
-
-				}
+			}
 
 		// sameAs
 

@@ -2724,6 +2724,196 @@
 
 		}
 
+	// Add data to an array defining schema data for health care professional associations (memberOf)
+
+		function uamswp_fad_schema_associations(
+			$associations, // mixed // Required // Health care professional association ID values
+			array &$association_array = array(), // array // Optional // Pre-existing array variable to populate with a list of association names
+			array $memberOf_schema = array() // array // Optional // Pre-existing schema array for Language to which to add association items
+		) {
+
+			/*
+
+				An Organization (or ProgramMembership) to which this Person or Organization 
+				belongs.
+
+				Inverse-property: member
+
+				Values expected to be one of these types:
+
+					 * Organization
+					 * ProgramMembership
+
+				Sub-properties:
+
+					 * affiliation
+
+			*/
+
+			// Check / define variables
+
+				$associations = is_array($associations) ? $associations : array($associations);
+				$associations = array_is_list($associations) ? $associations : array($associations);
+				$associations = array_filter($associations);
+				$associations = array_values($associations);
+
+				// If the input is empty, end now
+
+					if ( !$associations ) {
+
+						return $memberOf_schema;
+
+					}
+
+				$memberOf_schema = array_is_list($memberOf_schema) ? $memberOf_schema : array($memberOf_schema);
+
+			// Get values
+
+				foreach ( $associations as $association ) {
+
+					// Eliminate PHP errors / reset variables
+
+						$association_term = null;
+						$association_name = null;
+						$association_alternateName_array = null;
+						$association_alternateName = null;
+						$association_sameAs_array = null;
+						$association_sameAs = null;
+						$association_url = null;
+
+					// Base array
+
+						$association_schema = array(
+							'alternateName' => '',
+							'name' => '',
+							'sameAs' => '',
+							'url' => ''
+						);
+
+					$association_term = get_term( $association, 'association' ) ?? '';
+
+					if ( is_object($association_term) ) {
+
+						// name
+
+							$association_name = $association_term->name;
+
+							// Add name to list of association names
+
+								if ( $association_name ) {
+
+									$association_array[] = $association_name;
+
+								}
+
+							// Add to schema item
+
+								if ( $association_name ) {
+
+									$association_schema['name'] = uamswp_attr_conversion($association_name);
+
+								}
+
+						// alternateName
+
+							// Get alternateName repeater field value
+
+								$association_alternateName_array = get_field( 'schema_alternatename', $association_term ) ?? array();
+
+							// Add each item to alternateName property values array
+
+								if ( $association_alternateName_array ) {
+
+									$association_alternateName = uamswp_fad_schema_alternatename(
+										$association_alternateName_array, // alternateName repeater field
+										'schema_alternatename_text' // alternateName item field name
+									);
+
+								}
+
+							// Add to schema item
+
+								if ( $association_alternateName ) {
+
+									$association_schema['alternateName'] = $association_alternateName;
+
+								}
+
+						// sameAs
+
+							// Get sameAs repeater field value
+
+								$association_sameAs_array = get_field( 'schema_sameas', $association_term ) ?? array();
+
+							// Add each item to sameAs property values array
+
+								if ( $association_sameAs_array ) {
+
+									$association_sameAs = uamswp_fad_schema_sameas(
+										$association_sameAs_array, // sameAs repeater field
+										'schema_sameas_url' // sameAs item field name
+									);
+
+								}
+
+							// Add to schema item
+
+								if ( $association_sameAs ) {
+
+									$association_schema['sameAs'] = $association_sameAs;
+
+								}
+
+						// url (Official Website)
+
+							$association_url = get_field( 'schema_url', $association_term ) ?? '';
+
+							// Add to schema item
+
+								if ( $association_url ) {
+
+									$association_schema['url'] = uamswp_attr_conversion($association_url);
+
+								}
+
+						// Clean up schema item array
+
+							$association_schema = array_filter($association_schema);
+
+						// Add @type
+
+							if ( $association_schema ) {
+
+								$association_schema = array( '@type' => 'Organization' ) + $association_schema;
+
+							}
+
+						// Add to the list array
+
+							if ( $association_schema ) {
+
+								$memberOf_schema[] = $association_schema;
+
+							}
+
+					} // endif
+
+				} // endforeach
+
+			// Clean up schema list array
+
+				if ( $memberOf_schema ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($memberOf_schema);
+
+				}
+
+			return $memberOf_schema;
+
+		}
+
 	// Add data to an array defining schema data for ImageObject from thumbnails
 
 		function uamswp_fad_schema_imageobject_thumbnails(
@@ -3574,7 +3764,7 @@
 								$provider_alternateName_additional_repeater = null;
 								$provider_alternateName_variants = null;
 								$provider_areaServed = null;
-								$provider_areaServed = null;
+								$provider_associations = null;
 								$provider_availableService = null;
 								$provider_award = null;
 								$provider_brand = null;
@@ -6073,13 +6263,23 @@
 
 												// Get specific membership 'Organization'
 
-													// Base array
+													if ( !isset($provider_memberOf) ) {
 
-														$provider_memberOf = array();
+														// Get health care professional associations input value
 
-													// Get values
+															$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
 
-														$provider_memberOf = array();
+														// Format values
+
+															if ( $provider_associations ) {
+
+																$provider_memberOf = uamswp_fad_schema_associations(
+																	$provider_associations, // mixed // Required // Health care professional association ID values
+																); // Add to schema fields
+
+															}
+
+													}
 
 												// Merge common clinical 'Organization'
 

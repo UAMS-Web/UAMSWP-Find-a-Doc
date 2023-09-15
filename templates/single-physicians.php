@@ -1004,92 +1004,26 @@
 
 			// Construct a list of the provider's health care professional associations
 
-				$provider_associations = get_field('physician_associations');
+				// Get association input value
 
-				// Eliminate PHP errors
+					$provider_associations = get_field('physician_associations') ?? array();
+
+				// Define empty variable to receive association names
 
 					$provider_associations_names = array();
-					$provider_associations_values = array();
-					$association_term = '';
-					$association_name = '';
-					$association_alternateName_array = array();
-					$association_alternateName = array();
-					$association_sameAs_array = array();
-					$association_sameAs = array();
-					$association_url = '';
 
-				if ( $provider_associations ) {
+				// Format values
 
-					foreach ( $provider_associations as $association ) {
+					$provider_schema_fields['provider_memberOf'] = ''; // Add to schema fields
 
-						$association_term = get_term( $association, 'association' );
+					if ( $provider_associations ) {
 
-						if ( is_object($association_term) ) {
-
-							// Name (Schema.org name property)
-
-								$association_name = $association_term->name;
-
-							// Alternate Names (Schema.org alternateName property)
-
-								$association_alternateName_array = get_field( 'schema_alternatename', $association_term ) ?: array();
-
-								if ( count($association_alternateName_array) == 1 ) {
-
-									$association_alternateName = $association_alternateName_array[0]['schema_alternatename_text'];
-
-								} elseif ( count($association_alternateName_array) > 1 ) {
-
-									foreach ( $association_alternateName_array as $item ) {
-
-										$association_alternateName[] = $item['schema_alternatename_text'];
-
-									}
-
-								}
-
-							// Reference Webpages (Schema.org sameAs property)
-
-								$association_sameAs_array = get_field( 'schema_sameas', $association_term ) ?: array();
-
-								if ( count($association_sameAs_array) == 1 ) {
-
-									$association_sameAs = $association_sameAs_array[0]['schema_sameas_url'];
-
-								} elseif ( count($association_sameAs_array) > 1 ) {
-
-									foreach ( $association_sameAs_array as $item ) {
-
-										$association_sameAs[] = $item['schema_sameas_url'];
-
-									}
-
-								}
-
-							// Official Website (Schema.org url property)
-
-								$association_url = get_field( 'schema_url', $association_term ) ?: '';
-
-							// Add name to array
-
-								$provider_associations_names[] = $association_name;
-
-							// Add name and field values to array
-
-								$provider_associations_values[$association_name] = array_filter(
-									array(
-										'alternateName' => $association_alternateName,
-										'name' => $association_name,
-										'sameAs' => $association_sameAs,
-										'url' => $association_url
-									)
-								);
-
-						}
+						$provider_schema_fields['provider_memberOf'] = uamswp_fad_schema_associations(
+							$provider_associations, // mixed // Required // Health care professional association ID values
+							$provider_associations_names // array // Optional // Pre-existing array variable to populate with a list of association names
+						); // Add to schema fields
 
 					}
-
-				}
 
 			// Get the age of the provider portrait
 
