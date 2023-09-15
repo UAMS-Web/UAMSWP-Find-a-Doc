@@ -37,7 +37,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_first_name": {
@@ -185,7 +185,7 @@
 			"allow_null": 1,
 			"other_choice": 0,
 			"default_value": "",
-			"layout": "horizontal",
+			"layout": "vertical",
 			"return_format": "value",
 			"save_other_choice": 0
 		},
@@ -206,7 +206,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "25",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -269,6 +269,27 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		"field_physician_portrait_tab": {
+			"key": "field_physician_portrait_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons dashicons-images-alt2\"><\/i> Portraits",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_physician_featured_image": {
 			"key": "field_physician_featured_image",
@@ -341,7 +362,7 @@
 			"key": "field_physician_clinical_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Clinical Profile",
+			"label": "<i class=\"dashicons dashicons-id-alt\"><\/i> Clinical Role Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -350,7 +371,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_resident": {
@@ -544,7 +565,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -568,7 +589,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -601,7 +622,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -705,7 +726,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -726,7 +747,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -745,7 +766,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -770,7 +791,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -794,7 +815,7 @@
 			"name": "physician_clinical_bio",
 			"type": "wysiwyg",
 			"label": "Patient-focused Clinical Biography",
-			"instructions": "While this field is not required, it is heavily encouraged.</p><p class='description' style='margin-top: 0.5em;'>It should be written with the patient in mind (e.g., What can the provider do for the patient? Why should the patient choose to make an appointment with this provider or with UAMS Health in general?).</p><p class='description' style='margin-top: 0.5em;'>Write this from the third-person point of view. Use complete sentences. Use only paragraphs (no headings or lists). Do not use any line breaks, text formatting, images or links.</p><p class='description' style='margin-top: 0.5em;'>Move any academic and training background to the \"Academic Biography\" field, which is under the \"Academic Profile\" tab.",
+			"instructions": "While this field is not required, it is heavily encouraged.</p><p class='description' style='margin-top: 0.5em;'>It should be written with the patient in mind (e.g., What can the provider do for the patient? Why should the patient choose to make an appointment with this provider or with UAMS Health in general?).</p><p class='description' style='margin-top: 0.5em;'>Write this from the third-person point of view. Use complete sentences. Use only paragraphs (no headings or lists). Do not use any line breaks, text formatting, images or links.</p><p class='description' style='margin-top: 0.5em;'>Move any academic and training background to the \"Academic Biography\" field, which is under the \"Academic Role Details\" tab.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -817,7 +838,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -844,7 +865,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1080,7 +1101,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1113,7 +1134,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1146,7 +1167,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1251,7 +1272,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1276,7 +1297,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "25",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1353,7 +1374,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_resident_profile_group": {
@@ -1381,7 +1402,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -1412,7 +1433,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -1439,7 +1460,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -1523,7 +1544,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "50",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -1572,7 +1593,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -1658,7 +1679,7 @@
 			"key": "field_physician_academic_profile_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-edit\"><\/i> Academic Profile",
+			"label": "<i class=\"dashicons dashicons-edit\"><\/i> Academic Role Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -1675,7 +1696,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_profile_message": {
@@ -1712,7 +1733,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "51",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1734,7 +1755,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1759,7 +1780,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -1991,7 +2012,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2010,7 +2031,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2136,7 +2157,7 @@
 			"key": "field_physician_education_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons dashicons-book-alt\"><\/i> Education",
+			"label": "<i class=\"dashicons dashicons-book-alt\"><\/i> Education and Training",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -2145,7 +2166,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_appointment_education": {
@@ -2317,7 +2338,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_research_bio": {
@@ -2375,7 +2396,7 @@
 				]
 			],
 			"wrapper": {
-				"width": "33",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2391,7 +2412,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "33",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2410,7 +2431,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "33",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -2542,7 +2563,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_gmb_exclude": {
@@ -2613,7 +2634,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_awards": {
@@ -2734,7 +2755,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_physician_prefix": {
