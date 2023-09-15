@@ -8044,35 +8044,74 @@
 										)
 									) {
 
-										// Get hasMap repeater field value
+										// Google Company ID (CID)
 
-											if ( !isset($provider_hasMap_repeater) ) {
+											// Get Google Customer ID repeater field value
 
-												$provider_hasMap_repeater = array();
+												if ( !isset($provider_google_cid) ) {
 
-											}
+													if ( !isset($provider_google_cid_repeater) ) {
 
-											// Add each item to hasMap property values array
+														$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
 
-												if ( !isset($provider_hasMap) ) {
+													}
 
-													if ( $provider_hasMap_repeater ) {
+													// Add each item to Google Company ID value array
 
-														/*
+														if ( $provider_google_cid_repeater ) {
 
-															foreach loop to get the text field value from each row.
+															foreach ( $provider_google_cid_repeater as $cid ) {
 
-															Prepend 'https://www.google.com/maps?cid=' to each value.
+																if ( $cid ) {
 
-															Add each value to a list array
+																	$provider_google_cid[] = $cid['schema_google_cid_text'];
 
-														*/
+																}
 
-														$provider_hasMap = array();
+															}
+
+														}
+
+													// Clean up Google Company ID value array
+
+														$provider_google_cid = array_filter($provider_google_cid);
+														$provider_google_cid = array_unique($provider_google_cid);
+														$provider_google_cid = array_values($provider_google_cid);
+
+												}
+
+											// Format values
+
+												if ( $provider_google_cid ) {
+
+													$provider_google_cid = is_array($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
+
+													foreach ( $provider_google_cid as $cid ) {
+
+														if ( $cid ) {
+
+															$provider_hasMap[] = 'https://www.google.com/maps?cid=' . $cid;
+
+														}
 
 													}
 
 												}
+
+											// Clean up array
+
+												if ( $provider_hasMap ) {
+
+													// If there is only one item, flatten the multi-dimensional array by one step
+
+														if ( $provider_hasMap ) {
+
+															uamswp_fad_flatten_multidimensional_array($provider_hasMap);
+
+														}
+
+												}
+
 
 										// Add to item values
 
@@ -9033,37 +9072,51 @@
 
 														// Google Company ID (CID)
 
-															// Get Google Company ID repeater field value
+															// Get Google Customer ID repeater field value
 
-																if ( !isset($provider_cid_repeater) ) {
+																if ( !isset($provider_google_cid) ) {
 
-																	$provider_cid_repeater = array();
+																	if ( !isset($provider_google_cid_repeater) ) {
 
-																}
+																		$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
+	
+																	}
 
-																// Add each item to Google Company ID value array
+																	// Add each item to Google Company ID value array
+		
+																		if ( $provider_google_cid_repeater ) {
 
-																	if ( !isset($provider_cid) ) {
+																			foreach ( $provider_google_cid_repeater as $cid ) {
 
-																		if ( $provider_cid_repeater ) {
+																				if ( $cid ) {
 
-																			/*
+																					$provider_google_cid[] = $cid['schema_google_cid_text'];
 
-																				foreach loop to get the text field value from each row.
+																				}
 
-																				Add each value to a list array
-
-																			*/
-
-																			$provider_cid = array();
+																			}
 
 																		}
 
-																	}
+																	// Clean up Google Company ID value array
+
+																		$provider_google_cid = array_filter($provider_google_cid);
+																		$provider_google_cid = array_unique($provider_google_cid);
+																		$provider_google_cid = array_values($provider_google_cid);
+
+																}
 
 															// Add value to identifier property value list
 
-																if ( $provider_cid ) {
+																if ( $provider_google_cid ) {
+
+																	// If there is only one item, flatten the multi-dimensional array by one step
+
+																		if ( $provider_google_cid ) {
+
+																			uamswp_fad_flatten_multidimensional_array($provider_google_cid);
+
+																		}
 
 																	$provider_identifier[] = uamswp_fad_schema_propertyvalue(
 																		array(
@@ -9084,7 +9137,7 @@
 																		null, // string // Optional // unitCode property value
 																		null, // string // Optional // unitText property value
 																		null, // string // Optional // url property value
-																		$provider_cid, // mixed // Optional // value property value
+																		$provider_google_cid, // mixed // Optional // value property value
 																		null, // mixed // Optional // valueReference property value
 																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																	);
