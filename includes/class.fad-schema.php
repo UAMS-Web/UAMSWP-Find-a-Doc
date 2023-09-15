@@ -3952,15 +3952,17 @@
 														$provider_degree_array = array();
 														$provider_degree_list = '';
 														$provider_degree_list_i = 1;
+														$provider_degree_count = 0;
 
 														if ( !isset($provider_degrees) ) {
 
 															$provider_degrees = get_field( 'physician_degree', $provider );
-															$provider_degree_count = $degrees ? count($degrees) : 0;
 
 														}
 
 														if ( $provider_degrees ) {
+
+															$provider_degree_count = count($provider_degrees) ?? 0;
 
 															foreach ( $provider_degrees as $item ) {
 
