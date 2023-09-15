@@ -6765,15 +6765,16 @@
 
 													}
 
-											}
+												// Clean up value
 
-										// Clean up value
+													if ( $provider_description ) {
 
-											if ( $provider_description ) {
+														$provider_description = wp_strip_all_tags($provider_description);
+														$provider_description = str_replace("\n", ' ', $provider_description); // Strip line breaks
+														$provider_description = strlen($provider_description) > 160 ? mb_strimwidth($provider_description, 0, 156, '...') : $provider_description; // Limit to 160 characters
+														$provider_description = uamswp_attr_conversion($provider_description);
 
-												$provider_description = wp_strip_all_tags($provider_description);
-												$provider_description = str_replace("\n", ' ', $provider_description); // Strip line breaks
-												$provider_description = strlen($provider_description) > 160 ? mb_strimwidth($provider_description, 0, 156, '...') : $provider_description; // Limit to 160 characters
+													}
 
 											}
 
