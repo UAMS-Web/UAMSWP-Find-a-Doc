@@ -6513,14 +6513,63 @@
 												$nesting_level == 0
 											) {
 
-												// Get values
+												// Base array
 
-													if ( !isset($provider_worksFor) ) {
+													$provider_worksFor = array();
 
-														$provider_worksFor[] = $schema_base_org_uams_health_ref ?? '';
-														$provider_worksFor[] = $schema_base_org_uams_ref ?? '';
+												// Merge common clinical 'Organization'
+
+													if ( $provider_organization_common ) {
+
+														$provider_worksFor = array_merge(
+															( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
+															( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
+														);
 
 													}
+
+												// Merge specific clinical 'Organization'
+
+													if ( $provider_organization_specific ) {
+
+														if (
+															$provider_affiliation
+															||
+															$provider_brand
+															||
+															$provider_memberOf
+															||
+															$provider_parentOrganization
+														) {
+
+															// @id references
+
+																$provider_worksFor = array_merge(
+																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
+																);
+
+														} else {
+
+															// Full values
+
+																$provider_worksFor = array_merge(
+																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
+																);
+
+														}
+
+													}
+
+												// Clean up array
+
+													$provider_worksFor = array_unique( $provider_worksFor, SORT_REGULAR );
+													$provider_worksFor = array_values($provider_worksFor);
+
+													// If there is only one item, flatten the multi-dimensional array by one step
+
+														uamswp_fad_flatten_multidimensional_array($provider_worksFor);
 
 												// Add to item values
 
