@@ -395,10 +395,14 @@
 					$provider_specialty_term = '';
 					$provider_specialty_name = '';
 					$provider_occupation_title = '';
+					$provider_schema_fields['provider_clinical_specialization'] = ''; // Add to schema fields
+					$provider_schema_fields['provider_clinical_specialization_term'] = ''; // Add to schema fields
+					$provider_schema_fields['provider_jobTitle'] = ''; // Add to schema fields
 
 				if ( $resident ) {
 
 					$provider_occupation_title = $resident_title_name;
+					$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
 
 				} else {
 
@@ -410,14 +414,13 @@
 						if ( $provider_specialty ) {
 
 							$provider_specialty_term = get_term($provider_specialty, 'clinical_title');
-							$provider_schema_fields['provider_clinical_specialization_term'] = $provider_specialty_term; // Add to schema fields
 
 							if ( is_object($provider_specialty_term) ) {
 
 								$provider_specialty_name = $provider_specialty_term->name;
 								$provider_occupation_title = get_field('clinical_specialization_title', $provider_specialty_term);
 								$provider_occupation_title = $provider_occupation_title ?: $provider_specialty_name;
-								$provider_schema_fields['Physician_degree_query'] = $provider_occupation_title; // Add to schema fields
+								$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
 
 							}
 
@@ -427,6 +430,9 @@
 
 				$provider_specialty_name_attr = uamswp_attr_conversion($provider_specialty_name);
 				$provider_occupation_title_attr = uamswp_attr_conversion($provider_occupation_title);
+				$provider_schema_fields['provider_clinical_specialization'] = $provider_specialty; // Add to schema fields
+				$provider_schema_fields['provider_clinical_specialization_term'] = $provider_specialty_term; // Add to schema fields
+				$provider_schema_fields['provider_jobTitle'] = $provider_occupation_title_attr; // Add to schema fields
 
 				// Defines the indefinite article to precede the clinical occupation title (a or an, based on whether clinical occupation title starts with vowel)
 
