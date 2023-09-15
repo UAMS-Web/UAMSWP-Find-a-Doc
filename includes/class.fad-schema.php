@@ -5960,10 +5960,33 @@
 
 													if ( $provider_organization_specific ) {
 
-														$provider_brand = array_merge(
-															( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
-															( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
-														);
+														if (
+															$provider_affiliation
+															||
+															$provider_memberOf
+															||
+															$provider_parentOrganization
+															||
+															$provider_worksFor
+														) {
+
+															// @id references
+
+																$provider_brand = array_merge(
+																	( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
+																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
+																);
+
+														} else {
+
+															// Full values
+
+																$provider_brand = array_merge(
+																	( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
+																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
+																);
+
+														}
 
 													}
 
@@ -6177,7 +6200,15 @@
 
 														if ( $provider_organization_specific ) {
 
-															if ( $provider_brand ) {
+															if (
+																$provider_brand
+																||
+																$provider_memberOf
+																||
+																$provider_parentOrganization
+																||
+																$provider_worksFor
+															) {
 
 																// @id references
 
@@ -6310,6 +6341,10 @@
 															$provider_affiliation
 															||
 															$provider_brand
+															||
+															$provider_parentOrganization
+															||
+															$provider_worksFor
 														) {
 
 															// @id references
@@ -6422,6 +6457,8 @@
 															$provider_brand
 															||
 															$provider_memberOf
+															||
+															$provider_worksFor
 														) {
 
 															// @id references
