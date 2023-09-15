@@ -908,7 +908,7 @@ TODO List
 				$provider_hospitalAffiliation = array();
 
 			if ( $provider_hospitalAffiliation_multiselect ) {
-		
+
 				$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
 					$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
 					$page_url, // string // Required // Page URL

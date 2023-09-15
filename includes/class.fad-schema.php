@@ -1235,7 +1235,7 @@
 								$hospital_location = get_field( 'affiliation_location', $hospital_term ) ?? array();
 
 								// Check location value
-								
+
 									if ( $hospital_location ) {
 
 										$hospital_location = ( is_array($hospital_location) && !empty($hospital_location) ) ? reset($hospital_location) : $hospital_location;
@@ -1252,7 +1252,7 @@
 								continue;
 
 							} else {
-								
+
 								$schema = uamswp_fad_schema_location(
 									array($hospital_location), // List of IDs of the location items
 									$page_url, // Page URL
@@ -1275,7 +1275,7 @@
 					} // endforeach
 
 				} // endif ( $hospital_affiliation )
-			
+
 			// Clean up the list array
 
 				if ( $schema_hospital_affiliation ) {
@@ -2196,9 +2196,9 @@
 				$name
 
 					Name of the property
-					
+
 					Examples:
-					
+
 						 * 'Data Universal Numbering System number'
 						 * 'National Provider Identifier'
 
@@ -2209,9 +2209,9 @@
 				$alternateName
 
 					Alternate name(s) of the property
-					
+
 					Examples:
-					
+
 						 * array( 'Data Universal Numbering System (DUNS) number', 'DUNS number', 'D-U-N-S number' )
 						 * 'NPI'
 
@@ -2224,7 +2224,7 @@
 					A commonly used identifier for the characteristic represented by the 
 					property (e.g., a manufacturer or a standard code for a property). 
 					propertyID can be:
-					
+
 						(1) a prefixed string, mainly meant to be used with standards for product 
 						properties;
 
@@ -2237,9 +2237,9 @@
 
 					Standards bodies should promote a standard prefix for the identifiers of 
 					properties from their standards.
-					
+
 					Examples:
-					
+
 						 * 'https://www.wikidata.org/wiki/Q246386' (for Data Universal Numbering System number)
 						 * 'https://www.wikidata.org/wiki/Q6975101' (for National Provider Identifier)
 
@@ -2257,9 +2257,9 @@
 
 					Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a 
 					decimal point. Avoid using these symbols as a readability separator.
-					
+
 					Examples:
-					
+
 						 * '122452563' (for Data Universal Numbering System number)
 						 * '1841276169' (for National Provider Identifier)
 
@@ -2273,7 +2273,7 @@
 				$url
 
 					URL of a reference Web page that unambiguously indicates the value
-					
+
 					Examples:
 
 						 * 'https://npiregistry.cms.hhs.gov/provider-view/1841276169' (for a National Provider Identifier that is '1841276169')
@@ -2492,10 +2492,10 @@
 			/*
 
 				Natural languages such as Spanish, Tamil, Hindi, English, etc.
-				
+
 				Formal language code tags expressed in BCP 47 can be used via 
 				the alternateName property.
-				
+
 				The Language type previously also covered programming 
 				languages such as Scheme and Lisp, which are now best represented using 
 				ComputerLanguage.
@@ -2503,9 +2503,9 @@
 				$name
 
 					English name for this language (exonym / xenonym)
-					
+
 					Examples:
-					
+
 						 * 'Persian' is the English name, while 'Farsi' is the native name
 
 					Expected Type:
@@ -2520,7 +2520,7 @@
 						 * Native Name of Language (Endonym / Autonym)
 
 					Examples:
-					
+
 						 * 'fa' is the BCP 47 code for Persian / Farsi
 						 * 'Farsi' is the native name, while 'Persian' is the English name
 
@@ -2533,9 +2533,9 @@
 					URL of a reference Web page that unambiguously indicates the item's identity 
 					(e.g., the URL of the item's Wikipedia page, the URL of the item's Wikidata 
 					entry, the URL of the item's official website).
-					
+
 					Examples:
-					
+
 						 * 'https://en.wikipedia.org/wiki/Persian_language' (Wikipedia page for Persian)
 						 * 'https://www.wikidata.org/wiki/Q9168' (Wikidata entry for Persian)
 
@@ -2561,7 +2561,7 @@
 						}
 
 					} else {
-						
+
 						$languages = array($languages);
 
 					}
@@ -2715,7 +2715,7 @@
 					// Standard
 
 						$language_string = $language_string ? implode( ', ', $language_string ) : '';
-		
+
 					// Attribute-friendly
 
 						$language_string_attr = $language_string_attr ? implode( ', ', $language_string_attr ) : '';
@@ -3771,15 +3771,15 @@
 																	$item_name = $item_term->name;
 																	$provider_degree_list .= $item_name;
 																	$provider_degree_array[] = uamswp_attr_conversion($item_name);
-												
+
 																	if ( $provider_degree_count > $provider_degree_list_i ) {
-												
+
 																		$provider_degree_list .= ', ';
-												
+
 																	} // endif
-												
+
 																	$provider_degree_list_i++;
-												
+
 																} // endif
 
 															} // endforeach
@@ -3791,7 +3791,7 @@
 															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
 
 														} // endif
-										
+
 													}
 
 												// Check the list of degrees against the Physician degrees
@@ -3973,15 +3973,15 @@
 																$item_name = $item_term->name;
 																$provider_degree_list .= $item_name;
 																$provider_degree_array[] = uamswp_attr_conversion($item_name);
-											
+
 																if ( $provider_degree_count > $provider_degree_list_i ) {
-											
+
 																	$provider_degree_list .= ', ';
-											
+
 																} // endif
-											
+
 																$provider_degree_list_i++;
-											
+
 															} // endif
 
 														} // endforeach
@@ -3993,7 +3993,7 @@
 														$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
 
 													} // endif
-									
+
 												}
 
 											// Prefix
@@ -4544,15 +4544,15 @@
 																			$provider_alternateName_variants[] = $provider_honorificPrefix . ' ' . $item;
 
 																		}
-				
+
 																	// Add degrees
 
 																		if ( $provider_degree_list ) {
 
 																			$provider_alternateName_variants[] = $item . ', ' . $provider_degree_list;
-					
+
 																		}
-				
+
 																}
 
 																if ( $provider_alternateName_variants ) {
@@ -5768,7 +5768,7 @@
 													}
 
 												// Clean up array
-														
+
 													$provider_brand = array_unique( $provider_brand, SORT_REGULAR );
 													$provider_brand = array_values($provider_brand);
 
@@ -5851,14 +5851,14 @@
 														// Define hospitalAffiliation value
 
 															if ( $provider_hospitalAffiliation_multiselect ) {
-				
+
 																$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
 																	$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
 																	$provider_url, // string // Required // Page URL
 																	$nesting_level, // int // Optional // Nesting level within the main schema
 																	array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 																);
-		
+
 															}
 
 														// Define reference to hospitalAffiliation IDs if both hospitalAffiliation and affiliation are valid properties
@@ -5894,15 +5894,15 @@
 																$schema_provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references(
 																	$provider_hospitalAffiliation
 																);
-																
+
 															}
 
 														// Define affiliation value
 
 															if ( $provider_hospitalAffiliation ) {
-				
+
 																$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
-		
+
 															}
 
 												// hospitalAffiliation
@@ -6000,7 +6000,7 @@
 														}
 
 													// Clean up array
-														
+
 														$provider_affiliation = array_unique( $provider_affiliation, SORT_REGULAR );
 														$provider_affiliation = array_values($provider_affiliation);
 
@@ -6123,7 +6123,7 @@
 													}
 
 												// Clean up array
-													
+
 													$provider_memberOf = array_unique( $provider_memberOf, SORT_REGULAR );
 													$provider_memberOf = array_values($provider_memberOf);
 
@@ -6235,7 +6235,7 @@
 													}
 
 												// Clean up array
-														
+
 													$provider_parentOrganization = array_unique( $provider_parentOrganization, SORT_REGULAR );
 													$provider_parentOrganization = array_values($provider_parentOrganization);
 
@@ -7520,7 +7520,7 @@
 																	null, // mixed // Optional // valueReference property value
 																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
-																
+
 															}
 
 														// Global Location Number
@@ -8168,7 +8168,7 @@
 														$provider_clinical_specialization = get_field( 'physician_title', $provider );
 
 													}
-		
+
 													if ( $provider_clinical_specialization ) {
 
 														$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' );
@@ -8405,13 +8405,13 @@
 												if ( !isset($provider_languages) ) {
 
 													$provider_languages = get_field( 'physician_languages', $provider );
-												
+
 												}
 
 												$provider_knowsLanguage = uamswp_fad_schema_language(
 													$languages // mixed // Required // Language ID values
 												);
-								
+
 											}
 
 										// Add to item values
@@ -8485,9 +8485,9 @@
 
 														$provider_url = get_permalink($provider);
 														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-			
+
 													}
-			
+
 													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : '';
 
 												}
@@ -9108,9 +9108,9 @@
 
 														$provider_url = get_permalink($provider);
 														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-			
+
 													}
-			
+
 													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : '';
 
 												}
@@ -9898,7 +9898,7 @@
 												// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
 													if ( !isset($LocalBusiness_medicalSpecialty_list) ) {
-																	
+
 														// Get medicalSpecialty multiselect field value
 
 															if ( !isset($LocalBusiness_medicalSpecialty_multiselect) ) {
@@ -17288,28 +17288,28 @@
 												// name
 
 													/* 
-													* The name of the item.
-													* 
-													* Subproperty of:
-													* 
-													*     - rdfs:label
-													* 
-													* Values expected to be one of these types:
-													* 
-													*     - Text
-													*/
+													 * The name of the item.
+													 * 
+													 * Subproperty of:
+													 * 
+													 *     - rdfs:label
+													 * 
+													 * Values expected to be one of these types:
+													 * 
+													 *     - Text
+													 */
 
 													$service_usesDevice_item['name'] = $usesDevice['schema_medicaldevice_name'];
 
 												// alternateName
 
 													/* 
-													* An alias for the item.
-													* 
-													* Values expected to be one of these types:
-													* 
-													*     - Text
-													*/
+													 * An alias for the item.
+													 * 
+													 * Values expected to be one of these types:
+													 * 
+													 *     - Text
+													 */
 
 													// Get alternateName repeater field value
 
@@ -17333,13 +17333,13 @@
 												// code
 
 													/* 
-													* A medical code for the entity, taken from a controlled vocabulary or ontology 
-													* such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-													* 
-													* Values expected to be one of these types:
-													* 
-													*     - MedicalCode
-													*/
+													 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+													 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+													 * 
+													 * Values expected to be one of these types:
+													 * 
+													 *     - MedicalCode
+													 */
 
 													// Get code repeater field value
 
