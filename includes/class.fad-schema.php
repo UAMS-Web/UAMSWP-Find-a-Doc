@@ -6832,12 +6832,12 @@
 									if (
 										(
 											in_array(
-												'alumniOf',
+												'gender',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
 											in_array(
-												'alumniOf',
+												'gender',
 												$provider_properties_map[$Person_type]['properties']
 											)
 										)
@@ -6847,9 +6847,9 @@
 
 										// Get values
 
-											if ( !isset($provider_alumniOf) ) {
+											if ( !isset($provider_gender) ) {
 
-												$provider_alumniOf = array();
+												$provider_gender = array();
 
 											}
 
@@ -6859,14 +6859,14 @@
 
 												if (
 													in_array(
-														'alumniOf',
+														'gender',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													&&
-													$provider_alumniOf
+													$provider_gender
 												) {
 
-													$provider_item_MedicalBusiness['alumniOf'] = $provider_alumniOf;
+													$provider_item_MedicalBusiness['gender'] = $provider_gender;
 
 												}
 
@@ -6874,14 +6874,14 @@
 
 												if (
 													in_array(
-														'alumniOf',
+														'gender',
 														$provider_properties_map[$Person_type]['properties']
 													)
 													&&
-													$provider_alumniOf
+													$provider_gender
 												) {
 
-													$provider_item_Person['alumniOf'] = $provider_alumniOf;
+													$provider_item_Person['gender'] = $provider_gender;
 
 												}
 
