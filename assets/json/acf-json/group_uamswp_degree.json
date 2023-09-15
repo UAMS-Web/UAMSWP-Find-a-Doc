@@ -29,7 +29,7 @@
 		"field_degree_name": {
 			"key": "field_degree_name",
 			"name": "degree_name",
-			"label": "Full name of Clinical Degree or Credential",
+			"label": "Full Name of the Clinical Degree or Credential",
 			"type": "text",
 			"instructions": "",
 			"required": 1,
@@ -103,6 +103,54 @@
 			"allow_custom": 0,
 			"search_placeholder": "Select one",
 			"placeholder": ""
+		},
+		"field_degree_alternatename": {
+			"key": "field_degree_alternatename",
+			"name": "degree_alternatename",
+			"label": "Alternate Names for the Clinical Degree or Credential",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_degree_sameas": {
+			"key": "field_degree_sameas",
+			"name": "degree_sameas",
+			"label": "Reference Webpages for the Clinical Degree or Credential",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		}
 	},
 	"modified": false
