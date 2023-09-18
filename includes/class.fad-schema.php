@@ -5141,8 +5141,8 @@
 								$provider_vatID = null;
 								$provider_video = null;
 								$schema_provider_hospitalAffiliation_ref = null;
-								$schema_provider_MedicalBusiness_ref = null;
-								$schema_provider_Person_ref = null;
+								$provider_item_MedicalBusiness_ref = null;
+								$provider_item_Person_ref = null;
 
 							// Load variables from pre-existing field values array
 
@@ -5415,8 +5415,8 @@
 
 											if ( $provider_item_MedicalWebPage['@id'] ) {
 
-												$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
-												uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+												$provider_item_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
+												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
 
 											}
 
@@ -5440,8 +5440,8 @@
 
 											if ( $provider_item_MedicalBusiness['@id'] ) {
 
-												$schema_provider_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
-												uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalBusiness_ref);
+												$provider_item_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
+												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalBusiness_ref);
 
 											}
 
@@ -5465,8 +5465,8 @@
 
 											if ( $provider_item_Person['@id'] ) {
 
-												$schema_provider_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
-												uamswp_fad_flatten_multidimensional_array($schema_provider_Person_ref);
+												$provider_item_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
+												uamswp_fad_flatten_multidimensional_array($provider_item_Person_ref);
 
 											}
 
@@ -6345,9 +6345,9 @@
 
 										// Get values
 
-											if ( $schema_provider_MedicalBusiness_ref ) {
+											if ( $provider_item_MedicalBusiness_ref ) {
 
-												$provider_about = $schema_provider_MedicalBusiness_ref;
+												$provider_about = $provider_item_MedicalBusiness_ref;
 
 											}
 
@@ -7809,8 +7809,8 @@
 													if ( !isset($provider_aggregateRating_itemReviewed) ) {
 
 														$provider_aggregateRating_itemReviewed = array(
-															( is_array($schema_provider_MedicalBusiness_ref) ? $schema_provider_MedicalBusiness_ref : array($schema_provider_MedicalBusiness_ref) ),
-															( is_array($schema_provider_Person_ref) ? $schema_provider_Person_ref : array($schema_provider_Person_ref) )
+															( is_array($provider_item_MedicalBusiness_ref) ? $provider_item_MedicalBusiness_ref : array($provider_item_MedicalBusiness_ref) ),
+															( is_array($provider_item_Person_ref) ? $provider_item_Person_ref : array($provider_item_Person_ref) )
 														);
 
 													}
@@ -9783,7 +9783,7 @@
 
 												}
 
-												if ( !isset($schema_provider_MedicalWebPage_ref) ) {
+												if ( !isset($provider_item_MedicalWebPage_ref) ) {
 
 													if ( !isset($provider_url) ) {
 
@@ -9792,8 +9792,8 @@
 
 													}
 
-													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+													$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
 
 												}
 
@@ -9848,7 +9848,7 @@
 													$provider_breadcrumb['itemListElement'][] = array(
 														'@id' => $provider_url . '#ListItem',
 														'@type' => 'ListItem',
-														'item' => $schema_provider_MedicalWebPage_ref,
+														'item' => $provider_item_MedicalWebPage_ref,
 														'position' => 3,
 														'previousItem' => array(
 															'@id' => $provider_archive_url . '#ListItem'
@@ -13996,9 +13996,9 @@
 
 										// Get values
 
-											if ( $schema_provider_MedicalBusiness_ref ) {
+											if ( $provider_item_MedicalBusiness_ref ) {
 
-												$provider_mainEntity = $schema_provider_MedicalBusiness_ref;
+												$provider_mainEntity = $provider_item_MedicalBusiness_ref;
 
 											}
 
@@ -14077,7 +14077,7 @@
 
 											if ( !isset($provider_mainEntityOfPage) ) {
 
-												if ( !isset($schema_provider_MedicalWebPage_ref) ) {
+												if ( !isset($provider_item_MedicalWebPage_ref) ) {
 
 													if ( !isset($provider_url) ) {
 
@@ -14086,12 +14086,12 @@
 
 													}
 
-													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+													$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
 
 												}
 
-												$provider_mainEntityOfPage = $schema_provider_MedicalWebPage_ref ?? array();
+												$provider_mainEntityOfPage = $provider_item_MedicalWebPage_ref ?? array();
 
 											}
 
@@ -16170,7 +16170,7 @@
 
 											if ( !isset($provider_subjectOf) ) {
 
-												if ( !isset($schema_provider_MedicalWebPage_ref) ) {
+												if ( !isset($provider_item_MedicalWebPage_ref) ) {
 
 													if ( !isset($provider_url) ) {
 
@@ -16179,12 +16179,12 @@
 
 													}
 
-													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+													$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
 
 												}
 
-												$provider_subjectOf = $schema_provider_MedicalWebPage_ref ?? '';
+												$provider_subjectOf = $provider_item_MedicalWebPage_ref ?? '';
 
 											}
 
