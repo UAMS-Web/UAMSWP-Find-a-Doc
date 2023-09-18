@@ -12838,9 +12838,11 @@ function uamswp_prevent_orphan($string) {
 	function uamswp_fad_flatten_multidimensional_array(&$input) {
 
 		if (
+			$input
+			&&
 			is_array($input)
 			&&
-			!empty($input)
+			array_is_list($input)
 			&&
 			count($input) == 1
 		) {

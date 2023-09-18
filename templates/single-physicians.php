@@ -18,6 +18,7 @@
 
 	// Get system settings for provider labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
+	$provider_schema_fields[$page_id]['provider_plural_name_attr'] = $provider_plural_name_attr; // Pass value to schema function
 
 	// Get system settings for location labels
 	include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );

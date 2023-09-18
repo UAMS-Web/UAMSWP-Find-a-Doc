@@ -5360,7 +5360,12 @@
 
 											// Define reference to the @id
 
-												$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
+												if ( $provider_item_MedicalWebPage['@id'] ) {
+
+													$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
+													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+
+												}
 
 										// MedicalBusiness
 
@@ -9608,11 +9613,88 @@
 
 										// Get values
 
-											if ( !isset($provider_breadcrumb) ) {
+											// Base array
 
 												$provider_breadcrumb = array();
 
-											}
+											// @type
+
+												$provider_breadcrumb['@type'] = 'BreadcrumbList';
+
+											// @id
+
+												$provider_breadcrumb['@id'] = $page_url . '#' . $provider_breadcrumb['@type'];
+
+												// // Define 'BreadcrumbList' reference
+												//
+												// 	$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references( $provider_breadcrumb );
+
+											// itemListElement
+
+												// Base array
+
+													$provider_breadcrumb['itemListElement'] = array();
+
+												// Position 1
+
+													$provider_breadcrumb['itemListElement'][] = array(
+														'@type' => 'ListItem',
+														'position' => 1,
+														'item' => array(
+															'@type' => 'WebPage',
+															'@id' => $schema_base_org_uams_health_url . '#ListItem',
+															'url' => $schema_base_org_uams_health_url,
+															'name' => 'UAMS Health'
+														)
+													);
+
+												// Position 1
+
+													if ( !isset($provider_archive_url) ) {
+
+														$provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
+
+													}
+
+													if ( !isset($provider_plural_name_attr) ) {
+
+														// Get system settings for provider labels
+														include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
+
+													}
+
+													$provider_breadcrumb['itemListElement'][] = array(
+														'@type' => 'ListItem',
+														'position' => 2,
+														'item' => array(
+															'@type' => 'WebPage',
+															'@id' => $provider_archive_url . '#ListItem',
+															'url' => $provider_archive_url,
+															'name' => $provider_plural_name_attr
+														)
+													);
+
+												// Position 1
+
+													if ( !isset($schema_provider_MedicalWebPage_ref) ) {
+
+														if ( !isset($provider_url) ) {
+
+															$provider_url = get_permalink($provider);
+															$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
+
+														}
+
+														$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+														uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+
+													}
+
+													$provider_breadcrumb['itemListElement'][] = array(
+														'@type' => 'ListItem',
+														'position' => 3,
+														'item' => $schema_provider_MedicalWebPage_ref
+													);
 
 										// Add to item values
 
@@ -13959,11 +14041,12 @@
 
 													}
 
-													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : '';
+													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
 
 												}
 
-												$provider_mainEntityOfPage = $schema_provider_MedicalWebPage_ref ?? '';
+												$provider_mainEntityOfPage = $schema_provider_MedicalWebPage_ref ?? array();
 
 											}
 
@@ -15955,7 +16038,8 @@
 
 													}
 
-													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : '';
+													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
 
 												}
 
