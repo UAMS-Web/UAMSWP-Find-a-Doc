@@ -14644,7 +14644,13 @@
 
 											// Clean up the list array
 
-												if ( $provider_mentions ) {
+												if (
+													$provider_mentions
+													&&
+													is_array($provider_mentions)
+													&&
+													array_is_list($provider_mentions)
+												) {
 
 													$provider_mentions = array_filter($provider_mentions);
 													$provider_mentions = array_unique( $provider_mentions, SORT_REGULAR);
