@@ -786,7 +786,7 @@
 
 								/*
 
-									The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").
+									The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g., "iPhone") or a general category of products or services (e.g., "smartphones").
 
 									Expected Type:
 
@@ -2287,7 +2287,8 @@
 
 					Examples:
 
-						 * 'https://www.wikidata.org/wiki/Q246386' (for Data Universal Numbering System number)
+						 * 'https://www.wikidata.org/wiki/Q246386' (for Data Universal Numbering System 
+						   number)
 						 * 'https://www.wikidata.org/wiki/Q6975101' (for National Provider Identifier)
 
 					Expected Type:
@@ -2323,7 +2324,8 @@
 
 					Examples:
 
-						 * 'https://npiregistry.cms.hhs.gov/provider-view/1841276169' (for a National Provider Identifier that is '1841276169')
+						 * 'https://npiregistry.cms.hhs.gov/provider-view/1841276169' (for a National 
+						   Provider Identifier that is '1841276169')
 
 					Expected Type:
 
@@ -6405,7 +6407,9 @@
 									 * 
 									 *     - Text
 									 * 
-									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									 if (
@@ -6489,7 +6493,9 @@
 								// accessMode
 
 									/* 
-									 * The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Values should be drawn from the approved vocabulary.
+									 * The human sensory perceptual system or cognitive faculty through which a person 
+									 * may process or perceive information. Values should be drawn from the approved 
+									 * vocabulary.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -6577,7 +6583,9 @@
 								// accessModeSufficient
 
 									/* 
-									 * A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Values should be drawn from the approved vocabulary.
+									 * A list of single or combined accessModes that are sufficient to understand all 
+									 * the intellectual content of a resource. Values should be drawn from the 
+									 * approved vocabulary.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -6665,7 +6673,9 @@
 								// accessibilityAPI
 
 									/* 
-									 * Indicates that the resource is compatible with the referenced accessibility API. Values should be drawn from the approved vocabulary (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).
+									 * Indicates that the resource is compatible with the referenced accessibility 
+									 * API. Values should be drawn from the approved vocabulary 
+									 * (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -6753,7 +6763,9 @@
 								// accessibilityControl
 
 									/* 
-									 * Identifies input methods that are sufficient to fully control the described resource. Values should be drawn from the approved vocabulary (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).
+									 * Identifies input methods that are sufficient to fully control the described 
+									 * resource. Values should be drawn from the approved vocabulary 
+									 * (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -6841,7 +6853,10 @@
 								// accessibilityFeature
 
 									/* 
-									 * Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility. Values should be drawn from the approved vocabulary (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).
+									 * Content features of the resource, such as accessible media, alternatives and 
+									 * supported enhancements for accessibility. Values should be drawn from the 
+									 * approved vocabulary 
+									 * (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -6929,7 +6944,9 @@
 								// accessibilityHazard
 
 									/* 
-									 * A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the approved vocabulary.
+									 * A characteristic of the described resource that is physiologically dangerous to 
+									 * some users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the 
+									 * approved vocabulary.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -7017,7 +7034,11 @@
 								// accessibilitySummary
 
 									/* 
-									 * A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as "short descriptions are present but long descriptions will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."
+									 * A human-readable summary of specific accessibility features or deficiencies, 
+									 * consistent with the other accessibility metadata but expressing subtleties such 
+									 * as "short descriptions are present but long descriptions will be needed for 
+									 * non-visual users" or "short descriptions are present and no long descriptions 
+									 * are needed."
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -7193,14 +7214,17 @@
 								// acquireLicensePage
 
 									/* 
-									 * Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
+									 * Indicates a page documenting how licenses can be purchased or otherwise 
+									 * acquired, for the current item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - CreativeWork
 									 *     - URL
 									 * 
-									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -8148,7 +8172,9 @@
 								// author
 
 									/* 
-									 * The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
+									 * The author of this content or rating. Please note that author is special in 
+									 * that HTML 5 provides a special mechanism for indicating authorship via the rel 
+									 * tag. That is equivalent to this and may be used interchangeably.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -9268,7 +9294,8 @@
 										// memberOf
 
 											/* 
-											 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+											 * An Organization (or ProgramMembership) to which this Person or Organization 
+											 * belongs.
 											 * 
 											 * Inverse-property: member
 											 * 
@@ -10056,13 +10083,16 @@
 								// copyrightNotice
 
 									/* 
-									 * Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.
+									 * Text of a notice appropriate for describing the copyright aspects of this 
+									 * Creative Work, ideally indicating the owner of the copyright for the Work.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Text
 									 * 
-									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -10146,7 +10176,8 @@
 								// copyrightYear
 
 									/* 
-									 * The year during which the claimed copyright for the CreativeWork was first asserted.
+									 * The year during which the claimed copyright for the CreativeWork was first 
+									 * asserted.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -10234,11 +10265,17 @@
 								// countryOfOrigin
 
 									/* 
-									 * The country of origin of something, including products as well as creative works such as movie and TV content.
+									 * The country of origin of something, including products as well as creative 
+									 * works such as movie and TV content.
 									 * 
-									 * In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.
+									 * In the case of TV and movie, this would be the country of the principle offices 
+									 * of the production company or individual responsible for the movie. For other 
+									 * kinds of CreativeWork it is difficult to provide fully general guidance, and 
+									 * properties such as contentLocation and locationCreated may be more applicable.
 									 * 
-									 * In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
+									 * In the case of products, the country of origin of the product. The exact 
+									 * interpretation of this may vary by context and product type, and cannot be 
+									 * fully enumerated here.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -10326,14 +10363,18 @@
 								// creativeWorkStatus
 
 									/* 
-									 * The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.
+									 * The status of a creative work in terms of its stage in a lifecycle. Example 
+									 * terms include Incomplete, Draft, Published, Obsolete. Some organizations define 
+									 * a set of terms for the stages of their publication lifecycle.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - DefinedTerm
 									 *     - Text
 									 * 
-									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
 									if (
@@ -10417,7 +10458,8 @@
 								// creator
 
 									/* 
-									 * The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
+									 * The creator/author of this CreativeWork. This is the same as the Author 
+									 * property for CreativeWork.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -10506,7 +10548,8 @@
 								// creditText
 
 									/* 
-									 * Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.
+									 * Text that can be used to credit person(s) and/or organization(s) associated 
+									 * with a published Creative Work.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -10694,7 +10737,8 @@
 								// dateCreated
 
 									/* 
-									 * The date on which the CreativeWork was created or the item was added to a DataFeed.
+									 * The date on which the CreativeWork was created or the item was added to a 
+									 * DataFeed.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -10783,7 +10827,8 @@
 								// dateModified
 
 									/* 
-									 * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+									 * The date on which the CreativeWork was most recently modified or when the 
+									 * item's entry was modified within a DataFeed.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -12848,7 +12893,8 @@
 								// inLanguage
 
 									/* 
-									 * The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage.
+									 * The language of the content or performance or used in an action. Please use one 
+									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -13201,7 +13247,8 @@
 								// isPartOf
 
 									/* 
-									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.
+									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
+									 * sense), is part of.
 									 * 
 									 * Inverse-property: hasPart
 									 * 
@@ -13692,7 +13739,8 @@
 								// lastReviewed
 
 									/* 
-									 * Date on which the content on this web page was last reviewed for accuracy and/or completeness.
+									 * Date on which the content on this web page was last reviewed for accuracy 
+									 * and/or completeness.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -14041,17 +14089,25 @@
 								// maintainer
 
 									/* 
-									 * A maintainer of a Dataset, software package (SoftwareApplication), or other Project.
+									 * A maintainer of a Dataset, software package (SoftwareApplication), or other 
+									 * Project.
 									 * 
-									 * A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artifact.
+									 * A maintainer is a Person or Organization that manages contributions to, and/or 
+									 * publication of, some (typically complex) artifact.
 									 * 
-									 * It is common for distributions of software and data to be based on "upstream" sources.
+									 * It is common for distributions of software and data to be based on "upstream" 
+									 * sources.
 									 * 
-									 * When maintainer is applied to a specific version of something (e.g., a particular version or packaging of a Dataset), it is always possible that the upstream source has a different maintainer.
+									 * When maintainer is applied to a specific version of something (e.g., a 
+									 * particular version or packaging of a Dataset), it is always possible that the 
+									 * upstream source has a different maintainer.
 									 * 
-									 * The isBasedOn property can be used to indicate such relationships between datasets to make the different maintenance roles clear.
+									 * The isBasedOn property can be used to indicate such relationships between 
+									 * datasets to make the different maintenance roles clear.
 									 * 
-									 * Similarly in the case of software, a package may have dedicated maintainers working on integration into software distributions such as Ubuntu, as well as upstream maintainers of the underlying work.
+									 * Similarly in the case of software, a package may have dedicated maintainers 
+									 * working on integration into software distributions such as Ubuntu, as well as 
+									 * upstream maintainers of the underlying work.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -14319,7 +14375,8 @@
 								// mentions
 
 									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									 * about a concept.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -14407,13 +14464,17 @@
 								// offers
 
 									/* 
-									 * An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.
+									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									 * DVD of a movie, perform a service, or give away tickets to an event.
 									 * 
-									 * Use businessFunction to indicate the kind of transaction offered (i.e., sell, lease).
+									 * Use businessFunction to indicate the kind of transaction offered 
+									 * (i.e., sell, lease).
 									 * 
 									 * This property can also be used to describe a Demand.
 									 * 
-									 * While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+									 * While this property is listed as expected on a number of common types, it can 
+									 * be used in others. In that case, using a second type, such as Product or a 
+									 * subtype of Product, can clarify the nature of the offer.
 									 * 
 									 * Inverse-property: itemOffered
 									 * 
@@ -14923,7 +14984,8 @@
 								// producer
 
 									/* 
-									 * The person or organization who produced the work (e.g. music album, movie, TV/radio series etc.).
+									 * The person or organization who produced the work (e.g., music album, movie, 
+									 * TV/radio series).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -15012,9 +15074,11 @@
 								// provider
 
 									/* 
-									 * The service provider, service operator, or service performer; the goods producer.
+									 * The service provider, service operator, or service performer; the goods 
+									 * producer.
 									 * 
-									 * Another party (a seller) may offer those services or goods on behalf of the provider.
+									 * Another party (a seller) may offer those services or goods on behalf of the 
+									 * provider.
 									 * 
 									 * A provider may also serve as the seller.
 									 * 
@@ -15370,7 +15434,8 @@
 								// reviewedBy
 
 									/* 
-									 * People or organizations that have reviewed the content on this web page for accuracy and/or completeness.
+									 * People or organizations that have reviewed the content on this web page for 
+									 * accuracy and/or completeness.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -15536,7 +15601,8 @@
 								// significantLink
 
 									/* 
-									 * One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.
+									 * One of the more significant URLs on the page. Typically, these are the 
+									 * non-navigation links that are clicked on the most.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -15766,17 +15832,30 @@
 								// speakable
 
 									/* 
-									 * Indicates sections of a Web page that are particularly 'speakable' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the 'speakable' property serves to indicate the parts most likely to be generally useful for speech.
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+									 * of being highlighted as being especially appropriate for text-to-speech 
+									 * conversion. Other sections of a page may also be usefully spoken in particular 
+									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									 * likely to be generally useful for speech.
 									 * 
-									 * The speakable property can be repeated an arbitrary number of times, with three kinds of possible 'content-locator' values:
+									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 * kinds of possible 'content-locator' values:
 									 * 
-									 *     1.) id-value URL references - uses id-value of an element in the page being annotated. The simplest use of speakable has (potentially relative) URL values, referencing identified sections of the document concerned.
+									 *     1.) id-value URL references - uses id-value of an element in the page being 
+									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 * referencing identified sections of the document concerned.
 									 * 
-									 *     2.) CSS Selectors - addresses content in the annotated page, e.g. via class attribute. Use the cssSelector property.
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 * class attribute). Use the cssSelector property.
 									 * 
-									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the content). Use the xpath property.
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 * content). Use the xpath property.
 									 * 
-									 * For more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type, SpeakableSpecification which is defined to be a possible value of the speakable property.
+									 * For more sophisticated markup of speakable sections beyond simple ID 
+									 * references, either CSS selectors or XPath expressions to pick out document 
+									 * section(s) as speakable. For this we define a supporting type, 
+									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 * property.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -16126,7 +16205,8 @@
 								// timeRequired
 
 									/* 
-									 * Approximate or typical time it usually takes to work with or through the content of this work for the typical or target audience.
+									 * Approximate or typical time it usually takes to work with or through the 
+									 * content of this work for the typical or target audience.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -18244,7 +18324,8 @@
 								// funding
 
 									/* 
-									 * A Grant that directly or indirectly provide funding or sponsorship for this item. See also ownershipFundingInfo.
+									 * A Grant that directly or indirectly provide funding or sponsorship for this 
+									 * item. See also ownershipFundingInfo.
 									 * 
 									 * Inverse-property: fundedItem
 									 * 
@@ -19773,7 +19854,8 @@
 								// memberOf
 
 									/* 
-									 * An Organization (or ProgramMembership) to which this Person or Organization belongs.
+									 * An Organization (or ProgramMembership) to which this Person or Organization 
+									 * belongs.
 									 * 
 									 * Inverse-property: member
 									 * 
@@ -20120,8 +20202,8 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-												 * The direct performer or driver of the action — animate or inanimate (e.g., John 
-												wrote a book)
+											        * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											          wrote a book)
 											 * 'endTime'
 												 * The endTime of something. For a reserved event or service 
 												(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
@@ -21058,50 +21140,50 @@
 									Property descriptions:
 
 										 * 'actionStatus'
-											 * Indicates the current disposition of the Action
+										        * Indicates the current disposition of the Action
 										 * 'agent'
-											 * The direct performer or driver of the action — animate or inanimate (e.g., John 
-											wrote a book)
+										        * The direct performer or driver of the action — animate or inanimate (e.g., John 
+										          wrote a book)
 										 * 'endTime'
-											 * The endTime of something. For a reserved event or service 
-											(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-											actions that span a period of time, when the action was performed (e.g., John 
-											wrote a book from January to December). For media, including audio and video, 
-											it's the time offset of the end of a clip within a larger file. Note that Event 
-											uses startDate/endDate instead of startTime/endTime, even when describing dates 
-											with times. This situation may be clarified in future revisions.
+										        * The endTime of something. For a reserved event or service 
+										          (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+										          actions that span a period of time, when the action was performed (e.g., John 
+										          wrote a book from January to December). For media, including audio and video, 
+										          it's the time offset of the end of a clip within a larger file. Note that Event 
+										          uses startDate/endDate instead of startTime/endTime, even when describing dates 
+										          with times. This situation may be clarified in future revisions.
 										 * 'error'
-											 * For failed actions, more information on the cause of the failure.
+										        * For failed actions, more information on the cause of the failure.
 										 * 'instrument'
-											 * The object that helped the agent perform the action (e.g., John wrote a book 
+										        * The object that helped the agent perform the action (e.g., John wrote a book 
 											with a pen).
 										 * 'location'
 											 * The location of, for example, where an event is happening, where an 
-											organization is located, or where an action takes place.
+										          organization is located, or where an action takes place.
 										 * 'object'
-											 * The object upon which the action is carried out, whose state is kept intact or 
-											changed. Also known as the semantic roles patient, affected or undergoer — 
-											which change their state — or theme — which doesn't (e.g., John read a book).
+										        * The object upon which the action is carried out, whose state is kept intact or 
+										          changed. Also known as the semantic roles patient, affected or undergoer — 
+										          which change their state — or theme — which doesn't (e.g., John read a book).
 										 * 'participant'
-											 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
-											book with Steve).
+										        * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+										          book with Steve).
 										 * 'provider'
-											 * The service provider, service operator, or service performer; the goods 
-											producer. Another party (a seller) may offer those services or goods on behalf 
-											of the provider. A provider may also serve as the seller. Supersedes carrier.
+										        * The service provider, service operator, or service performer; the goods 
+										          producer. Another party (a seller) may offer those services or goods on behalf 
+										          of the provider. A provider may also serve as the seller. Supersedes carrier.
 										 * 'result'
-											 * The result produced in the action (e.g., John wrote a book).
+										        * The result produced in the action (e.g., John wrote a book).
 										 * 'startTime'
-											 * The startTime of something. For a reserved event or service 
-											(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-											For actions that span a period of time, when the action was performed 
-											(e.g., John wrote a book from January to December). For media, including audio 
-											and video, it's the time offset of the start of a clip within a larger file. 
-											Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-											describing dates with times. This situation may be clarified in future 
-											revisions.
+										        * The startTime of something. For a reserved event or service 
+										          (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+										          For actions that span a period of time, when the action was performed 
+										          (e.g., John wrote a book from January to December). For media, including audio 
+										          and video, it's the time offset of the start of a clip within a larger file. 
+										          Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+										          describing dates with times. This situation may be clarified in future 
+										          revisions.
 										 * 'target'
-											 * Indicates a target EntryPoint, or url, for an Action.
+										        * Indicates a target EntryPoint, or url, for an Action.
 
 								*/
 
@@ -22303,7 +22385,7 @@
 						// embeddedTextCaption
 
 							/* 
-							 * Represents textual captioning from a MediaObject, e.g. text of a 'meme'.
+							 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
 							 * 
 							 * Values expected to be one of these types:
 							 * 
@@ -22393,7 +22475,8 @@
 							 * information.
 							 * 
 							 * Unregistered or niche encoding and file formats can be indicated instead via 
-							 * the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
+							 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
+							 * entry).
 							 * 
 							 * Values expected to be one of these types:
 							 * 
@@ -22424,9 +22507,9 @@
 						// hasDigitalDocumentPermission
 
 							/* 
-							 * A permission related to the access to this document (e.g. permission to read or 
-							 * write an electronic document). For a public document, specify a grantee with an 
-							 * Audience with audienceType equal to "public".
+							 * A permission related to the access to this document (e.g., permission to read 
+							 * or  write an electronic document). For a public document, specify a grantee
+							 * with an  Audience with audienceType equal to "public".
 							 * 
 							 * Values expected to be one of these types:
 							 * 
