@@ -10791,7 +10791,7 @@
 
 											if ( !isset($provider_dateModified) ) {
 
-												$provider_dateModified = array();
+												$provider_dateModified = get_the_modified_date( 'c', $provider ) ?? '';
 
 											}
 
@@ -10880,7 +10880,7 @@
 
 											if ( !isset($provider_datePublished) ) {
 
-												$provider_datePublished = array();
+												$provider_datePublished = get_the_date( 'c', $provider ) ?? '';
 
 											}
 
