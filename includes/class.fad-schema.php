@@ -14365,9 +14365,9 @@
 
 										// Get values
 
-											if ( !isset($provider_medicalAudience) ) {
+											if ( $schema_common_medicalAudience ) {
 
-												$provider_medicalAudience = array();
+												$provider_medicalAudience = $schema_common_medicalAudience;
 
 											}
 
