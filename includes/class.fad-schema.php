@@ -5042,6 +5042,7 @@
 								$provider_clinical_specialization_name = null;
 								$provider_clinical_specialization_term = null;
 								$provider_condition = null;
+								$provider_condition_list = null;
 								$provider_condition_ref = null;
 								$provider_containedInPlace = null;
 								$provider_contributor = null;
@@ -6723,12 +6724,59 @@
 
 									// Associated conditions
 
+										// List of properties that reference treatments and procedures
+
+											$provider_condition_common = array(
+												'mentions'
+											);
+
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_condition_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_condition_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_condition_common
+											)
+										) {
+
+											// Get related treatments
+
+												if ( !isset($provider_condition_list) ) {
+
+													$provider_condition_list = get_field( 'physician_treatments_cpt', $provider ) ?: array();
+
+												}
+
+											// Format values
+
+												if ( $provider_condition_list ) {
+
+													$provider_condition = uamswp_fad_schema_medicalcondition(
+														$provider_condition_list, // List of IDs of the MedicalCondition items
+														$provider_url, // Page URL
+														1, // Nesting level within the main schema
+														'MedicalCondition' // Fragment identifier
+													) ?? array();
+
+												}
+
+										}
+
 									// Associated treatments and procedures
 
 										// List of properties that reference treatments and procedures
 
 											$provider_treatment_common = array(
-												'availableService'
+												'availableService',
+												'mentions'
 											);
 
 										if (
@@ -14712,6 +14760,14 @@
 														$provider_mentions,
 														( array_is_list($provider_condition) ? $provider_condition : array($provider_condition) )
 													);
+
+													// Define reference to the @id
+
+														if ( !isset($provider_condition_ref) ) {
+
+															$provider_condition_ref = uamswp_fad_schema_node_references($provider_condition);
+
+														}
 
 												}
 

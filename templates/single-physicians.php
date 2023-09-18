@@ -794,6 +794,7 @@
 			// Related Conditions Section Query
 
 				$conditions_cpt = get_field('physician_conditions_cpt');
+				$provider_schema_fields[$page_id]['provider_condition_list'] = $conditions_cpt; // Pass value to schema function
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/condition.php' );
 
 			// Related Treatments Section Query

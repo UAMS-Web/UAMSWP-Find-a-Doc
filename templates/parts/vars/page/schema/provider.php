@@ -363,30 +363,6 @@ TODO List
 
 		// Related Conditions and Treatments
 
-			// Related Conditions
-
-				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
-
-					$conditions_cpt = get_field( 'physician_conditions_cpt', $page_id );
-
-				// Define the schema for nesting in 'MedicalWebPage'['mentions']
-
-					/*
-						Nesting level 0 = 'MedicalWebPage'
-						Nesting level 1 = 'MedicalWebPage'['mentions']
-					*/
-
-					$provider_related_condition = uamswp_fad_schema_medicalcondition(
-						$conditions_cpt, // List of IDs of the MedicalCondition items
-						$page_url, // Page URL
-						1, // Nesting level within the main schema
-						'MedicalCondition' // Fragment identifier
-					);
-
-				// Define reference to each value/row in this property
-
-					$provider_related_condition_ref = uamswp_fad_schema_node_references( $provider_related_condition );
-
 			// Related Treatments
 
 				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
