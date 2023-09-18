@@ -361,32 +361,6 @@ TODO List
 					$schema_provider_significantLink // Existing list of URLs
 				);
 
-		// Related Conditions and Treatments
-
-			// Related Treatments
-
-				// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
-
-					$treatments_cpt = get_field( 'physician_treatments_cpt', $page_id );
-
-				// Define the schema for nesting in 'Physician'['availableService']
-
-					/*
-						Nesting level 0 = 'Physician'
-						Nesting level 1 = 'Physician'['availableService']
-					*/
-
-					$provider_related_treatment = uamswp_fad_schema_service(
-						$treatments_cpt, // List of IDs of the service items
-						$page_url, // Page URL
-						1, // Nesting level within the main schema
-						'Service' // Fragment identifier
-					);
-
-				// Define reference to each value/row in this property
-
-					$schema_provider_treatment_ref = uamswp_fad_schema_node_references( $provider_related_treatment );
-
 	// Provider Clinical Specialization and Associated Values (medicalSpecialty, et al.)
 
 		// Eliminate PHP errors
