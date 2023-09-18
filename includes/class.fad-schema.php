@@ -4933,12 +4933,16 @@
 
 												// Check the list of degrees against the Physician degrees
 
-													if ( $provider_degree_array ) {
+													if (
+														$provider_properties_map['OptPhysicianician']['degrees']
+														&&
+														$provider_degree_array
+													) {
 
 														$Physician_degree_query = !empty(
 															array_intersect(
-																$provider_degree_array,
-																$provider_properties_map['Physician']['degrees']
+																$provider_properties_map['Physician']['degrees'],
+																$provider_degree_array
 															)
 														);
 
@@ -4948,12 +4952,16 @@
 
 												// Check the list of degrees against the Dentist degrees
 
-													if ( $provider_degree_array ) {
+													if (
+														$provider_properties_map['Dentist']['degrees']
+														&&
+														$provider_degree_array
+													) {
 
 														$Dentist_degree_query = !empty(
 															array_intersect(
-																$provider_degree_array,
-																$provider_properties_map['Dentist']['degrees']
+																$provider_properties_map['Dentist']['degrees'],
+																$provider_degree_array
 															)
 														);
 
@@ -4963,12 +4971,16 @@
 
 												// Check the list of degrees against the Optician degrees
 
-													if ( $provider_degree_array ) {
+													if (
+														$provider_properties_map['Optician']['degrees']
+														&&
+														$provider_degree_array
+													) {
 
 														$Optician_degree_query = !empty(
 															array_intersect(
-																$provider_degree_array,
-																$provider_properties_map['Optician']['degrees']
+																$provider_properties_map['Optician']['degrees'],
+																$provider_degree_array
 															)
 														);
 
