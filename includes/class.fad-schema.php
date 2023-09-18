@@ -5663,8 +5663,6 @@
 
 												// Get values
 
-													if ( !isset($provider_alternateName) ) {
-
 														// Base array
 
 															$provider_alternateName = array();
@@ -5807,9 +5805,6 @@
 															$provider_alternateName = array_filter($provider_alternateName);
 															$provider_alternateName = array_unique($provider_alternateName);
 															$provider_alternateName = array_values($provider_alternateName);
-
-
-													}
 
 												// Add to item values
 
