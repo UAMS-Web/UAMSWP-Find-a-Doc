@@ -4976,21 +4976,27 @@
 															foreach ( $provider_degrees as $degree ) {
 
 																$degree_term = get_term( $degree, 'degree' );
+																$degree_name = '';
 
 																if ( is_object($degree_term) ) {
 
 																	$degree_name = $degree_term->name;
-																	$provider_degree_list .= $degree_name;
-																	$provider_degree_array[] = uamswp_attr_conversion($degree_name);
 
-																	if ( $provider_degree_count > $provider_degree_list_i ) {
+																	if ( $degree_name ) {
 
-																		$provider_degree_list .= ', ';
+																		$provider_degree_list .= $degree_name;
+																		$provider_degree_array[] = uamswp_attr_conversion($degree_name);
 
-																	} // endif
+																		if ( $provider_degree_count > $provider_degree_list_i ) {
 
-																	$provider_degree_list_i++;
+																			$provider_degree_list .= ', ';
 
+																		} // endif
+
+																		$provider_degree_list_i++;
+
+																	}
+																	
 																} // endif
 
 															} // endforeach
