@@ -7328,7 +7328,11 @@
 
 														// Get health care professional associations input value
 
-															$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
+															if ( !isset($provider_associations) ) {
+
+																$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
+
+															}
 
 														// Format values
 

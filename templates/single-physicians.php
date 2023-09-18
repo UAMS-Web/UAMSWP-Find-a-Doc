@@ -1016,6 +1016,7 @@
 				// Get association input value
 
 					$provider_associations = get_field('physician_associations') ?? array();
+					$provider_schema_fields[$page_id]['provider_associations'] = $provider_associations; // Add to schema fields
 
 				// Define empty variable to receive association names
 
