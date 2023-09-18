@@ -4547,107 +4547,107 @@
 
 					// Merge common properties into each type's properties
 
-						foreach ( $provider_properties_map as &$item ) {
+						foreach ( $provider_properties_map as &$provider_properties_map_item ) {
 
 							// Thing properties
 
 								if (
-									$item != 'Thing'
+									$provider_properties_map_item != 'Thing'
 									&&
-									$item['Thing']
+									$provider_properties_map_item['Thing']
 								) {
 
-									$item['properties'] = array_merge(
-										$item['properties'],
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
 										$provider_properties_map['Thing']['properties']
 									);
-									$item['properties'] = array_unique($item['properties']);
-									$item['properties'] = array_values($item['properties']);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
 
 							// Organization properties
 
 								if (
-									$item != 'Organization'
+									$provider_properties_map_item != 'Organization'
 									&&
-									$item['Organization']
+									$provider_properties_map_item['Organization']
 								) {
 
-									$item['properties'] = array_merge(
-										$item['properties'],
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
 										$provider_properties_map['Organization']['properties']
 									);
-									$item['properties'] = array_unique($item['properties']);
-									$item['properties'] = array_values($item['properties']);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
 
 							// Place properties
 
 								if (
-									$item != 'Place'
+									$provider_properties_map_item != 'Place'
 									&&
-									$item['Place']
+									$provider_properties_map_item['Place']
 								) {
 
-									$item['properties'] = array_merge(
-										$item['properties'],
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
 										$provider_properties_map['Place']['properties']
 									);
-									$item['properties'] = array_unique($item['properties']);
-									$item['properties'] = array_values($item['properties']);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
 
 							// LocalBusiness properties
 
 								if (
-									$item != 'LocalBusiness'
+									$provider_properties_map_item != 'LocalBusiness'
 									&&
-									$item['LocalBusiness']
+									$provider_properties_map_item['LocalBusiness']
 								) {
 
-									$item['properties'] = array_merge(
-										$item['properties'],
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
 										$provider_properties_map['LocalBusiness']['properties']
 									);
-									$item['properties'] = array_unique($item['properties']);
-									$item['properties'] = array_values($item['properties']);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
 
 							// MedicalBusiness properties
 
 								if (
-									$item != 'MedicalBusiness'
+									$provider_properties_map_item != 'MedicalBusiness'
 									&&
-									$item['MedicalBusiness']
+									$provider_properties_map_item['MedicalBusiness']
 								) {
 
-									$item['properties'] = array_merge(
-										$item['properties'],
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
 										$provider_properties_map['MedicalBusiness']['properties']
 									);
-									$item['properties'] = array_unique($item['properties']);
-									$item['properties'] = array_values($item['properties']);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
 
 							// MedicalOrganization properties
 
 								if (
-									$item != 'MedicalOrganization'
+									$provider_properties_map_item != 'MedicalOrganization'
 									&&
-									$item['MedicalOrganization']
+									$provider_properties_map_item['MedicalOrganization']
 								) {
 
-									$item['properties'] = array_merge(
-										$item['properties'],
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
 										$provider_properties_map['MedicalOrganization']['properties']
 									);
-									$item['properties'] = array_unique($item['properties']);
-									$item['properties'] = array_values($item['properties']);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
 
