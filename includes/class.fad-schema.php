@@ -4215,15 +4215,17 @@
 
 // Generate schema arrays of ontology page types
 
-	// Providers (Person; Physician / Dentist / Optician)
+	// Providers (MedicalWebPage; MedicalBusiness; Person)
 
 		function uamswp_fad_schema_provider(
 			array $repeater, // List of IDs of the provider items
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
+			int $MedicalWebPage_i = 1, // Iteration counter for provider-as-MedicalWebPage
 			int $MedicalBusiness_i = 1, // Iteration counter for provider-as-MedicalBusiness
 			int $Person_i = 1, // Iteration counter for provider-as-Person
 			array $provider_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
+			array $MedicalWebPage_list = array(), // Pre-existing list array for provider-as-MedicalWebPage to which to add additional items
 			array $MedicalBusiness_list = array(), // Pre-existing list array for provider-as-MedicalBusiness to which to add additional items
 			array $Person_list = array(), // Pre-existing list array for provider-as-Person to which to add additional items
 			array $provider_list = array() // Pre-existing list array for both provider-as-MedicalBusiness and provider-as-Person to which to add additional items
@@ -4250,6 +4252,8 @@
 					$provider_properties_map = array(
 						'Thing' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => false,
 							'Place' => false,
 							'LocalBusiness' => false,
@@ -4270,8 +4274,166 @@
 								'url'
 							)
 						),
+						'CreativeWork' => array(
+							'Thing' => true,
+							'CreativeWork' => true,
+							'WebPage' => false,
+							'Organization' => false,
+							'Place' => false,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'about',
+								'abstract',
+								'accessMode',
+								'accessModeSufficient',
+								'accessibilityAPI',
+								'accessibilityControl',
+								'accessibilityFeature',
+								'accessibilityHazard',
+								'accessibilitySummary',
+								'accountablePerson',
+								'acquireLicensePage',
+								'aggregateRating',
+								'alternativeHeadline',
+								'archivedAt',
+								'assesses',
+								'associatedMedia',
+								'audience',
+								'audio',
+								'author',
+								'award',
+								'character',
+								'citation',
+								'comment',
+								'commentCount',
+								'conditionsOfAccess',
+								'contentLocation',
+								'contentRating',
+								'contentReferenceTime',
+								'contributor',
+								'copyrightHolder',
+								'copyrightNotice',
+								'copyrightYear',
+								'correction',
+								'countryOfOrigin',
+								'creativeWorkStatus',
+								'creator',
+								'creditText',
+								'dateCreated',
+								'dateModified',
+								'datePublished',
+								'discussionUrl',
+								'editEIDR',
+								'editor',
+								'educationalAlignment',
+								'educationalLevel',
+								'educationalUse',
+								'encoding',
+								'encodingFormat',
+								'exampleOfWork',
+								'expires',
+								'fileFormat',
+								'funder',
+								'funding',
+								'genre',
+								'hasPart',
+								'headline',
+								'inLanguage',
+								'interactionStatistic',
+								'interactivityType',
+								'interpretedAsClaim',
+								'isAccessibleForFree',
+								'isBasedOn',
+								'isBasedOnUrl',
+								'isFamilyFriendly',
+								'isPartOf',
+								'keywords',
+								'learningResourceType',
+								'license',
+								'locationCreated',
+								'mainEntity',
+								'maintainer',
+								'material',
+								'materialExtent',
+								'mentions',
+								'offers',
+								'pattern',
+								'position',
+								'producer',
+								'provider',
+								'publication',
+								'publisher',
+								'publisherImprint',
+								'publishingPrinciples',
+								'recordedAt',
+								'releasedEvent',
+								'review',
+								'schemaVersion',
+								'sdDatePublished',
+								'sdLicense',
+								'sdPublisher',
+								'size',
+								'sourceOrganization',
+								'spatial',
+								'spatialCoverage',
+								'sponsor',
+								'teaches',
+								'temporal',
+								'temporalCoverage',
+								'text',
+								'thumbnail',
+								'thumbnailUrl',
+								'timeRequired',
+								'translationOfWork',
+								'translator',
+								'typicalAgeRange',
+								'usageInfo',
+								'version',
+								'video',
+								'workExample',
+								'workTranslation'
+							)
+						),
+						'WebPage' => array(
+							'Thing' => true,
+							'CreativeWork' => true,
+							'WebPage' => true,
+							'Organization' => false,
+							'Place' => false,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'breadcrumb',
+								'lastReviewed',
+								'mainContentOfPage',
+								'primaryImageOfPage',
+								'relatedLink',
+								'reviewedBy',
+								'significantLink',
+								'speakable',
+								'specialty'
+							)
+						),
+						'MedicalWebPage' => array(
+							'Thing' => true,
+							'CreativeWork' => true,
+							'WebPage' => true,
+							'Organization' => false,
+							'Place' => false,
+							'LocalBusiness' => false,
+							'MedicalBusiness' => false,
+							'MedicalOrganization' => false,
+							'properties' => array(
+								'medicalAudience'
+							)
+						),
 						'Organization' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => false,
 							'LocalBusiness' => false,
@@ -4343,6 +4505,8 @@
 						),
 						'Place' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => false,
 							'Place' => true,
 							'LocalBusiness' => false,
@@ -4395,6 +4559,8 @@
 						),
 						'LocalBusiness' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => true,
 							'LocalBusiness' => true,
@@ -4409,6 +4575,8 @@
 						),
 						'MedicalBusiness' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => true,
 							'LocalBusiness' => true,
@@ -4418,6 +4586,8 @@
 						),
 						'MedicalOrganization' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => false,
 							'LocalBusiness' => false,
@@ -4431,6 +4601,8 @@
 						),
 						'Physician' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => true,
 							'LocalBusiness' => true,
@@ -4448,6 +4620,8 @@
 						),
 						'Dentist' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => true,
 							'LocalBusiness' => true,
@@ -4461,6 +4635,8 @@
 						),
 						'Optician' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => true,
 							'Place' => true,
 							'LocalBusiness' => true,
@@ -4471,6 +4647,8 @@
 						),
 						'Person' => array(
 							'Thing' => true,
+							'CreativeWork' => false,
+							'WebPage' => false,
 							'Organization' => false,
 							'Place' => false,
 							'LocalBusiness' => false,
@@ -4560,6 +4738,40 @@
 									$provider_properties_map_item['properties'] = array_merge(
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['Thing']['properties']
+									);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
+
+								}
+
+							// CreativeWork properties
+
+								if (
+									$provider_properties_map_item != 'CreativeWork'
+									&&
+									$provider_properties_map_item['CreativeWork']
+								) {
+
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
+										$provider_properties_map['CreativeWork']['properties']
+									);
+									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
+
+								}
+
+							// WebPage properties
+
+								if (
+									$provider_properties_map_item != 'WebPage'
+									&&
+									$provider_properties_map_item['WebPage']
+								) {
+
+									$provider_properties_map_item['properties'] = array_merge(
+										$provider_properties_map_item['properties'],
+										$provider_properties_map['WebPage']['properties']
 									);
 									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
@@ -4701,6 +4913,12 @@
 							&&
 							(
 								(
+									isset($provider_item['MedicalWebPage'])
+									&&
+									!empty($provider_item['MedicalWebPage'])
+								)
+								||
+								(
 									isset($provider_item['MedicalBusiness'])
 									&&
 									!empty($provider_item['MedicalBusiness'])
@@ -4720,6 +4938,18 @@
 							 */
 
 							// Add to lists of providers
+
+								// Add to list of MedicalWebPage items
+
+									if (
+										isset($provider_item['MedicalWebPage'])
+										&&
+										!empty($provider_item['MedicalWebPage'])
+									) {
+
+										$MedicalWebPage_list[] = $provider_item['MedicalWebPage'];
+
+									}
 
 								// Add to list of MedicalBusiness items
 
@@ -4758,6 +4988,7 @@
 							// Eliminate PHP errors / reset variables
 
 								$provider_item = array(); // Base array
+								$provider_item_MedicalWebPage = array(); // Base MedicalWebPage array
 								$provider_item_MedicalBusiness = array(); // Base MedicalBusiness array
 								$provider_item_Person = array(); // Base Person array
 								$Dentist_degree_query = null;
@@ -4933,12 +5164,27 @@
 
 										if ( $provider_url ) {
 
+											$provider_item_MedicalWebPage['url'] = $provider_url;
 											$provider_item_MedicalBusiness['url'] = $provider_url;
 											$provider_item_Person['url'] = $provider_url;
 
 										}
 
 								// @type
+
+									// MedicalWebPage type
+
+										// Get values
+
+											$MedicalWebPage_type = 'MedicalWebPage';
+
+										// Add to item values
+
+											if ( $MedicalWebPage_type ) {
+
+												$provider_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+
+											}
 
 									// MedicalBusiness Subtype
 
@@ -5096,6 +5342,26 @@
 
 									if ( $nesting_level <= 1 ) {
 
+										// MedicalWebPage
+
+											// Get values
+
+												$MedicalWebPage_id = $provider_url . '#' . $MedicalWebPage_type;
+												// $MedicalWebPage_id .= $MedicalWebPage_i;
+												// $MedicalWebPage_i++;
+
+											// Add to item values
+
+												if ( $MedicalWebPage_id ) {
+
+													$provider_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
+
+												}
+
+											// Define reference to the @id
+
+												$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
+
 										// MedicalBusiness
 
 											// Get values
@@ -5141,6 +5407,20 @@
 								// names (common use and specific properties)
 
 									if (
+										array_intersect(
+											$provider_properties_map[$MedicalWebPage_type]['properties'],
+											array(
+												'additionalName',
+												'alternateName',
+												'familyName',
+												'givenName',
+												'honorificPrefix',
+												'honorificSuffix',
+												'legalName',
+												'name'
+											)
+										)
+										||
 										array_intersect(
 											$provider_properties_map[$MedicalBusiness_type]['properties'],
 											array(
@@ -5300,6 +5580,21 @@
 
 											// Add to item values
 
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'givenName',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_givenName
+													) {
+
+														$provider_item_MedicalWebPage['givenName'] = $provider_givenName;
+
+													}
+
 												// MedicalBusiness
 
 													if (
@@ -5342,6 +5637,21 @@
 
 											// Add to item values
 
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'additionalName',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_additionalName
+													) {
+
+														$provider_item_MedicalWebPage['additionalName'] = $provider_additionalName;
+
+													}
+
 												// MedicalBusiness
 
 													if (
@@ -5383,6 +5693,21 @@
 											 */
 
 											// Add to item values
+
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'familyName',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_familyName
+													) {
+
+														$provider_item_MedicalWebPage['familyName'] = $provider_familyName;
+
+													}
 
 												// MedicalBusiness
 
@@ -5434,6 +5759,21 @@
 
 											// Add to item values
 
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'legalName',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_legalName
+													) {
+
+														$provider_item_MedicalWebPage['legalName'] = $provider_legalName;
+
+													}
+
 												// MedicalBusiness
 
 													if (
@@ -5475,6 +5815,23 @@
 											 */
 
 											// Add to item values
+
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'honorificPrefix',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_honorificPrefix
+														&&
+														$nesting_level == 0
+													) {
+
+														$provider_item_MedicalWebPage['honorificPrefix'] = $provider_honorificPrefix;
+
+													}
 
 												// MedicalBusiness
 
@@ -5525,6 +5882,21 @@
 												$provider_honorificSuffix = $provider_degree_list;
 
 											// Add to item values
+
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'honorificSuffix',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_honorificSuffix
+													) {
+
+														$provider_item_MedicalWebPage['honorificSuffix'] = $provider_honorificSuffix;
+
+													}
 
 												// MedicalBusiness
 
@@ -5620,6 +5992,21 @@
 												}
 
 											// Add to item values
+
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'name',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_name
+													) {
+
+														$provider_item_MedicalWebPage['name'] = $provider_name;
+
+													}
 
 												// MedicalBusiness
 
@@ -5804,6 +6191,23 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'alternateName',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_alternateName
+															&&
+															$nesting_level == 0
+														) {
+
+															$provider_item_MedicalWebPage['alternateName'] = $provider_alternateName;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -5853,6 +6257,11 @@
 									if (
 										in_array(
 											'medicalSpecialty',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'medicalSpecialty',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
 										||
@@ -5894,6 +6303,21 @@
 											}
 
 										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'medicalSpecialty',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_medicalSpecialty
+												) {
+
+													$provider_item_MedicalWebPage['medicalSpecialty'] = $provider_medicalSpecialty;
+
+												}
 
 											// MedicalBusiness
 
@@ -5948,6 +6372,11 @@
 									 */
 
 									if (
+										in_array(
+											'additionalType',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'additionalType',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -6087,6 +6516,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'additionalType',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_additionalType
+												) {
+
+													$provider_item_MedicalWebPage['additionalType'] = $provider_additionalType;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -6136,6 +6580,11 @@
 										(
 											in_array(
 												'alumniOf',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'alumniOf',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -6157,6 +6606,21 @@
 											}
 
 										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'alumniOf',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_alumniOf
+												) {
+
+													$provider_item_MedicalWebPage['alumniOf'] = $provider_alumniOf;
+
+												}
 
 											// MedicalBusiness
 
@@ -6202,6 +6666,11 @@
 
 									if (
 										(
+											in_array(
+												'aggregateRating',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
 											in_array(
 												'aggregateRating',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -6353,6 +6822,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'aggregateRating',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_aggregateRating
+												) {
+
+													$provider_item_MedicalWebPage['aggregateRating'] = $provider_aggregateRating;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -6402,6 +6886,11 @@
 										(
 											in_array(
 												'areaServed',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'areaServed',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -6423,6 +6912,21 @@
 											}
 
 										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'areaServed',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_areaServed
+												) {
+
+													$provider_item_MedicalWebPage['areaServed'] = $provider_areaServed;
+
+												}
 
 											// MedicalBusiness
 
@@ -6471,6 +6975,11 @@
 										(
 											in_array(
 												'availableService',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'availableService',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -6509,6 +7018,21 @@
 											}
 
 										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'availableService',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_availableService
+												) {
+
+													$provider_item_MedicalWebPage['availableService'] = $provider_availableService;
+
+												}
 
 											// MedicalBusiness
 
@@ -6556,6 +7080,11 @@
 										(
 											in_array(
 												'award',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'award',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -6577,6 +7106,21 @@
 											}
 
 										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'award',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_award
+												) {
+
+													$provider_item_MedicalWebPage['award'] = $provider_award;
+
+												}
 
 											// MedicalBusiness
 
@@ -6621,6 +7165,11 @@
 										);
 
 									if (
+										array_intersect(
+											$provider_properties_map[$MedicalWebPage_type]['properties'],
+											$provider_location_common
+										)
+										||
 										array_intersect(
 											$provider_properties_map[$MedicalBusiness_type]['properties'],
 											$provider_location_common
@@ -6676,6 +7225,11 @@
 												(
 													in_array(
 														'location',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'location',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -6689,6 +7243,21 @@
 											) {
 
 												// Add to item values
+
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'location',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_location
+														) {
+
+															$provider_item_MedicalWebPage['location'] = $provider_location;
+
+														}
 
 													// MedicalBusiness
 
@@ -6737,6 +7306,11 @@
 												(
 													in_array(
 														'workLocation',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'workLocation',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -6770,6 +7344,21 @@
 													}
 
 												// Add to item values
+
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'workLocation',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_workLocation
+														) {
+
+															$provider_item_MedicalWebPage['workLocation'] = $provider_workLocation;
+
+														}
 
 													// MedicalBusiness
 
@@ -6816,6 +7405,11 @@
 												(
 													in_array(
 														'containedInPlace',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'containedInPlace',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -6853,6 +7447,21 @@
 													}
 
 												// Add to item values
+
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'containedInPlace',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_containedInPlace
+														) {
+
+															$provider_item_MedicalWebPage['containedInPlace'] = $provider_containedInPlace;
+
+														}
 
 													// MedicalBusiness
 
@@ -6902,6 +7511,11 @@
 										);
 
 									if (
+										array_intersect(
+											$provider_properties_map[$MedicalWebPage_type]['properties'],
+											$provider_organization_common
+										)
+										||
 										array_intersect(
 											$provider_properties_map[$MedicalBusiness_type]['properties'],
 											$provider_organization_common
@@ -6958,6 +7572,11 @@
 											 */
 
 											if (
+												in_array(
+													'brand',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
 												in_array(
 													'brand',
 													$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7035,6 +7654,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'brand',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_brand
+														) {
+
+															$provider_item_MedicalWebPage['brand'] = $provider_brand;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -7073,6 +7707,11 @@
 												(
 													in_array(
 														'hospitalAffiliation',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'hospitalAffiliation',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -7083,6 +7722,11 @@
 												)
 												||
 												(
+													in_array(
+														'affiliation',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
 													in_array(
 														'affiliation',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7126,6 +7770,11 @@
 																(
 																	in_array(
 																		'hospitalAffiliation',
+																		$provider_properties_map[$MedicalWebPage_type]['properties']
+																	)
+																	||
+																	in_array(
+																		'hospitalAffiliation',
 																		$provider_properties_map[$MedicalBusiness_type]['properties']
 																	)
 																	||
@@ -7136,6 +7785,11 @@
 																)
 																&&
 																(
+																	in_array(
+																		'affiliation',
+																		$provider_properties_map[$MedicalWebPage_type]['properties']
+																	)
+																	||
 																	in_array(
 																		'affiliation',
 																		$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7173,6 +7827,21 @@
 													 */
 
 													// Add to item values
+
+														// MedicalWebPage
+
+															if (
+																in_array(
+																	'hospitalAffiliation',
+																	$provider_properties_map[$MedicalWebPage_type]['properties']
+																)
+																&&
+																$provider_hospitalAffiliation
+															) {
+
+																$provider_item_MedicalWebPage['hospitalAffiliation'] = $provider_hospitalAffiliation;
+
+															}
 
 														// MedicalBusiness
 
@@ -7275,6 +7944,21 @@
 
 													// Add to item values
 
+														// MedicalWebPage
+
+															if (
+																in_array(
+																	'affiliation',
+																	$provider_properties_map[$MedicalWebPage_type]['properties']
+																)
+																&&
+																$provider_affiliation
+															) {
+
+																$provider_item_MedicalWebPage['affiliation'] = $provider_affiliation;
+
+															}
+
 														// MedicalBusiness
 
 															if (
@@ -7322,6 +8006,11 @@
 
 											if (
 												(
+													in_array(
+														'memberOf',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
 													in_array(
 														'memberOf',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7412,6 +8101,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'memberOf',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_memberOf
+														) {
+
+															$provider_item_MedicalWebPage['memberOf'] = $provider_memberOf;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -7455,6 +8159,11 @@
 											 */
 
 											if (
+												in_array(
+													'parentOrganization',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
 												in_array(
 													'parentOrganization',
 													$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7526,6 +8235,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'parentOrganization',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_parentOrganization
+														) {
+
+															$provider_item_MedicalWebPage['parentOrganization'] = $provider_parentOrganization;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -7570,6 +8294,11 @@
 
 											if (
 												(
+													in_array(
+														'worksFor',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
 													in_array(
 														'worksFor',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7644,6 +8373,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'workLocation',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_worksFor
+														) {
+
+															$provider_item_MedicalWebPage['workLocation'] = $provider_worksFor;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -7698,6 +8442,11 @@
 										(
 											in_array(
 												'currenciesAccepted',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'currenciesAccepted',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -7725,6 +8474,21 @@
 											}
 
 										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'currenciesAccepted',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_currenciesAccepted
+												) {
+
+													$provider_item_MedicalWebPage['currenciesAccepted'] = $provider_currenciesAccepted;
+
+												}
 
 											// MedicalBusiness
 
@@ -7773,6 +8537,11 @@
 										(
 											in_array(
 												'description',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'description',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -7814,6 +8583,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'description',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_description
+												) {
+
+													$provider_item_MedicalWebPage['description'] = $provider_description;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -7825,7 +8609,7 @@
 													$provider_description
 												) {
 
-													$provider_item_MedicalBusiness['description'] = $provider_description;
+														$provider_item_MedicalBusiness['description'] = $provider_description;
 
 												}
 
@@ -7865,6 +8649,11 @@
 
 									if (
 										(
+											in_array(
+												'gender',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
 											in_array(
 												'gender',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -7921,6 +8710,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'gender',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_gender
+												) {
+
+													$provider_item_MedicalWebPage['gender'] = $provider_gender;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -7932,7 +8736,7 @@
 													$provider_gender
 												) {
 
-													$provider_item_MedicalBusiness['gender'] = $provider_gender;
+														$provider_item_MedicalBusiness['gender'] = $provider_gender;
 
 												}
 
@@ -7969,6 +8773,11 @@
 
 									if (
 										(
+											in_array(
+												'hasCredential',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
 											in_array(
 												'hasCredential',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -8008,6 +8817,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'hasCredential',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_hasCredential
+												) {
+
+													$provider_item_MedicalWebPage['hasCredential'] = $provider_hasCredential;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -8019,7 +8843,7 @@
 													$provider_hasCredential
 												) {
 
-													$provider_item_MedicalBusiness['hasCredential'] = $provider_hasCredential;
+														$provider_item_MedicalBusiness['hasCredential'] = $provider_hasCredential;
 
 												}
 
@@ -8054,6 +8878,11 @@
 										(
 											in_array(
 												'hasOccupation',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'hasOccupation',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -8086,6 +8915,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'hasOccupation',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_hasOccupation
+												) {
+
+													$provider_item_MedicalWebPage['hasOccupation'] = $provider_hasOccupation;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -8097,7 +8941,7 @@
 													$provider_hasOccupation
 												) {
 
-													$provider_item_MedicalBusiness['hasOccupation'] = $provider_hasOccupation;
+														$provider_item_MedicalBusiness['hasOccupation'] = $provider_hasOccupation;
 
 												}
 
@@ -8133,6 +8977,11 @@
 									 */
 
 									if (
+										in_array(
+											'hasMap',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'hasMap',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -8217,6 +9066,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'hasMap',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_hasMap
+												) {
+
+													$provider_item_MedicalWebPage['hasMap'] = $provider_hasMap;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -8228,7 +9092,7 @@
 													$provider_hasMap
 												) {
 
-													$provider_item_MedicalBusiness['hasMap'] = $provider_hasMap;
+														$provider_item_MedicalBusiness['hasMap'] = $provider_hasMap;
 
 												}
 
@@ -8268,6 +9132,11 @@
 												(
 													in_array(
 														'duns',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'duns',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8296,6 +9165,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'duns',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_duns
+														) {
+
+															$provider_item_MedicalWebPage['duns'] = $provider_duns;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8307,7 +9191,7 @@
 															$provider_duns
 														) {
 
-															$provider_item_MedicalBusiness['duns'] = $provider_duns;
+																$provider_item_MedicalBusiness['duns'] = $provider_duns;
 
 														}
 
@@ -8344,6 +9228,11 @@
 												(
 													in_array(
 														'globalLocationNumber',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'globalLocationNumber',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8372,6 +9261,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'globalLocationNumber',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_globalLocationNumber
+														) {
+
+															$provider_item_MedicalWebPage['globalLocationNumber'] = $provider_globalLocationNumber;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8383,7 +9287,7 @@
 															$provider_globalLocationNumber
 														) {
 
-															$provider_item_MedicalBusiness['globalLocationNumber'] = $provider_globalLocationNumber;
+																$provider_item_MedicalBusiness['globalLocationNumber'] = $provider_globalLocationNumber;
 
 														}
 
@@ -8422,6 +9326,11 @@
 												(
 													in_array(
 														'isicV4',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'isicV4',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8448,6 +9357,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'isicV4',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_isicV4
+														) {
+
+															$provider_item_MedicalWebPage['isicV4'] = $provider_isicV4;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8459,7 +9383,7 @@
 															$provider_isicV4
 														) {
 
-															$provider_item_MedicalBusiness['isicV4'] = $provider_isicV4;
+																$provider_item_MedicalBusiness['isicV4'] = $provider_isicV4;
 
 														}
 
@@ -8495,6 +9419,11 @@
 												(
 													in_array(
 														'leiCode',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'leiCode',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8521,6 +9450,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'leiCode',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_leiCode
+														) {
+
+															$provider_item_MedicalWebPage['leiCode'] = $provider_leiCode;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8532,7 +9476,7 @@
 															$provider_leiCode
 														) {
 
-															$provider_item_MedicalBusiness['leiCode'] = $provider_leiCode;
+																$provider_item_MedicalBusiness['leiCode'] = $provider_leiCode;
 
 														}
 
@@ -8568,6 +9512,11 @@
 												(
 													in_array(
 														'naics',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'naics',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8594,6 +9543,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'naics',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_naics
+														) {
+
+															$provider_item_MedicalWebPage['naics'] = $provider_naics;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8605,7 +9569,7 @@
 															$provider_naics
 														) {
 
-															$provider_item_MedicalBusiness['naics'] = $provider_naics;
+																$provider_item_MedicalBusiness['naics'] = $provider_naics;
 
 														}
 
@@ -8639,6 +9603,11 @@
 
 											if (
 												(
+													in_array(
+														'taxID',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
 													in_array(
 														'taxID',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -8703,6 +9672,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'taxID',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_taxID
+														) {
+
+															$provider_item_MedicalWebPage['taxID'] = $provider_taxID;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8714,7 +9698,7 @@
 															$provider_taxID
 														) {
 
-															$provider_item_MedicalBusiness['taxID'] = $provider_taxID;
+																$provider_item_MedicalBusiness['taxID'] = $provider_taxID;
 
 														}
 
@@ -8747,6 +9731,11 @@
 												(
 													in_array(
 														'vatID',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'vatID',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8773,6 +9762,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'vatID',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_vatID
+														) {
+
+															$provider_item_MedicalWebPage['vatID'] = $provider_vatID;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8784,7 +9788,7 @@
 															$provider_vatID
 														) {
 
-															$provider_item_MedicalBusiness['vatID'] = $provider_vatID;
+																$provider_item_MedicalBusiness['vatID'] = $provider_vatID;
 
 														}
 
@@ -8826,6 +9830,11 @@
 												(
 													in_array(
 														'iso6523Code',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'iso6523Code',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -8852,6 +9861,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'iso6523Code',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_iso6523Code
+														) {
+
+															$provider_item_MedicalWebPage['iso6523Code'] = $provider_iso6523Code;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -8863,7 +9887,7 @@
 															$provider_iso6523Code
 														) {
 
-															$provider_item_MedicalBusiness['iso6523Code'] = $provider_iso6523Code;
+																$provider_item_MedicalBusiness['iso6523Code'] = $provider_iso6523Code;
 
 														}
 
@@ -8888,6 +9912,11 @@
 
 											if (
 												(
+													in_array(
+														'identifier',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
 													in_array(
 														'identifier',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -9250,6 +10279,21 @@
 
 												// Add to item values
 
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'identifier',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_identifier
+														) {
+
+															$provider_item_MedicalWebPage['identifier'] = $provider_identifier;
+
+														}
+
 													// MedicalBusiness
 
 														if (
@@ -9261,7 +10305,7 @@
 															$provider_identifier
 														) {
 
-															$provider_item_MedicalBusiness['identifier'] = $provider_identifier;
+																$provider_item_MedicalBusiness['identifier'] = $provider_identifier;
 
 														}
 
@@ -9290,6 +10334,11 @@
 										(
 											in_array(
 												'image',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'image',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -9300,6 +10349,11 @@
 										)
 										||
 										(
+											in_array(
+												'photo',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
 											in_array(
 												'photo',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -9376,6 +10430,11 @@
 									if (
 										in_array(
 											'image',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'image',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
 										||
@@ -9395,6 +10454,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'image',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_image
+												) {
+
+													$provider_item_MedicalWebPage['image'] = $provider_image;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9406,7 +10480,7 @@
 													$provider_image
 												) {
 
-													$provider_item_MedicalBusiness['image'] = $provider_image;
+														$provider_item_MedicalBusiness['image'] = $provider_image;
 
 												}
 
@@ -9445,6 +10519,11 @@
 										(
 											in_array(
 												'isAcceptingNewPatients',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'isAcceptingNewPatients',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -9471,6 +10550,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'isAcceptingNewPatients',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_isAcceptingNewPatients
+												) {
+
+													$provider_item_MedicalWebPage['isAcceptingNewPatients'] = $provider_isAcceptingNewPatients;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9482,7 +10576,7 @@
 													$provider_isAcceptingNewPatients
 												) {
 
-													$provider_item_MedicalBusiness['isAcceptingNewPatients'] = $provider_isAcceptingNewPatients;
+														$provider_item_MedicalBusiness['isAcceptingNewPatients'] = $provider_isAcceptingNewPatients;
 
 												}
 
@@ -9517,6 +10611,11 @@
 										(
 											in_array(
 												'isAccessibleForFree',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'isAccessibleForFree',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -9539,6 +10638,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'isAccessibleForFree',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_isAccessibleForFree
+												) {
+
+													$provider_item_MedicalWebPage['isAccessibleForFree'] = $provider_isAccessibleForFree;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9550,7 +10664,7 @@
 													$provider_isAccessibleForFree
 												) {
 
-													$provider_item_MedicalBusiness['isAccessibleForFree'] = $provider_isAccessibleForFree;
+														$provider_item_MedicalBusiness['isAccessibleForFree'] = $provider_isAccessibleForFree;
 
 												}
 
@@ -9584,6 +10698,11 @@
 
 									if (
 										(
+											in_array(
+												'jobTitle',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
 											in_array(
 												'jobTitle',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -9632,6 +10751,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'jobTitle',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_jobTitle
+												) {
+
+													$provider_item_MedicalWebPage['jobTitle'] = $provider_jobTitle;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9643,7 +10777,7 @@
 													$provider_jobTitle
 												) {
 
-													$provider_item_MedicalBusiness['jobTitle'] = $provider_jobTitle;
+														$provider_item_MedicalBusiness['jobTitle'] = $provider_jobTitle;
 
 												}
 
@@ -9681,6 +10815,11 @@
 										(
 											in_array(
 												'keywords',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'keywords',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -9703,6 +10842,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'keywords',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_keywords
+												) {
+
+													$provider_item_MedicalWebPage['keywords'] = $provider_keywords;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9714,7 +10868,7 @@
 													$provider_keywords
 												) {
 
-													$provider_item_MedicalBusiness['keywords'] = $provider_keywords;
+														$provider_item_MedicalBusiness['keywords'] = $provider_keywords;
 
 												}
 
@@ -9758,6 +10912,11 @@
 										(
 											in_array(
 												'knowsAbout',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -9780,6 +10939,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'knowsAbout',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_knowsAbout
+												) {
+
+													$provider_item_MedicalWebPage['knowsAbout'] = $provider_knowsAbout;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9791,7 +10965,7 @@
 													$provider_knowsAbout
 												) {
 
-													$provider_item_MedicalBusiness['knowsAbout'] = $provider_knowsAbout;
+														$provider_item_MedicalBusiness['knowsAbout'] = $provider_knowsAbout;
 
 												}
 
@@ -9829,6 +11003,11 @@
 										(
 											in_array(
 												'knowsLanguage',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsLanguage',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -9859,6 +11038,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'knowsLanguage',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_knowsLanguage
+												) {
+
+													$provider_item_MedicalWebPage['knowsLanguage'] = $provider_knowsLanguage;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9870,7 +11064,7 @@
 													$provider_knowsLanguage
 												) {
 
-													$provider_item_MedicalBusiness['knowsLanguage'] = $provider_knowsLanguage;
+														$provider_item_MedicalBusiness['knowsLanguage'] = $provider_knowsLanguage;
 
 												}
 
@@ -9909,6 +11103,11 @@
 									if (
 										in_array(
 											'mainEntityOfPage',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'mainEntityOfPage',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
 										||
@@ -9941,6 +11140,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'mainEntityOfPage',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_mainEntityOfPage
+												) {
+
+													$provider_item_MedicalWebPage['mainEntityOfPage'] = $provider_mainEntityOfPage;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -9952,7 +11166,7 @@
 													$provider_mainEntityOfPage
 												) {
 
-													$provider_item_MedicalBusiness['mainEntityOfPage'] = $provider_mainEntityOfPage;
+														$provider_item_MedicalBusiness['mainEntityOfPage'] = $provider_mainEntityOfPage;
 
 												}
 
@@ -9989,6 +11203,11 @@
 										(
 											in_array(
 												'makesOffer',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'makesOffer',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -10011,6 +11230,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'makesOffer',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_makesOffer
+												) {
+
+													$provider_item_MedicalWebPage['makesOffer'] = $provider_makesOffer;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10022,7 +11256,7 @@
 													$provider_makesOffer
 												) {
 
-													$provider_item_MedicalBusiness['makesOffer'] = $provider_makesOffer;
+														$provider_item_MedicalBusiness['makesOffer'] = $provider_makesOffer;
 
 												}
 
@@ -10057,6 +11291,11 @@
 										(
 											in_array(
 												'paymentAccepted',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'paymentAccepted',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -10084,6 +11323,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'paymentAccepted',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_paymentAccepted
+												) {
+
+													$provider_item_MedicalWebPage['paymentAccepted'] = $provider_paymentAccepted;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10095,7 +11349,7 @@
 													$provider_paymentAccepted
 												) {
 
-													$provider_item_MedicalBusiness['paymentAccepted'] = $provider_paymentAccepted;
+														$provider_item_MedicalBusiness['paymentAccepted'] = $provider_paymentAccepted;
 
 												}
 
@@ -10130,6 +11384,11 @@
 									if (
 										in_array(
 											'photo',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'photo',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
 										||
@@ -10149,6 +11408,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'photo',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_photo
+												) {
+
+													$provider_item_MedicalWebPage['photo'] = $provider_photo;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10160,7 +11434,7 @@
 													$provider_photo
 												) {
 
-													$provider_item_MedicalBusiness['photo'] = $provider_photo;
+														$provider_item_MedicalBusiness['photo'] = $provider_photo;
 
 												}
 
@@ -10260,6 +11534,11 @@
 										(
 											in_array(
 												'potentialAction',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'potentialAction',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -10282,6 +11561,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'potentialAction',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_potentialAction
+												) {
+
+													$provider_item_MedicalWebPage['potentialAction'] = $provider_potentialAction;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10293,7 +11587,7 @@
 													$provider_potentialAction
 												) {
 
-													$provider_item_MedicalBusiness['potentialAction'] = $provider_potentialAction;
+														$provider_item_MedicalBusiness['potentialAction'] = $provider_potentialAction;
 
 												}
 
@@ -10328,6 +11622,11 @@
 										(
 											in_array(
 												'review',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'review',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -10350,6 +11649,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'review',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_review
+												) {
+
+													$provider_item_MedicalWebPage['review'] = $provider_review;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10361,7 +11675,7 @@
 													$provider_review
 												) {
 
-													$provider_item_MedicalBusiness['review'] = $provider_review;
+														$provider_item_MedicalBusiness['review'] = $provider_review;
 
 												}
 
@@ -10397,6 +11711,11 @@
 									if (
 										in_array(
 											'sameAs',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'sameAs',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
 										||
@@ -10427,6 +11746,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'sameAs',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_sameAs
+												) {
+
+													$provider_item_MedicalWebPage['sameAs'] = $provider_sameAs;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10438,7 +11772,7 @@
 													$provider_sameAs
 												) {
 
-													$provider_item_MedicalBusiness['sameAs'] = $provider_sameAs;
+														$provider_item_MedicalBusiness['sameAs'] = $provider_sameAs;
 
 												}
 
@@ -10472,6 +11806,11 @@
 
 									if (
 										(
+											in_array(
+												'smokingAllowed',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
 											in_array(
 												'smokingAllowed',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -10525,6 +11864,11 @@
 										(
 											in_array(
 												'subjectOf',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'subjectOf',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
 											)
 											||
@@ -10560,6 +11904,21 @@
 
 										// Add to item values
 
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'subjectOf',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_subjectOf
+												) {
+
+													$provider_item_MedicalWebPage['subjectOf'] = $provider_subjectOf;
+
+												}
+
 											// MedicalBusiness
 
 												if (
@@ -10571,7 +11930,7 @@
 													$provider_subjectOf
 												) {
 
-													$provider_item_MedicalBusiness['subjectOf'] = $provider_subjectOf;
+														$provider_item_MedicalBusiness['subjectOf'] = $provider_subjectOf;
 
 												}
 
@@ -10594,12 +11953,14 @@
 
 							// Sort arrays
 
+								ksort($provider_item_MedicalWebPage);
 								ksort($provider_item_MedicalBusiness);
 								ksort($provider_item_Person);
 
 							// Combine the arrays
 
 								$provider_item = array(
+									'MedicalWebPage' => $provider_item_MedicalWebPage,
 									'MedicalBusiness' => $provider_item_MedicalBusiness,
 									'Person' => $provider_item_Person
 								);
@@ -10615,6 +11976,18 @@
 							// Add to lists of providers
 
 								$provider_list[] = $provider_item;
+
+								// Add to list of MedicalWebPage items
+
+									if (
+										isset($provider_item['MedicalWebPage'])
+										&&
+										!empty($provider_item['MedicalWebPage'])
+									) {
+
+										$MedicalWebPage_list[] = $provider_item['MedicalWebPage'];
+
+									}
 
 								// Add to list of MedicalBusiness items
 
@@ -10646,6 +12019,15 @@
 
 				// Clean up list arrays
 
+					// MedicalWebPage
+
+						$MedicalWebPage_list = array_filter($MedicalWebPage_list);
+						$MedicalWebPage_list = array_values($MedicalWebPage_list);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($MedicalWebPage_list);
+
 					// MedicalBusiness
 
 						$MedicalBusiness_list = array_filter($MedicalBusiness_list);
@@ -10665,6 +12047,26 @@
 							uamswp_fad_flatten_multidimensional_array($Person_list);
 
 				// Combine lists for return
+
+					// MedicalWebPage
+
+						if ( $MedicalWebPage_list ) {
+
+							// Check if pre-existing list is an indexed array
+
+								if (
+									isset($provider_list['MedicalWebPage'])
+									&&
+									!empty($provider_list['MedicalWebPage'])
+								) {
+
+									$provider_list['MedicalWebPage'] = array_is_list($provider_list['MedicalWebPage']) ? $provider_list['MedicalWebPage'] : array($provider_list['MedicalWebPage']);
+
+								}
+
+							$provider_list['MedicalWebPage'] = $MedicalWebPage_list;
+
+						}
 
 					// MedicalBusiness
 

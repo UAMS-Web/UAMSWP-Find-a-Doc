@@ -1086,6 +1086,7 @@ TODO List
 			array($page_id), // List of IDs of the provider items
 			$page_url, // Page URL
 			0, // Nesting level within the main schema
+			1, // Iteration counter for provider-as-MedicalWebPage
 			1, // Iteration counter for provider-as-MedicalBusiness
 			1, // Iteration counter for provider-as-Person
 			$provider_schema_fields // Pre-existing field values array so duplicate calls can be avoided
@@ -1093,8 +1094,11 @@ TODO List
 
 // Add Provider Schema Arrays to Base Array
 
-	// Provider as MedicalWebPage
+	// Provider as MedicalWebPage (old)
 	$schema_provider['@graph'][] = $schema_provider_MedicalWebPage;
+
+	// Provider as MedicalWebPage
+	$schema_provider['@graph'][] = $schema_provider_combined['MedicalWebPage'];
 
 	// Provider as MedicalBusiness
 	$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
