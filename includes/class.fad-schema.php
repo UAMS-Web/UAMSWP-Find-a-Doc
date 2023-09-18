@@ -1958,8 +1958,8 @@
 
 				if ( $code_list ) {
 
-					$code_list = array_unique($code_list, SORT_REGULAR);
 					$code_list = array_filter($code_list);
+					$code_list = array_unique( $code_list, SORT_REGULAR );
 					$code_list = array_values($code_list);
 
 					// If there is only one item, flatten the multi-dimensional array by one step
@@ -2013,8 +2013,8 @@
 
 				if ( $alternateName_schema ) {
 
-					$alternateName_schema = array_unique($alternateName_schema);
 					$alternateName_schema = array_filter($alternateName_schema);
+					$alternateName_schema = array_unique( $alternateName_schema, SORT_REGULAR );
 				}
 
 				if ( $alternateName_schema ) {
@@ -2132,8 +2132,8 @@
 
 				if ( $sameAs_schema ) {
 
-					$sameAs_schema = array_unique($sameAs_schema);
 					$sameAs_schema = array_filter($sameAs_schema);
+					$sameAs_schema = array_unique( $sameAs_schema, SORT_REGULAR );
 				}
 
 				if ( $sameAs_schema ) {
@@ -2196,8 +2196,8 @@
 
 					// Clean up list array
 
-						$additionalType_list = array_unique($additionalType_list);
 						$additionalType_list = array_filter($additionalType_list);
+						$additionalType_list = array_unique( $additionalType_list, SORT_REGULAR );
 						$additionalType_list = array_values($additionalType_list);
 						sort($additionalType_list);
 
@@ -2698,7 +2698,7 @@
 									if ( $item_schema['alternateName'] ) {
 
 										$item_schema['alternateName'] = array_filter($item_schema['alternateName']);
-										$item_schema['alternateName'] = array_unique($item_schema['alternateName']);
+										$item_schema['alternateName'] = array_unique( $item_schema['alternateName'], SORT_REGULAR );
 										$item_schema['alternateName'] = array_values($item_schema['alternateName']);
 
 									}
@@ -4741,7 +4741,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['Thing']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4758,7 +4758,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['CreativeWork']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4775,7 +4775,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['WebPage']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4792,7 +4792,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['Organization']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4809,7 +4809,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['Place']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4826,7 +4826,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['LocalBusiness']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4843,7 +4843,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['MedicalBusiness']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -4860,7 +4860,7 @@
 										$provider_properties_map_item['properties'],
 										$provider_properties_map['MedicalOrganization']['properties']
 									);
-									$provider_properties_map_item['properties'] = array_unique($provider_properties_map_item['properties']);
+									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
 									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
 
 								}
@@ -6252,7 +6252,7 @@
 															}
 
 														$provider_alternateName = array_filter($provider_alternateName);
-														$provider_alternateName = array_unique($provider_alternateName);
+														$provider_alternateName = array_unique( $provider_alternateName, SORT_REGULAR );
 														$provider_alternateName = array_values($provider_alternateName);
 
 												// Add to item values
@@ -11461,7 +11461,7 @@
 
 													$provider_degrees = get_field( 'physician_degree', $provider );
 													$provider_degrees = array_filter($provider_degrees);
-													$provider_degrees = array_unique($provider_degrees);
+													$provider_degrees = array_unique( $provider_degrees, SORT_REGULAR );
 													$provider_degrees = array_values($provider_degrees);
 
 												}
@@ -11687,7 +11687,7 @@
 													// Clean up Google Company ID value array
 
 														$provider_google_cid = array_filter($provider_google_cid);
-														$provider_google_cid = array_unique($provider_google_cid);
+														$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
 														$provider_google_cid = array_values($provider_google_cid);
 
 												}
@@ -12728,7 +12728,7 @@
 																	// Clean up Google Company ID value array
 
 																		$provider_google_cid = array_filter($provider_google_cid);
-																		$provider_google_cid = array_unique($provider_google_cid);
+																		$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
 																		$provider_google_cid = array_values($provider_google_cid);
 
 																}
@@ -14647,7 +14647,7 @@
 												if ( $provider_mentions ) {
 
 													$provider_mentions = array_filter($provider_mentions);
-													$provider_mentions = array_unique($provider_mentions);
+													$provider_mentions = array_unique( $provider_mentions, SORT_REGULAR);
 													$provider_mentions = array_values($provider_mentions);
 
 													// If there is only one item, flatten the multi-dimensional array by one step
@@ -19676,7 +19676,7 @@
 												// Clean up the list
 
 													$LocalBusiness_image_id = array_filter($LocalBusiness_image_id);
-													$LocalBusiness_image_id = array_unique($LocalBusiness_image_id);
+													$LocalBusiness_image_id = array_unique( $LocalBusiness_image_id, SORT_REGULAR );
 													$LocalBusiness_image_id = array_values($LocalBusiness_image_id);
 
 										}
@@ -23128,8 +23128,8 @@
 
 									if ( $CreativeWork_sameAs ) {
 
-										$CreativeWork_sameAs = array_unique($CreativeWork_sameAs);
 										$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
+										$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
 										$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
 
 										// If there is only one item, flatten the multi-dimensional array by one step
