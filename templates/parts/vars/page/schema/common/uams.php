@@ -25,6 +25,7 @@
 	// name
 
 		$schema_base_org_uams['name'] = 'University of Arkansas for Medical Sciences';
+		$schema_base_org_uams_name = $schema_base_org_uams['name'];
 
 	// alternateName
 

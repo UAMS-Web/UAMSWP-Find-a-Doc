@@ -10490,11 +10490,31 @@
 
 										// Get values
 
-											if ( !isset($provider_creator) ) {
+											// Base array
 
 												$provider_creator = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_creator[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_creator[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_creator );
 
 										// Add to item values
 
@@ -10579,9 +10599,9 @@
 
 										// Get values
 
-											if ( !isset($provider_creditText) ) {
+											if ( $schema_base_org_uams_name ) {
 
-												$provider_creditText = array();
+												$provider_creditText = $schema_base_org_uams_name;
 
 											}
 
@@ -11144,11 +11164,31 @@
 
 										// Get values
 
-											if ( !isset($provider_editor) ) {
+											// Base array
 
 												$provider_editor = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_editor[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_editor[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_editor );
 
 										// Add to item values
 
@@ -14138,11 +14178,31 @@
 
 										// Get values
 
-											if ( !isset($provider_maintainer) ) {
+											// Base array
 
 												$provider_maintainer = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_maintainer[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_maintainer[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_maintainer );
 
 										// Add to item values
 
@@ -15016,11 +15076,31 @@
 
 										// Get values
 
-											if ( !isset($provider_producer) ) {
+											// Base array
 
 												$provider_producer = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_producer[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_producer[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_producer );
 
 										// Add to item values
 
@@ -15200,11 +15280,31 @@
 
 										// Get values
 
-											if ( !isset($provider_publisher) ) {
+											// Base array
 
 												$provider_publisher = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_publisher[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_publisher[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_publisher );
 
 										// Add to item values
 
@@ -15466,11 +15566,31 @@
 
 										// Get values
 
-											if ( !isset($provider_reviewedBy) ) {
+											// Base array
 
 												$provider_reviewedBy = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_reviewedBy[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_reviewedBy[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_reviewedBy );
 
 										// Add to item values
 
@@ -22150,9 +22270,35 @@
 
 										$CreativeWork_creator = $CreativeWork_syndication_org;
 
-									} elseif ( isset($schema_base_org_uams_health_ref) ) {
+									} else {
 
-										$CreativeWork_creator = $schema_base_org_uams_health_ref;
+										// Get values
+
+											// Base array
+
+												$CreativeWork_creator = array();
+
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$CreativeWork_creator[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$CreativeWork_creator[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $CreativeWork_creator );
 
 									}
 
@@ -22842,7 +22988,33 @@
 
 									} else {
 
-										$CreativeWork_sourceOrganization = $schema_base_org_uams_health_ref ?? '';
+										// Get values
+
+											// Base array
+
+												$CreativeWork_sourceOrganization = array();
+
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$CreativeWork_sourceOrganization[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$CreativeWork_sourceOrganization[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $CreativeWork_sourceOrganization );
 
 									}
 
