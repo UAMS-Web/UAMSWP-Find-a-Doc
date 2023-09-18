@@ -7332,13 +7332,9 @@
 
 														// Format values
 
-															if ( $provider_associations ) {
-
-																$provider_memberOf = uamswp_fad_schema_associations(
-																	$provider_associations, // mixed // Required // Health care professional association ID values
-																); // Add to schema fields
-
-															}
+															$provider_memberOf = uamswp_fad_schema_associations(
+																$provider_associations, // mixed // Required // Health care professional association ID values
+															); // Add to schema fields
 
 													}
 
