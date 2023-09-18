@@ -799,7 +799,7 @@
 			// Related Treatments Section Query
 
 				$treatments_cpt = get_field('physician_treatments_cpt');
-				$provider_schema_fields[$page_id]['provider_treatments'] = $treatments_cpt; // Pass value to schema function
+				$provider_schema_fields[$page_id]['provider_treatment'] = $treatments_cpt; // Pass value to schema function
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/treatment.php' );
 
 			// Query for whether UAMS Health Talk podcast section should be displayed on ontology pages/subsections

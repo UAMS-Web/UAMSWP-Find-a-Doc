@@ -5031,13 +5031,18 @@
 								$provider_audience = null;
 								$provider_author = null;
 								$provider_availableService = null;
+								$provider_availableService_ref = null;
 								$provider_award = null;
 								$provider_brand = null;
 								$provider_breadcrumb = null;
 								$provider_cid = null;
+								$provider_clinical_resource = null;
+								$provider_clinical_resource_ref = null;
 								$provider_clinical_specialization = null;
 								$provider_clinical_specialization_name = null;
 								$provider_clinical_specialization_term = null;
+								$provider_condition = null;
+								$provider_condition_ref = null;
 								$provider_containedInPlace = null;
 								$provider_contributor = null;
 								$provider_copyrightHolder = null;
@@ -5059,6 +5064,8 @@
 								$provider_description_text = null;
 								$provider_duns = null;
 								$provider_editor = null;
+								$provider_expertise = null;
+								$provider_expertise_ref = null;
 								$provider_familyName = null;
 								$provider_fpage_query = null;
 								$provider_generational_suffix = null;
@@ -5094,6 +5101,7 @@
 								$provider_leiCode = null;
 								$provider_location = null;
 								$provider_location_array = null;
+								$provider_location_ref = null;
 								$provider_mainContentOfPage = null;
 								$provider_mainEntity = null;
 								$provider_mainEntityOfPage = null;
@@ -5136,7 +5144,7 @@
 								$provider_taxID_taxpayer = null;
 								$provider_thumbnailUrl = null;
 								$provider_timeRequired = null;
-								$provider_treatments = null;
+								$provider_treatment = null;
 								$provider_url = null;
 								$provider_vatID = null;
 								$provider_video = null;
@@ -6309,6 +6317,459 @@
 														}
 
 									}
+
+								// Associated ontology items (e.g., locations, areas of expertise, clinical resources, conditions, treatments)
+
+									// Associated Locations (common and specific)
+
+										// List of properties that reference locations (i.e., 'Place')
+
+											$provider_location_common = array(
+												'containedInPlace',
+												'location',
+												'workLocation'
+											);
+
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_location_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_location_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_location_common
+											)
+										) {
+
+											// location (common 'Place')
+
+												// Get values
+
+													if ( !isset($provider_location_array) ) {
+
+														$provider_location_array = get_field( 'physician_locations', $provider ) ?? array(); // array
+
+													}
+
+													if ( $provider_location_array ) {
+
+														$provider_location = uamswp_fad_schema_location(
+															$provider_location_array, // List of IDs of the location items
+															$provider_url, // Page URL
+															$nesting_level + 1 // Nesting level within the main schema
+														);
+
+													}
+
+											// location (specific property)
+
+												/* 
+												* The location of, for example, where an event is happening, where an 
+												* organization is located, or where an action takes place.
+												* 
+												* Values expected to be one of these types:
+												* 
+												*     - Place
+												*     - PostalAddress
+												*     - Text
+												*     - VirtualLocation
+												*/
+
+												if (
+													(
+														in_array(
+															'location',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														||
+														in_array(
+															'location',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														||
+														in_array(
+															'location',
+															$provider_properties_map[$Person_type]['properties']
+														)
+													)
+													&&
+													$nesting_level == 0
+												) {
+
+													// Add to item values
+
+														// MedicalWebPage
+
+															if (
+																in_array(
+																	'location',
+																	$provider_properties_map[$MedicalWebPage_type]['properties']
+																)
+																&&
+																$provider_location
+															) {
+
+																if (
+																	isset($provider_location_ref)
+																	&&
+																	!empty($provider_location_ref)
+																) {
+
+																	$provider_item_MedicalWebPage['location'] = $provider_location_ref;
+
+																} else {
+
+																	$provider_item_MedicalWebPage['location'] = $provider_location;
+
+																	// Define reference to the @id
+
+																		if ( !isset($provider_location_ref) ) {
+
+																			$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+																		}
+
+																}
+
+															}
+
+														// MedicalBusiness
+
+															if (
+																in_array(
+																	'location',
+																	$provider_properties_map[$MedicalBusiness_type]['properties']
+																)
+																&&
+																$provider_location
+															) {
+
+																if (
+																	isset($provider_location_ref)
+																	&&
+																	!empty($provider_location_ref)
+																) {
+
+																	$provider_item_MedicalBusiness['location'] = $provider_location_ref;
+
+																} else {
+
+																	$provider_item_MedicalBusiness['location'] = $provider_location;
+
+																	// Define reference to the @id
+
+																		if ( !isset($provider_location_ref) ) {
+
+																			$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+																		}
+
+																}
+
+															}
+
+														// Person
+
+															if (
+																in_array(
+																	'location',
+																	$provider_properties_map[$Person_type]['properties']
+																)
+																&&
+																$provider_location
+															) {
+
+																if (
+																	isset($provider_location_ref)
+																	&&
+																	!empty($provider_location_ref)
+																) {
+
+																	$provider_item_Person['location'] = $provider_location_ref;
+
+																} else {
+
+																	$provider_item_Person['location'] = $provider_location;
+
+																	// Define reference to the @id
+
+																		if ( !isset($provider_location_ref) ) {
+
+																			$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+																		}
+
+																}
+
+															}
+
+												}
+
+											// workLocation
+
+												/* 
+												* A contact location for a person's place of work.
+												* 
+												* Values expected to be one of these types:
+												* 
+												*     - ContactPoint
+												*     - Place
+												*/
+
+												if (
+													(
+														in_array(
+															'workLocation',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														||
+														in_array(
+															'workLocation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														||
+														in_array(
+															'workLocation',
+															$provider_properties_map[$Person_type]['properties']
+														)
+													)
+													&&
+													$nesting_level == 0
+												) {
+
+													// Get values
+
+														if (
+															$provider_location
+															&&
+															isset($provider_location_ref)
+														) {
+
+															// @id references
+
+																$provider_workLocation = $provider_location_ref;
+
+														} else {
+
+															// Full values
+
+																$provider_workLocation = $provider_location;
+
+														}
+
+													// Add to item values
+
+														// MedicalWebPage
+
+															if (
+																in_array(
+																	'workLocation',
+																	$provider_properties_map[$MedicalWebPage_type]['properties']
+																)
+																&&
+																$provider_workLocation
+															) {
+
+																$provider_item_MedicalWebPage['workLocation'] = $provider_workLocation;
+
+															}
+
+														// MedicalBusiness
+
+															if (
+																in_array(
+																	'workLocation',
+																	$provider_properties_map[$MedicalBusiness_type]['properties']
+																)
+																&&
+																$provider_workLocation
+															) {
+
+																$provider_item_MedicalBusiness['workLocation'] = $provider_workLocation;
+
+															}
+
+														// Person
+
+															if (
+																in_array(
+																	'workLocation',
+																	$provider_properties_map[$Person_type]['properties']
+																)
+																&&
+																$provider_workLocation
+															) {
+
+																$provider_item_Person['workLocation'] = $provider_workLocation;
+
+															}
+
+												}
+
+											// containedInPlace
+
+												/* 
+												* The basic containment relation between a place and one that contains it.
+												* expected to be one of these types:
+												* 
+												*     - Place
+												*/
+
+												if (
+													(
+														in_array(
+															'containedInPlace',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														||
+														in_array(
+															'containedInPlace',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														||
+														in_array(
+															'containedInPlace',
+															$provider_properties_map[$Person_type]['properties']
+														)
+													)
+													&&
+													$nesting_level == 0
+												) {
+
+													// Get values
+
+														if (
+															(
+																$provider_location
+																||
+																$provider_workLocation
+															)
+															&&
+															isset($provider_location_ref)
+														) {
+
+															// @id references
+
+																$provider_workLocation = $provider_location_ref;
+
+														} else {
+
+															// Full values
+
+																$provider_workLocation = $provider_location;
+
+														}
+
+													// Add to item values
+
+														// MedicalWebPage
+
+															if (
+																in_array(
+																	'containedInPlace',
+																	$provider_properties_map[$MedicalWebPage_type]['properties']
+																)
+																&&
+																$provider_containedInPlace
+															) {
+
+																$provider_item_MedicalWebPage['containedInPlace'] = $provider_containedInPlace;
+
+															}
+
+														// MedicalBusiness
+
+															if (
+																in_array(
+																	'containedInPlace',
+																	$provider_properties_map[$MedicalBusiness_type]['properties']
+																)
+																&&
+																$provider_containedInPlace
+															) {
+
+																$provider_item_MedicalBusiness['containedInPlace'] = $provider_containedInPlace;
+
+															}
+
+														// Person
+
+															if (
+																in_array(
+																	'containedInPlace',
+																	$provider_properties_map[$Person_type]['properties']
+																)
+																&&
+																$provider_containedInPlace
+															) {
+
+																$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
+
+															}
+
+												}
+
+										}
+
+									// Associated areas of expertise
+
+									// Associated clinical resources
+
+									// Associated conditions
+
+									// Associated treatments and procedures
+
+										// List of properties that reference treatments and procedures
+
+											$provider_treatment_common = array(
+												'availableService'
+											);
+
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_treatment_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_treatment_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_treatment_common
+											)
+										) {
+
+											// Get related treatments
+
+												if ( !isset($provider_treatment) ) {
+
+													$provider_treatment = get_field( 'physician_treatments_cpt', $provider ) ?: array();
+
+												}
+
+											// Format values
+
+												if ( $provider_treatment ) {
+
+													$provider_availableService = uamswp_fad_schema_service(
+														$provider_treatment, // List of IDs of the service items
+														$provider_url, // Page URL
+														( $nesting_level + 1 ), // Nesting level within the main schema
+														'Service' // Fragment identifier
+													) ?? array();
+
+												}
+
+										}
 
 								// about
 
@@ -8294,31 +8755,6 @@
 										$nesting_level == 0
 									) {
 
-										// Get related treatments
-
-											if ( !isset($provider_treatments) ) {
-
-												$provider_treatments = get_field( 'physician_treatments_cpt', $provider ) ?: array();
-
-											}
-
-										// Format values
-
-											if ( !isset($provider_availableService) ) {
-
-												if ( $provider_treatments ) {
-
-													$provider_availableService = uamswp_fad_schema_service(
-														$provider_treatments, // List of IDs of the service items
-														$provider_url, // Page URL
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'Service' // Fragment identifier
-													) ?? array();
-
-												}
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -8332,7 +8768,27 @@
 													$provider_availableService
 												) {
 
-													$provider_item_MedicalWebPage['availableService'] = $provider_availableService;
+													if (
+														isset($provider_availableService_ref)
+														&&
+														!empty($provider_availableService_ref)
+													) {
+
+														$provider_item_MedicalWebPage['availableService'] = $provider_availableService_ref;
+
+													} else {
+
+														$provider_item_MedicalWebPage['availableService'] = $provider_availableService;
+
+														// Define reference to the @id
+
+															if ( !isset($provider_availableService_ref) ) {
+
+																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+
+															}
+
+													}
 
 												}
 
@@ -8347,7 +8803,27 @@
 													$provider_availableService
 												) {
 
-													$provider_item_MedicalBusiness['availableService'] = $provider_availableService;
+													if (
+														isset($provider_availableService_ref)
+														&&
+														!empty($provider_availableService_ref)
+													) {
+
+														$provider_item_MedicalBusiness['availableService'] = $provider_availableService_ref;
+
+													} else {
+
+														$provider_item_MedicalBusiness['availableService'] = $provider_availableService;
+
+														// Define reference to the @id
+
+															if ( !isset($provider_availableService_ref) ) {
+
+																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+
+															}
+
+													}
 
 												}
 
@@ -8362,7 +8838,27 @@
 													$provider_availableService
 												) {
 
-													$provider_item_Person['availableService'] = $provider_availableService;
+													if (
+														isset($provider_availableService_ref)
+														&&
+														!empty($provider_availableService_ref)
+													) {
+
+														$provider_item_Person['availableService'] = $provider_availableService_ref;
+
+													} else {
+
+														$provider_item_Person['availableService'] = $provider_availableService;
+
+														// Define reference to the @id
+
+															if ( !isset($provider_availableService_ref) ) {
+
+																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+
+															}
+
+													}
 
 												}
 
@@ -8453,403 +8949,6 @@
 													$provider_item_Person['award'] = $provider_award;
 
 												}
-
-									}
-
-								// Associated Locations (common and specific)
-
-									// List of properties that reference locations (i.e., 'Place')
-
-										$provider_location_common = array(
-											'containedInPlace',
-											'location',
-											'workLocation'
-										);
-
-									if (
-										array_intersect(
-											$provider_properties_map[$MedicalWebPage_type]['properties'],
-											$provider_location_common
-										)
-										||
-										array_intersect(
-											$provider_properties_map[$MedicalBusiness_type]['properties'],
-											$provider_location_common
-										)
-										||
-										array_intersect(
-											$provider_properties_map[$Person_type]['properties'],
-											$provider_location_common
-										)
-									) {
-
-										// location (common 'Place')
-
-											// Get values
-
-												if ( !isset($provider_location_array) ) {
-
-													$provider_location_array = get_field( 'physician_locations', $provider ) ?? array(); // array
-
-												}
-
-												if ( $provider_location_array ) {
-
-													$provider_location = uamswp_fad_schema_location(
-														$provider_location_array, // List of IDs of the location items
-														$provider_url, // Page URL
-														$nesting_level + 1 // Nesting level within the main schema
-													);
-
-												}
-
-										// location (specific property)
-
-											/* 
-											 * The location of, for example, where an event is happening, where an 
-											 * organization is located, or where an action takes place.
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - Place
-											 *     - PostalAddress
-											 *     - Text
-											 *     - VirtualLocation
-											 */
-
-											if (
-												(
-													in_array(
-														'location',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'location',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													||
-													in_array(
-														'location',
-														$provider_properties_map[$Person_type]['properties']
-													)
-												)
-												&&
-												$nesting_level == 0
-											) {
-
-												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'location',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_location
-														) {
-
-															if (
-																isset($provider_location_ref)
-																&&
-																!empty($provider_location_ref)
-															) {
-
-																$provider_item_MedicalWebPage['location'] = $provider_location_ref;
-
-															} else {
-
-																$provider_item_MedicalWebPage['location'] = $provider_location;
-
-																// Define reference to the @id
-
-																	if ( !isset($provider_location_ref) ) {
-
-																		$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
-
-																	}
-
-															}
-
-														}
-
-													// MedicalBusiness
-
-														if (
-															in_array(
-																'location',
-																$provider_properties_map[$MedicalBusiness_type]['properties']
-															)
-															&&
-															$provider_location
-														) {
-
-															if (
-																isset($provider_location_ref)
-																&&
-																!empty($provider_location_ref)
-															) {
-
-																$provider_item_MedicalBusiness['location'] = $provider_location_ref;
-
-															} else {
-
-																$provider_item_MedicalBusiness['location'] = $provider_location;
-
-																// Define reference to the @id
-
-																	if ( !isset($provider_location_ref) ) {
-
-																		$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
-
-																	}
-
-															}
-
-														}
-
-													// Person
-
-														if (
-															in_array(
-																'location',
-																$provider_properties_map[$Person_type]['properties']
-															)
-															&&
-															$provider_location
-														) {
-
-															if (
-																isset($provider_location_ref)
-																&&
-																!empty($provider_location_ref)
-															) {
-
-																$provider_item_Person['location'] = $provider_location_ref;
-
-															} else {
-
-																$provider_item_Person['location'] = $provider_location;
-
-																// Define reference to the @id
-
-																	if ( !isset($provider_location_ref) ) {
-
-																		$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
-
-																	}
-
-															}
-
-														}
-
-											}
-
-										// workLocation
-
-											/* 
-											 * A contact location for a person's place of work.
-											 * 
-											 * Values expected to be one of these types:
-											 * 
-											 *     - ContactPoint
-											 *     - Place
-											 */
-
-											if (
-												(
-													in_array(
-														'workLocation',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'workLocation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													||
-													in_array(
-														'workLocation',
-														$provider_properties_map[$Person_type]['properties']
-													)
-												)
-												&&
-												$nesting_level == 0
-											) {
-
-												// Get values
-
-													if (
-														$provider_location
-														&&
-														isset($provider_location_ref)
-													) {
-
-														// @id references
-
-															$provider_workLocation = $provider_location_ref;
-
-													} else {
-
-														// Full values
-
-															$provider_workLocation = $provider_location;
-
-													}
-
-												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'workLocation',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_workLocation
-														) {
-
-															$provider_item_MedicalWebPage['workLocation'] = $provider_workLocation;
-
-														}
-
-													// MedicalBusiness
-
-														if (
-															in_array(
-																'workLocation',
-																$provider_properties_map[$MedicalBusiness_type]['properties']
-															)
-															&&
-															$provider_workLocation
-														) {
-
-															$provider_item_MedicalBusiness['workLocation'] = $provider_workLocation;
-
-														}
-
-													// Person
-
-														if (
-															in_array(
-																'workLocation',
-																$provider_properties_map[$Person_type]['properties']
-															)
-															&&
-															$provider_workLocation
-														) {
-
-															$provider_item_Person['workLocation'] = $provider_workLocation;
-
-														}
-
-											}
-
-										// containedInPlace
-
-											/* 
-											 * The basic containment relation between a place and one that contains it.
-											 * expected to be one of these types:
-											 * 
-											 *     - Place
-											 */
-
-											if (
-												(
-													in_array(
-														'containedInPlace',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'containedInPlace',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													||
-													in_array(
-														'containedInPlace',
-														$provider_properties_map[$Person_type]['properties']
-													)
-												)
-												&&
-												$nesting_level == 0
-											) {
-
-												// Get values
-
-													if (
-														(
-															$provider_location
-															||
-															$provider_workLocation
-														)
-														&&
-														isset($provider_location_ref)
-													) {
-
-														// @id references
-
-															$provider_workLocation = $provider_location_ref;
-
-													} else {
-
-														// Full values
-
-															$provider_workLocation = $provider_location;
-
-													}
-
-												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'containedInPlace',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_containedInPlace
-														) {
-
-															$provider_item_MedicalWebPage['containedInPlace'] = $provider_containedInPlace;
-
-														}
-
-													// MedicalBusiness
-
-														if (
-															in_array(
-																'containedInPlace',
-																$provider_properties_map[$MedicalBusiness_type]['properties']
-															)
-															&&
-															$provider_containedInPlace
-														) {
-
-															$provider_item_MedicalBusiness['containedInPlace'] = $provider_containedInPlace;
-
-														}
-
-													// Person
-
-														if (
-															in_array(
-																'containedInPlace',
-																$provider_properties_map[$Person_type]['properties']
-															)
-															&&
-															$provider_containedInPlace
-														) {
-
-															$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
-
-														}
-
-											}
 
 									}
 
@@ -14541,25 +14640,25 @@
 											// Related Areas of Expertise
 
 												if (
-													isset($provider_related_expertise_ref)
+													isset($provider_expertise_ref)
 													&&
-													!empty($provider_related_expertise_ref)
+													!empty($provider_expertise_ref)
 												) {
 
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($provider_related_expertise_ref) ? $provider_related_expertise_ref : array($provider_related_expertise_ref) )
+														( array_is_list($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref) )
 													);
 
 												} elseif (
-													isset($provider_related_expertise)
+													isset($provider_expertise)
 													&&
-													!empty($provider_related_expertise)
+													!empty($provider_expertise)
 												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($provider_related_expertise) ? $provider_related_expertise : array($provider_related_expertise) )
+														( array_is_list($provider_expertise) ? $provider_expertise : array($provider_expertise) )
 													);
 
 												}
@@ -14567,25 +14666,25 @@
 											// Related Clinical Resources
 
 												if (
-													isset($provider_related_clinical_resource_ref)
+													isset($provider_clinical_resource_ref)
 													&&
-													!empty($provider_related_clinical_resource_ref)
+													!empty($provider_clinical_resource_ref)
 												) {
 
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($provider_related_clinical_resource_ref) ? $provider_related_clinical_resource_ref : array($provider_related_clinical_resource_ref) )
+														( array_is_list($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref) )
 													);
 
 												} elseif (
-													isset($provider_related_clinical_resource)
+													isset($provider_clinical_resource)
 													&&
-													!empty($provider_related_clinical_resource)
+													!empty($provider_clinical_resource)
 												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($provider_related_clinical_resource) ? $provider_related_clinical_resource : array($provider_related_clinical_resource) )
+														( array_is_list($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource) )
 													);
 
 												}
@@ -14593,25 +14692,25 @@
 											// Related Conditions
 
 												if (
-													isset($provider_related_condition_ref)
+													isset($provider_condition_ref)
 													&&
-													!empty($provider_related_condition_ref)
+													!empty($provider_condition_ref)
 												) {
 
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($provider_related_condition_ref) ? $provider_related_condition_ref : array($provider_related_condition_ref) )
+														( array_is_list($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref) )
 													);
 
 												} elseif (
-													isset($provider_related_condition)
+													isset($provider_condition)
 													&&
-													!empty($provider_related_condition)
+													!empty($provider_condition)
 												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($provider_related_condition) ? $provider_related_condition : array($provider_related_condition) )
+														( array_is_list($provider_condition) ? $provider_condition : array($provider_condition) )
 													);
 
 												}
@@ -14619,25 +14718,25 @@
 											// Related Treatments
 
 											if (
-												isset($schema_provider_treatment_ref)
+												isset($provider_availableService_ref)
 												&&
-												!empty($schema_provider_treatment_ref)
+												!empty($provider_availableService_ref)
 											) {
 
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($schema_provider_treatment_ref) ? $schema_provider_treatment_ref : array($schema_provider_treatment_ref) )
+														( array_is_list($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref) )
 													);
 
 												} elseif (
-													isset($schema_provider_treatment)
+													isset($provider_availableService)
 													&&
-													!empty($schema_provider_treatment)
+													!empty($provider_availableService)
 												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
-														( array_is_list($schema_provider_treatment) ? $schema_provider_treatment : array($schema_provider_treatment) )
+														( array_is_list($provider_availableService) ? $provider_availableService : array($provider_availableService) )
 													);
 
 												}
