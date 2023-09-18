@@ -7264,7 +7264,7 @@
 													if ( $provider_organization_common ) {
 
 														$provider_memberOf = array_merge(
-															( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+															( array_is_list( is_array($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ) ? $provider_memberOf : array($provider_memberOf) ),
 															( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
 														);
 
