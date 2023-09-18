@@ -16314,7 +16314,7 @@
 
 										$CreativeWork_creator = $CreativeWork_syndication_org;
 
-									} else {
+									} elseif ( isset($schema_base_org_uams_health_ref) ) {
 
 										$CreativeWork_creator = $schema_base_org_uams_health_ref;
 
