@@ -9295,7 +9295,7 @@
 
 											// Get the various images
 
-												$provider_image_id = get_field( '_thumbnail_id', $provider ) ?? null;
+												$provider_image_id = get_field( '_thumbnail_id', $provider ) ?? 0;
 
 										}
 

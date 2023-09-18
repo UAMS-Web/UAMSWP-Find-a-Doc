@@ -278,14 +278,12 @@
 
 	// Get the featured image ID
 
-		$featured_image = get_field('_thumbnail_id', $post->ID); // int // Featured image ID
-		$featured_image = $featured_image ? : '';
-		$provider_schema_fields[$page_id]['provider_image_id'] = ''; // Add to schema fields
+		$featured_image = get_field('_thumbnail_id', $post->ID) ?? 0; // int // Featured image ID
+		$provider_schema_fields[$page_id]['provider_image_id'] = $featured_image; // Add to schema fields
 
 	// Get the wide image ID
 
-		$headshot_wide = get_field('physician_image_wide', $post->ID);
-		$headshot_wide = $headshot_wide ?: '';
+		$headshot_wide = get_field('physician_image_wide', $post->ID) ?? 0;
 		$provider_schema_fields[$page_id]['provider_image_wide_id'] = $headshot_wide; // Add to schema fields
 
 	// Schema image
