@@ -5391,84 +5391,80 @@
 
 								// @id
 
-									if ( $nesting_level <= 1 ) {
+									// MedicalWebPage
 
-										// MedicalWebPage
+										// Get values
 
-											// Get values
+											$MedicalWebPage_id = $provider_url . '#' . $MedicalWebPage_type;
+											// $MedicalWebPage_id .= $MedicalWebPage_i;
+											// $MedicalWebPage_i++;
 
-												$MedicalWebPage_id = $provider_url . '#' . $MedicalWebPage_type;
-												// $MedicalWebPage_id .= $MedicalWebPage_i;
-												// $MedicalWebPage_i++;
+										// Add to item values
 
-											// Add to item values
+											if ( $MedicalWebPage_id ) {
 
-												if ( $MedicalWebPage_id ) {
+												$provider_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
 
-													$provider_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
+											}
 
-												}
+										// Define reference to the @id
 
-											// Define reference to the @id
+											if ( $provider_item_MedicalWebPage['@id'] ) {
 
-												if ( $provider_item_MedicalWebPage['@id'] ) {
+												$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
+												uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
 
-													$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
-													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+											}
 
-												}
+									// MedicalBusiness
 
-										// MedicalBusiness
+										// Get values
 
-											// Get values
+											$MedicalBusiness_id = $provider_url . '#' . $MedicalBusiness_type;
+											// $MedicalBusiness_id .= $MedicalBusiness_i;
+											// $MedicalBusiness_i++;
 
-												$MedicalBusiness_id = $provider_url . '#' . $MedicalBusiness_type;
-												// $MedicalBusiness_id .= $MedicalBusiness_i;
-												// $MedicalBusiness_i++;
+										// Add to item values
 
-											// Add to item values
+											if ( $MedicalBusiness_id ) {
 
-												if ( $MedicalBusiness_id ) {
+												$provider_item_MedicalBusiness['@id'] = $MedicalBusiness_id;
 
-													$provider_item_MedicalBusiness['@id'] = $MedicalBusiness_id;
+											}
 
-												}
+										// Define reference to the @id
 
-											// Define reference to the @id
+											if ( $provider_item_MedicalBusiness['@id'] ) {
 
-												if ( $provider_item_MedicalBusiness['@id'] ) {
+												$schema_provider_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
+												uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalBusiness_ref);
 
-													$schema_provider_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
-													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalBusiness_ref);
+											}
 
-												}
+									// Person
 
-										// Person
+										// Get values
 
-											// Get values
+											$Person_id = $provider_url . '#' . $Person_type;
+											// $Person_id .= $Person_i;
+											// $Person_i++;
 
-												$Person_id = $provider_url . '#' . $Person_type;
-												// $Person_id .= $Person_i;
-												// $Person_i++;
+										// Add to item values
 
-											// Add to item values
+											if ( $Person_id ) {
 
-												if ( $Person_id ) {
+												$provider_item_Person['@id'] = $Person_id;
 
-													$provider_item_Person['@id'] = $Person_id;
+											}
 
-												}
+										// Define reference to the @id
 
-											// Define reference to the @id
+											if ( $provider_item_Person['@id'] ) {
 
-												if ( $provider_item_Person['@id'] ) {
+												$schema_provider_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
+												uamswp_fad_flatten_multidimensional_array($schema_provider_Person_ref);
 
-													$schema_provider_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
-													uamswp_fad_flatten_multidimensional_array($schema_provider_Person_ref);
-
-												}
-
-									}
+											}
 
 								// names (common use and specific properties)
 
