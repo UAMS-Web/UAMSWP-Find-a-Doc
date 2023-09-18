@@ -1100,7 +1100,8 @@ TODO List
 	$schema_provider['@graph'][] = $schema_provider_combined['Person'];
 
 // Construct the schema JSON script tag
-uamswp_fad_schema_construct($schema_provider);
+
+	uamswp_fad_schema_construct($schema_provider);
 
 // Display array as development testing
 
