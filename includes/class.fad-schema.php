@@ -13329,9 +13329,9 @@
 
 										// Get values
 
-											if ( !isset($provider_isPartOf) ) {
+											if ( $schema_base_website_uams_health_ref ) {
 
-												$provider_isPartOf = array();
+												$provider_isPartOf = $schema_base_website_uams_health_ref;
 
 											}
 
