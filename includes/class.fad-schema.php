@@ -12963,9 +12963,13 @@
 
 										// Get values
 
-											if ( !isset($provider_inLanguage) ) {
+											if ( isset($schema_base_website_uams_health_inLanguage_ref) ) {
 
-												$provider_inLanguage = array();
+												$provider_inLanguage = $schema_base_website_uams_health_inLanguage_ref;
+
+											} else {
+
+												$provider_inLanguage = $schema_base_website_uams_health_inLanguage_ref;
 
 											}
 
@@ -12982,7 +12986,13 @@
 													$provider_inLanguage
 												) {
 
-													$provider_item_MedicalWebPage['inLanguage'] = $provider_inLanguage;
+													$provider_item_MedicalWebPage['inLanguage'] = array(
+														'@id' => $provider_url . '#inLanguage',
+														'@type' => 'Language',
+														'alternateName' => 'en',
+														'name' => 'English',
+														'sameAs' => 'https://www.wikidata.org/wiki/Q1860'
+													);
 
 												}
 

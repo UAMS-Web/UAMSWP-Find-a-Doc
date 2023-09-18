@@ -359,10 +359,11 @@
 	// inLanguage
 
 		$schema_base_website_uams_health['inLanguage'] = array(
-			'@id' => $schema_base_org_uams_health_url . '#InLanguage',
+			'@id' => $schema_base_org_uams_health_url . '#inLanguage',
 			'@type' => 'Language',
 			'alternateName' => 'en',
-			'name' => 'English'
+			'name' => 'English',
+			'sameAs' => 'https://www.wikidata.org/wiki/Q1860'
 		);
 
 		// Define reference to this 'inLanguage' property
