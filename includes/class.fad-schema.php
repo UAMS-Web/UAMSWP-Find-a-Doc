@@ -4684,7 +4684,7 @@
 						'https://schema.org/PublicHealth/'
 					);
 
-				// Loop through each location to add values
+				// Loop through each provider to add values
 
 					foreach ( $repeater as $provider ) {
 
