@@ -8137,6 +8137,8 @@
 
 													// Add each item to Google Company ID value array
 
+														$provider_google_cid = array();
+
 														if ( $provider_google_cid_repeater ) {
 
 															foreach ( $provider_google_cid_repeater as $cid ) {
