@@ -4973,15 +4973,15 @@
 
 															$provider_degree_count = count($provider_degrees) ?? 0;
 
-															foreach ( $provider_degrees as $item ) {
+															foreach ( $provider_degrees as $degree ) {
 
-																$item_term = get_term( $item, 'degree' );
+																$degree_term = get_term( $degree, 'degree' );
 
-																if ( is_object($item_term) ) {
+																if ( is_object($degree_term) ) {
 
-																	$item_name = $item_term->name;
-																	$provider_degree_list .= $item_name;
-																	$provider_degree_array[] = uamswp_attr_conversion($item_name);
+																	$degree_name = $degree_term->name;
+																	$provider_degree_list .= $degree_name;
+																	$provider_degree_array[] = uamswp_attr_conversion($degree_name);
 
 																	if ( $provider_degree_count > $provider_degree_list_i ) {
 
