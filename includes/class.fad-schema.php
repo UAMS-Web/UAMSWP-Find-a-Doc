@@ -6341,9 +6341,9 @@
 
 										// Get values
 
-											if ( !isset($provider_about) ) {
+											if ( $schema_provider_MedicalBusiness_ref ) {
 
-												$provider_about = array();
+												$provider_about = $schema_provider_MedicalBusiness_ref;
 
 											}
 
