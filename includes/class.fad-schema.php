@@ -6244,6 +6244,981 @@
 
 									}
 
+								// about
+
+									/* 
+									 * The subject matter of the content.
+									 * 
+									 * Inverse-property: subjectOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+									 if (
+										(
+											in_array(
+												'about',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'about',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'about',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_about) ) {
+
+												$provider_about = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'about',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_about
+												) {
+
+													$provider_item_MedicalWebPage['about'] = $provider_about;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'about',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_about
+												) {
+
+													$provider_item_MedicalBusiness['about'] = $provider_about;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'about',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_about
+												) {
+
+													$provider_item_Person['about'] = $provider_about;
+
+												}
+
+									}
+
+								// abstract
+
+									/* 
+									 * An abstract is a short description that summarizes a CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 */
+
+									 if (
+										(
+											in_array(
+												'abstract',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'abstract',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'abstract',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_abstract) ) {
+
+												$provider_abstract = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'abstract',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_abstract
+												) {
+
+													$provider_item_MedicalWebPage['abstract'] = $provider_abstract;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'abstract',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_abstract
+												) {
+
+													$provider_item_MedicalBusiness['abstract'] = $provider_abstract;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'abstract',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_abstract
+												) {
+
+													$provider_item_Person['abstract'] = $provider_abstract;
+
+												}
+
+									}
+
+								// accessMode
+
+									/* 
+									 * The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Values should be drawn from the approved vocabulary.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									 if (
+										(
+											in_array(
+												'accessMode',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessMode',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessMode',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessMode) ) {
+
+												$provider_accessMode = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessMode',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessMode
+												) {
+
+													$provider_item_MedicalWebPage['accessMode'] = $provider_accessMode;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessMode',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessMode
+												) {
+
+													$provider_item_MedicalBusiness['accessMode'] = $provider_accessMode;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessMode',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessMode
+												) {
+
+													$provider_item_Person['accessMode'] = $provider_accessMode;
+
+												}
+
+									}
+
+								// accessModeSufficient
+
+									/* 
+									 * A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Values should be drawn from the approved vocabulary.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ItemList
+									 */
+
+									if (
+										(
+											in_array(
+												'accessModeSufficient',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessModeSufficient',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessModeSufficient',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessModeSufficient) ) {
+
+												$provider_accessModeSufficient = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessModeSufficient',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessModeSufficient
+												) {
+
+													$provider_item_MedicalWebPage['accessModeSufficient'] = $provider_accessModeSufficient;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessModeSufficient',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessModeSufficient
+												) {
+
+													$provider_item_MedicalBusiness['accessModeSufficient'] = $provider_accessModeSufficient;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessModeSufficient',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessModeSufficient
+												) {
+
+													$provider_item_Person['accessModeSufficient'] = $provider_accessModeSufficient;
+
+												}
+
+									}
+
+								// accessibilityAPI
+
+									/* 
+									 * Indicates that the resource is compatible with the referenced accessibility API. Values should be drawn from the approved vocabulary (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'accessibilityAPI',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityAPI',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityAPI',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessibilityAPI) ) {
+
+												$provider_accessibilityAPI = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessibilityAPI',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessibilityAPI
+												) {
+
+													$provider_item_MedicalWebPage['accessibilityAPI'] = $provider_accessibilityAPI;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessibilityAPI',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessibilityAPI
+												) {
+
+													$provider_item_MedicalBusiness['accessibilityAPI'] = $provider_accessibilityAPI;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessibilityAPI',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessibilityAPI
+												) {
+
+													$provider_item_Person['accessibilityAPI'] = $provider_accessibilityAPI;
+
+												}
+
+									}
+
+								// accessibilityControl
+
+									/* 
+									 * Identifies input methods that are sufficient to fully control the described resource. Values should be drawn from the approved vocabulary (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'accessibilityControl',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityControl',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityControl',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessibilityControl) ) {
+
+												$provider_accessibilityControl = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessibilityControl',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessibilityControl
+												) {
+
+													$provider_item_MedicalWebPage['accessibilityControl'] = $provider_accessibilityControl;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessibilityControl',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessibilityControl
+												) {
+
+													$provider_item_MedicalBusiness['accessibilityControl'] = $provider_accessibilityControl;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessibilityControl',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessibilityControl
+												) {
+
+													$provider_item_Person['accessibilityControl'] = $provider_accessibilityControl;
+
+												}
+
+									}
+
+								// accessibilityFeature
+
+									/* 
+									 * Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility. Values should be drawn from the approved vocabulary (https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'accessibilityFeature',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityFeature',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityFeature',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessibilityFeature) ) {
+
+												$provider_accessibilityFeature = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessibilityFeature',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessibilityFeature
+												) {
+
+													$provider_item_MedicalWebPage['accessibilityFeature'] = $provider_accessibilityFeature;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessibilityFeature',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessibilityFeature
+												) {
+
+													$provider_item_MedicalBusiness['accessibilityFeature'] = $provider_accessibilityFeature;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessibilityFeature',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessibilityFeature
+												) {
+
+													$provider_item_Person['accessibilityFeature'] = $provider_accessibilityFeature;
+
+												}
+
+									}
+
+								// accessibilityHazard
+
+									/* 
+									 * A characteristic of the described resource that is physiologically dangerous to some users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the approved vocabulary.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'accessibilityHazard',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityHazard',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilityHazard',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessibilityHazard) ) {
+
+												$provider_accessibilityHazard = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessibilityHazard',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessibilityHazard
+												) {
+
+													$provider_item_MedicalWebPage['accessibilityHazard'] = $provider_accessibilityHazard;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessibilityHazard',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessibilityHazard
+												) {
+
+													$provider_item_MedicalBusiness['accessibilityHazard'] = $provider_accessibilityHazard;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessibilityHazard',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessibilityHazard
+												) {
+
+													$provider_item_Person['accessibilityHazard'] = $provider_accessibilityHazard;
+
+												}
+
+									}
+
+								// accessibilitySummary
+
+									/* 
+									 * A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as "short descriptions are present but long descriptions will be needed for non-visual users" or "short descriptions are present and no long descriptions are needed."
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'accessibilitySummary',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilitySummary',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accessibilitySummary',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accessibilitySummary) ) {
+
+												$provider_accessibilitySummary = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accessibilitySummary',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accessibilitySummary
+												) {
+
+													$provider_item_MedicalWebPage['accessibilitySummary'] = $provider_accessibilitySummary;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accessibilitySummary',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accessibilitySummary
+												) {
+
+													$provider_item_MedicalBusiness['accessibilitySummary'] = $provider_accessibilitySummary;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accessibilitySummary',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accessibilitySummary
+												) {
+
+													$provider_item_Person['accessibilitySummary'] = $provider_accessibilitySummary;
+
+												}
+
+									}
+
+								// accountablePerson
+
+									/* 
+									 * Specifies the Person that is legally accountable for the CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'accountablePerson',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'accountablePerson',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'accountablePerson',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_accountablePerson) ) {
+
+												$provider_accountablePerson = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'accountablePerson',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_accountablePerson
+												) {
+
+													$provider_item_MedicalWebPage['accountablePerson'] = $provider_accountablePerson;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'accountablePerson',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_accountablePerson
+												) {
+
+													$provider_item_MedicalBusiness['accountablePerson'] = $provider_accountablePerson;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'accountablePerson',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_accountablePerson
+												) {
+
+													$provider_item_Person['accountablePerson'] = $provider_accountablePerson;
+
+												}
+
+									}
+
+								// acquireLicensePage
+
+									/* 
+									 * Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 * 
+									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'acquireLicensePage',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'acquireLicensePage',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'acquireLicensePage',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_acquireLicensePage) ) {
+
+												$provider_acquireLicensePage = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'acquireLicensePage',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_acquireLicensePage
+												) {
+
+													$provider_item_MedicalWebPage['acquireLicensePage'] = $provider_acquireLicensePage;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'acquireLicensePage',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_acquireLicensePage
+												) {
+
+													$provider_item_MedicalBusiness['acquireLicensePage'] = $provider_acquireLicensePage;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'acquireLicensePage',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_acquireLicensePage
+												) {
+
+													$provider_item_Person['acquireLicensePage'] = $provider_acquireLicensePage;
+
+												}
+
+									}
+
 								// medicalSpecialty
 
 									/* 
@@ -6563,97 +7538,6 @@
 
 									}
 
-								// alumniOf
-
-									/* 
-									 * An organization that the person is an alumni of.
-									 * 
-									 * Inverse property: alumni
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - EducationalOrganization
-									 *     - Organization
-									 */
-
-									if (
-										(
-											in_array(
-												'alumniOf',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'alumniOf',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'alumniOf',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($provider_alumniOf) ) {
-
-												$provider_alumniOf = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												if (
-													in_array(
-														'alumniOf',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_alumniOf
-												) {
-
-													$provider_item_MedicalWebPage['alumniOf'] = $provider_alumniOf;
-
-												}
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'alumniOf',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_alumniOf
-												) {
-
-													$provider_item_MedicalBusiness['alumniOf'] = $provider_alumniOf;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'alumniOf',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_alumniOf
-												) {
-
-													$provider_item_Person['alumniOf'] = $provider_alumniOf;
-
-												}
-
-									}
-
 								// aggregateRating
 
 									/* 
@@ -6869,6 +7753,97 @@
 
 									}
 
+								// alumniOf
+
+									/* 
+									 * An organization that the person is an alumni of.
+									 * 
+									 * Inverse property: alumni
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - EducationalOrganization
+									 *     - Organization
+									 */
+
+									if (
+										(
+											in_array(
+												'alumniOf',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'alumniOf',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'alumniOf',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_alumniOf) ) {
+
+												$provider_alumniOf = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'alumniOf',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_alumniOf
+												) {
+
+													$provider_item_MedicalWebPage['alumniOf'] = $provider_alumniOf;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'alumniOf',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_alumniOf
+												) {
+
+													$provider_item_MedicalBusiness['alumniOf'] = $provider_alumniOf;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'alumniOf',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_alumniOf
+												) {
+
+													$provider_item_Person['alumniOf'] = $provider_alumniOf;
+
+												}
+
+									}
+
 								// areaServed
 
 									/* 
@@ -6955,6 +7930,183 @@
 												) {
 
 													$provider_item_Person['areaServed'] = $provider_areaServed;
+
+												}
+
+									}
+
+								// audience
+
+									/* 
+									 * An intended audience, i.e. a group for whom something was created.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Audience
+									 */
+
+									 if (
+										(
+											in_array(
+												'audience',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'audience',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'audience',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_audience) ) {
+
+												$provider_audience = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'audience',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_audience
+												) {
+
+													$provider_item_MedicalWebPage['audience'] = $provider_audience;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'audience',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_audience
+												) {
+
+													$provider_item_MedicalBusiness['audience'] = $provider_audience;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'audience',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_audience
+												) {
+
+													$provider_item_Person['audience'] = $provider_audience;
+
+												}
+
+									}
+
+								// author
+
+									/* 
+									 * The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									 if (
+										(
+											in_array(
+												'author',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'author',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'author',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_author) ) {
+
+												$provider_author = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'author',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_author
+												) {
+
+													$provider_item_MedicalWebPage['author'] = $provider_author;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'author',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_author
+												) {
+
+													$provider_item_MedicalBusiness['author'] = $provider_author;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'author',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_author
+												) {
+
+													$provider_item_Person['author'] = $provider_author;
 
 												}
 
@@ -8422,6 +9574,811 @@
 
 									}
 
+								// breadcrumb
+
+									/* 
+									 * A set of links that can help a user understand and navigate a website hierarchy.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - BreadcrumbList
+									 *     - Text
+									 */
+
+									 if (
+										(
+											in_array(
+												'breadcrumb',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'breadcrumb',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'breadcrumb',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_breadcrumb) ) {
+
+												$provider_breadcrumb = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'breadcrumb',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_breadcrumb
+												) {
+
+													$provider_item_MedicalWebPage['breadcrumb'] = $provider_breadcrumb;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'breadcrumb',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_breadcrumb
+												) {
+
+													$provider_item_MedicalBusiness['breadcrumb'] = $provider_breadcrumb;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'breadcrumb',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_breadcrumb
+												) {
+
+													$provider_item_Person['breadcrumb'] = $provider_breadcrumb;
+
+												}
+
+									}
+
+								// contributor
+
+									/* 
+									 * A secondary contributor to the CreativeWork or Event.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'contributor',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'contributor',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'contributor',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_contributor) ) {
+
+												$provider_contributor = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'contributor',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_contributor
+												) {
+
+													$provider_item_MedicalWebPage['contributor'] = $provider_contributor;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'contributor',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_contributor
+												) {
+
+													$provider_item_MedicalBusiness['contributor'] = $provider_contributor;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'contributor',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_contributor
+												) {
+
+													$provider_item_Person['contributor'] = $provider_contributor;
+
+												}
+
+									}
+
+								// copyrightHolder
+
+									/* 
+									 * The party holding the legal copyright to the CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'copyrightHolder',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'copyrightHolder',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'copyrightHolder',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_copyrightHolder) ) {
+
+												$provider_copyrightHolder = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'copyrightHolder',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_copyrightHolder
+												) {
+
+													$provider_item_MedicalWebPage['copyrightHolder'] = $provider_copyrightHolder;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'copyrightHolder',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_copyrightHolder
+												) {
+
+													$provider_item_MedicalBusiness['copyrightHolder'] = $provider_copyrightHolder;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'copyrightHolder',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_copyrightHolder
+												) {
+
+													$provider_item_Person['copyrightHolder'] = $provider_copyrightHolder;
+
+												}
+
+									}
+
+								// copyrightNotice
+
+									/* 
+									 * Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'copyrightNotice',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'copyrightNotice',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'copyrightNotice',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_copyrightNotice) ) {
+
+												$provider_copyrightNotice = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'copyrightNotice',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_copyrightNotice
+												) {
+
+													$provider_item_MedicalWebPage['copyrightNotice'] = $provider_copyrightNotice;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'copyrightNotice',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_copyrightNotice
+												) {
+
+													$provider_item_MedicalBusiness['copyrightNotice'] = $provider_copyrightNotice;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'copyrightNotice',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_copyrightNotice
+												) {
+
+													$provider_item_Person['copyrightNotice'] = $provider_copyrightNotice;
+
+												}
+
+									}
+
+								// copyrightYear
+
+									/* 
+									 * The year during which the claimed copyright for the CreativeWork was first asserted.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Number
+									 */
+
+									if (
+										(
+											in_array(
+												'copyrightYear',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'copyrightYear',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'copyrightYear',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_copyrightYear) ) {
+
+												$provider_copyrightYear = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'copyrightYear',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_copyrightYear
+												) {
+
+													$provider_item_MedicalWebPage['copyrightYear'] = $provider_copyrightYear;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'copyrightYear',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_copyrightYear
+												) {
+
+													$provider_item_MedicalBusiness['copyrightYear'] = $provider_copyrightYear;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'copyrightYear',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_copyrightYear
+												) {
+
+													$provider_item_Person['copyrightYear'] = $provider_copyrightYear;
+
+												}
+
+									}
+
+								// countryOfOrigin
+
+									/* 
+									 * The country of origin of something, including products as well as creative works such as movie and TV content.
+									 * 
+									 * In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.
+									 * 
+									 * In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Country
+									 */
+
+									if (
+										(
+											in_array(
+												'countryOfOrigin',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'countryOfOrigin',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'countryOfOrigin',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_countryOfOrigin) ) {
+
+												$provider_countryOfOrigin = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'countryOfOrigin',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_countryOfOrigin
+												) {
+
+													$provider_item_MedicalWebPage['countryOfOrigin'] = $provider_countryOfOrigin;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'countryOfOrigin',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_countryOfOrigin
+												) {
+
+													$provider_item_MedicalBusiness['countryOfOrigin'] = $provider_countryOfOrigin;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'countryOfOrigin',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_countryOfOrigin
+												) {
+
+													$provider_item_Person['countryOfOrigin'] = $provider_countryOfOrigin;
+
+												}
+
+									}
+
+								// creativeWorkStatus
+
+									/* 
+									 * The status of a creative work in terms of its stage in a lifecycle. Example terms include Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for the stages of their publication lifecycle.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DefinedTerm
+									 *     - Text
+									 * 
+									 * This term is in the "new" area - implementation feedback and adoption from applications and websites can help improve our definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'creativeWorkStatus',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'creativeWorkStatus',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'creativeWorkStatus',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_creativeWorkStatus) ) {
+
+												$provider_creativeWorkStatus = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'creativeWorkStatus',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_creativeWorkStatus
+												) {
+
+													$provider_item_MedicalWebPage['creativeWorkStatus'] = $provider_creativeWorkStatus;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'creativeWorkStatus',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_creativeWorkStatus
+												) {
+
+													$provider_item_MedicalBusiness['creativeWorkStatus'] = $provider_creativeWorkStatus;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'creativeWorkStatus',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_creativeWorkStatus
+												) {
+
+													$provider_item_Person['creativeWorkStatus'] = $provider_creativeWorkStatus;
+
+												}
+
+									}
+
+								// creator
+
+									/* 
+									 * The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'creator',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'creator',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'creator',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_creator) ) {
+
+												$provider_creator = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'creator',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_creator
+												) {
+
+													$provider_item_MedicalWebPage['creator'] = $provider_creator;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'creator',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_creator
+												) {
+
+													$provider_item_MedicalBusiness['creator'] = $provider_creator;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'creator',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_creator
+												) {
+
+													$provider_item_Person['creator'] = $provider_creator;
+
+												}
+
+									}
+
+								// creditText
+
+									/* 
+									 * Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										(
+											in_array(
+												'creditText',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'creditText',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'creditText',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_creditText) ) {
+
+												$provider_creditText = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'creditText',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_creditText
+												) {
+
+													$provider_item_MedicalWebPage['creditText'] = $provider_creditText;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'creditText',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_creditText
+												) {
+
+													$provider_item_MedicalBusiness['creditText'] = $provider_creditText;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'creditText',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_creditText
+												) {
+
+													$provider_item_Person['creditText'] = $provider_creditText;
+
+												}
+
+									}
+
 								// currenciesAccepted
 
 									/* 
@@ -8517,6 +10474,273 @@
 												) {
 
 													$provider_item_Person['currenciesAccepted'] = $provider_currenciesAccepted;
+
+												}
+
+									}
+
+								// dateCreated
+
+									/* 
+									 * The date on which the CreativeWork was created or the item was added to a DataFeed.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Date
+									 *     - DateTime
+									 */
+
+									 if (
+										(
+											in_array(
+												'dateCreated',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'dateCreated',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'dateCreated',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_dateCreated) ) {
+
+												$provider_dateCreated = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'dateCreated',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_dateCreated
+												) {
+
+													$provider_item_MedicalWebPage['dateCreated'] = $provider_dateCreated;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'dateCreated',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_dateCreated
+												) {
+
+													$provider_item_MedicalBusiness['dateCreated'] = $provider_dateCreated;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'dateCreated',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_dateCreated
+												) {
+
+													$provider_item_Person['dateCreated'] = $provider_dateCreated;
+
+												}
+
+									}
+
+								// dateModified
+
+									/* 
+									 * The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Date
+									 *     - DateTime
+									 */
+
+									if (
+										(
+											in_array(
+												'dateModified',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'dateModified',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'dateModified',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_dateModified) ) {
+
+												$provider_dateModified = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'dateModified',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_dateModified
+												) {
+
+													$provider_item_MedicalWebPage['dateModified'] = $provider_dateModified;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'dateModified',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_dateModified
+												) {
+
+													$provider_item_MedicalBusiness['dateModified'] = $provider_dateModified;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'dateModified',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_dateModified
+												) {
+
+													$provider_item_Person['dateModified'] = $provider_dateModified;
+
+												}
+
+									}
+
+								// datePublished
+
+									/* 
+									 * Date of first broadcast/publication.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Date
+									 *     - DateTime
+									 */
+
+									if (
+										(
+											in_array(
+												'datePublished',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'datePublished',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'datePublished',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_datePublished) ) {
+
+												$provider_datePublished = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'datePublished',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_datePublished
+												) {
+
+													$provider_item_MedicalWebPage['datePublished'] = $provider_datePublished;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'datePublished',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_datePublished
+												) {
+
+													$provider_item_MedicalBusiness['datePublished'] = $provider_datePublished;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'datePublished',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_datePublished
+												) {
+
+													$provider_item_Person['datePublished'] = $provider_datePublished;
 
 												}
 
@@ -8625,6 +10849,94 @@
 												) {
 
 													$provider_item_Person['description'] = $provider_description;
+
+												}
+
+									}
+
+								// editor
+
+									/* 
+									 * Specifies the Person who edited the CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Person
+									 */
+
+									 if (
+										(
+											in_array(
+												'editor',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'editor',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'editor',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_editor) ) {
+
+												$provider_editor = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'editor',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_editor
+												) {
+
+													$provider_item_MedicalWebPage['editor'] = $provider_editor;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'editor',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_editor
+												) {
+
+													$provider_item_MedicalBusiness['editor'] = $provider_editor;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'editor',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_editor
+												) {
+
+													$provider_item_Person['editor'] = $provider_editor;
 
 												}
 
@@ -9113,6 +11425,94 @@
 
 									}
 
+								// headline
+
+									/* 
+									 * Headline of the article.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									 if (
+										(
+											in_array(
+												'headline',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'headline',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'headline',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_headline) ) {
+
+												$provider_headline = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'headline',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_headline
+												) {
+
+													$provider_item_MedicalWebPage['headline'] = $provider_headline;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'headline',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_headline
+												) {
+
+													$provider_item_MedicalBusiness['headline'] = $provider_headline;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'headline',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_headline
+												) {
+
+													$provider_item_Person['headline'] = $provider_headline;
+
+												}
+
+									}
+
 								// identifiers (multiple properties)
 
 									if ( $nesting_level == 0 ) {
@@ -9130,11 +11530,6 @@
 
 											if (
 												(
-													in_array(
-														'duns',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
 													in_array(
 														'duns',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -9164,21 +11559,6 @@
 													}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'duns',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_duns
-														) {
-
-															$provider_item_MedicalWebPage['duns'] = $provider_duns;
-
-														}
 
 													// MedicalBusiness
 
@@ -9228,11 +11608,6 @@
 												(
 													in_array(
 														'globalLocationNumber',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'globalLocationNumber',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -9260,21 +11635,6 @@
 													}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'globalLocationNumber',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_globalLocationNumber
-														) {
-
-															$provider_item_MedicalWebPage['globalLocationNumber'] = $provider_globalLocationNumber;
-
-														}
 
 													// MedicalBusiness
 
@@ -9326,11 +11686,6 @@
 												(
 													in_array(
 														'isicV4',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'isicV4',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -9356,21 +11711,6 @@
 												}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'isicV4',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_isicV4
-														) {
-
-															$provider_item_MedicalWebPage['isicV4'] = $provider_isicV4;
-
-														}
 
 													// MedicalBusiness
 
@@ -9419,11 +11759,6 @@
 												(
 													in_array(
 														'leiCode',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'leiCode',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -9449,21 +11784,6 @@
 												}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'leiCode',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_leiCode
-														) {
-
-															$provider_item_MedicalWebPage['leiCode'] = $provider_leiCode;
-
-														}
 
 													// MedicalBusiness
 
@@ -9512,11 +11832,6 @@
 												(
 													in_array(
 														'naics',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'naics',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -9542,21 +11857,6 @@
 												}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'naics',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_naics
-														) {
-
-															$provider_item_MedicalWebPage['naics'] = $provider_naics;
-
-														}
 
 													// MedicalBusiness
 
@@ -9603,11 +11903,6 @@
 
 											if (
 												(
-													in_array(
-														'taxID',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
 													in_array(
 														'taxID',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -9672,21 +11967,6 @@
 
 												// Add to item values
 
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'taxID',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_taxID
-														) {
-
-															$provider_item_MedicalWebPage['taxID'] = $provider_taxID;
-
-														}
-
 													// MedicalBusiness
 
 														if (
@@ -9731,11 +12011,6 @@
 												(
 													in_array(
 														'vatID',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'vatID',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -9761,21 +12036,6 @@
 												}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'vatID',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_vatID
-														) {
-
-															$provider_item_MedicalWebPage['vatID'] = $provider_vatID;
-
-														}
 
 													// MedicalBusiness
 
@@ -9830,11 +12090,6 @@
 												(
 													in_array(
 														'iso6523Code',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'iso6523Code',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
 													)
 													||
@@ -9860,21 +12115,6 @@
 												}
 
 												// Add to item values
-
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'iso6523Code',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_iso6523Code
-														) {
-
-															$provider_item_MedicalWebPage['iso6523Code'] = $provider_iso6523Code;
-
-														}
 
 													// MedicalBusiness
 
@@ -9912,11 +12152,6 @@
 
 											if (
 												(
-													in_array(
-														'identifier',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
 													in_array(
 														'identifier',
 														$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -10279,21 +12514,6 @@
 
 												// Add to item values
 
-													// MedicalWebPage
-
-														if (
-															in_array(
-																'identifier',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_identifier
-														) {
-
-															$provider_item_MedicalWebPage['identifier'] = $provider_identifier;
-
-														}
-
 													// MedicalBusiness
 
 														if (
@@ -10501,6 +12721,95 @@
 
 									}
 
+								// inLanguage
+
+									/* 
+									 * The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Language
+									 *     - Text
+									 */
+
+									 if (
+										(
+											in_array(
+												'inLanguage',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'inLanguage',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'inLanguage',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_inLanguage) ) {
+
+												$provider_inLanguage = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'inLanguage',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_inLanguage
+												) {
+
+													$provider_item_MedicalWebPage['inLanguage'] = $provider_inLanguage;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'inLanguage',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_inLanguage
+												) {
+
+													$provider_item_MedicalBusiness['inLanguage'] = $provider_inLanguage;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'inLanguage',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_inLanguage
+												) {
+
+													$provider_item_Person['inLanguage'] = $provider_inLanguage;
+
+												}
+
+									}
+
 								// isAcceptingNewPatients
 
 									/* 
@@ -10632,7 +12941,7 @@
 
 											if ( !isset($provider_isAccessibleForFree) ) {
 
-												$provider_isAccessibleForFree = array();
+												$provider_isAccessibleForFree = 'True';
 
 											}
 
@@ -10680,6 +12989,177 @@
 												) {
 
 													$provider_item_Person['isAccessibleForFree'] = $provider_isAccessibleForFree;
+
+												}
+
+									}
+
+								// isFamilyFriendly
+
+									/* 
+									 * Indicates whether this content is family friendly.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 */
+
+									 if (
+										in_array(
+											'isFamilyFriendly',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'isFamilyFriendly',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'isFamilyFriendly',
+											$provider_properties_map[$Person_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$provider_isFamilyFriendly = 'True';
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'isFamilyFriendly',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_isFamilyFriendly
+												) {
+
+													$provider_item_MedicalWebPage['isFamilyFriendly'] = $provider_isFamilyFriendly;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'isFamilyFriendly',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_isFamilyFriendly
+												) {
+
+													$provider_item_MedicalBusiness['isFamilyFriendly'] = $provider_isFamilyFriendly;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'isFamilyFriendly',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_isFamilyFriendly
+												) {
+
+													$provider_item_Person['isFamilyFriendly'] = $provider_isFamilyFriendly;
+
+												}
+
+									}
+
+								// isPartOf
+
+									/* 
+									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.
+									 * 
+									 * Inverse-property: hasPart
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'isPartOf',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'isPartOf',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'isPartOf',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_isPartOf) ) {
+
+												$provider_isPartOf = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'isPartOf',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_isPartOf
+												) {
+
+													$provider_item_MedicalWebPage['isPartOf'] = $provider_isPartOf;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'isPartOf',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_isPartOf
+												) {
+
+													$provider_item_MedicalBusiness['isPartOf'] = $provider_isPartOf;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'isPartOf',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_isPartOf
+												) {
+
+													$provider_item_Person['isPartOf'] = $provider_isPartOf;
 
 												}
 
@@ -11085,6 +13565,360 @@
 
 									}
 
+								// lastReviewed
+
+									/* 
+									 * Date on which the content on this web page was last reviewed for accuracy and/or completeness.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Date
+									 */
+
+									 if (
+										(
+											in_array(
+												'lastReviewed',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'lastReviewed',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'lastReviewed',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_lastReviewed) ) {
+
+												$provider_lastReviewed = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'lastReviewed',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_lastReviewed
+												) {
+
+													$provider_item_MedicalWebPage['lastReviewed'] = $provider_lastReviewed;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'lastReviewed',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_lastReviewed
+												) {
+
+													$provider_item_MedicalBusiness['lastReviewed'] = $provider_lastReviewed;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'lastReviewed',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_lastReviewed
+												) {
+
+													$provider_item_Person['lastReviewed'] = $provider_lastReviewed;
+
+												}
+
+									}
+
+								// learningResourceType
+
+									/* 
+									 * foo
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - foo
+									 */
+
+									if (
+										(
+											in_array(
+												'learningResourceType',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'learningResourceType',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'learningResourceType',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_learningResourceType) ) {
+
+												$provider_learningResourceType = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'learningResourceType',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_learningResourceType
+												) {
+
+													$provider_item_MedicalWebPage['learningResourceType'] = $provider_learningResourceType;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'learningResourceType',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_learningResourceType
+												) {
+
+													$provider_item_MedicalBusiness['learningResourceType'] = $provider_learningResourceType;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'learningResourceType',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_learningResourceType
+												) {
+
+													$provider_item_Person['learningResourceType'] = $provider_learningResourceType;
+
+												}
+
+									}
+
+								// mainContentOfPage
+
+									/* 
+									 * Indicates if this web page element is the main subject of the page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - WebPageElement
+									 */
+
+									if (
+										(
+											in_array(
+												'mainContentOfPage',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'mainContentOfPage',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'mainContentOfPage',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_mainContentOfPage) ) {
+
+												$provider_mainContentOfPage = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'mainContentOfPage',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_mainContentOfPage
+												) {
+
+													$provider_item_MedicalWebPage['mainContentOfPage'] = $provider_mainContentOfPage;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'mainContentOfPage',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_mainContentOfPage
+												) {
+
+													$provider_item_MedicalBusiness['mainContentOfPage'] = $provider_mainContentOfPage;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'mainContentOfPage',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_mainContentOfPage
+												) {
+
+													$provider_item_Person['mainContentOfPage'] = $provider_mainContentOfPage;
+
+												}
+
+									}
+
+								// mainEntity
+
+									/* 
+									 * Indicates the primary entity described in some page or other CreativeWork.
+									 * 
+									 * Inverse-property: mainEntityOfPage
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+									if (
+										(
+											in_array(
+												'mainEntity',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'mainEntity',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'mainEntity',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_mainEntity) ) {
+
+												$provider_mainEntity = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'mainEntity',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_mainEntity
+												) {
+
+													$provider_item_MedicalWebPage['mainEntity'] = $provider_mainEntity;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'mainEntity',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_mainEntity
+												) {
+
+													$provider_item_MedicalBusiness['mainEntity'] = $provider_mainEntity;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'mainEntity',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_mainEntity
+												) {
+
+													$provider_item_Person['mainEntity'] = $provider_mainEntity;
+
+												}
+
+									}
+
 								// mainEntityOfPage
 
 									/* 
@@ -11101,11 +13935,6 @@
 									 */
 
 									if (
-										in_array(
-											'mainEntityOfPage',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
 										in_array(
 											'mainEntityOfPage',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -11140,21 +13969,6 @@
 
 										// Add to item values
 
-											// MedicalWebPage
-
-												if (
-													in_array(
-														'mainEntityOfPage',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_mainEntityOfPage
-												) {
-
-													$provider_item_MedicalWebPage['mainEntityOfPage'] = $provider_mainEntityOfPage;
-
-												}
-
 											// MedicalBusiness
 
 												if (
@@ -11182,6 +13996,105 @@
 												) {
 
 													$provider_item_Person['mainEntityOfPage'] = $provider_mainEntityOfPage;
+
+												}
+
+									}
+
+								// maintainer
+
+									/* 
+									 * A maintainer of a Dataset, software package (SoftwareApplication), or other Project.
+									 * 
+									 * A maintainer is a Person or Organization that manages contributions to, and/or publication of, some (typically complex) artifact.
+									 * 
+									 * It is common for distributions of software and data to be based on "upstream" sources.
+									 * 
+									 * When maintainer is applied to a specific version of something (e.g., a particular version or packaging of a Dataset), it is always possible that the upstream source has a different maintainer.
+									 * 
+									 * The isBasedOn property can be used to indicate such relationships between datasets to make the different maintenance roles clear.
+									 * 
+									 * Similarly in the case of software, a package may have dedicated maintainers working on integration into software distributions such as Ubuntu, as well as upstream maintainers of the underlying work.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									 if (
+										(
+											in_array(
+												'maintainer',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'maintainer',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'maintainer',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_maintainer) ) {
+
+												$provider_maintainer = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'maintainer',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_maintainer
+												) {
+
+													$provider_item_MedicalWebPage['maintainer'] = $provider_maintainer;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'maintainer',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_maintainer
+												) {
+
+													$provider_item_MedicalBusiness['maintainer'] = $provider_maintainer;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'maintainer',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_maintainer
+												) {
+
+													$provider_item_Person['maintainer'] = $provider_maintainer;
 
 												}
 
@@ -11272,6 +14185,280 @@
 												) {
 
 													$provider_item_Person['makesOffer'] = $provider_makesOffer;
+
+												}
+
+									}
+
+								// medicalAudience
+
+									/* 
+									 * Medical audience for page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalAudience (Type)
+									 *     - MedicalAudienceType (Enumeration Type)
+									 */
+
+									 if (
+										(
+											in_array(
+												'medicalAudience',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'medicalAudience',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'medicalAudience',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_medicalAudience) ) {
+
+												$provider_medicalAudience = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'medicalAudience',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_medicalAudience
+												) {
+
+													$provider_item_MedicalWebPage['medicalAudience'] = $provider_medicalAudience;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'medicalAudience',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_medicalAudience
+												) {
+
+													$provider_item_MedicalBusiness['medicalAudience'] = $provider_medicalAudience;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'medicalAudience',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_medicalAudience
+												) {
+
+													$provider_item_Person['medicalAudience'] = $provider_medicalAudience;
+
+												}
+
+									}
+
+								// mentions
+
+									/* 
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+									if (
+										(
+											in_array(
+												'mentions',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'mentions',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'mentions',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_mentions) ) {
+
+												$provider_mentions = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'mentions',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_mentions
+												) {
+
+													$provider_item_MedicalWebPage['mentions'] = $provider_mentions;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'mentions',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_mentions
+												) {
+
+													$provider_item_MedicalBusiness['mentions'] = $provider_mentions;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'mentions',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_mentions
+												) {
+
+													$provider_item_Person['mentions'] = $provider_mentions;
+
+												}
+
+									}
+
+								// offers
+
+									/* 
+									 * An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.
+									 * 
+									 * Use businessFunction to indicate the kind of transaction offered (i.e., sell, lease).
+									 * 
+									 * This property can also be used to describe a Demand.
+									 * 
+									 * While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.
+									 * 
+									 * Inverse-property: itemOffered
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Demand
+									 *     - Offer
+									 */
+
+									if (
+										(
+											in_array(
+												'offers',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'offers',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'offers',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_offers) ) {
+
+												$provider_offers = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'offers',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_offers
+												) {
+
+													$provider_item_MedicalWebPage['offers'] = $provider_offers;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'offers',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_offers
+												) {
+
+													$provider_item_MedicalBusiness['offers'] = $provider_offers;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'offers',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_offers
+												) {
+
+													$provider_item_Person['offers'] = $provider_offers;
 
 												}
 
@@ -11608,6 +14795,453 @@
 
 									}
 
+								// primaryImageOfPage
+
+									/* 
+									 * Indicates the main image on the page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 */
+
+									 if (
+										(
+											in_array(
+												'primaryImageOfPage',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'primaryImageOfPage',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'primaryImageOfPage',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_primaryImageOfPage) ) {
+
+												$provider_primaryImageOfPage = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'primaryImageOfPage',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_primaryImageOfPage
+												) {
+
+													$provider_item_MedicalWebPage['primaryImageOfPage'] = $provider_primaryImageOfPage;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'primaryImageOfPage',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_primaryImageOfPage
+												) {
+
+													$provider_item_MedicalBusiness['primaryImageOfPage'] = $provider_primaryImageOfPage;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'primaryImageOfPage',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_primaryImageOfPage
+												) {
+
+													$provider_item_Person['primaryImageOfPage'] = $provider_primaryImageOfPage;
+
+												}
+
+									}
+
+								// producer
+
+									/* 
+									 * The person or organization who produced the work (e.g. music album, movie, TV/radio series etc.).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'producer',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'producer',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'producer',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_producer) ) {
+
+												$provider_producer = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'producer',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_producer
+												) {
+
+													$provider_item_MedicalWebPage['producer'] = $provider_producer;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'producer',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_producer
+												) {
+
+													$provider_item_MedicalBusiness['producer'] = $provider_producer;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'producer',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_producer
+												) {
+
+													$provider_item_Person['producer'] = $provider_producer;
+
+												}
+
+									}
+
+								// provider
+
+									/* 
+									 * The service provider, service operator, or service performer; the goods producer.
+									 * 
+									 * Another party (a seller) may offer those services or goods on behalf of the provider.
+									 * 
+									 * A provider may also serve as the seller.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'provider',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'provider',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'provider',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_provider) ) {
+
+												$provider_provider = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'provider',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_provider
+												) {
+
+													$provider_item_MedicalWebPage['provider'] = $provider_provider;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'provider',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_provider
+												) {
+
+													$provider_item_MedicalBusiness['provider'] = $provider_provider;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'provider',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_provider
+												) {
+
+													$provider_item_Person['provider'] = $provider_provider;
+
+												}
+
+									}
+
+								// publisher
+
+									/* 
+									 * The publisher of the creative work.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'publisher',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'publisher',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'publisher',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_publisher) ) {
+
+												$provider_publisher = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'publisher',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_publisher
+												) {
+
+													$provider_item_MedicalWebPage['publisher'] = $provider_publisher;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'publisher',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_publisher
+												) {
+
+													$provider_item_MedicalBusiness['publisher'] = $provider_publisher;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'publisher',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_publisher
+												) {
+
+													$provider_item_Person['publisher'] = $provider_publisher;
+
+												}
+
+									}
+
+								// relatedLink
+
+									/* 
+									 * A link related to this web page, for example to other related web pages.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'relatedLink',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'relatedLink',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'relatedLink',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_relatedLink) ) {
+
+												$provider_relatedLink = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'relatedLink',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_relatedLink
+												) {
+
+													$provider_item_MedicalWebPage['relatedLink'] = $provider_relatedLink;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'relatedLink',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_relatedLink
+												) {
+
+													$provider_item_MedicalBusiness['relatedLink'] = $provider_relatedLink;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'relatedLink',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_relatedLink
+												) {
+
+													$provider_item_Person['relatedLink'] = $provider_relatedLink;
+
+												}
+
+									}
+
 								// review
 
 									/* 
@@ -11696,6 +15330,95 @@
 
 									}
 
+								// reviewedBy
+
+									/* 
+									 * People or organizations that have reviewed the content on this web page for accuracy and/or completeness.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'reviewedBy',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'reviewedBy',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'reviewedBy',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_reviewedBy) ) {
+
+												$provider_reviewedBy = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'reviewedBy',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_reviewedBy
+												) {
+
+													$provider_item_MedicalWebPage['reviewedBy'] = $provider_reviewedBy;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'reviewedBy',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_reviewedBy
+												) {
+
+													$provider_item_MedicalBusiness['reviewedBy'] = $provider_reviewedBy;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'reviewedBy',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_reviewedBy
+												) {
+
+													$provider_item_Person['reviewedBy'] = $provider_reviewedBy;
+
+												}
+
+									}
+
 								// sameAs
 
 									/* 
@@ -11709,11 +15432,6 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
 										in_array(
 											'sameAs',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -11746,21 +15464,6 @@
 
 										// Add to item values
 
-											// MedicalWebPage
-
-												if (
-													in_array(
-														'sameAs',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_sameAs
-												) {
-
-													$provider_item_MedicalWebPage['sameAs'] = $provider_sameAs;
-
-												}
-
 											// MedicalBusiness
 
 												if (
@@ -11788,6 +15491,94 @@
 												) {
 
 													$provider_item_Person['sameAs'] = $provider_sameAs;
+
+												}
+
+									}
+
+								// significantLink
+
+									/* 
+									 * One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									 if (
+										(
+											in_array(
+												'significantLink',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'significantLink',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'significantLink',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_significantLink) ) {
+
+												$provider_significantLink = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'significantLink',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_significantLink
+												) {
+
+													$provider_item_MedicalWebPage['significantLink'] = $provider_significantLink;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'significantLink',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_significantLink
+												) {
+
+													$provider_item_MedicalBusiness['significantLink'] = $provider_significantLink;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'significantLink',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_significantLink
+												) {
+
+													$provider_item_Person['significantLink'] = $provider_significantLink;
 
 												}
 
@@ -11847,6 +15638,281 @@
 
 									}
 
+								// sourceOrganization
+
+									/* 
+									 * The Organization on whose behalf the creator was working.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 */
+
+									 if (
+										(
+											in_array(
+												'sourceOrganization',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'sourceOrganization',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'sourceOrganization',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_sourceOrganization) ) {
+
+												$provider_sourceOrganization = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'sourceOrganization',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_sourceOrganization
+												) {
+
+													$provider_item_MedicalWebPage['sourceOrganization'] = $provider_sourceOrganization;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'sourceOrganization',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_sourceOrganization
+												) {
+
+													$provider_item_MedicalBusiness['sourceOrganization'] = $provider_sourceOrganization;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'sourceOrganization',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_sourceOrganization
+												) {
+
+													$provider_item_Person['sourceOrganization'] = $provider_sourceOrganization;
+
+												}
+
+									}
+
+								// speakable
+
+									/* 
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense of being highlighted as being especially appropriate for text-to-speech conversion. Other sections of a page may also be usefully spoken in particular circumstances; the 'speakable' property serves to indicate the parts most likely to be generally useful for speech.
+									 * 
+									 * The speakable property can be repeated an arbitrary number of times, with three kinds of possible 'content-locator' values:
+									 * 
+									 *     1.) id-value URL references - uses id-value of an element in the page being annotated. The simplest use of speakable has (potentially relative) URL values, referencing identified sections of the document concerned.
+									 * 
+									 *     2.) CSS Selectors - addresses content in the annotated page, e.g. via class attribute. Use the cssSelector property.
+									 * 
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the content). Use the xpath property.
+									 * 
+									 * For more sophisticated markup of speakable sections beyond simple ID references, either CSS selectors or XPath expressions to pick out document section(s) as speakable. For this we define a supporting type, SpeakableSpecification which is defined to be a possible value of the speakable property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - SpeakableSpecification
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'speakable',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'speakable',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'speakable',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_speakable) ) {
+
+												$provider_speakable = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'speakable',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_speakable
+												) {
+
+													$provider_item_MedicalWebPage['speakable'] = $provider_speakable;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'speakable',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_speakable
+												) {
+
+													$provider_item_MedicalBusiness['speakable'] = $provider_speakable;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'speakable',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_speakable
+												) {
+
+													$provider_item_Person['speakable'] = $provider_speakable;
+
+												}
+
+									}
+
+								// specialty
+
+									/* 
+									 * One of the domain specialities to which this web page's content applies.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Specialty
+									 */
+
+									if (
+										(
+											in_array(
+												'specialty',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'specialty',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'specialty',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_specialty) ) {
+
+												$provider_specialty = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'specialty',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_specialty
+												) {
+
+													$provider_item_MedicalWebPage['specialty'] = $provider_specialty;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'specialty',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_specialty
+												) {
+
+													$provider_item_MedicalBusiness['specialty'] = $provider_specialty;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'specialty',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_specialty
+												) {
+
+													$provider_item_Person['specialty'] = $provider_specialty;
+
+												}
+
+									}
+
 								// subjectOf
 
 									/* 
@@ -11862,11 +15928,6 @@
 
 									if (
 										(
-											in_array(
-												'subjectOf',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
 											in_array(
 												'subjectOf',
 												$provider_properties_map[$MedicalBusiness_type]['properties']
@@ -11904,21 +15965,6 @@
 
 										// Add to item values
 
-											// MedicalWebPage
-
-												if (
-													in_array(
-														'subjectOf',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_subjectOf
-												) {
-
-													$provider_item_MedicalWebPage['subjectOf'] = $provider_subjectOf;
-
-												}
-
 											// MedicalBusiness
 
 												if (
@@ -11946,6 +15992,271 @@
 												) {
 
 													$provider_item_Person['subjectOf'] = $provider_subjectOf;
+
+												}
+
+									}
+
+								// thumbnailUrl
+
+									/* 
+									 * A thumbnail image relevant to the Thing.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									 if (
+										(
+											in_array(
+												'thumbnailUrl',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'thumbnailUrl',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'thumbnailUrl',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_thumbnailUrl) ) {
+
+												$provider_thumbnailUrl = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'thumbnailUrl',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_thumbnailUrl
+												) {
+
+													$provider_item_MedicalWebPage['thumbnailUrl'] = $provider_thumbnailUrl;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'thumbnailUrl',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_thumbnailUrl
+												) {
+
+													$provider_item_MedicalBusiness['thumbnailUrl'] = $provider_thumbnailUrl;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'thumbnailUrl',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_thumbnailUrl
+												) {
+
+													$provider_item_Person['thumbnailUrl'] = $provider_thumbnailUrl;
+
+												}
+
+									}
+
+								// timeRequired
+
+									/* 
+									 * Approximate or typical time it usually takes to work with or through the content of this work for the typical or target audience.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Duration
+									 */
+
+									if (
+										(
+											in_array(
+												'timeRequired',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'timeRequired',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'timeRequired',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_timeRequired) ) {
+
+												$provider_timeRequired = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'timeRequired',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_timeRequired
+												) {
+
+													$provider_item_MedicalWebPage['timeRequired'] = $provider_timeRequired;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'timeRequired',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_timeRequired
+												) {
+
+													$provider_item_MedicalBusiness['timeRequired'] = $provider_timeRequired;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'timeRequired',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_timeRequired
+												) {
+
+													$provider_item_Person['timeRequired'] = $provider_timeRequired;
+
+												}
+
+									}
+
+								// video
+
+									/* 
+									 * An embedded video object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Clip
+									 *     - VideoObject
+									 */
+
+									if (
+										(
+											in_array(
+												'video',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'video',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'video',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( !isset($provider_video) ) {
+
+												$provider_video = array();
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'video',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_video
+												) {
+
+													$provider_item_MedicalWebPage['video'] = $provider_video;
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'video',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_video
+												) {
+
+													$provider_item_MedicalBusiness['video'] = $provider_video;
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'video',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_video
+												) {
+
+													$provider_item_Person['video'] = $provider_video;
 
 												}
 
