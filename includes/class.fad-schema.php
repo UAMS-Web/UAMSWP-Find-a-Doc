@@ -14525,7 +14525,11 @@
 														( array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref) )
 													);
 
-												} elseif ( $provider_location ) {
+												} elseif (
+													isset($provider_location)
+													&&
+													!empty($provider_location)
+												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
@@ -14547,7 +14551,11 @@
 														( array_is_list($provider_related_expertise_ref) ? $provider_related_expertise_ref : array($provider_related_expertise_ref) )
 													);
 
-												} elseif ( $provider_related_expertise ) {
+												} elseif (
+													isset($provider_related_expertise)
+													&&
+													!empty($provider_related_expertise)
+												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
@@ -14569,7 +14577,11 @@
 														( array_is_list($provider_related_clinical_resource_ref) ? $provider_related_clinical_resource_ref : array($provider_related_clinical_resource_ref) )
 													);
 
-												} elseif ( $provider_related_clinical_resource ) {
+												} elseif (
+													isset($provider_related_clinical_resource)
+													&&
+													!empty($provider_related_clinical_resource)
+												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
@@ -14591,7 +14603,11 @@
 														( array_is_list($provider_related_condition_ref) ? $provider_related_condition_ref : array($provider_related_condition_ref) )
 													);
 
-												} elseif ( $provider_related_condition ) {
+												} elseif (
+													isset($provider_related_condition)
+													&&
+													!empty($provider_related_condition)
+												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
@@ -14613,7 +14629,11 @@
 														( array_is_list($schema_provider_treatment_ref) ? $schema_provider_treatment_ref : array($schema_provider_treatment_ref) )
 													);
 
-												} elseif ( $schema_provider_treatment ) {
+												} elseif (
+													isset($schema_provider_treatment)
+													&&
+													!empty($schema_provider_treatment)
+												) {
 													
 													$provider_mentions = array_merge(
 														$provider_mentions,
