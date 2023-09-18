@@ -14454,11 +14454,133 @@
 
 										// Get values
 
-											if ( !isset($provider_mentions) ) {
+											// Base array
 
 												$provider_mentions = array();
 
-											}
+											// Related Locations
+
+												if (
+													isset($provider_location_ref)
+													&&
+													!empty($provider_location_ref)
+												) {
+
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref) )
+													);
+
+												} elseif ( $provider_location ) {
+													
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_location) ? $provider_location : array($provider_location) )
+													);
+
+												}
+
+											// Related Areas of Expertise
+
+												if (
+													isset($provider_related_expertise_ref)
+													&&
+													!empty($provider_related_expertise_ref)
+												) {
+
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_related_expertise_ref) ? $provider_related_expertise_ref : array($provider_related_expertise_ref) )
+													);
+
+												} elseif ( $provider_related_expertise ) {
+													
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_related_expertise) ? $provider_related_expertise : array($provider_related_expertise) )
+													);
+
+												}
+
+											// Related Clinical Resources
+
+												if (
+													isset($provider_related_clinical_resource_ref)
+													&&
+													!empty($provider_related_clinical_resource_ref)
+												) {
+
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_related_clinical_resource_ref) ? $provider_related_clinical_resource_ref : array($provider_related_clinical_resource_ref) )
+													);
+
+												} elseif ( $provider_related_clinical_resource ) {
+													
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_related_clinical_resource) ? $provider_related_clinical_resource : array($provider_related_clinical_resource) )
+													);
+
+												}
+
+											// Related Conditions
+
+												if (
+													isset($provider_related_condition_ref)
+													&&
+													!empty($provider_related_condition_ref)
+												) {
+
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_related_condition_ref) ? $provider_related_condition_ref : array($provider_related_condition_ref) )
+													);
+
+												} elseif ( $provider_related_condition ) {
+													
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($provider_related_condition) ? $provider_related_condition : array($provider_related_condition) )
+													);
+
+												}
+
+											// Related Treatments
+
+											if (
+												isset($schema_provider_treatment_ref)
+												&&
+												!empty($schema_provider_treatment_ref)
+											) {
+
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($schema_provider_treatment_ref) ? $schema_provider_treatment_ref : array($schema_provider_treatment_ref) )
+													);
+
+												} elseif ( $schema_provider_treatment ) {
+													
+													$provider_mentions = array_merge(
+														$provider_mentions,
+														( array_is_list($schema_provider_treatment) ? $schema_provider_treatment : array($schema_provider_treatment) )
+													);
+
+												}
+
+											// Clean up the list array
+
+												if ( $provider_mentions ) {
+
+													$provider_mentions = array_filter($provider_mentions);
+													$provider_mentions = array_unique($provider_mentions);
+													$provider_mentions = array_values($provider_mentions);
+
+													// If there is only one item, flatten the multi-dimensional array by one step
+
+														uamswp_fad_flatten_multidimensional_array($provider_mentions);
+
+												}
 
 										// Add to item values
 
