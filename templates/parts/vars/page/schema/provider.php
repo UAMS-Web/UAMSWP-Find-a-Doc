@@ -857,7 +857,7 @@ TODO List
 
 			// Define reference to this 'MedicalWebPage' item
 
-				$schema_provider_MedicalWebPage_ref['@id'] = $schema_provider_MedicalWebPage['@id'] ?: '';
+				$schema_provider_MedicalWebPage_ref = uamswp_fad_schema_node_references( $schema_provider_MedicalWebPage );
 
 		// name
 
@@ -1020,7 +1020,7 @@ TODO List
 
 			// Define reference to this 'url' property
 
-				$schema_provider_MedicalWebPage_url_ref['@id'] = $schema_provider_MedicalWebPage['url']['@id'] ?: '';
+				$schema_provider_MedicalWebPage_url_ref = uamswp_fad_schema_node_references( $schema_provider_MedicalWebPage['url'] );
 
 		// video
 
@@ -1068,7 +1068,7 @@ TODO List
 
 		// Define 'BreadcrumbList' reference
 
-			$schema_provider_BreadcrumbList_ref['@id'] = $schema_provider_BreadcrumbList['@id'] ?: '';
+			$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references( $schema_provider_BreadcrumbList );
 
 		// Set value of 'breadcrumb' property of 'MedicalWebPage' item with 'BreadcrumbList' reference
 
