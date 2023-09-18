@@ -5055,6 +5055,8 @@
 								$provider_degree_array = null;
 								$provider_degrees = null;
 								$provider_description = null;
+								$provider_description_ref = null;
+								$provider_description_text = null;
 								$provider_duns = null;
 								$provider_editor = null;
 								$provider_familyName = null;
@@ -10967,28 +10969,42 @@
 
 										// Get the Selected Short Description for This Page
 
-											if ( !isset($provider_description) ) {
+											if ( !isset($provider_description_text) ) {
 
-												$provider_description = get_field( 'physician_short_clinical_bio', $provider ) ?? array();
+												$provider_description_text = get_field( 'physician_short_clinical_bio', $provider ) ?? array();
 
 												// Fallback — Get clinical bio
 
-													if ( !$provider_description ) {
+													if ( !$provider_description_text ) {
 
-														$provider_description = get_field( 'physician_clinical_bio', $provider ) ?? array();
+														$provider_description_text = get_field( 'physician_clinical_bio', $provider ) ?? array();
 
 													}
 
 												// Clean up value
 
-													if ( $provider_description ) {
+													if ( $provider_description_text ) {
 
-														$provider_description = wp_strip_all_tags($provider_description);
-														$provider_description = str_replace("\n", ' ', $provider_description); // Strip line breaks
-														$provider_description = strlen($provider_description) > 160 ? mb_strimwidth($provider_description, 0, 156, '...') : $provider_description; // Limit to 160 characters
-														$provider_description = uamswp_attr_conversion($provider_description);
+														$provider_description_text = wp_strip_all_tags($provider_description_text);
+														$provider_description_text = str_replace("\n", ' ', $provider_description_text); // Strip line breaks
+														$provider_description_text = strlen($provider_description_text) > 160 ? mb_strimwidth($provider_description_text, 0, 156, '...') : $provider_description_text; // Limit to 160 characters
+														$provider_description_text = uamswp_attr_conversion($provider_description_text);
 
 													}
+
+											}
+
+										// Format schema value
+
+											if ( $provider_description_text ) {
+
+												$provider_description = array(
+													'@id' => $provider_url . '#description',
+													'@type' => 'TextObject',
+													'text' => $provider_description_text,
+												);
+
+												$provider_description_ref = uamswp_fad_schema_node_references($provider_description);
 
 											}
 
@@ -11005,7 +11021,31 @@
 													$provider_description
 												) {
 
-													$provider_item_MedicalWebPage['description'] = $provider_description;
+													if (
+														(
+															(
+																isset($provider_item_MedicalBusiness['description']['text'])
+																&&
+																!empty($provider_item_MedicalBusiness['description']['text'])
+															)
+															||
+															(
+																isset($provider_item_Person['description']['text'])
+																&&
+																!empty($provider_item_Person['description']['text'])
+															)
+														)
+														&&
+														$provider_description_ref
+													) {
+														
+														$provider_item_MedicalWebPage['description'] = $provider_description_ref;
+
+													} else {
+														
+														$provider_item_MedicalWebPage['description'] = $provider_description;
+
+													}
 
 												}
 
@@ -11020,7 +11060,31 @@
 													$provider_description
 												) {
 
+													if (
+														(
+															(
+																isset($provider_item_MedicalWebPage['description']['text'])
+																&&
+																!empty($provider_item_MedicalWebPage['description']['text'])
+															)
+															||
+															(
+																isset($provider_item_Person['description']['text'])
+																&&
+																!empty($provider_item_Person['description']['text'])
+															)
+														)
+														&&
+														$provider_description_ref
+													) {
+														
+														$provider_item_MedicalBusiness['description'] = $provider_description_ref;
+
+													} else {
+														
 														$provider_item_MedicalBusiness['description'] = $provider_description;
+
+													}
 
 												}
 
@@ -11035,7 +11099,31 @@
 													$provider_description
 												) {
 
-													$provider_item_Person['description'] = $provider_description;
+													if (
+														(
+															(
+																isset($provider_item_MedicalWebPage['description']['text'])
+																&&
+																!empty($provider_item_MedicalWebPage['description']['text'])
+															)
+															||
+															(
+																isset($provider_item_MedicalBusiness['description']['text'])
+																&&
+																!empty($provider_item_MedicalBusiness['description']['text'])
+															)
+														)
+														&&
+														$provider_description_ref
+													) {
+														
+														$provider_item_Person['description'] = $provider_description_ref;
+
+													} else {
+														
+														$provider_item_Person['description'] = $provider_description;
+
+													}
 
 												}
 
