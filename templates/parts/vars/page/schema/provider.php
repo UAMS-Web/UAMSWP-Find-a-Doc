@@ -885,7 +885,57 @@ TODO List
 
 		// breadcrumb
 
-			$schema_provider_MedicalWebPage['breadcrumb'] = array(); // Defined after 'BreadcrumbList' item is defined
+			// Base array
+
+				$schema_provider_MedicalWebPage['breadcrumb'] = array();
+
+			// @type
+
+				$schema_provider_MedicalWebPage['breadcrumb']['@type'] = 'BreadcrumbList';
+
+			// @id
+
+				$schema_provider_MedicalWebPage['breadcrumb']['@id'] = $page_url . '#' . $schema_provider_MedicalWebPage['breadcrumb']['@type'];
+
+				// Define 'BreadcrumbList' reference
+
+					$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references( $schema_provider_MedicalWebPage['breadcrumb'] );
+
+			// itemListElement
+
+				// Position 1
+
+					$schema_provider_MedicalWebPage['breadcrumb']['itemListElement'][] = array(
+						'@type' => 'ListItem',
+						'position' => 1,
+						'item' => array(
+							'@type' => 'WebPage',
+							'@id' => $schema_base_org_uams_health_url . '#ListItem',
+							'url' => $schema_base_org_uams_health_url,
+							'name' => 'UAMS Health'
+						)
+					);
+
+				// Position 1
+
+					$schema_provider_MedicalWebPage['breadcrumb']['itemListElement'][] = array(
+						'@type' => 'ListItem',
+						'position' => 2,
+						'item' => array(
+							'@type' => 'WebPage',
+							'@id' => $schema_provider_archive_url . '#ListItem',
+							'url' => $schema_provider_archive_url,
+							'name' => $provider_plural_name_attr
+						)
+					);
+
+				// Position 1
+
+					$schema_provider_MedicalWebPage['breadcrumb']['itemListElement'][] = array(
+						'@type' => 'ListItem',
+						'position' => 3,
+						'item' => $schema_provider_MedicalWebPage_ref
+					);
 
 		// creator
 
@@ -1030,50 +1080,6 @@ TODO List
 
 			}
 
-	// BreadcrumbList
-
-		$schema_provider_BreadcrumbList = array(
-			'@type' => 'BreadcrumbList'
-		);
-
-		$schema_provider_BreadcrumbList['@id'] = $page_url . '#' . $schema_provider_BreadcrumbList['@type'];
-
-		$schema_provider_BreadcrumbList['itemListElement'] = array(
-			array(
-				'@type' => 'ListItem',
-				'position' => 1,
-				'item' => array(
-					'@type' => 'WebPage',
-					'@id' => $schema_base_org_uams_health_url . '#ListItem',
-					'url' => $schema_base_org_uams_health_url,
-					'name' => 'UAMS Health'
-				)
-			),
-			array(
-				'@type' => 'ListItem',
-				'position' => 2,
-				'item' => array(
-					'@type' => 'WebPage',
-					'@id' => $schema_provider_archive_url . '#ListItem',
-					'url' => $schema_provider_archive_url,
-					'name' => $provider_plural_name_attr
-				)
-				),
-			array(
-				'@type' => 'ListItem',
-				'position' => 3,
-				'item' => $schema_provider_MedicalWebPage_ref
-			)
-		);
-
-		// Define 'BreadcrumbList' reference
-
-			$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references( $schema_provider_BreadcrumbList );
-
-		// Set value of 'breadcrumb' property of 'MedicalWebPage' item with 'BreadcrumbList' reference
-
-			$schema_provider_MedicalWebPage['breadcrumb'] = $schema_provider_BreadcrumbList_ref ?: '';
-
 	// Provider as Physician and as Person
 
 		$schema_provider_combined = uamswp_fad_schema_provider(
@@ -1089,9 +1095,6 @@ TODO List
 
 	// Provider as MedicalWebPage
 	$schema_provider['@graph'][] = $schema_provider_MedicalWebPage;
-
-	// BreadcrumbList
-	$schema_provider['@graph'][] = $schema_provider_BreadcrumbList;
 
 	// Provider as MedicalBusiness
 	$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
