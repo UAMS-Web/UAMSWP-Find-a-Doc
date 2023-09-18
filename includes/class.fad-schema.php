@@ -7331,7 +7331,71 @@
 
 									}
 
-								// additionalType
+								// additionalType (MedicalWebPage)
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'additionalType',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$provider_additionalType_MedicalWebPage = 'ProfilePage';
+
+										// Clean up additionalType property values array
+
+											if (
+												$provider_additionalType_MedicalWebPage
+												&&
+												is_array($provider_additionalType_MedicalWebPage)
+											) {
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($provider_additionalType_MedicalWebPage);
+
+											}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'additionalType',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_additionalType_MedicalWebPage
+												) {
+
+													$provider_item_MedicalWebPage['additionalType'] = $provider_additionalType_MedicalWebPage;
+
+												}
+
+									}
+
+								// additionalType (MedicalBusiness; Person)
 
 									/* 
 									 * An additional type for the item, typically used for adding more specific types 
@@ -7370,23 +7434,66 @@
 
 										// Get values
 
-											if ( !isset($provider_additionalType) ) {
+											// Base property values array
 
-												// Base property values array
+												$provider_additionalType = array();
 
-													$provider_additionalType = array();
+											// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-												// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
+												// Get values
 
-													// Get values
+													if (
+														!isset($provider_medicalSpecialty)
+														||
+														!isset($provider_medicalSpecialty_list)
+													) {
 
-														if (
-															!isset($provider_medicalSpecialty)
-															||
-															!isset($provider_medicalSpecialty_list)
-														) {
+														// Get Clinical Specialization value
 
-															// Get Clinical Specialization value
+															if ( !isset($provider_clinical_specialization) ) {
+
+																$provider_clinical_specialization = get_field( 'physician_title', $provider );
+
+															}
+
+														// Get MedicalSpecialty from Clinical Specialization value
+
+															// Simple list of MedicalSpecialty values
+
+																$provider_medicalSpecialty_list = array();
+
+															// Schema property values
+
+																$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+																	$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+																	$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+																);
+
+													}
+
+												// Merge into property values array
+
+													if ( $provider_medicalSpecialty_list ) {
+
+														$provider_additionalType = array_merge(
+															$provider_additionalType,
+															array_intersect(
+																$provider_additionalType_MedicalSpecialty,
+																( is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list) )
+															)
+														);
+
+													}
+
+											// Get Wikidata item URL for the occupation from associated Clinical Specialization items
+
+												// Get values
+
+													if ( !isset($provider_additionalType_clinical_specialization) ) {
+
+														// Get Clinical Specialization value
+
+															if ( !isset($provider_clinical_specialization_term) ) {
 
 																if ( !isset($provider_clinical_specialization) ) {
 
@@ -7394,91 +7501,44 @@
 
 																}
 
-															// Get MedicalSpecialty from Clinical Specialization value
+																if ( $provider_clinical_specialization ) {
 
-																// Simple list of MedicalSpecialty values
-
-																	$provider_medicalSpecialty_list = array();
-
-																// Schema property values
-
-																	$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
-																		$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
-																		$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-																	);
-
-														}
-
-													// Merge into property values array
-
-														if ( $provider_medicalSpecialty_list ) {
-
-															$provider_additionalType = array_merge(
-																$provider_additionalType,
-																array_intersect(
-																	$provider_additionalType_MedicalSpecialty,
-																	( is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list) )
-																)
-															);
-
-														}
-
-												// Get Wikidata item URL for the occupation from associated Clinical Specialization items
-
-													// Get values
-
-														if ( !isset($provider_additionalType_clinical_specialization) ) {
-
-															// Get Clinical Specialization value
-
-																if ( !isset($provider_clinical_specialization_term) ) {
-
-																	if ( !isset($provider_clinical_specialization) ) {
-
-																		$provider_clinical_specialization = get_field( 'physician_title', $provider );
-
-																	}
-
-																	if ( $provider_clinical_specialization ) {
-
-																		$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
-
-																	}
-
-																	// Get Wikidata Item URL for the Occupation field value
-
-																		$provider_additionalType_clinical_specialization = '';
-
-																		if ( is_object($provider_clinical_specialization_term) ) {
-
-																			$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $item_term ) ?? '';
-
-																		}
+																	$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
 
 																}
 
-														}
+																// Get Wikidata Item URL for the Occupation field value
 
-													// Merge into property values array
+																	$provider_additionalType_clinical_specialization = '';
 
-														if (
-															$provider_additionalType
-															&&
-															$provider_additionalType_clinical_specialization
-														) {
+																	if ( is_object($provider_clinical_specialization_term) ) {
 
-															$provider_additionalType = array_merge(
-																$provider_additionalType,
-																( is_array($provider_additionalType_clinical_specialization) ? $provider_additionalType_clinical_specialization : array($provider_additionalType_clinical_specialization) )
-															);
+																		$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $item_term ) ?? '';
 
-														} elseif ( $provider_additionalType_clinical_specialization ) {
+																	}
 
-															$provider_additionalType = $provider_additionalType_clinical_specialization;
+															}
 
-														}
+													}
 
-											}
+												// Merge into property values array
+
+													if (
+														$provider_additionalType
+														&&
+														$provider_additionalType_clinical_specialization
+													) {
+
+														$provider_additionalType = array_merge(
+															$provider_additionalType,
+															( is_array($provider_additionalType_clinical_specialization) ? $provider_additionalType_clinical_specialization : array($provider_additionalType_clinical_specialization) )
+														);
+
+													} elseif ( $provider_additionalType_clinical_specialization ) {
+
+														$provider_additionalType = $provider_additionalType_clinical_specialization;
+
+													}
 
 										// Clean up additionalType property values array
 
