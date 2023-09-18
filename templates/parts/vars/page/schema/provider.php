@@ -241,10 +241,6 @@ TODO List
 
 		include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
 
-	// Provider URL
-
-		$schema_provider_url = user_trailingslashit($page_url);
-
 	// Provider archive URL
 
 		$schema_provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
@@ -283,7 +279,7 @@ TODO List
 
 					$provider_related_location = uamswp_fad_schema_location(
 						$locations, // List of IDs of the location items
-						$schema_provider_url, // Page URL
+						$page_url, // Page URL
 					);
 
 				}
@@ -382,7 +378,7 @@ TODO List
 
 					$provider_related_condition = uamswp_fad_schema_medicalcondition(
 						$conditions_cpt, // List of IDs of the MedicalCondition items
-						$schema_provider_url, // Page URL
+						$page_url, // Page URL
 						1, // Nesting level within the main schema
 						'MedicalCondition' // Fragment identifier
 					);
@@ -406,7 +402,7 @@ TODO List
 
 					$provider_related_treatment = uamswp_fad_schema_service(
 						$treatments_cpt, // List of IDs of the service items
-						$schema_provider_url, // Page URL
+						$page_url, // Page URL
 						1, // Nesting level within the main schema
 						'Service' // Fragment identifier
 					);
@@ -857,7 +853,7 @@ TODO List
 
 		// @id
 
-			$schema_provider_MedicalWebPage['@id'] = $schema_provider_url . '#' . $schema_provider_MedicalWebPage['@type'];
+			$schema_provider_MedicalWebPage['@id'] = $page_url . '#' . $schema_provider_MedicalWebPage['@type'];
 
 			// Define reference to this 'MedicalWebPage' item
 
@@ -1018,8 +1014,8 @@ TODO List
 			 */
 
 			$schema_provider_MedicalWebPage['url'] = array(
-				'@id' => $schema_provider_url . '#URL',
-				'url' => $schema_provider_url
+				'@id' => $page_url . '#URL',
+				'url' => $page_url
 			);
 
 			// Define reference to this 'url' property
@@ -1040,7 +1036,7 @@ TODO List
 			'@type' => 'BreadcrumbList'
 		);
 
-		$schema_provider_BreadcrumbList['@id'] = $schema_provider_url . '#' . $schema_provider_BreadcrumbList['@type'];
+		$schema_provider_BreadcrumbList['@id'] = $page_url . '#' . $schema_provider_BreadcrumbList['@type'];
 
 		$schema_provider_BreadcrumbList['itemListElement'] = array(
 			array(

@@ -1995,9 +1995,6 @@
 							// Property: geo
 							$schema_geo_coordinates = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
 
-							// Property: url
-							$schema_url = $page_url; // string
-
 						// Additional Selected Properties
 
 							// Property: availableService
