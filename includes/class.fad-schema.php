@@ -8503,12 +8503,6 @@
 
 												}
 
-												if ( $provider_location ) {
-
-													$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
-
-												}
-
 										// location (specific property)
 
 											/* 
@@ -8557,7 +8551,27 @@
 															$provider_location
 														) {
 
-															$provider_item_MedicalWebPage['location'] = $provider_location;
+															if (
+																isset($provider_location_ref)
+																&&
+																!empty($provider_location_ref)
+															) {
+
+																$provider_item_MedicalWebPage['location'] = $provider_location_ref;
+
+															} else {
+
+																$provider_item_MedicalWebPage['location'] = $provider_location;
+
+																// Define reference to the @id
+
+																	if ( !isset($provider_location_ref) ) {
+
+																		$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+																	}
+
+															}
 
 														}
 
@@ -8572,7 +8586,27 @@
 															$provider_location
 														) {
 
-															$provider_item_MedicalBusiness['location'] = $provider_location;
+															if (
+																isset($provider_location_ref)
+																&&
+																!empty($provider_location_ref)
+															) {
+
+																$provider_item_MedicalBusiness['location'] = $provider_location_ref;
+
+															} else {
+
+																$provider_item_MedicalBusiness['location'] = $provider_location;
+
+																// Define reference to the @id
+
+																	if ( !isset($provider_location_ref) ) {
+
+																		$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+																	}
+
+															}
 
 														}
 
@@ -8587,7 +8621,27 @@
 															$provider_location
 														) {
 
-															$provider_item_Person['location'] = $provider_location;
+															if (
+																isset($provider_location_ref)
+																&&
+																!empty($provider_location_ref)
+															) {
+
+																$provider_item_Person['location'] = $provider_location_ref;
+
+															} else {
+
+																$provider_item_Person['location'] = $provider_location;
+
+																// Define reference to the @id
+
+																	if ( !isset($provider_location_ref) ) {
+
+																		$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+																	}
+
+															}
 
 														}
 
