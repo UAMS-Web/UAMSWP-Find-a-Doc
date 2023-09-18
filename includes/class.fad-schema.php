@@ -5014,7 +5014,7 @@
 												// Check the list of degrees against the Physician degrees
 
 													if (
-														$provider_properties_map['OptPhysicianician']['degrees']
+														$provider_properties_map['Physician']['degrees']
 														&&
 														$provider_degree_array
 													) {
