@@ -6652,6 +6652,12 @@
 
 												}
 
+												if ( $provider_location ) {
+
+													$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+
+												}
+
 										// location (specific property)
 
 											/* 
@@ -6745,7 +6751,11 @@
 
 												// Get values
 
-													if ( $provider_location ) {
+													if (
+														$provider_location
+														&&
+														isset($provider_location_ref)
+													) {
 
 														// @id references
 
@@ -6821,9 +6831,13 @@
 												// Get values
 
 													if (
-														$provider_location
-														||
-														$provider_workLocation
+														(
+															$provider_location
+															||
+															$provider_workLocation
+														)
+														&&
+														isset($provider_location_ref)
 													) {
 
 														// @id references
