@@ -9631,6 +9631,26 @@
 
 											// itemListElement
 
+												if ( !isset($provider_archive_url) ) {
+
+													$provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
+
+												}
+
+												if ( !isset($schema_provider_MedicalWebPage_ref) ) {
+
+													if ( !isset($provider_url) ) {
+
+														$provider_url = get_permalink($provider);
+														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
+
+													}
+
+													$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
+
+												}
+
 												// Base array
 
 													$provider_breadcrumb['itemListElement'] = array();
@@ -9638,23 +9658,20 @@
 												// Position 1
 
 													$provider_breadcrumb['itemListElement'][] = array(
+														'@id' => $schema_base_org_uams_health_url . '#ListItem',
 														'@type' => 'ListItem',
-														'position' => 1,
 														'item' => array(
 															'@type' => 'WebPage',
-															'@id' => $schema_base_org_uams_health_url . '#ListItem',
 															'url' => $schema_base_org_uams_health_url,
 															'name' => 'UAMS Health'
-														)
+														),
+														'nextItem' => array(
+															'@id' => $provider_archive_url . '#ListItem'
+														),
+														'position' => 1
 													);
 
-												// Position 1
-
-													if ( !isset($provider_archive_url) ) {
-
-														$provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
-
-													}
+												// Position 2
 
 													if ( !isset($provider_plural_name_attr) ) {
 
@@ -9664,36 +9681,32 @@
 													}
 
 													$provider_breadcrumb['itemListElement'][] = array(
+														'@id' => $provider_archive_url . '#ListItem',
 														'@type' => 'ListItem',
-														'position' => 2,
 														'item' => array(
 															'@type' => 'WebPage',
-															'@id' => $provider_archive_url . '#ListItem',
 															'url' => $provider_archive_url,
 															'name' => $provider_plural_name_attr
+														),
+														'nextItem' => array(
+															'@id' => $provider_url . '#ListItem'
+														),
+														'position' => 2,
+														'previousItem' => array(
+															'@id' => $schema_base_org_uams_health_url . '#ListItem'
 														)
 													);
 
-												// Position 1
-
-													if ( !isset($schema_provider_MedicalWebPage_ref) ) {
-
-														if ( !isset($provider_url) ) {
-
-															$provider_url = get_permalink($provider);
-															$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-
-														}
-
-														$schema_provider_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-														uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage_ref);
-
-													}
+												// Position 3
 
 													$provider_breadcrumb['itemListElement'][] = array(
+														'@id' => $provider_url . '#ListItem',
 														'@type' => 'ListItem',
+														'item' => $schema_provider_MedicalWebPage_ref,
 														'position' => 3,
-														'item' => $schema_provider_MedicalWebPage_ref
+														'previousItem' => array(
+															'@id' => $provider_archive_url . '#ListItem'
+														)
 													);
 
 										// Add to item values
