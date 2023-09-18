@@ -13996,9 +13996,9 @@
 
 										// Get values
 
-											if ( !isset($provider_mainEntity) ) {
+											if ( $schema_provider_MedicalBusiness_ref ) {
 
-												$provider_mainEntity = array();
+												$provider_mainEntity = $schema_provider_MedicalBusiness_ref;
 
 											}
 
@@ -14071,11 +14071,6 @@
 											'mainEntityOfPage',
 											$provider_properties_map[$MedicalBusiness_type]['properties']
 										)
-										||
-										in_array(
-											'mainEntityOfPage',
-											$provider_properties_map[$Person_type]['properties']
-										)
 									) {
 
 										// Get values
@@ -14114,21 +14109,6 @@
 												) {
 
 														$provider_item_MedicalBusiness['mainEntityOfPage'] = $provider_mainEntityOfPage;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'mainEntityOfPage',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_mainEntityOfPage
-												) {
-
-													$provider_item_Person['mainEntityOfPage'] = $provider_mainEntityOfPage;
 
 												}
 
