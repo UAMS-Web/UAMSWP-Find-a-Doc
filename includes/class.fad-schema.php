@@ -7881,9 +7881,9 @@
 											// Format values
 
 												if (
-													array_intersect(
-														$GenderType_valid,
-														$provider_gender_value_attr
+													in_array(
+														$provider_gender_value_attr,
+														$GenderType_valid
 													)
 												) {
 
