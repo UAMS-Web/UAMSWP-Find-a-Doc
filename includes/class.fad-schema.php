@@ -592,8 +592,8 @@
 
 							$input = array_filter(
 								array_intersect(
-									$input,
-									$schema_ContactPoint_base
+									$schema_ContactPoint_base,
+									$input
 								)
 							);
 
@@ -684,8 +684,8 @@
 									) {
 
 										$item['contactOption'] = array_intersect(
-											$item['contactOption'],
-											$schema_ContactPoint_contactOption_valid
+											$schema_ContactPoint_contactOption_valid,
+											$item['contactOption']
 										);
 
 										$schema_ContactPoint['contactOption'] = $item['contactOption'] ?: '';
