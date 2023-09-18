@@ -5385,7 +5385,12 @@
 
 											// Define reference to the @id
 
-												$schema_provider_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
+												if ( $provider_item_MedicalBusiness['@id'] ) {
+
+													$schema_provider_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
+													uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalBusiness_ref);
+
+												}
 
 										// Person
 
@@ -5405,7 +5410,12 @@
 
 											// Define reference to the @id
 
-												$schema_provider_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
+												if ( $provider_item_Person['@id'] ) {
+
+													$schema_provider_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
+													uamswp_fad_flatten_multidimensional_array($schema_provider_Person_ref);
+
+												}
 
 									}
 
