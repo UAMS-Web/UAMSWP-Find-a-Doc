@@ -5725,8 +5725,6 @@
 
 															// Get values
 
-																if ( !isset($provider_alternateName_additional) ) {
-
 																	// Get the alternateName repeater field value
 
 																		if ( !isset($provider_alternateName_additional_repeater) ) {
@@ -5745,8 +5743,6 @@
 																			);
 
 																		}
-
-																}
 
 															// Merge values
 
