@@ -7884,10 +7884,13 @@
 											if ( !isset($provider_gender_value) ) {
 
 												$provider_gender_value = get_field( 'physician_gender', $provider );
-												$provider_gender_value = ucfirst($provider_gender_value);
-												$provider_gender_value_attr = uamswp_attr_conversion($provider_gender_value);
 
 											}
+
+											// Format values
+
+												$provider_gender_value = $provider_gender_value ? ucfirst($provider_gender_value) : '';
+												$provider_gender_value_attr = $provider_gender_value ? uamswp_attr_conversion($provider_gender_value) : '';
 
 											// Define list of GenderType enumeration members
 
@@ -7896,7 +7899,7 @@
 													'Male'
 												);
 
-											// Format values
+											// Format schema values
 
 												if (
 													in_array(
