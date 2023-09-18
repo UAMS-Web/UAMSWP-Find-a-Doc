@@ -1024,7 +1024,7 @@
 
 				// Format values
 
-					$provider_schema_fields[$page_id]['provider_memberOf'] = ''; // Add to schema fields
+					$provider_schema_fields[$page_id]['provider_memberOf'] = array(); // Add to schema fields
 
 					if ( $provider_associations ) {
 
