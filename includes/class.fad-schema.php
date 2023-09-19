@@ -15566,11 +15566,31 @@
 
 										// Get values
 
-											if ( !isset($provider_sourceOrganization) ) {
+											// Base array
 
 												$provider_sourceOrganization = array();
 
-											}
+											// UAMS
+
+												if ( $schema_base_org_uams_ref ) {
+
+													$provider_sourceOrganization[] = $schema_base_org_uams_ref;
+
+												}
+
+											// UAMS Health
+
+												if ( $schema_base_org_uams_health_ref ) {
+
+													$provider_sourceOrganization[] = $schema_base_org_uams_health_ref;
+
+												}
+
+										// Format values
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $provider_sourceOrganization );
 
 										// Add to item values
 

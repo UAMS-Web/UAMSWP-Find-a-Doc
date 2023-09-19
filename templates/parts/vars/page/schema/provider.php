@@ -326,10 +326,6 @@ TODO List
 
 			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
 
-		// sourceOrganization
-
-			$schema_provider_MedicalWebPage['sourceOrganization'] = $schema_base_org_uams_health_ref;
-
 		// url
 
 			/*
