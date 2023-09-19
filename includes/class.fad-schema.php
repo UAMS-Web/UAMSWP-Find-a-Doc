@@ -5149,6 +5149,9 @@
 								$provider_iso6523Code_ref = null;
 								$provider_isPartOf = null;
 								$provider_isPartOf_ref = null;
+								$provider_item_MedicalBusiness_ref = null;
+								$provider_item_MedicalWebPage_ref = null;
+								$provider_item_Person_ref = null;
 								$provider_jobTitle = null;
 								$provider_jobTitle_ref = null;
 								$provider_keywords = null;
@@ -5233,8 +5236,8 @@
 								$provider_subjectOf = null;
 								$provider_subjectOf_ref = null;
 								$provider_taxID = null;
-								$provider_taxID_ref = null;
 								$provider_taxID_employer = null;
+								$provider_taxID_ref = null;
 								$provider_taxID_taxpayer = null;
 								$provider_thumbnailUrl = null;
 								$provider_thumbnailUrl_ref = null;
@@ -5262,9 +5265,6 @@
 								$provider_workLocation = null;
 								$provider_workLocation_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
-								$provider_item_MedicalWebPage_ref = null;
-								$provider_item_MedicalBusiness_ref = null;
-								$provider_item_Person_ref = null;
 
 							// Load variables from pre-existing field values array
 
