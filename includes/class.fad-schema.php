@@ -14213,11 +14213,11 @@
 
 											// Related Treatments
 
-											if (
-												isset($provider_availableService_ref)
-												&&
-												!empty($provider_availableService_ref)
-											) {
+												if (
+													isset($provider_availableService_ref)
+													&&
+													!empty($provider_availableService_ref)
+												) {
 
 													$provider_mentions = array_merge(
 														$provider_mentions,
