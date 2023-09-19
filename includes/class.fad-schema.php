@@ -12594,39 +12594,27 @@
 
 								// image (common use)
 
+									// List of properties that reference image
+
+										$provider_image_common = array(
+											'image',
+											'photo'
+										);
+
 									if (
-										(
-											in_array(
-												'image',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'image',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'image',
-												$provider_properties_map[$Person_type]['properties']
-											)
+										array_intersect(
+											$provider_properties_map[$MedicalWebPage_type]['properties'],
+											$provider_image_common
 										)
 										||
-										(
-											in_array(
-												'photo',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'photo',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'photo',
-												$provider_properties_map[$Person_type]['properties']
-											)
+										array_intersect(
+											$provider_properties_map[$MedicalBusiness_type]['properties'],
+											$provider_image_common
+										)
+										||
+										array_intersect(
+											$provider_properties_map[$Person_type]['properties'],
+											$provider_image_common
 										)
 									) {
 
