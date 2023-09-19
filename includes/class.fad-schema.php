@@ -9841,10 +9841,6 @@
 
 												$provider_breadcrumb['@id'] = $page_url . '#' . $provider_breadcrumb['@type'];
 
-												// // Define 'BreadcrumbList' reference
-												//
-												// 	$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references($provider_breadcrumb);
-
 											// itemListElement
 
 												if ( !isset($provider_archive_url) ) {
