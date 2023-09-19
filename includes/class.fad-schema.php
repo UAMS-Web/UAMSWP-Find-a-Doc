@@ -14137,27 +14137,51 @@
 
 											// Related Clinical Resources
 
-												if (
-													isset($provider_clinical_resource_ref)
-													&&
-													!empty($provider_clinical_resource_ref)
-												) {
+												if ( $provider_clinical_resource ) {
 
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref) )
-													);
+													if (
+														isset($provider_clinical_resource_ref)
+														&&
+														!empty($provider_clinical_resource_ref)
+													) {
 
-												} elseif (
-													isset($provider_clinical_resource)
-													&&
-													!empty($provider_clinical_resource)
-												) {
-													
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource) )
-													);
+														// @id references
+
+															$provider_clinical_resource_ref = is_array($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref);
+															$provider_clinical_resource_ref = array_is_list($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref) )
+															);
+
+													} else {
+
+														// Full values
+
+															$provider_clinical_resource = is_array($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource);
+															$provider_clinical_resource = array_is_list($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource) )
+															);
+
+														// Define reference to the @id
+										
+															if (
+																!isset($provider_clinical_resource_ref)
+																&&
+																!empty($provider_clinical_resource)
+																&&
+																is_array($provider_clinical_resource)
+															) {
+										
+																$provider_clinical_resource_ref = uamswp_fad_schema_node_references($provider_clinical_resource);
+										
+															}
+										
+													}
 
 												}
 
