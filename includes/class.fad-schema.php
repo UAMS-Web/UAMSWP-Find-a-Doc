@@ -9344,6 +9344,7 @@
 
 													// Clean up array
 
+														$provider_affiliation = array_filter($provider_affiliation);
 														$provider_affiliation = array_unique( $provider_affiliation, SORT_REGULAR );
 														$provider_affiliation = array_values($provider_affiliation);
 
