@@ -18,7 +18,8 @@ $page_id = get_the_ID();
 
 TODO List
 
- * Ontology items
+	Launch List
+
 	 * Area of Expertise + Clinical Resource + Condition + Location + Provider + Treatment
 		 * Primary third-party clinical organizations
 			 * Create means of defining organization schema for third-party clinical organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
@@ -31,117 +32,7 @@ TODO List
 			 * Create method of defining 'Organization' property values for UAMS Health and UAMS
 			 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
 			 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
-	 * Area of Expertise + Clinical Resource + Condition + Location + Provider
-		 * 
-	 * Area of Expertise + Clinical Resource + Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Condition + Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Condition + Location + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Condition + Provider + Treatment
-		 * 
-	 * Clinical Resource + Condition + Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Location + Provider
-		 * 
-	 * Area of Expertise + Condition + Location + Provider
-		 * 
-	 * Area of Expertise + Clinical Resource + Condition + Location
-		 * 
-	 * Area of Expertise + Clinical Resource + Condition + Provider
-		 * 
-	 * Clinical Resource + Condition + Location + Provider
-		 * 
-	 * Area of Expertise + Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Location + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Provider + Treatment
-		 * 
-	 * Clinical Resource + Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Condition + Location + Treatment
-		 * 
-	 * Area of Expertise + Condition + Provider + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Condition + Treatment
-		 * 
-	 * Clinical Resource + Condition + Location + Treatment
-		 * 
-	 * Clinical Resource + Condition + Provider + Treatment
-		 * 
-	 * Condition + Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Location + Provider
-		 * 
-	 * Area of Expertise + Clinical Resource + Location
-		 * 
-	 * Area of Expertise + Clinical Resource + Provider
-		 * 
-	 * Clinical Resource + Location + Provider
-		 * 
-	 * Area of Expertise + Condition + Location
-		 * 
-	 * Area of Expertise + Condition + Provider
-		 * 
-	 * Area of Expertise + Clinical Resource + Condition
-		 * 
-	 * Clinical Resource + Condition + Location
-		 * 
-	 * Clinical Resource + Condition + Provider
-		 * 
-	 * Condition + Location + Provider
-		 * 
-	 * Area of Expertise + Location + Treatment
-		 * 
-	 * Area of Expertise + Provider + Treatment
-		 * 
-	 * Area of Expertise + Clinical Resource + Treatment
-		 * 
-	 * Clinical Resource + Location + Treatment
-		 * 
-	 * Clinical Resource + Provider + Treatment
-		 * 
-	 * Area of Expertise + Condition + Treatment
-		 * 
-	 * Clinical Resource + Condition + Treatment
-		 * 
-	 * Condition + Location + Treatment
-		 * 
-	 * Condition + Provider + Treatment
-		 * 
-	 * Location + Provider + Treatment
-		 * 
-	 * Area of Expertise + Location
-		 * 
-	 * Area of Expertise + Provider
-		 * 
-	 * Area of Expertise + Clinical Resource
-		 * 
-	 * Clinical Resource + Location
-		 * 
-	 * Clinical Resource + Provider
-		 * 
-	 * Area of Expertise + Condition
-		 * 
-	 * Clinical Resource + Condition
-		 * 
-	 * Condition + Location
-		 * 
-	 * Condition + Provider
-		 * 
 	 * Location + Provider
-		 * 
-	 * Area of Expertise + Treatment
-		 * 
-	 * Clinical Resource + Treatment
-		 * 
-	 * Condition + Treatment
-		 * 
-	 * Location + Treatment
-		 * 
-	 * Provider + Treatment
 		 * 
 	 * Area of Expertise only
 		 * Apply the areas of expertise schema function to the single area of expertise template
@@ -185,6 +76,7 @@ TODO List
 					 * naics
 					 * taxID
 					 * vatID
+					 * Google customer ID (cid)
 				 * isAcceptingNewPatients
 				 * isAccessibleForFree
 				 * knowsLanguage
@@ -321,7 +213,6 @@ TODO List
 					 * knowsLanguage
 					 * memberOf
 		 * MedicalBusiness only
-			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
 			 * Set value of 'employee' property using the provider's 'Person' type
 			 * Add values for remaining properties:
 				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
@@ -337,26 +228,16 @@ TODO List
 					 * hasCredential
 					 * hasMap
 					 * hospitalAffiliation
-					 * isAcceptingNewPatients
+						 * Add attributes from Hospital Affilation taxonomy
+							 * Name of Hospital in American Hospital Association (AHA) Records (alternateName)
+							 * ID of Hospital in American Hospital Association Records (AHA ID) (identifier)
+						 * Check if CMS has additional identifiers for a given hospital.
 					 * legalName
-					 * location
-					 * parentOrganization
-					 * photo
-					 * smokingAllowed
 		 * Person only
-			 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
-				 * Required — Query for whether the organization is a College/University
-				 * Optional — Alternate Name (repeater)
-				 * Required — URL
-				 * Optional — Street Address
-				 * Required — City / Locality (required)
-				 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
-				 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
-				 * Optional — Postal Code
 			 * Make a decision on whether 'jobTitle' and/or 'hasOccupation' should include 
-			   only the selected clinical specialization (e.g., 'Orthopaedic Spine Surgeon') 
-			   or also its ancestors (e.g., 'Orthopaedic Spine Surgeon' will also display 
-			   'Orthopaedic Surgeon' and 'Physician').
+				   only the selected clinical specialization (e.g., 'Orthopaedic Spine Surgeon') 
+				   or also its ancestors (e.g., 'Orthopaedic Spine Surgeon' will also display 
+				   'Orthopaedic Surgeon' and 'Physician').
 	 * Treatment only
 		 * Filter ACF fields
 			 * Filter the fields referencing MedicalTest type
@@ -374,6 +255,34 @@ TODO List
 					 * 'field_treatment_procedure_schema_duplicatetherapy'
 				 * Limit options to just treatment posts with MedicalTherapy type or its subtypes
 				 * Exclude current treatment post
+
+	********************************************************************************
+
+	Post-Launch List
+
+	 * Provider only
+		 * MedicalWebPage + MedicalBusiness + Person
+			 * 
+		 * MedicalWebPage + MedicalBusiness
+			 * 
+		 * MedicalWebPage + Person
+			 * 
+		 * MedicalWebPage only
+			 * 
+		 * MedicalBusiness + Person
+			 * 
+		 * MedicalBusiness only
+			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
+		 * Person only
+			 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
+				 * Required — Query for whether the organization is a College/University
+				 * Optional — Alternate Name (repeater)
+				 * Required — URL
+				 * Optional — Street Address
+				 * Required — City / Locality (required)
+				 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
+				 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
+				 * Optional — Postal Code
 
 */
 
