@@ -5157,8 +5157,10 @@
 								$provider_inLanguage_ref = null;
 								$provider_isAcceptingNewPatients = null;
 								$provider_isAcceptingNewPatients_ref = null;
-								$provider_isAccessibleForFree = null;
-								$provider_isAccessibleForFree_ref = null;
+								$provider_isAccessibleForFree_MedicalBusiness = null;
+								$provider_isAccessibleForFree_MedicalBusiness_ref = null;
+								$provider_isAccessibleForFree_MedicalWebPage = null;
+								$provider_isAccessibleForFree_MedicalWebPage_ref = null;
 								$provider_isFamilyFriendly = null;
 								$provider_isFamilyFriendly_ref = null;
 								$provider_isicV4 = null;
@@ -12941,74 +12943,61 @@
 									 *     - Boolean
 									 */
 
-									if (
-										(
+									// MedicalWebPage
+
+										if (
 											in_array(
 												'isAccessibleForFree',
 												$provider_properties_map[$MedicalWebPage_type]['properties']
 											)
-											||
-											in_array(
-												'isAccessibleForFree',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'isAccessibleForFree',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
+										) {
 
-										// Get values
+											// Get values
 
-											if ( !isset($provider_isAccessibleForFree) ) {
+												$provider_isAccessibleForFree_MedicalWebPage = 'True';
 
-												$provider_isAccessibleForFree = 'True';
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
+											// Add to item values
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
-													$provider_isAccessibleForFree, // mixed // Required // Variable to add as the property value
-													$provider_isAccessibleForFree_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_isAccessibleForFree_MedicalWebPage, // mixed // Required // Variable to add as the property value
+													$provider_isAccessibleForFree_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// MedicalBusiness
+										}
+
+									// MedicalBusiness
+
+										if (
+											in_array(
+												'isAccessibleForFree',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												$provider_isAccessibleForFree_MedicalBusiness = '';
+
+											// Add to item values
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
-													$provider_isAccessibleForFree, // mixed // Required // Variable to add as the property value
-													$provider_isAccessibleForFree_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_isAccessibleForFree_MedicalBusiness, // mixed // Required // Variable to add as the property value
+													$provider_isAccessibleForFree_MedicalBusiness_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'isAccessibleForFree', // string // Required // Name of schema property
-													$provider_isAccessibleForFree, // mixed // Required // Variable to add as the property value
-													$provider_isAccessibleForFree_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
+										}
 
 								// isFamilyFriendly
 
