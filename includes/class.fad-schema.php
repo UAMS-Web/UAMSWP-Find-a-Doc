@@ -8894,16 +8894,6 @@
 
 													$provider_organization_specific = array();
 
-											// Define @id references to each top-level node in an array
-
-												if ( $provider_organization_specific ) {
-
-													$provider_organization_specific_ref = uamswp_fad_schema_node_references(
-														$provider_organization_specific
-													);
-
-												}
-
 										// brand
 
 											/* 
@@ -8943,9 +8933,12 @@
 
 														$provider_brand = array();
 
-												// Merge common clinical 'Organization'
+												// Merge in common clinical 'Organization'
 
 													if ( $provider_organization_common ) {
+
+														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
+														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
 
 														$provider_brand = array_merge(
 															( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
@@ -8954,21 +8947,20 @@
 
 													}
 
-												// Merge specific clinical 'Organization'
+												// Merge in specific clinical 'Organization'
 
 													if ( $provider_organization_specific ) {
 
 														if (
-															$provider_affiliation
-															||
-															$provider_memberOf
-															||
-															$provider_parentOrganization
-															||
-															$provider_worksFor
+															isset($provider_organization_specific_ref)
+															&&
+															!empty($provider_organization_specific_ref)
 														) {
 
 															// @id references
+
+																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
 
 																$provider_brand = array_merge(
 																	( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
@@ -8979,11 +8971,28 @@
 
 															// Full values
 
+																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+
 																$provider_brand = array_merge(
 																	( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
 																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
 																);
 
+															// Define reference to the @id
+											
+																if (
+																	!isset($provider_organization_specific_ref)
+																	&&
+																	!empty($provider_organization_specific)
+																	&&
+																	is_array($provider_organization_specific)
+																) {
+											
+																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
+											
+																}
+											
 														}
 
 													}
@@ -9098,60 +9107,6 @@
 
 															}
 
-														// Define reference to hospitalAffiliation IDs if both hospitalAffiliation and affiliation are valid properties
-
-															if (
-																$provider_hospitalAffiliation
-																&&
-																(
-																	in_array(
-																		'hospitalAffiliation',
-																		$provider_properties_map[$MedicalWebPage_type]['properties']
-																	)
-																	||
-																	in_array(
-																		'hospitalAffiliation',
-																		$provider_properties_map[$MedicalBusiness_type]['properties']
-																	)
-																	||
-																	in_array(
-																		'hospitalAffiliation',
-																		$provider_properties_map[$Person_type]['properties']
-																	)
-																)
-																&&
-																(
-																	in_array(
-																		'affiliation',
-																		$provider_properties_map[$MedicalWebPage_type]['properties']
-																	)
-																	||
-																	in_array(
-																		'affiliation',
-																		$provider_properties_map[$MedicalBusiness_type]['properties']
-																	)
-																	||
-																	in_array(
-																		'affiliation',
-																		$provider_properties_map[$Person_type]['properties']
-																	)
-																)
-															) {
-
-																$schema_provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references(
-																	$provider_hospitalAffiliation
-																);
-
-															}
-
-														// Define affiliation value
-
-															if ( $provider_hospitalAffiliation ) {
-
-																$provider_affiliation = $schema_provider_hospitalAffiliation_ref ?: $provider_hospitalAffiliation;
-
-															}
-
 												// hospitalAffiliation
 
 													/* 
@@ -9213,34 +9168,86 @@
 
 													// Base array
 
-														$provider_affiliation = $provider_affiliation ?: array();
+														$provider_affiliation = array();
 
-													// Merge common clinical 'Organization'
+													// Merge in hospitalAffiliation values
+
+														if ( $provider_hospitalAffiliation ) {
+
+															if (
+																isset($provider_hospitalAffiliation_ref)
+																&&
+																!empty($provider_hospitalAffiliation_ref)
+															) {
+
+																// @id references
+
+																	$provider_hospitalAffiliation_ref = is_array($provider_hospitalAffiliation_ref) ? $provider_hospitalAffiliation_ref : array($provider_hospitalAffiliation_ref);
+																	$provider_hospitalAffiliation_ref = array_is_list($provider_hospitalAffiliation_ref) ? $provider_hospitalAffiliation_ref : array($provider_hospitalAffiliation_ref);
+
+																	$provider_affiliation = array_merge(
+																		$provider_affiliation,
+																		$provider_hospitalAffiliation_ref
+																	);
+													
+															} else {
+												
+																// Full values
+
+																	$provider_hospitalAffiliation = is_array($provider_hospitalAffiliation) ? $provider_hospitalAffiliation : array($provider_hospitalAffiliation);
+																	$provider_hospitalAffiliation = array_is_list($provider_hospitalAffiliation) ? $provider_hospitalAffiliation : array($provider_hospitalAffiliation);
+																	
+																	$provider_affiliation = array_merge(
+																		$provider_affiliation,
+																		$provider_hospitalAffiliation
+																	);
+													
+																// Define reference to the @id
+												
+																	if (
+																		!isset($provider_hospitalAffiliation_ref)
+																		&&
+																		!empty($provider_hospitalAffiliation)
+																		&&
+																		is_array($provider_hospitalAffiliation)
+																	) {
+												
+																		$provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references($provider_hospitalAffiliation);
+												
+																	}
+												
+															}
+											
+														}
+
+													// Merge in common clinical 'Organization'
 
 														if ( $provider_organization_common ) {
 
+															$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
+															$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
+																
 															$provider_affiliation = array_merge(
-																( array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
-																( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
+																( $provider_affiliation && array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
+																$provider_organization_common
 															);
 
 														}
 
-													// Merge specific clinical 'Organization'
+													// Merge in specific clinical 'Organization'
 
 														if ( $provider_organization_specific ) {
 
 															if (
-																$provider_brand
-																||
-																$provider_memberOf
-																||
-																$provider_parentOrganization
-																||
-																$provider_worksFor
+																isset($provider_organization_specific_ref)
+																&&
+																!empty($provider_organization_specific_ref)
 															) {
 
 																// @id references
+
+																	$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+																	$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
 
 																	$provider_affiliation = array_merge(
 																		( array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
@@ -9251,11 +9258,28 @@
 
 																// Full values
 
+																	$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+																	$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+
 																	$provider_affiliation = array_merge(
 																		( array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
 																		( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
 																	);
 
+																// Define reference to the @id
+												
+																	if (
+																		!isset($provider_organization_specific_ref)
+																		&&
+																		!empty($provider_organization_specific)
+																		&&
+																		is_array($provider_organization_specific)
+																	) {
+												
+																		$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
+												
+																	}
+												
 															}
 
 														}
@@ -9364,9 +9388,12 @@
 
 													}
 
-												// Merge common clinical 'Organization'
+												// Merge in common clinical 'Organization'
 
 													if ( $provider_organization_common ) {
+
+														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
+														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
 
 														$provider_memberOf = array_merge(
 															( array_is_list( is_array($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ) ? $provider_memberOf : array($provider_memberOf) ),
@@ -9375,21 +9402,20 @@
 
 													}
 
-												// Merge specific clinical 'Organization'
+												// Merge in specific clinical 'Organization'
 
 													if ( $provider_organization_specific ) {
 
 														if (
-															$provider_affiliation
-															||
-															$provider_brand
-															||
-															$provider_parentOrganization
-															||
-															$provider_worksFor
+															isset($provider_organization_specific_ref)
+															&&
+															!empty($provider_organization_specific_ref)
 														) {
 
 															// @id references
+
+																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
 
 																$provider_memberOf = array_merge(
 																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
@@ -9400,11 +9426,28 @@
 
 															// Full values
 
+																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+
 																$provider_memberOf = array_merge(
 																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
 																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
 																);
 
+															// Define reference to the @id
+											
+																if (
+																	!isset($provider_organization_specific_ref)
+																	&&
+																	!empty($provider_organization_specific)
+																	&&
+																	is_array($provider_organization_specific)
+																) {
+											
+																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
+											
+																}
+											
 														}
 
 													}
@@ -9489,9 +9532,12 @@
 
 													$provider_parentOrganization = array();
 
-												// Merge common clinical 'Organization'
+												// Merge in common clinical 'Organization'
 
 													if ( $provider_organization_common ) {
+
+														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
+														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
 
 														$provider_parentOrganization = array_merge(
 															( array_is_list($provider_parentOrganization) ? $provider_parentOrganization : array($provider_parentOrganization) ),
@@ -9500,24 +9546,23 @@
 
 													}
 
-												// Merge specific clinical 'Organization'
+												// Merge in specific clinical 'Organization'
 
 													if ( $provider_organization_specific ) {
 
 														if (
-															$provider_affiliation
-															||
-															$provider_brand
-															||
-															$provider_memberOf
-															||
-															$provider_worksFor
+															isset($provider_organization_specific_ref)
+															&&
+															!empty($provider_organization_specific_ref)
 														) {
 
 															// @id references
 
+																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+
 																$provider_parentOrganization = array_merge(
-																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+																	( array_is_list($provider_parentOrganization) ? $provider_parentOrganization : array($provider_parentOrganization) ),
 																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
 																);
 
@@ -9525,11 +9570,28 @@
 
 															// Full values
 
+																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+
 																$provider_parentOrganization = array_merge(
-																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+																	( array_is_list($provider_parentOrganization) ? $provider_parentOrganization : array($provider_parentOrganization) ),
 																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
 																);
 
+															// Define reference to the @id
+											
+																if (
+																	!isset($provider_organization_specific_ref)
+																	&&
+																	!empty($provider_organization_specific)
+																	&&
+																	is_array($provider_organization_specific)
+																) {
+											
+																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
+											
+																}
+											
 														}
 
 													}
@@ -9618,9 +9680,12 @@
 
 													$provider_worksFor = array();
 
-												// Merge common clinical 'Organization'
+												// Merge in common clinical 'Organization'
 
 													if ( $provider_organization_common ) {
+
+														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
+														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
 
 														$provider_worksFor = array_merge(
 															( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
@@ -9629,24 +9694,23 @@
 
 													}
 
-												// Merge specific clinical 'Organization'
+												// Merge in specific clinical 'Organization'
 
 													if ( $provider_organization_specific ) {
 
 														if (
-															$provider_affiliation
-															||
-															$provider_brand
-															||
-															$provider_memberOf
-															||
-															$provider_parentOrganization
+															isset($provider_organization_specific_ref)
+															&&
+															!empty($provider_organization_specific_ref)
 														) {
 
 															// @id references
 
+																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
+
 																$provider_worksFor = array_merge(
-																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+																	( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
 																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
 																);
 
@@ -9654,11 +9718,28 @@
 
 															// Full values
 
+																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
+
 																$provider_worksFor = array_merge(
-																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
+																	( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
 																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
 																);
 
+															// Define reference to the @id
+											
+																if (
+																	!isset($provider_organization_specific_ref)
+																	&&
+																	!empty($provider_organization_specific)
+																	&&
+																	is_array($provider_organization_specific)
+																) {
+											
+																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
+											
+																}
+											
 														}
 
 													}
@@ -9762,7 +9843,7 @@
 
 												// // Define 'BreadcrumbList' reference
 												//
-												// 	$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references( $provider_breadcrumb );
+												// 	$schema_provider_BreadcrumbList_ref = uamswp_fad_schema_node_references($provider_breadcrumb);
 
 											// itemListElement
 
