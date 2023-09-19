@@ -6551,12 +6551,12 @@
 
 													// Get URLs for significantLink property
 
-														if ( $provider_workLocation ) {
+														if ( $provider_location ) {
 
 															$provider_significantLink = $provider_significantLink ?? array();
 
 															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_workLocation, // Property values from which to extract URLs
+																$provider_location, // Property values from which to extract URLs
 																$provider_significantLink // Existing list of URLs
 															);
 
