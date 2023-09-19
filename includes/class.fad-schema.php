@@ -25477,7 +25477,13 @@
 
 				// Define reference to the @id
 
-					if ( !isset($reference) ) {
+					if (
+						!isset($reference)
+						&&
+						!empty($value)
+						&&
+						is_array($value)
+					) {
 
 						$reference = uamswp_fad_schema_node_references($value);
 
