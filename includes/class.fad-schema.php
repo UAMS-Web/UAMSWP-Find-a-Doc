@@ -6681,7 +6681,7 @@
 
 									// Associated areas of expertise
 
-										// List of properties that reference treatments and procedures
+										// List of properties that reference areas of expertise
 
 											$provider_expertise_common = array(
 												'mentions'
@@ -6704,7 +6704,7 @@
 											)
 										) {
 
-											// Get related treatments
+											// Get related areas of expertise
 
 												if ( !isset($provider_expertise_list) ) {
 
@@ -6717,7 +6717,7 @@
 												if ( $provider_expertise_list ) {
 
 													$provider_expertise = uamswp_fad_schema_expertise(
-														$provider_expertise_list, // List of IDs of the MedicalCondition items
+														$provider_expertise_list, // List of IDs of the area of expertise items
 														$provider_url, // Page URL
 														( $nesting_level + 1 ), // Nesting level within the main schema
 														'MedicalEntity' // Fragment identifier
@@ -6797,7 +6797,7 @@
 
 									// Associated conditions
 
-										// List of properties that reference treatments and procedures
+										// List of properties that reference conditions
 
 											$provider_condition_common = array(
 												'mentions'
@@ -6820,7 +6820,7 @@
 											)
 										) {
 
-											// Get related treatments
+											// Get related conditions
 
 												if ( !isset($provider_condition_list) ) {
 
