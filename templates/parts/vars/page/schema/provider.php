@@ -237,20 +237,6 @@ TODO List
 
 // Get Values
 
-	// Common property values
-
-		include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
-
-	// Provider archive URL
-
-		$schema_provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
-
-	// Significant links (significantLink)
-
-		// Base array
-
-			$schema_provider_significantLink = array();
-
 	// Related ontology items as schema arrays
 
 		// Related Locations (MedicalWebPage[mentions], Physician[location], Person[workLocation])
@@ -284,13 +270,6 @@ TODO List
 
 				$schema_provider_location_ref = uamswp_fad_schema_node_references( $provider_related_location );
 
-			// Get URLs for significantLink property
-
-				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
-					$provider_related_location, // Property values from which to extract URLs
-					$schema_provider_significantLink // Existing list of URLs
-				);
-
 			// If there is only one item, flatten the multi-dimensional array by one step
 
 				uamswp_fad_flatten_multidimensional_array($provider_related_location);
@@ -315,13 +294,6 @@ TODO List
 
 				$schema_provider_expertise_ref = uamswp_fad_schema_node_references( $provider_related_expertise );
 
-			// Get URLs for significantLink property
-
-				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
-					$provider_related_expertise, // Property values from which to extract URLs
-					$schema_provider_significantLink // Existing list of URLs
-				);
-
 		// Related Clinical Resources
 
 			// Define the schema for nesting in 'MedicalWebPage'['mentions']
@@ -342,13 +314,6 @@ TODO List
 
 				$schema_provider_clinical_resource_ref = uamswp_fad_schema_node_references( $provider_related_clinical_resource );
 
-			// Get URLs for significantLink property
-
-				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
-					$provider_related_clinical_resource, // Property values from which to extract URLs
-					$schema_provider_significantLink // Existing list of URLs
-				);
-
 // Schema JSON Item Arrays
 
 	// Provider as MedicalWebPage
@@ -360,18 +325,6 @@ TODO List
 		// primaryImageOfPage
 
 			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
-
-		// significantLink
-
-			if ( $schema_provider_significantLink ) {
-
-				$schema_provider_MedicalWebPage['significantLink'] = $schema_provider_significantLink;
-
-				// If there is only one item, flatten the multi-dimensional array by one step
-
-					uamswp_fad_flatten_multidimensional_array($schema_provider_MedicalWebPage['significantLink']);
-
-			}
 
 		// sourceOrganization
 
