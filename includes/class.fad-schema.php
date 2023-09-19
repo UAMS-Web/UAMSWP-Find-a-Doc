@@ -1224,6 +1224,7 @@
 
 							$hospital_term = '';
 							$hospital_location = '';
+
 						// Get the Hospital Affiliation term from the ID
 
 							$hospital_term = get_term( $hospital, 'affiliation' ) ?? array();
