@@ -9014,6 +9014,29 @@ if ( !function_exists('array_is_list') ) {
 
 }
 
+// Create str_contains function that is available in PHP 8
+
+	if ( !function_exists('str_contains') ) {
+
+		function str_contains(
+			string $haystack, // string // Required // The string to search in.
+			string $needle // string // Required // The substring to search for in the haystack.
+		) {
+
+			/*
+			
+				Performs a case-sensitive check indicating if needle is contained in haystack.
+
+				Returns true if needle is in haystack, false otherwise.
+
+			*/
+
+			return $needle !== '' || mb_strpos($haystack, $needle) !== false;
+
+		}
+
+	}
+
 // Construct UAMS Text & Image Overlay Block on Ontology Fake Subpages
 function uamswp_fad_fpage_text_image_overlay(
 	$page_id, // int
