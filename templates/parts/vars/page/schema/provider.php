@@ -238,12 +238,6 @@ TODO List
 
 // Schema JSON Item Arrays
 
-	// Provider as MedicalWebPage
-
-		// primaryImageOfPage
-
-			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
-
 	// Provider profile as MedicalWebPage, MedicalBusiness and Person
 
 		$schema_provider_combined = uamswp_fad_schema_provider(
