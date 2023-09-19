@@ -6770,7 +6770,7 @@
 														$provider_url, // Page URL
 														( $nesting_level + 1 ), // Nesting level within the main schema
 														'Service' // Fragment identifier
-													) ?? array();
+													);
 
 												}
 
