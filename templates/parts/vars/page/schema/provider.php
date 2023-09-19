@@ -326,25 +326,6 @@ TODO List
 
 			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
 
-		// url
-
-			/*
-			 * URL of the item.
-			 * 
-			 * Values expected to be one of these types:
-			 * 
-			 *     - URL
-			 */
-
-			$schema_provider_MedicalWebPage['url'] = array(
-				'@id' => $page_url . '#URL',
-				'url' => $page_url
-			);
-
-			// Define reference to this 'url' property
-
-				$schema_provider_MedicalWebPage_url_ref = uamswp_fad_schema_node_references( $schema_provider_MedicalWebPage['url'] );
-
 		// video
 
 			if ( $video ) {
