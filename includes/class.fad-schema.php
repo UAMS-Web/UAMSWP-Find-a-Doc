@@ -3922,7 +3922,7 @@
 					$image_ImageObject_base = array(
 						'@type' => 'ImageObject'
 					);
-					$image_ImageObject_base['representativeOfPage'] = $nesting_level == 0 ? 'True' : 'False';
+					$image_ImageObject_base['representativeOfPage'] = $nesting_level <= 1 ? 'True' : 'False';
 
 				// 1:1 aspect ratio source image
 
@@ -3930,7 +3930,7 @@
 						$input_1_1
 						&&
 						(
-							$nesting_level == 0
+							$nesting_level <= 1
 							||
 							$single_aspect_ratio == '1:1'
 						)
@@ -3991,7 +3991,7 @@
 						$input_3_4
 						&&
 						(
-							$nesting_level == 0
+							$nesting_level <= 1
 							||
 							$single_aspect_ratio == '3:4'
 						)
@@ -4052,7 +4052,7 @@
 						$input_4_3
 						&&
 						(
-							$nesting_level == 0
+							$nesting_level <= 1
 							||
 							$single_aspect_ratio == '4:3'
 						)
@@ -4113,7 +4113,7 @@
 						$input_16_9
 						&&
 						(
-							$nesting_level == 0
+							$nesting_level <= 1
 							||
 							$single_aspect_ratio == '16:9'
 						)
