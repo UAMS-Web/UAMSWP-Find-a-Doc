@@ -7816,30 +7816,29 @@
 
 									}
 
-								// medicalSpecialty
+								// medicalSpecialty and specialty
 
-									/* 
-									 * A medical specialty of the provider.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MedicalSpecialty
-									 */
+									// List of properties that reference organizations (i.e., 'Organization')
+
+									$provider_specialty_common = array(
+										'medicalSpecialty',
+										'specialty'
+									);
 
 									if (
-										in_array(
-											'medicalSpecialty',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										array_intersect(
+											$provider_properties_map[$MedicalWebPage_type]['properties'],
+											$provider_specialty_common
 										)
 										||
-										in_array(
-											'medicalSpecialty',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										array_intersect(
+											$provider_properties_map[$MedicalBusiness_type]['properties'],
+											$provider_specialty_common
 										)
 										||
-										in_array(
-											'medicalSpecialty',
-											$provider_properties_map[$Person_type]['properties']
+										array_intersect(
+											$provider_properties_map[$Person_type]['properties'],
+											$provider_specialty_common
 										)
 									) {
 
@@ -7874,52 +7873,239 @@
 
 											}
 
-										// Add to item values
+										// medicalSpecialty
 
-											// MedicalWebPage
+											/* 
+											 * A medical specialty of the provider.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - MedicalSpecialty
+											 */
 
-												if (
-													in_array(
-														'medicalSpecialty',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_medicalSpecialty
-												) {
+											// Add to item values
 
-													$provider_item_MedicalWebPage['medicalSpecialty'] = $provider_medicalSpecialty;
+												// MedicalWebPage
 
-												}
+													if (
+														in_array(
+															'medicalSpecialty',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_medicalSpecialty
+													) {
 
-											// MedicalBusiness
+														if (
+															isset($provider_medicalSpecialty_ref)
+															&&
+															!empty($provider_medicalSpecialty_ref)
+														) {
 
-												if (
-													in_array(
-														'medicalSpecialty',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_medicalSpecialty
-												) {
+															$provider_item_MedicalWebPage['medicalSpecialty'] = $provider_medicalSpecialty_ref;
 
-													$provider_item_MedicalBusiness['medicalSpecialty'] = $provider_medicalSpecialty;
+														} else {
 
-												}
+															$provider_item_MedicalWebPage['medicalSpecialty'] = $provider_medicalSpecialty;
 
-											// Person
+															// Define reference to the @id
 
-												if (
-													in_array(
-														'medicalSpecialty',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_medicalSpecialty
-												) {
+																if ( !isset($provider_medicalSpecialty_ref) ) {
 
-													$provider_item_Person['medicalSpecialty'] = $provider_medicalSpecialty;
+																	$provider_medicalSpecialty_ref = uamswp_fad_schema_node_references($provider_medicalSpecialty);
 
-												}
+																}
+
+														}
+
+													}
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'medicalSpecialty',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_medicalSpecialty
+													) {
+
+														if (
+															isset($provider_medicalSpecialty_ref)
+															&&
+															!empty($provider_medicalSpecialty_ref)
+														) {
+
+															$provider_item_MedicalBusiness['medicalSpecialty'] = $provider_medicalSpecialty_ref;
+
+														} else {
+
+															$provider_item_MedicalBusiness['medicalSpecialty'] = $provider_medicalSpecialty;
+
+															// Define reference to the @id
+
+																if ( !isset($provider_medicalSpecialty_ref) ) {
+
+																	$provider_medicalSpecialty_ref = uamswp_fad_schema_node_references($provider_medicalSpecialty);
+
+																}
+
+														}
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'medicalSpecialty',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_medicalSpecialty
+													) {
+
+														if (
+															isset($provider_medicalSpecialty_ref)
+															&&
+															!empty($provider_medicalSpecialty_ref)
+														) {
+
+															$provider_item_Person['medicalSpecialty'] = $provider_medicalSpecialty_ref;
+
+														} else {
+
+															$provider_item_Person['medicalSpecialty'] = $provider_medicalSpecialty;
+
+															// Define reference to the @id
+
+																if ( !isset($provider_medicalSpecialty_ref) ) {
+
+																	$provider_medicalSpecialty_ref = uamswp_fad_schema_node_references($provider_medicalSpecialty);
+
+																}
+
+														}
+
+													}
+
+										// specialty
+
+											/* 
+											 * One of the domain specialities to which this web page's content applies.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Specialty
+											 */
+
+											// Add to item values
+
+												// MedicalWebPage
+
+													if (
+														in_array(
+															'specialty',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
+														&&
+														$provider_medicalSpecialty
+													) {
+
+														if (
+															isset($provider_medicalSpecialty_ref)
+															&&
+															!empty($provider_medicalSpecialty_ref)
+														) {
+
+															$provider_item_MedicalWebPage['specialty'] = $provider_medicalSpecialty_ref;
+
+														} else {
+
+															$provider_item_MedicalWebPage['specialty'] = $provider_medicalSpecialty;
+
+															// Define reference to the @id
+
+																if ( !isset($provider_medicalSpecialty_ref) ) {
+
+																	$provider_medicalSpecialty_ref = uamswp_fad_schema_node_references($provider_medicalSpecialty);
+
+																}
+
+														}
+
+													}
+
+												// MedicalBusiness
+
+													if (
+														in_array(
+															'specialty',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
+														&&
+														$provider_medicalSpecialty
+													) {
+
+														if (
+															isset($provider_medicalSpecialty_ref)
+															&&
+															!empty($provider_medicalSpecialty_ref)
+														) {
+
+															$provider_item_MedicalBusiness['specialty'] = $provider_medicalSpecialty_ref;
+
+														} else {
+
+															$provider_item_MedicalBusiness['specialty'] = $provider_medicalSpecialty;
+
+															// Define reference to the @id
+
+																if ( !isset($provider_medicalSpecialty_ref) ) {
+
+																	$provider_medicalSpecialty_ref = uamswp_fad_schema_node_references($provider_medicalSpecialty);
+
+																}
+
+														}
+
+													}
+
+												// Person
+
+													if (
+														in_array(
+															'specialty',
+															$provider_properties_map[$Person_type]['properties']
+														)
+														&&
+														$provider_medicalSpecialty
+													) {
+
+														if (
+															isset($provider_medicalSpecialty_ref)
+															&&
+															!empty($provider_medicalSpecialty_ref)
+														) {
+
+															$provider_item_Person['specialty'] = $provider_medicalSpecialty_ref;
+
+														} else {
+
+															$provider_item_Person['specialty'] = $provider_medicalSpecialty;
+
+															// Define reference to the @id
+
+																if ( !isset($provider_medicalSpecialty_ref) ) {
+
+																	$provider_medicalSpecialty_ref = uamswp_fad_schema_node_references($provider_medicalSpecialty);
+
+																}
+
+														}
+
+													}
 
 									}
 
@@ -16401,94 +16587,6 @@
 												) {
 
 													$provider_item_Person['speakable'] = $provider_speakable;
-
-												}
-
-									}
-
-								// specialty
-
-									/* 
-									 * One of the domain specialities to which this web page's content applies.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Specialty
-									 */
-
-									if (
-										(
-											in_array(
-												'specialty',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'specialty',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'specialty',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($provider_specialty) ) {
-
-												$provider_specialty = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												if (
-													in_array(
-														'specialty',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_specialty
-												) {
-
-													$provider_item_MedicalWebPage['specialty'] = $provider_specialty;
-
-												}
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'specialty',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_specialty
-												) {
-
-													$provider_item_MedicalBusiness['specialty'] = $provider_specialty;
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'specialty',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_specialty
-												) {
-
-													$provider_item_Person['specialty'] = $provider_specialty;
 
 												}
 
