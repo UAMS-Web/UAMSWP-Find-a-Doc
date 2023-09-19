@@ -14727,11 +14727,7 @@
 
 										// Get values
 
-											if ( !isset($provider_photo) ) {
-
-												$provider_photo = $provider_image_general ?? array();
-
-											}
+											$provider_photo = $provider_image_general ?? array();
 
 										// Add to item values
 
