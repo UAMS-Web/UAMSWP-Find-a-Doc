@@ -12124,336 +12124,332 @@
 												 *     - URL
 												 */
 
-												if ( !isset($provider_identifier) ) {
+												// Base 'identifier' property value array
 
-													// Base 'identifier' property value array
+													$provider_identifier = array();
 
-														$provider_identifier = array();
+												// Get values
 
-													// Get values
+													// Dun & Bradstreet DUNS number
 
-														// Dun & Bradstreet DUNS number
+														if ( $provider_duns ) {
 
-															if ( $provider_duns ) {
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																array(
+																	'Data Universal Numbering System (DUNS) number',
+																	'DUNS number',
+																	'D-U-N-S number'
+																), // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'Data Universal Numbering System number', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q246386', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_duns, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
+
+														}
+
+													// Global Location Number
+
+														if ( $provider_globalLocationNumber ) {
+
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																'GLN', // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'Global Location Number', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q1258830', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_globalLocationNumber, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
+
+														}
+
+													// International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
+
+														if ( $provider_isicV4 ) {
+
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																array(
+																	'ISIC 2008',
+																	'ISIC Rev 4'
+																), // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'International Standard Industrial Classification Rev. 4', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q112111674', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_isicV4, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
+
+														}
+
+													// Legal Entity Identifier (LEI)
+
+														if ( $provider_leiCode ) {
+
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																array(
+																	'Global Legal Entity Identifier',
+																	'LEI',
+																	'LEI code',
+																	'LEI number'
+																), // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'Legal Entity Identifier', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q6517388', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_leiCode, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
+
+														}
+
+													// North American Industry Classification System (NAICS) code
+
+														if ( $provider_naics ) {
+
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																array(
+																	'North American Industry Classification System',
+																	'NAICS code',
+																	'NAICS',
+																	'NAICS-SCIAN code',
+																	'NAICS-SCIAN'
+																), // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'North American Industry Classification System code', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q3509282', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_naics, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
+
+														}
+
+													// Tax / Fiscal ID
+
+														// Taxpayer Identification Number
+
+															if ( $provider_taxID_taxpayer ) {
 
 																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
 																	array(
-																		'Data Universal Numbering System (DUNS) number',
-																		'DUNS number',
-																		'D-U-N-S number'
+																		'TIN',
+																		'IRS TIN',
+																		'TIN IRS'
 																	), // mixed // Optional // alternateName property value
 																	null, // string // Optional // description property value
 																	null, // int // Optional // maxValue property value
 																	null, // mixed // Optional // measurementMethod property value
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
-																	'Data Universal Numbering System number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q246386', // string // Optional // propertyID property value
+																	'Taxpayer Identification Number', // string // Optional // name property value
+																	'https://www.wikidata.org/wiki/Q1444804', // string // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$provider_duns, // mixed // Optional // value property value
+																	$provider_taxID_taxpayer, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
 
-														// Global Location Number
+														// Employer Identification Number
 
-															if ( $provider_globalLocationNumber ) {
-
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																	'GLN', // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'Global Location Number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q1258830', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_globalLocationNumber, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
-
-															}
-
-														// International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
-
-															if ( $provider_isicV4 ) {
+															if ( $provider_taxID_employer ) {
 
 																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
 																	array(
-																		'ISIC 2008',
-																		'ISIC Rev 4'
+																		'Federal Employer Identification Number',
+																		'EIN'
 																	), // mixed // Optional // alternateName property value
 																	null, // string // Optional // description property value
 																	null, // int // Optional // maxValue property value
 																	null, // mixed // Optional // measurementMethod property value
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
-																	'International Standard Industrial Classification Rev. 4', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q112111674', // string // Optional // propertyID property value
+																	'Employer Identification Number', // string // Optional // name property value
+																	'https://www.wikidata.org/wiki/Q2397748', // string // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
-																	$provider_isicV4, // mixed // Optional // value property value
+																	$provider_taxID_employer, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
 
-														// Legal Entity Identifier (LEI)
+													// Value-added tax (VAT) identification number
 
-															if ( $provider_leiCode ) {
+														if ( $provider_vatID ) {
 
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																	array(
-																		'Global Legal Entity Identifier',
-																		'LEI',
-																		'LEI code',
-																		'LEI number'
-																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'Legal Entity Identifier', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q6517388', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_leiCode, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																array(
+																	'value-added tax identification number',
+																	'VAT ID',
+																	'VATIN'
+																), // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'VAT identification number', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q2319042', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_vatID, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
 
-															}
+														}
 
-														// North American Industry Classification System (NAICS) code
+													// National Provider Identifier (NPI)
 
-															if ( $provider_naics ) {
+														// Get values
 
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																	array(
-																		'North American Industry Classification System',
-																		'NAICS code',
-																		'NAICS',
-																		'NAICS-SCIAN code',
-																		'NAICS-SCIAN'
-																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'North American Industry Classification System code', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q3509282', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_naics, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
+															if ( !isset($provider_npi) ) {
+
+																$provider_npi = get_field( 'physician_npi', $provider ) ?? '';
+																$provider_npi = $provider_npi ? str_pad($provider_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
 
 															}
 
-														// Tax / Fiscal ID
+														if ( $provider_npi ) {
 
-															// Taxpayer Identification Number
+															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																'NPI', // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'National Provider Identifier', // string // Optional // name property value
+																'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_npi, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
 
-																if ( $provider_taxID_taxpayer ) {
+														}
 
-																	$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																		array(
-																			'TIN',
-																			'IRS TIN',
-																			'TIN IRS'
-																		), // mixed // Optional // alternateName property value
-																		null, // string // Optional // description property value
-																		null, // int // Optional // maxValue property value
-																		null, // mixed // Optional // measurementMethod property value
-																		null, // mixed // Optional // measurementTechnique property value
-																		null, // int // Optional // minValue property value
-																		'Taxpayer Identification Number', // string // Optional // name property value
-																		'https://www.wikidata.org/wiki/Q1444804', // string // Optional // propertyID property value
-																		null, // string // Optional // unitCode property value
-																		null, // string // Optional // unitText property value
-																		null, // string // Optional // url property value
-																		$provider_taxID_taxpayer, // mixed // Optional // value property value
-																		null, // mixed // Optional // valueReference property value
-																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																	);
+													// Google Company ID (CID)
+
+														// Get Google Customer ID repeater field value
+
+															if ( !isset($provider_google_cid) ) {
+
+																if ( !isset($provider_google_cid_repeater) ) {
+
+																	$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
 
 																}
 
-															// Employer Identification Number
-
-																if ( $provider_taxID_employer ) {
-
-																	$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																		array(
-																			'Federal Employer Identification Number',
-																			'EIN'
-																		), // mixed // Optional // alternateName property value
-																		null, // string // Optional // description property value
-																		null, // int // Optional // maxValue property value
-																		null, // mixed // Optional // measurementMethod property value
-																		null, // mixed // Optional // measurementTechnique property value
-																		null, // int // Optional // minValue property value
-																		'Employer Identification Number', // string // Optional // name property value
-																		'https://www.wikidata.org/wiki/Q2397748', // string // Optional // propertyID property value
-																		null, // string // Optional // unitCode property value
-																		null, // string // Optional // unitText property value
-																		null, // string // Optional // url property value
-																		$provider_taxID_employer, // mixed // Optional // value property value
-																		null, // mixed // Optional // valueReference property value
-																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																	);
-
-																}
-
-														// Value-added tax (VAT) identification number
-
-															if ( $provider_vatID ) {
-
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																	array(
-																		'value-added tax identification number',
-																		'VAT ID',
-																		'VATIN'
-																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'VAT identification number', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q2319042', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_vatID, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
-
-															}
-
-														// National Provider Identifier (NPI)
-
-															// Get values
-
-																if ( !isset($provider_npi) ) {
-
-																	$provider_npi = get_field( 'physician_npi', $provider ) ?? '';
-																	$provider_npi = $provider_npi ? str_pad($provider_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
-
-																}
-
-															if ( $provider_npi ) {
-
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																	'NPI', // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'National Provider Identifier', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_npi, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
-
-															}
-
-														// Google Company ID (CID)
-
-															// Get Google Customer ID repeater field value
-
-																if ( !isset($provider_google_cid) ) {
-
-																	if ( !isset($provider_google_cid_repeater) ) {
-
-																		$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
+																// Add each item to Google Company ID value array
 	
-																	}
+																	if ( $provider_google_cid_repeater ) {
 
-																	// Add each item to Google Company ID value array
-		
-																		if ( $provider_google_cid_repeater ) {
+																		foreach ( $provider_google_cid_repeater as $cid ) {
 
-																			foreach ( $provider_google_cid_repeater as $cid ) {
+																			if ( $cid ) {
 
-																				if ( $cid ) {
-
-																					$provider_google_cid[] = $cid['schema_google_cid_text'];
-
-																				}
+																				$provider_google_cid[] = $cid['schema_google_cid_text'];
 
 																			}
 
 																		}
 
-																	// Clean up Google Company ID value array
+																	}
 
-																		$provider_google_cid = array_filter($provider_google_cid);
-																		$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
-																		$provider_google_cid = array_values($provider_google_cid);
+																// Clean up Google Company ID value array
 
-																}
+																	$provider_google_cid = array_filter($provider_google_cid);
+																	$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
+																	$provider_google_cid = array_values($provider_google_cid);
 
-															// Add value to identifier property value list
+															}
 
-																if ( $provider_google_cid ) {
+														// Add value to identifier property value list
 
-																	// If there is only one item, flatten the multi-dimensional array by one step
+															if ( $provider_google_cid ) {
 
-																		if ( $provider_google_cid ) {
+																// If there is only one item, flatten the multi-dimensional array by one step
 
-																			uamswp_fad_flatten_multidimensional_array($provider_google_cid);
+																	if ( $provider_google_cid ) {
 
-																		}
+																		uamswp_fad_flatten_multidimensional_array($provider_google_cid);
 
-																	$provider_identifier[] = uamswp_fad_schema_propertyvalue(
-																		array(
-																			'Google Ads customer ID',
-																			'Google Ads CID',
-																			'Google Maps customer ID',
-																			'Google Maps CID',
-																			'Google CID',
-																			'CID'
-																		), // mixed // Optional // alternateName property value
-																		null, // string // Optional // description property value
-																		null, // int // Optional // maxValue property value
-																		null, // mixed // Optional // measurementMethod property value
-																		null, // mixed // Optional // measurementTechnique property value
-																		null, // int // Optional // minValue property value
-																		'Google customer ID', // string // Optional // name property value
-																		'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
-																		null, // string // Optional // unitCode property value
-																		null, // string // Optional // unitText property value
-																		null, // string // Optional // url property value
-																		$provider_google_cid, // mixed // Optional // value property value
-																		null, // mixed // Optional // valueReference property value
-																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																	);
+																	}
 
-																}
+																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																	array(
+																		'Google Ads customer ID',
+																		'Google Ads CID',
+																		'Google Maps customer ID',
+																		'Google Maps CID',
+																		'Google CID',
+																		'CID'
+																	), // mixed // Optional // alternateName property value
+																	null, // string // Optional // description property value
+																	null, // int // Optional // maxValue property value
+																	null, // mixed // Optional // measurementMethod property value
+																	null, // mixed // Optional // measurementTechnique property value
+																	null, // int // Optional // minValue property value
+																	'Google customer ID', // string // Optional // name property value
+																	'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
+																	null, // string // Optional // unitCode property value
+																	null, // string // Optional // unitText property value
+																	null, // string // Optional // url property value
+																	$provider_google_cid, // mixed // Optional // value property value
+																	null, // mixed // Optional // valueReference property value
+																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																);
 
-												}
+															}
 
 												// Add to item values
 
