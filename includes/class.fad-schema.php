@@ -5135,6 +5135,7 @@
 								$provider_sameAs = null;
 								$provider_sameAs_repeater = null;
 								$provider_significantLink = null;
+								$provider_significantLink_ref = null;
 								$provider_smokingAllowed = null;
 								$provider_sourceOrganization = null;
 								$provider_speakable = null;
@@ -6510,6 +6511,19 @@
 
 															}
 
+													// Get URLs for significantLink property
+
+														if ( $provider_location ) {
+
+															$provider_significantLink = $provider_significantLink ?? array();
+
+															$provider_significantLink = uamswp_fad_schema_property_urls(
+																$provider_location, // Property values from which to extract URLs
+																$provider_significantLink // Existing list of URLs
+															);
+
+														}
+
 												}
 
 											// workLocation
@@ -6610,6 +6624,19 @@
 																$provider_item_Person['workLocation'] = $provider_workLocation;
 
 															}
+
+													// Get URLs for significantLink property
+
+														if ( $provider_workLocation ) {
+
+															$provider_significantLink = $provider_significantLink ?? array();
+
+															$provider_significantLink = uamswp_fad_schema_property_urls(
+																$provider_workLocation, // Property values from which to extract URLs
+																$provider_significantLink // Existing list of URLs
+															);
+
+														}
 
 												}
 
@@ -6713,6 +6740,19 @@
 																$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
 
 															}
+
+													// Get URLs for significantLink property
+
+														if ( $provider_containedInPlace ) {
+
+															$provider_significantLink = $provider_significantLink ?? array();
+
+															$provider_significantLink = uamswp_fad_schema_property_urls(
+																$provider_containedInPlace, // Property values from which to extract URLs
+																$provider_significantLink // Existing list of URLs
+															);
+
+														}
 
 												}
 
@@ -6818,6 +6858,115 @@
 												}
 
 										}
+
+									// significantLink
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												if (
+													in_array(
+														'significantLink',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													&&
+													$provider_significantLink
+												) {
+
+													if (
+														isset($provider_significantLink_ref)
+														&&
+														!empty($provider_significantLink_ref)
+													) {
+
+														$provider_item_MedicalWebPage['significantLink'] = $provider_significantLink_ref;
+
+													} else {
+
+														$provider_item_MedicalWebPage['significantLink'] = $provider_significantLink;
+
+														// Define reference to the @id
+
+															if ( !isset($provider_significantLink_ref) ) {
+
+																$provider_significantLink_ref = uamswp_fad_schema_node_references($provider_significantLink);
+
+															}
+
+													}
+
+												}
+
+											// MedicalBusiness
+
+												if (
+													in_array(
+														'significantLink',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													&&
+													$provider_significantLink
+												) {
+
+													if (
+														isset($provider_significantLink_ref)
+														&&
+														!empty($provider_significantLink_ref)
+													) {
+
+														$provider_item_MedicalBusiness['significantLink'] = $provider_significantLink_ref;
+
+													} else {
+
+														$provider_item_MedicalBusiness['significantLink'] = $provider_significantLink;
+
+														// Define reference to the @id
+
+															if ( !isset($provider_significantLink_ref) ) {
+
+																$provider_significantLink_ref = uamswp_fad_schema_node_references($provider_significantLink);
+
+															}
+
+													}
+
+												}
+
+											// Person
+
+												if (
+													in_array(
+														'significantLink',
+														$provider_properties_map[$Person_type]['properties']
+													)
+													&&
+													$provider_significantLink
+												) {
+
+													if (
+														isset($provider_significantLink_ref)
+														&&
+														!empty($provider_significantLink_ref)
+													) {
+
+														$provider_item_Person['significantLink'] = $provider_significantLink_ref;
+
+													} else {
+
+														$provider_item_Person['significantLink'] = $provider_significantLink;
+
+														// Define reference to the @id
+
+															if ( !isset($provider_significantLink_ref) ) {
+
+																$provider_significantLink_ref = uamswp_fad_schema_node_references($provider_significantLink);
+
+															}
+
+													}
+
+												}
 
 								// about
 
@@ -9095,6 +9244,19 @@
 													}
 
 												}
+
+										// Get URLs for significantLink property
+
+											if ( $provider_availableService ) {
+
+												$provider_significantLink = $provider_significantLink ?? array();
+
+												$provider_significantLink = uamswp_fad_schema_property_urls(
+													$provider_availableService, // Property values from which to extract URLs
+													$provider_significantLink // Existing list of URLs
+												);
+
+											}
 
 									}
 
@@ -14956,6 +15118,19 @@
 														}
 
 												}
+
+												// Get URLs for significantLink property
+
+													if ( $provider_condition ) {
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_condition, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
+
+													}
 
 											// Related Treatments
 
