@@ -16883,6 +16883,7 @@
 								$LocalBusiness_identifier = null;
 								$LocalBusiness_image = null;
 								$LocalBusiness_image_general = null;
+								$LocalBusiness_image_general_ref = null;
 								$LocalBusiness_image_id = null;
 								$LocalBusiness_isAcceptingNewPatients = null;
 								$LocalBusiness_isAccessibleForFree = null;
@@ -19468,21 +19469,17 @@
 										)
 									) {
 
-										// Get the values
+										// Add to item values
 
-											if ( !isset($LocalBusiness_image) ) {
-
-												$LocalBusiness_image = $LocalBusiness_image_general ?? array();
-
-											}
-
-										// Add to schema
-
-											if ( $LocalBusiness_image ) {
-
-												$LocalBusiness_item['image'] = $LocalBusiness_image;
-
-											}
+											uamswp_fad_schema_add_to_item_values(
+												$LocalBusiness_type, // string // Required // The @type value for the schema item
+												$LocalBusiness_item, // array // Required // The list array for the schema item to which to add the property value
+												'image', // string // Required // Name of schema property
+												$LocalBusiness_image_general, // mixed // Required // Variable to add as the property value
+												$LocalBusiness_image_general_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+												$LocalBusiness_subtype_map, // array // Required // Map array to match schema types with allowed properties
+												($nesting_level + 1) // int // Required // Current nesting level value
+											);
 
 									}
 
@@ -20186,21 +20183,17 @@
 										)
 									) {
 
-										// Get values
-
-											if ( !isset($LocalBusiness_photo) ) {
-
-												$LocalBusiness_photo = $LocalBusiness_image_general ?? array();
-
-											}
-
 										// Add to item values
 
-											if ( $LocalBusiness_photo ) {
-
-												$LocalBusiness_item['photo'] = $LocalBusiness_photo;
-
-											}
+											uamswp_fad_schema_add_to_item_values(
+												$LocalBusiness_type, // string // Required // The @type value for the schema item
+												$LocalBusiness_item, // array // Required // The list array for the schema item to which to add the property value
+												'photo', // string // Required // Name of schema property
+												$LocalBusiness_image_general, // mixed // Required // Variable to add as the property value
+												$LocalBusiness_image_general_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+												$LocalBusiness_subtype_map, // array // Required // Map array to match schema types with allowed properties
+												($nesting_level + 1) // int // Required // Current nesting level value
+											);
 
 									}
 
