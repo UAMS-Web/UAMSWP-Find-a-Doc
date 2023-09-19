@@ -25534,6 +25534,11 @@
 			array &$output = array() // Existing list of URLs
 		) {
 
+			// Check / define variables
+
+				$input = array_is_list($input) ? $input : array($input);
+				$output = array_is_list($output) ? $output : array($output);
+
 			if ( $input ) {
 
 				foreach ( $input as $item ) {
@@ -25553,6 +25558,23 @@
 				}
 
 			}
+
+			// Clean up output array
+
+				$output = $output ? array_filter($output) : $output;
+				$output = $output ? array_unique( $output, SORT_REGULAR ) : $output;
+				$output = $output ? array_values($output) : $output;
+				uamswp_fad_flatten_multidimensional_array($output);
+
+				if (
+					$output
+					&&
+					is_array($output)
+				) {
+
+					sort($output);
+
+				}
 
 			return $output;
 
