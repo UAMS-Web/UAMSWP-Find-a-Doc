@@ -18,24 +18,152 @@ $page_id = get_the_ID();
 
 TODO List
 
- * Provider
-	 * Create means of defining organization schema for third-party institutions (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
-	 * Create means of associating third-party institutions with provider
-	 * Define schema for affiliated hospital(s)
-	 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
-		 * Required — Query for whether the organization is a College/University
-		 * Optional — Alternate Name (repeater)
-		 * Required — URL
-		 * Optional — Street Address
-		 * Required — City / Locality (required)
-		 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
-		 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
-		 * Optional — Postal Code
-	 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
-	 * Define Provider-as-Dentist type array
-	 * Define Provider-as-Optician type array
- * Related ontology items
-	 * Related locations
+ * Ontology items
+	 * Area of Expertise + Clinical Resource + Condition + Location + Provider + Treatment
+		 * Primary third-party clinical organizations
+			 * Create means of defining organization schema for third-party clinical organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System)
+			 * Create means of associating third-party clinical organizations with provider, location, et al.
+		 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
+		 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
+		 * Resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+		 * Consider shifting to the use of the 'Thing > CreativeWork > WebContent > HealthTopicContent' type in place of 'MedicalWebPage' and/or the 'CreativeWork' subtypes used for clinical resources.
+		 * 'Organization' values (for properties like 'brand', 'parentOrganization' and 'worksFor')
+			 * Create method of defining 'Organization' property values for UAMS Health and UAMS
+			 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
+			 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
+	 * Area of Expertise + Clinical Resource + Condition + Location + Provider
+		 * 
+	 * Area of Expertise + Clinical Resource + Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Condition + Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Condition + Location + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Condition + Provider + Treatment
+		 * 
+	 * Clinical Resource + Condition + Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Location + Provider
+		 * 
+	 * Area of Expertise + Condition + Location + Provider
+		 * 
+	 * Area of Expertise + Clinical Resource + Condition + Location
+		 * 
+	 * Area of Expertise + Clinical Resource + Condition + Provider
+		 * 
+	 * Clinical Resource + Condition + Location + Provider
+		 * 
+	 * Area of Expertise + Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Location + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Provider + Treatment
+		 * 
+	 * Clinical Resource + Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Condition + Location + Treatment
+		 * 
+	 * Area of Expertise + Condition + Provider + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Condition + Treatment
+		 * 
+	 * Clinical Resource + Condition + Location + Treatment
+		 * 
+	 * Clinical Resource + Condition + Provider + Treatment
+		 * 
+	 * Condition + Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Location + Provider
+		 * 
+	 * Area of Expertise + Clinical Resource + Location
+		 * 
+	 * Area of Expertise + Clinical Resource + Provider
+		 * 
+	 * Clinical Resource + Location + Provider
+		 * 
+	 * Area of Expertise + Condition + Location
+		 * 
+	 * Area of Expertise + Condition + Provider
+		 * 
+	 * Area of Expertise + Clinical Resource + Condition
+		 * 
+	 * Clinical Resource + Condition + Location
+		 * 
+	 * Clinical Resource + Condition + Provider
+		 * 
+	 * Condition + Location + Provider
+		 * 
+	 * Area of Expertise + Location + Treatment
+		 * 
+	 * Area of Expertise + Provider + Treatment
+		 * 
+	 * Area of Expertise + Clinical Resource + Treatment
+		 * 
+	 * Clinical Resource + Location + Treatment
+		 * 
+	 * Clinical Resource + Provider + Treatment
+		 * 
+	 * Area of Expertise + Condition + Treatment
+		 * 
+	 * Clinical Resource + Condition + Treatment
+		 * 
+	 * Condition + Location + Treatment
+		 * 
+	 * Condition + Provider + Treatment
+		 * 
+	 * Location + Provider + Treatment
+		 * 
+	 * Area of Expertise + Location
+		 * 
+	 * Area of Expertise + Provider
+		 * 
+	 * Area of Expertise + Clinical Resource
+		 * 
+	 * Clinical Resource + Location
+		 * 
+	 * Clinical Resource + Provider
+		 * 
+	 * Area of Expertise + Condition
+		 * 
+	 * Clinical Resource + Condition
+		 * 
+	 * Condition + Location
+		 * 
+	 * Condition + Provider
+		 * 
+	 * Location + Provider
+		 * 
+	 * Area of Expertise + Treatment
+		 * 
+	 * Clinical Resource + Treatment
+		 * 
+	 * Condition + Treatment
+		 * 
+	 * Location + Treatment
+		 * 
+	 * Provider + Treatment
+		 * 
+	 * Area of Expertise only
+		 * Apply the areas of expertise schema function to the single area of expertise template
+		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
+			 * Apply the areas of expertise schema function to the area of expertise fake subpages templates
+		 * Add system fallback images to schema if relevant featured image is blank
+		 * Add system fallback text to schema if relevant text is blank
+	 * Clinical Resource only
+		 * Apply the clinical resources schema function to the single clinical resource template
+		 * Separate resource types (e.g., ImageObject) into separate functions, calling them in the clinical resource schema function
+			 * Apply VideoObject schema function to video property value within Provider schema function
+		 * Get more info from YouTube API through YouTube Lyte plugin
+			 * videoQuality
+			 * videoFrameSize
+		 * Get info from Vimeo API
+			 * duration
+			 * thumbnail
+			 * videoQuality
+			 * videoFrameSize
+	 * Condition only
+		 * 
+	 * Location only
 		 * Apply the location schema function to the single location template
 		 * Add values for remaining properties:
 			 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
@@ -109,130 +237,149 @@ TODO List
 				 * photo
 					 * Amend values from ImageObject to accommodate properties particular to 'Photograph' type
 				 * specialOpeningHoursSpecification
-	 * Related areas of expertise
-		 * Apply the areas of expertise schema function to the single area of expertise template
-		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
-			 * Apply the areas of expertise schema function to the area of expertise fake subpages templates
-		 * Add system fallback images to schema if relevant featured image is blank
-		 * Add system fallback text to schema if relevant text is blank
-	 * Related clinical resources
-		 * Apply the clinical resources schema function to the single clinical resource template
-		 * Separate resource types (e.g., ImageObject) into separate functions, calling them in the clinical resource schema function
-			 * Apply VideoObject schema function to video property value within Provider schema function
-		 * Get more info from YouTube API through YouTube Lyte plugin
-			 * videoQuality
-			 * videoFrameSize
-		 * Get info from Vimeo API
-			 * duration
-			 * thumbnail
-			 * videoQuality
-			 * videoFrameSize
-	 * Provider
-		 * Make function for provider schema
-		 * Make adjustments to convert 'Physician' type to 'MedicalBusiness' or a subtype of 'MedicalBusiness' relevant to the particular provider
-			 * A dentist -> 'Dentist'
-			 * An optician -> 'Optician'
-			 * A women's health nurse practitioner -> 'Gynecologic'
-		 * Provider as 'MedicalBusiness' type and its subtypes
+	 * Provider only
+		 * MedicalWebPage + MedicalBusiness + Person
+			 * Define schema for affiliated hospital(s)
+			 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
+			 * Add new set of inputs for name
+				 * Message instructing editors to fully populate all fields and to not use initials
+				 * Required inputs:
+					 * Full first name
+					 * Button group to confirm presence/absence of middle name (default: null)
+					 * Full middle name
+					 * Button group to confirm presence/absence of nickname (default: null)
+					 * Nickname
+					 * Full last name
+					 * Button group to confirm presence/absence of generational suffix (default: null)
+					 * Generational suffix
+					 * Name display format selector with a message instructing editors to mirror the external name value defined in Epic (default: 'First Middle Last')
+						 * First Middle Last
+						 * First Middle "Nickname" Last
+						 * First M. Last
+						 * First M. "Nickname" Last
+						 * F. Middle Last
+						 * F. Middle "Nickname" Last
+						 * F. M. Last
+						 * F. M. "Nickname" Last
+				 * Optional inputs
+					 * Alternate name repeater (e.g., former names, variant names)
+				 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
+			 * Add values for remaining properties:
+				 * Needing new data inputs
+					 * alternateName
+					 * potentialAction
+					 * sameAs
+				 * Other properties
+					 * description
+					 * image
+					 * mainEntityOfPage
+					 * name
+					 * subjectOf
+		 * MedicalWebPage + MedicalBusiness
+			 * Add values for remaining properties:
+				 * Other properties
+					 * keywords
+		 * MedicalWebPage + Person
+			 * Add values for remaining properties:
+				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+					 * 
+				 * Needing new data inputs
+					 * 
+				 * Other properties
+					 * 
+		 * MedicalWebPage only
+			 * Add values for remaining properties:
+				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+					 * 
+				 * Needing new data inputs
+					 * 
+				 * Other properties
+					 * 
+		 * MedicalBusiness + Person
+			 * Add values for remaining properties:
+				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+					 * identifier
+						 * duns
+						 * globalLocationNumber
+						 * isicV4
+						 * naics
+						 * taxID
+						 * vatID
+				 * Needing new data inputs
+					 * affiliation
+					 * award
+					 * brand
+					 * makesOffer
+					 * review
+					 * worksFor
+					 * 
+				 * Other properties
+					 * identifier
+						 * the NPI value
+						 * the taxonomy code value(s)?
+					 * knowsAbout
+					 * knowsLanguage
+					 * memberOf
+		 * MedicalBusiness only
 			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
-			 * 'employee' property
-				 * Add Provider as 'Person' type
-		 * Consider adding 'ProfilePage' as an additional type on one of the items in @graph
-		 * Add new set of inputs for name
-			 * Message instructing editors to fully populate all fields and to not use initials
-			 * Required inputs:
-				 * Full first name
-				 * Button group to confirm presence/absence of middle name (default: null)
-				 * Full middle name
-				 * Button group to confirm presence/absence of nickname (default: null)
-				 * Nickname
-				 * Full last name
-				 * Button group to confirm presence/absence of generational suffix (default: null)
-				 * Generational suffix
-				 * Name display format selector with a message instructing editors to mirror the external name value defined in Epic (default: 'First Middle Last')
-					 * First Middle Last
-					 * First Middle "Nickname" Last
-					 * First M. Last
-					 * First M. "Nickname" Last
-					 * F. Middle Last
-					 * F. Middle "Nickname" Last
-					 * F. M. Last
-					 * F. M. "Nickname" Last
-			 * Optional inputs
-				 * Alternate name repeater (e.g., former names, variant names)
-			 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
-		 * Add values for remaining properties:
-			 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-				 * areaServed
-				 * currenciesAccepted
-				 * identifiers
-					 * duns
-					 * globalLocationNumber
-					 * isicV4
-					 * leiCode
-					 * naics
-					 * taxID
-					 * vatID
-					 * iso6523Code
-				 * isAccessibleForFree
-				 * paymentAccepted
-			 * Needing new data inputs
-				 * alternateName
-				 * award
-				 * brand
-				 * makesOffer
-				 * potentialAction
-				 * review
-				 * sameAs
-				 * worksFor
-			 * Other properties
-				 * additionalName
-				 * affiliation
-				 * containedInPlace
-				 * description
-				 * familyName
-				 * givenName
-				 * hasCredential
-				 * hasOccupation
-				 * hasMap
-				 * honorificPrefix
-				 * honorificSuffix
-				 * hospitalAffiliation
-				 * identifier
-					 * the NPI value
-					 * the taxonomy code value(s)?
-				 * image
-				 * isAcceptingNewPatients
-				 * jobTitle
-				 * keywords
-				 * knowsAbout
-				 * knowsLanguage
-				 * legalName
-				 * location
-				 * mainEntityOfPage
-				 * memberOf
-				 * name
-				 * parentOrganization
-				 * photo
-				 * smokingAllowed
-				 * subjectOf
-				 * workLocation
- * General
-	 * Remove irrelevant metaboxes from taxonomy items (e.g., SEO; __ Archive Settings; Layout Settings)
-	 * Replace common schema fields with clone fields referencing field in 'assets\json\acf-json\group_uamswp_schema.json'
-	 * Resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
-	 * Consider shifting to the use of the 'Thing > CreativeWork > WebContent > HealthTopicContent' type in place of 'MedicalWebPage' and/or the 'CreativeWork' subtypes used for clinical resources.
-	 * 'Organization' values (for properties like 'brand', 'parentOrganization' and 'worksFor')
-		 * Create method of defining 'Organization' property values for UAMS Health and UAMS
-		 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
-		 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
- * Filter ACF fields
-	 * Fields referencing MedicalTest type
-		 * Just treatments with MedicalTest type or its subtypes
-		 * Exclude current item
-	 * Fields referencing MedicalTherapy type
-		 * Just treatments with MedicalTherapy type or its subtypes
-		 * Exclude current item
+			 * Set value of 'employee' property using the provider's 'Person' type
+			 * Add values for remaining properties:
+				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+					 * areaServed
+					 * currenciesAccepted
+					 * identifier
+						 * leiCode
+						 * iso6523Code
+					 * isAccessibleForFree
+					 * paymentAccepted
+				 * Other properties
+					 * containedInPlace
+					 * hasCredential
+					 * hasMap
+					 * hospitalAffiliation
+					 * isAcceptingNewPatients
+					 * legalName
+					 * location
+					 * parentOrganization
+					 * photo
+					 * smokingAllowed
+		 * Person only
+			 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
+				 * Required — Query for whether the organization is a College/University
+				 * Optional — Alternate Name (repeater)
+				 * Required — URL
+				 * Optional — Street Address
+				 * Required — City / Locality (required)
+				 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
+				 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
+				 * Optional — Postal Code
+			 * Add values for remaining properties:
+				 * Other properties
+					 * additionalName
+					 * familyName
+					 * givenName
+					 * hasOccupation
+					 * honorificPrefix
+					 * honorificSuffix
+					 * jobTitle
+					 * workLocation
+	 * Treatment only
+		 * Filter ACF fields
+			 * Filter the fields referencing MedicalTest type
+				 * Affected fields:
+					 * 'field_condition_schema_typicaltest'
+					 * 'field_schema_medicaltest' (and its clones)
+				 * Limit options to just treatment posts with MedicalTest type or its subtypes
+				 * Exclude current treatment post
+			 * Filter the fields referencing MedicalTherapy type
+				 * Affected fields:
+					 * 'field_condition_schema_primaryprevention'
+					 * 'field_condition_schema_secondaryprevention'
+					 * 'field_condition_schema_possibletreatment'
+					 * 'field_schema_medicaltherapy' (and its clones)
+					 * 'field_treatment_procedure_schema_duplicatetherapy'
+				 * Limit options to just treatment posts with MedicalTherapy type or its subtypes
+				 * Exclude current treatment post
 
 */
 
