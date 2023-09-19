@@ -6651,7 +6651,33 @@
 
 									// Associated areas of expertise
 
+										// Get URLs for significantLink property
+
+											if ( $provider_expertise ) {
+
+												$provider_significantLink = $provider_significantLink ?? array();
+
+												$provider_significantLink = uamswp_fad_schema_property_urls(
+													$provider_expertise, // Property values from which to extract URLs
+													$provider_significantLink // Existing list of URLs
+												);
+
+											}
+
 									// Associated clinical resources
+
+										// Get URLs for significantLink property
+
+											if ( $provider_clinical_resource ) {
+
+												$provider_significantLink = $provider_significantLink ?? array();
+
+												$provider_significantLink = uamswp_fad_schema_property_urls(
+													$provider_clinical_resource, // Property values from which to extract URLs
+													$provider_significantLink // Existing list of URLs
+												);
+
+											}
 
 									// Associated conditions
 
@@ -6696,19 +6722,6 @@
 														( $nesting_level + 1 ), // Nesting level within the main schema
 														'MedicalCondition' // Fragment identifier
 													);
-
-												// Get URLs for significantLink property
-
-													if ( $provider_condition ) {
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_condition, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-													}
 
 												}
 
@@ -14107,6 +14120,15 @@
 										
 													}
 
+													// Get URLs for significantLink property
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_location, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
+
 												}
 
 											// Related Areas of Expertise
@@ -14156,6 +14178,15 @@
 															}
 										
 													}
+
+													// Get URLs for significantLink property
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_expertise, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
 
 												}
 
@@ -14207,6 +14238,15 @@
 										
 													}
 
+													// Get URLs for significantLink property
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_clinical_resource, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
+
 												}
 
 											// Merge in related conditions
@@ -14257,6 +14297,15 @@
 										
 													}
 
+													// Get URLs for significantLink property
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_condition, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
+
 												}
 
 											// Related Treatments
@@ -14306,6 +14355,15 @@
 															}
 										
 													}
+
+													// Get URLs for significantLink property
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_availableService, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
 
 												}
 
