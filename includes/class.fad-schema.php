@@ -6895,108 +6895,36 @@
 
 													// MedicalWebPage
 
-														if (
-															in_array(
-																'availableService',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_availableService
-														) {
-
-															if (
-																isset($provider_availableService_ref)
-																&&
-																!empty($provider_availableService_ref)
-															) {
-
-																$provider_item_MedicalWebPage['availableService'] = $provider_availableService_ref;
-
-															} else {
-
-																$provider_item_MedicalWebPage['availableService'] = $provider_availableService;
-
-																// Define reference to the @id
-
-																	if ( !isset($provider_availableService_ref) ) {
-
-																		$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-																	}
-
-															}
-
-														}
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'availableService', // string // Required // Name of schema property
+															$provider_availableService, // mixed // Required // Variable to add as the property value
+															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														);
 
 													// MedicalBusiness
 
-														if (
-															in_array(
-																'availableService',
-																$provider_properties_map[$MedicalBusiness_type]['properties']
-															)
-															&&
-															$provider_availableService
-														) {
-
-															if (
-																isset($provider_availableService_ref)
-																&&
-																!empty($provider_availableService_ref)
-															) {
-
-																$provider_item_MedicalBusiness['availableService'] = $provider_availableService_ref;
-
-															} else {
-
-																$provider_item_MedicalBusiness['availableService'] = $provider_availableService;
-
-																// Define reference to the @id
-
-																	if ( !isset($provider_availableService_ref) ) {
-
-																		$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-																	}
-
-															}
-
-														}
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'availableService', // string // Required // Name of schema property
+															$provider_availableService, // mixed // Required // Variable to add as the property value
+															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														);
 
 													// Person
 
-														if (
-															in_array(
-																'availableService',
-																$provider_properties_map[$Person_type]['properties']
-															)
-															&&
-															$provider_availableService
-														) {
-
-															if (
-																isset($provider_availableService_ref)
-																&&
-																!empty($provider_availableService_ref)
-															) {
-
-																$provider_item_Person['availableService'] = $provider_availableService_ref;
-
-															} else {
-
-																$provider_item_Person['availableService'] = $provider_availableService;
-
-																// Define reference to the @id
-
-																	if ( !isset($provider_availableService_ref) ) {
-
-																		$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-																	}
-
-															}
-
-														}
+														uamswp_fad_schema_add_to_item_values(
+															$Person_type, // string // Required // The @type value for the schema item
+															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+															'availableService', // string // Required // Name of schema property
+															$provider_availableService, // mixed // Required // Variable to add as the property value
+															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														);
 
 												// Get URLs for significantLink property
 
@@ -25524,6 +25452,87 @@
 			uamswp_fad_flatten_multidimensional_array($output);
 
 			return $output;
+
+		}
+
+	// Determine whether to define schema property with full values or with @id reference
+
+		function uamswp_fad_schema_values_or_reference(
+			&$property, // Property variable
+			$value, // Full value variable
+			&$reference // @id reference variable
+		) {
+
+			if (
+				isset($reference)
+				&&
+				!empty($reference)
+			) {
+
+				$property = $reference;
+
+			} else {
+
+				$property = $value;
+
+				// Define reference to the @id
+
+					if ( !isset($reference) ) {
+
+						$reference = uamswp_fad_schema_node_references($value);
+
+					}
+
+			}
+
+		}
+
+	// Add values to multiple schema items
+
+		function uamswp_fad_schema_add_to_item_values(
+			string $schema_type, // string // Required // The @type value for the schema item
+			array &$schema_type_list, // array // Required // The list array for the schema item to which to add the property value
+			string $property_name, // string // Required // Name of schema property
+			$property_value, // mixed // Required // Variable to add as the property value
+			&$property_value_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+			array $property_map, // array // Required // Map array to match schema types with allowed properties
+			string $property_map_key = 'properties' // string // Optional // Key in the property map containing the list of allowed properties as its value // Default: 'properties'
+		) {
+
+			if (
+				!$schema_type
+				||
+				!$schema_type_list
+				||
+				!$property_name
+				||
+				!$property_value
+				||
+				!$property_map
+				||
+				!$property_map_key
+			) {
+
+				return;
+
+			}
+
+				if (
+					in_array(
+						$property_name,
+						$property_map[$schema_type][$property_map_key]
+					)
+					&&
+					$property_value
+				) {
+
+					uamswp_fad_schema_values_or_reference(
+						$schema_type_list[$property_name], // Property variable
+						$property_value, // Full value variable
+						$property_value_ref // @id reference variable
+					);
+
+				}
 
 		}
 
