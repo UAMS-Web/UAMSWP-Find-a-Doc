@@ -812,6 +812,7 @@
 
 				$provider_clinical_bio = get_field('physician_clinical_bio');
 				$video = get_field('physician_youtube_link');
+				$provider_schema_fields[$page_id]['provider_video_url'] = $video; // Pass value to schema function
 
 				if (
 					$provider_clinical_bio

@@ -5246,7 +5246,19 @@
 								$provider_vatID = null;
 								$provider_vatID_ref = null;
 								$provider_video = null;
+								$provider_video_caption = null;
+								$provider_video_caption_query = null;
+								$provider_video_description = null;
+								$provider_video_duration = null;
+								$provider_video_embedUrl = null;
+								$provider_video_info = null;
+								$provider_video_parsed = null;
+								$provider_video_published = null;
 								$provider_video_ref = null;
+								$provider_video_thumbnail = null;
+								$provider_video_title = null;
+								$provider_video_videoFrameSize = null;
+								$provider_video_videoQuality = null;
 								$provider_workLocation = null;
 								$provider_workLocation_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
@@ -16007,10 +16019,167 @@
 
 										// Get values
 
-											if ( !isset($provider_video) ) {
+											// Video URL
 
-												$provider_video = array();
+												if ( !isset($provider_video_url) ) {
 
+													$provider_video_url = get_field( 'physician_youtube_link', $provider );
+
+												}
+
+											// Video info
+
+												if ( $provider_video_url ) {
+
+													// Parse the URL and return its components
+
+														$provider_video_parsed = parse_url($provider_video_url);
+
+														// Parse the query string into variables
+
+															parse_str($provider_video_parsed['query'], $provider_video_parsed['query']);
+
+													if (
+														str_contains( $provider_video_parsed['host'], 'youtube' )
+														||
+														str_contains( $provider_video_parsed['host'], 'youtu.be' )
+													) {
+
+														// If YouTube
+
+															// Embed URL
+
+																$provider_video_embedUrl = $provider_video_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $provider_video_parsed['query']['v'] : '';
+
+															// Get info from video
+
+																$provider_video_info = uamswp_fad_youtube_info( $provider_video_url ) ?? array();
+
+																// Title (snippet.title)
+
+																	$provider_video_title = $provider_video_info['title'] ?? '';
+
+																// Thumbnail URL
+
+																	// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+
+																		$provider_video_thumbnail = $provider_video_info['HQthumbUrl'] ?? array();
+
+																	// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+																		if ( !$provider_video_thumbnail ) {
+
+																			$provider_video_thumbnail = $provider_video_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+																		}
+
+																// Published date and time (snippet.publishedAt)
+
+																	$provider_video_published = $provider_video_info['dateField'] ?? '';
+
+																// Duration (contentDetails.duration)
+
+																	$provider_video_duration = $provider_video_info['duration'] ?? '';
+
+																// Description (snippet.description)
+
+																	$provider_video_description = $provider_video_info['description'] ?? '';
+
+																// Whether captions are available for the video (contentDetails.caption)
+
+																	$provider_video_caption_query = $provider_video_info['captions_data'] ?? '';
+																	$provider_video_caption_query = ( $provider_video_caption_query == 'true' ) ? true : false;
+
+																	// Captions text
+
+																		if ( $provider_video_caption_query ) {
+
+																			/* No info on this returned from function */
+
+																			$provider_video_caption = '';
+
+																		}
+
+																// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
+
+																	/* No info on this returned from function */
+
+																	$provider_video_videoQuality = '';
+
+																// Frame size
+
+																	/* No info on this returned from function */
+
+																	$provider_video_videoFrameSize = '';
+
+													} elseif ( str_contains( $provider_video_parsed['host'], 'vimeo' ) ) {
+
+														// If Vimeo
+
+															// Embed URL
+
+																$provider_video_embedUrl = $provider_video_parsed['path'] ? 'https://www.youtube.com/embed/' . $provider_video_parsed['path']: '';
+
+													}
+
+												}
+
+										// Format values
+
+											if ( $provider_video_url ) {
+
+												// Base array
+
+													$provider_video = array();
+
+												// @type
+
+													$provider_video['@type'] = 'VideoObject';
+
+												// @id
+
+													if ( !isset($provider_url) ) {
+
+														$provider_url = get_permalink($provider);
+														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
+			
+													}
+			
+													$provider_video['@id'] = $provider_url . '#' . $provider_video['@type'];
+
+												// Other properties
+
+													$provider_video['abstract'] = '';
+													$provider_video['alternateName'] = '';
+													$provider_video['audience'] = '';
+													$provider_video['creator'] = '';
+													$provider_video['dateModified'] = '';
+													$provider_video['datePublished'] = $provider_video_published ?? '';
+													$provider_video['description'] = $provider_video_description ?? '';
+													$provider_video['duration'] = $provider_video_duration ?? '';
+													$provider_video['embedUrl'] = $provider_video_embedUrl ?? '';
+													$provider_video['isAccessibleForFree'] = 'True';
+													$provider_video['isPartOf'] = $provider_item_MedicalWebPage_ref ?? '';
+													$provider_video['mainEntityOfPage'] = '' ?? '';
+													$provider_video['name'] = $provider_video_title ?? '';
+													$provider_video['sameAs'] = $provider_video_url ?? '';
+													$provider_video['sourceOrganization'] = '';
+													$provider_video['speakable'] = '';
+													$provider_video['subjectOf'] = '';
+													$provider_video['thumbnail'] = $provider_video_thumbnail ?? '';
+													$provider_video['timeRequired'] = $provider_video_duration ?? '';
+													$provider_video['transcript'] = $provider_video_caption ?? '';
+													$provider_video['url'] = $provider_video_url ?? '';
+													$provider_video['videoFrameSize'] = $provider_video_videoFrameSize ?? '';
+													$provider_video['videoQuality'] = $provider_video_videoQuality ?? '';
+
+												// Clean up the array
+
+													if ( $provider_video ) {
+
+														$provider_video = array_filter($provider_video);
+
+													}
 											}
 
 										// Add to item values

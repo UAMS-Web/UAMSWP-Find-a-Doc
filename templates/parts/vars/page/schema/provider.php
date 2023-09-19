@@ -118,6 +118,7 @@ TODO List
 	 * Related clinical resources
 		 * Apply the clinical resources schema function to the single clinical resource template
 		 * Separate resource types (e.g., ImageObject) into separate functions, calling them in the clinical resource schema function
+			 * Apply VideoObject schema function to video property value within Provider schema function
 		 * Get more info from YouTube API through YouTube Lyte plugin
 			 * videoQuality
 			 * videoFrameSize
