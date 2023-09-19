@@ -14085,27 +14085,51 @@
 
 											// Related Locations
 
-												if (
-													isset($provider_location_ref)
-													&&
-													!empty($provider_location_ref)
-												) {
+												if ( $provider_location ) {
 
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref) )
-													);
+													if (
+														isset($provider_location_ref)
+														&&
+														!empty($provider_location_ref)
+													) {
 
-												} elseif (
-													isset($provider_location)
-													&&
-													!empty($provider_location)
-												) {
-													
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_location) ? $provider_location : array($provider_location) )
-													);
+														// @id references
+
+															$provider_location_ref = is_array($provider_location_ref) ? $provider_location_ref : array($provider_location_ref);
+															$provider_location_ref = array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref) )
+															);
+
+													} else {
+
+														// Full values
+
+															$provider_location = is_array($provider_location) ? $provider_location : array($provider_location);
+															$provider_location = array_is_list($provider_location) ? $provider_location : array($provider_location);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_location) ? $provider_location : array($provider_location) )
+															);
+
+														// Define reference to the @id
+										
+															if (
+																!isset($provider_location_ref)
+																&&
+																!empty($provider_location)
+																&&
+																is_array($provider_location)
+															) {
+										
+																$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
+										
+															}
+										
+													}
 
 												}
 
