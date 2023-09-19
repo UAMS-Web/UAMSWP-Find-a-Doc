@@ -21052,6 +21052,24 @@
 
 									}
 
+								// Clean up values array
+
+									if (
+										is_array($MedicalEntity_image)
+										&&
+										!empty($MedicalEntity_image)
+									) {
+
+										$MedicalEntity_image = array_filter($MedicalEntity_image);
+										$MedicalEntity_image = array_unique( $MedicalEntity_image, SORT_REGULAR );
+										$MedicalEntity_image = array_values($MedicalEntity_image);
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array( $MedicalEntity_image );
+
+									}
+
 								// Add to schema
 
 									if ( $MedicalEntity_image ) {
