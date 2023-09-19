@@ -5727,7 +5727,12 @@
 
 														$provider_honorificPrefix = '';
 
-														if ( in_array( $provider_honorificPrefix_degree_valid, $provider_degree_array, true ) ) {
+														if (
+															array_intersect(
+																$provider_honorificPrefix_degree_valid, // The array with master values to check.
+																$provider_degree_array // Arrays to compare values against.
+															)
+														) {
 
 															$provider_honorificPrefix = uamswp_attr_conversion('Dr.');
 

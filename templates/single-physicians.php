@@ -155,7 +155,12 @@
 					$prefix = '';
 					$prefix_attr = '';
 
-				if ( in_array( $prefix_degrees, $degree_attr_array, true ) ) {
+				if (
+					array_intersect(
+						$prefix_degrees, // The array with master values to check.
+						$degree_attr_array // Arrays to compare values against.
+					)
+				) {
 
 					$prefix = 'Dr.';
 					$prefix_attr = uamswp_attr_conversion($prefix);
