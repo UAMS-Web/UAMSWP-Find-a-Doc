@@ -5608,7 +5608,7 @@
 
 												if ( !isset($provider_givenName) ) {
 
-													$provider_givenName = get_field( 'physician_first_name', $provider );
+													$provider_givenName = get_field( 'physician_first_name', $provider ) ?? '';
 
 												}
 
@@ -5616,7 +5616,7 @@
 
 												if ( !isset($provider_additionalName) ) {
 
-													$provider_additionalName = get_field( 'physician_middle_name', $provider );
+													$provider_additionalName = get_field( 'physician_middle_name', $provider ) ?? '';
 
 												}
 
@@ -5632,7 +5632,7 @@
 
 												if ( !isset($provider_familyName) ) {
 
-													$provider_familyName = get_field( 'physician_last_name', $provider );
+													$provider_familyName = get_field( 'physician_last_name', $provider ) ?? '';
 
 												}
 
@@ -5640,7 +5640,7 @@
 
 												if ( !isset($provider_generational_suffix) ) {
 
-													$provider_generational_suffix = get_field( 'physician_pedigree', $provider );
+													$provider_generational_suffix = get_field( 'physician_pedigree', $provider ) ?? '';
 
 												}
 
