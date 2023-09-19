@@ -319,21 +319,9 @@ TODO List
 
 	// Provider as MedicalWebPage
 
-		// Base array
-
-			$schema_provider_MedicalWebPage = array();
-
 		// primaryImageOfPage
 
 			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
-
-		// video
-
-			if ( $video ) {
-
-				$schema_provider_MedicalWebPage['video'] = $video;
-
-			}
 
 	// Provider as Physician and as Person
 
@@ -348,9 +336,6 @@ TODO List
 		);
 
 // Add Provider Schema Arrays to Base Array
-
-	// // Provider as MedicalWebPage (old)
-	// $schema_provider['@graph'][] = $schema_provider_MedicalWebPage;
 
 	// Provider as MedicalWebPage
 	$schema_provider['@graph'][] = $schema_provider_combined['MedicalWebPage'];
