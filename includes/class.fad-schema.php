@@ -5026,6 +5026,7 @@
 								$provider_alternateName = null;
 								$provider_alternateName_additional = null;
 								$provider_alternateName_additional_repeater = null;
+								$provider_alternateName_ref = null;
 								$provider_alternateName_variants = null;
 								$provider_areaServed = null;
 								$provider_associations = null;
