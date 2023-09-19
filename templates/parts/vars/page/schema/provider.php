@@ -240,41 +240,6 @@ TODO List
 
 	// Related ontology items as schema arrays
 
-		// Related Locations (MedicalWebPage[mentions], Physician[location], Person[workLocation])
-
-			// Base array
-
-				$provider_related_location = array();
-
-			// Define values array for each associated location // Repeat for all associated locations
-
-				if (
-					isset($LocalBusiness_list)
-					&&
-					!empty($LocalBusiness_list)
-					&&
-					is_array($LocalBusiness_list)
-				) {
-
-					$provider_related_location = $LocalBusiness_list;
-
-				} else {
-
-					$provider_related_location = uamswp_fad_schema_location(
-						$locations, // List of IDs of the location items
-						$page_url, // Page URL
-					);
-
-				}
-
-			// Define reference to each value/row in this property
-
-				$schema_provider_location_ref = uamswp_fad_schema_node_references( $provider_related_location );
-
-			// If there is only one item, flatten the multi-dimensional array by one step
-
-				uamswp_fad_flatten_multidimensional_array($provider_related_location);
-
 		// Related Areas of Expertise
 
 			// Define the schema for nesting in 'MedicalWebPage'['mentions']
