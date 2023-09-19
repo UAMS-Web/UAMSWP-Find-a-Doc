@@ -6859,6 +6859,160 @@
 
 										}
 
+										// availableService
+
+											/* 
+											 * A medical service available from this provider.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - MedicalProcedure
+											 *     - MedicalTest
+											 */
+
+											if (
+												(
+													in_array(
+														'availableService',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'availableService',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
+													||
+													in_array(
+														'availableService',
+														$provider_properties_map[$Person_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Add to item values
+
+													// MedicalWebPage
+
+														if (
+															in_array(
+																'availableService',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
+															&&
+															$provider_availableService
+														) {
+
+															if (
+																isset($provider_availableService_ref)
+																&&
+																!empty($provider_availableService_ref)
+															) {
+
+																$provider_item_MedicalWebPage['availableService'] = $provider_availableService_ref;
+
+															} else {
+
+																$provider_item_MedicalWebPage['availableService'] = $provider_availableService;
+
+																// Define reference to the @id
+
+																	if ( !isset($provider_availableService_ref) ) {
+
+																		$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+
+																	}
+
+															}
+
+														}
+
+													// MedicalBusiness
+
+														if (
+															in_array(
+																'availableService',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
+															&&
+															$provider_availableService
+														) {
+
+															if (
+																isset($provider_availableService_ref)
+																&&
+																!empty($provider_availableService_ref)
+															) {
+
+																$provider_item_MedicalBusiness['availableService'] = $provider_availableService_ref;
+
+															} else {
+
+																$provider_item_MedicalBusiness['availableService'] = $provider_availableService;
+
+																// Define reference to the @id
+
+																	if ( !isset($provider_availableService_ref) ) {
+
+																		$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+
+																	}
+
+															}
+
+														}
+
+													// Person
+
+														if (
+															in_array(
+																'availableService',
+																$provider_properties_map[$Person_type]['properties']
+															)
+															&&
+															$provider_availableService
+														) {
+
+															if (
+																isset($provider_availableService_ref)
+																&&
+																!empty($provider_availableService_ref)
+															) {
+
+																$provider_item_Person['availableService'] = $provider_availableService_ref;
+
+															} else {
+
+																$provider_item_Person['availableService'] = $provider_availableService;
+
+																// Define reference to the @id
+
+																	if ( !isset($provider_availableService_ref) ) {
+
+																		$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+
+																	}
+
+															}
+
+														}
+
+												// Get URLs for significantLink property
+
+													if ( $provider_availableService ) {
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_availableService, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
+
+													}
+
+											}
+
 									// significantLink
 
 										// Add to item values
@@ -9103,160 +9257,6 @@
 													$provider_item_Person['author'] = $provider_author;
 
 												}
-
-									}
-
-								// availableService
-
-									/* 
-									 * A medical service available from this provider.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MedicalProcedure
-									 *     - MedicalTest
-									 */
-
-									if (
-										(
-											in_array(
-												'availableService',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'availableService',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'availableService',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												if (
-													in_array(
-														'availableService',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_availableService
-												) {
-
-													if (
-														isset($provider_availableService_ref)
-														&&
-														!empty($provider_availableService_ref)
-													) {
-
-														$provider_item_MedicalWebPage['availableService'] = $provider_availableService_ref;
-
-													} else {
-
-														$provider_item_MedicalWebPage['availableService'] = $provider_availableService;
-
-														// Define reference to the @id
-
-															if ( !isset($provider_availableService_ref) ) {
-
-																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-															}
-
-													}
-
-												}
-
-											// MedicalBusiness
-
-												if (
-													in_array(
-														'availableService',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_availableService
-												) {
-
-													if (
-														isset($provider_availableService_ref)
-														&&
-														!empty($provider_availableService_ref)
-													) {
-
-														$provider_item_MedicalBusiness['availableService'] = $provider_availableService_ref;
-
-													} else {
-
-														$provider_item_MedicalBusiness['availableService'] = $provider_availableService;
-
-														// Define reference to the @id
-
-															if ( !isset($provider_availableService_ref) ) {
-
-																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-															}
-
-													}
-
-												}
-
-											// Person
-
-												if (
-													in_array(
-														'availableService',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_availableService
-												) {
-
-													if (
-														isset($provider_availableService_ref)
-														&&
-														!empty($provider_availableService_ref)
-													) {
-
-														$provider_item_Person['availableService'] = $provider_availableService_ref;
-
-													} else {
-
-														$provider_item_Person['availableService'] = $provider_availableService;
-
-														// Define reference to the @id
-
-															if ( !isset($provider_availableService_ref) ) {
-
-																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-															}
-
-													}
-
-												}
-
-										// Get URLs for significantLink property
-
-											if ( $provider_availableService ) {
-
-												$provider_significantLink = $provider_significantLink ?? array();
-
-												$provider_significantLink = uamswp_fad_schema_property_urls(
-													$provider_availableService, // Property values from which to extract URLs
-													$provider_significantLink // Existing list of URLs
-												);
-
-											}
 
 									}
 
