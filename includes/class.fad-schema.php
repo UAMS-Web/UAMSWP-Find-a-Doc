@@ -2519,11 +2519,11 @@
 
 				if ( $propertyvalue_item ) {
 
-					$additionalType_list[] = $propertyvalue_item;
+					$propertyvalue_list[] = $propertyvalue_item;
 
 				}
 
-			return $additionalType_list;
+			return $propertyvalue_list;
 
 		}
 
