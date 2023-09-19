@@ -18217,7 +18217,7 @@
 											$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
 										)
 										&&
-										$nesting_level == 0
+										$nesting_level <= 1
 									) {
 
 										// Get values
