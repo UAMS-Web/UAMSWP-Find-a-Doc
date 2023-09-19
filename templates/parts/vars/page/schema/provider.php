@@ -353,16 +353,10 @@ TODO List
 				 * Required — State / Appropriate first-level Administrative division — https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country
 				 * Required — Country (required) — two-letter ISO 3166-1 alpha-2 country code — https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements
 				 * Optional — Postal Code
-			 * Add values for remaining properties:
-				 * Other properties
-					 * additionalName
-					 * familyName
-					 * givenName
-					 * hasOccupation
-					 * honorificPrefix
-					 * honorificSuffix
-					 * jobTitle
-					 * workLocation
+			 * Make a decision on whether 'jobTitle' and/or 'hasOccupation' should include 
+			   only the selected clinical specialization (e.g., 'Orthopaedic Spine Surgeon') 
+			   or also its ancestors (e.g., 'Orthopaedic Spine Surgeon' will also display 
+			   'Orthopaedic Surgeon' and 'Physician').
 	 * Treatment only
 		 * Filter ACF fields
 			 * Filter the fields referencing MedicalTest type
