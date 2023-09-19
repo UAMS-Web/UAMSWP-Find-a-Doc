@@ -133,7 +133,7 @@
 
 			// Remove duplicate rows
 
-				$degree_attr_array = array_unique($degree_attr_array);
+				$degree_attr_array = array_unique( $degree_attr_array, SORT_REGULAR );
 
 			// Reindex array
 
