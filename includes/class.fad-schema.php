@@ -5069,6 +5069,7 @@
 								$provider_expertise = null;
 								$provider_expertise_ref = null;
 								$provider_familyName = null;
+								$provider_familyName_ref = null;
 								$provider_fpage_query = null;
 								$provider_generational_suffix = null;
 								$provider_givenName = null;
@@ -5750,48 +5751,36 @@
 
 												// MedicalWebPage
 
-													if (
-														in_array(
-															'familyName',
-															$provider_properties_map[$MedicalWebPage_type]['properties']
-														)
-														&&
-														$provider_familyName
-													) {
-
-														$provider_item_MedicalWebPage['familyName'] = $provider_familyName;
-
-													}
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'familyName', // string // Required // Name of schema property
+														$provider_familyName, // mixed // Required // Variable to add as the property value
+														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+													);
 
 												// MedicalBusiness
 
-													if (
-														in_array(
-															'familyName',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
-														)
-														&&
-														$provider_familyName
-													) {
-
-														$provider_item_MedicalBusiness['familyName'] = $provider_familyName;
-
-													}
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'familyName', // string // Required // Name of schema property
+														$provider_familyName, // mixed // Required // Variable to add as the property value
+														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+													);
 
 												// Person
 
-													if (
-														in_array(
-															'familyName',
-															$provider_properties_map[$Person_type]['properties']
-														)
-														&&
-														$provider_familyName
-													) {
-
-														$provider_item_Person['familyName'] = $provider_familyName;
-
-													}
+													uamswp_fad_schema_add_to_item_values(
+														$Person_type, // string // Required // The @type value for the schema item
+														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+														'familyName', // string // Required // Name of schema property
+														$provider_familyName, // mixed // Required // Variable to add as the property value
+														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+													);
 
 										// legalName
 
