@@ -6796,108 +6796,39 @@
 
 											// MedicalWebPage
 
-												if (
-													in_array(
-														'significantLink',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													&&
-													$provider_significantLink
-												) {
-
-													if (
-														isset($provider_significantLink_ref)
-														&&
-														!empty($provider_significantLink_ref)
-													) {
-
-														$provider_item_MedicalWebPage['significantLink'] = $provider_significantLink_ref;
-
-													} else {
-
-														$provider_item_MedicalWebPage['significantLink'] = $provider_significantLink;
-
-														// Define reference to the @id
-
-															if ( !isset($provider_significantLink_ref) ) {
-
-																$provider_significantLink_ref = uamswp_fad_schema_node_references($provider_significantLink);
-
-															}
-
-													}
-
-												}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$provider_significantLink, // mixed // Required // Variable to add as the property value
+													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 											// MedicalBusiness
 
-												if (
-													in_array(
-														'significantLink',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													&&
-													$provider_significantLink
-												) {
-
-													if (
-														isset($provider_significantLink_ref)
-														&&
-														!empty($provider_significantLink_ref)
-													) {
-
-														$provider_item_MedicalBusiness['significantLink'] = $provider_significantLink_ref;
-
-													} else {
-
-														$provider_item_MedicalBusiness['significantLink'] = $provider_significantLink;
-
-														// Define reference to the @id
-
-															if ( !isset($provider_significantLink_ref) ) {
-
-																$provider_significantLink_ref = uamswp_fad_schema_node_references($provider_significantLink);
-
-															}
-
-													}
-
-												}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$provider_significantLink, // mixed // Required // Variable to add as the property value
+													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 											// Person
 
-												if (
-													in_array(
-														'significantLink',
-														$provider_properties_map[$Person_type]['properties']
-													)
-													&&
-													$provider_significantLink
-												) {
-
-													if (
-														isset($provider_significantLink_ref)
-														&&
-														!empty($provider_significantLink_ref)
-													) {
-
-														$provider_item_Person['significantLink'] = $provider_significantLink_ref;
-
-													} else {
-
-														$provider_item_Person['significantLink'] = $provider_significantLink;
-
-														// Define reference to the @id
-
-															if ( !isset($provider_significantLink_ref) ) {
-
-																$provider_significantLink_ref = uamswp_fad_schema_node_references($provider_significantLink);
-
-															}
-
-													}
-
-												}
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$provider_significantLink, // mixed // Required // Variable to add as the property value
+													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 								// about
 
