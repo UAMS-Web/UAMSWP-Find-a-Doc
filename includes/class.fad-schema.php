@@ -6719,7 +6719,20 @@
 														$provider_url, // Page URL
 														( $nesting_level + 1 ), // Nesting level within the main schema
 														'MedicalCondition' // Fragment identifier
-													) ?? array();
+													);
+
+												// Get URLs for significantLink property
+
+													if ( $provider_condition ) {
+
+														$provider_significantLink = $provider_significantLink ?? array();
+
+														$provider_significantLink = uamswp_fad_schema_property_urls(
+															$provider_condition, // Property values from which to extract URLs
+															$provider_significantLink // Existing list of URLs
+														);
+
+													}
 
 												}
 
@@ -14148,52 +14161,55 @@
 
 												}
 
-											// Related Conditions
+											// Merge in related conditions
 
-												if (
-													isset($provider_condition_ref)
-													&&
-													!empty($provider_condition_ref)
-												) {
+												if ( $provider_condition ) {
 
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref) )
-													);
+													if (
+														isset($provider_condition_ref)
+														&&
+														!empty($provider_condition_ref)
+													) {
 
-												} elseif (
-													isset($provider_condition)
-													&&
-													!empty($provider_condition)
-												) {
-													
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_condition) ? $provider_condition : array($provider_condition) )
-													);
+														// @id references
 
-													// Define reference to the @id
+															$provider_condition_ref = is_array($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref);
+															$provider_condition_ref = array_is_list($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref);
 
-														if ( !isset($provider_condition_ref) ) {
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref) )
+															);
 
-															$provider_condition_ref = uamswp_fad_schema_node_references($provider_condition);
+													} else {
 
-														}
+														// Full values
+
+															$provider_condition = is_array($provider_condition) ? $provider_condition : array($provider_condition);
+															$provider_condition = array_is_list($provider_condition) ? $provider_condition : array($provider_condition);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_condition) ? $provider_condition : array($provider_condition) )
+															);
+
+														// Define reference to the @id
+										
+															if (
+																!isset($provider_condition_ref)
+																&&
+																!empty($provider_condition)
+																&&
+																is_array($provider_condition)
+															) {
+										
+																$provider_condition_ref = uamswp_fad_schema_node_references($provider_condition);
+										
+															}
+										
+													}
 
 												}
-
-												// Get URLs for significantLink property
-
-													if ( $provider_condition ) {
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_condition, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-													}
 
 											// Related Treatments
 
