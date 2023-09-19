@@ -6594,30 +6594,6 @@
 													$nesting_level == 0
 												) {
 
-													// Get values
-
-														if (
-															(
-																$provider_location
-																||
-																$provider_workLocation
-															)
-															&&
-															isset($provider_location_ref)
-														) {
-
-															// @id references
-
-																$provider_workLocation = $provider_location_ref;
-
-														} else {
-
-															// Full values
-
-																$provider_workLocation = $provider_location;
-
-														}
-
 													// Add to item values
 
 														// MedicalWebPage
@@ -6626,8 +6602,8 @@
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'containedInPlace', // string // Required // Name of schema property
-																$provider_containedInPlace, // mixed // Required // Variable to add as the property value
-																$provider_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_location, // mixed // Required // Variable to add as the property value
+																$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
@@ -6638,8 +6614,8 @@
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'containedInPlace', // string // Required // Name of schema property
-																$provider_containedInPlace, // mixed // Required // Variable to add as the property value
-																$provider_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_location, // mixed // Required // Variable to add as the property value
+																$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
@@ -6650,20 +6626,20 @@
 																$Person_type, // string // Required // The @type value for the schema item
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'containedInPlace', // string // Required // Name of schema property
-																$provider_containedInPlace, // mixed // Required // Variable to add as the property value
-																$provider_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_location, // mixed // Required // Variable to add as the property value
+																$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
 													// Get URLs for significantLink property
 
-														if ( $provider_containedInPlace ) {
+														if ( $provider_location ) {
 
 															$provider_significantLink = $provider_significantLink ?? array();
 
 															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_containedInPlace, // Property values from which to extract URLs
+																$provider_location, // Property values from which to extract URLs
 																$provider_significantLink // Existing list of URLs
 															);
 
