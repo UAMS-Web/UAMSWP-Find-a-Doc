@@ -13169,24 +13169,20 @@
 									 */
 
 									if (
-										(
-											in_array(
-												'jobTitle',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'jobTitle',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'jobTitle',
-												$provider_properties_map[$Person_type]['properties']
-											)
+										in_array(
+											'jobTitle',
+											$provider_properties_map[$MedicalWebPage_type]['properties']
 										)
-										&&
-										$nesting_level == 0
+										||
+										in_array(
+											'jobTitle',
+											$provider_properties_map[$MedicalBusiness_type]['properties']
+										)
+										||
+										in_array(
+											'jobTitle',
+											$provider_properties_map[$Person_type]['properties']
+										)
 									) {
 
 										// Get values
