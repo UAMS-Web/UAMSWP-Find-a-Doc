@@ -10962,8 +10962,6 @@
 													'text' => $provider_description_text,
 												);
 
-												$provider_description_ref = uamswp_fad_schema_node_references($provider_description);
-
 											}
 
 										// Add to item values
