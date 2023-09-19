@@ -6681,18 +6681,51 @@
 
 									// Associated areas of expertise
 
-										// Get URLs for significantLink property
+										// List of properties that reference treatments and procedures
 
-											if ( $provider_expertise ) {
+											$provider_expertise_common = array(
+												'mentions'
+											);
 
-												$provider_significantLink = $provider_significantLink ?? array();
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_expertise_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_expertise_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_expertise_common
+											)
+										) {
 
-												$provider_significantLink = uamswp_fad_schema_property_urls(
-													$provider_expertise, // Property values from which to extract URLs
-													$provider_significantLink // Existing list of URLs
-												);
+											// Get related treatments
 
-											}
+												if ( !isset($provider_expertise_list) ) {
+
+													$provider_expertise_list = get_field( 'physician_expertise', $provider ) ?: array();
+
+												}
+
+											// Format values
+
+												if ( $provider_expertise_list ) {
+
+													$provider_expertise = uamswp_fad_schema_expertise(
+														$provider_expertise_list, // List of IDs of the MedicalCondition items
+														$provider_url, // Page URL
+														( $nesting_level + 1 ), // Nesting level within the main schema
+														'MedicalEntity' // Fragment identifier
+													);
+
+												}
+
+										}
 
 									// Associated clinical resources
 

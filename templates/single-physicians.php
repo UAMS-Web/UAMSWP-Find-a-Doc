@@ -361,6 +361,7 @@
 			// Related Areas of Expertise Section Query
 
 				$expertises = get_field('physician_expertise',$post->ID);
+				$provider_schema_fields[$page_id]['provider_expertise_list'] = $expertises; // Pass value to schema function
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/expertise.php' );
 
 			// Get the name of the provider's primary area of expertise
