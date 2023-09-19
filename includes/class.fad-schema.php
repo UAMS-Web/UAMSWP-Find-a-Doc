@@ -19425,7 +19425,7 @@
 															$LocalBusiness_image_general,
 															uamswp_fad_schema_imageobject_thumbnails(
 																$LocalBusiness_url, // URL of entity with which the image is associated
-																$nesting_level, // Nesting level within the main schema
+																( $nesting_level + 1 ), // Nesting level within the main schema
 																'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
 																'Image', // Base fragment identifier
 																$id, // ID of image to use for 1:1 aspect ratio
@@ -21058,7 +21058,7 @@
 
 										$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
 											$MedicalEntity_url, // URL of entity with which the image is associated
-											$nesting_level, // Nesting level within the main schema
+											( $nesting_level + 1 ), // Nesting level within the main schema
 											'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
 											'Image', // Base fragment identifier
 											$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
@@ -21790,7 +21790,7 @@
 
 									$CreativeWork_image = uamswp_fad_schema_imageobject_thumbnails(
 										$CreativeWork_url, // URL of entity with which the image is associated
-										$nesting_level, // Nesting level within the main schema
+										( $nesting_level + 1 ), // Nesting level within the main schema
 										'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
 										'Image', // Base fragment identifier
 										$CreativeWork_featured_image_square_id, // ID of image to use for 1:1 aspect ratio
