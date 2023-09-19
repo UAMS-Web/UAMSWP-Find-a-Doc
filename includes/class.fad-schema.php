@@ -4680,7 +4680,6 @@
 								'affiliation',
 								'alumniOf',
 								'award',
-								'awards',
 								'birthDate',
 								'birthPlace',
 								'brand',
