@@ -5082,6 +5082,7 @@
 								$provider_honorificPrefix = null;
 								$provider_honorificPrefix_ref = null;
 								$provider_honorificSuffix = null;
+								$provider_honorificSuffix_ref = null;
 								$provider_hospitalAffiliation = null;
 								$provider_hospitalAffiliation_multiselect = null;
 								$provider_identifier = null;
@@ -5900,48 +5901,36 @@
 
 												// MedicalWebPage
 
-													if (
-														in_array(
-															'honorificSuffix',
-															$provider_properties_map[$MedicalWebPage_type]['properties']
-														)
-														&&
-														$provider_honorificSuffix
-													) {
-
-														$provider_item_MedicalWebPage['honorificSuffix'] = $provider_honorificSuffix;
-
-													}
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'honorificSuffix', // string // Required // Name of schema property
+														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
+														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+													);
 
 												// MedicalBusiness
 
-													if (
-														in_array(
-															'honorificSuffix',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
-														)
-														&&
-														$provider_honorificSuffix
-													) {
-
-														$provider_item_MedicalBusiness['honorificSuffix'] = $provider_honorificSuffix;
-
-													}
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'honorificSuffix', // string // Required // Name of schema property
+														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
+														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+													);
 
 												// Person
 
-													if (
-														in_array(
-															'honorificSuffix',
-															$provider_properties_map[$Person_type]['properties']
-														)
-														&&
-														$provider_honorificSuffix
-													) {
-
-														$provider_item_Person['honorificSuffix'] = $provider_honorificSuffix;
-
-													}
+													uamswp_fad_schema_add_to_item_values(
+														$Person_type, // string // Required // The @type value for the schema item
+														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+														'honorificSuffix', // string // Required // Name of schema property
+														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
+														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+													);
 
 										// name
 
