@@ -25346,6 +25346,8 @@
 
 			}
 
+			uamswp_fad_flatten_multidimensional_array($output);
+
 			return $output;
 
 		}
