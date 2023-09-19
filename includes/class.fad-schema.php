@@ -6207,54 +6207,45 @@
 
 													// MedicalWebPage
 
-														if (
-															in_array(
-																'alternateName',
-																$provider_properties_map[$MedicalWebPage_type]['properties']
-															)
-															&&
-															$provider_alternateName
-															&&
-															$nesting_level == 0
-														) {
-
-															$provider_item_MedicalWebPage['alternateName'] = $provider_alternateName;
-
-														}
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'alternateName', // string // Required // Name of schema property
+															$provider_alternateName, // mixed // Required // Variable to add as the property value
+															$provider_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1), // int // Required // Current nesting level value
+															1, // int // Optional // Max nesting level at which to add the property value // Default: -1 (no limit)
+															'<=' // string // Optional // Operator used to compare nesting level with max nesting level. The possible operators are: <, lt, <=, le, >, gt, >=, ge, ==, =, eq, !=, <>, ne respectively. // Default: ==
+														);
 
 													// MedicalBusiness
 
-														if (
-															in_array(
-																'alternateName',
-																$provider_properties_map[$MedicalBusiness_type]['properties']
-															)
-															&&
-															$provider_alternateName
-															&&
-															$nesting_level == 0
-														) {
-
-															$provider_item_MedicalBusiness['alternateName'] = $provider_alternateName;
-
-														}
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'alternateName', // string // Required // Name of schema property
+															$provider_alternateName, // mixed // Required // Variable to add as the property value
+															$provider_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1), // int // Required // Current nesting level value
+															1, // int // Optional // Max nesting level at which to add the property value // Default: -1 (no limit)
+															'<=' // string // Optional // Operator used to compare nesting level with max nesting level. The possible operators are: <, lt, <=, le, >, gt, >=, ge, ==, =, eq, !=, <>, ne respectively. // Default: ==
+														);
 
 													// Person
 
-														if (
-															in_array(
-																'alternateName',
-																$provider_properties_map[$Person_type]['properties']
-															)
-															&&
-															$provider_alternateName
-															&&
-															$nesting_level == 0
-														) {
-
-															$provider_item_Person['alternateName'] = $provider_alternateName;
-
-														}
+														uamswp_fad_schema_add_to_item_values(
+															$Person_type, // string // Required // The @type value for the schema item
+															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+															'alternateName', // string // Required // Name of schema property
+															$provider_alternateName, // mixed // Required // Variable to add as the property value
+															$provider_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1), // int // Required // Current nesting level value
+															1, // int // Optional // Max nesting level at which to add the property value // Default: -1 (no limit)
+															'<=' // string // Optional // Operator used to compare nesting level with max nesting level. The possible operators are: <, lt, <=, le, >, gt, >=, ge, ==, =, eq, !=, <>, ne respectively. // Default: ==
+														);
 
 									}
 
