@@ -2523,6 +2523,24 @@
 
 				}
 
+			// Clean up the array
+
+				if (
+					is_array($propertyvalue_list)
+					&&
+					!empty($propertyvalue_list)
+				) {
+
+					$propertyvalue_list = array_filter($propertyvalue_list);
+					$propertyvalue_list = array_unique( $propertyvalue_list, SORT_REGULAR );
+					$propertyvalue_list = array_values($propertyvalue_list);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($propertyvalue_list);
+
+				}
+
 			return $propertyvalue_list;
 
 		}
