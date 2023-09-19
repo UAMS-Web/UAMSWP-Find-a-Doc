@@ -5127,6 +5127,8 @@
 								$provider_duns_ref = null;
 								$provider_editor = null;
 								$provider_editor_ref = null;
+								$provider_employee = null;
+								$provider_employee_ref = null;
 								$provider_expertise = null;
 								$provider_expertise_ref = null;
 								$provider_familyName = null;
@@ -11167,6 +11169,77 @@
 													'editor', // string // Required // Name of schema property
 													$provider_editor, // mixed // Required // Variable to add as the property value
 													$provider_editor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// employee
+
+									/* 
+									 * Someone working for this organization.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Person
+									 */
+
+									if (
+										(
+											in_array(
+												'employee',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'employee',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'employee',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level <= 1
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'employee', // string // Required // Name of schema property
+													$provider_item_Person, // mixed // Required // Variable to add as the property value
+													$provider_item_Person_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'employee', // string // Required // Name of schema property
+													$provider_item_Person, // mixed // Required // Variable to add as the property value
+													$provider_item_Person_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// Person
+
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'employee', // string // Required // Name of schema property
+													$provider_item_Person, // mixed // Required // Variable to add as the property value
+													$provider_item_Person_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
