@@ -22338,7 +22338,7 @@
 
 								// Resource type
 
-									$CreativeWork_resource_type = get_field( 'clinical_resource_type', $CreativeWork )['value'] ?: '';
+									$CreativeWork_resource_type = get_field( 'clinical_resource_type', $CreativeWork )['value'] ?? '';
 
 								// Get value from values map
 
