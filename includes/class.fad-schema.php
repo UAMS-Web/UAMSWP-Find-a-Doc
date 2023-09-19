@@ -5047,6 +5047,7 @@
 								$provider_condition_list = null;
 								$provider_condition_ref = null;
 								$provider_containedInPlace = null;
+								$provider_containedInPlace_ref = null;
 								$provider_contributor = null;
 								$provider_copyrightHolder = null;
 								$provider_copyrightNotice = null;
@@ -6552,48 +6553,39 @@
 
 														// MedicalWebPage
 
-															if (
-																in_array(
-																	'containedInPlace',
-																	$provider_properties_map[$MedicalWebPage_type]['properties']
-																)
-																&&
-																$provider_containedInPlace
-															) {
-
-																$provider_item_MedicalWebPage['containedInPlace'] = $provider_containedInPlace;
-
-															}
+															uamswp_fad_schema_add_to_item_values(
+																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+																'containedInPlace', // string // Required // Name of schema property
+																$provider_containedInPlace, // mixed // Required // Variable to add as the property value
+																$provider_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
 
 														// MedicalBusiness
 
-															if (
-																in_array(
-																	'containedInPlace',
-																	$provider_properties_map[$MedicalBusiness_type]['properties']
-																)
-																&&
-																$provider_containedInPlace
-															) {
-
-																$provider_item_MedicalBusiness['containedInPlace'] = $provider_containedInPlace;
-
-															}
+															uamswp_fad_schema_add_to_item_values(
+																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+																'containedInPlace', // string // Required // Name of schema property
+																$provider_containedInPlace, // mixed // Required // Variable to add as the property value
+																$provider_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
 
 														// Person
 
-															if (
-																in_array(
-																	'containedInPlace',
-																	$provider_properties_map[$Person_type]['properties']
-																)
-																&&
-																$provider_containedInPlace
-															) {
-
-																$provider_item_Person['containedInPlace'] = $provider_containedInPlace;
-
-															}
+															uamswp_fad_schema_add_to_item_values(
+																$Person_type, // string // Required // The @type value for the schema item
+																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+																'containedInPlace', // string // Required // Name of schema property
+																$provider_containedInPlace, // mixed // Required // Variable to add as the property value
+																$provider_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
 
 													// Get URLs for significantLink property
 
