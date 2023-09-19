@@ -6511,26 +6511,6 @@
 													$nesting_level == 0
 												) {
 
-													// Get values
-
-														if (
-															$provider_location
-															&&
-															isset($provider_location_ref)
-														) {
-
-															// @id references
-
-																$provider_workLocation = $provider_location_ref;
-
-														} else {
-
-															// Full values
-
-																$provider_workLocation = $provider_location;
-
-														}
-
 													// Add to item values
 
 														// MedicalWebPage
@@ -6539,8 +6519,8 @@
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'workLocation', // string // Required // Name of schema property
-																$provider_workLocation, // mixed // Required // Variable to add as the property value
-																$provider_workLocation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_location, // mixed // Required // Variable to add as the property value
+																$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
@@ -6551,8 +6531,8 @@
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'workLocation', // string // Required // Name of schema property
-																$provider_workLocation, // mixed // Required // Variable to add as the property value
-																$provider_workLocation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_location, // mixed // Required // Variable to add as the property value
+																$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
@@ -6563,8 +6543,8 @@
 																$Person_type, // string // Required // The @type value for the schema item
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'workLocation', // string // Required // Name of schema property
-																$provider_workLocation, // mixed // Required // Variable to add as the property value
-																$provider_workLocation_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$provider_location, // mixed // Required // Variable to add as the property value
+																$provider_location_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
