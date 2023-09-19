@@ -18913,7 +18913,7 @@
 																	null, // string // Optional // url property value
 																	$LocalBusiness_duns, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
@@ -18936,7 +18936,7 @@
 																	null, // string // Optional // url property value
 																	$LocalBusiness_globalLocationNumber, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
@@ -18962,7 +18962,7 @@
 																	null, // string // Optional // url property value
 																	$LocalBusiness_isicV4, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
@@ -18990,7 +18990,7 @@
 																	null, // string // Optional // url property value
 																	$LocalBusiness_leiCode, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
@@ -19019,7 +19019,7 @@
 																	null, // string // Optional // url property value
 																	$LocalBusiness_naics, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
@@ -19048,7 +19048,7 @@
 																		null, // string // Optional // url property value
 																		$LocalBusiness_taxID_taxpayer, // mixed // Optional // value property value
 																		null, // mixed // Optional // valueReference property value
-																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																		$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																	);
 
 																}
@@ -19074,7 +19074,7 @@
 																		null, // string // Optional // url property value
 																		$LocalBusiness_taxID_employer, // mixed // Optional // value property value
 																		null, // mixed // Optional // valueReference property value
-																		$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																		$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																	);
 
 																}
@@ -19101,7 +19101,7 @@
 																	null, // string // Optional // url property value
 																	$LocalBusiness_vatID, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																	$LocalBusiness_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
 															}
