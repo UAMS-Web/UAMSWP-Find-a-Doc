@@ -3317,7 +3317,11 @@
 
 						// Add to the list array
 
-							if ( $credential_schema ) {
+							if (
+								isset($credential_schema['name'])
+								&&
+								!empty($credential_schema['name'])
+							) {
 
 								$hasCredential_schema[] = $credential_schema;
 
