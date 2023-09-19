@@ -12134,7 +12134,7 @@
 
 														if ( $provider_duns ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																array(
 																	'Data Universal Numbering System (DUNS) number',
 																	'DUNS number',
@@ -12161,7 +12161,7 @@
 
 														if ( $provider_globalLocationNumber ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																'GLN', // mixed // Optional // alternateName property value
 																null, // string // Optional // description property value
 																null, // int // Optional // maxValue property value
@@ -12184,7 +12184,7 @@
 
 														if ( $provider_isicV4 ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																array(
 																	'ISIC 2008',
 																	'ISIC Rev 4'
@@ -12210,7 +12210,7 @@
 
 														if ( $provider_leiCode ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																array(
 																	'Global Legal Entity Identifier',
 																	'LEI',
@@ -12238,7 +12238,7 @@
 
 														if ( $provider_naics ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																array(
 																	'North American Industry Classification System',
 																	'NAICS code',
@@ -12269,7 +12269,7 @@
 
 															if ( $provider_taxID_taxpayer ) {
 
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																$provider_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'TIN',
 																		'IRS TIN',
@@ -12296,7 +12296,7 @@
 
 															if ( $provider_taxID_employer ) {
 
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																$provider_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'Federal Employer Identification Number',
 																		'EIN'
@@ -12322,7 +12322,7 @@
 
 														if ( $provider_vatID ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																array(
 																	'value-added tax identification number',
 																	'VAT ID',
@@ -12358,7 +12358,7 @@
 
 														if ( $provider_npi ) {
 
-															$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
 																'NPI', // mixed // Optional // alternateName property value
 																null, // string // Optional // description property value
 																null, // int // Optional // maxValue property value
@@ -12425,7 +12425,7 @@
 
 																	}
 
-																$provider_identifier[] = uamswp_fad_schema_propertyvalue(
+																$provider_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'Google Ads customer ID',
 																		'Google Ads CID',
@@ -18895,7 +18895,7 @@
 
 															if ( $LocalBusiness_duns ) {
 
-																$LocalBusiness_identifier[] =  uamswp_fad_schema_propertyvalue(
+																$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'Data Universal Numbering System (DUNS) number',
 																		'DUNS number',
@@ -18922,7 +18922,7 @@
 
 															if ( $LocalBusiness_globalLocationNumber ) {
 
-																$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																	'GLN', // mixed // Optional // alternateName property value
 																	null, // string // Optional // description property value
 																	null, // int // Optional // maxValue property value
@@ -18945,7 +18945,7 @@
 
 															if ( $LocalBusiness_isicV4 ) {
 
-																$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'ISIC 2008',
 																		'ISIC Rev 4'
@@ -18971,7 +18971,7 @@
 
 															if ( $LocalBusiness_leiCode ) {
 
-																$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'Global Legal Entity Identifier',
 																		'LEI',
@@ -18999,7 +18999,7 @@
 
 															if ( $LocalBusiness_naics ) {
 
-																$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'North American Industry Classification System',
 																		'NAICS code',
@@ -19030,7 +19030,7 @@
 
 																if ( $LocalBusiness_taxID_taxpayer ) {
 
-																	$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																	$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																		array(
 																			'TIN',
 																			'IRS TIN',
@@ -19057,7 +19057,7 @@
 
 																if ( $LocalBusiness_taxID_employer ) {
 
-																	$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																	$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																		array(
 																			'Federal Employer Identification Number',
 																			'EIN'
@@ -19083,7 +19083,7 @@
 
 															if ( $LocalBusiness_vatID ) {
 
-																$LocalBusiness_identifier[] = uamswp_fad_schema_propertyvalue(
+																$LocalBusiness_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
 																		'value-added tax identification number',
 																		'VAT ID',
