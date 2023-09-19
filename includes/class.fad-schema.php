@@ -14111,27 +14111,51 @@
 
 											// Related Areas of Expertise
 
-												if (
-													isset($provider_expertise_ref)
-													&&
-													!empty($provider_expertise_ref)
-												) {
+												if ( $provider_expertise ) {
 
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref) )
-													);
+													if (
+														isset($provider_expertise_ref)
+														&&
+														!empty($provider_expertise_ref)
+													) {
 
-												} elseif (
-													isset($provider_expertise)
-													&&
-													!empty($provider_expertise)
-												) {
-													
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_expertise) ? $provider_expertise : array($provider_expertise) )
-													);
+														// @id references
+
+															$provider_expertise_ref = is_array($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref);
+															$provider_expertise_ref = array_is_list($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref) )
+															);
+
+													} else {
+
+														// Full values
+
+															$provider_expertise = is_array($provider_expertise) ? $provider_expertise : array($provider_expertise);
+															$provider_expertise = array_is_list($provider_expertise) ? $provider_expertise : array($provider_expertise);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_expertise) ? $provider_expertise : array($provider_expertise) )
+															);
+
+														// Define reference to the @id
+										
+															if (
+																!isset($provider_expertise_ref)
+																&&
+																!empty($provider_expertise)
+																&&
+																is_array($provider_expertise)
+															) {
+										
+																$provider_expertise_ref = uamswp_fad_schema_node_references($provider_expertise);
+										
+															}
+										
+													}
 
 												}
 
