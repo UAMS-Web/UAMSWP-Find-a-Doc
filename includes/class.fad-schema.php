@@ -14285,27 +14285,51 @@
 
 											// Related Treatments
 
-												if (
-													isset($provider_availableService_ref)
-													&&
-													!empty($provider_availableService_ref)
-												) {
+												if ( $provider_availableService ) {
 
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref) )
-													);
+													if (
+														isset($provider_availableService_ref)
+														&&
+														!empty($provider_availableService_ref)
+													) {
 
-												} elseif (
-													isset($provider_availableService)
-													&&
-													!empty($provider_availableService)
-												) {
-													
-													$provider_mentions = array_merge(
-														$provider_mentions,
-														( array_is_list($provider_availableService) ? $provider_availableService : array($provider_availableService) )
-													);
+														// @id references
+
+															$provider_availableService_ref = is_array($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref);
+															$provider_availableService_ref = array_is_list($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref) )
+															);
+
+													} else {
+
+														// Full values
+
+															$provider_availableService = is_array($provider_availableService) ? $provider_availableService : array($provider_availableService);
+															$provider_availableService = array_is_list($provider_availableService) ? $provider_availableService : array($provider_availableService);
+
+															$provider_mentions = array_merge(
+																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
+																( array_is_list($provider_availableService) ? $provider_availableService : array($provider_availableService) )
+															);
+
+														// Define reference to the @id
+										
+															if (
+																!isset($provider_availableService_ref)
+																&&
+																!empty($provider_availableService)
+																&&
+																is_array($provider_availableService)
+															) {
+										
+																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
+										
+															}
+										
+													}
 
 												}
 
