@@ -6729,6 +6729,59 @@
 
 									// Associated clinical resources
 
+										// List of properties that reference clinical resources
+
+											$provider_clinical_resource_common = array(
+												'mentions'
+											);
+
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_clinical_resource_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_clinical_resource_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_clinical_resource_common
+											)
+										) {
+
+											// Get related clinical resources
+
+												if ( !isset($provider_clinical_resource_list) ) {
+
+													$provider_clinical_resource_list = get_field( 'physician_clinical_resources', $provider ) ?: array();
+
+												}
+
+												if ( !isset($provider_clinical_resource_list_max) ) {
+
+													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)									
+													$provider_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
+
+												}
+
+											// Format values
+
+												if ( $provider_clinical_resource_list ) {
+
+													$provider_clinical_resource = uamswp_fad_schema_creativework(
+														$provider_clinical_resource_list, // List of IDs of the clinical resource items
+														$provider_url, // Page URL
+														( $nesting_level + 1 ), // Nesting level within the main schema
+														'CreativeWork' // Fragment identifier
+													);
+
+												}
+
+										}
+
 										// Get URLs for significantLink property
 
 											if ( $provider_clinical_resource ) {

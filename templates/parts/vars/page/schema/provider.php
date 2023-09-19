@@ -236,30 +236,6 @@ TODO List
 
 */
 
-// Get Values
-
-	// Related ontology items as schema arrays
-
-		// Related Clinical Resources
-
-			// Define the schema for nesting in 'MedicalWebPage'['mentions']
-
-				/*
-					Nesting level 0 = 'MedicalWebPage'
-					Nesting level 1 = 'MedicalWebPage'['mentions']
-				*/
-
-				$provider_related_clinical_resource = uamswp_fad_schema_creativework(
-					$clinical_resources, // List of IDs of the clinical resource items
-					$page_url, // Page URL
-					1, // Nesting level within the main schema
-					'CreativeWork' // Base fragment identifier
-				);
-
-			// Define reference to each value/row in this property
-
-				$schema_provider_clinical_resource_ref = uamswp_fad_schema_node_references( $provider_related_clinical_resource );
-
 // Schema JSON Item Arrays
 
 	// Provider as MedicalWebPage
