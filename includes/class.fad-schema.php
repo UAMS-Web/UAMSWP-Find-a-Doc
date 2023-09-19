@@ -3849,7 +3849,7 @@
 
 							if ( $specialization_schema ) {
 
-								$specialization_schema = array( '@type' => 'EducationalOccupationalCredential' ) + $specialization_schema;
+								$specialization_schema = array( '@type' => 'Occupation' ) + $specialization_schema;
 
 							}
 
