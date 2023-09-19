@@ -70,7 +70,7 @@
 			"name": "affiliation_location",
 			"type": "relationship",
 			"instructions": "Select the location profile that matches this affiliated hospital.",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
