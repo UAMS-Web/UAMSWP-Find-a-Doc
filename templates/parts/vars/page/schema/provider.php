@@ -323,7 +323,7 @@ TODO List
 
 			$schema_provider_MedicalWebPage['primaryImageOfPage'] = array(); // Defined later
 
-	// Provider as Physician and as Person
+	// Provider profile as MedicalWebPage, MedicalBusiness and Person
 
 		$schema_provider_combined = uamswp_fad_schema_provider(
 			array($page_id), // List of IDs of the provider items
