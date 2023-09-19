@@ -9024,7 +9024,7 @@ if ( !function_exists('array_is_list') ) {
 		) {
 
 			/*
-			
+
 				Performs a case-sensitive check indicating if needle is contained in haystack.
 
 				Returns true if needle is in haystack, false otherwise.

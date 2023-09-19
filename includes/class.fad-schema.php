@@ -3807,9 +3807,9 @@
 								// Clean up the array
 
 									// If there is only one item, flatten the multi-dimensional array by one step
-								
+
 										uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
-							
+
 
 							// Get sameAs repeater field value
 
@@ -5438,7 +5438,7 @@
 																		$provider_degree_list_i++;
 
 																	}
-																	
+
 																} // endif
 
 															} // endforeach
@@ -6768,7 +6768,7 @@
 
 												if ( !isset($provider_clinical_resource_list_max) ) {
 
-													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)									
+													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
 													$provider_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
 
 												}
@@ -9044,7 +9044,7 @@
 																);
 
 															// Define reference to the @id
-											
+
 																if (
 																	!isset($provider_organization_specific_ref)
 																	&&
@@ -9052,11 +9052,11 @@
 																	&&
 																	is_array($provider_organization_specific)
 																) {
-											
+
 																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-											
+
 																}
-											
+
 														}
 
 													}
@@ -9253,21 +9253,21 @@
 																		$provider_affiliation,
 																		$provider_hospitalAffiliation_ref
 																	);
-													
+
 															} else {
-												
+
 																// Full values
 
 																	$provider_hospitalAffiliation = is_array($provider_hospitalAffiliation) ? $provider_hospitalAffiliation : array($provider_hospitalAffiliation);
 																	$provider_hospitalAffiliation = array_is_list($provider_hospitalAffiliation) ? $provider_hospitalAffiliation : array($provider_hospitalAffiliation);
-																	
+
 																	$provider_affiliation = array_merge(
 																		$provider_affiliation,
 																		$provider_hospitalAffiliation
 																	);
-													
+
 																// Define reference to the @id
-												
+
 																	if (
 																		!isset($provider_hospitalAffiliation_ref)
 																		&&
@@ -9275,13 +9275,13 @@
 																		&&
 																		is_array($provider_hospitalAffiliation)
 																	) {
-												
+
 																		$provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references($provider_hospitalAffiliation);
-												
+
 																	}
-												
+
 															}
-											
+
 														}
 
 													// Merge in common clinical 'Organization'
@@ -9290,7 +9290,7 @@
 
 															$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
 															$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-																
+
 															$provider_affiliation = array_merge(
 																( $provider_affiliation && array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
 																$provider_organization_common
@@ -9331,7 +9331,7 @@
 																	);
 
 																// Define reference to the @id
-												
+
 																	if (
 																		!isset($provider_organization_specific_ref)
 																		&&
@@ -9339,11 +9339,11 @@
 																		&&
 																		is_array($provider_organization_specific)
 																	) {
-												
+
 																		$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-												
+
 																	}
-												
+
 															}
 
 														}
@@ -9500,7 +9500,7 @@
 																);
 
 															// Define reference to the @id
-											
+
 																if (
 																	!isset($provider_organization_specific_ref)
 																	&&
@@ -9508,11 +9508,11 @@
 																	&&
 																	is_array($provider_organization_specific)
 																) {
-											
+
 																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-											
+
 																}
-											
+
 														}
 
 													}
@@ -9644,7 +9644,7 @@
 																);
 
 															// Define reference to the @id
-											
+
 																if (
 																	!isset($provider_organization_specific_ref)
 																	&&
@@ -9652,11 +9652,11 @@
 																	&&
 																	is_array($provider_organization_specific)
 																) {
-											
+
 																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-											
+
 																}
-											
+
 														}
 
 													}
@@ -9792,7 +9792,7 @@
 																);
 
 															// Define reference to the @id
-											
+
 																if (
 																	!isset($provider_organization_specific_ref)
 																	&&
@@ -9800,11 +9800,11 @@
 																	&&
 																	is_array($provider_organization_specific)
 																) {
-											
+
 																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-											
+
 																}
-											
+
 														}
 
 													}
@@ -12501,7 +12501,7 @@
 																}
 
 																// Add each item to Google Company ID value array
-	
+
 																	if ( $provider_google_cid_repeater ) {
 
 																		foreach ( $provider_google_cid_repeater as $cid ) {
@@ -13198,7 +13198,7 @@
 												}
 
 											// Add ancestors to the list of ID values
-											
+
 												if ( $provider_clinical_specialization ) {
 
 													$provider_clinical_specialization_ancestors = array_merge(
@@ -13221,18 +13221,18 @@
 														if ( $item ) {
 
 															$item_term = get_term( $item, 'clinical_title' ) ?? array();
-							
+
 															$item_name = '';
 															$item_occupation_title = '';
 															$item_occupation_title_attr = '';
-							
+
 															if ( is_object($item_term) ) {
-								
+
 																$item_name = $item_term->name;
 																$item_occupation_title = get_field('clinical_specialization_title', $item_term) ?? '';
 																$item_occupation_title = $item_occupation_title ?: $item_name;
 																$item_occupation_title_attr = uamswp_attr_conversion($item_occupation_title);
-								
+
 															}
 
 															if ( $item_occupation_title_attr ) {
@@ -13240,13 +13240,13 @@
 																$provider_jobTitle[] = $item_occupation_title_attr;
 
 															}
-								
+
 														}
-								
+
 													}
 
 												}
-										
+
 										// Clean up the array
 
 											if ( $provider_jobTitle ) {
@@ -14211,7 +14211,7 @@
 															);
 
 														// Define reference to the @id
-										
+
 															if (
 																!isset($provider_location_ref)
 																&&
@@ -14219,11 +14219,11 @@
 																&&
 																is_array($provider_location)
 															) {
-										
+
 																$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
-										
+
 															}
-										
+
 													}
 
 													// Get URLs for significantLink property
@@ -14270,7 +14270,7 @@
 															);
 
 														// Define reference to the @id
-										
+
 															if (
 																!isset($provider_expertise_ref)
 																&&
@@ -14278,11 +14278,11 @@
 																&&
 																is_array($provider_expertise)
 															) {
-										
+
 																$provider_expertise_ref = uamswp_fad_schema_node_references($provider_expertise);
-										
+
 															}
-										
+
 													}
 
 													// Get URLs for significantLink property
@@ -14329,7 +14329,7 @@
 															);
 
 														// Define reference to the @id
-										
+
 															if (
 																!isset($provider_clinical_resource_ref)
 																&&
@@ -14337,11 +14337,11 @@
 																&&
 																is_array($provider_clinical_resource)
 															) {
-										
+
 																$provider_clinical_resource_ref = uamswp_fad_schema_node_references($provider_clinical_resource);
-										
+
 															}
-										
+
 													}
 
 													// Get URLs for significantLink property
@@ -14388,7 +14388,7 @@
 															);
 
 														// Define reference to the @id
-										
+
 															if (
 																!isset($provider_condition_ref)
 																&&
@@ -14396,11 +14396,11 @@
 																&&
 																is_array($provider_condition)
 															) {
-										
+
 																$provider_condition_ref = uamswp_fad_schema_node_references($provider_condition);
-										
+
 															}
-										
+
 													}
 
 													// Get URLs for significantLink property
@@ -14447,7 +14447,7 @@
 															);
 
 														// Define reference to the @id
-										
+
 															if (
 																!isset($provider_availableService_ref)
 																&&
@@ -14455,11 +14455,11 @@
 																&&
 																is_array($provider_availableService)
 															) {
-										
+
 																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-										
+
 															}
-										
+
 													}
 
 													// Get URLs for significantLink property
@@ -16276,9 +16276,9 @@
 
 														$provider_url = get_permalink($provider);
 														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-			
+
 													}
-			
+
 													$provider_video['@id'] = $provider_url . '#' . $provider_video['@type'];
 
 												// Other properties
@@ -24931,7 +24931,7 @@
 				||
 				version_compare( $nesting_level, $nesting_level_max, $nesting_level_operator )
 			) {
-				
+
 				if (
 					in_array(
 						$property_name,
