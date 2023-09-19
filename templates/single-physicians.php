@@ -793,8 +793,10 @@
 			// Related Clinical Resources Section Query
 
 				$clinical_resources = get_field('physician_clinical_resources');
+				$provider_schema_fields[$page_id]['provider_clinical_resource_list'] = $clinical_resources; // Pass value to schema function
 				include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
 				$clinical_resource_posts_per_page = $clinical_resource_posts_per_page_section;
+				$provider_schema_fields[$page_id]['provider_clinical_resource_list_max'] = $clinical_resource_posts_per_page; // Pass value to schema function
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/clinical-resource.php' );
 
 			// Related Conditions Section Query
