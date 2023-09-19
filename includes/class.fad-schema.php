@@ -1206,7 +1206,7 @@
 				if ( $schema_hospital_affiliation ) {
 
 					$schema_hospital_affiliation = array_is_list($schema_hospital_affiliation) ? $schema_hospital_affiliation : array($schema_hospital_affiliation);
-					$schema_hospital_affiliation_i = $schema_hospital_affiliation_i ? count($schema_hospital_affiliation) + 1 : 1;
+					$schema_hospital_affiliation_i = $schema_hospital_affiliation ? count($schema_hospital_affiliation) + 1 : 1;
 
 				}
 
