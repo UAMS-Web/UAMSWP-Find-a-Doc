@@ -6363,7 +6363,7 @@
 														$provider_location = uamswp_fad_schema_location(
 															$provider_location_array, // List of IDs of the location items
 															$provider_url, // Page URL
-															$nesting_level + 1 // Nesting level within the main schema
+															( $nesting_level + 1 ), // Nesting level within the main schema
 														);
 
 													}
@@ -6762,7 +6762,7 @@
 													$provider_condition = uamswp_fad_schema_medicalcondition(
 														$provider_condition_list, // List of IDs of the MedicalCondition items
 														$provider_url, // Page URL
-														1, // Nesting level within the main schema
+														( $nesting_level + 1 ), // Nesting level within the main schema
 														'MedicalCondition' // Fragment identifier
 													) ?? array();
 
@@ -9445,7 +9445,7 @@
 																$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
 																	$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
 																	$provider_url, // string // Required // Page URL
-																	$nesting_level, // int // Optional // Nesting level within the main schema
+																	( $nesting_level + 1 ), // Nesting level within the main schema
 																	array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 																);
 
@@ -13208,7 +13208,7 @@
 
 													$provider_image_general = uamswp_fad_schema_imageobject_thumbnails(
 														$provider_url, // URL of entity with which the image is associated
-														$nesting_level, // Nesting level within the main schema
+														( $nesting_level + 1 ), // Nesting level within the main schema
 														'3:4', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
 														'Image', // Base fragment identifier
 														$provider_image_id, // ID of image to use for 1:1 aspect ratio
