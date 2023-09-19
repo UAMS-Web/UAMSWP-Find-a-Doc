@@ -5671,7 +5671,8 @@
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
 														$provider_givenName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -5682,7 +5683,8 @@
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
 														$provider_givenName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -5693,7 +5695,8 @@
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
 														$provider_givenName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// additionalName
@@ -5716,7 +5719,8 @@
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
 														$provider_additionalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -5727,7 +5731,8 @@
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
 														$provider_additionalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -5738,7 +5743,8 @@
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
 														$provider_additionalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// familyName
@@ -5761,7 +5767,8 @@
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
 														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -5772,7 +5779,8 @@
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
 														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -5783,7 +5791,8 @@
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
 														$provider_familyName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// legalName
@@ -5814,7 +5823,8 @@
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
 														$provider_legalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -5825,7 +5835,8 @@
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
 														$provider_legalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -5836,7 +5847,8 @@
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
 														$provider_legalName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// honorificPrefix
@@ -5859,7 +5871,8 @@
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
 														$provider_honorificPrefix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -5870,7 +5883,8 @@
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
 														$provider_honorificPrefix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -5881,7 +5895,8 @@
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
 														$provider_honorificPrefix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// honorificSuffix
@@ -5908,7 +5923,8 @@
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
 														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -5919,7 +5935,8 @@
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
 														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -5930,7 +5947,8 @@
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
 														$provider_honorificSuffix_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// name
@@ -6006,7 +6024,8 @@
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
 														$provider_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// MedicalBusiness
@@ -6017,7 +6036,8 @@
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
 														$provider_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 												// Person
@@ -6028,7 +6048,8 @@
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
 														$provider_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-														$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														$nesting_level // int // Required // Current nesting level value
 													);
 
 										// alternateName
@@ -6818,7 +6839,8 @@
 															'availableService', // string // Required // Name of schema property
 															$provider_availableService, // mixed // Required // Variable to add as the property value
 															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-															$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+															$nesting_level // int // Required // Current nesting level value
 														);
 
 													// MedicalBusiness
@@ -6829,7 +6851,8 @@
 															'availableService', // string // Required // Name of schema property
 															$provider_availableService, // mixed // Required // Variable to add as the property value
 															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-															$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+															$nesting_level // int // Required // Current nesting level value
 														);
 
 													// Person
@@ -6840,7 +6863,8 @@
 															'availableService', // string // Required // Name of schema property
 															$provider_availableService, // mixed // Required // Variable to add as the property value
 															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-															$provider_properties_map // array // Required // Map array to match schema types with allowed properties
+															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+															$nesting_level // int // Required // Current nesting level value
 														);
 
 												// Get URLs for significantLink property
@@ -25419,6 +25443,9 @@
 			$property_value, // mixed // Required // Variable to add as the property value
 			&$property_value_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 			array $property_map, // array // Required // Map array to match schema types with allowed properties
+			int $nesting_level, // int // Required // Current nesting level value
+			int $nesting_level_max = -1, // int // Optional // Max nesting level at which to add the property value // Default: -1 (no limit)
+			string $nesting_level_operator = '==', // int // Optional // Max nesting level at which to add the property value // Default: ==
 			string $property_map_key = 'properties' // string // Optional // Key in the property map containing the list of allowed properties as its value // Default: 'properties'
 		) {
 
@@ -25440,6 +25467,12 @@
 
 			}
 
+			if (
+				$nesting_level_max == -1
+				||
+				version_compare( $nesting_level, $nesting_level_max, $nesting_level_operator )
+			) {
+				
 				if (
 					in_array(
 						$property_name,
@@ -25456,6 +25489,8 @@
 					);
 
 				}
+
+			}
 
 		}
 
