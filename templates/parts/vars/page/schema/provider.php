@@ -236,30 +236,31 @@ TODO List
 
 */
 
-// Schema JSON Item Arrays
+// Define Schema JSON item arrays for provider profile as MedicalWebPage, MedicalBusiness and Person
 
-	// Provider profile as MedicalWebPage, MedicalBusiness and Person
+	$schema_provider_combined = uamswp_fad_schema_provider(
+		array($page_id), // List of IDs of the provider items
+		$page_url, // Page URL
+		0, // Nesting level within the main schema
+		1, // Iteration counter for provider-as-MedicalWebPage
+		1, // Iteration counter for provider-as-MedicalBusiness
+		1, // Iteration counter for provider-as-Person
+		$provider_schema_fields // Pre-existing field values array so duplicate calls can be avoided
+	);
 
-		$schema_provider_combined = uamswp_fad_schema_provider(
-			array($page_id), // List of IDs of the provider items
-			$page_url, // Page URL
-			0, // Nesting level within the main schema
-			1, // Iteration counter for provider-as-MedicalWebPage
-			1, // Iteration counter for provider-as-MedicalBusiness
-			1, // Iteration counter for provider-as-Person
-			$provider_schema_fields // Pre-existing field values array so duplicate calls can be avoided
-		);
+// Add provider schema arrays to the base schema array
 
-// Add Provider Schema Arrays to Base Array
+	// Provider profile as MedicalWebPage
 
-	// Provider as MedicalWebPage
-	$schema_provider['@graph'][] = $schema_provider_combined['MedicalWebPage'];
+		$schema_provider['@graph'][] = $schema_provider_combined['MedicalWebPage'];
 
-	// Provider as MedicalBusiness
-	$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
+	// Provider profile as MedicalBusiness
 
-	// Provider as Person
-	$schema_provider['@graph'][] = $schema_provider_combined['Person'];
+		$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
+
+	// Provider profile as Person
+
+		$schema_provider['@graph'][] = $schema_provider_combined['Person'];
 
 // Construct the schema JSON script tag
 
