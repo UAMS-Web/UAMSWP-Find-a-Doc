@@ -13187,33 +13187,77 @@
 
 										// Get values
 
-											if ( !isset($provider_jobTitle) ) {
+											$provider_jobTitle = array();
 
-												$provider_jobTitle = array();
+											// Get ID of clinical specialization
 
-												if ( !isset($provider_clinical_specialization_term) ) {
+												if ( !isset($provider_clinical_specialization) ) {
 
-													if ( !isset($provider_clinical_specialization) ) {
-
-														$provider_clinical_specialization = get_field( 'physician_title', $provider );
-
-													}
-
-													if ( $provider_clinical_specialization ) {
-
-														$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' );
-
-													}
+													$provider_clinical_specialization = get_field( 'physician_title', $provider );
 
 												}
 
-												if ( is_object($provider_clinical_specialization_term) ) {
+											// Add ancestors to the list of ID values
+											
+												if ( $provider_clinical_specialization ) {
 
-													$provider_clinical_specialization_name = $provider_clinical_specialization_term->name;
-													$provider_jobTitle = get_field( 'clinical_specialization_title', $provider_clinical_specialization_term );
-													$provider_jobTitle = $provider_jobTitle ?: $provider_clinical_specialization_name;
+													$provider_clinical_specialization_ancestors = array_merge(
+														array($provider_clinical_specialization),
+														get_ancestors(
+															$provider_clinical_specialization, // $object_id  // int // Optional // The ID of the object // Default: 0
+															'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+															'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+														)
+													);
 
 												}
+
+											// Get attributes of the clinical specializations
+
+												if ( $provider_clinical_specialization_ancestors ) {
+
+													foreach ( $provider_clinical_specialization_ancestors as $item ) {
+
+														if ( $item ) {
+
+															$item_term = get_term( $item, 'clinical_title' ) ?? array();
+							
+															$item_name = '';
+															$item_occupation_title = '';
+															$item_occupation_title_attr = '';
+							
+															if ( is_object($item_term) ) {
+								
+																$item_name = $item_term->name;
+																$item_occupation_title = get_field('clinical_specialization_title', $item_term) ?? '';
+																$item_occupation_title = $item_occupation_title ?: $item_name;
+																$item_occupation_title_attr = uamswp_attr_conversion($item_occupation_title);
+								
+															}
+
+															if ( $item_occupation_title_attr ) {
+
+																$provider_jobTitle[] = $item_occupation_title_attr;
+
+															}
+								
+														}
+								
+													}
+
+												}
+										
+										// Clean up the array
+
+											if ( $provider_jobTitle ) {
+
+												$provider_jobTitle = array_filter($provider_jobTitle);
+												$provider_jobTitle = array_unique( $provider_jobTitle, SORT_REGULAR );
+												$provider_jobTitle = array_values($provider_jobTitle);
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($provider_jobTitle);
 
 											}
 
