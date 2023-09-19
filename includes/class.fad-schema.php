@@ -20812,7 +20812,7 @@
 								 *     - Text
 								 */
 
-								if ( $nesting_level <= 1 ) {
+								if ( $nesting_level == 0 ) {
 
 									// Get repeater field value
 
@@ -20846,7 +20846,7 @@
 								 *     - MedicalCode
 								 */
 
-								if ( $nesting_level <= 1 ) {
+								if ( $nesting_level == 0 ) {
 
 									// Get values
 
@@ -21051,7 +21051,7 @@
 								 *     - MedicineSystem
 								 */
 
-								if ( $nesting_level <= 1 ) {
+								if ( $nesting_level == 0 ) {
 
 									// Get field value
 
@@ -21148,7 +21148,7 @@
 
 								*/
 
-								if ( $nesting_level <= 1 ) {
+							if ( $nesting_level == 0 ) {
 
 								}
 
@@ -21162,7 +21162,7 @@
 								 *     - MedicalSpecialty
 								 */
 
-								if ( $nesting_level <= 1 ) {
+								if ( $nesting_level == 0 ) {
 
 									// Get values
 

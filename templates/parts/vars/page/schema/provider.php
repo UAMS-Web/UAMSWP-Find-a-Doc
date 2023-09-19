@@ -240,26 +240,6 @@ TODO List
 
 	// Related ontology items as schema arrays
 
-		// Related Areas of Expertise
-
-			// Define the schema for nesting in 'MedicalWebPage'['mentions']
-
-				/*
-					Nesting level 0 = 'MedicalWebPage'
-					Nesting level 1 = 'MedicalWebPage'['mentions']
-				*/
-
-				$provider_related_expertise = uamswp_fad_schema_expertise(
-					$expertises, // List of IDs of the clinical resource items
-					$page_url, // Page URL
-					1, // Nesting level within the main schema
-					'MedicalEntity', // Base fragment identifier
-				);
-
-			// Define reference to each value/row in this property
-
-				$schema_provider_expertise_ref = uamswp_fad_schema_node_references( $provider_related_expertise );
-
 		// Related Clinical Resources
 
 			// Define the schema for nesting in 'MedicalWebPage'['mentions']
