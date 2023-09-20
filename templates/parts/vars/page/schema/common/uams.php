@@ -25,11 +25,12 @@
 	// name
 
 		$schema_base_org_uams['name'] = 'University of Arkansas for Medical Sciences';
-		$schema_base_org_uams_name = $schema_base_org_uams['name'];
+		$schema_base_org_uams_name = $schema_base_org_uams['name'] ?? '';
 
 	// alternateName
 
 		$schema_base_org_uams['alternateName'] = 'UAMS';
+		$schema_base_org_uams_alternateName = $schema_base_org_uams['alternateName'] ?? '';
 
 	// contactPoint
 
@@ -287,6 +288,12 @@
 	// name
 
 		$schema_base_org_uams_health['name'] = 'UAMS Health';
+		$schema_base_org_uams_health_name = $schema_base_org_uams_health['name'] ?? '';
+
+	// alternateName
+
+		$schema_base_org_uams_health['alternateName'] = '';
+		$schema_base_org_uams_health_alternateName = $schema_base_org_uams_health['alternateName'] ?? '';
 
 	// contactPoint
 
