@@ -16805,105 +16805,101 @@
 
 										// Get values
 
-											if ( !isset($LocalBusiness_additionalType) ) {
+											// Base property values array
 
-												// Base property values array
+												$LocalBusiness_additionalType = array();
 
-													$LocalBusiness_additionalType = array();
+											// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-												// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
+												// Get list of medicalSpecialty values
 
-													// Get list of medicalSpecialty values
+													if ( !isset($LocalBusiness_medicalSpecialty_list) ) {
 
-														if ( !isset($LocalBusiness_medicalSpecialty_list) ) {
+														// Get medicalSpecialty values
 
-															// Get medicalSpecialty values
+															if ( !isset($LocalBusiness_medicalSpecialty) ) {
 
-																if ( !isset($LocalBusiness_medicalSpecialty) ) {
-
-																	// Get medicalSpecialty multiselect field value
-					
-																		if ( !isset($LocalBusiness_medicalSpecialty_multiselect) ) {
-					
-																			$LocalBusiness_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
-					
-																		}
-					
-																	// Format value
-					
-																		// Simple list of MedicalSpecialty values
-					
-																			$LocalBusiness_medicalSpecialty_list = array();
-					
-																		// Schema property values
-					
-																			if ( $LocalBusiness_medicalSpecialty_multiselect ) {
-					
-																				$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
-																					$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
-																					$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-																				);
-					
-																			}
-					
-																}
+																// Get medicalSpecialty multiselect field value
 				
-														}
+																	if ( !isset($LocalBusiness_medicalSpecialty_multiselect) ) {
+				
+																		$LocalBusiness_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
+				
+																	}
+				
+																// Format value
+				
+																	// Simple list of MedicalSpecialty values
+				
+																		$LocalBusiness_medicalSpecialty_list = array();
+				
+																	// Schema property values
+				
+																		if ( $LocalBusiness_medicalSpecialty_multiselect ) {
+				
+																			$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+																				$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+																				$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+																			);
+				
+																		}
+				
+															}
+			
+													}
 
-													// Cross-reference the lists
+												// Cross-reference the lists
 
-														if ( $LocalBusiness_medicalSpecialty_list ) {
+													if ( $LocalBusiness_medicalSpecialty_list ) {
 
-															$LocalBusiness_medicalSpecialty_list = is_array($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
-															$LocalBusiness_medicalSpecialty_list = array_is_list($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
+														$LocalBusiness_medicalSpecialty_list = is_array($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
+														$LocalBusiness_medicalSpecialty_list = array_is_list($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
 
-															$LocalBusiness_additionalType_medicalSpecialty = array_intersect(
-																$LocalBusiness_additionalType_MedicalSpecialty_valid,
-																$LocalBusiness_medicalSpecialty_list
+														$LocalBusiness_additionalType_medicalSpecialty = array_intersect(
+															$LocalBusiness_additionalType_MedicalSpecialty_valid,
+															$LocalBusiness_medicalSpecialty_list
+														);
+
+													}
+
+												// Merge array into the additionalType property values array
+
+													$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
+														$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
+														$LocalBusiness_additionalType_medicalSpecialty, // mixed // Required // Incoming schema item property value
+														$LocalBusiness_additionalType_medicalSpecialty_ref // mixed // Required // @id reference to incoming schema item property value
+													);
+
+											// Get additionalType repeater field value
+
+												if ( !isset($LocalBusiness_additionalType_repeater) ) {
+
+													$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
+
+												}
+
+												// Add each item to an array
+
+													if ( !isset($LocalBusiness_additionalType_field) ) {
+
+														if ( $LocalBusiness_additionalType_repeater ) {
+
+															$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
+																$LocalBusiness_additionalType_repeater, // additionalType repeater field
+																'schema_additionalType_uri' // additionalType item field name
 															);
 
 														}
 
-													// Merge array into the additionalType property values array
-
-														$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
-															$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
-															$LocalBusiness_additionalType_medicalSpecialty, // mixed // Required // Incoming schema item property value
-															$LocalBusiness_additionalType_medicalSpecialty_ref // mixed // Required // @id reference to incoming schema item property value
-														);
-
-												// Get additionalType repeater field value
-
-													if ( !isset($LocalBusiness_additionalType_repeater) ) {
-
-														$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
-
 													}
 
-													// Add each item to an array
+												// Merge array into the additionalType property values array
 
-														if ( !isset($LocalBusiness_additionalType_field) ) {
-
-															if ( $LocalBusiness_additionalType_repeater ) {
-
-																$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
-																	$LocalBusiness_additionalType_repeater, // additionalType repeater field
-																	'schema_additionalType_uri' // additionalType item field name
-																);
-
-															}
-
-														}
-
-													// Merge array into the additionalType property values array
-
-														$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
-															$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
-															$LocalBusiness_additionalType_field, // mixed // Required // Incoming schema item property value
-															$LocalBusiness_additionalType_field_ref // mixed // Required // @id reference to incoming schema item property value
-														);
-
-											}
+													$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
+														$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
+														$LocalBusiness_additionalType_field, // mixed // Required // Incoming schema item property value
+														$LocalBusiness_additionalType_field_ref // mixed // Required // @id reference to incoming schema item property value
+													);
 
 										// Add to item values
 
