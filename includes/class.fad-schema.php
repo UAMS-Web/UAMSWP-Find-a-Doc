@@ -9440,25 +9440,26 @@
 												$nesting_level == 0
 											) {
 
-												// Get specific membership 'Organization'
+												// Base array
 
-													if ( !isset($provider_memberOf) ) {
+													$provider_memberOf = array();
 
-														// Get health care professional associations input value
+												// Get health care professional associations input value
 
-															if ( !isset($provider_associations) ) {
+													if ( !isset($provider_associations) ) {
 
-																$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
-
-															}
-
-														// Format values
-
-															$provider_memberOf = uamswp_fad_schema_associations(
-																$provider_associations, // mixed // Required // Health care professional association ID values
-															); // Add to schema fields
+														$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
 
 													}
+
+													// Format values
+
+														$provider_association_names = array();
+														$provider_memberOf = uamswp_fad_schema_associations(
+															$provider_associations, // mixed // Required // Health care professional association ID values
+															$provider_association_names, // array // Optional // Pre-existing array variable to populate with a list of association names
+															$provider_memberOf // array // Optional // Pre-existing schema array for Language to which to add association items
+														);
 
 												// Merge in common clinical 'Organization'
 
