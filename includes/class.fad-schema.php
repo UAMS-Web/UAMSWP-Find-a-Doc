@@ -24949,7 +24949,7 @@
 
 		}
 
-	// Add values to multiple schema items
+	// Add values to schema item property
 
 		function uamswp_fad_schema_add_to_item_values(
 			string $schema_type, // string // Required // The @type value for the schema item
