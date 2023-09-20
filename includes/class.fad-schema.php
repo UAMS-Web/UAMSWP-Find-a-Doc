@@ -25078,11 +25078,19 @@
 
 			// Merge the arrays
 
-				uamswp_fad_schema_values_or_reference(
-					$base_value, // Property variable
-					$incoming_value, // Full value variable
-					$incoming_value_ref // @id reference variable
-				);
+				if (
+					$base_value
+					||
+					$incoming_value
+				) {
+
+					uamswp_fad_schema_values_or_reference(
+						$base_value, // Property variable
+						$incoming_value, // Full value variable
+						$incoming_value_ref // @id reference variable
+					);
+
+				}
 
 			// Clean up array
 
