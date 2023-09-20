@@ -5117,6 +5117,8 @@
 								$provider_alternateName = null;
 								$provider_alternateName_additional = null;
 								$provider_alternateName_additional_repeater = null;
+								$provider_alternateName_combinations = null;
+								$provider_alternateName_options = null;
 								$provider_alternateName_ref = null;
 								$provider_alternateName_variants = null;
 								$provider_areaServed = null;
@@ -5188,6 +5190,12 @@
 								$provider_expertise_ref = null;
 								$provider_familyName = null;
 								$provider_familyName_ref = null;
+								$provider_forename_combinations = null;
+								$provider_forename_list = null;
+								$provider_forename_options = null;
+								$provider_forename_options_first = null;
+								$provider_forename_options_middle = null;
+								$provider_forename_options_nickname = null;
 								$provider_fpage_query = null;
 								$provider_generational_suffix = null;
 								$provider_givenName = null;
@@ -6289,65 +6297,196 @@
 
 												// Get values
 
-													// Base array
+													// Base arrays
 
 														$provider_alternateName = array();
+														$provider_alternateName_options = array();
+														$provider_forename_list = array();
+														$provider_forename_options = array();
+														$provider_surname_list = array();
+														$provider_surname_options = array();
 
-													// Name variations
+													// Reset variables
 
-														// First Middle "Nickname" Last
+													// Create a list of all name variations
 
-															$provider_alternateName[] = '';
+														// Name options
 
-														// First Middle Last
+															// First
 
-															$provider_alternateName[] = '';
+																// Base array
 
-														// First "Nickname" Last
+																	$provider_forename_options_first = array();
 
-															$provider_alternateName[] = '';
+																// Get values
 
-														// First Last
+																	if ( $provider_givenName ) {
 
-															$provider_alternateName[] = '';
+																		$provider_forename_options_first[] = $provider_givenName;
 
-														// Middle Last
+																	}
 
-															$provider_alternateName[] = '';
+																	if ( $provider_givenName_initial ) {
 
-														// Middle "Nickname" Last
+																		$provider_forename_options_first[] = $provider_givenName_initial;
 
-															$provider_alternateName[] = '';
+																	}
 
-														// Nickname Last
+																	$provider_forename_options_first[] = ''; // Empty option
 
-															$provider_alternateName[] = '';
+																// Add group to name options list
 
-														// First M. "Nickname" Last
+																	if ( $provider_forename_options_first ) {
 
-															$provider_alternateName[] = '';
+																		$provider_forename_options[] = $provider_forename_options_first;
 
-														// First M. Last
+																	}
 
-															$provider_alternateName[] = '';
+															// Middle
 
-														// F. Middle "Nickname" Last
+																// Base array
 
-															$provider_alternateName[] = '';
+																	$provider_forename_options_middle = array();
 
-														// F. Middle Last
+																// Get values
 
-															$provider_alternateName[] = '';
+																	if ( $provider_additionalName ) {
 
-														// F. M. "Nickname" Last
+																		$provider_forename_options_middle[] = $provider_additionalName;
 
-															$provider_alternateName[] = '';
+																	}
 
-														// F. M. Last
+																	if ( $provider_additionalName_initial ) {
 
-															$provider_alternateName[] = '';
+																		$provider_forename_options_middle[] = $provider_additionalName_initial;
 
-													// Additional alternate names
+																	}
+
+																	$provider_forename_options_middle[] = ''; // Empty option
+
+																// Add group to name options list
+
+																	if ( $provider_forename_options_middle ) {
+
+																		$provider_forename_options[] = $provider_forename_options_middle;
+
+																	}
+
+															// Nickname
+
+																// Base array
+
+																	$provider_forename_options_nickname = array();
+
+																// Get values
+
+																	if ( $provider_nickname ) {
+
+																		$provider_forename_options_nickname[] = $provider_nickname;
+
+																	}
+
+																	$provider_forename_options_nickname[] = ''; // Empty option
+
+																// Add group to name options list
+
+																	if ( $provider_forename_options_nickname ) {
+
+																		$provider_forename_options[] = $provider_forename_options_nickname;
+
+																	}
+
+															// Last
+
+																// Base array
+
+																	$provider_surname_options_last = array();
+
+																// Get values
+
+																	if ( $provider_familyName ) {
+
+																		$provider_surname_options_last[] = $provider_familyName;
+
+																	}
+
+																// Add group to name options list
+
+																	if ( $provider_surname_options_last ) {
+
+																		$provider_surname_options[] = $provider_surname_options_last;
+
+																	}
+
+															// Generational Suffix
+
+																// Base array
+
+																	$provider_surname_options_suffix = array();
+
+																// Get values
+
+																	if ( $provider_generational_suffix ) {
+
+																		$provider_surname_options_suffix[] = $provider_generational_suffix;
+
+																	}
+
+																	$provider_surname_options_suffix[] = ''; // Empty option
+
+																// Add group to name options list
+
+																	if ( $provider_surname_options_suffix ) {
+
+																		$provider_surname_options[] = $provider_surname_options_suffix;
+
+																	}
+
+														// Forename combination list
+
+															$provider_forename_combinations = uamswp_fad_combinations($provider_forename_options);
+
+															foreach ( $provider_forename_combinations as $item ) {
+
+																$provider_forename_list[] = implode(
+																	' ',
+																	$item
+																);
+
+															}
+
+														// Surname combination list
+
+															$provider_surname_combinations = uamswp_fad_combinations($provider_surname_options);
+
+															foreach ( $provider_surname_combinations as $item ) {
+
+																$provider_surname_list[] = implode(
+																	' ',
+																	$item
+																);
+
+															}
+
+														// Full name combination list
+
+															$provider_alternateName_options = array(
+																$provider_forename_list,
+																$provider_surname_list
+															);
+
+															$provider_alternateName_combinations = uamswp_fad_combinations($provider_alternateName_options);
+
+															foreach ( $provider_alternateName_combinations as $item ) {
+
+																$provider_alternateName[] = implode(
+																	' ',
+																	$item
+																);
+
+															}
+
+													// Add additional alternate names from the repeater field
 
 														// Get values
 
@@ -6370,11 +6509,14 @@
 
 																}
 
-														// Merge values
+														// Merge values into alternateName list array
 
 															if ( $provider_alternateName_additional ) {
 
-																$provider_alternateName = $provider_alternateName + $provider_alternateName_additional;
+																$provider_alternateName = array_merge(
+																	$provider_alternateName,
+																	$provider_alternateName_additional
+																);
 
 															}
 
@@ -6386,11 +6528,23 @@
 
 															foreach ( $provider_alternateName as $item ) {
 
+																if ( !$item ) {
+
+																	continue;
+
+																}
+
 																// Add prefix
 
 																	if ( $provider_honorificPrefix ) {
 
-																		$provider_alternateName_variants[] = $provider_honorificPrefix . ' ' . $item;
+																		$provider_alternateName_variants[] = implode(
+																			' ',
+																			array(
+																				$provider_honorificPrefix,
+																				$item
+																			)
+																		);
 
 																	}
 
@@ -6398,7 +6552,13 @@
 
 																	if ( $provider_degree_list ) {
 
-																		$provider_alternateName_variants[] = $item . ', ' . $provider_degree_list;
+																		$provider_alternateName_variants[] = implode(
+																			', ',
+																			array(
+																				$item,
+																				$provider_degree_list
+																			)
+																		);
 
 																	}
 
@@ -6406,7 +6566,10 @@
 
 															if ( $provider_alternateName_variants ) {
 
-																$provider_alternateName = $provider_alternateName + $provider_alternateName_variants;
+																$provider_alternateName = array_merge(
+																	$provider_alternateName,
+																	$provider_alternateName_variants
+																);
 
 															}
 
@@ -6414,19 +6577,30 @@
 
 													// Clean up values
 
-														// Remove display name from list
+														if ( $provider_alternateName ) {
 
-															if (
-																$provider_alternateName
-																&&
-																array_search( $provider_name, $provider_alternateName, true ) !== false
-															) {
-																unset($provider_alternateName[array_search( $provider_name, $provider_alternateName, true )]);
-															}
+															// Remove display name from list
 
-														$provider_alternateName = array_filter($provider_alternateName);
-														$provider_alternateName = array_unique( $provider_alternateName, SORT_REGULAR );
-														$provider_alternateName = array_values($provider_alternateName);
+																if (
+																	array_search(
+																		$provider_name,
+																		$provider_alternateName,
+																		true
+																	) !== false
+																) {
+																	unset($provider_alternateName[array_search( $provider_name, $provider_alternateName, true )]);
+																}
+
+															$provider_alternateName = array_filter($provider_alternateName);
+															$provider_alternateName = array_unique( $provider_alternateName, SORT_REGULAR );
+															$provider_alternateName = array_values($provider_alternateName);
+															sort($provider_alternateName);
+
+															// If there is only one item, flatten the multi-dimensional array by one step
+
+																uamswp_fad_flatten_multidimensional_array($provider_alternateName);
+
+														}
 
 												// Add to item values
 
