@@ -5066,6 +5066,7 @@
 								$provider_item_MedicalBusiness = array(); // Base MedicalBusiness array
 								$provider_item_Person = array(); // Base Person array
 								$Dentist_degree_query = null;
+								$isco08_values = null;
 								$MedicalBusiness_type = null;
 								$Optician_degree_query = null;
 								$Person_type = null;
@@ -5093,6 +5094,7 @@
 								$provider_acquireLicensePage = null;
 								$provider_acquireLicensePage_ref = null;
 								$provider_additionalName = null;
+								$provider_additionalName_initial = null;
 								$provider_additionalName_ref = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
@@ -5189,6 +5191,7 @@
 								$provider_fpage_query = null;
 								$provider_generational_suffix = null;
 								$provider_givenName = null;
+								$provider_givenName_initial = null;
 								$provider_givenName_ref = null;
 								$provider_globalLocationNumber = null;
 								$provider_globalLocationNumber_ref = null;
@@ -5276,18 +5279,13 @@
 								$provider_npi = null;
 								$provider_occupationalCategory = null;
 								$provider_occupationalCategory_ref = null;
-								$provider_specialization_onetsoc_code = null;
-								$provider_specialization_onetsoc_code_name = null;
-								$provider_specialization_onetsoc = null;
-								$provider_specialization_onetsoc_ref = null;
-								$provider_specialization_isco08_code = null;
-								$provider_specialization_isco08 = null;
-								$provider_specialization_isco08_ref = null;
-								$provider_specialization_isco08_schema = null;
-								$isco08_values = null;
 								$provider_offers = null;
 								$provider_offers_ref = null;
 								$provider_ontology_type = null;
+								$provider_organization_common = null;
+								$provider_organization_common_ref = null;
+								$provider_organization_specific = null;
+								$provider_organization_specific_ref = null;
 								$provider_parentOrganization = null;
 								$provider_parentOrganization_ref = null;
 								$provider_paymentAccepted = null;
@@ -5321,10 +5319,23 @@
 								$provider_sourceOrganization_ref = null;
 								$provider_speakable = null;
 								$provider_speakable_ref = null;
+								$provider_specialization_isco08 = null;
+								$provider_specialization_isco08_code = null;
+								$provider_specialization_isco08_ref = null;
+								$provider_specialization_isco08_schema = null;
+								$provider_specialization_onetsoc = null;
+								$provider_specialization_onetsoc_code = null;
+								$provider_specialization_onetsoc_code_name = null;
+								$provider_specialization_onetsoc_ref = null;
 								$provider_specialty = null;
 								$provider_specialty_ref = null;
 								$provider_subjectOf = null;
 								$provider_subjectOf_ref = null;
+								$provider_surname_combinations = null;
+								$provider_surname_list = null;
+								$provider_surname_options = null;
+								$provider_surname_options_last = null;
+								$provider_surname_options_suffix = null;
 								$provider_taxID = null;
 								$provider_taxID_employer = null;
 								$provider_taxID_ref = null;
@@ -5355,10 +5366,6 @@
 								$provider_workLocation = null;
 								$provider_workLocation_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
-								$provider_organization_common = null;
-								$provider_organization_common_ref = null;
-								$provider_organization_specific = null;
-								$provider_organization_specific_ref = null;
 
 							// Load variables from pre-existing field values array
 
@@ -5819,6 +5826,15 @@
 
 												}
 
+												// First initial
+
+													if ( $provider_givenName ) {
+
+														$provider_givenName_initial = substr( $provider_givenName, 0, 1 ) . '.';
+														$provider_givenName_initial = ( $provider_givenName_initial != $provider_givenName ) ? $provider_givenName_initial : ''; // Check if initial matches full first name value
+
+													}
+
 											// Middle name
 
 												if ( !isset($provider_additionalName) ) {
@@ -5826,6 +5842,15 @@
 													$provider_additionalName = get_field( 'physician_middle_name', $provider ) ?? '';
 
 												}
+
+												// First initial
+
+													if ( $provider_additionalName ) {
+
+														$provider_additionalName_initial = substr( $provider_additionalName, 0, 1 ) . '.';
+														$provider_additionalName_initial = ( $provider_additionalName_initial != $provider_additionalName ) ? $provider_additionalName_initial : ''; // Check if initial matches full middle name value
+
+													}
 
 											// Nickname
 
