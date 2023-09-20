@@ -5355,6 +5355,10 @@
 								$provider_workLocation = null;
 								$provider_workLocation_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
+								$provider_organization_common = null;
+								$provider_organization_common_ref = null;
+								$provider_organization_specific = null;
+								$provider_organization_specific_ref = null;
 
 							// Load variables from pre-existing field values array
 
@@ -9060,76 +9064,19 @@
 
 												// Merge in common clinical 'Organization'
 
-													if ( $provider_organization_common ) {
-
-														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-
-														$provider_brand = array_merge(
-															( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
-															( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
-														);
-
-													}
+													$provider_brand = uamswp_fad_schema_merge_values(
+														$provider_brand, // mixed // Required // Initial schema item property value
+														$provider_organization_common, // mixed // Required // Incoming schema item property value
+														$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+													);
 
 												// Merge in specific clinical 'Organization'
 
-													if ( $provider_organization_specific ) {
-
-														if (
-															isset($provider_organization_specific_ref)
-															&&
-															!empty($provider_organization_specific_ref)
-														) {
-
-															// @id references
-
-																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-
-																$provider_brand = array_merge(
-																	( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
-																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
-																);
-
-														} else {
-
-															// Full values
-
-																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-
-																$provider_brand = array_merge(
-																	( array_is_list($provider_brand) ? $provider_brand : array($provider_brand) ),
-																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
-																);
-
-															// Define reference to the @id
-
-																if (
-																	!isset($provider_organization_specific_ref)
-																	&&
-																	!empty($provider_organization_specific)
-																	&&
-																	is_array($provider_organization_specific)
-																) {
-
-																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-
-																}
-
-														}
-
-													}
-
-												// Clean up array
-
-													$provider_brand = array_unique( $provider_brand, SORT_REGULAR );
-													$provider_brand = array_values($provider_brand);
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array($provider_brand);
+													$provider_brand = uamswp_fad_schema_merge_values(
+														$provider_brand, // mixed // Required // Initial schema item property value
+														$provider_organization_specific, // mixed // Required // Incoming schema item property value
+														$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+													);
 
 												// Add to item values
 
@@ -9291,133 +9238,35 @@
 													 *     - Organization
 													 */
 
-													// Base array
+													// Get values
 
-														$provider_affiliation = array();
+														// Base array
 
-													// Merge in hospitalAffiliation values
+															$provider_affiliation = array();
 
-														if ( $provider_hospitalAffiliation ) {
+														// Merge in hospitalAffiliation values
 
-															if (
-																isset($provider_hospitalAffiliation_ref)
-																&&
-																!empty($provider_hospitalAffiliation_ref)
-															) {
-
-																// @id references
-
-																	$provider_hospitalAffiliation_ref = is_array($provider_hospitalAffiliation_ref) ? $provider_hospitalAffiliation_ref : array($provider_hospitalAffiliation_ref);
-																	$provider_hospitalAffiliation_ref = array_is_list($provider_hospitalAffiliation_ref) ? $provider_hospitalAffiliation_ref : array($provider_hospitalAffiliation_ref);
-
-																	$provider_affiliation = array_merge(
-																		$provider_affiliation,
-																		$provider_hospitalAffiliation_ref
-																	);
-
-															} else {
-
-																// Full values
-
-																	$provider_hospitalAffiliation = is_array($provider_hospitalAffiliation) ? $provider_hospitalAffiliation : array($provider_hospitalAffiliation);
-																	$provider_hospitalAffiliation = array_is_list($provider_hospitalAffiliation) ? $provider_hospitalAffiliation : array($provider_hospitalAffiliation);
-
-																	$provider_affiliation = array_merge(
-																		$provider_affiliation,
-																		$provider_hospitalAffiliation
-																	);
-
-																// Define reference to the @id
-
-																	if (
-																		!isset($provider_hospitalAffiliation_ref)
-																		&&
-																		!empty($provider_hospitalAffiliation)
-																		&&
-																		is_array($provider_hospitalAffiliation)
-																	) {
-
-																		$provider_hospitalAffiliation_ref = uamswp_fad_schema_node_references($provider_hospitalAffiliation);
-
-																	}
-
-															}
-
-														}
-
-													// Merge in common clinical 'Organization'
-
-														if ( $provider_organization_common ) {
-
-															$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-															$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-
-															$provider_affiliation = array_merge(
-																( $provider_affiliation && array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
-																$provider_organization_common
+															$provider_affiliation = uamswp_fad_schema_merge_values(
+																$provider_affiliation, // mixed // Required // Initial schema item property value
+																$provider_hospitalAffiliation, // mixed // Required // Incoming schema item property value
+																$provider_hospitalAffiliation_ref // mixed // Required // @id reference to incoming schema item property value
 															);
 
-														}
+														// Merge in common clinical 'Organization'
 
-													// Merge in specific clinical 'Organization'
+															$provider_affiliation = uamswp_fad_schema_merge_values(
+																$provider_affiliation, // mixed // Required // Initial schema item property value
+																$provider_organization_common, // mixed // Required // Incoming schema item property value
+																$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+															);
 
-														if ( $provider_organization_specific ) {
+														// Merge in specific clinical 'Organization'
 
-															if (
-																isset($provider_organization_specific_ref)
-																&&
-																!empty($provider_organization_specific_ref)
-															) {
-
-																// @id references
-
-																	$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-																	$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-
-																	$provider_affiliation = array_merge(
-																		( array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
-																		( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
-																	);
-
-															} else {
-
-																// Full values
-
-																	$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-																	$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-
-																	$provider_affiliation = array_merge(
-																		( array_is_list($provider_affiliation) ? $provider_affiliation : array($provider_affiliation) ),
-																		( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
-																	);
-
-																// Define reference to the @id
-
-																	if (
-																		!isset($provider_organization_specific_ref)
-																		&&
-																		!empty($provider_organization_specific)
-																		&&
-																		is_array($provider_organization_specific)
-																	) {
-
-																		$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-
-																	}
-
-															}
-
-														}
-
-													// Clean up array
-
-														$provider_affiliation = array_filter($provider_affiliation);
-														$provider_affiliation = array_unique( $provider_affiliation, SORT_REGULAR );
-														$provider_affiliation = array_values($provider_affiliation);
-
-														// If there is only one item, flatten the multi-dimensional array by one step
-
-															uamswp_fad_flatten_multidimensional_array($provider_affiliation);
+															$provider_affiliation = uamswp_fad_schema_merge_values(
+																$provider_affiliation, // mixed // Required // Initial schema item property value
+																$provider_organization_specific, // mixed // Required // Incoming schema item property value
+																$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+															);
 
 													// Add to item values
 
@@ -9494,99 +9343,44 @@
 												$nesting_level == 0
 											) {
 
-												// Base array
+												// Get values
 
-													$provider_memberOf = array();
+													// Base array
 
-												// Get health care professional associations input value
+														$provider_memberOf = array();
 
-													if ( !isset($provider_associations) ) {
+													// Get health care professional associations input value
 
-														$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
+														if ( !isset($provider_associations) ) {
 
-													}
-
-													// Format values
-
-														$provider_association_names = array();
-														$provider_memberOf = uamswp_fad_schema_associations(
-															$provider_associations, // mixed // Required // Health care professional association ID values
-															$provider_association_names, // array // Optional // Pre-existing array variable to populate with a list of association names
-															$provider_memberOf // array // Optional // Pre-existing schema array for Language to which to add association items
-														);
-
-												// Merge in common clinical 'Organization'
-
-													if ( $provider_organization_common ) {
-
-														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-
-														$provider_memberOf = array_merge(
-															( array_is_list( is_array($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ) ? $provider_memberOf : array($provider_memberOf) ),
-															( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
-														);
-
-													}
-
-												// Merge in specific clinical 'Organization'
-
-													if ( $provider_organization_specific ) {
-
-														if (
-															isset($provider_organization_specific_ref)
-															&&
-															!empty($provider_organization_specific_ref)
-														) {
-
-															// @id references
-
-																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-
-																$provider_memberOf = array_merge(
-																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
-																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
-																);
-
-														} else {
-
-															// Full values
-
-																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-
-																$provider_memberOf = array_merge(
-																	( array_is_list($provider_memberOf) ? $provider_memberOf : array($provider_memberOf) ),
-																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
-																);
-
-															// Define reference to the @id
-
-																if (
-																	!isset($provider_organization_specific_ref)
-																	&&
-																	!empty($provider_organization_specific)
-																	&&
-																	is_array($provider_organization_specific)
-																) {
-
-																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-
-																}
+															$provider_associations = get_field( 'physician_associations', $provider ) ?? array();
 
 														}
 
-													}
+														// Format values
 
-												// Clean up array
+															$provider_association_names = array();
+															$provider_memberOf = uamswp_fad_schema_associations(
+																$provider_associations, // mixed // Required // Health care professional association ID values
+																$provider_association_names, // array // Optional // Pre-existing array variable to populate with a list of association names
+																$provider_memberOf // array // Optional // Pre-existing schema array for Language to which to add association items
+															);
 
-													$provider_memberOf = array_unique( $provider_memberOf, SORT_REGULAR );
-													$provider_memberOf = array_values($provider_memberOf);
+													// Merge in common clinical 'Organization'
 
-													// If there is only one item, flatten the multi-dimensional array by one step
+														$provider_memberOf = uamswp_fad_schema_merge_values(
+															$provider_memberOf, // mixed // Required // Initial schema item property value
+															$provider_organization_common, // mixed // Required // Incoming schema item property value
+															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
-														uamswp_fad_flatten_multidimensional_array($provider_memberOf);
+													// Merge in specific clinical 'Organization'
+
+														$provider_memberOf = uamswp_fad_schema_merge_values(
+															$provider_memberOf, // mixed // Required // Initial schema item property value
+															$provider_organization_specific, // mixed // Required // Incoming schema item property value
+															$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
 												// Add to item values
 
@@ -9655,82 +9449,27 @@
 												)
 											) {
 
-												// Base array
+												// Get values
 
-													$provider_parentOrganization = array();
+													// Base array
 
-												// Merge in common clinical 'Organization'
+														$provider_parentOrganization = array();
 
-													if ( $provider_organization_common ) {
+													// Merge in common clinical 'Organization'
 
-														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-
-														$provider_parentOrganization = array_merge(
-															( array_is_list($provider_parentOrganization) ? $provider_parentOrganization : array($provider_parentOrganization) ),
-															( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
+														$provider_parentOrganization = uamswp_fad_schema_merge_values(
+															$provider_parentOrganization, // mixed // Required // Initial schema item property value
+															$provider_organization_common, // mixed // Required // Incoming schema item property value
+															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 														);
 
-													}
+													// Merge in specific clinical 'Organization'
 
-												// Merge in specific clinical 'Organization'
-
-													if ( $provider_organization_specific ) {
-
-														if (
-															isset($provider_organization_specific_ref)
-															&&
-															!empty($provider_organization_specific_ref)
-														) {
-
-															// @id references
-
-																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-
-																$provider_parentOrganization = array_merge(
-																	( array_is_list($provider_parentOrganization) ? $provider_parentOrganization : array($provider_parentOrganization) ),
-																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
-																);
-
-														} else {
-
-															// Full values
-
-																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-
-																$provider_parentOrganization = array_merge(
-																	( array_is_list($provider_parentOrganization) ? $provider_parentOrganization : array($provider_parentOrganization) ),
-																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
-																);
-
-															// Define reference to the @id
-
-																if (
-																	!isset($provider_organization_specific_ref)
-																	&&
-																	!empty($provider_organization_specific)
-																	&&
-																	is_array($provider_organization_specific)
-																) {
-
-																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-
-																}
-
-														}
-
-													}
-
-												// Clean up array
-
-													$provider_parentOrganization = array_unique( $provider_parentOrganization, SORT_REGULAR );
-													$provider_parentOrganization = array_values($provider_parentOrganization);
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array($provider_parentOrganization);
+														$provider_parentOrganization = uamswp_fad_schema_merge_values(
+															$provider_parentOrganization, // mixed // Required // Initial schema item property value
+															$provider_organization_specific, // mixed // Required // Incoming schema item property value
+															$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
 												// Add to item values
 
@@ -9803,82 +9542,27 @@
 												$nesting_level == 0
 											) {
 
-												// Base array
+												// Get values
 
-													$provider_worksFor = array();
+													// Base array
 
-												// Merge in common clinical 'Organization'
+														$provider_worksFor = array();
 
-													if ( $provider_organization_common ) {
+													// Merge in common clinical 'Organization'
 
-														$provider_organization_common = is_array($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-														$provider_organization_common = array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common);
-
-														$provider_worksFor = array_merge(
-															( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
-															( array_is_list($provider_organization_common) ? $provider_organization_common : array($provider_organization_common) )
+														$provider_worksFor = uamswp_fad_schema_merge_values(
+															$provider_worksFor, // mixed // Required // Initial schema item property value
+															$provider_organization_common, // mixed // Required // Incoming schema item property value
+															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 														);
 
-													}
+													// Merge in specific clinical 'Organization'
 
-												// Merge in specific clinical 'Organization'
-
-													if ( $provider_organization_specific ) {
-
-														if (
-															isset($provider_organization_specific_ref)
-															&&
-															!empty($provider_organization_specific_ref)
-														) {
-
-															// @id references
-
-																$provider_organization_specific_ref = is_array($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-																$provider_organization_specific_ref = array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref);
-
-																$provider_worksFor = array_merge(
-																	( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
-																	( array_is_list($provider_organization_specific_ref) ? $provider_organization_specific_ref : array($provider_organization_specific_ref) )
-																);
-
-														} else {
-
-															// Full values
-
-																$provider_organization_specific = is_array($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-																$provider_organization_specific = array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific);
-
-																$provider_worksFor = array_merge(
-																	( array_is_list($provider_worksFor) ? $provider_worksFor : array($provider_worksFor) ),
-																	( array_is_list($provider_organization_specific) ? $provider_organization_specific : array($provider_organization_specific) )
-																);
-
-															// Define reference to the @id
-
-																if (
-																	!isset($provider_organization_specific_ref)
-																	&&
-																	!empty($provider_organization_specific)
-																	&&
-																	is_array($provider_organization_specific)
-																) {
-
-																	$provider_organization_specific_ref = uamswp_fad_schema_node_references($provider_organization_specific);
-
-																}
-
-														}
-
-													}
-
-												// Clean up array
-
-													$provider_worksFor = array_unique( $provider_worksFor, SORT_REGULAR );
-													$provider_worksFor = array_values($provider_worksFor);
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array($provider_worksFor);
+														$provider_worksFor = uamswp_fad_schema_merge_values(
+															$provider_worksFor, // mixed // Required // Initial schema item property value
+															$provider_organization_specific, // mixed // Required // Incoming schema item property value
+															$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
 												// Add to item values
 
@@ -14301,318 +13985,88 @@
 
 											// Related Locations
 
-												if ( $provider_location ) {
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_location, // mixed // Required // Incoming schema item property value
+													$provider_location_ref // mixed // Required // @id reference to incoming schema item property value
+												);
 
-													if (
-														isset($provider_location_ref)
-														&&
-														!empty($provider_location_ref)
-													) {
+												// Get URLs for significantLink property
 
-														// @id references
+													$provider_significantLink = $provider_significantLink ?? array();
 
-															$provider_location_ref = is_array($provider_location_ref) ? $provider_location_ref : array($provider_location_ref);
-															$provider_location_ref = array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_location_ref) ? $provider_location_ref : array($provider_location_ref) )
-															);
-
-													} else {
-
-														// Full values
-
-															$provider_location = is_array($provider_location) ? $provider_location : array($provider_location);
-															$provider_location = array_is_list($provider_location) ? $provider_location : array($provider_location);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_location) ? $provider_location : array($provider_location) )
-															);
-
-														// Define reference to the @id
-
-															if (
-																!isset($provider_location_ref)
-																&&
-																!empty($provider_location)
-																&&
-																is_array($provider_location)
-															) {
-
-																$provider_location_ref = uamswp_fad_schema_node_references($provider_location);
-
-															}
-
-													}
-
-													// Get URLs for significantLink property
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_location, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-												}
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_location, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
 
 											// Related Areas of Expertise
 
-												if ( $provider_expertise ) {
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_expertise, // mixed // Required // Incoming schema item property value
+													$provider_expertise_ref // mixed // Required // @id reference to incoming schema item property value
+												);
 
-													if (
-														isset($provider_expertise_ref)
-														&&
-														!empty($provider_expertise_ref)
-													) {
+												// Get URLs for significantLink property
 
-														// @id references
+													$provider_significantLink = $provider_significantLink ?? array();
 
-															$provider_expertise_ref = is_array($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref);
-															$provider_expertise_ref = array_is_list($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_expertise_ref) ? $provider_expertise_ref : array($provider_expertise_ref) )
-															);
-
-													} else {
-
-														// Full values
-
-															$provider_expertise = is_array($provider_expertise) ? $provider_expertise : array($provider_expertise);
-															$provider_expertise = array_is_list($provider_expertise) ? $provider_expertise : array($provider_expertise);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_expertise) ? $provider_expertise : array($provider_expertise) )
-															);
-
-														// Define reference to the @id
-
-															if (
-																!isset($provider_expertise_ref)
-																&&
-																!empty($provider_expertise)
-																&&
-																is_array($provider_expertise)
-															) {
-
-																$provider_expertise_ref = uamswp_fad_schema_node_references($provider_expertise);
-
-															}
-
-													}
-
-													// Get URLs for significantLink property
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_expertise, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-												}
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_expertise, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
 
 											// Related Clinical Resources
 
-												if ( $provider_clinical_resource ) {
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_clinical_resource, // mixed // Required // Incoming schema item property value
+													$provider_clinical_resource_ref // mixed // Required // @id reference to incoming schema item property value
+												);
 
-													if (
-														isset($provider_clinical_resource_ref)
-														&&
-														!empty($provider_clinical_resource_ref)
-													) {
+												// Get URLs for significantLink property
 
-														// @id references
+													$provider_significantLink = $provider_significantLink ?? array();
 
-															$provider_clinical_resource_ref = is_array($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref);
-															$provider_clinical_resource_ref = array_is_list($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_clinical_resource_ref) ? $provider_clinical_resource_ref : array($provider_clinical_resource_ref) )
-															);
-
-													} else {
-
-														// Full values
-
-															$provider_clinical_resource = is_array($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource);
-															$provider_clinical_resource = array_is_list($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_clinical_resource) ? $provider_clinical_resource : array($provider_clinical_resource) )
-															);
-
-														// Define reference to the @id
-
-															if (
-																!isset($provider_clinical_resource_ref)
-																&&
-																!empty($provider_clinical_resource)
-																&&
-																is_array($provider_clinical_resource)
-															) {
-
-																$provider_clinical_resource_ref = uamswp_fad_schema_node_references($provider_clinical_resource);
-
-															}
-
-													}
-
-													// Get URLs for significantLink property
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_clinical_resource, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-												}
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_clinical_resource, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
 
 											// Merge in related conditions
 
-												if ( $provider_condition ) {
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_condition, // mixed // Required // Incoming schema item property value
+													$provider_condition_ref // mixed // Required // @id reference to incoming schema item property value
+												);
 
-													if (
-														isset($provider_condition_ref)
-														&&
-														!empty($provider_condition_ref)
-													) {
+												// Get URLs for significantLink property
 
-														// @id references
+													$provider_significantLink = $provider_significantLink ?? array();
 
-															$provider_condition_ref = is_array($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref);
-															$provider_condition_ref = array_is_list($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_condition_ref) ? $provider_condition_ref : array($provider_condition_ref) )
-															);
-
-													} else {
-
-														// Full values
-
-															$provider_condition = is_array($provider_condition) ? $provider_condition : array($provider_condition);
-															$provider_condition = array_is_list($provider_condition) ? $provider_condition : array($provider_condition);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_condition) ? $provider_condition : array($provider_condition) )
-															);
-
-														// Define reference to the @id
-
-															if (
-																!isset($provider_condition_ref)
-																&&
-																!empty($provider_condition)
-																&&
-																is_array($provider_condition)
-															) {
-
-																$provider_condition_ref = uamswp_fad_schema_node_references($provider_condition);
-
-															}
-
-													}
-
-													// Get URLs for significantLink property
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_condition, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-												}
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_condition, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
 
 											// Related Treatments
 
-												if ( $provider_availableService ) {
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_availableService, // mixed // Required // Incoming schema item property value
+													$provider_availableService_ref // mixed // Required // @id reference to incoming schema item property value
+												);
 
-													if (
-														isset($provider_availableService_ref)
-														&&
-														!empty($provider_availableService_ref)
-													) {
+												// Get URLs for significantLink property
 
-														// @id references
+													$provider_significantLink = $provider_significantLink ?? array();
 
-															$provider_availableService_ref = is_array($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref);
-															$provider_availableService_ref = array_is_list($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_availableService_ref) ? $provider_availableService_ref : array($provider_availableService_ref) )
-															);
-
-													} else {
-
-														// Full values
-
-															$provider_availableService = is_array($provider_availableService) ? $provider_availableService : array($provider_availableService);
-															$provider_availableService = array_is_list($provider_availableService) ? $provider_availableService : array($provider_availableService);
-
-															$provider_mentions = array_merge(
-																( array_is_list($provider_mentions) ? $provider_mentions : array($provider_mentions) ),
-																( array_is_list($provider_availableService) ? $provider_availableService : array($provider_availableService) )
-															);
-
-														// Define reference to the @id
-
-															if (
-																!isset($provider_availableService_ref)
-																&&
-																!empty($provider_availableService)
-																&&
-																is_array($provider_availableService)
-															) {
-
-																$provider_availableService_ref = uamswp_fad_schema_node_references($provider_availableService);
-
-															}
-
-													}
-
-													// Get URLs for significantLink property
-
-														$provider_significantLink = $provider_significantLink ?? array();
-
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_availableService, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
-														);
-
-												}
-
-											// Clean up the list array
-
-												if (
-													$provider_mentions
-													&&
-													is_array($provider_mentions)
-													&&
-													array_is_list($provider_mentions)
-												) {
-
-													$provider_mentions = array_filter($provider_mentions);
-													$provider_mentions = array_unique( $provider_mentions, SORT_REGULAR);
-													$provider_mentions = array_values($provider_mentions);
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array($provider_mentions);
-
-												}
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_availableService, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
 
 										// Add to item values
 
