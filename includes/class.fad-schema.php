@@ -24889,17 +24889,29 @@
 
 				foreach ( $input as $item ) {
 
-					// Define reference to each value/row in this property
+					if ( $item ) {
 
-						if (
-							isset($item['@id'])
-							&&
-							!empty($item['@id'])
-						) {
+						// Define reference to each value/row in this property
 
-							$output[]['@id'] = $item['@id'];
+							if (
+								isset($item['@id'])
+								&&
+								!empty($item['@id'])
+							) {
 
-						}
+								// If @id key exists, add only that key/value pair
+
+									$output[]['@id'] = $item['@id'];
+
+							} else {
+
+								// Otherwise, add the full value array
+
+									$output[] = $item;
+
+							}
+
+					}
 
 				}
 
