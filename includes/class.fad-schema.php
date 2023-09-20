@@ -18218,16 +18218,16 @@
 											 *     - Text
 											 */
 
-											// Define values
+											if (
+												in_array(
+													'duns',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+												&&
+												$nesting_level == 0
+											) {
 
-												if (
-													in_array(
-														'duns',
-														$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-													)
-													&&
-													$nesting_level == 0
-												) {
+												// Define values
 
 													if ( !isset($LocalBusiness_duns) ) {
 
@@ -18241,15 +18241,15 @@
 
 													}
 
-													// Add to item values
+												// Add to item values
 
-														if ( $LocalBusiness_duns ) {
+													if ( $LocalBusiness_duns ) {
 
-															$LocalBusiness_item['duns'] = $LocalBusiness_duns;
+														$LocalBusiness_item['duns'] = $LocalBusiness_duns;
 
-														}
+													}
 
-												}
+											}
 
 										// globalLocationNumber
 
@@ -18263,14 +18263,14 @@
 											 *     - Text
 											 */
 
-											// Define values
+											if (
+												in_array(
+													'globalLocationNumber',
+													$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
+												)
+											) {
 
-												if (
-													in_array(
-														'globalLocationNumber',
-														$LocalBusiness_subtype_map[$LocalBusiness_type]['properties']
-													)
-												) {
+												// Define values
 
 													if ( !isset($LocalBusiness_globalLocationNumber) ) {
 
@@ -18284,15 +18284,15 @@
 
 													}
 
-													// Add to item values
+												// Add to item values
 
-														if ( $LocalBusiness_globalLocationNumber ) {
+													if ( $LocalBusiness_globalLocationNumber ) {
 
-															$LocalBusiness_item['globalLocationNumber'] = $LocalBusiness_globalLocationNumber;
+														$LocalBusiness_item['globalLocationNumber'] = $LocalBusiness_globalLocationNumber;
 
-														}
+													}
 
-												}
+											}
 
 										// isicV4
 
@@ -18313,17 +18313,19 @@
 												)
 											) {
 
-												if ( !isset($LocalBusiness_isicV4) ) {
+												// Define values
 
-													// Base 'isicV4' property value array
+													if ( !isset($LocalBusiness_isicV4) ) {
 
-														$LocalBusiness_isicV4 = array();
+														// Base 'isicV4' property value array
 
-													// Get values
+															$LocalBusiness_isicV4 = array();
 
-														$LocalBusiness_isicV4 = array();
+														// Get values
 
-												}
+															$LocalBusiness_isicV4 = array();
+
+													}
 
 												// Add to item values
 
@@ -18353,17 +18355,19 @@
 												)
 											) {
 
-												if ( !isset($LocalBusiness_leiCode) ) {
+												// Define values
 
-													// Base 'leiCode' property value array
+													if ( !isset($LocalBusiness_leiCode) ) {
 
-														$LocalBusiness_leiCode = array();
+														// Base 'leiCode' property value array
 
-													// Get values
+															$LocalBusiness_leiCode = array();
 
-														$LocalBusiness_leiCode = array();
+														// Get values
 
-												}
+															$LocalBusiness_leiCode = array();
+
+													}
 
 												// Add to item values
 
@@ -18393,17 +18397,19 @@
 												)
 											) {
 
-												if ( !isset($LocalBusiness_naics) ) {
+												// Define values
 
-													// Base 'naics' property value array
+													if ( !isset($LocalBusiness_naics) ) {
 
-														$LocalBusiness_naics = array();
+														// Base 'naics' property value array
 
-													// Get values
+															$LocalBusiness_naics = array();
 
-														$LocalBusiness_naics = array();
+														// Get values
 
-												}
+															$LocalBusiness_naics = array();
+
+													}
 
 												// Add to item values
 
@@ -18435,51 +18441,57 @@
 
 												// taxID
 
-													if ( !isset($LocalBusiness_taxID) ) {
+													// Define values
 
-														// Base 'taxID' property value array
+														if ( !isset($LocalBusiness_taxID) ) {
 
-															/* https://schema.org/taxID */
+															// Base 'taxID' property value array
 
-															$LocalBusiness_taxID = array();
+																/* https://schema.org/taxID */
 
-														// Get values
+																$LocalBusiness_taxID = array();
 
-															$LocalBusiness_taxID = array();
+															// Get values
 
-													}
+																$LocalBusiness_taxID = array();
+
+														}
 
 												// Taxpayer Identification Number
 
-													if ( !isset($LocalBusiness_taxID_taxpayer) ) {
+													// Define values
 
-														// Base Taxpayer Identification Number value array
+														if ( !isset($LocalBusiness_taxID_taxpayer) ) {
 
-															/* https://www.wikidata.org/wiki/Q1444804 */
+															// Base Taxpayer Identification Number value array
 
-															$LocalBusiness_taxID_taxpayer = array();
+																/* https://www.wikidata.org/wiki/Q1444804 */
 
-														// Get values
+																$LocalBusiness_taxID_taxpayer = array();
 
-															$LocalBusiness_taxID_taxpayer = array();
+															// Get values
 
-													}
+																$LocalBusiness_taxID_taxpayer = array();
+
+														}
 
 												// Employer Identification Number
 
-													if ( !isset($LocalBusiness_taxID_employer) ) {
+													// Define values
 
-														// Base Employer Identification Number value array
+														if ( !isset($LocalBusiness_taxID_employer) ) {
 
-															/* https://www.wikidata.org/wiki/Q2397748 */
+															// Base Employer Identification Number value array
 
-															$LocalBusiness_taxID_employer = array();
+																/* https://www.wikidata.org/wiki/Q2397748 */
 
-														// Get values
+																$LocalBusiness_taxID_employer = array();
 
-															$LocalBusiness_taxID_employer = array();
+															// Get values
 
-													}
+																$LocalBusiness_taxID_employer = array();
+
+														}
 
 												// Add to item values
 
@@ -18506,17 +18518,19 @@
 												)
 											) {
 
-												if ( !isset($LocalBusiness_vatID) ) {
+												// Define values
 
-													// Base 'vatID' property value array
+													if ( !isset($LocalBusiness_vatID) ) {
 
-														$LocalBusiness_vatID = array();
+														// Base 'vatID' property value array
 
-													// Get values
+															$LocalBusiness_vatID = array();
 
-														$LocalBusiness_vatID = array();
+														// Get values
 
-												}
+															$LocalBusiness_vatID = array();
+
+													}
 
 												// Add to item values
 
@@ -18552,17 +18566,19 @@
 												)
 											) {
 
-												if ( !isset($LocalBusiness_iso6523Code) ) {
+												// Define values
 
-													// Base 'iso6523Code' property value array
+													if ( !isset($LocalBusiness_iso6523Code) ) {
 
-														$LocalBusiness_iso6523Code = array();
+														// Base 'iso6523Code' property value array
 
-													// Get values
+															$LocalBusiness_iso6523Code = array();
 
-														$LocalBusiness_iso6523Code = array();
+														// Get values
 
-												}
+															$LocalBusiness_iso6523Code = array();
+
+													}
 
 												// Add to item values
 
