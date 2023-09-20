@@ -3462,56 +3462,68 @@
 
 						// occupationalCategory
 
+							// Base array
+
+								$provider_occupationalCategory = array();
+
 							// O*Net-SOC
 
 								// Occupation Code
 
-								$specialization_onetsoc_code = get_field( 'clinical_specialization_onetsoc_code', $specialization_term ) ?? '';
-								$specialization_onetsoc_code = $specialization_onetsoc_code ? uamswp_attr_conversion($specialization_onetsoc_code) : '';
+									$provider_specialization_onetsoc_code = get_field( 'clinical_specialization_onetsoc_code', $specialization_term ) ?? '';
+									$provider_specialization_onetsoc_code = $provider_specialization_onetsoc_code ? uamswp_attr_conversion($provider_specialization_onetsoc_code) : '';
 
 								// Occupation Name
 
-									$specialization_onetsoc_code_name = get_field( 'clinical_specialization_onetsoc_code_name', $specialization_term );
-									$specialization_onetsoc_code_name = $specialization_onetsoc_code_name ? uamswp_attr_conversion($specialization_onetsoc_code_name) : '';
+									$provider_specialization_onetsoc_code_name = get_field( 'clinical_specialization_onetsoc_code_name', $specialization_term );
+									$provider_specialization_onetsoc_code_name = $provider_specialization_onetsoc_code_name ? uamswp_attr_conversion($provider_specialization_onetsoc_code_name) : '';
 
-								// Array
+								// Format schema values
 
-									$specialization_onetsoc = array();
+									$provider_specialization_onetsoc = array();
 
-									if ( $specialization_onetsoc_code ) {
+									if ( $provider_specialization_onetsoc_code ) {
 
-										$specialization_onetsoc = array(
+										$provider_specialization_onetsoc = array(
 											'@type' => 'CategoryCode',
-											'codeValue' => $specialization_onetsoc_code, // O*Net-SOC code value from Specialty item
+											'codeValue' => $provider_specialization_onetsoc_code, // O*Net-SOC code value from Specialty item
 											'inCodeSet' => array(
 												'@type' => 'CategoryCodeSet',
 												'dateModified' => '2019',
 												'name' => 'O*Net-SOC',
 												'url' => 'https://www.onetonline.org/'
 											),
-											'name' => $specialization_onetsoc_code_name ?? '', // O*Net-SOC name from Specialty item
-											'url' => 'https://www.onetonline.org/link/summary/' . $specialization_onetsoc_code // O*Net-SOC URL from Specialty item
+											'name' => $provider_specialization_onetsoc_code_name ?? '', // O*Net-SOC name from Specialty item
+											'url' => 'https://www.onetonline.org/link/summary/' . $provider_specialization_onetsoc_code // O*Net-SOC URL from Specialty item
 										);
 
 										// Clean up array
 
-											$specialization_onetsoc = array_filter($specialization_onetsoc);
+											$provider_specialization_onetsoc = array_filter($provider_specialization_onetsoc);
 
 									}
 
+								// Merge into occupationalCategory value array
+
+									$provider_occupationalCategory = uamswp_fad_schema_merge_values(
+										$provider_occupationalCategory, // mixed // Required // Initial schema item property value
+										$provider_specialization_onetsoc, // mixed // Required // Incoming schema item property value
+										$provider_specialization_onetsoc_ref // mixed // Required // @id reference to incoming schema item property value
+									);
+
 							// ISCO-08 Code
 
-								$specialization_isco08_code = get_field( 'clinical_specialization_isco08_code', $specialization_term ) ?? array();
-								$specialization_isco08_code = is_array($specialization_isco08_code) ? $specialization_isco08_code : array($specialization_isco08_code);
-								$specialization_isco08_code = array_filter($specialization_isco08_code);
+								$provider_specialization_isco08_code = get_field( 'clinical_specialization_isco08_code', $specialization_term ) ?? array();
+								$provider_specialization_isco08_code = is_array($provider_specialization_isco08_code) ? $provider_specialization_isco08_code : array($provider_specialization_isco08_code);
+								$provider_specialization_isco08_code = array_filter($provider_specialization_isco08_code);
 
 								// Make value attribute-friendly, add it to an array if it is not already
 
-									if ( $specialization_isco08_code ) {
+									if ( $provider_specialization_isco08_code ) {
 
-										foreach ($specialization_isco08_code as &$code ) {
+										foreach ( $provider_specialization_isco08_code as &$provider_specialization_isco08_code_item ) {
 
-											$code = uamswp_attr_conversion($code);
+											$provider_specialization_isco08_code_item = uamswp_attr_conversion($provider_specialization_isco08_code_item);
 
 										}
 
@@ -3715,52 +3727,52 @@
 										)
 									);
 
-								// // (Optional) Expand ISCO-8 code to include list of ancestors
-								// 
-								// 	if ( $specialization_isco08_code ) {
-								// 
-								// 		$specialization_isco08_code = array_merge(
-								// 			$specialization_isco08_code,
-								// 			$isco08_values[$specialization_isco08_code[0]]['sameAs']
-								// 		);
-								// 
-								// 		sort($specialization_isco08_code);
-								// 
-								// 	}
+								// (Optional) Expand ISCO-8 code to include list of ancestors
+								
+									// if ( $provider_specialization_isco08_code ) {
+								
+									// 	$provider_specialization_isco08_code = array_merge(
+									// 		$provider_specialization_isco08_code,
+									// 		$isco08_values[reset($provider_specialization_isco08_code)]['sameAs']
+									// 	);
+								
+									// 	sort($provider_specialization_isco08_code);
+								
+									// }
 
-								// Format values
+								// Format schema values
 
-									$specialization_isco08 = array();
+									$provider_specialization_isco08 = array();
 
-									if ( $specialization_isco08_code ) {
+									if ( $provider_specialization_isco08_code ) {
 
-										foreach ( $specialization_isco08_code as $code ) {
+										foreach ( $provider_specialization_isco08_code as $item ) {
 
-											if ( $code ) {
+											if ( $item ) {
 
-												$code_schema = array(
+												$provider_specialization_isco08_schema = array(
 													'@type' => 'CategoryCode',
-													'codeValue' => $code, // ISCO-08 code value from Specialty item
-													'description' => $isco08_values[$code]['description'] ?? '', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
+													'codeValue' => $item, // ISCO-08 code value from Specialty item
+													'description' => $isco08_values[$item]['description'] ?? '', // ISCO-08 description from Specialty item (called "Lead Statement" in "Draft ISCO-08 Group Definitions: Occupations in Health")
 													'inCodeSet' => array(
 														'@type' => 'CategoryCodeSet',
 														'dateModified' => '2016',
 														'name' => 'ISCO-08',
 														'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/isco08/'
 													),
-													'name' => $isco08_values[$code]['name'] ?? '', // ISCO-08 name from Specialty item
+													'name' => $isco08_values[$item]['name'] ?? '', // ISCO-08 name from Specialty item
 													'url' => 'https://www.ilo.org/public/english/bureau/stat/isco/docs/health.pdf'
 												);
 
 												// Clean up the array
 
-													$code_schema = array_filter($code_schema);
+													$provider_specialization_isco08_schema = array_filter($provider_specialization_isco08_schema);
 
 												// Add to the list array
 
-													if (  $code_schema ) {
+													if (  $provider_specialization_isco08_schema ) {
 
-														$specialization_isco08[] = $code_schema;
+														$provider_specialization_isco08[] = $provider_specialization_isco08_schema;
 
 													}
 
@@ -3770,26 +3782,19 @@
 
 									}
 
-							// occupationalCategory Value Array
+								// Merge into occupationalCategory value array
 
-								$schema_provider_occupationalCategory = array_merge(
-									( ( is_array($specialization_isco08) && array_is_list($specialization_isco08) ) ? $specialization_isco08 : array($specialization_isco08) ),
-									( ( is_array($specialization_onetsoc) && array_is_list($specialization_onetsoc) ) ? $specialization_onetsoc : array($specialization_onetsoc) )
-								);
-
-								// If there is only one item, flatten the multi-dimensional array by one step
-
-									if ( $schema_provider_occupationalCategory ) {
-
-										uamswp_fad_flatten_multidimensional_array($schema_provider_occupationalCategory);
-
-									}
+									$provider_occupationalCategory = uamswp_fad_schema_merge_values(
+										$provider_occupationalCategory, // mixed // Required // Initial schema item property value
+										$provider_specialization_isco08, // mixed // Required // Incoming schema item property value
+										$provider_specialization_isco08_ref // mixed // Required // @id reference to incoming schema item property value
+									);
 
 							// Add to schema item
 
-								if ( $schema_provider_occupationalCategory ) {
+								if ( $provider_occupationalCategory ) {
 
-									$specialization_schema['occupationalCategory'] = $schema_provider_occupationalCategory;
+									$specialization_schema['occupationalCategory'] = $provider_occupationalCategory;
 
 								}
 
@@ -5221,6 +5226,17 @@
 								$provider_name_ref = null;
 								$provider_nickname = null;
 								$provider_npi = null;
+								$provider_occupationalCategory = null;
+								$provider_occupationalCategory_ref = null;
+								$provider_specialization_onetsoc_code = null;
+								$provider_specialization_onetsoc_code_name = null;
+								$provider_specialization_onetsoc = null;
+								$provider_specialization_onetsoc_ref = null;
+								$provider_specialization_isco08_code = null;
+								$provider_specialization_isco08 = null;
+								$provider_specialization_isco08_ref = null;
+								$provider_specialization_isco08_schema = null;
+								$isco08_values = null;
 								$provider_offers = null;
 								$provider_offers_ref = null;
 								$provider_ontology_type = null;
