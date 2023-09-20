@@ -16862,7 +16862,7 @@
 
 					*/
 
-					$LocalBusiness_additionalType_MedicalSpecialty = array(
+					$LocalBusiness_additionalType_MedicalSpecialty_valid = array(
 						'https://schema.org/CommunityHealth/',
 						'https://schema.org/Dermatology/',
 						'https://schema.org/DietNutrition/',
@@ -16922,6 +16922,8 @@
 								$LocalBusiness_item = array(); // Base array
 								$LocalBusiness_additionalType = null;
 								$LocalBusiness_additionalType_field = null;
+								$LocalBusiness_additionalType_medicalSpecialty = null;
+								$LocalBusiness_additionalType_medicalSpecialty_ref = null;
 								$LocalBusiness_additionalType_repeater = null;
 								$LocalBusiness_address = null;
 								$LocalBusiness_address_1 = null;
@@ -17315,19 +17317,27 @@
 
 																}
 
+																if ( $LocalBusiness_medicalSpecialty ) {
+
+																	$LocalBusiness_medicalSpecialty_list = is_array($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
+																	$LocalBusiness_medicalSpecialty_list = array_is_list($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
+
+																	$LocalBusiness_additionalType_medicalSpecialty = array_intersect(
+																		$LocalBusiness_additionalType_MedicalSpecialty_valid,
+																		$LocalBusiness_medicalSpecialty_list
+																	);
+
+																}
+
 													}
 
-													if ( $LocalBusiness_medicalSpecialty_list ) {
+													// Merge array into the additionalType property values array
 
-														$LocalBusiness_additionalType = array_merge(
-															$LocalBusiness_additionalType,
-															array_intersect(
-																$LocalBusiness_additionalType_MedicalSpecialty,
-																( is_array($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list) )
-															)
+														$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
+															$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
+															$LocalBusiness_additionalType_medicalSpecialty, // mixed // Required // Incoming schema item property value
+															$LocalBusiness_additionalType_medicalSpecialty_ref // mixed // Required // @id reference to incoming schema item property value
 														);
-
-													}
 
 												// Get additionalType repeater field value
 
