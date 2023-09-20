@@ -878,6 +878,7 @@
 			// Address and physical location information
 
 				$map = get_field('location_map', $post_id );
+				$map = ( array_key_exists( 'lat', $map ) && array_key_exists( 'lng', $map ) ) ? $map : array(); // Check values
 				$location_address_1 = get_field('location_address_1', $post_id );
 				$location_building = get_field('location_building', $post_id );
 				if ($location_building) {

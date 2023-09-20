@@ -18019,15 +18019,15 @@
 
 												$LocalBusiness_geo_value = get_field( 'location_map', $LocalBusiness ) ?? array();
 
+												// Check values
+
+													if ( $LocalBusiness_geo_value ) {
+
+														$LocalBusiness_geo_value = ( array_key_exists( 'lat', $LocalBusiness_geo_value ) && array_key_exists( 'lng', $LocalBusiness_geo_value ) ) ? $LocalBusiness_geo_value : array();
+
+													}
+
 											}
-
-											// Check values
-
-												if ( $LocalBusiness_geo_value ) {
-
-													$LocalBusiness_geo_value = ( array_key_exists( 'lat', $LocalBusiness_geo_value ) && array_key_exists( 'lng', $LocalBusiness_geo_value ) ) ? $LocalBusiness_geo_value : array();
-
-												}
 
 									}
 
