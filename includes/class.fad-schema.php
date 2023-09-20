@@ -25106,7 +25106,7 @@
 
 				}
 
-			return $output;
+			return $base_value;
 
 		}
 
