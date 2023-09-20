@@ -131,32 +131,23 @@ TODO List
 			 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
 		 * MedicalWebPage + MedicalBusiness
 			 * Add values for remaining properties:
-				 * Other properties
-					 * keywords
+				 * keywords
+					 * clinical specialization attributes
+						 * Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+						 * Specialization Name in the Health Care Provider Taxonomy Code Set
+						 * Specialization Display Name in the Health Care Provider Taxonomy Code Set
+						 * Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
+						 * Alternate Names for the Clinical Occupation Title
+					 * area of expertise names
+					 * location names
 		 * MedicalBusiness + Person
 			 * Add values for remaining properties:
-				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-					 * identifier
-						 * duns
-						 * globalLocationNumber
-						 * isicV4
-						 * naics
-						 * taxID
-						 * vatID
-				 * Needing new data inputs
-					 * affiliation
-					 * award
-					 * brand
-					 * makesOffer
-					 * review
-					 * worksFor
-				 * Other properties
-					 * identifier
-						 * the NPI value
-						 * the taxonomy code value(s)?
-					 * knowsAbout
-					 * knowsLanguage
-					 * memberOf
+				 * affiliation
+					 * Pending inputs for defining third-party clinical organizations
+				 * brand
+					 * Pending inputs for defining third-party clinical organizations
+				 * worksFor
+					 * Pending inputs for defining third-party clinical organizations
 		 * MedicalBusiness only
 			 * Add values for remaining properties:
 				 * hospitalAffiliation
@@ -228,7 +219,21 @@ TODO List
 		 * MedicalWebPage only
 			 * 
 		 * MedicalBusiness + Person
-			 * 
+			 * Add values for remaining properties:
+				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+					 * identifier
+						 * duns
+						 * globalLocationNumber
+						 * isicV4
+						 * naics
+						 * taxID
+						 * vatID
+				 * Needing new data inputs
+					 * award
+						 * Pending new or expanded inputs for defining awards and recognition
+					 * makesOffer
+					 * review
+						 * Pending inputs for defining reviews
 		 * MedicalBusiness only
 			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
 			 * Add values for remaining properties:
