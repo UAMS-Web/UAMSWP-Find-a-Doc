@@ -4354,6 +4354,7 @@
 									) {
 
 										$nucc_item = array(
+											'@id' => $nucc_item_url,
 											'@type' => 'MedicalCode',
 											'additionalType' => $nucc_item_additionalType,
 											'alternateName' => $nucc_item_alternateName,
