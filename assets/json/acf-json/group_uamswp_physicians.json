@@ -2676,7 +2676,7 @@
 		"field_physician_alternatename": {
 			"key": "field_physician_alternatename",
 			"name": "physician_alternatename",
-			"label": "Alternate Names for the Provider (alternateName > URL)",
+			"label": "Alternate Names for the Provider (alternateName > Text)",
 			"type": "clone",
 			"instructions": "Do not include degrees and credentials in the alternate names.",
 			"required": 0,
