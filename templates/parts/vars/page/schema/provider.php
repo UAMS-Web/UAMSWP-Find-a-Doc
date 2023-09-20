@@ -32,8 +32,6 @@ TODO List
 			 * Create method of defining 'Organization' property values for UAMS Health and UAMS
 			 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
 			 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
-	 * Location + Provider
-		 * 
 	 * Area of Expertise only
 		 * Apply the areas of expertise schema function to the single area of expertise template
 		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
@@ -52,8 +50,6 @@ TODO List
 			 * thumbnail
 			 * videoQuality
 			 * videoFrameSize
-	 * Condition only
-		 * 
 	 * Location only
 		 * Apply the location schema function to the single location template
 		 * Add values for remaining properties:
@@ -133,60 +129,10 @@ TODO List
 		 * MedicalWebPage + MedicalBusiness + Person
 			 * Define schema for affiliated hospital(s)
 			 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
-			 * Add new set of inputs for name
-				 * Message instructing editors to fully populate all fields and to not use initials
-				 * Required inputs:
-					 * Full first name
-					 * Button group to confirm presence/absence of middle name (default: null)
-					 * Full middle name
-					 * Button group to confirm presence/absence of nickname (default: null)
-					 * Nickname
-					 * Full last name
-					 * Button group to confirm presence/absence of generational suffix (default: null)
-					 * Generational suffix
-					 * Name display format selector with a message instructing editors to mirror the external name value defined in Epic (default: 'First Middle Last')
-						 * First Middle Last
-						 * First Middle "Nickname" Last
-						 * First M. Last
-						 * First M. "Nickname" Last
-						 * F. Middle Last
-						 * F. Middle "Nickname" Last
-						 * F. M. Last
-						 * F. M. "Nickname" Last
-				 * Optional inputs
-					 * Alternate name repeater (e.g., former names, variant names)
-				 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
-			 * Add values for remaining properties:
-				 * Needing new data inputs
-					 * alternateName
-					 * potentialAction
-					 * sameAs
-				 * Other properties
-					 * description
-					 * image
-					 * mainEntityOfPage
-					 * name
-					 * subjectOf
 		 * MedicalWebPage + MedicalBusiness
 			 * Add values for remaining properties:
 				 * Other properties
 					 * keywords
-		 * MedicalWebPage + Person
-			 * Add values for remaining properties:
-				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-					 * 
-				 * Needing new data inputs
-					 * 
-				 * Other properties
-					 * 
-		 * MedicalWebPage only
-			 * Add values for remaining properties:
-				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-					 * 
-				 * Needing new data inputs
-					 * 
-				 * Other properties
-					 * 
 		 * MedicalBusiness + Person
 			 * Add values for remaining properties:
 				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
@@ -204,7 +150,6 @@ TODO List
 					 * makesOffer
 					 * review
 					 * worksFor
-					 * 
 				 * Other properties
 					 * identifier
 						 * the NPI value
@@ -213,26 +158,12 @@ TODO List
 					 * knowsLanguage
 					 * memberOf
 		 * MedicalBusiness only
-			 * Set value of 'employee' property using the provider's 'Person' type
 			 * Add values for remaining properties:
-				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
-					 * areaServed
-					 * currenciesAccepted
-					 * identifier
-						 * leiCode
-						 * iso6523Code
-					 * isAccessibleForFree
-					 * paymentAccepted
-				 * Other properties
-					 * containedInPlace
-					 * hasCredential
-					 * hasMap
-					 * hospitalAffiliation
-						 * Add attributes from Hospital Affilation taxonomy
-							 * Name of Hospital in American Hospital Association (AHA) Records (alternateName)
-							 * ID of Hospital in American Hospital Association Records (AHA ID) (identifier)
-						 * Check if CMS has additional identifiers for a given hospital.
-					 * legalName
+				 * hospitalAffiliation
+					 * Add attributes from Hospital Affilation taxonomy
+						 * Name of Hospital in American Hospital Association (AHA) Records (alternateName)
+						 * ID of Hospital in American Hospital Association Records (AHA ID) (identifier)
+					 * Check if CMS has additional identifiers for a given hospital.
 		 * Person only
 			 * Make a decision on whether 'jobTitle' and/or 'hasOccupation' should include 
 				   only the selected clinical specialization (e.g., 'Orthopaedic Spine Surgeon') 
@@ -262,7 +193,34 @@ TODO List
 
 	 * Provider only
 		 * MedicalWebPage + MedicalBusiness + Person
-			 * 
+			 * Add new set of inputs for name
+				 * Message instructing editors to fully populate all fields and to not use initials
+				 * Required inputs:
+					 * Full first name
+					 * Button group to confirm presence/absence of middle name (default: null)
+					 * Full middle name
+					 * Button group to confirm presence/absence of nickname (default: null)
+					 * Nickname
+					 * Full last name
+					 * Button group to confirm presence/absence of generational suffix (default: null)
+					 * Generational suffix
+					 * Name display format selector with a message instructing editors to mirror the external name value defined in Epic (default: 'First Middle Last')
+						 * First Middle Last
+						 * First Middle "Nickname" Last
+						 * First M. Last
+						 * First M. "Nickname" Last
+						 * F. Middle Last
+						 * F. Middle "Nickname" Last
+						 * F. M. Last
+						 * F. M. "Nickname" Last
+				 * Optional inputs
+					 * Alternate name repeater (e.g., former names, variant names)
+				 * Populate a hidden field in the provider data that is populated by all the name variants and is queried by provider search and site search
+			 * Add values for remaining properties:
+				 * Needing new data inputs
+					 * alternateName
+						 * Incorporate values from new inputs (e.g., nickname, alternateName repeater)
+					 * potentialAction
 		 * MedicalWebPage + MedicalBusiness
 			 * 
 		 * MedicalWebPage + Person
@@ -273,6 +231,17 @@ TODO List
 			 * 
 		 * MedicalBusiness only
 			 * Find a way to validate whether a provider is an optician so the Optician type can be used in place of MedicalBusiness
+			 * Add values for remaining properties:
+				 * Properties with pending questions @ https://uamsweb.atlassian.net/browse/FD20-3482
+					 * areaServed
+					 * currenciesAccepted
+					 * identifier
+						 * leiCode
+						 * iso6523Code
+					 * isAccessibleForFree
+					 * paymentAccepted
+				 * Other properties
+					 * legalName
 		 * Person only
 			 * Add fields to Education and Training Organization taxonomy, integrate them into this schema
 				 * Required — Query for whether the organization is a College/University
