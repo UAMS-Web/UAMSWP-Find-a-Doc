@@ -19424,15 +19424,11 @@
 
 										// Get values
 
-											if ( !isset($LocalBusiness_mainEntityOfPage) ) {
+											$LocalBusiness_mainEntityOfPage = $schema_location_MedicalWebPage_ref ?? '';
 
-												$LocalBusiness_mainEntityOfPage = $schema_location_MedicalWebPage_ref ?? '';
+											if ( !$LocalBusiness_mainEntityOfPage ) {
 
-												if ( !$LocalBusiness_mainEntityOfPage ) {
-
-													$LocalBusiness_mainEntityOfPage = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
-
-												}
+												$LocalBusiness_mainEntityOfPage = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
 
 											}
 
@@ -20035,28 +20031,30 @@
 										)
 									) {
 
-										// Get sameAs repeater field value
+										// Get sameAs values
 
-											if ( !isset($LocalBusiness_sameAs_repeater) ) {
+											if ( !isset($LocalBusiness_sameAs) ) {
 
-												$LocalBusiness_sameAs_repeater = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
+												// Get sameAs repeater field value
 
-											}
+													if ( !isset($LocalBusiness_sameAs_repeater) ) {
 
-											// Add each item to sameAs property values array
-
-												if ( !isset($LocalBusiness_sameAs) ) {
-
-													if ( $LocalBusiness_sameAs_repeater ) {
-
-														$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
-															$LocalBusiness_sameAs_repeater, // sameAs repeater field
-															'schema_sameas_url' // sameAs item field name
-														);
+														$LocalBusiness_sameAs_repeater = get_field( 'schema_sameas', $LocalBusiness ) ?: array();
 
 													}
 
-												}
+													// Add each item to sameAs property values array
+
+														if ( $LocalBusiness_sameAs_repeater ) {
+
+															$LocalBusiness_sameAs = uamswp_fad_schema_sameas(
+																$LocalBusiness_sameAs_repeater, // sameAs repeater field
+																'schema_sameas_url' // sameAs item field name
+															);
+
+														}
+
+											}
 
 										// Add to schema
 
