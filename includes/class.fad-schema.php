@@ -24643,7 +24643,7 @@
 				$base_value = $base_value ?? array();
 				$base_value = is_array($base_value) ? $base_value : array($base_value);
 				$base_value = array_is_list($base_value) ? $base_value : array($base_value);
-				$incoming_value = $base_value ?? array();
+				$incoming_value = $incoming_value ?? array();
 				$incoming_value = is_array($incoming_value) ? $incoming_value : array($incoming_value);
 				$incoming_value = array_is_list($incoming_value) ? $incoming_value : array($incoming_value);
 
