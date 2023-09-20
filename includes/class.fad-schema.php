@@ -18051,16 +18051,12 @@
 
 										// Format values
 
-											if ( !isset($LocalBusiness_geo) ) {
+											if ( $LocalBusiness_geo_value ) {
 
-												if ( $LocalBusiness_geo_value ) {
-
-													$LocalBusiness_geo = uamswp_schema_geo_coordinates(
-														$LocalBusiness_geo_value['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-														$LocalBusiness_geo_value['lng'] // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
-													);
-
-												}
+												$LocalBusiness_geo = uamswp_schema_geo_coordinates(
+													$LocalBusiness_geo_value['lat'], // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+													$LocalBusiness_geo_value['lng'] // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
+												);
 
 											}
 
