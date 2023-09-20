@@ -3978,20 +3978,29 @@
 							$image_1_1['height'] = $image_1_1_height ? $image_1_1_height . ' px' : '';
 							$image_1_1['width'] = $image_1_1_width ? $image_1_1_width . ' px' : '';
 
-							$image_1_1 = array_filter(
-								array_merge(
+						// Merge base ImageObject values array into the item array
+
+							if ( $image_1_1 ) {
+
+								$image_1_1 = array_merge(
 									$image_ImageObject_base,
 									$image_1_1
-								)
-							);
+								);
 
-							// Sort the item array
+							}
 
+						// Clean up the item array
+
+							if ( $image_1_1 ) {
+
+								$image_1_1 = array_filter($image_1_1);
 								ksort($image_1_1);
 
-							// Add to list array
+							}
 
-								$image_ImageObject[] = $image_1_1;
+						// Add to list array
+
+							$image_ImageObject[] = $image_1_1;
 
 					}
 
@@ -4039,20 +4048,29 @@
 							$image_3_4['height'] = $image_3_4_height ? $image_3_4_height . ' px' : '';
 							$image_3_4['width'] = $image_3_4_width ? $image_3_4_width . ' px' : '';
 
-							$image_3_4 = array_filter(
-								array_merge(
+						// Merge base ImageObject values array into the item array
+
+							if ( $image_3_4 ) {
+
+								$image_3_4 = array_merge(
 									$image_ImageObject_base,
 									$image_3_4
-								)
-							);
+								);
 
-							// Sort the item array
+							}
 
+						// Clean up the item array
+
+							if ( $image_3_4 ) {
+
+								$image_3_4 = array_filter($image_3_4);
 								ksort($image_3_4);
 
-							// Add to list array
+							}
 
-								$image_ImageObject[] = $image_3_4;
+						// Add to list array
+
+							$image_ImageObject[] = $image_3_4;
 
 					}
 
@@ -4100,20 +4118,29 @@
 							$image_4_3['height'] = $image_4_3_height ? $image_4_3_height . ' px' : '';
 							$image_4_3['width'] = $image_4_3_width ? $image_4_3_width . ' px' : '';
 
-							$image_4_3 = array_filter(
-								array_merge(
+						// Merge base ImageObject values array into the item array
+
+							if ( $image_4_3 ) {
+
+								$image_4_3 = array_merge(
 									$image_ImageObject_base,
 									$image_4_3
-								)
-							);
+								);
 
-							// Sort the item array
+							}
 
+						// Clean up the item array
+
+							if ( $image_4_3 ) {
+
+								$image_4_3 = array_filter($image_4_3);
 								ksort($image_4_3);
 
-							// Add to list array
+							}
 
-								$image_ImageObject[] = $image_4_3;
+						// Add to list array
+
+							$image_ImageObject[] = $image_4_3;
 
 					}
 
@@ -4161,20 +4188,29 @@
 							$image_16_9['height'] = $image_16_9_height ? $image_16_9_height . ' px' : '';
 							$image_16_9['width'] = $image_16_9_width ? $image_16_9_width . ' px' : '';
 
-							$image_16_9 = array_filter(
-								array_merge(
+						// Merge base ImageObject values array into the item array
+
+							if ( $image_16_9 ) {
+
+								$image_16_9 = array_merge(
 									$image_ImageObject_base,
 									$image_16_9
-								)
-							);
+								);
 
-							// Sort the item array
+							}
 
+						// Clean up the item array
+
+							if ( $image_16_9 ) {
+
+								$image_16_9 = array_filter($image_16_9);
 								ksort($image_16_9);
 
-							// Add to list array
+							}
 
-								$image_ImageObject[] = $image_16_9;
+						// Add to list array
+
+							$image_ImageObject[] = $image_16_9;
 
 					}
 
@@ -4222,20 +4258,29 @@
 							$image_full['height'] = $image_full_height ? $image_full_height . ' px' : '';
 							$image_full['width'] = $image_full_width ? $image_full_width . ' px' : '';
 
-							$image_full = array_filter(
-								array_merge(
+						// Merge base ImageObject values array into the item array
+
+							if ( $image_full ) {
+
+								$image_16_9 = array_merge(
 									$image_ImageObject_base,
 									$image_full
-								)
-							);
+								);
 
-							// Sort the item array
+							}
 
+						// Clean up the item array
+
+							if ( $image_full ) {
+
+								$image_full = array_filter($image_full);
 								ksort($image_full);
 
-							// Add to list array
+							}
 
-								$image_ImageObject[] = $image_full;
+						// Add to list array
+
+							$image_ImageObject[] = $image_full;
 
 					}
 
