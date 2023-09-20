@@ -13579,12 +13579,65 @@
 
 										// Get values
 
-											if ( !isset($provider_knowsAbout) ) {
+											// Base array
 
 												$provider_knowsAbout = array();
 
-											}
+											// Get ID of clinical specialization
 
+												if ( !isset($provider_clinical_specialization) ) {
+
+													$provider_clinical_specialization = get_field( 'physician_title', $provider ) ?? array();
+
+												}
+
+											// Add ancestors to the list of ID values
+
+												if ( !isset($provider_clinical_specialization_ancestors) ) {
+
+													if ( $provider_clinical_specialization ) {
+
+														$provider_clinical_specialization = is_array($provider_clinical_specialization) ? $provider_clinical_specialization : array($provider_clinical_specialization);
+														$provider_clinical_specialization_ancestors = $provider_clinical_specialization;
+
+														foreach ( $provider_clinical_specialization as $item ) {
+
+															if ( $item ) {
+
+																$provider_clinical_specialization_ancestors = array_merge(
+																	$provider_clinical_specialization_ancestors,
+																	get_ancestors(
+																		$item, // $object_id  // int // Optional // The ID of the object // Default: 0
+																		'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+																		'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+																	)
+																);
+
+															}
+
+														} // endforeach
+
+													}
+
+												}
+
+												// Clean up list of ID values
+
+													if ( $provider_clinical_specialization_ancestors ) {
+														
+														$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
+														$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
+														$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
+
+													}
+
+											// Get attributes of the clinical specializations
+
+												$provider_knowsAbout = uamswp_fad_schema_nucc_code_set(
+													$provider_clinical_specialization_ancestors, // mixed // Required // List of clinical specialization IDs
+													$provider_knowsAbout // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
+												);
+		
 										// Add to item values
 
 											// MedicalWebPage
