@@ -24634,7 +24634,7 @@
 
 		function uamswp_fad_schema_merge_values(
 			&$base_value, // mixed // Required // Initial schema item property value
-			&$incoming_value, // mixed // Required // Incoming schema item property value
+			$incoming_value, // mixed // Required // Incoming schema item property value
 			&$incoming_value_ref // mixed // Required // @id reference to incoming schema item property value
 		) {
 
