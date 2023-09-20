@@ -17348,18 +17348,14 @@
 
 										// Format values
 
-											if ( !isset($LocalBusiness_availableService) ) {
+											if ( $LocalBusiness_treatments ) {
 
-												if ( $LocalBusiness_treatments ) {
-
-													$LocalBusiness_availableService = uamswp_fad_schema_service(
-														$LocalBusiness_treatments, // List of IDs of the service items
-														$LocalBusiness_url, // Page URL
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'Service' // Fragment identifier
-													) ?? array();
-
-												}
+												$LocalBusiness_availableService = uamswp_fad_schema_service(
+													$LocalBusiness_treatments, // List of IDs of the service items
+													$LocalBusiness_url, // Page URL
+													( $nesting_level + 1 ), // Nesting level within the main schema
+													'Service' // Fragment identifier
+												) ?? array();
 
 											}
 
@@ -17431,11 +17427,7 @@
 
 										// Get values
 
-											if ( !isset($LocalBusiness_brand) ) {
-
-												$LocalBusiness_brand = $schema_base_org_uams_health_ref ?? array();
-
-											}
+											$LocalBusiness_brand = $schema_base_org_uams_health_ref ?? array();
 
 										// Add to item values
 
