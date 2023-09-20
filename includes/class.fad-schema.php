@@ -4903,7 +4903,7 @@
 
 					*/
 
-					$provider_additionalType_MedicalSpecialty = array(
+					$provider_additionalType_MedicalSpecialty_valid = array(
 						'https://schema.org/CommunityHealth/',
 						'https://schema.org/Dermatology/',
 						'https://schema.org/DietNutrition/',
@@ -5051,6 +5051,9 @@
 								$provider_additionalName_ref = null;
 								$provider_additionalType = null;
 								$provider_additionalType_clinical_specialization = null;
+								$provider_additionalType_clinical_specialization_ref = null;
+								$provider_additionalType_MedicalSpecialty = null;
+								$provider_additionalType_MedicalSpecialty_ref = null;
 								$provider_additionalType_ref = null;
 								$provider_affiliation = null;
 								$provider_affiliation_ref = null;
@@ -8167,21 +8170,17 @@
 
 												// Get values
 
-													if (
-														!isset($provider_medicalSpecialty)
-														||
-														!isset($provider_medicalSpecialty_list)
-													) {
+													// Get Clinical Specialization value
 
-														// Get Clinical Specialization value
+														if ( !isset($provider_clinical_specialization) ) {
 
-															if ( !isset($provider_clinical_specialization) ) {
+															$provider_clinical_specialization = get_field( 'physician_title', $provider );
 
-																$provider_clinical_specialization = get_field( 'physician_title', $provider );
+														}
 
-															}
+													// Get MedicalSpecialty from Clinical Specialization value
 
-														// Get MedicalSpecialty from Clinical Specialization value
+														if ( $provider_clinical_specialization ) {
 
 															// Simple list of MedicalSpecialty values
 
@@ -8194,21 +8193,26 @@
 																	$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
 																);
 
-													}
+																if ( $provider_medicalSpecialty_list ) {
+
+																	$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
+
+																	$provider_additionalType_MedicalSpecialty = array_intersect(
+																		$provider_additionalType_MedicalSpecialty_valid,
+																		$provider_medicalSpecialty_list
+																	);
+
+																}
+
+														}
 
 												// Merge into property values array
 
-													if ( $provider_medicalSpecialty_list ) {
-
-														$provider_additionalType = array_merge(
-															$provider_additionalType,
-															array_intersect(
-																$provider_additionalType_MedicalSpecialty,
-																( is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list) )
-															)
-														);
-
-													}
+													$provider_additionalType = uamswp_fad_schema_merge_values(
+														$provider_additionalType, // mixed // Required // Initial schema item property value
+														$provider_additionalType_MedicalSpecialty, // mixed // Required // Incoming schema item property value
+														$provider_additionalType_MedicalSpecialty_ref // mixed // Required // @id reference to incoming schema item property value
+													);
 
 											// Get Wikidata item URL for the occupation from associated Clinical Specialization items
 
@@ -8248,22 +8252,11 @@
 
 												// Merge into property values array
 
-													if (
-														$provider_additionalType
-														&&
-														$provider_additionalType_clinical_specialization
-													) {
-
-														$provider_additionalType = array_merge(
-															$provider_additionalType,
-															( is_array($provider_additionalType_clinical_specialization) ? $provider_additionalType_clinical_specialization : array($provider_additionalType_clinical_specialization) )
-														);
-
-													} elseif ( $provider_additionalType_clinical_specialization ) {
-
-														$provider_additionalType = $provider_additionalType_clinical_specialization;
-
-													}
+													$provider_additionalType = uamswp_fad_schema_merge_values(
+														$provider_additionalType, // mixed // Required // Initial schema item property value
+														$provider_additionalType_clinical_specialization, // mixed // Required // Incoming schema item property value
+														$provider_additionalType_clinical_specialization_ref // mixed // Required // @id reference to incoming schema item property value
+													);
 
 										// Clean up additionalType property values array
 
