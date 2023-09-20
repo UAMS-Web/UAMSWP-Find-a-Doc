@@ -93,6 +93,30 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		"field_language_schema_sameas": {
+			"key": "field_language_schema_sameas",
+			"name": "language_schema_sameas",
+			"label": "Reference Webpage(s) About This Language (sameAs > URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		}
 	},
 	"modified": false
