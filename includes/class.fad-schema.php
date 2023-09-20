@@ -19498,32 +19498,66 @@
 
 										// Create ImageObject values array for each image
 
-											if ( !isset($LocalBusiness_image_general) ) {
+											// Base array
 
-												if ( $LocalBusiness_image_id ) {
+												$LocalBusiness_image_general = array();
 
-													// Base array
+											if ( $LocalBusiness_image_id ) {
 
-														$LocalBusiness_image_general = array();
+												foreach ( $LocalBusiness_image_id as $item ) {
 
-													foreach ( $LocalBusiness_image_id as $id ) {
+													// Reset variables
 
-														$LocalBusiness_image_general = array_merge(
-															$LocalBusiness_image_general,
-															uamswp_fad_schema_imageobject_thumbnails(
-																$LocalBusiness_url, // URL of entity with which the image is associated
-																( $nesting_level + 1 ), // Nesting level within the main schema
-																'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
-																'Image', // Base fragment identifier
-																$id, // ID of image to use for 1:1 aspect ratio
-																0, // ID of image to use for 3:4 aspect ratio
-																$id, // ID of image to use for 4:3 aspect ratio
-																$id, // ID of image to use for 16:9 aspect ratio
-																0 // ID of image to use for full image
-															)
+														$item_thumbnails = array();
+
+													// Check variables
+
+														if ( $LocalBusiness_image_general ) {
+
+															$LocalBusiness_image_general = is_array($LocalBusiness_image_general) ? $LocalBusiness_image_general : array($LocalBusiness_image_general);
+															$LocalBusiness_image_general = array_is_list($LocalBusiness_image_general) ? $LocalBusiness_image_general : array($LocalBusiness_image_general);
+
+														}
+
+													// If item value is empty or 0, skip this iteration
+
+														if ( !$item ) {
+
+															continue;
+
+														}
+
+													// Get values
+
+														$item_thumbnails = uamswp_fad_schema_imageobject_thumbnails(
+															$LocalBusiness_url, // URL of entity with which the image is associated
+															( $nesting_level + 1 ), // Nesting level within the main schema
+															'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
+															'Image', // Base fragment identifier
+															$item, // ID of image to use for 1:1 aspect ratio
+															0, // ID of image to use for 3:4 aspect ratio
+															$item, // ID of image to use for 4:3 aspect ratio
+															$item, // ID of image to use for 16:9 aspect ratio
+															0 // ID of image to use for full image
 														);
 
-													}
+													// Add values to list array
+
+														if ( $item_thumbnails ) {
+
+															$item_thumbnails = is_array($item_thumbnails) ? $item_thumbnails : array($item_thumbnails);
+															$item_thumbnails = array_is_list($item_thumbnails) ? $item_thumbnails : array($item_thumbnails);
+
+															$LocalBusiness_image_general = array_merge(
+																$LocalBusiness_image_general,
+																$item_thumbnails
+															);
+
+														}
+
+													// Reset variables
+
+														$item_thumbnails = array();
 
 												}
 
