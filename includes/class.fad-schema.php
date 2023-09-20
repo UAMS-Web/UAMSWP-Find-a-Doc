@@ -24945,11 +24945,41 @@
 				!empty($reference)
 			) {
 
-				$property = $reference;
+				if (
+					isset($property)
+					&&
+					!empty($property)
+				) {
+
+					$property = array_merge(
+						$property,
+						$reference
+					);
+
+				} else {
+
+					$property = $reference;
+
+				}
 
 			} else {
 
-				$property = $value;
+				if (
+					isset($property)
+					&&
+					!empty($property)
+				) {
+
+					$property = array_merge(
+						$property,
+						$value
+					);
+
+				} else {
+
+					$property = $value;
+
+				}
 
 				// Define reference to the @id
 
@@ -25026,6 +25056,49 @@
 				}
 
 			}
+
+		}
+
+	// Merge multiple schema item property value arrays
+
+		function uamswp_fad_schema_merge_values(
+			&$base_value, // mixed // Required // Initial schema item property value
+			&$incoming_value, // mixed // Required // Incoming schema item property value
+			&$incoming_value_ref // mixed // Required // @id reference to incoming schema item property value
+		) {
+
+			// Check / define variables
+
+				$base_value = $base_value ?? array();
+				$base_value = is_array($base_value) ? $base_value : array($base_value);
+				$base_value = array_is_list($base_value) ? $base_value : array($base_value);
+				$incoming_value = $base_value ?? array();
+				$incoming_value = is_array($incoming_value) ? $incoming_value : array($incoming_value);
+				$incoming_value = array_is_list($incoming_value) ? $incoming_value : array($incoming_value);
+
+			// Merge the arrays
+
+				uamswp_fad_schema_values_or_reference(
+					$base_value, // Property variable
+					$incoming_value, // Full value variable
+					$incoming_value_ref // @id reference variable
+				);
+
+			// Clean up array
+
+				if ( $base_value ) {
+
+					$base_value = array_filter($base_value);
+					$base_value = array_unique( $base_value, SORT_REGULAR );
+					$base_value = array_values($base_value);
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($base_value);
+
+				}
+
+			return $output;
 
 		}
 
