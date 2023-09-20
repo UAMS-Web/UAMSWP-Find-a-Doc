@@ -20088,11 +20088,7 @@
 
 										// Define value
 
-											if ( !isset($LocalBusiness_smokingAllowed) ) {
-
-												$LocalBusiness_smokingAllowed = 'False';
-
-											}
+											$LocalBusiness_smokingAllowed = 'False';
 
 										// Add to item values
 
@@ -20172,19 +20168,15 @@
 
 										// Get values
 
-											if ( !isset($LocalBusiness_subjectOf) ) {
+											$LocalBusiness_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
 
-												$LocalBusiness_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
+											if ( !$LocalBusiness_subjectOf ) {
+
+												$LocalBusiness_subjectOf = $LocalBusiness_mainEntityOfPage ?? '';
 
 												if ( !$LocalBusiness_subjectOf ) {
 
-													$LocalBusiness_subjectOf = $LocalBusiness_mainEntityOfPage ?? '';
-
-													if ( !$LocalBusiness_subjectOf ) {
-
-														$LocalBusiness_subjectOf = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
-
-													}
+													$LocalBusiness_subjectOf = ( isset($LocalBusiness_url) && !empty($LocalBusiness_url) ) ? $LocalBusiness_url . '#MedicalWebPage' : '';
 
 												}
 
