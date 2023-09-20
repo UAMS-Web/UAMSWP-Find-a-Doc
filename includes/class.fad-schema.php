@@ -24500,13 +24500,13 @@
 
 			// Check / define variables
 
-				$property = $property ?: array();
+				$property = $property ?? array();
 				$property = is_array($property) ? $property : array($property);
 				$property = array_is_list($property) ? $property : array($property);
-				$value = $value ?: array();
+				$value = $value ?? array();
 				$value = is_array($value) ? $value : array($value);
 				$value = array_is_list($value) ? $value : array($value);
-				$reference = $reference ?: array();
+				$reference = $reference ?? array();
 				$reference = is_array($reference) ? $reference : array($reference);
 				$reference = array_is_list($reference) ? $reference : array($reference);
 
