@@ -17680,15 +17680,15 @@
 
 													}
 
-											}
+												// Clean up value
 
-										// Clean up value
+													if ( $LocalBusiness_description ) {
 
-											if ( $LocalBusiness_description ) {
+														$LocalBusiness_description = wp_strip_all_tags($LocalBusiness_description);
+														$LocalBusiness_description = str_replace("\n", ' ', $LocalBusiness_description); // Strip line breaks
+														$LocalBusiness_description = strlen($LocalBusiness_description) > 160 ? mb_strimwidth($LocalBusiness_description, 0, 156, '...') : $LocalBusiness_description; // Limit to 160 characters
 
-												$LocalBusiness_description = wp_strip_all_tags($LocalBusiness_description);
-												$LocalBusiness_description = str_replace("\n", ' ', $LocalBusiness_description); // Strip line breaks
-												$LocalBusiness_description = strlen($LocalBusiness_description) > 160 ? mb_strimwidth($LocalBusiness_description, 0, 156, '...') : $LocalBusiness_description; // Limit to 160 characters
+													}
 
 											}
 
