@@ -16870,28 +16870,30 @@
 														$LocalBusiness_additionalType_medicalSpecialty_ref // mixed // Required // @id reference to incoming schema item property value
 													);
 
-											// Get additionalType repeater field value
+											// Get additionalType field list
 
-												if ( !isset($LocalBusiness_additionalType_repeater) ) {
+												if ( !isset($LocalBusiness_additionalType_field) ) {
 
-													$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
+													// Get additionalType repeater field value
 
-												}
+														if ( !isset($LocalBusiness_additionalType_repeater) ) {
 
-												// Add each item to an array
-
-													if ( !isset($LocalBusiness_additionalType_field) ) {
-
-														if ( $LocalBusiness_additionalType_repeater ) {
-
-															$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
-																$LocalBusiness_additionalType_repeater, // additionalType repeater field
-																'schema_additionalType_uri' // additionalType item field name
-															);
+															$LocalBusiness_additionalType_repeater = get_field( 'schema_additionalType', $LocalBusiness ) ?? array();
 
 														}
 
-													}
+														// Add each item to an array
+
+															if ( $LocalBusiness_additionalType_repeater ) {
+
+																$LocalBusiness_additionalType_field = uamswp_fad_schema_additionaltype(
+																	$LocalBusiness_additionalType_repeater, // additionalType repeater field
+																	'schema_additionalType_uri' // additionalType item field name
+																);
+
+															}
+
+												}
 
 												// Merge array into the additionalType property values array
 
@@ -17241,28 +17243,30 @@
 										$nesting_level == 0
 									) {
 
-										// Get alternateName repeater field value
+										// Get alternateName values
 
-											if ( !isset($LocalBusiness_alternateName_repeater) ) {
+											if ( !isset($LocalBusiness_alternateName) ) {
 
-												$LocalBusiness_alternateName_repeater = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
+												// Get alternateName repeater field value
 
-											}
+													if ( !isset($LocalBusiness_alternateName_repeater) ) {
 
-											// Add each item to alternateName property values array
-
-												if ( !isset($LocalBusiness_alternateName) ) {
-
-													if ( $LocalBusiness_alternateName_repeater ) {
-
-														$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
-															$LocalBusiness_alternateName_repeater, // alternateName repeater field
-															'schema_alternatename_text' // alternateName item field name
-														);
+														$LocalBusiness_alternateName_repeater = get_field( 'schema_alternatename', $LocalBusiness ) ?: array();
 
 													}
 
-												}
+													// Add each item to alternateName property values array
+
+														if ( $LocalBusiness_alternateName_repeater ) {
+
+															$LocalBusiness_alternateName = uamswp_fad_schema_alternatename(
+																$LocalBusiness_alternateName_repeater, // alternateName repeater field
+																'schema_alternatename_text' // alternateName item field name
+															);
+
+														}
+
+											}
 
 										// Add to schema
 
