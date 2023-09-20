@@ -8467,14 +8467,25 @@
 
 											// itemReviewed
 
-												if ( !isset($provider_aggregateRating_itemReviewed) ) {
+												// Base array
 
-													$provider_aggregateRating_itemReviewed = array(
-														( is_array($provider_item_MedicalBusiness_ref) ? $provider_item_MedicalBusiness_ref : array($provider_item_MedicalBusiness_ref) ),
-														( is_array($provider_item_Person_ref) ? $provider_item_Person_ref : array($provider_item_Person_ref) )
+													$provider_aggregateRating_itemReviewed = array();
+
+												// Merge in provider MedicalBusiness
+
+													$provider_aggregateRating_itemReviewed = uamswp_fad_schema_merge_values(
+														$provider_aggregateRating_itemReviewed,
+														$provider_item_MedicalBusiness,
+														$provider_item_MedicalBusiness_ref
 													);
 
-												}
+												// Merge in provider Person
+
+													$provider_aggregateRating_itemReviewed = uamswp_fad_schema_merge_values(
+														$provider_aggregateRating_itemReviewed,
+														$provider_item_Person,
+														$provider_item_Person_ref
+													);
 
 											// reviewAspect
 
