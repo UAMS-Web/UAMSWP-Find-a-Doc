@@ -3503,7 +3503,7 @@
 
 									}
 
-								// Merge into occupationalCategory value array
+								// Merge value/reference into the occupationalCategory property values array
 
 									$provider_occupationalCategory = uamswp_fad_schema_merge_values(
 										$provider_occupationalCategory, // mixed // Required // Initial schema item property value
@@ -3782,7 +3782,7 @@
 
 									}
 
-								// Merge into occupationalCategory value array
+								// Merge value/reference into the occupationalCategory property values array
 
 									$provider_occupationalCategory = uamswp_fad_schema_merge_values(
 										$provider_occupationalCategory, // mixed // Required // Initial schema item property value
@@ -8251,7 +8251,7 @@
 
 														}
 
-												// Merge into property values array
+												// Merge value/reference into the additionalType property values array
 
 													$provider_additionalType = uamswp_fad_schema_merge_values(
 														$provider_additionalType, // mixed // Required // Initial schema item property value
@@ -8295,7 +8295,7 @@
 
 													}
 
-												// Merge into property values array
+												// Merge value/reference into the additionalType property values array
 
 													$provider_additionalType = uamswp_fad_schema_merge_values(
 														$provider_additionalType, // mixed // Required // Initial schema item property value
@@ -9040,7 +9040,7 @@
 
 														$provider_brand = array();
 
-												// Merge in common clinical 'Organization'
+												// Merge in common clinical 'Organization' value/reference
 
 													$provider_brand = uamswp_fad_schema_merge_values(
 														$provider_brand, // mixed // Required // Initial schema item property value
@@ -9048,7 +9048,7 @@
 														$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 													);
 
-												// Merge in specific clinical 'Organization'
+												// Merge in specific clinical 'Organization' value/reference
 
 													$provider_brand = uamswp_fad_schema_merge_values(
 														$provider_brand, // mixed // Required // Initial schema item property value
@@ -9222,7 +9222,7 @@
 
 															$provider_affiliation = array();
 
-														// Merge in hospitalAffiliation values
+														// Merge in hospitalAffiliation value/reference
 
 															$provider_affiliation = uamswp_fad_schema_merge_values(
 																$provider_affiliation, // mixed // Required // Initial schema item property value
@@ -9230,7 +9230,7 @@
 																$provider_hospitalAffiliation_ref // mixed // Required // @id reference to incoming schema item property value
 															);
 
-														// Merge in common clinical 'Organization'
+														// Merge in common clinical 'Organization' value/reference
 
 															$provider_affiliation = uamswp_fad_schema_merge_values(
 																$provider_affiliation, // mixed // Required // Initial schema item property value
@@ -9238,7 +9238,7 @@
 																$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 															);
 
-														// Merge in specific clinical 'Organization'
+														// Merge in specific clinical 'Organization' value/reference
 
 															$provider_affiliation = uamswp_fad_schema_merge_values(
 																$provider_affiliation, // mixed // Required // Initial schema item property value
@@ -9344,7 +9344,7 @@
 																$provider_memberOf // array // Optional // Pre-existing schema array for Language to which to add association items
 															);
 
-													// Merge in common clinical 'Organization'
+													// Merge in common clinical 'Organization' value/reference
 
 														$provider_memberOf = uamswp_fad_schema_merge_values(
 															$provider_memberOf, // mixed // Required // Initial schema item property value
@@ -9352,7 +9352,7 @@
 															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 														);
 
-													// Merge in specific clinical 'Organization'
+													// Merge in specific clinical 'Organization' value/reference
 
 														$provider_memberOf = uamswp_fad_schema_merge_values(
 															$provider_memberOf, // mixed // Required // Initial schema item property value
@@ -9433,7 +9433,7 @@
 
 														$provider_parentOrganization = array();
 
-													// Merge in common clinical 'Organization'
+													// Merge in common clinical 'Organization' value/reference
 
 														$provider_parentOrganization = uamswp_fad_schema_merge_values(
 															$provider_parentOrganization, // mixed // Required // Initial schema item property value
@@ -9441,7 +9441,7 @@
 															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 														);
 
-													// Merge in specific clinical 'Organization'
+													// Merge in specific clinical 'Organization' value/reference
 
 														$provider_parentOrganization = uamswp_fad_schema_merge_values(
 															$provider_parentOrganization, // mixed // Required // Initial schema item property value
@@ -9526,7 +9526,7 @@
 
 														$provider_worksFor = array();
 
-													// Merge in common clinical 'Organization'
+													// Merge in common clinical 'Organization' value/reference
 
 														$provider_worksFor = uamswp_fad_schema_merge_values(
 															$provider_worksFor, // mixed // Required // Initial schema item property value
@@ -9534,7 +9534,7 @@
 															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
 														);
 
-													// Merge in specific clinical 'Organization'
+													// Merge in specific clinical 'Organization' value/reference
 
 														$provider_worksFor = uamswp_fad_schema_merge_values(
 															$provider_worksFor, // mixed // Required // Initial schema item property value
@@ -13981,7 +13981,7 @@
 
 												$provider_mentions = array();
 
-											// Related Locations
+											// Merge in related locations value/reference
 
 												$provider_mentions = uamswp_fad_schema_merge_values(
 													$provider_mentions, // mixed // Required // Initial schema item property value
@@ -13998,7 +13998,7 @@
 														$provider_significantLink // Existing list of URLs
 													);
 
-											// Related Areas of Expertise
+											// Merge in related areas of expertise value/reference
 
 												$provider_mentions = uamswp_fad_schema_merge_values(
 													$provider_mentions, // mixed // Required // Initial schema item property value
@@ -14015,7 +14015,7 @@
 														$provider_significantLink // Existing list of URLs
 													);
 
-											// Related Clinical Resources
+											// Merge in related clinical resources value/reference
 
 												$provider_mentions = uamswp_fad_schema_merge_values(
 													$provider_mentions, // mixed // Required // Initial schema item property value
@@ -14032,7 +14032,7 @@
 														$provider_significantLink // Existing list of URLs
 													);
 
-											// Merge in related conditions
+											// Merge in related conditions value/reference
 
 												$provider_mentions = uamswp_fad_schema_merge_values(
 													$provider_mentions, // mixed // Required // Initial schema item property value
@@ -14049,7 +14049,7 @@
 														$provider_significantLink // Existing list of URLs
 													);
 
-											// Related Treatments
+											// Merge in related treatments value/reference
 
 												$provider_mentions = uamswp_fad_schema_merge_values(
 													$provider_mentions, // mixed // Required // Initial schema item property value
@@ -16862,7 +16862,7 @@
 
 													}
 
-												// Merge array into the additionalType property values array
+												// Merge value/reference into the additionalType property values array
 
 													$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
 														$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
@@ -16895,7 +16895,7 @@
 
 												}
 
-												// Merge array into the additionalType property values array
+												// Merge value/reference into the additionalType property values array
 
 													$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
 														$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
