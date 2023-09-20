@@ -12977,3 +12977,113 @@ function uamswp_prevent_orphan($string) {
 		return $str;
 
 	}
+
+// Generate all combinations from a multi-dimensional array
+
+	function uamswp_fad_combinations(
+		array $input, // array // Required // Multi-dimensional array with choice lists nested in arrays
+		int $i = 0 // int // Option // Iteration counter
+	) {
+
+		/*
+
+			Source: https://stackoverflow.com/a/8567199
+
+			Expected format of $input:
+
+				$input = array(
+					array(
+						'Leonard',
+						'L.',
+						''
+					),
+					array(
+						'Horatio',
+						'H.',
+						''
+					),
+					array(
+						'\'Bones\'',
+						''
+					)
+				);
+
+		*/
+
+		// Check if the indicated sub-array exists before continuing
+
+			if ( !isset($input[$i]) ) {
+
+				return array();
+
+			}
+
+		// If there is only one sub-array, return that sub-array
+
+			if ( $i == count($input) - 1 ) {
+
+				return $input[$i];
+
+			}
+
+		// Get combinations from subsequent arrays
+
+			// Create a temporary array that equals the next sub-array
+
+				$next_array = uamswp_fad_combinations($input, $i + 1);
+
+			// Base array // Used in first iteration
+
+				$result = array();
+
+			// concat each array from $temporary_array with each element from $arrays[$i]
+
+				foreach (
+					$input[$i] // Current sub-array
+					as
+					$current_array_value // Value in current sub-array
+				) {
+
+					foreach (
+						$next_array // Next sub-array
+						as
+						$next_array_value // Value in next sub-array
+					) {
+
+						if (
+							is_array($next_array_value)
+						) {
+
+							$result_value = array_merge(
+								array($current_array_value),
+								$next_array_value
+							);
+
+						} else {
+
+							$result_value = array(
+								$current_array_value,
+								$next_array_value
+							);
+
+						}
+
+						// Clean up value
+
+							$result_value = array_filter($result_value);
+							$result_value = array_values($result_value);
+
+						$result[] = $result_value;
+
+					}
+
+				}
+
+		// Clean up result
+
+			$result = array_filter($result);
+			$result = array_values($result);
+
+		return $result;
+
+	}
