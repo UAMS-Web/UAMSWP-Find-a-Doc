@@ -7089,11 +7089,17 @@
 
 										// Get values
 
-											if ( $provider_item_MedicalBusiness_ref ) {
+											// Base array
 
-												$provider_about = $provider_item_MedicalBusiness_ref;
+												$provider_about = array();
 
-											}
+											// Merge in provider MedicalWebPage value/reference
+
+												$provider_about = uamswp_fad_schema_merge_values(
+													$provider_about, // mixed // Required // Initial schema item property value
+													$provider_item_MedicalBusiness, // mixed // Required // Incoming schema item property value
+													$provider_item_MedicalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+												);
 
 										// Add to item values
 
