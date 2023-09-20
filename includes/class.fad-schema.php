@@ -2749,6 +2749,15 @@
 
 						} // endif
 
+						// Clean up item array
+
+							if ( $item_schema ) {
+
+								$item_schema = array_filter($item_schema);
+								$item_schema = array_unique( $item_schema, SORT_REGULAR );
+								
+							}
+
 						// Add @type
 
 							if ( $item_schema ) {
@@ -2792,6 +2801,10 @@
 
 				if ( $language_schema ) {
 
+					$language_schema = array_filter($language_schema);
+					$language_schema = array_unique( $language_schema, SORT_REGULAR );
+					$language_schema = array_is_list($language_schema) ? array_values($language_schema) : $language_schema;
+					
 					// If there is only one item, flatten the multi-dimensional array by one step
 
 						uamswp_fad_flatten_multidimensional_array($language_schema);
