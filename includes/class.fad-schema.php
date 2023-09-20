@@ -5461,131 +5461,127 @@
 
 										// Get values
 
-											if ( !isset($MedicalBusiness_type) ) {
+											// Base value
 
-												// Base value
+												$MedicalBusiness_type = 'MedicalBusiness';
 
-													$MedicalBusiness_type = 'MedicalBusiness';
+											// Get list of the provider's degrees
 
-												// Get list of the provider's degrees
+												if (
+													!isset($provider_degree_array)
+													||
+													!isset($provider_degree_list)
+												) {
 
-													if (
-														!isset($provider_degree_array)
-														||
-														!isset($provider_degree_list)
-													) {
+													$provider_degree_array = array();
+													$provider_degree_list = '';
+													$provider_degree_list_i = 1;
+													$provider_degree_count = 0;
 
-														$provider_degree_array = array();
-														$provider_degree_list = '';
-														$provider_degree_list_i = 1;
-														$provider_degree_count = 0;
+													if ( !isset($provider_degrees) ) {
 
-														if ( !isset($provider_degrees) ) {
-
-															$provider_degrees = get_field( 'physician_degree', $provider );
-
-														}
-
-														if ( $provider_degrees ) {
-
-															$provider_degree_count = count($provider_degrees) ?? 0;
-
-															foreach ( $provider_degrees as $item ) {
-
-																$item_term = get_term( $item, 'degree' );
-																$item_name = '';
-
-																if ( is_object($item_term) ) {
-
-																	$item_name = $item_term->name;
-
-																	if ( $item_name ) {
-
-																		$provider_degree_list .= $item_name;
-																		$provider_degree_array[] = uamswp_attr_conversion($item_name);
-
-																		if ( $provider_degree_count > $provider_degree_list_i ) {
-
-																			$provider_degree_list .= ', ';
-
-																		} // endif
-
-																		$provider_degree_list_i++;
-
-																	}
-
-																} // endif
-
-															} // endforeach
-
-														} // endif
-
-														if ( $provider_degree_list ) {
-
-															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
-
-														} // endif
+														$provider_degrees = get_field( 'physician_degree', $provider );
 
 													}
 
-												// Check the list of degrees against the Physician degrees
+													if ( $provider_degrees ) {
 
-													if (
-														$provider_properties_map['Physician']['degrees']
-														&&
-														$provider_degree_array
-													) {
+														$provider_degree_count = count($provider_degrees) ?? 0;
 
-														$Physician_degree_query = !empty(
-															array_intersect(
-																$provider_properties_map['Physician']['degrees'],
-																$provider_degree_array
-															)
-														);
+														foreach ( $provider_degrees as $item ) {
 
-														$MedicalBusiness_type = $Physician_degree_query ? 'Physician' : $MedicalBusiness_type;
+															$item_term = get_term( $item, 'degree' );
+															$item_name = '';
 
-													}
+															if ( is_object($item_term) ) {
 
-												// Check the list of degrees against the Dentist degrees
+																$item_name = $item_term->name;
 
-													if (
-														$provider_properties_map['Dentist']['degrees']
-														&&
-														$provider_degree_array
-													) {
+																if ( $item_name ) {
 
-														$Dentist_degree_query = !empty(
-															array_intersect(
-																$provider_properties_map['Dentist']['degrees'],
-																$provider_degree_array
-															)
-														);
+																	$provider_degree_list .= $item_name;
+																	$provider_degree_array[] = uamswp_attr_conversion($item_name);
 
-														$MedicalBusiness_type = $Dentist_degree_query ? 'Dentist' : $MedicalBusiness_type;
+																	if ( $provider_degree_count > $provider_degree_list_i ) {
 
-													}
+																		$provider_degree_list .= ', ';
 
-												// Check the list of degrees against the Optician degrees
+																	} // endif
 
-													if (
-														$provider_properties_map['Optician']['degrees']
-														&&
-														$provider_degree_array
-													) {
+																	$provider_degree_list_i++;
 
-														$Optician_degree_query = !empty(
-															array_intersect(
-																$provider_properties_map['Optician']['degrees'],
-																$provider_degree_array
-															)
-														);
+																}
 
-														$MedicalBusiness_type = $Optician_degree_query ? 'Optician' : $MedicalBusiness_type;
+															} // endif
 
-													}
+														} // endforeach
 
-											}
+													} // endif
+
+													if ( $provider_degree_list ) {
+
+														$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
+
+													} // endif
+
+												}
+
+											// Check the list of degrees against the Physician degrees
+
+												if (
+													$provider_properties_map['Physician']['degrees']
+													&&
+													$provider_degree_array
+												) {
+
+													$Physician_degree_query = !empty(
+														array_intersect(
+															$provider_properties_map['Physician']['degrees'],
+															$provider_degree_array
+														)
+													);
+
+													$MedicalBusiness_type = $Physician_degree_query ? 'Physician' : $MedicalBusiness_type;
+
+												}
+
+											// Check the list of degrees against the Dentist degrees
+
+												if (
+													$provider_properties_map['Dentist']['degrees']
+													&&
+													$provider_degree_array
+												) {
+
+													$Dentist_degree_query = !empty(
+														array_intersect(
+															$provider_properties_map['Dentist']['degrees'],
+															$provider_degree_array
+														)
+													);
+
+													$MedicalBusiness_type = $Dentist_degree_query ? 'Dentist' : $MedicalBusiness_type;
+
+												}
+
+											// Check the list of degrees against the Optician degrees
+
+												if (
+													$provider_properties_map['Optician']['degrees']
+													&&
+													$provider_degree_array
+												) {
+
+													$Optician_degree_query = !empty(
+														array_intersect(
+															$provider_properties_map['Optician']['degrees'],
+															$provider_degree_array
+														)
+													);
+
+													$MedicalBusiness_type = $Optician_degree_query ? 'Optician' : $MedicalBusiness_type;
+
+												}
 
 										// Add to item values
 
@@ -8378,140 +8374,136 @@
 										$nesting_level == 0
 									) {
 
-										if ( !isset($provider_aggregateRating) ) {
+										// Get values
 
-											// Get values
+											// Query for whether there are valid ratings ($rating_valid)
 
-												// Query for whether there are valid ratings ($rating_valid)
+												if ( !isset($provider_aggregateRating_query) ) {
 
-													if ( !isset($provider_aggregateRating_query) ) {
+													// Get NPI value ($npi)
 
-														// Get NPI value ($npi)
+														if ( !isset($provider_npi) ) {
 
-															if ( !isset($provider_npi) ) {
+															$provider_npi = get_field( 'physician_npi', $provider );
 
-																$provider_npi = get_field( 'physician_npi', $provider );
+														}
 
-															}
+													// Get ratings data from NRC JSON API and decode
 
-														// Get ratings data from NRC JSON API and decode
+														if ( !isset($provider_aggregateRating_api) ) {
 
-															if ( !isset($provider_aggregateRating_api) ) {
+															$provider_aggregateRating_api = json_decode( wp_nrc_cached_api($provider_npi) );
 
-																$provider_aggregateRating_api = json_decode( wp_nrc_cached_api($provider_npi) );
+														}
 
-															}
+													// Check if ratings data is valid
 
-														// Check if ratings data is valid
+														if ( !empty($provider_aggregateRating_api) ) {
 
-															if ( !empty($provider_aggregateRating_api) ) {
+															$provider_aggregateRating_query = $provider_aggregateRating_api->valid ?? false;
+															$provider_aggregateRating_query = $provider_aggregateRating_query ? true : false;
 
-																$provider_aggregateRating_query = $provider_aggregateRating_api->valid ?? false;
-																$provider_aggregateRating_query = $provider_aggregateRating_query ? true : false;
+														} else {
 
-															} else {
+															$provider_aggregateRating_query = false;
 
-																$provider_aggregateRating_query = false;
+														}
 
-															}
+												}
 
-													}
+											// Get values from ratings data
 
-												// Get values from ratings data
+												if (
+													$provider_aggregateRating_query
+													&&
+													$provider_aggregateRating_api
+												) {
 
-													if (
-														$provider_aggregateRating_query
-														&&
-														$provider_aggregateRating_api
-													) {
+													// ratingCount
 
-														// ratingCount
+														if ( !isset($provider_aggregateRating_ratingCount) ) {
 
-															if ( !isset($provider_aggregateRating_ratingCount) ) {
+															$provider_aggregateRating_ratingCount = $provider_aggregateRating_api->profile->reviewcount;
 
-																$provider_aggregateRating_ratingCount = $provider_aggregateRating_api->profile->reviewcount;
+														}
 
-															}
+													// ratingValue ($avg_rating)
 
-														// ratingValue ($avg_rating)
+														if ( !isset($provider_aggregateRating_ratingValue) ) {
 
-															if ( !isset($provider_aggregateRating_ratingValue) ) {
+															$provider_aggregateRating_ratingValue = $provider_aggregateRating_api->profile->averageRatingStr;
 
-																$provider_aggregateRating_ratingValue = $provider_aggregateRating_api->profile->averageRatingStr;
+														}
 
-															}
+													// reviewCount ($comment_count)
 
-														// reviewCount ($comment_count)
+														if ( !isset($provider_aggregateRating_reviewCount) ) {
 
-															if ( !isset($provider_aggregateRating_reviewCount) ) {
+															$provider_aggregateRating_reviewCount = $provider_aggregateRating_api->profile->bodycount;
 
-																$provider_aggregateRating_reviewCount = $provider_aggregateRating_api->profile->bodycount;
+														}
 
-															}
+												}
 
-													}
+											// description
 
-												// description
+												/*
 
-													/*
+													Get description of the rating/review concept from Patient Experience.
 
-														Get description of the rating/review concept from Patient Experience.
+												*/
 
-													*/
+												if ( !isset($provider_aggregateRating_description) ) {
 
-													if ( !isset($provider_aggregateRating_description) ) {
+													$provider_aggregateRating_description = '';
 
-														$provider_aggregateRating_description = '';
+												}
 
-													}
+											// itemReviewed
 
-												// itemReviewed
+												if ( !isset($provider_aggregateRating_itemReviewed) ) {
 
-													if ( !isset($provider_aggregateRating_itemReviewed) ) {
+													$provider_aggregateRating_itemReviewed = array(
+														( is_array($provider_item_MedicalBusiness_ref) ? $provider_item_MedicalBusiness_ref : array($provider_item_MedicalBusiness_ref) ),
+														( is_array($provider_item_Person_ref) ? $provider_item_Person_ref : array($provider_item_Person_ref) )
+													);
 
-														$provider_aggregateRating_itemReviewed = array(
-															( is_array($provider_item_MedicalBusiness_ref) ? $provider_item_MedicalBusiness_ref : array($provider_item_MedicalBusiness_ref) ),
-															( is_array($provider_item_Person_ref) ? $provider_item_Person_ref : array($provider_item_Person_ref) )
-														);
+												}
 
-													}
+											// reviewAspect
 
-												// reviewAspect
+												/*
 
-													/*
+													Get info from Patient Experience about which facets of the provider is rated/reviewed.
 
-														Get info from Patient Experience about which facets of the provider is rated/reviewed.
+												*/
 
-													*/
+												if ( !isset($provider_aggregateRating_reviewAspect) ) {
 
-													if ( !isset($provider_aggregateRating_reviewAspect) ) {
+													$provider_aggregateRating_reviewAspect = '';
 
-														$provider_aggregateRating_reviewAspect = '';
+												}
 
-													}
+										// Format values
 
-											// Format values
+											$provider_aggregateRating = array_filter(
+												array(
+													'description' => $provider_aggregateRating_description,
+													'itemReviewed' => $provider_aggregateRating_itemReviewed,
+													'ratingCount' => $provider_aggregateRating_ratingCount,
+													'ratingValue' => $provider_aggregateRating_ratingValue,
+													'reviewAspect' => $provider_aggregateRating_reviewAspect,
+													'reviewCount' => $provider_aggregateRating_reviewCount
+												)
+											);
 
-												$provider_aggregateRating = array_filter(
-													array(
-														'description' => $provider_aggregateRating_description,
-														'itemReviewed' => $provider_aggregateRating_itemReviewed,
-														'ratingCount' => $provider_aggregateRating_ratingCount,
-														'ratingValue' => $provider_aggregateRating_ratingValue,
-														'reviewAspect' => $provider_aggregateRating_reviewAspect,
-														'reviewCount' => $provider_aggregateRating_reviewCount
-													)
-												);
+											// Add @type
 
-												// Add @type
+												if ( $provider_aggregateRating ) {
 
-													if ( $provider_aggregateRating ) {
+													$provider_aggregateRating = array( '@type' => 'AggregateRating' ) + $provider_aggregateRating;
 
-														$provider_aggregateRating = array( '@type' => 'AggregateRating' ) + $provider_aggregateRating;
-
-													}
-
-										}
+												}
 
 										// Add to item values
 
@@ -11131,13 +11123,20 @@
 												if ( !isset($provider_degrees) ) {
 
 													$provider_degrees = get_field( 'physician_degree', $provider );
-													$provider_degrees = array_filter($provider_degrees);
-													$provider_degrees = array_unique( $provider_degrees, SORT_REGULAR );
-													$provider_degrees = array_values($provider_degrees);
 
 												}
 
-											// Format values
+												// Clean up values
+
+													if ( $provider_degrees ) {
+
+														$provider_degrees = array_filter($provider_degrees);
+														$provider_degrees = array_unique( $provider_degrees, SORT_REGULAR );
+														$provider_degrees = array_values($provider_degrees);
+
+													}
+
+											// Format schema values
 
 												if ( $provider_degrees ) {
 
@@ -11309,15 +11308,17 @@
 
 										// Google Company ID (CID)
 
-											// Get Google Customer ID repeater field value
+											// Get list of Google Customer IDs
 
 												if ( !isset($provider_google_cid) ) {
 
-													if ( !isset($provider_google_cid_repeater) ) {
+													// Get Google Customer ID repeater field value
 
-														$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
+														if ( !isset($provider_google_cid_repeater) ) {
 
-													}
+															$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
+
+														}
 
 													// Add each item to Google Company ID value array
 
@@ -11325,11 +11326,11 @@
 
 														if ( $provider_google_cid_repeater ) {
 
-															foreach ( $provider_google_cid_repeater as $cid ) {
+															foreach ( $provider_google_cid_repeater as $item ) {
 
-																if ( $cid ) {
+																if ( $item ) {
 
-																	$provider_google_cid[] = $cid['schema_google_cid_text'];
+																	$provider_google_cid[] = $item['schema_google_cid_text'];
 
 																}
 
@@ -11339,23 +11340,30 @@
 
 													// Clean up Google Company ID value array
 
-														$provider_google_cid = array_filter($provider_google_cid);
-														$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
-														$provider_google_cid = array_values($provider_google_cid);
+														if ( $provider_google_cid ) {
+
+															$provider_google_cid = array_filter($provider_google_cid);
+															$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
+															$provider_google_cid = array_values($provider_google_cid);
+
+														}
 
 												}
 
-											// Format values
+											// Format schema values
 
 												if ( $provider_google_cid ) {
 
-													$provider_google_cid = is_array($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
+													// Check / define values
+													
+														$provider_google_cid = is_array($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
+														$provider_google_cid = array_is_list($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
 
-													foreach ( $provider_google_cid as $cid ) {
+													foreach ( $provider_google_cid as $item ) {
 
-														if ( $cid ) {
+														if ( $item ) {
 
-															$provider_hasMap[] = 'https://www.google.com/maps?cid=' . $cid;
+															$provider_hasMap[] = 'https://www.google.com/maps?cid=' . $item;
 
 														}
 
@@ -11363,19 +11371,15 @@
 
 												}
 
-											// Clean up array
+												// Clean up array
 
-												if ( $provider_hasMap ) {
+													if ( $provider_hasMap ) {
 
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														if ( $provider_hasMap ) {
+														// If there is only one item, flatten the multi-dimensional array by one step
 
 															uamswp_fad_flatten_multidimensional_array($provider_hasMap);
 
-														}
-
-												}
+													}
 
 
 										// Add to item values
@@ -11573,8 +11577,6 @@
 											 *     - Text
 											 */
 
-											// Define values
-
 											if (
 												(
 													in_array(
@@ -11591,17 +11593,19 @@
 												$nesting_level == 0
 											) {
 
-												if ( !isset($provider_isicV4) ) {
+												// Define values
 
-													// Base 'isicV4' property value array
+													if ( !isset($provider_isicV4) ) {
 
-														$provider_isicV4 = array();
+														// Base 'isicV4' property value array
 
-													// Get values
+															$provider_isicV4 = array();
 
-														$provider_isicV4 = array();
+														// Get values
 
-												}
+															$provider_isicV4 = array();
+
+													}
 
 												// Add to item values
 
@@ -11658,17 +11662,19 @@
 												$nesting_level == 0
 											) {
 
-												if ( !isset($provider_leiCode) ) {
+												// Define values
 
-													// Base 'leiCode' property value array
+													if ( !isset($provider_leiCode) ) {
 
-														$provider_leiCode = array();
+														// Base 'leiCode' property value array
 
-													// Get values
+															$provider_leiCode = array();
 
-														$provider_leiCode = array();
+														// Get values
 
-												}
+															$provider_leiCode = array();
+
+													}
 
 												// Add to item values
 
@@ -11725,17 +11731,19 @@
 												$nesting_level == 0
 											) {
 
-												if ( !isset($provider_naics) ) {
+												// Define values
 
-													// Base 'naics' property value array
+													if ( !isset($provider_naics) ) {
 
-														$provider_naics = array();
+														// Base 'naics' property value array
 
-													// Get values
+															$provider_naics = array();
 
-														$provider_naics = array();
+														// Get values
 
-												}
+															$provider_naics = array();
+
+													}
 
 												// Add to item values
 
@@ -11792,7 +11800,7 @@
 												$nesting_level == 0
 											) {
 
-												// taxID
+												// Define values
 
 													if ( !isset($provider_taxID) ) {
 
@@ -11810,35 +11818,39 @@
 
 												// Taxpayer Identification Number
 
-													if ( !isset($provider_taxID_taxpayer) ) {
+													// Define values
 
-														// Base Taxpayer Identification Number value array
+														if ( !isset($provider_taxID_taxpayer) ) {
 
-															/* https://www.wikidata.org/wiki/Q1444804 */
+															// Base Taxpayer Identification Number value array
 
-															$provider_taxID_taxpayer = array();
+																/* https://www.wikidata.org/wiki/Q1444804 */
 
-														// Get values
+																$provider_taxID_taxpayer = array();
 
-															$provider_taxID_taxpayer = array();
+															// Get values
 
-													}
+																$provider_taxID_taxpayer = array();
+
+														}
 
 												// Employer Identification Number
 
-													if ( !isset($provider_taxID_employer) ) {
+													// Define values
 
-														// Base Employer Identification Number value array
+														if ( !isset($provider_taxID_employer) ) {
 
-															/* https://www.wikidata.org/wiki/Q2397748 */
+															// Base Employer Identification Number value array
 
-															$provider_taxID_employer = array();
+																/* https://www.wikidata.org/wiki/Q2397748 */
 
-														// Get values
+																$provider_taxID_employer = array();
 
-															$provider_taxID_employer = array();
+															// Get values
 
-													}
+																$provider_taxID_employer = array();
+
+														}
 
 												// Add to item values
 
@@ -11892,17 +11904,19 @@
 												$nesting_level == 0
 											) {
 
-												if ( !isset($provider_vatID) ) {
+												// Define values
 
-													// Base 'vatID' property value array
+													if ( !isset($provider_vatID) ) {
 
-														$provider_vatID = array();
+														// Base 'vatID' property value array
 
-													// Get values
+															$provider_vatID = array();
 
-														$provider_vatID = array();
+														// Get values
 
-												}
+															$provider_vatID = array();
+
+													}
 
 												// Add to item values
 
@@ -11965,17 +11979,19 @@
 												$nesting_level == 0
 											) {
 
-												if ( !isset($provider_iso6523Code) ) {
+												// Define values
 
-													// Base 'iso6523Code' property value array
+													if ( !isset($provider_iso6523Code) ) {
 
-														$provider_iso6523Code = array();
+														// Base 'iso6523Code' property value array
 
-													// Get values
+															$provider_iso6523Code = array();
 
-														$provider_iso6523Code = array();
+														// Get values
 
-												}
+															$provider_iso6523Code = array();
+
+													}
 
 												// Add to item values
 
@@ -12293,25 +12309,29 @@
 
 													// Google Company ID (CID)
 
-														// Get Google Customer ID repeater field value
+														// Get list of Google Customer IDs
 
 															if ( !isset($provider_google_cid) ) {
 
-																if ( !isset($provider_google_cid_repeater) ) {
+																// Get Google Customer ID repeater field value
 
-																	$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
+																	if ( !isset($provider_google_cid_repeater) ) {
 
-																}
+																		$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $provider ) ?? array();
+
+																	}
 
 																// Add each item to Google Company ID value array
 
+																	$provider_google_cid = array();
+
 																	if ( $provider_google_cid_repeater ) {
 
-																		foreach ( $provider_google_cid_repeater as $cid ) {
+																		foreach ( $provider_google_cid_repeater as $item ) {
 
-																			if ( $cid ) {
+																			if ( $item ) {
 
-																				$provider_google_cid[] = $cid['schema_google_cid_text'];
+																				$provider_google_cid[] = $item['schema_google_cid_text'];
 
 																			}
 
@@ -12321,9 +12341,13 @@
 
 																// Clean up Google Company ID value array
 
-																	$provider_google_cid = array_filter($provider_google_cid);
-																	$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
-																	$provider_google_cid = array_values($provider_google_cid);
+																	if ( $provider_google_cid ) {
+
+																		$provider_google_cid = array_filter($provider_google_cid);
+																		$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
+																		$provider_google_cid = array_values($provider_google_cid);
+
+																	}
 
 															}
 
@@ -12433,33 +12457,29 @@
 
 											// Get the various images
 
-												$provider_image_wide_id = get_field( 'physician_image_wide', $provider ) ?? null;
+												$provider_image_wide_id = get_field( 'physician_image_wide', $provider ) ?? 0;
 
 										}
 
 										// Create ImageObject values array
 
-											if ( !isset($provider_image_general) ) {
+											if (
+												$provider_image_id
+												||
+												$provider_image_wide_id
+											) {
 
-												if (
-													$provider_image_id
-													||
-													$provider_image_wide_id
-												) {
-
-													$provider_image_general = uamswp_fad_schema_imageobject_thumbnails(
-														$provider_url, // URL of entity with which the image is associated
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'3:4', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
-														'Image', // Base fragment identifier
-														$provider_image_id, // ID of image to use for 1:1 aspect ratio
-														$provider_image_id, // ID of image to use for 3:4 aspect ratio
-														$provider_image_wide_id, // ID of image to use for 4:3 aspect ratio
-														$provider_image_wide_id, // ID of image to use for 16:9 aspect ratio
-														0 // ID of image to use for full image
-													);
-
-												}
+												$provider_image_general = uamswp_fad_schema_imageobject_thumbnails(
+													$provider_url, // URL of entity with which the image is associated
+													( $nesting_level + 1 ), // Nesting level within the main schema
+													'3:4', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
+													'Image', // Base fragment identifier
+													$provider_image_id, // ID of image to use for 1:1 aspect ratio
+													$provider_image_id, // ID of image to use for 3:4 aspect ratio
+													$provider_image_wide_id, // ID of image to use for 4:3 aspect ratio
+													$provider_image_wide_id, // ID of image to use for 16:9 aspect ratio
+													0 // ID of image to use for full image
+												);
 
 											}
 
@@ -12501,11 +12521,7 @@
 
 										// Get the values
 
-											if ( !isset($provider_image) ) {
-
-												$provider_image = $provider_image_general ?? array();
-
-											}
+											$provider_image = $provider_image_general ?? array();
 
 										// Add to item values
 
@@ -13616,25 +13632,21 @@
 
 										// Get values
 
-											if ( !isset($provider_mainEntityOfPage) ) {
+											if ( !isset($provider_item_MedicalWebPage_ref) ) {
 
-												if ( !isset($provider_item_MedicalWebPage_ref) ) {
+												if ( !isset($provider_url) ) {
 
-													if ( !isset($provider_url) ) {
-
-														$provider_url = get_permalink($provider);
-														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-
-													}
-
-													$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
+													$provider_url = get_permalink($provider);
+													$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
 
 												}
 
-												$provider_mainEntityOfPage = $provider_item_MedicalWebPage_ref ?? array();
+												$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
 
 											}
+
+											$provider_mainEntityOfPage = $provider_item_MedicalWebPage_ref ?? array();
 
 										// Add to item values
 
@@ -15469,25 +15481,21 @@
 
 										// Get values
 
-											if ( !isset($provider_subjectOf) ) {
+											if ( !isset($provider_item_MedicalWebPage_ref) ) {
 
-												if ( !isset($provider_item_MedicalWebPage_ref) ) {
+												if ( !isset($provider_url) ) {
 
-													if ( !isset($provider_url) ) {
-
-														$provider_url = get_permalink($provider);
-														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-
-													}
-
-													$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
+													$provider_url = get_permalink($provider);
+													$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
 
 												}
 
-												$provider_subjectOf = $provider_item_MedicalWebPage_ref ?? '';
+												$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
+												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
 
 											}
+
+											$provider_subjectOf = $provider_item_MedicalWebPage_ref ?? '';
 
 										// Add to item values
 
