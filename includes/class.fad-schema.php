@@ -2749,16 +2749,28 @@
 
 							// sameAs
 
-								$item_sameAs = array();
+								// Get sameAs repeater field value
 
-								if ( $item_sameAs ) {
+									$item_sameAs_array = get_field( 'schema_sameas', $item_term ) ?? array();
 
-									$item_schema['sameAs'] = uamswp_fad_schema_sameas(
-										$item_sameAs, // sameAs repeater field
-										'schema_sameas_url' // sameAs item field name
-									);
+								// Add each item to sameAs property values array
 
-								} // endif
+									if ( $item_sameAs_array ) {
+
+										$item_sameAs = uamswp_fad_schema_sameas(
+											$item_sameAs_array, // sameAs repeater field
+											'schema_sameas_url' // sameAs item field name
+										);
+
+									}
+
+								// Add to schema item
+
+									if ( $item_sameAs ) {
+
+										$item_schema['sameAs'] = $item_sameAs;
+
+									}
 
 						} // endif
 
