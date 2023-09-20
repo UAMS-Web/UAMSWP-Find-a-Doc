@@ -24628,6 +24628,29 @@
 
 			}
 
+			// Clean up property value array
+
+				if (
+					isset($schema_type_list[$property_name])
+					&&
+					!empty($schema_type_list[$property_name])
+				) {
+
+					$schema_type_list[$property_name] = array_filter($schema_type_list[$property_name]);
+
+					if ( array_is_list($schema_type_list[$property_name]) ) {
+
+						$schema_type_list[$property_name] = array_unique( $schema_type_list[$property_name], SORT_REGULAR );
+						$schema_type_list[$property_name] = array_values($schema_type_list[$property_name]);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($schema_type_list[$property_name]);
+
+					}
+					
+				}
+
 		}
 
 	// Merge multiple schema item property value arrays
