@@ -2682,6 +2682,19 @@
 
 				foreach ( $languages as $item ) {
 
+					// Reset variables
+
+						$item_schema = array();
+						$item_term = array();
+						$item_name = '';
+						$item_name_attr = '';
+						$item_name_native = '';
+						$item_name_native_attr = '';
+						$item_bcp47 = '';
+						$item_bcp47_attr = '';
+						$item_sameAs_array = array();
+						$item_sameAs = array();
+
 					if ( $item ) {
 
 						$item_term = get_term_by( 'id', $item, 'language');
