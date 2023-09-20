@@ -8307,20 +8307,6 @@
 														$provider_additionalType_clinical_specialization_ref // mixed // Required // @id reference to incoming schema item property value
 													);
 
-										// Clean up additionalType property values array
-
-											if (
-												$provider_additionalType
-												&&
-												is_array($provider_additionalType)
-											) {
-
-												// If there is only one item, flatten the multi-dimensional array by one step
-
-													uamswp_fad_flatten_multidimensional_array($provider_additionalType);
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -16869,20 +16855,6 @@
 															$LocalBusiness_additionalType_field, // mixed // Required // Incoming schema item property value
 															$LocalBusiness_additionalType_field_ref // mixed // Required // @id reference to incoming schema item property value
 														);
-
-											}
-
-										// Clean up additionalType property values array
-
-											if (
-												$LocalBusiness_additionalType
-												&&
-												is_array($LocalBusiness_additionalType)
-											) {
-
-												// If there is only one item, flatten the multi-dimensional array by one step
-
-													uamswp_fad_flatten_multidimensional_array($LocalBusiness_additionalType);
 
 											}
 
