@@ -3728,16 +3728,16 @@
 									);
 
 								// (Optional) Expand ISCO-8 code to include list of ancestors
-								
+
 									// if ( $provider_specialization_isco08_code ) {
-								
+
 									// 	$provider_specialization_isco08_code = array_merge(
 									// 		$provider_specialization_isco08_code,
 									// 		$isco08_values[reset($provider_specialization_isco08_code)]['sameAs']
 									// 	);
-								
+
 									// 	sort($provider_specialization_isco08_code);
-								
+
 									// }
 
 								// Format schema values
@@ -11571,7 +11571,7 @@
 												if ( $provider_google_cid ) {
 
 													// Check / define values
-													
+
 														$provider_google_cid = is_array($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
 														$provider_google_cid = array_is_list($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
 
@@ -17036,32 +17036,32 @@
 															if ( !isset($LocalBusiness_medicalSpecialty) ) {
 
 																// Get medicalSpecialty multiselect field value
-				
+
 																	if ( !isset($LocalBusiness_medicalSpecialty_multiselect) ) {
-				
+
 																		$LocalBusiness_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $LocalBusiness ) ?? array();
-				
+
 																	}
-				
+
 																// Format value
-				
+
 																	// Simple list of MedicalSpecialty values
-				
+
 																		$LocalBusiness_medicalSpecialty_list = array();
-				
+
 																	// Schema property values
-				
+
 																		if ( $LocalBusiness_medicalSpecialty_multiselect ) {
-				
+
 																			$LocalBusiness_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
 																				$LocalBusiness_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
 																				$LocalBusiness_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
 																			);
-				
+
 																		}
-				
+
 															}
-			
+
 													}
 
 												// Cross-reference the lists
@@ -24858,7 +24858,7 @@
 							uamswp_fad_flatten_multidimensional_array($schema_type_list[$property_name]);
 
 					}
-					
+
 				}
 
 		}
