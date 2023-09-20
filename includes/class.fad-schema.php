@@ -24917,7 +24917,15 @@
 
 			}
 
-			uamswp_fad_flatten_multidimensional_array($output);
+			// Clean up array
+
+				$output = array_filter($output);
+				$output = array_unique( $output, SORT_REGULAR );
+				$output = array_values($output);
+
+				// If there is only one item, flatten the multi-dimensional array by one step
+
+					uamswp_fad_flatten_multidimensional_array($output);
 
 			return $output;
 
