@@ -138,8 +138,17 @@ TODO List
 						 * Specialization Display Name in the Health Care Provider Taxonomy Code Set
 						 * Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
 						 * Alternate Names for the Clinical Occupation Title
-					 * area of expertise names
-					 * location names
+					 * associated area of expertise attributes
+						 * name
+						 * alternateName
+					 * associated location attributes
+						 * name
+						 * alternateName?
+						 * city
+						 * state
+						 * city + state?
+						 * Arkansas region?
+						 * county?
 		 * MedicalBusiness + Person
 			 * Add values for remaining properties:
 				 * affiliation
