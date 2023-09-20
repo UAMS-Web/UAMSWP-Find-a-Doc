@@ -16922,6 +16922,7 @@
 								$LocalBusiness_item = array(); // Base array
 								$LocalBusiness_additionalType = null;
 								$LocalBusiness_additionalType_field = null;
+								$LocalBusiness_additionalType_field_ref = null;
 								$LocalBusiness_additionalType_medicalSpecialty = null;
 								$LocalBusiness_additionalType_medicalSpecialty_ref = null;
 								$LocalBusiness_additionalType_repeater = null;
@@ -17364,24 +17365,11 @@
 
 													// Merge array into the additionalType property values array
 
-														if (
-															$LocalBusiness_additionalType
-															&&
-															$LocalBusiness_additionalType_field
-														) {
-
-															$LocalBusiness_additionalType_field = is_array($LocalBusiness_additionalType_field) ? $LocalBusiness_additionalType_field : array($LocalBusiness_additionalType_field);
-
-															$LocalBusiness_additionalType = array_merge(
-																$LocalBusiness_additionalType,
-																$LocalBusiness_additionalType_field
-															);
-
-														} elseif ( $LocalBusiness_additionalType_field ) {
-
-															$LocalBusiness_additionalType = $LocalBusiness_additionalType_field;
-
-														}
+														$LocalBusiness_additionalType = uamswp_fad_schema_merge_values(
+															$LocalBusiness_additionalType, // mixed // Required // Initial schema item property value
+															$LocalBusiness_additionalType_field, // mixed // Required // Incoming schema item property value
+															$LocalBusiness_additionalType_field_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
 											}
 
