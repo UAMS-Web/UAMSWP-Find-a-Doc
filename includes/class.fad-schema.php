@@ -2696,7 +2696,7 @@
 								$language_string[] = $item_name;
 								$language_array_attr[] = $item_name_attr;
 								$language_string_attr[] = $item_name;
-								$item_schema['name'] = '';
+								$item_schema['name'] = $item_name_attr;
 
 							// alternateName
 
