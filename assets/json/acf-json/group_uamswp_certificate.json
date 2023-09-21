@@ -1,0 +1,376 @@
+{
+	"key": "group_uamswp_certificate",
+	"title": "Specialty and Subspecialty Certificate Details",
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "board"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [
+		"description"
+	],
+	"active": 1,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_permissions": "",
+	"acfe_note": "",
+	"acfe_meta": "",
+	"fields": {
+		"field_certificate_intro": {
+			"key": "field_certificate_intro",
+			"label": "Naming the Taxonomy Item",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "Name the taxonomy item using the name of the certifying board followed by the name of the specialty or subspecialty certificate (e.g., \"American Board of Pediatrics — Adolescent Medicine\").",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_certificate_name": {
+			"key": "field_certificate_name",
+			"name": "certificate_name",
+			"label": "Official Name of the Specialty or Subspecialty Certificate",
+			"type": "text",
+			"instructions": "<p class='description' style='margin-top: 0.5em;'>Do not include the name of the certifying board.</p><p class='description' style='margin-top: 0.5em;'>For subspecialty certificates, do not include the name of a related primary specialty certificate.</p>",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"default_value": "",
+			"placeholder": "e.g., Anesthesiology Critical Care Medicine",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_certificate_certifying_board": {
+			"key": "field_certificate_certifying_board",
+			"name": "certificate_certifying_board",
+			"label": "Certifying Board for the Specialty or Subspecialty Certificate.",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "certifying_board",
+			"field_type": "select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_certificate_type": {
+			"key": "field_certificate_type",
+			"name": "certificate_type",
+			"label": "Certificate Type",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"specialty": "Specialty Certificate",
+				"subspecialty": "Subspecialty Certificate"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_certificate_primary_specialty_query": {
+			"key": "field_certificate_primary_specialty_query",
+			"name": "certificate_primary_specialty_query",
+			"label": "Is primary specialty certification is a core requirement for this subspecialty?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_certificate_type",
+						"operator": "==",
+						"value": "subspecialty"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		"field_certificate_primary_specialty_options": {
+			"key": "field_certificate_primary_specialty_options",
+			"name": "certificate_primary_specialty_options",
+			"label": "What type of primary specialty certification is required?",
+			"type": "radio",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_certificate_primary_specialty_query",
+						"operator": "==",
+						"value": 1
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"certifying_board": "Certification through specific certifying boards",
+				"certificate": "Specific specialty certificates"
+			},
+			"allow_custom": 0,
+			"default_value": [],
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 1,
+			"ajax": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
+		},
+		"field_certificate_primary_specialty_certifying_board": {
+			"key": "field_certificate_primary_specialty_certifying_board",
+			"name": "certificate_primary_specialty_certifying_board",
+			"label": "Select the certifying boards that meet the subspecialty's requirements for primary specialty certification",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_certificate_primary_specialty_query",
+						"operator": "==",
+						"value": 1
+					},
+					{
+						"field": "field_certificate_primary_specialty_options",
+						"operator": "==",
+						"value": "certifying_board"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "certifying_board",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_certificate_primary_specialty_certificate": {
+			"key": "field_certificate_primary_specialty_certificate",
+			"name": "certificate_primary_specialty_certificate",
+			"label": "Select the specialty certificates that meet the subspecialty's requirements for primary specialty certification",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_certificate_primary_specialty_query",
+						"operator": "==",
+						"value": 1
+					},
+					{
+						"field": "field_certificate_primary_specialty_options",
+						"operator": "==",
+						"value": "certificate"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "board",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
+		"field_certificate_url_query": {
+			"key": "field_certificate_url_query",
+			"name": "certificate_url_query",
+			"label": "Does this specialty or subspecialty certificate have a webpage on the certifying board's official website?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": 1,
+			"layout": "horizontal",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		"field_certificate_url": {
+			"key": "field_certificate_url",
+			"name": "certificate_url",
+			"label": "Specialty or Subspecialty Certificate Webpage URL",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_certificate_url_query",
+						"operator": "==",
+						"value": 1
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_url"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_certificate_alternatename": {
+			"key": "field_certificate_alternatename",
+			"name": "certificate_alternatename",
+			"label": "Alternate Names for the Specialty or Subspecialty Certificate",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_certificate_sameas": {
+			"key": "field_certificate_sameas",
+			"name": "certificate_sameas",
+			"label": "Reference Webpages for the Specialty or Subspecialty Certificate",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		}
+	},
+	"modified": false
+}
