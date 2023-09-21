@@ -90,9 +90,10 @@ $page_id = get_the_ID();
 
 			// Get URLs for significantLink property
 
-				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
-					$provider_related_location, // Property values from which to extract URLs
-					$schema_provider_significantLink // Existing list of URLs
+				$schema_provider_significantLink = uamswp_fad_schema_property_values(
+					$provider_related_location, // array // Required // Property values from which to extract specific values
+					array( 'url' ), // mixed // Required // List of properties from which to collect values
+					$schema_provider_significantLink // mixed // Optional // Pre-existing list to which to add additional items
 				);
 
 			// If there is only one item, flatten the multi-dimensional array by one step
@@ -125,9 +126,10 @@ $page_id = get_the_ID();
 
 			// Get URLs for significantLink property
 
-				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
-					$provider_related_expertise, // Property values from which to extract URLs
-					$schema_provider_significantLink // Existing list of URLs
+				$schema_provider_significantLink = uamswp_fad_schema_property_values(
+					$provider_related_expertise, // array // Required // Property values from which to extract specific values
+					array( 'url' ), // mixed // Required // List of properties from which to collect values
+					$schema_provider_significantLink // mixed // Optional // Pre-existing list to which to add additional items
 				);
 
 		// Related Clinical Resources
@@ -156,9 +158,10 @@ $page_id = get_the_ID();
 
 			// Get URLs for significantLink property
 
-				$schema_provider_significantLink = uamswp_fad_schema_property_urls(
-					$provider_related_clinical_resource, // Property values from which to extract URLs
-					$schema_provider_significantLink // Existing list of URLs
+				$schema_provider_significantLink = uamswp_fad_schema_property_values(
+					$provider_related_clinical_resource, // array // Required // Property values from which to extract specific values
+					array( 'url' ), // mixed // Required // List of properties from which to collect values
+					$schema_provider_significantLink // mixed // Optional // Pre-existing list to which to add additional items
 				);
 
 		// Related Conditions and Treatments

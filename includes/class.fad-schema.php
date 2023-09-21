@@ -25519,59 +25519,6 @@
 
 		}
 
-	// Create list of URLs from property value items
-
-		function uamswp_fad_schema_property_urls(
-			array $input, // array // Required // Property values from which to extract URLs
-			array &$output = array() // array // Optional // Pre-existing list array to which to add additional items
-		) {
-
-			// Check / define variables
-
-				$input = array_is_list($input) ? $input : array($input);
-				$output = array_is_list($output) ? $output : array($output);
-
-			if ( $input ) {
-
-				foreach ( $input as $item ) {
-
-					// Get URLs for significantLink property
-
-						if (
-							isset($item['url'])
-							&&
-							!empty($item['url'])
-						) {
-
-							$output[] = $item['url'];
-
-						}
-
-				}
-
-			}
-
-			// Clean up output array
-
-				$output = $output ? array_filter($output) : $output;
-				$output = $output ? array_unique( $output, SORT_REGULAR ) : $output;
-				$output = $output ? array_values($output) : $output;
-				uamswp_fad_flatten_multidimensional_array($output);
-
-				if (
-					$output
-					&&
-					is_array($output)
-				) {
-
-					sort( $output, SORT_NATURAL | SORT_FLAG_CASE );
-
-				}
-
-			return $output;
-
-		}
-
 	// Create list of specific values from property value items
 
 		function uamswp_fad_schema_property_values(
