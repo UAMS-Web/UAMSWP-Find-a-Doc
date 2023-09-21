@@ -842,7 +842,7 @@
 				$academic_appointment = get_field('physician_academic_appointment');
 				$academic_admin_title = get_field('physician_academic_admin_title');
 				$education = get_field('physician_education');
-				$boards = get_field( 'physician_boards' );
+				$certifications = get_field( 'physician_boards' );
 
 				if (
 					$resident
@@ -855,7 +855,7 @@
 					||
 					$education
 					||
-					$boards
+					$certifications
 				) {
 
 					$academic_section_show = true;
@@ -1105,7 +1105,7 @@
 			// Add one instance of a class (' has-empty-education-type') if there is an empty education_type field in any of the physician_education rows.
 			$provider_field_classes .= ( $education && !empty($education) ) ? ' has-education' : '';
 			// Add one instance of a class (' has-empty-education-school') if there is an empty school field in any of the physician_education rows.
-			$provider_field_classes .= ( $boards && !empty($boards) ) ? ' has-boards' : '';
+			$provider_field_classes .= ( $certifications && !empty($certifications) ) ? ' has-boards' : '';
 			$provider_field_classes .= ( $provider_associations && !empty($provider_associations) ) ? ' has-associations' : '';
 			$provider_field_classes .= ( $bio_research && !empty($bio_research) ) ? ' has-research-bio' : '';
 			$provider_field_classes .= ( $research_interests && !empty($research_interests) ) ? ' has-research-interests' : '';
@@ -1605,7 +1605,7 @@
 									||
 									$education
 									||
-									$boards
+									$certifications
 								)
 							) {
 
@@ -1680,13 +1680,24 @@
 															while ( have_rows('physician_academic_admin_title') ) {
 
 																the_row();
-																$department = get_term( get_sub_field('department'), 'academic_department' );
-																$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
 
-																?>
-																<dt><?php echo $department->name; ?></dt>
-																<dd><?php echo $academic_admin_title_tax->name; ?></dd>
-																<?php
+																$administrative_role_department_term = get_term( get_sub_field('department'), 'academic_department' );
+																$administrative_role_department = $administrative_role_department_term->name ?? '';
+																$administrative_role_title_term = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
+																$administrative_role_title = $administrative_role_title_term->name ?? '';
+
+																if (
+																	$administrative_role_department
+																	&&
+																	$administrative_role_title
+																) {
+
+																	?>
+																	<dt><?php echo $administrative_role_department; ?></dt>
+																	<dd><?php echo $administrative_role_title; ?></dd>
+																	<?php
+
+																}
 
 															} // endwhile ( have_rows('physician_academic_admin_title') )
 															
@@ -1710,23 +1721,24 @@
 															while ( have_rows('physician_academic_appointment') ) {
 
 																the_row();
-																$department = get_term( get_sub_field('department'), 'academic_department' );
-																$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
 
-																if ( $academic_title_tax->name ) {
+																$faculty_role_department_term = get_term( get_sub_field('department'), 'academic_department' );
+																$faculty_role_department = $faculty_role_department_term->name ?? '';
+																$faculty_role_title_term = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
+																$faculty_role_title = $faculty_role_title_term->name ?? '';
 
-																	$academic_title = $academic_title_tax->name;
+																if (
+																	$faculty_role_department
+																	&&
+																	$faculty_role_title
+																) {
 
-																} else {
+																	?>
+																	<dt><?php echo $faculty_role_department; ?></dt>
+																	<dd><?php echo $faculty_role_title; ?></dd>
+																	<?php
 
-																	$academic_title = get_sub_field('academic_title');
-
-																} // endif
-																
-																?>
-																<dt><?php echo $department->name; ?></dt>
-																<dd><?php echo $academic_title; ?></dd>
-																<?php
+																}
 
 															} // endwhile ( have_rows('physician_academic_appointment') )
 															
@@ -1762,14 +1774,31 @@
 															while ( have_rows('physician_education') ) {
 
 																the_row();
-																$school_name = get_term( get_sub_field('school'), 'school');
-																$education_type = get_term( get_sub_field('education_type'), 'educationtype');
-																
-																?>
-																<dt><?php echo $education_type->name; ?></dt>
-																<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
-																<?php
-																
+
+																$education_organization_term = get_term( get_sub_field('school'), 'school');
+																$education_organization = $education_organization_term->name ?? '';
+																$education_type_term = get_term( get_sub_field('education_type'), 'educationtype');
+																$education_type = $education_type_term->name ?? '';
+																$education_description = get_sub_field('description') ?? '';
+
+																if (
+																	$education_organization
+																	&&
+																	$education_type
+																) {
+
+																	?>
+																	<dt><?php echo $education_organization; ?></dt>
+																	<dd><?php
+
+																		echo $education_type;
+																		echo $education_description ? ', ' . $education_description : '';
+
+																	?></dd>
+																	<?php
+
+																}
+
 															} // endwhile ( have_rows('physician_education') )
 															
 															?>
@@ -1780,28 +1809,76 @@
 
 												// Certifications
 
-													if ( !empty( $boards ) ) { 
+													if ( !empty( $certifications ) ) { 
 														
 														?>
 														<h3 class="h4">Certifications</h3>
-														<ul>
+														<dl>
 															<?php
 															
-															foreach ( $boards as $board ) {
+															foreach ( $certifications as $certification ) {
 
-																$board_name = get_term( $board, 'board');
-																
-																?>
-																<li><?php echo $board_name->name; ?></li>
-																<?php
+																if ( $certification ) {
 
-															} // endforeach ( $boards as $board )
+																	$certification_term = get_term( $certification, 'board') ?? '';
+
+																	$certification_term_name = $certification_term->name ?? '';
+																	$certification_name = get_field( 'certificate_name', $certification_term ) ?? '';
+
+																	$certification_board_id = get_field( 'certificate_certifying_board', $certification_term ) ?? '';
+																	$certification_board_term = get_term( $certification_board_id, 'certifying_board') ?? '';
+																	$certification_board_name = $certification_board_term->name ?? '';
+
+																	if (
+																		$certification_name
+																		&&
+																		$certification_board_name
+																	) {
+
+																		?>
+																		<dt><?php echo $certification_board_name; ?></dt>
+																		<dd><?php echo $certification_name; ?></dd>
+																		<?php
+
+																	} elseif ( $certification_term_name ) {
+		
+																		$certification_term_name = explode(
+																			' — ',
+																			$certification_term_name
+																		);
+																		$certification_name = $certification_term_name[0] ?? '';
+																		$certification_board_name = $certification_term_name[1] ?? '';
+
+																		if (
+																			$certification_name
+																			&&
+																			$certification_board_name
+																		) {
+	
+																			?>
+																			<dt><?php echo $certification_board_name; ?></dt>
+																			<dd><?php echo $certification_name; ?></dd>
+																			<?php
+	
+																		} else {
+																				
+																			?>
+																			<dt><?php echo $certification_term_name; ?></dt>
+																			<?php
+
+																		}
+
+																	}
+																	
+																}
+
+															} // endforeach ( $certifications as $certification )
 															
 															?>
-														</ul>
+														</dl>
 														<?php
 
-													} // end( !empty( $boards ) )
+													} // end( !empty( $certifications ) )
 
 												// Professional Memberships
 													
