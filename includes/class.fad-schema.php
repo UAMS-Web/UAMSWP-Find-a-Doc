@@ -11440,7 +11440,8 @@
 
 													$provider_gender = array(
 														'@id' => 'https://schema.org/' . $provider_gender_value_attr,
-														'@type' => 'GenderType'
+														'@type' => 'GenderType',
+														'name' => $provider_gender_value_attr
 													);
 
 												} else {
@@ -11486,6 +11487,16 @@
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
+
+										// Get names for keywords property
+
+											$provider_keywords = $provider_keywords ?? array();
+
+											$provider_keywords = uamswp_fad_schema_property_values(
+												$provider_gender, // array // Required // Property values from which to extract specific values
+												array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+											);
 
 									}
 
