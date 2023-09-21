@@ -9472,6 +9472,16 @@
 															($nesting_level + 1) // int // Required // Current nesting level value
 														);
 
+												// Get names for keywords property
+
+													$provider_keywords = $provider_keywords ?? array();
+
+													$provider_keywords = uamswp_fad_schema_property_values(
+														$provider_brand, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													);
+
 											}
 
 										// hospitalAffiliation and affiliation
@@ -9865,6 +9875,16 @@
 															($nesting_level + 1) // int // Required // Current nesting level value
 														);
 
+													// Get names for keywords property
+
+														$provider_keywords = $provider_keywords ?? array();
+
+														$provider_keywords = uamswp_fad_schema_property_values(
+															$provider_parentOrganization, // array // Required // Property values from which to extract specific values
+															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+														);
+
 											}
 
 										// worksFor
@@ -9956,6 +9976,16 @@
 															$provider_worksFor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// Get names for keywords property
+
+														$provider_keywords = $provider_keywords ?? array();
+
+														$provider_keywords = uamswp_fad_schema_property_values(
+															$provider_worksFor, // array // Required // Property values from which to extract specific values
+															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
 														);
 
 											}
@@ -16547,22 +16577,6 @@
 												// Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
 
 												// Alternate Names for the Clinical Occupation Title
-
-											// Merge in UAMS Health name/alternateName value/reference
-
-												$provider_keywords = uamswp_fad_schema_property_values(
-													$schema_base_org_uams_health, // array // Required // Property values from which to extract specific values
-													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-													$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
-												);
-
-											// Merge in UAMS name/alternateName value/reference
-
-												$provider_keywords = uamswp_fad_schema_property_values(
-													$schema_base_org_uams, // array // Required // Property values from which to extract specific values
-													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-													$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
-												);
 
 										// Add to item values
 
