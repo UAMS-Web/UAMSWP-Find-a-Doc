@@ -5256,24 +5256,42 @@
 								$provider_author = null;
 								$provider_author_ref = null;
 								$provider_availableService = null;
+								$provider_availableService_keywords = null;
+								$provider_availableService_keywords_ref = null;
 								$provider_availableService_ref = null;
+								$provider_availableService_significantLink = null;
+								$provider_availableService_significantLink_ref = null;
 								$provider_award = null;
 								$provider_award_ref = null;
 								$provider_brand = null;
 								$provider_brand_ref = null;
+								$provider_brand_keywords = null;
+								$provider_brand_keywords_ref = null;
 								$provider_breadcrumb = null;
 								$provider_breadcrumb_ref = null;
 								$provider_cid = null;
 								$provider_cid_ref = null;
 								$provider_clinical_resource = null;
 								$provider_clinical_resource_ref = null;
+								$provider_clinical_resource_significantLink = null;
+								$provider_clinical_resource_significantLink_ref = null;
 								$provider_clinical_specialization = null;
+								$provider_clinical_specialization_keywords = null;
+								$provider_clinical_specialization_keywords_ref = null;
+								$provider_clinical_specialization_knowsAbout = null;
+								$provider_clinical_specialization_knowsAbout_ref = null;
 								$provider_clinical_specialization_name = null;
 								$provider_clinical_specialization_ref = null;
+								$provider_clinical_specialization_significantLink = null;
+								$provider_clinical_specialization_significantLink_ref = null;
 								$provider_clinical_specialization_term = null;
 								$provider_condition = null;
+								$provider_condition_keywords = null;
+								$provider_condition_keywords_ref = null;
 								$provider_condition_list = null;
 								$provider_condition_ref = null;
+								$provider_condition_significantLink = null;
+								$provider_condition_significantLink_ref = null;
 								$provider_containedInPlace = null;
 								$provider_containedInPlace_ref = null;
 								$provider_contributor = null;
@@ -5313,7 +5331,11 @@
 								$provider_employee = null;
 								$provider_employee_ref = null;
 								$provider_expertise = null;
+								$provider_expertise_keywords = null;
+								$provider_expertise_keywords_ref = null;
 								$provider_expertise_ref = null;
+								$provider_expertise_significantLink = null;
+								$provider_expertise_significantLink_ref = null;
 								$provider_familyName = null;
 								$provider_familyName_ref = null;
 								$provider_forename_combinations = null;
@@ -5323,6 +5345,10 @@
 								$provider_forename_options_middle = null;
 								$provider_forename_options_nickname = null;
 								$provider_fpage_query = null;
+								$provider_gender = null;
+								$provider_gender_keywords = null;
+								$provider_gender_keywords_ref = null;
+								$provider_gender_ref = null;
 								$provider_generational_suffix = null;
 								$provider_givenName = null;
 								$provider_givenName_initial = null;
@@ -5335,11 +5361,17 @@
 								$provider_hasMap = null;
 								$provider_hasMap_ref = null;
 								$provider_hasMap_repeater = null;
+								$provider_hasOccupation = null;
+								$provider_hasOccupation_keywords = null;
+								$provider_hasOccupation_keywords_ref = null;
+								$provider_hasOccupation_ref = null;
 								$provider_honorificPrefix = null;
 								$provider_honorificPrefix_ref = null;
 								$provider_honorificSuffix = null;
 								$provider_honorificSuffix_ref = null;
 								$provider_hospitalAffiliation = null;
+								$provider_hospitalAffiliation_keywords = null;
+								$provider_hospitalAffiliation_keywords_ref = null;
 								$provider_hospitalAffiliation_multiselect = null;
 								$provider_hospitalAffiliation_ref = null;
 								$provider_identifier = null;
@@ -5369,6 +5401,8 @@
 								$provider_item_MedicalWebPage_ref = null;
 								$provider_item_Person_ref = null;
 								$provider_jobTitle = null;
+								$provider_jobTitle_keywords = null;
+								$provider_jobTitle_keywords_ref = null;
 								$provider_jobTitle_ref = null;
 								$provider_keywords = null;
 								$provider_keywords_ref = null;
@@ -5385,11 +5419,11 @@
 								$provider_leiCode_ref = null;
 								$provider_location = null;
 								$provider_location_array = null;
+								$provider_location_keywords = null;
+								$provider_location_keywords_ref = null;
 								$provider_location_ref = null;
 								$provider_location_significantLink = null;
 								$provider_location_significantLink_ref = null;
-								$provider_location_keywords = null;
-								$provider_location_keywords_ref = null;
 								$provider_mainContentOfPage = null;
 								$provider_mainContentOfPage_ref = null;
 								$provider_mainEntity = null;
@@ -5425,6 +5459,8 @@
 								$provider_organization_specific = null;
 								$provider_organization_specific_ref = null;
 								$provider_parentOrganization = null;
+								$provider_parentOrganization_keywords = null;
+								$provider_parentOrganization_keywords_ref = null;
 								$provider_parentOrganization_ref = null;
 								$provider_paymentAccepted = null;
 								$provider_paymentAccepted_ref = null;
@@ -5503,6 +5539,10 @@
 								$provider_video_videoQuality = null;
 								$provider_workLocation = null;
 								$provider_workLocation_ref = null;
+								$provider_worksFor = null;
+								$provider_worksFor_keywords = null;
+								$provider_worksFor_keywords_ref = null;
+								$provider_worksFor_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
 
 							// Load variables from pre-existing field values array
@@ -6914,7 +6954,7 @@
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
-													// Merge location significantLink value/reference into keywords
+													// Merge location significantLink value/reference into significantLink
 
 														$provider_significantLink = uamswp_fad_schema_merge_values(
 															$provider_significantLink,
@@ -7002,7 +7042,7 @@
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
-													// Merge location significantLink value/reference into keywords
+													// Merge location significantLink value/reference into significantLink
 
 														$provider_significantLink = uamswp_fad_schema_merge_values(
 															$provider_significantLink,
@@ -7088,7 +7128,7 @@
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
-													// Merge location significantLink value/reference into keywords
+													// Merge location significantLink value/reference into significantLink
 
 														$provider_significantLink = uamswp_fad_schema_merge_values(
 															$provider_significantLink,
@@ -7154,6 +7194,20 @@
 
 												}
 
+											// Get URLs for significantLink property
+
+												$provider_expertise_significantLink = uamswp_fad_schema_property_values(
+													$provider_expertise, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											// Get names for keywords property
+
+												$provider_expertise_keywords = uamswp_fad_schema_property_values(
+													$provider_expertise, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+												);
+
 										}
 
 									// Associated clinical resources
@@ -7209,20 +7263,22 @@
 
 												}
 
-										}
+											// Get URLs for significantLink property
 
-										// Get URLs for significantLink property
-
-											if ( $provider_clinical_resource ) {
-
-												$provider_significantLink = $provider_significantLink ?? array();
-
-												$provider_significantLink = uamswp_fad_schema_property_urls(
-													$provider_clinical_resource, // array // Required // Property values from which to extract URLs
-													$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+												$provider_clinical_resource_significantLink = uamswp_fad_schema_property_values(
+													$provider_clinical_resource, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
 												);
 
-											}
+												// Merge clinical resource significantLink value/reference into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_clinical_resource_significantLink,
+														$provider_clinical_resource_significantLink_ref
+													);
+
+										}
 
 									// Associated conditions
 
@@ -7269,6 +7325,20 @@
 													);
 
 												}
+
+											// Get URLs for significantLink property
+
+												$provider_condition_significantLink = uamswp_fad_schema_property_values(
+													$provider_condition, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											// Get names for keywords property
+
+												$provider_condition_keywords = uamswp_fad_schema_property_values(
+													$provider_condition, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+												);
 
 										}
 
@@ -7318,6 +7388,20 @@
 													);
 
 												}
+
+											// Get URLs for significantLink property
+
+												$provider_availableService_significantLink = uamswp_fad_schema_property_values(
+													$provider_availableService, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											// Get names for keywords property
+
+												$provider_availableService_keywords = uamswp_fad_schema_property_values(
+													$provider_availableService, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+												);
 
 										}
 
@@ -7391,27 +7475,20 @@
 															($nesting_level + 1) // int // Required // Current nesting level value
 														);
 
-												// Get URLs for significantLink property
+												// Merge availableService significantLink value/reference into significantLink
 
-													if ( $provider_availableService ) {
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_availableService_significantLink,
+														$provider_availableService_significantLink_ref
+													);
 
-														$provider_significantLink = $provider_significantLink ?? array();
+												// Merge availableService keywords value/reference into keywords
 
-														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_availableService, // array // Required // Property values from which to extract URLs
-															$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
-														);
-
-													}
-
-												// Get names for keywords property
-
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_availableService, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_availableService_keywords,
+														$provider_availableService_keywords_ref
 													);
 
 											}
@@ -9475,13 +9552,18 @@
 
 												// Get names for keywords property
 
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
+													$provider_brand_keywords = uamswp_fad_schema_property_values(
 														$provider_brand, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 													);
+
+													// Merge brand keywords value/reference into keywords
+
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_brand_keywords,
+															$provider_brand_keywords_ref
+														);
 
 											}
 
@@ -9596,13 +9678,18 @@
 
 													// Get names for keywords property
 
-														$provider_keywords = $provider_keywords ?? array();
-
-														$provider_keywords = uamswp_fad_schema_property_values(
+														$provider_hospitalAffiliation_keywords = uamswp_fad_schema_property_values(
 															$provider_hospitalAffiliation, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+															array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 														);
+
+														// Merge hospitalAffiliation keywords value/reference into keywords
+
+															$provider_keywords = uamswp_fad_schema_merge_values(
+																$provider_keywords,
+																$provider_hospitalAffiliation_keywords,
+																$provider_hospitalAffiliation_keywords_ref
+															);
 
 												// affiliation
 
@@ -9886,14 +9973,19 @@
 															($nesting_level + 1) // int // Required // Current nesting level value
 														);
 
-													// Get names for keywords property
+												// Get names for keywords property
 
-														$provider_keywords = $provider_keywords ?? array();
+													$provider_parentOrganization_keywords = uamswp_fad_schema_property_values(
+														$provider_parentOrganization, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
 
-														$provider_keywords = uamswp_fad_schema_property_values(
-															$provider_parentOrganization, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													// Merge parentOrganization keywords value/reference into keywords
+
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_parentOrganization_keywords,
+															$provider_parentOrganization_keywords_ref
 														);
 
 											}
@@ -9989,14 +10081,19 @@
 															($nesting_level + 1) // int // Required // Current nesting level value
 														);
 
-													// Get names for keywords property
+												// Get names for keywords property
 
-														$provider_keywords = $provider_keywords ?? array();
+													$provider_worksFor_keywords = uamswp_fad_schema_property_values(
+														$provider_worksFor, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
 
-														$provider_keywords = uamswp_fad_schema_property_values(
-															$provider_worksFor, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													// Merge worksFor keywords value/reference into keywords
+
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_worksFor_keywords,
+															$provider_worksFor_keywords_ref
 														);
 
 											}
@@ -11501,13 +11598,18 @@
 
 										// Get names for keywords property
 
-											$provider_keywords = $provider_keywords ?? array();
-
-											$provider_keywords = uamswp_fad_schema_property_values(
+											$provider_gender_keywords = uamswp_fad_schema_property_values(
 												$provider_gender, // array // Required // Property values from which to extract specific values
-												array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+												array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 											);
+
+											// Merge gender keywords value/reference into keywords
+
+												$provider_keywords = uamswp_fad_schema_merge_values(
+													$provider_keywords,
+													$provider_gender_keywords,
+													$provider_gender_keywords_ref
+												);
 
 									}
 
@@ -11705,13 +11807,18 @@
 
 										// Get names for keywords property
 
-											$provider_keywords = $provider_keywords ?? array();
-
-											$provider_keywords = uamswp_fad_schema_property_values(
+											$provider_hasOccupation_keywords = uamswp_fad_schema_property_values(
 												$provider_hasOccupation, // array // Required // Property values from which to extract specific values
-												array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+												array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 											);
+
+											// Merge hasOccupation keywords value/reference into keywords
+
+												$provider_keywords = uamswp_fad_schema_merge_values(
+													$provider_keywords,
+													$provider_hasOccupation_keywords,
+													$provider_hasOccupation_keywords_ref
+												);
 
 									}
 
@@ -13572,21 +13679,26 @@
 
 										// Get names for keywords property
 
-											$provider_keywords = $provider_keywords ?? array();
-
 											if ( is_array($provider_jobTitle) ) {
 
-												$provider_keywords = uamswp_fad_schema_property_values(
+												$provider_jobTitle_keywords = uamswp_fad_schema_property_values(
 													$provider_jobTitle, // array // Required // Property values from which to extract specific values
-													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-													$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 												);
-
+	
 											} else {
 
-												$provider_keywords[] = $provider_jobTitle;
+												$provider_jobTitle_keywords = array($provider_jobTitle);
 
 											}
+
+											// Merge jobTitle keywords value/reference into keywords
+
+												$provider_keywords = uamswp_fad_schema_merge_values(
+													$provider_keywords,
+													$provider_jobTitle_keywords,
+													$provider_jobTitle_keywords_ref
+												);
 
 									}
 
@@ -13688,10 +13800,47 @@
 
 												// Get attributes of the clinical specializations
 
-													$provider_knowsAbout = uamswp_fad_schema_nucc_code_set(
-														$provider_clinical_specialization_ancestors, // mixed // Required // List of clinical specialization IDs
-														$provider_knowsAbout // array // Optional // Pre-existing schema array for the Health Care Provider Taxonomy code set to which to add items
+													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set(
+														$provider_clinical_specialization_ancestors // mixed // Required // List of clinical specialization IDs
 													);
+
+												// Add to knowsAbout list array
+
+													$provider_knowsAbout = uamswp_fad_schema_merge_values(
+														$provider_knowsAbout, // mixed // Required // Initial schema item property value
+														$provider_clinical_specialization_knowsAbout, // mixed // Required // Incoming schema item property value
+														$provider_clinical_specialization_knowsAbout_ref // mixed // Required // @id reference to incoming schema item property value
+													);
+
+												// Get URLs for significantLink property
+
+													$provider_clinical_specialization_significantLink = uamswp_fad_schema_property_values(
+														$provider_clinical_specialization_knowsAbout, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+													// Merge clinical specializations significantLink value/reference into significantLink
+
+														$provider_significantLink = uamswp_fad_schema_merge_values(
+															$provider_significantLink,
+															$provider_clinical_specialization_significantLink,
+															$provider_clinical_specialization_significantLink_ref
+														);
+
+												// Get values for keywords property
+
+													$provider_clinical_specialization_keywords = uamswp_fad_schema_property_values(
+														$provider_clinical_specialization_knowsAbout, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName', 'codeValue' ) // mixed // Required // List of properties from which to collect values
+													);
+
+													// Merge clinical specializations keywords value/reference into keywords
+
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_clinical_specialization_keywords,
+															$provider_clinical_specialization_keywords_ref
+														);
 
 											// Merge in related areas of expertise value/reference
 
@@ -13701,13 +13850,20 @@
 													$provider_expertise_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge areas of expertise significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_expertise_significantLink,
+														$provider_expertise_significantLink_ref
+													);
 
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_expertise, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+												// Merge areas of expertise keywords value/reference into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_expertise_keywords,
+														$provider_expertise_keywords_ref
 													);
 
 											// Merge in related conditions value/reference
@@ -13718,13 +13874,20 @@
 													$provider_condition_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge conditions significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_condition_significantLink,
+														$provider_condition_significantLink_ref
+													);
 
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_condition, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+												// Merge conditions keywords value/reference into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_condition_keywords,
+														$provider_condition_keywords_ref
 													);
 
 											// Merge in related treatments value/reference
@@ -13735,13 +13898,20 @@
 													$provider_availableService_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge availableService significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_availableService_significantLink,
+														$provider_availableService_significantLink_ref
+													);
 
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_availableService, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+												// Merge availableService keywords value/reference into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_availableService_keywords,
+														$provider_availableService_keywords_ref
 													);
 
 										// Add to item values
@@ -13781,16 +13951,6 @@
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
-
-										// Get names for keywords property
-
-											$provider_keywords = $provider_keywords ?? array();
-
-											$provider_keywords = uamswp_fad_schema_property_values(
-												$provider_knowsAbout, // array // Required // Property values from which to extract specific values
-												array( 'name', 'alternateName', 'codeValue' ), // mixed // Required // List of properties from which to collect values
-												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
-											);
 
 									}
 
@@ -13884,13 +14044,18 @@
 
 										// Get names for keywords property
 
-											$provider_keywords = $provider_keywords ?? array();
-
-											$provider_keywords = uamswp_fad_schema_property_values(
+											$provider_knowsLanguage_keywords = uamswp_fad_schema_property_values(
 												$provider_knowsLanguage, // array // Required // Property values from which to extract specific values
-												array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+												array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 											);
+
+											// Merge knowsLanguage keywords value/reference into keywords
+
+												$provider_keywords = uamswp_fad_schema_merge_values(
+													$provider_keywords,
+													$provider_knowsLanguage_keywords,
+													$provider_knowsLanguage_keywords_ref
+												);
 
 									}
 
@@ -14515,7 +14680,7 @@
 													$provider_location_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Merge location significantLink value/reference into keywords
+												// Merge location significantLink value/reference into significantLink
 
 													$provider_significantLink = uamswp_fad_schema_merge_values(
 														$provider_significantLink,
@@ -14539,23 +14704,20 @@
 													$provider_expertise_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge areas of expertise significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
-
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_expertise, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_expertise_significantLink,
+														$provider_expertise_significantLink_ref
 													);
 
-												// Get names for keywords property
+												// Merge areas of expertise keywords value/reference into keywords
 
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_expertise, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_expertise_keywords,
+														$provider_expertise_keywords_ref
 													);
 
 											// Merge in related clinical resources value/reference
@@ -14566,13 +14728,12 @@
 													$provider_clinical_resource_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge clinical resources significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
-
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_clinical_resource, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_clinical_resource_significantLink,
+														$provider_clinical_resource_significantLink_ref
 													);
 
 											// Merge in related conditions value/reference
@@ -14583,23 +14744,20 @@
 													$provider_condition_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge conditions significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
-
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_condition, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_condition_significantLink,
+														$provider_condition_significantLink_ref
 													);
 
-												// Get names for keywords property
+												// Merge conditions keywords value/reference into keywords
 
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_condition, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_condition_keywords,
+														$provider_condition_keywords_ref
 													);
 
 											// Merge in related treatments value/reference
@@ -14610,23 +14768,20 @@
 													$provider_availableService_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge availableService significantLink value/reference into significantLink
 
-													$provider_significantLink = $provider_significantLink ?? array();
-
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_availableService, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_availableService_significantLink,
+														$provider_availableService_significantLink_ref
 													);
 
-												// Get names for keywords property
+												// Merge availableService keywords value/reference into keywords
 
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_availableService, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_availableService_keywords,
+														$provider_availableService_keywords_ref
 													);
 
 										// Add to item values
