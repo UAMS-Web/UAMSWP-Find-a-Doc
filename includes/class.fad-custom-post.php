@@ -458,7 +458,7 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
-		// Certifications
+		// Certification — Specialty and Subspecialty Certificates
 	
 			add_action( 'init', 'create_boards_taxonomy', 0 );
 
@@ -1522,21 +1522,21 @@ function create_academic_departments_taxonomy() {
 
 function create_boards_taxonomy() {
 	$labels = array(
-		'name' => 'Board Certifications',
-		'singular_name' => 'Board Certification',
-		'search_items' => 'Search Board Certifications',
-		'all_items' => 'All Board Certifications',
-		'edit_item' => 'Edit Board Certification',
-		'update_item' => 'Update Board Certification',
-		'add_new_item' => 'Add New Board Certification',
-		'new_item_name' => 'New Board Certification',
-		'menu_name' => 'Certifications',
-		'view_item' => 'View Board Certification',
-		'popular_items' => 'Popular Board Certifications',
-		'separate_items_with_commas' => 'Separate board certifications with commas',
-		'add_or_remove_items' => 'Add or remove board certifications',
-		'choose_from_most_used' => 'Choose from the most used board certifications',
-		'not_found' => 'No board certifications found'
+		'name' => 'Specialty and Subspecialty Certificates',
+		'singular_name' => 'Specialty or Subspecialty Certificate',
+		'search_items' => 'Search Specialty and Subspecialty Certificates',
+		'all_items' => 'All Specialty and Subspecialty Certificates',
+		'edit_item' => 'Edit Specialty or Subspecialty Certificate',
+		'update_item' => 'Update Specialty or Subspecialty Certificate',
+		'add_new_item' => 'Add New Specialty or Subspecialty Certificate',
+		'new_item_name' => 'New Specialty or Subspecialty Certificate',
+		'menu_name' => 'Certification — Specialty and Subspecialty Certificates',
+		'view_item' => 'View Specialty or Subspecialty Certificate',
+		'popular_items' => 'Popular Specialty and Subspecialty Certificates',
+		'separate_items_with_commas' => 'Separate Specialty and Subspecialty Certificates with commas',
+		'add_or_remove_items' => 'Add or remove Specialty and Subspecialty Certificates',
+		'choose_from_most_used' => 'Choose from the most used Specialty and Subspecialty Certificates',
+		'not_found' => 'No Specialty and Subspecialty Certificates found'
 	);
 	$rewrite = array(
 		'slug' => 'board',
@@ -1550,7 +1550,7 @@ function create_boards_taxonomy() {
 		'assign_terms' => 'edit_physicians',
 	);
 	$args = array(
-		'label' => __( 'Board Certifications' ),
+		'label' => __( 'Specialty and Subspecialty Certificates' ),
 		'labels' => $labels,
 		'hierarchical' => false,
 		'public' => true,

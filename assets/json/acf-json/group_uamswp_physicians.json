@@ -2254,7 +2254,7 @@
 			"key": "field_physician_boards",
 			"name": "physician_boards",
 			"type": "taxonomy",
-			"label": "Boards and Certifications",
+			"label": "Specialty and Subspecialty Certifications",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
