@@ -13511,120 +13511,6 @@
 
 									}
 
-								// keywords
-
-									/* 
-									 * Keywords or tags used to describe some item. Multiple textual entries in a 
-									 * keywords list are typically delimited by commas, or by repeating the property.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - DefinedTerm
-									 *     - Text
-									 *     - URL
-									 */
-
-									if (
-										(
-											in_array(
-												'keywords',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'keywords',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'keywords',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$provider_keywords = $provider_keywords ?? array();
-
-											// Common values
-
-												$provider_keywords[] = 'health care provider';
-												$provider_keywords[] = $provider_honorificPrefix ? 'doctor' : '';
-												$provider_keywords[] = $provider_honorificPrefix ? 'physician' : '';
-
-											// Merge in clinical specialization attributes value/reference
-
-												// Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
-
-												// Specialization Name in the Health Care Provider Taxonomy Code Set
-
-												// Specialization Display Name in the Health Care Provider Taxonomy Code Set
-
-												// Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
-
-												// Alternate Names for the Clinical Occupation Title
-
-											// Merge in UAMS Health name/alternateName value/reference
-
-												$provider_keywords = uamswp_fad_schema_property_values(
-													$schema_base_org_uams_health, // array // Required // Property values from which to extract specific values
-													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-													$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
-												);
-
-											// Merge in UAMS name/alternateName value/reference
-
-												$provider_keywords = uamswp_fad_schema_property_values(
-													$schema_base_org_uams, // array // Required // Property values from which to extract specific values
-													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-													$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
-												);
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'keywords', // string // Required // Name of schema property
-													$provider_keywords, // mixed // Required // Variable to add as the property value
-													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'keywords', // string // Required // Name of schema property
-													$provider_keywords, // mixed // Required // Variable to add as the property value
-													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'keywords', // string // Required // Name of schema property
-													$provider_keywords, // mixed // Required // Variable to add as the property value
-													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// knowsAbout
 
 									/* 
@@ -16598,6 +16484,120 @@
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
 													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// keywords
+
+									/* 
+									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									 * keywords list are typically delimited by commas, or by repeating the property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DefinedTerm
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'keywords',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'keywords',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'keywords',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$provider_keywords = $provider_keywords ?? array();
+
+											// Common values
+
+												$provider_keywords[] = 'health care provider';
+												$provider_keywords[] = $provider_honorificPrefix ? 'doctor' : '';
+												$provider_keywords[] = $provider_honorificPrefix ? 'physician' : '';
+
+											// Merge in clinical specialization attributes value/reference
+
+												// Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
+
+												// Specialization Name in the Health Care Provider Taxonomy Code Set
+
+												// Specialization Display Name in the Health Care Provider Taxonomy Code Set
+
+												// Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
+
+												// Alternate Names for the Clinical Occupation Title
+
+											// Merge in UAMS Health name/alternateName value/reference
+
+												$provider_keywords = uamswp_fad_schema_property_values(
+													$schema_base_org_uams_health, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+													$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
+												);
+
+											// Merge in UAMS name/alternateName value/reference
+
+												$provider_keywords = uamswp_fad_schema_property_values(
+													$schema_base_org_uams, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+													$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
+												);
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'keywords', // string // Required // Name of schema property
+													$provider_keywords, // mixed // Required // Variable to add as the property value
+													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'keywords', // string // Required // Name of schema property
+													$provider_keywords, // mixed // Required // Variable to add as the property value
+													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// Person
+
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'keywords', // string // Required // Name of schema property
+													$provider_keywords, // mixed // Required // Variable to add as the property value
+													$provider_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
