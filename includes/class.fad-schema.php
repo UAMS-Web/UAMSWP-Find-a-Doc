@@ -13661,16 +13661,6 @@
 														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
-												// Get names for keywords property
-
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_expertise, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
-													);
-
 											// Merge in related conditions value/reference
 
 												$provider_knowsAbout = uamswp_fad_schema_merge_values(
@@ -13688,16 +13678,6 @@
 														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
-												// Get names for keywords property
-
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_condition, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
-													);
-
 											// Merge in related treatments value/reference
 
 												$provider_knowsAbout = uamswp_fad_schema_merge_values(
@@ -13713,16 +13693,6 @@
 													$provider_significantLink = uamswp_fad_schema_property_urls(
 														$provider_availableService, // array // Required // Property values from which to extract URLs
 														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
-													);
-
-												// Get names for keywords property
-
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_availableService, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 										// Add to item values
@@ -13762,6 +13732,16 @@
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
+
+										// Get names for keywords property
+
+											$provider_keywords = $provider_keywords ?? array();
+
+											$provider_keywords = uamswp_fad_schema_property_values(
+												$provider_knowsAbout, // array // Required // Property values from which to extract specific values
+												array( 'name', 'alternateName', 'codeValue' ), // mixed // Required // List of properties from which to collect values
+												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+											);
 
 									}
 
