@@ -25415,7 +25415,13 @@
 
 					}
 
-				}
+				} else {
+
+					// If $input is empty, stop here
+
+						return $output;
+
+				} // endif ( $input )
 
 			// Clean up the output array
 
