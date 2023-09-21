@@ -5409,6 +5409,8 @@
 								$provider_knowsAbout = null;
 								$provider_knowsAbout_ref = null;
 								$provider_knowsLanguage = null;
+								$provider_knowsLanguage_keywords = null;
+								$provider_knowsLanguage_keywords_ref = null;
 								$provider_knowsLanguage_ref = null;
 								$provider_languages = null;
 								$provider_lastReviewed = null;
