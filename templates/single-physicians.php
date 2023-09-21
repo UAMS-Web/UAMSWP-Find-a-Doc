@@ -1715,7 +1715,7 @@
 												if ( !empty( $provider_associations_names ) ) {
 
 													?>
-													<h3 class="h4">Associations</h3>
+													<h3 class="h4">Professional Memberships</h3>
 													<ul>
 														<?php
 
