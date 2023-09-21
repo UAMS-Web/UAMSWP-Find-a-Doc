@@ -128,7 +128,6 @@ TODO List
 	 * Provider only
 		 * MedicalWebPage + MedicalBusiness + Person
 			 * Define schema for affiliated hospital(s)
-			 * Add labels and definitions to Credential Transparency Description Language values map array ($ctdl_values)
 		 * MedicalWebPage + MedicalBusiness
 			 * Add values for remaining properties:
 				 * keywords
