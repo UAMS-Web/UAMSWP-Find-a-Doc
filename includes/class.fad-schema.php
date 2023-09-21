@@ -279,7 +279,7 @@
 					if ( $values ) {
 
 						$medicalSpecialty_list = $medicalSpecialty_list + $values;
-						sort($medicalSpecialty_list);
+						sort( $medicalSpecialty_list, SORT_NATURAL | SORT_FLAG_CASE );
 
 					}
 
@@ -350,7 +350,7 @@
 					if ( $values ) {
 
 						$medicalSpecialty_list = $medicalSpecialty_list + $values;
-						sort($medicalSpecialty_list);
+						sort( $medicalSpecialty_list, SORT_NATURAL | SORT_FLAG_CASE );
 
 					}
 
@@ -1685,7 +1685,7 @@
 								if ( $code_item ) {
 
 									$code_item = array_filter($code_item);
-									ksort($code_item);
+									ksort( $code_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 								} // endif ( $code_item )
 
@@ -1774,7 +1774,7 @@
 				if ( $alternateName_schema ) {
 
 					$alternateName_schema = array_values($alternateName_schema);
-					sort($alternateName_schema);
+					sort( $alternateName_schema, SORT_NATURAL | SORT_FLAG_CASE );
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -1825,7 +1825,7 @@
 
 							if ( is_array( $MedicineSystem_list ) ) {
 
-								sort($MedicineSystem_list);
+								sort( $MedicineSystem_list, SORT_NATURAL | SORT_FLAG_CASE );
 
 							}
 
@@ -1893,7 +1893,7 @@
 				if ( $sameAs_schema ) {
 
 					$sameAs_schema = array_values($sameAs_schema);
-					sort($sameAs_schema);
+					sort( $sameAs_schema, SORT_NATURAL | SORT_FLAG_CASE );
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -1953,7 +1953,7 @@
 						$additionalType_list = array_filter($additionalType_list);
 						$additionalType_list = array_unique( $additionalType_list, SORT_REGULAR );
 						$additionalType_list = array_values($additionalType_list);
-						sort($additionalType_list);
+						sort( $additionalType_list, SORT_NATURAL | SORT_FLAG_CASE );
 
 						// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -2496,7 +2496,7 @@
 
 										if ( is_array($item_schema['alternateName']) ) {
 
-											sort($item_schema['alternateName']);
+											sort( $item_schema['alternateName'], SORT_NATURAL | SORT_FLAG_CASE );
 
 										}
 
@@ -2560,10 +2560,10 @@
 
 				// Sort
 
-					sort($language_string);
-					sort($language_string_attr);
-					sort($language_array);
-					sort($language_array_attr);
+					sort( $language_string, SORT_NATURAL | SORT_FLAG_CASE );
+					sort( $language_string_attr, SORT_NATURAL | SORT_FLAG_CASE );
+					sort( $language_array, SORT_NATURAL | SORT_FLAG_CASE );
+					sort( $language_array_attr, SORT_NATURAL | SORT_FLAG_CASE );
 
 				// String lists
 
@@ -3527,7 +3527,7 @@
 									// 		$isco08_values[reset($provider_specialization_isco08_code)]['sameAs']
 									// 	);
 
-									// 	sort($provider_specialization_isco08_code);
+									// 	sort( $provider_specialization_isco08_code, SORT_NATURAL | SORT_FLAG_CASE );
 
 									// }
 
@@ -3785,7 +3785,7 @@
 							if ( $image_1_1 ) {
 
 								$image_1_1 = array_filter($image_1_1);
-								ksort($image_1_1);
+								ksort( $image_1_1, SORT_NATURAL | SORT_FLAG_CASE );
 
 							}
 
@@ -3855,7 +3855,7 @@
 							if ( $image_3_4 ) {
 
 								$image_3_4 = array_filter($image_3_4);
-								ksort($image_3_4);
+								ksort( $image_3_4, SORT_NATURAL | SORT_FLAG_CASE );
 
 							}
 
@@ -3925,7 +3925,7 @@
 							if ( $image_4_3 ) {
 
 								$image_4_3 = array_filter($image_4_3);
-								ksort($image_4_3);
+								ksort( $image_4_3, SORT_NATURAL | SORT_FLAG_CASE );
 
 							}
 
@@ -3995,7 +3995,7 @@
 							if ( $image_16_9 ) {
 
 								$image_16_9 = array_filter($image_16_9);
-								ksort($image_16_9);
+								ksort( $image_16_9, SORT_NATURAL | SORT_FLAG_CASE );
 
 							}
 
@@ -4065,7 +4065,7 @@
 							if ( $image_full ) {
 
 								$image_full = array_filter($image_full);
-								ksort($image_full);
+								ksort( $image_full, SORT_NATURAL | SORT_FLAG_CASE );
 
 							}
 
@@ -4392,7 +4392,7 @@
 						if ( $nucc_item ) {
 
 							$nucc_item = array_filter($nucc_item);
-							ksort($nucc_item);
+							ksort( $nucc_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 						} // endif ( $nucc_item )
 
@@ -6716,7 +6716,7 @@
 															$provider_alternateName = array_filter($provider_alternateName);
 															$provider_alternateName = array_unique( $provider_alternateName, SORT_REGULAR );
 															$provider_alternateName = array_values($provider_alternateName);
-															sort($provider_alternateName);
+															sort( $provider_alternateName, SORT_NATURAL | SORT_FLAG_CASE );
 
 															// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -16658,9 +16658,9 @@
 
 							// Sort arrays
 
-								ksort($provider_item_MedicalWebPage);
-								ksort($provider_item_MedicalBusiness);
-								ksort($provider_item_Person);
+								ksort( $provider_item_MedicalWebPage, SORT_NATURAL | SORT_FLAG_CASE );
+								ksort( $provider_item_MedicalBusiness, SORT_NATURAL | SORT_FLAG_CASE );
+								ksort( $provider_item_Person, SORT_NATURAL | SORT_FLAG_CASE );
 
 							// Combine the arrays
 
@@ -20899,7 +20899,7 @@
 
 							// Sort array
 
-								ksort($LocalBusiness_item);
+								ksort( $LocalBusiness_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 							// Set/update the value of the item transient
 
@@ -21642,7 +21642,7 @@
 
 						// Sort array
 
-							ksort($MedicalEntity_item);
+							ksort( $MedicalEntity_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 						// Set/update the value of the item transient
 
@@ -23667,7 +23667,7 @@
 
 						// Sort array
 
-							ksort($CreativeWork_item);
+							ksort( $CreativeWork_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 						// Set/update the value of the item transient
 
@@ -24141,7 +24141,7 @@
 
 						// Sort array
 
-							ksort($condition_item);
+							ksort( $condition_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 						// Set/update the value of the item transient
 
@@ -24815,7 +24815,7 @@
 
 									$service_relevantSpecialty = array_filter($service_relevantSpecialty);
 									$service_relevantSpecialty = array_values($service_relevantSpecialty);
-									sort($service_relevantSpecialty);
+									sort( $service_relevantSpecialty, SORT_NATURAL | SORT_FLAG_CASE );
 
 									// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -24865,7 +24865,7 @@
 
 										$service_tissueSample = array_filter($service_tissueSample);
 										$service_tissueSample = array_values($service_tissueSample);
-										sort($service_tissueSample);
+										sort( $service_tissueSample, SORT_NATURAL | SORT_FLAG_CASE );
 
 										// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -25032,7 +25032,7 @@
 
 												$service_usesDevice = array_filter($service_usesDevice);
 												$service_usesDevice = array_values($service_usesDevice);
-												sort($service_usesDevice);
+												sort( $service_usesDevice, SORT_NATURAL | SORT_FLAG_CASE );
 
 												// If there is only one item, flatten the multi-dimensional array by one step
 
@@ -25052,7 +25052,7 @@
 
 						// Sort array
 
-							ksort($service_item);
+							ksort( $service_item, SORT_NATURAL | SORT_FLAG_CASE );
 
 						// Set/update the value of the item transient
 
@@ -25406,7 +25406,7 @@
 					is_array($output)
 				) {
 
-					sort($output);
+					sort( $output, SORT_NATURAL | SORT_FLAG_CASE );
 
 				}
 
@@ -25511,11 +25511,11 @@
 						array_is_list($output)
 					) {
 
-						sort($output);
+						sort( $output, SORT_NATURAL | SORT_FLAG_CASE );
 
 					} elseif ( is_array($output) ) {
 
-						ksort($output);
+						ksort( $output, SORT_NATURAL | SORT_FLAG_CASE );
 
 					}
 
