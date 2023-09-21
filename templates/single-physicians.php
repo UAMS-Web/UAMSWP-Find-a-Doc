@@ -1621,127 +1621,230 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<h2 class="module-title"><span class="title"><?php echo $short_name_possessive; ?> Academic Background</span></h2>
-												<?php if ( $provider_academic_split ) {
-													// If there is a bio AND at least one of the other academic things, visually split the layout ?>
-													<div class="row content-split-lg">
-													<div class="col-xs-12 col-lg-7">
-													<div class="content-width">
 												<?php
-												} else { ?>
-													<div class="module-body">
-												<?php
-												} // endif
-												if ( $academic_bio ) { ?>
-													<h3 class="sr-only">Academic Biography</h3>
-													<?php echo $academic_bio; ?>
-												<?php
-												} // endif
-												if ( $provider_academic_split ) { ?>
-													</div>
-													</div>
-													<div class="col-xs-12 col-lg-5">
-													<div class="content-width">
-												<?php
-												} // endif ( $provider_academic_split )]
-												if( have_rows('physician_academic_admin_title') ) { ?>
-													<h3 class="h4">Administrative Roles</h3>
-													<dl>
-													<?php while ( have_rows('physician_academic_admin_title') ) {
-														the_row();
-														$department = get_term( get_sub_field('department'), 'academic_department' );
-														$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
-													?>
-														<dt><?php echo $department->name; ?></dt>
-														<dd><?php echo $academic_admin_title_tax->name; ?></dd>
-													<?php
-													} // endwhile ( have_rows('physician_academic_admin_title') ) ?>
-													</dl>
-												<?php
-												} // endif( have_rows('physician_academic_admin_title') )
-												// $academic_appointments = get_field('physician_academic_appointment');
-												if ( have_rows('physician_academic_appointment') ) { ?>
-													<h3 class="h4">Faculty Appointments</h3>
-													<dl>
-													<?php while ( have_rows('physician_academic_appointment') ) {
-														the_row();
-														$department = get_term( get_sub_field('department'), 'academic_department' );
-														$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
-														if ($academic_title_tax->name) {
-															$academic_title = $academic_title_tax->name;
-														} else {
-															$academic_title = get_sub_field('academic_title');
-														} ?>
-														<dt><?php echo $department->name; ?></dt>
-														<dd><?php echo $academic_title; ?></dd>
-													<?php
-													} // endwhile ( have_rows('physician_academic_appointment') ) ?>
-													</dl>
-												<?php
-												} // endif ( have_rows('physician_academic_appointment') )
-												if ( $resident ) { ?>
-													<h3 class="h4">Residency Program</h3>
-													<dl>
-														<dt><?php echo $resident_academic_department_name; ?></dt>
-														<dd><?php echo $resident_academic_name; ?></dd>
-													</dl>
-												<?php
-												} // endif ( $resident )
-												if ( have_rows('physician_education') ) { ?>
-													<h3 class="h4">Education and Training</h3>
-													<dl>
-													<?php while ( have_rows('physician_education') ) {
-														the_row();
-														$school_name = get_term( get_sub_field('school'), 'school');
-														$education_type = get_term( get_sub_field('education_type'), 'educationtype'); ?>
-														<dt><?php echo $education_type->name; ?></dt>
-														<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
-													<?php
-													} // endwhile ( have_rows('physician_education') ) ?>
-													</dl>
-												<?php
-												} // endif ( have_rows('physician_education') )
-												if ( !empty( $boards ) ) { ?>
-													<h3 class="h4">Certifications</h3>
-													<ul>
-														<?php foreach ( $boards as $board ) {
-															$board_name = get_term( $board, 'board'); ?>
-															<li><?php echo $board_name->name; ?></li>
-														<?php
-														} // endforeach ( $boards as $board ) ?>
-													</ul>
-												<?php
-												} // end( !empty( $boards ) )
 
-												if ( !empty( $provider_associations_names ) ) {
+												// Begin Visual Split Container
+													
+													if ( $provider_academic_split ) {
 
-													?>
-													<h3 class="h4">Professional Memberships</h3>
-													<ul>
+														// If there is a bio AND at least one of the other academic things, visually split the layout
+														
+														?>
+														<div class="row content-split-lg">
+														<div class="col-xs-12 col-lg-7">
+														<div class="content-width">
 														<?php
 
-														foreach ( $provider_associations_names as $item ) {
+													} else {
+														
+														?>
+														<div class="module-body">
+														<?php
 
-															?>
-															<li><?php echo $item; ?></li>
+													} // endif
+
+												// Academic Biography
+
+													if ( $academic_bio ) {
+													
+														?>
+														<h3 class="sr-only">Academic Biography</h3>
+														<?php
+														
+														echo $academic_bio;
+														
+													} // endif
+
+												// Visual Split Elements
+
+													if ( $provider_academic_split ) {
+														
+														?>
+														</div>
+														</div>
+														<div class="col-xs-12 col-lg-5">
+														<div class="content-width">
+														<?php
+
+													} // endif ( $provider_academic_split )]
+
+												// Academic Administrative Roles
+
+													if ( have_rows('physician_academic_admin_title') ) {
+														
+														?>
+														<h3 class="h4">Administrative Roles</h3>
+														<dl>
 															<?php
+															
+															while ( have_rows('physician_academic_admin_title') ) {
 
-														} // endforeach
+																the_row();
+																$department = get_term( get_sub_field('department'), 'academic_department' );
+																$academic_admin_title_tax = get_term( get_sub_field('academic_admin_title_tax'), 'academic_admin_title' );
+
+																?>
+																<dt><?php echo $department->name; ?></dt>
+																<dd><?php echo $academic_admin_title_tax->name; ?></dd>
+																<?php
+
+															} // endwhile ( have_rows('physician_academic_admin_title') )
+															
+															?>
+														</dl>
+														<?php
+
+													} // endif( have_rows('physician_academic_admin_title') )
+
+												// Faculty Appointments
+
+													// $academic_appointments = get_field('physician_academic_appointment');
+
+													if ( have_rows('physician_academic_appointment') ) {
+														
+														?>
+														<h3 class="h4">Faculty Appointments</h3>
+														<dl>
+															<?php
+															
+															while ( have_rows('physician_academic_appointment') ) {
+
+																the_row();
+																$department = get_term( get_sub_field('department'), 'academic_department' );
+																$academic_title_tax = get_term( get_sub_field('academic_title_tax'), 'academic_title' );
+
+																if ( $academic_title_tax->name ) {
+
+																	$academic_title = $academic_title_tax->name;
+
+																} else {
+
+																	$academic_title = get_sub_field('academic_title');
+
+																} // endif
+																
+																?>
+																<dt><?php echo $department->name; ?></dt>
+																<dd><?php echo $academic_title; ?></dd>
+																<?php
+
+															} // endwhile ( have_rows('physician_academic_appointment') )
+															
+															?>
+														</dl>
+														<?php
+
+													} // endif ( have_rows('physician_academic_appointment') )
+
+												// Residency Program
+
+													if ( $resident ) {
+														
+														?>
+														<h3 class="h4">Residency Program</h3>
+														<dl>
+															<dt><?php echo $resident_academic_department_name; ?></dt>
+															<dd><?php echo $resident_academic_name; ?></dd>
+														</dl>
+														<?php
+
+													} // endif ( $resident )
+
+												// Education and Training
+
+													if ( have_rows('physician_education') ) {
+														
+														?>
+														<h3 class="h4">Education and Training</h3>
+														<dl>
+															<?php
+															
+															while ( have_rows('physician_education') ) {
+
+																the_row();
+																$school_name = get_term( get_sub_field('school'), 'school');
+																$education_type = get_term( get_sub_field('education_type'), 'educationtype');
+																
+																?>
+																<dt><?php echo $education_type->name; ?></dt>
+																<dd><?php echo $school_name->name; ?><?php echo (get_sub_field('description') ? '<br /><span class="subtitle">' . get_sub_field('description') .'</span>' : ''); ?></dd>
+																<?php
+																
+															} // endwhile ( have_rows('physician_education') )
+															
+															?>
+														</dl>
+														<?php
+
+													} // endif ( have_rows('physician_education') )
+
+												// Certifications
+
+													if ( !empty( $boards ) ) { 
+														
+														?>
+														<h3 class="h4">Certifications</h3>
+														<ul>
+															<?php
+															
+															foreach ( $boards as $board ) {
+
+																$board_name = get_term( $board, 'board');
+																
+																?>
+																<li><?php echo $board_name->name; ?></li>
+																<?php
+
+															} // endforeach ( $boards as $board )
+															
+															?>
+														</ul>
+														<?php
+
+													} // end( !empty( $boards ) )
+
+												// Professional Memberships
+													
+													if ( !empty( $provider_associations_names ) ) {
 
 														?>
-													</ul>
-													<?php
+														<h3 class="h4">Professional Memberships</h3>
+														<ul>
+															<?php
 
-												} // endif ( !empty( $provider_associations_names ) )
+															foreach ( $provider_associations_names as $item ) {
 
-												if ( $provider_academic_split ) { ?>
-													</div>
-													</div>
-													</div>
-												<?php
-												} else { ?>
-													</div>
-												<?php
-												} // endif ( $provider_academic_split ) ?>
+																?>
+																<li><?php echo $item; ?></li>
+																<?php
+
+															} // endforeach
+
+															?>
+														</ul>
+														<?php
+
+													} // endif ( !empty( $provider_associations_names ) )
+
+												// End Visual Split Container
+													
+													if ( $provider_academic_split ) {
+														
+														?>
+														</div>
+														</div>
+														</div>
+														<?php
+
+													} else {
+														
+														?>
+														</div>
+														<?php
+
+													} // endif ( $provider_academic_split )
+												
+												?>
 											</div>
 										</div>
 									</div>
