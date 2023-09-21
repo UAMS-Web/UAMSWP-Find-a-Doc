@@ -13729,6 +13729,40 @@
 														$provider_significantLink // Existing list of URLs
 													);
 
+											// Merge in related conditions value/reference
+
+												$provider_knowsAbout = uamswp_fad_schema_merge_values(
+													$provider_knowsAbout, // mixed // Required // Initial schema item property value
+													$provider_condition, // mixed // Required // Incoming schema item property value
+													$provider_condition_ref // mixed // Required // @id reference to incoming schema item property value
+												);
+
+												// Get URLs for significantLink property
+
+													$provider_significantLink = $provider_significantLink ?? array();
+
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_condition, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
+
+											// Merge in related treatments value/reference
+
+												$provider_knowsAbout = uamswp_fad_schema_merge_values(
+													$provider_knowsAbout, // mixed // Required // Initial schema item property value
+													$provider_availableService, // mixed // Required // Incoming schema item property value
+													$provider_availableService_ref // mixed // Required // @id reference to incoming schema item property value
+												);
+
+												// Get URLs for significantLink property
+
+													$provider_significantLink = $provider_significantLink ?? array();
+
+													$provider_significantLink = uamswp_fad_schema_property_urls(
+														$provider_availableService, // Property values from which to extract URLs
+														$provider_significantLink // Existing list of URLs
+													);
+
 										// Add to item values
 
 											// MedicalWebPage
