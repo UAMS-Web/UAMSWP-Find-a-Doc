@@ -141,6 +141,12 @@ TODO List
 					 * associated area of expertise attributes
 						 * name
 						 * alternateName
+					 * associated condition attributes
+						 * name
+						 * alternateName
+					 * associated treatment attributes
+						 * name
+						 * alternateName
 					 * associated location attributes
 						 * name
 						 * alternateName?
@@ -155,12 +161,14 @@ TODO List
 					 * Pending inputs for defining third-party clinical organizations
 				 * brand
 					 * Pending inputs for defining third-party clinical organizations
+				 * hasCredential
+					 * board certification
 				 * worksFor
 					 * Pending inputs for defining third-party clinical organizations
 		 * MedicalBusiness only
 			 * Add values for remaining properties:
 				 * hospitalAffiliation
-					 * Add attributes from Hospital Affilation taxonomy
+					 * Add attributes from Hospital Affiliation taxonomy
 						 * Name of Hospital in American Hospital Association (AHA) Records (alternateName)
 						 * ID of Hospital in American Hospital Association Records (AHA ID) (identifier)
 					 * Check if CMS has additional identifiers for a given hospital.
