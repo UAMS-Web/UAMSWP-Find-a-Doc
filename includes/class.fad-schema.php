@@ -13499,10 +13499,9 @@
 
 															if ( is_object($item_term) ) {
 
-																$item_name = $item_term->name;
-																$item_occupation_title = get_field('clinical_specialization_title', $item_term) ?? '';
-																$item_occupation_title = $item_occupation_title ?: $item_name;
-																$item_occupation_title_attr = uamswp_attr_conversion($item_occupation_title);
+																$item_name = $item_term->name ?? '';
+																$item_occupation_title = get_field('clinical_specialization_title', $item_term) ?? $item_name;
+																$item_occupation_title_attr = $item_occupation_title ? uamswp_attr_conversion($item_occupation_title) : '';
 
 															}
 
