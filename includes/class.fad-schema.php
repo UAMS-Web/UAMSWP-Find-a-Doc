@@ -25429,7 +25429,7 @@
 
 					$output = array_filter($output);
 					$output = array_unique( $output, SORT_REGULAR );
-					$output = array_is_list($output) ? array_values($output) : $output;
+					$output = array_values($output);
 					uamswp_fad_flatten_multidimensional_array($output);
 
 					if (
