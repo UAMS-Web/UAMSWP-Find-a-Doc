@@ -25374,7 +25374,9 @@
 
 				if ( !$input ) {
 
-					return $output;
+					// If $input is empty, stop here
+
+						return $output;
 
 				}
 
@@ -25407,13 +25409,13 @@
 
 									$output[] = $item[$property];
 
-								}
+								} // endif
 
-							}
+							} // endif
 
-						}
+						} // endforeach ( $properties as $property )
 
-					}
+					} // endforeach ( $input as $item )
 
 				} else {
 
