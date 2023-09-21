@@ -25452,14 +25452,33 @@
 
 								if ( is_array($item[$property]) ) {
 
-									$output = array_merge(
-										$output,
-										$item[$property]
-									);
+									foreach ( $item[$property] as $array_item ) {
+
+										// Check if value is longer than two characters
+
+											if (
+												$array_item
+												&&
+												!is_array($array_item)
+												&&
+												strlen($array_item) > 2
+											) {
+
+												$output[] = $array_item;
+
+											}
+
+									}
 
 								} else {
 
-									$output[] = $item[$property];
+									// Check if value is longer than two characters
+
+										if ( strlen($item[$property]) > 2 ) {
+
+											$output[] = $item[$property];
+
+										}
 
 								} // endif
 
