@@ -25367,7 +25367,7 @@
 		function uamswp_fad_schema_property_values(
 			array $input, // array // Required // Property values from which to extract specific values
 			$properties, // mixed // Required // List of properties from which to collect values
-			array &$output = array() // array // Optional // Pre-existing list array to which to add additional items
+			&$output = array() // mixed // Optional // Pre-existing list to which to add additional items
 		) {
 
 			// Check / define variables
@@ -25380,7 +25380,7 @@
 
 				$input = array_is_list($input) ? $input : array($input);
 				$properties = is_array($properties) && array_is_list($properties) ? $properties : array($properties);
-				$output = array_is_list($output) ? $output : array($output);
+				$output = is_array($output) && array_is_list($output) ? $output : array($output);
 
 			// Loop through input array and get the desired property values
 
