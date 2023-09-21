@@ -16608,18 +16608,6 @@
 												$provider_keywords[] = $provider_honorificPrefix ? 'doctor' : '';
 												$provider_keywords[] = $provider_honorificPrefix ? 'physician' : '';
 
-											// Merge in clinical specialization attributes value/reference
-
-												// Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
-
-												// Specialization Name in the Health Care Provider Taxonomy Code Set
-
-												// Specialization Display Name in the Health Care Provider Taxonomy Code Set
-
-												// Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
-
-												// Alternate Names for the Clinical Occupation Title
-
 										// Add to item values
 
 											// MedicalWebPage
