@@ -478,10 +478,6 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 	
 			add_action( 'init', 'create_academic_departments_taxonomy', 0 );
 
-		// Departments, Clinical
-	
-			add_action( 'init', 'create_departments_taxonomy', 0 );
-
 		// Education and Training Organizations
 	
 			add_action( 'init', 'create_schools_taxonomy', 0 );
@@ -537,6 +533,10 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 		// Conditions
 
 			// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
+
+		// Departments, Clinical
+	
+			// add_action( 'init', 'create_departments_taxonomy', 0 );
 
 		// Medical Specialties
 	
@@ -736,60 +736,60 @@ function create_clinical_treatments_taxonomy() {
 
 // }
 
-function create_departments_taxonomy() {
-	$labels = array(
-		'name' => 'Clinical Departments',
-		'singular_name' => 'Clinical Departments',
-		'search_items' => 'Search Clinical Departments',
-		'all_items' => 'All Clinical Departments',
-		'edit_item' => 'Edit Clinical Department',
-		'update_item' => 'Update Clinical Department',
-		'add_new_item' => 'Add New Clinical Department',
-		'new_item_name' => 'New Clinical Department',
-		'menu_name' => 'Departments, Clinical',
-		'view_item' => 'View Clinical Department',
-		'popular_items' => 'Popular Clinical Department',
-		'separate_items_with_commas' => 'Separate Clinical Departments With Commas',
-		'add_or_remove_items' => 'Add or Remove Clinical Departments',
-		'choose_from_most_used' => 'Choose From the Most Used Clinical Departments',
-		'not_found' => 'No Clinical Departments Found',
-		'parent_item' => 'Parent Clinical Department',
-		'parent_item_colon' => 'Parent Clinical Department:',
-		'no_terms' => 'No Clinical Departments',
-		'items_list' => 'Clinical Clinical Departments List',
-		'items_list_navigation' => 'Clinical Departments List Navigation',
-	);
-	$rewrite = array(
-		'slug' => 'department',
-		'with_front' => true,
-		'hierarchical' => true,
-	);
-	$capabilities = array(
-		'manage_terms' => 'manage_options',
-		'edit_terms' => 'manage_options',
-		'delete_terms' => 'manage_options',
-		'assign_terms' => 'edit_physicians',
-	);
-	$args = array(
-		'label' => __( 'Medical Departments' ),
-		'labels' => $labels,
-		'hierarchical' => true,
-		'public' => true,
-		'show_ui' => true,
-		'meta_box_cb' => false,
-		'show_admin_column' => false,
-		'show_in_nav_menus' => false,
-		'show_tagcloud' => false,
-		'rewrite' => $rewrite,
-		'capabilities' => $capabilities,
-		'show_in_rest' => true,
-		'rest_base' => 'medical_department',
-		'rest_controller_class' => 'WP_REST_Terms_Controller',
-		'show_in_quick_edit' => false,
-	);
-	register_taxonomy( 'department', array( 'provider' ), $args );
+// function create_departments_taxonomy() {
+// 	$labels = array(
+// 		'name' => 'Clinical Departments',
+// 		'singular_name' => 'Clinical Departments',
+// 		'search_items' => 'Search Clinical Departments',
+// 		'all_items' => 'All Clinical Departments',
+// 		'edit_item' => 'Edit Clinical Department',
+// 		'update_item' => 'Update Clinical Department',
+// 		'add_new_item' => 'Add New Clinical Department',
+// 		'new_item_name' => 'New Clinical Department',
+// 		'menu_name' => 'Departments, Clinical',
+// 		'view_item' => 'View Clinical Department',
+// 		'popular_items' => 'Popular Clinical Department',
+// 		'separate_items_with_commas' => 'Separate Clinical Departments With Commas',
+// 		'add_or_remove_items' => 'Add or Remove Clinical Departments',
+// 		'choose_from_most_used' => 'Choose From the Most Used Clinical Departments',
+// 		'not_found' => 'No Clinical Departments Found',
+// 		'parent_item' => 'Parent Clinical Department',
+// 		'parent_item_colon' => 'Parent Clinical Department:',
+// 		'no_terms' => 'No Clinical Departments',
+// 		'items_list' => 'Clinical Clinical Departments List',
+// 		'items_list_navigation' => 'Clinical Departments List Navigation',
+// 	);
+// 	$rewrite = array(
+// 		'slug' => 'department',
+// 		'with_front' => true,
+// 		'hierarchical' => true,
+// 	);
+// 	$capabilities = array(
+// 		'manage_terms' => 'manage_options',
+// 		'edit_terms' => 'manage_options',
+// 		'delete_terms' => 'manage_options',
+// 		'assign_terms' => 'edit_physicians',
+// 	);
+// 	$args = array(
+// 		'label' => __( 'Medical Departments' ),
+// 		'labels' => $labels,
+// 		'hierarchical' => true,
+// 		'public' => true,
+// 		'show_ui' => true,
+// 		'meta_box_cb' => false,
+// 		'show_admin_column' => false,
+// 		'show_in_nav_menus' => false,
+// 		'show_tagcloud' => false,
+// 		'rewrite' => $rewrite,
+// 		'capabilities' => $capabilities,
+// 		'show_in_rest' => true,
+// 		'rest_base' => 'medical_department',
+// 		'rest_controller_class' => 'WP_REST_Terms_Controller',
+// 		'show_in_quick_edit' => false,
+// 	);
+// 	register_taxonomy( 'department', array( 'provider' ), $args );
 
-}
+// }
 
 function create_service_line_taxonomy() {
 	$labels = array(
