@@ -13853,6 +13853,16 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
+										// Get names for keywords property
+
+											$provider_keywords = $provider_keywords ?? array();
+
+											$provider_keywords = uamswp_fad_schema_property_values(
+												$provider_knowsLanguage, // array // Required // Property values from which to extract specific values
+												array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
+												$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+											);
+
 									}
 
 								// lastReviewed
