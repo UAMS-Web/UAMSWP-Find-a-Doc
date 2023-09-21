@@ -16608,6 +16608,23 @@
 												$provider_keywords[] = $provider_honorificPrefix ? 'doctor' : '';
 												$provider_keywords[] = $provider_honorificPrefix ? 'physician' : '';
 
+											// Clean up list array
+
+												if ( $provider_keywords ) {
+
+													$provider_keywords = array_filter($provider_keywords);
+													$provider_keywords = array_unique( $provider_keywords, SORT_REGULAR );
+													$provider_keywords = array_values($provider_keywords);
+													uamswp_fad_flatten_multidimensional_array($provider_keywords);
+								
+													if ( is_array($provider_keywords) ) {
+
+														sort( $provider_keywords, SORT_NATURAL | SORT_FLAG_CASE );
+
+													}
+
+												}
+
 										// Add to item values
 
 											// MedicalWebPage
