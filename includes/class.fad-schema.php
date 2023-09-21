@@ -5282,8 +5282,6 @@
 								$provider_clinical_specialization_knowsAbout_ref = null;
 								$provider_clinical_specialization_name = null;
 								$provider_clinical_specialization_ref = null;
-								$provider_clinical_specialization_significantLink = null;
-								$provider_clinical_specialization_significantLink_ref = null;
 								$provider_clinical_specialization_term = null;
 								$provider_condition = null;
 								$provider_condition_keywords = null;
@@ -13813,21 +13811,6 @@
 														$provider_clinical_specialization_knowsAbout, // mixed // Required // Incoming schema item property value
 														$provider_clinical_specialization_knowsAbout_ref // mixed // Required // @id reference to incoming schema item property value
 													);
-
-												// Get URLs for significantLink property
-
-													$provider_clinical_specialization_significantLink = uamswp_fad_schema_property_values(
-														$provider_clinical_specialization_knowsAbout, // array // Required // Property values from which to extract specific values
-														array( 'url' ) // mixed // Required // List of properties from which to collect values
-													);
-
-													// Merge clinical specializations significantLink value/reference into significantLink
-
-														$provider_significantLink = uamswp_fad_schema_merge_values(
-															$provider_significantLink,
-															$provider_clinical_specialization_significantLink,
-															$provider_clinical_specialization_significantLink_ref
-														);
 
 												// Get values for keywords property
 
