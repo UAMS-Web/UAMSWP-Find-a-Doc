@@ -6899,8 +6899,8 @@
 															$provider_significantLink = $provider_significantLink ?? array();
 
 															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_location, // Property values from which to extract URLs
-																$provider_significantLink // Existing list of URLs
+																$provider_location, // array // Required // Property values from which to extract URLs
+																$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 															);
 
 														}
@@ -6984,8 +6984,8 @@
 															$provider_significantLink = $provider_significantLink ?? array();
 
 															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_location, // Property values from which to extract URLs
-																$provider_significantLink // Existing list of URLs
+																$provider_location, // array // Required // Property values from which to extract URLs
+																$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 															);
 
 														}
@@ -7067,8 +7067,8 @@
 															$provider_significantLink = $provider_significantLink ?? array();
 
 															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_location, // Property values from which to extract URLs
-																$provider_significantLink // Existing list of URLs
+																$provider_location, // array // Required // Property values from which to extract URLs
+																$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 															);
 
 														}
@@ -7187,8 +7187,8 @@
 												$provider_significantLink = $provider_significantLink ?? array();
 
 												$provider_significantLink = uamswp_fad_schema_property_urls(
-													$provider_clinical_resource, // Property values from which to extract URLs
-													$provider_significantLink // Existing list of URLs
+													$provider_clinical_resource, // array // Required // Property values from which to extract URLs
+													$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 												);
 
 											}
@@ -7367,8 +7367,8 @@
 														$provider_significantLink = $provider_significantLink ?? array();
 
 														$provider_significantLink = uamswp_fad_schema_property_urls(
-															$provider_availableService, // Property values from which to extract URLs
-															$provider_significantLink // Existing list of URLs
+															$provider_availableService, // array // Required // Property values from which to extract URLs
+															$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 														);
 
 													}
@@ -13725,8 +13725,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_expertise, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_expertise, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 											// Merge in related conditions value/reference
@@ -13742,8 +13742,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_condition, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_condition, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 											// Merge in related treatments value/reference
@@ -13759,8 +13759,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_availableService, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_availableService, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 										// Add to item values
@@ -14519,8 +14519,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_location, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_location, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 											// Merge in related areas of expertise value/reference
@@ -14536,8 +14536,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_expertise, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_expertise, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 											// Merge in related clinical resources value/reference
@@ -14553,8 +14553,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_clinical_resource, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_clinical_resource, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 											// Merge in related conditions value/reference
@@ -14570,8 +14570,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_condition, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_condition, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 											// Merge in related treatments value/reference
@@ -14587,8 +14587,8 @@
 													$provider_significantLink = $provider_significantLink ?? array();
 
 													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_availableService, // Property values from which to extract URLs
-														$provider_significantLink // Existing list of URLs
+														$provider_availableService, // array // Required // Property values from which to extract URLs
+														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
 													);
 
 										// Add to item values
@@ -25226,8 +25226,8 @@
 	// Create list of URLs from property value items
 
 		function uamswp_fad_schema_property_urls(
-			array $input, // Property values from which to extract URLs
-			array &$output = array() // Existing list of URLs
+			array $input, // array // Required // Property values from which to extract URLs
+			array &$output = array() // array // Optional // Pre-existing list array to which to add additional items
 		) {
 
 			// Check / define variables
