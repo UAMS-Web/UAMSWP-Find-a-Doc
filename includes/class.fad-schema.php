@@ -4327,6 +4327,10 @@
 									$nucc_item_name = get_field( 'clinical_specialty_name', $item_term ) ?? $item_term->name; // Use post title as fallback value
 									$nucc_item_name = $nucc_item_name ?? '';
 
+								// alternateName (Specialization Display Name in the Health Care Provider Taxonomy Code Set)
+
+									$nucc_item_alternateName = get_field( 'clinical_specialization_name_display', $item_term ) ?? '';
+
 								// description (Specialization Definition in the Health Care Provider Taxonomy Code Set)
 
 									$nucc_item_description = get_field( 'clinical_specialization_definition', $item_term ) ?? ''; // Use post title as fallback value
