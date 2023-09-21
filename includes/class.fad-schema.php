@@ -25276,6 +25276,90 @@
 
 		}
 
+	// Create list of specific values from property value items
+
+		function uamswp_fad_schema_property_values(
+			array $input, // array // Required // Property values from which to extract specific values
+			$properties, // mixed // Required // List of properties from which to collect values
+			array &$output = array() // array // Optional // Pre-existing list array to which to add additional items
+		) {
+
+			// Check / define variables
+
+				if ( !$input ) {
+
+					return $output;
+
+				}
+
+				$input = array_is_list($input) ? $input : array($input);
+				$properties = is_array($properties) && array_is_list($properties) ? $properties : array($properties);
+				$output = array_is_list($output) ? $output : array($output);
+
+			// Loop through input array and get the desired property values
+
+				if ( $input ) {
+
+					foreach ( $input as $item ) {
+
+						foreach ( $properties as $property ) {
+
+							if (
+								isset($item[$property])
+								&&
+								!empty($item[$property])
+							) {
+
+								if ( is_array($item[$property]) ) {
+
+									$output = array_merge(
+										$output,
+										$item[$property]
+									);
+
+								} else {
+
+									$output[] = $item[$property];
+
+								}
+
+							}
+
+						}
+
+					}
+
+				}
+
+			// Clean up the output array
+
+				if ( $output ) {
+
+					$output = array_filter($output);
+					$output = array_unique( $output, SORT_REGULAR );
+					$output = array_is_list($output) ? array_values($output) : $output;
+					uamswp_fad_flatten_multidimensional_array($output);
+
+					if (
+						is_array($output)
+						&&
+						array_is_list($output)
+					) {
+
+						sort($output);
+
+					} elseif ( is_array($output) ) {
+
+						ksort($output);
+
+					}
+
+				}
+
+			return $output;
+
+		}
+
 // Construct the schema script tag
 
 	function uamswp_fad_schema_construct($input) {
