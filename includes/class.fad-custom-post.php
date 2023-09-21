@@ -458,6 +458,10 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
+		// Certifications —  Certifying Boards
+	
+			add_action( 'init', 'create_certifying_boards_taxonomy', 0 );
+
 		// Certification — Specialty and Subspecialty Certificates
 	
 			add_action( 'init', 'create_boards_taxonomy', 0 );
@@ -1564,6 +1568,53 @@ function create_boards_taxonomy() {
 		'show_in_quick_edit' => false,
 	);
 	register_taxonomy( 'board', array( 'provider' ), $args );
+
+}
+
+function create_certifying_boards_taxonomy() {
+	$labels = array(
+		'name' => 'Certifying Boards',
+		'singular_name' => 'Certifying Board',
+		'search_items' => 'Search Certifying Boards',
+		'all_items' => 'All Certifying Boards',
+		'edit_item' => 'Edit Certifying Board',
+		'update_item' => 'Update Certifying Board',
+		'add_new_item' => 'Add New Certifying Board',
+		'new_item_name' => 'New Certifying Board',
+		'menu_name' => 'Certification — Certifying Boards',
+		'view_item' => 'View Certifying Board',
+		'popular_items' => 'Popular Certifying Boards',
+		'separate_items_with_commas' => 'Separate Certifying Boards With Commas',
+		'add_or_remove_items' => 'Add or Remove Certifying Boards',
+		'choose_from_most_used' => 'Choose From the Most Used Certifying Boards',
+		'not_found' => 'No Certifying Boards Found'
+	);
+	$rewrite = array(
+		'slug' => 'certifying_board',
+		'with_front' => false,
+		'hierarchical' => false,
+	);
+	$capabilities = array(
+		'manage_terms' => 'manage_options',
+		'edit_terms' => 'manage_options',
+		'delete_terms' => 'manage_options',
+		'assign_terms' => 'edit_physicians',
+	);
+	$args = array(
+		'label' => __( 'Certifying Boards' ),
+		'labels' => $labels,
+		'hierarchical' => false,
+		'public' => true,
+		'show_ui' => true, //Made true to add / edit
+		'meta_box_cb' => false,
+		'show_admin_column' => false,
+		'show_in_nav_menus' => false,
+		'show_tagcloud' => false,
+		'rewrite' => $rewrite,
+		'capabilities' => $capabilities,
+		'show_in_quick_edit' => false,
+	);
+	register_taxonomy( 'certifying_board', array( 'provider' ), $args );
 
 }
 
