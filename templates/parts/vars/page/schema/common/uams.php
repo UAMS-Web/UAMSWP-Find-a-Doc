@@ -30,7 +30,6 @@
 	// alternateName
 
 		$schema_base_org_uams['alternateName'] = 'UAMS';
-		$schema_base_org_uams_alternateName = $schema_base_org_uams['alternateName'] ?? '';
 
 	// contactPoint
 
@@ -289,11 +288,6 @@
 
 		$schema_base_org_uams_health['name'] = 'UAMS Health';
 		$schema_base_org_uams_health_name = $schema_base_org_uams_health['name'] ?? '';
-
-	// alternateName
-
-		$schema_base_org_uams_health['alternateName'] = '';
-		$schema_base_org_uams_health_alternateName = $schema_base_org_uams_health['alternateName'] ?? '';
 
 	// contactPoint
 
