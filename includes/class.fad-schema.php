@@ -5386,6 +5386,10 @@
 								$provider_location = null;
 								$provider_location_array = null;
 								$provider_location_ref = null;
+								$provider_location_significantLink = null;
+								$provider_location_significantLink_ref = null;
+								$provider_location_keywords = null;
+								$provider_location_keywords_ref = null;
 								$provider_mainContentOfPage = null;
 								$provider_mainContentOfPage_ref = null;
 								$provider_mainEntity = null;
@@ -6823,6 +6827,20 @@
 
 													}
 
+												// Get URLs for significantLink property
+
+													$provider_location_significantLink = uamswp_fad_schema_property_values(
+														$provider_location, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												// Get names for keywords property
+
+													$provider_location_keywords = uamswp_fad_schema_property_values(
+														$provider_location, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
+
 											// location (specific property)
 
 												/* 
@@ -6896,27 +6914,20 @@
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
-													// Get URLs for significantLink property
+													// Merge location significantLink value/reference into keywords
 
-														if ( $provider_location ) {
+														$provider_significantLink = uamswp_fad_schema_merge_values(
+															$provider_significantLink,
+															$provider_location_significantLink,
+															$provider_location_significantLink_ref
+														);
 
-															$provider_significantLink = $provider_significantLink ?? array();
+													// Merge location keywords value/reference into keywords
 
-															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_location, // array // Required // Property values from which to extract URLs
-																$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
-															);
-
-														}
-
-													// Get names for keywords property
-
-														$provider_keywords = $provider_keywords ?? array();
-
-														$provider_keywords = uamswp_fad_schema_property_values(
-															$provider_location, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_location_keywords,
+															$provider_location_keywords_ref
 														);
 
 												}
@@ -6991,27 +7002,20 @@
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
-													// Get URLs for significantLink property
+													// Merge location significantLink value/reference into keywords
 
-														if ( $provider_location ) {
+														$provider_significantLink = uamswp_fad_schema_merge_values(
+															$provider_significantLink,
+															$provider_location_significantLink,
+															$provider_location_significantLink_ref
+														);
 
-															$provider_significantLink = $provider_significantLink ?? array();
+													// Merge location keywords value/reference into keywords
 
-															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_location, // array // Required // Property values from which to extract URLs
-																$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
-															);
-
-														}
-
-													// Get names for keywords property
-
-														$provider_keywords = $provider_keywords ?? array();
-
-														$provider_keywords = uamswp_fad_schema_property_values(
-															$provider_location, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_location_keywords,
+															$provider_location_keywords_ref
 														);
 
 												}
@@ -7084,27 +7088,20 @@
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
-													// Get URLs for significantLink property
+													// Merge location significantLink value/reference into keywords
 
-														if ( $provider_location ) {
+														$provider_significantLink = uamswp_fad_schema_merge_values(
+															$provider_significantLink,
+															$provider_location_significantLink,
+															$provider_location_significantLink_ref
+														);
 
-															$provider_significantLink = $provider_significantLink ?? array();
+													// Merge location keywords value/reference into keywords
 
-															$provider_significantLink = uamswp_fad_schema_property_urls(
-																$provider_location, // array // Required // Property values from which to extract URLs
-																$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
-															);
-
-														}
-
-													// Get names for keywords property
-
-														$provider_keywords = $provider_keywords ?? array();
-
-														$provider_keywords = uamswp_fad_schema_property_values(
-															$provider_location, // array // Required // Property values from which to extract specific values
-															array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-															$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords,
+															$provider_location_keywords,
+															$provider_location_keywords_ref
 														);
 
 												}
@@ -14518,23 +14515,20 @@
 													$provider_location_ref // mixed // Required // @id reference to incoming schema item property value
 												);
 
-												// Get URLs for significantLink property
+												// Merge location significantLink value/reference into keywords
 
-													$provider_significantLink = $provider_significantLink ?? array();
-
-													$provider_significantLink = uamswp_fad_schema_property_urls(
-														$provider_location, // array // Required // Property values from which to extract URLs
-														$provider_significantLink // array // Optional // Pre-existing list array to which to add additional items
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink,
+														$provider_location_significantLink,
+														$provider_location_significantLink_ref
 													);
 
-												// Get names for keywords property
+												// Merge location keywords value/reference into keywords
 
-													$provider_keywords = $provider_keywords ?? array();
-
-													$provider_keywords = uamswp_fad_schema_property_values(
-														$provider_location, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName' ), // mixed // Required // List of properties from which to collect values
-														$provider_keywords // mixed // Optional // Pre-existing list to which to add additional items
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords,
+														$provider_location_keywords,
+														$provider_location_keywords_ref
 													);
 
 											// Merge in related areas of expertise value/reference
