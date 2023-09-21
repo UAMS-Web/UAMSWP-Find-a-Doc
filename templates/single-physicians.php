@@ -1701,7 +1701,7 @@
 												<?php
 												} // endif ( have_rows('physician_education') )
 												if ( !empty( $boards ) ) { ?>
-													<h3 class="h4">Professional Certifications</h3>
+													<h3 class="h4">Certifications</h3>
 													<ul>
 														<?php foreach ( $boards as $board ) {
 															$board_name = get_term( $board, 'board'); ?>
