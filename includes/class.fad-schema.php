@@ -25588,7 +25588,7 @@
 				}
 
 				$input = array_is_list($input) ? $input : array($input);
-				$properties = is_array($properties) && array_is_list($properties) ? $properties : array($properties);
+				$properties = is_array($properties) ? $properties : array($properties);
 				$output = is_array($output) && array_is_list($output) ? $output : array($output);
 
 			// Loop through input array and get the desired property values
@@ -25597,49 +25597,65 @@
 
 					foreach ( $input as $item ) {
 
-						foreach ( $properties as $property ) {
+						foreach ( $properties as $property_key => $property_value ) {
 
-							if (
-								isset($item[$property])
-								&&
-								!empty($item[$property])
-							) {
+							if ( is_array($property_value) ) {
 
-								if ( is_array($item[$property]) ) {
+								// If requested property is an array
 
-									foreach ( $item[$property] as $array_item ) {
+									$output = uamswp_fad_schema_property_values(
+										$item[$property_key], // array // Required // Property values from which to extract specific values
+										$property_value, // mixed // Required // List of properties from which to collect values
+										$output // mixed // Optional // Pre-existing list to which to add additional items
+									);
 
-										// Check if value is longer than two characters
+							} else {
 
-											if (
-												$array_item
-												&&
-												!is_array($array_item)
-												&&
-												strlen($array_item) > 2
-											) {
+								// If requested property is a string
 
-												$output[] = $array_item;
+									if (
+										isset($item[$property_value])
+										&&
+										!empty($item[$property_value])
+									) {
+
+										if ( is_array($item[$property_value]) ) {
+
+											foreach ( $item[$property_value] as $array_item ) {
+
+												// Check if value is longer than two characters
+
+													if (
+														$array_item
+														&&
+														!is_array($array_item)
+														&&
+														strlen($array_item) > 2
+													) {
+
+														$output[] = $array_item;
+
+													}
 
 											}
 
-									}
+										} else {
 
-								} else {
+											// Check if value is longer than two characters
 
-									// Check if value is longer than two characters
+												if ( strlen($item[$property_value]) > 2 ) {
 
-										if ( strlen($item[$property]) > 2 ) {
+													$output[] = $item[$property_value];
 
-											$output[] = $item[$property];
+												}
 
-										}
+										} // endif
 
-								} // endif
+									} // endif
 
-							} // endif
+							}
 
-						} // endforeach ( $properties as $property )
+						} // endforeach ( $properties as $property_key => $property_value )
 
 					} // endforeach ( $input as $item )
 
