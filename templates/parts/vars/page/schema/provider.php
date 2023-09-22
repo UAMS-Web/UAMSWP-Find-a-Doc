@@ -32,6 +32,7 @@ TODO List
 			 * Create method of defining 'Organization' property values for UAMS Health and UAMS
 			 * Create method of defining 'Organization' property values for third-party organizations (e.g., Arkansas Children's)
 			 * Create method of associating additional 'Organization' options with each ontology item type (e.g., location, provider)
+		 * Find a way to check the whole schema for full value arrays with the same @id property value, squashing all but the @id property value of any after the first
 	 * Area of Expertise only
 		 * Apply the areas of expertise schema function to the single area of expertise template
 		 * Adjust the areas of expertise schema function (or create new one) to support the information on area of expertise fake subpages.
@@ -128,42 +129,12 @@ TODO List
 	 * Provider only
 		 * MedicalWebPage + MedicalBusiness + Person
 			 * Define schema for affiliated hospital(s)
-		 * MedicalWebPage + MedicalBusiness
-			 * Add values for remaining properties:
-				 * keywords
-					 * clinical specialization attributes
-						 * Specialization Taxonomy Code in the Health Care Provider Taxonomy Code Set
-						 * Specialization Name in the Health Care Provider Taxonomy Code Set
-						 * Specialization Display Name in the Health Care Provider Taxonomy Code Set
-						 * Clinical Occupation Title Based on the Health Care Provider Taxonomy Code Set
-						 * Alternate Names for the Clinical Occupation Title
-					 * associated area of expertise attributes
-						 * name
-						 * alternateName
-					 * associated condition attributes
-						 * name
-						 * alternateName
-					 * associated treatment attributes
-						 * name
-						 * alternateName
-					 * associated location attributes
-						 * name
-						 * alternateName?
-						 * city
-						 * state
-						 * city + state?
-						 * Arkansas region?
-						 * county?
 		 * MedicalBusiness + Person
 			 * Add values for remaining properties:
-				 * affiliation
-					 * Pending inputs for defining third-party clinical organizations
-				 * brand
-					 * Pending inputs for defining third-party clinical organizations
-				 * hasCredential
-					 * board certification
-				 * worksFor
-					 * Pending inputs for defining third-party clinical organizations
+				 * Pending inputs for defining third-party clinical organizations
+					 * affiliation
+					 * brand
+					 * worksFor
 		 * MedicalBusiness only
 			 * Add values for remaining properties:
 				 * hospitalAffiliation
@@ -229,7 +200,12 @@ TODO List
 						 * Incorporate values from new inputs (e.g., nickname, alternateName repeater)
 					 * potentialAction
 		 * MedicalWebPage + MedicalBusiness
-			 * 
+			 * Add additional values for properties:
+				 * keywords
+					 * associated location attributes
+						 * city + state?
+						 * Arkansas region?
+						 * county?
 		 * MedicalWebPage + Person
 			 * 
 		 * MedicalWebPage only
