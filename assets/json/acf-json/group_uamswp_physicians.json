@@ -2282,15 +2282,7 @@
 			"label": "Health Care Professional Associations",
 			"instructions": "Examples: Fellow of the American College of Obstetricians and Gynecologists, American Society of Breast Surgeons, American Burn Association, etc.",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_physician_resident",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
