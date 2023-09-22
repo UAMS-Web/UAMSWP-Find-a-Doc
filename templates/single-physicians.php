@@ -2136,7 +2136,7 @@
 
 				// Construct the Schema Data Script Tag
 
-					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/provider.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/html/script/schema_provider.php' );
 
 			} // endwhile // end of the loop
 
