@@ -3,6 +3,17 @@
  * Template Name: Single Location
  */
 
+// Get the page ID
+
+	$page_id = get_the_ID();
+
+// Pass fields to schema function
+
+	// Base array
+
+		$location_schema_fields = array();
+		$location_schema_fields[$page_id] = array();
+
 // Get system settings for ontology item labels
 
 	// Get system settings for provider labels
@@ -37,8 +48,6 @@
 	$ontology_type = true; // Ontology type of the post (true is ontology type, false is content type)
 
 // Get the page ID
-
-	$page_id = get_the_ID();
 
 	// Parent location ID
 
@@ -2594,7 +2603,9 @@
 				</div>
 				<?php
 
-				// Schema Data
+				// Schema Data (Old)
+
+					/*
 
 					// Set the values
 
@@ -2645,6 +2656,12 @@
 					// Construct the schema script tag
 
 						include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
+
+					*/
+
+				// Construct the Schema Data Script Tag
+
+					include( UAMS_FAD_PATH . '/templates/parts/html/script/schema_location.php' );
 
 			} // endwhile // end of the loop.
 
