@@ -79,7 +79,7 @@ $page_id = get_the_ID();
 
 					$provider_related_location = uamswp_fad_schema_location(
 						$locations, // List of IDs of the location items
-						$schema_provider_url, // Page URL
+						$schema_provider_url // Page URL
 					);
 
 				}

@@ -1323,7 +1323,8 @@
 									array($hospital_location), // List of IDs of the location items
 									$page_url, // Page URL
 									$nesting_level, // Nesting level within the main schema
-									$schema_hospital_affiliation_i, // Iteration counter
+									1, // Iteration counter for location-as-MedicalWebPage
+									$schema_hospital_affiliation_i, // Iteration counter for location-as-LocalBusiness
 									array(), // Pre-existing field values array so duplicate calls can be avoided
 									$schema_hospital_affiliation // Pre-existing list array to which to add additional items
 								);
@@ -17869,7 +17870,8 @@
 			array $repeater, // List of IDs of the location items
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
-			int $LocalBusiness_i = 1, // Iteration counter
+			int $MedicalWebPage_i = 1, // Iteration counter for location-as-MedicalWebPage
+			int $LocalBusiness_i = 1, // Iteration counter for location-as-LocalBusiness
 			array $LocalBusiness_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $LocalBusiness_list = array() // Pre-existing list array to which to add additional items
 		) {

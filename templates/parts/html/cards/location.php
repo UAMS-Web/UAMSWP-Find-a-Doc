@@ -75,7 +75,8 @@
 			array($page_id), // List of IDs of the location items
 			$location_url, // Page URL
 			1, // Nesting level within the main schema
-			1, // Iteration counter
+			1, // Iteration counter for location-as-MedicalWebPage
+			1, // Iteration counter for location-as-LocalBusiness
 			$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided
 			$LocalBusiness_list // Pre-existing list array to which to add additional items
 		);
