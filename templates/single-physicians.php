@@ -1820,14 +1820,33 @@
 
 																if ( $certification ) {
 
-																	$certification_term = get_term( $certification, 'board') ?? '';
+																	// Get values
 
-																	$certification_term_name = $certification_term->name ?? '';
-																	$certification_name = get_field( 'certificate_name', $certification_term ) ?? '';
+																		$certification_term = get_term( $certification, 'board') ?? '';
 
-																	$certification_board_id = get_field( 'certificate_certifying_board', $certification_term ) ?? '';
-																	$certification_board_term = get_term( $certification_board_id, 'certifying_board') ?? '';
-																	$certification_board_name = $certification_board_term->name ?? '';
+																		$certification_term_name = $certification_term->name ?? '';
+																		$certification_name = get_field( 'certificate_name', $certification_term ) ?? '';
+
+																		$certification_board_id = get_field( 'certificate_certifying_board', $certification_term ) ?? '';
+																		$certification_board_term = get_term( $certification_board_id, 'certifying_board') ?? '';
+																		$certification_board_name = $certification_board_term->name ?? '';
+
+																		// If there are no values in certificate name or board name, split the taxonomy item title at the em dash
+
+																			if (
+																				!$certification_name
+																				||
+																				!$certification_board_name
+																			) {
+
+																				$certification_term_name = explode(
+																					' — ',
+																					$certification_term_name
+																				);
+																				$certification_name = $certification_term_name[1] ?? '';
+																				$certification_board_name = $certification_term_name[0] ?? '';
+
+																			}
 
 																	if (
 																		$certification_name
@@ -1842,31 +1861,9 @@
 
 																	} elseif ( $certification_term_name ) {
 		
-																		$certification_term_name = explode(
-																			' — ',
-																			$certification_term_name
-																		);
-																		$certification_name = $certification_term_name[0] ?? '';
-																		$certification_board_name = $certification_term_name[1] ?? '';
-
-																		if (
-																			$certification_name
-																			&&
-																			$certification_board_name
-																		) {
-	
-																			?>
-																			<dt><?php echo $certification_board_name; ?></dt>
-																			<dd><?php echo $certification_name; ?></dd>
-																			<?php
-	
-																		} else {
-																				
-																			?>
-																			<dt><?php echo $certification_term_name; ?></dt>
-																			<?php
-
-																		}
+																		?>
+																		<dt><?php echo $certification_term_name; ?></dt>
+																		<?php
 
 																	}
 																	
