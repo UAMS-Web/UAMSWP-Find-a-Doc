@@ -180,7 +180,7 @@
 			},
 			"choices": {
 				"board-certification-abms": "The area of specialty is recognized for certification by the American Board of Medical Specialties.",
-				"board-certification-aoa": "The area of specialty is recognized for certification by the American Osteopathic Association certifying boards  or conjoint examination committees.",
+				"board-certification-aoa": "The area of specialty is recognized for certification by the American Osteopathic Association certifying boards or conjoint examination committees.",
 				"training-program-acgme": "There is an accredited residency/fellowship specialty/subspecialty training program by the Accreditation Council for Graduate Medical Education.",
 				"training-program-aoa": "There is an accredited residency/fellowship specialty/subspecialty training program by AOA-accredited Osteopathic Graduate Medical Education.",
 				"none": "None of the above"
