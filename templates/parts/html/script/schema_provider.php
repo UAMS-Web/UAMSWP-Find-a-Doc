@@ -51,38 +51,8 @@ $page_id = get_the_ID();
 	// Full
 	echo print_r($schema_provider); // test
 
-	// // UAMS
+	// // Specific @graph item
 	// echo print_r($schema_provider['@graph'][0]); // test
-
-	// // UAMS Health
-	// echo print_r($schema_provider['@graph'][1]); // test
-
-	// // UAMSHealth.com
-	// echo print_r($schema_provider['@graph'][1]); // test
-
-	// // MedicalWebPage
-	// echo print_r($schema_provider['@graph'][3]); // test
-
-		// // MedicalWebPage[mentions]
-		// echo print_r($schema_provider['@graph'][3]['mentions']); // test
-
-	// // BreadcrumbList
-	// echo print_r($schema_provider['@graph'][4]); // test
-
-	// // Physician
-	// echo print_r($schema_provider['@graph'][5]); // test
-
-		// // Physician
-		// echo print_r($schema_provider['@graph'][5]['containedInPlace']); // test
-
-		// // Physician
-		// echo print_r($schema_provider['@graph'][5]['location']); // test
-
-	// // Person
-	// echo print_r($schema_provider['@graph'][6]); // test
-
-	// // Specific variable
-	// echo print_r($schema_provider_location_ref); // test
 
 	echo '</pre>'; // test
 
