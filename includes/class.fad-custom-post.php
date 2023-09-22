@@ -458,9 +458,9 @@ if ( ! function_exists('clinical_resources_cpt') ) {
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
-		// Certifications —  Certifying Boards
+		// Certifications —  Certifying Bodies
 	
-			add_action( 'init', 'create_certifying_boards_taxonomy', 0 );
+			add_action( 'init', 'create_certifying_body_taxonomy', 0 );
 
 		// Certification — Specialty and Subspecialty Certificates
 	
@@ -1571,26 +1571,26 @@ function create_boards_taxonomy() {
 
 }
 
-function create_certifying_boards_taxonomy() {
+function create_certifying_body_taxonomy() {
 	$labels = array(
-		'name' => 'Certifying Boards',
-		'singular_name' => 'Certifying Board',
-		'search_items' => 'Search Certifying Boards',
-		'all_items' => 'All Certifying Boards',
-		'edit_item' => 'Edit Certifying Board',
-		'update_item' => 'Update Certifying Board',
-		'add_new_item' => 'Add New Certifying Board',
-		'new_item_name' => 'New Certifying Board',
-		'menu_name' => 'Certification — Certifying Boards',
-		'view_item' => 'View Certifying Board',
-		'popular_items' => 'Popular Certifying Boards',
-		'separate_items_with_commas' => 'Separate Certifying Boards With Commas',
-		'add_or_remove_items' => 'Add or Remove Certifying Boards',
-		'choose_from_most_used' => 'Choose From the Most Used Certifying Boards',
-		'not_found' => 'No Certifying Boards Found'
+		'name' => 'Certifying Bodies',
+		'singular_name' => 'Certifying Body',
+		'search_items' => 'Search Certifying Bodies',
+		'all_items' => 'All Certifying Bodies',
+		'edit_item' => 'Edit Certifying Body',
+		'update_item' => 'Update Certifying Body',
+		'add_new_item' => 'Add New Certifying Body',
+		'new_item_name' => 'New Certifying Body',
+		'menu_name' => 'Certification — Certifying Bodies',
+		'view_item' => 'View Certifying Body',
+		'popular_items' => 'Popular Certifying Bodies',
+		'separate_items_with_commas' => 'Separate Certifying Bodies With Commas',
+		'add_or_remove_items' => 'Add or Remove Certifying Bodies',
+		'choose_from_most_used' => 'Choose From the Most Used Certifying Bodies',
+		'not_found' => 'No Certifying Bodies Found'
 	);
 	$rewrite = array(
-		'slug' => 'certifying_board',
+		'slug' => 'certifying_body',
 		'with_front' => false,
 		'hierarchical' => false,
 	);
@@ -1601,7 +1601,7 @@ function create_certifying_boards_taxonomy() {
 		'assign_terms' => 'edit_physicians',
 	);
 	$args = array(
-		'label' => __( 'Certifying Boards' ),
+		'label' => __( 'Certifying Bodies' ),
 		'labels' => $labels,
 		'hierarchical' => false,
 		'public' => true,
@@ -1614,7 +1614,7 @@ function create_certifying_boards_taxonomy() {
 		'capabilities' => $capabilities,
 		'show_in_quick_edit' => false,
 	);
-	register_taxonomy( 'certifying_board', array( 'provider' ), $args );
+	register_taxonomy( 'certifying_body', array( 'provider' ), $args );
 
 }
 

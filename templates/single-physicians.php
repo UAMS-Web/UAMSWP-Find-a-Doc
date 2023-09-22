@@ -1827,8 +1827,8 @@
 																		$certification_term_name = $certification_term->name ?? '';
 																		$certification_name = get_field( 'certificate_name', $certification_term ) ?? '';
 
-																		$certification_board_id = get_field( 'certificate_certifying_board', $certification_term ) ?? '';
-																		$certification_board_term = get_term( $certification_board_id, 'certifying_board') ?? '';
+																		$certification_board_id = get_field( 'certificate_certifying_body', $certification_term ) ?? '';
+																		$certification_board_term = get_term( $certification_board_id, 'certifying_body') ?? '';
 																		$certification_board_name = $certification_board_term->name ?? '';
 
 																		// If there are no values in certificate name or board name, split the taxonomy item title at the em dash

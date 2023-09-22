@@ -1,12 +1,12 @@
 {
-	"key": "group_uamswp_board",
-	"title": "Certifying Board Details",
+	"key": "group_uamswp_certifying_body",
+	"title": "Certifying Body Details",
 	"location": [
 		[
 			{
 				"param": "taxonomy",
 				"operator": "==",
-				"value": "certifying_board"
+				"value": "certifying_body"
 			}
 		]
 	],
@@ -26,8 +26,8 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
-		"field_board_intro": {
-			"key": "field_board_intro",
+		"field_certifying_body_intro": {
+			"key": "field_certifying_body_intro",
 			"label": "Naming the Taxonomy Item",
 			"name": "",
 			"type": "message",
@@ -39,14 +39,14 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<p class='description' style='margin-top: 0.5em;'>Name the taxonomy item using only the full official name of the certifying board (e.g., \"American Board of Pediatrics\").</p><p class='description' style='margin-top: 0.5em;'>Do not include the word \"The\" at the beginning of the name.</p><p class='description' style='margin-top: 0.5em;'>Do not follow the full name of the certifying board with an abbreviation or acronym in parentheses or set off by dashes.</p>",
+			"message": "<p class='description' style='margin-top: 0.5em;'>Name the taxonomy item using only the full official name of the certifying body (e.g., \"American Board of Pediatrics\").</p><p class='description' style='margin-top: 0.5em;'>Do not include the word \"The\" at the beginning of the name.</p><p class='description' style='margin-top: 0.5em;'>Do not follow the full name of the certifying body with an abbreviation or acronym in parentheses or set off by dashes.</p>",
 			"new_lines": "",
 			"esc_html": 0
 		},
-		"field_board_url_query": {
-			"key": "field_board_url_query",
-			"name": "board_url_query",
-			"label": "Does this certifying board have a website?",
+		"field_certifying_body_url_query": {
+			"key": "field_certifying_body_url_query",
+			"name": "certifying_body_url_query",
+			"label": "Does this certifying body have a website?",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
@@ -67,17 +67,17 @@
 			"return_format": "value",
 			"save_other_choice": 0
 		},
-		"field_board_url": {
-			"key": "field_board_url",
-			"name": "board_url",
-			"label": "Certifying Board Website URL",
+		"field_certifying_body_url": {
+			"key": "field_certifying_body_url",
+			"name": "certifying_body_url",
+			"label": "Certifying Body Website URL",
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": [
 				[
 					{
-						"field": "field_board_url_query",
+						"field": "field_certifying_body_url_query",
 						"operator": "==",
 						"value": 1
 					}
@@ -99,10 +99,10 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_board_alternatename": {
-			"key": "field_board_alternatename",
-			"name": "board_alternatename",
-			"label": "Alternate Names for the Certifying Board",
+		"field_certifying_body_alternatename": {
+			"key": "field_certifying_body_alternatename",
+			"name": "certifying_body_alternatename",
+			"label": "Alternate Names for the Certifying Body",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,
@@ -123,10 +123,10 @@
 			"acfe_seamless_style": 1,
 			"acfe_settings": ""
 		},
-		"field_board_sameas": {
-			"key": "field_board_sameas",
-			"name": "board_sameas",
-			"label": "Reference Webpages for the Certifying Board",
+		"field_certifying_body_sameas": {
+			"key": "field_certifying_body_sameas",
+			"name": "certifying_body_sameas",
+			"label": "Reference Webpages for the Certifying Body",
 			"type": "clone",
 			"instructions": "",
 			"required": 0,

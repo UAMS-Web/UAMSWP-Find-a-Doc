@@ -39,7 +39,7 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "Name the taxonomy item using the name of the certifying board followed by the name of the specialty or subspecialty certificate (e.g., \"American Board of Pediatrics — Adolescent Medicine\").",
+			"message": "Name the taxonomy item using the name of the certifying body followed by the name of the specialty or subspecialty certificate (e.g., \"American Board of Pediatrics — Adolescent Medicine\").",
 			"new_lines": "",
 			"esc_html": 0
 		},
@@ -48,7 +48,7 @@
 			"name": "certificate_name",
 			"label": "Official Name of the Specialty or Subspecialty Certificate",
 			"type": "text",
-			"instructions": "<p class='description' style='margin-top: 0.5em;'>Do not include the name of the certifying board.</p><p class='description' style='margin-top: 0.5em;'>For subspecialty certificates, do not include the name of a related primary specialty certificate.</p>",
+			"instructions": "<p class='description' style='margin-top: 0.5em;'>Do not include the name of the certifying body.</p><p class='description' style='margin-top: 0.5em;'>For subspecialty certificates, do not include the name of a related primary specialty certificate.</p>",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -63,10 +63,10 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_certificate_certifying_board": {
-			"key": "field_certificate_certifying_board",
-			"name": "certificate_certifying_board",
-			"label": "Certifying Board for the Specialty or Subspecialty Certificate.",
+		"field_certificate_certifying_body": {
+			"key": "field_certificate_certifying_body",
+			"name": "certificate_certifying_body",
+			"label": "Certifying Body for the Specialty or Subspecialty Certificate.",
 			"type": "taxonomy",
 			"instructions": "",
 			"required": 1,
@@ -77,7 +77,7 @@
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"taxonomy": "certifying_board",
+			"taxonomy": "certifying_body",
 			"field_type": "select",
 			"allow_null": 1,
 			"add_term": 0,
@@ -174,7 +174,7 @@
 			},
 			"acfe_permissions": "",
 			"choices": {
-				"certifying_board": "Certification through specific certifying boards",
+				"certifying_body": "Certification through specific certifying bodies",
 				"certificate": "Specific specialty certificates"
 			},
 			"allow_custom": 0,
@@ -188,10 +188,10 @@
 			"acfe_settings": "",
 			"acfe_validate": ""
 		},
-		"field_certificate_primary_specialty_certifying_board": {
-			"key": "field_certificate_primary_specialty_certifying_board",
-			"name": "certificate_primary_specialty_certifying_board",
-			"label": "Select the certifying boards that meet the subspecialty's requirements for primary specialty certification",
+		"field_certificate_primary_specialty_certifying_body": {
+			"key": "field_certificate_primary_specialty_certifying_body",
+			"name": "certificate_primary_specialty_certifying_body",
+			"label": "Select the certifying bodies that meet the subspecialty's requirements for primary specialty certification",
 			"type": "taxonomy",
 			"instructions": "",
 			"required": 1,
@@ -205,7 +205,7 @@
 					{
 						"field": "field_certificate_primary_specialty_options",
 						"operator": "==",
-						"value": "certifying_board"
+						"value": "certifying_body"
 					}
 				]
 			],
@@ -215,7 +215,7 @@
 				"id": ""
 			},
 			"acfe_permissions": "",
-			"taxonomy": "certifying_board",
+			"taxonomy": "certifying_body",
 			"field_type": "multi_select",
 			"allow_null": 1,
 			"add_term": 0,
@@ -269,7 +269,7 @@
 		"field_certificate_url_query": {
 			"key": "field_certificate_url_query",
 			"name": "certificate_url_query",
-			"label": "Does this specialty or subspecialty certificate have a webpage on the certifying board's official website?",
+			"label": "Does this specialty or subspecialty certificate have a webpage on the certifying body's official website?",
 			"type": "button_group",
 			"instructions": "",
 			"required": 1,
