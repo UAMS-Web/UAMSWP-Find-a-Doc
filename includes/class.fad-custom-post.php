@@ -1794,6 +1794,7 @@
 
 				Expected taxonomy items:
 
+					 * Chief Residency
 					 * Externship
 					 * Fellowship
 					 * Internship
