@@ -292,24 +292,6 @@
 		$headshot_wide = get_field('physician_image_wide', $post->ID) ?? 0;
 		$provider_schema_fields[$page_id]['provider_image_wide_id'] = $headshot_wide; // Pass value to schema function
 
-	// Schema image
-
-		$schema_image = '';
-
-		if (
-			$featured_image
-			&&
-			function_exists( 'fly_add_image_size' )
-		) {
-
-			$schema_image = image_sizer($featured_image, 778, 1038, 'center', 'center');
-
-		} elseif ( $featured_image ) {
-
-			$schema_image = get_the_post_thumbnail( 'large' );
-
-		} // endif ( $featured_image && function_exists( 'fly_add_image_size' ) ) elseif ( $featured_image )
-
 // Define the placement for content
 
 	$content_placement = 'profile'; // Expected values: 'subsection' or 'profile'
@@ -561,10 +543,6 @@
 
 		$excerpt_attr = uamswp_attr_conversion($excerpt);
 		$provider_schema_fields[$page_id]['provider_description_text'] = $excerpt_attr; // Pass value to schema function
-
-		// Set schema description
-
-			$schema_description = $excerpt_attr; // Used for Schema Data. Should ALWAYS have a value
 
 		// Override theme's method of defining the meta description
 
@@ -2156,66 +2134,9 @@
 				</div>
 				<?php
 
-				// Schema Data
+				// Construct the Schema Data Script Tag
 
-					// Set the values
-
-						// Required for Google Structured Data
-						// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-
-							// Type: Physician
-							$schema_type = 'Physician'; // string
-
-							// Property: address
-							$schema_address = isset($schema_address) ? $schema_address : ''; // array
-
-						// Recommended by Google Structured Data
-						// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-
-							// Property: aggregateRating
-							$schema_aggregate_rating = $rating_valid; // bool
-
-							if ( $schema_aggregate_rating ) {
-								$schema_aggregate_rating_value = $avg_rating; // string
-								$schema_aggregate_rating_count = $review_count; // int
-								$schema_aggregate_rating_review_count = $comment_count; // int
-							}
-
-							// Property: geo
-							$schema_geo_coordinates = isset($schema_geo_coordinates) ? $schema_geo_coordinates : '';
-
-						// Additional Selected Properties
-
-							// Property: availableService
-							$schema_available_service = ( isset($schema_available_service) && is_array($schema_available_service) && !empty($schema_available_service) ) ? $schema_available_service : array(); // array
-
-							// Property: description
-							$schema_description = isset($schema_description) ? $schema_description : ''; // string
-
-							// Property: image
-							$schema_image = isset($schema_image) ? $schema_image : ''; // string
-
-							// Property: medicalSpecialty
-							$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array(); // array
-
-							// Property: hospitalAffiliation
-
-								$schema_hospital_affiliation = ( isset($schema_hospital_affiliation) && is_array($schema_hospital_affiliation) && !empty($schema_hospital_affiliation) ) ? $schema_hospital_affiliation : array(); // array
-
-								$schema_hospital_affiliation = uamswp_fad_schema_hospital_affiliation(
-									$affiliation, // array // Required // Hospital affiliation ID values
-									$page_url, // string // Required // Page URL
-									1, // int // Optional // Nesting level within the main schema
-									$schema_hospital_affiliation // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
-								);
-
-					// // Construct the schema script tag
-					// 
-					// 	include( UAMS_FAD_PATH . '/templates/parts/html/script/schema.php' );
-
-					// Construct the schema script tag (v2)
-
-						include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/provider.php' );
+					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/provider.php' );
 
 			} // endwhile // end of the loop
 
