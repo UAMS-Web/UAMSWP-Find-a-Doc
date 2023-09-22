@@ -1022,7 +1022,7 @@
 				);
 				$provider_schema_fields[$page_id]['provider_knowsLanguage'] = $schema_provider_languages; // Pass value to schema function
 
-			// Construct a list of the provider's health care professional associations
+			// Construct a list of the provider's health care professional memberships
 
 				// Get association input value
 
