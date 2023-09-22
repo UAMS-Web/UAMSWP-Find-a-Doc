@@ -843,6 +843,7 @@
 				$academic_admin_title = get_field('physician_academic_admin_title');
 				$education = get_field('physician_education');
 				$certifications = get_field( 'physician_boards' );
+				$provider_schema_fields[$page_id]['provider_certifications'] = $certifications; // Pass value to schema function
 
 				if (
 					$resident
