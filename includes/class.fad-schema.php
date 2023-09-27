@@ -7775,7 +7775,7 @@
 									 *     - Thing
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'about',
@@ -7864,7 +7864,7 @@
 									 * definitions.
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'abstract',
@@ -7945,7 +7945,7 @@
 									 *     - Text
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'accessMode',
@@ -9445,7 +9445,7 @@
 									 *     - Audience
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'audience',
@@ -9527,7 +9527,7 @@
 									 *     - Person
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'author',
@@ -10381,7 +10381,7 @@
 									 *     - Text
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'breadcrumb',
@@ -11589,7 +11589,7 @@
 									 *     - Person
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'editor',
@@ -13420,7 +13420,7 @@
 									 *     - Text
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'inLanguage',
@@ -13665,7 +13665,7 @@
 									 *     - Boolean
 									 */
 
-									 if (
+									if (
 										in_array(
 											'isFamilyFriendly',
 											$provider_properties_map[$MedicalWebPage_type]['properties']
@@ -14353,7 +14353,7 @@
 									 *     - Date
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'lastReviewed',
@@ -14667,7 +14667,7 @@
 									 *     - Person
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'maintainer',
@@ -14848,7 +14848,7 @@
 									 *     - MedicalAudienceType (Enumeration Type)
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'medicalAudience',
@@ -15509,7 +15509,7 @@
 									 *     - ImageObject
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'primaryImageOfPage',
@@ -16259,7 +16259,7 @@
 									 *     - Organization
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'sourceOrganization',
@@ -16536,7 +16536,7 @@
 									 *     - URL
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'thumbnailUrl',
@@ -16933,7 +16933,7 @@
 									 *     - URL
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'significantLink',
