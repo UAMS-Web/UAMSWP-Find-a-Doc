@@ -17702,22 +17702,36 @@
 									 *     - Text
 									 */
 
-									// Get values
+									if (
+										in_array(
+											'name',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'name',
+											$location_properties_map[$LocalBusiness_type]['properties']
+										)
+									) {
 
-										if ( !isset($location_name) ) {
+										// Get values
 
-											$location_name = get_the_title($location) ?? '';
+											if ( !isset($location_name) ) {
 
-										}
+												$location_name = get_the_title($location) ?? '';
 
-									// Add to item values
+											}
 
-										if ( $location_name ) {
+										// Add to item values
 
-											$location_item_MedicalWebPage['name'] = $location_name;
-											$location_item_LocalBusiness['name'] = $location_name;
+											if ( $location_name ) {
 
-										}
+												$location_item_MedicalWebPage['name'] = $location_name;
+												$location_item_LocalBusiness['name'] = $location_name;
+
+											}
+
+									}
 
 								// medicalSpecialty
 
@@ -17730,6 +17744,11 @@
 									 */
 
 									if (
+										in_array(
+											'medicalSpecialty',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'medicalSpecialty',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -17836,6 +17855,11 @@
 									 */
 
 									if (
+										in_array(
+											'additionalType',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'additionalType',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -17955,20 +17979,23 @@
 
 								// Parent location information (common use)
 
-									if (
-										in_array(
+									// List of properties that reference parent locations
+
+										$location_parent_common = array(
 											'address',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-										||
-										in_array(
 											'image',
-											$location_properties_map[$LocalBusiness_type]['properties']
+											'photo'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_parent_common
 										)
 										||
-										in_array(
-											'photo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_parent_common
 										)
 									) {
 
@@ -18004,6 +18031,11 @@
 									 */
 
 									if (
+										in_array(
+											'address',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'address',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -18239,9 +18271,16 @@
 									 */
 
 									if (
-										in_array(
-											'aggregateRating',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'aggregateRating',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'aggregateRating',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18277,9 +18316,16 @@
 									 */
 
 									if (
-										in_array(
-											'alternateName',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'alternateName',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'alternateName',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18335,9 +18381,16 @@
 									 */
 
 									if (
-										in_array(
-											'areaServed',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'areaServed',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'areaServed',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18374,9 +18427,16 @@
 									 */
 
 									if (
-										in_array(
-											'availableService',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'availableService',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'availableService',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18425,9 +18485,16 @@
 									 */
 
 									if (
-										in_array(
-											'award',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'award',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'award',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18465,6 +18532,11 @@
 									 */
 
 									if (
+										in_array(
+											'brand',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'brand',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -18505,6 +18577,11 @@
 									if (
 										in_array(
 											'contactPoint',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'contactPoint',
 											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
@@ -18538,6 +18615,11 @@
 									 */
 
 									if (
+										in_array(
+											'containedInPlace',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'containedInPlace',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -18576,9 +18658,16 @@
 									 */
 
 									if (
-										in_array(
-											'containsPlace',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'containsPlace',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'containsPlace',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18629,9 +18718,16 @@
 									 */
 
 									if (
-										in_array(
-											'currenciesAccepted',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'currenciesAccepted',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'currenciesAccepted',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18669,9 +18765,16 @@
 									 */
 
 									if (
-										in_array(
-											'department',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'department',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'department',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18708,9 +18811,16 @@
 									 */
 
 									if (
-										in_array(
-											'description',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'description',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'description',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18775,9 +18885,16 @@
 									 */
 
 									if (
-										in_array(
-											'diversityPolicy',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'diversityPolicy',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'diversityPolicy',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18820,9 +18937,16 @@
 									 */
 
 									if (
-										in_array(
-											'diversityStaffingReport',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'diversityStaffingReport',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'diversityStaffingReport',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18858,9 +18982,16 @@
 									 */
 
 									if (
-										in_array(
-											'employee',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'employee',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'employee',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level <= 1
@@ -18906,9 +19037,16 @@
 									 */
 
 									if (
-										in_array(
-											'ethicsPolicy',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'ethicsPolicy',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'ethicsPolicy',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18944,9 +19082,16 @@
 									 */
 
 									if (
-										in_array(
-											'event',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'event',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'event',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -18982,9 +19127,16 @@
 									 */
 
 									if (
-										in_array(
-											'foundingDate',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'foundingDate',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'foundingDate',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -19027,9 +19179,16 @@
 									 */
 
 									if (
-										in_array(
-											'funding',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'funding',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'funding',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -19056,20 +19215,23 @@
 
 								// geo (common use)
 
-									if (
-										in_array(
+									// List of properties that reference geo
+
+										$location_geo_common = array(
 											'geo',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-										||
-										in_array(
 											'latitude',
-											$location_properties_map[$LocalBusiness_type]['properties']
+											'longitude'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_geo_common
 										)
 										||
-										in_array(
-											'longitude',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_geo_common
 										)
 									) {
 
@@ -19103,6 +19265,11 @@
 									 */
 
 									if (
+										in_array(
+											'geo',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'geo',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -19146,9 +19313,16 @@
 									 */
 
 									if (
-										in_array(
-											'hasCredential',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'hasCredential',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'hasCredential',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -19192,9 +19366,16 @@
 									 */
 
 									if (
-										in_array(
-											'hasDriveThroughService',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'hasDriveThroughService',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'hasDriveThroughService',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -19234,6 +19415,11 @@
 									 */
 
 									if (
+										in_array(
+											'hasMap',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'hasMap',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -19283,9 +19469,16 @@
 											 */
 
 											if (
-												in_array(
-													'duns',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													in_array(
+														'duns',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'duns',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 												&&
 												$nesting_level == 0
@@ -19329,6 +19522,11 @@
 											 */
 
 											if (
+												in_array(
+													'globalLocationNumber',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
 												in_array(
 													'globalLocationNumber',
 													$location_properties_map[$LocalBusiness_type]['properties']
@@ -19375,6 +19573,11 @@
 											if (
 												in_array(
 													'isicV4',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'isicV4',
 													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
@@ -19416,6 +19619,11 @@
 											 */
 
 											if (
+												in_array(
+													'leiCode',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
 												in_array(
 													'leiCode',
 													$location_properties_map[$LocalBusiness_type]['properties']
@@ -19461,6 +19669,11 @@
 											if (
 												in_array(
 													'naics',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'naics',
 													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
@@ -19502,6 +19715,11 @@
 											 */
 
 											if (
+												in_array(
+													'taxID',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
 												in_array(
 													'taxID',
 													$location_properties_map[$LocalBusiness_type]['properties']
@@ -19584,6 +19802,11 @@
 											if (
 												in_array(
 													'vatID',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'vatID',
 													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
@@ -19633,6 +19856,11 @@
 											if (
 												in_array(
 													'iso6523Code',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'iso6523Code',
 													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
@@ -19665,6 +19893,11 @@
 										// 'identifier' property
 
 											if (
+												in_array(
+													'identifier',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
 												in_array(
 													'identifier',
 													$location_properties_map[$LocalBusiness_type]['properties']
@@ -19926,15 +20159,22 @@
 
 								// image (common use)
 
-									if (
-										in_array(
+									// List of properties that reference geo
+
+										$location_image_common = array(
 											'image',
-											$location_properties_map[$LocalBusiness_type]['properties']
+											'photo'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_image_common
 										)
 										||
-										in_array(
-											'photo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_image_common
 										)
 									) {
 
@@ -20180,6 +20420,11 @@
 									if (
 										in_array(
 											'image',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'image',
 											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
@@ -20213,9 +20458,16 @@
 									 */
 
 									if (
-										in_array(
-											'isAcceptingNewPatients',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'isAcceptingNewPatients',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'isAcceptingNewPatients',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20251,9 +20503,16 @@
 									 */
 
 									if (
-										in_array(
-											'isAccessibleForFree',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'isAccessibleForFree',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'isAccessibleForFree',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20292,9 +20551,16 @@
 									 */
 
 									if (
-										in_array(
-											'keywords',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'keywords',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'keywords',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20339,9 +20605,16 @@
 									 */
 
 									if (
-										in_array(
-											'knowsAbout',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'knowsAbout',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20380,9 +20653,16 @@
 									 */
 
 									if (
-										in_array(
-											'knowsLanguage',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'knowsLanguage',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsLanguage',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20416,6 +20696,11 @@
 									 */
 
 									if (
+										in_array(
+											'legalName',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'legalName',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -20453,9 +20738,16 @@
 									 */
 
 									if (
-										in_array(
-											'logo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'logo',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'logo',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20498,6 +20790,11 @@
 									if (
 										in_array(
 											'mainEntityOfPage',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'mainEntityOfPage',
 											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
@@ -20536,9 +20833,16 @@
 									 */
 
 									if (
-										in_array(
-											'makesOffer',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'makesOffer',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'makesOffer',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20574,9 +20878,16 @@
 									 */
 
 									if (
-										in_array(
-											'maximumAttendeeCapacity',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'maximumAttendeeCapacity',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'maximumAttendeeCapacity',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20620,9 +20931,16 @@
 									 */
 
 									if (
-										in_array(
-											'memberOf',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'memberOf',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'memberOf',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20663,9 +20981,16 @@
 									 */
 
 									if (
-										in_array(
-											'nonprofitStatus',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'nonprofitStatus',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'nonprofitStatus',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20701,9 +21026,16 @@
 									 */
 
 									if (
-										in_array(
-											'numberOfEmployees',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'numberOfEmployees',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'numberOfEmployees',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20754,9 +21086,16 @@
 									 */
 
 									if (
-										in_array(
-											'openingHours',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'openingHours',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'openingHours',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20792,9 +21131,16 @@
 									 */
 
 									if (
-										in_array(
-											'openingHoursSpecification',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'openingHoursSpecification',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'openingHoursSpecification',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20832,6 +21178,11 @@
 									if (
 										in_array(
 											'parentOrganization',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'parentOrganization',
 											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
@@ -20866,9 +21217,16 @@
 									 */
 
 									if (
-										in_array(
-											'paymentAccepted',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'paymentAccepted',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'paymentAccepted',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -20905,6 +21263,11 @@
 									 */
 
 									if (
+										in_array(
+											'photo',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'photo',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -21001,9 +21364,16 @@
 									*/
 
 									if (
-										in_array(
-											'potentialAction',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'potentialAction',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'potentialAction',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -21040,9 +21410,16 @@
 									 */
 
 									if (
-										in_array(
-											'publicAccess',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'publicAccess',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'publicAccess',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -21078,9 +21455,16 @@
 									 */
 
 									if (
-										in_array(
-											'review',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'review',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'review',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -21118,6 +21502,11 @@
 									 */
 
 									if (
+										in_array(
+											'sameAs',
+											$location_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
 										in_array(
 											'sameAs',
 											$location_properties_map[$LocalBusiness_type]['properties']
@@ -21172,9 +21561,16 @@
 									 */
 
 									if (
-										in_array(
-											'smokingAllowed',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'smokingAllowed',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'smokingAllowed',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -21213,9 +21609,16 @@
 									 */
 
 									if (
-										in_array(
-											'specialOpeningHoursSpecification',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'specialOpeningHoursSpecification',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'specialOpeningHoursSpecification',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -21254,9 +21657,16 @@
 									 */
 
 									if (
-										in_array(
-											'subjectOf',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'subjectOf',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'subjectOf',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
@@ -21305,9 +21715,16 @@
 									 */
 
 									if (
-										in_array(
-											'subOrganization',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											in_array(
+												'subOrganization',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'subOrganization',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 										&&
 										$nesting_level == 0
