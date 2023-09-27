@@ -18080,7 +18080,7 @@
 
 									}
 
-								// Parent location information (common use)
+								// Parent location attributes (common use)
 
 									// List of properties that reference parent locations
 
