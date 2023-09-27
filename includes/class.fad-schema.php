@@ -6153,47 +6153,33 @@
 
 								// names (common use and specific properties)
 
+									// List of properties that reference names
+
+										$provider_name_common = array(
+											'additionalName',
+											'alternateName',
+											'familyName',
+											'givenName',
+											'honorificPrefix',
+											'honorificSuffix',
+											'legalName',
+											'name'
+										);
+
 									if (
 										array_intersect(
 											$provider_properties_map[$MedicalWebPage_type]['properties'],
-											array(
-												'additionalName',
-												'alternateName',
-												'familyName',
-												'givenName',
-												'honorificPrefix',
-												'honorificSuffix',
-												'legalName',
-												'name'
-											)
+											$provider_name_common
 										)
 										||
 										array_intersect(
 											$provider_properties_map[$MedicalBusiness_type]['properties'],
-											array(
-												'additionalName',
-												'alternateName',
-												'familyName',
-												'givenName',
-												'honorificPrefix',
-												'honorificSuffix',
-												'legalName',
-												'name'
-											)
+											$provider_name_common
 										)
 										||
 										array_intersect(
 											$provider_properties_map[$Person_type]['properties'],
-											array(
-												'additionalName',
-												'alternateName',
-												'familyName',
-												'givenName',
-												'honorificPrefix',
-												'honorificSuffix',
-												'legalName',
-												'name'
-											)
+											$provider_name_common
 										)
 									) {
 
