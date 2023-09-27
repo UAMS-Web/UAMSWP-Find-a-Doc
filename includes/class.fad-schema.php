@@ -17477,7 +17477,11 @@
 
 							// Load variables from pre-existing field values array
 
-								if ( $location_fields[$LocalBusiness] ) {
+								if (
+									isset($location_fields[$LocalBusiness])
+									&&
+									!empty($location_fields[$LocalBusiness])
+								) {
 
 									foreach ( $location_fields[$LocalBusiness] as $key => $value ) {
 
