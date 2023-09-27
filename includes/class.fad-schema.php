@@ -6145,15 +6145,6 @@
 
 												}
 
-											// Define reference to the @id
-
-												if ( $provider_item_MedicalWebPage['@id'] ) {
-
-													$provider_item_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
-													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
-
-												}
-
 										}
 
 									// MedicalBusiness
@@ -6174,15 +6165,6 @@
 
 												}
 
-											// Define reference to the @id
-
-												if ( $provider_item_MedicalBusiness['@id'] ) {
-
-													$provider_item_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
-													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalBusiness_ref);
-
-												}
-
 										}
 
 									// Person
@@ -6200,15 +6182,6 @@
 												if ( $Person_id ) {
 
 													$provider_item_Person['@id'] = $Person_id;
-
-												}
-
-											// Define reference to the @id
-
-												if ( $provider_item_Person['@id'] ) {
-
-													$provider_item_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
-													uamswp_fad_flatten_multidimensional_array($provider_item_Person_ref);
 
 												}
 
@@ -19323,15 +19296,6 @@
 
 											}
 
-										// Define reference to the @id
-
-											if ( $location_item_MedicalWebPage['@id'] ) {
-
-												$location_item_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($location_item_MedicalWebPage));
-												uamswp_fad_flatten_multidimensional_array($location_item_MedicalWebPage_ref);
-
-											}
-
 									// LocalBusiness
 
 										// Get values
@@ -19345,15 +19309,6 @@
 											if ( $LocalBusiness_id ) {
 
 												$location_item_LocalBusiness['@id'] = $LocalBusiness_id;
-
-											}
-
-										// Define reference to the @id
-
-											if ( $location_item_LocalBusiness['@id'] ) {
-
-												$location_item_LocalBusiness_ref = uamswp_fad_schema_node_references(array($location_item_LocalBusiness));
-												uamswp_fad_flatten_multidimensional_array($location_item_LocalBusiness_ref);
 
 											}
 
