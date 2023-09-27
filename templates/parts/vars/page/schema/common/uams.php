@@ -18,9 +18,18 @@
 
 		$schema_base_org_uams['@id'] = $schema_base_org_uams_url . '#' . $schema_base_org_uams['@type'];
 
-		// Define reference to this 'CollegeOrUniversity' item
+		// Define reference to the @id
 
-			$schema_base_org_uams_ref['@id'] = $schema_base_org_uams['@id'] ?: '';
+			if (
+				isset($schema_base_org_uams['@id'])
+				&&
+				!empty($schema_base_org_uams['@id'])
+			) {
+
+				$schema_base_org_uams_ref = uamswp_fad_schema_node_references(array($schema_base_org_uams));
+				uamswp_fad_flatten_multidimensional_array($schema_base_org_uams_ref);
+
+			}
 
 	// name
 
@@ -44,9 +53,20 @@
 			'streetAddress' => '4301 West Markham Street'
 		);
 
-		// Define reference to this 'CollegeOrUniversity' item's 'contactPoint' property
+		// Define reference to the @id
 
-			$schema_base_org_uams_contactPoint_ref['@id'] = $schema_base_org_uams['contactPoint']['@id'] ?: '';
+			$schema_base_org_uams_contactPoint = $schema_base_org_uams['contactPoint'] ?? array();
+
+			if (
+				isset($schema_base_org_uams_contactPoint['@id'])
+				&&
+				!empty($schema_base_org_uams_contactPoint['@id'])
+			) {
+
+				$schema_base_org_uams_contactPoint_ref = uamswp_fad_schema_node_references(array($schema_base_org_uams_contactPoint));
+				uamswp_fad_flatten_multidimensional_array($schema_base_org_uams_contactPoint_ref);
+
+			}
 
 	// description
 
@@ -276,9 +296,18 @@
 
 		$schema_base_org_uams_health['@id'] = $schema_base_org_uams_health_url . '#' . $schema_base_org_uams_health['@type'];
 
-		// Define reference to this 'MedicalOrganization' item
+		// Define reference to the @id
 
-			$schema_base_org_uams_health_ref['@id'] = $schema_base_org_uams_health['@id'] ?: '';
+			if (
+				isset($schema_base_org_uams_health['@id'])
+				&&
+				!empty($schema_base_org_uams_health['@id'])
+			) {
+
+				$schema_base_org_uams_health_ref = uamswp_fad_schema_node_references(array($schema_base_org_uams_health));
+				uamswp_fad_flatten_multidimensional_array($schema_base_org_uams_health_ref);
+
+			}
 
 		// Set value of 'subOrganization' property of 'CollegeOrUniversity' item with this 'MedicalOrganization' reference
 
@@ -341,9 +370,18 @@
 
 		$schema_base_website_uams_health['@id'] = $schema_base_org_uams_health_url . '#' . $schema_base_website_uams_health['@type'];
 
-		// Define reference to this 'MedicalOrganization' item
+		// Define reference to the @id
 
-			$schema_base_website_uams_health_ref['@id'] = $schema_base_website_uams_health['@id'] ?: '';
+			if (
+				isset($schema_base_website_uams_health['@id'])
+				&&
+				!empty($schema_base_website_uams_health['@id'])
+			) {
+
+				$schema_base_website_uams_health_ref = uamswp_fad_schema_node_references(array($schema_base_website_uams_health));
+				uamswp_fad_flatten_multidimensional_array($schema_base_website_uams_health_ref);
+
+			}
 
 	// name
 
@@ -367,9 +405,20 @@
 			'sameAs' => 'https://www.wikidata.org/wiki/Q1860'
 		);
 
-		// Define reference to this 'inLanguage' property
+		// Define reference to the @id
 
-			$schema_base_website_uams_health_inLanguage_ref['@id'] = $schema_base_website_uams_health['inLanguage']['@id'] ?: '';
+			$schema_base_website_uams_health_inLanguage = $schema_base_website_uams_health['inLanguage'] ?? array();
+
+			if (
+				isset($schema_base_website_uams_health_inLanguage['@id'])
+				&&
+				!empty($schema_base_website_uams_health_inLanguage['@id'])
+			) {
+
+				$schema_base_website_uams_health_inLanguage_ref = uamswp_fad_schema_node_references(array($schema_base_website_uams_health_inLanguage));
+				uamswp_fad_flatten_multidimensional_array($schema_base_website_uams_health_inLanguage_ref);
+
+			}
 
 	// sourceOrganization
 
@@ -385,7 +434,18 @@
 
 		// Define reference to this 'url' property
 
-			$schema_base_website_uams_health_url_ref['@id'] = $schema_base_website_uams_health['url']['@id'] ?: '';
+			$schema_base_website_uams_health_url = $schema_base_website_uams_health['url'] ?? array();
+
+			if (
+				isset($schema_base_website_uams_health_url['@id'])
+				&&
+				!empty($schema_base_website_uams_health_url['@id'])
+			) {
+
+				$schema_base_website_uams_health_url_ref = uamswp_fad_schema_node_references(array($schema_base_website_uams_health_url));
+				uamswp_fad_flatten_multidimensional_array($schema_base_website_uams_health_url_ref);
+
+			}
 
 		// Set value of 'url' property of UAMS Health 'MedicalOrganization' item with this 'url' reference
 

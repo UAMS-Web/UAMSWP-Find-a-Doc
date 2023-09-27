@@ -1325,11 +1325,13 @@
 									array($hospital_location), // List of IDs of the location items
 									$page_url, // Page URL
 									$nesting_level, // Nesting level within the main schema
+									false, // bool // Query for whether to output the 'MedicalWebPage' type
+									true, // bool // Query for whether to output the 'LocalBusiness' type
 									1, // Iteration counter for location-as-MedicalWebPage
 									$schema_hospital_affiliation_i, // Iteration counter for location-as-LocalBusiness
 									array(), // Pre-existing field values array so duplicate calls can be avoided
 									$schema_hospital_affiliation // Pre-existing list array to which to add additional items
-								);
+								)['LocalBusiness'] ?? array();
 
 							}
 
@@ -5298,6 +5300,9 @@
 			array $repeater, // List of IDs of the provider items
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
+			bool $MedicalWebPage_output = true, // bool // Query for whether to output the 'MedicalWebPage' type
+			bool $MedicalBusiness_output = true, // bool // Query for whether to output the 'MedicalBusiness' type
+			bool $Person_output = true, // bool // Query for whether to output the 'Person' type
 			int $MedicalWebPage_i = 1, // Iteration counter for provider-as-MedicalWebPage
 			int $MedicalBusiness_i = 1, // Iteration counter for provider-as-MedicalBusiness
 			int $Person_i = 1, // Iteration counter for provider-as-Person
@@ -5833,7 +5838,11 @@
 
 							// Load variables from pre-existing field values array
 
-								if ( $provider_fields[$provider] ) {
+								if (
+									isset($provider_fields[$provider])
+									&&
+									!empty($provider_fields[$provider])
+								) {
 
 									foreach ( $provider_fields[$provider] as $key => $value ) {
 
@@ -5904,254 +5913,306 @@
 
 									// Add to item values
 
-										if ( $provider_url ) {
+										// MedicalWebPage
 
-											$provider_item_MedicalWebPage['url'] = $provider_url;
-											$provider_item_MedicalBusiness['url'] = $provider_url;
-											$provider_item_Person['url'] = $provider_url;
+											if (
+												$MedicalWebPage_output
+												&&
+												$provider_url
+											) {
 
-										}
+												$provider_item_MedicalWebPage['url'] = $provider_url;
+
+											}
+
+										// MedicalBusiness
+
+										if (
+											$MedicalBusiness_output
+											&&
+											$provider_url
+										) {
+
+												$provider_item_MedicalBusiness['url'] = $provider_url;
+
+											}
+
+										// Person
+
+										if (
+											$Person_output
+											&&
+											$provider_url
+										) {
+
+												$provider_item_Person['url'] = $provider_url;
+
+											}
 
 								// @type
 
 									// MedicalWebPage type
 
-										// Get values
+										if ( $MedicalWebPage_output ) {
 
-											$MedicalWebPage_type = 'MedicalWebPage';
+											// Get values
 
-										// Add to item values
+												$MedicalWebPage_type = 'MedicalWebPage';
 
-											if ( $MedicalWebPage_type ) {
+											// Add to item values
 
-												$provider_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+												if ( $MedicalWebPage_type ) {
 
-											}
+													$provider_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+
+												}
+
+										}
 
 									// MedicalBusiness Subtype
 
-										// Get values
+										if ( $MedicalBusiness_output ) {
 
-											// Base value
+											// Get values
 
-												$MedicalBusiness_type = 'MedicalBusiness';
+												// Base value
 
-											// Get list of the provider's degrees
+													$MedicalBusiness_type = 'MedicalBusiness';
 
-												if (
-													!isset($provider_degree_array)
-													||
-													!isset($provider_degree_list)
-												) {
+												// Get list of the provider's degrees
 
-													$provider_degree_array = array();
-													$provider_degree_list = '';
-													$provider_degree_list_i = 1;
-													$provider_degree_count = 0;
+													if (
+														!isset($provider_degree_array)
+														||
+														!isset($provider_degree_list)
+													) {
 
-													if ( !isset($provider_degrees) ) {
+														$provider_degree_array = array();
+														$provider_degree_list = '';
+														$provider_degree_list_i = 1;
+														$provider_degree_count = 0;
 
-														$provider_degrees = get_field( 'physician_degree', $provider );
+														if ( !isset($provider_degrees) ) {
+
+															$provider_degrees = get_field( 'physician_degree', $provider );
+
+														}
+
+														if ( $provider_degrees ) {
+
+															$provider_degree_count = count($provider_degrees) ?? 0;
+
+															foreach ( $provider_degrees as $item ) {
+
+																$item_term = get_term( $item, 'degree' );
+																$item_name = '';
+
+																if ( is_object($item_term) ) {
+
+																	$item_name = $item_term->name;
+
+																	if ( $item_name ) {
+
+																		$provider_degree_list .= $item_name;
+																		$provider_degree_array[] = uamswp_attr_conversion($item_name);
+
+																		if ( $provider_degree_count > $provider_degree_list_i ) {
+
+																			$provider_degree_list .= ', ';
+
+																		} // endif
+
+																		$provider_degree_list_i++;
+
+																	}
+
+																} // endif
+
+															} // endforeach
+
+														} // endif
+
+														if ( $provider_degree_list ) {
+
+															$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
+
+														} // endif
 
 													}
 
-													if ( $provider_degrees ) {
+												// Check the list of degrees against the Physician degrees
 
-														$provider_degree_count = count($provider_degrees) ?? 0;
+													if (
+														$provider_properties_map['Physician']['degrees']
+														&&
+														$provider_degree_array
+													) {
 
-														foreach ( $provider_degrees as $item ) {
+														$Physician_degree_query = !empty(
+															array_intersect(
+																$provider_properties_map['Physician']['degrees'],
+																$provider_degree_array
+															)
+														);
 
-															$item_term = get_term( $item, 'degree' );
-															$item_name = '';
+														$MedicalBusiness_type = $Physician_degree_query ? 'Physician' : $MedicalBusiness_type;
 
-															if ( is_object($item_term) ) {
+													}
 
-																$item_name = $item_term->name;
+												// Check the list of degrees against the Dentist degrees
 
-																if ( $item_name ) {
+													if (
+														$provider_properties_map['Dentist']['degrees']
+														&&
+														$provider_degree_array
+													) {
 
-																	$provider_degree_list .= $item_name;
-																	$provider_degree_array[] = uamswp_attr_conversion($item_name);
+														$Dentist_degree_query = !empty(
+															array_intersect(
+																$provider_properties_map['Dentist']['degrees'],
+																$provider_degree_array
+															)
+														);
 
-																	if ( $provider_degree_count > $provider_degree_list_i ) {
+														$MedicalBusiness_type = $Dentist_degree_query ? 'Dentist' : $MedicalBusiness_type;
 
-																		$provider_degree_list .= ', ';
+													}
 
-																	} // endif
+												// Check the list of degrees against the Optician degrees
 
-																	$provider_degree_list_i++;
+													if (
+														$provider_properties_map['Optician']['degrees']
+														&&
+														$provider_degree_array
+													) {
 
-																}
+														$Optician_degree_query = !empty(
+															array_intersect(
+																$provider_properties_map['Optician']['degrees'],
+																$provider_degree_array
+															)
+														);
 
-															} // endif
+														$MedicalBusiness_type = $Optician_degree_query ? 'Optician' : $MedicalBusiness_type;
 
-														} // endforeach
+													}
 
-													} // endif
+											// Add to item values
 
-													if ( $provider_degree_list ) {
+												if ( $MedicalBusiness_type ) {
 
-														$provider_degree_list = uamswp_attr_conversion($provider_degree_list);
-
-													} // endif
-
-												}
-
-											// Check the list of degrees against the Physician degrees
-
-												if (
-													$provider_properties_map['Physician']['degrees']
-													&&
-													$provider_degree_array
-												) {
-
-													$Physician_degree_query = !empty(
-														array_intersect(
-															$provider_properties_map['Physician']['degrees'],
-															$provider_degree_array
-														)
-													);
-
-													$MedicalBusiness_type = $Physician_degree_query ? 'Physician' : $MedicalBusiness_type;
-
-												}
-
-											// Check the list of degrees against the Dentist degrees
-
-												if (
-													$provider_properties_map['Dentist']['degrees']
-													&&
-													$provider_degree_array
-												) {
-
-													$Dentist_degree_query = !empty(
-														array_intersect(
-															$provider_properties_map['Dentist']['degrees'],
-															$provider_degree_array
-														)
-													);
-
-													$MedicalBusiness_type = $Dentist_degree_query ? 'Dentist' : $MedicalBusiness_type;
+													$provider_item_MedicalBusiness['@type'] = $MedicalBusiness_type;
 
 												}
 
-											// Check the list of degrees against the Optician degrees
-
-												if (
-													$provider_properties_map['Optician']['degrees']
-													&&
-													$provider_degree_array
-												) {
-
-													$Optician_degree_query = !empty(
-														array_intersect(
-															$provider_properties_map['Optician']['degrees'],
-															$provider_degree_array
-														)
-													);
-
-													$MedicalBusiness_type = $Optician_degree_query ? 'Optician' : $MedicalBusiness_type;
-
-												}
-
-										// Add to item values
-
-											if ( $MedicalBusiness_type ) {
-
-												$provider_item_MedicalBusiness['@type'] = $MedicalBusiness_type;
-
-											}
+										}
 
 									// Person type
 
-										// Get values
+										if ( $Person_output ) {
 
-											$Person_type = 'Person';
+											// Get values
 
-										// Add to item values
+												$Person_type = 'Person';
 
-											if ( $Person_type ) {
+											// Add to item values
 
-												$provider_item_Person['@type'] = $Person_type;
+												if ( $Person_type ) {
 
-											}
+													$provider_item_Person['@type'] = $Person_type;
+
+												}
+
+										}
 
 								// @id
 
 									// MedicalWebPage
 
-										// Get values
+										if ( $MedicalWebPage_output ) {
 
-											$MedicalWebPage_id = $provider_url . '#' . $MedicalWebPage_type;
-											// $MedicalWebPage_id .= $MedicalWebPage_i;
-											// $MedicalWebPage_i++;
+											// Get values
 
-										// Add to item values
+												$MedicalWebPage_id = $provider_url . '#' . $MedicalWebPage_type;
+												// $MedicalWebPage_id .= $MedicalWebPage_i;
+												// $MedicalWebPage_i++;
 
-											if ( $MedicalWebPage_id ) {
+											// Add to item values
 
-												$provider_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
+												if ( $MedicalWebPage_id ) {
 
-											}
+													$provider_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
 
-										// Define reference to the @id
+												}
 
-											if ( $provider_item_MedicalWebPage['@id'] ) {
+											// Define reference to the @id
 
-												$provider_item_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
-												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
+												if ( $provider_item_MedicalWebPage['@id'] ) {
 
-											}
+													$provider_item_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalWebPage));
+													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
+
+												}
+
+										}
 
 									// MedicalBusiness
 
-										// Get values
+										if ( $MedicalBusiness_output ) {
 
-											$MedicalBusiness_id = $provider_url . '#' . $MedicalBusiness_type;
-											// $MedicalBusiness_id .= $MedicalBusiness_i;
-											// $MedicalBusiness_i++;
+											// Get values
 
-										// Add to item values
+												$MedicalBusiness_id = $provider_url . '#' . $MedicalBusiness_type;
+												// $MedicalBusiness_id .= $MedicalBusiness_i;
+												// $MedicalBusiness_i++;
 
-											if ( $MedicalBusiness_id ) {
+											// Add to item values
 
-												$provider_item_MedicalBusiness['@id'] = $MedicalBusiness_id;
+												if ( $MedicalBusiness_id ) {
 
-											}
+													$provider_item_MedicalBusiness['@id'] = $MedicalBusiness_id;
 
-										// Define reference to the @id
+												}
 
-											if ( $provider_item_MedicalBusiness['@id'] ) {
+											// Define reference to the @id
 
-												$provider_item_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
-												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalBusiness_ref);
+												if ( $provider_item_MedicalBusiness['@id'] ) {
 
-											}
+													$provider_item_MedicalBusiness_ref = uamswp_fad_schema_node_references(array($provider_item_MedicalBusiness));
+													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalBusiness_ref);
+
+												}
+
+										}
 
 									// Person
 
-										// Get values
+										if ( $Person_output ) {
 
-											$Person_id = $provider_url . '#' . $Person_type;
-											// $Person_id .= $Person_i;
-											// $Person_i++;
+											// Get values
 
-										// Add to item values
+												$Person_id = $provider_url . '#' . $Person_type;
+												// $Person_id .= $Person_i;
+												// $Person_i++;
 
-											if ( $Person_id ) {
+											// Add to item values
 
-												$provider_item_Person['@id'] = $Person_id;
+												if ( $Person_id ) {
 
-											}
+													$provider_item_Person['@id'] = $Person_id;
 
-										// Define reference to the @id
+												}
 
-											if ( $provider_item_Person['@id'] ) {
+											// Define reference to the @id
 
-												$provider_item_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
-												uamswp_fad_flatten_multidimensional_array($provider_item_Person_ref);
+												if ( $provider_item_Person['@id'] ) {
 
-											}
+													$provider_item_Person_ref = uamswp_fad_schema_node_references(array($provider_item_Person));
+													uamswp_fad_flatten_multidimensional_array($provider_item_Person_ref);
+
+												}
+
+										}
 
 								// names (common use and specific properties)
 
@@ -6169,19 +6230,31 @@
 										);
 
 									if (
-										array_intersect(
-											$provider_properties_map[$MedicalWebPage_type]['properties'],
-											$provider_name_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_name_common
+											)
 										)
 										||
-										array_intersect(
-											$provider_properties_map[$MedicalBusiness_type]['properties'],
-											$provider_name_common
+										(
+											$MedicalBusiness_output
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_name_common
+											)
 										)
 										||
-										array_intersect(
-											$provider_properties_map[$Person_type]['properties'],
-											$provider_name_common
+										(
+											$Person_output
+											&&
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_name_common
+											)
 										)
 									) {
 
@@ -6342,6 +6415,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
@@ -6354,6 +6428,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
@@ -6366,6 +6441,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'givenName', // string // Required // Name of schema property
 														$provider_givenName, // mixed // Required // Variable to add as the property value
@@ -6390,6 +6466,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
@@ -6402,6 +6479,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
@@ -6414,6 +6492,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'additionalName', // string // Required // Name of schema property
 														$provider_additionalName, // mixed // Required // Variable to add as the property value
@@ -6438,6 +6517,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
@@ -6450,6 +6530,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
@@ -6462,6 +6543,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'familyName', // string // Required // Name of schema property
 														$provider_familyName, // mixed // Required // Variable to add as the property value
@@ -6494,6 +6576,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
@@ -6506,6 +6589,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
@@ -6518,6 +6602,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'legalName', // string // Required // Name of schema property
 														$provider_legalName, // mixed // Required // Variable to add as the property value
@@ -6542,6 +6627,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
@@ -6554,6 +6640,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
@@ -6566,6 +6653,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'honorificPrefix', // string // Required // Name of schema property
 														$provider_honorificPrefix, // mixed // Required // Variable to add as the property value
@@ -6594,6 +6682,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
@@ -6606,6 +6695,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
@@ -6618,6 +6708,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'honorificSuffix', // string // Required // Name of schema property
 														$provider_honorificSuffix, // mixed // Required // Variable to add as the property value
@@ -6695,6 +6786,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
@@ -6707,6 +6799,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
@@ -6719,6 +6812,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$provider_name, // mixed // Required // Variable to add as the property value
@@ -7050,6 +7144,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'alternateName', // string // Required // Name of schema property
 															$provider_alternateName, // mixed // Required // Variable to add as the property value
@@ -7064,6 +7159,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'alternateName', // string // Required // Name of schema property
 															$provider_alternateName, // mixed // Required // Variable to add as the property value
@@ -7078,6 +7174,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'alternateName', // string // Required // Name of schema property
 															$provider_alternateName, // mixed // Required // Variable to add as the property value
@@ -7103,19 +7200,31 @@
 											);
 
 										if (
-											array_intersect(
-												$provider_properties_map[$MedicalWebPage_type]['properties'],
-												$provider_location_common
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalWebPage_type]['properties'],
+													$provider_location_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$MedicalBusiness_type]['properties'],
-												$provider_location_common
+											(
+												$MedicalBusiness_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalBusiness_type]['properties'],
+													$provider_location_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$Person_type]['properties'],
-												$provider_location_common
+											(
+												$Person_output
+												&&
+												array_intersect(
+													$provider_properties_map[$Person_type]['properties'],
+													$provider_location_common
+												)
 											)
 										) {
 
@@ -7135,6 +7244,8 @@
 															$provider_location_array, // List of IDs of the location items
 															$provider_url, // Page URL
 															( $nesting_level + 1 ), // Nesting level within the main schema
+															false, // bool // Query for whether to output the 'MedicalWebPage' type
+															true // bool // Query for whether to output the 'LocalBusiness' type
 														)['LocalBusiness'];
 
 													}
@@ -7169,19 +7280,31 @@
 
 												if (
 													(
-														in_array(
-															'location',
-															$provider_properties_map[$MedicalWebPage_type]['properties']
+														(
+															$MedicalWebPage_output
+															&&
+															in_array(
+																'location',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
 														)
 														||
-														in_array(
-															'location',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
+														(
+															$MedicalBusiness_output
+															&&
+															in_array(
+																'location',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
 														)
 														||
-														in_array(
-															'location',
-															$provider_properties_map[$Person_type]['properties']
+														(
+															$Person_output
+															&&
+															in_array(
+																'location',
+																$provider_properties_map[$Person_type]['properties']
+															)
 														)
 													)
 													&&
@@ -7194,6 +7317,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'location', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7206,6 +7330,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'location', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7218,6 +7343,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$Person_type, // string // Required // The @type value for the schema item
+																$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'location', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7257,19 +7383,31 @@
 
 												if (
 													(
-														in_array(
-															'workLocation',
-															$provider_properties_map[$MedicalWebPage_type]['properties']
+														(
+															$MedicalWebPage_output
+															&&
+															in_array(
+																'workLocation',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
 														)
 														||
-														in_array(
-															'workLocation',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
+														(
+															$MedicalBusiness_output
+															&&
+															in_array(
+																'workLocation',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
 														)
 														||
-														in_array(
-															'workLocation',
-															$provider_properties_map[$Person_type]['properties']
+														(
+															$Person_output
+															&&
+															in_array(
+																'workLocation',
+																$provider_properties_map[$Person_type]['properties']
+															)
 														)
 													)
 													&&
@@ -7282,6 +7420,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'workLocation', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7294,6 +7433,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'workLocation', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7306,6 +7446,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$Person_type, // string // Required // The @type value for the schema item
+																$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'workLocation', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7343,19 +7484,31 @@
 
 												if (
 													(
-														in_array(
-															'containedInPlace',
-															$provider_properties_map[$MedicalWebPage_type]['properties']
+														(
+															$MedicalWebPage_output
+															&&
+															in_array(
+																'containedInPlace',
+																$provider_properties_map[$MedicalWebPage_type]['properties']
+															)
 														)
 														||
-														in_array(
-															'containedInPlace',
-															$provider_properties_map[$MedicalBusiness_type]['properties']
+														(
+															$MedicalBusiness_output
+															&&
+															in_array(
+																'containedInPlace',
+																$provider_properties_map[$MedicalBusiness_type]['properties']
+															)
 														)
 														||
-														in_array(
-															'containedInPlace',
-															$provider_properties_map[$Person_type]['properties']
+														(
+															$Person_output
+															&&
+															in_array(
+																'containedInPlace',
+																$provider_properties_map[$Person_type]['properties']
+															)
 														)
 													)
 													&&
@@ -7368,6 +7521,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'containedInPlace', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7380,6 +7534,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'containedInPlace', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7392,6 +7547,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$Person_type, // string // Required // The @type value for the schema item
+																$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'containedInPlace', // string // Required // Name of schema property
 																$provider_location, // mixed // Required // Variable to add as the property value
@@ -7429,19 +7585,31 @@
 											);
 
 										if (
-											array_intersect(
-												$provider_properties_map[$MedicalWebPage_type]['properties'],
-												$provider_expertise_common
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalWebPage_type]['properties'],
+													$provider_expertise_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$MedicalBusiness_type]['properties'],
-												$provider_expertise_common
+											(
+												$MedicalBusiness_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalBusiness_type]['properties'],
+													$provider_expertise_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$Person_type]['properties'],
-												$provider_expertise_common
+											(
+												$Person_output
+												&&
+												array_intersect(
+													$provider_properties_map[$Person_type]['properties'],
+													$provider_expertise_common
+												)
 											)
 										) {
 
@@ -7491,19 +7659,31 @@
 											);
 
 										if (
-											array_intersect(
-												$provider_properties_map[$MedicalWebPage_type]['properties'],
-												$provider_clinical_resource_common
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalWebPage_type]['properties'],
+													$provider_clinical_resource_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$MedicalBusiness_type]['properties'],
-												$provider_clinical_resource_common
+											(
+												$MedicalBusiness_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalBusiness_type]['properties'],
+													$provider_clinical_resource_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$Person_type]['properties'],
-												$provider_clinical_resource_common
+											(
+												$Person_output
+												&&
+												array_intersect(
+													$provider_properties_map[$Person_type]['properties'],
+													$provider_clinical_resource_common
+												)
 											)
 										) {
 
@@ -7561,19 +7741,31 @@
 											);
 
 										if (
-											array_intersect(
-												$provider_properties_map[$MedicalWebPage_type]['properties'],
-												$provider_condition_common
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalWebPage_type]['properties'],
+													$provider_condition_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$MedicalBusiness_type]['properties'],
-												$provider_condition_common
+											(
+												$MedicalBusiness_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalBusiness_type]['properties'],
+													$provider_condition_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$Person_type]['properties'],
-												$provider_condition_common
+											(
+												$Person_output
+												&&
+												array_intersect(
+													$provider_properties_map[$Person_type]['properties'],
+													$provider_condition_common
+												)
 											)
 										) {
 
@@ -7624,19 +7816,31 @@
 											);
 
 										if (
-											array_intersect(
-												$provider_properties_map[$MedicalWebPage_type]['properties'],
-												$provider_treatment_common
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalWebPage_type]['properties'],
+													$provider_treatment_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$MedicalBusiness_type]['properties'],
-												$provider_treatment_common
+											(
+												$MedicalBusiness_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalBusiness_type]['properties'],
+													$provider_treatment_common
+												)
 											)
 											||
-											array_intersect(
-												$provider_properties_map[$Person_type]['properties'],
-												$provider_treatment_common
+											(
+												$Person_output
+												&&
+												array_intersect(
+													$provider_properties_map[$Person_type]['properties'],
+													$provider_treatment_common
+												)
 											)
 										) {
 
@@ -7690,19 +7894,31 @@
 
 											if (
 												(
-													in_array(
-														'availableService',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
+													(
+														$MedicalWebPage_output
+														&&
+														in_array(
+															'availableService',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'availableService',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'availableService',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'availableService',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'availableService',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -7715,6 +7931,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'availableService', // string // Required // Name of schema property
 															$provider_availableService, // mixed // Required // Variable to add as the property value
@@ -7727,6 +7944,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'availableService', // string // Required // Name of schema property
 															$provider_availableService, // mixed // Required // Variable to add as the property value
@@ -7739,6 +7957,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'availableService', // string // Required // Name of schema property
 															$provider_availableService, // mixed // Required // Variable to add as the property value
@@ -7779,19 +7998,31 @@
 
 									if (
 										(
-											in_array(
-												'about',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'about',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'about',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'about',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'about',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'about',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -7818,6 +8049,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$provider_about, // mixed // Required // Variable to add as the property value
@@ -7830,6 +8062,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$provider_about, // mixed // Required // Variable to add as the property value
@@ -7842,6 +8075,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'about', // string // Required // Name of schema property
 													$provider_about, // mixed // Required // Variable to add as the property value
@@ -7868,19 +8102,31 @@
 
 									if (
 										(
-											in_array(
-												'abstract',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'abstract',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'abstract',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'abstract',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'abstract',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'abstract',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -7901,6 +8147,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$provider_abstract, // mixed // Required // Variable to add as the property value
@@ -7913,6 +8160,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$provider_abstract, // mixed // Required // Variable to add as the property value
@@ -7925,6 +8173,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
 													$provider_abstract, // mixed // Required // Variable to add as the property value
@@ -7949,19 +8198,31 @@
 
 									if (
 										(
-											in_array(
-												'accessMode',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessMode',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessMode',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessMode',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessMode',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessMode',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -7982,6 +8243,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessMode', // string // Required // Name of schema property
 													$provider_accessMode, // mixed // Required // Variable to add as the property value
@@ -7994,6 +8256,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessMode', // string // Required // Name of schema property
 													$provider_accessMode, // mixed // Required // Variable to add as the property value
@@ -8006,6 +8269,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessMode', // string // Required // Name of schema property
 													$provider_accessMode, // mixed // Required // Variable to add as the property value
@@ -8030,19 +8294,31 @@
 
 									if (
 										(
-											in_array(
-												'accessModeSufficient',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessModeSufficient',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessModeSufficient',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessModeSufficient',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessModeSufficient',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessModeSufficient',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8063,6 +8339,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessModeSufficient', // string // Required // Name of schema property
 													$provider_accessModeSufficient, // mixed // Required // Variable to add as the property value
@@ -8075,6 +8352,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessModeSufficient', // string // Required // Name of schema property
 													$provider_accessModeSufficient, // mixed // Required // Variable to add as the property value
@@ -8087,6 +8365,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessModeSufficient', // string // Required // Name of schema property
 													$provider_accessModeSufficient, // mixed // Required // Variable to add as the property value
@@ -8111,19 +8390,31 @@
 
 									if (
 										(
-											in_array(
-												'accessibilityAPI',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessibilityAPI',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityAPI',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessibilityAPI',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityAPI',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessibilityAPI',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8144,6 +8435,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityAPI', // string // Required // Name of schema property
 													$provider_accessibilityAPI, // mixed // Required // Variable to add as the property value
@@ -8156,6 +8448,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityAPI', // string // Required // Name of schema property
 													$provider_accessibilityAPI, // mixed // Required // Variable to add as the property value
@@ -8168,6 +8461,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityAPI', // string // Required // Name of schema property
 													$provider_accessibilityAPI, // mixed // Required // Variable to add as the property value
@@ -8192,19 +8486,31 @@
 
 									if (
 										(
-											in_array(
-												'accessibilityControl',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessibilityControl',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityControl',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessibilityControl',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityControl',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessibilityControl',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8225,6 +8531,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityControl', // string // Required // Name of schema property
 													$provider_accessibilityControl, // mixed // Required // Variable to add as the property value
@@ -8237,6 +8544,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityControl', // string // Required // Name of schema property
 													$provider_accessibilityControl, // mixed // Required // Variable to add as the property value
@@ -8249,6 +8557,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityControl', // string // Required // Name of schema property
 													$provider_accessibilityControl, // mixed // Required // Variable to add as the property value
@@ -8274,19 +8583,31 @@
 
 									if (
 										(
-											in_array(
-												'accessibilityFeature',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessibilityFeature',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityFeature',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessibilityFeature',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityFeature',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessibilityFeature',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8307,6 +8628,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityFeature', // string // Required // Name of schema property
 													$provider_accessibilityFeature, // mixed // Required // Variable to add as the property value
@@ -8319,6 +8641,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityFeature', // string // Required // Name of schema property
 													$provider_accessibilityFeature, // mixed // Required // Variable to add as the property value
@@ -8331,6 +8654,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityFeature', // string // Required // Name of schema property
 													$provider_accessibilityFeature, // mixed // Required // Variable to add as the property value
@@ -8355,19 +8679,31 @@
 
 									if (
 										(
-											in_array(
-												'accessibilityHazard',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessibilityHazard',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityHazard',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessibilityHazard',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilityHazard',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessibilityHazard',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8388,6 +8724,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityHazard', // string // Required // Name of schema property
 													$provider_accessibilityHazard, // mixed // Required // Variable to add as the property value
@@ -8400,6 +8737,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityHazard', // string // Required // Name of schema property
 													$provider_accessibilityHazard, // mixed // Required // Variable to add as the property value
@@ -8412,6 +8750,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilityHazard', // string // Required // Name of schema property
 													$provider_accessibilityHazard, // mixed // Required // Variable to add as the property value
@@ -8438,19 +8777,31 @@
 
 									if (
 										(
-											in_array(
-												'accessibilitySummary',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accessibilitySummary',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilitySummary',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accessibilitySummary',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accessibilitySummary',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accessibilitySummary',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8471,6 +8822,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilitySummary', // string // Required // Name of schema property
 													$provider_accessibilitySummary, // mixed // Required // Variable to add as the property value
@@ -8483,6 +8835,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilitySummary', // string // Required // Name of schema property
 													$provider_accessibilitySummary, // mixed // Required // Variable to add as the property value
@@ -8495,6 +8848,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accessibilitySummary', // string // Required // Name of schema property
 													$provider_accessibilitySummary, // mixed // Required // Variable to add as the property value
@@ -8517,19 +8871,31 @@
 
 									if (
 										(
-											in_array(
-												'accountablePerson',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'accountablePerson',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accountablePerson',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'accountablePerson',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'accountablePerson',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'accountablePerson',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8550,6 +8916,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'accountablePerson', // string // Required // Name of schema property
 													$provider_accountablePerson, // mixed // Required // Variable to add as the property value
@@ -8562,6 +8929,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'accountablePerson', // string // Required // Name of schema property
 													$provider_accountablePerson, // mixed // Required // Variable to add as the property value
@@ -8574,6 +8942,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'accountablePerson', // string // Required // Name of schema property
 													$provider_accountablePerson, // mixed // Required // Variable to add as the property value
@@ -8602,19 +8971,31 @@
 
 									if (
 										(
-											in_array(
-												'acquireLicensePage',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'acquireLicensePage',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'acquireLicensePage',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'acquireLicensePage',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'acquireLicensePage',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'acquireLicensePage',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -8635,6 +9016,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'acquireLicensePage', // string // Required // Name of schema property
 													$provider_acquireLicensePage, // mixed // Required // Variable to add as the property value
@@ -8647,6 +9029,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'acquireLicensePage', // string // Required // Name of schema property
 													$provider_acquireLicensePage, // mixed // Required // Variable to add as the property value
@@ -8659,6 +9042,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'acquireLicensePage', // string // Required // Name of schema property
 													$provider_acquireLicensePage, // mixed // Required // Variable to add as the property value
@@ -8679,19 +9063,31 @@
 									);
 
 									if (
-										array_intersect(
-											$provider_properties_map[$MedicalWebPage_type]['properties'],
-											$provider_specialty_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_specialty_common
+											)
 										)
 										||
-										array_intersect(
-											$provider_properties_map[$MedicalBusiness_type]['properties'],
-											$provider_specialty_common
+										(
+											$MedicalBusiness_output
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_specialty_common
+											)
 										)
 										||
-										array_intersect(
-											$provider_properties_map[$Person_type]['properties'],
-											$provider_specialty_common
+										(
+											$Person_output
+											&&
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_specialty_common
+											)
 										)
 									) {
 
@@ -8742,6 +9138,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -8754,6 +9151,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -8766,6 +9164,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'additionalType', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -8790,6 +9189,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'specialty', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -8802,6 +9202,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'specialty', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -8814,6 +9215,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$Person_type, // string // Required // The @type value for the schema item
+														$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 														'specialty', // string // Required // Name of schema property
 														$provider_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -8845,9 +9247,13 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'additionalType',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 									) {
 
@@ -8875,6 +9281,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$provider_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
@@ -8906,19 +9313,31 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'additionalType',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'additionalType',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'additionalType',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'additionalType',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'additionalType',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -9026,6 +9445,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$provider_additionalType, // mixed // Required // Variable to add as the property value
@@ -9038,6 +9458,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$provider_additionalType, // mixed // Required // Variable to add as the property value
@@ -9050,6 +9471,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$provider_additionalType, // mixed // Required // Variable to add as the property value
@@ -9072,19 +9494,31 @@
 
 									if (
 										(
-											in_array(
-												'aggregateRating',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'aggregateRating',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'aggregateRating',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'aggregateRating',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'aggregateRating',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'aggregateRating',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -9239,6 +9673,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$provider_aggregateRating, // mixed // Required // Variable to add as the property value
@@ -9251,6 +9686,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$provider_aggregateRating, // mixed // Required // Variable to add as the property value
@@ -9263,6 +9699,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$provider_aggregateRating, // mixed // Required // Variable to add as the property value
@@ -9288,19 +9725,31 @@
 
 									if (
 										(
-											in_array(
-												'alumniOf',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'alumniOf',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'alumniOf',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'alumniOf',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'alumniOf',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'alumniOf',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -9321,6 +9770,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'alumniOf', // string // Required // Name of schema property
 													$provider_alumniOf, // mixed // Required // Variable to add as the property value
@@ -9333,6 +9783,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'alumniOf', // string // Required // Name of schema property
 													$provider_alumniOf, // mixed // Required // Variable to add as the property value
@@ -9345,6 +9796,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'alumniOf', // string // Required // Name of schema property
 													$provider_alumniOf, // mixed // Required // Variable to add as the property value
@@ -9370,19 +9822,31 @@
 
 									if (
 										(
-											in_array(
-												'areaServed',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'areaServed',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'areaServed',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'areaServed',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'areaServed',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'areaServed',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -9403,6 +9867,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'areaServed', // string // Required // Name of schema property
 													$provider_areaServed, // mixed // Required // Variable to add as the property value
@@ -9415,6 +9880,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'areaServed', // string // Required // Name of schema property
 													$provider_areaServed, // mixed // Required // Variable to add as the property value
@@ -9427,6 +9893,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'areaServed', // string // Required // Name of schema property
 													$provider_areaServed, // mixed // Required // Variable to add as the property value
@@ -9449,19 +9916,31 @@
 
 									if (
 										(
-											in_array(
-												'audience',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'audience',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'audience',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'audience',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'audience',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'audience',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -9482,6 +9961,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'audience', // string // Required // Name of schema property
 													$provider_audience, // mixed // Required // Variable to add as the property value
@@ -9494,6 +9974,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'audience', // string // Required // Name of schema property
 													$provider_audience, // mixed // Required // Variable to add as the property value
@@ -9506,6 +9987,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'audience', // string // Required // Name of schema property
 													$provider_audience, // mixed // Required // Variable to add as the property value
@@ -9531,19 +10013,31 @@
 
 									if (
 										(
-											in_array(
-												'author',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'author',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'author',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'author',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'author',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'author',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -9564,6 +10058,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'author', // string // Required // Name of schema property
 													$provider_author, // mixed // Required // Variable to add as the property value
@@ -9576,6 +10071,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'author', // string // Required // Name of schema property
 													$provider_author, // mixed // Required // Variable to add as the property value
@@ -9588,6 +10084,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'author', // string // Required // Name of schema property
 													$provider_author, // mixed // Required // Variable to add as the property value
@@ -9610,19 +10107,31 @@
 
 									if (
 										(
-											in_array(
-												'award',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'award',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'award',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'award',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'award',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'award',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -9643,6 +10152,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'award', // string // Required // Name of schema property
 													$provider_award, // mixed // Required // Variable to add as the property value
@@ -9655,6 +10165,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'award', // string // Required // Name of schema property
 													$provider_award, // mixed // Required // Variable to add as the property value
@@ -9667,6 +10178,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'award', // string // Required // Name of schema property
 													$provider_award, // mixed // Required // Variable to add as the property value
@@ -9691,20 +10203,36 @@
 										);
 
 									if (
-										array_intersect(
-											$provider_properties_map[$MedicalWebPage_type]['properties'],
-											$provider_organization_common
+										(
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalWebPage_type]['properties'],
+													$provider_organization_common
+												)
+											)
+											||
+											(
+												$MedicalBusiness_output
+												&&
+												array_intersect(
+													$provider_properties_map[$MedicalBusiness_type]['properties'],
+													$provider_organization_common
+												)
+											)
+											||
+											(
+												$Person_output
+												&&
+												array_intersect(
+													$provider_properties_map[$Person_type]['properties'],
+													$provider_organization_common
+												)
+											)
 										)
-										||
-										array_intersect(
-											$provider_properties_map[$MedicalBusiness_type]['properties'],
-											$provider_organization_common
-										)
-										||
-										array_intersect(
-											$provider_properties_map[$Person_type]['properties'],
-											$provider_organization_common
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Common clinical 'Organization'
@@ -9713,13 +10241,13 @@
 
 												$provider_organization_common = array();
 
-												// UAMS Health
+											// UAMS Health
 
-													if ( $schema_base_org_uams_health_ref ) {
-
-														$provider_organization_common[] = $schema_base_org_uams_health_ref;
-
-													}
+												$provider_organization_common = uamswp_fad_schema_merge_values(
+													$provider_organization_common,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Specific clinical 'Organization'
 
@@ -9742,19 +10270,31 @@
 											 */
 
 											if (
-												in_array(
-													'brand',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'brand',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'brand',
-													$provider_properties_map[$MedicalBusiness_type]['properties']
+												(
+													$MedicalBusiness_output
+													&&
+													in_array(
+														'brand',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'brand',
-													$provider_properties_map[$Person_type]['properties']
+												(
+													$Person_output
+													&&
+													in_array(
+														'brand',
+														$provider_properties_map[$Person_type]['properties']
+													)
 												)
 											) {
 
@@ -9786,6 +10326,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'brand', // string // Required // Name of schema property
 															$provider_brand, // mixed // Required // Variable to add as the property value
@@ -9798,6 +10339,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'brand', // string // Required // Name of schema property
 															$provider_brand, // mixed // Required // Variable to add as the property value
@@ -9810,6 +10352,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'brand', // string // Required // Name of schema property
 															$provider_brand, // mixed // Required // Variable to add as the property value
@@ -9839,14 +10382,22 @@
 
 											if (
 												(
-													in_array(
-														'hospitalAffiliation',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
+													(
+														$MedicalWebPage_output
+														&&
+														in_array(
+															'hospitalAffiliation',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'hospitalAffiliation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'hospitalAffiliation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
 													in_array(
@@ -9856,14 +10407,22 @@
 												)
 												||
 												(
-													in_array(
-														'affiliation',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
+													(
+														$MedicalWebPage_output
+														&&
+														in_array(
+															'affiliation',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'affiliation',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'affiliation',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
 													in_array(
@@ -9912,6 +10471,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'hospitalAffiliation', // string // Required // Name of schema property
 																$provider_hospitalAffiliation, // mixed // Required // Variable to add as the property value
@@ -9924,6 +10484,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'hospitalAffiliation', // string // Required // Name of schema property
 																$provider_hospitalAffiliation, // mixed // Required // Variable to add as the property value
@@ -9936,6 +10497,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$Person_type, // string // Required // The @type value for the schema item
+																$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'hospitalAffiliation', // string // Required // Name of schema property
 																$provider_hospitalAffiliation, // mixed // Required // Variable to add as the property value
@@ -10006,6 +10568,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalWebPage_type, // string // Required // The @type value for the schema item
+																$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 																'affiliation', // string // Required // Name of schema property
 																$provider_affiliation, // mixed // Required // Variable to add as the property value
@@ -10018,6 +10581,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$MedicalBusiness_type, // string // Required // The @type value for the schema item
+																$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 																'affiliation', // string // Required // Name of schema property
 																$provider_affiliation, // mixed // Required // Variable to add as the property value
@@ -10030,6 +10594,7 @@
 
 															uamswp_fad_schema_add_to_item_values(
 																$Person_type, // string // Required // The @type value for the schema item
+																$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 																$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 																'affiliation', // string // Required // Name of schema property
 																$provider_affiliation, // mixed // Required // Variable to add as the property value
@@ -10056,19 +10621,31 @@
 
 											if (
 												(
-													in_array(
-														'memberOf',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
+													(
+														$MedicalWebPage_output
+														&&
+														in_array(
+															'memberOf',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'memberOf',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'memberOf',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'memberOf',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'memberOf',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -10120,6 +10697,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'memberOf', // string // Required // Name of schema property
 															$provider_memberOf, // mixed // Required // Variable to add as the property value
@@ -10132,6 +10710,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'memberOf', // string // Required // Name of schema property
 															$provider_memberOf, // mixed // Required // Variable to add as the property value
@@ -10144,6 +10723,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'memberOf', // string // Required // Name of schema property
 															$provider_memberOf, // mixed // Required // Variable to add as the property value
@@ -10165,19 +10745,31 @@
 											 */
 
 											if (
-												in_array(
-													'parentOrganization',
-													$provider_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'parentOrganization',
+														$provider_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'parentOrganization',
-													$provider_properties_map[$MedicalBusiness_type]['properties']
+												(
+													$MedicalBusiness_output
+													&&
+													in_array(
+														'parentOrganization',
+														$provider_properties_map[$MedicalBusiness_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'parentOrganization',
-													$provider_properties_map[$Person_type]['properties']
+												(
+													$Person_output
+													&&
+													in_array(
+														'parentOrganization',
+														$provider_properties_map[$Person_type]['properties']
+													)
 												)
 											) {
 
@@ -10209,6 +10801,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'parentOrganization', // string // Required // Name of schema property
 															$provider_parentOrganization, // mixed // Required // Variable to add as the property value
@@ -10221,6 +10814,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'parentOrganization', // string // Required // Name of schema property
 															$provider_parentOrganization, // mixed // Required // Variable to add as the property value
@@ -10233,6 +10827,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'parentOrganization', // string // Required // Name of schema property
 															$provider_parentOrganization, // mixed // Required // Variable to add as the property value
@@ -10270,19 +10865,31 @@
 
 											if (
 												(
-													in_array(
-														'worksFor',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
+													(
+														$MedicalWebPage_output
+														&&
+														in_array(
+															'worksFor',
+															$provider_properties_map[$MedicalWebPage_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'worksFor',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'worksFor',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'worksFor',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'worksFor',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -10317,6 +10924,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'workLocation', // string // Required // Name of schema property
 															$provider_worksFor, // mixed // Required // Variable to add as the property value
@@ -10329,6 +10937,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'workLocation', // string // Required // Name of schema property
 															$provider_worksFor, // mixed // Required // Variable to add as the property value
@@ -10341,6 +10950,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'worksFor', // string // Required // Name of schema property
 															$provider_worksFor, // mixed // Required // Variable to add as the property value
@@ -10381,19 +10991,31 @@
 
 									if (
 										(
-											in_array(
-												'breadcrumb',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'breadcrumb',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'breadcrumb',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'breadcrumb',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'breadcrumb',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'breadcrumb',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10500,6 +11122,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'breadcrumb', // string // Required // Name of schema property
 													$provider_breadcrumb, // mixed // Required // Variable to add as the property value
@@ -10512,6 +11135,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'breadcrumb', // string // Required // Name of schema property
 													$provider_breadcrumb, // mixed // Required // Variable to add as the property value
@@ -10524,6 +11148,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'breadcrumb', // string // Required // Name of schema property
 													$provider_breadcrumb, // mixed // Required // Variable to add as the property value
@@ -10547,19 +11172,31 @@
 
 									if (
 										(
-											in_array(
-												'contributor',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'contributor',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'contributor',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'contributor',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'contributor',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'contributor',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10580,6 +11217,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'contributor', // string // Required // Name of schema property
 													$provider_contributor, // mixed // Required // Variable to add as the property value
@@ -10592,6 +11230,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'contributor', // string // Required // Name of schema property
 													$provider_contributor, // mixed // Required // Variable to add as the property value
@@ -10604,6 +11243,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'contributor', // string // Required // Name of schema property
 													$provider_contributor, // mixed // Required // Variable to add as the property value
@@ -10627,19 +11267,31 @@
 
 									if (
 										(
-											in_array(
-												'copyrightHolder',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'copyrightHolder',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'copyrightHolder',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'copyrightHolder',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'copyrightHolder',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'copyrightHolder',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10660,6 +11312,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightHolder', // string // Required // Name of schema property
 													$provider_copyrightHolder, // mixed // Required // Variable to add as the property value
@@ -10672,6 +11325,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightHolder', // string // Required // Name of schema property
 													$provider_copyrightHolder, // mixed // Required // Variable to add as the property value
@@ -10684,6 +11338,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightHolder', // string // Required // Name of schema property
 													$provider_copyrightHolder, // mixed // Required // Variable to add as the property value
@@ -10711,19 +11366,31 @@
 
 									if (
 										(
-											in_array(
-												'copyrightNotice',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'copyrightNotice',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'copyrightNotice',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'copyrightNotice',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'copyrightNotice',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'copyrightNotice',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10744,6 +11411,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightNotice', // string // Required // Name of schema property
 													$provider_copyrightNotice, // mixed // Required // Variable to add as the property value
@@ -10756,6 +11424,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightNotice', // string // Required // Name of schema property
 													$provider_copyrightNotice, // mixed // Required // Variable to add as the property value
@@ -10768,6 +11437,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightNotice', // string // Required // Name of schema property
 													$provider_copyrightNotice, // mixed // Required // Variable to add as the property value
@@ -10791,19 +11461,31 @@
 
 									if (
 										(
-											in_array(
-												'copyrightYear',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'copyrightYear',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'copyrightYear',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'copyrightYear',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'copyrightYear',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'copyrightYear',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10824,6 +11506,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightYear', // string // Required // Name of schema property
 													$provider_copyrightYear, // mixed // Required // Variable to add as the property value
@@ -10836,6 +11519,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightYear', // string // Required // Name of schema property
 													$provider_copyrightYear, // mixed // Required // Variable to add as the property value
@@ -10848,6 +11532,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'copyrightYear', // string // Required // Name of schema property
 													$provider_copyrightYear, // mixed // Required // Variable to add as the property value
@@ -10880,19 +11565,31 @@
 
 									if (
 										(
-											in_array(
-												'countryOfOrigin',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'countryOfOrigin',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'countryOfOrigin',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'countryOfOrigin',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'countryOfOrigin',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'countryOfOrigin',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10913,6 +11610,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'countryOfOrigin', // string // Required // Name of schema property
 													$provider_countryOfOrigin, // mixed // Required // Variable to add as the property value
@@ -10925,6 +11623,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'countryOfOrigin', // string // Required // Name of schema property
 													$provider_countryOfOrigin, // mixed // Required // Variable to add as the property value
@@ -10937,6 +11636,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'countryOfOrigin', // string // Required // Name of schema property
 													$provider_countryOfOrigin, // mixed // Required // Variable to add as the property value
@@ -10966,19 +11666,31 @@
 
 									if (
 										(
-											in_array(
-												'creativeWorkStatus',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'creativeWorkStatus',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'creativeWorkStatus',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'creativeWorkStatus',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'creativeWorkStatus',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'creativeWorkStatus',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -10999,6 +11711,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'creativeWorkStatus', // string // Required // Name of schema property
 													$provider_creativeWorkStatus, // mixed // Required // Variable to add as the property value
@@ -11011,6 +11724,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'creativeWorkStatus', // string // Required // Name of schema property
 													$provider_creativeWorkStatus, // mixed // Required // Variable to add as the property value
@@ -11023,6 +11737,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'creativeWorkStatus', // string // Required // Name of schema property
 													$provider_creativeWorkStatus, // mixed // Required // Variable to add as the property value
@@ -11047,19 +11762,31 @@
 
 									if (
 										(
-											in_array(
-												'creator',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'creator',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'creator',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'creator',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'creator',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'creator',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11074,19 +11801,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_creator[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_creator = uamswp_fad_schema_merge_values(
+													$provider_creator,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_creator[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_creator = uamswp_fad_schema_merge_values(
+													$provider_creator,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -11100,6 +11827,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'creator', // string // Required // Name of schema property
 													$provider_creator, // mixed // Required // Variable to add as the property value
@@ -11112,6 +11840,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'creator', // string // Required // Name of schema property
 													$provider_creator, // mixed // Required // Variable to add as the property value
@@ -11124,6 +11853,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'creator', // string // Required // Name of schema property
 													$provider_creator, // mixed // Required // Variable to add as the property value
@@ -11147,19 +11877,31 @@
 
 									if (
 										(
-											in_array(
-												'creditText',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'creditText',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'creditText',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'creditText',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'creditText',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'creditText',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11180,6 +11922,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'creditText', // string // Required // Name of schema property
 													$provider_creditText, // mixed // Required // Variable to add as the property value
@@ -11192,6 +11935,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'creditText', // string // Required // Name of schema property
 													$provider_creditText, // mixed // Required // Variable to add as the property value
@@ -11204,6 +11948,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'creditText', // string // Required // Name of schema property
 													$provider_creditText, // mixed // Required // Variable to add as the property value
@@ -11232,19 +11977,31 @@
 
 									if (
 										(
-											in_array(
-												'currenciesAccepted',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'currenciesAccepted',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'currenciesAccepted',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'currenciesAccepted',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'currenciesAccepted',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'currenciesAccepted',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11271,6 +12028,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
@@ -11283,6 +12041,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
@@ -11295,6 +12054,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$provider_currenciesAccepted, // mixed // Required // Variable to add as the property value
@@ -11319,19 +12079,31 @@
 
 									if (
 										(
-											in_array(
-												'dateModified',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'dateModified',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'dateModified',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'dateModified',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'dateModified',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'dateModified',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11352,6 +12124,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'dateModified', // string // Required // Name of schema property
 													$provider_dateModified, // mixed // Required // Variable to add as the property value
@@ -11364,6 +12137,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'dateModified', // string // Required // Name of schema property
 													$provider_dateModified, // mixed // Required // Variable to add as the property value
@@ -11376,6 +12150,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'dateModified', // string // Required // Name of schema property
 													$provider_dateModified, // mixed // Required // Variable to add as the property value
@@ -11399,19 +12174,31 @@
 
 									if (
 										(
-											in_array(
-												'datePublished',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'datePublished',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'datePublished',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'datePublished',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'datePublished',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'datePublished',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11432,6 +12219,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'datePublished', // string // Required // Name of schema property
 													$provider_datePublished, // mixed // Required // Variable to add as the property value
@@ -11444,6 +12232,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'datePublished', // string // Required // Name of schema property
 													$provider_datePublished, // mixed // Required // Variable to add as the property value
@@ -11456,6 +12245,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'datePublished', // string // Required // Name of schema property
 													$provider_datePublished, // mixed // Required // Variable to add as the property value
@@ -11479,19 +12269,31 @@
 
 									if (
 										(
-											in_array(
-												'description',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'description',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'description',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'description',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'description',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'description',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11543,6 +12345,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$provider_description, // mixed // Required // Variable to add as the property value
@@ -11555,6 +12358,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$provider_description, // mixed // Required // Variable to add as the property value
@@ -11567,6 +12371,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$provider_description, // mixed // Required // Variable to add as the property value
@@ -11589,19 +12394,31 @@
 
 									if (
 										(
-											in_array(
-												'editor',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'editor',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'editor',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'editor',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'editor',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'editor',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11616,19 +12433,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_editor[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_editor = uamswp_fad_schema_merge_values(
+													$provider_editor,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_editor[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_editor = uamswp_fad_schema_merge_values(
+													$provider_editor,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -11642,6 +12459,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'editor', // string // Required // Name of schema property
 													$provider_editor, // mixed // Required // Variable to add as the property value
@@ -11654,6 +12472,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'editor', // string // Required // Name of schema property
 													$provider_editor, // mixed // Required // Variable to add as the property value
@@ -11666,6 +12485,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'editor', // string // Required // Name of schema property
 													$provider_editor, // mixed // Required // Variable to add as the property value
@@ -11688,23 +12508,35 @@
 
 									if (
 										(
-											in_array(
-												'employee',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'employee',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'employee',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'employee',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'employee',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'employee',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
-										$nesting_level <= 1
+										$nesting_level == 0
 									) {
 
 										// Add to item values
@@ -11713,6 +12545,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$provider_item_Person, // mixed // Required // Variable to add as the property value
@@ -11725,6 +12558,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$provider_item_Person, // mixed // Required // Variable to add as the property value
@@ -11737,6 +12571,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'employee', // string // Required // Name of schema property
 													$provider_item_Person, // mixed // Required // Variable to add as the property value
@@ -11766,19 +12601,31 @@
 
 									if (
 										(
-											in_array(
-												'gender',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'gender',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'gender',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'gender',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'gender',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'gender',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11832,6 +12679,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'gender', // string // Required // Name of schema property
 													$provider_gender, // mixed // Required // Variable to add as the property value
@@ -11844,6 +12692,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'gender', // string // Required // Name of schema property
 													$provider_gender, // mixed // Required // Variable to add as the property value
@@ -11856,6 +12705,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'gender', // string // Required // Name of schema property
 													$provider_gender, // mixed // Required // Variable to add as the property value
@@ -11897,19 +12747,31 @@
 
 									if (
 										(
-											in_array(
-												'hasCredential',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'hasCredential',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasCredential',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'hasCredential',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasCredential',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'hasCredential',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -11980,6 +12842,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$provider_hasCredential, // mixed // Required // Variable to add as the property value
@@ -11992,6 +12855,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$provider_hasCredential, // mixed // Required // Variable to add as the property value
@@ -12004,6 +12868,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$provider_hasCredential, // mixed // Required // Variable to add as the property value
@@ -12026,19 +12891,31 @@
 
 									if (
 										(
-											in_array(
-												'hasOccupation',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'hasOccupation',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasOccupation',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'hasOccupation',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasOccupation',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'hasOccupation',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -12069,6 +12946,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasOccupation', // string // Required // Name of schema property
 													$provider_hasOccupation, // mixed // Required // Variable to add as the property value
@@ -12081,6 +12959,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasOccupation', // string // Required // Name of schema property
 													$provider_hasOccupation, // mixed // Required // Variable to add as the property value
@@ -12093,6 +12972,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hasOccupation', // string // Required // Name of schema property
 													$provider_hasOccupation, // mixed // Required // Variable to add as the property value
@@ -12133,19 +13013,31 @@
 									 */
 
 									if (
-										in_array(
-											'hasMap',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'hasMap',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'hasMap',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'hasMap',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'hasMap',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'hasMap',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -12231,6 +13123,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$provider_hasMap, // mixed // Required // Variable to add as the property value
@@ -12243,6 +13136,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$provider_hasMap, // mixed // Required // Variable to add as the property value
@@ -12255,6 +13149,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$provider_hasMap, // mixed // Required // Variable to add as the property value
@@ -12282,14 +13177,22 @@
 
 											if (
 												(
-													in_array(
-														'duns',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'duns',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'duns',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'duns',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12316,6 +13219,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'duns', // string // Required // Name of schema property
 															$provider_duns, // mixed // Required // Variable to add as the property value
@@ -12328,6 +13232,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'duns', // string // Required // Name of schema property
 															$provider_duns, // mixed // Required // Variable to add as the property value
@@ -12352,14 +13257,22 @@
 
 											if (
 												(
-													in_array(
-														'globalLocationNumber',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'globalLocationNumber',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'globalLocationNumber',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'globalLocationNumber',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12386,6 +13299,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'globalLocationNumber', // string // Required // Name of schema property
 															$provider_globalLocationNumber, // mixed // Required // Variable to add as the property value
@@ -12398,6 +13312,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'globalLocationNumber', // string // Required // Name of schema property
 															$provider_globalLocationNumber, // mixed // Required // Variable to add as the property value
@@ -12422,14 +13337,22 @@
 
 											if (
 												(
-													in_array(
-														'isicV4',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'isicV4',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'isicV4',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'isicV4',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12456,6 +13379,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'isicV4', // string // Required // Name of schema property
 															$provider_isicV4, // mixed // Required // Variable to add as the property value
@@ -12468,6 +13392,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'isicV4', // string // Required // Name of schema property
 															$provider_isicV4, // mixed // Required // Variable to add as the property value
@@ -12491,14 +13416,22 @@
 
 											if (
 												(
-													in_array(
-														'leiCode',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'leiCode',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'leiCode',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'leiCode',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12525,6 +13458,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'leiCode', // string // Required // Name of schema property
 															$provider_leiCode, // mixed // Required // Variable to add as the property value
@@ -12537,6 +13471,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'leiCode', // string // Required // Name of schema property
 															$provider_leiCode, // mixed // Required // Variable to add as the property value
@@ -12560,14 +13495,22 @@
 
 											if (
 												(
-													in_array(
-														'naics',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'naics',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'naics',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'naics',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12594,6 +13537,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'naics', // string // Required // Name of schema property
 															$provider_naics, // mixed // Required // Variable to add as the property value
@@ -12606,6 +13550,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'naics', // string // Required // Name of schema property
 															$provider_naics, // mixed // Required // Variable to add as the property value
@@ -12629,14 +13574,22 @@
 
 											if (
 												(
-													in_array(
-														'taxID',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'taxID',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'taxID',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'taxID',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12701,6 +13654,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'taxID', // string // Required // Name of schema property
 															$provider_taxID, // mixed // Required // Variable to add as the property value
@@ -12713,6 +13667,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'taxID', // string // Required // Name of schema property
 															$provider_taxID, // mixed // Required // Variable to add as the property value
@@ -12733,14 +13688,22 @@
 
 											if (
 												(
-													in_array(
-														'vatID',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'vatID',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'vatID',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'vatID',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12767,6 +13730,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'vatID', // string // Required // Name of schema property
 															$provider_vatID, // mixed // Required // Variable to add as the property value
@@ -12779,6 +13743,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'vatID', // string // Required // Name of schema property
 															$provider_vatID, // mixed // Required // Variable to add as the property value
@@ -12808,14 +13773,22 @@
 
 											if (
 												(
-													in_array(
-														'iso6523Code',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'iso6523Code',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'iso6523Code',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'iso6523Code',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -12842,6 +13815,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'iso6523Code', // string // Required // Name of schema property
 															$provider_iso6523Code, // mixed // Required // Variable to add as the property value
@@ -12854,6 +13828,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'iso6523Code', // string // Required // Name of schema property
 															$provider_iso6523Code, // mixed // Required // Variable to add as the property value
@@ -12868,14 +13843,22 @@
 
 											if (
 												(
-													in_array(
-														'identifier',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
+													(
+														$MedicalBusiness_output
+														&&
+														in_array(
+															'identifier',
+															$provider_properties_map[$MedicalBusiness_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'identifier',
-														$provider_properties_map[$Person_type]['properties']
+													(
+														$Person_output
+														&&
+														in_array(
+															'identifier',
+															$provider_properties_map[$Person_type]['properties']
+														)
 													)
 												)
 												&&
@@ -13238,6 +14221,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalBusiness_type, // string // Required // The @type value for the schema item
+															$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$provider_identifier, // mixed // Required // Variable to add as the property value
@@ -13250,6 +14234,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Person_type, // string // Required // The @type value for the schema item
+															$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$provider_identifier, // mixed // Required // Variable to add as the property value
@@ -13272,19 +14257,31 @@
 										);
 
 									if (
-										array_intersect(
-											$provider_properties_map[$MedicalWebPage_type]['properties'],
-											$provider_image_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_image_common
+											)
 										)
 										||
-										array_intersect(
-											$provider_properties_map[$MedicalBusiness_type]['properties'],
-											$provider_image_common
+										(
+											$MedicalBusiness_output
+											&&
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_image_common
+											)
 										)
 										||
-										array_intersect(
-											$provider_properties_map[$Person_type]['properties'],
-											$provider_image_common
+										(
+											$Person_output
+											&&
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_image_common
+											)
 										)
 									) {
 
@@ -13346,19 +14343,31 @@
 									 */
 
 									if (
-										in_array(
-											'image',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'image',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'image',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'image',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'image',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'image',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -13372,6 +14381,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$provider_image, // mixed // Required // Variable to add as the property value
@@ -13384,6 +14394,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$provider_image, // mixed // Required // Variable to add as the property value
@@ -13396,6 +14407,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$provider_image, // mixed // Required // Variable to add as the property value
@@ -13420,19 +14432,31 @@
 
 									if (
 										(
-											in_array(
-												'inLanguage',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'inLanguage',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'inLanguage',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'inLanguage',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'inLanguage',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'inLanguage',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -13441,15 +14465,15 @@
 
 										// Get values
 
-											if ( isset($schema_base_website_uams_health_inLanguage_ref) ) {
+											// Base array
 
-												$provider_inLanguage = $schema_base_website_uams_health_inLanguage_ref;
+												$provider_inLanguage = array();
 
-											} else {
-
-												$provider_inLanguage = $schema_base_website_uams_health_inLanguage_ref;
-
-											}
+											$provider_inLanguage = uamswp_fad_schema_merge_values(
+												$provider_inLanguage,
+												$schema_base_website_uams_health_inLanguage,
+												$schema_base_website_uams_health_inLanguage_ref
+											);
 
 										// Add to item values
 
@@ -13478,6 +14502,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'inLanguage', // string // Required // Name of schema property
 													$provider_inLanguage, // mixed // Required // Variable to add as the property value
@@ -13490,6 +14515,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'inLanguage', // string // Required // Name of schema property
 													$provider_inLanguage, // mixed // Required // Variable to add as the property value
@@ -13516,19 +14542,31 @@
 
 									if (
 										(
-											in_array(
-												'isAcceptingNewPatients',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'isAcceptingNewPatients',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'isAcceptingNewPatients',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'isAcceptingNewPatients',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'isAcceptingNewPatients',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'isAcceptingNewPatients',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -13553,6 +14591,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$provider_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
@@ -13565,6 +14604,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$provider_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
@@ -13577,6 +14617,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$provider_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
@@ -13600,9 +14641,13 @@
 									// MedicalWebPage
 
 										if (
-											in_array(
-												'isAccessibleForFree',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'isAccessibleForFree',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 										) {
 
@@ -13614,6 +14659,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
 													$provider_isAccessibleForFree_MedicalWebPage, // mixed // Required // Variable to add as the property value
@@ -13643,6 +14689,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
 													$provider_isAccessibleForFree_MedicalBusiness, // mixed // Required // Variable to add as the property value
@@ -13664,19 +14711,31 @@
 									 */
 
 									if (
-										in_array(
-											'isFamilyFriendly',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'isFamilyFriendly',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'isFamilyFriendly',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'isFamilyFriendly',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'isFamilyFriendly',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'isFamilyFriendly',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -13690,6 +14749,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isFamilyFriendly', // string // Required // Name of schema property
 													$provider_isFamilyFriendly, // mixed // Required // Variable to add as the property value
@@ -13702,6 +14762,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isFamilyFriendly', // string // Required // Name of schema property
 													$provider_isFamilyFriendly, // mixed // Required // Variable to add as the property value
@@ -13714,6 +14775,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'isFamilyFriendly', // string // Required // Name of schema property
 													$provider_isFamilyFriendly, // mixed // Required // Variable to add as the property value
@@ -13740,19 +14802,31 @@
 
 									if (
 										(
-											in_array(
-												'isPartOf',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'isPartOf',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'isPartOf',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'isPartOf',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'isPartOf',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'isPartOf',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -13761,18 +14835,23 @@
 
 										// Get values
 
-											if ( $schema_base_website_uams_health_ref ) {
+											// Base array
 
-												$provider_isPartOf = $schema_base_website_uams_health_ref;
+												$provider_isPartOf = array();
 
-											}
-
+											$provider_isPartOf = uamswp_fad_schema_merge_values(
+												$provider_isPartOf,
+												$schema_base_website_uams_health,
+												$schema_base_website_uams_health_ref
+											);
+	
 										// Add to item values
 
 											// MedicalWebPage
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isPartOf', // string // Required // Name of schema property
 													$provider_isPartOf, // mixed // Required // Variable to add as the property value
@@ -13785,6 +14864,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isPartOf', // string // Required // Name of schema property
 													$provider_isPartOf, // mixed // Required // Variable to add as the property value
@@ -13797,6 +14877,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'isPartOf', // string // Required // Name of schema property
 													$provider_isPartOf, // mixed // Required // Variable to add as the property value
@@ -13819,19 +14900,31 @@
 									 */
 
 									if (
-										in_array(
-											'jobTitle',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'jobTitle',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'jobTitle',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'jobTitle',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'jobTitle',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'jobTitle',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -13941,6 +15034,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'jobTitle', // string // Required // Name of schema property
 													$provider_jobTitle, // mixed // Required // Variable to add as the property value
@@ -13953,6 +15047,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'jobTitle', // string // Required // Name of schema property
 													$provider_jobTitle, // mixed // Required // Variable to add as the property value
@@ -13965,6 +15060,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'jobTitle', // string // Required // Name of schema property
 													$provider_jobTitle, // mixed // Required // Variable to add as the property value
@@ -14019,19 +15115,31 @@
 
 									if (
 										(
-											in_array(
-												'knowsAbout',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'knowsAbout',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsAbout',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'knowsAbout',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsAbout',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'knowsAbout',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14201,6 +15309,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
@@ -14213,6 +15322,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
@@ -14225,6 +15335,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
@@ -14250,19 +15361,31 @@
 
 									if (
 										(
-											in_array(
-												'knowsLanguage',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'knowsLanguage',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsLanguage',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'knowsLanguage',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsLanguage',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'knowsLanguage',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14291,6 +15414,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$provider_knowsLanguage, // mixed // Required // Variable to add as the property value
@@ -14303,6 +15427,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$provider_knowsLanguage, // mixed // Required // Variable to add as the property value
@@ -14315,6 +15440,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$provider_knowsLanguage, // mixed // Required // Variable to add as the property value
@@ -14353,19 +15479,31 @@
 
 									if (
 										(
-											in_array(
-												'lastReviewed',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'lastReviewed',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'lastReviewed',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'lastReviewed',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'lastReviewed',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'lastReviewed',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14386,6 +15524,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'lastReviewed', // string // Required // Name of schema property
 													$provider_lastReviewed, // mixed // Required // Variable to add as the property value
@@ -14398,6 +15537,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'lastReviewed', // string // Required // Name of schema property
 													$provider_lastReviewed, // mixed // Required // Variable to add as the property value
@@ -14410,6 +15550,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'lastReviewed', // string // Required // Name of schema property
 													$provider_lastReviewed, // mixed // Required // Variable to add as the property value
@@ -14432,19 +15573,31 @@
 
 									if (
 										(
-											in_array(
-												'mainContentOfPage',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'mainContentOfPage',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainContentOfPage',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'mainContentOfPage',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainContentOfPage',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'mainContentOfPage',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14465,6 +15618,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mainContentOfPage', // string // Required // Name of schema property
 													$provider_mainContentOfPage, // mixed // Required // Variable to add as the property value
@@ -14477,6 +15631,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mainContentOfPage', // string // Required // Name of schema property
 													$provider_mainContentOfPage, // mixed // Required // Variable to add as the property value
@@ -14489,6 +15644,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'mainContentOfPage', // string // Required // Name of schema property
 													$provider_mainContentOfPage, // mixed // Required // Variable to add as the property value
@@ -14513,19 +15669,31 @@
 
 									if (
 										(
-											in_array(
-												'mainEntity',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'mainEntity',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainEntity',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'mainEntity',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mainEntity',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'mainEntity',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14534,11 +15702,15 @@
 
 										// Get values
 
-											if ( $provider_item_MedicalBusiness_ref ) {
+											// Base array
 
-												$provider_mainEntity = $provider_item_MedicalBusiness_ref;
+												$provider_mainEntity = array();
 
-											}
+											$provider_mainEntity = uamswp_fad_schema_merge_values(
+												$provider_mainEntity,
+												$provider_item_MedicalBusiness,
+												$provider_item_MedicalBusiness_ref
+											);
 
 										// Add to item values
 
@@ -14546,6 +15718,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$provider_mainEntity, // mixed // Required // Variable to add as the property value
@@ -14558,6 +15731,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$provider_mainEntity, // mixed // Required // Variable to add as the property value
@@ -14570,6 +15744,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntity', // string // Required // Name of schema property
 													$provider_mainEntity, // mixed // Required // Variable to add as the property value
@@ -14596,29 +15771,19 @@
 									 */
 
 									if (
-										in_array(
-											'mainEntityOfPage',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'mainEntityOfPage',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 									) {
 
 										// Get values
 
-											if ( !isset($provider_item_MedicalWebPage_ref) ) {
-
-												if ( !isset($provider_url) ) {
-
-													$provider_url = get_permalink($provider);
-													$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-
-												}
-
-												$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
-
-											}
-
-											$provider_mainEntityOfPage = $provider_item_MedicalWebPage_ref ?? array();
+											$provider_mainEntityOfPage = $provider_item_MedicalWebPage ?? array();
 
 										// Add to item values
 
@@ -14626,6 +15791,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntityOfPage', // string // Required // Name of schema property
 													$provider_mainEntityOfPage, // mixed // Required // Variable to add as the property value
@@ -14667,19 +15833,31 @@
 
 									if (
 										(
-											in_array(
-												'maintainer',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'maintainer',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'maintainer',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'maintainer',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'maintainer',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'maintainer',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14694,19 +15872,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_maintainer[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_maintainer = uamswp_fad_schema_merge_values(
+													$provider_maintainer,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_maintainer[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_maintainer = uamswp_fad_schema_merge_values(
+													$provider_maintainer,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -14720,6 +15898,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'maintainer', // string // Required // Name of schema property
 													$provider_maintainer, // mixed // Required // Variable to add as the property value
@@ -14732,6 +15911,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'maintainer', // string // Required // Name of schema property
 													$provider_maintainer, // mixed // Required // Variable to add as the property value
@@ -14744,6 +15924,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'maintainer', // string // Required // Name of schema property
 													$provider_maintainer, // mixed // Required // Variable to add as the property value
@@ -14768,19 +15949,31 @@
 
 									if (
 										(
-											in_array(
-												'makesOffer',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'makesOffer',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'makesOffer',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'makesOffer',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'makesOffer',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'makesOffer',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14801,6 +15994,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'makesOffer', // string // Required // Name of schema property
 													$provider_makesOffer, // mixed // Required // Variable to add as the property value
@@ -14813,6 +16007,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'makesOffer', // string // Required // Name of schema property
 													$provider_makesOffer, // mixed // Required // Variable to add as the property value
@@ -14825,6 +16020,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'makesOffer', // string // Required // Name of schema property
 													$provider_makesOffer, // mixed // Required // Variable to add as the property value
@@ -14848,19 +16044,31 @@
 
 									if (
 										(
-											in_array(
-												'medicalAudience',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'medicalAudience',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'medicalAudience',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'medicalAudience',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'medicalAudience',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'medicalAudience',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -14881,6 +16089,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'medicalAudience', // string // Required // Name of schema property
 													$provider_medicalAudience, // mixed // Required // Variable to add as the property value
@@ -14893,6 +16102,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'medicalAudience', // string // Required // Name of schema property
 													$provider_medicalAudience, // mixed // Required // Variable to add as the property value
@@ -14905,6 +16115,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'medicalAudience', // string // Required // Name of schema property
 													$provider_medicalAudience, // mixed // Required // Variable to add as the property value
@@ -14928,19 +16139,31 @@
 
 									if (
 										(
-											in_array(
-												'mentions',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'mentions',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mentions',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'mentions',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'mentions',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'mentions',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15071,6 +16294,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
@@ -15083,6 +16307,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
@@ -15095,6 +16320,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
@@ -15130,19 +16356,31 @@
 
 									if (
 										(
-											in_array(
-												'offers',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'offers',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'offers',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'offers',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'offers',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'offers',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15163,6 +16401,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'offers', // string // Required // Name of schema property
 													$provider_offers, // mixed // Required // Variable to add as the property value
@@ -15175,6 +16414,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'offers', // string // Required // Name of schema property
 													$provider_offers, // mixed // Required // Variable to add as the property value
@@ -15187,6 +16427,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'offers', // string // Required // Name of schema property
 													$provider_offers, // mixed // Required // Variable to add as the property value
@@ -15209,19 +16450,31 @@
 
 									if (
 										(
-											in_array(
-												'paymentAccepted',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'paymentAccepted',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'paymentAccepted',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'paymentAccepted',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'paymentAccepted',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'paymentAccepted',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15247,6 +16500,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
@@ -15259,6 +16513,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
@@ -15271,6 +16526,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$provider_paymentAccepted, // mixed // Required // Variable to add as the property value
@@ -15293,19 +16549,31 @@
 									 */
 
 									if (
-										in_array(
-											'photo',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'photo',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'photo',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'photo',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'photo',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'photo',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -15319,6 +16587,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$provider_photo, // mixed // Required // Variable to add as the property value
@@ -15331,6 +16600,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$provider_photo, // mixed // Required // Variable to add as the property value
@@ -15343,6 +16613,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$provider_photo, // mixed // Required // Variable to add as the property value
@@ -15430,19 +16701,31 @@
 
 									if (
 										(
-											in_array(
-												'potentialAction',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'potentialAction',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'potentialAction',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'potentialAction',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'potentialAction',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'potentialAction',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15463,6 +16746,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'potentialAction', // string // Required // Name of schema property
 													$provider_potentialAction, // mixed // Required // Variable to add as the property value
@@ -15475,6 +16759,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'potentialAction', // string // Required // Name of schema property
 													$provider_potentialAction, // mixed // Required // Variable to add as the property value
@@ -15487,6 +16772,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'potentialAction', // string // Required // Name of schema property
 													$provider_potentialAction, // mixed // Required // Variable to add as the property value
@@ -15509,19 +16795,31 @@
 
 									if (
 										(
-											in_array(
-												'primaryImageOfPage',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'primaryImageOfPage',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'primaryImageOfPage',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'primaryImageOfPage',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'primaryImageOfPage',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'primaryImageOfPage',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15542,6 +16840,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'primaryImageOfPage', // string // Required // Name of schema property
 													$provider_primaryImageOfPage, // mixed // Required // Variable to add as the property value
@@ -15554,6 +16853,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'primaryImageOfPage', // string // Required // Name of schema property
 													$provider_primaryImageOfPage, // mixed // Required // Variable to add as the property value
@@ -15566,6 +16866,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'primaryImageOfPage', // string // Required // Name of schema property
 													$provider_primaryImageOfPage, // mixed // Required // Variable to add as the property value
@@ -15590,19 +16891,31 @@
 
 									if (
 										(
-											in_array(
-												'producer',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'producer',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'producer',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'producer',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'producer',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'producer',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15617,19 +16930,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_producer[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_producer = uamswp_fad_schema_merge_values(
+													$provider_producer,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_producer[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_producer = uamswp_fad_schema_merge_values(
+													$provider_producer,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -15643,6 +16956,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'producer', // string // Required // Name of schema property
 													$provider_producer, // mixed // Required // Variable to add as the property value
@@ -15655,6 +16969,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'producer', // string // Required // Name of schema property
 													$provider_producer, // mixed // Required // Variable to add as the property value
@@ -15667,6 +16982,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'producer', // string // Required // Name of schema property
 													$provider_producer, // mixed // Required // Variable to add as the property value
@@ -15696,19 +17012,31 @@
 
 									if (
 										(
-											in_array(
-												'provider',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'provider',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'provider',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'provider',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'provider',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'provider',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15729,6 +17057,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'provider', // string // Required // Name of schema property
 													$provider_provider, // mixed // Required // Variable to add as the property value
@@ -15741,6 +17070,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'provider', // string // Required // Name of schema property
 													$provider_provider, // mixed // Required // Variable to add as the property value
@@ -15753,6 +17083,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'provider', // string // Required // Name of schema property
 													$provider_provider, // mixed // Required // Variable to add as the property value
@@ -15776,19 +17107,31 @@
 
 									if (
 										(
-											in_array(
-												'publisher',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'publisher',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'publisher',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'publisher',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'publisher',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'publisher',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15803,19 +17146,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_publisher[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_publisher = uamswp_fad_schema_merge_values(
+													$provider_publisher,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_publisher[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_publisher = uamswp_fad_schema_merge_values(
+													$provider_publisher,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -15829,6 +17172,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'publisher', // string // Required // Name of schema property
 													$provider_publisher, // mixed // Required // Variable to add as the property value
@@ -15841,6 +17185,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'publisher', // string // Required // Name of schema property
 													$provider_publisher, // mixed // Required // Variable to add as the property value
@@ -15853,6 +17198,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'publisher', // string // Required // Name of schema property
 													$provider_publisher, // mixed // Required // Variable to add as the property value
@@ -15875,19 +17221,31 @@
 
 									if (
 										(
-											in_array(
-												'relatedLink',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'relatedLink',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'relatedLink',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'relatedLink',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'relatedLink',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'relatedLink',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15908,6 +17266,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'relatedLink', // string // Required // Name of schema property
 													$provider_relatedLink, // mixed // Required // Variable to add as the property value
@@ -15920,6 +17279,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'relatedLink', // string // Required // Name of schema property
 													$provider_relatedLink, // mixed // Required // Variable to add as the property value
@@ -15932,6 +17292,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'relatedLink', // string // Required // Name of schema property
 													$provider_relatedLink, // mixed // Required // Variable to add as the property value
@@ -15954,19 +17315,31 @@
 
 									if (
 										(
-											in_array(
-												'review',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'review',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'review',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'review',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'review',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'review',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -15987,6 +17360,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'review', // string // Required // Name of schema property
 													$provider_review, // mixed // Required // Variable to add as the property value
@@ -15999,6 +17373,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'review', // string // Required // Name of schema property
 													$provider_review, // mixed // Required // Variable to add as the property value
@@ -16011,6 +17386,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'review', // string // Required // Name of schema property
 													$provider_review, // mixed // Required // Variable to add as the property value
@@ -16035,19 +17411,31 @@
 
 									if (
 										(
-											in_array(
-												'reviewedBy',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'reviewedBy',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'reviewedBy',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'reviewedBy',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'reviewedBy',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'reviewedBy',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16062,19 +17450,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_reviewedBy[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_reviewedBy = uamswp_fad_schema_merge_values(
+													$provider_reviewedBy,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_reviewedBy[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_reviewedBy = uamswp_fad_schema_merge_values(
+													$provider_reviewedBy,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -16088,6 +17476,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'reviewedBy', // string // Required // Name of schema property
 													$provider_reviewedBy, // mixed // Required // Variable to add as the property value
@@ -16100,6 +17489,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'reviewedBy', // string // Required // Name of schema property
 													$provider_reviewedBy, // mixed // Required // Variable to add as the property value
@@ -16112,6 +17502,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'reviewedBy', // string // Required // Name of schema property
 													$provider_reviewedBy, // mixed // Required // Variable to add as the property value
@@ -16135,14 +17526,22 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
+										(
+											$MedicalBusiness_output
+											&&
+											in_array(
+												'sameAs',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'sameAs',
-											$provider_properties_map[$Person_type]['properties']
+										(
+											$Person_output
+											&&
+											in_array(
+												'sameAs',
+												$provider_properties_map[$Person_type]['properties']
+											)
 										)
 									) {
 
@@ -16171,6 +17570,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$provider_sameAs, // mixed // Required // Variable to add as the property value
@@ -16183,6 +17583,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'sameAs', // string // Required // Name of schema property
 													$provider_sameAs, // mixed // Required // Variable to add as the property value
@@ -16206,19 +17607,31 @@
 
 									if (
 										(
-											in_array(
-												'smokingAllowed',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'smokingAllowed',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'smokingAllowed',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'smokingAllowed',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'smokingAllowed',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'smokingAllowed',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16259,19 +17672,31 @@
 
 									if (
 										(
-											in_array(
-												'sourceOrganization',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'sourceOrganization',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'sourceOrganization',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'sourceOrganization',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'sourceOrganization',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'sourceOrganization',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16286,19 +17711,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$provider_sourceOrganization[] = $schema_base_org_uams_ref;
-
-												}
+												$provider_sourceOrganization = uamswp_fad_schema_merge_values(
+													$provider_sourceOrganization,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$provider_sourceOrganization[] = $schema_base_org_uams_health_ref;
-
-												}
+												$provider_sourceOrganization = uamswp_fad_schema_merge_values(
+													$provider_sourceOrganization,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -16312,6 +17737,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'sourceOrganization', // string // Required // Name of schema property
 													$provider_sourceOrganization, // mixed // Required // Variable to add as the property value
@@ -16324,6 +17750,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'sourceOrganization', // string // Required // Name of schema property
 													$provider_sourceOrganization, // mixed // Required // Variable to add as the property value
@@ -16336,6 +17763,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'sourceOrganization', // string // Required // Name of schema property
 													$provider_sourceOrganization, // mixed // Required // Variable to add as the property value
@@ -16382,19 +17810,31 @@
 
 									if (
 										(
-											in_array(
-												'speakable',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'speakable',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'speakable',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'speakable',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'speakable',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'speakable',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16415,6 +17855,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'speakable', // string // Required // Name of schema property
 													$provider_speakable, // mixed // Required // Variable to add as the property value
@@ -16427,6 +17868,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'speakable', // string // Required // Name of schema property
 													$provider_speakable, // mixed // Required // Variable to add as the property value
@@ -16439,6 +17881,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'speakable', // string // Required // Name of schema property
 													$provider_speakable, // mixed // Required // Variable to add as the property value
@@ -16464,14 +17907,22 @@
 
 									if (
 										(
-											in_array(
-												'subjectOf',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'subjectOf',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'subjectOf',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'subjectOf',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16480,21 +17931,15 @@
 
 										// Get values
 
-											if ( !isset($provider_item_MedicalWebPage_ref) ) {
+											// Base array
 
-												if ( !isset($provider_url) ) {
+												$provider_subjectOf = array();
 
-													$provider_url = get_permalink($provider);
-													$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-
-												}
-
-												$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-												uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
-
-											}
-
-											$provider_subjectOf = $provider_item_MedicalWebPage_ref ?? '';
+											$provider_subjectOf = uamswp_fad_schema_merge_values(
+												$provider_subjectOf,
+												$provider_item_MedicalWebPage,
+												$provider_item_MedicalWebPage_ref
+											);
 
 										// Add to item values
 
@@ -16502,6 +17947,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'subjectOf', // string // Required // Name of schema property
 													$provider_subjectOf, // mixed // Required // Variable to add as the property value
@@ -16514,6 +17960,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'subjectOf', // string // Required // Name of schema property
 													$provider_subjectOf, // mixed // Required // Variable to add as the property value
@@ -16536,19 +17983,31 @@
 
 									if (
 										(
-											in_array(
-												'thumbnailUrl',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'thumbnailUrl',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'thumbnailUrl',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'thumbnailUrl',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'thumbnailUrl',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'thumbnailUrl',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16569,6 +18028,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'thumbnailUrl', // string // Required // Name of schema property
 													$provider_thumbnailUrl, // mixed // Required // Variable to add as the property value
@@ -16581,6 +18041,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'thumbnailUrl', // string // Required // Name of schema property
 													$provider_thumbnailUrl, // mixed // Required // Variable to add as the property value
@@ -16593,6 +18054,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'thumbnailUrl', // string // Required // Name of schema property
 													$provider_thumbnailUrl, // mixed // Required // Variable to add as the property value
@@ -16616,19 +18078,31 @@
 
 									if (
 										(
-											in_array(
-												'timeRequired',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'timeRequired',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'timeRequired',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'timeRequired',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'timeRequired',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'timeRequired',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16649,6 +18123,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'timeRequired', // string // Required // Name of schema property
 													$provider_timeRequired, // mixed // Required // Variable to add as the property value
@@ -16661,6 +18136,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'timeRequired', // string // Required // Name of schema property
 													$provider_timeRequired, // mixed // Required // Variable to add as the property value
@@ -16673,6 +18149,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'timeRequired', // string // Required // Name of schema property
 													$provider_timeRequired, // mixed // Required // Variable to add as the property value
@@ -16696,19 +18173,31 @@
 
 									if (
 										(
-											in_array(
-												'video',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'video',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'video',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'video',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'video',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'video',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16857,7 +18346,19 @@
 													$provider_video['duration'] = $provider_video_duration ?? '';
 													$provider_video['embedUrl'] = $provider_video_embedUrl ?? '';
 													$provider_video['isAccessibleForFree'] = 'True';
-													$provider_video['isPartOf'] = $provider_item_MedicalWebPage_ref ?? '';
+
+													// isPartOf
+
+														// Base array
+
+															$provider_video['isPartOf'] = array();
+
+														$provider_video['isPartOf'] = uamswp_fad_schema_merge_values(
+															$provider_video['isPartOf'],
+															$provider_item_MedicalWebPage,
+															$provider_item_MedicalWebPage_ref
+														);
+
 													$provider_video['mainEntityOfPage'] = '' ?? '';
 													$provider_video['name'] = $provider_video_title ?? '';
 													$provider_video['sameAs'] = $provider_video_url ?? '';
@@ -16886,6 +18387,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'video', // string // Required // Name of schema property
 													$provider_video, // mixed // Required // Variable to add as the property value
@@ -16898,6 +18400,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'video', // string // Required // Name of schema property
 													$provider_video, // mixed // Required // Variable to add as the property value
@@ -16910,6 +18413,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'video', // string // Required // Name of schema property
 													$provider_video, // mixed // Required // Variable to add as the property value
@@ -16933,19 +18437,31 @@
 
 									if (
 										(
-											in_array(
-												'significantLink',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'significantLink',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'significantLink',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'significantLink',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'significantLink',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'significantLink',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -16958,6 +18474,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
@@ -16970,6 +18487,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
@@ -16982,6 +18500,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'significantLink', // string // Required // Name of schema property
 													$provider_significantLink, // mixed // Required // Variable to add as the property value
@@ -17007,19 +18526,31 @@
 
 									if (
 										(
-											in_array(
-												'keywords',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'keywords',
+													$provider_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'keywords',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
+											(
+												$MedicalBusiness_output
+												&&
+												in_array(
+													'keywords',
+													$provider_properties_map[$MedicalBusiness_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'keywords',
-												$provider_properties_map[$Person_type]['properties']
+											(
+												$Person_output
+												&&
+												in_array(
+													'keywords',
+													$provider_properties_map[$Person_type]['properties']
+												)
 											)
 										)
 										&&
@@ -17061,6 +18592,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$provider_keywords, // mixed // Required // Variable to add as the property value
@@ -17073,6 +18605,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$MedicalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$provider_keywords, // mixed // Required // Variable to add as the property value
@@ -17085,6 +18618,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$Person_type, // string // Required // The @type value for the schema item
+													$Person_output, // bool // Required // Query for whether to output the schema for the specified type
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$provider_keywords, // mixed // Required // Variable to add as the property value
@@ -17264,6 +18798,8 @@
 			array $repeater, // List of IDs of the location items
 			string $page_url, // Page URL
 			int $nesting_level = 1, // Nesting level within the main schema
+			bool $MedicalWebPage_output = true, // bool // Query for whether to output the 'MedicalWebPage' type
+			bool $LocalBusiness_output = true, // bool // Query for whether to output the 'LocalBusiness' type
 			int $MedicalWebPage_i = 1, // Iteration counter for location-as-MedicalWebPage
 			int $LocalBusiness_i = 1, // Iteration counter for location-as-LocalBusiness
 			array $location_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
@@ -17604,12 +19140,12 @@
 								$MedicalWebPage_id_ref = null;
 								$MedicalWebPage_type = null;
 								$MedicalWebPage_type_ref = null;
-								$location_descendant_locations_relationship = null;
-								$location_descendant_locations_relationship_ref = null;
+								$location_descendant_location_ids = null;
+								$location_descendant_location_ids_ref = null;
 								$location_descendant_locations_LocalBusiness = null;
 								$location_descendant_locations_LocalBusiness_ref = null;
-								$location_providers_relationship = null;
-								$location_providers_relationship_ref = null;
+								$location_provider_ids = null;
+								$location_provider_ids_ref = null;
 								$location_providers_MedicalBusiness = null;
 								$location_providers_MedicalBusiness_ref = null;
 								$location_providers_Person = null;
@@ -17836,14 +19372,22 @@
 									 */
 
 									if (
-										in_array(
-											'name',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'name',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'name',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'name',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -17861,6 +19405,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$location_name, // mixed // Required // Variable to add as the property value
@@ -17873,6 +19418,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$LocalBusiness_type, // string // Required // The @type value for the schema item
+														$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'name', // string // Required // Name of schema property
 														$location_name, // mixed // Required // Variable to add as the property value
@@ -17893,14 +19439,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_MedicalSpecialty_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_MedicalSpecialty_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_MedicalSpecialty_common
+										(
+											$LocalBusiness_output
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_MedicalSpecialty_common
+											)
 										)
 									) {
 
@@ -17944,14 +19498,22 @@
 									 */
 
 									if (
-										in_array(
-											'medicalSpecialty',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'medicalSpecialty',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'medicalSpecialty',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'medicalSpecialty',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -17963,6 +19525,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 														$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 														'medicalSpecialty', // string // Required // Name of schema property
 														$location_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -17975,6 +19538,7 @@
 
 													uamswp_fad_schema_add_to_item_values(
 														$LocalBusiness_type, // string // Required // The @type value for the schema item
+														$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 														$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 														'medicalSpecialty', // string // Required // Name of schema property
 														$location_medicalSpecialty, // mixed // Required // Variable to add as the property value
@@ -18008,14 +19572,22 @@
 									 */
 
 									if (
-										in_array(
-											'additionalType',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'additionalType',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'additionalType',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'additionalType',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -18084,6 +19656,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$location_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
@@ -18096,6 +19669,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
 													$location_additionalType_LocalBusiness, // mixed // Required // Variable to add as the property value
@@ -18121,14 +19695,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_parent_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_parent_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_parent_common
+										(
+											$LocalBusiness_output
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_parent_common
+											)
 										)
 									) {
 
@@ -18164,15 +19746,27 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_organization_common
+										(
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_organization_common
+												)
+											)
+											||
+											(
+												$LocalBusiness_output
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_organization_common
+												)
+											)
 										)
-										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_organization_common
-										)
+										&&
+										$nesting_level == 0
 									) {
 										
 										// Common clinical 'Organization'
@@ -18181,13 +19775,13 @@
 
 												$location_organization_common = array();
 
-												// UAMS Health
+											// UAMS Health
 
-													if ( $schema_base_org_uams_health_ref ) {
-
-														$location_organization_common[] = $schema_base_org_uams_health_ref;
-
-													}
+												$location_organization_common = uamswp_fad_schema_merge_values(
+													$location_organization_common,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Specific clinical 'Organization' [WIP]
 
@@ -18212,7 +19806,9 @@
 													$location_parent_LocalBusiness = uamswp_fad_schema_location(
 														array($location_parent_id), // List of IDs of the location items
 														$location_url, // Page URL
-														($nesting_level + 1) // Nesting level within the main schema
+														($nesting_level + 1), // Nesting level within the main schema
+														false, // bool // Query for whether to output the 'MedicalWebPage' type
+														true // bool // Query for whether to output the 'LocalBusiness' type
 													)['LocalBusiness'] ?? array();
 
 												}
@@ -18291,14 +19887,22 @@
 											 */
 
 											if (
-												in_array(
-													'brand',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'brand',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'brand',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'brand',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -18330,6 +19934,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'brand', // string // Required // Name of schema property
 															$location_brand, // mixed // Required // Variable to add as the property value
@@ -18342,6 +19947,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'brand', // string // Required // Name of schema property
 															$location_brand, // mixed // Required // Variable to add as the property value
@@ -18362,14 +19968,22 @@
 											 */
 
 											if (
-												in_array(
-													'containedInPlace',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'containedInPlace',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'containedInPlace',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'containedInPlace',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -18401,6 +20015,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'containedInPlace', // string // Required // Name of schema property
 															$location_containedInPlace, // mixed // Required // Variable to add as the property value
@@ -18413,6 +20028,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'containedInPlace', // string // Required // Name of schema property
 															$location_containedInPlace, // mixed // Required // Variable to add as the property value
@@ -18443,18 +20059,22 @@
 
 											if (
 												(
+													$MedicalWebPage_output
+													&&
 													in_array(
 														'memberOf',
 														$location_properties_map[$MedicalWebPage_type]['properties']
 													)
-													||
+												)
+												||
+												(
+													$LocalBusiness_output
+													&&
 													in_array(
 														'memberOf',
 														$location_properties_map[$LocalBusiness_type]['properties']
 													)
 												)
-												&&
-												$nesting_level == 0
 											) {
 
 												// Get values
@@ -18502,6 +20122,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'memberOf', // string // Required // Name of schema property
 															$location_memberOf, // mixed // Required // Variable to add as the property value
@@ -18514,6 +20135,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'memberOf', // string // Required // Name of schema property
 															$location_memberOf, // mixed // Required // Variable to add as the property value
@@ -18535,14 +20157,22 @@
 											 */
 
 											if (
-												in_array(
-													'parentOrganization',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'parentOrganization',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'parentOrganization',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'parentOrganization',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -18574,6 +20204,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'parentOrganization', // string // Required // Name of schema property
 															$location_parentOrganization, // mixed // Required // Variable to add as the property value
@@ -18586,6 +20217,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'parentOrganization', // string // Required // Name of schema property
 															$location_parentOrganization, // mixed // Required // Variable to add as the property value
@@ -18610,54 +20242,102 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_descendant_common
+										(
+											(
+												$MedicalWebPage_output
+												&&
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_descendant_common
+												)
+											)
+											||
+											(
+												$LocalBusiness_output
+												&&
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_descendant_common
+												)
+											)
 										)
-										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_descendant_common
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
 
 											// Get list of descendant locations
 
-												if ( !isset($location_descendant_locations_relationship) ) {
+												if ( !isset($location_descendant_location_ids) ) {
 
-													$location_descendant_locations_relationship = array();
+													$location_descendant_locations_query_vars = uamswp_fad_location_descendant_query(
+														$location, // int
+														get_pages(
+															array(
+																'child_of' => $location,
+																'post_status' => 'publish',
+																'post_type' => 'location',
+															)
+														) // WP_Post
+													);
+
+													$location_descendant_location_ids = $location_descendant_locations_query_vars['location_descendant_ids'];
 
 												}
 
 												// Format values (LocalBusiness and subtypes)
 
-													if ( $location_descendant_locations_LocalBusiness ) {
+													if ( $location_descendant_location_ids ) {
 
-														$location_descendant_locations_LocalBusiness = array();
+														$location_descendant_locations_LocalBusiness = uamswp_fad_schema_location(
+															$location_descendant_location_ids, // List of IDs of the location items
+															$location_url, // Page URL
+															($nesting_level + 1), // Nesting level within the main schema
+															false, // bool // Query for whether to output the 'MedicalWebPage' type
+															true // bool // Query for whether to output the 'LocalBusiness' type
+														)['LocalBusiness'] ?? array();
 
 													}
 
 											// Get list of associated providers
 
-												if ( !isset($location_providers_relationship) ) {
+												if ( !isset($location_provider_ids) ) {
 
-													$location_providers_relationship = array();
+													$location_provider_ids = array();
+
+													$providers = get_field( 'physician_locations', $location );
+													include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
+													$location_provider_ids = $provider_ids;
+
+													// Reset variables from Related Providers Section Query template part
+
+														$providers = null;
+														$provider_query = null;
+														$provider_section_show = null;
+														$provider_ids = null;
+														$provider_count = null;
+														$jump_link_count = null;
 
 												}
 
 												// Format values
 
-													if ( $location_providers_relationship ) {
+													if ( $location_provider_ids ) {
+
+														$location_providers = uamswp_fad_schema_provider(
+															$location_provider_ids, // List of IDs of the provider items
+															$location_url, // Page URL
+															($nesting_level + 1), // Nesting level within the main schema
+														);
 
 														// MedicalBusiness and subtypes
 
-															$location_providers_MedicalBusiness = array();
+															$location_providers_MedicalBusiness = $location_providers['MedicalBusiness'];
 
 														// Person
 
-															$location_providers_Person = array();
+															$location_providers_Person = $location_providers['Person'];
 
 													}
 
@@ -18675,18 +20355,22 @@
 
 											if (
 												(
+													$MedicalWebPage_output
+													&&
 													in_array(
 														'containsPlace',
 														$location_properties_map[$MedicalWebPage_type]['properties']
 													)
-													||
+												)
+												||
+												(
+													$LocalBusiness_output
+													&&
 													in_array(
 														'containsPlace',
 														$location_properties_map[$LocalBusiness_type]['properties']
 													)
 												)
-												&&
-												$nesting_level == 0
 											) {
 
 												/*
@@ -18726,6 +20410,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'containsPlace', // string // Required // Name of schema property
 															$location_containsPlace, // mixed // Required // Variable to add as the property value
@@ -18738,6 +20423,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'containsPlace', // string // Required // Name of schema property
 															$location_containsPlace, // mixed // Required // Variable to add as the property value
@@ -18762,18 +20448,22 @@
 
 											if (
 												(
+													$MedicalWebPage_output
+													&&
 													in_array(
 														'department',
 														$location_properties_map[$MedicalWebPage_type]['properties']
 													)
-													||
+												)
+												||
+												(
+													$LocalBusiness_output
+													&&
 													in_array(
 														'department',
 														$location_properties_map[$LocalBusiness_type]['properties']
 													)
 												)
-												&&
-												$nesting_level == 0
 											) {
 
 												// Get values
@@ -18804,6 +20494,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'department', // string // Required // Name of schema property
 															$location_department, // mixed // Required // Variable to add as the property value
@@ -18816,6 +20507,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'department', // string // Required // Name of schema property
 															$location_department, // mixed // Required // Variable to add as the property value
@@ -18838,18 +20530,22 @@
 
 											if (
 												(
+													$MedicalWebPage_output
+													&&
 													in_array(
 														'employee',
 														$location_properties_map[$MedicalWebPage_type]['properties']
 													)
-													||
+												)
+												||
+												(
+													$LocalBusiness_output
+													&&
 													in_array(
 														'employee',
 														$location_properties_map[$LocalBusiness_type]['properties']
 													)
 												)
-												&&
-												$nesting_level <= 1
 											) {
 
 												// Get values
@@ -18872,6 +20568,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'employee', // string // Required // Name of schema property
 															$location_employee, // mixed // Required // Variable to add as the property value
@@ -18884,6 +20581,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'employee', // string // Required // Name of schema property
 															$location_employee, // mixed // Required // Variable to add as the property value
@@ -18911,18 +20609,22 @@
 
 											if (
 												(
+													$MedicalWebPage_output
+													&&
 													in_array(
 														'subOrganization',
 														$location_properties_map[$MedicalWebPage_type]['properties']
 													)
-													||
+												)
+												||
+												(
+													$LocalBusiness_output
+													&&
 													in_array(
 														'subOrganization',
 														$location_properties_map[$LocalBusiness_type]['properties']
 													)
 												)
-												&&
-												$nesting_level == 0
 											) {
 
 												// Get values
@@ -18953,6 +20655,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'subOrganization', // string // Required // Name of schema property
 															$location_subOrganization, // mixed // Required // Variable to add as the property value
@@ -18965,6 +20668,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'subOrganization', // string // Required // Name of schema property
 															$location_subOrganization, // mixed // Required // Variable to add as the property value
@@ -18989,14 +20693,22 @@
 									 */
 
 									if (
-										in_array(
-											'address',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'address',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'address',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'address',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -19213,6 +20925,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'address', // string // Required // Name of schema property
 													$location_address, // mixed // Required // Variable to add as the property value
@@ -19225,6 +20938,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'address', // string // Required // Name of schema property
 													$location_address, // mixed // Required // Variable to add as the property value
@@ -19247,14 +20961,22 @@
 
 									if (
 										(
-											in_array(
-												'aggregateRating',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'aggregateRating',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'aggregateRating',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'aggregateRating',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19271,6 +20993,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$location_aggregateRating, // mixed // Required // Variable to add as the property value
@@ -19283,6 +21006,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'aggregateRating', // string // Required // Name of schema property
 													$location_aggregateRating, // mixed // Required // Variable to add as the property value
@@ -19305,14 +21029,22 @@
 
 									if (
 										(
-											in_array(
-												'alternateName',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'alternateName',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'alternateName',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'alternateName',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19370,14 +21102,22 @@
 
 									if (
 										(
-											in_array(
-												'areaServed',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'areaServed',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'areaServed',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'areaServed',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19394,6 +21134,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'areaServed', // string // Required // Name of schema property
 													$location_areaServed, // mixed // Required // Variable to add as the property value
@@ -19406,6 +21147,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'areaServed', // string // Required // Name of schema property
 													$location_areaServed, // mixed // Required // Variable to add as the property value
@@ -19429,14 +21171,22 @@
 
 									if (
 										(
-											in_array(
-												'availableService',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'availableService',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'availableService',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'availableService',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19470,6 +21220,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$location_availableService, // mixed // Required // Variable to add as the property value
@@ -19482,6 +21233,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'availableService', // string // Required // Name of schema property
 													$location_availableService, // mixed // Required // Variable to add as the property value
@@ -19504,14 +21256,22 @@
 
 									if (
 										(
-											in_array(
-												'award',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'award',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'award',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'award',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19528,6 +21288,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'award', // string // Required // Name of schema property
 													$location_award, // mixed // Required // Variable to add as the property value
@@ -19540,6 +21301,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'award', // string // Required // Name of schema property
 													$location_award, // mixed // Required // Variable to add as the property value
@@ -19567,14 +21329,22 @@
 									*/
 
 									if (
-										in_array(
-											'contactPoint',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'contactPoint',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'contactPoint',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'contactPoint',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -19588,6 +21358,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'contactPoint', // string // Required // Name of schema property
 													$location_contactPoint, // mixed // Required // Variable to add as the property value
@@ -19600,6 +21371,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'contactPoint', // string // Required // Name of schema property
 													$location_contactPoint, // mixed // Required // Variable to add as the property value
@@ -19628,14 +21400,22 @@
 
 									if (
 										(
-											in_array(
-												'currenciesAccepted',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'currenciesAccepted',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'currenciesAccepted',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'currenciesAccepted',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19652,6 +21432,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$location_currenciesAccepted, // mixed // Required // Variable to add as the property value
@@ -19664,6 +21445,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'currenciesAccepted', // string // Required // Name of schema property
 													$location_currenciesAccepted, // mixed // Required // Variable to add as the property value
@@ -19687,14 +21469,22 @@
 
 									if (
 										(
-											in_array(
-												'description',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'description',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'description',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'description',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19735,6 +21525,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$location_description, // mixed // Required // Variable to add as the property value
@@ -19747,6 +21538,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
 													$location_description, // mixed // Required // Variable to add as the property value
@@ -19778,14 +21570,22 @@
 
 									if (
 										(
-											in_array(
-												'diversityPolicy',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'diversityPolicy',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'diversityPolicy',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'diversityPolicy',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19802,6 +21602,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'diversityPolicy', // string // Required // Name of schema property
 													$location_diversityPolicy, // mixed // Required // Variable to add as the property value
@@ -19814,6 +21615,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'diversityPolicy', // string // Required // Name of schema property
 													$location_diversityPolicy, // mixed // Required // Variable to add as the property value
@@ -19843,14 +21645,22 @@
 
 									if (
 										(
-											in_array(
-												'diversityStaffingReport',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'diversityStaffingReport',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'diversityStaffingReport',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'diversityStaffingReport',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19867,6 +21677,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'diversityStaffingReport', // string // Required // Name of schema property
 													$location_diversityStaffingReport, // mixed // Required // Variable to add as the property value
@@ -19879,6 +21690,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'diversityStaffingReport', // string // Required // Name of schema property
 													$location_diversityStaffingReport, // mixed // Required // Variable to add as the property value
@@ -19911,14 +21723,22 @@
 
 									if (
 										(
-											in_array(
-												'ethicsPolicy',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'ethicsPolicy',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'ethicsPolicy',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'ethicsPolicy',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19935,6 +21755,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'ethicsPolicy', // string // Required // Name of schema property
 													$location_ethicsPolicy, // mixed // Required // Variable to add as the property value
@@ -19947,6 +21768,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'ethicsPolicy', // string // Required // Name of schema property
 													$location_ethicsPolicy, // mixed // Required // Variable to add as the property value
@@ -19969,14 +21791,22 @@
 
 									if (
 										(
-											in_array(
-												'event',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'event',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'event',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'event',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -19993,6 +21823,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'event', // string // Required // Name of schema property
 													$location_event, // mixed // Required // Variable to add as the property value
@@ -20005,6 +21836,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'event', // string // Required // Name of schema property
 													$location_event, // mixed // Required // Variable to add as the property value
@@ -20027,14 +21859,22 @@
 
 									if (
 										(
-											in_array(
-												'foundingDate',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'foundingDate',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'foundingDate',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'foundingDate',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -20051,6 +21891,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'foundingDate', // string // Required // Name of schema property
 													$location_foundingDate, // mixed // Required // Variable to add as the property value
@@ -20063,6 +21904,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'foundingDate', // string // Required // Name of schema property
 													$location_foundingDate, // mixed // Required // Variable to add as the property value
@@ -20092,14 +21934,22 @@
 
 									if (
 										(
-											in_array(
-												'funding',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'funding',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'funding',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'funding',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -20116,6 +21966,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'funding', // string // Required // Name of schema property
 													$location_funding, // mixed // Required // Variable to add as the property value
@@ -20128,6 +21979,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'funding', // string // Required // Name of schema property
 													$location_funding, // mixed // Required // Variable to add as the property value
@@ -20149,14 +22001,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_geo_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_geo_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_geo_common
+										(
+											$LocalBusiness_output
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_geo_common
+											)
 										)
 									) {
 
@@ -20190,14 +22050,22 @@
 									 */
 
 									if (
-										in_array(
-											'geo',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'geo',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'geo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'geo',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -20218,6 +22086,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'geo', // string // Required // Name of schema property
 													$location_geo, // mixed // Required // Variable to add as the property value
@@ -20230,6 +22099,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'geo', // string // Required // Name of schema property
 													$location_geo, // mixed // Required // Variable to add as the property value
@@ -20256,14 +22126,22 @@
 
 									if (
 										(
-											in_array(
-												'hasCredential',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'hasCredential',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasCredential',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'hasCredential',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -20280,6 +22158,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$location_hasCredential, // mixed // Required // Variable to add as the property value
@@ -20292,6 +22171,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasCredential', // string // Required // Name of schema property
 													$location_hasCredential, // mixed // Required // Variable to add as the property value
@@ -20322,14 +22202,22 @@
 
 									if (
 										(
-											in_array(
-												'hasDriveThroughService',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'hasDriveThroughService',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'hasDriveThroughService',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'hasDriveThroughService',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -20346,6 +22234,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasDriveThroughService', // string // Required // Name of schema property
 													$location_hasDriveThroughService, // mixed // Required // Variable to add as the property value
@@ -20358,6 +22247,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasDriveThroughService', // string // Required // Name of schema property
 													$location_hasDriveThroughService, // mixed // Required // Variable to add as the property value
@@ -20383,14 +22273,22 @@
 									 */
 
 									if (
-										in_array(
-											'hasMap',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'hasMap',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'hasMap',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'hasMap',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -20416,6 +22314,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$location_hasMap, // mixed // Required // Variable to add as the property value
@@ -20428,6 +22327,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'hasMap', // string // Required // Name of schema property
 													$location_hasMap, // mixed // Required // Variable to add as the property value
@@ -20455,14 +22355,22 @@
 
 											if (
 												(
-													in_array(
-														'duns',
-														$location_properties_map[$MedicalWebPage_type]['properties']
+													(
+														$MedicalWebPage_output
+														&&
+														in_array(
+															'duns',
+															$location_properties_map[$MedicalWebPage_type]['properties']
+														)
 													)
 													||
-													in_array(
-														'duns',
-														$location_properties_map[$LocalBusiness_type]['properties']
+													(
+														$LocalBusiness_output
+														&&
+														in_array(
+															'duns',
+															$location_properties_map[$LocalBusiness_type]['properties']
+														)
 													)
 												)
 												&&
@@ -20489,6 +22397,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'duns', // string // Required // Name of schema property
 															$location_duns, // mixed // Required // Variable to add as the property value
@@ -20501,6 +22410,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'duns', // string // Required // Name of schema property
 															$location_duns, // mixed // Required // Variable to add as the property value
@@ -20524,14 +22434,22 @@
 											 */
 
 											if (
-												in_array(
-													'globalLocationNumber',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'globalLocationNumber',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'globalLocationNumber',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'globalLocationNumber',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20555,6 +22473,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'globalLocationNumber', // string // Required // Name of schema property
 															$location_globalLocationNumber, // mixed // Required // Variable to add as the property value
@@ -20567,6 +22486,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'globalLocationNumber', // string // Required // Name of schema property
 															$location_globalLocationNumber, // mixed // Required // Variable to add as the property value
@@ -20590,14 +22510,22 @@
 											 */
 
 											if (
-												in_array(
-													'isicV4',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'isicV4',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'isicV4',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'isicV4',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20621,6 +22549,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'isicV4', // string // Required // Name of schema property
 															$location_isicV4, // mixed // Required // Variable to add as the property value
@@ -20633,6 +22562,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'isicV4', // string // Required // Name of schema property
 															$location_isicV4, // mixed // Required // Variable to add as the property value
@@ -20655,14 +22585,22 @@
 											 */
 
 											if (
-												in_array(
-													'leiCode',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'leiCode',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'leiCode',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'leiCode',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20686,6 +22624,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'leiCode', // string // Required // Name of schema property
 															$location_leiCode, // mixed // Required // Variable to add as the property value
@@ -20698,6 +22637,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'leiCode', // string // Required // Name of schema property
 															$location_leiCode, // mixed // Required // Variable to add as the property value
@@ -20720,14 +22660,22 @@
 											 */
 
 											if (
-												in_array(
-													'naics',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'naics',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'naics',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'naics',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20751,6 +22699,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'naics', // string // Required // Name of schema property
 															$location_naics, // mixed // Required // Variable to add as the property value
@@ -20763,6 +22712,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'naics', // string // Required // Name of schema property
 															$location_naics, // mixed // Required // Variable to add as the property value
@@ -20785,14 +22735,22 @@
 											 */
 
 											if (
-												in_array(
-													'taxID',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'taxID',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'taxID',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'taxID',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20856,6 +22814,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'taxID', // string // Required // Name of schema property
 															$location_taxID, // mixed // Required // Variable to add as the property value
@@ -20868,6 +22827,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'taxID', // string // Required // Name of schema property
 															$location_taxID, // mixed // Required // Variable to add as the property value
@@ -20887,14 +22847,22 @@
 											 */
 
 											if (
-												in_array(
-													'vatID',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'vatID',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'vatID',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'vatID',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20918,6 +22886,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'vatID', // string // Required // Name of schema property
 															$location_vatID, // mixed // Required // Variable to add as the property value
@@ -20930,6 +22899,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'vatID', // string // Required // Name of schema property
 															$location_vatID, // mixed // Required // Variable to add as the property value
@@ -20958,14 +22928,22 @@
 											 */
 
 											if (
-												in_array(
-													'iso6523Code',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'iso6523Code',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'iso6523Code',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'iso6523Code',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -20989,6 +22967,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'iso6523Code', // string // Required // Name of schema property
 															$location_iso6523Code, // mixed // Required // Variable to add as the property value
@@ -21001,6 +22980,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'iso6523Code', // string // Required // Name of schema property
 															$location_iso6523Code, // mixed // Required // Variable to add as the property value
@@ -21014,14 +22994,22 @@
 										// 'identifier' property
 
 											if (
-												in_array(
-													'identifier',
-													$location_properties_map[$MedicalWebPage_type]['properties']
+												(
+													$MedicalWebPage_output
+													&&
+													in_array(
+														'identifier',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
 												)
 												||
-												in_array(
-													'identifier',
-													$location_properties_map[$LocalBusiness_type]['properties']
+												(
+													$LocalBusiness_output
+													&&
+													in_array(
+														'identifier',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
 												)
 											) {
 
@@ -21271,6 +23259,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$location_identifier, // mixed // Required // Variable to add as the property value
@@ -21283,6 +23272,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 															'identifier', // string // Required // Name of schema property
 															$location_identifier, // mixed // Required // Variable to add as the property value
@@ -21305,14 +23295,22 @@
 										);
 
 									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_image_common
+										(
+											$MedicalWebPage_output
+											&&
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_image_common
+											)
 										)
 										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_image_common
+										(
+											$LocalBusiness_output
+											&&
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_image_common
+											)
 										)
 									) {
 
@@ -21556,14 +23554,22 @@
 									 */
 
 									if (
-										in_array(
-											'image',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'image',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'image',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'image',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -21573,6 +23579,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
@@ -21585,6 +23592,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'image', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
@@ -21611,14 +23619,22 @@
 
 									if (
 										(
-											in_array(
-												'isAcceptingNewPatients',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'isAcceptingNewPatients',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'isAcceptingNewPatients',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'isAcceptingNewPatients',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -21635,6 +23651,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$location_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
@@ -21647,6 +23664,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAcceptingNewPatients', // string // Required // Name of schema property
 													$location_isAcceptingNewPatients, // mixed // Required // Variable to add as the property value
@@ -21669,14 +23687,22 @@
 
 									if (
 										(
-											in_array(
-												'isAccessibleForFree',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'isAccessibleForFree',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'isAccessibleForFree',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'isAccessibleForFree',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -21693,6 +23719,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
 													$location_isAccessibleForFree, // mixed // Required // Variable to add as the property value
@@ -21705,6 +23732,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'isAccessibleForFree', // string // Required // Name of schema property
 													$location_isAccessibleForFree, // mixed // Required // Variable to add as the property value
@@ -21730,14 +23758,22 @@
 
 									if (
 										(
-											in_array(
-												'keywords',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'keywords',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'keywords',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'keywords',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -21754,6 +23790,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$location_keywords, // mixed // Required // Variable to add as the property value
@@ -21766,6 +23803,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'keywords', // string // Required // Name of schema property
 													$location_keywords, // mixed // Required // Variable to add as the property value
@@ -21797,14 +23835,22 @@
 
 									if (
 										(
-											in_array(
-												'knowsAbout',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'knowsAbout',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsAbout',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'knowsAbout',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -21821,6 +23867,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$location_knowsAbout, // mixed // Required // Variable to add as the property value
@@ -21833,6 +23880,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsAbout', // string // Required // Name of schema property
 													$location_knowsAbout, // mixed // Required // Variable to add as the property value
@@ -21858,14 +23906,22 @@
 
 									if (
 										(
-											in_array(
-												'knowsLanguage',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'knowsLanguage',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'knowsLanguage',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'knowsLanguage',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -21882,6 +23938,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$location_knowsLanguage, // mixed // Required // Variable to add as the property value
@@ -21894,6 +23951,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'knowsLanguage', // string // Required // Name of schema property
 													$location_knowsLanguage, // mixed // Required // Variable to add as the property value
@@ -21913,14 +23971,22 @@
 									 */
 
 									if (
-										in_array(
-											'legalName',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'legalName',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'legalName',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'legalName',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -21934,6 +24000,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'legalName', // string // Required // Name of schema property
 													$location_legalName, // mixed // Required // Variable to add as the property value
@@ -21946,6 +24013,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'legalName', // string // Required // Name of schema property
 													$location_legalName, // mixed // Required // Variable to add as the property value
@@ -21969,14 +24037,22 @@
 
 									if (
 										(
-											in_array(
-												'logo',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'logo',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'logo',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'logo',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -21993,6 +24069,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'logo', // string // Required // Name of schema property
 													$location_logo, // mixed // Required // Variable to add as the property value
@@ -22005,6 +24082,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'logo', // string // Required // Name of schema property
 													$location_logo, // mixed // Required // Variable to add as the property value
@@ -22031,26 +24109,36 @@
 									 */
 
 									if (
-										in_array(
-											'mainEntityOfPage',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'mainEntityOfPage',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'mainEntityOfPage',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'mainEntityOfPage',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
 										// Get values
 
-											$location_mainEntityOfPage = $schema_location_MedicalWebPage_ref ?? '';
+											// Base array
 
-											if ( !$location_mainEntityOfPage ) {
+												$location_mainEntityOfPage = array();
 
-												$location_mainEntityOfPage = ( isset($location_url) && !empty($location_url) ) ? $location_url . '#MedicalWebPage' : '';
-
-											}
+											$location_mainEntityOfPage = uamswp_fad_schema_merge_values(
+												$location_mainEntityOfPage,
+												$location_item_MedicalWebPage,
+												$location_item_MedicalWebPage_ref
+											);
 
 										// Add to item values
 
@@ -22058,6 +24146,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntityOfPage', // string // Required // Name of schema property
 													$location_mainEntityOfPage, // mixed // Required // Variable to add as the property value
@@ -22070,6 +24159,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'mainEntityOfPage', // string // Required // Name of schema property
 													$location_mainEntityOfPage, // mixed // Required // Variable to add as the property value
@@ -22094,14 +24184,22 @@
 
 									if (
 										(
-											in_array(
-												'makesOffer',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'makesOffer',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'makesOffer',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'makesOffer',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22118,6 +24216,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'makesOffer', // string // Required // Name of schema property
 													$location_makesOffer, // mixed // Required // Variable to add as the property value
@@ -22130,6 +24229,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'makesOffer', // string // Required // Name of schema property
 													$location_makesOffer, // mixed // Required // Variable to add as the property value
@@ -22152,14 +24252,22 @@
 
 									if (
 										(
-											in_array(
-												'maximumAttendeeCapacity',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'maximumAttendeeCapacity',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'maximumAttendeeCapacity',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'maximumAttendeeCapacity',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22176,6 +24284,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'maximumAttendeeCapacity', // string // Required // Name of schema property
 													$location_maximumAttendeeCapacity, // mixed // Required // Variable to add as the property value
@@ -22188,6 +24297,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'maximumAttendeeCapacity', // string // Required // Name of schema property
 													$location_maximumAttendeeCapacity, // mixed // Required // Variable to add as the property value
@@ -22215,14 +24325,22 @@
 
 									if (
 										(
-											in_array(
-												'nonprofitStatus',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'nonprofitStatus',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'nonprofitStatus',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'nonprofitStatus',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22239,6 +24357,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'nonprofitStatus', // string // Required // Name of schema property
 													$location_nonprofitStatus, // mixed // Required // Variable to add as the property value
@@ -22251,6 +24370,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'nonprofitStatus', // string // Required // Name of schema property
 													$location_nonprofitStatus, // mixed // Required // Variable to add as the property value
@@ -22273,14 +24393,22 @@
 
 									if (
 										(
-											in_array(
-												'numberOfEmployees',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'numberOfEmployees',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'numberOfEmployees',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'numberOfEmployees',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22297,6 +24425,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'numberOfEmployees', // string // Required // Name of schema property
 													$location_numberOfEmployees, // mixed // Required // Variable to add as the property value
@@ -22309,6 +24438,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'numberOfEmployees', // string // Required // Name of schema property
 													$location_numberOfEmployees, // mixed // Required // Variable to add as the property value
@@ -22346,14 +24476,22 @@
 
 									if (
 										(
-											in_array(
-												'openingHours',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'openingHours',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'openingHours',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'openingHours',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22370,6 +24508,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'openingHours', // string // Required // Name of schema property
 													$location_openingHours, // mixed // Required // Variable to add as the property value
@@ -22382,6 +24521,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'openingHours', // string // Required // Name of schema property
 													$location_openingHours, // mixed // Required // Variable to add as the property value
@@ -22404,14 +24544,22 @@
 
 									if (
 										(
-											in_array(
-												'openingHoursSpecification',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'openingHoursSpecification',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'openingHoursSpecification',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'openingHoursSpecification',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22428,6 +24576,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'openingHoursSpecification', // string // Required // Name of schema property
 													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
@@ -22440,6 +24589,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'openingHoursSpecification', // string // Required // Name of schema property
 													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
@@ -22462,14 +24612,22 @@
 
 									if (
 										(
-											in_array(
-												'paymentAccepted',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'paymentAccepted',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'paymentAccepted',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'paymentAccepted',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22486,6 +24644,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$location_paymentAccepted, // mixed // Required // Variable to add as the property value
@@ -22498,6 +24657,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'paymentAccepted', // string // Required // Name of schema property
 													$location_paymentAccepted, // mixed // Required // Variable to add as the property value
@@ -22520,14 +24680,22 @@
 									 */
 
 									if (
-										in_array(
-											'photo',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'photo',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'photo',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'photo',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -22537,6 +24705,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
@@ -22549,6 +24718,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'photo', // string // Required // Name of schema property
 													$location_image_general, // mixed // Required // Variable to add as the property value
@@ -22636,14 +24806,22 @@
 
 									if (
 										(
-											in_array(
-												'potentialAction',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'potentialAction',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'potentialAction',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'potentialAction',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22660,6 +24838,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'potentialAction', // string // Required // Name of schema property
 													$location_potentialAction, // mixed // Required // Variable to add as the property value
@@ -22672,6 +24851,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'potentialAction', // string // Required // Name of schema property
 													$location_potentialAction, // mixed // Required // Variable to add as the property value
@@ -22695,14 +24875,22 @@
 
 									if (
 										(
-											in_array(
-												'publicAccess',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'publicAccess',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'publicAccess',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'publicAccess',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22719,6 +24907,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'publicAccess', // string // Required // Name of schema property
 													$location_publicAccess, // mixed // Required // Variable to add as the property value
@@ -22731,6 +24920,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'publicAccess', // string // Required // Name of schema property
 													$location_publicAccess, // mixed // Required // Variable to add as the property value
@@ -22753,14 +24943,22 @@
 
 									if (
 										(
-											in_array(
-												'review',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'review',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'review',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'review',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22777,6 +24975,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'review', // string // Required // Name of schema property
 													$location_review, // mixed // Required // Variable to add as the property value
@@ -22789,6 +24988,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'review', // string // Required // Name of schema property
 													$location_review, // mixed // Required // Variable to add as the property value
@@ -22812,14 +25012,22 @@
 									 */
 
 									if (
-										in_array(
-											'sameAs',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											$MedicalWebPage_output
+											&&
+											in_array(
+												'sameAs',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
 										)
 										||
-										in_array(
-											'sameAs',
-											$location_properties_map[$LocalBusiness_type]['properties']
+										(
+											$LocalBusiness_output
+											&&
+											in_array(
+												'sameAs',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
 									) {
 
@@ -22872,14 +25080,22 @@
 
 									if (
 										(
-											in_array(
-												'smokingAllowed',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'smokingAllowed',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'smokingAllowed',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'smokingAllowed',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22896,6 +25112,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'smokingAllowed', // string // Required // Name of schema property
 													$location_smokingAllowed, // mixed // Required // Variable to add as the property value
@@ -22908,6 +25125,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'smokingAllowed', // string // Required // Name of schema property
 													$location_smokingAllowed, // mixed // Required // Variable to add as the property value
@@ -22933,14 +25151,22 @@
 
 									if (
 										(
-											in_array(
-												'specialOpeningHoursSpecification',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'specialOpeningHoursSpecification',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'specialOpeningHoursSpecification',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'specialOpeningHoursSpecification',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -22957,6 +25183,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
 													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
@@ -22969,6 +25196,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'specialOpeningHoursSpecification', // string // Required // Name of schema property
 													$location_specialOpeningHoursSpecification, // mixed // Required // Variable to add as the property value
@@ -22994,14 +25222,22 @@
 
 									if (
 										(
-											in_array(
-												'subjectOf',
-												$location_properties_map[$MedicalWebPage_type]['properties']
+											(
+												$MedicalWebPage_output
+												&&
+												in_array(
+													'subjectOf',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
 											)
 											||
-											in_array(
-												'subjectOf',
-												$location_properties_map[$LocalBusiness_type]['properties']
+											(
+												$LocalBusiness_output
+												&&
+												in_array(
+													'subjectOf',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
 											)
 										)
 										&&
@@ -23010,19 +25246,15 @@
 
 										// Get values
 
-											$location_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
+											// Base array
 
-											if ( !$location_subjectOf ) {
+												$location_subjectOf = array();
 
-												$location_subjectOf = $location_mainEntityOfPage ?? '';
-
-												if ( !$location_subjectOf ) {
-
-													$location_subjectOf = ( isset($location_url) && !empty($location_url) ) ? $location_url . '#MedicalWebPage' : '';
-
-												}
-
-											}
+											$location_subjectOf = uamswp_fad_schema_merge_values(
+												$location_subjectOf,
+												$location_item_MedicalWebPage,
+												$location_item_MedicalWebPage_ref
+											);
 
 										// Add to item values
 
@@ -23030,6 +25262,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$MedicalWebPage_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'subjectOf', // string // Required // Name of schema property
 													$location_subjectOf, // mixed // Required // Variable to add as the property value
@@ -23042,6 +25275,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$LocalBusiness_output, // bool // Required // Query for whether to output the schema for the specified type
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'subjectOf', // string // Required // Name of schema property
 													$location_subjectOf, // mixed // Required // Variable to add as the property value
@@ -23250,6 +25484,8 @@
 
 						// Eliminate PHP errors / reset variables
 
+							$expertise_item_MedicalWebPage = array(); // Base array
+							$expertise_item_MedicalEntity = array(); // Base array
 							$MedicalEntity_item = array(); // Base array
 							$MedicalEntity_url = '';
 							$MedicalEntity_type = '';
@@ -23662,13 +25898,15 @@
 
 								// Get values
 
-									$MedicalEntity_mainEntityOfPage = $schema_expertise_MedicalWebPage_ref ?? '';
+									// Base array
 
-									if ( !$MedicalEntity_mainEntityOfPage ) {
+										$MedicalEntity_mainEntityOfPage = array();
 
-										$MedicalEntity_mainEntityOfPage = ( isset($MedicalEntity_url) && !empty($MedicalEntity_url) ) ? $MedicalEntity_url . '#MedicalWebPage' : '';
-
-									}
+									$MedicalEntity_mainEntityOfPage = uamswp_fad_schema_merge_values(
+										$MedicalEntity_mainEntityOfPage,
+										$expertise_item_MedicalWebPage,
+										$expertise_item_MedicalWebPage_ref
+									);
 
 								// Add to item values
 
@@ -23877,19 +26115,15 @@
 
 									// Get values
 
-										$MedicalEntity_subjectOf = $schema_expertise_MedicalWebPage_ref ?? '';
+										// Base array
 
-										if ( !$MedicalEntity_subjectOf ) {
+											$MedicalEntity_subjectOf = array();
 
-											$MedicalEntity_subjectOf = $MedicalEntity_mainEntityOfPage ?? '';
-
-											if ( !$MedicalEntity_subjectOf ) {
-
-												$MedicalEntity_subjectOf = ( isset($MedicalEntity_url) && !empty($MedicalEntity_url) ) ? $MedicalEntity_url . '#MedicalWebPage' : '';
-
-											}
-
-										}
+										$MedicalEntity_subjectOf = uamswp_fad_schema_merge_values(
+											$MedicalEntity_subjectOf,
+											$expertise_item_MedicalWebPage,
+											$expertise_item_MedicalWebPage_ref
+										);
 
 									// Add to item values
 
@@ -24031,6 +26265,8 @@
 
 						// Eliminate PHP errors / reset variables
 
+							$clinical_resource_item_MedicalWebPage = array(); // Base array
+							$clinical_resource_item_CreativeWork = array(); // Base array
 							$CreativeWork_abstract = '';
 							$CreativeWork_additionalType = '';
 							$CreativeWork_alternateName = '';
@@ -24792,19 +27028,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$CreativeWork_creator[] = $schema_base_org_uams_ref;
-
-												}
+												$CreativeWork_creator = uamswp_fad_schema_merge_values(
+													$CreativeWork_creator,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$CreativeWork_creator[] = $schema_base_org_uams_health_ref;
-
-												}
+												$CreativeWork_creator = uamswp_fad_schema_merge_values(
+													$CreativeWork_creator,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -25317,13 +27553,15 @@
 
 								// Get values
 
-									$CreativeWork_isPartOf = $schema_clinical_resource_MedicalWebPage_ref ?? '';
+									// Base array
 
-									if ( !$CreativeWork_isPartOf ) {
+										$CreativeWork_isPartOf = array();
 
-										$CreativeWork_isPartOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
-
-									}
+									$CreativeWork_isPartOf = uamswp_fad_schema_merge_values(
+										$CreativeWork_isPartOf,
+										$clinical_resource_item_MedicalWebPage,
+										$clinical_resource_item_MedicalWebPage_ref
+									);
 
 								// Add to item values
 
@@ -25354,13 +27592,15 @@
 
 								// Get values
 
-									$CreativeWork_mainEntityOfPage = $schema_clinical_resource_MedicalWebPage_ref ?? '';
+									// Base array
 
-									if ( !$CreativeWork_mainEntityOfPage ) {
+										$CreativeWork_mainEntityOfPage = array();
 
-										$CreativeWork_mainEntityOfPage = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
-
-									}
+									$CreativeWork_mainEntityOfPage = uamswp_fad_schema_merge_values(
+										$CreativeWork_mainEntityOfPage,
+										$clinical_resource_item_MedicalWebPage,
+										$clinical_resource_item_MedicalWebPage_ref
+									);
 
 								// Add to item values
 
@@ -25508,19 +27748,19 @@
 
 											// UAMS
 
-												if ( $schema_base_org_uams_ref ) {
-
-													$CreativeWork_sourceOrganization[] = $schema_base_org_uams_ref;
-
-												}
+												$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
+													$CreativeWork_sourceOrganization,
+													$schema_base_org_uams,
+													$schema_base_org_uams_ref
+												);
 
 											// UAMS Health
 
-												if ( $schema_base_org_uams_health_ref ) {
-
-													$CreativeWork_sourceOrganization[] = $schema_base_org_uams_health_ref;
-
-												}
+												$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
+													$CreativeWork_sourceOrganization,
+													$schema_base_org_uams_health,
+													$schema_base_org_uams_health_ref
+												);
 
 										// Format values
 
@@ -25662,19 +27902,15 @@
 
 								// Get values
 
-									$CreativeWork_subjectOf = $schema_clinical_resource_MedicalWebPage_ref ?? '';
+									// Base array
 
-									if ( !$CreativeWork_subjectOf ) {
+										$CreativeWork_subjectOf = array();
 
-										$CreativeWork_subjectOf = $CreativeWork_mainEntityOfPage ?? '';
-
-										if ( !$CreativeWork_subjectOf ) {
-
-											$CreativeWork_subjectOf = ( isset($CreativeWork_url) && !empty($CreativeWork_url) ) ? $CreativeWork_url . '#MedicalWebPage' : '';
-
-										}
-
-									}
+									$CreativeWork_subjectOf = uamswp_fad_schema_merge_values(
+										$CreativeWork_subjectOf,
+										$clinical_resource_item_MedicalWebPage,
+										$clinical_resource_item_MedicalWebPage_ref
+									);
 
 								// Add to item values
 
@@ -27600,6 +29836,7 @@
 
 		function uamswp_fad_schema_add_to_item_values(
 			string $schema_type, // string // Required // The @type value for the schema item
+			bool $schema_type_query, // bool // Required // Query for whether to output the schema for the specified type
 			array &$schema_type_list, // array // Required // The list array for the schema item to which to add the property value
 			string $property_name, // string // Required // Name of schema property
 			$property_value, // mixed // Required // Variable to add as the property value
@@ -27613,6 +29850,8 @@
 
 			if (
 				!$schema_type
+				||
+				!$schema_type_query
 				||
 				!$schema_type_list
 				||

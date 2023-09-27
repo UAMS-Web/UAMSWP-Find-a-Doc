@@ -22,6 +22,8 @@ $page_id = get_the_ID();
 		0, // Nesting level within the main schema
 		1, // Iteration counter for location-as-MedicalWebPage
 		1, // Iteration counter for location-as-LocalBusiness
+		false, // bool // Query for whether to output the 'MedicalWebPage' type
+		true, // bool // Query for whether to output the 'LocalBusiness' type
 		$location_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 	);
 

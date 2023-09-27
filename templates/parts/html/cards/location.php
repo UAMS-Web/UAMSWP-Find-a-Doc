@@ -75,6 +75,8 @@
 			array($page_id), // List of IDs of the location items
 			$location_url, // Page URL
 			1, // Nesting level within the main schema
+			false, // bool // Query for whether to output the 'MedicalWebPage' type
+			true, // bool // Query for whether to output the 'LocalBusiness' type
 			1, // Iteration counter for location-as-MedicalWebPage
 			1, // Iteration counter for location-as-LocalBusiness
 			$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided
