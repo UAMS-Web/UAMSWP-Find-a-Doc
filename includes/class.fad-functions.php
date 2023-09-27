@@ -2194,7 +2194,7 @@ function uamswp_fad_ontology_site_values(
 	// Query for whether descendant locations content section should be displayed on a page
 	function uamswp_fad_location_descendant_query(
 		$page_id, // int
-		$location_descendants, // int[]
+		$location_descendants, // int[] or WP_Post
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
