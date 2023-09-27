@@ -5316,659 +5316,62 @@
 
 			if ( !empty($repeater) ) {
 
-				// Person and MedicalBusiness Subtype Properties Map
+				// List of valid types
 
-					/*
-
-					Listing the properties valid for each schema type.
-
-					*/
-
-					$provider_properties_map = array(
-						'Thing' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => false,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'additionalType',
-								'alternateName',
-								'description',
-								'disambiguatingDescription',
-								'identifier',
-								'image',
-								'mainEntityOfPage',
-								'name',
-								'potentialAction',
-								'sameAs',
-								'subjectOf',
-								'url'
-							)
-						),
-						'CreativeWork' => array(
-							'Thing' => true,
-							'CreativeWork' => true,
-							'WebPage' => false,
-							'Organization' => false,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'about',
-								'abstract',
-								'accessMode',
-								'accessModeSufficient',
-								'accessibilityAPI',
-								'accessibilityControl',
-								'accessibilityFeature',
-								'accessibilityHazard',
-								'accessibilitySummary',
-								'accountablePerson',
-								'acquireLicensePage',
-								'aggregateRating',
-								'alternativeHeadline',
-								'archivedAt',
-								'assesses',
-								'associatedMedia',
-								'audience',
-								'audio',
-								'author',
-								'award',
-								'character',
-								'citation',
-								'comment',
-								'commentCount',
-								'conditionsOfAccess',
-								'contentLocation',
-								'contentRating',
-								'contentReferenceTime',
-								'contributor',
-								'copyrightHolder',
-								'copyrightNotice',
-								'copyrightYear',
-								'correction',
-								'countryOfOrigin',
-								'creativeWorkStatus',
-								'creator',
-								'creditText',
-								'dateCreated',
-								'dateModified',
-								'datePublished',
-								'discussionUrl',
-								'editEIDR',
-								'editor',
-								'educationalAlignment',
-								'educationalLevel',
-								'educationalUse',
-								'encoding',
-								'encodingFormat',
-								'exampleOfWork',
-								'expires',
-								'fileFormat',
-								'funder',
-								'funding',
-								'genre',
-								'hasPart',
-								'headline',
-								'inLanguage',
-								'interactionStatistic',
-								'interactivityType',
-								'interpretedAsClaim',
-								'isAccessibleForFree',
-								'isBasedOn',
-								'isBasedOnUrl',
-								'isFamilyFriendly',
-								'isPartOf',
-								'keywords',
-								'learningResourceType',
-								'license',
-								'locationCreated',
-								'mainEntity',
-								'maintainer',
-								'material',
-								'materialExtent',
-								'mentions',
-								'offers',
-								'pattern',
-								'position',
-								'producer',
-								'provider',
-								'publication',
-								'publisher',
-								'publisherImprint',
-								'publishingPrinciples',
-								'recordedAt',
-								'releasedEvent',
-								'review',
-								'schemaVersion',
-								'sdDatePublished',
-								'sdLicense',
-								'sdPublisher',
-								'size',
-								'sourceOrganization',
-								'spatial',
-								'spatialCoverage',
-								'sponsor',
-								'teaches',
-								'temporal',
-								'temporalCoverage',
-								'text',
-								'thumbnail',
-								'thumbnailUrl',
-								'timeRequired',
-								'translationOfWork',
-								'translator',
-								'typicalAgeRange',
-								'usageInfo',
-								'version',
-								'video',
-								'workExample',
-								'workTranslation'
-							)
-						),
-						'WebPage' => array(
-							'Thing' => true,
-							'CreativeWork' => true,
-							'WebPage' => true,
-							'Organization' => false,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'breadcrumb',
-								'lastReviewed',
-								'mainContentOfPage',
-								'primaryImageOfPage',
-								'relatedLink',
-								'reviewedBy',
-								'significantLink',
-								'speakable',
-								'specialty'
-							)
-						),
-						'MedicalWebPage' => array(
-							'Thing' => true,
-							'CreativeWork' => true,
-							'WebPage' => true,
-							'Organization' => false,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'medicalAudience'
-							)
-						),
-						'Organization' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'actionableFeedbackPolicy',
-								'address',
-								'aggregateRating',
-								'alumni',
-								'areaServed',
-								'award',
-								'brand',
-								'contactPoint',
-								'correctionsPolicy',
-								'department',
-								'dissolutionDate',
-								'diversityPolicy',
-								'diversityStaffingReport',
-								'duns',
-								'email',
-								'employee',
-								'ethicsPolicy',
-								'event',
-								'events',
-								'faxNumber',
-								'founder',
-								'foundingDate',
-								'foundingLocation',
-								'funder',
-								'funding',
-								'globalLocationNumber',
-								'hasCredential',
-								'hasMerchantReturnPolicy',
-								'hasOfferCatalog',
-								'hasPOS',
-								'hasProductReturnPolicy',
-								'interactionStatistic',
-								'isicV4',
-								'iso6523Code',
-								'keywords',
-								'knowsAbout',
-								'knowsLanguage',
-								'legalName',
-								'leiCode',
-								'location',
-								'logo',
-								'makesOffer',
-								'member',
-								'memberOf',
-								'naics',
-								'nonprofitStatus',
-								'numberOfEmployees',
-								'ownershipFundingInfo',
-								'owns',
-								'parentOrganization',
-								'publishingPrinciples',
-								'review',
-								'seeks',
-								'serviceArea',
-								'slogan',
-								'sponsor',
-								'subOrganization',
-								'taxID',
-								'telephone',
-								'unnamedSourcesPolicy',
-								'vatID'
-							)
-						),
-						'Place' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => false,
-							'Place' => true,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'additionalProperty',
-								'address',
-								'aggregateRating',
-								'amenityFeature',
-								'branchCode',
-								'containedInPlace',
-								'containsPlace',
-								'event',
-								'events',
-								'faxNumber',
-								'geo',
-								'geoContains',
-								'geoCoveredBy',
-								'geoCovers',
-								'geoCrosses',
-								'geoDisjoint',
-								'geoEquals',
-								'geoIntersects',
-								'geoOverlaps',
-								'geoTouches',
-								'geoWithin',
-								'globalLocationNumber',
-								'hasDriveThroughService',
-								'hasMap',
-								'isAccessibleForFree',
-								'isicV4',
-								'keywords',
-								'latitude',
-								'logo',
-								'longitude',
-								'map',
-								'maps',
-								'maximumAttendeeCapacity',
-								'openingHoursSpecification',
-								'photo',
-								'publicAccess',
-								'review',
-								'slogan',
-								'smokingAllowed',
-								'specialOpeningHoursSpecification',
-								'telephone',
-								'tourBookingPage'
-							)
-						),
-						'LocalBusiness' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => true,
-							'LocalBusiness' => true,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'currenciesAccepted',
-								'openingHours',
-								'paymentAccepted',
-								'priceRange'
-							)
-						),
-						'MedicalBusiness' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => true,
-							'LocalBusiness' => true,
-							'MedicalBusiness' => true,
-							'MedicalOrganization' => false,
-							'properties' => array()
-						),
-						'MedicalOrganization' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => true,
-							'properties' => array(
-								'healthPlanNetworkId',
-								'isAcceptingNewPatients',
-								'medicalSpecialty'
-							)
-						),
-						'Physician' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => true,
-							'LocalBusiness' => true,
-							'MedicalBusiness' => true,
-							'MedicalOrganization' => true,
-							'properties' => array(
-								'availableService',
-								'hospitalAffiliation',
-								'medicalSpecialty'
-							),
-							'degrees' => array(
-								'M.D.',
-								'D.O.'
-							)
-						),
-						'Dentist' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => true,
-							'LocalBusiness' => true,
-							'MedicalBusiness' => true,
-							'MedicalOrganization' => true,
-							'properties' => array(),
-							'degrees' => array(
-								'D.D.S.',
-								'D.M.D.'
-							)
-						),
-						'Optician' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => true,
-							'Place' => true,
-							'LocalBusiness' => true,
-							'MedicalBusiness' => true,
-							'MedicalOrganization' => false,
-							'properties' => array(),
-							'degrees' => array()
-						),
-						'Person' => array(
-							'Thing' => true,
-							'CreativeWork' => false,
-							'WebPage' => false,
-							'Organization' => false,
-							'Place' => false,
-							'LocalBusiness' => false,
-							'MedicalBusiness' => false,
-							'MedicalOrganization' => false,
-							'properties' => array(
-								'additionalName',
-								'address',
-								'affiliation',
-								'alumniOf',
-								'award',
-								'birthDate',
-								'birthPlace',
-								'brand',
-								'callSign',
-								'children',
-								'colleague',
-								'colleagues',
-								'contactPoint',
-								'contactPoints',
-								'deathDate',
-								'deathPlace',
-								'duns',
-								'email',
-								'familyName',
-								'faxNumber',
-								'follows',
-								'funder',
-								'funding',
-								'gender',
-								'givenName',
-								'globalLocationNumber',
-								'hasCredential',
-								'hasOccupation',
-								'hasOfferCatalog',
-								'hasPOS',
-								'height',
-								'homeLocation',
-								'honorificPrefix',
-								'honorificSuffix',
-								'interactionStatistic',
-								'isicV4',
-								'jobTitle',
-								'knows',
-								'knowsAbout',
-								'knowsLanguage',
-								'makesOffer',
-								'memberOf',
-								'naics',
-								'nationality',
-								'netWorth',
-								'owns',
-								'parent',
-								'parents',
-								'performerIn',
-								'publishingPrinciples',
-								'relatedTo',
-								'seeks',
-								'sibling',
-								'siblings',
-								'sponsor',
-								'spouse',
-								'taxID',
-								'telephone',
-								'vatID',
-								'weight',
-								'workLocation',
-								'worksFor'
-							),
-							'degrees' => array()
-						)
+					$provider_valid_types = array(
+						'MedicalBusiness',
+						'MedicalWebPage',
+						'Dentist',
+						'Optician',
+						'Physician',
+						'Person'
 					);
 
-					// Merge common properties into each type's properties
+					// Other valid types from MedicalSpecialty enumeration members
 
-						foreach ( $provider_properties_map as &$provider_properties_map_item ) {
+						$provider_valid_types_MedicalSpecialty = array(
+							'CommunityHealth',
+							'Dermatology',
+							'DietNutrition',
+							'Emergency',
+							'Geriatric',
+							'Gynecologic',
+							'Midwifery',
+							'Nursing',
+							'Obstetric',
+							'Oncologic',
+							'Optometric',
+							'Otolaryngologic',
+							'Pediatric',
+							'Physiotherapy',
+							'PlasticSurgery',
+							'Podiatric',
+							'PrimaryCare',
+							'Psychiatric',
+							'PublicHealth'
+						);
 
-							// Thing properties
+						// Merge list into valid types list
 
-								if (
-									$provider_properties_map_item != 'Thing'
-									&&
-									$provider_properties_map_item['Thing']
-								) {
+							$provider_valid_types = array_merge(
+								$provider_valid_types,
+								$provider_valid_types_MedicalSpecialty
+							);
 
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['Thing']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
+				// List of valid properties for each type
 
-								}
+					// Base array
 
-							// CreativeWork properties
+						$provider_properties_map = array();
 
-								if (
-									$provider_properties_map_item != 'CreativeWork'
-									&&
-									$provider_properties_map_item['CreativeWork']
-								) {
+					// Get list of valid properties from Schema.org type list
 
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['CreativeWork']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
+						foreach ( $provider_valid_types as $item ) {
 
-								}
-
-							// WebPage properties
-
-								if (
-									$provider_properties_map_item != 'WebPage'
-									&&
-									$provider_properties_map_item['WebPage']
-								) {
-
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['WebPage']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
-
-								}
-
-							// Organization properties
-
-								if (
-									$provider_properties_map_item != 'Organization'
-									&&
-									$provider_properties_map_item['Organization']
-								) {
-
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['Organization']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
-
-								}
-
-							// Place properties
-
-								if (
-									$provider_properties_map_item != 'Place'
-									&&
-									$provider_properties_map_item['Place']
-								) {
-
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['Place']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
-
-								}
-
-							// LocalBusiness properties
-
-								if (
-									$provider_properties_map_item != 'LocalBusiness'
-									&&
-									$provider_properties_map_item['LocalBusiness']
-								) {
-
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['LocalBusiness']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
-
-								}
-
-							// MedicalBusiness properties
-
-								if (
-									$provider_properties_map_item != 'MedicalBusiness'
-									&&
-									$provider_properties_map_item['MedicalBusiness']
-								) {
-
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['MedicalBusiness']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
-
-								}
-
-							// MedicalOrganization properties
-
-								if (
-									$provider_properties_map_item != 'MedicalOrganization'
-									&&
-									$provider_properties_map_item['MedicalOrganization']
-								) {
-
-									$provider_properties_map_item['properties'] = array_merge(
-										$provider_properties_map_item['properties'],
-										$provider_properties_map['MedicalOrganization']['properties']
-									);
-									$provider_properties_map_item['properties'] = array_unique( $provider_properties_map_item['properties'], SORT_REGULAR );
-									$provider_properties_map_item['properties'] = array_values($provider_properties_map_item['properties']);
-
-								}
+							$provider_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$provider_properties_map[$item]['properties'] = is_array($provider_properties_map[$item]['properties']) ? $provider_properties_map[$item]['properties'] : array($provider_properties_map[$item]['properties']);
 
 						}
-
-				// MedicalBusiness additionalType MedicalSpecialty values
-
-					/*
-
-					Listing the MedicalSpecialty enumeration members that are also 
-					subtypes of the MedicalBusiness type.
-
-					*/
-
-					$provider_additionalType_MedicalSpecialty_valid = array(
-						'https://schema.org/CommunityHealth/',
-						'https://schema.org/Dermatology/',
-						'https://schema.org/DietNutrition/',
-						'https://schema.org/Emergency/',
-						'https://schema.org/Geriatric/',
-						'https://schema.org/Gynecologic/',
-						'https://schema.org/Midwifery/',
-						'https://schema.org/Nursing/',
-						'https://schema.org/Obstetric/',
-						'https://schema.org/Oncologic/',
-						'https://schema.org/Optometric/',
-						'https://schema.org/Otolaryngologic/',
-						'https://schema.org/Pediatric/',
-						'https://schema.org/Physiotherapy/',
-						'https://schema.org/PlasticSurgery/',
-						'https://schema.org/Podiatric/',
-						'https://schema.org/PrimaryCare/',
-						'https://schema.org/Psychiatric/',
-						'https://schema.org/PublicHealth/'
-					);
 
 				// Loop through each provider to add values
 
@@ -9562,7 +8965,7 @@
 																	$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
 
 																	$provider_additionalType_MedicalSpecialty = array_intersect(
-																		$provider_additionalType_MedicalSpecialty_valid,
+																		$provider_valid_types_MedicalSpecialty,
 																		$provider_medicalSpecialty_list
 																	);
 
@@ -17877,215 +17280,76 @@
 			array $LocalBusiness_list = array() // Pre-existing list array for location-as-LocalBusiness to which to add additional items
 		) {
 
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+
 			// Common property values
 
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
 
-				// UAMS organization values
+			// UAMS organization values
 
-					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
 
 			if ( !empty($repeater) ) {
 
-				// LocalBusiness Subtype Properties Map
+				// List of valid types
 
-					/*
-
-					Listing the properties valid for each schema type.
-
-					*/
-
-					$location_properties_map = array(
-						'all' => array(
-							'MedicalBusiness' => false,
-							'properties' => array(
-								'actionableFeedbackPolicy',
-								'additionalProperty',
-								'additionalType',
-								'address',
-								'aggregateRating',
-								'alternateName',
-								'alumni',
-								'amenityFeature',
-								'areaServed',
-								'award',
-								'awards',
-								'branchCode',
-								'brand',
-								'contactPoint',
-								'containedInPlace',
-								'containsPlace',
-								'correctionsPolicy',
-								'currenciesAccepted',
-								'department',
-								'description',
-								'disambiguatingDescription',
-								'dissolutionDate',
-								'diversityPolicy',
-								'diversityStaffingReport',
-								'duns',
-								'email',
-								'employee',
-								'ethicsPolicy',
-								'event',
-								'events',
-								'faxNumber',
-								'founder',
-								'foundingDate',
-								'foundingLocation',
-								'funder',
-								'funding',
-								'geo',
-								'geoContains',
-								'geoCoveredBy',
-								'geoCovers',
-								'geoCrosses',
-								'geoDisjoint',
-								'geoEquals',
-								'geoIntersects',
-								'geoOverlaps',
-								'geoTouches',
-								'geoWithin',
-								'globalLocationNumber',
-								'hasCredential',
-								'hasDriveThroughService',
-								'hasMap',
-								'hasMerchantReturnPolicy',
-								'hasOfferCatalog',
-								'hasPOS',
-								'hasProductReturnPolicy',
-								'identifier',
-								'image',
-								'interactionStatistic',
-								'isAccessibleForFree',
-								'isicV4',
-								'iso6523Code',
-								'keywords',
-								'knowsAbout',
-								'knowsLanguage',
-								'latitude',
-								'legalName',
-								'leiCode',
-								'location',
-								'logo',
-								'longitude',
-								'mainEntityOfPage',
-								'makesOffer',
-								'map',
-								'maps',
-								'maximumAttendeeCapacity',
-								'member',
-								'memberOf',
-								'naics',
-								'name',
-								'nonprofitStatus',
-								'numberOfEmployees',
-								'openingHours',
-								'openingHoursSpecification',
-								'ownershipFundingInfo',
-								'owns',
-								'parentOrganization',
-								'paymentAccepted',
-								'photo',
-								'potentialAction',
-								'priceRange',
-								'publicAccess',
-								'publishingPrinciples',
-								'review',
-								'sameAs',
-								'seeks',
-								'serviceArea',
-								'slogan',
-								'smokingAllowed',
-								'specialOpeningHoursSpecification',
-								'sponsor',
-								'subjectOf',
-								'subOrganization',
-								'taxID',
-								'telephone',
-								'tourBookingPage',
-								'unnamedSourcesPolicy',
-								'url',
-								'vatID'
-							)
-						),
-						'Hospital' => array(
-							'MedicalBusiness' => false,
-							'properties' => array(
-								'availableService',
-								'healthPlanNetworkId',
-								'healthcareReportingData',
-								'isAcceptingNewPatients',
-								'medicalSpecialty'
-							)
-						),
-						'MedicalBusiness' => array(
-							'MedicalBusiness' => true,
-							'properties' => array()
-						),
-						'MedicalClinic' => array(
-							'MedicalBusiness' => true,
-							'properties' => array(
-								'availableService',
-								'healthPlanNetworkId',
-								'isAcceptingNewPatients',
-								'medicalSpecialty'
-							)
-						),
-						'Pharmacy' => array(
-							'MedicalBusiness' => true,
-							'properties' => array(
-								'healthPlanNetworkId',
-								'isAcceptingNewPatients',
-								'medicalSpecialty'
-							)
-						)
+					$location_valid_types = array(
+						'MedicalBusiness',
+						'MedicalClinic',
+						'MedicalWebPage',
+						'Optician',
+						'Pharmacy',
+						'Physician'
 					);
 
-					// Merge common property values into each LocalBusiness Subtype's property values
+					// Other valid types from MedicalSpecialty enumeration members
 
-						foreach ( $location_properties_map as &$item ) {
+						$location_valid_types_MedicalSpecialty = array(
+							'CommunityHealth',
+							'Dermatology',
+							'DietNutrition',
+							'Emergency',
+							'Geriatric',
+							'Gynecologic',
+							'Midwifery',
+							'Nursing',
+							'Obstetric',
+							'Oncologic',
+							'Optometric',
+							'Otolaryngologic',
+							'Pediatric',
+							'Physiotherapy',
+							'PlasticSurgery',
+							'Podiatric',
+							'PrimaryCare',
+							'Psychiatric',
+							'PublicHealth'
+						);
 
-							if ( $item != 'all ') {
+						// Merge list into valid types list
 
-								$item['properties'] = array_merge(
-									$item['properties'],
-									$location_properties_map['all']['properties']
-								);
+							$location_valid_types = array_merge(
+								$location_valid_types,
+								$location_valid_types_MedicalSpecialty
+							);
 
-							}
+				// List of valid properties for each type
+
+					// Base array
+
+						$location_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $location_valid_types as $item ) {
+
+							$location_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$location_properties_map[$item]['properties'] = is_array($location_properties_map[$item]['properties']) ? $location_properties_map[$item]['properties'] : array($location_properties_map[$item]['properties']);
+
 						}
-
-				// LocalBusiness additionalType MedicalSpecialty values
-
-					/*
-
-					Listing the MedicalSpecialty enumeration members that are also 
-					subtypes of the MedicalBusiness type.
-
-					*/
-
-					$LocalBusiness_additionalType_MedicalSpecialty_valid = array(
-						'https://schema.org/CommunityHealth/',
-						'https://schema.org/Dermatology/',
-						'https://schema.org/DietNutrition/',
-						'https://schema.org/Emergency/',
-						'https://schema.org/Geriatric/',
-						'https://schema.org/Gynecologic/',
-						'https://schema.org/Midwifery/',
-						'https://schema.org/Nursing/',
-						'https://schema.org/Obstetric/',
-						'https://schema.org/Oncologic/',
-						'https://schema.org/Optometric/',
-						'https://schema.org/Otolaryngologic/',
-						'https://schema.org/Pediatric/',
-						'https://schema.org/Physiotherapy/',
-						'https://schema.org/PlasticSurgery/',
-						'https://schema.org/Podiatric/',
-						'https://schema.org/PrimaryCare/',
-						'https://schema.org/Psychiatric/',
-						'https://schema.org/PublicHealth/'
-					);
 
 				// Loop through each location to add values
 
@@ -18566,7 +17830,7 @@
 														$LocalBusiness_medicalSpecialty_list = array_is_list($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
 
 														$LocalBusiness_additionalType_medicalSpecialty = array_intersect(
-															$LocalBusiness_additionalType_MedicalSpecialty_valid,
+															$location_valid_types_MedicalSpecialty,
 															$LocalBusiness_medicalSpecialty_list
 														);
 
