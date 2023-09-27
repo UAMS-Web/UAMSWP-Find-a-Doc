@@ -17872,7 +17872,7 @@
 			int $nesting_level = 1, // Nesting level within the main schema
 			int $MedicalWebPage_i = 1, // Iteration counter for location-as-MedicalWebPage
 			int $LocalBusiness_i = 1, // Iteration counter for location-as-LocalBusiness
-			array $LocalBusiness_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
+			array $location_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $MedicalWebPage_list = array(), // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
 			array $LocalBusiness_list = array() // Pre-existing list array for location-as-LocalBusiness to which to add additional items
 		) {
@@ -18237,9 +18237,9 @@
 
 							// Load variables from pre-existing field values array
 
-								if ( $LocalBusiness_fields[$LocalBusiness] ) {
+								if ( $location_fields[$LocalBusiness] ) {
 
-									foreach ( $LocalBusiness_fields[$LocalBusiness] as $key => $value ) {
+									foreach ( $location_fields[$LocalBusiness] as $key => $value ) {
 
 										${$key} = $value; // Create a variable for each item in the array
 
