@@ -18408,11 +18408,7 @@
 
 										// Get values
 
-											if ( !isset($location_aggregateRating) ) {
-
-												$location_aggregateRating = array();
-
-											}
+											$location_aggregateRating = array();
 
 										// Add to item values
 
@@ -18535,11 +18531,7 @@
 
 										// Get values
 
-											if ( !isset($location_areaServed) ) {
-
-												$location_areaServed = array();
-
-											}
+											$location_areaServed = array();
 
 										// Add to item values
 
@@ -18673,11 +18665,7 @@
 
 										// Get values
 
-											if ( !isset($location_award) ) {
-
-												$location_award = array();
-
-											}
+											$location_award = array();
 
 										// Add to item values
 
@@ -18793,11 +18781,7 @@
 
 										// Get values
 
-											if ( !isset($location_contactPoint) ) {
-
-												$location_contactPoint = array();
-
-											}
+											$location_contactPoint = array();
 
 										// Add to item values
 
@@ -18850,11 +18834,7 @@
 
 										// Get values
 
-											if ( !isset($location_containedInPlace) ) {
-
-												$location_containedInPlace = array();
-
-											}
+											$location_containedInPlace = array();
 
 										// Add to item values
 
@@ -18923,11 +18903,7 @@
 
 										// Get values
 
-											if ( !isset($location_containsPlace) ) {
-
-												$location_containsPlace = array();
-
-											}
+											$location_containsPlace = array();
 
 										// Add to item values
 
@@ -18991,11 +18967,7 @@
 
 										// Get values
 
-											if ( !isset($location_currenciesAccepted) ) {
-
-												$location_currenciesAccepted = array();
-
-											}
+											$location_currenciesAccepted = array();
 
 										// Add to item values
 
@@ -19055,11 +19027,7 @@
 
 										// Get values
 
-											if ( !isset($location_department) ) {
-
-												$location_department = $location_containsPlace ?? array();
-
-											}
+											$location_department = $location_containsPlace ?? array();
 
 										// Add to item values
 
@@ -19209,11 +19177,7 @@
 
 										// Get values
 
-											if ( !isset($location_diversityPolicy) ) {
-
-												$location_diversityPolicy = array();
-
-											}
+											$location_diversityPolicy = array();
 
 										// Add to item values
 
@@ -19278,11 +19242,7 @@
 
 										// Get values
 
-											if ( !isset($location_diversityStaffingReport) ) {
-
-												$location_diversityStaffingReport = array();
-
-											}
+											$location_diversityStaffingReport = array();
 
 										// Add to item values
 
@@ -19340,11 +19300,7 @@
 
 										// Get values
 
-											if ( !isset($location_employee) ) {
-
-												$location_employee = array();
-
-											}
+											$location_employee = array();
 
 										// Add to item values
 
@@ -19412,11 +19368,7 @@
 
 										// Get values
 
-											if ( !isset($location_ethicsPolicy) ) {
-
-												$location_ethicsPolicy = array();
-
-											}
+											$location_ethicsPolicy = array();
 
 										// Add to item values
 
@@ -19474,11 +19426,7 @@
 
 										// Get values
 
-											if ( !isset($location_event) ) {
-
-												$location_event = array();
-
-											}
+											$location_event = array();
 
 										// Add to item values
 
@@ -19536,11 +19484,7 @@
 
 										// Get values
 
-											if ( !isset($location_foundingDate) ) {
-
-												$location_foundingDate = array();
-
-											}
+											$location_foundingDate = array();
 
 										// Add to item values
 
@@ -19605,11 +19549,7 @@
 
 										// Get values
 
-											if ( !isset($location_funding) ) {
-
-												$location_funding = array();
-
-											}
+											$location_funding = array();
 
 										// Add to item values
 
@@ -19773,11 +19713,7 @@
 
 										// Get values
 
-											if ( !isset($location_hasCredential) ) {
-
-												$location_hasCredential = array();
-
-											}
+											$location_hasCredential = array();
 
 										// Add to item values
 
@@ -19843,11 +19779,7 @@
 
 										// Get values
 
-											if ( !isset($location_hasDriveThroughService) ) {
-
-												$location_hasDriveThroughService = array();
-
-											}
+											$location_hasDriveThroughService = array();
 
 										// Add to item values
 
@@ -21136,11 +21068,7 @@
 
 										// Get values
 
-											if ( !isset($location_isAcceptingNewPatients) ) {
-
-												$location_isAcceptingNewPatients = array();
-
-											}
+											$location_isAcceptingNewPatients = array();
 
 										// Add to item values
 
@@ -21198,11 +21126,7 @@
 
 										// Get values
 
-											if ( !isset($location_isAccessibleForFree) ) {
-
-												$location_isAccessibleForFree = array();
-
-											}
+											$location_isAccessibleForFree = array();
 
 										// Add to item values
 
@@ -21263,11 +21187,7 @@
 
 										// Get values
 
-											if ( !isset($location_keywords) ) {
-
-												$location_keywords = array();
-
-											}
+											$location_keywords = array();
 
 										// Add to item values
 
@@ -21334,11 +21254,7 @@
 
 										// Get values
 
-											if ( !isset($location_knowsAbout) ) {
-
-												$location_knowsAbout = array();
-
-											}
+											$location_knowsAbout = array();
 
 										// Add to item values
 
@@ -21399,11 +21315,7 @@
 
 										// Get values
 
-											if ( !isset($location_knowsLanguage) ) {
-
-												$location_knowsLanguage = array();
-
-											}
+											$location_knowsLanguage = array();
 
 										// Add to item values
 
@@ -21455,11 +21367,7 @@
 
 										// Get values
 
-											if ( !isset($location_legalName) ) {
-
-												$location_legalName = array();
-
-											}
+											$location_legalName = array();
 
 										// Add to item values
 
@@ -21518,11 +21426,7 @@
 
 										// Get values
 
-											if ( !isset($location_logo) ) {
-
-												$location_logo = array();
-
-											}
+											$location_logo = array();
 
 										// Add to item values
 
@@ -21647,11 +21551,7 @@
 
 										// Get values
 
-											if ( !isset($location_makesOffer) ) {
-
-												$location_makesOffer = array();
-
-											}
+											$location_makesOffer = array();
 
 										// Add to item values
 
@@ -21709,11 +21609,7 @@
 
 										// Get values
 
-											if ( !isset($location_maximumAttendeeCapacity) ) {
-
-												$location_maximumAttendeeCapacity = array();
-
-											}
+											$location_maximumAttendeeCapacity = array();
 
 										// Add to item values
 
@@ -21779,11 +21675,7 @@
 
 										// Get values
 
-											if ( !isset($location_memberOf) ) {
-
-												$location_memberOf = array();
-
-											}
+											$location_memberOf = array();
 
 										// Add to item values
 
@@ -21846,11 +21738,7 @@
 
 										// Get values
 
-											if ( !isset($location_nonprofitStatus) ) {
-
-												$location_nonprofitStatus = array();
-
-											}
+											$location_nonprofitStatus = array();
 
 										// Add to item values
 
@@ -21908,11 +21796,7 @@
 
 										// Get values
 
-											if ( !isset($location_numberOfEmployees) ) {
-
-												$location_numberOfEmployees = array();
-
-											}
+											$location_numberOfEmployees = array();
 
 										// Add to item values
 
@@ -21985,11 +21869,7 @@
 
 										// Get values
 
-											if ( !isset($location_openingHours) ) {
-
-												$location_openingHours = array();
-
-											}
+											$location_openingHours = array();
 
 										// Add to item values
 
@@ -22047,11 +21927,7 @@
 
 										// Get values
 
-											if ( !isset($location_openingHoursSpecification) ) {
-
-												$location_openingHoursSpecification = array();
-
-											}
+											$location_openingHoursSpecification = array();
 
 										// Add to item values
 
@@ -22105,11 +21981,7 @@
 
 										// Get values
 
-											if ( !isset($location_parentOrganization) ) {
-
-												$location_parentOrganization = array();
-
-											}
+											$location_parentOrganization = array();
 
 										// Add to item values
 
@@ -22167,11 +22039,7 @@
 
 										// Get values
 
-											if ( !isset($location_paymentAccepted) ) {
-
-												$location_paymentAccepted = array();
-
-											}
+											$location_paymentAccepted = array();
 
 										// Add to item values
 
@@ -22345,11 +22213,7 @@
 
 										// Get values
 
-											if ( !isset($location_potentialAction) ) {
-
-												$location_potentialAction = array();
-
-											}
+											$location_potentialAction = array();
 
 										// Add to item values
 
@@ -22408,11 +22272,7 @@
 
 										// Get values
 
-											if ( !isset($location_publicAccess) ) {
-
-												$location_publicAccess = array();
-
-											}
+											$location_publicAccess = array();
 
 										// Add to item values
 
@@ -22470,11 +22330,7 @@
 
 										// Get values
 
-											if ( !isset($location_review) ) {
-
-												$location_review = array();
-
-											}
+											$location_review = array();
 
 										// Add to item values
 
@@ -22654,11 +22510,7 @@
 
 										// Get values
 
-											if ( !isset($location_specialOpeningHoursSpecification) ) {
-
-												$location_specialOpeningHoursSpecification = array();
-
-											}
+											$location_specialOpeningHoursSpecification = array();
 
 										// Add to item values
 
@@ -22794,11 +22646,7 @@
 
 										// Get values
 
-											if ( !isset($location_subOrganization) ) {
-
-												$location_subOrganization = $location_containsPlace ?? array();
-
-											}
+											$location_subOrganization = $location_containsPlace ?? array();
 
 										// Add to item values
 
