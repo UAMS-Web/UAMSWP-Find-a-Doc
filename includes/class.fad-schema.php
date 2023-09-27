@@ -5325,42 +5325,12 @@
 					$provider_valid_types = array(
 						'MedicalBusiness',
 						'MedicalWebPage',
-						'Dentist',
-						'Optician',
-						'Physician',
 						'Person'
 					);
 
-					// Other valid types from MedicalSpecialty enumeration members
+					// Get subtypes
 
-						$provider_valid_types_MedicalSpecialty = array(
-							'CommunityHealth',
-							'Dermatology',
-							'DietNutrition',
-							'Emergency',
-							'Geriatric',
-							'Gynecologic',
-							'Midwifery',
-							'Nursing',
-							'Obstetric',
-							'Oncologic',
-							'Optometric',
-							'Otolaryngologic',
-							'Pediatric',
-							'Physiotherapy',
-							'PlasticSurgery',
-							'Podiatric',
-							'PrimaryCare',
-							'Psychiatric',
-							'PublicHealth'
-						);
-
-						// Merge list into valid types list
-
-							$provider_valid_types = array_merge(
-								$provider_valid_types,
-								$provider_valid_types_MedicalSpecialty
-							);
+						uamswp_fad_schema_subtypes($provider_valid_types);
 
 				// List of valid properties for each type
 
@@ -8969,7 +8939,7 @@
 																	$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
 
 																	$provider_additionalType_MedicalSpecialty = array_intersect(
-																		$provider_valid_types_MedicalSpecialty,
+																		$provider_valid_types,
 																		$provider_medicalSpecialty_list
 																	);
 
@@ -17302,43 +17272,13 @@
 
 					$location_valid_types = array(
 						'MedicalBusiness',
-						'MedicalClinic',
 						'MedicalWebPage',
-						'Optician',
-						'Pharmacy',
-						'Physician'
+						'Hospital'
 					);
 
-					// Other valid types from MedicalSpecialty enumeration members
+					// Get subtypes
 
-						$location_valid_types_MedicalSpecialty = array(
-							'CommunityHealth',
-							'Dermatology',
-							'DietNutrition',
-							'Emergency',
-							'Geriatric',
-							'Gynecologic',
-							'Midwifery',
-							'Nursing',
-							'Obstetric',
-							'Oncologic',
-							'Optometric',
-							'Otolaryngologic',
-							'Pediatric',
-							'Physiotherapy',
-							'PlasticSurgery',
-							'Podiatric',
-							'PrimaryCare',
-							'Psychiatric',
-							'PublicHealth'
-						);
-
-						// Merge list into valid types list
-
-							$location_valid_types = array_merge(
-								$location_valid_types,
-								$location_valid_types_MedicalSpecialty
-							);
+						uamswp_fad_schema_subtypes($location_valid_types);
 
 				// List of valid properties for each type
 
@@ -17834,7 +17774,7 @@
 														$LocalBusiness_medicalSpecialty_list = array_is_list($LocalBusiness_medicalSpecialty_list) ? $LocalBusiness_medicalSpecialty_list : array($LocalBusiness_medicalSpecialty_list);
 
 														$LocalBusiness_additionalType_medicalSpecialty = array_intersect(
-															$location_valid_types_MedicalSpecialty,
+															$location_valid_types,
 															$LocalBusiness_medicalSpecialty_list
 														);
 
