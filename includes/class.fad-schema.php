@@ -18203,7 +18203,11 @@
 
 												if ( $location_has_parent ) {
 
-													$location_parent_LocalBusiness = array();
+													$location_parent_LocalBusiness = uamswp_fad_schema_location(
+														array($location_parent_id), // List of IDs of the location items
+														$location_url, // Page URL
+														($nesting_level + 1) // Nesting level within the main schema
+													)['LocalBusiness'] ?? array();
 
 												}
 
