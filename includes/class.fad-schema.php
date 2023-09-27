@@ -5347,6 +5347,38 @@
 
 						}
 
+				// Add list of degrees for provider as MedicalBusiness subtypes
+
+					// Dentist
+
+						if ( isset($provider_properties_map['Dentist']) ) {
+
+							$provider_properties_map['Dentist']['degrees'] = array(
+								'D.D.S.',
+								'D.M.D.'
+							);
+
+						}
+
+					// Optician
+
+						if ( isset($provider_properties_map['Optician']) ) {
+
+							$provider_properties_map['Optician']['degrees'] = array();
+
+						}
+
+					// Physician
+
+						if ( isset($provider_properties_map['Physician']) ) {
+
+							$provider_properties_map['Physician']['degrees'] = array(
+								'M.D.',
+								'D.O.'
+							);
+
+						}
+
 				// Loop through each provider to add values
 
 					foreach ( $repeater as $provider ) {
