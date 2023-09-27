@@ -22015,6 +22015,35 @@
 
 			if ( !empty($repeater) ) {
 
+				// List of valid types
+
+					$clinical_resource_valid_types = array(
+						'Article',
+						'DigitalDocument',
+						'ImageObject',
+						'MedicalWebPage',
+						'VideoObject'
+					);
+
+					// Get subtypes
+
+						uamswp_fad_schema_subtypes($clinical_resource_valid_types);
+
+				// List of valid properties for each type
+
+					// Base array
+
+						$clinical_resource_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $clinical_resource_valid_types as $item ) {
+
+							$clinical_resource_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$clinical_resource_properties_map[$item]['properties'] = is_array($clinical_resource_properties_map[$item]['properties']) ? $clinical_resource_properties_map[$item]['properties'] : array($clinical_resource_properties_map[$item]['properties']);
+
+						}
+
 				foreach ( $repeater as $CreativeWork ) {
 
 					// Retrieve the value of the item transient
@@ -24044,6 +24073,31 @@
 
 			if ( !empty($repeater) ) {
 
+				// List of valid types
+
+					$condition_valid_types = array(
+						'MedicalCondition'
+					);
+
+					// Get subtypes
+
+						uamswp_fad_schema_subtypes($condition_valid_types);
+
+				// List of valid properties for each type
+
+					// Base array
+
+						$condition_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $condition_valid_types as $item ) {
+
+							$condition_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$condition_properties_map[$item]['properties'] = is_array($condition_properties_map[$item]['properties']) ? $condition_properties_map[$item]['properties'] : array($condition_properties_map[$item]['properties']);
+
+						}
+
 				foreach ( $repeater as $condition ) {
 
 					// Retrieve the value of the item transient
@@ -24529,6 +24583,32 @@
 				$service_list = array();
 
 			if ( !empty($repeater) ) {
+
+				// List of valid types
+
+					$treatment_valid_types = array(
+						'MedicalTest',
+						'MedicalProcedure'
+					);
+
+					// Get subtypes
+
+						uamswp_fad_schema_subtypes($treatment_valid_types);
+
+				// List of valid properties for each type
+
+					// Base array
+
+						$treatment_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $treatment_valid_types as $item ) {
+
+							$treatment_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$treatment_properties_map[$item]['properties'] = is_array($treatment_properties_map[$item]['properties']) ? $treatment_properties_map[$item]['properties'] : array($treatment_properties_map[$item]['properties']);
+
+						}
 
 				foreach ( $repeater as $service ) {
 
