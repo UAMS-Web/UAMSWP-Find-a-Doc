@@ -52,8 +52,10 @@
 	// Parent location ID
 
 		$location_has_parent = get_field('location_parent');
-		$location_parent_id = $location_has_parent ? get_field('location_parent_id') : '';
+		$location_parent_id = $location_has_parent ? get_field('location_parent_id') : 0;
 		$location_has_parent = $location_parent_id ? true : false;
+		$location_schema_fields[$page_id]['location_parent_id'] = $location_parent_id; // Pass value to schema function
+		$location_schema_fields[$page_id]['location_has_parent'] = $location_has_parent; // Pass value to schema function
 
 	// Parent location post object
 
@@ -67,6 +69,7 @@
 
 	$page_title = get_the_title(); // Title of the location
 	$page_title_attr = uamswp_attr_conversion($page_title);
+	$location_schema_fields[$page_id]['location_name'] = $page_title_attr; // Pass value to schema function
 	$page_title_phrase = ( get_field('location_prepend_the') ? 'the ' : '' ) . $page_title; // Conditionally prepend "the" to the title for use in phrases
 	$page_title_phrase_attr = uamswp_attr_conversion($page_title_phrase);
 
@@ -114,6 +117,7 @@
 // Get the page URL and slug
 
 	$page_url = user_trailingslashit(get_permalink());
+	$location_schema_fields[$page_id]['location_url'] = $page_url; // Pass value to schema function
 	$page_slug = $post->post_name;
 
 	// Parent location
@@ -830,6 +834,7 @@
 
 				$providers = get_field('physician_locations');
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
+				$location_schema_fields[$page_id]['location_provider_ids'] = $providers; // Pass value to schema function
 
 			// Query for whether related descendant locations content section should be displayed on a page
 
@@ -847,6 +852,7 @@
 					$location_descendant_query = $location_descendant_query_vars['location_descendant_query']; // WP_Post[]
 					$location_descendant_section_show = $location_descendant_query_vars['location_descendant_section_show']; // bool
 					$location_descendant_ids = $location_descendant_query_vars['location_descendant_ids']; // int[]
+					$location_schema_fields[$page_id]['location_descendant_locations_relationship'] = $location_descendant_ids; // Pass value to schema function
 					$location_descendant_count = $location_descendant_query_vars['location_descendant_count']; // int
 					$location_descendant_valid = $location_descendant_query_vars['location_descendant_valid']; // bool
 				$location_query = $location_descendant_query;
