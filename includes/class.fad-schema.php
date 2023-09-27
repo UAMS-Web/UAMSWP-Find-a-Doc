@@ -17873,7 +17873,8 @@
 			int $MedicalWebPage_i = 1, // Iteration counter for location-as-MedicalWebPage
 			int $LocalBusiness_i = 1, // Iteration counter for location-as-LocalBusiness
 			array $LocalBusiness_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
-			array $LocalBusiness_list = array() // Pre-existing list array to which to add additional items
+			array $MedicalWebPage_list = array(), // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
+			array $LocalBusiness_list = array() // Pre-existing list array for location-as-LocalBusiness to which to add additional items
 		) {
 
 			// Common property values
