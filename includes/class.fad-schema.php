@@ -5953,31 +5953,31 @@
 
 									// MedicalWebPage type
 
-										if ( $MedicalWebPage_output ) {
+										// Get values
 
-											// Get values
+											$MedicalWebPage_type = 'MedicalWebPage';
 
-												$MedicalWebPage_type = 'MedicalWebPage';
+										// Add to item values
 
-											// Add to item values
+											if (
+												$MedicalWebPage_output
+												&&
+												$MedicalWebPage_type
+											) {
 
-												if ( $MedicalWebPage_type ) {
+												$provider_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
 
-													$provider_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
-
-												}
-
-										}
+											}
 
 									// MedicalBusiness Subtype
+
+										// Base value
+
+											$MedicalBusiness_type = 'MedicalBusiness';
 
 										if ( $MedicalBusiness_output ) {
 
 											// Get values
-
-												// Base value
-
-													$MedicalBusiness_type = 'MedicalBusiness';
 
 												// Get list of the provider's degrees
 
@@ -6109,21 +6109,21 @@
 
 									// Person type
 
-										if ( $Person_output ) {
+										// Get values
 
-											// Get values
+											$Person_type = 'Person';
 
-												$Person_type = 'Person';
+										// Add to item values
 
-											// Add to item values
+											if (
+												$Person_output
+												&&
+												$Person_type
+											) {
 
-												if ( $Person_type ) {
+												$provider_item_Person['@type'] = $Person_type;
 
-													$provider_item_Person['@type'] = $Person_type;
-
-												}
-
-										}
+											}
 
 								// @id
 
