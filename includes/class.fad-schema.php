@@ -9764,25 +9764,21 @@
 
 														$provider_brand = array();
 
-													// Get values
+													// Merge in common clinical 'Organization' value/reference
 
-														$provider_brand = array();
+														$provider_brand = uamswp_fad_schema_merge_values(
+															$provider_brand, // mixed // Required // Initial schema item property value
+															$provider_organization_common, // mixed // Required // Incoming schema item property value
+															$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
-												// Merge in common clinical 'Organization' value/reference
+													// Merge in specific clinical 'Organization' value/reference
 
-													$provider_brand = uamswp_fad_schema_merge_values(
-														$provider_brand, // mixed // Required // Initial schema item property value
-														$provider_organization_common, // mixed // Required // Incoming schema item property value
-														$provider_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
-													);
-
-												// Merge in specific clinical 'Organization' value/reference
-
-													$provider_brand = uamswp_fad_schema_merge_values(
-														$provider_brand, // mixed // Required // Initial schema item property value
-														$provider_organization_specific, // mixed // Required // Incoming schema item property value
-														$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
-													);
+														$provider_brand = uamswp_fad_schema_merge_values(
+															$provider_brand, // mixed // Required // Initial schema item property value
+															$provider_organization_specific, // mixed // Required // Incoming schema item property value
+															$provider_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
 
 												// Add to item values
 
@@ -17608,6 +17604,36 @@
 								$MedicalWebPage_id_ref = null;
 								$MedicalWebPage_type = null;
 								$MedicalWebPage_type_ref = null;
+								$location_descendant_locations_relationship = null;
+								$location_descendant_locations_relationship_ref = null;
+								$location_descendant_locations_LocalBusiness = null;
+								$location_descendant_locations_LocalBusiness_ref = null;
+								$location_providers_relationship = null;
+								$location_providers_relationship_ref = null;
+								$location_providers_MedicalBusiness = null;
+								$location_providers_MedicalBusiness_ref = null;
+								$location_providers_Person = null;
+								$location_providers_Person_ref = null;
+								$location_building_id = null;
+								$location_building_Place = null;
+								$location_building_additionalType_repeater = null;
+								$location_building_additionalType = null;
+								$location_building_address = null;
+								$location_building_alternateName_repeater = null;
+								$location_building_alternateName = null;
+								$location_building_containedIn = null;
+								$location_building_containedInPlace = null;
+								$location_building_geo = null;
+								$location_building_hasMap = null;
+								$location_building_image = null;
+								$location_building_latitude = null;
+								$location_building_longitude = null;
+								$location_building_name = null;
+								$location_building_photo = null;
+								$location_building_sameAs_repeater = null;
+								$location_building_sameAs = null;
+								$location_parent_LocalBusiness = null;
+								$location_parent_LocalBusiness_ref = null;
 
 								// Reused variables
 
@@ -18102,7 +18128,7 @@
 										)
 									) {
 
-										// Query for whether the location has a parent
+										// Parent location query and ID
 
 											if (
 												!isset($location_has_parent)
@@ -18122,6 +18148,839 @@
 
 									}
 
+								// Parent and associated entities (common)
+
+									// List of properties that reference parent/associated organizations or locations (i.e., 'Organization')
+
+										$location_organization_common = array(
+											'brand',
+											'containedInPlace',
+											'memberOf',
+											'parentOrganization'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_organization_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_organization_common
+										)
+									) {
+										
+										// Common clinical 'Organization'
+
+											// Base array
+
+												$location_organization_common = array();
+
+												// UAMS Health
+
+													if ( $schema_base_org_uams_health_ref ) {
+
+														$location_organization_common[] = $schema_base_org_uams_health_ref;
+
+													}
+
+										// Specific clinical 'Organization'
+
+											// Get specific clinical 'Organization'
+
+												// Base array
+
+													$location_organization_specific = array();
+
+										// Get parent location
+
+											// Parent location query and ID
+
+												if (
+													!isset($location_has_parent)
+													||
+													(
+														$location_has_parent
+														&&
+														!isset($location_parent_id)
+													)
+												) {
+
+													$location_has_parent = get_field( 'location_parent', $location );
+													$location_parent_id = $location_has_parent ? get_field( 'location_parent_id', $location ) : '';
+													$location_has_parent = $location_parent_id ? true : false;
+
+												}
+
+											// Format values (LocalBusiness and subtypes)
+
+												if ( $location_has_parent ) {
+
+													$location_parent_LocalBusiness = array();
+
+												}
+
+										// Get building
+
+											// Parent location query and ID
+
+												if (
+													isset($location_has_parent)
+													&&
+													$location_has_parent == false
+												) {
+
+													$location_building_id = '';
+
+												}
+
+											// Format values (Place)
+
+												if ( $location_building_id ) {
+
+													$location_building_term = array();
+
+													if ( is_object($location_building_term) ) {
+
+														$location_building_additionalType_repeater = '';
+														$location_building_additionalType = $location_building_additionalType ?: 'https://www.wikidata.org/wiki/Q41176'; // Wikidata entry for 'building'
+														$location_building_address = '';
+														$location_building_alternateName_repeater = '';
+														$location_building_alternateName = '';
+														$location_building_containedIn = '';
+														$location_building_containedInPlace = '';
+														$location_building_geo = '';
+														$location_building_hasMap = '';
+														$location_building_image = '';
+														$location_building_latitude = '';
+														$location_building_longitude = '';
+														$location_building_name = '';
+														$location_building_photo = '';
+														$location_building_sameAs_repeater = '';
+														$location_building_sameAs = '';
+
+														$location_building_Place = array(
+															'@id' => $location_url . '#Building',
+															'@type' => 'Place',
+															'additionalType' => $location_building_additionalType,
+															'address' => $location_building_address,
+															'alternateName' => $location_building_alternateName,
+															'containedIn' => $location_building_containedIn,
+															'containedInPlace' => $location_building_containedInPlace,
+															'geo' => $location_building_geo,
+															'hasMap' => $location_building_hasMap,
+															'image' => $location_building_image,
+															'latitude' => $location_building_latitude,
+															'longitude' => $location_building_longitude,
+															'name' => $location_building_name,
+															'photo' => $location_building_photo,
+															'sameAs' => $location_building_sameAs
+														);
+
+													}
+
+												}
+
+										// brand
+
+											/* 
+											 * The brand(s) associated with a product or service, or the brand(s) maintained 
+											 * by an organization or business person.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Brand
+											 *     - Organization
+											 */
+
+											if (
+												in_array(
+													'brand',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'brand',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_brand = array();
+
+													// Merge in common clinical 'Organization' value/reference
+
+														$location_brand = uamswp_fad_schema_merge_values(
+															$location_brand, // mixed // Required // Initial schema item property value
+															$location_organization_common, // mixed // Required // Incoming schema item property value
+															$location_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+
+													// Merge in specific clinical 'Organization' value/reference
+
+														$location_brand = uamswp_fad_schema_merge_values(
+															$location_brand, // mixed // Required // Initial schema item property value
+															$location_organization_specific, // mixed // Required // Incoming schema item property value
+															$location_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'brand', // string // Required // Name of schema property
+															$location_brand, // mixed // Required // Variable to add as the property value
+															$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'brand', // string // Required // Name of schema property
+															$location_brand, // mixed // Required // Variable to add as the property value
+															$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										// containedInPlace
+
+											/* 
+											 * The basic containment relation between a place and one that contains it.
+											 * expected to be one of these types:
+											 * 
+											 *     - Place
+											 */
+
+											if (
+												in_array(
+													'containedInPlace',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'containedInPlace',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_containedInPlace = array();
+
+													// Merge in parent location LocalBusiness value/reference
+
+														$location_containedInPlace = uamswp_fad_schema_merge_values(
+															$location_containedInPlace, // mixed // Required // Initial schema item property value
+															$location_parent_LocalBusiness, // mixed // Required // Incoming schema item property value
+															$location_parent_LocalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+													// Merge in building MedicalBusiness value/reference
+
+														$location_containedInPlace = uamswp_fad_schema_merge_values(
+															$location_containedInPlace, // mixed // Required // Initial schema item property value
+															$location_building_Place, // mixed // Required // Incoming schema item property value
+															$location_building_Place_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'containedInPlace', // string // Required // Name of schema property
+															$location_containedInPlace, // mixed // Required // Variable to add as the property value
+															$location_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'containedInPlace', // string // Required // Name of schema property
+															$location_containedInPlace, // mixed // Required // Variable to add as the property value
+															$location_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										// memberOf
+
+											/* 
+											 * An Organization (or ProgramMembership) to which this Person or Organization 
+											 * belongs.
+											 * 
+											 * Inverse-property: member
+											 * 
+											 * Subproperty of:
+											 * 
+											 *     - foo
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Organization
+											 *     - ProgramMembership
+											 */
+
+											if (
+												(
+													in_array(
+														'memberOf',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'memberOf',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_memberOf = array();
+
+													// Get health care professional associations input value
+
+														if ( !isset($location_associations) ) {
+
+															$location_associations = array();
+
+														}
+
+														// Format values
+
+															$location_association_names = array();
+															$location_memberOf = uamswp_fad_schema_associations(
+																$location_associations, // mixed // Required // Health care professional association ID values
+																$location_association_names, // array // Optional // Pre-existing array variable to populate with a list of association names
+																$location_memberOf // array // Optional // Pre-existing schema array for Language to which to add association items
+															);
+
+													// Merge in common clinical 'Organization' value/reference
+
+														$location_memberOf = uamswp_fad_schema_merge_values(
+															$location_memberOf, // mixed // Required // Initial schema item property value
+															$location_organization_common, // mixed // Required // Incoming schema item property value
+															$location_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+
+													// Merge in specific clinical 'Organization' value/reference
+
+														$location_memberOf = uamswp_fad_schema_merge_values(
+															$location_memberOf, // mixed // Required // Initial schema item property value
+															$location_organization_specific, // mixed // Required // Incoming schema item property value
+															$location_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'memberOf', // string // Required // Name of schema property
+															$location_memberOf, // mixed // Required // Variable to add as the property value
+															$location_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'memberOf', // string // Required // Name of schema property
+															$location_memberOf, // mixed // Required // Variable to add as the property value
+															$location_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										// parentOrganization
+
+											/* 
+											 * The larger organization that this organization is a subOrganization of, if any.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Organization
+											 */
+
+											if (
+												in_array(
+													'parentOrganization',
+													$location_properties_map[$MedicalWebPage_type]['properties']
+												)
+												||
+												in_array(
+													'parentOrganization',
+													$location_properties_map[$LocalBusiness_type]['properties']
+												)
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_parentOrganization = array();
+
+													// Merge in common clinical 'Organization' value/reference
+
+														$location_parentOrganization = uamswp_fad_schema_merge_values(
+															$location_parentOrganization, // mixed // Required // Initial schema item property value
+															$location_organization_common, // mixed // Required // Incoming schema item property value
+															$location_organization_common_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+
+													// Merge in specific clinical 'Organization' value/reference
+
+														$location_parentOrganization = uamswp_fad_schema_merge_values(
+															$location_parentOrganization, // mixed // Required // Initial schema item property value
+															$location_organization_specific, // mixed // Required // Incoming schema item property value
+															$location_organization_specific_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'parentOrganization', // string // Required // Name of schema property
+															$location_parentOrganization, // mixed // Required // Variable to add as the property value
+															$location_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'parentOrganization', // string // Required // Name of schema property
+															$location_parentOrganization, // mixed // Required // Variable to add as the property value
+															$location_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+									}
+
+								// Descendant entities (common)
+
+									// List of properties that reference descendant entities
+
+										$location_descendant_common = array(
+											'containsPlace',
+											'department',
+											'employee',
+											'subOrganization'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_descendant_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_descendant_common
+										)
+									) {
+
+										// Get values
+
+											// Get list of descendant locations
+
+												if ( !isset($location_descendant_locations_relationship) ) {
+
+													$location_descendant_locations_relationship = array();
+
+												}
+
+												// Format values (LocalBusiness and subtypes)
+
+													if ( $location_descendant_locations_LocalBusiness ) {
+
+														$location_descendant_locations_LocalBusiness = array();
+
+													}
+
+											// Get list of associated providers
+
+												if ( !isset($location_providers_relationship) ) {
+
+													$location_providers_relationship = array();
+
+												}
+
+												// Format values
+
+													if ( $location_providers_relationship ) {
+
+														// MedicalBusiness and subtypes
+
+															$location_providers_MedicalBusiness = array();
+
+														// Person
+
+															$location_providers_Person = array();
+
+													}
+
+										// containsPlace
+
+											/* 
+											 * The basic containment relation between a place and another that it contains.
+											 * 
+											 * Inverse property: 'containedInPlace'
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Place
+											 */
+
+											if (
+												(
+													in_array(
+														'containsPlace',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'containsPlace',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												/*
+
+													 * Provider as 'Physician' type
+													 * Provider as 'Dentist' type
+													 * Provider as 'Optician' type
+													 * Descendant locations (LocalBusiness subtypes)
+
+												*/
+
+												// Get values
+
+													// Base array
+
+														$location_containsPlace = array();
+
+													// Merge in location LocalBusiness value/reference
+
+														$location_containsPlace = uamswp_fad_schema_merge_values(
+															$location_containsPlace, // mixed // Required // Initial schema item property value
+															$location_descendant_locations_LocalBusiness, // mixed // Required // Incoming schema item property value
+															$location_descendant_locations_LocalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+													// Merge in provider MedicalBusiness value/reference
+
+														$location_containsPlace = uamswp_fad_schema_merge_values(
+															$location_containsPlace, // mixed // Required // Initial schema item property value
+															$location_providers_MedicalBusiness, // mixed // Required // Incoming schema item property value
+															$location_providers_MedicalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'containsPlace', // string // Required // Name of schema property
+															$location_containsPlace, // mixed // Required // Variable to add as the property value
+															$location_containsPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'containsPlace', // string // Required // Name of schema property
+															$location_containsPlace, // mixed // Required // Variable to add as the property value
+															$location_containsPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										// department
+
+											/* 
+											 * A relationship between an organization and a department of that organization, 
+											 * also described as an organization (allowing different urls, logos, opening 
+											 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Organization
+											 */
+
+											if (
+												(
+													in_array(
+														'department',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'department',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_department = array();
+
+													// Merge in location LocalBusiness value/reference
+
+														$location_department = uamswp_fad_schema_merge_values(
+															$location_department, // mixed // Required // Initial schema item property value
+															$location_descendant_locations_LocalBusiness, // mixed // Required // Incoming schema item property value
+															$location_descendant_locations_LocalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+													// Merge in provider MedicalBusiness value/reference
+
+														$location_department = uamswp_fad_schema_merge_values(
+															$location_department, // mixed // Required // Initial schema item property value
+															$location_providers_MedicalBusiness, // mixed // Required // Incoming schema item property value
+															$location_providers_MedicalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'department', // string // Required // Name of schema property
+															$location_department, // mixed // Required // Variable to add as the property value
+															$location_department_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'department', // string // Required // Name of schema property
+															$location_department, // mixed // Required // Variable to add as the property value
+															$location_department_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										// employee
+
+											/* 
+											 * Someone working for this organization.
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Person
+											 */
+
+											if (
+												(
+													in_array(
+														'employee',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'employee',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
+												)
+												&&
+												$nesting_level <= 1
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_employee = array();
+
+													// Merge in provider Person value/reference
+
+														$location_employee = uamswp_fad_schema_merge_values(
+															$location_employee, // mixed // Required // Initial schema item property value
+															$location_providers_Person, // mixed // Required // Incoming schema item property value
+															$location_providers_Person_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'employee', // string // Required // Name of schema property
+															$location_employee, // mixed // Required // Variable to add as the property value
+															$location_employee_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'employee', // string // Required // Name of schema property
+															$location_employee, // mixed // Required // Variable to add as the property value
+															$location_employee_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										// subOrganization
+
+											/* 
+											 * A relationship between two organizations where the first includes the second 
+											 * (e.g., as a subsidiary).
+											 * 
+											 * See also: the more specific 'department' property.
+											 * 
+											 * Inverse-property: parentOrganization
+											 * 
+											 * Values expected to be one of these types:
+											 * 
+											 *     - Organization
+											 */
+
+											if (
+												(
+													in_array(
+														'subOrganization',
+														$location_properties_map[$MedicalWebPage_type]['properties']
+													)
+													||
+													in_array(
+														'subOrganization',
+														$location_properties_map[$LocalBusiness_type]['properties']
+													)
+												)
+												&&
+												$nesting_level == 0
+											) {
+
+												// Get values
+
+													// Base array
+
+														$location_subOrganization = array();
+
+													// Merge in location LocalBusiness value/reference
+
+														$location_subOrganization = uamswp_fad_schema_merge_values(
+															$location_subOrganization, // mixed // Required // Initial schema item property value
+															$location_descendant_locations_LocalBusiness, // mixed // Required // Incoming schema item property value
+															$location_descendant_locations_LocalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+													// Merge in provider MedicalBusiness value/reference
+
+														$location_subOrganization = uamswp_fad_schema_merge_values(
+															$location_subOrganization, // mixed // Required // Initial schema item property value
+															$location_providers_MedicalBusiness, // mixed // Required // Incoming schema item property value
+															$location_providers_MedicalBusiness_ref // mixed // Required // @id reference to incoming schema item property value
+														);
+	
+												// Add to item values
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															'subOrganization', // string // Required // Name of schema property
+															$location_subOrganization, // mixed // Required // Variable to add as the property value
+															$location_subOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// LocalBusiness
+
+														uamswp_fad_schema_add_to_item_values(
+															$LocalBusiness_type, // string // Required // The @type value for the schema item
+															$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+															'subOrganization', // string // Required // Name of schema property
+															$location_subOrganization, // mixed // Required // Variable to add as the property value
+															$location_subOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+															$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+									}
+										
 								// address
 
 									/* 
@@ -18695,62 +19554,6 @@
 
 									}
 
-								// brand
-
-									/* 
-									 * The brand(s) associated with a product or service, or the brand(s) maintained 
-									 * by an organization or business person.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Brand
-									 *     - Organization
-									 */
-
-									if (
-										in_array(
-											'brand',
-											$location_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'brand',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$location_brand = $schema_base_org_uams_health_ref ?? array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$location_brand, // mixed // Required // Variable to add as the property value
-													$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'brand', // string // Required // Name of schema property
-													$location_brand, // mixed // Required // Variable to add as the property value
-													$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// contactPoint
 
 									/* 
@@ -18805,128 +19608,6 @@
 													'contactPoint', // string // Required // Name of schema property
 													$location_contactPoint, // mixed // Required // Variable to add as the property value
 													$location_contactPoint_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// containedInPlace
-
-									/* 
-									 * The basic containment relation between a place and one that contains it.
-									 * expected to be one of these types:
-									 * 
-									 *     - Place
-									 */
-
-									if (
-										in_array(
-											'containedInPlace',
-											$location_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'containedInPlace',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$location_containedInPlace = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'containedInPlace', // string // Required // Name of schema property
-													$location_containedInPlace, // mixed // Required // Variable to add as the property value
-													$location_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'containedInPlace', // string // Required // Name of schema property
-													$location_containedInPlace, // mixed // Required // Variable to add as the property value
-													$location_containedInPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// containsPlace
-
-									/* 
-									 * The basic containment relation between a place and another that it contains.
-									 * 
-									 * Inverse property: 'containedInPlace'
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Place
-									 */
-
-									if (
-										(
-											in_array(
-												'containsPlace',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'containsPlace',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										/*
-
-											 * Provider as 'Physician' type
-											 * Provider as 'Dentist' type
-											 * Provider as 'Optician' type
-											 * Descendant locations (LocalBusiness subtypes)
-
-										*/
-
-										// Get values
-
-											$location_containsPlace = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'containsPlace', // string // Required // Name of schema property
-													$location_containsPlace, // mixed // Required // Variable to add as the property value
-													$location_containsPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'containsPlace', // string // Required // Name of schema property
-													$location_containsPlace, // mixed // Required // Variable to add as the property value
-													$location_containsPlace_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
@@ -18991,66 +19672,6 @@
 													'currenciesAccepted', // string // Required // Name of schema property
 													$location_currenciesAccepted, // mixed // Required // Variable to add as the property value
 													$location_currenciesAccepted_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// department
-
-									/* 
-									 * A relationship between an organization and a department of that organization, 
-									 * also described as an organization (allowing different urls, logos, opening 
-									 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										(
-											in_array(
-												'department',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'department',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$location_department = $location_containsPlace ?? array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'department', // string // Required // Name of schema property
-													$location_department, // mixed // Required // Variable to add as the property value
-													$location_department_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'department', // string // Required // Name of schema property
-													$location_department, // mixed // Required // Variable to add as the property value
-													$location_department_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
@@ -19266,64 +19887,6 @@
 													'diversityStaffingReport', // string // Required // Name of schema property
 													$location_diversityStaffingReport, // mixed // Required // Variable to add as the property value
 													$location_diversityStaffingReport_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// employee
-
-									/* 
-									 * Someone working for this organization.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Person
-									 */
-
-									if (
-										(
-											in_array(
-												'employee',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'employee',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level <= 1
-									) {
-
-										// Get values
-
-											$location_employee = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'employee', // string // Required // Name of schema property
-													$location_employee, // mixed // Required // Variable to add as the property value
-													$location_employee_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'employee', // string // Required // Name of schema property
-													$location_employee, // mixed // Required // Variable to add as the property value
-													$location_employee_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
@@ -21639,72 +22202,6 @@
 
 									}
 
-								// memberOf
-
-									/* 
-									 * An Organization (or ProgramMembership) to which this Person or Organization 
-									 * belongs.
-									 * 
-									 * Inverse-property: member
-									 * 
-									 * Subproperty of:
-									 * 
-									 *     - foo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 *     - ProgramMembership
-									 */
-
-									if (
-										(
-											in_array(
-												'memberOf',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'memberOf',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$location_memberOf = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'memberOf', // string // Required // Name of schema property
-													$location_memberOf, // mixed // Required // Variable to add as the property value
-													$location_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'memberOf', // string // Required // Name of schema property
-													$location_memberOf, // mixed // Required // Variable to add as the property value
-													$location_memberOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// nonprofitStatus
 
 									/* 
@@ -21951,60 +22448,6 @@
 													'openingHoursSpecification', // string // Required // Name of schema property
 													$location_openingHoursSpecification, // mixed // Required // Variable to add as the property value
 													$location_openingHoursSpecification_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// parentOrganization
-
-									/* 
-									 * The larger organization that this organization is a subOrganization of, if any.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										in_array(
-											'parentOrganization',
-											$location_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'parentOrganization',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$location_parentOrganization = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'parentOrganization', // string // Required // Name of schema property
-													$location_parentOrganization, // mixed // Required // Variable to add as the property value
-													$location_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'parentOrganization', // string // Required // Name of schema property
-													$location_parentOrganization, // mixed // Required // Variable to add as the property value
-													$location_parentOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
@@ -22607,69 +23050,6 @@
 													'subjectOf', // string // Required // Name of schema property
 													$location_subjectOf, // mixed // Required // Variable to add as the property value
 													$location_subjectOf_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// subOrganization
-
-									/* 
-									 * A relationship between two organizations where the first includes the second 
-									 * (e.g., as a subsidiary).
-									 * 
-									 * See also: the more specific 'department' property.
-									 * 
-									 * Inverse-property: parentOrganization
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										(
-											in_array(
-												'subOrganization',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'subOrganization',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$location_subOrganization = $location_containsPlace ?? array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'subOrganization', // string // Required // Name of schema property
-													$location_subOrganization, // mixed // Required // Variable to add as the property value
-													$location_subOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'subOrganization', // string // Required // Name of schema property
-													$location_subOrganization, // mixed // Required // Variable to add as the property value
-													$location_subOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
