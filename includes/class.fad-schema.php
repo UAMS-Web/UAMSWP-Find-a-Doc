@@ -25201,22 +25201,11 @@
 
 									if (
 										(
-											(
-												$MedicalWebPage_output
-												&&
-												in_array(
-													'subjectOf',
-													$location_properties_map[$MedicalWebPage_type]['properties']
-												)
-											)
-											||
-											(
-												$LocalBusiness_output
-												&&
-												in_array(
-													'subjectOf',
-													$location_properties_map[$LocalBusiness_type]['properties']
-												)
+											$LocalBusiness_output
+											&&
+											in_array(
+												'subjectOf',
+												$location_properties_map[$LocalBusiness_type]['properties']
 											)
 										)
 										&&
