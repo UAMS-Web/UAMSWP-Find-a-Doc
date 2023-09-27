@@ -18141,7 +18141,7 @@
 											) {
 
 												$location_has_parent = get_field( 'location_parent', $location );
-												$location_parent_id = $location_has_parent ? get_field( 'location_parent_id', $location ) : '';
+												$location_parent_id = $location_has_parent ? get_field( 'location_parent_id', $location ) : 0;
 												$location_has_parent = $location_parent_id ? true : false;
 
 											}
@@ -18208,7 +18208,7 @@
 												) {
 
 													$location_has_parent = get_field( 'location_parent', $location );
-													$location_parent_id = $location_has_parent ? get_field( 'location_parent_id', $location ) : '';
+													$location_parent_id = $location_has_parent ? get_field( 'location_parent_id', $location ) : 0;
 													$location_has_parent = $location_parent_id ? true : false;
 
 												}
