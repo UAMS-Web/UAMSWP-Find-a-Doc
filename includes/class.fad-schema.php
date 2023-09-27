@@ -17851,7 +17851,7 @@
 
 											if ( !isset($location_name) ) {
 
-												$location_name = get_the_title($location) ?? '';
+												$location_name = uamswp_attr_conversion(get_the_title($location)) ?? '';
 
 											}
 
