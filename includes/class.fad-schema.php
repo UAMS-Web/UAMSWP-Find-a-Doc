@@ -18152,7 +18152,7 @@
 
 									}
 
-								// Parent and associated entities (common)
+								// Parent and associated entities (common) [WIP]
 
 									// List of properties that reference parent/associated organizations or locations (i.e., 'Organization')
 
@@ -18189,7 +18189,13 @@
 
 													}
 
-										// Specific clinical 'Organization'
+										// Specific clinical 'Organization' [WIP]
+
+											/*
+
+												e.g., Arkansas Children's, Baptist Health, Central Arkansas Veterans Healthcare System
+
+											*/
 
 											// Get specific clinical 'Organization'
 
@@ -18211,7 +18217,7 @@
 
 												}
 
-										// Get building
+										// Get building [WIP]
 
 											// Parent location query and ID
 
@@ -18417,7 +18423,7 @@
 
 											}
 
-										// memberOf
+										// memberOf [WIP]
 
 											/* 
 											 * An Organization (or ProgramMembership) to which this Person or Organization 
