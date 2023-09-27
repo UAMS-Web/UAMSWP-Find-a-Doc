@@ -374,7 +374,8 @@
 				// Base arrays
 
 					$output = array();
-					$values = array();
+					$list_values = array();
+					$output_values = array();
 
 				// Check variables
 
@@ -404,7 +405,8 @@
 							!is_array($item)
 						) {
 
-							$values[] = 'https://schema.org/' . $item . '/';
+							$list_values[] = $item;
+							$output_values[] = 'https://schema.org/' . $item . '/';
 
 						}
 
@@ -412,19 +414,19 @@
 
 				// Construct simple list of MedicalSpecialty values
 
-					if ( $values ) {
+					if ( $list_values ) {
 
-						$medicalSpecialty_list = $medicalSpecialty_list + $values;
+						$medicalSpecialty_list = $medicalSpecialty_list + $list_values;
 						sort( $medicalSpecialty_list, SORT_NATURAL | SORT_FLAG_CASE );
 
 					}
 
 				// Construct output for base MedicalSpecialty schema function
 
-					if ( $values ) {
+					if ( $output_values ) {
 
 						$output = uamswp_fad_schema_medicalSpecialty(
-							$values, // mixed // Required // MedicalSpecialty value(s)
+							$output_values, // mixed // Required // MedicalSpecialty value(s)
 							$schema_medicalSpecialty // Optional // Pre-existing list array to which to add additional items
 						);
 
@@ -17396,12 +17398,14 @@
 								$LocalBusiness_id_ref = null;
 								$LocalBusiness_type = null;
 								$LocalBusiness_type_ref = null;
-								$location_additionalType = null;
 								$location_additionalType_field = null;
 								$location_additionalType_field_ref = null;
+								$location_additionalType_LocalBusiness = null;
+								$location_additionalType_LocalBusiness_ref = null;
 								$location_additionalType_medicalSpecialty = null;
 								$location_additionalType_medicalSpecialty_ref = null;
-								$location_additionalType_ref = null;
+								$location_additionalType_MedicalWebPage = null;
+								$location_additionalType_MedicalWebPage_ref = null;
 								$location_additionalType_repeater = null;
 								$location_additionalType_repeater_ref = null;
 								$location_address = null;
@@ -17853,7 +17857,57 @@
 
 									}
 
-								// medicalSpecialty
+								// MedicalSpecialty (common)
+
+									// List of properties that reference MedicalSpecialty
+
+										$location_MedicalSpecialty_common = array(
+											'additionalType',
+											'medicalSpecialty'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_MedicalSpecialty_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_MedicalSpecialty_common
+										)
+									) {
+
+										// Get values
+
+											// Get medicalSpecialty multiselect field value
+
+												if ( !isset($location_medicalSpecialty_multiselect) ) {
+
+													$location_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $location ) ?? array();
+
+												}
+
+											// Format value
+
+												// Simple list of MedicalSpecialty values
+
+													$location_medicalSpecialty_list = array();
+
+												// Schema property values
+
+													if ( $location_medicalSpecialty_multiselect ) {
+
+														$location_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
+															$location_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
+															$location_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+														);
+
+													}
+
+									}
+
+								// medicalSpecialty (specific property)
 
 									/* 
 									 * A medical specialty of the provider.
@@ -17874,70 +17928,6 @@
 											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
-
-										// Get values
-
-											if ( !isset($location_medicalSpecialty) ) {
-
-												// Get medicalSpecialty multiselect field value
-
-													if ( !isset($location_medicalSpecialty_multiselect) ) {
-
-														$location_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $location ) ?? array();
-
-													}
-
-												// Format value
-
-													// Simple list of MedicalSpecialty values
-
-														$location_medicalSpecialty_list = array();
-
-													// Schema property values
-
-														if ( $location_medicalSpecialty_multiselect ) {
-
-															$location_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
-																$location_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
-																$location_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-															);
-
-														}
-
-											}
-
-											// Get medicalSpecialty multiselect field value
-
-												if ( !isset($location_medicalSpecialty_multiselect) ) {
-
-													$location_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $location ) ?? array();
-
-												}
-
-											// Format value
-
-												if (
-													!isset($location_medicalSpecialty_list)
-													||
-													!isset($location_medicalSpecialty)
-												) {
-
-													// Simple list of MedicalSpecialty values
-
-														$location_medicalSpecialty_list = array();
-
-													// Schema property values
-
-														if ( $location_medicalSpecialty_multiselect ) {
-
-															$location_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
-																$location_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
-																$location_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-															);
-
-														}
-
-												}
 
 										// Add to item values
 
@@ -18005,100 +17995,59 @@
 
 										// Get values
 
-											// Base property values array
+											// Base property values arrays
 
-												$location_additionalType = array();
+												$location_additionalType_MedicalWebPage = array();
+												$location_additionalType_LocalBusiness = array();
 
 											// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
-
-												// Get list of medicalSpecialty values
-
-													if ( !isset($location_medicalSpecialty_list) ) {
-
-														// Get medicalSpecialty values
-
-															if ( !isset($location_medicalSpecialty) ) {
-
-																// Get medicalSpecialty multiselect field value
-
-																	if ( !isset($location_medicalSpecialty_multiselect) ) {
-
-																		$location_medicalSpecialty_multiselect = get_field( 'schema_medicalspecialty_multiple', $location ) ?? array();
-
-																	}
-
-																// Format value
-
-																	// Simple list of MedicalSpecialty values
-
-																		$location_medicalSpecialty_list = array();
-
-																	// Schema property values
-
-																		if ( $location_medicalSpecialty_multiselect ) {
-
-																			$location_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_select(
-																				$location_medicalSpecialty_multiselect, // mixed // Required // MedicalSpecialty select or multi-select field value
-																				$location_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-																			);
-
-																		}
-
-															}
-
-													}
 
 												// Cross-reference the lists
 
 													if ( $location_medicalSpecialty_list ) {
-
-														$location_medicalSpecialty_list = is_array($location_medicalSpecialty_list) ? $location_medicalSpecialty_list : array($location_medicalSpecialty_list);
-														$location_medicalSpecialty_list = array_is_list($location_medicalSpecialty_list) ? $location_medicalSpecialty_list : array($location_medicalSpecialty_list);
 
 														$location_additionalType_medicalSpecialty = array_intersect(
 															$location_valid_types,
 															$location_medicalSpecialty_list
 														);
 
+														$location_additionalType_medicalSpecialty = array_values($location_additionalType_medicalSpecialty);
+
 													}
 
 												// Merge value/reference into the additionalType property values array
 
-													$location_additionalType = uamswp_fad_schema_merge_values(
-														$location_additionalType, // mixed // Required // Initial schema item property value
+													$location_additionalType_LocalBusiness = uamswp_fad_schema_merge_values(
+														$location_additionalType_LocalBusiness, // mixed // Required // Initial schema item property value
 														$location_additionalType_medicalSpecialty, // mixed // Required // Incoming schema item property value
 														$location_additionalType_medicalSpecialty_ref // mixed // Required // @id reference to incoming schema item property value
 													);
 
 											// Get additionalType field list
 
-												if ( !isset($location_additionalType_field) ) {
+												// Get additionalType repeater field value
 
-													// Get additionalType repeater field value
+													if ( !isset($location_additionalType_repeater) ) {
 
-														if ( !isset($location_additionalType_repeater) ) {
+														$location_additionalType_repeater = get_field( 'schema_additionalType', $location ) ?? array();
 
-															$location_additionalType_repeater = get_field( 'schema_additionalType', $location ) ?? array();
+													}
 
-														}
+												// Add each item to an array
 
-														// Add each item to an array
+													if ( $location_additionalType_repeater ) {
 
-															if ( $location_additionalType_repeater ) {
+														$location_additionalType_field = uamswp_fad_schema_additionaltype(
+															$location_additionalType_repeater, // additionalType repeater field
+															'schema_additionalType_uri' // additionalType item field name
+														);
 
-																$location_additionalType_field = uamswp_fad_schema_additionaltype(
-																	$location_additionalType_repeater, // additionalType repeater field
-																	'schema_additionalType_uri' // additionalType item field name
-																);
-
-															}
-
-												}
+													}
 
 												// Merge value/reference into the additionalType property values array
 
-													$location_additionalType = uamswp_fad_schema_merge_values(
-														$location_additionalType, // mixed // Required // Initial schema item property value
+													$location_additionalType_LocalBusiness = uamswp_fad_schema_merge_values(
+														$location_additionalType_LocalBusiness, // mixed // Required // Initial schema item property value
 														$location_additionalType_field, // mixed // Required // Incoming schema item property value
 														$location_additionalType_field_ref // mixed // Required // @id reference to incoming schema item property value
 													);
@@ -18111,8 +18060,8 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
-													$location_additionalType, // mixed // Required // Variable to add as the property value
-													$location_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$location_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
+													$location_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
@@ -18123,8 +18072,8 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'additionalType', // string // Required // Name of schema property
-													$location_additionalType, // mixed // Required // Variable to add as the property value
-													$location_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$location_additionalType_LocalBusiness, // mixed // Required // Variable to add as the property value
+													$location_additionalType_LocalBusiness_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
