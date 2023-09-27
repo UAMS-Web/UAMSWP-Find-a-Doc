@@ -18112,7 +18112,11 @@
 
 										$location_parent_common = array(
 											'address',
+											'brand',
+											'containedInPlace',
 											'image',
+											'memberOf',
+											'parentOrganization',
 											'photo'
 										);
 
@@ -18194,24 +18198,6 @@
 													$location_organization_specific = array();
 
 										// Get parent location
-
-											// Parent location query and ID
-
-												if (
-													!isset($location_has_parent)
-													||
-													(
-														$location_has_parent
-														&&
-														!isset($location_parent_id)
-													)
-												) {
-
-													$location_has_parent = get_field( 'location_parent', $location );
-													$location_parent_id = $location_has_parent ? get_field( 'location_parent_id', $location ) : 0;
-													$location_has_parent = $location_parent_id ? true : false;
-
-												}
 
 											// Format values (LocalBusiness and subtypes)
 
