@@ -20,6 +20,9 @@ $page_id = get_the_ID();
 		array($page_id), // List of IDs of the provider items
 		$page_url, // Page URL
 		0, // Nesting level within the main schema
+		true, // bool // Query for whether to output the 'MedicalWebPage' type
+		true, // bool // Query for whether to output the 'MedicalBusiness' type
+		true, // bool // Query for whether to output the 'Person' type
 		1, // Iteration counter for provider-as-MedicalWebPage
 		1, // Iteration counter for provider-as-MedicalBusiness
 		1, // Iteration counter for provider-as-Person

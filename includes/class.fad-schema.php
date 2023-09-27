@@ -20329,6 +20329,9 @@
 															$location_provider_ids, // List of IDs of the provider items
 															$location_url, // Page URL
 															($nesting_level + 1), // Nesting level within the main schema
+															false, // bool // Query for whether to output the 'MedicalWebPage' type
+															false, // bool // Query for whether to output the 'MedicalBusiness' type
+															true // bool // Query for whether to output the 'Person' type
 														);
 
 														// MedicalBusiness and subtypes
