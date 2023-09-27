@@ -426,27 +426,12 @@
 
 	// url
 
-		$schema_base_website_uams_health['url'] = array(
-			'@type' => 'URL',
-			'@id' => $schema_base_org_uams_health_url . '#URL',
-			'url' => $schema_base_org_uams_health_url
-		);
+		$schema_base_website_uams_health['url'] = $schema_base_org_uams_health_url;
 
 		// Define reference to this 'url' property
 
 			$schema_base_website_uams_health_url = $schema_base_website_uams_health['url'] ?? array();
 
-			if (
-				isset($schema_base_website_uams_health_url['@id'])
-				&&
-				!empty($schema_base_website_uams_health_url['@id'])
-			) {
-
-				$schema_base_website_uams_health_url_ref = uamswp_fad_schema_node_references(array($schema_base_website_uams_health_url));
-				uamswp_fad_flatten_multidimensional_array($schema_base_website_uams_health_url_ref);
-
-			}
-
 		// Set value of 'url' property of UAMS Health 'MedicalOrganization' item with this 'url' reference
 
-			$schema_base_org_uams_health['url'] = $schema_base_website_uams_health_url_ref;
+			$schema_base_org_uams_health['url'] = $schema_base_website_uams_health_url;
