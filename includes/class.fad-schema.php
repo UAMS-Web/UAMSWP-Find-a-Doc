@@ -6275,7 +6275,7 @@
 													if ( !isset($provider_degrees) ) {
 
 														$provider_degrees = get_field( 'physician_degree', $provider );
-														$provider_degree_count = $degrees ? count($degrees) : 0;
+														$provider_degree_count = $provider_degrees ? count($provider_degrees) : 0;
 
 													}
 
@@ -20330,7 +20330,7 @@
 															$location_url, // Page URL
 															($nesting_level + 1), // Nesting level within the main schema
 															false, // bool // Query for whether to output the 'MedicalWebPage' type
-															false, // bool // Query for whether to output the 'MedicalBusiness' type
+															true, // bool // Query for whether to output the 'MedicalBusiness' type
 															true // bool // Query for whether to output the 'Person' type
 														);
 
