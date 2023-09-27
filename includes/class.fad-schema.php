@@ -5306,13 +5306,17 @@
 			array $provider_list = array() // Pre-existing list array for both provider-as-MedicalBusiness and provider-as-Person to which to add additional items
 		) {
 
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+
 			// Common property values
 
 				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
 
-				// UAMS organization values
+			// UAMS organization values
 
-					include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
 
 			if ( !empty($repeater) ) {
 
