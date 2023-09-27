@@ -25852,6 +25852,39 @@
 
 		}
 
+	// Get list of Schema.org subtypes
+
+		function uamswp_fad_schema_subtypes(
+			array &$types // List of Schema.org types
+		) {
+
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+
+			foreach ( $types as $item ) {
+
+				$subtypes = $schema_org_types[$item]['subTypes'] ?? array();
+				$subtypes = !empty($subtypes) ? $subtypes : array();
+				$subtypes = is_array($subtypes) ? $subtypes : array($subtypes);
+
+				uamswp_fad_schema_subtypes($subtypes);
+
+				$types = array_merge(
+					$types,
+					$subtypes
+				);
+
+			}
+
+			// Clean up the array
+
+				$types = array_filter($types);
+				$types = array_unique( $types, SORT_REGULAR );
+				$types = array_values($types);
+
+		}
+
 // Construct the schema script tag
 
 	function uamswp_fad_schema_construct($input) {
