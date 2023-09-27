@@ -21267,6 +21267,27 @@
 
 			if ( !empty($repeater) ) {
 
+				// List of valid types
+
+					$expertise_valid_types = array(
+						'MedicalEntity'
+					);
+
+				// List of valid properties for each type
+
+					// Base array
+
+						$expertise_properties_map = array();
+
+					// Get list of valid properties from Schema.org type list
+
+						foreach ( $expertise_valid_types as $item ) {
+
+							$expertise_properties_map[$item]['properties'] = $schema_org_types[$item]['properties'] ?? array();
+							$expertise_properties_map[$item]['properties'] = is_array($expertise_properties_map[$item]['properties']) ? $expertise_properties_map[$item]['properties'] : array($expertise_properties_map[$item]['properties']);
+
+						}
+
 				foreach ( $repeater as $MedicalEntity ) {
 
 					// Retrieve the value of the item transient
@@ -21995,6 +22016,10 @@
 			string $page_fragment = 'CreativeWork', // Base fragment identifier
 			int $CreativeWork_i = 1 // Iteration counter
 		) {
+
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
 
 			// Common property values
 
@@ -24021,6 +24046,18 @@
 			int $condition_i = 1 // Iteration counter
 		) {
 
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+
+			// Common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+			// UAMS organization values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
+
 			// Base list array
 
 				$condition_list = array();
@@ -24494,6 +24531,18 @@
 			string $page_fragment = 'Service', // Fragment identifier
 			int $service_i = 1 // Iteration counter
 		) {
+
+			// Schema.org types and properties
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/schema-org.php' );
+
+			// Common property values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+
+			// UAMS organization values
+
+				include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/uams.php' );
 
 			// Base list array
 
