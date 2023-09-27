@@ -5477,6 +5477,7 @@
 								$Dentist_degree_query = null;
 								$isco08_values = null;
 								$MedicalBusiness_type = null;
+								$MedicalWebPage_type = null;
 								$Optician_degree_query = null;
 								$Person_type = null;
 								$Physician_degree_query = null;
@@ -17455,7 +17456,8 @@
 								$location_hasCredential = null;
 								$location_hasDriveThroughService = null;
 								$location_hasMap = null;
-								$location_id = null;
+								$LocalBusiness_id = null;
+								$MedicalWebPage_id = null;
 								$location_identifier = null;
 								$location_image = null;
 								$location_image_general = null;
@@ -17508,7 +17510,8 @@
 								$location_taxID_taxpayer = null;
 								$location_taxID_employer = null;
 								$location_treatments = null;
-								$location_type = null;
+								$LocalBusiness_type = null;
+								$MedicalWebPage_type = null;
 								$location_url = null;
 								$location_vatID = null;
 								$location_wayfinding_image_id = null;
@@ -17603,51 +17606,101 @@
 
 								// @type
 
-									// Get values
-
-										// LocalBusiness Subtype
-
-											if ( !isset($location_type) ) {
-
-												$location_type = get_field( 'schema_localbusiness_single', $location ) ?? '';
-
-											}
-
-											$location_type = is_array($location_type) ? reset($location_type) : $location_type;
-
-											// Fallback value
-
-												if (
-													!$location_type
-													||
-													!array_key_exists( $location_type, $location_properties_map )
-												) {
-
-													$location_type = 'MedicalBusiness';
-
-												}
-
-									// Add to schema
-
-										$location_item_MedicalWebPage['@type'] = $location_type;
-										$location_item_LocalBusiness['@type'] = $location_type;
-
-								// @id
-
-									if ( $nesting_level <= 1 ) {
+									// MedicalWebPage type
 
 										// Get values
 
-											$location_id = $location_url . '#' . $location_type;
-											// $location_id .= $LocalBusiness_i;
-											// $location_id++;
+											$MedicalWebPage_type = 'MedicalWebPage';
 
-										// Add to schema
+											// Add to item values
 
-											$location_item_MedicalWebPage['@id'] = $location_id;
-											$location_item_LocalBusiness['@id'] = $location_id;
+												if ( $MedicalWebPage_type ) {
 
-									}
+													$location_item_MedicalWebPage['@type'] = $MedicalWebPage_type;
+
+												}
+
+									// LocalBusiness Subtype
+
+										// Get values
+
+											// LocalBusiness Subtype
+
+												if ( !isset($LocalBusiness_type) ) {
+
+													$LocalBusiness_type = get_field( 'schema_localbusiness_single', $location ) ?? '';
+
+												}
+
+												$LocalBusiness_type = is_array($LocalBusiness_type) ? reset($LocalBusiness_type) : $LocalBusiness_type;
+
+												// Fallback value
+
+													if (
+														!$LocalBusiness_type
+														||
+														!array_key_exists( $LocalBusiness_type, $location_properties_map )
+													) {
+
+														$LocalBusiness_type = 'MedicalBusiness';
+
+													}
+
+										// Add to item values
+
+											$location_item_LocalBusiness['@type'] = $LocalBusiness_type;
+
+								// @id
+
+									// MedicalWebPage
+
+										// Get values
+
+											$MedicalWebPage_id = $location_url . '#' . $MedicalWebPage_type;
+											// $MedicalWebPage_id .= $MedicalWebPage_i;
+											// $MedicalWebPage_i++;
+
+										// Add to item values
+
+											if ( $MedicalWebPage_id ) {
+
+												$location_item_MedicalWebPage['@id'] = $MedicalWebPage_id;
+
+											}
+
+										// Define reference to the @id
+
+											if ( $location_item_MedicalWebPage['@id'] ) {
+
+												$location_item_MedicalWebPage_ref = uamswp_fad_schema_node_references(array($location_item_MedicalWebPage));
+												uamswp_fad_flatten_multidimensional_array($location_item_MedicalWebPage_ref);
+
+											}
+
+									// LocalBusiness
+
+										// Get values
+
+											$LocalBusiness_id = $location_url . '#' . $LocalBusiness_type;
+											// $LocalBusiness_id .= $LocalBusiness_i;
+											// $LocalBusiness_i++;
+
+										// Add to item values
+
+											if ( $LocalBusiness_id ) {
+
+												$location_item_LocalBusiness['@id'] = $LocalBusiness_id;
+
+											}
+
+										// Define reference to the @id
+
+											if ( $location_item_LocalBusiness['@id'] ) {
+
+												$location_item_LocalBusiness_ref = uamswp_fad_schema_node_references(array($location_item_LocalBusiness));
+												uamswp_fad_flatten_multidimensional_array($location_item_LocalBusiness_ref);
+
+											}
 
 								// name
 
@@ -17693,7 +17746,7 @@
 									if (
 										in_array(
 											'medicalSpecialty',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -17799,7 +17852,7 @@
 									if (
 										in_array(
 											'additionalType',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -17919,17 +17972,17 @@
 									if (
 										in_array(
 											'address',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										||
 										in_array(
 											'image',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										||
 										in_array(
 											'photo',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -17967,7 +18020,7 @@
 									if (
 										in_array(
 											'address',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -18202,7 +18255,7 @@
 									if (
 										in_array(
 											'aggregateRating',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18240,7 +18293,7 @@
 									if (
 										in_array(
 											'alternateName',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18298,7 +18351,7 @@
 									if (
 										in_array(
 											'areaServed',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18337,7 +18390,7 @@
 									if (
 										in_array(
 											'availableService',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18388,7 +18441,7 @@
 									if (
 										in_array(
 											'award',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18428,7 +18481,7 @@
 									if (
 										in_array(
 											'brand',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -18466,7 +18519,7 @@
 									if (
 										in_array(
 											'contactPoint',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -18501,7 +18554,7 @@
 									if (
 										in_array(
 											'containedInPlace',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -18539,7 +18592,7 @@
 									if (
 										in_array(
 											'containsPlace',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18592,7 +18645,7 @@
 									if (
 										in_array(
 											'currenciesAccepted',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18632,7 +18685,7 @@
 									if (
 										in_array(
 											'department',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18671,7 +18724,7 @@
 									if (
 										in_array(
 											'description',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18738,7 +18791,7 @@
 									if (
 										in_array(
 											'diversityPolicy',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18783,7 +18836,7 @@
 									if (
 										in_array(
 											'diversityStaffingReport',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18821,7 +18874,7 @@
 									if (
 										in_array(
 											'employee',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level <= 1
@@ -18869,7 +18922,7 @@
 									if (
 										in_array(
 											'ethicsPolicy',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18907,7 +18960,7 @@
 									if (
 										in_array(
 											'event',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18945,7 +18998,7 @@
 									if (
 										in_array(
 											'foundingDate',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -18990,7 +19043,7 @@
 									if (
 										in_array(
 											'funding',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -19020,17 +19073,17 @@
 									if (
 										in_array(
 											'geo',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										||
 										in_array(
 											'latitude',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										||
 										in_array(
 											'longitude',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -19066,7 +19119,7 @@
 									if (
 										in_array(
 											'geo',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -19109,7 +19162,7 @@
 									if (
 										in_array(
 											'hasCredential',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -19155,7 +19208,7 @@
 									if (
 										in_array(
 											'hasDriveThroughService',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -19197,7 +19250,7 @@
 									if (
 										in_array(
 											'hasMap',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -19246,7 +19299,7 @@
 											if (
 												in_array(
 													'duns',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 												&&
 												$nesting_level == 0
@@ -19292,7 +19345,7 @@
 											if (
 												in_array(
 													'globalLocationNumber',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19336,7 +19389,7 @@
 											if (
 												in_array(
 													'isicV4',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19379,7 +19432,7 @@
 											if (
 												in_array(
 													'leiCode',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19422,7 +19475,7 @@
 											if (
 												in_array(
 													'naics',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19465,7 +19518,7 @@
 											if (
 												in_array(
 													'taxID',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19545,7 +19598,7 @@
 											if (
 												in_array(
 													'vatID',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19594,7 +19647,7 @@
 											if (
 												in_array(
 													'iso6523Code',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19628,7 +19681,7 @@
 											if (
 												in_array(
 													'identifier',
-													$location_properties_map[$location_type]['properties']
+													$location_properties_map[$LocalBusiness_type]['properties']
 												)
 											) {
 
@@ -19890,12 +19943,12 @@
 									if (
 										in_array(
 											'image',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										||
 										in_array(
 											'photo',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -20141,14 +20194,14 @@
 									if (
 										in_array(
 											'image',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
 										// Add to item values
 
 											uamswp_fad_schema_add_to_item_values(
-												$location_type, // string // Required // The @type value for the schema item
+												$LocalBusiness_type, // string // Required // The @type value for the schema item
 												$location_item, // array // Required // The list array for the schema item to which to add the property value
 												'image', // string // Required // Name of schema property
 												$location_image_general, // mixed // Required // Variable to add as the property value
@@ -20176,7 +20229,7 @@
 									if (
 										in_array(
 											'isAcceptingNewPatients',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20214,7 +20267,7 @@
 									if (
 										in_array(
 											'isAccessibleForFree',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20255,7 +20308,7 @@
 									if (
 										in_array(
 											'keywords',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20302,7 +20355,7 @@
 									if (
 										in_array(
 											'knowsAbout',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20343,7 +20396,7 @@
 									if (
 										in_array(
 											'knowsLanguage',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20379,7 +20432,7 @@
 									if (
 										in_array(
 											'legalName',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -20416,7 +20469,7 @@
 									if (
 										in_array(
 											'logo',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20459,7 +20512,7 @@
 									if (
 										in_array(
 											'mainEntityOfPage',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -20499,7 +20552,7 @@
 									if (
 										in_array(
 											'makesOffer',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20537,7 +20590,7 @@
 									if (
 										in_array(
 											'maximumAttendeeCapacity',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20583,7 +20636,7 @@
 									if (
 										in_array(
 											'memberOf',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20626,7 +20679,7 @@
 									if (
 										in_array(
 											'nonprofitStatus',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20664,7 +20717,7 @@
 									if (
 										in_array(
 											'numberOfEmployees',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20717,7 +20770,7 @@
 									if (
 										in_array(
 											'openingHours',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20755,7 +20808,7 @@
 									if (
 										in_array(
 											'openingHoursSpecification',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20793,7 +20846,7 @@
 									if (
 										in_array(
 											'parentOrganization',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -20829,7 +20882,7 @@
 									if (
 										in_array(
 											'paymentAccepted',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -20868,14 +20921,14 @@
 									if (
 										in_array(
 											'photo',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
 										// Add to item values
 
 											uamswp_fad_schema_add_to_item_values(
-												$location_type, // string // Required // The @type value for the schema item
+												$LocalBusiness_type, // string // Required // The @type value for the schema item
 												$location_item, // array // Required // The list array for the schema item to which to add the property value
 												'photo', // string // Required // Name of schema property
 												$location_image_general, // mixed // Required // Variable to add as the property value
@@ -20964,7 +21017,7 @@
 									if (
 										in_array(
 											'potentialAction',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -21003,7 +21056,7 @@
 									if (
 										in_array(
 											'publicAccess',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -21041,7 +21094,7 @@
 									if (
 										in_array(
 											'review',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -21081,7 +21134,7 @@
 									if (
 										in_array(
 											'sameAs',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 									) {
 
@@ -21135,7 +21188,7 @@
 									if (
 										in_array(
 											'smokingAllowed',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -21176,7 +21229,7 @@
 									if (
 										in_array(
 											'specialOpeningHoursSpecification',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -21217,7 +21270,7 @@
 									if (
 										in_array(
 											'subjectOf',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
@@ -21268,7 +21321,7 @@
 									if (
 										in_array(
 											'subOrganization',
-											$location_properties_map[$location_type]['properties']
+											$location_properties_map[$LocalBusiness_type]['properties']
 										)
 										&&
 										$nesting_level == 0
