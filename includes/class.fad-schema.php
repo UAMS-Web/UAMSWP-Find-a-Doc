@@ -8805,223 +8805,202 @@
 									 *     - URL
 									 */
 
-									if (
-										in_array(
-											'additionalType',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
-										)
-									) {
+									// additionalType (MedicalWebPage)
 
-										// Get values
+										if (
+											in_array(
+												'additionalType',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+										) {
 
-											$provider_additionalType_MedicalWebPage = 'ProfilePage';
+											// Get values
 
-										// Clean up additionalType property values array
+												$provider_additionalType_MedicalWebPage = 'ProfilePage';
 
-											if (
-												$provider_additionalType_MedicalWebPage
-												&&
-												is_array($provider_additionalType_MedicalWebPage)
-											) {
+											// Clean up additionalType property values array
 
-												// If there is only one item, flatten the multi-dimensional array by one step
+												if (
+													$provider_additionalType_MedicalWebPage
+													&&
+													is_array($provider_additionalType_MedicalWebPage)
+												) {
 
-													uamswp_fad_flatten_multidimensional_array($provider_additionalType_MedicalWebPage);
+													// If there is only one item, flatten the multi-dimensional array by one step
 
-											}
+														uamswp_fad_flatten_multidimensional_array($provider_additionalType_MedicalWebPage);
 
-										// Add to item values
+												}
 
-											// MedicalWebPage
+											// Add to item values
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$provider_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
-													$provider_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												// MedicalWebPage
 
-									}
-
-								// additionalType (MedicalBusiness; Person)
-
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
-									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
-									 * Subproperty of:
-									 *     - rdf:type
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 *     - URL
-									 */
-
-									if (
-										in_array(
-											'additionalType',
-											$provider_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'additionalType',
-											$provider_properties_map[$MedicalBusiness_type]['properties']
-										)
-										||
-										in_array(
-											'additionalType',
-											$provider_properties_map[$Person_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											// Base property values array
-
-												$provider_additionalType = array();
-
-											// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
-
-												// Get values
-
-													// Get Clinical Specialization value
-
-														if ( !isset($provider_clinical_specialization) ) {
-
-															$provider_clinical_specialization = get_field( 'physician_title', $provider );
-
-														}
-
-													// Get MedicalSpecialty from Clinical Specialization value
-
-														if ( $provider_clinical_specialization ) {
-
-															// Simple list of MedicalSpecialty values
-
-																$provider_medicalSpecialty_list = array();
-
-															// Schema property values
-
-																$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
-																	$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
-																	$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
-																);
-
-																if ( $provider_medicalSpecialty_list ) {
-
-																	$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
-
-																	$provider_additionalType_MedicalSpecialty = array_intersect(
-																		$provider_valid_types,
-																		$provider_medicalSpecialty_list
-																	);
-
-																}
-
-														}
-
-												// Merge value/reference into the additionalType property values array
-
-													$provider_additionalType = uamswp_fad_schema_merge_values(
-														$provider_additionalType, // mixed // Required // Initial schema item property value
-														$provider_additionalType_MedicalSpecialty // mixed // Required // Incoming schema item property value
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$provider_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
+														$provider_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
 													);
 
-											// Get Wikidata item URL for the occupation from associated Clinical Specialization items
+										}
 
-												// Get values
+									// additionalType (MedicalBusiness; Person)
 
-													if ( !isset($provider_additionalType_clinical_specialization) ) {
+										if (
+											in_array(
+												'additionalType',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'additionalType',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										) {
+
+											// Get values
+
+												// Base property values array
+
+													$provider_additionalType = array();
+
+												// Get MedicalSpecialty values that match MedicalBusiness subtypes and add to property values
+
+													// Get values
 
 														// Get Clinical Specialization value
 
-															if ( !isset($provider_clinical_specialization_term) ) {
+															if ( !isset($provider_clinical_specialization) ) {
 
-																if ( !isset($provider_clinical_specialization) ) {
+																$provider_clinical_specialization = get_field( 'physician_title', $provider );
 
-																	$provider_clinical_specialization = get_field( 'physician_title', $provider );
+															}
 
-																}
+														// Get MedicalSpecialty from Clinical Specialization value
 
-																if ( $provider_clinical_specialization ) {
+															if ( $provider_clinical_specialization ) {
 
-																	$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
+																// Simple list of MedicalSpecialty values
 
-																}
+																	$provider_medicalSpecialty_list = array();
 
-																// Get Wikidata Item URL for the Occupation field value
+																// Schema property values
 
-																	$provider_additionalType_clinical_specialization = '';
+																	$provider_medicalSpecialty = uamswp_fad_schema_medicalSpecialty_specialization(
+																		$provider_clinical_specialization, // mixed // Required // Clinical Specialization value(s)
+																		$provider_medicalSpecialty_list // Optional // Array to populate with the list of MedicalSpecialty values
+																	);
 
-																	if ( is_object($provider_clinical_specialization_term) ) {
+																	if ( $provider_medicalSpecialty_list ) {
 
-																		$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $item_term ) ?? '';
+																		$provider_medicalSpecialty_list = is_array($provider_medicalSpecialty_list) ? $provider_medicalSpecialty_list : array($provider_medicalSpecialty_list);
+
+																		$provider_additionalType_MedicalSpecialty = array_intersect(
+																			$provider_valid_types,
+																			$provider_medicalSpecialty_list
+																		);
 
 																	}
 
 															}
 
-													}
+													// Merge value/reference into the additionalType property values array
 
-												// Merge value/reference into the additionalType property values array
+														$provider_additionalType = uamswp_fad_schema_merge_values(
+															$provider_additionalType, // mixed // Required // Initial schema item property value
+															$provider_additionalType_MedicalSpecialty // mixed // Required // Incoming schema item property value
+														);
 
-													$provider_additionalType = uamswp_fad_schema_merge_values(
-														$provider_additionalType, // mixed // Required // Initial schema item property value
-														$provider_additionalType_clinical_specialization // mixed // Required // Incoming schema item property value
+												// Get Wikidata item URL for the occupation from associated Clinical Specialization items
+
+													// Get values
+
+														if ( !isset($provider_additionalType_clinical_specialization) ) {
+
+															// Get Clinical Specialization value
+
+																if ( !isset($provider_clinical_specialization_term) ) {
+
+																	if ( !isset($provider_clinical_specialization) ) {
+
+																		$provider_clinical_specialization = get_field( 'physician_title', $provider );
+
+																	}
+
+																	if ( $provider_clinical_specialization ) {
+
+																		$provider_clinical_specialization_term = get_term( $provider_clinical_specialization, 'clinical_title' ) ?? '';
+
+																	}
+
+																	// Get Wikidata Item URL for the Occupation field value
+
+																		$provider_additionalType_clinical_specialization = '';
+
+																		if ( is_object($provider_clinical_specialization_term) ) {
+
+																			$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $item_term ) ?? '';
+
+																		}
+
+																}
+
+														}
+
+													// Merge value/reference into the additionalType property values array
+
+														$provider_additionalType = uamswp_fad_schema_merge_values(
+															$provider_additionalType, // mixed // Required // Initial schema item property value
+															$provider_additionalType_clinical_specialization // mixed // Required // Incoming schema item property value
+														);
+
+											// Add to item values
+
+												// MedicalWebPage
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$provider_additionalType, // mixed // Required // Variable to add as the property value
+														$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
 													);
 
-										// Add to item values
+												// MedicalBusiness
 
-											// MedicalWebPage
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalBusiness_type, // string // Required // The @type value for the schema item
+														$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$provider_additionalType, // mixed // Required // Variable to add as the property value
+														$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$provider_additionalType, // mixed // Required // Variable to add as the property value
-													$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
+												// Person
 
-											// MedicalBusiness
+													uamswp_fad_schema_add_to_item_values(
+														$Person_type, // string // Required // The @type value for the schema item
+														$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$provider_additionalType, // mixed // Required // Variable to add as the property value
+														$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
 
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$provider_additionalType, // mixed // Required // Variable to add as the property value
-													$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$provider_additionalType, // mixed // Required // Variable to add as the property value
-													$provider_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
+										}
 
 								// aggregateRating
 
@@ -18765,104 +18744,129 @@
 									 *     - URL
 									 */
 
-									if (
-										in_array(
-											'additionalType',
-											$location_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
+									// additionalType (MedicalWebPage)
+
+										if (
+											in_array(
+												'additionalType',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+										) {
+
+											// Get values
+
+												$location_additionalType_MedicalWebPage = 'ProfilePage';
+
+											// Clean up additionalType property values array
+
+												if (
+													$location_additionalType_MedicalWebPage
+													&&
+													is_array($location_additionalType_MedicalWebPage)
+												) {
+
+													// If there is only one item, flatten the multi-dimensional array by one step
+
+														uamswp_fad_flatten_multidimensional_array($location_additionalType_MedicalWebPage);
+
+												}
+
+											// Add to item values
+
+												// MedicalWebPage
+
+													uamswp_fad_schema_add_to_item_values(
+														$MedicalWebPage_type, // string // Required // The @type value for the schema item
+														$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$location_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
+														$location_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
+													);
+
+										}
+
+									// additionalType (LocalBusiness)
+
+										if in_array(
 											'additionalType',
 											$location_properties_map[$LocalBusiness_type]['properties']
-										)
-									) {
+										) {
 
-										// Get values
+											// Get values
 
-											// Base property values arrays
+												// Base property values array
 
-												$location_additionalType_MedicalWebPage = array();
-												$location_additionalType_LocalBusiness = array();
+													$location_additionalType_LocalBusiness = array();
 
-											// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
+												// Get medicalSpecialty values that match MedicalBusiness subtypes and add to property values
 
-												// Cross-reference the lists
+													// Cross-reference the lists
 
-													if ( $location_medicalSpecialty_list ) {
+														if ( $location_medicalSpecialty_list ) {
 
-														$location_additionalType_medicalSpecialty = array_intersect(
-															$location_valid_types,
-															$location_medicalSpecialty_list
+															$location_additionalType_medicalSpecialty = array_intersect(
+																$location_valid_types,
+																$location_medicalSpecialty_list
+															);
+
+															$location_additionalType_medicalSpecialty = array_values($location_additionalType_medicalSpecialty);
+
+														}
+
+													// Merge value/reference into the additionalType property values array
+
+														$location_additionalType_LocalBusiness = uamswp_fad_schema_merge_values(
+															$location_additionalType_LocalBusiness, // mixed // Required // Initial schema item property value
+															$location_additionalType_medicalSpecialty // mixed // Required // Incoming schema item property value
 														);
 
-														$location_additionalType_medicalSpecialty = array_values($location_additionalType_medicalSpecialty);
+												// Get additionalType field list
 
-													}
+													// Get additionalType repeater field value
 
-												// Merge value/reference into the additionalType property values array
+														if ( !isset($location_additionalType_repeater) ) {
 
-													$location_additionalType_LocalBusiness = uamswp_fad_schema_merge_values(
-														$location_additionalType_LocalBusiness, // mixed // Required // Initial schema item property value
-														$location_additionalType_medicalSpecialty // mixed // Required // Incoming schema item property value
-													);
+															$location_additionalType_repeater = get_field( 'schema_additionalType', $location ) ?? array();
 
-											// Get additionalType field list
+														}
 
-												// Get additionalType repeater field value
+													// Add each item to an array
 
-													if ( !isset($location_additionalType_repeater) ) {
+														if ( $location_additionalType_repeater ) {
 
-														$location_additionalType_repeater = get_field( 'schema_additionalType', $location ) ?? array();
+															$location_additionalType_field = uamswp_fad_schema_additionaltype(
+																$location_additionalType_repeater, // additionalType repeater field
+																'schema_additionalType_uri' // additionalType item field name
+															);
 
-													}
+														}
 
-												// Add each item to an array
+													// Merge value/reference into the additionalType property values array
 
-													if ( $location_additionalType_repeater ) {
-
-														$location_additionalType_field = uamswp_fad_schema_additionaltype(
-															$location_additionalType_repeater, // additionalType repeater field
-															'schema_additionalType_uri' // additionalType item field name
+														$location_additionalType_LocalBusiness = uamswp_fad_schema_merge_values(
+															$location_additionalType_LocalBusiness, // mixed // Required // Initial schema item property value
+															$location_additionalType_field // mixed // Required // Incoming schema item property value
 														);
 
-													}
+											// Add to item values
 
-												// Merge value/reference into the additionalType property values array
+												// LocalBusiness
 
-													$location_additionalType_LocalBusiness = uamswp_fad_schema_merge_values(
-														$location_additionalType_LocalBusiness, // mixed // Required // Initial schema item property value
-														$location_additionalType_field // mixed // Required // Incoming schema item property value
+													uamswp_fad_schema_add_to_item_values(
+														$LocalBusiness_type, // string // Required // The @type value for the schema item
+														$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+														'additionalType', // string // Required // Name of schema property
+														$location_additionalType_LocalBusiness, // mixed // Required // Variable to add as the property value
+														$location_additionalType_LocalBusiness_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+														$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+														$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+														($nesting_level + 1) // int // Required // Current nesting level value
 													);
 
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$location_additionalType_MedicalWebPage, // mixed // Required // Variable to add as the property value
-													$location_additionalType_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$location_additionalType_LocalBusiness, // mixed // Required // Variable to add as the property value
-													$location_additionalType_LocalBusiness_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
+										}
 
 								// Parent location attributes (common use)
 
