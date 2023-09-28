@@ -1603,11 +1603,11 @@
 												<?php
 
 												// Begin Visual Split Container
-													
+
 													if ( $provider_academic_split ) {
 
 														// If there is a bio AND at least one of the other academic things, visually split the layout
-														
+
 														?>
 														<div class="row content-split-lg">
 														<div class="col-xs-12 col-lg-7">
@@ -1615,7 +1615,7 @@
 														<?php
 
 													} else {
-														
+
 														?>
 														<div class="module-body">
 														<?php
@@ -1625,19 +1625,19 @@
 												// Academic Biography
 
 													if ( $academic_bio ) {
-													
+
 														?>
 														<h3 class="sr-only">Academic Biography</h3>
 														<?php
-														
+
 														echo $academic_bio;
-														
+
 													} // endif
 
 												// Visual Split Elements
 
 													if ( $provider_academic_split ) {
-														
+
 														?>
 														</div>
 														</div>
@@ -1650,12 +1650,12 @@
 												// Academic Administrative Roles
 
 													if ( have_rows('physician_academic_admin_title') ) {
-														
+
 														?>
 														<h3 class="h4">Administrative Roles</h3>
 														<dl>
 															<?php
-															
+
 															while ( have_rows('physician_academic_admin_title') ) {
 
 																the_row();
@@ -1679,7 +1679,7 @@
 																}
 
 															} // endwhile ( have_rows('physician_academic_admin_title') )
-															
+
 															?>
 														</dl>
 														<?php
@@ -1691,12 +1691,12 @@
 													// $academic_appointments = get_field('physician_academic_appointment');
 
 													if ( have_rows('physician_academic_appointment') ) {
-														
+
 														?>
 														<h3 class="h4">Faculty Appointments</h3>
 														<dl>
 															<?php
-															
+
 															while ( have_rows('physician_academic_appointment') ) {
 
 																the_row();
@@ -1720,7 +1720,7 @@
 																}
 
 															} // endwhile ( have_rows('physician_academic_appointment') )
-															
+
 															?>
 														</dl>
 														<?php
@@ -1730,7 +1730,7 @@
 												// Residency Program
 
 													if ( $resident ) {
-														
+
 														?>
 														<h3 class="h4">Residency Program</h3>
 														<dl>
@@ -1744,12 +1744,12 @@
 												// Education and Training
 
 													if ( have_rows('physician_education') ) {
-														
+
 														?>
 														<h3 class="h4">Education and Training</h3>
 														<dl>
 															<?php
-															
+
 															while ( have_rows('physician_education') ) {
 
 																the_row();
@@ -1779,7 +1779,7 @@
 																}
 
 															} // endwhile ( have_rows('physician_education') )
-															
+
 															?>
 														</dl>
 														<?php
@@ -1789,12 +1789,12 @@
 												// Certifications
 
 													if ( !empty( $certifications ) ) { 
-														
+
 														?>
 														<h3 class="h4">Certifications</h3>
 														<dl>
 															<?php
-															
+
 															foreach ( $certifications as $certification ) {
 
 																if ( $certification ) {
@@ -1839,17 +1839,17 @@
 																		<?php
 
 																	} elseif ( $certification_term_name ) {
-		
+
 																		?>
 																		<dt><?php echo $certification_term_name; ?></dt>
 																		<?php
 
 																	}
-																	
+
 																}
 
 															} // endforeach ( $certifications as $certification )
-															
+
 															?>
 														</dl>
 														<?php
@@ -1857,7 +1857,7 @@
 													} // end( !empty( $certifications ) )
 
 												// Professional Memberships
-													
+
 													if ( !empty( $provider_associations_names ) ) {
 
 														?>
@@ -1880,9 +1880,9 @@
 													} // endif ( !empty( $provider_associations_names ) )
 
 												// End Visual Split Container
-													
+
 													if ( $provider_academic_split ) {
-														
+
 														?>
 														</div>
 														</div>
@@ -1890,13 +1890,13 @@
 														<?php
 
 													} else {
-														
+
 														?>
 														</div>
 														<?php
 
 													} // endif ( $provider_academic_split )
-												
+
 												?>
 											</div>
 										</div>

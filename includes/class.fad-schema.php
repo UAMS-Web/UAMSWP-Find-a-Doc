@@ -136,7 +136,7 @@
 						$addressRegion = $addressRegion_map[$addressRegion] ?? $addressRegion;
 
 					}
-					
+
 
 			// If the required fields are empty, end now
 
@@ -2606,7 +2606,7 @@
 
 								$item_schema = array_filter($item_schema);
 								$item_schema = array_unique( $item_schema, SORT_REGULAR );
-								
+
 							}
 
 						// Add @type
@@ -2655,7 +2655,7 @@
 					$language_schema = array_filter($language_schema);
 					$language_schema = array_unique( $language_schema, SORT_REGULAR );
 					$language_schema = array_is_list($language_schema) ? array_values($language_schema) : $language_schema;
-					
+
 					// If there is only one item, flatten the multi-dimensional array by one step
 
 						uamswp_fad_flatten_multidimensional_array($language_schema);
@@ -3476,7 +3476,7 @@
 								// Get value
 
 									$credential_name = '';
-										
+
 									if ( $credential_taxonomy['name'] ) {
 
 										$credential_name = get_field( $credential_taxonomy['name'], $credential_term ) ?? '';
@@ -3498,7 +3498,7 @@
 							// url query
 
 								$credential_url_query = true;
-								
+
 								if ( $credential_taxonomy['url_query'] ) {
 
 									$credential_url_query = get_field( $credential_taxonomy['url_query'], $credential_term ) ?? true;
@@ -3510,7 +3510,7 @@
 								// Get value
 
 									$credential_url = '';
-									
+
 									if (
 										$credential_taxonomy['url']
 										&&
@@ -3650,7 +3650,7 @@
 																// Get value
 
 																	$item_name = '';
-																	
+
 																	if ( $credential_recognizedBy_field_name ) {
 
 																		$item_name = get_field( $credential_recognizedBy_field_name, $item_term ) ?? '';
@@ -3674,7 +3674,7 @@
 															// url query
 
 																$item_url_query = true;
-																
+
 																if ( $credential_recognizedBy_field_url_query ) {
 
 																	$item_url_query = get_field( $credential_recognizedBy_field_url_query, $item_term ) ?? true;
@@ -3686,7 +3686,7 @@
 																// Get value
 
 																	$item_url = '';
-																	
+
 																	if (
 																		$credential_recognizedBy_field_url
 																		&&
@@ -3710,7 +3710,7 @@
 																// Get alternateName repeater field value
 
 																	$item_alternatename_repeater = array();
-																	
+
 																	if ( $credential_recognizedBy_field_alternateName ) {
 
 																		$item_alternatename_repeater = get_field( $credential_recognizedBy_field_alternateName, $item_term ) ?? array();
@@ -3745,7 +3745,7 @@
 																// Get sameAs repeater field value
 
 																	$item_sameAs_repeater = array();
-																	
+
 																	if ( $credential_recognizedBy_field_sameAs ) {
 
 																		$item_sameAs_repeater = get_field( $credential_recognizedBy_field_sameAs, $item_term ) ?? array();
@@ -5198,7 +5198,7 @@
 								// codeValue
 
 									$nucc_item_codeValue = $item_code ?? '';
-								
+
 								// name (Specialization Name in the Health Care Provider Taxonomy Code Set)
 
 									$nucc_item_name = get_field( 'clinical_specialty_name', $item_term ) ?? $item_term->name; // Use post title as fallback value
@@ -6770,8 +6770,6 @@
 														$provider_forename_options = array();
 														$provider_surname_list = array();
 														$provider_surname_options = array();
-
-													// Reset variables
 
 													// Create a list of all name variations
 
@@ -13963,7 +13961,7 @@
 												$provider_isPartOf, // mixed // Required // Initial schema item property value
 												$schema_base_website_uams_health // mixed // Required // Incoming schema item property value
 											);
-	
+
 										// Add to item values
 
 											// MedicalWebPage
@@ -14080,7 +14078,7 @@
 												// Clean up list of ID values
 
 													if ( $provider_clinical_specialization_ancestors ) {
-														
+
 														$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
 														$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
 														$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
@@ -14184,7 +14182,7 @@
 													$provider_jobTitle, // array // Required // Property values from which to extract specific values
 													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 												);
-	
+
 											} else {
 
 												$provider_jobTitle_keywords = array($provider_jobTitle);
@@ -14289,7 +14287,7 @@
 													// Clean up list of ID values
 
 														if ( $provider_clinical_specialization_ancestors ) {
-															
+
 															$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
 															$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
 															$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
@@ -17288,7 +17286,7 @@
 													$provider_keywords = array_unique( $provider_keywords, SORT_REGULAR );
 													$provider_keywords = array_values($provider_keywords);
 													uamswp_fad_flatten_multidimensional_array($provider_keywords);
-								
+
 													if ( is_array($provider_keywords) ) {
 
 														sort( $provider_keywords, SORT_NATURAL | SORT_FLAG_CASE );
@@ -18416,7 +18414,7 @@
 										&&
 										$nesting_level == 0
 									) {
-										
+
 										// Common clinical 'Organization'
 
 											// Base array
@@ -18630,14 +18628,14 @@
 															$location_containedInPlace, // mixed // Required // Initial schema item property value
 															$location_parent_LocalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 													// Merge in building MedicalBusiness value/reference
 
 														$location_containedInPlace = uamswp_fad_schema_merge_values(
 															$location_containedInPlace, // mixed // Required // Initial schema item property value
 															$location_building_Place // mixed // Required // Incoming schema item property value
 														);
-	
+
 												// Add to item values
 
 													// MedicalWebPage
@@ -18991,14 +18989,14 @@
 															$location_containsPlace, // mixed // Required // Initial schema item property value
 															$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 													// Merge in provider MedicalBusiness value/reference
 
 														$location_containsPlace = uamswp_fad_schema_merge_values(
 															$location_containsPlace, // mixed // Required // Initial schema item property value
 															$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 												// Add to item values
 
 													// MedicalWebPage
@@ -19065,14 +19063,14 @@
 															$location_department, // mixed // Required // Initial schema item property value
 															$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 													// Merge in provider MedicalBusiness value/reference
 
 														$location_department = uamswp_fad_schema_merge_values(
 															$location_department, // mixed // Required // Initial schema item property value
 															$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 												// Add to item values
 
 													// MedicalWebPage
@@ -19137,7 +19135,7 @@
 															$location_employee, // mixed // Required // Initial schema item property value
 															$location_providers_Person // mixed // Required // Incoming schema item property value
 														);
-	
+
 												// Add to item values
 
 													// MedicalWebPage
@@ -19207,14 +19205,14 @@
 															$location_subOrganization, // mixed // Required // Initial schema item property value
 															$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 													// Merge in provider MedicalBusiness value/reference
 
 														$location_subOrganization = uamswp_fad_schema_merge_values(
 															$location_subOrganization, // mixed // Required // Initial schema item property value
 															$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
 														);
-	
+
 												// Add to item values
 
 													// MedicalWebPage
@@ -19246,7 +19244,7 @@
 											}
 
 									}
-										
+
 								// address
 
 									/* 
@@ -27875,7 +27873,7 @@
 									$output[]['@id'] = $item['@id'];
 
 							}
-							
+
 					}
 
 				}
@@ -28074,7 +28072,7 @@
 						}
 
 					} elseif ( is_string($reference) ) {
-					
+
 						if ( !empty($reference) ) {
 
 							if (
@@ -28271,7 +28269,7 @@
 						}
 
 					// Add the value to the property
-					
+
 						/*
 
 							If there is no nesting level limit or if the current nesting level is at/under the limit ....
@@ -28365,11 +28363,11 @@
 					$incoming_value
 				) {
 
-					$property = array_merge(
+					$base_value = array_merge(
 						$base_value,
 						$incoming_value,
 					);
-	
+
 				}
 
 			// Clean up array
