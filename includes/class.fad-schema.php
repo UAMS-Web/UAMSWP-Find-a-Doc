@@ -27933,6 +27933,20 @@
 					)
 				);
 
+				if ( $property ) {
+
+					$property = array_filter($property);
+					$property = array_unique( $property, SORT_REGULAR );
+					$property = array_values($property);
+
+					if ( !isset($property['@id']) ) {
+
+						uamswp_fad_flatten_multidimensional_array($property);
+
+					}
+
+				}
+
 			} elseif (
 				isset($reference)
 				&&
@@ -27959,6 +27973,20 @@
 							( ( is_array($property) && array_is_list($property) ) ? $property : array($property) ),
 							( ( is_array($reference) && array_is_list($reference) ) ? $reference : array($reference) )
 						);
+
+						if ( $property ) {
+
+							$property = array_filter($property);
+							$property = array_unique( $property, SORT_REGULAR );
+							$property = array_values($property);
+
+							if ( !isset($property['@id']) ) {
+
+								uamswp_fad_flatten_multidimensional_array($property);
+
+							}
+
+						}
 
 					} else {
 
@@ -28093,6 +28121,20 @@
 						( ( is_array($property) && array_is_list($property) ) ? $property : array($property) ),
 						( ( is_array($value) && array_is_list($value) ) ? $value : array($value) )
 					);
+
+					if ( $property ) {
+
+						$property = array_filter($property);
+						$property = array_unique( $property, SORT_REGULAR );
+						$property = array_values($property);
+
+						if ( !isset($property['@id']) ) {
+
+							uamswp_fad_flatten_multidimensional_array($property);
+
+						}
+
+					}
 
 				} else {
 
