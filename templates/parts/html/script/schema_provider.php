@@ -16,13 +16,13 @@ $page_id = get_the_ID();
 
 // Define Schema JSON item arrays for provider profile as MedicalWebPage, MedicalBusiness and Person
 
+	$node_identifier_list = $node_identifier_list ?? array();
+
 	$schema_provider_combined = uamswp_fad_schema_provider(
 		array($page_id), // List of IDs of the provider items
 		$page_url, // Page URL
+		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 		0, // Nesting level within the main schema
-		true, // bool // Query for whether to output the 'MedicalWebPage' type
-		true, // bool // Query for whether to output the 'MedicalBusiness' type
-		true, // bool // Query for whether to output the 'Person' type
 		1, // Iteration counter for provider-as-MedicalWebPage
 		1, // Iteration counter for provider-as-MedicalBusiness
 		1, // Iteration counter for provider-as-Person

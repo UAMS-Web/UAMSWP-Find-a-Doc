@@ -71,12 +71,13 @@
 
 	// Construct the schema for this location
 
+		$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 		$LocalBusiness_list = $LocalBusiness_list + uamswp_fad_schema_location(
 			array($page_id), // List of IDs of the location items
 			$location_url, // Page URL
+			$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 			1, // Nesting level within the main schema
-			false, // bool // Query for whether to output the 'MedicalWebPage' type
-			true, // bool // Query for whether to output the 'LocalBusiness' type
 			1, // Iteration counter for location-as-MedicalWebPage
 			1, // Iteration counter for location-as-LocalBusiness
 			$LocalBusiness_fields, // Pre-existing field values array so duplicate calls can be avoided

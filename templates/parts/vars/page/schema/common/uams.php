@@ -4,6 +4,10 @@
 
 	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
 
+// List of existing node identifiers
+
+	$node_identifier_list = $node_identifier_list ?? array();
+
 // UAMS
 
 	$schema_base_org_uams_url = user_trailingslashit('https://uams.edu');
@@ -17,6 +21,7 @@
 	// @id
 
 		$schema_base_org_uams['@id'] = $schema_base_org_uams_url . '#' . $schema_base_org_uams['@type'];
+		$node_identifier_list[] = $schema_base_org_uams['@id']; // Add to the list of existing node identifiers
 
 		// Define reference to the @id
 
@@ -27,7 +32,6 @@
 			) {
 
 				$schema_base_org_uams_ref = uamswp_fad_schema_node_references(array($schema_base_org_uams));
-				uamswp_fad_flatten_multidimensional_array($schema_base_org_uams_ref);
 
 			}
 
@@ -52,6 +56,7 @@
 			'postalCode' => '72205',
 			'streetAddress' => '4301 West Markham Street'
 		);
+		$node_identifier_list[] = $schema_base_org_uams['contactPoint']['@id']; // Add to the list of existing node identifiers
 
 		// Define reference to the @id
 
@@ -64,7 +69,6 @@
 			) {
 
 				$schema_base_org_uams_contactPoint_ref = uamswp_fad_schema_node_references(array($schema_base_org_uams_contactPoint));
-				uamswp_fad_flatten_multidimensional_array($schema_base_org_uams_contactPoint_ref);
 
 			}
 
@@ -295,6 +299,7 @@
 	// @id
 
 		$schema_base_org_uams_health['@id'] = $schema_base_org_uams_health_url . '#' . $schema_base_org_uams_health['@type'];
+		$node_identifier_list[] = $schema_base_org_uams_health['@id']; // Add to the list of existing node identifiers
 
 		// Define reference to the @id
 
@@ -305,7 +310,6 @@
 			) {
 
 				$schema_base_org_uams_health_ref = uamswp_fad_schema_node_references(array($schema_base_org_uams_health));
-				uamswp_fad_flatten_multidimensional_array($schema_base_org_uams_health_ref);
 
 			}
 
@@ -369,6 +373,7 @@
 	// @id
 
 		$schema_base_website_uams_health['@id'] = $schema_base_org_uams_health_url . '#' . $schema_base_website_uams_health['@type'];
+		$node_identifier_list[] = $schema_base_website_uams_health['@id']; // Add to the list of existing node identifiers
 
 		// Define reference to the @id
 
@@ -379,7 +384,6 @@
 			) {
 
 				$schema_base_website_uams_health_ref = uamswp_fad_schema_node_references(array($schema_base_website_uams_health));
-				uamswp_fad_flatten_multidimensional_array($schema_base_website_uams_health_ref);
 
 			}
 
@@ -404,6 +408,7 @@
 			'name' => 'English',
 			'sameAs' => 'https://www.wikidata.org/wiki/Q1860'
 		);
+		$node_identifier_list[] = $schema_base_website_uams_health['inLanguage']['@id']; // Add to the list of existing node identifiers
 
 		// Define reference to the @id
 
@@ -416,7 +421,6 @@
 			) {
 
 				$schema_base_website_uams_health_inLanguage_ref = uamswp_fad_schema_node_references(array($schema_base_website_uams_health_inLanguage));
-				uamswp_fad_flatten_multidimensional_array($schema_base_website_uams_health_inLanguage_ref);
 
 			}
 

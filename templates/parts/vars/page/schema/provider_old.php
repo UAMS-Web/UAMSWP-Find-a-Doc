@@ -77,9 +77,12 @@ $page_id = get_the_ID();
 
 				} else {
 
+					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 					$provider_related_location = uamswp_fad_schema_location(
 						$locations, // List of IDs of the location items
-						$schema_provider_url // Page URL
+						$schema_provider_url, // Page URL
+						$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
 					);
 
 				}
@@ -113,9 +116,12 @@ $page_id = get_the_ID();
 					Nesting level 1 = 'MedicalWebPage'['mentions']
 				*/
 
+				$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 				$provider_related_expertise = uamswp_fad_schema_expertise(
 					$expertises, // List of IDs of the clinical resource items
 					$page_url, // Page URL
+					$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 					1, // Nesting level within the main schema
 					'MedicalEntity', // Base fragment identifier
 				);
@@ -145,9 +151,12 @@ $page_id = get_the_ID();
 					Nesting level 1 = 'MedicalWebPage'['mentions']
 				*/
 
+				$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 				$provider_related_clinical_resource = uamswp_fad_schema_creativework(
 					$clinical_resources, // List of IDs of the clinical resource items
 					$page_url, // Page URL
+					$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 					1, // Nesting level within the main schema
 					'CreativeWork' // Base fragment identifier
 				);
@@ -179,9 +188,12 @@ $page_id = get_the_ID();
 						Nesting level 1 = 'MedicalWebPage'['mentions']
 					*/
 
+					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 					$provider_related_condition = uamswp_fad_schema_medicalcondition(
 						$conditions_cpt, // List of IDs of the MedicalCondition items
 						$schema_provider_url, // Page URL
+						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 						1, // Nesting level within the main schema
 						'MedicalCondition' // Fragment identifier
 					);
@@ -203,9 +215,12 @@ $page_id = get_the_ID();
 						Nesting level 1 = 'Physician'['availableService']
 					*/
 
+					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 					$provider_related_treatment = uamswp_fad_schema_service(
 						$treatments_cpt, // List of IDs of the service items
 						$schema_provider_url, // Page URL
+						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 						1, // Nesting level within the main schema
 						'Service' // Fragment identifier
 					);

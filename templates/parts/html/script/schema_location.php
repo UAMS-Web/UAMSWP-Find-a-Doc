@@ -16,14 +16,15 @@ $page_id = get_the_ID();
 
 // Define Schema JSON item arrays for location profile as MedicalWebPage, MedicalBusiness and Person
 
+	$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+
 	$schema_location_combined = uamswp_fad_schema_location(
 		array($page_id), // List of IDs of the location items
 		$page_url, // Page URL
+		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 		0, // Nesting level within the main schema
 		1, // Iteration counter for location-as-MedicalWebPage
 		1, // Iteration counter for location-as-LocalBusiness
-		false, // bool // Query for whether to output the 'MedicalWebPage' type
-		true, // bool // Query for whether to output the 'LocalBusiness' type
 		$location_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 	);
 
