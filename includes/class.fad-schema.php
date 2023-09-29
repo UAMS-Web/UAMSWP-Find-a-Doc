@@ -22540,1987 +22540,1989 @@
 
 						}
 
-				foreach ( $repeater as $entity ) {
+				// Loop through each clinical resource to add values
 
-					// Retrieve the value of the item transient
+					foreach ( $repeater as $entity ) {
 
-						uamswp_fad_get_transient(
-							'item_' . $entity, // Required // String added to transient name for disambiguation.
-							$CreativeWork_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
-						);
+						// Retrieve the value of the item transient
 
-					if ( !empty( $CreativeWork_item ) ) {
-
-						/* 
-						 * The transient exists.
-						 * Return the variable.
-						 */
-
-						// Add to list of clinical resources
-
-							$clinical_resource_list[] = $CreativeWork_item;
-
-					} else {
-
-						/* 
-						 * The transient does not exist.
-						 * Define the variable again.
-						 */
-
-						// If post is not published, skip to the next iteration
-
-							if ( get_post_status($entity) != 'publish' ) {
-
-								continue;
-
-							}
-
-						// Eliminate PHP errors / reset variables
-
-							$clinical_resource_item_MedicalWebPage = array(); // Base array
-							$clinical_resource_item_CreativeWork = array(); // Base array
-							$CreativeWork_abstract = '';
-							$CreativeWork_additionalType = '';
-							$CreativeWork_alternateName = '';
-							$CreativeWork_articleBody = '';
-							$CreativeWork_articleBody_count = '';
-							$CreativeWork_asset_caption_query = '';
-							$CreativeWork_asset_description = '';
-							$CreativeWork_asset_duration = '';
-							$CreativeWork_asset_embedUrl = '';
-							$CreativeWork_asset_filesize = '';
-							$CreativeWork_asset_height = '';
-							$CreativeWork_asset_id = '';
-							$CreativeWork_asset_info = '';
-							$CreativeWork_asset_info = '';
-							$CreativeWork_asset_parsed = '';
-							$CreativeWork_asset_path = '';
-							$CreativeWork_asset_published = '';
-							$CreativeWork_asset_thumbnail = '';
-							$CreativeWork_asset_title = '';
-							$CreativeWork_asset_url = '';
-							$CreativeWork_asset_width = '';
-							$CreativeWork_contentUrl = '';
-							$CreativeWork_creator = '';
-							$CreativeWork_dateModified = '';
-							$CreativeWork_datePublished = '';
-							$CreativeWork_description = '';
-							$CreativeWork_description_count = '';
-							$CreativeWork_duration = '';
-							$CreativeWork_embeddedTextCaption = '';
-							$CreativeWork_embeddedTextCaption_count = '';
-							$CreativeWork_embedUrl = '';
-							$CreativeWork_encodingFormat = '';
-							$CreativeWork_featured_image_1_1_size = '';
-							$CreativeWork_featured_image_1_1_src = array();
-							$CreativeWork_featured_image_1_1_url = '';
-							$CreativeWork_featured_image_1_1_width = '';
-							$CreativeWork_featured_image_16_9_height = '';
-							$CreativeWork_featured_image_16_9_size = '';
-							$CreativeWork_featured_image_16_9_src = array();
-							$CreativeWork_featured_image_16_9_url = '';
-							$CreativeWork_featured_image_16_9_width = '';
-							$CreativeWork_featured_image_3_4_height = '';
-							$CreativeWork_featured_image_3_4_size = '';
-							$CreativeWork_featured_image_3_4_src = array();
-							$CreativeWork_featured_image_3_4_url = '';
-							$CreativeWork_featured_image_3_4_width = '';
-							$CreativeWork_featured_image_4_3_height = '';
-							$CreativeWork_featured_image_4_3_size = '';
-							$CreativeWork_featured_image_4_3_src = array();
-							$CreativeWork_featured_image_4_3_url = '';
-							$CreativeWork_featured_image_4_3_width = '';
-							$CreativeWork_featured_image_caption = '';
-							$CreativeWork_featured_image_encodingFormat = '';
-							$CreativeWork_featured_image_id = '';
-							$CreativeWork_featured_image_ImageObject = array();
-							$CreativeWork_featured_image_ImageObject_base = array();
-							$CreativeWork_featured_image_square_encodingFormat = '';
-							$CreativeWork_featured_image_square_id = '';
-							$CreativeWork_hasDigitalDocumentPermission = '';
-							$CreativeWork_height = '';
-							$CreativeWork_id = '';
-							$CreativeWork_image = '';
-							$CreativeWork_isAccessibleForFree = '';
-							$CreativeWork_isPartOf = '';
-							$CreativeWork_mainEntityOfPage = '';
-							$CreativeWork_name = '';
-							$CreativeWork_nci_query = '';
-							$CreativeWork_representativeOfPage = '';
-							$CreativeWork_sameAs = '';
-							$CreativeWork_sourceOrganization = '';
-							$CreativeWork_speakable = '';
-							$CreativeWork_subjectOf = '';
-							$CreativeWork_syndication_org = '';
-							$CreativeWork_syndication_query = '';
-							$CreativeWork_syndication_URL = '';
-							$CreativeWork_thumbnail = array();
-							$CreativeWork_timeRequired = '';
-							$CreativeWork_timeRequired_seconds = '';
-							$CreativeWork_transcript = '';
-							$CreativeWork_transcript_count = '';
-							$CreativeWork_video = '';
-							$CreativeWork_videoFrameSize = '';
-							$CreativeWork_videoQuality = '';
-							$CreativeWork_width = '';
-							$CreativeWork_word_count = 0;
-							$CreativeWork_wordCount = '';$CreativeWork_featured_image_1_1_height = '';
-
-							// Reused variables
-
-								$CreativeWork_audience = $CreativeWork_audience ?? '';
-
-						// Values Map
-
-							$CreativeWork_type_values = array(
-								'all' => array(
-									'@type' => 'CreativeWork',
-									'properties' => array(
-										'abstract',
-										'audience',
-										'creator',
-										'dateModified',
-										'datePublished',
-										'description',
-										'isAccessibleForFree',
-										'isPartOf',
-										'mainEntityOfPage',
-										'name',
-										'sameAs',
-										'sourceOrganization',
-										'speakable',
-										'subjectOf',
-										'url'
-									)
-								),
-								'text' => array(
-									'@type' => 'Article',
-									'properties' => array(
-										'articleBody',
-										'image',
-										'timeRequired',
-										'wordCount'
-									)
-								),
-								'infographic' => array(
-									'@type' => 'ImageObject',
-									'properties' => array(
-										'additionalType',
-										'contentSize',
-										'contentUrl',
-										'embeddedTextCaption',
-										'encodingFormat',
-										'height',
-										'representativeOfPage',
-										'thumbnail',
-										'timeRequired',
-										'width'
-									)
-								),
-								'video' => array(
-									'@type' => 'VideoObject',
-									'properties' => array(
-										'alternateName',
-										'duration',
-										'embedUrl',
-										'thumbnail',
-										'timeRequired',
-										'transcript',
-										'videoFrameSize',
-										'videoQuality'
-									)
-								),
-								'doc' => array(
-									'@type' => 'DigitalDocument',
-									'properties' => array(
-										'hasDigitalDocumentPermission'
-									)
-								)
-							);
-
-							// Merge common property values into each resource type's property values
-
-								foreach ( $CreativeWork_type_values as &$item ) {
-
-									if ( $item != 'all ') {
-
-										$item['properties'] = array_merge(
-											$item['properties'],
-											$CreativeWork_type_values['all']['properties']
-										);
-
-									}
-								}
-
-						// Base array
-
-							$CreativeWork_item = array();
-
-						// url
-
-							/* 
-							 * URL of the item.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - URL
-							 */
-
-							$CreativeWork_url = user_trailingslashit( get_permalink($entity) );
-							$CreativeWork_item['url'] = $CreativeWork_url;
-
-						// @type
-
-							// Base value
-
-								$CreativeWork_type = $CreativeWork_type_values['all']['@type'];
-								$CreativeWork_properties = $CreativeWork_type_values['all']['properties'];
-
-							// Get value based on clinical resource type
-
-								// Resource type
-
-									$CreativeWork_resource_type = get_field( 'clinical_resource_type', $entity )['value'] ?? '';
-
-								// Get value from values map
-
-									if ( $CreativeWork_resource_type ) {
-
-										$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] : $CreativeWork_type;
-										$CreativeWork_properties = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] : $CreativeWork_properties;
-
-									}
-
-							// Add to schema
-
-								$CreativeWork_item['@type'] = $CreativeWork_type;
-
-						// @id
-
-							if ( $nesting_level <= 1 ) {
-
-								$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
-								// $CreativeWork_id .= $CreativeWork_i;
-								$CreativeWork_item['@id'] = $CreativeWork_id;
-								$node_identifier_list[] = $CreativeWork_item['@id']; // Add to the list of existing node identifiers
-								// $CreativeWork_i++;
-
-							} // endif ( $nesting_level == 1 )
-
-						// Asset ID
-
-							if ( $nesting_level == 0 ) {
-
-								if ( $CreativeWork_resource_type == 'infographic' ) {
-
-									// Infographic image id
-
-										$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?: '';
-
-								}
-
-							}
-
-						// Syndication values
-
-							if ( $nesting_level == 0 ) {
-
-								$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $entity ) ?: false;
-
-								// NCI syndication query
-
-									if ( $CreativeWork_syndication_query ) {
-
-										$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
-
-									}
-
-								// Syndication source URL
-
-									if ( $CreativeWork_syndication_query ) {
-
-										$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $entity ) ?: false;
-
-									}
-
-								// Syndication source organization
-
-									if (
-										$CreativeWork_syndication_query
-										&&
-										$CreativeWork_nci_query
-									) {
-
-										$CreativeWork_syndication_org = array(
-											'@type' => 'ResearchOrganization',
-											'name' => 'National Cancer Institute',
-											'sameAs' => array(
-												'http://id.loc.gov/authorities/names/n79107940',
-												'https://www.wikidata.org/wiki/Q664846'
-											),
-											'url' => 'https://www.cancer.gov/'
-										);
-
-									}
-
-							}
-
-						// Get image info
-
-							if (
-								$CreativeWork_resource_type == 'infographic'
-								&&
-								$nesting_level == 0
-							) {
-
-								// Full infographic image
-
-									// URL, width, height
-
-										$CreativeWork_asset_info = wp_get_attachment_image_src( $CreativeWork_asset_id, 'full' ) ?: '';
-
-										if ( $CreativeWork_asset_info ) {
-
-											$CreativeWork_asset_url = $CreativeWork_asset_info[0] ?? '';
-											$CreativeWork_asset_width = $CreativeWork_asset_info[1] ?? '';
-											$CreativeWork_asset_height = $CreativeWork_asset_info[2] ?? '';
-
-										}
-
-									// File size
-
-										// Asset file path
-
-											$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
-
-										// Asset file size
-
-											$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
-
-										// Formatted asset file size
-
-											$CreativeWork_asset_filesize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
-
-							} elseif (
-								in_array( 'image', $CreativeWork_properties )
-								||
-								in_array( 'thumbnail', $CreativeWork_properties )
-							) {
-
-								// Get featured image values
-
-									// 16:9 aspect ratio source image
-
-										$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $entity ) ?? '';
-
-									// 1:1 aspect ratio source image
-
-										$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $entity ) ?? $CreativeWork_featured_image_id;
-
-								// Create ImageObject values arrays
-
-									$CreativeWork_image = uamswp_fad_schema_imageobject_thumbnails(
-										$CreativeWork_url, // URL of entity with which the image is associated
-										( $nesting_level + 1 ), // Nesting level within the main schema
-										'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
-										'Image', // Base fragment identifier
-										$CreativeWork_featured_image_square_id, // ID of image to use for 1:1 aspect ratio
-										0, // ID of image to use for 3:4 aspect ratio
-										$CreativeWork_featured_image_id, // ID of image to use for 4:3 aspect ratio
-										$CreativeWork_featured_image_id, // ID of image to use for 16:9 aspect ratio
-										0 // ID of image to use for full image
-									) ?? array();
-
-									$CreativeWork_thumbnail = $CreativeWork_image;
-
-							}
-
-						// Get video info
-
-							if ( $CreativeWork_resource_type == 'video' ) {
-
-								// Video URL
-
-									$CreativeWork_video = get_field( 'clinical_resource_video', $entity ) ?: '';
-
-								// Video info
-
-									if ( $nesting_level == 0 ) {
-
-											// Parse the URL and return its components
-
-												$CreativeWork_asset_parsed = parse_url($CreativeWork_video);
-
-												// Parse the query string into variables
-
-													parse_str($CreativeWork_asset_parsed['query'], $CreativeWork_asset_parsed['query']);
-
-											if (
-												str_contains( $CreativeWork_asset_parsed['host'], 'youtube' )
-												||
-												str_contains( $CreativeWork_asset_parsed['host'], 'youtu.be' )
-											) {
-
-												// If YouTube
-
-													// Embed URL
-
-														$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['query']['v'] : '';
-
-													// Get info from video
-
-														$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?? array();
-
-														// Title (snippet.title)
-
-															$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?? '';
-
-														// Thumbnail URL
-
-															// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
-
-																$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?? array();
-
-															// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-																if ( !$CreativeWork_asset_thumbnail ) {
-
-																	$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-																}
-
-														// Published date and time (snippet.publishedAt)
-
-															$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?? '';
-
-														// Duration (contentDetails.duration)
-
-															$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?? '';
-
-														// Description (snippet.description)
-
-															$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?? '';
-
-														// Whether captions are available for the video (contentDetails.caption)
-
-															$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?? '';
-															$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
-
-														// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
-
-															/* No info on this returned from function */
-
-															$CreativeWork_asset_videoQuality = '';
-
-														// Frame size
-
-															/* No info on this returned from function */
-
-															$CreativeWork_asset_videoFrameSize = '';
-
-											} elseif ( str_contains( $CreativeWork_asset_parsed['host'], 'vimeo' ) ) {
-
-												// If Vimeo
-
-													// Embed URL
-
-														$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['path']: '';
-
-											}
-
-									}
-
-							}
-
-						// name
-
-							/* 
-							 * The name of the item.
-							 * 
-							 * Subproperty of:
-							 * 
-							 *     - rdfs:label
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if ( in_array( 'name', $CreativeWork_properties ) ) {
-
-								// Get values
-
-									$CreativeWork_name = get_the_title($entity) ?: '';
-
-								// Add to item values
-
-									if ( $CreativeWork_name ) {
-
-										$CreativeWork_item['name'] = $CreativeWork_name;
-
-									}
-
-							}
-
-						// abstract
-
-							/* 
-							 * An abstract is a short description that summarizes a CreativeWork.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 * 
-							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-							 * feedback and adoption from applications and websites can help improve their 
-							 * definitions.
-							 */
-
-							if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-								// Get values
-
-									$CreativeWork_abstract = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-								// Add to item values
-
-									if ( $CreativeWork_abstract ) {
-
-										$CreativeWork_item['abstract'] = $CreativeWork_abstract;
-
-									}
-
-							}
-
-						// additionalType
-
-							/* 
-							 * An additional type for the item, typically used for adding more specific types 
-							 * from external vocabularies in microdata syntax. This is a relationship between 
-							 * something and a class that the thing is in. Typically the value is a 
-							 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-							 * in RDF. Text values can be used sparingly, for cases where useful information 
-							 * can be added without their being an appropriate schema to reference. In the 
-							 * case of text values, the class label should follow the schema.org style guide.
-							 * 
-							 * Subproperty of:
-							 *     - rdf:type
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 *     - URL
-							 */
-
-							if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
-
-								// Get values
-
-									if ( $CreativeWork_resource_type == 'infographic' ) {
-
-										$CreativeWork_additionalType = 'https://www.wikidata.org/wiki/Q845734'; // Wikidata entry for 'infographic'
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_additionalType ) {
-
-										$CreativeWork_item['additionalType'] = $CreativeWork_additionalType;
-
-									}
-
-							}
-
-						// alternateName
-
-							/* 
-							 * An alias for the item.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if (
-								in_array( 'alternateName', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									if ( $CreativeWork_resource_type == 'video' ) {
-
-										$CreativeWork_alternateName = $CreativeWork_asset_title ?? '';
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_alternateName ) {
-
-										$CreativeWork_item['alternateName'] = $CreativeWork_alternateName;
-
-									}
-
-							}
-
-						// articleBody
-
-							/* 
-							 * The actual body of the article.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if (
-								in_array( 'articleBody', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
-
-									if ( !$CreativeWork_nci_query ) {
-
-										$CreativeWork_articleBody = get_field( 'clinical_resource_text', $entity )  ?: '';
-
-									}
-
-								// Clean up values
-
-									if ( $CreativeWork_articleBody ) {
-
-										// Strip all tags
-
-											$CreativeWork_articleBody = wp_strip_all_tags($CreativeWork_articleBody);
-											$CreativeWork_articleBody = str_replace("\n", ' ', $CreativeWork_articleBody); // Strip line breaks
-
-										// Make attribute-friendly
-
-											$CreativeWork_articleBody = uamswp_attr_conversion($CreativeWork_articleBody);
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_articleBody ) {
-
-										$CreativeWork_item['articleBody'] = $CreativeWork_articleBody;
-
-									}
-
-							}
-
-						// audience
-
-							/* 
-							 * An intended audience, i.e. a group for whom something was created.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Audience
-							 */
-
-							if (
-								in_array( 'audience', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_audience = $CreativeWork_audience ?? $schema_common_audience;
-
-								// Add to item values
-
-									if ( $CreativeWork_audience ) {
-
-										$CreativeWork_item['audience'] = $CreativeWork_audience;
-
-									}
-
-							}
-
-						// contentSize
-
-							/* 
-							 * File size in (mega/kilo)bytes.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if (
-								in_array( 'contentSize', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_contentSize = $CreativeWork_asset_filesize ?? '';
-
-								// Add to item values
-
-									if ( $CreativeWork_contentSize ) {
-
-										$CreativeWork_item['contentSize'] = $CreativeWork_contentSize;
-
-									}
-
-							}
-
-						// contentUrl
-
-							/* 
-							 * Actual bytes of the media object, for example the image file or video file.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - URL
-							 */
-
-							if (
-								in_array( 'contentUrl', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_contentUrl = $CreativeWork_asset_url ?? '';
-
-								// Add to item values
-
-									if ( $CreativeWork_contentUrl ) {
-
-										$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
-
-									}
-
-							}
-
-						// creator
-
-							/* 
-							 * The creator/author of this CreativeWork. This is the same as the Author 
-							 * property for CreativeWork.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Organization
-							 *     - Person
-							 */
-
-							if (
-								in_array( 'creator', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									if ( $CreativeWork_syndication_query ) {
-
-										$CreativeWork_creator = $CreativeWork_syndication_org;
-
-									} else {
-
-										// Get values
-
-											// Base array
-
-												$CreativeWork_creator = array();
-
-											// UAMS
-
-												$CreativeWork_creator = uamswp_fad_schema_merge_values(
-													$CreativeWork_creator, // mixed // Required // Initial schema item property value
-													$schema_base_org_uams // mixed // Required // Incoming schema item property value
-												);
-
-											// UAMS Health
-
-												$CreativeWork_creator = uamswp_fad_schema_merge_values(
-													$CreativeWork_creator, // mixed // Required // Initial schema item property value
-													$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
-												);
-
-										// Format values
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array( $CreativeWork_creator );
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_creator ) {
-
-										$CreativeWork_item['creator'] = $CreativeWork_creator;
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($CreativeWork_item['creator']);
-
-									}
-
-							}
-
-						// dateModified
-
-							/* 
-							 * The date on which the CreativeWork was most recently modified or when the 
-							 * item's entry was modified within a DataFeed.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Date
-							 *     - DateTime
-							 */
-
-							if (
-								in_array( 'dateModified', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_dateModified = get_the_modified_date( 'Y-m-d', $entity ); // ISO 8601 date format
-
-								// Add to item values
-
-									if ( $CreativeWork_dateModified ) {
-
-										$CreativeWork_item['dateModified'] = $CreativeWork_dateModified;
-
-									}
-
-							}
-
-						// datePublished
-
-							/* 
-							 * Date of first broadcast/publication.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Date
-							 *     - DateTime
-							 */
-
-							if (
-								in_array( 'datePublished', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_datePublished = get_the_date( 'Y-m-d', $entity ); // ISO 8601 date format
-
-								// Add to item values
-
-									if ( $CreativeWork_datePublished ) {
-
-										$CreativeWork_item['datePublished'] = $CreativeWork_datePublished;
-
-									}
-
-							}
-
-						// description
-
-							/* 
-							 * A description of the item.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 *     - TextObject
-							 */
-
-							// Get values
-
-								if ( $CreativeWork_resource_type == 'text' ) {
-
-									// Article
-
-										if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-											$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-										} else {
-
-											$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-										}
-
-								} elseif ( $CreativeWork_resource_type == 'infographic' ) {
-
-									// Infographic
-
-										$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
-
-										// Fallback value
-
-											if ( !$CreativeWork_description ) {
-
-												if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-													$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-												} else {
-
-													$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-												}
-
-											}
-
-								} elseif ( $CreativeWork_resource_type == 'video' ) {
-
-									// Video
-
-										$CreativeWork_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
-
-										// Fallback value
-
-											if ( !$CreativeWork_description ) {
-
-												if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-													$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-												} else {
-
-													$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-												}
-
-											}
-
-								} elseif ( $CreativeWork_resource_type == 'doc' ) {
-
-									// Document
-
-										$CreativeWork_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
-
-										// Fallback value
-
-											if ( !$CreativeWork_description ) {
-
-												if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-													$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-												} else {
-
-													$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-												}
-
-											}
-
-								}
-
-							// Clean up values
-
-								if ( $CreativeWork_description ) {
-
-									// Strip all tags
-
-										$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
-										$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
-
-									// Make attribute-friendly
-
-										$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
-
-								}
-
-							// Add to item values
-
-								if ( $CreativeWork_description ) {
-
-									$CreativeWork_item['description'] = $CreativeWork_description;
-
-								}
-
-						// duration
-
-							/* 
-							 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
-							 * format.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Duration
-							 */
-
-							if (
-								in_array( 'duration', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_duration = $CreativeWork_asset_duration ?? '';
-
-								// Add to item values
-
-									if ( $CreativeWork_duration ) {
-
-										$CreativeWork_item['duration'] = $CreativeWork_duration;
-
-									}
-
-							}
-
-						// embeddedTextCaption
-
-							/* 
-							 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 * 
-							 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-							 * feedback and adoption from applications and websites can help improve their 
-							 * definitions.
-							 */
-
-							if (
-								in_array( 'embeddedTextCaption', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_embeddedTextCaption = get_field( 'clinical_resource_infographic_transcript', $entity ) ?: '';
-
-								// Clean up values
-
-									if ( $CreativeWork_embeddedTextCaption ) {
-
-										// Strip all tags
-
-											$CreativeWork_embeddedTextCaption = wp_strip_all_tags($CreativeWork_embeddedTextCaption);
-											$CreativeWork_embeddedTextCaption = str_replace("\n", ' ', $CreativeWork_embeddedTextCaption); // Strip line breaks
-
-										// Make attribute-friendly
-
-											$CreativeWork_embeddedTextCaption = uamswp_attr_conversion($CreativeWork_embeddedTextCaption);
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_embeddedTextCaption ) {
-
-										$CreativeWork_item['embeddedTextCaption'] = $CreativeWork_embeddedTextCaption;
-
-									}
-
-							}
-
-						// embedUrl
-
-							/* 
-							 * A URL pointing to a player for a specific video. In general, this is the 
-							 * information in the src element of an embed tag and should not be the same as 
-							 * the content of the loc tag.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - URL
-							 */
-
-							if (
-								in_array( 'embedUrl', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_embedUrl = $CreativeWork_asset_embedUrl ?? '';
-
-								// Add to item values
-
-									if ( $CreativeWork_embedUrl ) {
-
-										$CreativeWork_item['embedUrl'] = $CreativeWork_embedUrl;
-
-									}
-
-							}
-
-						// encodingFormat
-
-							/* 
-							 * Media type typically expressed using a MIME format (see IANA site and MDN 
-							 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
-							 * for .mp3).
-							 * 
-							 * In cases where a CreativeWork has several media type representations, encoding 
-							 * can be used to indicate each MediaObject alongside particular encodingFormat 
-							 * information.
-							 * 
-							 * Unregistered or niche encoding and file formats can be indicated instead via 
-							 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
-							 * entry).
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 *     - URL
-							 */
-
-							if (
-								in_array( 'encodingFormat', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_encodingFormat = get_post_mime_type( $CreativeWork_asset_id ) ?: ''; // e.g., 'image/jpeg'
-
-								// Add to item values
-
-									if ( $CreativeWork_encodingFormat ) {
-
-										$CreativeWork_item['encodingFormat'] = $CreativeWork_encodingFormat;
-
-									}
-
-							}
-
-						// hasDigitalDocumentPermission
-
-							/* 
-							 * A permission related to the access to this document (e.g., permission to read 
-							 * or  write an electronic document). For a public document, specify a grantee
-							 * with an  Audience with audienceType equal to "public".
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - DigitalDocumentPermission
-							 */
-
-							if (
-								in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_hasDigitalDocumentPermission = array(
-										'@type' => 'DigitalDocumentPermission',
-										'permissionType' => 'ReadPermission', // Thing > Intangible > Enumeration > DigitalDocumentPermissionType
-										'grantee' => array(
-											'@type' => 'Audience',
-											'audienceType' => 'public'
-										)
-									);
-
-								// Add to item values
-
-									if ( $CreativeWork_hasDigitalDocumentPermission ) {
-
-										$CreativeWork_item['hasDigitalDocumentPermission'] = $CreativeWork_hasDigitalDocumentPermission;
-
-									}
-
-							}
-
-						// height
-
-							/* 
-							 * The height of the item.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Distance
-							 *     - QuantitativeValue
-							 */
-
-							if (
-								in_array( 'height', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_height = ( isset($CreativeWork_asset_height) && !empty($CreativeWork_asset_height) ) ? $CreativeWork_asset_height . ' px' : '';
-
-								// Add to item values
-
-									if ( $CreativeWork_height ) {
-
-										$CreativeWork_item['height'] = $CreativeWork_height;
-
-									}
-
-							}
-
-						// image
-
-							/* 
-							 * An image of the item. This can be a URL or a fully described ImageObject.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - ImageObject
-							 *     - URL
-							 */
-
-							if ( in_array( 'image', $CreativeWork_properties ) ) {
-
-								// Get values
-
-									$CreativeWork_image = $CreativeWork_image ?? array();
-
-								// Clean up list array
-
-									// If there is only one item, flatten the multi-dimensional array by one step
-
-										uamswp_fad_flatten_multidimensional_array($CreativeWork_image);
-
-								// Add to item values
-
-									if ( $CreativeWork_image ) {
-
-										$CreativeWork_item['image'] = $CreativeWork_image;
-
-									}
-
-							}
-
-						// isAccessibleForFree
-
-							/* 
-							 * A flag to signal that the item, event, or place is accessible for free.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Boolean
-							 */
-
-							if (
-								in_array( 'isAccessibleForFree', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_isAccessibleForFree = 'True';
-
-								// Add to item values
-
-									if ( $CreativeWork_isAccessibleForFree ) {
-
-										$CreativeWork_item['isAccessibleForFree'] = $CreativeWork_isAccessibleForFree;
-
-									}
-
-							}
-
-						// isPartOf
-
-							/* 
-							 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
-							 * sense), is part of.
-							 * 
-							 * Inverse-property: hasPart
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - CreativeWork
-							 *     - URL
-							 */
-
-							if (
-								in_array( 'isPartOf', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									// Base array
-
-										$CreativeWork_isPartOf = array();
-
-									$CreativeWork_isPartOf = uamswp_fad_schema_merge_values(
-										$CreativeWork_isPartOf, // mixed // Required // Initial schema item property value
-										$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-									);
-
-								// Add to item values
-
-									if ( $CreativeWork_isPartOf ) {
-
-										$CreativeWork_item['isPartOf'] = $CreativeWork_isPartOf;
-
-									}
-
-							}
-
-						// mainEntityOfPage
-
-							/* 
-							 * Indicates a page (or other CreativeWork) for which this thing is the main 
-							 * entity being described. See background notes at 
-							 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-							 * 
-							 * Inverse-property: mainEntity
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - CreativeWork
-							 *     - URL
-							 */
-
-							if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
-
-								// Get values
-
-									// Base array
-
-										$CreativeWork_mainEntityOfPage = array();
-
-									$CreativeWork_mainEntityOfPage = uamswp_fad_schema_merge_values(
-										$CreativeWork_mainEntityOfPage, // mixed // Required // Initial schema item property value
-										$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-									);
-
-								// Add to item values
-
-									if ( $CreativeWork_mainEntityOfPage ) {
-
-										$CreativeWork_item['mainEntityOfPage'] = $CreativeWork_mainEntityOfPage;
-
-									}
-
-							}
-
-						// representativeOfPage
-
-							/* 
-							 * Indicates whether this image is representative of the content of the page.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Boolean
-							 */
-
-							if (
-								in_array( 'representativeOfPage', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
-
-								// Add to item values
-
-									if ( $CreativeWork_representativeOfPage ) {
-
-										$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
-
-									}
-
-							}
-
-						// sameAs
-
-							/* 
-							 * URL of a reference Web page that unambiguously indicates the item's identity 
-							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-							 * website).
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - URL
-							 */
-
-							if (
-								in_array( 'sameAs', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									// Base list array
-
-										$CreativeWork_sameAs = array();
-
-									// Add values to the list array
-
-										// Syndication URL
-
-											if (
-												isset($CreativeWork_syndication_URL)
-												&&
-												!empty($CreativeWork_syndication_URL)
-											) {
-
-												$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
-
-											}
-
-										// Video URL
-
-											if (
-												$CreativeWork_resource_type == 'video'
-												&&
-												$CreativeWork_video
-											) {
-
-												$CreativeWork_sameAs[] = $CreativeWork_video;
-
-											}
-
-								// Clean up list array
-
-									if ( $CreativeWork_sameAs ) {
-
-										$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
-										$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
-										$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_sameAs ) {
-
-										$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
-
-									}
-
-							}
-
-						// sourceOrganization
-
-							/* 
-							 * The Organization on whose behalf the creator was working.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Organization
-							 */
-
-							if (
-								in_array( 'sourceOrganization', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									if ( $CreativeWork_syndication_query ) {
-
-										$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?? '';
-
-									} else {
-
-										// Get values
-
-											// Base array
-
-												$CreativeWork_sourceOrganization = array();
-
-											// UAMS
-
-												$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
-													$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
-													$schema_base_org_uams // mixed // Required // Incoming schema item property value
-												);
-
-											// UAMS Health
-
-												$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
-													$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
-													$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
-												);
-
-										// Format values
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array( $CreativeWork_sourceOrganization );
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_sourceOrganization ) {
-
-										$CreativeWork_item['sourceOrganization'] = $CreativeWork_sourceOrganization;
-
-									}
-
-							}
-
-						// speakable
-
-							/* 
-							 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-							 * of being highlighted as being especially appropriate for text-to-speech 
-							 * conversion. Other sections of a page may also be usefully spoken in particular 
-							 * circumstances; the 'speakable' property serves to indicate the parts most 
-							 * likely to be generally useful for speech.
-							 * 
-							 * The speakable property can be repeated an arbitrary number of times, with three 
-							 * kinds of possible 'content-locator' values:
-							 *     
-							 *     1.) id-value URL references - uses id-value of an element in the page being 
-							 *         annotated. The simplest use of speakable has (potentially relative) URL 
-							 *         values, referencing identified sections of the document concerned.
-							 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
-							 *         class attribute. Use the cssSelector property).
-							 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
-							 *         content). Use the xpath property.
-							 * 
-							 * For more sophisticated markup of speakable sections beyond simple ID 
-							 * references, either CSS selectors or XPath expressions to pick out document 
-							 * section(s) as speakable. For this we define a supporting type, 
-							 * SpeakableSpecification which is defined to be a possible value of the speakable 
-							 * property.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - SpeakableSpecification
-							 *     - URL
-							 */
-
-							if (
-								in_array( 'speakable', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Base array
-
-									$CreativeWork_speakable = array();
-
-								// Get values
-
-									// Introduction / Description
-
-										if (
-											$CreativeWork_resource_type == 'infographic'
-											||
-											$CreativeWork_resource_type == 'video'
-											||
-											$CreativeWork_resource_type == 'doc'
-										) {
-
-											$CreativeWork_speakable[] = array(
-												'@type' => 'SpeakableSpecification',
-												'cssSelector' => '#resource-description-body'
-											);
-
-										}
-
-									// Content
-
-										if ( $CreativeWork_resource_type == 'text' ) {
-
-											$CreativeWork_speakable[] = array(
-												'@type' => 'SpeakableSpecification',
-												'cssSelector' => '#resource-content-body'
-											);
-
-										}
-
-									// Transcript
-
-										if (
-											$CreativeWork_resource_type == 'infographic'
-											||
-											$CreativeWork_resource_type == 'video'
-										) {
-
-											$CreativeWork_speakable[] = array(
-												'@type' => 'SpeakableSpecification',
-												'cssSelector' => '#resource-transcript-body'
-											);
-
-										}
-
-								// Add to item values
-
-									if ( $CreativeWork_speakable ) {
-
-										$CreativeWork_item['speakable'] = $CreativeWork_speakable;
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
-
-									}
-
-							}
-
-						// subjectOf
-
-							/* 
-							 * A CreativeWork or Event about this Thing.
-							 * 
-							 * Inverse-property: about
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - CreativeWork
-							 *     - Event
-							 */
-
-							if (
-								in_array( 'subjectOf', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									// Base array
-
-										$CreativeWork_subjectOf = array();
-
-									$CreativeWork_subjectOf = uamswp_fad_schema_merge_values(
-										$CreativeWork_subjectOf, // mixed // Required // Initial schema item property value
-										$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-									);
-
-								// Add to item values
-
-									if ( $CreativeWork_subjectOf ) {
-
-										$CreativeWork_item['subjectOf'] = $CreativeWork_subjectOf;
-
-									}
-
-							}
-
-						// thumbnail
-
-							/* 
-							 * Thumbnail image for an image or video.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - ImageObject
-							 */
-
-							if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
-
-								// Get values
-
-									$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
-
-								// Clean up list array
-
-									// If there is only one item, flatten the multi-dimensional array by one step
-
-										uamswp_fad_flatten_multidimensional_array($CreativeWork_thumbnail);
-
-								// Add to item values
-
-									if ( $CreativeWork_thumbnail ) {
-
-										$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
-
-									}
-
-							}
-
-						// transcript
-
-							/* 
-							 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
-							 * object.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if (
-								in_array( 'transcript', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $entity ) ?: '';
-
-								// Clean up values
-
-									if ( $CreativeWork_transcript ) {
-
-										// Strip all tags
-
-											$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
-											$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
-
-										// Make attribute-friendly
-
-											$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_transcript ) {
-
-										$CreativeWork_item['transcript'] = $CreativeWork_transcript;
-
-									}
-
-							}
-
-						// timeRequired
-
-							/* 
-							 * Approximate or typical time it usually takes to work with or through the 
-							 * content of this work for the typical or target audience.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Duration (use ISO 8601 duration format).
-							 */
-
-							if (
-								in_array( 'timeRequired', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									// Count words
-
-										// Base value
-
-											$CreativeWork_word_count = 0;
-
-										// Introduction / Description
-
-											if ( $CreativeWork_resource_type != 'text' ) {
-
-												$CreativeWork_description_count = str_word_count($CreativeWork_description);
-												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
-
-											}
-
-										// Article body
-
-											$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
-											$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
-
-										// Video transcript
-
-											$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
-											$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
-
-										// Infographic transcript
-
-											$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
-											$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
-
-									// Calculate time to read all words
-
-										$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
-										$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
-
-										$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
-										$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
-
-								// Add to item values
-
-									if ( $CreativeWork_timeRequired ) {
-
-										$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
-
-									}
-
-							}
-
-						// videoFrameSize
-
-							/* 
-							 * The frame size of the video.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if (
-								in_array( 'videoFrameSize', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
-
-								// Add to item values
-
-									if ( $CreativeWork_videoFrameSize ) {
-
-										$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
-
-									}
-
-							}
-
-						// videoQuality
-
-							/* 
-							 * The quality of the video.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							if (
-								in_array( 'videoQuality', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
-
-								// Add to item values
-
-									if ( $CreativeWork_videoQuality ) {
-
-										$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
-
-									}
-
-							}
-
-						// width
-
-							/* 
-							 * The width of the item.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Distance
-							 *     - QuantitativeValue
-							 */
-
-							if (
-								in_array( 'width', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
-
-								// Add to item values
-
-									if ( $CreativeWork_width ) {
-
-										$CreativeWork_item['width'] = $CreativeWork_width;
-
-									}
-
-							}
-
-						// wordCount
-
-							/* 
-							 * The number of words in the text of the Article.
-							 * 
-							 * Values expected to be one of these types:
-							 *     - Integer
-							 */
-
-							if (
-								in_array( 'wordCount', $CreativeWork_properties )
-								&&
-								$nesting_level == 0
-							) {
-
-								// Get values
-
-									$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
-
-									// Fallback value
-
-										if ( !$CreativeWork_wordCount ) {
-
-											$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
-
-										}
-
-								// Add to item values
-
-									if ( $CreativeWork_wordCount ) {
-
-										$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
-
-									}
-
-							}
-
-						// Sort array
-
-							ksort( $CreativeWork_item, SORT_NATURAL | SORT_FLAG_CASE );
-
-						// Set/update the value of the item transient
-
-							uamswp_fad_set_transient(
+							uamswp_fad_get_transient(
 								'item_' . $entity, // Required // String added to transient name for disambiguation.
 								$CreativeWork_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-						// Add to list of clinical resources
+						if ( !empty( $CreativeWork_item ) ) {
 
-							$clinical_resource_list[] = $CreativeWork_item;
+							/* 
+							 * The transient exists.
+							 * Return the variable.
+							 */
 
-					}
+							// Add to list of clinical resources
 
-				} // endforeach ( $repeater as $entity )
+								$clinical_resource_list[] = $CreativeWork_item;
+
+						} else {
+
+							/* 
+							 * The transient does not exist.
+							 * Define the variable again.
+							 */
+
+							// If post is not published, skip to the next iteration
+
+								if ( get_post_status($entity) != 'publish' ) {
+
+									continue;
+
+								}
+
+							// Eliminate PHP errors / reset variables
+
+								$clinical_resource_item_MedicalWebPage = array(); // Base array
+								$clinical_resource_item_CreativeWork = array(); // Base array
+								$CreativeWork_abstract = '';
+								$CreativeWork_additionalType = '';
+								$CreativeWork_alternateName = '';
+								$CreativeWork_articleBody = '';
+								$CreativeWork_articleBody_count = '';
+								$CreativeWork_asset_caption_query = '';
+								$CreativeWork_asset_description = '';
+								$CreativeWork_asset_duration = '';
+								$CreativeWork_asset_embedUrl = '';
+								$CreativeWork_asset_filesize = '';
+								$CreativeWork_asset_height = '';
+								$CreativeWork_asset_id = '';
+								$CreativeWork_asset_info = '';
+								$CreativeWork_asset_info = '';
+								$CreativeWork_asset_parsed = '';
+								$CreativeWork_asset_path = '';
+								$CreativeWork_asset_published = '';
+								$CreativeWork_asset_thumbnail = '';
+								$CreativeWork_asset_title = '';
+								$CreativeWork_asset_url = '';
+								$CreativeWork_asset_width = '';
+								$CreativeWork_contentUrl = '';
+								$CreativeWork_creator = '';
+								$CreativeWork_dateModified = '';
+								$CreativeWork_datePublished = '';
+								$CreativeWork_description = '';
+								$CreativeWork_description_count = '';
+								$CreativeWork_duration = '';
+								$CreativeWork_embeddedTextCaption = '';
+								$CreativeWork_embeddedTextCaption_count = '';
+								$CreativeWork_embedUrl = '';
+								$CreativeWork_encodingFormat = '';
+								$CreativeWork_featured_image_1_1_size = '';
+								$CreativeWork_featured_image_1_1_src = array();
+								$CreativeWork_featured_image_1_1_url = '';
+								$CreativeWork_featured_image_1_1_width = '';
+								$CreativeWork_featured_image_16_9_height = '';
+								$CreativeWork_featured_image_16_9_size = '';
+								$CreativeWork_featured_image_16_9_src = array();
+								$CreativeWork_featured_image_16_9_url = '';
+								$CreativeWork_featured_image_16_9_width = '';
+								$CreativeWork_featured_image_3_4_height = '';
+								$CreativeWork_featured_image_3_4_size = '';
+								$CreativeWork_featured_image_3_4_src = array();
+								$CreativeWork_featured_image_3_4_url = '';
+								$CreativeWork_featured_image_3_4_width = '';
+								$CreativeWork_featured_image_4_3_height = '';
+								$CreativeWork_featured_image_4_3_size = '';
+								$CreativeWork_featured_image_4_3_src = array();
+								$CreativeWork_featured_image_4_3_url = '';
+								$CreativeWork_featured_image_4_3_width = '';
+								$CreativeWork_featured_image_caption = '';
+								$CreativeWork_featured_image_encodingFormat = '';
+								$CreativeWork_featured_image_id = '';
+								$CreativeWork_featured_image_ImageObject = array();
+								$CreativeWork_featured_image_ImageObject_base = array();
+								$CreativeWork_featured_image_square_encodingFormat = '';
+								$CreativeWork_featured_image_square_id = '';
+								$CreativeWork_hasDigitalDocumentPermission = '';
+								$CreativeWork_height = '';
+								$CreativeWork_id = '';
+								$CreativeWork_image = '';
+								$CreativeWork_isAccessibleForFree = '';
+								$CreativeWork_isPartOf = '';
+								$CreativeWork_mainEntityOfPage = '';
+								$CreativeWork_name = '';
+								$CreativeWork_nci_query = '';
+								$CreativeWork_representativeOfPage = '';
+								$CreativeWork_sameAs = '';
+								$CreativeWork_sourceOrganization = '';
+								$CreativeWork_speakable = '';
+								$CreativeWork_subjectOf = '';
+								$CreativeWork_syndication_org = '';
+								$CreativeWork_syndication_query = '';
+								$CreativeWork_syndication_URL = '';
+								$CreativeWork_thumbnail = array();
+								$CreativeWork_timeRequired = '';
+								$CreativeWork_timeRequired_seconds = '';
+								$CreativeWork_transcript = '';
+								$CreativeWork_transcript_count = '';
+								$CreativeWork_video = '';
+								$CreativeWork_videoFrameSize = '';
+								$CreativeWork_videoQuality = '';
+								$CreativeWork_width = '';
+								$CreativeWork_word_count = 0;
+								$CreativeWork_wordCount = '';$CreativeWork_featured_image_1_1_height = '';
+
+								// Reused variables
+
+									$CreativeWork_audience = $CreativeWork_audience ?? '';
+
+							// Values Map
+
+								$CreativeWork_type_values = array(
+									'all' => array(
+										'@type' => 'CreativeWork',
+										'properties' => array(
+											'abstract',
+											'audience',
+											'creator',
+											'dateModified',
+											'datePublished',
+											'description',
+											'isAccessibleForFree',
+											'isPartOf',
+											'mainEntityOfPage',
+											'name',
+											'sameAs',
+											'sourceOrganization',
+											'speakable',
+											'subjectOf',
+											'url'
+										)
+									),
+									'text' => array(
+										'@type' => 'Article',
+										'properties' => array(
+											'articleBody',
+											'image',
+											'timeRequired',
+											'wordCount'
+										)
+									),
+									'infographic' => array(
+										'@type' => 'ImageObject',
+										'properties' => array(
+											'additionalType',
+											'contentSize',
+											'contentUrl',
+											'embeddedTextCaption',
+											'encodingFormat',
+											'height',
+											'representativeOfPage',
+											'thumbnail',
+											'timeRequired',
+											'width'
+										)
+									),
+									'video' => array(
+										'@type' => 'VideoObject',
+										'properties' => array(
+											'alternateName',
+											'duration',
+											'embedUrl',
+											'thumbnail',
+											'timeRequired',
+											'transcript',
+											'videoFrameSize',
+											'videoQuality'
+										)
+									),
+									'doc' => array(
+										'@type' => 'DigitalDocument',
+										'properties' => array(
+											'hasDigitalDocumentPermission'
+										)
+									)
+								);
+
+								// Merge common property values into each resource type's property values
+
+									foreach ( $CreativeWork_type_values as &$item ) {
+
+										if ( $item != 'all ') {
+
+											$item['properties'] = array_merge(
+												$item['properties'],
+												$CreativeWork_type_values['all']['properties']
+											);
+
+										}
+									}
+
+							// Base array
+
+								$CreativeWork_item = array();
+
+							// url
+
+								/* 
+								 * URL of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								$CreativeWork_url = user_trailingslashit( get_permalink($entity) );
+								$CreativeWork_item['url'] = $CreativeWork_url;
+
+							// @type
+
+								// Base value
+
+									$CreativeWork_type = $CreativeWork_type_values['all']['@type'];
+									$CreativeWork_properties = $CreativeWork_type_values['all']['properties'];
+
+								// Get value based on clinical resource type
+
+									// Resource type
+
+										$CreativeWork_resource_type = get_field( 'clinical_resource_type', $entity )['value'] ?? '';
+
+									// Get value from values map
+
+										if ( $CreativeWork_resource_type ) {
+
+											$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] : $CreativeWork_type;
+											$CreativeWork_properties = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] : $CreativeWork_properties;
+
+										}
+
+								// Add to schema
+
+									$CreativeWork_item['@type'] = $CreativeWork_type;
+
+							// @id
+
+								if ( $nesting_level <= 1 ) {
+
+									$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
+									// $CreativeWork_id .= $CreativeWork_i;
+									$CreativeWork_item['@id'] = $CreativeWork_id;
+									$node_identifier_list[] = $CreativeWork_item['@id']; // Add to the list of existing node identifiers
+									// $CreativeWork_i++;
+
+								} // endif ( $nesting_level == 1 )
+
+							// Asset ID
+
+								if ( $nesting_level == 0 ) {
+
+									if ( $CreativeWork_resource_type == 'infographic' ) {
+
+										// Infographic image id
+
+											$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?: '';
+
+									}
+
+								}
+
+							// Syndication values
+
+								if ( $nesting_level == 0 ) {
+
+									$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $entity ) ?: false;
+
+									// NCI syndication query
+
+										if ( $CreativeWork_syndication_query ) {
+
+											$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
+
+										}
+
+									// Syndication source URL
+
+										if ( $CreativeWork_syndication_query ) {
+
+											$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $entity ) ?: false;
+
+										}
+
+									// Syndication source organization
+
+										if (
+											$CreativeWork_syndication_query
+											&&
+											$CreativeWork_nci_query
+										) {
+
+											$CreativeWork_syndication_org = array(
+												'@type' => 'ResearchOrganization',
+												'name' => 'National Cancer Institute',
+												'sameAs' => array(
+													'http://id.loc.gov/authorities/names/n79107940',
+													'https://www.wikidata.org/wiki/Q664846'
+												),
+												'url' => 'https://www.cancer.gov/'
+											);
+
+										}
+
+								}
+
+							// Get image info
+
+								if (
+									$CreativeWork_resource_type == 'infographic'
+									&&
+									$nesting_level == 0
+								) {
+
+									// Full infographic image
+
+										// URL, width, height
+
+											$CreativeWork_asset_info = wp_get_attachment_image_src( $CreativeWork_asset_id, 'full' ) ?: '';
+
+											if ( $CreativeWork_asset_info ) {
+
+												$CreativeWork_asset_url = $CreativeWork_asset_info[0] ?? '';
+												$CreativeWork_asset_width = $CreativeWork_asset_info[1] ?? '';
+												$CreativeWork_asset_height = $CreativeWork_asset_info[2] ?? '';
+
+											}
+
+										// File size
+
+											// Asset file path
+
+												$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
+
+											// Asset file size
+
+												$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
+
+											// Formatted asset file size
+
+												$CreativeWork_asset_filesize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
+
+								} elseif (
+									in_array( 'image', $CreativeWork_properties )
+									||
+									in_array( 'thumbnail', $CreativeWork_properties )
+								) {
+
+									// Get featured image values
+
+										// 16:9 aspect ratio source image
+
+											$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $entity ) ?? '';
+
+										// 1:1 aspect ratio source image
+
+											$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $entity ) ?? $CreativeWork_featured_image_id;
+
+									// Create ImageObject values arrays
+
+										$CreativeWork_image = uamswp_fad_schema_imageobject_thumbnails(
+											$CreativeWork_url, // URL of entity with which the image is associated
+											( $nesting_level + 1 ), // Nesting level within the main schema
+											'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
+											'Image', // Base fragment identifier
+											$CreativeWork_featured_image_square_id, // ID of image to use for 1:1 aspect ratio
+											0, // ID of image to use for 3:4 aspect ratio
+											$CreativeWork_featured_image_id, // ID of image to use for 4:3 aspect ratio
+											$CreativeWork_featured_image_id, // ID of image to use for 16:9 aspect ratio
+											0 // ID of image to use for full image
+										) ?? array();
+
+										$CreativeWork_thumbnail = $CreativeWork_image;
+
+								}
+
+							// Get video info
+
+								if ( $CreativeWork_resource_type == 'video' ) {
+
+									// Video URL
+
+										$CreativeWork_video = get_field( 'clinical_resource_video', $entity ) ?: '';
+
+									// Video info
+
+										if ( $nesting_level == 0 ) {
+
+												// Parse the URL and return its components
+
+													$CreativeWork_asset_parsed = parse_url($CreativeWork_video);
+
+													// Parse the query string into variables
+
+														parse_str($CreativeWork_asset_parsed['query'], $CreativeWork_asset_parsed['query']);
+
+												if (
+													str_contains( $CreativeWork_asset_parsed['host'], 'youtube' )
+													||
+													str_contains( $CreativeWork_asset_parsed['host'], 'youtu.be' )
+												) {
+
+													// If YouTube
+
+														// Embed URL
+
+															$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['query']['v'] : '';
+
+														// Get info from video
+
+															$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?? array();
+
+															// Title (snippet.title)
+
+																$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?? '';
+
+															// Thumbnail URL
+
+																// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+
+																	$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?? array();
+
+																// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+																	if ( !$CreativeWork_asset_thumbnail ) {
+
+																		$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+
+																	}
+
+															// Published date and time (snippet.publishedAt)
+
+																$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?? '';
+
+															// Duration (contentDetails.duration)
+
+																$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?? '';
+
+															// Description (snippet.description)
+
+																$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?? '';
+
+															// Whether captions are available for the video (contentDetails.caption)
+
+																$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?? '';
+																$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
+
+															// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
+
+																/* No info on this returned from function */
+
+																$CreativeWork_asset_videoQuality = '';
+
+															// Frame size
+
+																/* No info on this returned from function */
+
+																$CreativeWork_asset_videoFrameSize = '';
+
+												} elseif ( str_contains( $CreativeWork_asset_parsed['host'], 'vimeo' ) ) {
+
+													// If Vimeo
+
+														// Embed URL
+
+															$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['path']: '';
+
+												}
+
+										}
+
+								}
+
+							// name
+
+								/* 
+								 * The name of the item.
+								 * 
+								 * Subproperty of:
+								 * 
+								 *     - rdfs:label
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if ( in_array( 'name', $CreativeWork_properties ) ) {
+
+									// Get values
+
+										$CreativeWork_name = get_the_title($entity) ?: '';
+
+									// Add to item values
+
+										if ( $CreativeWork_name ) {
+
+											$CreativeWork_item['name'] = $CreativeWork_name;
+
+										}
+
+								}
+
+							// abstract
+
+								/* 
+								 * An abstract is a short description that summarizes a CreativeWork.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 * 
+								 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+								 * feedback and adoption from applications and websites can help improve their 
+								 * definitions.
+								 */
+
+								if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+									// Get values
+
+										$CreativeWork_abstract = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+
+									// Add to item values
+
+										if ( $CreativeWork_abstract ) {
+
+											$CreativeWork_item['abstract'] = $CreativeWork_abstract;
+
+										}
+
+								}
+
+							// additionalType
+
+								/* 
+								 * An additional type for the item, typically used for adding more specific types 
+								 * from external vocabularies in microdata syntax. This is a relationship between 
+								 * something and a class that the thing is in. Typically the value is a 
+								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+								 * in RDF. Text values can be used sparingly, for cases where useful information 
+								 * can be added without their being an appropriate schema to reference. In the 
+								 * case of text values, the class label should follow the schema.org style guide.
+								 * 
+								 * Subproperty of:
+								 *     - rdf:type
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - URL
+								 */
+
+								if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
+
+									// Get values
+
+										if ( $CreativeWork_resource_type == 'infographic' ) {
+
+											$CreativeWork_additionalType = 'https://www.wikidata.org/wiki/Q845734'; // Wikidata entry for 'infographic'
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_additionalType ) {
+
+											$CreativeWork_item['additionalType'] = $CreativeWork_additionalType;
+
+										}
+
+								}
+
+							// alternateName
+
+								/* 
+								 * An alias for the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array( 'alternateName', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										if ( $CreativeWork_resource_type == 'video' ) {
+
+											$CreativeWork_alternateName = $CreativeWork_asset_title ?? '';
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_alternateName ) {
+
+											$CreativeWork_item['alternateName'] = $CreativeWork_alternateName;
+
+										}
+
+								}
+
+							// articleBody
+
+								/* 
+								 * The actual body of the article.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array( 'articleBody', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
+
+										if ( !$CreativeWork_nci_query ) {
+
+											$CreativeWork_articleBody = get_field( 'clinical_resource_text', $entity )  ?: '';
+
+										}
+
+									// Clean up values
+
+										if ( $CreativeWork_articleBody ) {
+
+											// Strip all tags
+
+												$CreativeWork_articleBody = wp_strip_all_tags($CreativeWork_articleBody);
+												$CreativeWork_articleBody = str_replace("\n", ' ', $CreativeWork_articleBody); // Strip line breaks
+
+											// Make attribute-friendly
+
+												$CreativeWork_articleBody = uamswp_attr_conversion($CreativeWork_articleBody);
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_articleBody ) {
+
+											$CreativeWork_item['articleBody'] = $CreativeWork_articleBody;
+
+										}
+
+								}
+
+							// audience
+
+								/* 
+								 * An intended audience, i.e. a group for whom something was created.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Audience
+								 */
+
+								if (
+									in_array( 'audience', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_audience = $CreativeWork_audience ?? $schema_common_audience;
+
+									// Add to item values
+
+										if ( $CreativeWork_audience ) {
+
+											$CreativeWork_item['audience'] = $CreativeWork_audience;
+
+										}
+
+								}
+
+							// contentSize
+
+								/* 
+								 * File size in (mega/kilo)bytes.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array( 'contentSize', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_contentSize = $CreativeWork_asset_filesize ?? '';
+
+									// Add to item values
+
+										if ( $CreativeWork_contentSize ) {
+
+											$CreativeWork_item['contentSize'] = $CreativeWork_contentSize;
+
+										}
+
+								}
+
+							// contentUrl
+
+								/* 
+								 * Actual bytes of the media object, for example the image file or video file.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								if (
+									in_array( 'contentUrl', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_contentUrl = $CreativeWork_asset_url ?? '';
+
+									// Add to item values
+
+										if ( $CreativeWork_contentUrl ) {
+
+											$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
+
+										}
+
+								}
+
+							// creator
+
+								/* 
+								 * The creator/author of this CreativeWork. This is the same as the Author 
+								 * property for CreativeWork.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Organization
+								 *     - Person
+								 */
+
+								if (
+									in_array( 'creator', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										if ( $CreativeWork_syndication_query ) {
+
+											$CreativeWork_creator = $CreativeWork_syndication_org;
+
+										} else {
+
+											// Get values
+
+												// Base array
+
+													$CreativeWork_creator = array();
+
+												// UAMS
+
+													$CreativeWork_creator = uamswp_fad_schema_merge_values(
+														$CreativeWork_creator, // mixed // Required // Initial schema item property value
+														$schema_base_org_uams // mixed // Required // Incoming schema item property value
+													);
+
+												// UAMS Health
+
+													$CreativeWork_creator = uamswp_fad_schema_merge_values(
+														$CreativeWork_creator, // mixed // Required // Initial schema item property value
+														$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+													);
+
+											// Format values
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array( $CreativeWork_creator );
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_creator ) {
+
+											$CreativeWork_item['creator'] = $CreativeWork_creator;
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($CreativeWork_item['creator']);
+
+										}
+
+								}
+
+							// dateModified
+
+								/* 
+								 * The date on which the CreativeWork was most recently modified or when the 
+								 * item's entry was modified within a DataFeed.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Date
+								 *     - DateTime
+								 */
+
+								if (
+									in_array( 'dateModified', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_dateModified = get_the_modified_date( 'Y-m-d', $entity ); // ISO 8601 date format
+
+									// Add to item values
+
+										if ( $CreativeWork_dateModified ) {
+
+											$CreativeWork_item['dateModified'] = $CreativeWork_dateModified;
+
+										}
+
+								}
+
+							// datePublished
+
+								/* 
+								 * Date of first broadcast/publication.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Date
+								 *     - DateTime
+								 */
+
+								if (
+									in_array( 'datePublished', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_datePublished = get_the_date( 'Y-m-d', $entity ); // ISO 8601 date format
+
+									// Add to item values
+
+										if ( $CreativeWork_datePublished ) {
+
+											$CreativeWork_item['datePublished'] = $CreativeWork_datePublished;
+
+										}
+
+								}
+
+							// description
+
+								/* 
+								 * A description of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - TextObject
+								 */
+
+								// Get values
+
+									if ( $CreativeWork_resource_type == 'text' ) {
+
+										// Article
+
+											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+												$CreativeWork_description = $CreativeWork_abstract ?? '';
+
+											} else {
+
+												$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+
+											}
+
+									} elseif ( $CreativeWork_resource_type == 'infographic' ) {
+
+										// Infographic
+
+											$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
+
+											// Fallback value
+
+												if ( !$CreativeWork_description ) {
+
+													if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+														$CreativeWork_description = $CreativeWork_abstract ?? '';
+
+													} else {
+
+														$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+
+													}
+
+												}
+
+									} elseif ( $CreativeWork_resource_type == 'video' ) {
+
+										// Video
+
+											$CreativeWork_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
+
+											// Fallback value
+
+												if ( !$CreativeWork_description ) {
+
+													if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+														$CreativeWork_description = $CreativeWork_abstract ?? '';
+
+													} else {
+
+														$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+
+													}
+
+												}
+
+									} elseif ( $CreativeWork_resource_type == 'doc' ) {
+
+										// Document
+
+											$CreativeWork_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
+
+											// Fallback value
+
+												if ( !$CreativeWork_description ) {
+
+													if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+
+														$CreativeWork_description = $CreativeWork_abstract ?? '';
+
+													} else {
+
+														$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+
+													}
+
+												}
+
+									}
+
+								// Clean up values
+
+									if ( $CreativeWork_description ) {
+
+										// Strip all tags
+
+											$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
+											$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
+
+										// Make attribute-friendly
+
+											$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
+
+									}
+
+								// Add to item values
+
+									if ( $CreativeWork_description ) {
+
+										$CreativeWork_item['description'] = $CreativeWork_description;
+
+									}
+
+							// duration
+
+								/* 
+								 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
+								 * format.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Duration
+								 */
+
+								if (
+									in_array( 'duration', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_duration = $CreativeWork_asset_duration ?? '';
+
+									// Add to item values
+
+										if ( $CreativeWork_duration ) {
+
+											$CreativeWork_item['duration'] = $CreativeWork_duration;
+
+										}
+
+								}
+
+							// embeddedTextCaption
+
+								/* 
+								 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 * 
+								 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+								 * feedback and adoption from applications and websites can help improve their 
+								 * definitions.
+								 */
+
+								if (
+									in_array( 'embeddedTextCaption', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_embeddedTextCaption = get_field( 'clinical_resource_infographic_transcript', $entity ) ?: '';
+
+									// Clean up values
+
+										if ( $CreativeWork_embeddedTextCaption ) {
+
+											// Strip all tags
+
+												$CreativeWork_embeddedTextCaption = wp_strip_all_tags($CreativeWork_embeddedTextCaption);
+												$CreativeWork_embeddedTextCaption = str_replace("\n", ' ', $CreativeWork_embeddedTextCaption); // Strip line breaks
+
+											// Make attribute-friendly
+
+												$CreativeWork_embeddedTextCaption = uamswp_attr_conversion($CreativeWork_embeddedTextCaption);
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_embeddedTextCaption ) {
+
+											$CreativeWork_item['embeddedTextCaption'] = $CreativeWork_embeddedTextCaption;
+
+										}
+
+								}
+
+							// embedUrl
+
+								/* 
+								 * A URL pointing to a player for a specific video. In general, this is the 
+								 * information in the src element of an embed tag and should not be the same as 
+								 * the content of the loc tag.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								if (
+									in_array( 'embedUrl', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_embedUrl = $CreativeWork_asset_embedUrl ?? '';
+
+									// Add to item values
+
+										if ( $CreativeWork_embedUrl ) {
+
+											$CreativeWork_item['embedUrl'] = $CreativeWork_embedUrl;
+
+										}
+
+								}
+
+							// encodingFormat
+
+								/* 
+								 * Media type typically expressed using a MIME format (see IANA site and MDN 
+								 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
+								 * for .mp3).
+								 * 
+								 * In cases where a CreativeWork has several media type representations, encoding 
+								 * can be used to indicate each MediaObject alongside particular encodingFormat 
+								 * information.
+								 * 
+								 * Unregistered or niche encoding and file formats can be indicated instead via 
+								 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
+								 * entry).
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - URL
+								 */
+
+								if (
+									in_array( 'encodingFormat', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_encodingFormat = get_post_mime_type( $CreativeWork_asset_id ) ?: ''; // e.g., 'image/jpeg'
+
+									// Add to item values
+
+										if ( $CreativeWork_encodingFormat ) {
+
+											$CreativeWork_item['encodingFormat'] = $CreativeWork_encodingFormat;
+
+										}
+
+								}
+
+							// hasDigitalDocumentPermission
+
+								/* 
+								 * A permission related to the access to this document (e.g., permission to read 
+								 * or  write an electronic document). For a public document, specify a grantee
+								 * with an  Audience with audienceType equal to "public".
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - DigitalDocumentPermission
+								 */
+
+								if (
+									in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_hasDigitalDocumentPermission = array(
+											'@type' => 'DigitalDocumentPermission',
+											'permissionType' => 'ReadPermission', // Thing > Intangible > Enumeration > DigitalDocumentPermissionType
+											'grantee' => array(
+												'@type' => 'Audience',
+												'audienceType' => 'public'
+											)
+										);
+
+									// Add to item values
+
+										if ( $CreativeWork_hasDigitalDocumentPermission ) {
+
+											$CreativeWork_item['hasDigitalDocumentPermission'] = $CreativeWork_hasDigitalDocumentPermission;
+
+										}
+
+								}
+
+							// height
+
+								/* 
+								 * The height of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Distance
+								 *     - QuantitativeValue
+								 */
+
+								if (
+									in_array( 'height', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_height = ( isset($CreativeWork_asset_height) && !empty($CreativeWork_asset_height) ) ? $CreativeWork_asset_height . ' px' : '';
+
+									// Add to item values
+
+										if ( $CreativeWork_height ) {
+
+											$CreativeWork_item['height'] = $CreativeWork_height;
+
+										}
+
+								}
+
+							// image
+
+								/* 
+								 * An image of the item. This can be a URL or a fully described ImageObject.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - ImageObject
+								 *     - URL
+								 */
+
+								if ( in_array( 'image', $CreativeWork_properties ) ) {
+
+									// Get values
+
+										$CreativeWork_image = $CreativeWork_image ?? array();
+
+									// Clean up list array
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($CreativeWork_image);
+
+									// Add to item values
+
+										if ( $CreativeWork_image ) {
+
+											$CreativeWork_item['image'] = $CreativeWork_image;
+
+										}
+
+								}
+
+							// isAccessibleForFree
+
+								/* 
+								 * A flag to signal that the item, event, or place is accessible for free.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Boolean
+								 */
+
+								if (
+									in_array( 'isAccessibleForFree', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_isAccessibleForFree = 'True';
+
+									// Add to item values
+
+										if ( $CreativeWork_isAccessibleForFree ) {
+
+											$CreativeWork_item['isAccessibleForFree'] = $CreativeWork_isAccessibleForFree;
+
+										}
+
+								}
+
+							// isPartOf
+
+								/* 
+								 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
+								 * sense), is part of.
+								 * 
+								 * Inverse-property: hasPart
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - URL
+								 */
+
+								if (
+									in_array( 'isPartOf', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										// Base array
+
+											$CreativeWork_isPartOf = array();
+
+										$CreativeWork_isPartOf = uamswp_fad_schema_merge_values(
+											$CreativeWork_isPartOf, // mixed // Required // Initial schema item property value
+											$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+										);
+
+									// Add to item values
+
+										if ( $CreativeWork_isPartOf ) {
+
+											$CreativeWork_item['isPartOf'] = $CreativeWork_isPartOf;
+
+										}
+
+								}
+
+							// mainEntityOfPage
+
+								/* 
+								 * Indicates a page (or other CreativeWork) for which this thing is the main 
+								 * entity being described. See background notes at 
+								 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+								 * 
+								 * Inverse-property: mainEntity
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - URL
+								 */
+
+								if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
+
+									// Get values
+
+										// Base array
+
+											$CreativeWork_mainEntityOfPage = array();
+
+										$CreativeWork_mainEntityOfPage = uamswp_fad_schema_merge_values(
+											$CreativeWork_mainEntityOfPage, // mixed // Required // Initial schema item property value
+											$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+										);
+
+									// Add to item values
+
+										if ( $CreativeWork_mainEntityOfPage ) {
+
+											$CreativeWork_item['mainEntityOfPage'] = $CreativeWork_mainEntityOfPage;
+
+										}
+
+								}
+
+							// representativeOfPage
+
+								/* 
+								 * Indicates whether this image is representative of the content of the page.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Boolean
+								 */
+
+								if (
+									in_array( 'representativeOfPage', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
+
+									// Add to item values
+
+										if ( $CreativeWork_representativeOfPage ) {
+
+											$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
+
+										}
+
+								}
+
+							// sameAs
+
+								/* 
+								 * URL of a reference Web page that unambiguously indicates the item's identity 
+								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+								 * website).
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								if (
+									in_array( 'sameAs', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										// Base list array
+
+											$CreativeWork_sameAs = array();
+
+										// Add values to the list array
+
+											// Syndication URL
+
+												if (
+													isset($CreativeWork_syndication_URL)
+													&&
+													!empty($CreativeWork_syndication_URL)
+												) {
+
+													$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
+
+												}
+
+											// Video URL
+
+												if (
+													$CreativeWork_resource_type == 'video'
+													&&
+													$CreativeWork_video
+												) {
+
+													$CreativeWork_sameAs[] = $CreativeWork_video;
+
+												}
+
+									// Clean up list array
+
+										if ( $CreativeWork_sameAs ) {
+
+											$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
+											$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
+											$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_sameAs ) {
+
+											$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
+
+										}
+
+								}
+
+							// sourceOrganization
+
+								/* 
+								 * The Organization on whose behalf the creator was working.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Organization
+								 */
+
+								if (
+									in_array( 'sourceOrganization', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										if ( $CreativeWork_syndication_query ) {
+
+											$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?? '';
+
+										} else {
+
+											// Get values
+
+												// Base array
+
+													$CreativeWork_sourceOrganization = array();
+
+												// UAMS
+
+													$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
+														$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
+														$schema_base_org_uams // mixed // Required // Incoming schema item property value
+													);
+
+												// UAMS Health
+
+													$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
+														$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
+														$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+													);
+
+											// Format values
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array( $CreativeWork_sourceOrganization );
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_sourceOrganization ) {
+
+											$CreativeWork_item['sourceOrganization'] = $CreativeWork_sourceOrganization;
+
+										}
+
+								}
+
+							// speakable
+
+								/* 
+								 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+								 * of being highlighted as being especially appropriate for text-to-speech 
+								 * conversion. Other sections of a page may also be usefully spoken in particular 
+								 * circumstances; the 'speakable' property serves to indicate the parts most 
+								 * likely to be generally useful for speech.
+								 * 
+								 * The speakable property can be repeated an arbitrary number of times, with three 
+								 * kinds of possible 'content-locator' values:
+								 *     
+								 *     1.) id-value URL references - uses id-value of an element in the page being 
+								 *         annotated. The simplest use of speakable has (potentially relative) URL 
+								 *         values, referencing identified sections of the document concerned.
+								 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+								 *         class attribute. Use the cssSelector property).
+								 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+								 *         content). Use the xpath property.
+								 * 
+								 * For more sophisticated markup of speakable sections beyond simple ID 
+								 * references, either CSS selectors or XPath expressions to pick out document 
+								 * section(s) as speakable. For this we define a supporting type, 
+								 * SpeakableSpecification which is defined to be a possible value of the speakable 
+								 * property.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - SpeakableSpecification
+								 *     - URL
+								 */
+
+								if (
+									in_array( 'speakable', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Base array
+
+										$CreativeWork_speakable = array();
+
+									// Get values
+
+										// Introduction / Description
+
+											if (
+												$CreativeWork_resource_type == 'infographic'
+												||
+												$CreativeWork_resource_type == 'video'
+												||
+												$CreativeWork_resource_type == 'doc'
+											) {
+
+												$CreativeWork_speakable[] = array(
+													'@type' => 'SpeakableSpecification',
+													'cssSelector' => '#resource-description-body'
+												);
+
+											}
+
+										// Content
+
+											if ( $CreativeWork_resource_type == 'text' ) {
+
+												$CreativeWork_speakable[] = array(
+													'@type' => 'SpeakableSpecification',
+													'cssSelector' => '#resource-content-body'
+												);
+
+											}
+
+										// Transcript
+
+											if (
+												$CreativeWork_resource_type == 'infographic'
+												||
+												$CreativeWork_resource_type == 'video'
+											) {
+
+												$CreativeWork_speakable[] = array(
+													'@type' => 'SpeakableSpecification',
+													'cssSelector' => '#resource-transcript-body'
+												);
+
+											}
+
+									// Add to item values
+
+										if ( $CreativeWork_speakable ) {
+
+											$CreativeWork_item['speakable'] = $CreativeWork_speakable;
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
+
+										}
+
+								}
+
+							// subjectOf
+
+								/* 
+								 * A CreativeWork or Event about this Thing.
+								 * 
+								 * Inverse-property: about
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - CreativeWork
+								 *     - Event
+								 */
+
+								if (
+									in_array( 'subjectOf', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										// Base array
+
+											$CreativeWork_subjectOf = array();
+
+										$CreativeWork_subjectOf = uamswp_fad_schema_merge_values(
+											$CreativeWork_subjectOf, // mixed // Required // Initial schema item property value
+											$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+										);
+
+									// Add to item values
+
+										if ( $CreativeWork_subjectOf ) {
+
+											$CreativeWork_item['subjectOf'] = $CreativeWork_subjectOf;
+
+										}
+
+								}
+
+							// thumbnail
+
+								/* 
+								 * Thumbnail image for an image or video.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - ImageObject
+								 */
+
+								if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
+
+									// Get values
+
+										$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
+
+									// Clean up list array
+
+										// If there is only one item, flatten the multi-dimensional array by one step
+
+											uamswp_fad_flatten_multidimensional_array($CreativeWork_thumbnail);
+
+									// Add to item values
+
+										if ( $CreativeWork_thumbnail ) {
+
+											$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
+
+										}
+
+								}
+
+							// transcript
+
+								/* 
+								 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+								 * object.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array( 'transcript', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $entity ) ?: '';
+
+									// Clean up values
+
+										if ( $CreativeWork_transcript ) {
+
+											// Strip all tags
+
+												$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
+												$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
+
+											// Make attribute-friendly
+
+												$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
+
+										}
+
+									// Add to item values
+
+										if ( $CreativeWork_transcript ) {
+
+											$CreativeWork_item['transcript'] = $CreativeWork_transcript;
+
+										}
+
+								}
+
+							// timeRequired
+
+								/* 
+								 * Approximate or typical time it usually takes to work with or through the 
+								 * content of this work for the typical or target audience.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Duration (use ISO 8601 duration format).
+								 */
+
+								if (
+									in_array( 'timeRequired', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										// Count words
+
+											// Base value
+
+												$CreativeWork_word_count = 0;
+
+											// Introduction / Description
+
+												if ( $CreativeWork_resource_type != 'text' ) {
+
+													$CreativeWork_description_count = str_word_count($CreativeWork_description);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
+
+												}
+
+											// Article body
+
+												$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
+												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
+
+											// Video transcript
+
+												$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
+												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
+
+											// Infographic transcript
+
+												$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
+												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
+
+										// Calculate time to read all words
+
+											$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
+											$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
+
+											$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
+											$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
+
+									// Add to item values
+
+										if ( $CreativeWork_timeRequired ) {
+
+											$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
+
+										}
+
+								}
+
+							// videoFrameSize
+
+								/* 
+								 * The frame size of the video.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array( 'videoFrameSize', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
+
+									// Add to item values
+
+										if ( $CreativeWork_videoFrameSize ) {
+
+											$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
+
+										}
+
+								}
+
+							// videoQuality
+
+								/* 
+								 * The quality of the video.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								if (
+									in_array( 'videoQuality', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
+
+									// Add to item values
+
+										if ( $CreativeWork_videoQuality ) {
+
+											$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
+
+										}
+
+								}
+
+							// width
+
+								/* 
+								 * The width of the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Distance
+								 *     - QuantitativeValue
+								 */
+
+								if (
+									in_array( 'width', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
+
+									// Add to item values
+
+										if ( $CreativeWork_width ) {
+
+											$CreativeWork_item['width'] = $CreativeWork_width;
+
+										}
+
+								}
+
+							// wordCount
+
+								/* 
+								 * The number of words in the text of the Article.
+								 * 
+								 * Values expected to be one of these types:
+								 *     - Integer
+								 */
+
+								if (
+									in_array( 'wordCount', $CreativeWork_properties )
+									&&
+									$nesting_level == 0
+								) {
+
+									// Get values
+
+										$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
+
+										// Fallback value
+
+											if ( !$CreativeWork_wordCount ) {
+
+												$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
+
+											}
+
+									// Add to item values
+
+										if ( $CreativeWork_wordCount ) {
+
+											$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
+
+										}
+
+								}
+
+							// Sort array
+
+								ksort( $CreativeWork_item, SORT_NATURAL | SORT_FLAG_CASE );
+
+							// Set/update the value of the item transient
+
+								uamswp_fad_set_transient(
+									'item_' . $entity, // Required // String added to transient name for disambiguation.
+									$CreativeWork_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+								);
+
+							// Add to list of clinical resources
+
+								$clinical_resource_list[] = $CreativeWork_item;
+
+						}
+
+					} // endforeach ( $repeater as $entity )
 
 				// Clean up list array
 
