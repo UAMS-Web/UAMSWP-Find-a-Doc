@@ -21728,7 +21728,8 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			int $MedicalEntity_i = 1, // Iteration counter
+			int $MedicalWebPage_i = 1, // Iteration counter for area of expertise-as-MedicalWebPage
+			int $MedicalEntity_i = 1, // Iteration counter for area of expertise-as-MedicalEntity
 			array $expertise_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
 		) {
 
@@ -22484,7 +22485,8 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			int $CreativeWork_i = 1, // Iteration counter
+			int $MedicalWebPage_i = 1, // Iteration counter for clinical resource-as-MedicalWebPage
+			int $CreativeWork_i = 1, // Iteration counter for clinical resource-as-CreativeWork
 			array $clinical_resource_list = array() // Pre-existing list array for combined clinical resource schema to which to add additional items
 		) {
 
