@@ -21731,6 +21731,8 @@
 			int $MedicalWebPage_i = 1, // Iteration counter for area of expertise-as-MedicalWebPage
 			int $MedicalEntity_i = 1, // Iteration counter for area of expertise-as-MedicalEntity
 			array $expertise_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
+			array $MedicalWebPage_list = array(), // Pre-existing list array for area of expertise-as-MedicalWebPage to which to add additional items
+			array $MedicalEntity_list = array(), // Pre-existing list array for area of expertise-as-MedicalEntity to which to add additional items
 			array $expertise_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
 		) {
 
@@ -22489,6 +22491,8 @@
 			int $MedicalWebPage_i = 1, // Iteration counter for clinical resource-as-MedicalWebPage
 			int $CreativeWork_i = 1, // Iteration counter for clinical resource-as-CreativeWork
 			array $clinical_resource_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
+			array $MedicalWebPage_list = array(), // Pre-existing list array for clinical resource-as-MedicalWebPage to which to add additional items
+			array $CreativeWork_list = array(), // Pre-existing list array for clinical resource-as-CreativeWork to which to add additional items
 			array $clinical_resource_list = array() // Pre-existing list array for combined clinical resource schema to which to add additional items
 		) {
 
