@@ -26069,23 +26069,20 @@
 
 				*/
 
-				$property = array_merge(
-					( ( is_array($property) && array_is_list($property) ) ? $property : array($property) ),
-					array(
-						'@id' => $value['@id']
-					)
-				);
-
 				if ( $property ) {
 
-					$property = array_filter($property);
-					$property = array_unique( $property, SORT_REGULAR );
+					$property = is_array($property) ? $property : array($property);
+					$property = array_is_list($property) ? $property : array($property);
 
-					if ( !isset($property['@id']) ) {
+					$property[] = array(
+						'@id' => $value['@id']
+					);
 
-						uamswp_fad_flatten_multidimensional_array($property);
+				} else {
 
-					}
+					$property = array(
+						'@id' => $value['@id']
+					);
 
 				}
 
