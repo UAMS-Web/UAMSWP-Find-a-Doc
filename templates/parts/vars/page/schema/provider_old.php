@@ -24,7 +24,7 @@
  * 	$conditions_cpt
  */
 
-include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_script.php' );
 
 $schema_provider = $schema_common_base;
 

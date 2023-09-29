@@ -1,14 +1,32 @@
 <?php
 
-// Arkansas as State
+// Common schema values
 
-	$schema_common_arkansas = array(
-		'@type' => 'State',
-		'name' => 'Arkansas',
-		'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
-	);
+	// Arkansas as State
 
-// Audiences
+		$schema_common_arkansas = array(
+			'@type' => 'State',
+			'alternateName' => array(
+				'AR',
+				'Ark.'
+			),
+			'name' => 'Arkansas',
+			'sameAs' => 'https://www.wikidata.org/wiki/Q1612'
+		);
+
+	// USA as Country
+
+		$schema_common_usa = array(
+			'@type' => 'Country',
+			'alternateName' => array(
+				'U.S.',
+				'U.S.A.',
+				'United States of America',
+				'USA'
+			),
+			'name' => 'US',
+			'sameAs' => 'https://www.wikidata.org/wiki/Q30',
+		);
 
 	// audience (untyped)
 
