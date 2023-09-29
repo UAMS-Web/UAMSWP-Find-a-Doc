@@ -14604,7 +14604,7 @@
 			array $location_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $MedicalWebPage_list = array(), // Pre-existing list array for location-as-MedicalWebPage to which to add additional items
 			array $LocalBusiness_list = array(), // Pre-existing list array for location-as-LocalBusiness to which to add additional items
-			array $provider_list = array() // Pre-existing list array for combined location schema to which to add additional items
+			array $location_list = array() // Pre-existing list array for combined location schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
