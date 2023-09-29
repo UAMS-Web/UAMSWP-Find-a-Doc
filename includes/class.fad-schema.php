@@ -5458,6 +5458,11 @@
 
 						} else {
 
+							/* 
+							 * The transient does not exist.
+							 * Define the variable again.
+							 */
+
 							// If post is not published, skip to the next iteration
 
 								if ( get_post_status($entity) != 'publish' ) {
@@ -14707,6 +14712,11 @@
 
 						} else {
 
+							/* 
+							 * The transient does not exist.
+							 * Define the variable again.
+							 */
+
 							// If post is not published, skip to the next iteration
 
 								if ( get_post_status($entity) != 'publish' ) {
@@ -21795,6 +21805,11 @@
 
 						} else {
 
+							/* 
+							 * The transient does not exist.
+							 * Define the variable again.
+							 */
+
 							// If post is not published, skip to the next iteration
 
 								if ( get_post_status($entity) != 'publish' ) {
@@ -21832,6 +21847,22 @@
 								// Reused variables
 
 									$MedicalEntity_additionalType = $MedicalEntity_additionalType ?? '';
+
+							// Load variables from pre-existing field values array
+
+								if (
+									isset($expertise_fields[$entity])
+									&&
+									!empty($expertise_fields[$entity])
+								) {
+
+									foreach ( $expertise_fields[$entity] as $key => $value ) {
+
+										${$key} = $value; // Create a variable for each item in the array
+
+									}
+
+								}
 
 							// Get ontology type
 
@@ -22672,6 +22703,60 @@
 								// Reused variables
 
 									$CreativeWork_audience = $CreativeWork_audience ?? '';
+
+							// Load variables from pre-existing field values array
+
+								if (
+									isset($clinical_resource_fields[$entity])
+									&&
+									!empty($clinical_resource_fields[$entity])
+								) {
+
+									foreach ( $clinical_resource_fields[$entity] as $key => $value ) {
+
+										${$key} = $value; // Create a variable for each item in the array
+
+									}
+
+								}
+
+							// Get ontology type
+
+								if ( !isset($clinical_resource_ontology_type) ) {
+
+									$clinical_resource_ontology_type = true;
+
+								}
+
+							// If the page is not an ontology type, skip to the next iteration
+
+								if ( !$clinical_resource_ontology_type ) {
+
+									continue;
+
+								}
+
+							// Fake subpage query and get fake subpage slug
+
+								if (
+									$clinical_resource_ontology_type
+									&&
+									$nesting_level == 0
+								) {
+
+									if ( !isset($clinical_resource_current_fpage) ) {
+
+										$clinical_resource_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+
+									}
+
+									if ( !isset($clinical_resource_fpage_query) ) {
+
+										$clinical_resource_fpage_query = $clinical_resource_current_fpage ? true : false;
+
+									}
+
+								}
 
 							// Values Map
 
@@ -24608,6 +24693,11 @@
 
 						} else {
 
+							/* 
+							 * The transient does not exist.
+							 * Define the variable again.
+							 */
+
 							// If post is not published, skip to the next iteration
 
 								if ( get_post_status($entity) != 'publish' ) {
@@ -24641,6 +24731,60 @@
 								$condition_type_parent = array();
 								$condition_typicalTest = array();
 								$condition_typicalTest_relationship = array();
+
+							// Load variables from pre-existing field values array
+
+								if (
+									isset($condition_fields[$entity])
+									&&
+									!empty($condition_fields[$entity])
+								) {
+
+									foreach ( $condition_fields[$entity] as $key => $value ) {
+
+										${$key} = $value; // Create a variable for each item in the array
+
+									}
+
+								}
+
+							// Get ontology type
+
+								if ( !isset($condition_ontology_type) ) {
+
+									$condition_ontology_type = true;
+
+								}
+
+							// If the page is not an ontology type, skip to the next iteration
+
+								if ( !$condition_ontology_type ) {
+
+									continue;
+
+								}
+
+							// Fake subpage query and get fake subpage slug
+
+								if (
+									$condition_ontology_type
+									&&
+									$nesting_level == 0
+								) {
+
+									if ( !isset($condition_current_fpage) ) {
+
+										$condition_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+
+									}
+
+									if ( !isset($condition_fpage_query) ) {
+
+										$condition_fpage_query = $condition_current_fpage ? true : false;
+
+									}
+
+								}
 
 							// @id
 
@@ -25132,6 +25276,11 @@
 
 						} else {
 
+							/* 
+							 * The transient does not exist.
+							 * Define the variable again.
+							 */
+
 							// If post is not published, skip to the next iteration
 
 								if ( get_post_status($entity) != 'publish' ) {
@@ -25140,7 +25289,7 @@
 
 								}
 
-							// Eliminate PHP errors and reset variables
+							// Eliminate PHP errors / reset variables
 
 								$service_item = array(); // Base array
 								$service_additionalType = array();
@@ -25182,6 +25331,60 @@
 								$service_usesDevice_repeater = array();
 								$usesDevice = array();
 								$MedicalCondition_i = 1;
+
+							// Load variables from pre-existing field values array
+
+								if (
+									isset($treatment_fields[$entity])
+									&&
+									!empty($treatment_fields[$entity])
+								) {
+
+									foreach ( $treatment_fields[$entity] as $key => $value ) {
+
+										${$key} = $value; // Create a variable for each item in the array
+
+									}
+
+								}
+
+							// Get ontology type
+
+								if ( !isset($treatment_ontology_type) ) {
+
+									$treatment_ontology_type = true;
+
+								}
+
+							// If the page is not an ontology type, skip to the next iteration
+
+								if ( !$treatment_ontology_type ) {
+
+									continue;
+
+								}
+
+							// Fake subpage query and get fake subpage slug
+
+								if (
+									$treatment_ontology_type
+									&&
+									$nesting_level == 0
+								) {
+
+									if ( !isset($treatment_current_fpage) ) {
+
+										$treatment_current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+
+									}
+
+									if ( !isset($treatment_fpage_query) ) {
+
+										$treatment_fpage_query = $treatment_current_fpage ? true : false;
+
+									}
+
+								}
 
 							// @id
 
