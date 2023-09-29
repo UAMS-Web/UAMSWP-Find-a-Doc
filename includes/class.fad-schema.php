@@ -26422,18 +26422,22 @@
 							array_is_list($property_value)
 						) {
 
+							$property_value_temp = array();
+
 							foreach ( $property_value as &$item ) {
 
 								$item_ref = null;
 
 								uamswp_fad_schema_values_or_reference(
-									$item, // Property variable
+									$property_value_temp, // Property variable
 									$item, // Full value variable
 									$item_ref, // @id reference variable
 									$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 								);
 
 							}
+
+							$property_value = $property_value_temp;
 
 						}
 
