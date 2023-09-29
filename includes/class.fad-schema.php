@@ -26031,7 +26031,7 @@
 				$output = array_unique( $output, SORT_REGULAR );
 				$output = array_values($output);
 
-				// If there is only one item, flatten the multi-dimensional array by one step
+				// If there is only one item, and that item is not '@id' and its value, flatten the multi-dimensional array by one step
 
 					if ( !isset($output['@id']) ) {
 
