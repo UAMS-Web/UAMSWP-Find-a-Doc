@@ -21730,7 +21730,7 @@
 			int $nesting_level = 1, // Nesting level within the main schema
 			string $page_fragment = 'MedicalEntity', // Base fragment identifier
 			int $MedicalEntity_i = 1, // Iteration counter
-			array $MedicalEntity_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
+			array $expertise_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
@@ -21779,7 +21779,7 @@
 
 						// Add to list of areas of expertise
 
-							$MedicalEntity_list[] = $MedicalEntity_item;
+							$expertise_list[] = $MedicalEntity_item;
 
 					} else {
 
@@ -22457,7 +22457,7 @@
 
 						// Add to list of areas of expertise
 
-							$MedicalEntity_list[] = $MedicalEntity_item;
+							$expertise_list[] = $MedicalEntity_item;
 
 					}
 
@@ -22465,16 +22465,16 @@
 
 				// Clean up list array
 
-					$MedicalEntity_list = array_filter($MedicalEntity_list);
-					$MedicalEntity_list = array_values($MedicalEntity_list);
+					$expertise_list = array_filter($expertise_list);
+					$expertise_list = array_values($expertise_list);
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						uamswp_fad_flatten_multidimensional_array($MedicalEntity_list);
+						uamswp_fad_flatten_multidimensional_array($expertise_list);
 
 			} // endif ( !empty($repeater) )
 
-			return $MedicalEntity_list;
+			return $expertise_list;
 
 		}
 
@@ -22487,7 +22487,7 @@
 			int $nesting_level = 1, // Nesting level within the main schema
 			string $page_fragment = 'CreativeWork', // Base fragment identifier
 			int $CreativeWork_i = 1, // Iteration counter
-			array $CreativeWork_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
+			array $clinical_resource_list = array() // Pre-existing list array for combined clinical resource schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
@@ -22544,7 +22544,7 @@
 
 						// Add to list of clinical resources
 
-							$CreativeWork_list[] = $CreativeWork_item;
+							$clinical_resource_list[] = $CreativeWork_item;
 
 					} else {
 
@@ -24501,7 +24501,7 @@
 
 						// Add to list of clinical resources
 
-							$CreativeWork_list[] = $CreativeWork_item;
+							$clinical_resource_list[] = $CreativeWork_item;
 
 					}
 
@@ -24509,16 +24509,16 @@
 
 				// Clean up list array
 
-					$CreativeWork_list = array_filter($CreativeWork_list);
-					$CreativeWork_list = array_values($CreativeWork_list);
+					$clinical_resource_list = array_filter($clinical_resource_list);
+					$clinical_resource_list = array_values($clinical_resource_list);
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						uamswp_fad_flatten_multidimensional_array($CreativeWork_list);
+						uamswp_fad_flatten_multidimensional_array($clinical_resource_list);
 
 			} // endif ( !empty($repeater) )
 
-			return $CreativeWork_list;
+			return $clinical_resource_list;
 
 		}
 
@@ -25045,7 +25045,7 @@
 			int $nesting_level = 1, // Nesting level within the main schema
 			string $page_fragment = 'Service', // Fragment identifier
 			int $service_i = 1, // Iteration counter
-			array $service_list = array() // Pre-existing list array for combined treatment schema to which to add additional items
+			array $treatment_list = array() // Pre-existing list array for treatment schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
@@ -25099,7 +25099,7 @@
 
 						// Add to list of treatments and procedures
 
-							$service_list[] = $service_item;
+							$treatment_list[] = $service_item;
 
 					} else {
 
@@ -25964,7 +25964,7 @@
 
 						// Add to list of treatments
 
-							$service_list[] = $service_item;
+							$treatment_list[] = $service_item;
 
 					}
 
@@ -25972,16 +25972,16 @@
 
 				// Clean up list array
 
-					$service_list = array_filter($service_list);
-					$service_list = array_values($service_list);
+					$treatment_list = array_filter($treatment_list);
+					$treatment_list = array_values($treatment_list);
 
 					// If there is only one item, flatten the multi-dimensional array by one step
 
-						uamswp_fad_flatten_multidimensional_array($service_list);
+						uamswp_fad_flatten_multidimensional_array($treatment_list);
 
 			} // endif ( !empty($repeater) )
 
-			return $service_list;
+			return $treatment_list;
 
 		}
 
