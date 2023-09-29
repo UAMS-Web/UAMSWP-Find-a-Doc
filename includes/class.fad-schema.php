@@ -5826,6 +5826,7 @@
 								$provider_worksFor_keywords_ref = null;
 								$provider_worksFor_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
+								$MedicalCondition_i = 1;
 								$Service_i = 1;
 
 							// Load variables from pre-existing field values array
@@ -7880,11 +7881,11 @@
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 													$provider_condition = uamswp_fad_schema_medicalcondition(
-														$provider_condition_list, // List of IDs of the MedicalCondition items
-														$provider_url, // Page URL
+														$provider_condition_list, // array // Required // List of IDs of the MedicalCondition items
+														$provider_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'MedicalCondition' // Fragment identifier
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 													);
 
 												}
@@ -24533,13 +24534,13 @@
 	// Conditions (MedicalCondition)
 
 		function uamswp_fad_schema_medicalcondition(
-			array $repeater, // List of IDs of the MedicalCondition items
-			string $page_url, // Page URL
+			array $repeater, // array // Required // List of IDs of the MedicalCondition items
+			string $page_url, // string // Required // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
-			int $nesting_level = 1, // Nesting level within the main schema
-			int $MedicalCondition_i = 1, // Iteration counter for condition-as-MedicalCondition
-			array $condition_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
-			array $condition_list = array() // Pre-existing list array for combined condition schema to which to add additional items
+			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
+			int &$MedicalCondition_i = 1, // int // Optional // Iteration counter for condition-as-MedicalCondition
+			array $condition_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+			array $condition_list = array() // array // Optional // Pre-existing list array for combined condition schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
@@ -25163,6 +25164,7 @@
 							$service_usesDevice = array();
 							$service_usesDevice_repeater = array();
 							$usesDevice = array();
+							$MedicalCondition_i = 1;
 
 						// @id
 
@@ -25812,11 +25814,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$service_usedToDiagnose = uamswp_fad_schema_medicalcondition(
-												$service_usedToDiagnose_relationship, // List of IDs of the MedicalCondition items
-												$page_url, // Page URL
+												$service_usedToDiagnose_relationship, // array // Required // List of IDs of the MedicalCondition items
+												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // Nesting level within the main schema
-												'usedToDiagnose' // Fragment identifier
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
