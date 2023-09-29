@@ -5826,6 +5826,7 @@
 								$provider_worksFor_keywords_ref = null;
 								$provider_worksFor_ref = null;
 								$schema_provider_hospitalAffiliation_ref = null;
+								$Service_i = 1;
 
 							// Load variables from pre-existing field values array
 
@@ -7945,11 +7946,11 @@
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 													$provider_availableService = uamswp_fad_schema_service(
-														$provider_treatment, // List of IDs of the service items
-														$provider_url, // Page URL
+														$provider_treatment, // array // Required // List of IDs of the service items
+														$provider_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'Service' // Fragment identifier
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i // int // Optional // Iteration counter for treatment-as-Service
 													);
 
 												}
@@ -15058,6 +15059,7 @@
 								$MedicalWebPage_id_ref = null;
 								$MedicalWebPage_type = null;
 								$MedicalWebPage_type_ref = null;
+								$Service_i = 1;
 
 								// Reused variables
 
@@ -16799,12 +16801,12 @@
 												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 												$location_availableService = uamswp_fad_schema_service(
-													$location_treatments, // List of IDs of the service items
-													$location_url, // Page URL
+													$location_treatments, // array // Required // List of IDs of the service items
+													$location_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // Nesting level within the main schema
-													'Service' // Fragment identifier
-												) ?? array();
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												);
 
 											}
 
@@ -24627,6 +24629,7 @@
 							$condition_type_parent = array();
 							$condition_typicalTest = array();
 							$condition_typicalTest_relationship = array();
+							$Service_i = 1;
 
 						// @id
 
@@ -24888,11 +24891,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$condition_possibleTreatment = uamswp_fad_schema_service(
-												$condition_possibleTreatment_relationship,
-												$page_url,
+												$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ),
-												'possibleTreatment' // Fragment identifier
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}
@@ -24922,11 +24925,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$condition_primaryPrevention = uamswp_fad_schema_service(
-												$condition_primaryPrevention_relationship,
-												$page_url,
+												$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ),
-												'primaryPrevention' // Fragment identifier
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}
@@ -24956,11 +24959,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$condition_secondaryPrevention = uamswp_fad_schema_service(
-												$condition_secondaryPrevention_relationship,
-												$page_url,
+												$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ),
-												'secondaryPrevention' // Fragment identifier
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}
@@ -24990,11 +24993,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$condition_typicalTest = uamswp_fad_schema_service(
-												$condition_typicalTest_relationship,
-												$page_url,
+												$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ),
-												'typicalTest' // Fragment identifier
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}
@@ -25047,13 +25050,13 @@
 	// Treatments and procedures (MedicalProcedure, MedicalTest)
 
 		function uamswp_fad_schema_service(
-			array $repeater, // List of IDs of the service items
-			string $page_url, // Page URL
+			array $repeater, // array // Required // List of IDs of the service items
+			string $page_url, // string // Required // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
-			int $nesting_level = 1, // Nesting level within the main schema
-			int $Service_i = 1, // Iteration counter for treatment-as-Service
-			array $treatment_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
-			array $treatment_list = array() // Pre-existing list array for treatment schema to which to add additional items
+			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
+			int &$Service_i = 1, // int // Optional // Iteration counter for treatment-as-Service
+			array $treatment_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+			array $treatment_list = array() // array // Optional // Pre-existing list array for treatment schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
@@ -25575,11 +25578,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$service_duplicateTherapy = uamswp_fad_schema_service(
-												$service_duplicateTherapy_relationship,
-												$page_url,
+												$service_duplicateTherapy_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ),
-												'duplicateTherapy' // Fragment identifier
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}
@@ -25667,11 +25670,11 @@
 											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
 											$service_subTest = uamswp_fad_schema_service(
-												$service_subTest_relationship,
-												$page_url,
-												$service_subTest_relationship, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ),
-												'subTest' // Fragment identifier
+												$service_subTest_relationship, // array // Required // List of IDs of the service items
+												$page_url, // string // Required // Page URL
+												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}

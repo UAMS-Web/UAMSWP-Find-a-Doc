@@ -218,11 +218,10 @@ $page_id = get_the_ID();
 					$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
 					$provider_related_treatment = uamswp_fad_schema_service(
-						$treatments_cpt, // List of IDs of the service items
-						$schema_provider_url, // Page URL
+						$treatments_cpt, // array // Required // List of IDs of the service items
+						$schema_provider_url, // string // Required // Page URL
 						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-						1, // Nesting level within the main schema
-						'Service' // Fragment identifier
+						1 // int // Optional // Nesting level within the main schema
 					);
 
 				// Define reference to each value/row in this property
