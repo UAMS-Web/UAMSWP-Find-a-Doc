@@ -193,8 +193,7 @@ $page_id = get_the_ID();
 					$provider_related_condition = uamswp_fad_schema_medicalcondition(
 						$conditions_cpt, // array // Required // List of IDs of the MedicalCondition items
 						$schema_provider_url, // string // Required // Page URL
-						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-						1 // int // Optional // Nesting level within the main schema
+						$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
 					);
 
 				// Define reference to each value/row in this property
@@ -219,8 +218,7 @@ $page_id = get_the_ID();
 					$provider_related_treatment = uamswp_fad_schema_service(
 						$treatments_cpt, // array // Required // List of IDs of the service items
 						$schema_provider_url, // string // Required // Page URL
-						$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-						1 // int // Optional // Nesting level within the main schema
+						$node_identifier_list // array // Optional // List of node identifiers (@id) already defined in the schema
 					);
 
 				// Define reference to each value/row in this property
