@@ -22758,1836 +22758,1838 @@
 
 								}
 
-							// Values Map
+							// Add property values
 
-								$CreativeWork_type_values = array(
-									'all' => array(
-										'@type' => 'CreativeWork',
-										'properties' => array(
-											'abstract',
-											'audience',
-											'creator',
-											'dateModified',
-											'datePublished',
-											'description',
-											'isAccessibleForFree',
-											'isPartOf',
-											'mainEntityOfPage',
-											'name',
-											'sameAs',
-											'sourceOrganization',
-											'speakable',
-											'subjectOf',
-											'url'
+								// Values Map
+
+									$CreativeWork_type_values = array(
+										'all' => array(
+											'@type' => 'CreativeWork',
+											'properties' => array(
+												'abstract',
+												'audience',
+												'creator',
+												'dateModified',
+												'datePublished',
+												'description',
+												'isAccessibleForFree',
+												'isPartOf',
+												'mainEntityOfPage',
+												'name',
+												'sameAs',
+												'sourceOrganization',
+												'speakable',
+												'subjectOf',
+												'url'
+											)
+										),
+										'text' => array(
+											'@type' => 'Article',
+											'properties' => array(
+												'articleBody',
+												'image',
+												'timeRequired',
+												'wordCount'
+											)
+										),
+										'infographic' => array(
+											'@type' => 'ImageObject',
+											'properties' => array(
+												'additionalType',
+												'contentSize',
+												'contentUrl',
+												'embeddedTextCaption',
+												'encodingFormat',
+												'height',
+												'representativeOfPage',
+												'thumbnail',
+												'timeRequired',
+												'width'
+											)
+										),
+										'video' => array(
+											'@type' => 'VideoObject',
+											'properties' => array(
+												'alternateName',
+												'duration',
+												'embedUrl',
+												'thumbnail',
+												'timeRequired',
+												'transcript',
+												'videoFrameSize',
+												'videoQuality'
+											)
+										),
+										'doc' => array(
+											'@type' => 'DigitalDocument',
+											'properties' => array(
+												'hasDigitalDocumentPermission'
+											)
 										)
-									),
-									'text' => array(
-										'@type' => 'Article',
-										'properties' => array(
-											'articleBody',
-											'image',
-											'timeRequired',
-											'wordCount'
-										)
-									),
-									'infographic' => array(
-										'@type' => 'ImageObject',
-										'properties' => array(
-											'additionalType',
-											'contentSize',
-											'contentUrl',
-											'embeddedTextCaption',
-											'encodingFormat',
-											'height',
-											'representativeOfPage',
-											'thumbnail',
-											'timeRequired',
-											'width'
-										)
-									),
-									'video' => array(
-										'@type' => 'VideoObject',
-										'properties' => array(
-											'alternateName',
-											'duration',
-											'embedUrl',
-											'thumbnail',
-											'timeRequired',
-											'transcript',
-											'videoFrameSize',
-											'videoQuality'
-										)
-									),
-									'doc' => array(
-										'@type' => 'DigitalDocument',
-										'properties' => array(
-											'hasDigitalDocumentPermission'
-										)
-									)
-								);
+									);
 
-								// Merge common property values into each resource type's property values
+									// Merge common property values into each resource type's property values
 
-									foreach ( $CreativeWork_type_values as &$item ) {
+										foreach ( $CreativeWork_type_values as &$item ) {
 
-										if ( $item != 'all ') {
+											if ( $item != 'all ') {
 
-											$item['properties'] = array_merge(
-												$item['properties'],
-												$CreativeWork_type_values['all']['properties']
-											);
+												$item['properties'] = array_merge(
+													$item['properties'],
+													$CreativeWork_type_values['all']['properties']
+												);
 
-										}
-									}
-
-							// Base array
-
-								$CreativeWork_item = array();
-
-							// url
-
-								/* 
-								 * URL of the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								$CreativeWork_url = user_trailingslashit( get_permalink($entity) );
-								$CreativeWork_item['url'] = $CreativeWork_url;
-
-							// @type
-
-								// Base value
-
-									$CreativeWork_type = $CreativeWork_type_values['all']['@type'];
-									$CreativeWork_properties = $CreativeWork_type_values['all']['properties'];
-
-								// Get value based on clinical resource type
-
-									// Resource type
-
-										$CreativeWork_resource_type = get_field( 'clinical_resource_type', $entity )['value'] ?? '';
-
-									// Get value from values map
-
-										if ( $CreativeWork_resource_type ) {
-
-											$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] : $CreativeWork_type;
-											$CreativeWork_properties = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] : $CreativeWork_properties;
-
+											}
 										}
 
-								// Add to schema
+								// Base array
 
-									$CreativeWork_item['@type'] = $CreativeWork_type;
+									$CreativeWork_item = array();
 
-							// @id
+								// url
 
-								if ( $nesting_level <= 1 ) {
+									/* 
+									 * URL of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
 
-									$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
-									// $CreativeWork_id .= $CreativeWork_i;
-									$CreativeWork_item['@id'] = $CreativeWork_id;
-									$node_identifier_list[] = $CreativeWork_item['@id']; // Add to the list of existing node identifiers
-									// $CreativeWork_i++;
+									$CreativeWork_url = user_trailingslashit( get_permalink($entity) );
+									$CreativeWork_item['url'] = $CreativeWork_url;
 
-								} // endif ( $nesting_level == 1 )
+								// @type
 
-							// Asset ID
+									// Base value
 
-								if ( $nesting_level == 0 ) {
+										$CreativeWork_type = $CreativeWork_type_values['all']['@type'];
+										$CreativeWork_properties = $CreativeWork_type_values['all']['properties'];
 
-									if ( $CreativeWork_resource_type == 'infographic' ) {
+									// Get value based on clinical resource type
 
-										// Infographic image id
+										// Resource type
 
-											$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?: '';
+											$CreativeWork_resource_type = get_field( 'clinical_resource_type', $entity )['value'] ?? '';
 
-									}
+										// Get value from values map
 
-								}
+											if ( $CreativeWork_resource_type ) {
 
-							// Syndication values
-
-								if ( $nesting_level == 0 ) {
-
-									$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $entity ) ?: false;
-
-									// NCI syndication query
-
-										if ( $CreativeWork_syndication_query ) {
-
-											$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
-
-										}
-
-									// Syndication source URL
-
-										if ( $CreativeWork_syndication_query ) {
-
-											$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $entity ) ?: false;
-
-										}
-
-									// Syndication source organization
-
-										if (
-											$CreativeWork_syndication_query
-											&&
-											$CreativeWork_nci_query
-										) {
-
-											$CreativeWork_syndication_org = array(
-												'@type' => 'ResearchOrganization',
-												'name' => 'National Cancer Institute',
-												'sameAs' => array(
-													'http://id.loc.gov/authorities/names/n79107940',
-													'https://www.wikidata.org/wiki/Q664846'
-												),
-												'url' => 'https://www.cancer.gov/'
-											);
-
-										}
-
-								}
-
-							// Get image info
-
-								if (
-									$CreativeWork_resource_type == 'infographic'
-									&&
-									$nesting_level == 0
-								) {
-
-									// Full infographic image
-
-										// URL, width, height
-
-											$CreativeWork_asset_info = wp_get_attachment_image_src( $CreativeWork_asset_id, 'full' ) ?: '';
-
-											if ( $CreativeWork_asset_info ) {
-
-												$CreativeWork_asset_url = $CreativeWork_asset_info[0] ?? '';
-												$CreativeWork_asset_width = $CreativeWork_asset_info[1] ?? '';
-												$CreativeWork_asset_height = $CreativeWork_asset_info[2] ?? '';
+												$CreativeWork_type = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['@type'] : $CreativeWork_type;
+												$CreativeWork_properties = isset( $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] ) ? $CreativeWork_type_values[$CreativeWork_resource_type]['properties'] : $CreativeWork_properties;
 
 											}
 
-										// File size
+									// Add to schema
 
-											// Asset file path
+										$CreativeWork_item['@type'] = $CreativeWork_type;
 
-												$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
+								// @id
 
-											// Asset file size
+									if ( $nesting_level <= 1 ) {
 
-												$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
+										$CreativeWork_id = $CreativeWork_url . '#' . $CreativeWork_type;
+										// $CreativeWork_id .= $CreativeWork_i;
+										$CreativeWork_item['@id'] = $CreativeWork_id;
+										$node_identifier_list[] = $CreativeWork_item['@id']; // Add to the list of existing node identifiers
+										// $CreativeWork_i++;
 
-											// Formatted asset file size
+									} // endif ( $nesting_level == 1 )
 
-												$CreativeWork_asset_filesize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
+								// Asset ID
 
-								} elseif (
-									in_array( 'image', $CreativeWork_properties )
-									||
-									in_array( 'thumbnail', $CreativeWork_properties )
-								) {
-
-									// Get featured image values
-
-										// 16:9 aspect ratio source image
-
-											$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $entity ) ?? '';
-
-										// 1:1 aspect ratio source image
-
-											$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $entity ) ?? $CreativeWork_featured_image_id;
-
-									// Create ImageObject values arrays
-
-										$CreativeWork_image = uamswp_fad_schema_imageobject_thumbnails(
-											$CreativeWork_url, // URL of entity with which the image is associated
-											( $nesting_level + 1 ), // Nesting level within the main schema
-											'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
-											'Image', // Base fragment identifier
-											$CreativeWork_featured_image_square_id, // ID of image to use for 1:1 aspect ratio
-											0, // ID of image to use for 3:4 aspect ratio
-											$CreativeWork_featured_image_id, // ID of image to use for 4:3 aspect ratio
-											$CreativeWork_featured_image_id, // ID of image to use for 16:9 aspect ratio
-											0 // ID of image to use for full image
-										) ?? array();
-
-										$CreativeWork_thumbnail = $CreativeWork_image;
-
-								}
-
-							// Get video info
-
-								if ( $CreativeWork_resource_type == 'video' ) {
-
-									// Video URL
-
-										$CreativeWork_video = get_field( 'clinical_resource_video', $entity ) ?: '';
-
-									// Video info
-
-										if ( $nesting_level == 0 ) {
-
-												// Parse the URL and return its components
-
-													$CreativeWork_asset_parsed = parse_url($CreativeWork_video);
-
-													// Parse the query string into variables
-
-														parse_str($CreativeWork_asset_parsed['query'], $CreativeWork_asset_parsed['query']);
-
-												if (
-													str_contains( $CreativeWork_asset_parsed['host'], 'youtube' )
-													||
-													str_contains( $CreativeWork_asset_parsed['host'], 'youtu.be' )
-												) {
-
-													// If YouTube
-
-														// Embed URL
-
-															$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['query']['v'] : '';
-
-														// Get info from video
-
-															$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?? array();
-
-															// Title (snippet.title)
-
-																$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?? '';
-
-															// Thumbnail URL
-
-																// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
-
-																	$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?? array();
-
-																// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-																	if ( !$CreativeWork_asset_thumbnail ) {
-
-																		$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
-
-																	}
-
-															// Published date and time (snippet.publishedAt)
-
-																$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?? '';
-
-															// Duration (contentDetails.duration)
-
-																$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?? '';
-
-															// Description (snippet.description)
-
-																$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?? '';
-
-															// Whether captions are available for the video (contentDetails.caption)
-
-																$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?? '';
-																$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
-
-															// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
-
-																/* No info on this returned from function */
-
-																$CreativeWork_asset_videoQuality = '';
-
-															// Frame size
-
-																/* No info on this returned from function */
-
-																$CreativeWork_asset_videoFrameSize = '';
-
-												} elseif ( str_contains( $CreativeWork_asset_parsed['host'], 'vimeo' ) ) {
-
-													// If Vimeo
-
-														// Embed URL
-
-															$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['path']: '';
-
-												}
-
-										}
-
-								}
-
-							// name
-
-								/* 
-								 * The name of the item.
-								 * 
-								 * Subproperty of:
-								 * 
-								 *     - rdfs:label
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
-
-								if ( in_array( 'name', $CreativeWork_properties ) ) {
-
-									// Get values
-
-										$CreativeWork_name = get_the_title($entity) ?: '';
-
-									// Add to item values
-
-										if ( $CreativeWork_name ) {
-
-											$CreativeWork_item['name'] = $CreativeWork_name;
-
-										}
-
-								}
-
-							// abstract
-
-								/* 
-								 * An abstract is a short description that summarizes a CreativeWork.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 * 
-								 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-								 * feedback and adoption from applications and websites can help improve their 
-								 * definitions.
-								 */
-
-								if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-									// Get values
-
-										$CreativeWork_abstract = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-									// Add to item values
-
-										if ( $CreativeWork_abstract ) {
-
-											$CreativeWork_item['abstract'] = $CreativeWork_abstract;
-
-										}
-
-								}
-
-							// additionalType
-
-								/* 
-								 * An additional type for the item, typically used for adding more specific types 
-								 * from external vocabularies in microdata syntax. This is a relationship between 
-								 * something and a class that the thing is in. Typically the value is a 
-								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-								 * in RDF. Text values can be used sparingly, for cases where useful information 
-								 * can be added without their being an appropriate schema to reference. In the 
-								 * case of text values, the class label should follow the schema.org style guide.
-								 * 
-								 * Subproperty of:
-								 *     - rdf:type
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - URL
-								 */
-
-								if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
-
-									// Get values
+									if ( $nesting_level == 0 ) {
 
 										if ( $CreativeWork_resource_type == 'infographic' ) {
 
-											$CreativeWork_additionalType = 'https://www.wikidata.org/wiki/Q845734'; // Wikidata entry for 'infographic'
+											// Infographic image id
+
+												$CreativeWork_asset_id = get_field( 'clinical_resource_infographic', $entity ) ?: '';
 
 										}
 
-									// Add to item values
+									}
 
-										if ( $CreativeWork_additionalType ) {
+								// Syndication values
 
-											$CreativeWork_item['additionalType'] = $CreativeWork_additionalType;
+									if ( $nesting_level == 0 ) {
 
-										}
+										$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $entity ) ?: false;
 
-								}
+										// NCI syndication query
 
-							// alternateName
+											if ( $CreativeWork_syndication_query ) {
 
-								/* 
-								 * An alias for the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+												$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
 
-								if (
-									in_array( 'alternateName', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+											}
 
-									// Get values
+										// Syndication source URL
 
-										if ( $CreativeWork_resource_type == 'video' ) {
+											if ( $CreativeWork_syndication_query ) {
 
-											$CreativeWork_alternateName = $CreativeWork_asset_title ?? '';
+												$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $entity ) ?: false;
 
-										}
+											}
 
-									// Add to item values
+										// Syndication source organization
 
-										if ( $CreativeWork_alternateName ) {
+											if (
+												$CreativeWork_syndication_query
+												&&
+												$CreativeWork_nci_query
+											) {
 
-											$CreativeWork_item['alternateName'] = $CreativeWork_alternateName;
+												$CreativeWork_syndication_org = array(
+													'@type' => 'ResearchOrganization',
+													'name' => 'National Cancer Institute',
+													'sameAs' => array(
+														'http://id.loc.gov/authorities/names/n79107940',
+														'https://www.wikidata.org/wiki/Q664846'
+													),
+													'url' => 'https://www.cancer.gov/'
+												);
 
-										}
+											}
 
-								}
+									}
 
-							// articleBody
+								// Get image info
 
-								/* 
-								 * The actual body of the article.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+									if (
+										$CreativeWork_resource_type == 'infographic'
+										&&
+										$nesting_level == 0
+									) {
 
-								if (
-									in_array( 'articleBody', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+										// Full infographic image
 
-									// Get values
+											// URL, width, height
 
-										$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
+												$CreativeWork_asset_info = wp_get_attachment_image_src( $CreativeWork_asset_id, 'full' ) ?: '';
 
-										if ( !$CreativeWork_nci_query ) {
+												if ( $CreativeWork_asset_info ) {
 
-											$CreativeWork_articleBody = get_field( 'clinical_resource_text', $entity )  ?: '';
+													$CreativeWork_asset_url = $CreativeWork_asset_info[0] ?? '';
+													$CreativeWork_asset_width = $CreativeWork_asset_info[1] ?? '';
+													$CreativeWork_asset_height = $CreativeWork_asset_info[2] ?? '';
 
-										}
+												}
 
-									// Clean up values
+											// File size
 
-										if ( $CreativeWork_articleBody ) {
+												// Asset file path
 
-											// Strip all tags
+													$CreativeWork_asset_path = get_attached_file( $CreativeWork_asset_id ) ?: '';
 
-												$CreativeWork_articleBody = wp_strip_all_tags($CreativeWork_articleBody);
-												$CreativeWork_articleBody = str_replace("\n", ' ', $CreativeWork_articleBody); // Strip line breaks
+												// Asset file size
 
-											// Make attribute-friendly
+													$CreativeWork_asset_filesize = filesize( $CreativeWork_asset_path ) ?: '';
 
-												$CreativeWork_articleBody = uamswp_attr_conversion($CreativeWork_articleBody);
+												// Formatted asset file size
 
-										}
+													$CreativeWork_asset_filesize = size_format( $CreativeWork_asset_filesize, 2 ) ?: '';
 
-									// Add to item values
+									} elseif (
+										in_array( 'image', $CreativeWork_properties )
+										||
+										in_array( 'thumbnail', $CreativeWork_properties )
+									) {
 
-										if ( $CreativeWork_articleBody ) {
+										// Get featured image values
 
-											$CreativeWork_item['articleBody'] = $CreativeWork_articleBody;
+											// 16:9 aspect ratio source image
 
-										}
+												$CreativeWork_featured_image_id = get_field( '_thumbnail_id', $entity ) ?? '';
 
-								}
+											// 1:1 aspect ratio source image
 
-							// audience
+												$CreativeWork_featured_image_square_id = get_field( 'clinical_resource_image_square', $entity ) ?? $CreativeWork_featured_image_id;
 
-								/* 
-								 * An intended audience, i.e. a group for whom something was created.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Audience
-								 */
+										// Create ImageObject values arrays
 
-								if (
-									in_array( 'audience', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+											$CreativeWork_image = uamswp_fad_schema_imageobject_thumbnails(
+												$CreativeWork_url, // URL of entity with which the image is associated
+												( $nesting_level + 1 ), // Nesting level within the main schema
+												'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
+												'Image', // Base fragment identifier
+												$CreativeWork_featured_image_square_id, // ID of image to use for 1:1 aspect ratio
+												0, // ID of image to use for 3:4 aspect ratio
+												$CreativeWork_featured_image_id, // ID of image to use for 4:3 aspect ratio
+												$CreativeWork_featured_image_id, // ID of image to use for 16:9 aspect ratio
+												0 // ID of image to use for full image
+											) ?? array();
 
-									// Get values
+											$CreativeWork_thumbnail = $CreativeWork_image;
 
-										$CreativeWork_audience = $CreativeWork_audience ?? $schema_common_audience;
+									}
 
-									// Add to item values
+								// Get video info
 
-										if ( $CreativeWork_audience ) {
+									if ( $CreativeWork_resource_type == 'video' ) {
 
-											$CreativeWork_item['audience'] = $CreativeWork_audience;
+										// Video URL
 
-										}
+											$CreativeWork_video = get_field( 'clinical_resource_video', $entity ) ?: '';
 
-								}
+										// Video info
 
-							// contentSize
+											if ( $nesting_level == 0 ) {
 
-								/* 
-								 * File size in (mega/kilo)bytes.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+													// Parse the URL and return its components
 
-								if (
-									in_array( 'contentSize', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+														$CreativeWork_asset_parsed = parse_url($CreativeWork_video);
 
-									// Get values
+														// Parse the query string into variables
 
-										$CreativeWork_contentSize = $CreativeWork_asset_filesize ?? '';
+															parse_str($CreativeWork_asset_parsed['query'], $CreativeWork_asset_parsed['query']);
 
-									// Add to item values
+													if (
+														str_contains( $CreativeWork_asset_parsed['host'], 'youtube' )
+														||
+														str_contains( $CreativeWork_asset_parsed['host'], 'youtu.be' )
+													) {
 
-										if ( $CreativeWork_contentSize ) {
+														// If YouTube
 
-											$CreativeWork_item['contentSize'] = $CreativeWork_contentSize;
+															// Embed URL
 
-										}
+																$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['query']['v'] : '';
 
-								}
+															// Get info from video
 
-							// contentUrl
+																$CreativeWork_asset_info = uamswp_fad_youtube_info( $CreativeWork_video ) ?? array();
 
-								/* 
-								 * Actual bytes of the media object, for example the image file or video file.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
+																// Title (snippet.title)
 
-								if (
-									in_array( 'contentUrl', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+																	$CreativeWork_asset_title = $CreativeWork_asset_info['title'] ?? '';
 
-									// Get values
+																// Thumbnail URL
 
-										$CreativeWork_contentUrl = $CreativeWork_asset_url ?? '';
+																	// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
 
-									// Add to item values
+																		$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['HQthumbUrl'] ?? array();
 
-										if ( $CreativeWork_contentUrl ) {
+																	// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
 
-											$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
+																		if ( !$CreativeWork_asset_thumbnail ) {
 
-										}
+																			$CreativeWork_asset_thumbnail = $CreativeWork_asset_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
 
-								}
+																		}
 
-							// creator
+																// Published date and time (snippet.publishedAt)
 
-								/* 
-								 * The creator/author of this CreativeWork. This is the same as the Author 
-								 * property for CreativeWork.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Organization
-								 *     - Person
-								 */
+																	$CreativeWork_asset_published = $CreativeWork_asset_info['dateField'] ?? '';
 
-								if (
-									in_array( 'creator', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+																// Duration (contentDetails.duration)
 
-									// Get values
+																	$CreativeWork_asset_duration = $CreativeWork_asset_info['duration'] ?? '';
 
-										if ( $CreativeWork_syndication_query ) {
+																// Description (snippet.description)
 
-											$CreativeWork_creator = $CreativeWork_syndication_org;
+																	$CreativeWork_asset_description = $CreativeWork_asset_info['description'] ?? '';
 
-										} else {
+																// Whether captions are available for the video (contentDetails.caption)
 
-											// Get values
+																	$CreativeWork_asset_caption_query = $CreativeWork_asset_info['captions_data'] ?? '';
+																	$CreativeWork_asset_caption_query = ( $CreativeWork_asset_caption_query == 'true' ) ? true : false;
 
-												// Base array
+																// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
 
-													$CreativeWork_creator = array();
+																	/* No info on this returned from function */
 
-												// UAMS
+																	$CreativeWork_asset_videoQuality = '';
 
-													$CreativeWork_creator = uamswp_fad_schema_merge_values(
-														$CreativeWork_creator, // mixed // Required // Initial schema item property value
-														$schema_base_org_uams // mixed // Required // Incoming schema item property value
-													);
+																// Frame size
 
-												// UAMS Health
+																	/* No info on this returned from function */
 
-													$CreativeWork_creator = uamswp_fad_schema_merge_values(
-														$CreativeWork_creator, // mixed // Required // Initial schema item property value
-														$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
-													);
+																	$CreativeWork_asset_videoFrameSize = '';
 
-											// Format values
+													} elseif ( str_contains( $CreativeWork_asset_parsed['host'], 'vimeo' ) ) {
 
-												// If there is only one item, flatten the multi-dimensional array by one step
+														// If Vimeo
 
-													uamswp_fad_flatten_multidimensional_array( $CreativeWork_creator );
+															// Embed URL
 
-										}
+																$CreativeWork_asset_embedUrl = $CreativeWork_asset_parsed['path'] ? 'https://www.youtube.com/embed/' . $CreativeWork_asset_parsed['path']: '';
 
-									// Add to item values
+													}
 
-										if ( $CreativeWork_creator ) {
+											}
 
-											$CreativeWork_item['creator'] = $CreativeWork_creator;
+									}
 
-											// If there is only one item, flatten the multi-dimensional array by one step
+								// name
 
-												uamswp_fad_flatten_multidimensional_array($CreativeWork_item['creator']);
+									/* 
+									 * The name of the item.
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - rdfs:label
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
 
-										}
+									if ( in_array( 'name', $CreativeWork_properties ) ) {
 
-								}
+										// Get values
 
-							// dateModified
+											$CreativeWork_name = get_the_title($entity) ?: '';
 
-								/* 
-								 * The date on which the CreativeWork was most recently modified or when the 
-								 * item's entry was modified within a DataFeed.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Date
-								 *     - DateTime
-								 */
+										// Add to item values
 
-								if (
-									in_array( 'dateModified', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+											if ( $CreativeWork_name ) {
 
-									// Get values
+												$CreativeWork_item['name'] = $CreativeWork_name;
 
-										$CreativeWork_dateModified = get_the_modified_date( 'Y-m-d', $entity ); // ISO 8601 date format
+											}
 
-									// Add to item values
+									}
 
-										if ( $CreativeWork_dateModified ) {
+								// abstract
 
-											$CreativeWork_item['dateModified'] = $CreativeWork_dateModified;
+									/* 
+									 * An abstract is a short description that summarizes a CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
 
-										}
+									if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-								}
+										// Get values
 
-							// datePublished
+											$CreativeWork_abstract = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
 
-								/* 
-								 * Date of first broadcast/publication.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Date
-								 *     - DateTime
-								 */
+										// Add to item values
 
-								if (
-									in_array( 'datePublished', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+											if ( $CreativeWork_abstract ) {
 
-									// Get values
+												$CreativeWork_item['abstract'] = $CreativeWork_abstract;
 
-										$CreativeWork_datePublished = get_the_date( 'Y-m-d', $entity ); // ISO 8601 date format
+											}
 
-									// Add to item values
+									}
 
-										if ( $CreativeWork_datePublished ) {
+								// additionalType
 
-											$CreativeWork_item['datePublished'] = $CreativeWork_datePublished;
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
 
-										}
+									if ( in_array( 'additionalType', $CreativeWork_properties ) ) {
 
-								}
+										// Get values
 
-							// description
+											if ( $CreativeWork_resource_type == 'infographic' ) {
 
-								/* 
-								 * A description of the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - TextObject
-								 */
+												$CreativeWork_additionalType = 'https://www.wikidata.org/wiki/Q845734'; // Wikidata entry for 'infographic'
 
-								// Get values
+											}
 
-									if ( $CreativeWork_resource_type == 'text' ) {
+										// Add to item values
 
-										// Article
+											if ( $CreativeWork_additionalType ) {
 
-											if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+												$CreativeWork_item['additionalType'] = $CreativeWork_additionalType;
 
-												$CreativeWork_description = $CreativeWork_abstract ?? '';
+											}
+
+									}
+
+								// alternateName
+
+									/* 
+									 * An alias for the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'alternateName', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( $CreativeWork_resource_type == 'video' ) {
+
+												$CreativeWork_alternateName = $CreativeWork_asset_title ?? '';
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_alternateName ) {
+
+												$CreativeWork_item['alternateName'] = $CreativeWork_alternateName;
+
+											}
+
+									}
+
+								// articleBody
+
+									/* 
+									 * The actual body of the article.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'articleBody', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?: false;
+
+											if ( !$CreativeWork_nci_query ) {
+
+												$CreativeWork_articleBody = get_field( 'clinical_resource_text', $entity )  ?: '';
+
+											}
+
+										// Clean up values
+
+											if ( $CreativeWork_articleBody ) {
+
+												// Strip all tags
+
+													$CreativeWork_articleBody = wp_strip_all_tags($CreativeWork_articleBody);
+													$CreativeWork_articleBody = str_replace("\n", ' ', $CreativeWork_articleBody); // Strip line breaks
+
+												// Make attribute-friendly
+
+													$CreativeWork_articleBody = uamswp_attr_conversion($CreativeWork_articleBody);
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_articleBody ) {
+
+												$CreativeWork_item['articleBody'] = $CreativeWork_articleBody;
+
+											}
+
+									}
+
+								// audience
+
+									/* 
+									 * An intended audience, i.e. a group for whom something was created.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Audience
+									 */
+
+									if (
+										in_array( 'audience', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_audience = $CreativeWork_audience ?? $schema_common_audience;
+
+										// Add to item values
+
+											if ( $CreativeWork_audience ) {
+
+												$CreativeWork_item['audience'] = $CreativeWork_audience;
+
+											}
+
+									}
+
+								// contentSize
+
+									/* 
+									 * File size in (mega/kilo)bytes.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'contentSize', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_contentSize = $CreativeWork_asset_filesize ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_contentSize ) {
+
+												$CreativeWork_item['contentSize'] = $CreativeWork_contentSize;
+
+											}
+
+									}
+
+								// contentUrl
+
+									/* 
+									 * Actual bytes of the media object, for example the image file or video file.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'contentUrl', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_contentUrl = $CreativeWork_asset_url ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_contentUrl ) {
+
+												$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
+
+											}
+
+									}
+
+								// creator
+
+									/* 
+									 * The creator/author of this CreativeWork. This is the same as the Author 
+									 * property for CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+									if (
+										in_array( 'creator', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( $CreativeWork_syndication_query ) {
+
+												$CreativeWork_creator = $CreativeWork_syndication_org;
 
 											} else {
 
-												$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+												// Get values
+
+													// Base array
+
+														$CreativeWork_creator = array();
+
+													// UAMS
+
+														$CreativeWork_creator = uamswp_fad_schema_merge_values(
+															$CreativeWork_creator, // mixed // Required // Initial schema item property value
+															$schema_base_org_uams // mixed // Required // Incoming schema item property value
+														);
+
+													// UAMS Health
+
+														$CreativeWork_creator = uamswp_fad_schema_merge_values(
+															$CreativeWork_creator, // mixed // Required // Initial schema item property value
+															$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+														);
+
+												// Format values
+
+													// If there is only one item, flatten the multi-dimensional array by one step
+
+														uamswp_fad_flatten_multidimensional_array( $CreativeWork_creator );
 
 											}
 
-									} elseif ( $CreativeWork_resource_type == 'infographic' ) {
+										// Add to item values
 
-										// Infographic
+											if ( $CreativeWork_creator ) {
 
-											$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
-
-											// Fallback value
-
-												if ( !$CreativeWork_description ) {
-
-													if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-														$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-													} else {
-
-														$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-													}
-
-												}
-
-									} elseif ( $CreativeWork_resource_type == 'video' ) {
-
-										// Video
-
-											$CreativeWork_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
-
-											// Fallback value
-
-												if ( !$CreativeWork_description ) {
-
-													if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-														$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-													} else {
-
-														$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-													}
-
-												}
-
-									} elseif ( $CreativeWork_resource_type == 'doc' ) {
-
-										// Document
-
-											$CreativeWork_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
-
-											// Fallback value
-
-												if ( !$CreativeWork_description ) {
-
-													if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-														$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-													} else {
-
-														$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-													}
-
-												}
-
-									}
-
-								// Clean up values
-
-									if ( $CreativeWork_description ) {
-
-										// Strip all tags
-
-											$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
-											$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
-
-										// Make attribute-friendly
-
-											$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
-
-									}
-
-								// Add to item values
-
-									if ( $CreativeWork_description ) {
-
-										$CreativeWork_item['description'] = $CreativeWork_description;
-
-									}
-
-							// duration
-
-								/* 
-								 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
-								 * format.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Duration
-								 */
-
-								if (
-									in_array( 'duration', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_duration = $CreativeWork_asset_duration ?? '';
-
-									// Add to item values
-
-										if ( $CreativeWork_duration ) {
-
-											$CreativeWork_item['duration'] = $CreativeWork_duration;
-
-										}
-
-								}
-
-							// embeddedTextCaption
-
-								/* 
-								 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 * 
-								 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-								 * feedback and adoption from applications and websites can help improve their 
-								 * definitions.
-								 */
-
-								if (
-									in_array( 'embeddedTextCaption', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_embeddedTextCaption = get_field( 'clinical_resource_infographic_transcript', $entity ) ?: '';
-
-									// Clean up values
-
-										if ( $CreativeWork_embeddedTextCaption ) {
-
-											// Strip all tags
-
-												$CreativeWork_embeddedTextCaption = wp_strip_all_tags($CreativeWork_embeddedTextCaption);
-												$CreativeWork_embeddedTextCaption = str_replace("\n", ' ', $CreativeWork_embeddedTextCaption); // Strip line breaks
-
-											// Make attribute-friendly
-
-												$CreativeWork_embeddedTextCaption = uamswp_attr_conversion($CreativeWork_embeddedTextCaption);
-
-										}
-
-									// Add to item values
-
-										if ( $CreativeWork_embeddedTextCaption ) {
-
-											$CreativeWork_item['embeddedTextCaption'] = $CreativeWork_embeddedTextCaption;
-
-										}
-
-								}
-
-							// embedUrl
-
-								/* 
-								 * A URL pointing to a player for a specific video. In general, this is the 
-								 * information in the src element of an embed tag and should not be the same as 
-								 * the content of the loc tag.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								if (
-									in_array( 'embedUrl', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_embedUrl = $CreativeWork_asset_embedUrl ?? '';
-
-									// Add to item values
-
-										if ( $CreativeWork_embedUrl ) {
-
-											$CreativeWork_item['embedUrl'] = $CreativeWork_embedUrl;
-
-										}
-
-								}
-
-							// encodingFormat
-
-								/* 
-								 * Media type typically expressed using a MIME format (see IANA site and MDN 
-								 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
-								 * for .mp3).
-								 * 
-								 * In cases where a CreativeWork has several media type representations, encoding 
-								 * can be used to indicate each MediaObject alongside particular encodingFormat 
-								 * information.
-								 * 
-								 * Unregistered or niche encoding and file formats can be indicated instead via 
-								 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
-								 * entry).
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - URL
-								 */
-
-								if (
-									in_array( 'encodingFormat', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_encodingFormat = get_post_mime_type( $CreativeWork_asset_id ) ?: ''; // e.g., 'image/jpeg'
-
-									// Add to item values
-
-										if ( $CreativeWork_encodingFormat ) {
-
-											$CreativeWork_item['encodingFormat'] = $CreativeWork_encodingFormat;
-
-										}
-
-								}
-
-							// hasDigitalDocumentPermission
-
-								/* 
-								 * A permission related to the access to this document (e.g., permission to read 
-								 * or  write an electronic document). For a public document, specify a grantee
-								 * with an  Audience with audienceType equal to "public".
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - DigitalDocumentPermission
-								 */
-
-								if (
-									in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_hasDigitalDocumentPermission = array(
-											'@type' => 'DigitalDocumentPermission',
-											'permissionType' => 'ReadPermission', // Thing > Intangible > Enumeration > DigitalDocumentPermissionType
-											'grantee' => array(
-												'@type' => 'Audience',
-												'audienceType' => 'public'
-											)
-										);
-
-									// Add to item values
-
-										if ( $CreativeWork_hasDigitalDocumentPermission ) {
-
-											$CreativeWork_item['hasDigitalDocumentPermission'] = $CreativeWork_hasDigitalDocumentPermission;
-
-										}
-
-								}
-
-							// height
-
-								/* 
-								 * The height of the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Distance
-								 *     - QuantitativeValue
-								 */
-
-								if (
-									in_array( 'height', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_height = ( isset($CreativeWork_asset_height) && !empty($CreativeWork_asset_height) ) ? $CreativeWork_asset_height . ' px' : '';
-
-									// Add to item values
-
-										if ( $CreativeWork_height ) {
-
-											$CreativeWork_item['height'] = $CreativeWork_height;
-
-										}
-
-								}
-
-							// image
-
-								/* 
-								 * An image of the item. This can be a URL or a fully described ImageObject.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - ImageObject
-								 *     - URL
-								 */
-
-								if ( in_array( 'image', $CreativeWork_properties ) ) {
-
-									// Get values
-
-										$CreativeWork_image = $CreativeWork_image ?? array();
-
-									// Clean up list array
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($CreativeWork_image);
-
-									// Add to item values
-
-										if ( $CreativeWork_image ) {
-
-											$CreativeWork_item['image'] = $CreativeWork_image;
-
-										}
-
-								}
-
-							// isAccessibleForFree
-
-								/* 
-								 * A flag to signal that the item, event, or place is accessible for free.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Boolean
-								 */
-
-								if (
-									in_array( 'isAccessibleForFree', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_isAccessibleForFree = 'True';
-
-									// Add to item values
-
-										if ( $CreativeWork_isAccessibleForFree ) {
-
-											$CreativeWork_item['isAccessibleForFree'] = $CreativeWork_isAccessibleForFree;
-
-										}
-
-								}
-
-							// isPartOf
-
-								/* 
-								 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
-								 * sense), is part of.
-								 * 
-								 * Inverse-property: hasPart
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - CreativeWork
-								 *     - URL
-								 */
-
-								if (
-									in_array( 'isPartOf', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										// Base array
-
-											$CreativeWork_isPartOf = array();
-
-										$CreativeWork_isPartOf = uamswp_fad_schema_merge_values(
-											$CreativeWork_isPartOf, // mixed // Required // Initial schema item property value
-											$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-										);
-
-									// Add to item values
-
-										if ( $CreativeWork_isPartOf ) {
-
-											$CreativeWork_item['isPartOf'] = $CreativeWork_isPartOf;
-
-										}
-
-								}
-
-							// mainEntityOfPage
-
-								/* 
-								 * Indicates a page (or other CreativeWork) for which this thing is the main 
-								 * entity being described. See background notes at 
-								 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-								 * 
-								 * Inverse-property: mainEntity
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - CreativeWork
-								 *     - URL
-								 */
-
-								if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
-
-									// Get values
-
-										// Base array
-
-											$CreativeWork_mainEntityOfPage = array();
-
-										$CreativeWork_mainEntityOfPage = uamswp_fad_schema_merge_values(
-											$CreativeWork_mainEntityOfPage, // mixed // Required // Initial schema item property value
-											$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-										);
-
-									// Add to item values
-
-										if ( $CreativeWork_mainEntityOfPage ) {
-
-											$CreativeWork_item['mainEntityOfPage'] = $CreativeWork_mainEntityOfPage;
-
-										}
-
-								}
-
-							// representativeOfPage
-
-								/* 
-								 * Indicates whether this image is representative of the content of the page.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Boolean
-								 */
-
-								if (
-									in_array( 'representativeOfPage', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
-
-									// Add to item values
-
-										if ( $CreativeWork_representativeOfPage ) {
-
-											$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
-
-										}
-
-								}
-
-							// sameAs
-
-								/* 
-								 * URL of a reference Web page that unambiguously indicates the item's identity 
-								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-								 * website).
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								if (
-									in_array( 'sameAs', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										// Base list array
-
-											$CreativeWork_sameAs = array();
-
-										// Add values to the list array
-
-											// Syndication URL
-
-												if (
-													isset($CreativeWork_syndication_URL)
-													&&
-													!empty($CreativeWork_syndication_URL)
-												) {
-
-													$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
-
-												}
-
-											// Video URL
-
-												if (
-													$CreativeWork_resource_type == 'video'
-													&&
-													$CreativeWork_video
-												) {
-
-													$CreativeWork_sameAs[] = $CreativeWork_video;
-
-												}
-
-									// Clean up list array
-
-										if ( $CreativeWork_sameAs ) {
-
-											$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
-											$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
-											$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
-
-										}
-
-									// Add to item values
-
-										if ( $CreativeWork_sameAs ) {
-
-											$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
-
-										}
-
-								}
-
-							// sourceOrganization
-
-								/* 
-								 * The Organization on whose behalf the creator was working.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Organization
-								 */
-
-								if (
-									in_array( 'sourceOrganization', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										if ( $CreativeWork_syndication_query ) {
-
-											$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?? '';
-
-										} else {
-
-											// Get values
-
-												// Base array
-
-													$CreativeWork_sourceOrganization = array();
-
-												// UAMS
-
-													$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
-														$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
-														$schema_base_org_uams // mixed // Required // Incoming schema item property value
-													);
-
-												// UAMS Health
-
-													$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
-														$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
-														$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
-													);
-
-											// Format values
+												$CreativeWork_item['creator'] = $CreativeWork_creator;
 
 												// If there is only one item, flatten the multi-dimensional array by one step
 
-													uamswp_fad_flatten_multidimensional_array( $CreativeWork_sourceOrganization );
-
-										}
-
-									// Add to item values
-
-										if ( $CreativeWork_sourceOrganization ) {
-
-											$CreativeWork_item['sourceOrganization'] = $CreativeWork_sourceOrganization;
-
-										}
-
-								}
-
-							// speakable
-
-								/* 
-								 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-								 * of being highlighted as being especially appropriate for text-to-speech 
-								 * conversion. Other sections of a page may also be usefully spoken in particular 
-								 * circumstances; the 'speakable' property serves to indicate the parts most 
-								 * likely to be generally useful for speech.
-								 * 
-								 * The speakable property can be repeated an arbitrary number of times, with three 
-								 * kinds of possible 'content-locator' values:
-								 *     
-								 *     1.) id-value URL references - uses id-value of an element in the page being 
-								 *         annotated. The simplest use of speakable has (potentially relative) URL 
-								 *         values, referencing identified sections of the document concerned.
-								 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
-								 *         class attribute. Use the cssSelector property).
-								 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
-								 *         content). Use the xpath property.
-								 * 
-								 * For more sophisticated markup of speakable sections beyond simple ID 
-								 * references, either CSS selectors or XPath expressions to pick out document 
-								 * section(s) as speakable. For this we define a supporting type, 
-								 * SpeakableSpecification which is defined to be a possible value of the speakable 
-								 * property.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - SpeakableSpecification
-								 *     - URL
-								 */
-
-								if (
-									in_array( 'speakable', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Base array
-
-										$CreativeWork_speakable = array();
-
-									// Get values
-
-										// Introduction / Description
-
-											if (
-												$CreativeWork_resource_type == 'infographic'
-												||
-												$CreativeWork_resource_type == 'video'
-												||
-												$CreativeWork_resource_type == 'doc'
-											) {
-
-												$CreativeWork_speakable[] = array(
-													'@type' => 'SpeakableSpecification',
-													'cssSelector' => '#resource-description-body'
-												);
+													uamswp_fad_flatten_multidimensional_array($CreativeWork_item['creator']);
 
 											}
 
-										// Content
+									}
 
-											if ( $CreativeWork_resource_type == 'text' ) {
+								// dateModified
 
-												$CreativeWork_speakable[] = array(
-													'@type' => 'SpeakableSpecification',
-													'cssSelector' => '#resource-content-body'
-												);
+									/* 
+									 * The date on which the CreativeWork was most recently modified or when the 
+									 * item's entry was modified within a DataFeed.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Date
+									 *     - DateTime
+									 */
+
+									if (
+										in_array( 'dateModified', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_dateModified = get_the_modified_date( 'Y-m-d', $entity ); // ISO 8601 date format
+
+										// Add to item values
+
+											if ( $CreativeWork_dateModified ) {
+
+												$CreativeWork_item['dateModified'] = $CreativeWork_dateModified;
 
 											}
 
-										// Transcript
+									}
 
-											if (
-												$CreativeWork_resource_type == 'infographic'
-												||
-												$CreativeWork_resource_type == 'video'
-											) {
+								// datePublished
 
-												$CreativeWork_speakable[] = array(
-													'@type' => 'SpeakableSpecification',
-													'cssSelector' => '#resource-transcript-body'
-												);
+									/* 
+									 * Date of first broadcast/publication.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Date
+									 *     - DateTime
+									 */
+
+									if (
+										in_array( 'datePublished', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_datePublished = get_the_date( 'Y-m-d', $entity ); // ISO 8601 date format
+
+										// Add to item values
+
+											if ( $CreativeWork_datePublished ) {
+
+												$CreativeWork_item['datePublished'] = $CreativeWork_datePublished;
 
 											}
 
-									// Add to item values
+									}
 
-										if ( $CreativeWork_speakable ) {
+								// description
 
-											$CreativeWork_item['speakable'] = $CreativeWork_speakable;
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
-
-										}
-
-								}
-
-							// subjectOf
-
-								/* 
-								 * A CreativeWork or Event about this Thing.
-								 * 
-								 * Inverse-property: about
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - CreativeWork
-								 *     - Event
-								 */
-
-								if (
-									in_array( 'subjectOf', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+									/* 
+									 * A description of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - TextObject
+									 */
 
 									// Get values
 
-										// Base array
+										if ( $CreativeWork_resource_type == 'text' ) {
 
-											$CreativeWork_subjectOf = array();
+											// Article
 
-										$CreativeWork_subjectOf = uamswp_fad_schema_merge_values(
-											$CreativeWork_subjectOf, // mixed // Required // Initial schema item property value
-											$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-										);
+												if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-									// Add to item values
+													$CreativeWork_description = $CreativeWork_abstract ?? '';
 
-										if ( $CreativeWork_subjectOf ) {
+												} else {
 
-											$CreativeWork_item['subjectOf'] = $CreativeWork_subjectOf;
-
-										}
-
-								}
-
-							// thumbnail
-
-								/* 
-								 * Thumbnail image for an image or video.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - ImageObject
-								 */
-
-								if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
-
-									// Get values
-
-										$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
-
-									// Clean up list array
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($CreativeWork_thumbnail);
-
-									// Add to item values
-
-										if ( $CreativeWork_thumbnail ) {
-
-											$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
-
-										}
-
-								}
-
-							// transcript
-
-								/* 
-								 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
-								 * object.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
-
-								if (
-									in_array( 'transcript', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $entity ) ?: '';
-
-									// Clean up values
-
-										if ( $CreativeWork_transcript ) {
-
-											// Strip all tags
-
-												$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
-												$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
-
-											// Make attribute-friendly
-
-												$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
-
-										}
-
-									// Add to item values
-
-										if ( $CreativeWork_transcript ) {
-
-											$CreativeWork_item['transcript'] = $CreativeWork_transcript;
-
-										}
-
-								}
-
-							// timeRequired
-
-								/* 
-								 * Approximate or typical time it usually takes to work with or through the 
-								 * content of this work for the typical or target audience.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Duration (use ISO 8601 duration format).
-								 */
-
-								if (
-									in_array( 'timeRequired', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
-
-									// Get values
-
-										// Count words
-
-											// Base value
-
-												$CreativeWork_word_count = 0;
-
-											// Introduction / Description
-
-												if ( $CreativeWork_resource_type != 'text' ) {
-
-													$CreativeWork_description_count = str_word_count($CreativeWork_description);
-													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
+													$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
 
 												}
 
-											// Article body
+										} elseif ( $CreativeWork_resource_type == 'infographic' ) {
 
-												$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
-												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
+											// Infographic
 
-											// Video transcript
+												$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
 
-												$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
-												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
+												// Fallback value
 
-											// Infographic transcript
+													if ( !$CreativeWork_description ) {
 
-												$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
-												$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
+														if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-										// Calculate time to read all words
+															$CreativeWork_description = $CreativeWork_abstract ?? '';
 
-											$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
-											$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
+														} else {
 
-											$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
-											$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
+															$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
 
-									// Add to item values
+														}
 
-										if ( $CreativeWork_timeRequired ) {
+													}
 
-											$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
+										} elseif ( $CreativeWork_resource_type == 'video' ) {
 
-										}
+											// Video
 
-								}
+												$CreativeWork_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
 
-							// videoFrameSize
+												// Fallback value
 
-								/* 
-								 * The frame size of the video.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+													if ( !$CreativeWork_description ) {
 
-								if (
-									in_array( 'videoFrameSize', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+														if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-									// Get values
+															$CreativeWork_description = $CreativeWork_abstract ?? '';
 
-										$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
+														} else {
 
-									// Add to item values
+															$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
 
-										if ( $CreativeWork_videoFrameSize ) {
+														}
 
-											$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
+													}
 
-										}
+										} elseif ( $CreativeWork_resource_type == 'doc' ) {
 
-								}
+											// Document
 
-							// videoQuality
+												$CreativeWork_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
 
-								/* 
-								 * The quality of the video.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+												// Fallback value
 
-								if (
-									in_array( 'videoQuality', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+													if ( !$CreativeWork_description ) {
 
-									// Get values
+														if ( in_array( 'abstract', $CreativeWork_properties ) ) {
 
-										$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
+															$CreativeWork_description = $CreativeWork_abstract ?? '';
 
-									// Add to item values
+														} else {
 
-										if ( $CreativeWork_videoQuality ) {
+															$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
 
-											$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
+														}
+
+													}
 
 										}
 
-								}
+									// Clean up values
 
-							// width
+										if ( $CreativeWork_description ) {
 
-								/* 
-								 * The width of the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Distance
-								 *     - QuantitativeValue
-								 */
+											// Strip all tags
 
-								if (
-									in_array( 'width', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+												$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
+												$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
 
-									// Get values
+											// Make attribute-friendly
 
-										$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
-
-									// Add to item values
-
-										if ( $CreativeWork_width ) {
-
-											$CreativeWork_item['width'] = $CreativeWork_width;
+												$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
 
 										}
 
-								}
+									// Add to item values
 
-							// wordCount
+										if ( $CreativeWork_description ) {
 
-								/* 
-								 * The number of words in the text of the Article.
-								 * 
-								 * Values expected to be one of these types:
-								 *     - Integer
-								 */
+											$CreativeWork_item['description'] = $CreativeWork_description;
 
-								if (
-									in_array( 'wordCount', $CreativeWork_properties )
-									&&
-									$nesting_level == 0
-								) {
+										}
 
-									// Get values
+								// duration
 
-										$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
+									/* 
+									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
+									 * format.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Duration
+									 */
 
-										// Fallback value
+									if (
+										in_array( 'duration', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
 
-											if ( !$CreativeWork_wordCount ) {
+										// Get values
 
-												$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
+											$CreativeWork_duration = $CreativeWork_asset_duration ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_duration ) {
+
+												$CreativeWork_item['duration'] = $CreativeWork_duration;
 
 											}
 
-									// Add to item values
+									}
 
-										if ( $CreativeWork_wordCount ) {
+								// embeddedTextCaption
 
-											$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
+									/* 
+									 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
 
-										}
+									if (
+										in_array( 'embeddedTextCaption', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
 
-								}
+										// Get values
+
+											$CreativeWork_embeddedTextCaption = get_field( 'clinical_resource_infographic_transcript', $entity ) ?: '';
+
+										// Clean up values
+
+											if ( $CreativeWork_embeddedTextCaption ) {
+
+												// Strip all tags
+
+													$CreativeWork_embeddedTextCaption = wp_strip_all_tags($CreativeWork_embeddedTextCaption);
+													$CreativeWork_embeddedTextCaption = str_replace("\n", ' ', $CreativeWork_embeddedTextCaption); // Strip line breaks
+
+												// Make attribute-friendly
+
+													$CreativeWork_embeddedTextCaption = uamswp_attr_conversion($CreativeWork_embeddedTextCaption);
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_embeddedTextCaption ) {
+
+												$CreativeWork_item['embeddedTextCaption'] = $CreativeWork_embeddedTextCaption;
+
+											}
+
+									}
+
+								// embedUrl
+
+									/* 
+									 * A URL pointing to a player for a specific video. In general, this is the 
+									 * information in the src element of an embed tag and should not be the same as 
+									 * the content of the loc tag.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'embedUrl', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_embedUrl = $CreativeWork_asset_embedUrl ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_embedUrl ) {
+
+												$CreativeWork_item['embedUrl'] = $CreativeWork_embedUrl;
+
+											}
+
+									}
+
+								// encodingFormat
+
+									/* 
+									 * Media type typically expressed using a MIME format (see IANA site and MDN 
+									 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
+									 * for .mp3).
+									 * 
+									 * In cases where a CreativeWork has several media type representations, encoding 
+									 * can be used to indicate each MediaObject alongside particular encodingFormat 
+									 * information.
+									 * 
+									 * Unregistered or niche encoding and file formats can be indicated instead via 
+									 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
+									 * entry).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'encodingFormat', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_encodingFormat = get_post_mime_type( $CreativeWork_asset_id ) ?: ''; // e.g., 'image/jpeg'
+
+										// Add to item values
+
+											if ( $CreativeWork_encodingFormat ) {
+
+												$CreativeWork_item['encodingFormat'] = $CreativeWork_encodingFormat;
+
+											}
+
+									}
+
+								// hasDigitalDocumentPermission
+
+									/* 
+									 * A permission related to the access to this document (e.g., permission to read 
+									 * or  write an electronic document). For a public document, specify a grantee
+									 * with an  Audience with audienceType equal to "public".
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DigitalDocumentPermission
+									 */
+
+									if (
+										in_array( 'hasDigitalDocumentPermission', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_hasDigitalDocumentPermission = array(
+												'@type' => 'DigitalDocumentPermission',
+												'permissionType' => 'ReadPermission', // Thing > Intangible > Enumeration > DigitalDocumentPermissionType
+												'grantee' => array(
+													'@type' => 'Audience',
+													'audienceType' => 'public'
+												)
+											);
+
+										// Add to item values
+
+											if ( $CreativeWork_hasDigitalDocumentPermission ) {
+
+												$CreativeWork_item['hasDigitalDocumentPermission'] = $CreativeWork_hasDigitalDocumentPermission;
+
+											}
+
+									}
+
+								// height
+
+									/* 
+									 * The height of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Distance
+									 *     - QuantitativeValue
+									 */
+
+									if (
+										in_array( 'height', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_height = ( isset($CreativeWork_asset_height) && !empty($CreativeWork_asset_height) ) ? $CreativeWork_asset_height . ' px' : '';
+
+										// Add to item values
+
+											if ( $CreativeWork_height ) {
+
+												$CreativeWork_item['height'] = $CreativeWork_height;
+
+											}
+
+									}
+
+								// image
+
+									/* 
+									 * An image of the item. This can be a URL or a fully described ImageObject.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - URL
+									 */
+
+									if ( in_array( 'image', $CreativeWork_properties ) ) {
+
+										// Get values
+
+											$CreativeWork_image = $CreativeWork_image ?? array();
+
+										// Clean up list array
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($CreativeWork_image);
+
+										// Add to item values
+
+											if ( $CreativeWork_image ) {
+
+												$CreativeWork_item['image'] = $CreativeWork_image;
+
+											}
+
+									}
+
+								// isAccessibleForFree
+
+									/* 
+									 * A flag to signal that the item, event, or place is accessible for free.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 */
+
+									if (
+										in_array( 'isAccessibleForFree', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_isAccessibleForFree = 'True';
+
+										// Add to item values
+
+											if ( $CreativeWork_isAccessibleForFree ) {
+
+												$CreativeWork_item['isAccessibleForFree'] = $CreativeWork_isAccessibleForFree;
+
+											}
+
+									}
+
+								// isPartOf
+
+									/* 
+									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
+									 * sense), is part of.
+									 * 
+									 * Inverse-property: hasPart
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'isPartOf', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$CreativeWork_isPartOf = array();
+
+											$CreativeWork_isPartOf = uamswp_fad_schema_merge_values(
+												$CreativeWork_isPartOf, // mixed // Required // Initial schema item property value
+												$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+											);
+
+										// Add to item values
+
+											if ( $CreativeWork_isPartOf ) {
+
+												$CreativeWork_item['isPartOf'] = $CreativeWork_isPartOf;
+
+											}
+
+									}
+
+								// mainEntityOfPage
+
+									/* 
+									 * Indicates a page (or other CreativeWork) for which this thing is the main 
+									 * entity being described. See background notes at 
+									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * 
+									 * Inverse-property: mainEntity
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 */
+
+									if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
+
+										// Get values
+
+											// Base array
+
+												$CreativeWork_mainEntityOfPage = array();
+
+											$CreativeWork_mainEntityOfPage = uamswp_fad_schema_merge_values(
+												$CreativeWork_mainEntityOfPage, // mixed // Required // Initial schema item property value
+												$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+											);
+
+										// Add to item values
+
+											if ( $CreativeWork_mainEntityOfPage ) {
+
+												$CreativeWork_item['mainEntityOfPage'] = $CreativeWork_mainEntityOfPage;
+
+											}
+
+									}
+
+								// representativeOfPage
+
+									/* 
+									 * Indicates whether this image is representative of the content of the page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 */
+
+									if (
+										in_array( 'representativeOfPage', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
+
+										// Add to item values
+
+											if ( $CreativeWork_representativeOfPage ) {
+
+												$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
+
+											}
+
+									}
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'sameAs', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base list array
+
+												$CreativeWork_sameAs = array();
+
+											// Add values to the list array
+
+												// Syndication URL
+
+													if (
+														isset($CreativeWork_syndication_URL)
+														&&
+														!empty($CreativeWork_syndication_URL)
+													) {
+
+														$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
+
+													}
+
+												// Video URL
+
+													if (
+														$CreativeWork_resource_type == 'video'
+														&&
+														$CreativeWork_video
+													) {
+
+														$CreativeWork_sameAs[] = $CreativeWork_video;
+
+													}
+
+										// Clean up list array
+
+											if ( $CreativeWork_sameAs ) {
+
+												$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
+												$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
+												$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_sameAs ) {
+
+												$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
+
+											}
+
+									}
+
+								// sourceOrganization
+
+									/* 
+									 * The Organization on whose behalf the creator was working.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 */
+
+									if (
+										in_array( 'sourceOrganization', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											if ( $CreativeWork_syndication_query ) {
+
+												$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?? '';
+
+											} else {
+
+												// Get values
+
+													// Base array
+
+														$CreativeWork_sourceOrganization = array();
+
+													// UAMS
+
+														$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
+															$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
+															$schema_base_org_uams // mixed // Required // Incoming schema item property value
+														);
+
+													// UAMS Health
+
+														$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
+															$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
+															$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
+														);
+
+												// Format values
+
+													// If there is only one item, flatten the multi-dimensional array by one step
+
+														uamswp_fad_flatten_multidimensional_array( $CreativeWork_sourceOrganization );
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_sourceOrganization ) {
+
+												$CreativeWork_item['sourceOrganization'] = $CreativeWork_sourceOrganization;
+
+											}
+
+									}
+
+								// speakable
+
+									/* 
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+									 * of being highlighted as being especially appropriate for text-to-speech 
+									 * conversion. Other sections of a page may also be usefully spoken in particular 
+									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									 * likely to be generally useful for speech.
+									 * 
+									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 * kinds of possible 'content-locator' values:
+									 *     
+									 *     1.) id-value URL references - uses id-value of an element in the page being 
+									 *         annotated. The simplest use of speakable has (potentially relative) URL 
+									 *         values, referencing identified sections of the document concerned.
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 *         class attribute. Use the cssSelector property).
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 *         content). Use the xpath property.
+									 * 
+									 * For more sophisticated markup of speakable sections beyond simple ID 
+									 * references, either CSS selectors or XPath expressions to pick out document 
+									 * section(s) as speakable. For this we define a supporting type, 
+									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 * property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - SpeakableSpecification
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'speakable', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Base array
+
+											$CreativeWork_speakable = array();
+
+										// Get values
+
+											// Introduction / Description
+
+												if (
+													$CreativeWork_resource_type == 'infographic'
+													||
+													$CreativeWork_resource_type == 'video'
+													||
+													$CreativeWork_resource_type == 'doc'
+												) {
+
+													$CreativeWork_speakable[] = array(
+														'@type' => 'SpeakableSpecification',
+														'cssSelector' => '#resource-description-body'
+													);
+
+												}
+
+											// Content
+
+												if ( $CreativeWork_resource_type == 'text' ) {
+
+													$CreativeWork_speakable[] = array(
+														'@type' => 'SpeakableSpecification',
+														'cssSelector' => '#resource-content-body'
+													);
+
+												}
+
+											// Transcript
+
+												if (
+													$CreativeWork_resource_type == 'infographic'
+													||
+													$CreativeWork_resource_type == 'video'
+												) {
+
+													$CreativeWork_speakable[] = array(
+														'@type' => 'SpeakableSpecification',
+														'cssSelector' => '#resource-transcript-body'
+													);
+
+												}
+
+										// Add to item values
+
+											if ( $CreativeWork_speakable ) {
+
+												$CreativeWork_item['speakable'] = $CreativeWork_speakable;
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
+
+											}
+
+									}
+
+								// subjectOf
+
+									/* 
+									 * A CreativeWork or Event about this Thing.
+									 * 
+									 * Inverse-property: about
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Event
+									 */
+
+									if (
+										in_array( 'subjectOf', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$CreativeWork_subjectOf = array();
+
+											$CreativeWork_subjectOf = uamswp_fad_schema_merge_values(
+												$CreativeWork_subjectOf, // mixed // Required // Initial schema item property value
+												$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+											);
+
+										// Add to item values
+
+											if ( $CreativeWork_subjectOf ) {
+
+												$CreativeWork_item['subjectOf'] = $CreativeWork_subjectOf;
+
+											}
+
+									}
+
+								// thumbnail
+
+									/* 
+									 * Thumbnail image for an image or video.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 */
+
+									if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
+
+										// Get values
+
+											$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
+
+										// Clean up list array
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($CreativeWork_thumbnail);
+
+										// Add to item values
+
+											if ( $CreativeWork_thumbnail ) {
+
+												$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
+
+											}
+
+									}
+
+								// transcript
+
+									/* 
+									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+									 * object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'transcript', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $entity ) ?: '';
+
+										// Clean up values
+
+											if ( $CreativeWork_transcript ) {
+
+												// Strip all tags
+
+													$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
+													$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
+
+												// Make attribute-friendly
+
+													$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_transcript ) {
+
+												$CreativeWork_item['transcript'] = $CreativeWork_transcript;
+
+											}
+
+									}
+
+								// timeRequired
+
+									/* 
+									 * Approximate or typical time it usually takes to work with or through the 
+									 * content of this work for the typical or target audience.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Duration (use ISO 8601 duration format).
+									 */
+
+									if (
+										in_array( 'timeRequired', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Count words
+
+												// Base value
+
+													$CreativeWork_word_count = 0;
+
+												// Introduction / Description
+
+													if ( $CreativeWork_resource_type != 'text' ) {
+
+														$CreativeWork_description_count = str_word_count($CreativeWork_description);
+														$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
+
+													}
+
+												// Article body
+
+													$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
+
+												// Video transcript
+
+													$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
+
+												// Infographic transcript
+
+													$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
+
+											// Calculate time to read all words
+
+												$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
+												$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
+
+												$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
+												$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
+
+										// Add to item values
+
+											if ( $CreativeWork_timeRequired ) {
+
+												$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
+
+											}
+
+									}
+
+								// videoFrameSize
+
+									/* 
+									 * The frame size of the video.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'videoFrameSize', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_videoFrameSize ) {
+
+												$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
+
+											}
+
+									}
+
+								// videoQuality
+
+									/* 
+									 * The quality of the video.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'videoQuality', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_videoQuality ) {
+
+												$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
+
+											}
+
+									}
+
+								// width
+
+									/* 
+									 * The width of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Distance
+									 *     - QuantitativeValue
+									 */
+
+									if (
+										in_array( 'width', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
+
+										// Add to item values
+
+											if ( $CreativeWork_width ) {
+
+												$CreativeWork_item['width'] = $CreativeWork_width;
+
+											}
+
+									}
+
+								// wordCount
+
+									/* 
+									 * The number of words in the text of the Article.
+									 * 
+									 * Values expected to be one of these types:
+									 *     - Integer
+									 */
+
+									if (
+										in_array( 'wordCount', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
+
+											// Fallback value
+
+												if ( !$CreativeWork_wordCount ) {
+
+													$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
+
+												}
+
+										// Add to item values
+
+											if ( $CreativeWork_wordCount ) {
+
+												$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
+
+											}
+
+									}
 
 							// Sort array
 
@@ -24786,390 +24788,392 @@
 
 								}
 
-							// @id
+							// Add property values
 
-								// Define value
+								// @id
 
-									$page_fragment = 'MedicalCondition';
+									// Define value
+
+										$page_fragment = 'MedicalCondition';
+
+										if ( $nesting_level == 1 ) {
+
+											$condition_id = $page_url . '#' . $page_fragment . $MedicalCondition_i;
+											$MedicalCondition_i++;
+
+										}
+
+									// Add to schema
+
+										if ( $condition_id ) {
+
+											$condition_item['@id'] = $condition_id;
+											$node_identifier_list[] = $condition_item['@id']; // Add to the list of existing node identifiers
+
+										}
+
+								// @type
+
+									$condition_type = 'MedicalCondition';
+
+									// MedicalCondition Subtype
+
+										$condition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $condition_type;
+										$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
+
+									// Add to schema
+
+										if ( $condition_type ) {
+
+											$condition_item['@type'] = $condition_type;
+
+										}
+
+								// name
+
+									/* 
+									 * The name of the item.
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - rdfs:label
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									// Get value
+
+										$condition_name = get_the_title($entity); // Expects Text
+
+									// Add to array
+
+										if ( $condition_name ) {
+
+											$condition_item['name'] = $condition_name;
+
+										}
+
+								// alternateName
+
+									/* 
+									 * An alias for the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									// Get alternateName repeater field value
+
+										$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
+
+										// Add each item to alternateName property values array
+
+											$condition_alternateName = uamswp_fad_schema_alternatename(
+												$condition_alternateName_repeater, // alternateName repeater field
+												'alternate_text' // alternateName item field name
+											);
+
+									// Add to schema
+
+										if ( $condition_alternateName ) {
+
+											$condition_item['alternateName'] = $condition_alternateName;
+
+										}
+
+								// code
+
+									/* 
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalCode
+									 */
+
+									// Get code repeater field value
+
+										$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+
+										// Add each item to code property values array
+
+											$condition_code = uamswp_fad_schema_code(
+												$condition_code_repeater // code repeater field
+											);
+
+									// Add to schema
+
+										if ( $condition_code ) {
+
+											$condition_item['code'] = $condition_code;
+
+										}
+
+								// additionalType
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									// Get additionalType repeater field value
+
+										$condition_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
+
+										// Add each item to additionalType property values array
+
+											if ( $condition_additionalType_repeater ) {
+
+												$condition_additionalType = uamswp_fad_schema_additionaltype(
+													$condition_additionalType_repeater, // additionalType repeater field
+													'schema_additionalType_uri' // additionalType item field name
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $condition_additionalType ) {
+
+											$service_item['additionalType'] = $condition_additionalType;
+
+										}
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									// Get sameAs repeater field value
+
+										$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+
+										// Add each item to sameAs property values array
+
+											if ( $condition_sameAs_repeater ) {
+
+												$condition_sameAs = uamswp_fad_schema_sameas(
+													$condition_sameAs_repeater, // sameAs repeater field
+													'schema_sameas_url' // sameAs item field name
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $condition_sameAs ) {
+
+											$condition_item['sameAs'] = $condition_sameAs;
+
+										}
+
+								// infectiousAgent
+
+									if (
+										$condition_type == 'InfectiousDisease'
+										||
+										in_array( 'InfectiousDisease', $condition_type_parent )
+									) {
+
+										// Get field value
+
+											$condition_infectiousAgent = get_field( 'schema_infectiousagent', $entity ) ?: '';
+
+										// Add to schema
+
+											if ( $condition_infectiousAgent ) {
+
+												$condition_item['infectiousAgent'] = $condition_infectiousAgent;
+
+											}
+
+									}
+
+								// infectiousAgentClass
+
+									if (
+										$condition_type == 'InfectiousDisease'
+										||
+										in_array( 'InfectiousDisease', $condition_type_parent )
+									) {
+
+										// Get field value
+
+											$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $entity ) ?: '';
+
+										// Add to schema
+
+											if ( $condition_infectiousAgentClass ) {
+
+												$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
+
+											}
+
+									}
+
+								// possibleTreatment
 
 									if ( $nesting_level == 1 ) {
 
-										$condition_id = $page_url . '#' . $page_fragment . $MedicalCondition_i;
-										$MedicalCondition_i++;
+										// Get possibleTreatment relationship field value
 
-									}
+											$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
 
-								// Add to schema
+											// Add each item to possibleTreatment property values array
 
-									if ( $condition_id ) {
+												if ( $condition_possibleTreatment_relationship ) {
 
-										$condition_item['@id'] = $condition_id;
-										$node_identifier_list[] = $condition_item['@id']; // Add to the list of existing node identifiers
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-									}
+													$condition_possibleTreatment = uamswp_fad_schema_service(
+														$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
 
-							// @type
+												}
 
-								$condition_type = 'MedicalCondition';
+										// Add to schema
 
-								// MedicalCondition Subtype
+											if ( $condition_possibleTreatment ) {
 
-									$condition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $condition_type;
-									$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
-
-								// Add to schema
-
-									if ( $condition_type ) {
-
-										$condition_item['@type'] = $condition_type;
-
-									}
-
-							// name
-
-								/* 
-								 * The name of the item.
-								 * 
-								 * Subproperty of:
-								 * 
-								 *     - rdfs:label
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
-
-								// Get value
-
-									$condition_name = get_the_title($entity); // Expects Text
-
-								// Add to array
-
-									if ( $condition_name ) {
-
-										$condition_item['name'] = $condition_name;
-
-									}
-
-							// alternateName
-
-								/* 
-								 * An alias for the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
-
-								// Get alternateName repeater field value
-
-									$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
-
-									// Add each item to alternateName property values array
-
-										$condition_alternateName = uamswp_fad_schema_alternatename(
-											$condition_alternateName_repeater, // alternateName repeater field
-											'alternate_text' // alternateName item field name
-										);
-
-								// Add to schema
-
-									if ( $condition_alternateName ) {
-
-										$condition_item['alternateName'] = $condition_alternateName;
-
-									}
-
-							// code
-
-								/* 
-								 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-								 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - MedicalCode
-								 */
-
-								// Get code repeater field value
-
-									$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
-
-									// Add each item to code property values array
-
-										$condition_code = uamswp_fad_schema_code(
-											$condition_code_repeater // code repeater field
-										);
-
-								// Add to schema
-
-									if ( $condition_code ) {
-
-										$condition_item['code'] = $condition_code;
-
-									}
-
-							// additionalType
-
-								/* 
-								 * An additional type for the item, typically used for adding more specific types 
-								 * from external vocabularies in microdata syntax. This is a relationship between 
-								 * something and a class that the thing is in. Typically the value is a 
-								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-								 * in RDF. Text values can be used sparingly, for cases where useful information 
-								 * can be added without their being an appropriate schema to reference. In the 
-								 * case of text values, the class label should follow the schema.org style guide.
-								 * 
-								 * Subproperty of:
-								 *     - rdf:type
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - URL
-								 */
-
-								// Get additionalType repeater field value
-
-									$condition_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
-
-									// Add each item to additionalType property values array
-
-										if ( $condition_additionalType_repeater ) {
-
-											$condition_additionalType = uamswp_fad_schema_additionaltype(
-												$condition_additionalType_repeater, // additionalType repeater field
-												'schema_additionalType_uri' // additionalType item field name
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $condition_additionalType ) {
-
-										$service_item['additionalType'] = $condition_additionalType;
-
-									}
-
-							// sameAs
-
-								/* 
-								 * URL of a reference Web page that unambiguously indicates the item's identity 
-								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-								 * website).
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								// Get sameAs repeater field value
-
-									$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
-
-									// Add each item to sameAs property values array
-
-										if ( $condition_sameAs_repeater ) {
-
-											$condition_sameAs = uamswp_fad_schema_sameas(
-												$condition_sameAs_repeater, // sameAs repeater field
-												'schema_sameas_url' // sameAs item field name
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $condition_sameAs ) {
-
-										$condition_item['sameAs'] = $condition_sameAs;
-
-									}
-
-							// infectiousAgent
-
-								if (
-									$condition_type == 'InfectiousDisease'
-									||
-									in_array( 'InfectiousDisease', $condition_type_parent )
-								) {
-
-									// Get field value
-
-										$condition_infectiousAgent = get_field( 'schema_infectiousagent', $entity ) ?: '';
-
-									// Add to schema
-
-										if ( $condition_infectiousAgent ) {
-
-											$condition_item['infectiousAgent'] = $condition_infectiousAgent;
-
-										}
-
-								}
-
-							// infectiousAgentClass
-
-								if (
-									$condition_type == 'InfectiousDisease'
-									||
-									in_array( 'InfectiousDisease', $condition_type_parent )
-								) {
-
-									// Get field value
-
-										$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $entity ) ?: '';
-
-									// Add to schema
-
-										if ( $condition_infectiousAgentClass ) {
-
-											$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
-
-										}
-
-								}
-
-							// possibleTreatment
-
-								if ( $nesting_level == 1 ) {
-
-									// Get possibleTreatment relationship field value
-
-										$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
-
-										// Add each item to possibleTreatment property values array
-
-											if ( $condition_possibleTreatment_relationship ) {
-
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-												$condition_possibleTreatment = uamswp_fad_schema_service(
-													$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
+												$condition_item['possibleTreatment'] = $condition_possibleTreatment;
 
 											}
 
-									// Add to schema
+									}
 
-										if ( $condition_possibleTreatment ) {
+								// primaryPrevention
 
-											$condition_item['possibleTreatment'] = $condition_possibleTreatment;
+									if ( $nesting_level == 1 ) {
 
-										}
+										// Get primaryPrevention relationship field value
 
-								}
+											$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
 
-							// primaryPrevention
+											// Add each item to primaryPrevention property values array
 
-								if ( $nesting_level == 1 ) {
+												if ( $condition_primaryPrevention_relationship ) {
 
-									// Get primaryPrevention relationship field value
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-										$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
+													$condition_primaryPrevention = uamswp_fad_schema_service(
+														$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
 
-										// Add each item to primaryPrevention property values array
+												}
 
-											if ( $condition_primaryPrevention_relationship ) {
+										// Add to schema
 
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+											if ( $condition_primaryPrevention ) {
 
-												$condition_primaryPrevention = uamswp_fad_schema_service(
-													$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
-
-											}
-
-									// Add to schema
-
-										if ( $condition_primaryPrevention ) {
-
-											$condition_item['primaryPrevention'] = $condition_primaryPrevention;
-
-										}
-
-								}
-
-							// secondaryPrevention
-
-								if ( $nesting_level == 1 ) {
-
-									// Get secondaryPrevention relationship field value
-
-										$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
-
-										// Add each item to secondaryPrevention property values array
-
-											if ( $condition_secondaryPrevention_relationship ) {
-
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-												$condition_secondaryPrevention = uamswp_fad_schema_service(
-													$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
+												$condition_item['primaryPrevention'] = $condition_primaryPrevention;
 
 											}
 
-									// Add to schema
+									}
 
-										if ( $condition_secondaryPrevention ) {
+								// secondaryPrevention
 
-											$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
+									if ( $nesting_level == 1 ) {
 
-										}
+										// Get secondaryPrevention relationship field value
 
-								}
+											$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
 
-							// typicalTest
+											// Add each item to secondaryPrevention property values array
 
-								if ( $nesting_level == 1 ) {
+												if ( $condition_secondaryPrevention_relationship ) {
 
-									// Get typicalTest relationship field value
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-										$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
+													$condition_secondaryPrevention = uamswp_fad_schema_service(
+														$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
 
-										// Add each item to typicalTest property values array
+												}
 
-											if ( $condition_typicalTest_relationship ) {
+										// Add to schema
 
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+											if ( $condition_secondaryPrevention ) {
 
-												$condition_typicalTest = uamswp_fad_schema_service(
-													$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
+												$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
 
 											}
 
-									// Add to schema
+									}
 
-										if ( $condition_typicalTest ) {
+								// typicalTest
 
-											$condition_item['typicalTest'] = $condition_typicalTest;
+									if ( $nesting_level == 1 ) {
 
-										}
+										// Get typicalTest relationship field value
 
-								}
+											$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
+
+											// Add each item to typicalTest property values array
+
+												if ( $condition_typicalTest_relationship ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$condition_typicalTest = uamswp_fad_schema_service(
+														$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
+
+												}
+
+										// Add to schema
+
+											if ( $condition_typicalTest ) {
+
+												$condition_item['typicalTest'] = $condition_typicalTest;
+
+											}
+
+									}
 
 							// Sort array
 
@@ -25386,807 +25390,809 @@
 
 								}
 
-							// @id
+							// Add property values
 
-								$page_fragment = 'Service';
+								// @id
 
-								if ( $nesting_level == 1 ) {
+									$page_fragment = 'Service';
 
-									$service_id = $page_url . '#' . $page_fragment . $Service_i;
-									$service_item['@id'] = $service_id;
-									$node_identifier_list[] = $service_item['@id']; // Add to the list of existing node identifiers
-									$Service_i++;
+									if ( $nesting_level == 1 ) {
 
-								}
-
-							// @type
-
-								// Base value
-
-									$service_type = 'MedicalEntity';
-									$service_type_parent = array();
-
-								// MedicalEntity Subtype
-
-									$service_type = get_field( 'schema_medicalentity_subtype_availableservice', $entity ) ?: $service_type;
-
-									if ( $service_type == 'MedicalTest' ) {
-
-										$service_type_parent[] = 'MedicalEntity';
-
-										// MedicalTest Subtype
-
-											$service_type = get_field( 'schema_medicaltest_subtype', $entity ) ?: $service_type;
-											$service_type_parent[] = 'MedicalTest';
-
-									} elseif ( $service_type == 'MedicalProcedure' ) {
-
-										$service_type_parent[] = 'MedicalEntity';
-
-										// MedicalProcedure Subtype
-
-											$service_type = get_field( 'schema_medicalprocedure_subtype', $entity ) ?: $service_type;
-											$service_type_parent[] = 'MedicalProcedure';
-
-											if ( $service_type == 'TherapeuticProcedure' ) {
-
-												// TherapeuticProcedure Subtype
-
-													$service_type = get_field( 'schema_therapeuticprocedure_subtype', $entity ) ?: $service_type;
-													$service_type_parent[] = 'TherapeuticProcedure';
-
-													if ( $service_type == 'MedicalTherapy' ) {
-
-														// MedicalTherapy Subtype
-
-															$service_type = get_field( 'schema_medicaltherapy_subtype', $entity ) ?: $service_type;
-															$service_type_parent[] = 'MedicalTherapy';
-
-													}
-
-											}
+										$service_id = $page_url . '#' . $page_fragment . $Service_i;
+										$service_item['@id'] = $service_id;
+										$node_identifier_list[] = $service_item['@id']; // Add to the list of existing node identifiers
+										$Service_i++;
 
 									}
 
-								// Add to schema
+								// @type
 
-									$service_item['@type'] = $service_type;
+									// Base value
 
-							// name
+										$service_type = 'MedicalEntity';
+										$service_type_parent = array();
 
-								/* 
-								 * The name of the item.
-								 * 
-								 * Subproperty of:
-								 * 
-								 *     - rdfs:label
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+									// MedicalEntity Subtype
 
-								// Get value
+										$service_type = get_field( 'schema_medicalentity_subtype_availableservice', $entity ) ?: $service_type;
 
-									$service_name = get_the_title($entity) ?? ''; // Expects Text
+										if ( $service_type == 'MedicalTest' ) {
 
-								// Add to schema
+											$service_type_parent[] = 'MedicalEntity';
 
-									if ( $service_name ) {
+											// MedicalTest Subtype
 
-										$service_item['name'] = $service_name;
+												$service_type = get_field( 'schema_medicaltest_subtype', $entity ) ?: $service_type;
+												$service_type_parent[] = 'MedicalTest';
 
-									}
+										} elseif ( $service_type == 'MedicalProcedure' ) {
 
-							// alternateName
+											$service_type_parent[] = 'MedicalEntity';
 
-								/* 
-								 * An alias for the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
+											// MedicalProcedure Subtype
 
-								// Get alternateName repeater field value
+												$service_type = get_field( 'schema_medicalprocedure_subtype', $entity ) ?: $service_type;
+												$service_type_parent[] = 'MedicalProcedure';
 
-									$service_alternateName_repeater = get_field( 'treatment_procedure_alternate', $entity ) ?: array();
+												if ( $service_type == 'TherapeuticProcedure' ) {
 
-									// Add each item to alternateName property values array
+													// TherapeuticProcedure Subtype
 
-										if ( $service_alternateName_repeater ) {
+														$service_type = get_field( 'schema_therapeuticprocedure_subtype', $entity ) ?: $service_type;
+														$service_type_parent[] = 'TherapeuticProcedure';
 
-											$service_alternateName = uamswp_fad_schema_alternatename(
-												$service_alternateName_repeater, // alternateName repeater field
-												'alternate_text' // alternateName item field name
-											);
+														if ( $service_type == 'MedicalTherapy' ) {
 
-										}
+															// MedicalTherapy Subtype
 
-								// Add to schema
-
-									if ( $service_alternateName ) {
-
-										$service_item['alternateName'] = $service_alternateName;
-
-									}
-
-							// code
-
-								/* 
-								 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-								 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - MedicalCode
-								 */
-
-								// Get code repeater field value
-
-									$service_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
-
-									// Add each item to code property values array
-
-										if ( $service_code_repeater ) {
-
-											$service_code = uamswp_fad_schema_code(
-												$service_code_repeater // code repeater field
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $service_code ) {
-
-										$service_item['code'] = $service_code;
-
-									}
-
-							// additionalType
-
-								/* 
-								 * An additional type for the item, typically used for adding more specific types 
-								 * from external vocabularies in microdata syntax. This is a relationship between 
-								 * something and a class that the thing is in. Typically the value is a 
-								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-								 * in RDF. Text values can be used sparingly, for cases where useful information 
-								 * can be added without their being an appropriate schema to reference. In the 
-								 * case of text values, the class label should follow the schema.org style guide.
-								 * 
-								 * Subproperty of:
-								 *     - rdf:type
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - URL
-								 */
-
-								// Get additionalType repeater field value
-
-									$service_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
-
-									// Add each item to additionalType property values array
-
-										if ( $service_additionalType_repeater ) {
-
-											$service_additionalType = uamswp_fad_schema_additionaltype(
-												$service_additionalType_repeater, // additionalType repeater field
-												'schema_additionalType_uri' // additionalType item field name
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $service_additionalType ) {
-
-										$service_item['additionalType'] = $service_additionalType;
-
-									}
-
-							// sameAs
-
-								/* 
-								 * URL of a reference Web page that unambiguously indicates the item's identity 
-								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-								 * website).
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								// Get sameAs repeater field value
-
-									$service_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
-
-									// Add each item to sameAs property values array
-
-										if ( $service_sameAs_repeater ) {
-
-											$service_sameAs = uamswp_fad_schema_sameas(
-												$service_sameAs_repeater, // sameAs repeater field
-												'schema_sameas_url' // sameAs item field name
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $service_sameAs ) {
-
-										$service_item['sameAs'] = $service_sameAs;
-
-									}
-
-							// drug
-
-								if (
-									$service_type == 'TherapeuticProcedure'
-									||
-									in_array( 'TherapeuticProcedure', $service_type_parent )
-								) {
-
-									// Base drug property values array
-
-										$service_drug = array();
-
-									// Get drug repeater field value — Drug(s) or Medicine(s) Used
-
-										$service_drug_repeater = get_field( 'schema_drug', $entity ) ?? array();
-
-										// Add each item to drug property values array
-
-											if ( $service_drug_repeater ) {
-
-												foreach ( $service_drug_repeater as $drug ) {
-
-													// Base drug property value item array
-
-														$service_drug_item = array();
-
-													// Define property values of drug items
-
-														// Define proprietaryName schema property value
-
-															// Base proprietaryName list array
-
-																$service_drug_item_proprietaryName_list = array();
-
-															// Get proprietaryName repeater value
-
-																$service_drug_item['proprietaryName'] = $drug['schema_drug_proprietaryname'] ?? array();
-
-															// Loop through rows of proprietaryName repeater value
-
-																if ( $service_drug_item['proprietaryName'] ) {
-
-																	foreach ( $service_drug_item['proprietaryName'] as $proprietaryName ) {
-
-																		// Add subfield value to base proprietaryName list array
-
-																			$service_drug_item_proprietaryName_list[] = $proprietaryName['schema_drug_proprietaryname_text'];
-
-																	}
-
-																}
-
-															// Clean up base proprietaryName list array
-
-																if ( $service_drug_item_proprietaryName_list ) {
-
-																	// If there is only one item, flatten the multi-dimensional array by one step
-
-																		uamswp_fad_flatten_multidimensional_array($service_drug_item_proprietaryName_list);
-
-																}
-
-															// Add proprietaryName values to drug property value item array
-
-																if ( $service_drug_item_proprietaryName_list ) {
-
-																	$service_drug_item['proprietaryName'] = $service_drug_item_proprietaryName_list;
-
-																}
-
-														// Define nonProprietaryName schema property value
-
-															// Base nonProprietaryName list array
-
-																$service_drug_item_nonProprietaryName_list = array();
-
-															// Get nonProprietaryName subfield value
-
-																$service_drug_item['nonProprietaryName'] = $drug['schema_drug_nonproprietaryname'] ?? array();
-
-															// Loop through rows of proprietaryName repeater value
-
-																if ( $service_drug_item['nonProprietaryName'] ) {
-
-																	foreach ( $service_drug_item['nonProprietaryName'] as $nonProprietaryName ) {
-
-																		// Add subfield value to base nonProprietaryName list array
-
-																			$service_drug_item_nonProprietaryName_list[] = $nonProprietaryName['schema_drug_nonproprietaryname_text'];
-
-																	}
-
-																}
-
-															// Clean up base nonProprietaryName list array
-
-																if ( $service_drug_item_nonProprietaryName_list ) {
-
-																	// If there is only one item, flatten the multi-dimensional array by one step
-
-																		uamswp_fad_flatten_multidimensional_array($service_drug_item_nonProprietaryName_list);
-
-																}
-
-															// Add nonProprietaryName values to drug property value item array
-
-																if ( $service_drug_item_nonProprietaryName_list ) {
-
-																	$service_drug_item['nonProprietaryName'] = $service_drug_item_nonProprietaryName_list;
-
-																}
-
-														// Define prescriptionStatus schema property value, add to drug property value item array
-
-															$service_drug_item['prescriptionStatus'] = $drug['schema_drug_prescriptionstatus'] ?? '';
-
-														// Define rxcui schema property value, add to drug property value item array
-
-															$service_drug_item['rxcui'] = $drug['schema_drug_rxcui'] ?? '';
-
-													// Add drug property value item array to the drug property values array
-
-														if ( $service_drug_item ) {
-
-															$service_drug[] = $service_drug_item;
+																$service_type = get_field( 'schema_medicaltherapy_subtype', $entity ) ?: $service_type;
+																$service_type_parent[] = 'MedicalTherapy';
 
 														}
 
 												}
 
-											}
-
-									// Clean up drug property values array
-
-										if ( $service_drug ) {
-
-											$service_drug = array_filter($service_drug);
-											$service_drug = array_values($service_drug);
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array($service_drug);
-
 										}
 
 									// Add to schema
 
-										if ( $service_drug ) {
+										$service_item['@type'] = $service_type;
 
-											$service_item['drug'] = $service_drug;
+								// name
+
+									/* 
+									 * The name of the item.
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - rdfs:label
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									// Get value
+
+										$service_name = get_the_title($entity) ?? ''; // Expects Text
+
+									// Add to schema
+
+										if ( $service_name ) {
+
+											$service_item['name'] = $service_name;
 
 										}
 
-								}
+								// alternateName
 
-							// duplicateTherapy
+									/* 
+									 * An alias for the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
 
-								if (
-									(
+									// Get alternateName repeater field value
+
+										$service_alternateName_repeater = get_field( 'treatment_procedure_alternate', $entity ) ?: array();
+
+										// Add each item to alternateName property values array
+
+											if ( $service_alternateName_repeater ) {
+
+												$service_alternateName = uamswp_fad_schema_alternatename(
+													$service_alternateName_repeater, // alternateName repeater field
+													'alternate_text' // alternateName item field name
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $service_alternateName ) {
+
+											$service_item['alternateName'] = $service_alternateName;
+
+										}
+
+								// code
+
+									/* 
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalCode
+									 */
+
+									// Get code repeater field value
+
+										$service_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+
+										// Add each item to code property values array
+
+											if ( $service_code_repeater ) {
+
+												$service_code = uamswp_fad_schema_code(
+													$service_code_repeater // code repeater field
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $service_code ) {
+
+											$service_item['code'] = $service_code;
+
+										}
+
+								// additionalType
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									// Get additionalType repeater field value
+
+										$service_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
+
+										// Add each item to additionalType property values array
+
+											if ( $service_additionalType_repeater ) {
+
+												$service_additionalType = uamswp_fad_schema_additionaltype(
+													$service_additionalType_repeater, // additionalType repeater field
+													'schema_additionalType_uri' // additionalType item field name
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $service_additionalType ) {
+
+											$service_item['additionalType'] = $service_additionalType;
+
+										}
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									// Get sameAs repeater field value
+
+										$service_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+
+										// Add each item to sameAs property values array
+
+											if ( $service_sameAs_repeater ) {
+
+												$service_sameAs = uamswp_fad_schema_sameas(
+													$service_sameAs_repeater, // sameAs repeater field
+													'schema_sameas_url' // sameAs item field name
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $service_sameAs ) {
+
+											$service_item['sameAs'] = $service_sameAs;
+
+										}
+
+								// drug
+
+									if (
 										$service_type == 'TherapeuticProcedure'
 										||
 										in_array( 'TherapeuticProcedure', $service_type_parent )
-									)
-									&&
-									$nesting_level == 1
-								) {
+									) {
 
-									// Get duplicateTherapy relationship repeater value (clones 'field_schema_medicaltherapy')
+										// Base drug property values array
 
-										$service_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $entity ) ?: array();
+											$service_drug = array();
 
-										// Add each item to duplicateTherapy property values array
+										// Get drug repeater field value — Drug(s) or Medicine(s) Used
 
-											if ( $service_duplicateTherapy_relationship ) {
+											$service_drug_repeater = get_field( 'schema_drug', $entity ) ?? array();
 
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+											// Add each item to drug property values array
 
-												$service_duplicateTherapy = uamswp_fad_schema_service(
-													$service_duplicateTherapy_relationship, // array // Required // List of IDs of the service items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
+												if ( $service_drug_repeater ) {
 
-											}
+													foreach ( $service_drug_repeater as $drug ) {
 
-									// Add to schema
+														// Base drug property value item array
 
-										if ( $service_duplicateTherapy ) {
+															$service_drug_item = array();
 
-											$service_item['duplicateTherapy'] = $service_duplicateTherapy;
+														// Define property values of drug items
 
-										}
+															// Define proprietaryName schema property value
 
-								}
+																// Base proprietaryName list array
 
-							// MedicalImagingTechnique
+																	$service_drug_item_proprietaryName_list = array();
 
-								if (
-									$service_type == 'ImagingTest'
-									||
-									in_array( 'ImagingTest', $service_type_parent )
-								) {
+																// Get proprietaryName repeater value
 
-									// Get field value
+																	$service_drug_item['proprietaryName'] = $drug['schema_drug_proprietaryname'] ?? array();
 
-										$service_MedicalImagingTechnique = get_field( 'schema_medicalimagingtechnique', $entity ) ?: '';
+																// Loop through rows of proprietaryName repeater value
 
-									// Add to schema
+																	if ( $service_drug_item['proprietaryName'] ) {
 
-										if ( $service_MedicalImagingTechnique ) {
+																		foreach ( $service_drug_item['proprietaryName'] as $proprietaryName ) {
 
-											$service_item['imagingTechnique'] = $service_MedicalImagingTechnique;
+																			// Add subfield value to base proprietaryName list array
 
-										}
+																				$service_drug_item_proprietaryName_list[] = $proprietaryName['schema_drug_proprietaryname_text'];
 
-								}
+																		}
 
-							// procedureType
+																	}
 
-								if (
-									$service_type == 'MedicalProcedure'
-									||
-									(
-										in_array( 'MedicalProcedure', $service_type_parent )
-										&&
-										$service_type != 'SurgicalProcedure'
-										&&
-										!in_array( 'SurgicalProcedure', $service_type_parent )
-									)
-								) {
+																// Clean up base proprietaryName list array
 
-									// Get field value
+																	if ( $service_drug_item_proprietaryName_list ) {
 
-										$service_procedureType = get_field( 'schema_medicalproceduretype', $entity ) ?: '';
+																		// If there is only one item, flatten the multi-dimensional array by one step
 
-									// Add to schema
+																			uamswp_fad_flatten_multidimensional_array($service_drug_item_proprietaryName_list);
 
-										if ( $service_procedureType ) {
+																	}
 
-											$service_item['procedureType'] = $service_procedureType;
+																// Add proprietaryName values to drug property value item array
 
-										}
+																	if ( $service_drug_item_proprietaryName_list ) {
 
-								}
+																		$service_drug_item['proprietaryName'] = $service_drug_item_proprietaryName_list;
 
-							// subTest
+																	}
 
-								if (
-									(
-										$service_type == 'MedicalTestPanel'
-										||
-										in_array( 'MedicalTestPanel', $service_type_parent )
-									)
-									&&
-									$nesting_level == 1
-								) {
+															// Define nonProprietaryName schema property value
 
-									// Get subTest relationship field value (clone field referencing 'field_schema_medicaltest')
+																// Base nonProprietaryName list array
 
-										$service_subTest_relationship = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $entity ) ?: array();
+																	$service_drug_item_nonProprietaryName_list = array();
 
-										// Add each item to subTest property values array
+																// Get nonProprietaryName subfield value
 
-											if ( $service_subTest_relationship ) {
+																	$service_drug_item['nonProprietaryName'] = $drug['schema_drug_nonproprietaryname'] ?? array();
 
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+																// Loop through rows of proprietaryName repeater value
 
-												$service_subTest = uamswp_fad_schema_service(
-													$service_subTest_relationship, // array // Required // List of IDs of the service items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
+																	if ( $service_drug_item['nonProprietaryName'] ) {
 
-											}
+																		foreach ( $service_drug_item['nonProprietaryName'] as $nonProprietaryName ) {
 
-									// Add to schema
+																			// Add subfield value to base nonProprietaryName list array
 
-										if ( $service_subTest ) {
+																				$service_drug_item_nonProprietaryName_list[] = $nonProprietaryName['schema_drug_nonproprietaryname_text'];
 
-											$service_item['subTest'] = $service_subTest;
+																		}
 
-										}
+																	}
 
-								}
+																// Clean up base nonProprietaryName list array
 
-							// relevantSpecialty
+																	if ( $service_drug_item_nonProprietaryName_list ) {
 
-								/* 
-								 * If applicable, a medical specialty in which this entity is relevant.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - MedicalSpecialty
-								 */
+																		// If there is only one item, flatten the multi-dimensional array by one step
 
-								// Base relevantSpecialty property values array
+																			uamswp_fad_flatten_multidimensional_array($service_drug_item_nonProprietaryName_list);
 
-									$service_relevantSpecialty = array();
+																	}
 
-								// Get relevantSpecialty multi-select field value (clone of 'field_schema_medicalspecialty_multiple')
+																// Add nonProprietaryName values to drug property value item array
 
-									$service_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $entity ) ?: array();
+																	if ( $service_drug_item_nonProprietaryName_list ) {
 
-									// Add each item to relevantSpecialty property values array
+																		$service_drug_item['nonProprietaryName'] = $service_drug_item_nonProprietaryName_list;
 
-										if ( $service_relevantSpecialty_multiselect ) {
+																	}
 
-											foreach ( $service_relevantSpecialty_multiselect as $relevantSpecialty ) {
+															// Define prescriptionStatus schema property value, add to drug property value item array
 
-													$service_relevantSpecialty[] = $relevantSpecialty ?? '';
+																$service_drug_item['prescriptionStatus'] = $drug['schema_drug_prescriptionstatus'] ?? '';
 
-											}
+															// Define rxcui schema property value, add to drug property value item array
 
-										}
+																$service_drug_item['rxcui'] = $drug['schema_drug_rxcui'] ?? '';
 
-								// Clean up relevantSpecialty property values array
+														// Add drug property value item array to the drug property values array
 
-									if ( $service_relevantSpecialty ) {
+															if ( $service_drug_item ) {
 
-										$service_relevantSpecialty = array_filter($service_relevantSpecialty);
-										$service_relevantSpecialty = array_values($service_relevantSpecialty);
-										sort( $service_relevantSpecialty, SORT_NATURAL | SORT_FLAG_CASE );
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($service_relevantSpecialty);
-
-									}
-
-								// Add to schema
-
-									if ( $service_relevantSpecialty ) {
-
-										$service_item['relevantspecialty'] = $service_relevantSpecialty;
-
-									}
-
-							// tissueSample
-
-								if (
-									$service_type == 'PathologyTest'
-									||
-									in_array( 'PathologyTest', $service_type_parent )
-								) {
-
-									// Base tissueSample property values array
-
-										$service_tissueSample = array();
-
-									// Get tissueSample repeater field value 
-
-										$service_tissueSample_repeater = get_field( 'schema_tissuesample', $entity ) ?: array();
-
-										// Add each item to tissueSample property values array
-
-											if ( $service_tissueSample_repeater ) {
-
-												foreach ( $service_tissueSample_repeater as $tissueSample ) {
-
-													$service_tissueSample[] = $tissueSample['schema_tissuesample_text'];
-
-												}
-
-											}
-
-									// Clean up tissueSample property values array
-
-										if ( $service_tissueSample ) {
-
-											$service_tissueSample = array_filter($service_tissueSample);
-											$service_tissueSample = array_values($service_tissueSample);
-											sort( $service_tissueSample, SORT_NATURAL | SORT_FLAG_CASE );
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array($service_tissueSample);
-
-										}
-
-									// Add to schema
-
-										if ( $service_tissueSample ) {
-
-											$service_item['tissueSample'] = $service_tissueSample;
-
-										}
-
-								}
-
-							// usedToDiagnose
-
-								if (
-									$service_type == 'MedicalTest'
-									||
-									in_array( 'MedicalTest', $service_type_parent )
-								) {
-
-									// Get usedToDiagnose relationship field value (clone of 'field_schema_medicalcondition')
-
-										$service_usedToDiagnose_relationship = get_field( 'treatment_procedure_schema_usedtodiagnose_schema_medicalcondition', $entity ) ?: array();
-
-										// Add each item to usedToDiagnose property values array
-
-											if ( $service_usedToDiagnose_relationship ) {
-
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-												$service_usedToDiagnose = uamswp_fad_schema_medicalcondition(
-													$service_usedToDiagnose_relationship, // array // Required // List of IDs of the MedicalCondition items
-													$page_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
-													$Service_i // int // Optional // Iteration counter for treatment-as-Service
-												);
-
-											}
-
-									// Add to schema
-
-										if ( $service_usedToDiagnose ) {
-
-											$service_item['usedToDiagnose'] = $service_usedToDiagnose;
-
-										}
-
-								}
-
-							// usesDevice
-
-								if (
-									$service_type == 'MedicalTest'
-									||
-									in_array( 'MedicalTest', $service_type_parent )
-								) {
-
-									// Base usesDevice property values array
-
-										$service_usesDevice = array();
-
-									// Get usesDevice repeater field value
-
-										$service_usesDevice_repeater = get_field( 'schema_medicaldevice', $entity ) ?: array();
-
-										// Add each item to usesDevice property values array
-
-											if ( $service_usesDevice_repeater ) {
-
-												foreach ( $service_usesDevice_repeater as $usesDevice ) {
-
-													// Base usesDevice property value item array
-
-														$service_usesDevice_item = array();
-
-													// @type
-
-														$service_usesDevice_item['@type'] = 'MedicalDevice'; // Replace 'MedicalDevice' with subtype, if relevant
-
-													// name
-
-														/* 
-														 * The name of the item.
-														 * 
-														 * Subproperty of:
-														 * 
-														 *     - rdfs:label
-														 * 
-														 * Values expected to be one of these types:
-														 * 
-														 *     - Text
-														 */
-
-														$service_usesDevice_item['name'] = $usesDevice['schema_medicaldevice_name'];
-
-													// alternateName
-
-														/* 
-														 * An alias for the item.
-														 * 
-														 * Values expected to be one of these types:
-														 * 
-														 *     - Text
-														 */
-
-														// Get alternateName repeater field value
-
-															$service_usesDevice_item_alternateName_repeater = $usesDevice['schema_medicaldevice_alternatename']['schema_alternatename'] ?: array();
-
-															// Add each item to alternateName property value array
-
-																$service_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
-																	$service_alternateName_repeater, // alternateName repeater field
-																	'schema_alternatename_text' // alternateName item field name
-																);
-
-														// Add to usesDevice property value item array
-
-															if ( $service_usesDevice_item_alternateName ) {
-
-																$service_usesDevice_item['alternateName'] = $service_usesDevice_item_alternateName;
+																$service_drug[] = $service_drug_item;
 
 															}
-
-													// code
-
-														/* 
-														 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-														 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-														 * 
-														 * Values expected to be one of these types:
-														 * 
-														 *     - MedicalCode
-														 */
-
-														// Get code repeater field value
-
-															$service_usesDevice_item_code_repeater = $usesDevice['schema_medicaldevice_code']['schema_medicalcode'] ?: array();
-
-															// Add each item to code property value array
-
-																$service_usesDevice_item_code = uamswp_fad_schema_code(
-																	$service_usesDevice_item_code_repeater // code repeater field
-																);
-
-														// Add to usesDevice property value item array
-
-															if ( $service_usesDevice_item_code ) {
-
-																$service_usesDevice_item['code'] = $service_usesDevice_item_code;
-
-															}
-
-													// Add item to the list array
-
-														$service_usesDevice[] = $service_usesDevice_item;
-
-												}
-
-												// Clean up list array
-
-													$service_usesDevice = array_filter($service_usesDevice);
-													$service_usesDevice = array_values($service_usesDevice);
-													sort( $service_usesDevice, SORT_NATURAL | SORT_FLAG_CASE );
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array($service_usesDevice);
-
-												// Add to schema
-
-													if ( $service_usesDevice ) {
-
-														$service_item['usesDevice'] = $service_usesDevice;
 
 													}
 
+												}
+
+										// Clean up drug property values array
+
+											if ( $service_drug ) {
+
+												$service_drug = array_filter($service_drug);
+												$service_drug = array_values($service_drug);
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($service_drug);
+
 											}
 
-								}
+										// Add to schema
+
+											if ( $service_drug ) {
+
+												$service_item['drug'] = $service_drug;
+
+											}
+
+									}
+
+								// duplicateTherapy
+
+									if (
+										(
+											$service_type == 'TherapeuticProcedure'
+											||
+											in_array( 'TherapeuticProcedure', $service_type_parent )
+										)
+										&&
+										$nesting_level == 1
+									) {
+
+										// Get duplicateTherapy relationship repeater value (clones 'field_schema_medicaltherapy')
+
+											$service_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $entity ) ?: array();
+
+											// Add each item to duplicateTherapy property values array
+
+												if ( $service_duplicateTherapy_relationship ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$service_duplicateTherapy = uamswp_fad_schema_service(
+														$service_duplicateTherapy_relationship, // array // Required // List of IDs of the service items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
+
+												}
+
+										// Add to schema
+
+											if ( $service_duplicateTherapy ) {
+
+												$service_item['duplicateTherapy'] = $service_duplicateTherapy;
+
+											}
+
+									}
+
+								// MedicalImagingTechnique
+
+									if (
+										$service_type == 'ImagingTest'
+										||
+										in_array( 'ImagingTest', $service_type_parent )
+									) {
+
+										// Get field value
+
+											$service_MedicalImagingTechnique = get_field( 'schema_medicalimagingtechnique', $entity ) ?: '';
+
+										// Add to schema
+
+											if ( $service_MedicalImagingTechnique ) {
+
+												$service_item['imagingTechnique'] = $service_MedicalImagingTechnique;
+
+											}
+
+									}
+
+								// procedureType
+
+									if (
+										$service_type == 'MedicalProcedure'
+										||
+										(
+											in_array( 'MedicalProcedure', $service_type_parent )
+											&&
+											$service_type != 'SurgicalProcedure'
+											&&
+											!in_array( 'SurgicalProcedure', $service_type_parent )
+										)
+									) {
+
+										// Get field value
+
+											$service_procedureType = get_field( 'schema_medicalproceduretype', $entity ) ?: '';
+
+										// Add to schema
+
+											if ( $service_procedureType ) {
+
+												$service_item['procedureType'] = $service_procedureType;
+
+											}
+
+									}
+
+								// subTest
+
+									if (
+										(
+											$service_type == 'MedicalTestPanel'
+											||
+											in_array( 'MedicalTestPanel', $service_type_parent )
+										)
+										&&
+										$nesting_level == 1
+									) {
+
+										// Get subTest relationship field value (clone field referencing 'field_schema_medicaltest')
+
+											$service_subTest_relationship = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $entity ) ?: array();
+
+											// Add each item to subTest property values array
+
+												if ( $service_subTest_relationship ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$service_subTest = uamswp_fad_schema_service(
+														$service_subTest_relationship, // array // Required // List of IDs of the service items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
+
+												}
+
+										// Add to schema
+
+											if ( $service_subTest ) {
+
+												$service_item['subTest'] = $service_subTest;
+
+											}
+
+									}
+
+								// relevantSpecialty
+
+									/* 
+									 * If applicable, a medical specialty in which this entity is relevant.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSpecialty
+									 */
+
+									// Base relevantSpecialty property values array
+
+										$service_relevantSpecialty = array();
+
+									// Get relevantSpecialty multi-select field value (clone of 'field_schema_medicalspecialty_multiple')
+
+										$service_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $entity ) ?: array();
+
+										// Add each item to relevantSpecialty property values array
+
+											if ( $service_relevantSpecialty_multiselect ) {
+
+												foreach ( $service_relevantSpecialty_multiselect as $relevantSpecialty ) {
+
+														$service_relevantSpecialty[] = $relevantSpecialty ?? '';
+
+												}
+
+											}
+
+									// Clean up relevantSpecialty property values array
+
+										if ( $service_relevantSpecialty ) {
+
+											$service_relevantSpecialty = array_filter($service_relevantSpecialty);
+											$service_relevantSpecialty = array_values($service_relevantSpecialty);
+											sort( $service_relevantSpecialty, SORT_NATURAL | SORT_FLAG_CASE );
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($service_relevantSpecialty);
+
+										}
+
+									// Add to schema
+
+										if ( $service_relevantSpecialty ) {
+
+											$service_item['relevantspecialty'] = $service_relevantSpecialty;
+
+										}
+
+								// tissueSample
+
+									if (
+										$service_type == 'PathologyTest'
+										||
+										in_array( 'PathologyTest', $service_type_parent )
+									) {
+
+										// Base tissueSample property values array
+
+											$service_tissueSample = array();
+
+										// Get tissueSample repeater field value 
+
+											$service_tissueSample_repeater = get_field( 'schema_tissuesample', $entity ) ?: array();
+
+											// Add each item to tissueSample property values array
+
+												if ( $service_tissueSample_repeater ) {
+
+													foreach ( $service_tissueSample_repeater as $tissueSample ) {
+
+														$service_tissueSample[] = $tissueSample['schema_tissuesample_text'];
+
+													}
+
+												}
+
+										// Clean up tissueSample property values array
+
+											if ( $service_tissueSample ) {
+
+												$service_tissueSample = array_filter($service_tissueSample);
+												$service_tissueSample = array_values($service_tissueSample);
+												sort( $service_tissueSample, SORT_NATURAL | SORT_FLAG_CASE );
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($service_tissueSample);
+
+											}
+
+										// Add to schema
+
+											if ( $service_tissueSample ) {
+
+												$service_item['tissueSample'] = $service_tissueSample;
+
+											}
+
+									}
+
+								// usedToDiagnose
+
+									if (
+										$service_type == 'MedicalTest'
+										||
+										in_array( 'MedicalTest', $service_type_parent )
+									) {
+
+										// Get usedToDiagnose relationship field value (clone of 'field_schema_medicalcondition')
+
+											$service_usedToDiagnose_relationship = get_field( 'treatment_procedure_schema_usedtodiagnose_schema_medicalcondition', $entity ) ?: array();
+
+											// Add each item to usedToDiagnose property values array
+
+												if ( $service_usedToDiagnose_relationship ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$service_usedToDiagnose = uamswp_fad_schema_medicalcondition(
+														$service_usedToDiagnose_relationship, // array // Required // List of IDs of the MedicalCondition items
+														$page_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+														$Service_i // int // Optional // Iteration counter for treatment-as-Service
+													);
+
+												}
+
+										// Add to schema
+
+											if ( $service_usedToDiagnose ) {
+
+												$service_item['usedToDiagnose'] = $service_usedToDiagnose;
+
+											}
+
+									}
+
+								// usesDevice
+
+									if (
+										$service_type == 'MedicalTest'
+										||
+										in_array( 'MedicalTest', $service_type_parent )
+									) {
+
+										// Base usesDevice property values array
+
+											$service_usesDevice = array();
+
+										// Get usesDevice repeater field value
+
+											$service_usesDevice_repeater = get_field( 'schema_medicaldevice', $entity ) ?: array();
+
+											// Add each item to usesDevice property values array
+
+												if ( $service_usesDevice_repeater ) {
+
+													foreach ( $service_usesDevice_repeater as $usesDevice ) {
+
+														// Base usesDevice property value item array
+
+															$service_usesDevice_item = array();
+
+														// @type
+
+															$service_usesDevice_item['@type'] = 'MedicalDevice'; // Replace 'MedicalDevice' with subtype, if relevant
+
+														// name
+
+															/* 
+															 * The name of the item.
+															 * 
+															 * Subproperty of:
+															 * 
+															 *     - rdfs:label
+															 * 
+															 * Values expected to be one of these types:
+															 * 
+															 *     - Text
+															 */
+
+															$service_usesDevice_item['name'] = $usesDevice['schema_medicaldevice_name'];
+
+														// alternateName
+
+															/* 
+															 * An alias for the item.
+															 * 
+															 * Values expected to be one of these types:
+															 * 
+															 *     - Text
+															 */
+
+															// Get alternateName repeater field value
+
+																$service_usesDevice_item_alternateName_repeater = $usesDevice['schema_medicaldevice_alternatename']['schema_alternatename'] ?: array();
+
+																// Add each item to alternateName property value array
+
+																	$service_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
+																		$service_alternateName_repeater, // alternateName repeater field
+																		'schema_alternatename_text' // alternateName item field name
+																	);
+
+															// Add to usesDevice property value item array
+
+																if ( $service_usesDevice_item_alternateName ) {
+
+																	$service_usesDevice_item['alternateName'] = $service_usesDevice_item_alternateName;
+
+																}
+
+														// code
+
+															/* 
+															 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+															 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+															 * 
+															 * Values expected to be one of these types:
+															 * 
+															 *     - MedicalCode
+															 */
+
+															// Get code repeater field value
+
+																$service_usesDevice_item_code_repeater = $usesDevice['schema_medicaldevice_code']['schema_medicalcode'] ?: array();
+
+																// Add each item to code property value array
+
+																	$service_usesDevice_item_code = uamswp_fad_schema_code(
+																		$service_usesDevice_item_code_repeater // code repeater field
+																	);
+
+															// Add to usesDevice property value item array
+
+																if ( $service_usesDevice_item_code ) {
+
+																	$service_usesDevice_item['code'] = $service_usesDevice_item_code;
+
+																}
+
+														// Add item to the list array
+
+															$service_usesDevice[] = $service_usesDevice_item;
+
+													}
+
+													// Clean up list array
+
+														$service_usesDevice = array_filter($service_usesDevice);
+														$service_usesDevice = array_values($service_usesDevice);
+														sort( $service_usesDevice, SORT_NATURAL | SORT_FLAG_CASE );
+
+														// If there is only one item, flatten the multi-dimensional array by one step
+
+															uamswp_fad_flatten_multidimensional_array($service_usesDevice);
+
+													// Add to schema
+
+														if ( $service_usesDevice ) {
+
+															$service_item['usesDevice'] = $service_usesDevice;
+
+														}
+
+												}
+
+									}
 
 							// Sort array
 
