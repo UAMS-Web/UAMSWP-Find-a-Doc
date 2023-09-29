@@ -24583,467 +24583,469 @@
 
 						}
 
-				foreach ( $repeater as $entity ) {
+				// Loop through each treatment to add values
 
-					// Retrieve the value of the item transient
+					foreach ( $repeater as $entity ) {
 
-						uamswp_fad_get_transient(
-							'item_' . $entity, // Required // String added to transient name for disambiguation.
-							$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
-						);
+						// Retrieve the value of the item transient
 
-					if ( !empty( $condition_item ) ) {
-
-						/* 
-						 * The transient exists.
-						 * Return the variable.
-						 */
-
-						// Add to list of conditions
-
-							$condition_list[] = $condition_item;
-
-					} else {
-
-						// If post is not published, skip to the next iteration
-
-							if ( get_post_status($entity) != 'publish' ) {
-
-								continue;
-
-							}
-
-						// Eliminate PHP errors / reset variables
-
-							$condition_item = array(); // Base array
-							$condition_additionalType_repeater = array();
-							$condition_additionalType = array();
-							$condition_alternateName = array();
-							$condition_alternateName_repeater = array();
-							$condition_code = array();
-							$condition_code_repeater = array();
-							$condition_id = '';
-							$condition_infectiousAgent = '';
-							$condition_infectiousAgentClass = '';
-							$condition_name = '';
-							$condition_possibleTreatment = array();
-							$condition_possibleTreatment_relationship = array();
-							$condition_primaryPrevention = array();
-							$condition_primaryPrevention_relationship = array();
-							$condition_sameAs = array();
-							$condition_sameAs_repeater = array();
-							$condition_secondaryPrevention = array();
-							$condition_secondaryPrevention_relationship = array();
-							$condition_type = '';
-							$condition_type_parent = array();
-							$condition_typicalTest = array();
-							$condition_typicalTest_relationship = array();
-
-						// @id
-
-							// Define value
-
-								$page_fragment = 'MedicalCondition';
-
-								if ( $nesting_level == 1 ) {
-
-									$condition_id = $page_url . '#' . $page_fragment . $MedicalCondition_i;
-									$MedicalCondition_i++;
-
-								}
-
-							// Add to schema
-
-								if ( $condition_id ) {
-
-									$condition_item['@id'] = $condition_id;
-									$node_identifier_list[] = $condition_item['@id']; // Add to the list of existing node identifiers
-
-								}
-
-						// @type
-
-							$condition_type = 'MedicalCondition';
-
-							// MedicalCondition Subtype
-
-								$condition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $condition_type;
-								$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
-
-							// Add to schema
-
-								if ( $condition_type ) {
-
-									$condition_item['@type'] = $condition_type;
-
-								}
-
-						// name
-
-							/* 
-							 * The name of the item.
-							 * 
-							 * Subproperty of:
-							 * 
-							 *     - rdfs:label
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							// Get value
-
-								$condition_name = get_the_title($entity); // Expects Text
-
-							// Add to array
-
-								if ( $condition_name ) {
-
-									$condition_item['name'] = $condition_name;
-
-								}
-
-						// alternateName
-
-							/* 
-							 * An alias for the item.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 */
-
-							// Get alternateName repeater field value
-
-								$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
-
-								// Add each item to alternateName property values array
-
-									$condition_alternateName = uamswp_fad_schema_alternatename(
-										$condition_alternateName_repeater, // alternateName repeater field
-										'alternate_text' // alternateName item field name
-									);
-
-							// Add to schema
-
-								if ( $condition_alternateName ) {
-
-									$condition_item['alternateName'] = $condition_alternateName;
-
-								}
-
-						// code
-
-							/* 
-							 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-							 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - MedicalCode
-							 */
-
-							// Get code repeater field value
-
-								$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
-
-								// Add each item to code property values array
-
-									$condition_code = uamswp_fad_schema_code(
-										$condition_code_repeater // code repeater field
-									);
-
-							// Add to schema
-
-								if ( $condition_code ) {
-
-									$condition_item['code'] = $condition_code;
-
-								}
-
-						// additionalType
-
-							/* 
-							 * An additional type for the item, typically used for adding more specific types 
-							 * from external vocabularies in microdata syntax. This is a relationship between 
-							 * something and a class that the thing is in. Typically the value is a 
-							 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-							 * in RDF. Text values can be used sparingly, for cases where useful information 
-							 * can be added without their being an appropriate schema to reference. In the 
-							 * case of text values, the class label should follow the schema.org style guide.
-							 * 
-							 * Subproperty of:
-							 *     - rdf:type
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - Text
-							 *     - URL
-							 */
-
-							// Get additionalType repeater field value
-
-								$condition_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
-
-								// Add each item to additionalType property values array
-
-									if ( $condition_additionalType_repeater ) {
-
-										$condition_additionalType = uamswp_fad_schema_additionaltype(
-											$condition_additionalType_repeater, // additionalType repeater field
-											'schema_additionalType_uri' // additionalType item field name
-										);
-
-									}
-
-							// Add to schema
-
-								if ( $condition_additionalType ) {
-
-									$service_item['additionalType'] = $condition_additionalType;
-
-								}
-
-						// sameAs
-
-							/* 
-							 * URL of a reference Web page that unambiguously indicates the item's identity 
-							 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-							 * website).
-							 * 
-							 * Values expected to be one of these types:
-							 * 
-							 *     - URL
-							 */
-
-							// Get sameAs repeater field value
-
-								$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
-
-								// Add each item to sameAs property values array
-
-									if ( $condition_sameAs_repeater ) {
-
-										$condition_sameAs = uamswp_fad_schema_sameas(
-											$condition_sameAs_repeater, // sameAs repeater field
-											'schema_sameas_url' // sameAs item field name
-										);
-
-									}
-
-							// Add to schema
-
-								if ( $condition_sameAs ) {
-
-									$condition_item['sameAs'] = $condition_sameAs;
-
-								}
-
-						// infectiousAgent
-
-							if (
-								$condition_type == 'InfectiousDisease'
-								||
-								in_array( 'InfectiousDisease', $condition_type_parent )
-							) {
-
-								// Get field value
-
-									$condition_infectiousAgent = get_field( 'schema_infectiousagent', $entity ) ?: '';
-
-								// Add to schema
-
-									if ( $condition_infectiousAgent ) {
-
-										$condition_item['infectiousAgent'] = $condition_infectiousAgent;
-
-									}
-
-							}
-
-						// infectiousAgentClass
-
-							if (
-								$condition_type == 'InfectiousDisease'
-								||
-								in_array( 'InfectiousDisease', $condition_type_parent )
-							) {
-
-								// Get field value
-
-									$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $entity ) ?: '';
-
-								// Add to schema
-
-									if ( $condition_infectiousAgentClass ) {
-
-										$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
-
-									}
-
-							}
-
-						// possibleTreatment
-
-							if ( $nesting_level == 1 ) {
-
-								// Get possibleTreatment relationship field value
-
-									$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
-
-									// Add each item to possibleTreatment property values array
-
-										if ( $condition_possibleTreatment_relationship ) {
-
-											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-											$condition_possibleTreatment = uamswp_fad_schema_service(
-												$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $condition_possibleTreatment ) {
-
-										$condition_item['possibleTreatment'] = $condition_possibleTreatment;
-
-									}
-
-							}
-
-						// primaryPrevention
-
-							if ( $nesting_level == 1 ) {
-
-								// Get primaryPrevention relationship field value
-
-									$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
-
-									// Add each item to primaryPrevention property values array
-
-										if ( $condition_primaryPrevention_relationship ) {
-
-											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-											$condition_primaryPrevention = uamswp_fad_schema_service(
-												$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $condition_primaryPrevention ) {
-
-										$condition_item['primaryPrevention'] = $condition_primaryPrevention;
-
-									}
-
-							}
-
-						// secondaryPrevention
-
-							if ( $nesting_level == 1 ) {
-
-								// Get secondaryPrevention relationship field value
-
-									$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
-
-									// Add each item to secondaryPrevention property values array
-
-										if ( $condition_secondaryPrevention_relationship ) {
-
-											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-											$condition_secondaryPrevention = uamswp_fad_schema_service(
-												$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $condition_secondaryPrevention ) {
-
-										$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
-
-									}
-
-							}
-
-						// typicalTest
-
-							if ( $nesting_level == 1 ) {
-
-								// Get typicalTest relationship field value
-
-									$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
-
-									// Add each item to typicalTest property values array
-
-										if ( $condition_typicalTest_relationship ) {
-
-											$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-											$condition_typicalTest = uamswp_fad_schema_service(
-												$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
-												$page_url, // string // Required // Page URL
-												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-											);
-
-										}
-
-								// Add to schema
-
-									if ( $condition_typicalTest ) {
-
-										$condition_item['typicalTest'] = $condition_typicalTest;
-
-									}
-
-							}
-
-						// Sort array
-
-							ksort( $condition_item, SORT_NATURAL | SORT_FLAG_CASE );
-
-						// Set/update the value of the item transient
-
-							uamswp_fad_set_transient(
+							uamswp_fad_get_transient(
 								'item_' . $entity, // Required // String added to transient name for disambiguation.
 								$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-						// Add to list of conditions
+						if ( !empty( $condition_item ) ) {
 
-							$condition_list[] = $condition_item;
+							/* 
+							 * The transient exists.
+							 * Return the variable.
+							 */
 
-					}
+							// Add to list of conditions
 
-				} // endforeach ( $repeater as $entity )
+								$condition_list[] = $condition_item;
+
+						} else {
+
+							// If post is not published, skip to the next iteration
+
+								if ( get_post_status($entity) != 'publish' ) {
+
+									continue;
+
+								}
+
+							// Eliminate PHP errors / reset variables
+
+								$condition_item = array(); // Base array
+								$condition_additionalType_repeater = array();
+								$condition_additionalType = array();
+								$condition_alternateName = array();
+								$condition_alternateName_repeater = array();
+								$condition_code = array();
+								$condition_code_repeater = array();
+								$condition_id = '';
+								$condition_infectiousAgent = '';
+								$condition_infectiousAgentClass = '';
+								$condition_name = '';
+								$condition_possibleTreatment = array();
+								$condition_possibleTreatment_relationship = array();
+								$condition_primaryPrevention = array();
+								$condition_primaryPrevention_relationship = array();
+								$condition_sameAs = array();
+								$condition_sameAs_repeater = array();
+								$condition_secondaryPrevention = array();
+								$condition_secondaryPrevention_relationship = array();
+								$condition_type = '';
+								$condition_type_parent = array();
+								$condition_typicalTest = array();
+								$condition_typicalTest_relationship = array();
+
+							// @id
+
+								// Define value
+
+									$page_fragment = 'MedicalCondition';
+
+									if ( $nesting_level == 1 ) {
+
+										$condition_id = $page_url . '#' . $page_fragment . $MedicalCondition_i;
+										$MedicalCondition_i++;
+
+									}
+
+								// Add to schema
+
+									if ( $condition_id ) {
+
+										$condition_item['@id'] = $condition_id;
+										$node_identifier_list[] = $condition_item['@id']; // Add to the list of existing node identifiers
+
+									}
+
+							// @type
+
+								$condition_type = 'MedicalCondition';
+
+								// MedicalCondition Subtype
+
+									$condition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $condition_type;
+									$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
+
+								// Add to schema
+
+									if ( $condition_type ) {
+
+										$condition_item['@type'] = $condition_type;
+
+									}
+
+							// name
+
+								/* 
+								 * The name of the item.
+								 * 
+								 * Subproperty of:
+								 * 
+								 *     - rdfs:label
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								// Get value
+
+									$condition_name = get_the_title($entity); // Expects Text
+
+								// Add to array
+
+									if ( $condition_name ) {
+
+										$condition_item['name'] = $condition_name;
+
+									}
+
+							// alternateName
+
+								/* 
+								 * An alias for the item.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 */
+
+								// Get alternateName repeater field value
+
+									$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
+
+									// Add each item to alternateName property values array
+
+										$condition_alternateName = uamswp_fad_schema_alternatename(
+											$condition_alternateName_repeater, // alternateName repeater field
+											'alternate_text' // alternateName item field name
+										);
+
+								// Add to schema
+
+									if ( $condition_alternateName ) {
+
+										$condition_item['alternateName'] = $condition_alternateName;
+
+									}
+
+							// code
+
+								/* 
+								 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+								 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - MedicalCode
+								 */
+
+								// Get code repeater field value
+
+									$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+
+									// Add each item to code property values array
+
+										$condition_code = uamswp_fad_schema_code(
+											$condition_code_repeater // code repeater field
+										);
+
+								// Add to schema
+
+									if ( $condition_code ) {
+
+										$condition_item['code'] = $condition_code;
+
+									}
+
+							// additionalType
+
+								/* 
+								 * An additional type for the item, typically used for adding more specific types 
+								 * from external vocabularies in microdata syntax. This is a relationship between 
+								 * something and a class that the thing is in. Typically the value is a 
+								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+								 * in RDF. Text values can be used sparingly, for cases where useful information 
+								 * can be added without their being an appropriate schema to reference. In the 
+								 * case of text values, the class label should follow the schema.org style guide.
+								 * 
+								 * Subproperty of:
+								 *     - rdf:type
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - Text
+								 *     - URL
+								 */
+
+								// Get additionalType repeater field value
+
+									$condition_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
+
+									// Add each item to additionalType property values array
+
+										if ( $condition_additionalType_repeater ) {
+
+											$condition_additionalType = uamswp_fad_schema_additionaltype(
+												$condition_additionalType_repeater, // additionalType repeater field
+												'schema_additionalType_uri' // additionalType item field name
+											);
+
+										}
+
+								// Add to schema
+
+									if ( $condition_additionalType ) {
+
+										$service_item['additionalType'] = $condition_additionalType;
+
+									}
+
+							// sameAs
+
+								/* 
+								 * URL of a reference Web page that unambiguously indicates the item's identity 
+								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+								 * website).
+								 * 
+								 * Values expected to be one of these types:
+								 * 
+								 *     - URL
+								 */
+
+								// Get sameAs repeater field value
+
+									$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+
+									// Add each item to sameAs property values array
+
+										if ( $condition_sameAs_repeater ) {
+
+											$condition_sameAs = uamswp_fad_schema_sameas(
+												$condition_sameAs_repeater, // sameAs repeater field
+												'schema_sameas_url' // sameAs item field name
+											);
+
+										}
+
+								// Add to schema
+
+									if ( $condition_sameAs ) {
+
+										$condition_item['sameAs'] = $condition_sameAs;
+
+									}
+
+							// infectiousAgent
+
+								if (
+									$condition_type == 'InfectiousDisease'
+									||
+									in_array( 'InfectiousDisease', $condition_type_parent )
+								) {
+
+									// Get field value
+
+										$condition_infectiousAgent = get_field( 'schema_infectiousagent', $entity ) ?: '';
+
+									// Add to schema
+
+										if ( $condition_infectiousAgent ) {
+
+											$condition_item['infectiousAgent'] = $condition_infectiousAgent;
+
+										}
+
+								}
+
+							// infectiousAgentClass
+
+								if (
+									$condition_type == 'InfectiousDisease'
+									||
+									in_array( 'InfectiousDisease', $condition_type_parent )
+								) {
+
+									// Get field value
+
+										$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $entity ) ?: '';
+
+									// Add to schema
+
+										if ( $condition_infectiousAgentClass ) {
+
+											$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
+
+										}
+
+								}
+
+							// possibleTreatment
+
+								if ( $nesting_level == 1 ) {
+
+									// Get possibleTreatment relationship field value
+
+										$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
+
+										// Add each item to possibleTreatment property values array
+
+											if ( $condition_possibleTreatment_relationship ) {
+
+												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+												$condition_possibleTreatment = uamswp_fad_schema_service(
+													$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $condition_possibleTreatment ) {
+
+											$condition_item['possibleTreatment'] = $condition_possibleTreatment;
+
+										}
+
+								}
+
+							// primaryPrevention
+
+								if ( $nesting_level == 1 ) {
+
+									// Get primaryPrevention relationship field value
+
+										$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
+
+										// Add each item to primaryPrevention property values array
+
+											if ( $condition_primaryPrevention_relationship ) {
+
+												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+												$condition_primaryPrevention = uamswp_fad_schema_service(
+													$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $condition_primaryPrevention ) {
+
+											$condition_item['primaryPrevention'] = $condition_primaryPrevention;
+
+										}
+
+								}
+
+							// secondaryPrevention
+
+								if ( $nesting_level == 1 ) {
+
+									// Get secondaryPrevention relationship field value
+
+										$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
+
+										// Add each item to secondaryPrevention property values array
+
+											if ( $condition_secondaryPrevention_relationship ) {
+
+												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+												$condition_secondaryPrevention = uamswp_fad_schema_service(
+													$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $condition_secondaryPrevention ) {
+
+											$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
+
+										}
+
+								}
+
+							// typicalTest
+
+								if ( $nesting_level == 1 ) {
+
+									// Get typicalTest relationship field value
+
+										$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
+
+										// Add each item to typicalTest property values array
+
+											if ( $condition_typicalTest_relationship ) {
+
+												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+												$condition_typicalTest = uamswp_fad_schema_service(
+													$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
+													$page_url, // string // Required // Page URL
+													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												);
+
+											}
+
+									// Add to schema
+
+										if ( $condition_typicalTest ) {
+
+											$condition_item['typicalTest'] = $condition_typicalTest;
+
+										}
+
+								}
+
+							// Sort array
+
+								ksort( $condition_item, SORT_NATURAL | SORT_FLAG_CASE );
+
+							// Set/update the value of the item transient
+
+								uamswp_fad_set_transient(
+									'item_' . $entity, // Required // String added to transient name for disambiguation.
+									$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+								);
+
+							// Add to list of conditions
+
+								$condition_list[] = $condition_item;
+
+						}
+
+					} // endforeach ( $repeater as $entity )
 
 				// Clean up list array
 
