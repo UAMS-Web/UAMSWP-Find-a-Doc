@@ -21770,708 +21770,710 @@
 
 						}
 
-				foreach ( $repeater as $entity ) {
+				// Loop through each area of expertise to add values
 
-					// Retrieve the value of the item transient
+					foreach ( $repeater as $entity ) {
 
-						uamswp_fad_get_transient(
-							'item_' . $entity, // Required // String added to transient name for disambiguation.
-							$MedicalEntity_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
-							__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
-						);
+						// Retrieve the value of the item transient
 
-					if ( !empty( $MedicalEntity_item ) ) {
-
-						/* 
-						 * The transient exists.
-						 * Return the variable.
-						 */
-
-						// Add to list of areas of expertise
-
-							$expertise_list[] = $MedicalEntity_item;
-
-					} else {
-
-						// If post is not published, skip to the next iteration
-
-							if ( get_post_status($entity) != 'publish' ) {
-
-								continue;
-
-							}
-
-						// Eliminate PHP errors / reset variables
-
-							$expertise_item_MedicalWebPage = array(); // Base array
-							$expertise_item_MedicalEntity = array(); // Base array
-							$MedicalEntity_item = array(); // Base array
-							$MedicalEntity_url = '';
-							$MedicalEntity_type = '';
-							$MedicalEntity_id = '';
-							$MedicalEntity_image = '';
-							$MedicalEntity_featured_image = '';
-							$MedicalEntity_name = '';
-							$MedicalEntity_alternateName = '';
-							$MedicalEntity_code = '';
-							$MedicalEntity_description = '';
-							$MedicalEntity_image_id = '';
-							$MedicalEntity_mainEntityOfPage = '';
-							$MedicalEntity_medicineSystem = '';
-							$MedicalEntity_relevantSpecialty = array();
-							$MedicalEntity_sameAs = '';
-							$MedicalEntity_subjectOf = '';
-							$MedicalEntity_level = '';
-							$ontology_type = '';
-							$current_fpage = '';
-							$fpage_query = '';
-							$MedicalEntity_alternateName_array = '';
-
-							// Reused variables
-
-								$MedicalEntity_additionalType = $MedicalEntity_additionalType ?? '';
-
-						// Get ontology type
-
-							$ontology_type = get_field( 'expertise_type', $entity ) ?? true; // Check if 'expertise_type' is not null, and if so, set value to true
-
-						// If the page is not an ontology type, skip to the next iteration
-
-							if ( !$ontology_type ) {
-
-								continue;
-
-							}
-
-						// Fake subpage query and get fake subpage slug
-
-							if (
-								$ontology_type
-								&&
-								$nesting_level == 0
-							) {
-
-								$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
-								$fpage_query = $current_fpage ? true : false;
-
-							}
-
-						// Add property values
-
-							// url
-
-								/* 
-								 * URL of the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								$MedicalEntity_url = user_trailingslashit( get_permalink($entity) );
-								$MedicalEntity_item['url'] = $MedicalEntity_url;
-
-							// @type
-
-								$MedicalEntity_type = 'MedicalEntity';
-
-								// Add to schema
-
-									$MedicalEntity_item['@type'] = $MedicalEntity_type;
-
-							// @id
-
-								if ( $nesting_level <= 1 ) {
-
-									// Get values
-
-										$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
-										// $MedicalEntity_id .= $MedicalEntity_i;
-										// $MedicalEntity_id++;
-
-									// Add to schema
-
-										$MedicalEntity_item['@id'] = $MedicalEntity_id;
-										$node_identifier_list[] = $MedicalEntity_item['@id']; // Add to the list of existing node identifiers
-
-								}
-
-							// name
-
-								/* 
-								 * The name of the item.
-								 * 
-								 * Subproperty of:
-								 * 
-								 *     - rdfs:label
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
-
-								// Get values
-
-									$MedicalEntity_name = get_the_title($entity) ?: '';
-
-								// Add to item values
-
-									if ( $MedicalEntity_name ) {
-
-										$MedicalEntity_item['name'] = $MedicalEntity_name;
-
-									}
-
-							// additionalType
-
-								/* 
-								 * An additional type for the item, typically used for adding more specific types 
-								 * from external vocabularies in microdata syntax. This is a relationship between 
-								 * something and a class that the thing is in. Typically the value is a 
-								 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-								 * in RDF. Text values can be used sparingly, for cases where useful information 
-								 * can be added without their being an appropriate schema to reference. In the 
-								 * case of text values, the class label should follow the schema.org style guide.
-								 * 
-								 * Subproperty of:
-								 *     - rdf:type
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - URL
-								 */
-
-								// Get values
-
-									// Get level of the item within the area of expertise page hierarchy
-
-										$MedicalEntity_level = 1 + count(
-											get_ancestors(
-												$entity, // $object_id  // int // Optional // The ID of the object // Default: 0
-												'expertise', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
-												'post_type' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
-											)
-										) ?? '';
-
-									// Set value relevant to level
-
-										if ( $MedicalEntity_level ) {
-
-											if ( $MedicalEntity_level == 1 ) {
-
-												$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q930752'; // Wikidata entry for 'medical specialty'
-
-											} else {
-
-												$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q7632042'; // Wikidata entry for 'subspecialty'
-
-											}
-
-										}
-
-								// Add to item values
-
-									if ( $MedicalEntity_additionalType ) {
-
-										$MedicalEntity_item['additionalType'] = $MedicalEntity_additionalType;
-
-									}
-
-							// alternateName
-
-								/* 
-								 * An alias for the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 */
-
-								if ( $nesting_level == 0 ) {
-
-									// Get repeater field value
-
-										$MedicalEntity_alternateName_array = get_field( 'expertise_alternate_names', $entity ) ?: array();
-
-									// Get item values
-
-										$MedicalEntity_alternateName = uamswp_fad_schema_alternatename(
-											$MedicalEntity_alternateName_array, // alternateName repeater field
-											'alternate_text' // alternateName item field name
-										);
-
-									// Add to schema
-
-										if ( $MedicalEntity_alternateName ) {
-
-											$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
-
-										}
-
-								}
-
-							// code
-
-								/* 
-								 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-								 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - MedicalCode
-								 */
-
-								if ( $nesting_level == 0 ) {
-
-									// Get values
-
-										// Code repeater
-
-											$MedicalEntity_code_array = get_field( 'schema_medicalcode', $entity ) ?: array();
-
-										// Health Care Provider Taxonomy Code Set taxonomy field
-
-											$MedicalEntity_nucc_array = get_field( 'schema_nucc_multiple', $entity ) ?: array();
-
-									// Get item values
-
-										$MedicalEntity_code = uamswp_fad_schema_code(
-											$MedicalEntity_code_array, // code repeater field
-											$MedicalEntity_nucc_array // Health Care Provider Taxonomy Code Set taxonomy field
-										);
-
-									// Add to schema
-
-										if ( $MedicalEntity_code ) {
-
-											$MedicalEntity_item['code'] = $MedicalEntity_code;
-
-										}
-
-								}
-
-							// description
-
-								/* 
-								 * A description of the item.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Text
-								 *     - TextObject
-								 */
-
-								if ( $nesting_level <= 1 ) {
-
-									// Get values
-
-										// Get the Selected Short Description for This Page
-
-											$MedicalEntity_description = get_field( 'expertise_selected_post_excerpt', $entity ) ?? '';
-
-											// Fallback values
-
-												if ( !$MedicalEntity_description ) {
-
-													// Get the excerpt
-
-														$MedicalEntity_description = get_the_excerpt($entity) ?? '';
-
-														// Get the Short Description
-
-															if ( !$MedicalEntity_description ) {
-
-																$MedicalEntity_description = get_field( 'post_excerpt', $entity ) ?? '';
-
-																// Get the Intro Text (Marketing Landing Page Header style)
-
-																	if ( !$MedicalEntity_description ) {
-
-																		$MedicalEntity_description = get_field( 'page_header_landingpage_intro', $entity ) ?? '';
-
-																	}
-
-															}
-
-												}
-
-									// Add to item values
-
-										if ( $MedicalEntity_description ) {
-
-											$MedicalEntity_item['description'] = $MedicalEntity_description;
-
-										}
-
-								}
-
-							// image
-
-								/* 
-								 * An image of the item. This can be a URL or a fully described ImageObject.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - ImageObject
-								 *     - URL
-								 */
-
-								// Get featured image ID
-
-									if ( !$fpage_query ) {
-
-										/* Overview page */
-
-										$MedicalEntity_image_id = get_field( '_thumbnail_id', $entity ) ?? '';
-
-									} elseif ( $current_fpage == 'providers' ) {
-
-										/* Fake subpage for related providers */
-
-										$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $entity ) ?? '';
-
-									} elseif ( $current_fpage == 'locations' ) {
-
-										/* Fake subpage for related locations */
-
-										$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $entity ) ?? '';
-
-									} elseif ( $current_fpage == 'specialties' ) {
-
-										/* Fake subpage for descendant areas of expertise */
-
-										$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $entity ) ?? '';
-
-									} elseif ( $current_fpage == 'related' ) {
-
-										/* Fake subpage for related areas of expertise */
-
-										$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $entity ) ?? '';
-
-									} elseif ( $current_fpage == 'resources' ) {
-
-										/* Fake subpage for related clinical resources */
-
-										$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $entity ) ?? '';
-
-									}
-
-								// Create ImageObject values array
-
-									if ( $MedicalEntity_image_id ) {
-
-										$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
-											$MedicalEntity_url, // URL of entity with which the image is associated
-											( $nesting_level + 1 ), // Nesting level within the main schema
-											'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
-											'Image', // Base fragment identifier
-											$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
-											0, // ID of image to use for 3:4 aspect ratio
-											$MedicalEntity_image_id, // ID of image to use for 4:3 aspect ratio
-											$MedicalEntity_image_id, // ID of image to use for 16:9 aspect ratio
-											0 // ID of image to use for full image
-										) ?? array();
-
-									}
-
-								// Clean up values array
-
-									if (
-										is_array($MedicalEntity_image)
-										&&
-										!empty($MedicalEntity_image)
-									) {
-
-										$MedicalEntity_image = array_filter($MedicalEntity_image);
-										$MedicalEntity_image = array_unique( $MedicalEntity_image, SORT_REGULAR );
-										$MedicalEntity_image = array_values($MedicalEntity_image);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array( $MedicalEntity_image );
-
-									}
-
-								// Add to schema
-
-									if ( $MedicalEntity_image ) {
-
-										$MedicalEntity_item['image'] = $MedicalEntity_image;
-
-									}
-
-							// mainEntityOfPage
-
-								/* 
-								 * Indicates a page (or other CreativeWork) for which this thing is the main 
-								 * entity being described. See background notes at 
-								 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-								 * 
-								 * Inverse-property: mainEntity
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - CreativeWork
-								 *     - URL
-								 */
-
-								// Get values
-
-									// Base array
-
-										$MedicalEntity_mainEntityOfPage = array();
-
-									$MedicalEntity_mainEntityOfPage = uamswp_fad_schema_merge_values(
-										$MedicalEntity_mainEntityOfPage, // mixed // Required // Initial schema item property value
-										$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-									);
-
-								// Add to item values
-
-									if ( $MedicalEntity_mainEntityOfPage ) {
-
-										$MedicalEntity_item['mainEntityOfPage'] = $MedicalEntity_mainEntityOfPage;
-
-									}
-
-							// medicineSystem
-
-								/* 
-								 * The system of medicine that includes this MedicalEntity 
-								 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - MedicineSystem
-								 */
-
-								if ( $nesting_level == 0 ) {
-
-									// Get field value
-
-										$MedicalEntity_medicineSystems_array = get_field( 'schema_medicinesystem', $entity ) ?: array();
-
-									// Add each item to the list array
-
-										$MedicalEntity_medicineSystem = uamswp_fad_schema_medicinesystem(
-											$MedicalEntity_medicineSystems_array // array of MedicineSystem values
-										);
-
-									// Add to schema
-
-										if ( $MedicalEntity_medicineSystem ) {
-
-											$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
-
-										}
-
-								}
-
-							// potentialAction
-
-								/* 
-								 * Indicates a potential Action, which describes an idealized action in which this 
-								 * thing would play an 'object' role.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - Action
-								 */
-
-								/*
-
-									Create one or more Action arrays, likely 'CreateAction' type
-
-										 * Make an appointment, new or existing patient, by phone
-										 * Make an appointment, new patient, by phone
-										 * Make an appointment, existing patient, by phone
-										 * Make an appointment, new or existing patient, online
-										 * Make an appointment, new patient, online
-										 * Make an appointment, existing patient, online
-										 * Refer a patient, by phone
-										 * Refer a patient, by fax
-										 * Refer a patient, through Epic thing
-
-									Property descriptions:
-
-										 * 'actionStatus'
-										        * Indicates the current disposition of the Action
-										 * 'agent'
-										        * The direct performer or driver of the action — animate or inanimate (e.g., John 
-										          wrote a book)
-										 * 'endTime'
-										        * The endTime of something. For a reserved event or service 
-										          (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-										          actions that span a period of time, when the action was performed (e.g., John 
-										          wrote a book from January to December). For media, including audio and video, 
-										          it's the time offset of the end of a clip within a larger file. Note that Event 
-										          uses startDate/endDate instead of startTime/endTime, even when describing dates 
-										          with times. This situation may be clarified in future revisions.
-										 * 'error'
-										        * For failed actions, more information on the cause of the failure.
-										 * 'instrument'
-										        * The object that helped the agent perform the action (e.g., John wrote a book 
-											with a pen).
-										 * 'location'
-											 * The location of, for example, where an event is happening, where an 
-										          organization is located, or where an action takes place.
-										 * 'object'
-										        * The object upon which the action is carried out, whose state is kept intact or 
-										          changed. Also known as the semantic roles patient, affected or undergoer — 
-										          which change their state — or theme — which doesn't (e.g., John read a book).
-										 * 'participant'
-										        * Other co-agents that participated in the action indirectly (e.g., John wrote a 
-										          book with Steve).
-										 * 'provider'
-										        * The service provider, service operator, or service performer; the goods 
-										          producer. Another party (a seller) may offer those services or goods on behalf 
-										          of the provider. A provider may also serve as the seller. Supersedes carrier.
-										 * 'result'
-										        * The result produced in the action (e.g., John wrote a book).
-										 * 'startTime'
-										        * The startTime of something. For a reserved event or service 
-										          (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-										          For actions that span a period of time, when the action was performed 
-										          (e.g., John wrote a book from January to December). For media, including audio 
-										          and video, it's the time offset of the start of a clip within a larger file. 
-										          Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-										          describing dates with times. This situation may be clarified in future 
-										          revisions.
-										 * 'target'
-										        * Indicates a target EntryPoint, or url, for an Action.
-
-								*/
-
-							if ( $nesting_level == 0 ) {
-
-								}
-
-							// relevantSpecialty
-
-								/* 
-								 * If applicable, a medical specialty in which this entity is relevant.
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - MedicalSpecialty
-								 */
-
-								if ( $nesting_level == 0 ) {
-
-									// Get values
-
-										$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $entity ) ?: array();
-
-									// Clean up list array
-
-										$MedicalEntity_relevantSpecialty = array_filter($MedicalEntity_relevantSpecialty);
-										$MedicalEntity_relevantSpecialty = array_values($MedicalEntity_relevantSpecialty);
-
-										// If there is only one item, flatten the multi-dimensional array by one step
-
-											uamswp_fad_flatten_multidimensional_array($MedicalEntity_relevantSpecialty);
-
-									// Add to item values
-
-										if ( $MedicalEntity_relevantSpecialty ) {
-
-											$MedicalEntity_item['relevantSpecialty'] = $MedicalEntity_relevantSpecialty;
-
-										}
-
-								}
-
-							// sameAs
-
-								/* 
-								 * URL of a reference Web page that unambiguously indicates the item's identity 
-								 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-								 * website).
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - URL
-								 */
-
-								// Get repeater field value
-
-									$MedicalEntity_sameAs_array = get_field( 'schema_sameas', $entity ) ?: array();
-
-								// Add each row to the list array
-
-									if ( $MedicalEntity_sameAs_array ) {
-
-										$MedicalEntity_sameAs = uamswp_fad_schema_sameas(
-											$MedicalEntity_sameAs_array, // sameAs repeater field
-											'schema_sameas_url' // sameAs item field name
-										);
-
-									}
-
-								// Add to schema
-
-									if ( $MedicalEntity_sameAs ) {
-
-										$MedicalEntity_item['sameAs'] = $MedicalEntity_sameAs;
-
-									}
-
-							// subjectOf
-
-								/* 
-								 * A CreativeWork or Event about this Thing.
-								 * 
-								 * Inverse-property: about
-								 * 
-								 * Values expected to be one of these types:
-								 * 
-								 *     - CreativeWork
-								 *     - Event
-								 */
-
-								if ( $nesting_level <= 1 ) {
-
-									// Get values
-
-										// Base array
-
-											$MedicalEntity_subjectOf = array();
-
-										$MedicalEntity_subjectOf = uamswp_fad_schema_merge_values(
-											$MedicalEntity_subjectOf, // mixed // Required // Initial schema item property value
-											$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-										);
-
-									// Add to item values
-
-										if ( $MedicalEntity_subjectOf ) {
-
-											$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
-
-										}
-
-								}
-
-						// Sort array
-
-							ksort( $MedicalEntity_item, SORT_NATURAL | SORT_FLAG_CASE );
-
-						// Set/update the value of the item transient
-
-							uamswp_fad_set_transient(
+							uamswp_fad_get_transient(
 								'item_' . $entity, // Required // String added to transient name for disambiguation.
 								$MedicalEntity_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-						// Add to list of areas of expertise
+						if ( !empty( $MedicalEntity_item ) ) {
 
-							$expertise_list[] = $MedicalEntity_item;
+							/* 
+							 * The transient exists.
+							 * Return the variable.
+							 */
 
-					}
+							// Add to list of areas of expertise
 
-				} // endforeach ( $repeater as $entity )
+								$expertise_list[] = $MedicalEntity_item;
+
+						} else {
+
+							// If post is not published, skip to the next iteration
+
+								if ( get_post_status($entity) != 'publish' ) {
+
+									continue;
+
+								}
+
+							// Eliminate PHP errors / reset variables
+
+								$expertise_item_MedicalWebPage = array(); // Base array
+								$expertise_item_MedicalEntity = array(); // Base array
+								$MedicalEntity_item = array(); // Base array
+								$MedicalEntity_url = '';
+								$MedicalEntity_type = '';
+								$MedicalEntity_id = '';
+								$MedicalEntity_image = '';
+								$MedicalEntity_featured_image = '';
+								$MedicalEntity_name = '';
+								$MedicalEntity_alternateName = '';
+								$MedicalEntity_code = '';
+								$MedicalEntity_description = '';
+								$MedicalEntity_image_id = '';
+								$MedicalEntity_mainEntityOfPage = '';
+								$MedicalEntity_medicineSystem = '';
+								$MedicalEntity_relevantSpecialty = array();
+								$MedicalEntity_sameAs = '';
+								$MedicalEntity_subjectOf = '';
+								$MedicalEntity_level = '';
+								$ontology_type = '';
+								$current_fpage = '';
+								$fpage_query = '';
+								$MedicalEntity_alternateName_array = '';
+
+								// Reused variables
+
+									$MedicalEntity_additionalType = $MedicalEntity_additionalType ?? '';
+
+							// Get ontology type
+
+								$ontology_type = get_field( 'expertise_type', $entity ) ?? true; // Check if 'expertise_type' is not null, and if so, set value to true
+
+							// If the page is not an ontology type, skip to the next iteration
+
+								if ( !$ontology_type ) {
+
+									continue;
+
+								}
+
+							// Fake subpage query and get fake subpage slug
+
+								if (
+									$ontology_type
+									&&
+									$nesting_level == 0
+								) {
+
+									$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+									$fpage_query = $current_fpage ? true : false;
+
+								}
+
+							// Add property values
+
+								// url
+
+									/* 
+									 * URL of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									$MedicalEntity_url = user_trailingslashit( get_permalink($entity) );
+									$MedicalEntity_item['url'] = $MedicalEntity_url;
+
+								// @type
+
+									$MedicalEntity_type = 'MedicalEntity';
+
+									// Add to schema
+
+										$MedicalEntity_item['@type'] = $MedicalEntity_type;
+
+								// @id
+
+									if ( $nesting_level <= 1 ) {
+
+										// Get values
+
+											$MedicalEntity_id = $MedicalEntity_url . '#' . $MedicalEntity_type;
+											// $MedicalEntity_id .= $MedicalEntity_i;
+											// $MedicalEntity_id++;
+
+										// Add to schema
+
+											$MedicalEntity_item['@id'] = $MedicalEntity_id;
+											$node_identifier_list[] = $MedicalEntity_item['@id']; // Add to the list of existing node identifiers
+
+									}
+
+								// name
+
+									/* 
+									 * The name of the item.
+									 * 
+									 * Subproperty of:
+									 * 
+									 *     - rdfs:label
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									// Get values
+
+										$MedicalEntity_name = get_the_title($entity) ?: '';
+
+									// Add to item values
+
+										if ( $MedicalEntity_name ) {
+
+											$MedicalEntity_item['name'] = $MedicalEntity_name;
+
+										}
+
+								// additionalType
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									// Get values
+
+										// Get level of the item within the area of expertise page hierarchy
+
+											$MedicalEntity_level = 1 + count(
+												get_ancestors(
+													$entity, // $object_id  // int // Optional // The ID of the object // Default: 0
+													'expertise', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+													'post_type' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+												)
+											) ?? '';
+
+										// Set value relevant to level
+
+											if ( $MedicalEntity_level ) {
+
+												if ( $MedicalEntity_level == 1 ) {
+
+													$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q930752'; // Wikidata entry for 'medical specialty'
+
+												} else {
+
+													$MedicalEntity_additionalType = 'https://www.wikidata.org/wiki/Q7632042'; // Wikidata entry for 'subspecialty'
+
+												}
+
+											}
+
+									// Add to item values
+
+										if ( $MedicalEntity_additionalType ) {
+
+											$MedicalEntity_item['additionalType'] = $MedicalEntity_additionalType;
+
+										}
+
+								// alternateName
+
+									/* 
+									 * An alias for the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if ( $nesting_level == 0 ) {
+
+										// Get repeater field value
+
+											$MedicalEntity_alternateName_array = get_field( 'expertise_alternate_names', $entity ) ?: array();
+
+										// Get item values
+
+											$MedicalEntity_alternateName = uamswp_fad_schema_alternatename(
+												$MedicalEntity_alternateName_array, // alternateName repeater field
+												'alternate_text' // alternateName item field name
+											);
+
+										// Add to schema
+
+											if ( $MedicalEntity_alternateName ) {
+
+												$MedicalEntity_item['alternateName'] = $MedicalEntity_alternateName;
+
+											}
+
+									}
+
+								// code
+
+									/* 
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalCode
+									 */
+
+									if ( $nesting_level == 0 ) {
+
+										// Get values
+
+											// Code repeater
+
+												$MedicalEntity_code_array = get_field( 'schema_medicalcode', $entity ) ?: array();
+
+											// Health Care Provider Taxonomy Code Set taxonomy field
+
+												$MedicalEntity_nucc_array = get_field( 'schema_nucc_multiple', $entity ) ?: array();
+
+										// Get item values
+
+											$MedicalEntity_code = uamswp_fad_schema_code(
+												$MedicalEntity_code_array, // code repeater field
+												$MedicalEntity_nucc_array // Health Care Provider Taxonomy Code Set taxonomy field
+											);
+
+										// Add to schema
+
+											if ( $MedicalEntity_code ) {
+
+												$MedicalEntity_item['code'] = $MedicalEntity_code;
+
+											}
+
+									}
+
+								// description
+
+									/* 
+									 * A description of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - TextObject
+									 */
+
+									if ( $nesting_level <= 1 ) {
+
+										// Get values
+
+											// Get the Selected Short Description for This Page
+
+												$MedicalEntity_description = get_field( 'expertise_selected_post_excerpt', $entity ) ?? '';
+
+												// Fallback values
+
+													if ( !$MedicalEntity_description ) {
+
+														// Get the excerpt
+
+															$MedicalEntity_description = get_the_excerpt($entity) ?? '';
+
+															// Get the Short Description
+
+																if ( !$MedicalEntity_description ) {
+
+																	$MedicalEntity_description = get_field( 'post_excerpt', $entity ) ?? '';
+
+																	// Get the Intro Text (Marketing Landing Page Header style)
+
+																		if ( !$MedicalEntity_description ) {
+
+																			$MedicalEntity_description = get_field( 'page_header_landingpage_intro', $entity ) ?? '';
+
+																		}
+
+																}
+
+													}
+
+										// Add to item values
+
+											if ( $MedicalEntity_description ) {
+
+												$MedicalEntity_item['description'] = $MedicalEntity_description;
+
+											}
+
+									}
+
+								// image
+
+									/* 
+									 * An image of the item. This can be a URL or a fully described ImageObject.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - URL
+									 */
+
+									// Get featured image ID
+
+										if ( !$fpage_query ) {
+
+											/* Overview page */
+
+											$MedicalEntity_image_id = get_field( '_thumbnail_id', $entity ) ?? '';
+
+										} elseif ( $current_fpage == 'providers' ) {
+
+											/* Fake subpage for related providers */
+
+											$MedicalEntity_image_id = get_field( 'expertise_providers_fpage_featured_image', $entity ) ?? '';
+
+										} elseif ( $current_fpage == 'locations' ) {
+
+											/* Fake subpage for related locations */
+
+											$MedicalEntity_image_id = get_field( 'expertise_locations_fpage_featured_image', $entity ) ?? '';
+
+										} elseif ( $current_fpage == 'specialties' ) {
+
+											/* Fake subpage for descendant areas of expertise */
+
+											$MedicalEntity_image_id = get_field( 'expertise_descendant_fpage_featured_image', $entity ) ?? '';
+
+										} elseif ( $current_fpage == 'related' ) {
+
+											/* Fake subpage for related areas of expertise */
+
+											$MedicalEntity_image_id = get_field( 'expertise_associated_fpage_featured_image', $entity ) ?? '';
+
+										} elseif ( $current_fpage == 'resources' ) {
+
+											/* Fake subpage for related clinical resources */
+
+											$MedicalEntity_image_id = get_field( 'expertise_clinical_resources_fpage_featured_image', $entity ) ?? '';
+
+										}
+
+									// Create ImageObject values array
+
+										if ( $MedicalEntity_image_id ) {
+
+											$MedicalEntity_image = uamswp_fad_schema_imageobject_thumbnails(
+												$MedicalEntity_url, // URL of entity with which the image is associated
+												( $nesting_level + 1 ), // Nesting level within the main schema
+												'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9')
+												'Image', // Base fragment identifier
+												$MedicalEntity_image_id, // ID of image to use for 1:1 aspect ratio
+												0, // ID of image to use for 3:4 aspect ratio
+												$MedicalEntity_image_id, // ID of image to use for 4:3 aspect ratio
+												$MedicalEntity_image_id, // ID of image to use for 16:9 aspect ratio
+												0 // ID of image to use for full image
+											) ?? array();
+
+										}
+
+									// Clean up values array
+
+										if (
+											is_array($MedicalEntity_image)
+											&&
+											!empty($MedicalEntity_image)
+										) {
+
+											$MedicalEntity_image = array_filter($MedicalEntity_image);
+											$MedicalEntity_image = array_unique( $MedicalEntity_image, SORT_REGULAR );
+											$MedicalEntity_image = array_values($MedicalEntity_image);
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array( $MedicalEntity_image );
+
+										}
+
+									// Add to schema
+
+										if ( $MedicalEntity_image ) {
+
+											$MedicalEntity_item['image'] = $MedicalEntity_image;
+
+										}
+
+								// mainEntityOfPage
+
+									/* 
+									 * Indicates a page (or other CreativeWork) for which this thing is the main 
+									 * entity being described. See background notes at 
+									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * 
+									 * Inverse-property: mainEntity
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 */
+
+									// Get values
+
+										// Base array
+
+											$MedicalEntity_mainEntityOfPage = array();
+
+										$MedicalEntity_mainEntityOfPage = uamswp_fad_schema_merge_values(
+											$MedicalEntity_mainEntityOfPage, // mixed // Required // Initial schema item property value
+											$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+										);
+
+									// Add to item values
+
+										if ( $MedicalEntity_mainEntityOfPage ) {
+
+											$MedicalEntity_item['mainEntityOfPage'] = $MedicalEntity_mainEntityOfPage;
+
+										}
+
+								// medicineSystem
+
+									/* 
+									 * The system of medicine that includes this MedicalEntity 
+									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicineSystem
+									 */
+
+									if ( $nesting_level == 0 ) {
+
+										// Get field value
+
+											$MedicalEntity_medicineSystems_array = get_field( 'schema_medicinesystem', $entity ) ?: array();
+
+										// Add each item to the list array
+
+											$MedicalEntity_medicineSystem = uamswp_fad_schema_medicinesystem(
+												$MedicalEntity_medicineSystems_array // array of MedicineSystem values
+											);
+
+										// Add to schema
+
+											if ( $MedicalEntity_medicineSystem ) {
+
+												$MedicalEntity_item['medicineSystem'] = $MedicalEntity_medicineSystem;
+
+											}
+
+									}
+
+								// potentialAction
+
+									/* 
+									 * Indicates a potential Action, which describes an idealized action in which this 
+									 * thing would play an 'object' role.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Action
+									 */
+
+									/*
+
+										Create one or more Action arrays, likely 'CreateAction' type
+
+											 * Make an appointment, new or existing patient, by phone
+											 * Make an appointment, new patient, by phone
+											 * Make an appointment, existing patient, by phone
+											 * Make an appointment, new or existing patient, online
+											 * Make an appointment, new patient, online
+											 * Make an appointment, existing patient, online
+											 * Refer a patient, by phone
+											 * Refer a patient, by fax
+											 * Refer a patient, through Epic thing
+
+										Property descriptions:
+
+											 * 'actionStatus'
+											        * Indicates the current disposition of the Action
+											 * 'agent'
+											        * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											          wrote a book)
+											 * 'endTime'
+											        * The endTime of something. For a reserved event or service 
+											          (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+											          actions that span a period of time, when the action was performed (e.g., John 
+											          wrote a book from January to December). For media, including audio and video, 
+											          it's the time offset of the end of a clip within a larger file. Note that Event 
+											          uses startDate/endDate instead of startTime/endTime, even when describing dates 
+											          with times. This situation may be clarified in future revisions.
+											 * 'error'
+											        * For failed actions, more information on the cause of the failure.
+											 * 'instrument'
+											        * The object that helped the agent perform the action (e.g., John wrote a book 
+												with a pen).
+											 * 'location'
+												 * The location of, for example, where an event is happening, where an 
+											          organization is located, or where an action takes place.
+											 * 'object'
+											        * The object upon which the action is carried out, whose state is kept intact or 
+											          changed. Also known as the semantic roles patient, affected or undergoer — 
+											          which change their state — or theme — which doesn't (e.g., John read a book).
+											 * 'participant'
+											        * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+											          book with Steve).
+											 * 'provider'
+											        * The service provider, service operator, or service performer; the goods 
+											          producer. Another party (a seller) may offer those services or goods on behalf 
+											          of the provider. A provider may also serve as the seller. Supersedes carrier.
+											 * 'result'
+											        * The result produced in the action (e.g., John wrote a book).
+											 * 'startTime'
+											        * The startTime of something. For a reserved event or service 
+											          (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+											          For actions that span a period of time, when the action was performed 
+											          (e.g., John wrote a book from January to December). For media, including audio 
+											          and video, it's the time offset of the start of a clip within a larger file. 
+											          Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+											          describing dates with times. This situation may be clarified in future 
+											          revisions.
+											 * 'target'
+											        * Indicates a target EntryPoint, or url, for an Action.
+
+									*/
+
+								if ( $nesting_level == 0 ) {
+
+									}
+
+								// relevantSpecialty
+
+									/* 
+									 * If applicable, a medical specialty in which this entity is relevant.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSpecialty
+									 */
+
+									if ( $nesting_level == 0 ) {
+
+										// Get values
+
+											$MedicalEntity_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $entity ) ?: array();
+
+										// Clean up list array
+
+											$MedicalEntity_relevantSpecialty = array_filter($MedicalEntity_relevantSpecialty);
+											$MedicalEntity_relevantSpecialty = array_values($MedicalEntity_relevantSpecialty);
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($MedicalEntity_relevantSpecialty);
+
+										// Add to item values
+
+											if ( $MedicalEntity_relevantSpecialty ) {
+
+												$MedicalEntity_item['relevantSpecialty'] = $MedicalEntity_relevantSpecialty;
+
+											}
+
+									}
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									// Get repeater field value
+
+										$MedicalEntity_sameAs_array = get_field( 'schema_sameas', $entity ) ?: array();
+
+									// Add each row to the list array
+
+										if ( $MedicalEntity_sameAs_array ) {
+
+											$MedicalEntity_sameAs = uamswp_fad_schema_sameas(
+												$MedicalEntity_sameAs_array, // sameAs repeater field
+												'schema_sameas_url' // sameAs item field name
+											);
+
+										}
+
+									// Add to schema
+
+										if ( $MedicalEntity_sameAs ) {
+
+											$MedicalEntity_item['sameAs'] = $MedicalEntity_sameAs;
+
+										}
+
+								// subjectOf
+
+									/* 
+									 * A CreativeWork or Event about this Thing.
+									 * 
+									 * Inverse-property: about
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Event
+									 */
+
+									if ( $nesting_level <= 1 ) {
+
+										// Get values
+
+											// Base array
+
+												$MedicalEntity_subjectOf = array();
+
+											$MedicalEntity_subjectOf = uamswp_fad_schema_merge_values(
+												$MedicalEntity_subjectOf, // mixed // Required // Initial schema item property value
+												$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+											);
+
+										// Add to item values
+
+											if ( $MedicalEntity_subjectOf ) {
+
+												$MedicalEntity_item['subjectOf'] = $MedicalEntity_subjectOf;
+
+											}
+
+									}
+
+							// Sort array
+
+								ksort( $MedicalEntity_item, SORT_NATURAL | SORT_FLAG_CASE );
+
+							// Set/update the value of the item transient
+
+								uamswp_fad_set_transient(
+									'item_' . $entity, // Required // String added to transient name for disambiguation.
+									$MedicalEntity_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
+								);
+
+							// Add to list of areas of expertise
+
+								$expertise_list[] = $MedicalEntity_item;
+
+						}
+
+					} // endforeach ( $repeater as $entity )
 
 				// Clean up list array
 
