@@ -26086,6 +26086,34 @@
 
 				}
 
+				// Clean up the property value array
+
+					if (
+						$property
+						&&
+						is_array($property)
+					) {
+
+						$property = array_filter($property);
+
+						if ( array_is_list($property) ) {
+
+							$property = array_unique( $property, SORT_REGULAR );
+							$property = array_values($property);
+							uamswp_fad_flatten_multidimensional_array($property);
+
+						} else {
+
+							if ( !isset($property['@id']) ) {
+
+								uamswp_fad_flatten_multidimensional_array($property);
+
+							}
+
+						}
+
+					}
+
 			} elseif (
 				isset($reference)
 				&&
