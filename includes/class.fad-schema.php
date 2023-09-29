@@ -26080,7 +26080,6 @@
 
 					$property = array_filter($property);
 					$property = array_unique( $property, SORT_REGULAR );
-					$property = array_values($property);
 
 					if ( !isset($property['@id']) ) {
 
@@ -26520,12 +26519,17 @@
 				if ( $base_value ) {
 
 					$base_value = array_filter($base_value);
-					$base_value = array_unique( $base_value, SORT_REGULAR );
-					$base_value = array_values($base_value);
 
-					// If there is only one item, flatten the multi-dimensional array by one step
+					if ( array_is_list($base_value) ) {
 
-						uamswp_fad_flatten_multidimensional_array($base_value);
+						$base_value = array_unique( $base_value, SORT_REGULAR );
+						$base_value = array_values($base_value);
+
+						// If there is only one item, flatten the multi-dimensional array by one step
+
+							uamswp_fad_flatten_multidimensional_array($base_value);
+
+					}
 
 				}
 
