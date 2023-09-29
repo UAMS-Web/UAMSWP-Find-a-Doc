@@ -21730,6 +21730,7 @@
 			int $nesting_level = 1, // Nesting level within the main schema
 			int $MedicalWebPage_i = 1, // Iteration counter for area of expertise-as-MedicalWebPage
 			int $MedicalEntity_i = 1, // Iteration counter for area of expertise-as-MedicalEntity
+			array $expertise_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $expertise_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
 		) {
 
@@ -22487,6 +22488,7 @@
 			int $nesting_level = 1, // Nesting level within the main schema
 			int $MedicalWebPage_i = 1, // Iteration counter for clinical resource-as-MedicalWebPage
 			int $CreativeWork_i = 1, // Iteration counter for clinical resource-as-CreativeWork
+			array $clinical_resource_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $clinical_resource_list = array() // Pre-existing list array for combined clinical resource schema to which to add additional items
 		) {
 
@@ -24530,6 +24532,7 @@
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
 			int $MedicalCondition_i = 1, // Iteration counter for condition-as-MedicalCondition
+			array $condition_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $condition_list = array() // Pre-existing list array for combined condition schema to which to add additional items
 		) {
 
@@ -25045,6 +25048,7 @@
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
 			int $Service_i = 1, // Iteration counter for treatment-as-Service
+			array $treatment_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
 			array $treatment_list = array() // Pre-existing list array for treatment schema to which to add additional items
 		) {
 
