@@ -26522,30 +26522,50 @@
 			// Check / define variables
 
 				$base_value = $base_value ?? array();
-				$base_value = is_array($base_value) ? $base_value : array($base_value);
-				$base_value = array_is_list($base_value) ? $base_value : array($base_value);
 				$incoming_value = $incoming_value ?? array();
-				$incoming_value = is_array($incoming_value) ? $incoming_value : array($incoming_value);
-				$incoming_value = array_is_list($incoming_value) ? $incoming_value : array($incoming_value);
 
 			// Merge the arrays
 
-				if (
-					$base_value
-					||
-					$incoming_value
-				) {
+				// Base value is empty
 
-					$base_value = array_merge(
-						$base_value,
-						$incoming_value,
-					);
+					if (
+						!$base_value
+						&&
+						$incoming_value
+					) {
 
-				}
+						$base_value = $incoming_value;
+
+					}
+
+				// Base value exists
+
+					if (
+						$base_value
+						&&
+						$incoming_value
+					) {
+
+						$base_value = is_array($base_value) ? $base_value : array($base_value);
+						$incoming_value = is_array($incoming_value) ? $incoming_value : array($incoming_value);
+
+						$base_value = array_is_list($base_value) ? $base_value : array($base_value);
+						$incoming_value = array_is_list($incoming_value) ? $incoming_value : array($incoming_value);
+
+						$base_value = array_merge(
+							$base_value,
+							$incoming_value,
+						);
+
+					}
 
 			// Clean up array
 
-				if ( $base_value ) {
+				if (
+					$base_value
+					&&
+					is_array($base_value)
+				) {
 
 					$base_value = array_filter($base_value);
 
