@@ -7885,7 +7885,8 @@
 														$provider_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+														$Service_i // int // Optional // Iteration counter for treatment-as-Service
 													);
 
 												}
@@ -7951,7 +7952,8 @@
 														$provider_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-														$Service_i // int // Optional // Iteration counter for treatment-as-Service
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 													);
 
 												}
@@ -15060,6 +15062,7 @@
 								$MedicalWebPage_id_ref = null;
 								$MedicalWebPage_type = null;
 								$MedicalWebPage_type_ref = null;
+								$MedicalCondition_i = 1;
 								$Service_i = 1;
 
 								// Reused variables
@@ -16806,7 +16809,8 @@
 													$location_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i // int // Optional // Iteration counter for treatment-as-Service
+													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 												);
 
 											}
@@ -24539,6 +24543,7 @@
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
 			int &$MedicalCondition_i = 1, // int // Optional // Iteration counter for condition-as-MedicalCondition
+			int &$Service_i = 1, // int // Optional // Iteration counter for treatment-as-Service
 			array $condition_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 			array $condition_list = array() // array // Optional // Pre-existing list array for combined condition schema to which to add additional items
 		) {
@@ -24630,7 +24635,6 @@
 							$condition_type_parent = array();
 							$condition_typicalTest = array();
 							$condition_typicalTest_relationship = array();
-							$Service_i = 1;
 
 						// @id
 
@@ -24896,7 +24900,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
@@ -24930,7 +24935,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
@@ -24964,7 +24970,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
@@ -24998,7 +25005,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
@@ -25056,6 +25064,7 @@
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
 			int &$Service_i = 1, // int // Optional // Iteration counter for treatment-as-Service
+			int &$MedicalCondition_i = 1, // int // Optional // Iteration counter for condition-as-MedicalCondition
 			array $treatment_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
 			array $treatment_list = array() // array // Optional // Pre-existing list array for treatment schema to which to add additional items
 		) {
@@ -25584,7 +25593,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
@@ -25676,7 +25686,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$Service_i // int // Optional // Iteration counter for treatment-as-Service
+												$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
 											);
 
 										}
@@ -25818,7 +25829,8 @@
 												$page_url, // string // Required // Page URL
 												$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 												( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-												$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+												$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+												$Service_i // int // Optional // Iteration counter for treatment-as-Service
 											);
 
 										}
