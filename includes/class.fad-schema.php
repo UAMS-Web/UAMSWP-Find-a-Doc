@@ -21728,7 +21728,6 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			string $page_fragment = 'MedicalEntity', // Base fragment identifier
 			int $MedicalEntity_i = 1, // Iteration counter
 			array $expertise_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
 		) {
@@ -22485,7 +22484,6 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			string $page_fragment = 'CreativeWork', // Base fragment identifier
 			int $CreativeWork_i = 1, // Iteration counter
 			array $clinical_resource_list = array() // Pre-existing list array for combined clinical resource schema to which to add additional items
 		) {
@@ -24529,7 +24527,6 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			string $page_fragment = 'MedicalCondition', // Fragment identifier
 			int $condition_i = 1, // Iteration counter
 			array $condition_list = array() // Pre-existing list array for combined condition schema to which to add additional items
 		) {
@@ -24625,6 +24622,8 @@
 						// @id
 
 							// Define value
+
+								$page_fragment = 'MedicalCondition';
 
 								if ( $nesting_level == 1 ) {
 
@@ -25043,7 +25042,6 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			string $page_fragment = 'Service', // Fragment identifier
 			int $service_i = 1, // Iteration counter
 			array $treatment_list = array() // Pre-existing list array for treatment schema to which to add additional items
 		) {
@@ -25154,6 +25152,8 @@
 							$usesDevice = array();
 
 						// @id
+
+							$page_fragment = 'Service';
 
 							if ( $nesting_level == 1 ) {
 
