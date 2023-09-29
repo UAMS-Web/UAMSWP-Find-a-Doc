@@ -24527,7 +24527,7 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			int $condition_i = 1, // Iteration counter
+			int $MedicalCondition_i = 1, // Iteration counter for condition-as-MedicalCondition
 			array $condition_list = array() // Pre-existing list array for combined condition schema to which to add additional items
 		) {
 
@@ -24627,8 +24627,8 @@
 
 								if ( $nesting_level == 1 ) {
 
-									$condition_id = $page_url . '#' . $page_fragment . $condition_i;
-									$condition_i++;
+									$condition_id = $page_url . '#' . $page_fragment . $MedicalCondition_i;
+									$MedicalCondition_i++;
 
 								}
 
@@ -25042,7 +25042,7 @@
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
 			int $nesting_level = 1, // Nesting level within the main schema
-			int $service_i = 1, // Iteration counter
+			int $Service_i = 1, // Iteration counter for treatment-as-Service
 			array $treatment_list = array() // Pre-existing list array for treatment schema to which to add additional items
 		) {
 
@@ -25157,10 +25157,10 @@
 
 							if ( $nesting_level == 1 ) {
 
-								$service_id = $page_url . '#' . $page_fragment . $service_i;
+								$service_id = $page_url . '#' . $page_fragment . $Service_i;
 								$service_item['@id'] = $service_id;
 								$node_identifier_list[] = $service_item['@id']; // Add to the list of existing node identifiers
-								$service_i++;
+								$Service_i++;
 
 							}
 
