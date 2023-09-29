@@ -4573,6 +4573,8 @@
 
 			// Check variables
 
+				$page_fragment = $page_fragment ?: 'Image';
+
 				// If values are 0 or empty, end now
 
 					if (
