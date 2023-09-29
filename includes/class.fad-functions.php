@@ -1783,9 +1783,9 @@ function uamswp_fad_ontology_site_values(
 				if ( !empty( $output ) ) {
 
 					/* 
-					* The transient exists.
-					* Return the variable.
-					*/
+					 * The transient exists.
+					 * Return the variable.
+					 */
 
 					return $output;
 
