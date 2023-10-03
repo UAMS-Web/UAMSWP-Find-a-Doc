@@ -21955,8 +21955,6 @@
 
 							// Add property values
 
-								// disambiguatingDescription
-
 								// url
 
 									/* 
@@ -23485,6 +23483,887 @@
 												);
 
 									}
+
+								// about [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// abstract [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// accountablePerson [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// acquireLicensePage [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// aggregateRating [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// alternativeHeadline [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// archivedAt [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// aspect [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// assesses [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// associatedMedia [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// audio [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// award [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// breadcrumb [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// character [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// citation [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// comment [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// commentCount [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// conditionsOfAccess [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// contentLocation [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// contentRating [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// contentReferenceTime [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// correction [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// discussionUrl [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// editEIDR [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// educationalAlignment [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// educationalLevel [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// educationalUse [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// encoding [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// encodingFormat [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// exampleOfWork [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// expires [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// fileFormat [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// funder [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// funding [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// genre [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// hasPart [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// headline [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// interactionStatistic [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// interactivityType [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// interpretedAsClaim [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// isBasedOn [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// isBasedOnUrl [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// keywords [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// learningResourceType [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// license [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// locationCreated [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// mainEntity [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// material [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// materialExtent [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// mentions [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// offers [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// pattern [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// position [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// primaryImageOfPage [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// provider [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// publication [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// publisherImprint [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// publishingPrinciples [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// recordedAt [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// relatedLink [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// releasedEvent [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// review [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// schemaVersion [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// sdDatePublished [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// sdLicense [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// sdPublisher [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// significantLink [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// size [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// spatial [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// spatialCoverage [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// speakable [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// specialty [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// sponsor [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// teaches [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// temporal [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// temporalCoverage [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// text [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// thumbnail [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// thumbnailUrl [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// timeRequired [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// translationOfWork [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// translator [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// typicalAgeRange [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// usageInfo [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// version [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// video [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// workExample [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
+								// workTranslation [WIP]
+
+									/* 
+									 * [insert description here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 */
+
 
 							// Sort arrays
 
