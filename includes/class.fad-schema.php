@@ -23055,11 +23055,11 @@
 										$nesting_level == 0
 									) {
 
-										// Get values
+										// Get multi-select field value
 
-											$expertise_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $entity ) ?: array();
+											$expertise_relevantSpecialty = get_field( 'schema_medicalspecialty_multiple', $entity ) ?? array();
 
-										// Clean up list array
+										// Clean up multi-select field value array
 
 											$expertise_relevantSpecialty = array_filter($expertise_relevantSpecialty);
 											$expertise_relevantSpecialty = array_values($expertise_relevantSpecialty);
