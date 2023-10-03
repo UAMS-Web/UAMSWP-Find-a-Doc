@@ -22794,11 +22794,16 @@
 
 										// Get values
 
-											if ( !isset($expertise_mainEntityOfPage) ) {
+											// Base array
 
 												$expertise_mainEntityOfPage = array();
 
-											}
+											// Merge in MedicalEntity item value
+
+												$expertise_mainEntityOfPage = uamswp_fad_schema_merge_values(
+													$expertise_mainEntityOfPage, // mixed // Required // Initial schema item property value
+													$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+												);
 
 										// Add to item values
 
@@ -22829,25 +22834,6 @@
 												);
 
 									}
-
-									// Get values
-
-										// Base array
-
-											$MedicalEntity_mainEntityOfPage = array();
-
-										$MedicalEntity_mainEntityOfPage = uamswp_fad_schema_merge_values(
-											$MedicalEntity_mainEntityOfPage, // mixed // Required // Initial schema item property value
-											$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-										);
-
-									// Add to item values
-
-										if ( $MedicalEntity_mainEntityOfPage ) {
-
-											$expertise_item_MedicalEntity['mainEntityOfPage'] = $MedicalEntity_mainEntityOfPage;
-
-										}
 
 								// medicineSystem
 
