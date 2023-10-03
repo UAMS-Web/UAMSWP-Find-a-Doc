@@ -21883,7 +21883,7 @@
 								$expertise_mainEntityOfPage = '';
 								$expertise_medicineSystem = null;
 								$expertise_medicineSystem_ref = null;
-								$expertise_medicineSystem_array = null;
+								$expertise_medicineSystem_select = null;
 								$expertise_relevantSpecialty = array();
 								$expertise_sameAs = '';
 								$expertise_subjectOf = '';
@@ -22864,14 +22864,14 @@
 
 										// Get values
 
-											// Get field value
+											// Get select field value
 
-												$expertise_medicineSystem_array = get_field( 'schema_medicinesystem', $entity ) ?: array();
+												$expertise_medicineSystem_select = get_field( 'schema_medicinesystem', $entity ) ?? array();
 
 											// Add each item to the list array
 
 												$expertise_medicineSystem = uamswp_fad_schema_medicinesystem(
-													$expertise_medicineSystem_array // array of MedicineSystem values
+													$expertise_medicineSystem_select // array of MedicineSystem values
 												);
 
 										// Add to item values
