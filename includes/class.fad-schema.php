@@ -21885,7 +21885,8 @@
 								$expertise_medicineSystem_ref = null;
 								$expertise_medicineSystem_select = null;
 								$expertise_relevantSpecialty = array();
-								$expertise_sameAs = '';
+								$expertise_sameAs = null;
+								$expertise_sameAs_repeater = null;
 								$expertise_subjectOf = '';
 								$expertise_level = null;
 								$ontology_type = '';
@@ -23126,14 +23127,14 @@
 
 											// Get repeater field value
 
-												$expertise_sameAs_array = get_field( 'schema_sameas', $entity ) ?: array();
+												$expertise_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?? array();
 
 											// Add each row to the list array
 
-												if ( $expertise_sameAs_array ) {
+												if ( $expertise_sameAs_repeater ) {
 
 													$expertise_sameAs = uamswp_fad_schema_sameas(
-														$expertise_sameAs_array, // sameAs repeater field
+														$expertise_sameAs_repeater, // sameAs repeater field
 														'schema_sameas_url' // sameAs item field name
 													);
 
