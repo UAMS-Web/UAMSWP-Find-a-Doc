@@ -21887,7 +21887,7 @@
 								$expertise_relevantSpecialty = array();
 								$expertise_sameAs = null;
 								$expertise_sameAs_repeater = null;
-								$expertise_subjectOf = '';
+								$expertise_subjectOf = null;
 								$expertise_level = null;
 								$ontology_type = '';
 								$current_fpage = '';
@@ -23205,18 +23205,12 @@
 
 												$expertise_subjectOf = array();
 
-											$expertise_subjectOf = uamswp_fad_schema_merge_values(
-												$expertise_subjectOf, // mixed // Required // Initial schema item property value
-												$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-											);
+											// Merge in MedicalWebPage item value
 
-										// Add to item values
-
-											if ( $expertise_subjectOf ) {
-
-												$expertise_item_MedicalEntity['subjectOf'] = $expertise_subjectOf;
-
-											}
+												$expertise_subjectOf = uamswp_fad_schema_merge_values(
+													$expertise_subjectOf, // mixed // Required // Initial schema item property value
+													$expertise_item_MedicalWebPage // mixed // Required // Incoming schema item property value
+												);
 
 										// Add to item values
 
