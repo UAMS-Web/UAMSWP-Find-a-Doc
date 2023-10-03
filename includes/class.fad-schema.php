@@ -21861,40 +21861,56 @@
 								$expertise_item_MedicalWebPage = array(); // Base array
 								$expertise_item_MedicalEntity = array(); // Base array
 								$MedicalEntity_item = array(); // Base array
-								$expertise_url = '';
-								$MedicalWebPage_type = '';
-								$MedicalEntity_type = '';
-								$MedicalWebPage_id = '';
-								$expertise_id = '';
-								$expertise_image = '';
-								$expertise_featured_image = '';
-								$expertise_name = null;
-								$expertise_name_ref = null;
+								$current_fpage = null;
+								$expertise_additionalType = null;
+								$expertise_additionalType_ref = null;
 								$expertise_alternateName = null;
+								$expertise_alternateName_array = null;
 								$expertise_alternateName_ref = null;
 								$expertise_alternateName_repeater = null;
 								$expertise_code = null;
 								$expertise_code_ref = null;
 								$expertise_code_repeater = null;
-								$expertise_nucc_array = null;
 								$expertise_description = null;
 								$expertise_description_ref = null;
+								$expertise_disambiguatingDescription = null;
+								$expertise_disambiguatingDescription_ref = null;
+								$expertise_featured_image = null;
+								$expertise_grant = null;
+								$expertise_grant_ref = null;
+								$expertise_guideline = null;
+								$expertise_guideline_ref = null;
+								$expertise_id = null;
+								$expertise_identifier = null;
+								$expertise_identifier_ref = null;
+								$expertise_image = null;
 								$expertise_image_id = null;
+								$expertise_level = null;
 								$expertise_mainEntityOfPage = '';
 								$expertise_medicineSystem = null;
 								$expertise_medicineSystem_ref = null;
 								$expertise_medicineSystem_select = null;
-								$expertise_relevantSpecialty = array();
+								$expertise_name = null;
+								$expertise_name_ref = null;
+								$expertise_nucc_array = null;
+								$expertise_potentialAction = null;
+								$expertise_potentialAction_ref = null;
+								$expertise_recognizingAuthority = null;
+								$expertise_recognizingAuthority_ref = null;
+								$expertise_relevantSpecialty = null;
+								$expertise_relevantSpecialty_ref = null;
 								$expertise_sameAs = null;
+								$expertise_sameAs_ref = null;
 								$expertise_sameAs_repeater = null;
+								$expertise_study = null;
+								$expertise_study_ref = null;
 								$expertise_subjectOf = null;
-								$expertise_level = null;
-								$ontology_type = '';
-								$current_fpage = '';
-								$fpage_query = '';
-								$expertise_alternateName_array = '';
-								$expertise_additionalType = null;
-								$expertise_additionalType_ref = null;
+								$expertise_url = null;
+								$fpage_query = null;
+								$MedicalEntity_type = null;
+								$MedicalWebPage_id = null;
+								$MedicalWebPage_type = null;
+								$ontology_type = null;
 
 							// Load variables from pre-existing field values array
 
@@ -21938,6 +21954,8 @@
 								}
 
 							// Add property values
+
+								// disambiguatingDescription
 
 								// url
 
@@ -22631,6 +22649,245 @@
 
 									}
 
+								// disambiguatingDescription [WIP]
+
+									/* 
+									 * A sub property of description. A short description of the item used to 
+									 * disambiguate from other, similar items. Information from other properties (in 
+									 * particular, name) may be necessary for the description to be useful for 
+									 * disambiguation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array(
+											'disambiguatingDescription',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'disambiguatingDescription',
+											$expertise_properties_map[$MedicalEntity_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$expertise_disambiguatingDescription = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'disambiguatingDescription', // string // Required // sameAs of schema property
+													$expertise_disambiguatingDescription, // mixed // Required // Variable to add as the property value
+													$expertise_disambiguatingDescription_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'disambiguatingDescription', // string // Required // sameAs of schema property
+													$expertise_disambiguatingDescription, // mixed // Required // Variable to add as the property value
+													$expertise_disambiguatingDescription_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// funding [WIP]
+
+									/* 
+									 * A Grant that directly or indirectly provide funding or sponsorship for this 
+									 * item. See also ownershipFundingInfo.
+									 * 
+									 * Inverse property: fundedItem
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Grant
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
+
+									if (
+										in_array(
+											'funding',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'funding',
+											$expertise_properties_map[$MedicalEntity_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$expertise_funding = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'funding', // string // Required // sameAs of schema property
+													$expertise_funding, // mixed // Required // Variable to add as the property value
+													$expertise_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'funding', // string // Required // sameAs of schema property
+													$expertise_funding, // mixed // Required // Variable to add as the property value
+													$expertise_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// guideline [WIP]
+
+									/* 
+									 * A medical guideline related to this entity.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalGuideline
+									 */
+
+									if (
+										in_array(
+											'guideline',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'guideline',
+											$expertise_properties_map[$MedicalEntity_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$expertise_guideline = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'guideline', // string // Required // sameAs of schema property
+													$expertise_guideline, // mixed // Required // Variable to add as the property value
+													$expertise_guideline_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'guideline', // string // Required // sameAs of schema property
+													$expertise_guideline, // mixed // Required // Variable to add as the property value
+													$expertise_guideline_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// identifier [WIP]
+
+									/* 
+									 * The identifier property represents any kind of identifier for any kind of 
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+									 * properties for representing many of these, either as textual strings or as URL 
+									 * (URI) links. See background notes for more details.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - PropertyValue
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'identifier',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'identifier',
+											$expertise_properties_map[$MedicalEntity_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$expertise_identifier = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'identifier', // string // Required // sameAs of schema property
+													$expertise_identifier, // mixed // Required // Variable to add as the property value
+													$expertise_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'identifier', // string // Required // sameAs of schema property
+													$expertise_identifier, // mixed // Required // Variable to add as the property value
+													$expertise_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
 								// image
 
 									/* 
@@ -22766,6 +23023,22 @@
 
 									}
 
+								// legalStatus
+
+									/* 
+									 * The drug or supplement's legal status, including any controlled substance 
+									 * schedules that apply.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DrugLegalStatus
+									 *     - MedicalEnumeration
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included.
+									 */
+
 								// medicineSystem
 
 									/* 
@@ -22835,7 +23108,7 @@
 
 									}
 
-								// potentialAction
+								// potentialAction [WIP]
 
 									/* 
 									 * Indicates a potential Action, which describes an idealized action in which this 
@@ -22953,6 +23226,63 @@
 													'potentialAction', // string // Required // potentialAction of schema property
 													$expertise_potentialAction, // mixed // Required // Variable to add as the property value
 													$expertise_potentialAction_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// recognizingAuthority [WIP]
+
+									/* 
+									 * If applicable, the organization that officially recognizes this entity as part 
+									 * of its endorsed system of medicine.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 */
+
+									 if (
+										in_array(
+											'recognizingAuthority',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'recognizingAuthority',
+											$expertise_properties_map[$MedicalEntity_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$expertise_recognizingAuthority = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'recognizingAuthority', // string // Required // sameAs of schema property
+													$expertise_recognizingAuthority, // mixed // Required // Variable to add as the property value
+													$expertise_recognizingAuthority_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'recognizingAuthority', // string // Required // sameAs of schema property
+													$expertise_recognizingAuthority, // mixed // Required // Variable to add as the property value
+													$expertise_recognizingAuthority_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23093,6 +23423,62 @@
 													'sameAs', // string // Required // sameAs of schema property
 													$expertise_sameAs, // mixed // Required // Variable to add as the property value
 													$expertise_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// study [WIP]
+
+									/* 
+									 * A medical study or trial related to this entity.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalStudy
+									 */
+
+									if (
+										in_array(
+											'study',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										||
+										in_array(
+											'study',
+											$expertise_properties_map[$MedicalEntity_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											$expertise_study = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'study', // string // Required // sameAs of schema property
+													$expertise_study, // mixed // Required // Variable to add as the property value
+													$expertise_study_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'study', // string // Required // sameAs of schema property
+													$expertise_study, // mixed // Required // Variable to add as the property value
+													$expertise_study_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
