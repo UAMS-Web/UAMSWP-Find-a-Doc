@@ -23487,371 +23487,574 @@
 								// about [WIP]
 
 									/* 
-									 * [insert description here]
+									 * The subject matter of the content.
+									 * 
+									 * Inverse-property: subjectOf
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Thing
 									 */
 
 								// abstract [WIP]
 
 									/* 
-									 * [insert description here]
+									 * An abstract is a short description that summarizes a CreativeWork.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 */
 
-								// accountablePerson [WIP]
+								// accountablePerson [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Specifies the Person that is legally accountable for the CreativeWork.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Person
+									 * 
+									 * We will not be identifying the person that is legally accountable for 
+									 * UAMSHealth.com webpages and so this schema property will not be included.
 									 */
 
-								// acquireLicensePage [WIP]
+								// acquireLicensePage [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Indicates a page documenting how licenses can be purchased or otherwise 
+									 * acquired, for the current item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - CreativeWork
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included.
 									 */
 
-								// aggregateRating [WIP]
+								// aggregateRating [excluded for MedicalEntity]
 
 									/* 
-									 * [insert description here]
+									 * The overall rating, based on a collection of reviews or ratings, of the item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - AggregateRating
+									 * 
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included.
 									 */
 
-								// alternativeHeadline [WIP]
+								// alternativeHeadline [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * A secondary title of the CreativeWork.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 * 
+									 * The "headline" schema property is defined as "Headline of the article" which 
+									 * implies that the "alternativeHeadline" schema property also relates to an 
+									 * article, not a webpage, and so this property will not be included.
 									 */
 
-								// archivedAt [WIP]
+								// archivedAt [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Indicates a page or other link involved in archival of a CreativeWork. In the 
+									 * case of MediaReview, the items in a MediaReviewItem may often become 
+									 * inaccessible, but be archived by archival, journalistic, activist, or law 
+									 * enforcement organizations. In such cases, the referenced page may not directly 
+									 * publish the content.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - URL
+									 *     - WebPage
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * UAMSHealth.com webpages are not being procedurally archived and so this schema 
+									 * property will not be included.
 									 */
 
-								// aspect [WIP]
+								// assesses [excluded for MedicalEntity]
 
 									/* 
-									 * [insert description here]
+									 * The item being described is intended to assess the competency or learning 
+									 * outcome defined by the referenced term.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - [insert type(s) here]
-									 */
-
-								// assesses [WIP]
-
-									/* 
-									 * [insert description here]
 									 * 
-									 * Values expected to be one of these types:
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
 									 * 
-									 *     - [insert type(s) here]
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included.
 									 */
 
 								// associatedMedia [WIP]
 
 									/* 
-									 * [insert description here]
+									 * A media object that encodes this CreativeWork. This property is a synonym for 
+									 * encoding.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - MediaObject
 									 */
 
-								// audio [WIP]
+								// audio [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * An embedded audio object.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - AudioObject
+									 *     - Clip
+									 *     - MusicRecording
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// award [WIP]
+								// award [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * An award won by or for this item.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
 								// breadcrumb [WIP]
 
 									/* 
-									 * [insert description here]
+									 * A set of links that can help a user understand and navigate a website hierarchy.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - BreadcrumbList
+									 *     - Text
 									 */
 
-								// character [WIP]
+								// character [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Fictional person connected with a creative work.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Person
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
 								// citation [WIP]
 
 									/* 
-									 * [insert description here]
+									 * A citation or reference to another creative work, such as another publication, 
+									 * web page, scholarly article, etc.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - CreativeWork
+									 *     - Text
 									 */
 
-								// comment [WIP]
+								// comment [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Comments, typically from users.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Comment
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// commentCount [WIP]
+								// commentCount [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * The number of comments this CreativeWork (e.g. Article, Question or Answer) has 
+									 * received. This is most applicable to works published in Web sites with 
+									 * commenting system; additional comments may exist elsewhere.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - [insert type(s) here]
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// conditionsOfAccess [WIP]
+								// conditionsOfAccess [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Conditions that affect the availability of, or method(s) of access to, an item. 
+									 * Typically used for real world items such as an ArchiveComponent held by an 
+									 * ArchiveOrganization. This property is not suitable for use as a general Web 
+									 * access control mechanism. It is expressed only in natural language.
+									 * 
+									 * For example "Available by appointment from the Reading Room" or "Accessible 
+									 * only from logged-in accounts."
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// contentLocation [WIP]
+								// contentLocation [excluded for MedicalEntity]
 
 									/* 
-									 * [insert description here]
+									 * The location depicted or described in the content. For example, the location in 
+									 * a photograph or painting.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Place
+									 * 
+									 * This schema property is not relevant to areas of expertise webpages and will 
+									 * not be included for the MedicalWebPage schema type.
 									 */
 
-								// contentRating [WIP]
+								// contentRating [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Official rating of a piece of content—for example, 'MPAA PG-13'.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Rating
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// contentReferenceTime [WIP]
+								// contentReferenceTime [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * The specific time described by a creative work, for works (e.g., articles, 
+									 * video objects) that emphasise a particular moment within an Event.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - DateTime
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// correction [WIP]
+								// correction [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Indicates a correction to a CreativeWork, either via a CorrectionComment, 
+									 * textually or in another document.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - CorrectionComment
+									 *     - Text
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// discussionUrl [WIP]
+								// discussionUrl [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * A link to the page containing the comments of the CreativeWork.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - URL
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// editEIDR [WIP]
+								// editEIDR [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * An EIDR (Entertainment Identifier Registry) identifier representing a specific 
+									 * edit / edition for a work of film or television.
+									 * 
+									 * For example, the motion picture known as "Ghostbusters" whose titleEIDR is 
+									 * "10.5240/7EC7-228A-510A-053E-CBB8-J" has several edits 
+									 * (e.g., "10.5240/1F2A-E1C5-680A-14C6-E76B-I", 
+									 * "10.5240/8A35-3BEE-6497-5D12-9E4F-3").
+									 * 
+									 * Since schema.org types like Movie and TVEpisode can be used for both works and 
+									 * their multiple expressions, it is possible to use titleEIDR alone (for a 
+									 * general description), or alongside editEIDR for a more edit-specific 
+									 * description.
+									 * 
+									 * EIDR: https://eidr.org/
+									 * identifier: https://schema.org/identifier
+									 * titleEIDR: https://schema.org/titleEIDR
+									 * Movie: https://schema.org/Movie
+									 * TVEpisode: https://schema.org/TVEpisode
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// educationalAlignment [WIP]
+								// educationalAlignment [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * An alignment to an established educational framework.
+									 * 
+									 * This property should not be used where the nature of the alignment can be 
+									 * described using a simple property, for example to express that a resource 
+									 * teaches or assesses a competency.
+									 * 
+									 * teaches: https://schema.org/teaches
+									 * assesses: https://schema.org/assesses
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - AlignmentObject
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// educationalLevel [WIP]
+								// educationalLevel [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * The level in terms of progression through an educational or training context. 
+									 * Examples of educational levels include 'beginner', 'intermediate' or 
+									 * 'advanced', and formal sets of level indicators.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - DefinedTerm
+									 *     - Text
+									 *     - URL
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// educationalUse [WIP]
+								// educationalUse [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * The purpose of a work in the context of education; for example, 'assignment', 
+									 * 'group work'.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - DefinedTerm
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
 								// encoding [WIP]
 
 									/* 
-									 * [insert description here]
+									 * A media object that encodes this CreativeWork. This property is a synonym for 
+									 * associatedMedia.
+									 * 
+									 * Inverse-property: encodesCreativeWork
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - MediaObject
 									 */
 
 								// encodingFormat [WIP]
 
 									/* 
-									 * [insert description here]
+									 * Media type typically expressed using a MIME format (see IANA site and MDN 
+									 * reference), (e.g., application/zip for a SoftwareApplication binary, 
+									 * audio/mpeg for .mp3).
+									 * 
+									 * In cases where a CreativeWork has several media type representations, encoding 
+									 * can be used to indicate each MediaObject alongside particular encodingFormat 
+									 * information.
+									 * 
+									 * Unregistered or niche encoding and file formats can be indicated instead via 
+									 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
+									 * entry).
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - [insert type(s) here]
 									 */
 
-								// exampleOfWork [WIP]
+								// exampleOfWork [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * A creative work that this work is an example/instance/realization/derivation of.
+									 * 
+									 * Inverse-property: workExample
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - CreativeWork
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
-								// expires [WIP]
+								// expires [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Date the content expires and is no longer useful or available. For example a 
+									 * VideoObject or NewsArticle whose availability or relevance is time-limited, or 
+									 * a ClaimReview fact check whose publisher wants to indicate that it may no 
+									 * longer be relevant (or helpful to highlight) after some date.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Date
+									 *     - DateTime
+									 * 
+									 * This schema property is not currently relevant to UAMSHealth.com webpages and 
+									 * will not be included for the MedicalWebPage schema type.
 									 */
 
-								// fileFormat [WIP]
+								// fileFormat [superseded]
 
 									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
+									 * SupersededBy: encodingFormat
 									 */
 
-								// funder [WIP]
+								// funder [excluded]
 
 									/* 
-									 * [insert description here]
+									 * A person or organization that supports (sponsors) something through some kind 
+									 * of financial contribution.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Organization
+									 *     - Person
+									 * 
+									 * This schema property is not currently relevant to UAMSHealth.com webpages and 
+									 * will not be included for the MedicalWebPage schema type.
+									 * 
+									 * This schema property is not currently relevant to areas of expertise and will 
+									 * not be included for the MedicalEntity schema type.
 									 */
 
-								// funding [WIP]
+								// funding [excluded]
 
 									/* 
-									 * [insert description here]
+									 * A Grant that directly or indirectly provide funding or sponsorship for this 
+									 * item. See also ownershipFundingInfo.
+									 * 
+									 * Inverse-property: fundedItem
+									 * 
+									 * Grant: https://schema.org/Grant
+									 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Grant
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 * 
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included for the MedicalEntity schema type.
 									 */
 
 								// genre [WIP]
 
 									/* 
-									 * [insert description here]
+									 * Genre of the creative work, broadcast channel or group.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 *     - URL
 									 */
 
 								// hasPart [WIP]
 
 									/* 
-									 * [insert description here]
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									 * (in some sense).
+									 * 
+									 * Inverse-property: isPartOf
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - CreativeWork
 									 */
 
-								// headline [WIP]
+								// headline [excluded for MedicalWebPage]
 
 									/* 
-									 * [insert description here]
+									 * Headline of the article.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
 									 */
 
 								// interactionStatistic [WIP]
