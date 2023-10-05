@@ -24489,6 +24489,27 @@
 
 									}
 
+								// about [WIP]
+
+									/* 
+									 * The subject matter of the content.
+									 * 
+									 * Inverse-property: subjectOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+									/*
+									
+										For MedicalWebPage, set the value as the schema item for the CreativeWork.
+
+										For CreativeWork, set the value as something like the associated areas of 
+										expertise, conditions and treatments.
+
+									*/
+
 								// abstract
 
 									/* 
@@ -24593,6 +24614,19 @@
 
 									}
 
+								// aggregateRating [excluded]
+
+									/* 
+									 * The overall rating, based on a collection of reviews or ratings, of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - AggregateRating
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
+									 */
+
 								// alternateName [WIP]
 
 									/* 
@@ -24696,6 +24730,81 @@
 									 * not be included for the MedicalWebPage schema type.
 									 */
 
+								// award [excluded]
+
+									/* 
+									 * An award won by or for this item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
+									 */
+
+								// bitrate (CreativeWork only) [WIP]
+
+									/* 
+									 * The bitrate of the media object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+								// breadcrumb (MedicalWebPage only) [WIP]
+
+									/* 
+									 * A set of links that can help a user understand and navigate a website hierarchy.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - BreadcrumbList
+									 *     - Text
+									 */
+
+								// caption (CreativeWork only) [WIP]
+
+									/* 
+									 * The caption for this object. For downloadable machine formats (closed caption, 
+									 * subtitles etc.) use MediaObject and indicate the encodingFormat.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MediaObject
+									 *     - Text
+									 */
+
+								// citation [excluded]
+
+									/* 
+									 * A citation or reference to another creative work, such as another publication, 
+									 * web page, scholarly article, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
+									 */
+
+								// contentLocation [excluded]
+
+									/* 
+									 * The location depicted or described in the content. For example, the location in 
+									 * a photograph or painting.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Place
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
+									 */
+
 								// contentSize [WIP]
 
 									/* 
@@ -24751,69 +24860,6 @@
 											if ( $CreativeWork_contentUrl ) {
 
 												$CreativeWork_item['contentUrl'] = $CreativeWork_contentUrl;
-
-											}
-
-									}
-
-								// dateModified [WIP]
-
-									/* 
-									 * The date on which the CreativeWork was most recently modified or when the 
-									 * item's entry was modified within a DataFeed.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Date
-									 *     - DateTime
-									 */
-
-									if (
-										in_array( 'dateModified', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_dateModified = get_the_modified_date( 'Y-m-d', $entity ); // ISO 8601 date format
-
-										// Add to item values
-
-											if ( $CreativeWork_dateModified ) {
-
-												$CreativeWork_item['dateModified'] = $CreativeWork_dateModified;
-
-											}
-
-									}
-
-								// datePublished [WIP]
-
-									/* 
-									 * Date of first broadcast/publication.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Date
-									 *     - DateTime
-									 */
-
-									if (
-										in_array( 'datePublished', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_datePublished = get_the_date( 'Y-m-d', $entity ); // ISO 8601 date format
-
-										// Add to item values
-
-											if ( $CreativeWork_datePublished ) {
-
-												$CreativeWork_item['datePublished'] = $CreativeWork_datePublished;
 
 											}
 
@@ -24879,6 +24925,22 @@
 												);
 
 									}
+
+								// disambiguatingDescription [excluded]
+
+									/* 
+									 * A sub property of description. A short description of the item used to 
+									 * disambiguate from other, similar items. Information from other properties (in 
+									 * particular, name) may be necessary for the description to be useful for 
+									 * disambiguation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
+									 */
 
 								// duration [WIP]
 
@@ -25072,6 +25134,44 @@
 
 									}
 
+								// hasPart [WIP]
+
+									/* 
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									 * (in some sense).
+									 * 
+									 * Inverse-property: isPartOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 */
+
+									/*
+									
+										Indicate that the CreativeWork item is a part of the MedicalWebPage item.
+
+									*/
+
+								// headline (CreativeWork only) [WIP]
+
+									/* 
+									 * Headline of the article.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									/*
+									
+										Define for the 'Article' type clinical resources by using the post title.
+
+									*/
+
 								// height [WIP]
 
 									/* 
@@ -25102,6 +25202,24 @@
 											}
 
 									}
+
+								// identifier [excluded]
+
+									/* 
+									 * The identifier property represents any kind of identifier for any kind of 
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+									 * properties for representing many of these, either as textual strings or as URL 
+									 * (URI) links. See background notes for more details.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - PropertyValue
+									 *     - Text
+									 *     - URL
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
+									 */
 
 								// image [WIP]
 
@@ -25136,7 +25254,28 @@
 
 									}
 
-								// isAccessibleForFree [WIP]
+								// inLanguage (CreativeWork only) [WIP]
+
+									/* 
+									 * The language of the content or performance or used in an action. Please use one 
+									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Language
+									 *     - Text
+									 */
+
+									/*
+									
+										Add input to clinical resources to indicate the language of the content.
+
+										If there is a value (or if the value is not English), override the 'inLanguage' 
+										schema property value for the CreativeWork item.
+
+									*/
+
+								// isAccessibleForFree (CreativeWork only) [WIP]
 
 									/* 
 									 * A flag to signal that the item, event, or place is accessible for free.
@@ -25165,6 +25304,28 @@
 											}
 
 									}
+
+								// isBasedOn (CreativeWork only) [WIP]
+
+									/* 
+									 * A resource from which this work is derived or from which it is a modification 
+									 * or adaptation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Product
+									 *     - URL
+									 */
+
+									/*
+									
+										Add input to clinical resources to indicate a resource from which each clinical 
+										resource's content is derived or from which it is a modification or adaptation.
+
+										If there is a value, set the schema property value for the CreativeWork item.
+
+									*/
 
 								// isPartOf [WIP]
 
@@ -25206,748 +25367,6 @@
 											}
 
 									}
-
-								// mainEntityOfPage [WIP]
-
-									/* 
-									 * Indicates a page (or other CreativeWork) for which this thing is the main 
-									 * entity being described. See background notes at 
-									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-									 * 
-									 * Inverse-property: mainEntity
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 *     - URL
-									 */
-
-									if ( in_array( 'mainEntityOfPage', $CreativeWork_properties ) ) {
-
-										// Get values
-
-											// Base array
-
-												$CreativeWork_mainEntityOfPage = array();
-
-											$CreativeWork_mainEntityOfPage = uamswp_fad_schema_merge_values(
-												$CreativeWork_mainEntityOfPage, // mixed // Required // Initial schema item property value
-												$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-											);
-
-										// Add to item values
-
-											if ( $CreativeWork_mainEntityOfPage ) {
-
-												$CreativeWork_item['mainEntityOfPage'] = $CreativeWork_mainEntityOfPage;
-
-											}
-
-									}
-
-								// representativeOfPage [WIP]
-
-									/* 
-									 * Indicates whether this image is representative of the content of the page.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Boolean
-									 */
-
-									if (
-										in_array( 'representativeOfPage', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
-
-										// Add to item values
-
-											if ( $CreativeWork_representativeOfPage ) {
-
-												$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
-
-											}
-
-									}
-
-								// sameAs [WIP]
-
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-									 * website).
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - URL
-									 */
-
-									if (
-										in_array( 'sameAs', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base list array
-
-												$CreativeWork_sameAs = array();
-
-											// Add values to the list array
-
-												// Syndication URL
-
-													if (
-														isset($CreativeWork_syndication_URL)
-														&&
-														!empty($CreativeWork_syndication_URL)
-													) {
-
-														$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
-
-													}
-
-												// Video URL
-
-													if (
-														$CreativeWork_resource_type == 'video'
-														&&
-														$CreativeWork_video
-													) {
-
-														$CreativeWork_sameAs[] = $CreativeWork_video;
-
-													}
-
-										// Clean up list array
-
-											if ( $CreativeWork_sameAs ) {
-
-												$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
-												$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
-												$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
-
-												// If there is only one item, flatten the multi-dimensional array by one step
-
-													uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
-
-											}
-
-										// Add to item values
-
-											if ( $CreativeWork_sameAs ) {
-
-												$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
-
-											}
-
-									}
-
-								// speakable [WIP]
-
-									/* 
-									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-									 * of being highlighted as being especially appropriate for text-to-speech 
-									 * conversion. Other sections of a page may also be usefully spoken in particular 
-									 * circumstances; the 'speakable' property serves to indicate the parts most 
-									 * likely to be generally useful for speech.
-									 * 
-									 * The speakable property can be repeated an arbitrary number of times, with three 
-									 * kinds of possible 'content-locator' values:
-									 * 
-									 *     1.) id-value URL references - uses id-value of an element in the page being 
-									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
-									 * referencing identified sections of the document concerned.
-									 * 
-									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
-									 * class attribute). Use the cssSelector property.
-									 * 
-									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
-									 * content). Use the xpath property.
-									 * 
-									 * For more sophisticated markup of speakable sections beyond simple ID 
-									 * references, either CSS selectors or XPath expressions to pick out document 
-									 * section(s) as speakable. For this we define a supporting type, 
-									 * SpeakableSpecification which is defined to be a possible value of the speakable 
-									 * property.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - SpeakableSpecification
-									 *     - URL
-									 */
-
-									if (
-										in_array( 'speakable', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Base array
-
-											$CreativeWork_speakable = array();
-
-										// Get values
-
-											// Introduction / Description
-
-												if (
-													$CreativeWork_resource_type == 'infographic'
-													||
-													$CreativeWork_resource_type == 'video'
-													||
-													$CreativeWork_resource_type == 'doc'
-												) {
-
-													$CreativeWork_speakable[] = array(
-														'@type' => 'SpeakableSpecification',
-														'cssSelector' => '#resource-description-body'
-													);
-
-												}
-
-											// Content
-
-												if ( $CreativeWork_resource_type == 'text' ) {
-
-													$CreativeWork_speakable[] = array(
-														'@type' => 'SpeakableSpecification',
-														'cssSelector' => '#resource-content-body'
-													);
-
-												}
-
-											// Transcript
-
-												if (
-													$CreativeWork_resource_type == 'infographic'
-													||
-													$CreativeWork_resource_type == 'video'
-												) {
-
-													$CreativeWork_speakable[] = array(
-														'@type' => 'SpeakableSpecification',
-														'cssSelector' => '#resource-transcript-body'
-													);
-
-												}
-
-										// Add to item values
-
-											if ( $CreativeWork_speakable ) {
-
-												$CreativeWork_item['speakable'] = $CreativeWork_speakable;
-
-												// If there is only one item, flatten the multi-dimensional array by one step
-
-													uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
-
-											}
-
-									}
-
-								// thumbnail [WIP]
-
-									/* 
-									 * Thumbnail image for an image or video.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - ImageObject
-									 */
-
-									if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
-
-										// Get values
-
-											$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
-
-										// Clean up list array
-
-											// If there is only one item, flatten the multi-dimensional array by one step
-
-												uamswp_fad_flatten_multidimensional_array($CreativeWork_thumbnail);
-
-										// Add to item values
-
-											if ( $CreativeWork_thumbnail ) {
-
-												$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
-
-											}
-
-									}
-
-								// transcript [WIP]
-
-									/* 
-									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
-									 * object.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 */
-
-									if (
-										in_array( 'transcript', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $entity ) ?: '';
-
-										// Clean up values
-
-											if ( $CreativeWork_transcript ) {
-
-												// Strip all tags
-
-													$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
-													$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
-
-												// Make attribute-friendly
-
-													$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
-
-											}
-
-										// Add to item values
-
-											if ( $CreativeWork_transcript ) {
-
-												$CreativeWork_item['transcript'] = $CreativeWork_transcript;
-
-											}
-
-									}
-
-								// timeRequired [WIP]
-
-									/* 
-									 * Approximate or typical time it usually takes to work with or through the 
-									 * content of this work for the typical or target audience.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Duration (use ISO 8601 duration format).
-									 */
-
-									if (
-										in_array( 'timeRequired', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Count words
-
-												// Base value
-
-													$CreativeWork_word_count = 0;
-
-												// Introduction / Description
-
-													if ( $CreativeWork_resource_type != 'text' ) {
-
-														$CreativeWork_description_count = str_word_count($CreativeWork_description);
-														$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
-
-													}
-
-												// Article body
-
-													$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
-													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
-
-												// Video transcript
-
-													$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
-													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
-
-												// Infographic transcript
-
-													$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
-													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
-
-											// Calculate time to read all words
-
-												$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
-												$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
-
-												$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
-												$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
-
-										// Add to item values
-
-											if ( $CreativeWork_timeRequired ) {
-
-												$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
-
-											}
-
-									}
-
-								// videoFrameSize [WIP]
-
-									/* 
-									 * The frame size of the video.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 */
-
-									if (
-										in_array( 'videoFrameSize', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
-
-										// Add to item values
-
-											if ( $CreativeWork_videoFrameSize ) {
-
-												$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
-
-											}
-
-									}
-
-								// videoQuality [WIP]
-
-									/* 
-									 * The quality of the video.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 */
-
-									if (
-										in_array( 'videoQuality', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
-
-										// Add to item values
-
-											if ( $CreativeWork_videoQuality ) {
-
-												$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
-
-											}
-
-									}
-
-								// width [WIP]
-
-									/* 
-									 * The width of the item.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Distance
-									 *     - QuantitativeValue
-									 */
-
-									if (
-										in_array( 'width', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
-
-										// Add to item values
-
-											if ( $CreativeWork_width ) {
-
-												$CreativeWork_item['width'] = $CreativeWork_width;
-
-											}
-
-									}
-
-								// wordCount [WIP]
-
-									/* 
-									 * The number of words in the text of the Article.
-									 * 
-									 * Values expected to be one of these types:
-									 *     - Integer
-									 */
-
-									if (
-										in_array( 'wordCount', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
-
-											// Fallback value
-
-												if ( !$CreativeWork_wordCount ) {
-
-													$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
-
-												}
-
-										// Add to item values
-
-											if ( $CreativeWork_wordCount ) {
-
-												$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
-
-											}
-
-									}
-
-								// about [WIP]
-
-									/* 
-									 * The subject matter of the content.
-									 * 
-									 * Inverse-property: subjectOf
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Thing
-									 */
-
-									/*
-									
-										For MedicalWebPage, set the value as the schema item for the CreativeWork.
-
-										For CreativeWork, set the value as something like the associated areas of 
-										expertise, conditions and treatments.
-
-									*/
-
-								// aggregateRating [excluded]
-
-									/* 
-									 * The overall rating, based on a collection of reviews or ratings, of the item.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - AggregateRating
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
-									 * and so it will not be included.
-									 */
-
-								// award [excluded]
-
-									/* 
-									 * An award won by or for this item.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
-									 * and so it will not be included.
-									 */
-
-								// bitrate (CreativeWork only) [WIP]
-
-									/* 
-									 * The bitrate of the media object.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 */
-
-								// breadcrumb (MedicalWebPage only) [WIP]
-
-									/* 
-									 * A set of links that can help a user understand and navigate a website hierarchy.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - BreadcrumbList
-									 *     - Text
-									 */
-
-								// caption (CreativeWork only) [WIP]
-
-									/* 
-									 * The caption for this object. For downloadable machine formats (closed caption, 
-									 * subtitles etc.) use MediaObject and indicate the encodingFormat.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 *     - Text
-									 */
-
-								// citation [excluded]
-
-									/* 
-									 * A citation or reference to another creative work, such as another publication, 
-									 * web page, scholarly article, etc.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
-									 * and so it will not be included.
-									 */
-
-								// contentLocation [excluded]
-
-									/* 
-									 * The location depicted or described in the content. For example, the location in 
-									 * a photograph or painting.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Place
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
-									 * and so it will not be included.
-									 */
-
-								// disambiguatingDescription [excluded]
-
-									/* 
-									 * A sub property of description. A short description of the item used to 
-									 * disambiguate from other, similar items. Information from other properties (in 
-									 * particular, name) may be necessary for the description to be useful for 
-									 * disambiguation.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
-									 * and so it will not be included.
-									 */
-
-								// hasPart [WIP]
-
-									/* 
-									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
-									 * (in some sense).
-									 * 
-									 * Inverse-property: isPartOf
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-									/*
-									
-										Indicate that the CreativeWork item is a part of the MedicalWebPage item.
-
-									*/
-
-								// headline (CreativeWork only) [WIP]
-
-									/* 
-									 * Headline of the article.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 */
-
-									/*
-									
-										Define for the 'Article' type clinical resources by using the post title.
-
-									*/
-
-								// identifier [excluded]
-
-									/* 
-									 * The identifier property represents any kind of identifier for any kind of 
-									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-									 * properties for representing many of these, either as textual strings or as URL 
-									 * (URI) links. See background notes for more details.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - PropertyValue
-									 *     - Text
-									 *     - URL
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
-									 * and so it will not be included.
-									 */
-
-								// inLanguage (CreativeWork only) [WIP]
-
-									/* 
-									 * The language of the content or performance or used in an action. Please use one 
-									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Language
-									 *     - Text
-									 */
-
-									/*
-									
-										Add input to clinical resources to indicate the language of the content.
-
-										If there is a value (or if the value is not English), override the 'inLanguage' 
-										schema property value for the CreativeWork item.
-
-									*/
-
-								// isBasedOn (CreativeWork only) [WIP]
-
-									/* 
-									 * A resource from which this work is derived or from which it is a modification 
-									 * or adaptation.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 *     - Product
-									 *     - URL
-									 */
-
-									/*
-									
-										Add input to clinical resources to indicate a resource from which each clinical 
-										resource's content is derived or from which it is a modification or adaptation.
-
-										If there is a value, set the schema property value for the CreativeWork item.
-
-									*/
 
 								// keywords [WIP]
 
@@ -26103,6 +25522,36 @@
 									 *     - URL
 									 */
 
+								// representativeOfPage [WIP]
+
+									/* 
+									 * Indicates whether this image is representative of the content of the page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Boolean
+									 */
+
+									if (
+										in_array( 'representativeOfPage', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_representativeOfPage = $nesting_level == 0 ? 'True' : 'False';
+
+										// Add to item values
+
+											if ( $CreativeWork_representativeOfPage ) {
+
+												$CreativeWork_item['representativeOfPage'] = $CreativeWork_representativeOfPage;
+
+											}
+
+									}
+
 								// review [excluded]
 
 									/* 
@@ -26115,6 +25564,80 @@
 									 * This schema property is not relevant to clinical resources or their webpages, 
 									 * and so it will not be included.
 									 */
+
+								// sameAs [WIP]
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'sameAs', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base list array
+
+												$CreativeWork_sameAs = array();
+
+											// Add values to the list array
+
+												// Syndication URL
+
+													if (
+														isset($CreativeWork_syndication_URL)
+														&&
+														!empty($CreativeWork_syndication_URL)
+													) {
+
+														$CreativeWork_sameAs[] = $CreativeWork_syndication_URL;
+
+													}
+
+												// Video URL
+
+													if (
+														$CreativeWork_resource_type == 'video'
+														&&
+														$CreativeWork_video
+													) {
+
+														$CreativeWork_sameAs[] = $CreativeWork_video;
+
+													}
+
+										// Clean up list array
+
+											if ( $CreativeWork_sameAs ) {
+
+												$CreativeWork_sameAs = array_filter($CreativeWork_sameAs);
+												$CreativeWork_sameAs = array_unique( $CreativeWork_sameAs, SORT_REGULAR );
+												$CreativeWork_sameAs = array_values($CreativeWork_sameAs);
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($CreativeWork_sameAs);
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_sameAs ) {
+
+												$CreativeWork_item['sameAs'] = $CreativeWork_sameAs;
+
+											}
+
+									}
 
 								// significantLink [WIP]
 
@@ -26144,6 +25667,109 @@
 									 * definitions.
 									 */
 
+								// speakable [WIP]
+
+									/* 
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+									 * of being highlighted as being especially appropriate for text-to-speech 
+									 * conversion. Other sections of a page may also be usefully spoken in particular 
+									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									 * likely to be generally useful for speech.
+									 * 
+									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 * kinds of possible 'content-locator' values:
+									 * 
+									 *     1.) id-value URL references - uses id-value of an element in the page being 
+									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 * referencing identified sections of the document concerned.
+									 * 
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 * class attribute). Use the cssSelector property.
+									 * 
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 * content). Use the xpath property.
+									 * 
+									 * For more sophisticated markup of speakable sections beyond simple ID 
+									 * references, either CSS selectors or XPath expressions to pick out document 
+									 * section(s) as speakable. For this we define a supporting type, 
+									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 * property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - SpeakableSpecification
+									 *     - URL
+									 */
+
+									if (
+										in_array( 'speakable', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Base array
+
+											$CreativeWork_speakable = array();
+
+										// Get values
+
+											// Introduction / Description
+
+												if (
+													$CreativeWork_resource_type == 'infographic'
+													||
+													$CreativeWork_resource_type == 'video'
+													||
+													$CreativeWork_resource_type == 'doc'
+												) {
+
+													$CreativeWork_speakable[] = array(
+														'@type' => 'SpeakableSpecification',
+														'cssSelector' => '#resource-description-body'
+													);
+
+												}
+
+											// Content
+
+												if ( $CreativeWork_resource_type == 'text' ) {
+
+													$CreativeWork_speakable[] = array(
+														'@type' => 'SpeakableSpecification',
+														'cssSelector' => '#resource-content-body'
+													);
+
+												}
+
+											// Transcript
+
+												if (
+													$CreativeWork_resource_type == 'infographic'
+													||
+													$CreativeWork_resource_type == 'video'
+												) {
+
+													$CreativeWork_speakable[] = array(
+														'@type' => 'SpeakableSpecification',
+														'cssSelector' => '#resource-transcript-body'
+													);
+
+												}
+
+										// Add to item values
+
+											if ( $CreativeWork_speakable ) {
+
+												$CreativeWork_item['speakable'] = $CreativeWork_speakable;
+
+												// If there is only one item, flatten the multi-dimensional array by one step
+
+													uamswp_fad_flatten_multidimensional_array($CreativeWork_item['speakable']);
+
+											}
+
+									}
+
 								// specialty [WIP]
 
 									/* 
@@ -26164,6 +25790,38 @@
 									 *     - Text
 									 */
 
+								// thumbnail [WIP]
+
+									/* 
+									 * Thumbnail image for an image or video.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 */
+
+									if ( in_array( 'thumbnail', $CreativeWork_properties ) ) {
+
+										// Get values
+
+											$CreativeWork_thumbnail = $CreativeWork_asset_thumbnail ?: $CreativeWork_thumbnail;
+
+										// Clean up list array
+
+											// If there is only one item, flatten the multi-dimensional array by one step
+
+												uamswp_fad_flatten_multidimensional_array($CreativeWork_thumbnail);
+
+										// Add to item values
+
+											if ( $CreativeWork_thumbnail ) {
+
+												$CreativeWork_item['thumbnail'] = $CreativeWork_thumbnail;
+
+											}
+
+									}
+
 								// thumbnailUrl [WIP]
 
 									/* 
@@ -26180,6 +25838,119 @@
 										thumbnail does not exist.
 
 									*/
+
+								// timeRequired [WIP]
+
+									/* 
+									 * Approximate or typical time it usually takes to work with or through the 
+									 * content of this work for the typical or target audience.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Duration (use ISO 8601 duration format).
+									 */
+
+									if (
+										in_array( 'timeRequired', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Count words
+
+												// Base value
+
+													$CreativeWork_word_count = 0;
+
+												// Introduction / Description
+
+													if ( $CreativeWork_resource_type != 'text' ) {
+
+														$CreativeWork_description_count = str_word_count($CreativeWork_description);
+														$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_description_count;
+
+													}
+
+												// Article body
+
+													$CreativeWork_articleBody_count = str_word_count($CreativeWork_articleBody);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_articleBody_count;
+
+												// Video transcript
+
+													$CreativeWork_transcript_count = str_word_count($CreativeWork_transcript);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_transcript_count;
+
+												// Infographic transcript
+
+													$CreativeWork_embeddedTextCaption_count = str_word_count($CreativeWork_embeddedTextCaption);
+													$CreativeWork_word_count = $CreativeWork_word_count + $CreativeWork_embeddedTextCaption_count;
+
+											// Calculate time to read all words
+
+												$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
+												$wps = $wps ?? $wpm / 60; // National average for optimal silent reading rate for 9th grade, as words per second (Hasbrouck & Tindal, 2006)
+
+												$CreativeWork_timeRequired_seconds = $CreativeWork_word_count ? ( $CreativeWork_word_count / $wps ) : '';
+												$CreativeWork_timeRequired = $CreativeWork_timeRequired_seconds ? uamswp_fad_iso8601_duration($CreativeWork_timeRequired_seconds) : '';
+
+										// Add to item values
+
+											if ( $CreativeWork_timeRequired ) {
+
+												$CreativeWork_item['timeRequired'] = $CreativeWork_timeRequired;
+
+											}
+
+									}
+
+								// transcript [WIP]
+
+									/* 
+									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+									 * object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'transcript', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_transcript = get_field( 'clinical_resource_video_transcript', $entity ) ?: '';
+
+										// Clean up values
+
+											if ( $CreativeWork_transcript ) {
+
+												// Strip all tags
+
+													$CreativeWork_transcript = wp_strip_all_tags($CreativeWork_transcript);
+													$CreativeWork_transcript = str_replace("\n", ' ', $CreativeWork_transcript); // Strip line breaks
+
+												// Make attribute-friendly
+
+													$CreativeWork_transcript = uamswp_attr_conversion($CreativeWork_transcript);
+
+											}
+
+										// Add to item values
+
+											if ( $CreativeWork_transcript ) {
+
+												$CreativeWork_item['transcript'] = $CreativeWork_transcript;
+
+											}
+
+									}
 
 								// translator [WIP]
 
@@ -26228,6 +25999,134 @@
 										clinical resource's VideoObject schema item.
 
 									*/
+
+								// videoFrameSize [WIP]
+
+									/* 
+									 * The frame size of the video.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'videoFrameSize', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_videoFrameSize = $CreativeWork_asset_videoFrameSize ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_videoFrameSize ) {
+
+												$CreativeWork_item['videoFrameSize'] = $CreativeWork_videoFrameSize;
+
+											}
+
+									}
+
+								// videoQuality [WIP]
+
+									/* 
+									 * The quality of the video.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+									if (
+										in_array( 'videoQuality', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_videoQuality = $CreativeWork_asset_videoQuality ?? '';
+
+										// Add to item values
+
+											if ( $CreativeWork_videoQuality ) {
+
+												$CreativeWork_item['videoQuality'] = $CreativeWork_videoQuality;
+
+											}
+
+									}
+
+								// width [WIP]
+
+									/* 
+									 * The width of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Distance
+									 *     - QuantitativeValue
+									 */
+
+									if (
+										in_array( 'width', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_width = ( isset($CreativeWork_asset_width) && !empty($CreativeWork_asset_width) ) ? $CreativeWork_asset_width . ' px' : '';
+
+										// Add to item values
+
+											if ( $CreativeWork_width ) {
+
+												$CreativeWork_item['width'] = $CreativeWork_width;
+
+											}
+
+									}
+
+								// wordCount [WIP]
+
+									/* 
+									 * The number of words in the text of the Article.
+									 * 
+									 * Values expected to be one of these types:
+									 *     - Integer
+									 */
+
+									if (
+										in_array( 'wordCount', $CreativeWork_properties )
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											$CreativeWork_wordCount = $CreativeWork_articleBody_count ?? '';
+
+											// Fallback value
+
+												if ( !$CreativeWork_wordCount ) {
+
+													$CreativeWork_wordCount = ( isset($CreativeWork_articleBody) && !empty($CreativeWork_articleBody) ) ? str_word_count($CreativeWork_articleBody) : '';
+
+												}
+
+										// Add to item values
+
+											if ( $CreativeWork_wordCount ) {
+
+												$CreativeWork_item['wordCount'] = $CreativeWork_wordCount;
+
+											}
+
+									}
 
 								// Value overrides for syndicated clinical resource content as CreativeWork (or its subtypes)
 
