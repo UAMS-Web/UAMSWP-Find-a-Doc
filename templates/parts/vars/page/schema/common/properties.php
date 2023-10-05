@@ -2714,7 +2714,7 @@
 
 		}
 
-	// spatial [excluded for MedicalWebPage]
+	// spatial [excluded]
 
 		/* 
 		 * The "spatial" property can be used in cases when more specific properties 
@@ -2725,11 +2725,11 @@
 		 * 
 		 *     - Place
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// spatialCoverage [excluded for MedicalWebPage]
+	// spatialCoverage [excluded]
 
 		/* 
 		 * The spatialCoverage of a CreativeWork indicates the place(s) which are the 
@@ -2742,8 +2742,8 @@
 		 * 
 		 *     - Place
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// sponsor [excluded]
