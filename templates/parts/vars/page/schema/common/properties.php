@@ -362,7 +362,7 @@
 
 		}
 
-	// accountablePerson [excluded for MedicalWebPage]
+	// accountablePerson [excluded]
 
 		/* 
 		 * Specifies the Person that is legally accountable for the CreativeWork.
@@ -372,10 +372,11 @@
 		 *     - Person
 		 * 
 		 * We will not be identifying the person that is legally accountable for 
-		 * UAMSHealth.com webpages and so this schema property will not be included.
+		 * UAMSHealth.com webpages of their content and so this schema property will not 
+		 * be included.
 		 */
 
-	// acquireLicensePage [excluded for MedicalWebPage]
+	// acquireLicensePage [excluded]
 
 		/* 
 		 * Indicates a page documenting how licenses can be purchased or otherwise 
@@ -390,8 +391,14 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// actors [superseded]
+
+		/* 
+		 * SupersededBy: actor
 		 */
 
 	// affiliation
@@ -491,6 +498,25 @@
 
 		}
 
+	// assesses [excluded]
+
+		/* 
+		 * The item being described is intended to assess the competency or learning 
+		 * outcome defined by the referenced term.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DefinedTerm
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		*/
+
 	// audience
 
 		/* 
@@ -579,6 +605,12 @@
 		 * included for the MedicalWebPage schema type.
 		 */
 
+	// awards [superseded]
+
+		/* 
+		 * SupersededBy: award
+		 */
+
 	// brand
 
 		/* 
@@ -612,7 +644,7 @@
 
 			}
 
-	// character [excluded for MedicalWebPage]
+	// character [excluded]
 
 		/* 
 		 * Fictional person connected with a creative work.
@@ -621,11 +653,11 @@
 		 * 
 		 *     - Person
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// comment [excluded for MedicalWebPage]
+	// comment [excluded]
 
 		/* 
 		 * Comments, typically from users.
@@ -634,11 +666,11 @@
 		 * 
 		 *     - Comment
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// commentCount [excluded for MedicalWebPage]
+	// commentCount [excluded]
 
 		/* 
 		 * The number of comments this CreativeWork (e.g. Article, Question or Answer) has 
@@ -649,11 +681,11 @@
 		 * 
 		 *     - [insert type(s) here]
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// conditionsOfAccess [excluded for MedicalWebPage]
+	// conditionsOfAccess [excluded]
 
 		/* 
 		 * Conditions that affect the availability of, or method(s) of access to, an item. 
@@ -672,11 +704,11 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// contentRating [excluded for MedicalWebPage]
+	// contentRating [excluded]
 
 		/* 
 		 * Official rating of a piece of content (e.g., 'MPAA PG-13').
@@ -686,11 +718,11 @@
 		 *     - Rating
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// contentReferenceTime [excluded for MedicalWebPage]
+	// contentReferenceTime [excluded]
 
 		/* 
 		 * The specific time described by a creative work, for works (e.g., articles, 
@@ -704,8 +736,8 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// contributor
@@ -838,7 +870,7 @@
 
 		}
 
-	// correction [excluded for MedicalWebPage]
+	// correction [excluded]
 
 		/* 
 		 * Indicates a correction to a CreativeWork, either via a CorrectionComment, 
@@ -854,8 +886,8 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// countryOfOrigin
@@ -991,7 +1023,7 @@
 
 		}
 
-	// dateCreated [excluded for MedicalWebPage]
+	// dateCreated [excluded]
 
 		/* 
 		 * The date on which the CreativeWork was created or the item was added to a 
@@ -1004,8 +1036,7 @@
 		 * 
 		 * The DataFeed schema type is defined as "a single feed providing structured 
 		 * information about one or more entities or topics." This schema property is not 
-		 * relevant to UAMSHealth.com webpages and will not be included for the 
-		 * MedicalWebPage schema type.
+		 * relevant to UAMSHealth.com webpages or their content and will not be included.
 		 */
 
 	// dateModified
@@ -1089,7 +1120,13 @@
 
 			}
 
-	// discussionUrl [excluded for MedicalWebPage]
+	// directors [superseded]
+
+		/* 
+		 * SupersededBy: director
+		 */
+
+	// discussionUrl [excluded]
 
 		/* 
 		 * A link to the page containing the comments of the CreativeWork.
@@ -1098,11 +1135,11 @@
 		 * 
 		 *     - URL
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// editEIDR [excluded for MedicalWebPage]
+	// editEIDR [excluded]
 
 		/* 
 		 * An EIDR (Entertainment Identifier Registry) identifier representing a specific 
@@ -1133,11 +1170,11 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// educationalAlignment [excluded for MedicalWebPage]
+	// educationalAlignment [excluded]
 
 		/* 
 		 * An alignment to an established educational framework.
@@ -1153,11 +1190,11 @@
 		 * 
 		 *     - AlignmentObject
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// educationalLevel [excluded for MedicalWebPage]
+	// educationalLevel [excluded]
 
 		/* 
 		 * The level in terms of progression through an educational or training context. 
@@ -1174,11 +1211,11 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// educationalUse [excluded for MedicalWebPage]
+	// educationalUse [excluded]
 
 		/* 
 		 * The purpose of a work in the context of education; for example, 'assignment', 
@@ -1189,11 +1226,17 @@
 		 *     - DefinedTerm
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// exampleOfWork [excluded for MedicalWebPage]
+	// encodings [superseded]
+
+		/* 
+		 * SupersededBy: encoding
+		 */
+
+	// exampleOfWork [excluded]
 
 		/* 
 		 * A creative work that this work is an example/instance/realization/derivation of.
@@ -1204,11 +1247,11 @@
 		 * 
 		 *     - CreativeWork
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// expires [excluded for MedicalWebPage]
+	// expires [excluded]
 
 		/* 
 		 * Date the content expires and is no longer useful or available. For example a 
@@ -1221,8 +1264,8 @@
 		 *     - Date
 		 *     - DateTime
 		 * 
-		 * This schema property is not currently relevant to UAMSHealth.com webpages and 
-		 * will not be included for the MedicalWebPage schema type.
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
 		 */
 
 	// fileFormat [superseded]
@@ -1231,7 +1274,7 @@
 		 * SupersededBy: encodingFormat
 		 */
 
-	// funder [excluded for MedicalWebPage]
+	// funder [excluded]
 
 		/* 
 		 * A person or organization that supports (sponsors) something through some kind 
@@ -1242,11 +1285,11 @@
 		 *     - Organization
 		 *     - Person
 		 * 
-		 * This schema property is not currently relevant to UAMSHealth.com webpages and 
-		 * will not be included for the MedicalWebPage schema type.
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
 		 */
 
-	// funding [excluded for MedicalWebPage]
+	// funding [excluded]
 
 		/* 
 		 * A Grant that directly or indirectly provide funding or sponsorship for this 
@@ -1262,14 +1305,14 @@
 		 *     - Grant
 		 * 
 		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-		 * feedback and adoption from applicatio	ns and websites can help improve their 
+		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
 		 */
 
-	// genre [excluded for MedicalWebPage]
+	// genre [excluded]
 
 		/* 
 		 * Genre of the creative work, broadcast channel or group.
@@ -1279,24 +1322,8 @@
 		 *     - Text
 		 *     - URL
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
-		 */
-
-	// hasPart [excluded for MedicalWebPage]
-
-		/* 
-		 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
-		 * (in some sense).
-		 * 
-		 * Inverse-property: isPartOf
-		 * 
-		 * Values expected to be one of these types:
-		 * 
-		 *     - CreativeWork
-		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// headline [excluded for MedicalWebPage]
@@ -1340,7 +1367,7 @@
 
 		}
 
-	// interactionStatistic [excluded for MedicalWebPage]
+	// interactionStatistic [excluded]
 
 		/* 
 		 * The number of interactions for the CreativeWork using the WebSite or 
@@ -1352,10 +1379,11 @@
 		 *     - InteractionCounter
 		 * 
 		 * We will not be identifying the number of any form of interaction with 
-		 * UAMSHealth.com webpages, and so this schema property will not be included.
+		 * UAMSHealth.com webpages or their content, and so this schema property will not 
+		 * be included.
 		 */
 
-	// interactivityType [excluded for MedicalWebPage]
+	// interactivityType [excluded]
 
 		/* 
 		 * The predominant mode of learning supported by the learning resource. Acceptable 
@@ -1365,11 +1393,11 @@
 		 * 
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// interpretedAsClaim [excluded for MedicalWebPage]
+	// interpretedAsClaim [excluded]
 
 		/* 
 		 * Used to indicate a specific claim contained, implied, translated or refined 
@@ -1384,8 +1412,8 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// isAccessibleForFree (MedicalWebPage only)
@@ -1535,11 +1563,11 @@
 		 *     - DefinedTerm
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// license [excluded for MedicalWebPage]
+	// license [excluded]
 
 		/* 
 		 * A license document that applies to this content, typically indicated by URL.
@@ -1549,8 +1577,8 @@
 		 *     - CreativeWork
 		 *     - URL
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// locationCreated
@@ -1708,7 +1736,7 @@
 
 		}
 
-	// material [excluded for MedicalWebPage]
+	// material [excluded]
 
 		/* 
 		 * A material that something is made from, e.g. leather, wool, cotton, paper.
@@ -1719,11 +1747,11 @@
 		 *     - Text
 		 *     - URL
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// materialExtent [excluded for MedicalWebPage]
+	// materialExtent [excluded]
 
 		/* 
 		 * The quantity of the materials being described or an expression of the physical 
@@ -1738,8 +1766,8 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// medicalAudience
@@ -1827,7 +1855,7 @@
 
 			}
 
-	// pattern [excluded for MedicalWebPage]
+	// pattern [excluded]
 
 		/* 
 		 * A pattern that something has, for example 'polka dot', 'striped', 
@@ -1843,8 +1871,8 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// position [excluded for MedicalWebPage]
@@ -1963,7 +1991,7 @@
 
 		}
 
-	// publication [excluded for MedicalWebPage]
+	// publication [excluded]
 
 		/* 
 		 * A publication event associated with the item.
@@ -1972,8 +2000,8 @@
 		 * 
 		 *     - PublicationEvent
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// publisher
@@ -2012,7 +2040,7 @@
 
 		}
 
-	// publisherImprint [excluded for MedicalWebPage]
+	// publisherImprint [excluded]
 
 		/* 
 		 * The publishing division which published the comic.
@@ -2021,8 +2049,8 @@
 		 * 
 		 *     - Organization
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// publishingPrinciples [WIP]
@@ -2045,7 +2073,7 @@
 		 *     - URL
 		 */
 
-	// recordedAt [excluded for MedicalWebPage]
+	// recordedAt [excluded]
 
 		/* 
 		 * The Event where the CreativeWork was recorded. The CreativeWork may capture all 
@@ -2057,11 +2085,25 @@
 		 * 
 		 *     - Event
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// releasedEvent [excluded for MedicalWebPage]
+	// regionsAllowed [excluded]
+
+		/* 
+		 * The regions where the media is allowed. If not specified, then it's assumed to 
+		 * be allowed everywhere. Specify the countries in ISO 3166 format.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Place
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// releasedEvent [excluded]
 
 		/* 
 		 * The place and time the release was issued, expressed as a PublicationEvent.
@@ -2070,9 +2112,37 @@
 		 * 
 		 *     - PublicationEvent
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
+
+	// requiresSubscription
+
+		/* 
+		 * Indicates if use of the media require a subscription (either paid or free). 
+		 * Allowed values are true or false (note that an earlier version had 'yes', 'no').
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Boolean
+		 *     - MediaSubscription
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				$schema_common_requiresSubscription = 'False';
+
+			// Add to common schema properties array
+
+				if ( $schema_common_requiresSubscription ) {
+
+					$schema_common_properties['requiresSubscription'] = $schema_common_requiresSubscription;
+
+				}
+
+		}
 
 	// review [excluded for MedicalWebPage]
 
@@ -2123,6 +2193,12 @@
 				}
 
 		}
+
+	// reviews [superseded]
+
+		/* 
+		 * SupersededBy: review
+		 */
 
 	// schemaVersion
 
@@ -2254,6 +2330,12 @@
 
 		}
 
+	// significantLinks [superseded]
+
+		/* 
+		 * SupersededBy: significantLink
+		 */
+
 	// size [excluded for MedicalWebPage]
 
 		/* 
@@ -2362,13 +2444,13 @@
 		 * 
 		 * Values expected to be one of these types:
 		 * 
-		 *     - [insert type(s) here]
+		 *     - Place
 		 * 
 		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
 		 * included for the MedicalWebPage schema type.
 		 */
 
-	// sponsor [excluded for MedicalWebPage]
+	// sponsor [excluded]
 
 		/* 
 		 * A person or organization that supports a thing through a pledge, promise, or 
@@ -2380,8 +2462,8 @@
 		 *     - Organization
 		 *     - Person
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// subjectOf
@@ -2422,7 +2504,7 @@
 
 		}
 
-	// teaches [excluded for MedicalWebPage]
+	// teaches [excluded]
 
 		/* 
 		 * The item being described is intended to help a person learn the competency or 
@@ -2437,11 +2519,11 @@
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// temporal [excluded for MedicalWebPage]
+	// temporal [excluded]
 
 		/* 
 		 * The "temporal" property can be used in cases where more specific properties 
@@ -2453,11 +2535,11 @@
 		 *     - DateTime
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// temporalCoverage [excluded for MedicalWebPage]
+	// temporalCoverage [excluded]
 
 		/* 
 		 * The temporalCoverage of a CreativeWork indicates the period that the content 
@@ -2482,8 +2564,8 @@
 		 *     - Text
 		 *     - URL
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// thumbnail [excluded for MedicalWebPage]
@@ -2540,7 +2622,7 @@
 
 			}
 
-	// translationOfWork [excluded for MedicalWebPage]
+	// translationOfWork [excluded]
 
 		/* 
 		 * The work that this work has been translated from (e.g., 物种起源 is a 
@@ -2552,8 +2634,8 @@
 		 * 
 		 *     - CreativeWork
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// translator [excluded for MedicalWebPage]
@@ -2572,7 +2654,7 @@
 		 * included for the MedicalWebPage schema type.
 		 */
 
-	// typicalAgeRange [excluded for MedicalWebPage]
+	// typicalAgeRange [excluded]
 
 		/* 
 		 * The typical expected age range (e.g. '7-9', '11-').
@@ -2581,8 +2663,8 @@
 		 * 
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// usageInfo [WIP]
@@ -2612,7 +2694,7 @@
 		 * definitions.
 		 */
 
-	// version [excluded for MedicalWebPage]
+	// version [excluded]
 
 		/* 
 		 * The version of the CreativeWork embodied by a specified resource.
@@ -2622,11 +2704,11 @@
 		 *     - Number
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
-	// workExample [excluded for MedicalWebPage]
+	// workExample [excluded]
 
 		/* 
 		 * Example/instance/realization/derivation of the concept of this creative work 
@@ -2638,8 +2720,8 @@
 		 * 
 		 *     - CreativeWork
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// worksFor
@@ -2673,7 +2755,7 @@
 
 			}
 
-	// workTranslation [excluded for MedicalWebPage]
+	// workTranslation [excluded]
 
 		/* 
 		 * A work that is a translation of the content of this work (e.g., 西遊記 has an 
@@ -2686,6 +2768,6 @@
 		 * 
 		 *     - CreativeWork
 		 * 
-		 * This schema property is not currently relevant to UAMSHealth.com webpages and 
-		 * will not be included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */

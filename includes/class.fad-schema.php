@@ -8497,7 +8497,7 @@
 										// specialty
 
 											/* 
-											 * One of the domain specialities to which this web page's content applies.
+											 * One of the domain specialties to which this web page's content applies.
 											 * 
 											 * Values expected to be one of these types:
 											 * 
@@ -10280,6 +10280,22 @@
 												);
 
 									}
+
+								// hasPart [excluded]
+
+									/* 
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									 * (in some sense).
+									 * 
+									 * Inverse-property: isPartOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 * 
+									 * This schema property is not relevant to providers or their webpages and will 
+									 * not be included.
+									 */
 
 								// hospitalAffiliation
 
@@ -12931,16 +12947,16 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-												 * The direct performer or driver of the action — animate or inanimate (e.g., John 
-												wrote a book)
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											       wrote a book)
 											 * 'endTime'
 												 * The endTime of something. For a reserved event or service 
-												(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-												actions that span a period of time, when the action was performed (e.g., John 
-												wrote a book from January to December). For media, including audio and video, 
-												it's the time offset of the end of a clip within a larger file. Note that Event 
-												uses startDate/endDate instead of startTime/endTime, even when describing dates 
-												with times. This situation may be clarified in future revisions.
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+												   actions that span a period of time, when the action was performed (e.g., John 
+												   wrote a book from January to December). For media, including audio and video, 
+												   it's the time offset of the end of a clip within a larger file. Note that Event 
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												   with times. This situation may be clarified in future revisions.
 											 * 'error'
 												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
@@ -12948,29 +12964,29 @@
 												with a pen).
 											 * 'location'
 												 * The location of, for example, where an event is happening, where an 
-												organization is located, or where an action takes place.
+												   organization is located, or where an action takes place.
 											 * 'object'
 												 * The object upon which the action is carried out, whose state is kept intact or 
-												changed. Also known as the semantic roles patient, affected or undergoer — 
-												which change their state — or theme — which doesn't (e.g., John read a book).
+												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
 												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
 												book with Steve).
 											 * 'provider'
 												 * The service provider, service operator, or service performer; the goods 
-												producer. Another party (a seller) may offer those services or goods on behalf 
-												of the provider. A provider may also serve as the seller. Supersedes carrier.
+												   producer. Another party (a seller) may offer those services or goods on behalf 
+												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
 												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
 												 * The startTime of something. For a reserved event or service 
-												(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-												For actions that span a period of time, when the action was performed 
-												(e.g., John wrote a book from January to December). For media, including audio 
-												and video, it's the time offset of the start of a clip within a larger file. 
-												Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-												describing dates with times. This situation may be clarified in future 
-												revisions.
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+												   For actions that span a period of time, when the action was performed 
+												   (e.g., John wrote a book from January to December). For media, including audio 
+												   and video, it's the time offset of the start of a clip within a larger file. 
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+												   describing dates with times. This situation may be clarified in future 
+												   revisions.
 											 * 'target'
 												 * Indicates a target EntryPoint, or url, for an Action.
 
@@ -16782,7 +16798,7 @@
 
 									}
 
-								// award
+								// award [WIP]
 
 									/* 
 									 * An award won by or for this item.
@@ -18222,6 +18238,22 @@
 												);
 
 									}
+
+								// hasPart [excluded]
+
+									/* 
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									 * (in some sense).
+									 * 
+									 * Inverse-property: isPartOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 * 
+									 * This schema property is not relevant to locations or their webpages and will 
+									 * not be included.
+									 */
 
 								// identifiers (multiple properties)
 
@@ -19994,7 +20026,7 @@
 
 									}
 
-								// offers
+								// offers [WIP]
 
 									/* 
 									 * An offer to provide this item—for example, an offer to sell a product, rent the 
@@ -20399,7 +20431,7 @@
 
 									}
 
-								// potentialAction
+								// potentialAction [WIP]
 
 									/* 
 									 * Indicates a potential Action, which describes an idealized action in which this 
@@ -20429,16 +20461,16 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-											        * The direct performer or driver of the action — animate or inanimate (e.g., John 
-											          wrote a book)
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											       wrote a book)
 											 * 'endTime'
 												 * The endTime of something. For a reserved event or service 
-												(e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-												actions that span a period of time, when the action was performed (e.g., John 
-												wrote a book from January to December). For media, including audio and video, 
-												it's the time offset of the end of a clip within a larger file. Note that Event 
-												uses startDate/endDate instead of startTime/endTime, even when describing dates 
-												with times. This situation may be clarified in future revisions.
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+												   actions that span a period of time, when the action was performed (e.g., John 
+												   wrote a book from January to December). For media, including audio and video, 
+												   it's the time offset of the end of a clip within a larger file. Note that Event 
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												   with times. This situation may be clarified in future revisions.
 											 * 'error'
 												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
@@ -20446,29 +20478,29 @@
 												with a pen).
 											 * 'location'
 												 * The location of, for example, where an event is happening, where an 
-												organization is located, or where an action takes place.
+												   organization is located, or where an action takes place.
 											 * 'object'
 												 * The object upon which the action is carried out, whose state is kept intact or 
-												changed. Also known as the semantic roles patient, affected or undergoer — 
-												which change their state — or theme — which doesn't (e.g., John read a book).
+												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
 												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
 												book with Steve).
 											 * 'provider'
 												 * The service provider, service operator, or service performer; the goods 
-												producer. Another party (a seller) may offer those services or goods on behalf 
-												of the provider. A provider may also serve as the seller. Supersedes carrier.
+												   producer. Another party (a seller) may offer those services or goods on behalf 
+												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
 												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
 												 * The startTime of something. For a reserved event or service 
-												(e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-												For actions that span a period of time, when the action was performed 
-												(e.g., John wrote a book from January to December). For media, including audio 
-												and video, it's the time offset of the start of a clip within a larger file. 
-												Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-												describing dates with times. This situation may be clarified in future 
-												revisions.
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+												   For actions that span a period of time, when the action was performed 
+												   (e.g., John wrote a book from January to December). For media, including audio 
+												   and video, it's the time offset of the start of a clip within a larger file. 
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+												   describing dates with times. This situation may be clarified in future 
+												   revisions.
 											 * 'target'
 												 * Indicates a target EntryPoint, or url, for an Action.
 
@@ -20524,7 +20556,7 @@
 
 									}
 
-								// primaryImageOfPage
+								// primaryImageOfPage [WIP]
 
 									/* 
 									 * Indicates the main image on the page.
@@ -20649,7 +20681,7 @@
 
 									}
 
-								// relatedLink
+								// relatedLink [WIP]
 
 									/* 
 									 * A link related to this web page, for example to other related web pages.
@@ -20713,7 +20745,7 @@
 
 									}
 
-								// review
+								// review [WIP]
 
 									/* 
 									 * A review of the item.
@@ -20987,7 +21019,7 @@
 								// specialty
 
 									/* 
-									 * One of the domain specialities to which this web page's content applies.
+									 * One of the domain specialties to which this web page's content applies.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -22402,24 +22434,6 @@
 
 									}
 
-								// assesses [excluded]
-
-									/* 
-									 * The item being described is intended to assess the competency or learning 
-									 * outcome defined by the referenced term.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
-									 * included.
-									 */
-
 								// associatedMedia [WIP]
 
 									/* 
@@ -22787,6 +22801,22 @@
 
 									}
 
+								// hasPart [excluded]
+
+									/* 
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									 * (in some sense).
+									 * 
+									 * Inverse-property: isPartOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 * 
+									 * This schema property is not relevant to areas of expertise or their webpages 
+									 * and will not be included.
+									 */
+
 								// identifier [WIP]
 
 									/* 
@@ -23131,50 +23161,50 @@
 										Property descriptions:
 
 											 * 'actionStatus'
-											        * Indicates the current disposition of the Action
+												 * Indicates the current disposition of the Action
 											 * 'agent'
-											        * The direct performer or driver of the action — animate or inanimate (e.g., John 
-											          wrote a book)
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											       wrote a book)
 											 * 'endTime'
-											        * The endTime of something. For a reserved event or service 
-											          (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-											          actions that span a period of time, when the action was performed (e.g., John 
-											          wrote a book from January to December). For media, including audio and video, 
-											          it's the time offset of the end of a clip within a larger file. Note that Event 
-											          uses startDate/endDate instead of startTime/endTime, even when describing dates 
-											          with times. This situation may be clarified in future revisions.
+												 * The endTime of something. For a reserved event or service 
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+												   actions that span a period of time, when the action was performed (e.g., John 
+												   wrote a book from January to December). For media, including audio and video, 
+												   it's the time offset of the end of a clip within a larger file. Note that Event 
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												   with times. This situation may be clarified in future revisions.
 											 * 'error'
-											        * For failed actions, more information on the cause of the failure.
+												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
-											        * The object that helped the agent perform the action (e.g., John wrote a book 
+												 * The object that helped the agent perform the action (e.g., John wrote a book 
 												with a pen).
 											 * 'location'
 												 * The location of, for example, where an event is happening, where an 
-											          organization is located, or where an action takes place.
+												   organization is located, or where an action takes place.
 											 * 'object'
-											        * The object upon which the action is carried out, whose state is kept intact or 
-											          changed. Also known as the semantic roles patient, affected or undergoer — 
-											          which change their state — or theme — which doesn't (e.g., John read a book).
+												 * The object upon which the action is carried out, whose state is kept intact or 
+												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
-											        * Other co-agents that participated in the action indirectly (e.g., John wrote a 
-											          book with Steve).
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												book with Steve).
 											 * 'provider'
-											        * The service provider, service operator, or service performer; the goods 
-											          producer. Another party (a seller) may offer those services or goods on behalf 
-											          of the provider. A provider may also serve as the seller. Supersedes carrier.
+												 * The service provider, service operator, or service performer; the goods 
+												   producer. Another party (a seller) may offer those services or goods on behalf 
+												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
-											        * The result produced in the action (e.g., John wrote a book).
+												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
-											        * The startTime of something. For a reserved event or service 
-											          (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-											          For actions that span a period of time, when the action was performed 
-											          (e.g., John wrote a book from January to December). For media, including audio 
-											          and video, it's the time offset of the start of a clip within a larger file. 
-											          Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-											          describing dates with times. This situation may be clarified in future 
-											          revisions.
+												 * The startTime of something. For a reserved event or service 
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+												   For actions that span a period of time, when the action was performed 
+												   (e.g., John wrote a book from January to December). For media, including audio 
+												   and video, it's the time offset of the start of a clip within a larger file. 
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+												   describing dates with times. This situation may be clarified in future 
+												   revisions.
 											 * 'target'
-											        * Indicates a target EntryPoint, or url, for an Action.
+												 * Indicates a target EntryPoint, or url, for an Action.
 
 									*/
 
@@ -23899,7 +23929,10 @@
 								$CreativeWork_sourceOrganization = '';
 								$CreativeWork_speakable = '';
 								$CreativeWork_subjectOf = '';
-								$CreativeWork_syndication_org = '';
+								$CreativeWork_syndication_org = null;
+								$CreativeWork_syndication_org_name = null;
+								$CreativeWork_syndication_org_ref = null;
+								$CreativeWork_syndication_org_name_ref = null;
 								$CreativeWork_syndication_query = '';
 								$CreativeWork_syndication_URL = '';
 								$CreativeWork_thumbnail = array();
@@ -24060,7 +24093,7 @@
 
 									$CreativeWork_item = array();
 
-								// url
+								// url [WIP]
 
 									/* 
 									 * URL of the item.
@@ -24077,7 +24110,7 @@
 
 										$schema_common_url = $CreativeWork_url;
 
-								// @type
+								// @type [WIP]
 
 									// Base value
 
@@ -24103,7 +24136,7 @@
 
 										$CreativeWork_item['@type'] = $CreativeWork_type;
 
-								// @id
+								// @id [WIP]
 
 									if ( $nesting_level <= 1 ) {
 
@@ -24115,7 +24148,7 @@
 
 									} // endif ( $nesting_level == 1 )
 
-								// Asset ID
+								// Asset ID [WIP]
 
 									if ( $nesting_level == 0 ) {
 
@@ -24129,7 +24162,7 @@
 
 									}
 
-								// Syndication values
+								// Syndication values [WIP]
 
 									if ( $nesting_level == 0 ) {
 
@@ -24151,29 +24184,9 @@
 
 											}
 
-										// Syndication source organization
-
-											if (
-												$CreativeWork_syndication_query
-												&&
-												$CreativeWork_nci_query
-											) {
-
-												$CreativeWork_syndication_org = array(
-													'@type' => 'ResearchOrganization',
-													'name' => 'National Cancer Institute',
-													'sameAs' => array(
-														'http://id.loc.gov/authorities/names/n79107940',
-														'https://www.wikidata.org/wiki/Q664846'
-													),
-													'url' => 'https://www.cancer.gov/'
-												);
-
-											}
-
 									}
 
-								// Get image info
+								// Get image info [WIP]
 
 									if (
 										$CreativeWork_resource_type == 'infographic'
@@ -24243,7 +24256,7 @@
 
 									}
 
-								// Get video info
+								// Get video info [WIP]
 
 									if ( $CreativeWork_resource_type == 'video' ) {
 
@@ -24446,7 +24459,7 @@
 
 									}
 
-								// name
+								// name [WIP]
 
 									/* 
 									 * The name of the item.
@@ -24490,7 +24503,7 @@
 									 * definitions.
 									 */
 
-									 if (
+									if (
 										(
 											!isset($schema_common_excerpt)
 											||
@@ -24516,7 +24529,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$CreativeWork_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // potentialAction of schema property
 													$CreativeWork_description, // mixed // Required // Variable to add as the property value
 													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -24525,11 +24538,11 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// MedicalEntity
+											// CreativeWork
 
 												uamswp_fad_schema_add_to_item_values(
-													$MedicalEntity_type, // string // Required // The @type value for the schema item
-													$CreativeWork_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													$CreativeWork_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // potentialAction of schema property
 													$CreativeWork_description, // mixed // Required // Variable to add as the property value
 													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -24540,7 +24553,7 @@
 
 									}
 
-								// additionalType
+								// additionalType [WIP]
 
 									/* 
 									 * An additional type for the item, typically used for adding more specific types 
@@ -24580,7 +24593,7 @@
 
 									}
 
-								// alternateName
+								// alternateName [WIP]
 
 									/* 
 									 * An alias for the item.
@@ -24614,7 +24627,7 @@
 
 									}
 
-								// articleBody
+								// articleBody [WIP]
 
 									/* 
 									 * The actual body of the article.
@@ -24665,7 +24678,25 @@
 
 									}
 
-								// contentSize
+								// audio [excluded]
+
+									/* 
+									 * An embedded audio object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - AudioObject
+									 *     - Clip
+									 *     - MusicRecording
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 * 
+									 * This schema property is not currently relevant to clinical resoures and will 
+									 * not be included for the MedicalWebPage schema type.
+									 */
+
+								// contentSize [WIP]
 
 									/* 
 									 * File size in (mega/kilo)bytes.
@@ -24695,7 +24726,7 @@
 
 									}
 
-								// contentUrl
+								// contentUrl [WIP]
 
 									/* 
 									 * Actual bytes of the media object, for example the image file or video file.
@@ -24725,78 +24756,7 @@
 
 									}
 
-								// creator
-
-									/* 
-									 * The creator/author of this CreativeWork. This is the same as the Author 
-									 * property for CreativeWork.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 *     - Person
-									 * 
-									 * Override the value defined in the common schema properties template part, but 
-									 * only for the clinical resource content's CreativeWork type/subtypes.
-									 */
-
-									if (
-										in_array( 'creator', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( $CreativeWork_syndication_query ) {
-
-												$CreativeWork_creator = $CreativeWork_syndication_org;
-
-											} else {
-
-												// Get values
-
-													// Base array
-
-														$CreativeWork_creator = array();
-
-													// UAMS
-
-														$CreativeWork_creator = uamswp_fad_schema_merge_values(
-															$CreativeWork_creator, // mixed // Required // Initial schema item property value
-															$schema_base_org_uams // mixed // Required // Incoming schema item property value
-														);
-
-													// UAMS Health
-
-														$CreativeWork_creator = uamswp_fad_schema_merge_values(
-															$CreativeWork_creator, // mixed // Required // Initial schema item property value
-															$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
-														);
-
-												// Format values
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array( $CreativeWork_creator );
-
-											}
-
-										// Add to item values
-
-											if ( $CreativeWork_creator ) {
-
-												$CreativeWork_item['creator'] = $CreativeWork_creator;
-
-												// If there is only one item, flatten the multi-dimensional array by one step
-
-													uamswp_fad_flatten_multidimensional_array($CreativeWork_item['creator']);
-
-											}
-
-									}
-
-								// dateModified
+								// dateModified [WIP]
 
 									/* 
 									 * The date on which the CreativeWork was most recently modified or when the 
@@ -24828,7 +24788,7 @@
 
 									}
 
-								// datePublished
+								// datePublished [WIP]
 
 									/* 
 									 * Date of first broadcast/publication.
@@ -24896,7 +24856,7 @@
 
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$CreativeWork_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // potentialAction of schema property
 													$CreativeWork_description, // mixed // Required // Variable to add as the property value
 													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -24905,11 +24865,11 @@
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											// MedicalEntity
+											// CreativeWork
 
 												uamswp_fad_schema_add_to_item_values(
-													$MedicalEntity_type, // string // Required // The @type value for the schema item
-													$CreativeWork_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													$CreativeWork_type, // string // Required // The @type value for the schema item
+													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // potentialAction of schema property
 													$CreativeWork_description, // mixed // Required // Variable to add as the property value
 													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -24920,7 +24880,7 @@
 
 									}
 
-								// duration
+								// duration [WIP]
 
 									/* 
 									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
@@ -24951,7 +24911,7 @@
 
 									}
 
-								// embeddedTextCaption
+								// embeddedTextCaption [WIP]
 
 									/* 
 									 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
@@ -25000,7 +24960,7 @@
 
 									}
 
-								// embedUrl
+								// embedUrl [WIP]
 
 									/* 
 									 * A URL pointing to a player for a specific video. In general, this is the 
@@ -25032,7 +24992,7 @@
 
 									}
 
-								// encodingFormat
+								// encodingFormat [WIP]
 
 									/* 
 									 * Media type typically expressed using a MIME format (see IANA site and MDN 
@@ -25073,7 +25033,7 @@
 
 									}
 
-								// hasDigitalDocumentPermission
+								// hasDigitalDocumentPermission [WIP]
 
 									/* 
 									 * A permission related to the access to this document (e.g., permission to read 
@@ -25112,7 +25072,7 @@
 
 									}
 
-								// height
+								// height [WIP]
 
 									/* 
 									 * The height of the item.
@@ -25143,7 +25103,7 @@
 
 									}
 
-								// image
+								// image [WIP]
 
 									/* 
 									 * An image of the item. This can be a URL or a fully described ImageObject.
@@ -25176,7 +25136,7 @@
 
 									}
 
-								// isAccessibleForFree
+								// isAccessibleForFree [WIP]
 
 									/* 
 									 * A flag to signal that the item, event, or place is accessible for free.
@@ -25206,7 +25166,7 @@
 
 									}
 
-								// isPartOf
+								// isPartOf [WIP]
 
 									/* 
 									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
@@ -25247,7 +25207,7 @@
 
 									}
 
-								// mainEntityOfPage
+								// mainEntityOfPage [WIP]
 
 									/* 
 									 * Indicates a page (or other CreativeWork) for which this thing is the main 
@@ -25285,7 +25245,7 @@
 
 									}
 
-								// representativeOfPage
+								// representativeOfPage [WIP]
 
 									/* 
 									 * Indicates whether this image is representative of the content of the page.
@@ -25315,7 +25275,7 @@
 
 									}
 
-								// sameAs
+								// sameAs [WIP]
 
 									/* 
 									 * URL of a reference Web page that unambiguously indicates the item's identity 
@@ -25389,69 +25349,7 @@
 
 									}
 
-								// sourceOrganization
-
-									/* 
-									 * The Organization on whose behalf the creator was working.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 */
-
-									if (
-										in_array( 'sourceOrganization', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( $CreativeWork_syndication_query ) {
-
-												$CreativeWork_sourceOrganization = $CreativeWork_syndication_org ?? '';
-
-											} else {
-
-												// Get values
-
-													// Base array
-
-														$CreativeWork_sourceOrganization = array();
-
-													// UAMS
-
-														$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
-															$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
-															$schema_base_org_uams // mixed // Required // Incoming schema item property value
-														);
-
-													// UAMS Health
-
-														$CreativeWork_sourceOrganization = uamswp_fad_schema_merge_values(
-															$CreativeWork_sourceOrganization, // mixed // Required // Initial schema item property value
-															$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
-														);
-
-												// Format values
-
-													// If there is only one item, flatten the multi-dimensional array by one step
-
-														uamswp_fad_flatten_multidimensional_array( $CreativeWork_sourceOrganization );
-
-											}
-
-										// Add to item values
-
-											if ( $CreativeWork_sourceOrganization ) {
-
-												$CreativeWork_item['sourceOrganization'] = $CreativeWork_sourceOrganization;
-
-											}
-
-									}
-
-								// speakable
+								// speakable [WIP]
 
 									/* 
 									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
@@ -25554,47 +25452,7 @@
 
 									}
 
-								// subjectOf
-
-									/* 
-									 * A CreativeWork or Event about this Thing.
-									 * 
-									 * Inverse-property: about
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 *     - Event
-									 */
-
-									if (
-										in_array( 'subjectOf', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$CreativeWork_subjectOf = array();
-
-											$CreativeWork_subjectOf = uamswp_fad_schema_merge_values(
-												$CreativeWork_subjectOf, // mixed // Required // Initial schema item property value
-												$clinical_resource_item_MedicalWebPage // mixed // Required // Incoming schema item property value
-											);
-
-										// Add to item values
-
-											if ( $CreativeWork_subjectOf ) {
-
-												$CreativeWork_item['subjectOf'] = $CreativeWork_subjectOf;
-
-											}
-
-									}
-
-								// thumbnail
+								// thumbnail [WIP]
 
 									/* 
 									 * Thumbnail image for an image or video.
@@ -25626,7 +25484,7 @@
 
 									}
 
-								// transcript
+								// transcript [WIP]
 
 									/* 
 									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
@@ -25672,7 +25530,7 @@
 
 									}
 
-								// timeRequired
+								// timeRequired [WIP]
 
 									/* 
 									 * Approximate or typical time it usually takes to work with or through the 
@@ -25739,7 +25597,7 @@
 
 									}
 
-								// videoFrameSize
+								// videoFrameSize [WIP]
 
 									/* 
 									 * The frame size of the video.
@@ -25769,7 +25627,7 @@
 
 									}
 
-								// videoQuality
+								// videoQuality [WIP]
 
 									/* 
 									 * The quality of the video.
@@ -25799,7 +25657,7 @@
 
 									}
 
-								// width
+								// width [WIP]
 
 									/* 
 									 * The width of the item.
@@ -25830,7 +25688,7 @@
 
 									}
 
-								// wordCount
+								// wordCount [WIP]
 
 									/* 
 									 * The number of words in the text of the Article.
@@ -25866,6 +25724,1535 @@
 											}
 
 									}
+
+								// about [WIP]
+
+									/* 
+									 * The subject matter of the content.
+									 * 
+									 * Inverse-property: subjectOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+								// actor [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// aggregateRating [WIP]
+
+									/* 
+									 * The overall rating, based on a collection of reviews or ratings, of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - AggregateRating
+									 */
+
+								// alternativeHeadline [WIP]
+
+									/* 
+									 * A secondary title of the CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+								// articleSection [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// aspect [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// associatedArticle [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// associatedMedia [WIP]
+
+									/* 
+									 * A media object that encodes this CreativeWork. This property is a synonym for 
+									 * encoding.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MediaObject
+									 */
+
+								// award [WIP]
+
+									/* 
+									 * An award won by or for this item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+								// backstory [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// bitrate [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// breadcrumb [WIP]
+
+									/* 
+									 * A set of links that can help a user understand and navigate a website hierarchy.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - BreadcrumbList
+									 *     - Text
+									 */
+
+								// caption [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// citation [WIP]
+
+									/* 
+									 * A citation or reference to another creative work, such as another publication, 
+									 * web page, scholarly article, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Text
+									 */
+
+								// contentLocation [excluded]
+
+									/* 
+									 * The location depicted or described in the content. For example, the location in 
+									 * a photograph or painting.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Place
+									 * 
+									 * This schema property is not relevant to clinical resources content or webpages 
+									 * and will not be included.
+									 */
+
+								// director [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// disambiguatingDescription [WIP]
+
+									/* 
+									 * A sub property of description. A short description of the item used to 
+									 * disambiguate from other, similar items. Information from other properties (in 
+									 * particular, name) may be necessary for the description to be useful for 
+									 * disambiguation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+								// duration [WIP]
+
+									/* 
+									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
+									 * format.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Duration
+									 */
+
+								// editor [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// encodesCreativeWork [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// encoding [WIP]
+
+									/* 
+									 * A media object that encodes this CreativeWork. This property is a synonym for 
+									 * associatedMedia.
+									 * 
+									 * Inverse-property: encodesCreativeWork
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MediaObject
+									 */
+
+								// endTime [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// exifData [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// hasPart [WIP]
+
+									/* 
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									 * (in some sense).
+									 * 
+									 * Inverse-property: isPartOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 */
+
+									/*
+									
+										Indicate that the CreativeWork item is a part of the MedicalWebPage item.
+
+									*/
+
+								// headline (CreativeWork only) [WIP]
+
+									/* 
+									 * Headline of the article.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 */
+
+									/*
+									
+										Define for the 'Article' type clinical resources
+
+									*/
+
+								// identifier [WIP]
+
+									/* 
+									 * The identifier property represents any kind of identifier for any kind of 
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+									 * properties for representing many of these, either as textual strings or as URL 
+									 * (URI) links. See background notes for more details.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - PropertyValue
+									 *     - Text
+									 *     - URL
+									 */
+
+								// ineligibleRegion [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// inLanguage (CreativeWork only) [WIP]
+
+									/* 
+									 * The language of the content or performance or used in an action. Please use one 
+									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Language
+									 *     - Text
+									 */
+
+									/*
+									
+										Add input to clinical resources to indicate the language of the content.
+
+										If there is a value (or if the value is not English), override the 'inLanguage' 
+										schema property value for the CreativeWork item.
+
+									*/
+
+								// isBasedOn (CreativeWork only) [WIP]
+
+									/* 
+									 * A resource from which this work is derived or from which it is a modification 
+									 * or adaptation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Product
+									 *     - URL
+									 */
+
+									/*
+									
+										Add input to clinical resources to indicate a resource from which each clinical 
+										resource's content is derived or from which it is a modification or adaptation.
+
+										If there is a value, set the schema property value for the CreativeWork item.
+
+									*/
+
+								// keywords [WIP]
+
+									/* 
+									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									 * keywords list are typically delimited by commas, or by repeating the property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DefinedTerm
+									 *     - Text
+									 *     - URL
+									 */
+
+								// mainEntity [WIP]
+
+									/* 
+									 * Indicates the primary entity described in some page or other CreativeWork.
+									 * 
+									 * Inverse-property: mainEntityOfPage
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+								// mentions [WIP]
+
+									/* 
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									 * about a concept.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+								// musicBy [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// offers [WIP]
+
+									/* 
+									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									 * DVD of a movie, perform a service, or give away tickets to an event.
+									 * 
+									 * Use businessFunction to indicate the kind of transaction offered 
+									 * (i.e., sell, lease).
+									 * 
+									 * This property can also be used to describe a Demand.
+									 * 
+									 * While this property is listed as expected on a number of common types, it can 
+									 * be used in others. In that case, using a second type, such as Product or a 
+									 * subtype of Product, can clarify the nature of the offer.
+									 * 
+									 * Inverse-property: itemOffered
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Demand
+									 *     - Offer
+									 */
+
+								// pageEnd [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// pageStart [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// pagination [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// playerType [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// position [WIP]
+
+									/* 
+									 * The position of an item in a series or sequence of items.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Integer
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 */
+
+								// potentialAction [WIP]
+
+									/* 
+									 * Indicates a potential Action, which describes an idealized action in which this 
+									 * thing would play an 'object' role.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Action
+									 */
+
+									/*
+
+										Create one or more Action arrays, likely 'CreateAction' type
+
+											 * Make an appointment, new or existing patient, by phone
+											 * Make an appointment, new patient, by phone
+											 * Make an appointment, existing patient, by phone
+											 * Make an appointment, new or existing patient, online
+											 * Make an appointment, new patient, online
+											 * Make an appointment, existing patient, online
+											 * Refer a patient, by phone
+											 * Refer a patient, by fax
+											 * Refer a patient, through Epic thing
+
+										Property descriptions:
+
+											 * 'actionStatus'
+												 * Indicates the current disposition of the Action
+											 * 'agent'
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											       wrote a book)
+											 * 'endTime'
+												 * The endTime of something. For a reserved event or service 
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
+												   actions that span a period of time, when the action was performed (e.g., John 
+												   wrote a book from January to December). For media, including audio and video, 
+												   it's the time offset of the end of a clip within a larger file. Note that Event 
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												   with times. This situation may be clarified in future revisions.
+											 * 'error'
+												 * For failed actions, more information on the cause of the failure.
+											 * 'instrument'
+												 * The object that helped the agent perform the action (e.g., John wrote a book 
+												with a pen).
+											 * 'location'
+												 * The location of, for example, where an event is happening, where an 
+												   organization is located, or where an action takes place.
+											 * 'object'
+												 * The object upon which the action is carried out, whose state is kept intact or 
+												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												   which change their state — or theme — which doesn't (e.g., John read a book).
+											 * 'participant'
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												book with Steve).
+											 * 'provider'
+												 * The service provider, service operator, or service performer; the goods 
+												   producer. Another party (a seller) may offer those services or goods on behalf 
+												   of the provider. A provider may also serve as the seller. Supersedes carrier.
+											 * 'result'
+												 * The result produced in the action (e.g., John wrote a book).
+											 * 'startTime'
+												 * The startTime of something. For a reserved event or service 
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+												   For actions that span a period of time, when the action was performed 
+												   (e.g., John wrote a book from January to December). For media, including audio 
+												   and video, it's the time offset of the start of a clip within a larger file. 
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+												   describing dates with times. This situation may be clarified in future 
+												   revisions.
+											 * 'target'
+												 * Indicates a target EntryPoint, or url, for an Action.
+
+									*/
+
+								// primaryImageOfPage [WIP]
+
+									/* 
+									 * Indicates the main image on the page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 */
+
+								// productionCompany [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// relatedLink [WIP]
+
+									/* 
+									 * A link related to this web page, for example to other related web pages.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+								// review [WIP]
+
+									/* 
+									 * A review of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Review
+									 */
+
+								// sha256 [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// significantLink [WIP]
+
+									/* 
+									 * One of the more significant URLs on the page. Typically, these are the 
+									 * non-navigation links that are clicked on the most.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+								// size [WIP]
+
+									/* 
+									 * A standardized size of a product or creative work, specified either through a 
+									 * simple textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a 
+									 * unitCode, or a comprehensive and structured SizeSpecification; in other cases, 
+									 * the width, height, depth and weight properties may be more applicable.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
+
+								// spatial [WIP]
+
+									/* 
+									 * The "spatial" property can be used in cases when more specific properties 
+									 * (e.g., locationCreated, spatialCoverage, contentLocation) are not known to be 
+									 * appropriate.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Place
+									 */
+
+								// spatialCoverage [WIP]
+
+									/* 
+									 * The spatialCoverage of a CreativeWork indicates the place(s) which are the 
+									 * focus of the content. It is a subproperty of contentLocation intended primarily 
+									 * for more technical and detailed materials. For example with a Dataset, it 
+									 * indicates areas that the dataset describes: a dataset of New York weather would 
+									 * have spatialCoverage which was the place: the state of New York.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Place
+									 */
+
+								// specialty [WIP]
+
+									/* 
+									 * One of the domain specialties to which this web page's content applies.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Specialty
+									 */
+
+								// startTime [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// text [WIP]
+
+									/* 
+									 * The textual content of this CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+								// thumbnailUrl [WIP]
+
+									/* 
+									 * A thumbnail image relevant to the Thing.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									/*
+
+										Check if fallback value is needed for each clinical resource type if the post 
+										thumbnail does not exist.
+
+									*/
+
+								// translator [WIP]
+
+									/* 
+									 * Organization or person who adapts a creative work to different languages, 
+									 * regional differences and technical requirements of a target market, or that 
+									 * translates during some event.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 *     - Person
+									 */
+
+								// uploadDate [WIP]
+
+									/* 
+									 * [Insert definition here]
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [Insert type here]
+									 */
+
+								// video (MedicalWebPage only) [WIP]
+
+									/* 
+									 * An embedded video object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Clip
+									 *     - VideoObject
+									 */
+
+									/*
+									
+										If the clinical resource is the 'Video' type, set the property value using that 
+										clinical resource's VideoObject schema item.
+
+									*/
+
+								// Value overrides for syndicated clinical resource content as CreativeWork (or its subtypes)
+
+									// Query for whether or not the content is syndicated
+
+										if ( !isset($CreativeWork_syndication_query) ) {
+
+											$CreativeWork_syndication_query = get_field( 'clinical_resource_syndicated', $entity ) ?? false;
+
+										}
+
+									// Query for whether or not the content is syndicated from the National Cancer Institute
+
+										if (
+											$CreativeWork_syndication_query
+											&&
+											!isset($CreativeWork_nci_query)
+										) {
+
+											$CreativeWork_nci_query = get_field( 'clinical_resource_text_nci_query', $entity ) ?? false;
+
+										}
+
+									// Get the syndication source URL
+
+										if (
+											$CreativeWork_syndication_query
+											&&
+											!isset($CreativeWork_syndication_URL)
+										) {
+
+											$CreativeWork_syndication_URL = get_field( 'clinical_resource_syndication_url', $entity ) ?? null;
+
+										}
+
+									// Define the syndication source organization
+
+										if ( $CreativeWork_syndication_query ) {
+
+											$CreativeWork_syndication_Organization = array();
+											$CreativeWork_syndication_author = array();
+											$CreativeWork_syndication_contributor = array();
+											$CreativeWork_syndication_copyrightHolder = array();
+											$CreativeWork_syndication_copyrightNotice = array();
+											$CreativeWork_syndication_copyrightYear = array();
+											$CreativeWork_syndication_countryOfOrigin = array();
+											$CreativeWork_syndication_creator = array();
+											$CreativeWork_syndication_creditText = array();
+											$CreativeWork_syndication_dateModified = array();
+											$CreativeWork_syndication_datePublished = array();
+											$CreativeWork_syndication_director = array();
+											$CreativeWork_syndication_editor = array();
+											$CreativeWork_syndication_funder = array();
+											$CreativeWork_syndication_funding = array();
+											$CreativeWork_syndication_maintainer = array();
+											$CreativeWork_syndication_musicBy = array();
+											$CreativeWork_syndication_producer = array();
+											$CreativeWork_syndication_productionCompany = array();
+											$CreativeWork_syndication_provider = array();
+											$CreativeWork_syndication_publisher = array();
+											$CreativeWork_syndication_publisherImprint = array();
+											$CreativeWork_syndication_publishingPrinciples = array();
+											$CreativeWork_syndication_recordedAt = array();
+											$CreativeWork_syndication_sourceOrganization = array();
+											$CreativeWork_syndication_sponsor = array();
+											$CreativeWork_syndication_translator = array();
+
+											// National Cancer Institute
+
+												if ( $CreativeWork_nci_query ) {
+
+													$CreativeWork_syndication_Organization = array(
+														'@type' => 'ResearchOrganization',
+														'name' => 'National Cancer Institute',
+														'sameAs' => array(
+															'http://id.loc.gov/authorities/names/n79107940',
+															'https://www.wikidata.org/wiki/Q664846'
+														),
+														'url' => 'https://www.cancer.gov/'
+													);
+
+													$CreativeWork_syndication_sourceOrganization = $CreativeWork_syndication_Organization;
+
+												}
+
+										}
+
+									// Define the property values
+
+										if ( $CreativeWork_syndication_query ) {
+
+											// author (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'author',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'author', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_author, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_author_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// contributor (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'contributor',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'contributor', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_contributor, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_contributor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// copyrightHolder (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'copyrightHolder',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'copyrightHolder', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_copyrightHolder, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_copyrightHolder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// copyrightNotice (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'copyrightNotice',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'copyrightNotice', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_copyrightNotice, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_copyrightNotice_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// copyrightYear (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'copyrightYear',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'copyrightYear', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_copyrightYear, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_copyrightYear_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// countryOfOrigin (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'countryOfOrigin',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'countryOfOrigin', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_countryOfOrigin, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_countryOfOrigin_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// creator (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'creator',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'creator', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_creator, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_creator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// creditText (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'creditText',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'creditText', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_creditText, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_creditText_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// dateModified (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'dateModified',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'dateModified', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_dateModified, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_dateModified_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// datePublished (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'datePublished',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'datePublished', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_datePublished, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_datePublished_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// director (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'director',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'director', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_director, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_director_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// editor (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'editor',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'editor', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_editor, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_editor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// funder (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'funder',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'funder', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_funder, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_funder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// funding (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'funding',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'funding', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_funding, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// maintainer (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'maintainer',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'maintainer', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_maintainer, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_maintainer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// musicBy (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'musicBy',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'musicBy', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_musicBy, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_musicBy_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// producer (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'producer',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'producer', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_producer, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_producer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// productionCompany (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'productionCompany',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'productionCompany', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_productionCompany, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_productionCompany_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// provider (CreativeWork, syndicated only)
+
+												/* 
+												 * The service provider, service operator, or service performer; the goods 
+												 * producer.
+												 * 
+												 * Another party (a seller) may offer those services or goods on behalf of the 
+												 * provider.
+												 * 
+												 * A provider may also serve as the seller.
+											 	 * 
+												 * Values expected to be one of these types:
+												 * 
+												 *     - Organization
+												 *     - Person
+												 */
+
+												if (
+													in_array(
+														'provider',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'provider', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_provider, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// publisher (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'publisher',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'publisher', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_publisher, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_publisher_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// publisherImprint (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'publisherImprint',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'publisherImprint', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_publisherImprint, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_publisherImprint_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// publishingPrinciples (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'publishingPrinciples',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'publishingPrinciples', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_publishingPrinciples, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_publishingPrinciples_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// recordedAt (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'recordedAt',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'recordedAt', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_recordedAt, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_recordedAt_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// sourceOrganization (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'sourceOrganization',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'sourceOrganization', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_sourceOrganization, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_sourceOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// sponsor (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'sponsor',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'sponsor', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_sponsor, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_sponsor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+											// translator (CreativeWork, syndicated only)
+
+												if (
+													in_array(
+														'translator',
+														$clinical_resource_properties_map[$CreativeWork_type]['properties']
+													)
+												) {
+
+													// Add to item values
+
+														// CreativeWork
+
+															uamswp_fad_schema_add_to_item_values(
+																$CreativeWork_type, // string // Required // The @type value for the schema item
+																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+																'translator', // string // Required // potentialAction of schema property
+																$CreativeWork_syndication_translator, // mixed // Required // Variable to add as the property value
+																$CreativeWork_syndication_translator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																($nesting_level + 1) // int // Required // Current nesting level value
+															);
+
+												}
+
+										}
 
 							// Sort arrays
 
