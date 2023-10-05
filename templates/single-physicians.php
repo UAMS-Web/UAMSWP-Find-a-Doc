@@ -542,7 +542,7 @@
 			}
 
 		$excerpt_attr = uamswp_attr_conversion($excerpt);
-		$provider_schema_fields[$page_id]['provider_description_text'] = $excerpt_attr; // Pass value to schema function
+		$provider_schema_fields[$page_id]['provider_description'] = $excerpt_attr; // Pass value to schema function
 
 		// Override theme's method of defining the meta description
 

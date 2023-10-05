@@ -5608,7 +5608,8 @@
 								$provider_degrees = null;
 								$provider_description = null;
 								$provider_description_ref = null;
-								$provider_description_text = null;
+								$provider_description_TextObject = null;
+								$provider_description_TextObject_ref = null;
 								$provider_duns = null;
 								$provider_duns_ref = null;
 								$provider_editor = null;
@@ -8136,6 +8137,11 @@
 
 								// description (common)
 
+									/*
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
+									 */
+
 									// List of properties that reference treatments and procedures
 
 										$provider_description_common = array(
@@ -8144,6 +8150,12 @@
 										);
 
 									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
 										array_intersect(
 											$provider_properties_map[$MedicalWebPage_type]['properties'],
 											$provider_description_common
@@ -8160,44 +8172,48 @@
 										)
 									) {
 
-										// Get the Selected Short Description for This Page
+										// Get values
 
-											if ( !isset($provider_description_text) ) {
+											// Get the Selected Short Description for This Page
 
-												$provider_description_text = get_field( 'physician_short_clinical_bio', $entity ) ?? array();
+												if ( !isset($provider_description) ) {
 
-												// Fallback — Get clinical bio
+													$provider_description = get_field( 'physician_short_clinical_bio', $entity ) ?? array();
 
-													if ( !$provider_description_text ) {
+													// Fallback — Get clinical bio
 
-														$provider_description_text = get_field( 'physician_clinical_bio', $entity ) ?? array();
+														if ( !$provider_description ) {
 
-													}
+															$provider_description = get_field( 'physician_clinical_bio', $entity ) ?? array();
 
-												// Clean up value
+														}
 
-													if ( $provider_description_text ) {
+													// Clean up value
 
-														$provider_description_text = wp_strip_all_tags($provider_description_text);
-														$provider_description_text = str_replace("\n", ' ', $provider_description_text); // Strip line breaks
-														$provider_description_text = strlen($provider_description_text) > 160 ? mb_strimwidth($provider_description_text, 0, 156, '...') : $provider_description_text; // Limit to 160 characters
-														$provider_description_text = uamswp_attr_conversion($provider_description_text);
+														if ( $provider_description ) {
 
-													}
+															$provider_description = wp_strip_all_tags($provider_description);
+															$provider_description = str_replace("\n", ' ', $provider_description); // Strip line breaks
+															$provider_description = strlen($provider_description) > 160 ? mb_strimwidth($provider_description, 0, 156, '...') : $provider_description; // Limit to 160 characters
+															$provider_description = uamswp_attr_conversion($provider_description);
 
-											}
+														}
 
-										// Format schema value
+												}
 
-											if ( $provider_description_text ) {
+											// Format schema value
 
-												$provider_description = array(
-													'@id' => $provider_url . '#description',
-													'@type' => 'TextObject',
-													'text' => $provider_description_text,
-												);
+												$provider_description_TextObject = array();
 
-											}
+												if ( $provider_description ) {
+
+													$provider_description_TextObject = array(
+														'@id' => $provider_url . '#description',
+														'@type' => 'TextObject',
+														'text' => $provider_description,
+													);
+
+												}
 
 									}
 
@@ -8210,9 +8226,18 @@
 									 * 
 									 *     - Text
 									 *     - TextObject
+									 * 
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
 									 */
 
 									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
 										(
 											in_array(
 												'description',
@@ -8241,8 +8266,8 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
-													$provider_description, // mixed // Required // Variable to add as the property value
-													$provider_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_description_TextObject, // mixed // Required // Variable to add as the property value
+													$provider_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -8254,8 +8279,8 @@
 													$MedicalBusiness_type, // string // Required // The @type value for the schema item
 													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
-													$provider_description, // mixed // Required // Variable to add as the property value
-													$provider_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_description_TextObject, // mixed // Required // Variable to add as the property value
+													$provider_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -8267,8 +8292,8 @@
 													$Person_type, // string // Required // The @type value for the schema item
 													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
-													$provider_description, // mixed // Required // Variable to add as the property value
-													$provider_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$provider_description_TextObject, // mixed // Required // Variable to add as the property value
+													$provider_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -8288,9 +8313,18 @@
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 									 * feedback and adoption from applications and websites can help improve their 
 									 * definitions.
+									 * 
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
 									 */
 
 									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
 										(
 											in_array(
 												'abstract',
@@ -14670,6 +14704,8 @@
 								$location_descendant_locations_LocalBusiness_ref = null;
 								$location_description = null;
 								$location_description_ref = null;
+								$location_description_TextObject = null = null;
+								$location_description_TextObject_ref = null;
 								$location_diversityPolicy = null;
 								$location_diversityPolicy_ref = null;
 								$location_diversityStaffingReport = null;
@@ -15540,6 +15576,78 @@
 
 									}
 
+								// description (common)
+
+									// List of properties that reference treatments and procedures
+
+										$location_description_common = array(
+											'abstract',
+											'description'
+										);
+
+									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_description_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_description_common
+										)
+									) {
+
+										// Get values
+
+											// Get the Selected Short Description for This Page
+
+												if ( !isset($location_description) ) {
+
+													$location_description = get_field( 'location_short_desc', $entity ) ?? array();
+
+													// Fallback — Get clinical bio
+
+														if ( !$location_description ) {
+
+															$location_description = get_field( 'location_about', $entity ) ?? array();
+
+														}
+
+													// Clean up value
+
+														if ( $location_description ) {
+
+															$location_description = wp_strip_all_tags($location_description);
+															$location_description = str_replace("\n", ' ', $location_description); // Strip line breaks
+															$location_description = strlen($location_description) > 160 ? mb_strimwidth($location_description, 0, 156, '...') : $location_description; // Limit to 160 characters
+															$location_description = uamswp_attr_conversion($location_description);
+
+														}
+
+												}
+
+											// Format schema value
+
+												$location_description_TextObject = array();
+
+												if ( $location_description ) {
+
+													$location_description_TextObject = array(
+														'@id' => $location_url . '#description',
+														'@type' => 'TextObject',
+														'text' => $location_description,
+													);
+
+												}
+
+									}
+
 								// MedicalSpecialty (common use)
 
 									// List of properties that reference MedicalSpecialty
@@ -16007,9 +16115,18 @@
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 									 * feedback and adoption from applications and websites can help improve their 
 									 * definitions.
+									 * 
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
 									 */
 
 									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
 										(
 											in_array(
 												'abstract',
@@ -16025,14 +16142,6 @@
 										$nesting_level == 0
 									) {
 
-										// Get values
-
-											if ( !isset($location_abstract) ) {
-
-												$location_abstract = array();
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -16041,8 +16150,8 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
-													$location_abstract, // mixed // Required // Variable to add as the property value
-													$location_abstract_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$location_description, // mixed // Required // Variable to add as the property value
+													$location_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -16054,8 +16163,8 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'abstract', // string // Required // Name of schema property
-													$location_abstract, // mixed // Required // Variable to add as the property value
-													$location_abstract_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$location_description, // mixed // Required // Variable to add as the property value
+													$location_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17322,7 +17431,7 @@
 
 									}
 
-								// description
+								// description (specific property)
 
 									/* 
 									 * A description of the item.
@@ -17331,9 +17440,18 @@
 									 * 
 									 *     - Text
 									 *     - TextObject
+									 * 
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
 									 */
 
 									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
 										(
 											in_array(
 												'description',
@@ -17349,34 +17467,6 @@
 										$nesting_level == 0
 									) {
 
-										// Get the Selected Short Description for This Page
-
-											if ( !isset($location_description) ) {
-
-												$location_description = get_field( 'location_short_desc', $entity ) ?? array();
-
-												// Fallback values
-
-													if ( !$location_description ) {
-
-														// Get the full description
-
-															$location_description = get_field( 'location_about', $entity ) ?? array();
-
-													}
-
-												// Clean up value
-
-													if ( $location_description ) {
-
-														$location_description = wp_strip_all_tags($location_description);
-														$location_description = str_replace("\n", ' ', $location_description); // Strip line breaks
-														$location_description = strlen($location_description) > 160 ? mb_strimwidth($location_description, 0, 156, '...') : $location_description; // Limit to 160 characters
-
-													}
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -17385,8 +17475,8 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
-													$location_description, // mixed // Required // Variable to add as the property value
-													$location_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$location_description_TextObject, // mixed // Required // Variable to add as the property value
+													$location_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -17398,8 +17488,8 @@
 													$LocalBusiness_type, // string // Required // The @type value for the schema item
 													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // Name of schema property
-													$location_description, // mixed // Required // Variable to add as the property value
-													$location_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$location_description_TextObject, // mixed // Required // Variable to add as the property value
+													$location_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21530,6 +21620,8 @@
 								$expertise_code_repeater = null;
 								$expertise_description = null;
 								$expertise_description_ref = null;
+								$expertise_description_TextObject = null = null;
+								$expertise_description_TextObject_ref = null;
 								$expertise_disambiguatingDescription = null;
 								$expertise_disambiguatingDescription_ref = null;
 								$expertise_featured_image = null;
@@ -21900,6 +21992,83 @@
 
 										}
 
+								// description (common)
+
+									// List of properties that reference treatments and procedures
+
+										$expertise_description_common = array(
+											'abstract',
+											'description'
+										);
+
+									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
+										array_intersect(
+											$expertise_properties_map[$MedicalWebPage_type]['properties'],
+											$expertise_description_common
+										)
+										||
+										array_intersect(
+											$expertise_properties_map[$MedicalEntity_type]['properties'],
+											$expertise_description_common
+										)
+									) {
+
+										// Get the Selected Short Description for This Page
+
+											if ( !isset($expertise_description) ) {
+
+												$expertise_description = get_field( 'expertise_selected_post_excerpt', $entity ) ?? '';
+
+												// Fallback values
+
+													if ( !$expertise_description ) {
+
+														// Get the excerpt
+
+															$expertise_description = get_the_excerpt($entity) ?? '';
+
+															// Get the Short Description
+
+																if ( !$expertise_description ) {
+
+																	$expertise_description = get_field( 'post_excerpt', $entity ) ?? '';
+
+																	// Get the Intro Text (Marketing Landing Page Header style)
+
+																		if ( !$expertise_description ) {
+
+																			$expertise_description = get_field( 'page_header_landingpage_intro', $entity ) ?? '';
+
+																		}
+
+																}
+
+													}
+
+											}
+
+											// Format schema value
+
+												$expertise_description_TextObject = array();
+
+												if ( $expertise_description ) {
+
+													$expertise_description_TextObject = array(
+														'@id' => $expertise_url . '#description',
+														'@type' => 'TextObject',
+														'text' => $expertise_description,
+													);
+
+												}
+
+									}
+
 								// name
 
 									/* 
@@ -21976,7 +22145,7 @@
 									 *     - Thing
 									 */
 
-								// abstract [WIP]
+								// abstract
 
 									/* 
 									 * An abstract is a short description that summarizes a CreativeWork.
@@ -21988,14 +22157,62 @@
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 									 * feedback and adoption from applications and websites can help improve their 
 									 * definitions.
+									 * 
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
 									 */
 
-									/*
+									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
+										(
+											in_array(
+												'abstract',
+												$expertise_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'abstract',
+												$expertise_properties_map[$MedicalEntity_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
 
-										If the common schema template part did not generate a value, get the 
-										non-excerpt fallback value specific to this entity
+										// Add to item values
 
-									*/
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'abstract', // string // Required // abstract of schema property
+													$expertise_description, // mixed // Required // Variable to add as the property value
+													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'abstract', // string // Required // abstract of schema property
+													$expertise_description, // mixed // Required // Variable to add as the property value
+													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// additionalType
 
@@ -22329,7 +22546,7 @@
 									 * not be included for the MedicalWebPage schema type.
 									 */
 
-								// description
+								// description (specific property)
 
 									/* 
 									 * A description of the item.
@@ -22338,9 +22555,18 @@
 									 * 
 									 *     - Text
 									 *     - TextObject
+									 * 
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
 									 */
 
 									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
 										(
 											in_array(
 												'description',
@@ -22356,40 +22582,6 @@
 										$nesting_level == 0
 									) {
 
-										// Get the Selected Short Description for This Page
-
-											if ( !isset($expertise_description) ) {
-
-												$expertise_description = get_field( 'expertise_selected_post_excerpt', $entity ) ?? '';
-
-												// Fallback values
-
-													if ( !$expertise_description ) {
-
-														// Get the excerpt
-
-															$expertise_description = get_the_excerpt($entity) ?? '';
-
-															// Get the Short Description
-
-																if ( !$expertise_description ) {
-
-																	$expertise_description = get_field( 'post_excerpt', $entity ) ?? '';
-
-																	// Get the Intro Text (Marketing Landing Page Header style)
-
-																		if ( !$expertise_description ) {
-
-																			$expertise_description = get_field( 'page_header_landingpage_intro', $entity ) ?? '';
-
-																		}
-
-																}
-
-													}
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -22398,8 +22590,8 @@
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // description of schema property
-													$expertise_description, // mixed // Required // Variable to add as the property value
-													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$expertise_description_TextObject, // mixed // Required // Variable to add as the property value
+													$expertise_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22411,8 +22603,8 @@
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
 													'description', // string // Required // description of schema property
-													$expertise_description, // mixed // Required // Variable to add as the property value
-													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$expertise_description_TextObject, // mixed // Required // Variable to add as the property value
+													$expertise_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -23659,6 +23851,9 @@
 								$CreativeWork_datePublished = '';
 								$CreativeWork_description = '';
 								$CreativeWork_description_count = '';
+								$CreativeWork_description_ref = '';
+								$CreativeWork_description_TextObject = '';
+								$CreativeWork_description_TextObject_ref = '';
 								$CreativeWork_duration = '';
 								$CreativeWork_embeddedTextCaption = '';
 								$CreativeWork_embeddedTextCaption_count = '';
@@ -24145,6 +24340,112 @@
 
 									}
 
+								// description (common)
+
+									/*
+									 * If the common schema template part did not generate a value, get the 
+									 * non-excerpt fallback value specific to this entity
+									 */
+
+									// List of properties that reference treatments and procedures
+
+										$CreativeWork_description_common = array(
+											'abstract',
+											'description'
+										);
+
+									if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
+										array_intersect(
+											$CreativeWork_properties_map[$MedicalWebPage_type]['properties'],
+											$CreativeWork_description_common
+										)
+										||
+										array_intersect(
+											$CreativeWork_properties_map[$MedicalBusiness_type]['properties'],
+											$CreativeWork_description_common
+										)
+										||
+										array_intersect(
+											$CreativeWork_properties_map[$Person_type]['properties'],
+											$CreativeWork_description_common
+										)
+									) {
+
+										// Get values
+
+											// Get the Selected Short Description for This Page
+
+												if ( !isset($CreativeWork_description) ) {
+
+													$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?? array();
+
+													// Fallback — Get clinical bio
+
+														if ( !$CreativeWork_description ) {
+
+																if ( $CreativeWork_resource_type == 'text' ) {
+
+																	// Article
+						
+																		/* Do nothing */
+
+																} elseif ( $CreativeWork_resource_type == 'infographic' ) {
+
+																	// Infographic
+						
+																		$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
+
+																} elseif ( $CreativeWork_resource_type == 'video' ) {
+						
+																	// Video
+						
+																		$CreativeWork_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
+						
+																} elseif ( $CreativeWork_resource_type == 'doc' ) {
+						
+																	// Document
+						
+																		$CreativeWork_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
+
+																}
+
+														}
+
+													// Clean up value
+
+														if ( $CreativeWork_description ) {
+
+															$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
+															$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
+															$CreativeWork_description = strlen($CreativeWork_description) > 160 ? mb_strimwidth($CreativeWork_description, 0, 156, '...') : $CreativeWork_description; // Limit to 160 characters
+															$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
+
+														}
+
+												}
+
+											// Format schema value
+
+												$CreativeWork_description_TextObject = array();
+
+												if ( $CreativeWork_description ) {
+
+													$CreativeWork_description_TextObject = array(
+														'@id' => $CreativeWork_url . '#description',
+														'@type' => 'TextObject',
+														'text' => $CreativeWork_description,
+													);
+
+												}
+
+									}
+
 								// name
 
 									/* 
@@ -24189,19 +24490,53 @@
 									 * definitions.
 									 */
 
-									if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-										// Get values
-
-											$CreativeWork_abstract = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
+									 if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
+										(
+											in_array(
+												'abstract',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'abstract',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
+										)
+									) {
 
 										// Add to item values
 
-											if ( $CreativeWork_abstract ) {
+											// MedicalWebPage
 
-												$CreativeWork_item['abstract'] = $CreativeWork_abstract;
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$CreativeWork_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'abstract', // string // Required // potentialAction of schema property
+													$CreativeWork_description, // mixed // Required // Variable to add as the property value
+													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
-											}
+											// MedicalEntity
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$CreativeWork_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'abstract', // string // Required // potentialAction of schema property
+													$CreativeWork_description, // mixed // Required // Variable to add as the property value
+													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
@@ -24551,7 +24886,7 @@
 
 									}
 
-								// description
+								// description (specific property)
 
 									/* 
 									 * A description of the item.
@@ -24562,112 +24897,55 @@
 									 *     - TextObject
 									 */
 
-									// Get values
+									 if (
+										(
+											!isset($schema_common_excerpt)
+											||
+											empty($schema_common_excerpt)
+										)
+										&&
+										(
+											in_array(
+												'description',
+												$clinical_resource_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'description',
+												$clinical_resource_properties_map[$CreativeWork_type]['properties']
+											)
+										)
+									) {
 
-										if ( $CreativeWork_resource_type == 'text' ) {
+										// Add to item values
 
-											// Article
+											// MedicalWebPage
 
-												if ( in_array( 'abstract', $CreativeWork_properties ) ) {
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$CreativeWork_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'description', // string // Required // potentialAction of schema property
+													$CreativeWork_description, // mixed // Required // Variable to add as the property value
+													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
-													$CreativeWork_description = $CreativeWork_abstract ?? '';
+											// MedicalEntity
 
-												} else {
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalEntity_type, // string // Required // The @type value for the schema item
+													$CreativeWork_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
+													'description', // string // Required // potentialAction of schema property
+													$CreativeWork_description, // mixed // Required // Variable to add as the property value
+													$CreativeWork_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
-													$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-												}
-
-										} elseif ( $CreativeWork_resource_type == 'infographic' ) {
-
-											// Infographic
-
-												$CreativeWork_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
-
-												// Fallback value
-
-													if ( !$CreativeWork_description ) {
-
-														if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-															$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-														} else {
-
-															$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-														}
-
-													}
-
-										} elseif ( $CreativeWork_resource_type == 'video' ) {
-
-											// Video
-
-												$CreativeWork_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
-
-												// Fallback value
-
-													if ( !$CreativeWork_description ) {
-
-														if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-															$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-														} else {
-
-															$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-														}
-
-													}
-
-										} elseif ( $CreativeWork_resource_type == 'doc' ) {
-
-											// Document
-
-												$CreativeWork_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
-
-												// Fallback value
-
-													if ( !$CreativeWork_description ) {
-
-														if ( in_array( 'abstract', $CreativeWork_properties ) ) {
-
-															$CreativeWork_description = $CreativeWork_abstract ?? '';
-
-														} else {
-
-															$CreativeWork_description = get_field( 'clinical_resource_excerpt', $entity ) ?: '';
-
-														}
-
-													}
-
-										}
-
-									// Clean up values
-
-										if ( $CreativeWork_description ) {
-
-											// Strip all tags
-
-												$CreativeWork_description = wp_strip_all_tags($CreativeWork_description);
-												$CreativeWork_description = str_replace("\n", ' ', $CreativeWork_description); // Strip line breaks
-
-											// Make attribute-friendly
-
-												$CreativeWork_description = uamswp_attr_conversion($CreativeWork_description);
-
-										}
-
-									// Add to item values
-
-										if ( $CreativeWork_description ) {
-
-											$CreativeWork_item['description'] = $CreativeWork_description;
-
-										}
+									}
 
 								// duration
 

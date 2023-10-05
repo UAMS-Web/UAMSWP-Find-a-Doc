@@ -11,6 +11,7 @@
  *     $schema_common_item_MedicalWebPage
  *     $schema_common_specific_clinical_organization // Clinical organization(s) specific to the current entity
  *     $schema_common_url // URL of the current entity
+ *     $schema_common_excerpt
  * 
  */
 
@@ -25,6 +26,7 @@
 	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null;
 	$schema_common_specific_clinical_organization = $schema_common_specific_clinical_organization ?? null;
 	$schema_common_url = $schema_common_url ?? null;
+	$schema_common_excerpt = $schema_common_excerpt ?? null;
 
 // Common schema properties
 
@@ -101,6 +103,41 @@
 					$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
 				);
 
+		// Excerpt
+
+			if ( !isset($schema_common_excerpt) ) {
+
+				$schema_common_excerpt = get_the_excerpt( $entity ) ?? null;
+
+				// Clean up excerpt value
+
+					if ( $schema_common_excerpt ) {
+
+						$schema_common_excerpt = wp_strip_all_tags($schema_common_excerpt);
+						$schema_common_excerpt = str_replace("\n", ' ', $schema_common_excerpt); // Strip line breaks
+						$schema_common_excerpt = strlen($schema_common_excerpt) > 160 ? mb_strimwidth($schema_common_excerpt, 0, 156, '...') : $schema_common_excerpt; // Limit to 160 characters
+						$schema_common_excerpt = uamswp_attr_conversion($schema_common_excerpt);
+
+					}
+
+				// Create TextObject version
+
+					$schema_common_excerpt_TextObject = null;
+
+					if ( $schema_common_excerpt ) {
+
+						$schema_common_excerpt_TextObject = array(
+							'@id' => $schema_common_url ? $schema_common_url . '#Description' : '',
+							'@type' => 'TextObject',
+							'text' => $schema_common_excerpt,
+						);
+
+						$provider_description = array_filter($provider_description);
+
+					}
+
+			}
+
 	// abstract [WIP]
 
 		/* 
@@ -113,15 +150,18 @@
 		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
+		 * 
+		 * Get the excerpt. Let the specific entity's schema function handle the fallback 
+		 * value.
 		 */
 
-		/*
+		// Add to common schema properties array
 
-			Get the excerpt.
+			if ( $schema_common_excerpt ) {
 
-			Let the specific entity's schema function handle the fallback value.
+				$schema_common_properties['abstract'] = $schema_common_excerpt;
 
-		*/
+			}
 
 	// accessibilityAPI [WIP]
 
@@ -1026,6 +1066,28 @@
 				}
 
 		}
+
+	// description
+
+		/* 
+		 * A description of the item.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 *     - TextObject
+		 * 
+		 * Get the excerpt. Let the specific entity's schema function handle the fallback 
+		 * value.
+		 */
+
+		// Add to common schema properties array
+
+			if ( $schema_common_excerpt_TextObject ) {
+
+				$schema_common_properties['description'] = $schema_common_excerpt_TextObject;
+
+			}
 
 	// discussionUrl [excluded for MedicalWebPage]
 
