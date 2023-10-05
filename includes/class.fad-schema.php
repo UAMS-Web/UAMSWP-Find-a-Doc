@@ -24665,36 +24665,6 @@
 
 									}
 
-								// audience
-
-									/* 
-									 * An intended audience, i.e. a group for whom something was created.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Audience
-									 */
-
-									if (
-										in_array( 'audience', $CreativeWork_properties )
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											$CreativeWork_audience = $CreativeWork_audience ?? $schema_common_audience;
-
-										// Add to item values
-
-											if ( $CreativeWork_audience ) {
-
-												$CreativeWork_item['audience'] = $CreativeWork_audience;
-
-											}
-
-									}
-
 								// contentSize
 
 									/* 
