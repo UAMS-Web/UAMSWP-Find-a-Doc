@@ -24148,6 +24148,187 @@
 
 									} // endif ( $nesting_level == 1 )
 
+								// Add common properties
+
+									// Pass variables to template part
+
+										$schema_common_item_MedicalWebPage = $clinical_resource_item_MedicalWebPage;
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
+
+									// All types
+
+										/*
+
+											Loop through an associative array of properties common to all of our schema 
+											types, adding each row to this item's schema when the key matches a property 
+											valid for the type, replacing full values with only the node identifier where 
+											appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties)
+											&&
+											!empty($schema_common_properties)
+										) {
+
+											foreach ( $schema_common_properties as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_ref' } = null;
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+													// CreativeWork
+
+														uamswp_fad_schema_add_to_item_values(
+															$CreativeWork_type, // string // Required // The @type value for the schema item
+															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										}
+
+									// MedicalWebPage only
+
+										/*
+
+											Loop through an associative array of properties specific to the MedicalWebPage 
+											type, adding each row to this item's schema when the key matches a property 
+											valid for the type, replacing full values with only the node identifier where 
+											appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties_MedicalWebPage)
+											&&
+											!empty($schema_common_properties_MedicalWebPage)
+										) {
+
+											foreach ( $schema_common_properties_MedicalWebPage as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_MedicalWebPage_ref' } = null;
+
+													// MedicalWebPage
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalWebPage_type, // string // Required // The @type value for the schema item
+															$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_MedicalWebPage_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										}
+
+									// Types other than MedicalWebPage
+
+										/*
+
+											Loop through an associative array of properties specific to the types other 
+											than the MedicalWebPage type, adding each row to this item's schema when the 
+											key matches a property valid for the type, replacing full values with only the 
+											node identifier where appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties_exclude_MedicalWebPage)
+											&&
+											!empty($schema_common_properties_exclude_MedicalWebPage)
+										) {
+
+											foreach ( $schema_common_properties_exclude_MedicalWebPage as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
+
+													// CreativeWork
+
+														uamswp_fad_schema_add_to_item_values(
+															$CreativeWork_type, // string // Required // The @type value for the schema item
+															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										}
+
+									// Main entity type
+
+										/*
+
+											Loop through an associative array of properties specific to the main entity 
+											type, adding each row to this item's schema when the key matches a property 
+											valid for the type, replacing full values with only the node identifier where 
+											appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties_main_entity)
+											&&
+											!empty($schema_common_properties_main_entity)
+										) {
+
+											foreach ( $schema_common_properties_main_entity as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
+
+													// CreativeWork
+
+														uamswp_fad_schema_add_to_item_values(
+															$CreativeWork_type, // string // Required // The @type value for the schema item
+															$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										}
+
 								// Asset ID [WIP]
 
 									if ( $nesting_level == 0 ) {
