@@ -24735,6 +24735,9 @@
 									 * 
 									 *     - Organization
 									 *     - Person
+									 * 
+									 * Override the value defined in the common schema properties template part, but 
+									 * only for the clinical resource content's CreativeWork type/subtypes.
 									 */
 
 									if (
