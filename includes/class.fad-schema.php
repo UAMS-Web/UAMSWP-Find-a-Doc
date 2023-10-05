@@ -25737,17 +25737,16 @@
 									 *     - Thing
 									 */
 
-								// actor [WIP]
+									/*
+									
+										For MedicalWebPage, set the value as the schema item for the CreativeWork.
 
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
+										For CreativeWork, set the value as something like the associated areas of 
+										expertise, conditions and treatments.
 
-								// aggregateRating [WIP]
+									*/
+
+								// aggregateRating [excluded]
 
 									/* 
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
@@ -25755,60 +25754,12 @@
 									 * Values expected to be one of these types:
 									 * 
 									 *     - AggregateRating
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
-								// alternativeHeadline [WIP]
-
-									/* 
-									 * A secondary title of the CreativeWork.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 */
-
-								// articleSection [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// aspect [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// associatedArticle [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// associatedMedia [WIP]
-
-									/* 
-									 * A media object that encodes this CreativeWork. This property is a synonym for 
-									 * encoding.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 */
-
-								// award [WIP]
+								// award [excluded]
 
 									/* 
 									 * An award won by or for this item.
@@ -25816,29 +25767,22 @@
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Text
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
-								// backstory [WIP]
+								// bitrate (CreativeWork only) [WIP]
 
 									/* 
-									 * [Insert definition here]
+									 * The bitrate of the media object.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [Insert type here]
+									 *     - Text
 									 */
 
-								// bitrate [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// breadcrumb [WIP]
+								// breadcrumb (MedicalWebPage only) [WIP]
 
 									/* 
 									 * A set of links that can help a user understand and navigate a website hierarchy.
@@ -25849,17 +25793,19 @@
 									 *     - Text
 									 */
 
-								// caption [WIP]
+								// caption (CreativeWork only) [WIP]
 
 									/* 
-									 * [Insert definition here]
+									 * The caption for this object. For downloadable machine formats (closed caption, 
+									 * subtitles etc.) use MediaObject and indicate the encodingFormat.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [Insert type here]
+									 *     - MediaObject
+									 *     - Text
 									 */
 
-								// citation [WIP]
+								// citation [excluded]
 
 									/* 
 									 * A citation or reference to another creative work, such as another publication, 
@@ -25869,6 +25815,9 @@
 									 * 
 									 *     - CreativeWork
 									 *     - Text
+									 * 
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
 								// contentLocation [excluded]
@@ -25881,21 +25830,11 @@
 									 * 
 									 *     - Place
 									 * 
-									 * This schema property is not relevant to clinical resources content or webpages 
-									 * and will not be included.
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
-								// director [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// disambiguatingDescription [WIP]
+								// disambiguatingDescription [excluded]
 
 									/* 
 									 * A sub property of description. A short description of the item used to 
@@ -25906,70 +25845,9 @@
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Text
-									 */
-
-								// duration [WIP]
-
-									/* 
-									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
-									 * format.
 									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Duration
-									 */
-
-								// editor [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// encodesCreativeWork [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// encoding [WIP]
-
-									/* 
-									 * A media object that encodes this CreativeWork. This property is a synonym for 
-									 * associatedMedia.
-									 * 
-									 * Inverse-property: encodesCreativeWork
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 */
-
-								// endTime [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// exifData [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
 								// hasPart [WIP]
@@ -26002,18 +25880,15 @@
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
 									 */
 
 									/*
 									
-										Define for the 'Article' type clinical resources
+										Define for the 'Article' type clinical resources by using the post title.
 
 									*/
 
-								// identifier [WIP]
+								// identifier [excluded]
 
 									/* 
 									 * The identifier property represents any kind of identifier for any kind of 
@@ -26026,16 +25901,9 @@
 									 *     - PropertyValue
 									 *     - Text
 									 *     - URL
-									 */
-
-								// ineligibleRegion [WIP]
-
-									/* 
-									 * [Insert definition here]
 									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
 								// inLanguage (CreativeWork only) [WIP]
@@ -26117,16 +25985,6 @@
 									 *     - Thing
 									 */
 
-								// musicBy [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
 								// offers [WIP]
 
 									/* 
@@ -26148,60 +26006,6 @@
 									 * 
 									 *     - Demand
 									 *     - Offer
-									 */
-
-								// pageEnd [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// pageStart [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// pagination [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// playerType [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
-								// position [WIP]
-
-									/* 
-									 * The position of an item in a series or sequence of items.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Integer
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
 									 */
 
 								// potentialAction [WIP]
@@ -26289,16 +26093,6 @@
 									 *     - ImageObject
 									 */
 
-								// productionCompany [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
-									 */
-
 								// relatedLink [WIP]
 
 									/* 
@@ -26309,7 +26103,7 @@
 									 *     - URL
 									 */
 
-								// review [WIP]
+								// review [excluded]
 
 									/* 
 									 * A review of the item.
@@ -26317,16 +26111,9 @@
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Review
-									 */
-
-								// sha256 [WIP]
-
-									/* 
-									 * [Insert definition here]
 									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
+									 * This schema property is not relevant to clinical resources or their webpages, 
+									 * and so it will not be included.
 									 */
 
 								// significantLink [WIP]
@@ -26357,32 +26144,6 @@
 									 * definitions.
 									 */
 
-								// spatial [WIP]
-
-									/* 
-									 * The "spatial" property can be used in cases when more specific properties 
-									 * (e.g., locationCreated, spatialCoverage, contentLocation) are not known to be 
-									 * appropriate.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Place
-									 */
-
-								// spatialCoverage [WIP]
-
-									/* 
-									 * The spatialCoverage of a CreativeWork indicates the place(s) which are the 
-									 * focus of the content. It is a subproperty of contentLocation intended primarily 
-									 * for more technical and detailed materials. For example with a Dataset, it 
-									 * indicates areas that the dataset describes: a dataset of New York weather would 
-									 * have spatialCoverage which was the place: the state of New York.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Place
-									 */
-
 								// specialty [WIP]
 
 									/* 
@@ -26391,16 +26152,6 @@
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Specialty
-									 */
-
-								// startTime [WIP]
-
-									/* 
-									 * [Insert definition here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [Insert type here]
 									 */
 
 								// text [WIP]
@@ -26443,15 +26194,22 @@
 									 *     - Person
 									 */
 
-								// uploadDate [WIP]
+								// uploadDate (CreativeWork only) [WIP]
 
 									/* 
-									 * [Insert definition here]
+									 * Date when this media object was uploaded to this site.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [Insert type here]
+									 *     - Date
 									 */
+
+									/*
+									
+										Use get_post_time( 'c', false, $post ), where $post is the ID of the clinical 
+										resource's media asset (i.e., infographic image, digital document file).
+
+									*/
 
 								// video (MedicalWebPage only) [WIP]
 

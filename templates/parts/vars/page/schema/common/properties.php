@@ -395,6 +395,17 @@
 		 * content and will not be included.
 		 */
 
+	// actor [excluded]
+
+		/* 
+		 * An actor (e.g., in TV, radio, movie, video games, an event). Actors can be 
+		 * associated with individual items or with a series, episode, clip.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Person
+		 */
+
 	// actors [superseded]
 
 		/* 
@@ -433,7 +444,7 @@
 
 			}
 
-	// alternativeHeadline [excluded for MedicalWebPage]
+	// alternativeHeadline [excluded]
 
 		/* 
 		 * A secondary title of the CreativeWork.
@@ -442,9 +453,8 @@
 		 * 
 		 *     - Text
 		 * 
-		 * The "headline" schema property is defined as "Headline of the article" which 
-		 * implies that the "alternativeHeadline" schema property also relates to an 
-		 * article, not a webpage, and so this property will not be included.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// archivedAt [excluded for MedicalWebPage]
@@ -498,6 +508,26 @@
 
 		}
 
+	// articleSection [excluded]
+
+		/* 
+		 * Articles may belong to one or more 'sections' in a magazine or newspaper, such 
+		 * as Sports, Lifestyle, etc.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// aspect [superseded]
+
+		/* 
+		 * SupersededBy: mainContentOfPage
+		 */
+
 	// assesses [excluded]
 
 		/* 
@@ -512,10 +542,34 @@
 		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 		 * feedback and adoption from applications and websites can help improve their 
 		 * definitions.
+		*/
+
+	// associatedArticle [excluded]
+
+		/* 
+		 * A NewsArticle associated with the Media Object.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - NewsArticle
 		 * 
 		 * This schema property is not relevant to UAMSHealth.com webpages or their 
 		 * content and will not be included.
-		*/
+		 */
+
+	// associatedMedia [excluded]
+
+		/* 
+		 * A media object that encodes this CreativeWork. This property is a synonym for 
+		 * encoding.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - MediaObject
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
 
 	// audience
 
@@ -609,6 +663,27 @@
 
 		/* 
 		 * SupersededBy: award
+		 */
+
+	// backstory [excluded]
+
+		/* 
+		 * For an Article, typically a NewsArticle, the backstory property provides a 
+		 * textual summary giving a brief explanation of why and how an article was 
+		 * created. In a journalistic setting this could include information about 
+		 * reporting process, methods, interviews, data sources, etc.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// brand
@@ -1120,6 +1195,21 @@
 
 			}
 
+	// director [excluded]
+
+		/* 
+		 * A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. 
+		 * Directors can be associated with individual items or with a series, episode, 
+		 * clip.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Person
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
 	// directors [superseded]
 
 		/* 
@@ -1172,6 +1262,19 @@
 		 * 
 		 * This schema property is not relevant to UAMSHealth.com webpages or their 
 		 * content and will not be included.
+		 */
+
+	// editor [excluded]
+
+		/* 
+		 * Specifies the Person who edited the CreativeWork.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Person
+		 * 
+		 * We will not be identifying the person that edited UAMSHealth.com webpages or 
+		 * their content and so this schema property will not be included.
 		 */
 
 	// educationalAlignment [excluded]
@@ -1230,6 +1333,59 @@
 		 * content and will not be included.
 		 */
 
+	// endTime [excluded]
+
+		/* 
+		 * The endTime of something. For a reserved event or service 
+		 * (e.g., FoodEstablishmentReservation), the time that it is expected to end. 
+		 * For actions that span a period of time, when the action was performed 
+		 * (e.g., John wrote a book from January to December). For media, including audio 
+		 * and video, it's the time offset of the end of a clip within a larger file.
+		 * 
+		 * Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+		 * describing dates with times. This situation may be clarified in future 
+		 * revisions.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DateTime
+		 *     - Time
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// encodesCreativeWork [excluded]
+
+		/* 
+		 * The CreativeWork encoded by this media object.
+		 * 
+		 * Inverse-property: encoding
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// encoding [excluded]
+
+		/* 
+		 * A media object that encodes this CreativeWork. This property is a synonym for 
+		 * associatedMedia.
+		 * 
+		 * Inverse-property: encodesCreativeWork
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - MediaObject
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
 	// encodings [superseded]
 
 		/* 
@@ -1249,6 +1405,20 @@
 		 * 
 		 * This schema property is not relevant to UAMSHealth.com webpages or their 
 		 * content and will not be included.
+		 */
+
+	// exifData [excluded]
+
+		/* 
+		 * exif data for this object.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - PropertyValue
+		 *     - Text
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
 		 */
 
 	// expires [excluded]
@@ -1337,6 +1507,30 @@
 		 * 
 		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
 		 * included for the MedicalWebPage schema type.
+		 */
+
+	// ineligibleRegion [excluded]
+
+		/* 
+		 * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the 
+		 * GeoShape for the geo-political region(s) for which the offer or delivery charge 
+		 * specification is not valid (e.g., a region where the transaction is not 
+		 * allowed).
+		 * 
+		 * See also eligibleRegion.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - GeoShape
+		 *     - Place
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// inLanguage
@@ -1824,6 +2018,62 @@
 
 			}
 
+	// musicBy [excluded]
+
+		/* 
+		 * The composer of the soundtrack.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - MusicGroup
+		 *     - Person
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
+		 */
+
+	// pageEnd [excluded]
+
+		/* 
+		 * The page on which the work ends; for example "138" or "xvi".
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Integer
+		 *     - Text
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
+		 */
+
+	// pageStart [excluded]
+
+		/* 
+		 * The page on which the work starts; for example "135" or "xiii".
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Integer
+		 *     - Text
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
+		 */
+
+	// pagination [excluded]
+
+		/* 
+		 * Any description of pages that is not separated into pageStart and pageEnd; for 
+		 * example, "1-6, 9, 55" or "10-12, 46-49".
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages or 
+		 * their content and will not be included.
+		 */
+
 	// parentOrganization
 
 		/* 
@@ -1875,7 +2125,20 @@
 		 * content and will not be included.
 		 */
 
-	// position [excluded for MedicalWebPage]
+	// playerType [excluded]
+
+		/* 
+		 * Player type required—for example, Flash or Silverlight.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// position [excluded]
 
 		/* 
 		 * The position of an item in a series or sequence of items.
@@ -1885,8 +2148,8 @@
 		 *     - Integer
 		 *     - Text
 		 * 
-		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-		 * included for the MedicalWebPage schema type.
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
 		 */
 
 	// producer
@@ -1925,6 +2188,20 @@
 				}
 
 		}
+
+	// productionCompany [excluded]
+
+		/* 
+		 * The production company or studio responsible for the item (e.g., series, video 
+		 * game, episode).
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
 
 	// provider
 
@@ -2330,6 +2607,25 @@
 
 		}
 
+	// sha256 [excluded]
+
+		/* 
+		 * The SHA-2 SHA256 hash of the content of the item. For example, a zero-length 
+		 * input has value 
+		 * 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
 	// significantLinks [superseded]
 
 		/* 
@@ -2461,6 +2757,28 @@
 		 * 
 		 *     - Organization
 		 *     - Person
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages or their 
+		 * content and will not be included.
+		 */
+
+	// startTime [excluded]
+
+		/* 
+		 * The startTime of something. For a reserved event or service 
+		 * (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
+		 * For actions that span a period of time, when the action was performed 
+		 * (e.g., John wrote a book from January to December). For media, including audio 
+		 * and video, it's the time offset of the start of a clip within a larger file.
+		 * 
+		 * Note that Event uses startDate/endDate instead of startTime/endTime, even when 
+		 * describing dates with times. This situation may be clarified in future 
+		 * revisions.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DateTime
+		 *     - Time
 		 * 
 		 * This schema property is not relevant to UAMSHealth.com webpages or their 
 		 * content and will not be included.
