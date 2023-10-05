@@ -1,17 +1,30 @@
 <?php
 
 /*
- * 
  * Required vars:
- * $entity ($id of current post)
- * $schema_base_org_uams
- * $schema_base_org_uams_health
- * $schema_base_org_uams_health_name
- * $schema_common_state
- * $schema_common_usa
- * $schema_common_item_MedicalWebPage
+ *     $entity ($id of current post)
+ *     $schema_base_org_uams
+ *     $schema_base_org_uams_health
+ *     $schema_base_org_uams_health_name
+ *     $schema_common_state
+ *     $schema_common_usa
+ *     $schema_common_item_MedicalWebPage
+ *     $schema_common_specific_clinical_organization // Clinical organization(s) specific to the current entity
+ *     $schema_common_url // URL of the current entity
  * 
  */
+
+// Check/define variables
+
+	$entity = $entity ?? null;
+	$schema_base_org_uams = $schema_base_org_uams ?? null;
+	$schema_base_org_uams_health = $schema_base_org_uams_health ?? null;
+	$schema_base_org_uams_health_name = $schema_base_org_uams_health_name ?? null;
+	$schema_common_state = $schema_common_state ?? null;
+	$schema_common_usa = $schema_common_usa ?? null;
+	$schema_common_item_MedicalWebPage = $schema_common_item_MedicalWebPage ?? null;
+	$schema_common_specific_clinical_organization = $schema_common_specific_clinical_organization ?? null;
+	$schema_common_url = $schema_common_url ?? null;
 
 // Common schema properties
 
@@ -88,61 +101,27 @@
 					$schema_base_org_uams_health // mixed // Required // Incoming schema item property value
 				);
 
-	// accessMode [WIP]
+	// abstract [WIP]
 
 		/* 
-		 * The human sensory perceptual system or cognitive faculty through which a person 
-		 * may process or perceive information. Values should be drawn from the approved 
-		 * vocabulary.
+		 * An abstract is a short description that summarizes a CreativeWork.
 		 * 
 		 * Values expected to be one of these types:
 		 * 
 		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
 		 */
 
-		if ( $nesting_level == 0 ) {
+		/*
 
-			// Get values
+			Get the excerpt.
 
-				$schema_common_accessMode = array();
+			Let the specific entity's schema function handle the fallback value.
 
-			// Add to common schema properties array
-
-				if ( $schema_common_accessMode ) {
-
-					$schema_common_properties['accessMode'] = $schema_common_accessMode;
-
-				}
-
-		}
-
-	// accessModeSufficient [WIP]
-
-		/* 
-		 * A list of single or combined accessModes that are sufficient to understand all 
-		 * the intellectual content of a resource. Values should be drawn from the 
-		 * approved vocabulary.
-		 * 
-		 * Values expected to be one of these types:
-		 * 
-		 *     - ItemList
-		 */
-
-		if ( $nesting_level == 0 ) {
-
-			// Get values
-
-				$schema_common_accessModeSufficient = array();
-
-			// Add to common schema properties array
-
-				if ( $schema_common_accessModeSufficient ) {
-
-					$schema_common_properties['accessModeSufficient'] = $schema_common_accessModeSufficient;
-
-				}
-
-		}
+		*/
 
 	// accessibilityAPI [WIP]
 
@@ -287,6 +266,94 @@
 
 		}
 
+	// accessMode [WIP]
+
+		/* 
+		 * The human sensory perceptual system or cognitive faculty through which a person 
+		 * may process or perceive information. Values should be drawn from the approved 
+		 * vocabulary.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				$schema_common_accessMode = array();
+
+			// Add to common schema properties array
+
+				if ( $schema_common_accessMode ) {
+
+					$schema_common_properties['accessMode'] = $schema_common_accessMode;
+
+				}
+
+		}
+
+	// accessModeSufficient [WIP]
+
+		/* 
+		 * A list of single or combined accessModes that are sufficient to understand all 
+		 * the intellectual content of a resource. Values should be drawn from the 
+		 * approved vocabulary.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - ItemList
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				$schema_common_accessModeSufficient = array();
+
+			// Add to common schema properties array
+
+				if ( $schema_common_accessModeSufficient ) {
+
+					$schema_common_properties['accessModeSufficient'] = $schema_common_accessModeSufficient;
+
+				}
+
+		}
+
+	// accountablePerson [excluded for MedicalWebPage]
+
+		/* 
+		 * Specifies the Person that is legally accountable for the CreativeWork.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Person
+		 * 
+		 * We will not be identifying the person that is legally accountable for 
+		 * UAMSHealth.com webpages and so this schema property will not be included.
+		 */
+
+	// acquireLicensePage [excluded for MedicalWebPage]
+
+		/* 
+		 * Indicates a page documenting how licenses can be purchased or otherwise 
+		 * acquired, for the current item.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - URL
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included.
+		 */
+
 	// affiliation
 
 		/* 
@@ -318,6 +385,42 @@
 				$schema_common_properties['affiliation'] = $schema_common_affiliation;
 
 			}
+
+	// alternativeHeadline [excluded for MedicalWebPage]
+
+		/* 
+		 * A secondary title of the CreativeWork.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * The "headline" schema property is defined as "Headline of the article" which 
+		 * implies that the "alternativeHeadline" schema property also relates to an 
+		 * article, not a webpage, and so this property will not be included.
+		 */
+
+	// archivedAt [excluded for MedicalWebPage]
+
+		/* 
+		 * Indicates a page or other link involved in archival of a CreativeWork. In the 
+		 * case of MediaReview, the items in a MediaReviewItem may often become 
+		 * inaccessible, but be archived by archival, journalistic, activist, or law 
+		 * enforcement organizations. In such cases, the referenced page may not directly 
+		 * publish the content.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - URL
+		 *     - WebPage
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * UAMSHealth.com webpages are not being procedurally archived and so this schema 
+		 * property will not be included.
+		 */
 
 	// areaServed
 
@@ -370,6 +473,21 @@
 
 		}
 
+	// audio [excluded for MedicalWebPage]
+
+		/* 
+		 * An embedded audio object.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - AudioObject
+		 *     - Clip
+		 *     - MusicRecording
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// author
 
 		/* 
@@ -408,6 +526,19 @@
 
 		}
 
+	// award [excluded for MedicalWebPage]
+
+		/* 
+		 * An award won by or for this item.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// brand
 
 		/* 
@@ -440,6 +571,102 @@
 				$schema_common_properties['brand'] = $schema_common_brand;
 
 			}
+
+	// character [excluded for MedicalWebPage]
+
+		/* 
+		 * Fictional person connected with a creative work.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Person
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// comment [excluded for MedicalWebPage]
+
+		/* 
+		 * Comments, typically from users.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Comment
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// commentCount [excluded for MedicalWebPage]
+
+		/* 
+		 * The number of comments this CreativeWork (e.g. Article, Question or Answer) has 
+		 * received. This is most applicable to works published in Web sites with 
+		 * commenting system; additional comments may exist elsewhere.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - [insert type(s) here]
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// conditionsOfAccess [excluded for MedicalWebPage]
+
+		/* 
+		 * Conditions that affect the availability of, or method(s) of access to, an item. 
+		 * Typically used for real world items such as an ArchiveComponent held by an 
+		 * ArchiveOrganization. This property is not suitable for use as a general Web 
+		 * access control mechanism. It is expressed only in natural language.
+		 * 
+		 * For example "Available by appointment from the Reading Room" or "Accessible 
+		 * only from logged-in accounts."
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// contentRating [excluded for MedicalWebPage]
+
+		/* 
+		 * Official rating of a piece of content (e.g., 'MPAA PG-13').
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Rating
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// contentReferenceTime [excluded for MedicalWebPage]
+
+		/* 
+		 * The specific time described by a creative work, for works (e.g., articles, 
+		 * video objects) that emphasize a particular moment within an Event.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DateTime
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
 
 	// contributor
 
@@ -571,6 +798,26 @@
 
 		}
 
+	// correction [excluded for MedicalWebPage]
+
+		/* 
+		 * Indicates a correction to a CreativeWork, either via a CorrectionComment, 
+		 * textually or in another document.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CorrectionComment
+		 *     - Text
+		 *     - URL
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// countryOfOrigin
 
 		/* 
@@ -658,7 +905,7 @@
 
 				// Base array
 
-				$schema_common_creator = array();
+					$schema_common_creator = array();
 
 				// Merge in common organization credited values
 
@@ -703,6 +950,23 @@
 				}
 
 		}
+
+	// dateCreated [excluded for MedicalWebPage]
+
+		/* 
+		 * The date on which the CreativeWork was created or the item was added to a 
+		 * DataFeed.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Date
+		 *     - DateTime
+		 * 
+		 * The DataFeed schema type is defined as "a single feed providing structured 
+		 * information about one or more entities or topics." This schema property is not 
+		 * relevant to UAMSHealth.com webpages and will not be included for the 
+		 * MedicalWebPage schema type.
+		 */
 
 	// dateModified
 
@@ -763,6 +1027,229 @@
 
 		}
 
+	// discussionUrl [excluded for MedicalWebPage]
+
+		/* 
+		 * A link to the page containing the comments of the CreativeWork.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - URL
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// editEIDR [excluded for MedicalWebPage]
+
+		/* 
+		 * An EIDR (Entertainment Identifier Registry) identifier representing a specific 
+		 * edit / edition for a work of film or television.
+		 * 
+		 * For example, the motion picture known as "Ghostbusters" whose titleEIDR is 
+		 * "10.5240/7EC7-228A-510A-053E-CBB8-J" has several edits 
+		 * (e.g., "10.5240/1F2A-E1C5-680A-14C6-E76B-I", 
+		 * "10.5240/8A35-3BEE-6497-5D12-9E4F-3").
+		 * 
+		 * Since schema.org types like Movie and TVEpisode can be used for both works and 
+		 * their multiple expressions, it is possible to use titleEIDR alone (for a 
+		 * general description), or alongside editEIDR for a more edit-specific 
+		 * description.
+		 * 
+		 * EIDR: https://eidr.org/
+		 * identifier: https://schema.org/identifier
+		 * titleEIDR: https://schema.org/titleEIDR
+		 * Movie: https://schema.org/Movie
+		 * TVEpisode: https://schema.org/TVEpisode
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 *     - URL
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// educationalAlignment [excluded for MedicalWebPage]
+
+		/* 
+		 * An alignment to an established educational framework.
+		 * 
+		 * This property should not be used where the nature of the alignment can be 
+		 * described using a simple property, for example to express that a resource 
+		 * teaches or assesses a competency.
+		 * 
+		 * teaches: https://schema.org/teaches
+		 * assesses: https://schema.org/assesses
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - AlignmentObject
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// educationalLevel [excluded for MedicalWebPage]
+
+		/* 
+		 * The level in terms of progression through an educational or training context. 
+		 * Examples of educational levels include 'beginner', 'intermediate' or 
+		 * 'advanced', and formal sets of level indicators.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DefinedTerm
+		 *     - Text
+		 *     - URL
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// educationalUse [excluded for MedicalWebPage]
+
+		/* 
+		 * The purpose of a work in the context of education; for example, 'assignment', 
+		 * 'group work'.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DefinedTerm
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// exampleOfWork [excluded for MedicalWebPage]
+
+		/* 
+		 * A creative work that this work is an example/instance/realization/derivation of.
+		 * 
+		 * Inverse-property: workExample
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// expires [excluded for MedicalWebPage]
+
+		/* 
+		 * Date the content expires and is no longer useful or available. For example a 
+		 * VideoObject or NewsArticle whose availability or relevance is time-limited, or 
+		 * a ClaimReview fact check whose publisher wants to indicate that it may no 
+		 * longer be relevant (or helpful to highlight) after some date.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Date
+		 *     - DateTime
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages and 
+		 * will not be included for the MedicalWebPage schema type.
+		 */
+
+	// fileFormat [superseded]
+
+		/* 
+		 * SupersededBy: encodingFormat
+		 */
+
+	// funder [excluded for MedicalWebPage]
+
+		/* 
+		 * A person or organization that supports (sponsors) something through some kind 
+		 * of financial contribution.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 *     - Person
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages and 
+		 * will not be included for the MedicalWebPage schema type.
+		 */
+
+	// funding [excluded for MedicalWebPage]
+
+		/* 
+		 * A Grant that directly or indirectly provide funding or sponsorship for this 
+		 * item. See also ownershipFundingInfo.
+		 * 
+		 * Inverse-property: fundedItem
+		 * 
+		 * Grant: https://schema.org/Grant
+		 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Grant
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applicatio	ns and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// genre [excluded for MedicalWebPage]
+
+		/* 
+		 * Genre of the creative work, broadcast channel or group.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 *     - URL
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// hasPart [excluded for MedicalWebPage]
+
+		/* 
+		 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+		 * (in some sense).
+		 * 
+		 * Inverse-property: isPartOf
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// headline [excluded for MedicalWebPage]
+
+		/* 
+		 * Headline of the article.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// inLanguage
 
 		/* 
@@ -791,6 +1278,54 @@
 
 		}
 
+	// interactionStatistic [excluded for MedicalWebPage]
+
+		/* 
+		 * The number of interactions for the CreativeWork using the WebSite or 
+		 * SoftwareApplication. The most specific child type of InteractionCounter should 
+		 * be used.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - InteractionCounter
+		 * 
+		 * We will not be identifying the number of any form of interaction with 
+		 * UAMSHealth.com webpages, and so this schema property will not be included.
+		 */
+
+	// interactivityType [excluded for MedicalWebPage]
+
+		/* 
+		 * The predominant mode of learning supported by the learning resource. Acceptable 
+		 * values are 'active', 'expositive', or 'mixed'.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// interpretedAsClaim [excluded for MedicalWebPage]
+
+		/* 
+		 * Used to indicate a specific claim contained, implied, translated or refined 
+		 * from the content of a MediaObject or other CreativeWork. The interpreting party 
+		 * can be indicated using claimInterpreter.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Claim
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// isAccessibleForFree (MedicalWebPage only)
 
 		/* 
@@ -812,6 +1347,28 @@
 				$schema_common_properties_MedicalWebPage['inLanguage'] = $schema_common_isAccessibleForFree_MedicalWebPage;
 
 			}
+
+	// isBasedOn [excluded for MedicalWebPage]
+
+		/* 
+		 * A resource from which this work is derived or from which it is a modification 
+		 * or adaptation.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - Product
+		 *     - URL
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// isBasedOnUrl [superseded]
+
+		/* 
+		 * SupersededBy: isBasedOn
+		 */
 
 	// isFamilyFriendly
 
@@ -889,17 +1446,82 @@
 
 			// Get values
 
-				if ( !isset($schema_common_dateModified) ) {
+				if ( !isset($schema_common_locationCreated) ) {
 
-					$schema_common_dateModified = get_the_modified_date( 'c', $entity ) ?? '';
+					$schema_common_locationCreated = get_the_modified_date( 'c', $entity ) ?? '';
 
 				}
 
 			// Add to common schema properties array
 
-				if ( $schema_common_dateModified ) {
+				if ( $schema_common_locationCreated ) {
 
-					$schema_common_properties['lastReviewed'] = $schema_common_dateModified;
+					$schema_common_properties['lastReviewed'] = $schema_common_locationCreated;
+
+				}
+
+		}
+
+	// learningResourceType [excluded for MedicalWebPage]
+
+		/* 
+		 * The predominant type or kind characterizing the learning resource. For example, 
+		 * 'presentation', 'handout'.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DefinedTerm
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// license [excluded for MedicalWebPage]
+
+		/* 
+		 * A license document that applies to this content, typically indicated by URL.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - URL
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// locationCreated
+
+		/* 
+		 * The location where the CreativeWork was created, which may not be the same as 
+		 * the location depicted in the CreativeWork.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Place
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				// Base array
+
+					$schema_common_locationCreated = array();
+
+				// Merge in UAMS organization values
+
+					$schema_common_locationCreated = uamswp_fad_schema_merge_values(
+						$schema_common_locationCreated, // mixed // Required // Initial schema item property value
+						$schema_base_org_uams // mixed // Required // Incoming schema item property value
+					);
+
+			// Add to common schema properties array
+
+				if ( $schema_common_locationCreated ) {
+
+					$schema_common_properties['locationCreated'] = $schema_common_locationCreated;
 
 				}
 
@@ -934,7 +1556,7 @@
 
 		}
 
-	// mainEntityOfPage
+	// mainEntityOfPage (excluding MedicalWebPage)
 
 		/* 
 		 * Indicates a page (or other CreativeWork) for which this thing is the main 
@@ -953,7 +1575,7 @@
 
 			// Base array
 
-			$schema_common_mainEntityOfPage = array();
+				$schema_common_mainEntityOfPage = array();
 
 			// Merge in current entity's MedicalWebPage type item
 
@@ -1005,7 +1627,7 @@
 
 				// Base array
 
-				$schema_common_maintainer = array();
+					$schema_common_maintainer = array();
 
 				// Merge in common organization credited values
 
@@ -1023,6 +1645,40 @@
 				}
 
 		}
+
+	// material [excluded for MedicalWebPage]
+
+		/* 
+		 * A material that something is made from, e.g. leather, wool, cotton, paper.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Product
+		 *     - Text
+		 *     - URL
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// materialExtent [excluded for MedicalWebPage]
+
+		/* 
+		 * The quantity of the materials being described or an expression of the physical 
+		 * space they occupy.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - QuantitativeValue
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
 
 	// medicalAudience
 
@@ -1109,6 +1765,40 @@
 
 			}
 
+	// pattern [excluded for MedicalWebPage]
+
+		/* 
+		 * A pattern that something has, for example 'polka dot', 'striped', 
+		 * 'Canadian flag'. Values are typically expressed as text, although links to 
+		 * controlled value schemes are also supported.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DefinedTerm
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// position [excluded for MedicalWebPage]
+
+		/* 
+		 * The position of an item in a series or sequence of items.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Integer
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// producer
 
 		/* 
@@ -1127,7 +1817,7 @@
 
 				// Base array
 
-				$schema_common_producer = array();
+					$schema_common_producer = array();
 
 				// Merge in common organization credited values
 
@@ -1146,6 +1836,84 @@
 
 		}
 
+	// provider
+
+		/* 
+		 * The service provider, service operator, or service performer; the goods 
+		 * producer.
+		 * 
+		 * Another party (a seller) may offer those services or goods on behalf of the 
+		 * provider.
+		 * 
+		 * A provider may also serve as the seller.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 *     - Person
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				// Base array
+
+					$schema_common_provider = array();
+
+				// Merge in relevant clinical 'Organization' value
+
+					if (
+						isset($schema_common_specific_clinical_organization)
+						&&
+						!empty($schema_common_specific_clinical_organization)
+					) {
+
+						// Merge in specific clinical 'Organization' value
+
+							$schema_common_provider = uamswp_fad_schema_merge_values(
+								$schema_common_provider, // mixed // Required // Initial schema item property value
+								$schema_common_specific_clinical_organization // mixed // Required // Incoming schema item property value
+							);
+
+					} elseif (
+						isset($schema_common_common_clinical_organization)
+						&&
+						!empty($schema_common_common_clinical_organization)
+					) {
+
+						// Merge in common clinical 'Organization' value
+
+							$schema_common_provider = uamswp_fad_schema_merge_values(
+								$schema_common_provider, // mixed // Required // Initial schema item property value
+								$schema_common_common_clinical_organization // mixed // Required // Incoming schema item property value
+							);
+
+					}
+
+			// Add to common schema properties array
+
+				if ( $schema_common_provider ) {
+
+					$schema_common_properties['provider'] = $schema_common_provider;
+
+				}
+
+		}
+
+	// publication [excluded for MedicalWebPage]
+
+		/* 
+		 * A publication event associated with the item.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - PublicationEvent
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// publisher
 
 		/* 
@@ -1163,7 +1931,7 @@
 
 				// Base array
 
-				$schema_common_publisher = array();
+					$schema_common_publisher = array();
 
 				// Merge in common organization credited values
 
@@ -1181,6 +1949,81 @@
 				}
 
 		}
+
+	// publisherImprint [excluded for MedicalWebPage]
+
+		/* 
+		 * The publishing division which published the comic.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// publishingPrinciples [WIP]
+
+		/* 
+		 * The publishingPrinciples property indicates (typically via URL) a document 
+		 * describing the editorial principles of an Organization or individual 
+		 * (e.g., a Person writing a blog) that relate to their activities as a publisher 
+		 * (e.g., ethics or diversity policies). When applied to a CreativeWork 
+		 * (e.g., NewsArticle) the principles are those of the party primarily responsible 
+		 * for the creation of the CreativeWork.
+		 * 
+		 * While such policies are most typically expressed in natural language, sometimes 
+		 * related information (e.g., indicating a funder) can be expressed using 
+		 * schema.org terminology.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - URL
+		 */
+
+	// recordedAt [excluded for MedicalWebPage]
+
+		/* 
+		 * The Event where the CreativeWork was recorded. The CreativeWork may capture all 
+		 * or part of the event.
+		 * 
+		 * Inverse-property: recordedIn
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Event
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// releasedEvent [excluded for MedicalWebPage]
+
+		/* 
+		 * The place and time the release was issued, expressed as a PublicationEvent.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - PublicationEvent
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// review [excluded for MedicalWebPage]
+
+		/* 
+		 * A review of the item.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Review
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
 
 	// reviewedBy
 
@@ -1200,7 +2043,7 @@
 
 				// Base array
 
-				$schema_common_reviewedBy = array();
+					$schema_common_reviewedBy = array();
 
 				// Merge in common organization credited values
 
@@ -1218,6 +2061,156 @@
 				}
 
 		}
+
+	// schemaVersion
+
+		/* 
+		 * Indicates (by URL or string) a particular version of a schema used in some 
+		 * CreativeWork. This property was created primarily to indicate the use of a 
+		 * specific schema.org release (e.g., 10.0 as a simple string, or more explicitly 
+		 * via URL, https://schema.org/docs/releases.html#v10.0). There may be situations 
+		 * in which other schemas might usefully be referenced this way 
+		 * (e.g. http://dublincore.org/specifications/dublin-core/dces/1999-07-02/) but 
+		 * this has not been carefully explored in the community.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 *     - URL
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				$schema_common_schemaVersion = 'https://schema.org/docs/releases.html#v22.0';
+
+			// Add to common schema properties array
+
+				if ( $schema_common_schemaVersion ) {
+
+					$schema_common_properties['schemaVersion'] = $schema_common_schemaVersion;
+
+				}
+
+		}
+
+	// sdDatePublished
+
+		/* 
+		 * Indicates the date on which the current structured data was generated / 
+		 * published. Typically used alongside sdPublisher.
+		 * 
+		 * sdPublisher: https://schema.org/sdPublisher
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Date
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get current date
+
+				$schema_common_sdDatePublished = date( 'c' );
+
+			// Add to common schema properties array
+
+				if ( $schema_common_sdDatePublished ) {
+
+					$schema_common_properties['sdDatePublished'] = $schema_common_sdDatePublished;
+
+				}
+
+		}
+
+	// sdLicense [excluded for MedicalWebPage]
+
+		/* 
+		 * A license document that applies to this structured data, typically indicated 
+		 * by URL.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - URL
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// sdPublisher
+
+		/* 
+		 * Indicates the party responsible for generating and publishing the current 
+		 * structured data markup, typically in cases where the structured data is derived 
+		 * automatically from existing published content but published on a different 
+		 * site. For example, student projects and open data initiatives often re-publish 
+		 * existing content with more explicitly structured metadata. The sdPublisher 
+		 * property helps make such practices more explicit.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 *     - Person
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 */
+
+		if ( $nesting_level == 0 ) {
+
+			// Get values
+
+				// Base array
+
+					$schema_common_sdPublisher = array();
+
+				// Merge in UAMS organization values
+
+					$schema_common_sdPublisher = uamswp_fad_schema_merge_values(
+						$schema_common_sdPublisher, // mixed // Required // Initial schema item property value
+						$schema_base_org_uams // mixed // Required // Incoming schema item property value
+					);
+
+			// Add to common schema properties array
+
+				if ( $schema_common_sdPublisher ) {
+
+					$schema_common_properties['sdPublisher'] = $schema_common_sdPublisher;
+
+				}
+
+		}
+
+	// size [excluded for MedicalWebPage]
+
+		/* 
+		 * A standardized size of a product or creative work, specified either through a 
+		 * simple textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a 
+		 * unitCode, or a comprehensive and structured SizeSpecification; in other cases, 
+		 * the width, height, depth and weight properties may be more applicable.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - [insert type(s) here]
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
 
 	// smokingAllowed
 
@@ -1262,7 +2255,7 @@
 
 				// Base array
 
-				$schema_common_sourceOrganization = array();
+					$schema_common_sourceOrganization = array();
 
 				// Merge in common organization credited values
 
@@ -1280,6 +2273,54 @@
 				}
 
 		}
+
+	// spatial [excluded for MedicalWebPage]
+
+		/* 
+		 * The "spatial" property can be used in cases when more specific properties 
+		 * (e.g., locationCreated, spatialCoverage, contentLocation) are not known to be 
+		 * appropriate.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Place
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// spatialCoverage [excluded for MedicalWebPage]
+
+		/* 
+		 * The spatialCoverage of a CreativeWork indicates the place(s) which are the 
+		 * focus of the content. It is a subproperty of contentLocation intended primarily 
+		 * for more technical and detailed materials. For example with a Dataset, it 
+		 * indicates areas that the dataset describes: a dataset of New York weather would 
+		 * have spatialCoverage which was the place: the state of New York.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - [insert type(s) here]
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// sponsor [excluded for MedicalWebPage]
+
+		/* 
+		 * A person or organization that supports a thing through a pledge, promise, or 
+		 * financial contribution (e.g., a sponsor of a Medical Study or a corporate 
+		 * sponsor of an event).
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 *     - Person
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
 
 	// subjectOf
 
@@ -1319,6 +2360,226 @@
 
 		}
 
+	// teaches [excluded for MedicalWebPage]
+
+		/* 
+		 * The item being described is intended to help a person learn the competency or 
+		 * learning outcome defined by the referenced term.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DefinedTerm
+		 *     - Text
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// temporal [excluded for MedicalWebPage]
+
+		/* 
+		 * The "temporal" property can be used in cases where more specific properties 
+		 * (e.g., temporalCoverage, dateCreated, dateModified, datePublished) are not 
+		 * known to be appropriate.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DateTime
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// temporalCoverage [excluded for MedicalWebPage]
+
+		/* 
+		 * The temporalCoverage of a CreativeWork indicates the period that the content 
+		 * applies to (i.e., that it describes), either as a DateTime or as a textual 
+		 * string indicating a time period in ISO 8601 time interval format. In the case 
+		 * of a Dataset it will typically indicate the relevant time period in a precise 
+		 * notation (e.g., for a 2011 census dataset, the year 2011 would be written 
+		 * "2011/2012"). Other forms of content (e.g., ScholarlyArticle, Book, TVSeries, 
+		 * TVEpisode), may indicate their temporalCoverage in broader terms — textually or 
+		 * via well-known URL. Written works such as books may sometimes have precise 
+		 * temporal coverage too (e.g., a work set in 1939 - 1945 can be indicated in 
+		 * ISO 8601 interval format format via "1939/1945").
+		 * 
+		 * Open-ended date ranges can be written with ".." in place of the end date. For 
+		 * example, "2015-11/.." indicates a range beginning in November 2015 and with no 
+		 * specified final date. This is tentative and might be updated in future when 
+		 * ISO 8601 is officially updated.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - DateTime
+		 *     - Text
+		 *     - URL
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// thumbnail [excluded for MedicalWebPage]
+
+		/* 
+		 * Thumbnail image for an image or video.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - ImageObject
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// thumbnailUrl
+
+		/* 
+		 * A thumbnail image relevant to the Thing.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - URL
+		 */
+
+		// Get values
+
+			// Base array
+
+				$schema_common_thumbnailUrl = array();
+
+			// Get post thumbnail ID
+
+				$schema_common_thumbnailUrl_id = get_post_thumbnail_id( $entity );
+
+		// Create ImageObject
+
+			$schema_common_thumbnailUrl = uamswp_fad_schema_imageobject_thumbnails(
+				$schema_common_url, // URL of entity with which the image is associated
+				($nesting_level + 1), // Nesting level within the main schema
+				'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9', 'full')
+				'thumbnailUrl', // Base fragment identifier
+				$schema_common_thumbnailUrl_id, // ID of image to use for 1:1 aspect ratio
+				0, // ID of image to use for 3:4 aspect ratio
+				$schema_common_thumbnailUrl_id, // ID of image to use for 4:3 aspect ratio
+				$schema_common_thumbnailUrl_id // ID of image to use for 16:9 aspect ratio
+			);
+
+		// Add to common schema properties array
+
+			if ( $schema_common_thumbnailUrl ) {
+
+				$schema_common_properties['thumbnailUrl'] = $schema_common_thumbnailUrl;
+
+			}
+
+	// translationOfWork [excluded for MedicalWebPage]
+
+		/* 
+		 * The work that this work has been translated from (e.g., 物种起源 is a 
+		 * translationOf "On the Origin of Species".
+		 * 
+		 * Inverse-property: workTranslation
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// translator [excluded for MedicalWebPage]
+
+		/* 
+		 * Organization or person who adapts a creative work to different languages, 
+		 * regional differences and technical requirements of a target market, or that 
+		 * translates during some event.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Organization
+		 *     - Person
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// typicalAgeRange [excluded for MedicalWebPage]
+
+		/* 
+		 * The typical expected age range (e.g. '7-9', '11-').
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// usageInfo [WIP]
+
+		/* 
+		 * The schema.org usageInfo property indicates further information about a 
+		 * CreativeWork. This property is applicable both to works that are freely 
+		 * available and to those that require payment or other transactions. It can 
+		 * reference additional information (e.g., community expectations on preferred 
+		 * linking and citation conventions), as well as purchasing details. For something 
+		 * that can be commercially licensed, usageInfo can provide detailed, 
+		 * resource-specific information about licensing options.
+		 * 
+		 * This property can be used alongside the license property which indicates 
+		 * license(s) applicable to some piece of content. The usageInfo property can 
+		 * provide information about other licensing options (e.g., acquiring commercial 
+		 * usage rights for an image that is also available under non-commercial creative 
+		 * commons licenses).
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 *     - URL
+		 * 
+		 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+		 * feedback and adoption from applications and websites can help improve their 
+		 * definitions.
+		 */
+
+	// version [excluded for MedicalWebPage]
+
+		/* 
+		 * The version of the CreativeWork embodied by a specified resource.
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - Number
+		 *     - Text
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
+	// workExample [excluded for MedicalWebPage]
+
+		/* 
+		 * Example/instance/realization/derivation of the concept of this creative work 
+		 * (e.g., paperback edition, first edition, e-book).
+		 * 
+		 * Inverse-property: exampleOfWork
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 * 
+		 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+		 * included for the MedicalWebPage schema type.
+		 */
+
 	// worksFor
 
 		/* 
@@ -1349,3 +2610,20 @@
 				$schema_common_properties['worksFor'] = $schema_common_worksFor;
 
 			}
+
+	// workTranslation [excluded for MedicalWebPage]
+
+		/* 
+		 * A work that is a translation of the content of this work (e.g., 西遊記 has an 
+		 * English workTranslation "Journey to the West", a German workTranslation 
+		 * "Monkeys Pilgerfahrt" and a Vietnamese translation Tây du ký bình khảo).
+		 * 
+		 * Inverse-property: translationOfWork
+		 * 
+		 * Values expected to be one of these types:
+		 * 
+		 *     - CreativeWork
+		 * 
+		 * This schema property is not currently relevant to UAMSHealth.com webpages and 
+		 * will not be included for the MedicalWebPage schema type.
+		 */

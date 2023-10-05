@@ -5909,6 +5909,10 @@
 
 										}
 
+									// Pass the values to common schema properties template part
+
+										$schema_common_url = $provider_url;
+
 									// Add to item values
 
 										// MedicalWebPage
@@ -6152,6 +6156,58 @@
 
 											}
 
+								// Specific Clinical Organizations [WIP]
+
+									/*
+
+										e.g., Arkansas Children's, Baptist Health, Central Arkansas Veterans Healthcare System
+
+									*/
+
+									// List of properties that reference organizations (i.e., 'Organization')
+
+										$provider_organization_common = array(
+											'affiliation',
+											'brand',
+											'hospitalAffiliation',
+											'memberOf',
+											'parentOrganization',
+											'worksFor'
+										);
+
+									if (
+										(
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_organization_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_organization_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_organization_common
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values [WIP]
+
+											// Base array
+
+												$provider_specific_clinical_organization = array();
+
+										// Pass the values to common schema properties template part
+
+											$schema_common_specific_clinical_organization = $provider_specific_clinical_organization;
+
+									}
+
 								// Add common properties
 
 									// Pass variables to template part
@@ -6358,54 +6414,6 @@
 											}
 
 										}
-
-								// Specific Clinical Organizations [WIP]
-
-									/*
-
-										e.g., Arkansas Children's, Baptist Health, Central Arkansas Veterans Healthcare System
-
-									*/
-
-									// List of properties that reference organizations (i.e., 'Organization')
-
-										$provider_organization_common = array(
-											'affiliation',
-											'brand',
-											'hospitalAffiliation',
-											'memberOf',
-											'parentOrganization',
-											'worksFor'
-										);
-
-									if (
-										(
-											array_intersect(
-												$provider_properties_map[$MedicalWebPage_type]['properties'],
-												$provider_organization_common
-											)
-											||
-											array_intersect(
-												$provider_properties_map[$MedicalBusiness_type]['properties'],
-												$provider_organization_common
-											)
-											||
-											array_intersect(
-												$provider_properties_map[$Person_type]['properties'],
-												$provider_organization_common
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values [WIP]
-
-											// Base array
-
-												$provider_specific_clinical_organization = array();
-
-									}
 
 								// names (common use and specific properties) [WIP]
 
@@ -12490,185 +12498,6 @@
 
 									}
 
-								// mentions
-
-									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
-									 * about a concept.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Thing
-									 */
-
-									if (
-										(
-											in_array(
-												'mentions',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'mentions',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'mentions',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$provider_mentions = array();
-
-											// Merge in related locations value
-
-												$provider_mentions = uamswp_fad_schema_merge_values(
-													$provider_mentions, // mixed // Required // Initial schema item property value
-													$provider_location // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge location significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_location_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge location keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_location_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related areas of expertise value
-
-												$provider_mentions = uamswp_fad_schema_merge_values(
-													$provider_mentions, // mixed // Required // Initial schema item property value
-													$provider_expertise // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge areas of expertise significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_expertise_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge areas of expertise keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_expertise_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related clinical resources value
-
-												$provider_mentions = uamswp_fad_schema_merge_values(
-													$provider_mentions, // mixed // Required // Initial schema item property value
-													$provider_clinical_resource // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge clinical resources significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_clinical_resource_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related conditions value
-
-												$provider_mentions = uamswp_fad_schema_merge_values(
-													$provider_mentions, // mixed // Required // Initial schema item property value
-													$provider_condition // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge conditions significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_condition_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge conditions keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_condition_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related treatments value
-
-												$provider_mentions = uamswp_fad_schema_merge_values(
-													$provider_mentions, // mixed // Required // Initial schema item property value
-													$provider_availableService // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge availableService significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge availableService keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_availableService_keywords // mixed // Required // Incoming schema item property value
-													);
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'mentions', // string // Required // Name of schema property
-													$provider_mentions, // mixed // Required // Variable to add as the property value
-													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'mentions', // string // Required // Name of schema property
-													$provider_mentions, // mixed // Required // Variable to add as the property value
-													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'mentions', // string // Required // Name of schema property
-													$provider_mentions, // mixed // Required // Variable to add as the property value
-													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// offers [WIP]
 
 									/* 
@@ -13267,121 +13096,6 @@
 
 									}
 
-								// provider
-
-									/* 
-									 * The service provider, service operator, or service performer; the goods 
-									 * producer.
-									 * 
-									 * Another party (a seller) may offer those services or goods on behalf of the 
-									 * provider.
-									 * 
-									 * A provider may also serve as the seller.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 *     - Person
-									 */
-
-									if (
-										(
-											in_array(
-												'provider',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'provider',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'provider',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$provider_provider = array();
-
-											if (
-												isset($provider_specific_clinical_organization)
-												&&
-												!empty($provider_specific_clinical_organization)
-											) {
-
-												// Merge in specific clinical 'Organization' value
-
-													$provider_provider = uamswp_fad_schema_merge_values(
-														$provider_provider, // mixed // Required // Initial schema item property value
-														$provider_specific_clinical_organization // mixed // Required // Incoming schema item property value
-													);
-
-											} elseif (
-												isset($schema_common_clinical_organization)
-												&&
-												!empty($schema_common_clinical_organization)
-											) {
-
-												// Merge in common clinical organizations values
-
-													$provider_provider = uamswp_fad_schema_merge_values(
-														$provider_provider, // mixed // Required // Initial schema item property value
-														$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-													);
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'provider', // string // Required // Name of schema property
-													$provider_provider, // mixed // Required // Variable to add as the property value
-													$provider_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'provider', // string // Required // Name of schema property
-													$provider_provider, // mixed // Required // Variable to add as the property value
-													$provider_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'provider', // string // Required // Name of schema property
-													$provider_provider, // mixed // Required // Variable to add as the property value
-													$provider_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// relatedLink [WIP]
 
 									/* 
@@ -13725,88 +13439,6 @@
 
 									}
 
-								// thumbnailUrl [WIP]
-
-									/* 
-									 * A thumbnail image relevant to the Thing.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - URL
-									 */
-
-									if (
-										(
-											in_array(
-												'thumbnailUrl',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'thumbnailUrl',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'thumbnailUrl',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values [WIP]
-
-											if ( !isset($provider_thumbnailUrl) ) {
-
-												$provider_thumbnailUrl = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'thumbnailUrl', // string // Required // Name of schema property
-													$provider_thumbnailUrl, // mixed // Required // Variable to add as the property value
-													$provider_thumbnailUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'thumbnailUrl', // string // Required // Name of schema property
-													$provider_thumbnailUrl, // mixed // Required // Variable to add as the property value
-													$provider_thumbnailUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'thumbnailUrl', // string // Required // Name of schema property
-													$provider_thumbnailUrl, // mixed // Required // Variable to add as the property value
-													$provider_thumbnailUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// timeRequired [WIP]
 
 									/* 
@@ -13815,7 +13447,7 @@
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - Duration
+									 *     - Duration (use ISO 8601 duration format).
 									 */
 
 									if (
@@ -14253,6 +13885,185 @@
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
 													$provider_worksFor_keywords // mixed // Required // Incoming schema item property value
+												);
+
+									}
+
+								// mentions
+
+									/* 
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									 * about a concept.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+									if (
+										(
+											in_array(
+												'mentions',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'mentions',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'mentions',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$provider_mentions = array();
+
+											// Merge in related locations value
+
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_location // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge location significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_location_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge location keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_location_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related areas of expertise value
+
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_expertise // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge areas of expertise significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_expertise_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge areas of expertise keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_expertise_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related clinical resources value
+
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_clinical_resource // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge clinical resources significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_clinical_resource_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related conditions value
+
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_condition // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge conditions significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_condition_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge conditions keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_condition_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related treatments value
+
+												$provider_mentions = uamswp_fad_schema_merge_values(
+													$provider_mentions, // mixed // Required // Initial schema item property value
+													$provider_availableService // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge availableService significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge availableService keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_availableService_keywords // mixed // Required // Incoming schema item property value
+													);
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$provider_mentions, // mixed // Required // Variable to add as the property value
+													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$provider_mentions, // mixed // Required // Variable to add as the property value
+													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// Person
+
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$provider_mentions, // mixed // Required // Variable to add as the property value
+													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
 									}
@@ -15154,6 +14965,9 @@
 
 										}
 
+									// Pass the values to common schema properties template part
+
+										$schema_common_url = $location_url;
 
 									// Add to schema
 
@@ -15244,6 +15058,49 @@
 												$node_identifier_list[] = $location_item_LocalBusiness['@id']; // Add to the list of existing node identifiers
 
 											}
+
+								// Specific Clinical Organizations (common use) [WIP]
+
+									/*
+
+										e.g., Arkansas Children's, Baptist Health, Central Arkansas Veterans Healthcare System
+
+									*/
+
+									// List of properties that reference organizations (i.e., 'Organization')
+
+										$location_organization_common = array(
+											'affiliation',
+											'brand',
+											'hospitalAffiliation',
+											'memberOf',
+											'parentOrganization',
+											'worksFor'
+										);
+
+									if (
+										array_intersect(
+											$location_properties_map[$MedicalWebPage_type]['properties'],
+											$location_organization_common
+										)
+										||
+										array_intersect(
+											$location_properties_map[$LocalBusiness_type]['properties'],
+											$location_organization_common
+										)
+									) {
+
+										// Get values [WIP]
+
+											// Base array
+
+												$location_specific_clinical_organization = array();
+
+										// Pass values to common schema properties template part
+
+											$schema_common_specific_clinical_organization = $location_specific_clinical_organization;
+
+									}
 
 								// Add common properties
 
@@ -15425,45 +15282,6 @@
 											}
 
 										}
-
-								// Specific Clinical Organizations (common use) [WIP]
-
-									/*
-
-										e.g., Arkansas Children's, Baptist Health, Central Arkansas Veterans Healthcare System
-
-									*/
-
-									// List of properties that reference organizations (i.e., 'Organization')
-
-										$location_organization_common = array(
-											'affiliation',
-											'brand',
-											'hospitalAffiliation',
-											'memberOf',
-											'parentOrganization',
-											'worksFor'
-										);
-
-									if (
-										array_intersect(
-											$location_properties_map[$MedicalWebPage_type]['properties'],
-											$location_organization_common
-										)
-										||
-										array_intersect(
-											$location_properties_map[$LocalBusiness_type]['properties'],
-											$location_organization_common
-										)
-									) {
-
-										// Get values [WIP]
-
-											// Base array
-
-												$location_specific_clinical_organization = array();
-
-									}
 
 								// Parent location attributes (common use)
 
@@ -19961,69 +19779,6 @@
 
 									}
 
-								// mentions
-
-									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
-									 * about a concept.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Thing
-									 */
-
-									if (
-										(
-											in_array(
-												'mentions',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'mentions',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$location_mentions = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'mentions', // string // Required // Name of schema property
-													$location_mentions, // mixed // Required // Variable to add as the property value
-													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'mentions', // string // Required // Name of schema property
-													$location_mentions, // mixed // Required // Variable to add as the property value
-													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// nonprofitStatus
 
 									/* 
@@ -20743,103 +20498,6 @@
 
 									}
 
-								// provider
-
-									/* 
-									 * The service provider, service operator, or service performer; the goods 
-									 * producer.
-									 * 
-									 * Another party (a seller) may offer those services or goods on behalf of the 
-									 * provider.
-									 * 
-									 * A provider may also serve as the seller.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 *     - Person
-									 */
-
-									if (
-										(
-											in_array(
-												'provider',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'provider',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$location_provider = array();
-
-											if (
-												isset($location_specific_clinical_organization)
-												&&
-												!empty($location_specific_clinical_organization)
-											) {
-
-												// Merge in specific clinical 'Organization' value
-
-													$location_provider = uamswp_fad_schema_merge_values(
-														$location_provider, // mixed // Required // Initial schema item property value
-														$location_specific_clinical_organization // mixed // Required // Incoming schema item property value
-													);
-
-											} elseif (
-												isset($schema_common_clinical_organization)
-												&&
-												!empty($schema_common_clinical_organization)
-											) {
-
-												// Merge in common clinical organizations values
-
-													$location_provider = uamswp_fad_schema_merge_values(
-														$location_provider, // mixed // Required // Initial schema item property value
-														$schema_common_clinical_organization // mixed // Required // Incoming schema item property value
-													);
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'provider', // string // Required // Name of schema property
-													$location_provider, // mixed // Required // Variable to add as the property value
-													$location_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'provider', // string // Required // Name of schema property
-													$location_provider, // mixed // Required // Variable to add as the property value
-													$location_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// publicAccess
 
 									/* 
@@ -21369,71 +21027,7 @@
 
 									}
 
-								// thumbnailUrl
-
-									/* 
-									 * A thumbnail image relevant to the Thing.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - URL
-									 */
-
-									 if (
-										(
-											in_array(
-												'thumbnailUrl',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'thumbnailUrl',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											if ( !isset($location_thumbnailUrl) ) {
-
-												$location_thumbnailUrl = array();
-
-											}
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'thumbnailUrl', // string // Required // Name of schema property
-													$location_thumbnailUrl, // mixed // Required // Variable to add as the property value
-													$location_thumbnailUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'thumbnailUrl', // string // Required // Name of schema property
-													$location_thumbnailUrl, // mixed // Required // Variable to add as the property value
-													$location_thumbnailUrl_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// timeRequired
+								// timeRequired [WIP]
 
 									/* 
 									 * Approximate or typical time it usually takes to work with or through the 
@@ -21441,7 +21035,7 @@
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - Duration
+									 *     - Duration (use ISO 8601 duration format).
 									 */
 
 									if (
@@ -21491,6 +21085,69 @@
 													'timeRequired', // string // Required // Name of schema property
 													$location_timeRequired, // mixed // Required // Variable to add as the property value
 													$location_timeRequired_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// mentions [WIP]
+
+									/* 
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									 * about a concept.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+									if (
+										(
+											in_array(
+												'mentions',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'mentions',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$location_mentions = array();
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$location_mentions, // mixed // Required // Variable to add as the property value
+													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'mentions', // string // Required // Name of schema property
+													$location_mentions, // mixed // Required // Variable to add as the property value
+													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -21974,6 +21631,10 @@
 
 										}
 
+									// Pass the values to common schema properties template part
+
+										$schema_common_url = $expertise_url;
+
 									// Add to item values
 
 										// MedicalWebPage
@@ -22303,6 +21964,39 @@
 
 									}
 
+								// about [WIP]
+
+									/* 
+									 * The subject matter of the content.
+									 * 
+									 * Inverse-property: subjectOf
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
+									 */
+
+								// abstract [WIP]
+
+									/* 
+									 * An abstract is a short description that summarizes a CreativeWork.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 */
+
+									/*
+
+										If the common schema template part did not generate a value, get the 
+										non-excerpt fallback value specific to this entity
+
+									*/
+
 								// additionalType
 
 									/* 
@@ -22397,6 +22091,19 @@
 
 									}
 
+								// aggregateRating [excluded]
+
+									/* 
+									 * The overall rating, based on a collection of reviews or ratings, of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - AggregateRating
+									 * 
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included.
+									 */
+
 								// alternateName
 
 									/* 
@@ -22478,6 +22185,58 @@
 
 									}
 
+								// assesses [excluded]
+
+									/* 
+									 * The item being described is intended to assess the competency or learning 
+									 * outcome defined by the referenced term.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - [insert type(s) here]
+									 * 
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
+									 * feedback and adoption from applications and websites can help improve their 
+									 * definitions.
+									 * 
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included.
+									 */
+
+								// associatedMedia [WIP]
+
+									/* 
+									 * A media object that encodes this CreativeWork. This property is a synonym for 
+									 * encoding.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MediaObject
+									 */
+
+								// breadcrumb [WIP]
+
+									/* 
+									 * A set of links that can help a user understand and navigate a website hierarchy.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - BreadcrumbList
+									 *     - Text
+									 */
+
+								// citation [WIP]
+
+									/* 
+									 * A citation or reference to another creative work, such as another publication, 
+									 * web page, scholarly article, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Text
+									 */
+
 								// code
 
 									/* 
@@ -22555,6 +22314,20 @@
 												);
 
 									}
+
+								// contentLocation [excluded]
+
+									/* 
+									 * The location depicted or described in the content. For example, the location in 
+									 * a photograph or painting.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Place
+									 * 
+									 * This schema property is not relevant to areas of expertise webpages and will 
+									 * not be included for the MedicalWebPage schema type.
+									 */
 
 								// description
 
@@ -22706,13 +22479,50 @@
 
 									}
 
-								// funding [WIP]
+								// encoding [WIP]
+
+									/* 
+									 * A media object that encodes this CreativeWork. This property is a synonym for 
+									 * associatedMedia.
+									 * 
+									 * Inverse-property: encodesCreativeWork
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MediaObject
+									 */
+
+								// encodingFormat [WIP]
+
+									/* 
+									 * Media type typically expressed using a MIME format (see IANA site and MDN 
+									 * reference), (e.g., application/zip for a SoftwareApplication binary, 
+									 * audio/mpeg for .mp3).
+									 * 
+									 * In cases where a CreativeWork has several media type representations, encoding 
+									 * can be used to indicate each MediaObject alongside particular encodingFormat 
+									 * information.
+									 * 
+									 * Unregistered or niche encoding and file formats can be indicated instead via 
+									 * the most appropriate URL (e.g., defining Web page, a Wikipedia/Wikidata 
+									 * entry).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+								// funding [excluded]
 
 									/* 
 									 * A Grant that directly or indirectly provide funding or sponsorship for this 
 									 * item. See also ownershipFundingInfo.
 									 * 
-									 * Inverse property: fundedItem
+									 * Inverse-property: fundedItem
+									 * 
+									 * Grant: https://schema.org/Grant
+									 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
 									 * 
 									 * Values expected to be one of these types:
 									 * 
@@ -22721,53 +22531,13 @@
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 									 * feedback and adoption from applications and websites can help improve their 
 									 * definitions.
+									 * 
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 * included for the MedicalWebPage schema type.
+									 * 
+									 * This schema property is not relevant to areas of expertise and will not be 
+									 * included for the MedicalEntity schema type.
 									 */
-
-									if (
-										in_array(
-											'funding',
-											$expertise_properties_map[$MedicalWebPage_type]['properties']
-										)
-										||
-										in_array(
-											'funding',
-											$expertise_properties_map[$MedicalEntity_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											$expertise_funding = array();
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'funding', // string // Required // sameAs of schema property
-													$expertise_funding, // mixed // Required // Variable to add as the property value
-													$expertise_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalEntity
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalEntity_type, // string // Required // The @type value for the schema item
-													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'funding', // string // Required // sameAs of schema property
-													$expertise_funding, // mixed // Required // Variable to add as the property value
-													$expertise_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
 
 								// guideline [WIP]
 
@@ -23021,7 +22791,7 @@
 
 									}
 
-								// legalStatus
+								// legalStatus [excluded]
 
 									/* 
 									 * The drug or supplement's legal status, including any controlled substance 
@@ -23035,6 +22805,18 @@
 									 * 
 									 * This schema property is not relevant to areas of expertise and will not be 
 									 * included.
+									 */
+
+								// mainEntity [WIP]
+
+									/* 
+									 * Indicates the primary entity described in some page or other CreativeWork.
+									 * 
+									 * Inverse-property: mainEntityOfPage
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Thing
 									 */
 
 								// medicineSystem
@@ -23105,6 +22887,29 @@
 												);
 
 									}
+
+								// offers [WIP]
+
+									/* 
+									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									 * DVD of a movie, perform a service, or give away tickets to an event.
+									 * 
+									 * Use businessFunction to indicate the kind of transaction offered 
+									 * (i.e., sell, lease).
+									 * 
+									 * This property can also be used to describe a Demand.
+									 * 
+									 * While this property is listed as expected on a number of common types, it can 
+									 * be used in others. In that case, using a second type, such as Product or a 
+									 * subtype of Product, can clarify the nature of the offer.
+									 * 
+									 * Inverse-property: itemOffered
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Demand
+									 *     - Offer
+									 */
 
 								// potentialAction [WIP]
 
@@ -23231,6 +23036,16 @@
 
 									}
 
+								// primaryImageOfPage [WIP]
+
+									/* 
+									 * Indicates the main image on the page.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 */
+
 								// recognizingAuthority [WIP]
 
 									/* 
@@ -23287,6 +23102,16 @@
 												);
 
 									}
+
+								// relatedLink [WIP]
+
+									/* 
+									 * A link related to this web page, for example to other related web pages.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
 
 								// relevantSpecialty
 
@@ -23428,6 +23253,50 @@
 
 									}
 
+								// speakable [WIP]
+
+									/* 
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
+									 * of being highlighted as being especially appropriate for text-to-speech 
+									 * conversion. Other sections of a page may also be usefully spoken in particular 
+									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									 * likely to be generally useful for speech.
+									 * 
+									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 * kinds of possible 'content-locator' values:
+									 * 
+									 *     1.) id-value URL references - uses id-value of an element in the page being 
+									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 * referencing identified sections of the document concerned.
+									 * 
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 * class attribute). Use the cssSelector property.
+									 * 
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 * content). Use the xpath property.
+									 * 
+									 * For more sophisticated markup of speakable sections beyond simple ID 
+									 * references, either CSS selectors or XPath expressions to pick out document 
+									 * section(s) as speakable. For this we define a supporting type, 
+									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 * property.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - SpeakableSpecification
+									 *     - URL
+									 */
+
+								// specialty [WIP]
+
+									/* 
+									 * One of the domain specialities to which this web page's content applies.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Specialty
+									 */
+
 								// study [WIP]
 
 									/* 
@@ -23484,1089 +23353,72 @@
 
 									}
 
-								// about [WIP]
+								// text [WIP]
 
 									/* 
-									 * The subject matter of the content.
+									 * The textual content of this CreativeWork.
 									 * 
-									 * Inverse-property: subjectOf
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
+								// timeRequired [WIP]
+
+									/* 
+									 * Approximate or typical time it usually takes to work with or through the 
+									 * content of this work for the typical or target audience.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Duration (use ISO 8601 duration format).
+									 */
+
+								// video [WIP]
+
+									/* 
+									 * An embedded video object.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Clip
+									 *     - VideoObject
+									 */
+
+								// mentions [WIP]
+
+									/* 
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									 * about a concept.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Thing
 									 */
 
-								// abstract [WIP]
+								// significantLink [WIP]
 
 									/* 
-									 * An abstract is a short description that summarizes a CreativeWork.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 */
-
-								// accountablePerson [excluded for MedicalWebPage]
-
-									/* 
-									 * Specifies the Person that is legally accountable for the CreativeWork.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Person
-									 * 
-									 * We will not be identifying the person that is legally accountable for 
-									 * UAMSHealth.com webpages and so this schema property will not be included.
-									 */
-
-								// acquireLicensePage [excluded for MedicalWebPage]
-
-									/* 
-									 * Indicates a page documenting how licenses can be purchased or otherwise 
-									 * acquired, for the current item.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included.
-									 */
-
-								// aggregateRating [excluded for MedicalEntity]
-
-									/* 
-									 * The overall rating, based on a collection of reviews or ratings, of the item.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - AggregateRating
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
-									 * included.
-									 */
-
-								// alternativeHeadline [excluded for MedicalWebPage]
-
-									/* 
-									 * A secondary title of the CreativeWork.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * The "headline" schema property is defined as "Headline of the article" which 
-									 * implies that the "alternativeHeadline" schema property also relates to an 
-									 * article, not a webpage, and so this property will not be included.
-									 */
-
-								// archivedAt [excluded for MedicalWebPage]
-
-									/* 
-									 * Indicates a page or other link involved in archival of a CreativeWork. In the 
-									 * case of MediaReview, the items in a MediaReviewItem may often become 
-									 * inaccessible, but be archived by archival, journalistic, activist, or law 
-									 * enforcement organizations. In such cases, the referenced page may not directly 
-									 * publish the content.
+									 * One of the more significant URLs on the page. Typically, these are the 
+									 * non-navigation links that are clicked on the most.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - URL
-									 *     - WebPage
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * UAMSHealth.com webpages are not being procedurally archived and so this schema 
-									 * property will not be included.
-									 */
-
-								// assesses [excluded for MedicalEntity]
-
-									/* 
-									 * The item being described is intended to assess the competency or learning 
-									 * outcome defined by the referenced term.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
-									 * included.
-									 */
-
-								// associatedMedia [WIP]
-
-									/* 
-									 * A media object that encodes this CreativeWork. This property is a synonym for 
-									 * encoding.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 */
-
-								// audio [excluded for MedicalWebPage]
-
-									/* 
-									 * An embedded audio object.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - AudioObject
-									 *     - Clip
-									 *     - MusicRecording
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// award [excluded for MedicalWebPage]
-
-									/* 
-									 * An award won by or for this item.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// breadcrumb [WIP]
-
-									/* 
-									 * A set of links that can help a user understand and navigate a website hierarchy.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - BreadcrumbList
-									 *     - Text
-									 */
-
-								// character [excluded for MedicalWebPage]
-
-									/* 
-									 * Fictional person connected with a creative work.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Person
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// citation [WIP]
-
-									/* 
-									 * A citation or reference to another creative work, such as another publication, 
-									 * web page, scholarly article, etc.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 *     - Text
-									 */
-
-								// comment [excluded for MedicalWebPage]
-
-									/* 
-									 * Comments, typically from users.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Comment
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// commentCount [excluded for MedicalWebPage]
-
-									/* 
-									 * The number of comments this CreativeWork (e.g. Article, Question or Answer) has 
-									 * received. This is most applicable to works published in Web sites with 
-									 * commenting system; additional comments may exist elsewhere.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// conditionsOfAccess [excluded for MedicalWebPage]
-
-									/* 
-									 * Conditions that affect the availability of, or method(s) of access to, an item. 
-									 * Typically used for real world items such as an ArchiveComponent held by an 
-									 * ArchiveOrganization. This property is not suitable for use as a general Web 
-									 * access control mechanism. It is expressed only in natural language.
-									 * 
-									 * For example "Available by appointment from the Reading Room" or "Accessible 
-									 * only from logged-in accounts."
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// contentLocation [excluded for MedicalEntity]
-
-									/* 
-									 * The location depicted or described in the content. For example, the location in 
-									 * a photograph or painting.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Place
-									 * 
-									 * This schema property is not relevant to areas of expertise webpages and will 
-									 * not be included for the MedicalWebPage schema type.
-									 */
-
-								// contentRating [excluded for MedicalWebPage]
-
-									/* 
-									 * Official rating of a piece of content—for example, 'MPAA PG-13'.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Rating
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// contentReferenceTime [excluded for MedicalWebPage]
-
-									/* 
-									 * The specific time described by a creative work, for works (e.g., articles, 
-									 * video objects) that emphasise a particular moment within an Event.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - DateTime
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// correction [excluded for MedicalWebPage]
-
-									/* 
-									 * Indicates a correction to a CreativeWork, either via a CorrectionComment, 
-									 * textually or in another document.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CorrectionComment
-									 *     - Text
-									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// discussionUrl [excluded for MedicalWebPage]
-
-									/* 
-									 * A link to the page containing the comments of the CreativeWork.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - URL
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// editEIDR [excluded for MedicalWebPage]
-
-									/* 
-									 * An EIDR (Entertainment Identifier Registry) identifier representing a specific 
-									 * edit / edition for a work of film or television.
-									 * 
-									 * For example, the motion picture known as "Ghostbusters" whose titleEIDR is 
-									 * "10.5240/7EC7-228A-510A-053E-CBB8-J" has several edits 
-									 * (e.g., "10.5240/1F2A-E1C5-680A-14C6-E76B-I", 
-									 * "10.5240/8A35-3BEE-6497-5D12-9E4F-3").
-									 * 
-									 * Since schema.org types like Movie and TVEpisode can be used for both works and 
-									 * their multiple expressions, it is possible to use titleEIDR alone (for a 
-									 * general description), or alongside editEIDR for a more edit-specific 
-									 * description.
-									 * 
-									 * EIDR: https://eidr.org/
-									 * identifier: https://schema.org/identifier
-									 * titleEIDR: https://schema.org/titleEIDR
-									 * Movie: https://schema.org/Movie
-									 * TVEpisode: https://schema.org/TVEpisode
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// educationalAlignment [excluded for MedicalWebPage]
-
-									/* 
-									 * An alignment to an established educational framework.
-									 * 
-									 * This property should not be used where the nature of the alignment can be 
-									 * described using a simple property, for example to express that a resource 
-									 * teaches or assesses a competency.
-									 * 
-									 * teaches: https://schema.org/teaches
-									 * assesses: https://schema.org/assesses
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - AlignmentObject
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// educationalLevel [excluded for MedicalWebPage]
-
-									/* 
-									 * The level in terms of progression through an educational or training context. 
-									 * Examples of educational levels include 'beginner', 'intermediate' or 
-									 * 'advanced', and formal sets of level indicators.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - DefinedTerm
-									 *     - Text
-									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// educationalUse [excluded for MedicalWebPage]
-
-									/* 
-									 * The purpose of a work in the context of education; for example, 'assignment', 
-									 * 'group work'.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - DefinedTerm
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// encoding [WIP]
-
-									/* 
-									 * A media object that encodes this CreativeWork. This property is a synonym for 
-									 * associatedMedia.
-									 * 
-									 * Inverse-property: encodesCreativeWork
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 */
-
-								// encodingFormat [WIP]
-
-									/* 
-									 * Media type typically expressed using a MIME format (see IANA site and MDN 
-									 * reference), (e.g., application/zip for a SoftwareApplication binary, 
-									 * audio/mpeg for .mp3).
-									 * 
-									 * In cases where a CreativeWork has several media type representations, encoding 
-									 * can be used to indicate each MediaObject alongside particular encodingFormat 
-									 * information.
-									 * 
-									 * Unregistered or niche encoding and file formats can be indicated instead via 
-									 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
-									 * entry).
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// exampleOfWork [excluded for MedicalWebPage]
-
-									/* 
-									 * A creative work that this work is an example/instance/realization/derivation of.
-									 * 
-									 * Inverse-property: workExample
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// expires [excluded for MedicalWebPage]
-
-									/* 
-									 * Date the content expires and is no longer useful or available. For example a 
-									 * VideoObject or NewsArticle whose availability or relevance is time-limited, or 
-									 * a ClaimReview fact check whose publisher wants to indicate that it may no 
-									 * longer be relevant (or helpful to highlight) after some date.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Date
-									 *     - DateTime
-									 * 
-									 * This schema property is not currently relevant to UAMSHealth.com webpages and 
-									 * will not be included for the MedicalWebPage schema type.
-									 */
-
-								// fileFormat [superseded]
-
-									/* 
-									 * SupersededBy: encodingFormat
-									 */
-
-								// funder [excluded]
-
-									/* 
-									 * A person or organization that supports (sponsors) something through some kind 
-									 * of financial contribution.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Organization
-									 *     - Person
-									 * 
-									 * This schema property is not currently relevant to UAMSHealth.com webpages and 
-									 * will not be included for the MedicalWebPage schema type.
-									 * 
-									 * This schema property is not currently relevant to areas of expertise and will 
-									 * not be included for the MedicalEntity schema type.
-									 */
-
-								// funding [excluded]
-
-									/* 
-									 * A Grant that directly or indirectly provide funding or sponsorship for this 
-									 * item. See also ownershipFundingInfo.
-									 * 
-									 * Inverse-property: fundedItem
-									 * 
-									 * Grant: https://schema.org/Grant
-									 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Grant
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
-									 * included for the MedicalEntity schema type.
-									 */
-
-								// genre [WIP]
-
-									/* 
-									 * Genre of the creative work, broadcast channel or group.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 *     - URL
-									 */
-
-								// hasPart [WIP]
-
-									/* 
-									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
-									 * (in some sense).
-									 * 
-									 * Inverse-property: isPartOf
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - CreativeWork
-									 */
-
-								// headline [excluded for MedicalWebPage]
-
-									/* 
-									 * Headline of the article.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Text
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 */
-
-								// interactionStatistic [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// interactivityType [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// interpretedAsClaim [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// isBasedOn [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// isBasedOnUrl [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
 									 */
 
 								// keywords [WIP]
 
 									/* 
-									 * [insert description here]
+									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									 * keywords list are typically delimited by commas, or by repeating the property.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - [insert type(s) here]
+									 *     - DefinedTerm
+									 *     - Text
+									 *     - URL
 									 */
-
-								// learningResourceType [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// license [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// locationCreated [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// mainEntity [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// material [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// materialExtent [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// mentions [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// offers [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// pattern [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// position [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// primaryImageOfPage [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// provider [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// publication [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// publisherImprint [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// publishingPrinciples [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// recordedAt [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// relatedLink [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// releasedEvent [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// review [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// schemaVersion [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// sdDatePublished [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// sdLicense [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// sdPublisher [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// significantLink [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// size [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// spatial [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// spatialCoverage [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// speakable [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// specialty [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// sponsor [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// teaches [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// temporal [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// temporalCoverage [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// text [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// thumbnail [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// thumbnailUrl [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// timeRequired [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// translationOfWork [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// translator [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// typicalAgeRange [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// usageInfo [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// version [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// video [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// workExample [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
-								// workTranslation [WIP]
-
-									/* 
-									 * [insert description here]
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - [insert type(s) here]
-									 */
-
 
 							// Sort arrays
 
@@ -25025,6 +23877,10 @@
 
 									$CreativeWork_url = user_trailingslashit( get_permalink($entity) );
 									$CreativeWork_item['url'] = $CreativeWork_url;
+
+									// Pass the values to common schema properties template part
+
+										$schema_common_url = $CreativeWork_url;
 
 								// @type
 
@@ -26355,14 +25211,16 @@
 									 * 
 									 * The speakable property can be repeated an arbitrary number of times, with three 
 									 * kinds of possible 'content-locator' values:
-									 *     
+									 * 
 									 *     1.) id-value URL references - uses id-value of an element in the page being 
-									 *         annotated. The simplest use of speakable has (potentially relative) URL 
-									 *         values, referencing identified sections of the document concerned.
+									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 * referencing identified sections of the document concerned.
+									 * 
 									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
-									 *         class attribute. Use the cssSelector property).
+									 * class attribute). Use the cssSelector property.
+									 * 
 									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
-									 *         content). Use the xpath property.
+									 * content). Use the xpath property.
 									 * 
 									 * For more sophisticated markup of speakable sections beyond simple ID 
 									 * references, either CSS selectors or XPath expressions to pick out document 
