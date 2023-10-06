@@ -132,7 +132,7 @@
 							'text' => $schema_common_excerpt,
 						);
 
-						$provider_description = array_filter($provider_description);
+						$schema_common_excerpt_TextObject = array_filter($schema_common_excerpt_TextObject);
 
 					}
 
