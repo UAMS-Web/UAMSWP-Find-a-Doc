@@ -5554,8 +5554,6 @@
 								$provider_brand_ref = null;
 								$provider_brand_keywords = null;
 								$provider_brand_keywords_ref = null;
-								$provider_breadcrumb = null;
-								$provider_breadcrumb_ref = null;
 								$provider_cid = null;
 								$provider_cid_ref = null;
 								$provider_clinical_resource = null;
@@ -9412,175 +9410,6 @@
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
 													$provider_brand_keywords // mixed // Required // Incoming schema item property value
-												);
-
-									}
-
-								// breadcrumb
-
-									/* 
-									 * A set of links that can help a user understand and navigate a website hierarchy.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - BreadcrumbList
-									 *     - Text
-									 */
-
-									if (
-										(
-											in_array(
-												'breadcrumb',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'breadcrumb',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'breadcrumb',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$provider_breadcrumb = array();
-
-											// @type
-
-												$provider_breadcrumb['@type'] = 'BreadcrumbList';
-
-											// @id
-
-												$provider_breadcrumb['@id'] = $page_url . '#' . $provider_breadcrumb['@type'];
-
-											// itemListElement
-
-												if ( !isset($provider_archive_url) ) {
-
-													$provider_archive_url = user_trailingslashit( get_post_type_archive_link('provider') );
-
-												}
-
-												if ( !isset($provider_item_MedicalWebPage_ref) ) {
-
-													if ( !isset($provider_url) ) {
-
-														$provider_url = get_permalink($entity);
-														$provider_url = $provider_url ? user_trailingslashit( $provider_url ) : '';
-
-													}
-
-													$provider_item_MedicalWebPage_ref = $provider_url ? array( '@id' => $provider_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($provider_item_MedicalWebPage_ref);
-
-												}
-
-												// Base array
-
-													$provider_breadcrumb['itemListElement'] = array();
-
-												// Position 1
-
-													$provider_breadcrumb['itemListElement'][] = array(
-														'@id' => $schema_base_org_uams_health_url . '#ListItem',
-														'@type' => 'ListItem',
-														'item' => array(
-															'@type' => 'WebPage',
-															'url' => $schema_base_org_uams_health_url,
-															'name' => 'UAMS Health'
-														),
-														'nextItem' => array(
-															'@id' => $provider_archive_url . '#ListItem'
-														),
-														'position' => 1
-													);
-
-												// Position 2
-
-													if ( !isset($provider_plural_name_attr) ) {
-
-														// Get system settings for provider labels
-														include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/provider.php' );
-
-													}
-
-													$provider_breadcrumb['itemListElement'][] = array(
-														'@id' => $provider_archive_url . '#ListItem',
-														'@type' => 'ListItem',
-														'item' => array(
-															'@type' => 'WebPage',
-															'url' => $provider_archive_url,
-															'name' => $provider_plural_name_attr
-														),
-														'nextItem' => array(
-															'@id' => $provider_url . '#ListItem'
-														),
-														'position' => 2,
-														'previousItem' => array(
-															'@id' => $schema_base_org_uams_health_url . '#ListItem'
-														)
-													);
-
-												// Position 3
-
-													$provider_breadcrumb['itemListElement'][] = array(
-														'@id' => $provider_url . '#ListItem',
-														'@type' => 'ListItem',
-														'item' => $provider_item_MedicalWebPage_ref,
-														'position' => 3,
-														'previousItem' => array(
-															'@id' => $provider_archive_url . '#ListItem'
-														)
-													);
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'breadcrumb', // string // Required // Name of schema property
-													$provider_breadcrumb, // mixed // Required // Variable to add as the property value
-													$provider_breadcrumb_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'breadcrumb', // string // Required // Name of schema property
-													$provider_breadcrumb, // mixed // Required // Variable to add as the property value
-													$provider_breadcrumb_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'breadcrumb', // string // Required // Name of schema property
-													$provider_breadcrumb, // mixed // Required // Variable to add as the property value
-													$provider_breadcrumb_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
 									}
@@ -14655,8 +14484,6 @@
 								$location_award_ref = null;
 								$location_brand = null;
 								$location_brand_ref = null;
-								$location_breadcrumb = null;
-								$location_breadcrumb_ref = null;
 								$location_building = null;
 								$location_building_additionalType = null;
 								$location_building_additionalType_repeater = null;
@@ -16933,157 +16760,6 @@
 													'brand', // string // Required // Name of schema property
 													$location_brand, // mixed // Required // Variable to add as the property value
 													$location_brand_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// breadcrumb
-
-									/* 
-									 * A set of links that can help a user understand and navigate a website hierarchy.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - BreadcrumbList
-									 *     - Text
-									 */
-
-									 if (
-										(
-											in_array(
-												'breadcrumb',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'breadcrumb',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$location_breadcrumb = array();
-
-											// @type
-
-												$location_breadcrumb['@type'] = 'BreadcrumbList';
-
-											// @id
-
-												$location_breadcrumb['@id'] = $page_url . '#' . $location_breadcrumb['@type'];
-
-											// itemListElement
-
-												if ( !isset($location_archive_url) ) {
-
-													$location_archive_url = user_trailingslashit( get_post_type_archive_link('location') );
-
-												}
-
-												if ( !isset($location_item_MedicalWebPage_ref) ) {
-
-													if ( !isset($location_url) ) {
-
-														$location_url = get_permalink($entity);
-														$location_url = $location_url ? user_trailingslashit( $location_url ) : '';
-
-													}
-
-													$location_item_MedicalWebPage_ref = $location_url ? array( '@id' => $location_url . '#MedicalWebPage' ) : array();
-													uamswp_fad_flatten_multidimensional_array($location_item_MedicalWebPage_ref);
-
-												}
-
-												// Base array
-
-													$location_breadcrumb['itemListElement'] = array();
-
-												// Position 1
-
-													$location_breadcrumb['itemListElement'][] = array(
-														'@id' => $schema_base_org_uams_health_url . '#ListItem',
-														'@type' => 'ListItem',
-														'item' => array(
-															'@type' => 'WebPage',
-															'url' => $schema_base_org_uams_health_url,
-															'name' => 'UAMS Health'
-														),
-														'nextItem' => array(
-															'@id' => $location_archive_url . '#ListItem'
-														),
-														'position' => 1
-													);
-
-												// Position 2
-
-													if ( !isset($location_plural_name_attr) ) {
-
-														// Get system settings for location labels
-														include( UAMS_FAD_PATH . '/templates/parts/vars/sys/labels/location.php' );
-
-													}
-
-													$location_breadcrumb['itemListElement'][] = array(
-														'@id' => $location_archive_url . '#ListItem',
-														'@type' => 'ListItem',
-														'item' => array(
-															'@type' => 'WebPage',
-															'url' => $location_archive_url,
-															'name' => $location_plural_name_attr
-														),
-														'nextItem' => array(
-															'@id' => $location_url . '#ListItem'
-														),
-														'position' => 2,
-														'previousItem' => array(
-															'@id' => $schema_base_org_uams_health_url . '#ListItem'
-														)
-													);
-
-												// Position 3
-
-													$location_breadcrumb['itemListElement'][] = array(
-														'@id' => $location_url . '#ListItem',
-														'@type' => 'ListItem',
-														'item' => $location_item_MedicalWebPage_ref,
-														'position' => 3,
-														'previousItem' => array(
-															'@id' => $location_archive_url . '#ListItem'
-														)
-													);
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'breadcrumb', // string // Required // Name of schema property
-													$location_breadcrumb, // mixed // Required // Variable to add as the property value
-													$location_breadcrumb_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'breadcrumb', // string // Required // Name of schema property
-													$location_breadcrumb, // mixed // Required // Variable to add as the property value
-													$location_breadcrumb_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -22434,17 +22110,6 @@
 
 									}
 
-								// breadcrumb [WIP]
-
-									/* 
-									 * A set of links that can help a user understand and navigate a website hierarchy.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - BreadcrumbList
-									 *     - Text
-									 */
-
 								// citation [WIP]
 
 									/* 
@@ -25151,17 +24816,6 @@
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - Text
-									 */
-
-								// breadcrumb (MedicalWebPage only) [WIP]
-
-									/* 
-									 * A set of links that can help a user understand and navigate a website hierarchy.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - BreadcrumbList
 									 *     - Text
 									 */
 
