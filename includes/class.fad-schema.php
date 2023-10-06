@@ -22434,17 +22434,6 @@
 
 									}
 
-								// associatedMedia [WIP]
-
-									/* 
-									 * A media object that encodes this CreativeWork. This property is a synonym for 
-									 * encoding.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 */
-
 								// breadcrumb [WIP]
 
 									/* 
@@ -22685,19 +22674,6 @@
 
 									}
 
-								// encoding [WIP]
-
-									/* 
-									 * A media object that encodes this CreativeWork. This property is a synonym for 
-									 * associatedMedia.
-									 * 
-									 * Inverse-property: encodesCreativeWork
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MediaObject
-									 */
-
 								// encodingFormat [WIP]
 
 									/* 
@@ -22717,32 +22693,6 @@
 									 * 
 									 *     - Text
 									 *     - URL
-									 */
-
-								// funding [excluded]
-
-									/* 
-									 * A Grant that directly or indirectly provide funding or sponsorship for this 
-									 * item. See also ownershipFundingInfo.
-									 * 
-									 * Inverse-property: fundedItem
-									 * 
-									 * Grant: https://schema.org/Grant
-									 * ownershipFundingInfo: https://schema.org/ownershipFundingInfo
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - Grant
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
-									 * definitions.
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
-									 * included for the MedicalWebPage schema type.
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
-									 * included for the MedicalEntity schema type.
 									 */
 
 								// guideline [WIP]
