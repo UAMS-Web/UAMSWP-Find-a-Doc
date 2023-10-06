@@ -14969,9 +14969,17 @@
 
 												// Clean up the list
 
-													$location_image_id = array_filter($location_image_id);
-													$location_image_id = array_unique( $location_image_id, SORT_REGULAR );
-													$location_image_id = array_values($location_image_id);
+													if (
+														$location_image_id
+														&&
+														is_array($location_image_id)
+													) {
+
+														$location_image_id = array_filter($location_image_id);
+														$location_image_id = array_unique( $location_image_id, SORT_REGULAR );
+														$location_image_id = array_values($location_image_id);
+
+													}
 
 										}
 
