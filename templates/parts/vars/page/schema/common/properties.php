@@ -2921,16 +2921,20 @@
 
 		// Create ImageObject
 
-			$schema_common_thumbnailUrl = uamswp_fad_schema_imageobject_thumbnails(
-				$schema_common_url, // URL of entity with which the image is associated
-				($nesting_level + 1), // Nesting level within the main schema
-				'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9', 'full')
-				'thumbnailUrl', // Base fragment identifier
-				$schema_common_thumbnailUrl_id, // ID of image to use for 1:1 aspect ratio
-				0, // ID of image to use for 3:4 aspect ratio
-				$schema_common_thumbnailUrl_id, // ID of image to use for 4:3 aspect ratio
-				$schema_common_thumbnailUrl_id // ID of image to use for 16:9 aspect ratio
-			);
+			if ( $schema_common_thumbnailUrl_id ) {
+
+				$schema_common_thumbnailUrl = uamswp_fad_schema_imageobject_thumbnails(
+					$schema_common_url, // URL of entity with which the image is associated
+					($nesting_level + 1), // Nesting level within the main schema
+					'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9', 'full')
+					'thumbnailUrl', // Base fragment identifier
+					$schema_common_thumbnailUrl_id, // ID of image to use for 1:1 aspect ratio
+					0, // ID of image to use for 3:4 aspect ratio
+					$schema_common_thumbnailUrl_id, // ID of image to use for 4:3 aspect ratio
+					$schema_common_thumbnailUrl_id // ID of image to use for 16:9 aspect ratio
+				);
+
+			}
 
 		// Add to common schema properties array
 
