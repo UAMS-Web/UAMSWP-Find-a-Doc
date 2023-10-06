@@ -14,7 +14,7 @@ $schema_location = $schema_common_base;
 // Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
 $page_id = get_the_ID();
 
-// Define Schema JSON item arrays for location profile as MedicalWebPage, MedicalBusiness and Person
+// Define Schema JSON item arrays for location profile as MedicalWebPage and LocalBusiness
 
 	$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
