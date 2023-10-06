@@ -14539,7 +14539,7 @@
 								$location_descendant_locations_LocalBusiness_ref = null;
 								$location_description = null;
 								$location_description_ref = null;
-								$location_description_TextObject = null = null;
+								$location_description_TextObject = null;
 								$location_description_TextObject_ref = null;
 								$location_editor = null;
 								$location_editor_ref = null;
@@ -19056,7 +19056,7 @@
 								$expertise_code_repeater = null;
 								$expertise_description = null;
 								$expertise_description_ref = null;
-								$expertise_description_TextObject = null = null;
+								$expertise_description_TextObject = null;
 								$expertise_description_TextObject_ref = null;
 								$expertise_featured_image = null;
 								$expertise_grant = null;
