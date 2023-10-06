@@ -18943,7 +18943,8 @@
 				// List of valid types
 
 					$expertise_valid_types = array(
-						'MedicalEntity'
+						'MedicalEntity',
+						'MedicalWebPage'
 					);
 
 				// List of valid properties for each type
