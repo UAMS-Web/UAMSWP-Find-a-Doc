@@ -40,19 +40,54 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 			// Display featured video
 
 				add_action( 'genesis_entry_content', 'uamswp_expertise_youtube', 12 );
+
 				function uamswp_expertise_youtube() {
+
 					$video = get_field('expertise_youtube_link');
-					if( $video ) { ?>
-						<?php if(function_exists('lyte_preparse')) {
-							echo '<div class="alignwide">';
-							echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) );
-							echo '</div>';
-						} else {
-							echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-							echo wp_oembed_get( $video );
-							echo '</div>';
-						} ?>
-					<?php }
+
+					if ( $video ) {
+
+						// Check video source
+
+							if (
+								strpos( $video, 'youtube' ) !== false
+								||
+								strpos( $video, 'youtu.be' ) !== false
+							) {
+
+								$video_source = 'youtube';
+
+							} else {
+
+								$video_source = '';
+
+							}
+
+						// Display video player
+
+							if (
+								function_exists('lyte_preparse')
+								&&
+								$video_source == 'youtube'
+							) {
+
+								?>
+								<div class="alignwide">
+									<?php echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); ?>
+								</div>
+								<?php
+
+							} else {
+
+								?>
+								<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+									<?php echo wp_oembed_get( $video ); ?>
+								</div>
+								<?php
+
+							}
+
+					}
 				}
 
 			// Display call-to-action bars

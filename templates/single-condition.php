@@ -445,42 +445,85 @@
 								<h1 class="entry-title" itemprop="headline"><span class="supertitle"><?php echo $condition_single_name; ?></span><span class="sr-only">: </span><?php echo $page_title; ?></h1>
 							</header>
 							<div class="entry-content clearfix" itemprop="text">
-								<?php 
-									$keyword_text = '';
-									if( $keywords ): 
-										$i = 1;
-										foreach( $keywords as $keyword ) { 
-											if ( 1 < $i ) {
-												$keyword_text .= '; ';
-											}
-											$keyword_text .= $keyword['alternate_text'];
-											$i++;
+								<?php
+
+								$keyword_text = '';
+
+								if( $keywords ): 
+
+									$i = 1;
+
+									foreach( $keywords as $keyword ) { 
+										if ( 1 < $i ) {
+											$keyword_text .= '; ';
 										}
-										echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
-									endif;
-								?>
-								<?php the_content(); ?>
-								<?php 
-									if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
-										echo display_medline_api_data( trim($medline_code), $medline_type );
+										$keyword_text .= $keyword['alternate_text'];
+										$i++;
 									}
+
+									echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
+
+								endif;
+								
+								the_content();
+								
+								if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
+
+									echo display_medline_api_data( trim($medline_code), $medline_type );
+
+								}
+
+								if ( $embed_code ) {
+
+									echo $embed_code;
+
+								}
+								
+								if ( $video ) {
+									
+									// Check video source
+
+										if (
+											strpos( $video, 'youtube' ) !== false
+											||
+											strpos( $video, 'youtu.be' ) !== false
+										) {
+
+											$video_source = 'youtube';
+
+										} else {
+
+											$video_source = '';
+
+										}
+
+									// Display video player
+
+										if (
+											function_exists('lyte_preparse')
+											&&
+											$video_source == 'youtube'
+										) {
+
+											?>
+											<div class="alignwide">
+												<?php echo lyte_parse( str_replace( ['https:', 'http:'], 'httpv:', $video ) ); ?>
+											</div>
+											<?php
+
+										} else {
+
+											?>
+											<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">
+												<?php echo wp_oembed_get( $video ); ?>
+											</div>
+											<?php
+
+										}
+
+								}
+									
 								?>
-								<?php 
-									if ( $embed_code ) {
-										echo $embed_code;
-									}
-								?>
-								<?php if( $video ) { ?>
-									<?php if(function_exists('lyte_preparse')) {
-										echo '<div class="alignwide">';
-										echo lyte_parse( str_replace( 'https', 'httpv', $video ) );
-										echo '</div>';
-									} else {
-										echo '<div class="alignwide wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
-										echo wp_oembed_get( $video );
-										echo '</div>';
-									} ?>
-								<?php } ?>
 							</div>
 						</section>
 						<?php
