@@ -14291,7 +14291,7 @@
 
 		}
 
-	// Locations (LocalBusiness)
+	// Locations (MedicalWebPage; LocalBusiness)
 
 		function uamswp_fad_schema_location(
 			array $repeater, // List of IDs of the location items
@@ -21193,7 +21193,7 @@
 
 		}
 
-	// Areas of expertise (MedicalEntity)
+	// Areas of expertise (MedicalWebPage; MedicalEntity)
 
 		function uamswp_fad_schema_expertise(
 			array $repeater, // List of IDs of the area of expertise items
@@ -23130,7 +23130,7 @@
 
 		}
 
-	// Clinical resources (CreativeWork)
+	// Clinical resources (MedicalWebPage; CreativeWork)
 
 		function uamswp_fad_schema_creativework(
 			array $repeater, // List of IDs of the clinical resource items
