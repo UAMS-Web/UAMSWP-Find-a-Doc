@@ -21719,17 +21719,17 @@
 										)
 										&&
 										array_intersect(
-											$CreativeWork_properties_map[$MedicalWebPage_type]['properties'],
+											$clinical_resource_properties_map[$MedicalWebPage_type]['properties'],
 											$clinical_resource_description_common
 										)
 										||
 										array_intersect(
-											$CreativeWork_properties_map[$MedicalBusiness_type]['properties'],
+											$clinical_resource_properties_map[$MedicalBusiness_type]['properties'],
 											$clinical_resource_description_common
 										)
 										||
 										array_intersect(
-											$CreativeWork_properties_map[$Person_type]['properties'],
+											$clinical_resource_properties_map[$Person_type]['properties'],
 											$clinical_resource_description_common
 										)
 									) {
@@ -21844,7 +21844,7 @@
 													$clinical_resource_name, // mixed // Required // Variable to add as the property value
 													$clinical_resource_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -21857,7 +21857,7 @@
 													$clinical_resource_name, // mixed // Required // Variable to add as the property value
 													$clinical_resource_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -21926,7 +21926,7 @@
 													$clinical_resource_about_MedicalWebPage, // mixed // Required // Variable to add as the property value
 													$clinical_resource_about_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -21939,7 +21939,7 @@
 													$clinical_resource_about_CreativeWork, // mixed // Required // Variable to add as the property value
 													$clinical_resource_about_CreativeWork_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -21990,7 +21990,7 @@
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22003,7 +22003,7 @@
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22066,7 +22066,7 @@
 													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
 													$clinical_resource_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22079,7 +22079,7 @@
 													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
 													$clinical_resource_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22153,7 +22153,7 @@
 													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
 													$clinical_resource_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22166,7 +22166,7 @@
 													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
 													$clinical_resource_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22238,7 +22238,7 @@
 													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
 													$clinical_resource_articleBody_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22251,7 +22251,7 @@
 													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
 													$clinical_resource_articleBody_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22441,7 +22441,7 @@
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -22454,7 +22454,7 @@
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -23155,7 +23155,7 @@
 													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
 													$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -23168,7 +23168,7 @@
 													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
 													$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+													$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
@@ -23773,7 +23773,7 @@
 																$clinical_resource_syndication_author, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_author_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23799,7 +23799,7 @@
 																$clinical_resource_syndication_contributor, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_contributor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23825,7 +23825,7 @@
 																$clinical_resource_syndication_copyrightHolder, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_copyrightHolder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23851,7 +23851,7 @@
 																$clinical_resource_syndication_copyrightNotice, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_copyrightNotice_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23877,7 +23877,7 @@
 																$clinical_resource_syndication_copyrightYear, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_copyrightYear_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23903,7 +23903,7 @@
 																$clinical_resource_syndication_countryOfOrigin, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_countryOfOrigin_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23929,7 +23929,7 @@
 																$clinical_resource_syndication_creator, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_creator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23955,7 +23955,7 @@
 																$clinical_resource_syndication_creditText, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_creditText_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -23981,7 +23981,7 @@
 																$clinical_resource_syndication_dateModified, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_dateModified_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24007,7 +24007,7 @@
 																$clinical_resource_syndication_datePublished, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_datePublished_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24033,7 +24033,7 @@
 																$clinical_resource_syndication_director, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_director_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24059,7 +24059,7 @@
 																$clinical_resource_syndication_editor, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_editor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24085,7 +24085,7 @@
 																$clinical_resource_syndication_funder, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_funder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24111,7 +24111,7 @@
 																$clinical_resource_syndication_funding, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24137,7 +24137,7 @@
 																$clinical_resource_syndication_maintainer, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_maintainer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24163,7 +24163,7 @@
 																$clinical_resource_syndication_musicBy, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_musicBy_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24189,7 +24189,7 @@
 																$clinical_resource_syndication_producer, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_producer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24215,7 +24215,7 @@
 																$clinical_resource_syndication_productionCompany, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_productionCompany_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24256,7 +24256,7 @@
 																$clinical_resource_syndication_provider, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24282,7 +24282,7 @@
 																$clinical_resource_syndication_publisher, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_publisher_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24308,7 +24308,7 @@
 																$clinical_resource_syndication_publisherImprint, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_publisherImprint_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24334,7 +24334,7 @@
 																$clinical_resource_syndication_publishingPrinciples, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_publishingPrinciples_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24360,7 +24360,7 @@
 																$clinical_resource_syndication_recordedAt, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_recordedAt_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24399,7 +24399,7 @@
 																$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
 																$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24425,7 +24425,7 @@
 																$clinical_resource_syndication_sourceOrganization, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_sourceOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24451,7 +24451,7 @@
 																$clinical_resource_syndication_sponsor, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_sponsor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
@@ -24477,7 +24477,7 @@
 																$clinical_resource_syndication_translator, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_translator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-																$CreativeWork_properties_map, // array // Required // Map array to match schema types with allowed properties
+																$clinical_resource_properties_map, // array // Required // Map array to match schema types with allowed properties
 																($nesting_level + 1) // int // Required // Current nesting level value
 															);
 
