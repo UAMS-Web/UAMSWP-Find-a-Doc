@@ -22223,7 +22223,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'abstract', // string // Required // abstract of schema property
+													'abstract', // string // Required // Name of schema property
 													$expertise_description, // mixed // Required // Variable to add as the property value
 													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22236,7 +22236,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'abstract', // string // Required // abstract of schema property
+													'abstract', // string // Required // Name of schema property
 													$expertise_description, // mixed // Required // Variable to add as the property value
 													$expertise_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22317,7 +22317,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // additionalType of schema property
+													'additionalType', // string // Required // Name of schema property
 													$expertise_additionalType, // mixed // Required // Variable to add as the property value
 													$expertise_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22330,7 +22330,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // additionalType of schema property
+													'additionalType', // string // Required // Name of schema property
 													$expertise_additionalType, // mixed // Required // Variable to add as the property value
 													$expertise_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22411,7 +22411,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // alternateName of schema property
+													'alternateName', // string // Required // Name of schema property
 													$expertise_alternateName, // mixed // Required // Variable to add as the property value
 													$expertise_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22424,7 +22424,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // alternateName of schema property
+													'alternateName', // string // Required // Name of schema property
 													$expertise_alternateName, // mixed // Required // Variable to add as the property value
 													$expertise_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22523,7 +22523,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'code', // string // Required // code of schema property
+													'code', // string // Required // Name of schema property
 													$expertise_code, // mixed // Required // Variable to add as the property value
 													$expertise_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22536,7 +22536,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'code', // string // Required // code of schema property
+													'code', // string // Required // Name of schema property
 													$expertise_code, // mixed // Required // Variable to add as the property value
 													$expertise_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22603,7 +22603,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'description', // string // Required // description of schema property
+													'description', // string // Required // Name of schema property
 													$expertise_description_TextObject, // mixed // Required // Variable to add as the property value
 													$expertise_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22616,7 +22616,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'description', // string // Required // description of schema property
+													'description', // string // Required // Name of schema property
 													$expertise_description_TextObject, // mixed // Required // Variable to add as the property value
 													$expertise_description_TextObject_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22662,7 +22662,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'disambiguatingDescription', // string // Required // sameAs of schema property
+													'disambiguatingDescription', // string // Required // Name of schema property
 													$expertise_disambiguatingDescription, // mixed // Required // Variable to add as the property value
 													$expertise_disambiguatingDescription_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22675,7 +22675,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'disambiguatingDescription', // string // Required // sameAs of schema property
+													'disambiguatingDescription', // string // Required // Name of schema property
 													$expertise_disambiguatingDescription, // mixed // Required // Variable to add as the property value
 													$expertise_disambiguatingDescription_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22778,7 +22778,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'guideline', // string // Required // sameAs of schema property
+													'guideline', // string // Required // Name of schema property
 													$expertise_guideline, // mixed // Required // Variable to add as the property value
 													$expertise_guideline_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22791,7 +22791,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'guideline', // string // Required // sameAs of schema property
+													'guideline', // string // Required // Name of schema property
 													$expertise_guideline, // mixed // Required // Variable to add as the property value
 													$expertise_guideline_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22855,7 +22855,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'identifier', // string // Required // sameAs of schema property
+													'identifier', // string // Required // Name of schema property
 													$expertise_identifier, // mixed // Required // Variable to add as the property value
 													$expertise_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22868,7 +22868,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'identifier', // string // Required // sameAs of schema property
+													'identifier', // string // Required // Name of schema property
 													$expertise_identifier, // mixed // Required // Variable to add as the property value
 													$expertise_identifier_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -22990,7 +22990,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'image', // string // Required // image of schema property
+													'image', // string // Required // Name of schema property
 													$expertise_image, // mixed // Required // Variable to add as the property value
 													$expertise_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23003,7 +23003,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'image', // string // Required // image of schema property
+													'image', // string // Required // Name of schema property
 													$expertise_image, // mixed // Required // Variable to add as the property value
 													$expertise_image_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23087,7 +23087,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'medicineSystem', // string // Required // medicineSystem of schema property
+													'medicineSystem', // string // Required // Name of schema property
 													$expertise_medicineSystem, // mixed // Required // Variable to add as the property value
 													$expertise_medicineSystem_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23100,7 +23100,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'medicineSystem', // string // Required // medicineSystem of schema property
+													'medicineSystem', // string // Required // Name of schema property
 													$expertise_medicineSystem, // mixed // Required // Variable to add as the property value
 													$expertise_medicineSystem_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23235,7 +23235,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'potentialAction', // string // Required // potentialAction of schema property
+													'potentialAction', // string // Required // Name of schema property
 													$expertise_potentialAction, // mixed // Required // Variable to add as the property value
 													$expertise_potentialAction_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23248,7 +23248,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'potentialAction', // string // Required // potentialAction of schema property
+													'potentialAction', // string // Required // Name of schema property
 													$expertise_potentialAction, // mixed // Required // Variable to add as the property value
 													$expertise_potentialAction_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23302,7 +23302,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'recognizingAuthority', // string // Required // sameAs of schema property
+													'recognizingAuthority', // string // Required // Name of schema property
 													$expertise_recognizingAuthority, // mixed // Required // Variable to add as the property value
 													$expertise_recognizingAuthority_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23315,7 +23315,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'recognizingAuthority', // string // Required // sameAs of schema property
+													'recognizingAuthority', // string // Required // Name of schema property
 													$expertise_recognizingAuthority, // mixed // Required // Variable to add as the property value
 													$expertise_recognizingAuthority_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23381,7 +23381,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'relevantSpecialty', // string // Required // relevantSpecialty of schema property
+													'relevantSpecialty', // string // Required // Name of schema property
 													$expertise_relevantSpecialty, // mixed // Required // Variable to add as the property value
 													$expertise_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23394,7 +23394,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'relevantSpecialty', // string // Required // relevantSpecialty of schema property
+													'relevantSpecialty', // string // Required // Name of schema property
 													$expertise_relevantSpecialty, // mixed // Required // Variable to add as the property value
 													$expertise_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23452,7 +23452,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // sameAs of schema property
+													'sameAs', // string // Required // Name of schema property
 													$expertise_sameAs, // mixed // Required // Variable to add as the property value
 													$expertise_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23465,7 +23465,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // sameAs of schema property
+													'sameAs', // string // Required // Name of schema property
 													$expertise_sameAs, // mixed // Required // Variable to add as the property value
 													$expertise_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23552,7 +23552,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'study', // string // Required // sameAs of schema property
+													'study', // string // Required // Name of schema property
 													$expertise_study, // mixed // Required // Variable to add as the property value
 													$expertise_study_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -23565,7 +23565,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalEntity_type, // string // Required // The @type value for the schema item
 													$expertise_item_MedicalEntity, // array // Required // The list array for the schema item to which to add the property value
-													'study', // string // Required // sameAs of schema property
+													'study', // string // Required // Name of schema property
 													$expertise_study, // mixed // Required // Variable to add as the property value
 													$expertise_study_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24746,7 +24746,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'name', // string // Required // potentialAction of schema property
+													'name', // string // Required // Name of schema property
 													$clinical_resource_name, // mixed // Required // Variable to add as the property value
 													$clinical_resource_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24759,7 +24759,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'name', // string // Required // potentialAction of schema property
+													'name', // string // Required // Name of schema property
 													$clinical_resource_name, // mixed // Required // Variable to add as the property value
 													$clinical_resource_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24828,7 +24828,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'about', // string // Required // potentialAction of schema property
+													'about', // string // Required // Name of schema property
 													$clinical_resource_about_MedicalWebPage, // mixed // Required // Variable to add as the property value
 													$clinical_resource_about_MedicalWebPage_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24841,7 +24841,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'about', // string // Required // potentialAction of schema property
+													'about', // string // Required // Name of schema property
 													$clinical_resource_about_CreativeWork, // mixed // Required // Variable to add as the property value
 													$clinical_resource_about_CreativeWork_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24892,7 +24892,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'abstract', // string // Required // potentialAction of schema property
+													'abstract', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24905,7 +24905,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'abstract', // string // Required // potentialAction of schema property
+													'abstract', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24968,7 +24968,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // potentialAction of schema property
+													'additionalType', // string // Required // Name of schema property
 													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
 													$clinical_resource_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -24981,7 +24981,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // potentialAction of schema property
+													'additionalType', // string // Required // Name of schema property
 													$clinical_resource_additionalType, // mixed // Required // Variable to add as the property value
 													$clinical_resource_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -25055,7 +25055,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // potentialAction of schema property
+													'alternateName', // string // Required // Name of schema property
 													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
 													$clinical_resource_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -25068,7 +25068,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // potentialAction of schema property
+													'alternateName', // string // Required // Name of schema property
 													$clinical_resource_alternateName, // mixed // Required // Variable to add as the property value
 													$clinical_resource_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -25140,7 +25140,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'articleBody', // string // Required // potentialAction of schema property
+													'articleBody', // string // Required // Name of schema property
 													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
 													$clinical_resource_articleBody_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -25153,7 +25153,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'articleBody', // string // Required // potentialAction of schema property
+													'articleBody', // string // Required // Name of schema property
 													$clinical_resource_articleBody, // mixed // Required // Variable to add as the property value
 													$clinical_resource_articleBody_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -25354,7 +25354,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'description', // string // Required // potentialAction of schema property
+													'description', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -25367,7 +25367,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'description', // string // Required // potentialAction of schema property
+													'description', // string // Required // Name of schema property
 													$clinical_resource_description, // mixed // Required // Variable to add as the property value
 													$clinical_resource_description_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26068,7 +26068,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalWebPage_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // potentialAction of schema property
+													'sameAs', // string // Required // Name of schema property
 													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
 													$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26081,7 +26081,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$CreativeWork_type, // string // Required // The @type value for the schema item
 													$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // potentialAction of schema property
+													'sameAs', // string // Required // Name of schema property
 													$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
 													$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26686,7 +26686,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'author', // string // Required // potentialAction of schema property
+																'author', // string // Required // Name of schema property
 																$clinical_resource_syndication_author, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_author_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26712,7 +26712,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'contributor', // string // Required // potentialAction of schema property
+																'contributor', // string // Required // Name of schema property
 																$clinical_resource_syndication_contributor, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_contributor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26738,7 +26738,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'copyrightHolder', // string // Required // potentialAction of schema property
+																'copyrightHolder', // string // Required // Name of schema property
 																$clinical_resource_syndication_copyrightHolder, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_copyrightHolder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26764,7 +26764,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'copyrightNotice', // string // Required // potentialAction of schema property
+																'copyrightNotice', // string // Required // Name of schema property
 																$clinical_resource_syndication_copyrightNotice, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_copyrightNotice_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26790,7 +26790,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'copyrightYear', // string // Required // potentialAction of schema property
+																'copyrightYear', // string // Required // Name of schema property
 																$clinical_resource_syndication_copyrightYear, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_copyrightYear_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26816,7 +26816,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'countryOfOrigin', // string // Required // potentialAction of schema property
+																'countryOfOrigin', // string // Required // Name of schema property
 																$clinical_resource_syndication_countryOfOrigin, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_countryOfOrigin_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26842,7 +26842,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'creator', // string // Required // potentialAction of schema property
+																'creator', // string // Required // Name of schema property
 																$clinical_resource_syndication_creator, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_creator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26868,7 +26868,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'creditText', // string // Required // potentialAction of schema property
+																'creditText', // string // Required // Name of schema property
 																$clinical_resource_syndication_creditText, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_creditText_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26894,7 +26894,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'dateModified', // string // Required // potentialAction of schema property
+																'dateModified', // string // Required // Name of schema property
 																$clinical_resource_syndication_dateModified, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_dateModified_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26920,7 +26920,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'datePublished', // string // Required // potentialAction of schema property
+																'datePublished', // string // Required // Name of schema property
 																$clinical_resource_syndication_datePublished, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_datePublished_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26946,7 +26946,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'director', // string // Required // potentialAction of schema property
+																'director', // string // Required // Name of schema property
 																$clinical_resource_syndication_director, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_director_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26972,7 +26972,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'editor', // string // Required // potentialAction of schema property
+																'editor', // string // Required // Name of schema property
 																$clinical_resource_syndication_editor, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_editor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -26998,7 +26998,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'funder', // string // Required // potentialAction of schema property
+																'funder', // string // Required // Name of schema property
 																$clinical_resource_syndication_funder, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_funder_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27024,7 +27024,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'funding', // string // Required // potentialAction of schema property
+																'funding', // string // Required // Name of schema property
 																$clinical_resource_syndication_funding, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_funding_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27050,7 +27050,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'maintainer', // string // Required // potentialAction of schema property
+																'maintainer', // string // Required // Name of schema property
 																$clinical_resource_syndication_maintainer, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_maintainer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27076,7 +27076,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'musicBy', // string // Required // potentialAction of schema property
+																'musicBy', // string // Required // Name of schema property
 																$clinical_resource_syndication_musicBy, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_musicBy_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27102,7 +27102,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'producer', // string // Required // potentialAction of schema property
+																'producer', // string // Required // Name of schema property
 																$clinical_resource_syndication_producer, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_producer_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27128,7 +27128,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'productionCompany', // string // Required // potentialAction of schema property
+																'productionCompany', // string // Required // Name of schema property
 																$clinical_resource_syndication_productionCompany, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_productionCompany_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27169,7 +27169,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'provider', // string // Required // potentialAction of schema property
+																'provider', // string // Required // Name of schema property
 																$clinical_resource_syndication_provider, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_provider_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27195,7 +27195,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'publisher', // string // Required // potentialAction of schema property
+																'publisher', // string // Required // Name of schema property
 																$clinical_resource_syndication_publisher, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_publisher_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27221,7 +27221,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'publisherImprint', // string // Required // potentialAction of schema property
+																'publisherImprint', // string // Required // Name of schema property
 																$clinical_resource_syndication_publisherImprint, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_publisherImprint_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27247,7 +27247,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'publishingPrinciples', // string // Required // potentialAction of schema property
+																'publishingPrinciples', // string // Required // Name of schema property
 																$clinical_resource_syndication_publishingPrinciples, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_publishingPrinciples_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27273,7 +27273,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'recordedAt', // string // Required // potentialAction of schema property
+																'recordedAt', // string // Required // Name of schema property
 																$clinical_resource_syndication_recordedAt, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_recordedAt_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27312,7 +27312,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'sameAs', // string // Required // potentialAction of schema property
+																'sameAs', // string // Required // Name of schema property
 																$clinical_resource_sameAs, // mixed // Required // Variable to add as the property value
 																$clinical_resource_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27338,7 +27338,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'sourceOrganization', // string // Required // potentialAction of schema property
+																'sourceOrganization', // string // Required // Name of schema property
 																$clinical_resource_syndication_sourceOrganization, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_sourceOrganization_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27364,7 +27364,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'sponsor', // string // Required // potentialAction of schema property
+																'sponsor', // string // Required // Name of schema property
 																$clinical_resource_syndication_sponsor, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_sponsor_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27390,7 +27390,7 @@
 															uamswp_fad_schema_add_to_item_values(
 																$CreativeWork_type, // string // Required // The @type value for the schema item
 																$clinical_resource_item_CreativeWork, // array // Required // The list array for the schema item to which to add the property value
-																'translator', // string // Required // potentialAction of schema property
+																'translator', // string // Required // Name of schema property
 																$clinical_resource_syndication_translator, // mixed // Required // Variable to add as the property value
 																$clinical_resource_syndication_translator_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 																$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27941,7 +27941,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'alternateName', // string // Required // alternateName of schema property
+													'alternateName', // string // Required // Name of schema property
 													$condition_alternateName, // mixed // Required // Variable to add as the property value
 													$condition_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -27988,7 +27988,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'code', // string // Required // code of schema property
+													'code', // string // Required // Name of schema property
 													$condition_code, // mixed // Required // Variable to add as the property value
 													$condition_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28049,7 +28049,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // additionalType of schema property
+													'additionalType', // string // Required // Name of schema property
 													$condition_additionalType, // mixed // Required // Variable to add as the property value
 													$condition_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28102,7 +28102,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // sameAs of schema property
+													'sameAs', // string // Required // Name of schema property
 													$condition_sameAs, // mixed // Required // Variable to add as the property value
 													$condition_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28140,7 +28140,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'infectiousAgent', // string // Required // infectiousAgent of schema property
+													'infectiousAgent', // string // Required // Name of schema property
 													$condition_infectiousAgent, // mixed // Required // Variable to add as the property value
 													$condition_infectiousAgent_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28178,7 +28178,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'infectiousAgentClass', // string // Required // infectiousAgentClass of schema property
+													'infectiousAgentClass', // string // Required // Name of schema property
 													$condition_infectiousAgentClass, // mixed // Required // Variable to add as the property value
 													$condition_infectiousAgentClass_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28237,7 +28237,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'possibleTreatment', // string // Required // possibleTreatment of schema property
+													'possibleTreatment', // string // Required // Name of schema property
 													$condition_possibleTreatment, // mixed // Required // Variable to add as the property value
 													$condition_possibleTreatment_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28297,7 +28297,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'primaryPrevention', // string // Required // primaryPrevention of schema property
+													'primaryPrevention', // string // Required // Name of schema property
 													$condition_primaryPrevention, // mixed // Required // Variable to add as the property value
 													$condition_primaryPrevention_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28357,7 +28357,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'secondaryPrevention', // string // Required // secondaryPrevention of schema property
+													'secondaryPrevention', // string // Required // Name of schema property
 													$condition_secondaryPrevention, // mixed // Required // Variable to add as the property value
 													$condition_secondaryPrevention_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -28416,7 +28416,7 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'typicalTest', // string // Required // typicalTest of schema property
+													'typicalTest', // string // Required // Name of schema property
 													$condition_typicalTest, // mixed // Required // Variable to add as the property value
 													$condition_typicalTest_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
