@@ -26885,7 +26885,7 @@
 									if (
 										in_array(
 											'name',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -26933,7 +26933,7 @@
 									if (
 										in_array(
 											'additionalType',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27013,7 +27013,7 @@
 									if (
 										in_array(
 											'alternateName',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27065,7 +27065,7 @@
 									if (
 										in_array(
 											'code',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27186,7 +27186,7 @@
 									if (
 										in_array(
 											'drug',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27359,7 +27359,7 @@
 									if (
 										in_array(
 											'duplicateTherapy',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 										&&
 										$nesting_level <= 1
@@ -27486,7 +27486,7 @@
 									if (
 										in_array(
 											'imagingTechnique',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27611,7 +27611,7 @@
 									if (
 										in_array(
 											'procedureType',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27660,7 +27660,7 @@
 									if (
 										in_array(
 											'relevantSpecialty',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27718,7 +27718,7 @@
 									if (
 										in_array(
 											'sameAs',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27843,7 +27843,7 @@
 									if (
 										in_array(
 											'subTest',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 										&&
 										$nesting_level <= 1
@@ -27902,7 +27902,7 @@
 									if (
 										in_array(
 											'tissueSample',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
@@ -27958,7 +27958,7 @@
 									if (
 										in_array(
 											'usedToDiagnose',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 										&&
 										$nesting_level <= 1
@@ -28017,7 +28017,7 @@
 									if (
 										in_array(
 											'usesDevice',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
+											$treatment_properties_map[$Service_type]['properties']
 										)
 									) {
 
