@@ -13466,7 +13466,11 @@
 
 														// Parse the query string into variables
 
-															parse_str($provider_video_parsed['query'], $provider_video_parsed['query']);
+															if ( isset($provider_video_parsed['query']) ) {
+
+																parse_str($provider_video_parsed['query'], $provider_video_parsed['query']);
+
+															}
 
 													if (
 														str_contains( $provider_video_parsed['host'], 'youtube' )
