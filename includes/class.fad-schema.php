@@ -13449,6 +13449,21 @@
 
 														$provider_video_parsed = parse_url($provider_video_url);
 
+														// Convert https://youtu.be/* to https://www.youtube.com/watch?v=*
+
+															if (
+																isset($provider_video_parsed['host'])
+																&&
+																$provider_video_parsed['host'] == 'youtu.be'
+																&&
+																isset($provider_video_parsed['path'])
+															) {
+
+																$provider_video_url = 'https://www.youtube.com/watch?v=' . str_replace( '/', '', $provider_video_parsed['path']);
+																$provider_video_parsed = parse_url($provider_video_url);
+
+															}
+
 														// Parse the query string into variables
 
 															parse_str($provider_video_parsed['query'], $provider_video_parsed['query']);
