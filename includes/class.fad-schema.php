@@ -13437,7 +13437,7 @@
 
 												if ( !isset($provider_video_url) ) {
 
-													$provider_video_url = get_field( 'physician_youtube_link', $entity );
+													$provider_video_url = get_field( 'physician_youtube_link', $entity ) ?? '';
 
 												}
 
