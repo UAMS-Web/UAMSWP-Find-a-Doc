@@ -82,9 +82,21 @@
 		// Degrees and credentials (e.g., M.D., Ph.D.)
 
 			$degrees = get_field('physician_degree',$post->ID);
-			$degrees = array_filter($degrees);
-			$degrees = array_unique($degrees);
-			$degrees = array_values($degrees);
+
+			// Clean up degrees value
+
+				if (
+					$degrees
+					&&
+					is_array($degrees)
+				) {
+
+					$degrees = array_filter($degrees);
+					$degrees = array_unique($degrees);
+					$degrees = array_values($degrees);
+
+				}
+
 			$provider_schema_fields[$page_id]['provider_degrees'] = $degrees; // Pass value to schema function
 			$degree_count = $degrees ? count($degrees) : 0;
 			$degree_list = '';
