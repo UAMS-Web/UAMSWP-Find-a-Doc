@@ -26287,7 +26287,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Service_type, // string // Required // The @type value for the schema item
-															$treatment_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+															$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
 															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -26327,7 +26327,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Service_type, // string // Required // The @type value for the schema item
-															$treatment_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+															$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
 															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
@@ -26367,7 +26367,7 @@
 
 														uamswp_fad_schema_add_to_item_values(
 															$Service_type, // string // Required // The @type value for the schema item
-															$treatment_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+															$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
 															$key, // string // Required // Name of schema property
 															$value, // mixed // Required // Variable to add as the property value
 															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
