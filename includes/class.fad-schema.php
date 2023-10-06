@@ -8075,7 +8075,7 @@
 
 											}
 
-								// about
+								// about (MedicalWebPage only)
 
 									/* 
 									 * The subject matter of the content.
@@ -15895,7 +15895,7 @@
 
 									}
 
-								// about
+								// about (MedicalWebPage only)
 
 									/* 
 									 * The subject matter of the content.
@@ -21841,7 +21841,7 @@
 
 									}
 
-								// about [WIP]
+								// about (MedicalWebPage only)
 
 									/* 
 									 * The subject matter of the content.
@@ -21852,6 +21852,45 @@
 									 * 
 									 *     - Thing
 									 */
+
+									if (
+										in_array(
+											'about',
+											$expertise_properties_map[$MedicalWebPage_type]['properties']
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$expertise_about = array();
+
+											// Merge in area of expertise MedicalEntity value
+
+												$expertise_about = uamswp_fad_schema_merge_values(
+													$expertise_about, // mixed // Required // Initial schema item property value
+													$expertise_item_MedicalEntity // mixed // Required // Incoming schema item property value
+												);
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$expertise_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'about', // string // Required // Name of schema property
+													$expertise_about, // mixed // Required // Variable to add as the property value
+													$expertise_about_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$expertise_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// abstract
 
