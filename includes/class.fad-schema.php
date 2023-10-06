@@ -27574,11 +27574,13 @@
 
 							uamswp_fad_get_transient(
 								'item_' . $entity, // Required // String added to transient name for disambiguation.
-								$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+								$condition_item_MedicalCondition, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
 
-						if ( !empty( $condition_item ) ) {
+						if (
+							!empty( $condition_item_MedicalCondition )
+						) {
 
 							/* 
 							 * The transient exists.
@@ -27587,7 +27589,7 @@
 
 							// Add to list of conditions
 
-								$condition_list[] = $condition_item;
+								$condition_list[] = $condition_item_MedicalCondition;
 
 						} else {
 
@@ -27606,7 +27608,7 @@
 
 							// Eliminate PHP errors / reset variables
 
-								$condition_item = array(); // Base array
+								$condition_item_MedicalCondition = array(); // Base array
 								$condition_additionalType_repeater = array();
 								$condition_additionalType = array();
 								$condition_alternateName = array();
@@ -27625,8 +27627,8 @@
 								$condition_sameAs_repeater = array();
 								$condition_secondaryPrevention = array();
 								$condition_secondaryPrevention_relationship = array();
-								$condition_type = '';
-								$condition_type_parent = array();
+								$MedicalCondition_type = '';
+								$MedicalCondition_type_parent = array();
 								$condition_typicalTest = array();
 								$condition_typicalTest_relationship = array();
 
@@ -27686,42 +27688,177 @@
 
 							// Add property values
 
-								// @id
+								// url
 
-									// Define value
-
-										$page_fragment = 'MedicalCondition';
-
-										if ( $nesting_level == 1 ) {
-
-											$condition_id = $page_url . '#' . $page_fragment . $MedicalCondition_i;
-											$MedicalCondition_i++;
-
-										}
-
-									// Add to schema
-
-										if ( $condition_id ) {
-
-											$condition_item['@id'] = $condition_id;
-											$node_identifier_list[] = $condition_item['@id']; // Add to the list of existing node identifiers
-
-										}
+									/* 
+									 * URL of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 * 
+									 * The condition custom post type does not have a published URL and so this schema 
+									 * property will not be included.
+									 */
 
 								// @type
 
-									$condition_type = 'MedicalCondition';
+									// Base value
 
-									// MedicalCondition Subtype
+										$MedicalCondition_type = 'MedicalCondition';
+										$page_fragment = $MedicalCondition_type;
 
-										$condition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $condition_type;
-										$condition_type_parent = $condition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
+									// Get the MedicalCondition subtype
 
-									// Add to schema
+										$MedicalCondition_type = get_field( 'schema_medicalcondition_subtype', $entity ) ?: $MedicalCondition_type;
+										$MedicalCondition_type_parent = $MedicalCondition_type != 'MedicalCondition' ? array( 'MedicalCondition' ) : array();
 
-										if ( $condition_type ) {
+									// Add to item values
 
-											$condition_item['@type'] = $condition_type;
+										if ( $MedicalCondition_type ) {
+
+											$condition_item_MedicalCondition['@type'] = $MedicalCondition_type;
+
+										}
+
+								// @id
+
+									// Get values
+
+										$condition_id = $page_url . '#' . $page_fragment;
+										$condition_id .= $MedicalCondition_i;
+										$MedicalCondition_i++;
+
+									// Add to item values
+
+										if ( $condition_id ) {
+
+											$condition_item_MedicalCondition['@id'] = $condition_id;
+											$node_identifier_list[] = $condition_item_MedicalCondition['@id']; // Add to the list of existing node identifiers
+
+										}
+
+								// Add common properties
+
+									include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/properties.php' );
+
+									// All types
+
+										/*
+
+											Loop through an associative array of properties common to all of our schema 
+											types, adding each row to this item's schema when the key matches a property 
+											valid for the type, replacing full values with only the node identifier where 
+											appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties)
+											&&
+											!empty($schema_common_properties)
+										) {
+
+											foreach ( $schema_common_properties as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_ref' } = null;
+
+													// MedicalCondition
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalCondition_type, // string // Required // The @type value for the schema item
+															$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										}
+
+									// Types other than MedicalWebPage
+
+										/*
+
+											Loop through an associative array of properties specific to the types other 
+											than the MedicalWebPage type, adding each row to this item's schema when the 
+											key matches a property valid for the type, replacing full values with only the 
+											node identifier where appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties_exclude_MedicalWebPage)
+											&&
+											!empty($schema_common_properties_exclude_MedicalWebPage)
+										) {
+
+											foreach ( $schema_common_properties_exclude_MedicalWebPage as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_exclude_MedicalWebPage_ref' } = null;
+
+													// MedicalCondition
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalCondition_type, // string // Required // The @type value for the schema item
+															$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
+
+										}
+
+									// Main entity type
+
+										/*
+
+											Loop through an associative array of properties specific to the main entity 
+											type, adding each row to this item's schema when the key matches a property 
+											valid for the type, replacing full values with only the node identifier where 
+											appropriate.
+
+										*/
+
+										if (
+											isset($schema_common_properties_main_entity)
+											&&
+											!empty($schema_common_properties_main_entity)
+										) {
+
+											foreach ( $schema_common_properties_main_entity as $key => $value ) {
+
+												// Add to item values
+
+													${ 'schema_common_' . $key . '_main_entity_ref' } = null;
+
+													// MedicalCondition
+
+														uamswp_fad_schema_add_to_item_values(
+															$MedicalCondition_type, // string // Required // The @type value for the schema item
+															$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+															$key, // string // Required // Name of schema property
+															$value, // mixed // Required // Variable to add as the property value
+															${ 'schema_common_' . $key . '_ref' }, // mixed // Required // Variable to reference the list of @id in the full property value
+															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+															$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+															($nesting_level + 1) // int // Required // Current nesting level value
+														);
+
+											}
 
 										}
 
@@ -27739,18 +27876,34 @@
 									 *     - Text
 									 */
 
-									// Get value
+									if (
+										in_array(
+											'name',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
 
-										$condition_name = get_the_title($entity); // Expects Text
+										// Get values
 
-									// Add to array
+											$condition_name = get_the_title($entity) ?? '';
 
-										if ( $condition_name ) {
+										// Add to item values
 
-											$condition_item['name'] = $condition_name;
+											// MedicalCondition
 
-										}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'name', // string // Required // Name of schema property
+													$condition_name, // mixed // Required // Variable to add as the property value
+													$condition_name_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
+									}
+	
 								// alternateName
 
 									/* 
@@ -27761,25 +27914,43 @@
 									 *     - Text
 									 */
 
-									// Get alternateName repeater field value
+									if (
+										in_array(
+											'alternateName',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
 
-										$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
+										// Get values
 
-										// Add each item to alternateName property values array
+											// Get alternateName repeater field value
 
-											$condition_alternateName = uamswp_fad_schema_alternatename(
-												$condition_alternateName_repeater, // alternateName repeater field
-												'alternate_text' // alternateName item field name
-											);
+												$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
 
-									// Add to schema
+											// Add each item to alternateName property values array
 
-										if ( $condition_alternateName ) {
+												$condition_alternateName = uamswp_fad_schema_alternatename(
+													$condition_alternateName_repeater, // alternateName repeater field
+													'alternate_text' // alternateName item field name
+												);
 
-											$condition_item['alternateName'] = $condition_alternateName;
+										// Add to item values
 
-										}
+											// MedicalCondition
 
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'alternateName', // string // Required // alternateName of schema property
+													$condition_alternateName, // mixed // Required // Variable to add as the property value
+													$condition_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+	
 								// code
 
 									/* 
@@ -27791,24 +27962,42 @@
 									 *     - MedicalCode
 									 */
 
-									// Get code repeater field value
+									if (
+										in_array(
+											'code',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
 
-										$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+										// Get values
 
-										// Add each item to code property values array
+											// Get code repeater field value
 
-											$condition_code = uamswp_fad_schema_code(
-												$condition_code_repeater // code repeater field
-											);
+												$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
 
-									// Add to schema
+											// Add each item to code property values array
 
-										if ( $condition_code ) {
+												$condition_code = uamswp_fad_schema_code(
+													$condition_code_repeater // code repeater field
+												);
 
-											$condition_item['code'] = $condition_code;
+										// Add to item values
 
-										}
+											// MedicalCondition
 
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'code', // string // Required // code of schema property
+													$condition_code, // mixed // Required // Variable to add as the property value
+													$condition_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+	
 								// additionalType
 
 									/* 
@@ -27829,28 +28018,46 @@
 									 *     - URL
 									 */
 
-									// Get additionalType repeater field value
+									if (
+										in_array(
+											'additionalType',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
 
-										$condition_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
+										// Get values
 
-										// Add each item to additionalType property values array
+											// Get additionalType repeater field value
 
-											if ( $condition_additionalType_repeater ) {
+												$condition_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
 
-												$condition_additionalType = uamswp_fad_schema_additionaltype(
-													$condition_additionalType_repeater, // additionalType repeater field
-													'schema_additionalType_uri' // additionalType item field name
+											// Add each item to additionalType property values array
+
+												if ( $condition_additionalType_repeater ) {
+
+													$condition_additionalType = uamswp_fad_schema_additionaltype(
+														$condition_additionalType_repeater, // additionalType repeater field
+														'schema_additionalType_uri' // additionalType item field name
+													);
+
+												}
+
+										// Add to item values
+
+											// MedicalCondition
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'additionalType', // string // Required // additionalType of schema property
+													$condition_additionalType, // mixed // Required // Variable to add as the property value
+													$condition_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											}
-
-									// Add to schema
-
-										if ( $condition_additionalType ) {
-
-											$service_item['additionalType'] = $condition_additionalType;
-
-										}
+									}
 
 								// sameAs
 
@@ -27864,80 +28071,147 @@
 									 *     - URL
 									 */
 
-									// Get sameAs repeater field value
+									if (
+										in_array(
+											'sameAs',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
 
-										$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+										// Get values
 
-										// Add each item to sameAs property values array
+											// Get sameAs repeater field value
 
-											if ( $condition_sameAs_repeater ) {
+												$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
 
-												$condition_sameAs = uamswp_fad_schema_sameas(
-													$condition_sameAs_repeater, // sameAs repeater field
-													'schema_sameas_url' // sameAs item field name
+											// Add each item to sameAs property values array
+
+												if ( $condition_sameAs_repeater ) {
+
+													$condition_sameAs = uamswp_fad_schema_sameas(
+														$condition_sameAs_repeater, // sameAs repeater field
+														'schema_sameas_url' // sameAs item field name
+													);
+
+												}
+
+										// Add to item values
+
+											// MedicalCondition
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'sameAs', // string // Required // sameAs of schema property
+													$condition_sameAs, // mixed // Required // Variable to add as the property value
+													$condition_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
-											}
-
-									// Add to schema
-
-										if ( $condition_sameAs ) {
-
-											$condition_item['sameAs'] = $condition_sameAs;
-
-										}
+									}
 
 								// infectiousAgent
 
+									/* 
+									 * The actual infectious agent, such as a specific bacterium.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 */
+
 									if (
-										$condition_type == 'InfectiousDisease'
-										||
-										in_array( 'InfectiousDisease', $condition_type_parent )
+										in_array(
+											'infectiousAgent',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
 									) {
 
-										// Get field value
+										// Get values
 
 											$condition_infectiousAgent = get_field( 'schema_infectiousagent', $entity ) ?: '';
 
-										// Add to schema
+										// Add to item values
 
-											if ( $condition_infectiousAgent ) {
+											// MedicalCondition
 
-												$condition_item['infectiousAgent'] = $condition_infectiousAgent;
-
-											}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'infectiousAgent', // string // Required // infectiousAgent of schema property
+													$condition_infectiousAgent, // mixed // Required // Variable to add as the property value
+													$condition_infectiousAgent_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
 								// infectiousAgentClass
 
+									/* 
+									 * The class of infectious agent (bacteria, prion, etc.) that causes the disease.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - InfectiousAgentClass
+									 */
+
 									if (
-										$condition_type == 'InfectiousDisease'
-										||
-										in_array( 'InfectiousDisease', $condition_type_parent )
+										in_array(
+											'infectiousAgentClass',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
 									) {
 
-										// Get field value
+										// Get values
 
 											$condition_infectiousAgentClass =  get_field( 'condition_schema_infectiousagentclass_schema_infectiousagentclass', $entity ) ?: '';
 
-										// Add to schema
+										// Add to item values
 
-											if ( $condition_infectiousAgentClass ) {
+											// MedicalCondition
 
-												$condition_item['infectiousAgentClass'] = $condition_infectiousAgentClass;
-
-											}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'infectiousAgentClass', // string // Required // infectiousAgentClass of schema property
+													$condition_infectiousAgentClass, // mixed // Required // Variable to add as the property value
+													$condition_infectiousAgentClass_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
 								// possibleTreatment
 
-									if ( $nesting_level == 1 ) {
+									/* 
+									 * A possible treatment to address this condition, sign or symptom.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalTherapy
+									 */
 
-										// Get possibleTreatment relationship field value
+									if (
+										in_array(
+											'possibleTreatment',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+										&&
+										$nesting_level <= 1
+									) {
 
-											$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
+										// Get values
+
+											// Get possibleTreatment relationship field value
+
+												$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
 
 											// Add each item to possibleTreatment property values array
 
@@ -27956,23 +28230,48 @@
 
 												}
 
-										// Add to schema
+										// Add to item values
 
-											if ( $condition_possibleTreatment ) {
+											// MedicalCondition
 
-												$condition_item['possibleTreatment'] = $condition_possibleTreatment;
-
-											}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'possibleTreatment', // string // Required // possibleTreatment of schema property
+													$condition_possibleTreatment, // mixed // Required // Variable to add as the property value
+													$condition_possibleTreatment_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
 								// primaryPrevention
 
-									if ( $nesting_level == 1 ) {
+									/* 
+									 * A preventative therapy used to prevent an initial occurrence of the medical 
+									 * condition, such as vaccination.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalTherapy
+									 */
 
-										// Get primaryPrevention relationship field value
+									if (
+										in_array(
+											'primaryPrevention',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+										&&
+										$nesting_level <= 1
+									) {
 
-											$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
+										// Get values
+
+											// Get primaryPrevention relationship field value
+
+												$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
 
 											// Add each item to primaryPrevention property values array
 
@@ -27991,23 +28290,48 @@
 
 												}
 
-										// Add to schema
+										// Add to item values
 
-											if ( $condition_primaryPrevention ) {
+											// MedicalCondition
 
-												$condition_item['primaryPrevention'] = $condition_primaryPrevention;
-
-											}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'primaryPrevention', // string // Required // primaryPrevention of schema property
+													$condition_primaryPrevention, // mixed // Required // Variable to add as the property value
+													$condition_primaryPrevention_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
 								// secondaryPrevention
 
-									if ( $nesting_level == 1 ) {
+									/* 
+									 * A preventative therapy used to prevent reoccurrence of the medical condition 
+									 * after an initial episode of the condition.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalTherapy
+									 */
 
-										// Get secondaryPrevention relationship field value
+									if (
+										in_array(
+											'secondaryPrevention',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+										&&
+										$nesting_level <= 1
+									) {
 
-											$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
+										// Get values
+
+											// Get secondaryPrevention relationship field value
+
+												$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
 
 											// Add each item to secondaryPrevention property values array
 
@@ -28026,23 +28350,47 @@
 
 												}
 
-										// Add to schema
+										// Add to item values
 
-											if ( $condition_secondaryPrevention ) {
+											// MedicalCondition
 
-												$condition_item['secondaryPrevention'] = $condition_secondaryPrevention;
-
-											}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'secondaryPrevention', // string // Required // secondaryPrevention of schema property
+													$condition_secondaryPrevention, // mixed // Required // Variable to add as the property value
+													$condition_secondaryPrevention_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
 								// typicalTest
 
-									if ( $nesting_level == 1 ) {
+									/* 
+									 * A medical test typically performed given this condition.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalTest
+									 */
 
-										// Get typicalTest relationship field value
+									if (
+										in_array(
+											'typicalTest',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+										&&
+										$nesting_level <= 1
+									) {
 
-											$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
+										// Get values
+
+											// Get typicalTest relationship field value
+
+												$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
 
 											// Add each item to typicalTest property values array
 
@@ -28061,31 +28409,38 @@
 
 												}
 
-										// Add to schema
+										// Add to item values
 
-											if ( $condition_typicalTest ) {
+											// MedicalCondition
 
-												$condition_item['typicalTest'] = $condition_typicalTest;
-
-											}
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'typicalTest', // string // Required // typicalTest of schema property
+													$condition_typicalTest, // mixed // Required // Variable to add as the property value
+													$condition_typicalTest_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
 							// Sort arrays
 
-								ksort( $condition_item, SORT_NATURAL | SORT_FLAG_CASE );
+								ksort( $condition_item_MedicalCondition, SORT_NATURAL | SORT_FLAG_CASE );
 
 							// Set/update the value of the item transient
 
 								uamswp_fad_set_transient(
 									'item_' . $entity, // Required // String added to transient name for disambiguation.
-									$condition_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+									$condition_item_MedicalCondition, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);
 
 							// Add to list of conditions
 
-								$condition_list[] = $condition_item;
+								$condition_list[] = $condition_item_MedicalCondition;
 
 						}
 
