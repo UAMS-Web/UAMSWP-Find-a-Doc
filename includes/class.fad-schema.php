@@ -21725,12 +21725,7 @@
 										)
 										||
 										array_intersect(
-											$clinical_resource_properties_map[$MedicalBusiness_type]['properties'],
-											$clinical_resource_description_common
-										)
-										||
-										array_intersect(
-											$clinical_resource_properties_map[$Person_type]['properties'],
+											$clinical_resource_properties_map[$CreativeWork_type]['properties'],
 											$clinical_resource_description_common
 										)
 									) {
