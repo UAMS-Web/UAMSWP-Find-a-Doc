@@ -14958,7 +14958,7 @@
 
 													// Add to the list of image IDs
 
-														if ( $location_wayfinding_image_id ) {
+														if ( $location_gallery_image_id ) {
 
 															$location_image_id = array_merge(
 																$location_image_id,
