@@ -24989,6 +24989,26 @@
 
 									}
 	
+								// additionalType [WIP]
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
 								// alternateName
 
 									/* 
@@ -25036,53 +25056,22 @@
 
 									}
 	
-								// code
+								// associatedAnatomy [excluded]
 
 									/* 
-									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
-									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
+									 * The anatomy of the underlying organ system or structures associated with this 
+									 * entity.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - MedicalCode
+									 *     - AnatomicalStructure
+									 *     - AnatomicalSystem
+									 *     - SuperficialAnatomy
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
 									 */
 
-									if (
-										in_array(
-											'code',
-											$condition_properties_map[$MedicalCondition_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											// Get code repeater field value
-
-												$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
-
-											// Add each item to code property values array
-
-												$condition_code = uamswp_fad_schema_code(
-													$condition_code_repeater // code repeater field
-												);
-
-										// Add to item values
-
-											// MedicalCondition
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalCondition_type, // string // Required // The @type value for the schema item
-													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'code', // string // Required // Name of schema property
-													$condition_code, // mixed // Required // Variable to add as the property value
-													$condition_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-	
 								// additionalType
 
 									/* 
@@ -25144,41 +25133,35 @@
 
 									}
 
-								// sameAs
+								// code
 
 									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-									 * website).
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - URL
+									 *     - MedicalCode
 									 */
 
 									if (
 										in_array(
-											'sameAs',
+											'code',
 											$condition_properties_map[$MedicalCondition_type]['properties']
 										)
 									) {
 
 										// Get values
 
-											// Get sameAs repeater field value
+											// Get code repeater field value
 
-												$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+												$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
 
-											// Add each item to sameAs property values array
+											// Add each item to code property values array
 
-												if ( $condition_sameAs_repeater ) {
-
-													$condition_sameAs = uamswp_fad_schema_sameas(
-														$condition_sameAs_repeater, // sameAs repeater field
-														'schema_sameas_url' // sameAs item field name
-													);
-
-												}
+												$condition_code = uamswp_fad_schema_code(
+													$condition_code_repeater // code repeater field
+												);
 
 										// Add to item values
 
@@ -25187,15 +25170,163 @@
 												uamswp_fad_schema_add_to_item_values(
 													$MedicalCondition_type, // string // Required // The @type value for the schema item
 													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // Name of schema property
-													$condition_sameAs, // mixed // Required // Variable to add as the property value
-													$condition_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													'code', // string // Required // Name of schema property
+													$condition_code, // mixed // Required // Variable to add as the property value
+													$condition_code_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
 									}
+
+								// description [excluded]
+
+									/* 
+									 * A description of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - TextObject
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// differentialDiagnosis [excluded]
+
+									/* 
+									 * One of a set of differential diagnoses for the condition. Specifically, a 
+									 * closely-related or competing diagnosis typically considered later in the 
+									 * cognitive process whereby this medical condition is distinguished from others 
+									 * most likely responsible for a similar collection of signs and symptoms to reach 
+									 * the most parsimonious diagnosis or diagnoses in a patient.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DDxElement
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// disambiguatingDescription [excluded]
+
+									/* 
+									 * A sub property of description. A short description of the item used to 
+									 * disambiguate from other, similar items. Information from other properties (in 
+									 * particular, name) may be necessary for the description to be useful for 
+									 * disambiguation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// drug [excluded]
+
+									/* 
+									 * Specifying a drug or medicine used in a medication procedure.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Drug
+									 * 
+									 * This schema property is not relevant to conditions and so it will not be 
+									 * included.
+									 */
+
+								// epidemiology [excluded]
+
+									/* 
+									 * The characteristics of associated patients, such as age, gender, race etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// expectedPrognosis [excluded]
+
+									/* 
+									 * The likely outcome in either the short term or long term of the medical condition.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// guideline [excluded]
+
+									/* 
+									 * A medical guideline related to this entity.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalGuideline
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// identifier [WIP]
+
+									/* 
+									 * The identifier property represents any kind of identifier for any kind of 
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+									 * properties for representing many of these, either as textual strings or as URL 
+									 * (URI) links. See background notes for more details.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - PropertyValue
+									 *     - Text
+									 *     - URL
+									 */
+
+								// identifyingExam [WIP]
+
+									/* 
+									 * A physical examination that can identify this sign.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - PhysicalExam
+									 */
+
+								// identifyingTest [WIP]
+
+									/* 
+									 * A diagnostic test that can identify this sign.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalTest
+									 */
+
+								// image [excluded]
+
+									/* 
+									 * An image of the item. This can be a URL or a fully described ImageObject.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - URL
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
 
 								// infectiousAgent
 
@@ -25272,6 +25403,274 @@
 												);
 
 									}
+
+								// legalStatus [excluded]
+
+									/* 
+									 * The drug or supplement's legal status, including any controlled substance 
+									 * schedules that apply.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DrugLegalStatus
+									 *     - MedicalEnumeration
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to conditions and so it will not be 
+									 * included.
+									 */
+
+								// mainEntityOfPage [excluded]
+
+									/*
+									 * Indicates a page (or other CreativeWork) for which this thing is the main 
+									 * entity being described. See background notes at 
+									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * 
+									 * Inverse-property: mainEntity
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 * 
+									 * The condition post type does not have a published page and so this schema 
+									 * property will not be included.
+									 */
+
+								// medicineSystem [excluded]
+
+									/* 
+									 * The system of medicine that includes this MedicalEntity 
+									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicineSystem
+									 * 
+									 * This schema property is not relevant to conditions and so it will not be 
+									 * included.
+									 */
+
+								// naturalProgression [excluded]
+
+									/* 
+									 * The expected progression of the condition if it is not treated and allowed to 
+									 * progress naturally.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// pathophysiology [excluded]
+
+									/* 
+									 * Changes in the normal mechanical, physical, and biochemical functions that are 
+									 * associated with this activity or condition.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// possibleComplication [excluded]
+
+									/* 
+									 * A possible unexpected and unfavorable evolution of a medical condition. 
+									 * Complications may include worsening of the signs or symptoms of the disease, 
+									 * extension of the condition to other organ systems, etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// potentialAction [excluded]
+
+									/* 
+									 * Indicates a potential Action, which describes an idealized action in which this 
+									 * thing would play an 'object' role.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Action
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// recognizingAuthority [excluded]
+
+									/* 
+									 * If applicable, the organization that officially recognizes this entity as part 
+									 * of its endorsed system of medicine.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 * 
+									 * This schema property is not relevant to conditions and so it will not be 
+									 * included.
+									 */
+
+								// relevantSpecialty [excluded]
+
+									/* 
+									 * If applicable, a medical specialty in which this entity is relevant.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSpecialty
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// riskFactor [excluded]
+
+									/* 
+									 * A modifiable or non-modifiable factor that increases the risk of a patient 
+									 * contracting this condition (e.g., age, coexisting condition).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalRiskFactor
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'sameAs',
+											$condition_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											// Get sameAs repeater field value
+
+												$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+
+											// Add each item to sameAs property values array
+
+												if ( $condition_sameAs_repeater ) {
+
+													$condition_sameAs = uamswp_fad_schema_sameas(
+														$condition_sameAs_repeater, // sameAs repeater field
+														'schema_sameas_url' // sameAs item field name
+													);
+
+												}
+
+										// Add to item values
+
+											// MedicalCondition
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalCondition_type, // string // Required // The @type value for the schema item
+													$condition_item_MedicalCondition, // array // Required // The list array for the schema item to which to add the property value
+													'sameAs', // string // Required // Name of schema property
+													$condition_sameAs, // mixed // Required // Variable to add as the property value
+													$condition_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$condition_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// signOrSymptom [WIP]
+
+									/* 
+									 * A sign or symptom of this condition. Signs are objective or physically 
+									 * observable manifestations of the medical condition while symptoms are the 
+									 * subjective experience of the medical condition.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSignOrSymptom
+									 */
+
+								// stage [excluded]
+
+									/* 
+									 * The stage of the condition, if applicable.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalConditionStage
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// status [excluded]
+
+									/* 
+									 * The status of the study (enumerated).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - EventStatusType
+									 *     - MedicalStudyStatus
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to conditions and so it will not be 
+									 * included.
+									 */
+
+								// study [excluded]
+
+									/* 
+									 * A medical study or trial related to this entity.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalStudy
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								// subjectOf [excluded]
+
+									/*
+									 * A CreativeWork or Event about this Thing.
+									 * 
+									 * Inverse-property: about
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Event
+									 * 
+									 * The condition post type does not have a published page and so this schema 
+									 * property will not be included.
+									 */
 
 								// possibleTreatment
 
@@ -25452,7 +25851,21 @@
 
 									}
 
-								// typicalTest
+								// transmissionMethod [excluded]
+
+									/* 
+									 * How the disease spreads, either as a route or vector, for example 
+									 * 'direct contact', 'Aedes aegypti', etc.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * condition schema and so it will not be included.
+									 */
+
+								 // typicalTest
 
 									/* 
 									 * A medical test typically performed given this condition.
