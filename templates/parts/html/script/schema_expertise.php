@@ -1,101 +1,76 @@
 <?php
 
-// Common property values
+/*
+ * Required vars:
+ * 
+ * 	$schema_common_base
+ * 	$page_id
+ */
 
-	include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/property_values.php' );
+include( UAMS_FAD_PATH . '/templates/parts/vars/page/schema/common/base_script.php' );
 
-// area of expertise-specific schema
-// Merge into $schema_base['@graph']
+$schema_expertise = $schema_common_base;
 
-	$schema_graph = array(
-		// MedicalWebPage
-		array(
-			'@type' => 'MedicalWebPage',
-			'@id' => 'https://uamshealth.com/expertise/foo/#MedicalWebPage', // Replace URL up to the hash with relevant URL
-			'name' => array(
-				'@id' => 'https://uamshealth.com/expertise/foo/#Name', // Replace URL up to the hash with relevant URL
-				'foo' // Replace 'foo' with the title of the page
-			),
-			'headline' => array(
-				'@id' => 'https://uamshealth.com/expertise/foo/#Name' // Replace URL up to the hash with relevant URL
-			),
-			'about' => array(
-				'foo' // Replace 'foo' with MedicalSpecialty (Enumeration Type) associated with the area of expertise // Repeat as necessary
-				array( // Populate values for related condition items, repeating as necessary
-					'@type' => 'MedicalCondition',
-					'foo' => 'bar'
-				),
-			),
-			'breadcrumb' => array(
-				'@id' => 'https://uamshealth.com/expertise/foo/#BreadcrumbList' // Replace URL up to the hash with relevant URL
-			),
-			'creator' => array(
-				'@id' => 'https://uams.edu/#CollegeOrUniversity'
-			),
-			'dateModified' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
-			'datePublished' => 'foo', // Replace 'foo' with date value in ISO 8601 date format.
-			'description' => 'foo', // Replace 'foo' with excerpt / short description
-			'inLanguage' => 'English',
-			'isPartOf' => array(
-				'@id' => 'https://uamshealth.com/#WebSite'
-			),
-			'maintainer' => array(
-				'@id' => 'https://uams.edu/#CollegeOrUniversity'
-			),
-			'medicalAudience' => $schema_common_medicalAudience,
-			'primaryImageOfPage' => array( // Header background image
-				'@type' => 'ImageObject',
-				'caption' => 'foo', // Replace 'foo' with the image's alt text
-				'contentSize' => 'foo', // Replace 'foo' with the image's file size in (mega/kilo)bytes
-				'contentUrl' => 'foo', // Replace 'foo' with the image file's URL
-				'encodingFormat' => 'foo', // Replace 'foo' with the image's media type expressed using a MIME format (e.g., 'image/jpeg')
-				'height' => 'foo', // Replace 'foo' with the image's height
-				'representativeOfPage' => true,
-				'width' => 'foo' // Replace 'foo' with the image's width
-			),
-			'sourceOrganization' => array(
-				'@id' => 'https://uamshealth.com/#MedicalOrganization'
-			),
-			'specialty' => array(
-				'foo' // Replace 'foo' with MedicalSpecialty (Enumeration Type) associated with the area of expertise // Repeat as necessary
-			),
-			'url' => array(
-				'@id' => 'https://uamshealth.com/expertise/foo/#URL', // Replace URL up to the hash with relevant URL
-				'https://uamshealth.com/provider/foo/' // Replace 'foo' with provider profile slug
-			)
-		),
-		// BreadcrumbList
-		array(
-			'@type' => 'BreadcrumbList',
-			'@id' => 'https://uamshealth.com/expertise/foo/#BreadcrumbList', // Replace URL up to the hash with relevant URL
-			'itemListElement' => array(
-				array(
-					'@type' => 'ListItem',
-					'position' => 1,
-					'item' => array(
-						'@type' => 'MedicalWebPage',
-						'@id' => 'https://uamshealth.com',
-						'url' => 'https://uamshealth.com',
-						'name' => 'UAMS Health'
-					)
-				),
-				array(
-					'@type' => 'ListItem',
-					'position' => 2,
-					'item' => array(
-						'@type' => 'MedicalWebPage',
-						'@id' => 'https://uamshealth.com/provider/',
-						'url' => 'https://uamshealth.com/provider/',
-						'name' => 'Providers'
-					)
-				),
-				array( // Repeat as necessary for a descendant item
-					'@type' => 'ListItem',
-					'position' => 3, // Adjust position integer as necessary for a descendant item
-					'item' => array(
-						'@id' => 'https://uamshealth.com/expertise/foo/#MedicalWebPage' // Replace URL up to the hash with relevant URL
-					)
-				)
-			)
-		)
+// Band-aid to resolve overzealous variable definitions in uamswp_fad_ontology_site_values function (e.g., $conditions_cpt) that are leaking out of the location card template parts, et al.
+$page_id = get_the_ID();
+
+// Define Schema JSON item arrays for area of expertise profile as MedicalWebPage and MedicalEntity
+
+	$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
+	$expertise_schema_fields = $expertise_schema_fields ?? array();
+
+	$schema_expertise_combined = uamswp_fad_schema_expertise(
+		array($page_id), // List of IDs of the area of expertise items
+		$page_url, // Page URL
+		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
+		0, // Nesting level within the main schema
+		1, // Iteration counter for area of expertise-as-MedicalWebPage
+		1, // Iteration counter for area of expertise-as-MedicalEntity
+		$expertise_schema_fields // Pre-existing field values array so duplicate calls can be avoided
 	);
+
+// Add area of expertise schema arrays to the base schema array
+
+	// Area of expertise profile as MedicalWebPage
+
+		$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalWebPage'];
+
+	// Area of expertise profile as MedicalEntity
+
+		$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalEntity'];
+
+// Construct the schema JSON script tag
+
+	uamswp_fad_schema_construct($schema_expertise);
+
+// Display array as development testing
+
+	echo '<pre>'; // test
+
+	// // Full
+	// echo print_r($schema_expertise); // test
+
+	// // UAMS
+	// echo print_r($schema_expertise['@graph'][0]); // test
+
+	// // UAMS Health
+	// echo print_r($schema_expertise['@graph'][1]); // test
+
+	// // UAMSHealth.com
+	// echo print_r($schema_expertise['@graph'][2]); // test
+
+	// MedicalWebPage
+	echo print_r($schema_expertise['@graph'][3]); // test
+
+	// MedicalEntity
+	echo print_r($schema_expertise['@graph'][4]); // test
+
+	// // Specific @graph item
+	// echo print_r($schema_expertise['@graph'][3]); // test
+
+	echo '</pre>'; // test
+
+// Reusable test display lines
+
+	// echo '<p>$foo = ' . ( is_array($foo) ? 'Array' : ( is_object($foo) ? 'Object' : ( is_null($foo) ? 'Null' : ( $foo ) ) ) ) . '</p>'; // test
+	// if ( is_array($foo) || is_object($foo) ) { echo '<pre>'; print_r($foo); echo '</pre>'; } // test
