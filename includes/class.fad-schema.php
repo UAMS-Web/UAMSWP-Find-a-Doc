@@ -26424,6 +26424,96 @@
 
 									}
 
+								// additionalType
+
+									/* 
+									 * An additional type for the item, typically used for adding more specific types 
+									 * from external vocabularies in microdata syntax. This is a relationship between 
+									 * something and a class that the thing is in. Typically the value is a 
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
+									 * in RDF. Text values can be used sparingly, for cases where useful information 
+									 * can be added without their being an appropriate schema to reference. In the 
+									 * case of text values, the class label should follow the schema.org style guide.
+									 * 
+									 * Subproperty of:
+									 *     - rdf:type
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'additionalType',
+											$treatment_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											// Get additionalType repeater field value
+
+												$treatment_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
+
+											// Add each item to additionalType property values array
+
+												if ( $treatment_additionalType_repeater ) {
+
+													$treatment_additionalType = uamswp_fad_schema_additionaltype(
+														$treatment_additionalType_repeater, // additionalType repeater field
+														'schema_additionalType_uri' // additionalType item field name
+													);
+
+												}
+
+										// Add to item values
+
+											// Service
+
+												uamswp_fad_schema_add_to_item_values(
+													$Service_type, // string // Required // The @type value for the schema item
+													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+													'additionalType', // string // Required // Name of schema property
+													$treatment_additionalType, // mixed // Required // Variable to add as the property value
+													$treatment_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// adverseOutcome [excluded]
+
+									/* 
+									 * A possible complication and/or side effect of this therapy. If it is known that 
+									 * an adverse outcome is serious (resulting in death, disability, or permanent 
+									 * damage; requiring hospitalization; or otherwise life-threatening or requiring 
+									 * immediate medical attention), tag it as a seriousAdverseOutcome instead.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalEntity
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// affectedBy [excluded]
+
+									/* 
+									 * Drugs that affect the test's results.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Drug
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
 								// alternateName
 
 									/* 
@@ -26526,119 +26616,76 @@
 
 									}
 
-								// additionalType
+								// bodyLocation [excluded]
 
 									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
-									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
-									 * Subproperty of:
-									 *     - rdf:type
+									 * Location in the body of the anatomical structure.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
 									 *     - Text
-									 *     - URL
+									 * 
+									 * This schema property is not relevant to treatments and so it will not be 
+									 * included.
 									 */
 
-									if (
-										in_array(
-											'additionalType',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											// Get additionalType repeater field value
-
-												$treatment_additionalType_repeater = get_field( 'schema_additionalType', $entity ) ?? array();
-
-											// Add each item to additionalType property values array
-
-												if ( $treatment_additionalType_repeater ) {
-
-													$treatment_additionalType = uamswp_fad_schema_additionaltype(
-														$treatment_additionalType_repeater, // additionalType repeater field
-														'schema_additionalType_uri' // additionalType item field name
-													);
-
-												}
-
-										// Add to item values
-
-											// Service
-
-												uamswp_fad_schema_add_to_item_values(
-													$Service_type, // string // Required // The @type value for the schema item
-													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
-													'additionalType', // string // Required // Name of schema property
-													$treatment_additionalType, // mixed // Required // Variable to add as the property value
-													$treatment_additionalType_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// sameAs
+								// contraindication [excluded]
 
 									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
-									 * website).
+									 * A contraindication for this therapy.
 									 * 
 									 * Values expected to be one of these types:
 									 * 
-									 *     - URL
+									 *     - MedicalContraindication
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
 									 */
 
-									if (
-										in_array(
-											'sameAs',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
-										)
-									) {
+								// description [excluded]
 
-										// Get values
+									/* 
+									 * A description of the item.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 *     - TextObject
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
 
-											// Get sameAs repeater field value
+								// disambiguatingDescription [excluded]
 
-												$treatment_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+									/* 
+									 * A sub property of description. A short description of the item used to 
+									 * disambiguate from other, similar items. Information from other properties (in 
+									 * particular, name) may be necessary for the description to be useful for 
+									 * disambiguation.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
 
-											// Add each item to sameAs property values array
+								// doseSchedule [excluded]
 
-												if ( $treatment_sameAs_repeater ) {
-
-													$treatment_sameAs = uamswp_fad_schema_sameas(
-														$treatment_sameAs_repeater, // sameAs repeater field
-														'schema_sameas_url' // sameAs item field name
-													);
-
-												}
-
-										// Add to item values
-
-											// Service
-
-												uamswp_fad_schema_add_to_item_values(
-													$Service_type, // string // Required // The @type value for the schema item
-													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
-													'sameAs', // string // Required // Name of schema property
-													$treatment_sameAs, // mixed // Required // Variable to add as the property value
-													$treatment_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
+									/* 
+									 * A dosing schedule for the drug for a given population, either observed, 
+									 * recommended, or maximum dose based on the type used.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DoseSchedule
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
 
 								// drug
 
@@ -26872,6 +26919,74 @@
 
 									}
 
+								// followup [excluded]
+
+									/* 
+									 * Typical or recommended followup care after the procedure is performed.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// guideline [excluded]
+
+									/* 
+									 * A medical guideline related to this entity.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalGuideline
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// howPerformed [excluded]
+
+									/* 
+									 * How the procedure is performed.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// identifier [WIP]
+
+									/* 
+									 * The identifier property represents any kind of identifier for any kind of 
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
+									 * properties for representing many of these, either as textual strings or as URL 
+									 * (URI) links. See background notes for more details.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - PropertyValue
+									 *     - Text
+									 *     - URL
+									 */
+
+								// image [excluded]
+
+									/* 
+									 * An image of the item. This can be a URL or a fully described ImageObject.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - ImageObject
+									 *     - URL
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
 								// imagingTechnique
 
 									/* 
@@ -26909,6 +27024,91 @@
 												);
 
 									}
+
+								// legalStatus [WIP]
+
+									/* 
+									 * The drug or supplement's legal status, including any controlled substance 
+									 * schedules that apply.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - DrugLegalStatus
+									 *     - MedicalEnumeration
+									 *     - Text
+									 */
+
+								// mainEntityOfPage [excluded]
+
+									/*
+									 * Indicates a page (or other CreativeWork) for which this thing is the main 
+									 * entity being described. See background notes at 
+									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
+									 * 
+									 * Inverse-property: mainEntity
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - URL
+									 * 
+									 * The treatment post type does not have a published page and so this schema 
+									 * property will not be included.
+									 */
+
+								// medicineSystem [WIP]
+
+									/* 
+									 * The system of medicine that includes this MedicalEntity 
+									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicineSystem
+									 */
+
+								// normalRange [excluded]
+
+									/* 
+									 * Range of acceptable values for a typical patient, when applicable.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalEnumeration
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// potentialAction [excluded]
+
+									/* 
+									 * Indicates a potential Action, which describes an idealized action in which this 
+									 * thing would play an 'object' role.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Action
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// preparation [excluded]
+
+									/* 
+									 * Typical preparation that a patient must undergo before having the procedure 
+									 * performed.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalEntity
+									 *     - Text
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
 
 								// procedureType
 
@@ -26949,6 +27149,200 @@
 												);
 
 									}
+
+								// recognizingAuthority [WIP]
+
+									/* 
+									 * If applicable, the organization that officially recognizes this entity as part 
+									 * of its endorsed system of medicine.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - Organization
+									 */
+
+								// relevantSpecialty
+
+									/* 
+									 * If applicable, a medical specialty in which this entity is relevant.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSpecialty (enumeration type)
+									 */
+
+									if (
+										in_array(
+											'relevantSpecialty',
+											$treatment_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											// Base array
+
+												$treatment_relevantSpecialty = array();
+
+											// Get relevantSpecialty multi-select field value (clone of 'field_schema_medicalspecialty_multiple')
+
+												$treatment_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $entity ) ?: array();
+
+											// Add each item to relevantSpecialty property values array
+
+												if ( $treatment_relevantSpecialty_multiselect ) {
+
+													foreach ( $treatment_relevantSpecialty_multiselect as $item ) {
+
+														$treatment_relevantSpecialty[] = $item ?? '';
+
+													}
+
+												}
+
+										// Add to item values
+
+											// Service
+
+												uamswp_fad_schema_add_to_item_values(
+													$Service_type, // string // Required // The @type value for the schema item
+													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+													'relevantSpecialty', // string // Required // Name of schema property
+													$treatment_relevantSpecialty, // mixed // Required // Variable to add as the property value
+													$treatment_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// sameAs
+
+									/* 
+									 * URL of a reference Web page that unambiguously indicates the item's identity 
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									 * website).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - URL
+									 */
+
+									if (
+										in_array(
+											'sameAs',
+											$treatment_properties_map[$MedicalCondition_type]['properties']
+										)
+									) {
+
+										// Get values
+
+											// Get sameAs repeater field value
+
+												$treatment_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+
+											// Add each item to sameAs property values array
+
+												if ( $treatment_sameAs_repeater ) {
+
+													$treatment_sameAs = uamswp_fad_schema_sameas(
+														$treatment_sameAs_repeater, // sameAs repeater field
+														'schema_sameas_url' // sameAs item field name
+													);
+
+												}
+
+										// Add to item values
+
+											// Service
+
+												uamswp_fad_schema_add_to_item_values(
+													$Service_type, // string // Required // The @type value for the schema item
+													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
+													'sameAs', // string // Required // Name of schema property
+													$treatment_sameAs, // mixed // Required // Variable to add as the property value
+													$treatment_sameAs_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// seriousAdverseOutcome [excluded]
+
+									/* 
+									 * A possible serious complication and/or serious side effect of this therapy. 
+									 * Serious adverse outcomes include those that are life-threatening; result in 
+									 * death, disability, or permanent damage; require hospitalization or prolong 
+									 * existing hospitalization; cause congenital anomalies or birth defects; or 
+									 * jeopardize the patient and may require medical or surgical intervention to 
+									 * prevent one of the outcomes in this definition.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalEntity
+									 * 
+									 * This schema property is beyond the scope of what is being included for 
+									 * treatment schema and so it will not be included.
+									 */
+
+								// signDetected [WIP]
+
+									/* 
+									 * A sign detected by the test.
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - MedicalSign
+									 */
+
+								// status [excluded]
+
+									/* 
+									 * The status of the study (enumerated).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - EventStatusType
+									 *     - MedicalStudyStatus
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to treatments and so it will not be 
+									 * included.
+									 */
+
+								// study [excluded]
+
+									/* 
+									 * The status of the study (enumerated).
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - EventStatusType
+									 *     - MedicalStudyStatus
+									 *     - Text
+									 * 
+									 * This schema property is not relevant to treatments and so it will not be 
+									 * included.
+									 */
+
+								// subjectOf [excluded]
+
+									/*
+									 * A CreativeWork or Event about this Thing.
+									 * 
+									 * Inverse-property: about
+									 * 
+									 * Values expected to be one of these types:
+									 * 
+									 *     - CreativeWork
+									 *     - Event
+									 * 
+									 * The treatment post type does not have a published page and so this schema 
+									 * property will not be included.
+									 */
 
 								// subTest
 
@@ -27002,62 +27396,6 @@
 													'subTest', // string // Required // Name of schema property
 													$treatment_subTest, // mixed // Required // Variable to add as the property value
 													$treatment_subTest_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
-								// relevantSpecialty
-
-									/* 
-									 * If applicable, a medical specialty in which this entity is relevant.
-									 * 
-									 * Values expected to be one of these types:
-									 * 
-									 *     - MedicalSpecialty (enumeration type)
-									 */
-
-									if (
-										in_array(
-											'relevantSpecialty',
-											$treatment_properties_map[$MedicalCondition_type]['properties']
-										)
-									) {
-
-										// Get values
-
-											// Base array
-
-												$treatment_relevantSpecialty = array();
-
-											// Get relevantSpecialty multi-select field value (clone of 'field_schema_medicalspecialty_multiple')
-
-												$treatment_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $entity ) ?: array();
-
-											// Add each item to relevantSpecialty property values array
-
-												if ( $treatment_relevantSpecialty_multiselect ) {
-
-													foreach ( $treatment_relevantSpecialty_multiselect as $item ) {
-
-														$treatment_relevantSpecialty[] = $item ?? '';
-
-													}
-
-												}
-
-										// Add to item values
-
-											// Service
-
-												uamswp_fad_schema_add_to_item_values(
-													$Service_type, // string // Required // The @type value for the schema item
-													$treatment_item_Service, // array // Required // The list array for the schema item to which to add the property value
-													'relevantSpecialty', // string // Required // Name of schema property
-													$treatment_relevantSpecialty, // mixed // Required // Variable to add as the property value
-													$treatment_relevantSpecialty_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$treatment_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
