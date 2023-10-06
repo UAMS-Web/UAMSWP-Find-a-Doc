@@ -20745,7 +20745,7 @@
 							// Combine the arrays
 
 								$expertise_item = array(
-									'MedicalWebPage' => $provider_item_MedicalWebPage,
+									'MedicalWebPage' => $expertise_item_MedicalWebPage,
 									'MedicalEntity' => $expertise_item_MedicalEntity
 								);
 
