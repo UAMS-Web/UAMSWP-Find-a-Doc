@@ -28077,11 +28077,27 @@
 				||
 				!$property_name
 				||
-				!$property_value
+				(
+					!$property_value
+					||
+					!isset($property_value)
+				)
 				||
 				!$property_map
 				||
 				!$property_map_key
+				||
+				(
+					!$property_map[$schema_type]
+					||
+					!isset($property_map[$schema_type])
+				)
+				||
+				(
+					!$property_map[$schema_type][$property_map_key]
+					||
+					!isset($property_map[$schema_type][$property_map_key])
+				)
 			) {
 
 				/*
