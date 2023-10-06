@@ -122,8 +122,7 @@ $page_id = get_the_ID();
 					$expertises, // List of IDs of the clinical resource items
 					$page_url, // Page URL
 					$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-					1, // Nesting level within the main schema
-					'MedicalEntity', // Base fragment identifier
+					1 // Nesting level within the main schema
 				);
 
 			// Define reference to each value/row in this property
@@ -157,8 +156,7 @@ $page_id = get_the_ID();
 					$clinical_resources, // List of IDs of the clinical resource items
 					$page_url, // Page URL
 					$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
-					1, // Nesting level within the main schema
-					'CreativeWork' // Base fragment identifier
+					1 // Nesting level within the main schema
 				);
 
 			// Define reference to each value/row in this property

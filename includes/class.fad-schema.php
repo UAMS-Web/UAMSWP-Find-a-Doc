@@ -7759,8 +7759,7 @@
 														$provider_expertise_list, // List of IDs of the area of expertise items
 														$provider_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'MedicalEntity' // Fragment identifier
+														( $nesting_level + 1 ) // Nesting level within the main schema
 													);
 
 												}
@@ -7831,8 +7830,7 @@
 														$provider_clinical_resource_list, // List of IDs of the clinical resource items
 														$provider_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-														( $nesting_level + 1 ), // Nesting level within the main schema
-														'CreativeWork' // Fragment identifier
+														( $nesting_level + 1 ) // Nesting level within the main schema
 													);
 
 												}
