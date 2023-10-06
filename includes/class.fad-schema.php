@@ -13482,68 +13482,94 @@
 
 															// Embed URL
 
-																$provider_video_embedUrl = $provider_video_parsed['query']['v'] ? 'https://www.youtube.com/embed/' . $provider_video_parsed['query']['v'] : '';
+																$provider_video_embedUrl = null;
+
+																if (
+																	isset($provider_video_parsed['query']['v'])
+																) {
+
+																	/* Single video  */
+
+																	$provider_video_embedUrl = 'https://www.youtube.com/embed/' . $provider_video_parsed['query']['v'];
+
+																} elseif (
+																	isset($provider_video_parsed['path'])
+																	&&
+																	$provider_video_parsed['path'] == '/playlist'
+																	&&
+																	isset($provider_video_parsed['query']['list'])
+																) {
+
+																	/* Playlist  */
+
+																	$provider_video_embedUrl = 'https://www.youtube.com/embed/videoseries?list=' . $provider_video_parsed['query']['list'];
+
+																}
 
 															// Get info from video
 
-																$provider_video_info = uamswp_fad_youtube_info( $provider_video_url ) ?? array();
+																$provider_video_info = isset($provider_video_parsed['query']['v']) ? ( uamswp_fad_youtube_info( $provider_video_url ) ?? array() ) : array();
 
-																// Title (snippet.title)
+																if ( $provider_video_info ) {
 
-																	$provider_video_title = $provider_video_info['title'] ?? '';
+																	// Title (snippet.title)
 
-																// Thumbnail URL
+																		$provider_video_title = $provider_video_info['title'] ?? '';
 
-																	// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
+																	// Thumbnail URL
 
-																		$provider_video_thumbnail = $provider_video_info['HQthumbUrl'] ?? array();
+																		// MaxRes Thumbnail URL, 1280x720 (snippet.thumbnails.maxres.url)
 
-																	// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+																			$provider_video_thumbnail = $provider_video_info['HQthumbUrl'] ?? array();
 
-																		if ( !$provider_video_thumbnail ) {
+																		// Fallback value: High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
 
-																			$provider_video_thumbnail = $provider_video_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
+																			if ( !$provider_video_thumbnail ) {
 
-																		}
+																				$provider_video_thumbnail = $provider_video_info['thumbUrl'] ?? array(); // High Thumbnail URL, 480x360 (snippet.thumbnails.high.url)
 
-																// Published date and time (snippet.publishedAt)
+																			}
 
-																	$provider_video_published = $provider_video_info['dateField'] ?? '';
+																	// Published date and time (snippet.publishedAt)
 
-																// Duration (contentDetails.duration)
+																		$provider_video_published = $provider_video_info['dateField'] ?? '';
 
-																	$provider_video_duration = $provider_video_info['duration'] ?? '';
+																	// Duration (contentDetails.duration)
 
-																// Description (snippet.description)
+																		$provider_video_duration = $provider_video_info['duration'] ?? '';
 
-																	$provider_video_description = $provider_video_info['description'] ?? '';
+																	// Description (snippet.description)
 
-																// Whether captions are available for the video (contentDetails.caption)
+																		$provider_video_description = $provider_video_info['description'] ?? '';
 
-																	$provider_video_caption_query = $provider_video_info['captions_data'] ?? '';
-																	$provider_video_caption_query = ( $provider_video_caption_query == 'true' ) ? true : false;
+																	// Whether captions are available for the video (contentDetails.caption)
 
-																	// Captions text
+																		$provider_video_caption_query = $provider_video_info['captions_data'] ?? '';
+																		$provider_video_caption_query = ( $provider_video_caption_query == 'true' ) ? true : false;
 
-																		if ( $provider_video_caption_query ) {
+																		// Captions text
 
-																			/* No info on this returned from function */
+																			if ( $provider_video_caption_query ) {
 
-																			$provider_video_caption = '';
+																				/* No info on this returned from function */
 
-																		}
+																				$provider_video_caption = '';
 
-																// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
+																			}
 
-																	/* No info on this returned from function */
+																	// Video quality: high definition (hd) or standard definition (sd) (contentDetails.definition)
 
-																	$provider_video_videoQuality = '';
+																		/* No info on this returned from function */
 
-																// Frame size
+																		$provider_video_videoQuality = '';
 
-																	/* No info on this returned from function */
+																	// Frame size
 
-																	$provider_video_videoFrameSize = '';
+																		/* No info on this returned from function */
+
+																		$provider_video_videoFrameSize = '';
+
+																}
 
 													} elseif ( str_contains( $provider_video_parsed['host'], 'vimeo' ) ) {
 
