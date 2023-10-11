@@ -30,11 +30,27 @@
 	"active": true,
 	"description": "",
 	"fields": {
+		"field_location_parent_tab": {
+			"key": "field_location_parent_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-admin-home dashicons\"><\/i> General Details",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		"field_location_parent": {
 			"key": "field_location_parent",
 			"name": "location_parent",
 			"type": "true_false",
-			"label": "Does it have a parent?",
+			"label": "Does this location have a parent location?",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -79,6 +95,162 @@
 			"return_format": "id",
 			"ui": 1
 		},
+		"field_location_type": {
+			"key": "field_location_type",
+			"name": "location_type",
+			"type": "taxonomy",
+			"label": "Location Type",
+			"instructions": "Used for filtering only",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "location_type",
+			"field_type": "multi_select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"multiple": 0
+		},
+		"field_location_ac_query": {
+			"key": "field_location_ac_query",
+			"name": "location_ac_query",
+			"type": "true_false",
+			"label": "Is this an Arkansas Children's location?",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_appointments_query": {
+			"key": "field_location_appointments_query",
+			"name": "location_appointments_query",
+			"type": "true_false",
+			"label": "Can a patient schedule an appointment for services rendered at this location?",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 1,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_portal": {
+			"key": "field_location_portal",
+			"name": "location_portal",
+			"type": "taxonomy",
+			"label": "Patient Portal",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"taxonomy": "portal",
+			"field_type": "radio",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 1,
+			"load_terms": 1,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"acfe_validate": "",
+			"acfe_update": "",
+			"multiple": 0
+		},
+		"field_location_prepend_the": {
+			"key": "field_location_prepend_the",
+			"name": "location_prepend_the",
+			"type": "true_false",
+			"label": "Automatically prepend location name with \"the\" in phrases?",
+			"instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_hidden": {
+			"key": "field_location_hidden",
+			"name": "location_hidden",
+			"type": "true_false",
+			"label": "Exclude from Primary Location List?",
+			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_service_line": {
+			"key": "field_location_service_line",
+			"name": "location_service_line",
+			"type": "taxonomy",
+			"label": "Service Line(s)",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"taxonomy": "service_line",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
+		},
 		"field_location_address_tab": {
 			"key": "field_location_address_tab",
 			"name": "",
@@ -100,7 +272,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_address_1": {
@@ -199,7 +371,7 @@
 			"name": "location_suite",
 			"label": "Suite or other unit",
 			"type": "text",
-			"instructions": "Indicate the area where the patient would first check in.<br />Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").<br />Do not include landmarks (don't say \"Next to this other thing\").<br />If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
+			"instructions": "Indicate the area where the patient would first check in.</p><p class='description' style='margin-top: 0.5em;'>Do not just include the number (Example: enter \"Suite 1A\" not just \"1A.\").</p><p class='description' style='margin-top: 0.5em;'>Do not include landmarks (don't say \"Next to this other thing\").</p><p class='description' style='margin-top: 0.5em;'>If you are putting the name of another clinic here, this location should instead be set as a child of that location.",
 			"required": "0",
 			"conditional_logic": "0",
 			"wrapper": {
@@ -222,7 +394,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -241,7 +413,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "30",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -317,7 +489,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "20",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -332,7 +504,7 @@
 			"key": "field_location_map",
 			"name": "location_map",
 			"type": "google_map",
-			"label": "Map",
+			"label": "GPS Location of the Relevant Building Entrance",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -350,12 +522,12 @@
 			"key": "field_location_region",
 			"name": "location_region",
 			"type": "taxonomy",
-			"label": "Region",
-			"instructions": "",
+			"label": "Arkansas Region",
+			"instructions": "For information on how the Arkansas regions are defined, visit <a href='https://communications.uams.edu/web/kb/location-regions/' target='_blank'>https://communications.uams.edu/web/kb/location-regions/</a>.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -373,38 +545,11 @@
 			"acfe_update": "",
 			"multiple": 0
 		},
-		"field_location_type": {
-			"key": "field_location_type",
-			"name": "location_type",
-			"type": "taxonomy",
-			"label": "Type",
-			"instructions": "Used for filtering only",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "",
-				"id": ""
-			},
-			"taxonomy": "location_type",
-			"field_type": "multi_select",
-			"allow_null": 0,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"multiple": 0
-		},
 		"field_location_directions_tab": {
 			"key": "field_location_directions_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-randomize dashicons\"><\/i> Parking &amp; Directions",
+			"label": "<i class=\"dashicons-car dashicons\"><\/i> Parking Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
@@ -421,15 +566,15 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_parking_map": {
 			"key": "field_location_parking_map",
 			"name": "location_parking_map",
 			"type": "google_map",
-			"label": "Parking Map",
-			"instructions": "Place pin on the parking location (if different than building)",
+			"label": "GPS Location of the Main Parking Area",
+			"instructions": "If the parking area is a parking deck, place the pin on the entrance to the parking deck from the street.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a surface-level parking lot, place the pin in the middle of the parking lot.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -447,7 +592,7 @@
 			"name": "location_parking",
 			"type": "wysiwyg",
 			"label": "Parking Instructions",
-			"instructions": "",
+			"instructions": "Indicate whether patients will park in a parking deck or surface-level parking.</p><p class='description' style='margin-top: 0.5em;'>Indicate which parking lot, parking deck or other area in which patients will park when coming to this location.</p><p class='description' style='margin-top: 0.5em;'>Indicate whether or not patients will have to pay for parking.</p><p class='description' style='margin-top: 0.5em;'>If there is a parking fee for patients, indicate whether or not this location validates parking.</p><p class='description' style='margin-top: 0.5em;'>If patients will be parking in a specific parking deck, indicate the ideal area of the parking deck in which patients should park. If there is a patient drop-off area, also include details about that.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -466,7 +611,7 @@
 			"name": "location_direction",
 			"type": "wysiwyg",
 			"label": "Directions From Parking Area",
-			"instructions": "",
+			"instructions": "Comprehensively describe the path patients should take when coming from their vehicle — whether at the patient drop-off area or in the parking area — to the entrance or check-in area for the location.</p><p class='description' style='margin-top: 0.5em;'>If the parking area is a parking deck, include instructions regarding how to locate the appropriate elevators and stairs in the parking deck, then include the parking deck level to which they should take those elevators or stairs.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -480,11 +625,11 @@
 			"media_upload": 1,
 			"delay": 0
 		},
-		"field_location_details_tab": {
-			"key": "field_location_details_tab",
+		"field_location_contact_tab": {
+			"key": "field_location_contact_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-location dashicons\"><\/i> Location Details",
+			"label": "<i class=\"dashicons-phone dashicons\"><\/i> Contact Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -493,63 +638,8 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
-		},
-		"field_location_ac_query": {
-			"key": "field_location_ac_query",
-			"name": "location_ac_query",
-			"type": "true_false",
-			"label": "Is this an Arkansas Children's location?",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_location_appointments_query": {
-			"key": "field_location_appointments_query",
-			"name": "location_appointments_query",
-			"type": "true_false",
-			"label": "Can a patient schedule an appointment for services rendered at this location?",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 1,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_location_contact_message": {
-			"key": "field_location_contact_message",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>Contact Information<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_phone": {
 			"key": "field_location_phone",
@@ -560,8 +650,8 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
@@ -588,8 +678,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"message": "",
@@ -597,39 +687,6 @@
 			"ui": 1,
 			"ui_on_text": "",
 			"ui_off_text": ""
-		},
-		"field_location_clinic_phone_query_spacer": {
-			"key": "field_location_clinic_phone_query_spacer",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_ac_appointments_query": {
 			"key": "field_location_ac_appointments_query",
@@ -692,8 +749,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
@@ -715,8 +772,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
@@ -738,8 +795,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
@@ -761,8 +818,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"message": "",
@@ -770,37 +827,6 @@
 			"ui": 1,
 			"ui_on_text": "",
 			"ui_off_text": ""
-		},
-		"field_location_appointment_phone_query_spacer": {
-			"key": "field_location_appointment_phone_query_spacer",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_return_appointments_phone": {
 			"key": "field_location_return_appointments_phone",
@@ -819,37 +845,11 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
-		},
-		"field_phone_spacer": {
-			"key": "field_phone_spacer",
-			"label": "",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_appointment_phone_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_fax": {
 			"key": "field_location_fax",
@@ -868,8 +868,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"input_mask": "(999) 999-9999 [x 99999]"
@@ -878,8 +878,8 @@
 			"key": "field_location_phone_numbers",
 			"name": "location_phone_numbers",
 			"type": "repeater",
-			"label": "Additional Phone Numbers (if needed):",
-			"instructions": "Example: <br\/>After Hours: ###-###-####",
+			"label": "Additional Phone Numbers",
+			"instructions": "Add any additional phone numbers for this location (e.g., after hours nurse line).",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -892,19 +892,19 @@
 			],
 			"wrapper": {
 				"width": "",
-				"class": "hide-acf-border",
+				"class": "",
 				"id": ""
 			},
 			"collapsed": "field_location_appointments_text",
 			"min": 0,
 			"max": 0,
-			"layout": "table",
+			"layout": "block",
 			"button_label": "",
 			"sub_fields": [
 				{
 					"key": "field_location_appointments_text",
 					"name": "location_appointments_text",
-					"label": "Text",
+					"label": "Label for Phone Number",
 					"type": "text",
 					"instructions": "",
 					"required": 1,
@@ -923,7 +923,7 @@
 				{
 					"key": "field_location_appointments_phone",
 					"name": "location_appointments_phone",
-					"label": "Phone #",
+					"label": "Phone Number",
 					"type": "maskfield",
 					"instructions": "",
 					"required": 1,
@@ -938,7 +938,7 @@
 				{
 					"key": "field_location_appointments_additional_text",
 					"name": "location_appointments_additional_text",
-					"label": "Additional Text",
+					"label": "Additional Description of Phone Number",
 					"type": "text",
 					"instructions": "",
 					"required": 0,
@@ -956,11 +956,11 @@
 				}
 			]
 		},
-		"field_location_about_message": {
-			"key": "field_location_about_message",
-			"label": "",
+		"field_location_details_tab": {
+			"key": "field_location_details_tab",
 			"name": "",
-			"type": "message",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -969,9 +969,8 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<h3>\"About\" Section<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_about": {
 			"key": "field_location_about",
@@ -1001,8 +1000,8 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1020,8 +1019,8 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1055,8 +1054,8 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "30",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"acfe_permissions": "",
@@ -1068,32 +1067,6 @@
 			"default_value": 0,
 			"layout": "horizontal",
 			"return_format": "value"
-		},
-		"field_location_spacer_2": {
-			"key": "field_location_spacer_2",
-			"label": "hidden",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "70",
-				"class": "hide-acf-title",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_prescription_type": {
 			"key": "field_location_prescription_type",
@@ -1112,8 +1085,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "70",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"choices": {
@@ -1127,32 +1100,6 @@
 			"layout": "vertical",
 			"return_format": "value",
 			"save_other_choice": 0
-		},
-		"field_location_spacer_3": {
-			"key": "field_location_spacer_3",
-			"label": "hidden",
-			"name": "",
-			"type": "message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "30",
-				"class": "hide-acf-title",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"message": "&nbsp;",
-			"new_lines": "",
-			"esc_html": 0
 		},
 		"field_location_current_prescription_clinic": {
 			"key": "field_location_current_prescription_clinic",
@@ -1176,8 +1123,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "70",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"acfe_permissions": ""
@@ -1204,8 +1151,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "70",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"acfe_permissions": ""
@@ -1232,8 +1179,8 @@
 				]
 			],
 			"wrapper": {
-				"width": "70",
-				"class": "hide-acf-border",
+				"width": "",
+				"class": "",
 				"id": ""
 			},
 			"default_value": "",
@@ -1242,11 +1189,11 @@
 			"media_upload": 0,
 			"delay": 0
 		},
-		"field_location_appointment_message": {
-			"key": "field_location_appointment_message",
-			"label": "",
+		"field_location_appointment_info_tab": {
+			"key": "field_location_appointment_info_tab",
 			"name": "",
-			"type": "message",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -1255,9 +1202,8 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "<h3>\"Appointment Information\" Section<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_appointment": {
 			"key": "field_location_appointment",
@@ -1283,7 +1229,7 @@
 			"name": "location_appointment_bring",
 			"type": "wysiwyg",
 			"label": "What to Bring to Your Appointment",
-			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1302,7 +1248,7 @@
 			"name": "location_appointment_expect",
 			"type": "wysiwyg",
 			"label": "What to Expect at Your Appointment",
-			"instructions": "This section should ideally not contain headings. But if it does ...<br />If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1315,140 +1261,6 @@
 			"toolbar": "full",
 			"media_upload": 1,
 			"delay": 0
-		},
-		"field_link_message": {
-			"key": "field_link_message",
-			"name": "",
-			"type": "message",
-			"label": "",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>External Website<\/h3><p>Include a title and URL for a link to an external non-UAMS website. This is intended for use when the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g. for becoming a patient, making an appointment, receiving follow-up information). This is not to be used as a link to secondary things like a social media account.<\/p>",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_location_web_name": {
-			"key": "field_location_web_name",
-			"name": "location_web_name",
-			"type": "text",
-			"label": "Website Name",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_location_url": {
-			"key": "field_location_url",
-			"name": "location_url",
-			"type": "link",
-			"label": "URL",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "50",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"return_format": "array",
-			"endpoint": 0
-		},
-		"field_details_other_message": {
-			"key": "field_details_other_message",
-			"name": "",
-			"type": "message",
-			"label": "",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"message": "<h3>Other Details<\/h3>",
-			"new_lines": "",
-			"esc_html": 0
-		},
-		"field_location_portal": {
-			"key": "field_location_portal",
-			"name": "location_portal",
-			"type": "taxonomy",
-			"label": "Patient Portal",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"taxonomy": "portal",
-			"field_type": "radio",
-			"allow_null": 0,
-			"add_term": 0,
-			"save_terms": 1,
-			"load_terms": 1,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"acfe_validate": "",
-			"acfe_update": "",
-			"multiple": 0
-		},
-		"field_location_prepend_the": {
-			"key": "field_location_prepend_the",
-			"name": "location_prepend_the",
-			"type": "true_false",
-			"label": "Automatically prepend location name with \"the\" in phrases?",
-			"instructions": "Setting this to \"Yes\" will add the word \"the\" before the location name in headings such as \"About [Location Name]\".",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_location_hidden": {
-			"key": "field_location_hidden",
-			"name": "location_hidden",
-			"type": "true_false",
-			"label": "Exclude from Primary Location List?",
-			"instructions": "Setting this to \"Yes\" will remove this location from the Location archive. This input will not affect whether the location will be displayed on profiles and search results.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
@@ -1463,7 +1275,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"acfe_permissions": [
 				"super_admin",
 				"administrator",
@@ -1535,7 +1347,7 @@
 			"name": "_thumbnail_id",
 			"label": "Featured Image",
 			"type": "image",
-			"instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.<br />You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675.",
+			"instructions": "Select an image that will be used on card layouts, schema data, social sharing, etc.</p><p class='description' style='margin-top: 0.5em;'>You can select an image that is also used as the Wayfinding Photo or in the Photo Gallery.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675.",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -1615,7 +1427,7 @@
 			"name": "location_wayfinding_photo",
 			"label": "Wayfinding Photo",
 			"type": "image",
-			"instructions": "Select an image that will help the patient find the appropriate building from the road.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
+			"instructions": "Select an image that will help the patient find the appropriate building from the road.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -1695,7 +1507,7 @@
 			"name": "location_photo_gallery",
 			"label": "Photo Gallery",
 			"type": "gallery",
-			"instructions": "You may select up to four images.<br />These could include a photo of the interior entrance to the clinic or photos of the clinic in use.<br />The photo orientation must be landscape / horizontal.<br />Minimum dimensions: 1200x675",
+			"instructions": "You may select up to four images.</p><p class='description' style='margin-top: 0.5em;'>These could include a photo of the interior entrance to the clinic or photos of the clinic in use.</p><p class='description' style='margin-top: 0.5em;'>The photo orientation must be landscape / horizontal.</p><p class='description' style='margin-top: 0.5em;'>Minimum dimensions: 1200x675",
 			"required": 0,
 			"conditional_logic": [
 				[
@@ -1753,7 +1565,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_hours_group": {
@@ -1788,7 +1600,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -2081,7 +1893,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -2109,7 +1921,7 @@
 					"name": "location_modified_hours_reason",
 					"label": "Reason for Modified Hours",
 					"type": "wysiwyg",
-					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field.",
+					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field.",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2121,7 +1933,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "100",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2149,7 +1961,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "25",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2175,7 +1987,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "25",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2203,7 +2015,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "25",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2266,11 +2078,11 @@
 							"name": "location_modified_hours_information",
 							"label": "Information",
 							"type": "wysiwyg",
-							"instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />Or you can add information in addition to the structured days and hours.",
+							"instructions": "This field can include a description of the modification if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>Or you can add information in addition to the structured days and hours.",
 							"required": 0,
 							"conditional_logic": 0,
 							"wrapper": {
-								"width": "100",
+								"width": "",
 								"class": "",
 								"id": ""
 							},
@@ -2606,7 +2418,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -2887,7 +2699,7 @@
 						"id": ""
 					},
 					"acfe_permissions": "",
-					"placement": "left",
+					"placement": "top",
 					"endpoint": 0
 				},
 				{
@@ -2923,7 +2735,7 @@
 					"name": "location_telemed_modified_hours_reason",
 					"label": "Reason for Modified Telemedicine Hours",
 					"type": "wysiwyg",
-					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.<br /><br />This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.<br /><br />The date range will be displayed automatically, so that does not have to be included in this field..",
+					"instructions": "Describe the overall reason the hours are being modified. This might be because of a holiday or public health emergency.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>This field can also include a description of the modification, if it is too complex for using the Hours field below. One example of this would be if the telemedicine service was unavailable on one Friday afternoon and the following Monday morning.</p><p class='description' style='margin-top: 0.5em;'></p><p class='description' style='margin-top: 0.5em;'>The date range will be displayed automatically, so that does not have to be included in this field..",
 					"required": 1,
 					"conditional_logic": [
 						[
@@ -2935,7 +2747,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "100",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2963,7 +2775,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "25",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -2989,7 +2801,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "25",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -3017,7 +2829,7 @@
 						]
 					],
 					"wrapper": {
-						"width": "25",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -3213,11 +3025,11 @@
 				}
 			]
 		},
-		"field_location_scheduling_tab": {
-			"key": "field_location_scheduling_tab",
+		"field_location_physician_tab": {
+			"key": "field_location_physician_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> MyChart Scheduling",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3226,15 +3038,15 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
-		"field_location_scheduling_query": {
-			"key": "field_location_scheduling_query",
-			"name": "location_scheduling_query",
-			"type": "true_false",
-			"label": "Enable MyChart Scheduling?",
-			"instructions": "Check with the MyChart team before doing anything here.",
+		"field_location_physicians": {
+			"key": "field_location_physicians",
+			"name": "physician_locations",
+			"type": "relationship",
+			"label": "Providers",
+			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -3242,245 +3054,26 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
-		"field_location_scheduling_title_general": {
-			"key": "field_location_scheduling_title_general",
-			"name": "location_scheduling_title_general",
-			"type": "text",
-			"label": "Appointment Section Title (Optional Override)",
-			"instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. <br />If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. <br />If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_scheduling_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
+			"post_type": [
+				"provider"
 			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "Schedule an Appointment Online",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_location_scheduling_intro_general": {
-			"key": "field_location_scheduling_intro_general",
-			"name": "location_scheduling_intro_general",
-			"type": "textarea",
-			"label": "Appointment Section Introduction (Optional Override)",
-			"instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" <br />The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
-			"maxlength": 221,
-			"rows": 3,
-			"new_lines": ""
-		},
-		"field_location_scheduling_options": {
-			"key": "field_location_scheduling_options",
-			"name": "location_scheduling_options",
-			"type": "repeater",
-			"label": "MyChart Open Scheduling Widget Option(s)",
-			"instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_scheduling_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
+			"taxonomy": [],
+			"filters": [
+				"search"
 			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"collapsed": "field_location_scheduling_title",
-			"min": 1,
-			"max": 0,
-			"layout": "block",
-			"button_label": "Add Scheduling Widget Option",
-			"sub_fields": [
-				{
-					"key": "field_location_scheduling_title",
-					"name": "location_scheduling_title",
-					"type": "text",
-					"label": "Standalone Heading Text",
-					"instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). <br />Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_location_scheduling_intro",
-					"name": "location_scheduling_intro",
-					"type": "textarea",
-					"label": "Standalone Appointment Section Introduction (Optional Override)",
-					"instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. <br />If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"maxlength": 221,
-					"rows": 3,
-					"new_lines": ""
-				},
-				{
-					"key": "field_location_scheduling_item_title_nested",
-					"name": "location_scheduling_item_title_nested",
-					"type": "text",
-					"label": "Nested Heading Text",
-					"instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. <br />Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_location_scheduling_item_intro_nested",
-					"name": "location_scheduling_item_intro_nested",
-					"type": "textarea",
-					"label": "Nested Appointment Section Introduction (Optional)",
-					"instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. If used, this paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field, but should provide a brief overview of any information necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"maxlength": 221,
-					"rows": 3,
-					"new_lines": ""
-				},
-				{
-					"key": "field_location_scheduling_vt",
-					"name": "location_scheduling_vt",
-					"type": "text",
-					"label": "Visit Type (PRC) ID from Epic",
-					"instructions": "A single visit type available for scheduling in this specific widget.",
-					"required": 1,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_location_scheduling_ser",
-					"name": "location_scheduling_ser",
-					"type": "text",
-					"label": "Provider (SER) ID from Epic",
-					"instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). <br />If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_location_scheduling_dep",
-					"name": "location_scheduling_dep",
-					"type": "text",
-					"label": "Department (DEP) ID from Epic",
-					"instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). <br />If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. <br /><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"default_value": "",
-					"placeholder": "",
-					"prepend": "",
-					"append": "",
-					"maxlength": ""
-				},
-				{
-					"key": "field_location_scheduling_fallback",
-					"name": "location_scheduling_fallback",
-					"label": "Fallback Information",
-					"type": "wysiwyg",
-					"instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). <br /> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
-					"required": 0,
-					"conditional_logic": 0,
-					"wrapper": {
-						"width": "",
-						"class": "",
-						"id": ""
-					},
-					"acfe_permissions": "",
-					"default_value": "",
-					"tabs": "all",
-					"toolbar": "basic",
-					"media_upload": 0,
-					"delay": 0
-				}
-			]
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": 0,
+			"acfe_validate": "",
+			"acfe_update": ""
 		},
 		"field_location_medical_tab": {
 			"key": "field_location_medical_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Medical Info",
+			"label": "<i class=\"dashicons-welcome-learn-more dashicons\"><\/i> Related Areas of Expertise",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3489,7 +3082,54 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_expertise": {
+			"key": "field_location_expertise",
+			"name": "location_expertise",
+			"type": "relationship",
+			"label": "Areas of Expertise",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": [
+				"expertise"
+			],
+			"taxonomy": [],
+			"filters": [
+				"search"
+			],
+			"elements": "",
+			"min": "",
+			"max": "",
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "1",
+				"acfe_bidirectional_related": "field_expertise_locations"
+			},
+			"acfe_validate": "",
+			"acfe_update": ""
+		},
+		"field_location_conditions_treatments_tab": {
+			"key": "field_location_conditions_treatments_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions and Treatments",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_conditions_cpt": {
@@ -3550,11 +3190,11 @@
 			"acfe_update": "",
 			"ui": 1
 		},
-		"field_location_expertise": {
-			"key": "field_location_expertise",
-			"name": "location_expertise",
-			"type": "relationship",
-			"label": "Areas of Expertise",
+		"field_location_clinical_resources_tab": {
+			"key": "field_location_clinical_resources_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3563,23 +3203,8 @@
 				"class": "",
 				"id": ""
 			},
-			"post_type": [
-				"expertise"
-			],
-			"taxonomy": [],
-			"filters": [
-				"search"
-			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "1",
-				"acfe_bidirectional_related": "field_expertise_locations"
-			},
-			"acfe_validate": "",
-			"acfe_update": ""
+			"placement": "left",
+			"endpoint": 0
 		},
 		"field_location_clinical_resources": {
 			"key": "field_location_clinical_resources",
@@ -3612,37 +3237,11 @@
 			"acfe_validate": "",
 			"acfe_update": ""
 		},
-		"field_location_service_line": {
-			"key": "field_location_service_line",
-			"name": "location_service_line",
-			"type": "taxonomy",
-			"label": "Service Line(s)",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"taxonomy": "service_line",
-			"field_type": "multi_select",
-			"allow_null": 1,
-			"add_term": 0,
-			"save_terms": 0,
-			"load_terms": 0,
-			"return_format": "id",
-			"acfe_bidirectional": {
-				"acfe_bidirectional_enabled": "0"
-			},
-			"multiple": 0
-		},
-		"field_location_physician_tab": {
-			"key": "field_location_physician_tab",
+		"field_location_scheduling_tab": {
+			"key": "field_location_scheduling_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Providers",
+			"label": "<i class=\"dashicons-calendar-alt dashicons\"><\/i> MyChart Scheduling",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -3651,15 +3250,15 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
-		"field_location_physicians": {
-			"key": "field_location_physicians",
-			"name": "physician_locations",
-			"type": "relationship",
-			"label": "Providers",
-			"instructions": "The providers will display in alphabetical order. If there is more than one row of providers, the first row will display before prompting the user to load more.",
+		"field_location_scheduling_query": {
+			"key": "field_location_scheduling_query",
+			"name": "location_scheduling_query",
+			"type": "true_false",
+			"label": "Enable MyChart Scheduling?",
+			"instructions": "Check with the MyChart team before doing anything here.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -3667,20 +3266,322 @@
 				"class": "",
 				"id": ""
 			},
-			"post_type": [
-				"provider"
+			"message": "",
+			"default_value": 0,
+			"ui": 1,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		"field_location_scheduling_title_general": {
+			"key": "field_location_scheduling_title_general",
+			"name": "location_scheduling_title_general",
+			"type": "text",
+			"label": "Appointment Section Title (Optional Override)",
+			"instructions": "If there are multiple scheduling widgets, this will define the text used in the main section heading. If you do not define a value here, \"Schedule an Appointment Online\" will be used. </p><p class='description' style='margin-top: 0.5em;'>If you define a value here, use a very short phrase that makes the purpose of the online scheduling section clear to the user. Do not just use the name of a condition or treatment. </p><p class='description' style='margin-top: 0.5em;'>If there is only one scheduling widget, the heading will be defined by a value from within the <em>MyChart Open Scheduling Widget(s)</em> repeater instead.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_scheduling_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
 			],
-			"taxonomy": [],
-			"filters": [
-				"search"
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "Schedule an Appointment Online",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		"field_location_scheduling_intro_general": {
+			"key": "field_location_scheduling_intro_general",
+			"name": "location_scheduling_intro_general",
+			"type": "textarea",
+			"label": "Appointment Section Introduction (Optional Override)",
+			"instructions": "This paragraph introduces the online scheduling section. If you do not define a value here, it will display \"Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.\" </p><p class='description' style='margin-top: 0.5em;'>The paragraph should provide brief general information about MyChart open scheduling. There is a 221 character limit.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "Use your UAMS Health MyChart account to schedule an appointment at this clinic. If you are not a MyChart user, you can continue as a guest.",
+			"maxlength": 221,
+			"rows": 3,
+			"new_lines": ""
+		},
+		"field_location_scheduling_options": {
+			"key": "field_location_scheduling_options",
+			"name": "location_scheduling_options",
+			"type": "repeater",
+			"label": "MyChart Open Scheduling Widget Option(s)",
+			"instructions": "Define the information for each specific open scheduling widget. One or more must be defined.",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_scheduling_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
 			],
-			"elements": "",
-			"min": "",
-			"max": "",
-			"return_format": "id",
-			"acfe_bidirectional": 0,
-			"acfe_validate": "",
-			"acfe_update": ""
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "field_location_scheduling_title",
+			"min": 1,
+			"max": 0,
+			"layout": "block",
+			"button_label": "Add Scheduling Widget Option",
+			"sub_fields": [
+				{
+					"key": "field_location_scheduling_title",
+					"name": "location_scheduling_title",
+					"type": "text",
+					"label": "Standalone Heading Text",
+					"instructions": "If this is the only scheduling widget, this value will replace the main section heading (defined by <em>Appointment Section Title</em>). </p><p class='description' style='margin-top: 0.5em;'>Use a very short phrase that makes the purpose of this specific scheduling widget clear to the user. Do not just use the name of a condition or treatment.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_location_scheduling_intro",
+					"name": "location_scheduling_intro",
+					"type": "textarea",
+					"label": "Standalone Appointment Section Introduction (Optional Override)",
+					"instructions": "If this is the only scheduling widget, you can define a value here to replace the main section introduction (defined by <em>Appointment Section Introduction</em>) if that general introduction does not adequately introduce this specific widget. </p><p class='description' style='margin-top: 0.5em;'>If used, this paragraph should provide general information about MyChart open scheduling and a brief overview of anything necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"maxlength": 221,
+					"rows": 3,
+					"new_lines": ""
+				},
+				{
+					"key": "field_location_scheduling_item_title_nested",
+					"name": "location_scheduling_item_title_nested",
+					"type": "text",
+					"label": "Nested Heading Text",
+					"instructions": "If this is one of multiple scheduling widgets, this field defines the text of the heading immediately preceding this specific scheduling widget. This heading will be nested below the main section heading (defined by <em>Appointment Section Title</em>) in the heading outline. This will also set the label of the multiple choice option the user can select to display this specific scheduling widget. </p><p class='description' style='margin-top: 0.5em;'>Use a very short phrase, visit type name or treatment name that makes the purpose of this specific scheduling widget clear to the user.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_location_scheduling_item_intro_nested",
+					"name": "location_scheduling_item_intro_nested",
+					"type": "textarea",
+					"label": "Nested Appointment Section Introduction (Optional)",
+					"instructions": "If this is one of multiple scheduling widgets, this field defines the paragraph introducing this specific scheduling widget. If used, this paragraph will not need to cover information addressed in the <em>Appointment Section Introduction</em> field, but should provide a brief overview of any information necessary for users to know about this specific scheduling widget. There is a 221 character limit.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"maxlength": 221,
+					"rows": 3,
+					"new_lines": ""
+				},
+				{
+					"key": "field_location_scheduling_vt",
+					"name": "location_scheduling_vt",
+					"type": "text",
+					"label": "Visit Type (PRC) ID from Epic",
+					"instructions": "A single visit type available for scheduling in this specific widget.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_location_scheduling_ser",
+					"name": "location_scheduling_ser",
+					"type": "text",
+					"label": "Provider (SER) ID from Epic",
+					"instructions": "ID for one or more providers available for scheduling in this specific widget. Separate multiple values with a comma (\",\"). </p><p class='description' style='margin-top: 0.5em;'>If you specify a department, you <em>can</em> omit the list of provider IDs so all providers who are enabled for open scheduling in that department with that visit type are automatically included in the widget. </p><p class='description' style='margin-top: 0.5em;'><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_location_scheduling_dep",
+					"name": "location_scheduling_dep",
+					"type": "text",
+					"label": "Department (DEP) ID from Epic",
+					"instructions": "ID for one or more departments available for scheduling in this widget. Separate multiple values with a comma (\",\"). </p><p class='description' style='margin-top: 0.5em;'>If you specify a provider, you can omit the list of department IDs so all departments who are enabled for open scheduling with that provider and visit type are automatically included in the widget. </p><p class='description' style='margin-top: 0.5em;'><strong>Be sure to include an ID for either provider or department (or both). Otherwise, <em>all</em> providers departments with that visit type will be displayed.</strong>",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_location_scheduling_fallback",
+					"name": "location_scheduling_fallback",
+					"label": "Fallback Information",
+					"type": "wysiwyg",
+					"instructions": "This is an optional paragraph that appears after this specific scheduling widget where you can present users an alternative scheduling options. Keep it as brief as possible, limiting it to one to three sentences in a single paragraph. Add tel links to any phone numbers (href=\"tel:501-555-6162\"). </p><p class='description' style='margin-top: 0.5em;'> Example Paragraph: \"If you are unable to register for your appointment using the method above, call 501-555-6162 to schedule an appointment. This line is staffed Monday thru Friday from 10 a.m. – 5:30 p.m. If the lines are busy, you will be prompted to leave a voicemail.\"",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"default_value": "",
+					"tabs": "all",
+					"toolbar": "basic",
+					"media_upload": 0,
+					"delay": 0
+				}
+			]
+		},
+		"field_location_external_website_tab": {
+			"key": "field_location_external_website_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-admin-links dashicons\"><\/i> External Website",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_link_message": {
+			"key": "field_link_message",
+			"name": "",
+			"type": "message",
+			"label": "",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<p>Include a title and URL for a link to an external non-UAMS website if the location is a non-UAMS location where our providers practice.<\/p><p>This link should only be used when it is critical to the patient experience (e.g., for becoming a patient, making an appointment, receiving follow-up information). This must not be used as a link to secondary things like a social media account.<\/p>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_url": {
+			"key": "field_location_url",
+			"name": "location_url",
+			"type": "link",
+			"label": "Non-UAMS URL",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"endpoint": 0
+		},
+		"field_location_web_name": {
+			"key": "field_location_web_name",
+			"name": "location_web_name",
+			"type": "text",
+			"label": "Non-UAMS Website Name",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_url",
+						"operator": "!=empty"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
 		},
 		"field_location_alert_tab": {
 			"key": "field_location_alert_tab",
@@ -3695,7 +3596,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_current_alert": {
@@ -3935,7 +3836,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_closing": {
@@ -4146,7 +4047,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_gmb_exclude": {
@@ -4206,7 +4107,7 @@
 			"name": "location_gmb_cat",
 			"label": "Category",
 			"type": "taxonomy",
-			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.<br />For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
+			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
 			"required": "1",
 			"conditional_logic": [
 				[
@@ -4557,7 +4458,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_schema_localbusiness": {
@@ -4757,7 +4658,7 @@
 				"class": "",
 				"id": ""
 			},
-			"placement": "top",
+			"placement": "left",
 			"endpoint": 0
 		},
 		"field_location_address_2": {
@@ -4788,7 +4689,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "60",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -4807,7 +4708,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "60",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -4826,7 +4727,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "60",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -4956,6 +4857,216 @@
 			"ui": 1,
 			"ui_on_text": "",
 			"ui_off_text": ""
+		},
+		"field_location_contact_message": {
+			"key": "field_location_contact_message",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Contact Information<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_clinic_phone_query_spacer": {
+			"key": "field_location_clinic_phone_query_spacer",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_ac_query",
+						"operator": "==",
+						"value": "1"
+					}
+				],
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_appointment_phone_query_spacer": {
+			"key": "field_location_appointment_phone_query_spacer",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_ac_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_phone_spacer": {
+			"key": "field_phone_spacer",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointment_phone_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_about_message": {
+			"key": "field_location_about_message",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>\"About\" Section<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_spacer_2": {
+			"key": "field_location_spacer_2",
+			"label": "hidden",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_prescription_query",
+						"operator": "==",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_spacer_3": {
+			"key": "field_location_spacer_3",
+			"label": "hidden",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_prescription_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"message": "&nbsp;",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_location_appointment_message": {
+			"key": "field_location_appointment_message",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>\"Appointment Information\" Section<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
+		},
+		"field_details_other_message": {
+			"key": "field_details_other_message",
+			"name": "",
+			"type": "message",
+			"label": "",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "<h3>Other Details<\/h3>",
+			"new_lines": "",
+			"esc_html": 0
 		}
 	},
 	"modified": false
