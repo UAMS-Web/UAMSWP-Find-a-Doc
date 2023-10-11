@@ -25830,6 +25830,10 @@
 
 						uamswp_fad_schema_subtypes($treatment_valid_types);
 
+					// Add fallback type to the list
+
+						$treatment_valid_types[] = 'MedicalEntity';
+
 				// List of valid properties for each type
 
 					// Base array
