@@ -468,7 +468,25 @@
 			"type": "relationship",
 			"instructions": "Select any medical conditions for which this therapy is used to prevent the initial occurrence of the condition.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -497,7 +515,25 @@
 			"type": "relationship",
 			"instructions": "Select any medical conditions for which this therapy is used to prevent reoccurrence after an initial episode of the condition.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -526,7 +562,25 @@
 			"type": "relationship",
 			"instructions": "Select any medical conditions that can possibly be addressed with this therapy.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_medicalentity_subtype_availableservice",
+						"operator": "==",
+						"value": "MedicalProcedure"
+					},
+					{
+						"field": "field_schema_medicalprocedure_subtype",
+						"operator": "==",
+						"value": "TherapeuticProcedure"
+					},
+					{
+						"field": "field_schema_therapeuticprocedure_subtype",
+						"operator": "==",
+						"value": "MedicalTherapy"
+					}
+				]
+			],	
 			"wrapper": {
 				"width": "",
 				"class": "",
