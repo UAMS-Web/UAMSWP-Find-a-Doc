@@ -23178,7 +23178,7 @@
 
 									}
 
-								// translator [WIP]
+								// translator [excluded]
 
 									/* 
 									 * Organization or person who adapts a creative work to different languages, 
@@ -23189,6 +23189,10 @@
 									 * 
 									 *     - Organization
 									 *     - Person
+									 * 
+									 * We will not be identifying either the organization or the person who translates 
+									 * the clinical resources into different languages and so this schema property 
+									 * will not be included.
 									 */
 
 								// uploadDate (CreativeWork only) [WIP]
