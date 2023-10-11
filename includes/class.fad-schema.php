@@ -22768,7 +22768,7 @@
 									 *     - URL
 									 */
 
-								// size [WIP]
+								// size [excluded]
 
 									/* 
 									 * A standardized size of a product or creative work, specified either through a 
@@ -22783,6 +22783,9 @@
 									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
 									 * feedback and adoption from applications and websites can help improve their 
 									 * definitions.
+									 * 
+									 * Standardized sizes are not relevant to clinical resources or their webpages and 
+									 * so this schema property will not be included.
 									 */
 
 								// speakable
