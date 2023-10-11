@@ -7872,7 +7872,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$provider_condition = uamswp_fad_schema_medicalcondition(
+													$provider_condition = uamswp_fad_schema_condition(
 														$provider_condition_list, // array // Required // List of IDs of the MedicalCondition items
 														$provider_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -24417,7 +24417,7 @@
 
 	// Conditions (MedicalCondition)
 
-		function uamswp_fad_schema_medicalcondition(
+		function uamswp_fad_schema_condition(
 			array $repeater, // array // Required // List of IDs of the MedicalCondition items
 			string $page_url, // string // Required // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -27298,7 +27298,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$treatment_usedToDiagnose = uamswp_fad_schema_medicalcondition(
+													$treatment_usedToDiagnose = uamswp_fad_schema_condition(
 														$treatment_usedToDiagnose_relationship, // array // Required // List of IDs of the MedicalCondition items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
