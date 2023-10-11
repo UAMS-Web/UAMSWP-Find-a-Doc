@@ -1288,8 +1288,8 @@
 
 						// Eliminate PHP errors / reset variables
 
-							$hospital_term = '';
-							$hospital_location = '';
+							$hospital_term = null;
+							$hospital_location = null;
 
 						// Get the Hospital Affiliation term from the ID
 
