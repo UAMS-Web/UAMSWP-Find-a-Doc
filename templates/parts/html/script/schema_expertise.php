@@ -41,7 +41,7 @@ $page_id = get_the_ID();
 
 	// Area of expertise profile as MedicalEntity
 
-		if ( isset($schema_expertise_combined['MedicalWebPage']) ) {
+		if ( isset($schema_expertise_combined['MedicalEntity']) ) {
 
 			$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalEntity'];
 
