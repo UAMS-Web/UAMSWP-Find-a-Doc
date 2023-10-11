@@ -7739,7 +7739,9 @@
 
 													$provider_expertise = uamswp_fad_schema_expertise(
 														$provider_expertise_list, // List of IDs of the area of expertise items
-														$provider_url, // Page URL
+														'', // string // Required // Page or fake subpage URL
+														true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+														'', // string // Required // Fake subpage slug
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 														( $nesting_level + 1 ) // Nesting level within the main schema
 													);
@@ -18237,16 +18239,18 @@
 	// Areas of expertise (MedicalWebPage; MedicalEntity)
 
 		function uamswp_fad_schema_expertise(
-			array $repeater, // List of IDs of the area of expertise items
-			string $page_url, // Page URL
+			array $repeater, // array // Required // List of IDs of the area of expertise items
+			string $expertise_url, // string // Required // Page or fake subpage URL
+			bool $ontology_type, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+			string $current_fpage, // string // Required // Fake subpage slug
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
-			int $nesting_level = 1, // Nesting level within the main schema
-			int $MedicalWebPage_i = 1, // Iteration counter for area of expertise-as-MedicalWebPage
-			int $MedicalEntity_i = 1, // Iteration counter for area of expertise-as-MedicalEntity
-			array $expertise_fields = array(), // Pre-existing field values array so duplicate calls can be avoided
-			array $MedicalWebPage_list = array(), // Pre-existing list array for area of expertise-as-MedicalWebPage to which to add additional items
-			array $MedicalEntity_list = array(), // Pre-existing list array for area of expertise-as-MedicalEntity to which to add additional items
-			array $expertise_list = array() // Pre-existing list array for combined area of expertise schema to which to add additional items
+			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
+			int $MedicalWebPage_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalWebPage
+			int $MedicalEntity_i = 1, // int // Optional //  Iteration counter for area of expertise-as-MedicalEntity
+			array $expertise_fields = array(), // array // Optional // Pre-existing field values array so duplicate calls can be avoided
+			array $MedicalWebPage_list = array(), // array // Optional // Pre-existing list array for area of expertise-as-MedicalWebPage to which to add additional items
+			array $MedicalEntity_list = array(), // array // Optional // Pre-existing list array for area of expertise-as-MedicalEntity to which to add additional items
+			array $expertise_list = array() // array // Optional // Pre-existing list array for combined area of expertise schema to which to add additional items
 		) {
 
 			if ( !empty($repeater) ) {
@@ -18284,7 +18288,7 @@
 						// Retrieve the value of the item transient
 
 							uamswp_fad_get_transient(
-								'item_' . $entity, // Required // String added to transient name for disambiguation.
+								'item_' . $entity . ( $current_fpage ? '_' . $current_fpage : ''), // Required // String added to transient name for disambiguation.
 								$expertise_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 								__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 							);
@@ -18423,7 +18427,11 @@
 
 							// Get ontology type
 
-								$ontology_type = get_field( 'expertise_type', $entity ) ?? true; // Check if 'expertise_type' is not null, and if so, set value to true
+								if ( !isset($ontology_type) ) {
+
+									$ontology_type = get_field( 'expertise_type', $entity ) ?? true; // Check if 'expertise_type' is not null, and if so, set value to true
+
+								}
 
 							// If the page is not an ontology type, skip to the next iteration
 
@@ -18441,8 +18449,17 @@
 									$nesting_level == 0
 								) {
 
-									$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
-									$fpage_query = $current_fpage ? true : false;
+									if ( !isset($current_fpage) ) {
+
+										$current_fpage = get_query_var( 'fpage' ) ?? ''; // Fake subpage slug
+
+									}
+
+									if ( !isset($fpage_query) ) {
+
+										$fpage_query = $current_fpage ? true : false;
+
+									}
 
 								}
 
@@ -18460,11 +18477,27 @@
 
 									// Get values
 
-										if ( !isset($expertise_url) ) {
+										if (
+											!isset($expertise_url)
+											||
+											empty($expertise_url)
+										) {
 
 											$expertise_url = get_permalink($entity);
 											$expertise_url = $expertise_url ? user_trailingslashit( $expertise_url ) : '';
 
+											if ( $fpage_query ) {
+
+												if ( !isset($fpage_url) ) {
+
+													$fpage_url = !empty($current_fpage) ? trailingslashit($expertise_url) . user_trailingslashit($current_fpage) : $expertise_url; // Fake subpage URL
+	
+												}
+		
+												$expertise_url = $fpage_url;
+
+											}
+		
 										}
 
 									// Pass the values to common schema properties template part
@@ -20067,7 +20100,7 @@
 							// Set/update the value of the item transient
 
 								uamswp_fad_set_transient(
-									'item_' . $entity, // Required // String added to transient name for disambiguation.
+									'item_' . $entity . ( $current_fpage ? '_' . $current_fpage : ''), // Required // String added to transient name for disambiguation.
 									$expertise_item, // Required // Transient value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 									__FUNCTION__ // Optional // Function name added to transient name for disambiguation.
 								);

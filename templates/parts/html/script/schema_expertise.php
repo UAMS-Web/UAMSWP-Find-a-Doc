@@ -18,10 +18,15 @@ $page_id = get_the_ID();
 
 	$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 	$expertise_schema_fields = $expertise_schema_fields ?? array();
+	$ontology_type = $ontology_type ?? true;
+	$current_fpage = $current_fpage ?? '';
+	$fpage_url = $fpage_url ?? '';
 
 	$schema_expertise_combined = uamswp_fad_schema_expertise(
-		array($page_id), // List of IDs of the area of expertise items
-		$page_url, // Page URL
+		array($page_id), // array // Required // List of IDs of the area of expertise items
+		$fpage_url ?: $page_url, // string // Required // Page or fake subpage URL
+		$ontology_type, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+		$current_fpage, // string // Required // Fake subpage slug
 		$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema
 		0, // Nesting level within the main schema
 		1, // Iteration counter for area of expertise-as-MedicalWebPage

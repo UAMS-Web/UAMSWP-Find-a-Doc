@@ -234,7 +234,9 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 				$page_id,
 				$page_url,
 				$hide_medical_ontology,
-				$ontology_type
+				$ontology_type,
+				$current_fpage,
+				$fpage_url
 			) {
 				include( UAMS_FAD_PATH . '/templates/parts/html/script/schema_expertise.php' );
 			}, 18 );
