@@ -58,4 +58,15 @@
 			include( UAMS_FAD_PATH . '/templates/parts/html/section/list/location.php' );
 		}, 22 );
 
+	// Construct the Schema Data Script Tag
+
+		add_action( 'genesis_after_entry', function() use (
+			$page_id,
+			$page_url,
+			$hide_medical_ontology,
+			$ontology_type
+		) {
+			include( UAMS_FAD_PATH . '/templates/parts/html/script/schema_expertise.php' );
+		}, 18 );
+
 genesis();
