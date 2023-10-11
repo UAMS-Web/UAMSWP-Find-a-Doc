@@ -152,7 +152,7 @@ $page_id = get_the_ID();
 
 				$node_identifier_list = $node_identifier_list ?? array(); // List of node identifiers (@id) already defined in the schema
 
-				$provider_related_clinical_resource = uamswp_fad_schema_creativework(
+				$provider_related_clinical_resource = uamswp_fad_schema_clinical_resource(
 					$clinical_resources, // List of IDs of the clinical resource items
 					$page_url, // Page URL
 					$node_identifier_list, // array // Optional // List of node identifiers (@id) already defined in the schema

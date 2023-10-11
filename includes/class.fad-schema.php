@@ -7808,7 +7808,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$provider_clinical_resource = uamswp_fad_schema_creativework(
+													$provider_clinical_resource = uamswp_fad_schema_clinical_resource(
 														$provider_clinical_resource_list, // List of IDs of the clinical resource items
 														$provider_url, // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -20174,7 +20174,7 @@
 
 	// Clinical resources (MedicalWebPage; CreativeWork)
 
-		function uamswp_fad_schema_creativework(
+		function uamswp_fad_schema_clinical_resource(
 			array $repeater, // List of IDs of the clinical resource items
 			string $page_url, // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
