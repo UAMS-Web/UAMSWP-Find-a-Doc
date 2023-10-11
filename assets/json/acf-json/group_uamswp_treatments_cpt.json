@@ -493,7 +493,7 @@
 				"id": ""
 			},
 			"post_type": [
-				"treatment"
+				"condition"
 			],
 			"taxonomy": "",
 			"filters": [
@@ -540,7 +540,7 @@
 				"id": ""
 			},
 			"post_type": [
-				"treatment"
+				"condition"
 			],
 			"taxonomy": "",
 			"filters": [
@@ -587,7 +587,7 @@
 				"id": ""
 			},
 			"post_type": [
-				"treatment"
+				"condition"
 			],
 			"taxonomy": "",
 			"filters": [
