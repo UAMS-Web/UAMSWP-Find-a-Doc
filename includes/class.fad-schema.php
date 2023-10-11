@@ -7939,7 +7939,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$provider_availableService = uamswp_fad_schema_service(
+													$provider_availableService = uamswp_fad_schema_treatment(
 														$provider_treatment, // array // Required // List of IDs of the service items
 														$provider_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -15761,7 +15761,7 @@
 
 												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-												$location_availableService = uamswp_fad_schema_service(
+												$location_availableService = uamswp_fad_schema_treatment(
 													$location_treatments, // array // Required // List of IDs of the service items
 													$location_url, // string // Required // Page URL
 													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -25511,7 +25511,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$condition_possibleTreatment = uamswp_fad_schema_service(
+													$condition_possibleTreatment = uamswp_fad_schema_treatment(
 														$condition_possibleTreatment_relationship, // array // Required // List of IDs of the service items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -25571,7 +25571,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$condition_primaryPrevention = uamswp_fad_schema_service(
+													$condition_primaryPrevention = uamswp_fad_schema_treatment(
 														$condition_primaryPrevention_relationship, // array // Required // List of IDs of the service items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -25631,7 +25631,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$condition_secondaryPrevention = uamswp_fad_schema_service(
+													$condition_secondaryPrevention = uamswp_fad_schema_treatment(
 														$condition_secondaryPrevention_relationship, // array // Required // List of IDs of the service items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -25704,7 +25704,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$condition_typicalTest = uamswp_fad_schema_service(
+													$condition_typicalTest = uamswp_fad_schema_treatment(
 														$condition_typicalTest_relationship, // array // Required // List of IDs of the service items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -25769,7 +25769,7 @@
 
 	// Treatments and procedures (MedicalProcedure, MedicalTest)
 
-		function uamswp_fad_schema_service(
+		function uamswp_fad_schema_treatment(
 			array $repeater, // array // Required // List of IDs of the service items
 			string $page_url, // string // Required // Page URL
 			array &$node_identifier_list = array(), // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -26699,7 +26699,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$treatment_duplicateTherapy = uamswp_fad_schema_service(
+													$treatment_duplicateTherapy = uamswp_fad_schema_treatment(
 														$treatment_duplicateTherapy_relationship, // array // Required // List of IDs of the service items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -27183,7 +27183,7 @@
 
 													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-													$treatment_subTest = uamswp_fad_schema_service(
+													$treatment_subTest = uamswp_fad_schema_treatment(
 														$treatment_subTest_relationship, // array // Required // List of IDs of the service items
 														$page_url, // string // Required // Page URL
 														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
