@@ -1876,10 +1876,10 @@
 																		<dd><?php echo $certification_name; ?></dd>
 																		<?php
 
-																	} elseif ( $certification_term_name ) {
+																	} elseif ( $certification_board_name ) {
 
 																		?>
-																		<dt><?php echo $certification_term_name; ?></dt>
+																		<dt><?php echo $certification_board_name; ?></dt>
 																		<?php
 
 																	}
