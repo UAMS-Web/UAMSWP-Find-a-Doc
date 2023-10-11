@@ -32,11 +32,19 @@ $page_id = get_the_ID();
 
 	// location profile as MedicalWebPage
 
-		$schema_location['@graph'][] = $schema_location_combined['MedicalWebPage'];
+		if ( isset($schema_location_combined['MedicalWebPage']) ) {
+
+			$schema_location['@graph'][] = $schema_location_combined['MedicalWebPage'];
+
+		}
 
 	// location profile as LocalBusiness
 
-		$schema_location['@graph'][] = $schema_location_combined['LocalBusiness'];
+		if ( isset($schema_location_combined['LocalBusiness']) ) {
+
+			$schema_location['@graph'][] = $schema_location_combined['LocalBusiness'];
+
+		}
 
 // Construct the schema JSON script tag
 

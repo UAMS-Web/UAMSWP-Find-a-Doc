@@ -33,11 +33,19 @@ $page_id = get_the_ID();
 
 	// Area of expertise profile as MedicalWebPage
 
-		$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalWebPage'];
+		if ( isset($schema_expertise_combined['MedicalWebPage']) ) {
+
+			$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalWebPage'];
+
+		}
 
 	// Area of expertise profile as MedicalEntity
 
-		$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalEntity'];
+		if ( isset($schema_expertise_combined['MedicalWebPage']) ) {
+
+			$schema_expertise['@graph'][] = $schema_expertise_combined['MedicalEntity'];
+
+		}
 
 // Construct the schema JSON script tag
 

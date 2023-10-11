@@ -33,15 +33,27 @@ $page_id = get_the_ID();
 
 	// Provider profile as MedicalWebPage
 
-		$schema_provider['@graph'][] = $schema_provider_combined['MedicalWebPage'];
+		if ( isset($schema_provider_combined['MedicalWebPage']) ) {
+
+			$schema_provider['@graph'][] = $schema_provider_combined['MedicalWebPage'];
+
+		}
 
 	// Provider profile as MedicalBusiness
 
-		$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
+		if ( isset($schema_provider_combined['MedicalBusiness']) ) {
+
+			$schema_provider['@graph'][] = $schema_provider_combined['MedicalBusiness'];
+
+		}
 
 	// Provider profile as Person
 
-		$schema_provider['@graph'][] = $schema_provider_combined['Person'];
+		if ( isset($schema_provider_combined['Person']) ) {
+
+			$schema_provider['@graph'][] = $schema_provider_combined['Person'];
+
+		}
 
 // Construct the schema JSON script tag
 
