@@ -25035,6 +25035,14 @@
 									 * condition schema and so it will not be included.
 									 */
 
+									// Unset value defined in common properties
+
+									if ( isset($condition_item_MedicalCondition['description']) ) {
+
+										unset($condition_item_MedicalCondition['description']);
+
+									}
+
 								// differentialDiagnosis [excluded]
 
 									/* 
@@ -26501,6 +26509,14 @@
 									 * This schema property is beyond the scope of what is being included for 
 									 * treatment schema and so it will not be included.
 									 */
+
+									// Unset value defined in common properties
+
+										if ( isset($treatment_item_Service['description']) ) {
+
+											unset($treatment_item_Service['description']);
+
+										}
 
 								// disambiguatingDescription [excluded]
 
