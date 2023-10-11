@@ -876,6 +876,17 @@
 
 				}, 22 );
 
+			// Construct the Schema Data Script Tag
+	
+				add_action( 'genesis_after_entry', function() use (
+					$page_id,
+					$page_url,
+					$hide_medical_ontology,
+					$ontology_type
+				) {
+					include( UAMS_FAD_PATH . '/templates/parts/html/script/schema_clinical-resource.php' );
+				}, 24 );
+
 	// FOOTER
 
 		// Remove the post-related content and markup from the entry footer
