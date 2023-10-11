@@ -2924,7 +2924,7 @@
 			if ( $schema_common_thumbnailUrl_id ) {
 
 				$schema_common_thumbnailUrl = uamswp_fad_schema_imageobject_thumbnails(
-					$schema_common_url, // URL of entity with which the image is associated
+					$schema_common_url ?? '', // URL of entity with which the image is associated
 					($nesting_level + 1), // Nesting level within the main schema
 					'16:9', // Aspect ratio to use if only one image is included // enum('1:1', '3:4', '4:3', '16:9', 'full')
 					'thumbnailUrl', // Base fragment identifier
