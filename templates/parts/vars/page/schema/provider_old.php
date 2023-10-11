@@ -642,7 +642,6 @@ $page_id = get_the_ID();
 
 				$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
 					$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
-					$page_url, // string // Required // Page URL
 					1, // int // Optional // Nesting level within the main schema
 					$provider_hospitalAffiliation // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 				);

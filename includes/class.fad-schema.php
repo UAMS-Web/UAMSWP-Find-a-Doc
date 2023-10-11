@@ -1261,7 +1261,6 @@
 
 		function uamswp_fad_schema_hospital_affiliation(
 			array $hospital_affiliation, // array // Required // Hospital affiliation ID values
-			string $page_url, // string // Required // Page URL
 			int $nesting_level = 1, // int // Optional // Nesting level within the main schema
 			array $schema_hospital_affiliation = array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 		) {
@@ -1325,7 +1324,7 @@
 
 								$schema = uamswp_fad_schema_location(
 									array($hospital_location), // List of IDs of the location items
-									$page_url, // Page URL
+									'', // Page URL
 									$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
 									$nesting_level, // Nesting level within the main schema
 									1, // Iteration counter for location-as-MedicalWebPage
@@ -8828,7 +8827,6 @@
 
 																	$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
 																		$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
-																		$provider_url, // string // Required // Page URL
 																		( $nesting_level + 1 ), // Nesting level within the main schema
 																		array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 																	);
@@ -10011,7 +10009,6 @@
 
 																$provider_hospitalAffiliation = uamswp_fad_schema_hospital_affiliation(
 																	$provider_hospitalAffiliation_multiselect, // array // Required // Hospital affiliation ID values
-																	$provider_url, // string // Required // Page URL
 																	( $nesting_level + 1 ), // Nesting level within the main schema
 																	array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 																);
