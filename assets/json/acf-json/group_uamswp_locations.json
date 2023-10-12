@@ -4541,9 +4541,9 @@
 			"acfe_clone_modal": 0,
 			"acfe_settings": ""
 		},
-		"field_location_schema_npi_query": {
-			"key": "field_location_schema_npi_query",
-			"name": "location_schema_npi_query",
+		"field_location_npi_query": {
+			"key": "field_location_npi_query",
+			"name": "location_npi_query",
 			"label": "Does this location have a National Provider Identifier (NPI)?",
 			"type": "button_group",
 			"instructions": "",
@@ -4564,9 +4564,9 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_location_schema_npi": {
-			"key": "field_location_schema_npi",
-			"name": "location_schema_npi",
+		"field_location_npi": {
+			"key": "field_location_npi",
+			"name": "location_npi",
 			"type": "number",
 			"label": "National Provider Identifier (NPI)",
 			"instructions": "This value can be found by searching for the location in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
@@ -4574,7 +4574,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_schema_npi_query",
+						"field": "field_location_npi_query",
 						"operator": "==",
 						"value": "1"
 					}
@@ -4593,9 +4593,9 @@
 			"max": 9999999999,
 			"step": 1
 		},
-		"field_location_schema_va_query": {
-			"key": "field_location_schema_va_query",
-			"name": "location_schema_va_query",
+		"field_location_va_query": {
+			"key": "field_location_va_query",
+			"name": "location_va_query",
 			"label": "Is this location a United States Department of Veterans Affairs facility?",
 			"type": "button_group",
 			"instructions": "",
@@ -4616,9 +4616,9 @@
 			"layout": "horizontal",
 			"return_format": "value"
 		},
-		"field_location_schema_va_station_id": {
-			"key": "field_location_schema_va_station_id",
-			"name": "location_schema_va_station_id",
+		"field_location_va_station_id": {
+			"key": "field_location_va_station_id",
+			"name": "location_va_station_id",
 			"type": "text",
 			"label": "United States Department of Veterans Affairs Station ID",
 			"instructions": "This value can be found by searching for the location at <a href='https://www.va.gov/directory/guide/allstate.asp' target='_blank'>https://www.va.gov/directory/guide/allstate.asp</a>. Click the link for the appropriate state and then click the link for \"View Addresses.\"",
@@ -4626,7 +4626,7 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_location_schema_va_query",
+						"field": "field_location_va_query",
 						"operator": "==",
 						"value": "1"
 					}
@@ -4643,10 +4643,10 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_location_schema_hospital_aha_id": {
-			"key": "field_location_schema_hospital_aha_id",
+		"field_location_hospital_aha_id": {
+			"key": "field_location_hospital_aha_id",
 			"label": "American Hospital Association Hospital Identifier (AHAID) for the Hospital",
-			"name": "location_schema_hospital_aha_id",
+			"name": "location_hospital_aha_id",
 			"type": "text",
 			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
 			"required": 1,
@@ -4670,10 +4670,10 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_location_schema_hospital_aha_name": {
-			"key": "field_location_schema_hospital_aha_name",
+		"field_location_hospital_aha_name": {
+			"key": "field_location_hospital_aha_name",
 			"label": "Name of the Hospital on the American Hospital Association Hospital Identifier (AHAID) Record",
-			"name": "location_schema_hospital_aha_name",
+			"name": "location_hospital_aha_name",
 			"type": "text",
 			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
 			"required": 1,
@@ -4697,10 +4697,10 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_location_schema_hospital_ccn_id": {
-			"key": "field_location_schema_hospital_ccn_id",
+		"field_location_hospital_ccn_id": {
+			"key": "field_location_hospital_ccn_id",
 			"label": "Centers for Medicare &amp; Medicaid Services Certification Number (CCN) for the Hospital",
-			"name": "location_schema_hospital_ccn_id",
+			"name": "location_hospital_ccn_id",
 			"type": "text",
 			"instructions": "This information can be found in the hospital profile at <a href='https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool' target='_blank'>https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool.</a>",
 			"required": 1,
@@ -4724,10 +4724,10 @@
 			"append": "",
 			"maxlength": ""
 		},
-		"field_location_schema_hospital_ccn_name": {
-			"key": "field_location_schema_hospital_ccn_name",
+		"field_location_hospital_ccn_name": {
+			"key": "field_location_hospital_ccn_name",
 			"label": "Name of the Hospital on the Centers for Medicare &amp; Medicaid Services Certification Number (CRN) Record",
-			"name": "location_schema_hospital_ccn_name",
+			"name": "location_hospital_ccn_name",
 			"type": "text",
 			"instructions": "This information can be found in the hospital profile at <a href='https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool' target='_blank'>https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool.</a>",
 			"required": 1,
