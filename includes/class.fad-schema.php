@@ -2405,6 +2405,55 @@
 				
 			}
 
+		// Add data to an array defining schema data for Google customer ID (CID)
+
+			function uamswp_fad_schema_propertyvalue_google_cid(
+				$google_cid, // mixed // Required // Google customer ID
+				array $list = array() // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+			) {
+
+				if ( !$google_cid ) {
+
+					return $list;
+
+				}
+
+				if ( is_array($google_cid) ) {
+
+					// If there is only one item, flatten the multi-dimensional array by one step
+
+						uamswp_fad_flatten_multidimensional_array($google_cid);
+
+				}
+
+				$list = uamswp_fad_schema_propertyvalue(
+					array(
+						'Google Ads customer ID',
+						'Google Ads CID',
+						'Google Maps customer ID',
+						'Google Maps CID',
+						'Google CID',
+						'CID'
+					), // mixed // Optional // alternateName property value
+					null, // string // Optional // description property value
+					null, // int // Optional // maxValue property value
+					null, // mixed // Optional // measurementMethod property value
+					null, // mixed // Optional // measurementTechnique property value
+					null, // int // Optional // minValue property value
+					'Google customer ID', // string // Optional // name property value
+					'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
+					null, // string // Optional // unitCode property value
+					null, // string // Optional // unitText property value
+					null, // string // Optional // url property value
+					$google_cid, // mixed // Optional // value property value
+					null, // mixed // Optional // valueReference property value
+					$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+				);
+
+				return $list;
+
+			}
+
 	// Add data to an array defining schema data for Language
 
 		function uamswp_fad_schema_language(
@@ -11035,31 +11084,8 @@
 
 														if ( $provider_google_cid ) {
 
-															// If there is only one item, flatten the multi-dimensional array by one step
-
-																uamswp_fad_flatten_multidimensional_array($provider_google_cid);
-
-															$provider_identifier = uamswp_fad_schema_propertyvalue(
-																array(
-																	'Google Ads customer ID',
-																	'Google Ads CID',
-																	'Google Maps customer ID',
-																	'Google Maps CID',
-																	'Google CID',
-																	'CID'
-																), // mixed // Optional // alternateName property value
-																null, // string // Optional // description property value
-																null, // int // Optional // maxValue property value
-																null, // mixed // Optional // measurementMethod property value
-																null, // mixed // Optional // measurementTechnique property value
-																null, // int // Optional // minValue property value
-																'Google customer ID', // string // Optional // name property value
-																'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
-																null, // string // Optional // unitCode property value
-																null, // string // Optional // unitText property value
-																null, // string // Optional // url property value
-																$provider_google_cid, // mixed // Optional // value property value
-																null, // mixed // Optional // valueReference property value
+															$provider_identifier = uamswp_fad_schema_propertyvalue_google_cid(
+																$provider_google_cid, // mixed // Required // Google customer ID
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
 
@@ -16965,35 +16991,16 @@
 															}
 
 														// Google customer ID (CID)
-														
+
 															if ( $location_google_cid ) {
 
-																$location_identifier = uamswp_fad_schema_propertyvalue(
-																	array(
-																		'Google Ads customer ID',
-																		'Google Ads CID',
-																		'Google Maps customer ID',
-																		'Google Maps CID',
-																		'Google CID',
-																		'CID'
-																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'Google customer ID', // string // Optional // name property value
-																	'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$location_google_cid, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
+																$location_identifier = uamswp_fad_schema_propertyvalue_google_cid(
+																	$location_google_cid, // mixed // Required // Google customer ID
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
-
+	
 															}
-
+	
 														// National Provider Identifier (NPI)
 															
 															if ( $location_npi ) {
