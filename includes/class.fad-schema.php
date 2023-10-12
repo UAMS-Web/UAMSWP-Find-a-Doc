@@ -2371,6 +2371,34 @@
 
 		}
 
+		// Add data to an array defining schema data for National Provider Identifier (NPI)
+
+			function uamswp_fad_schema_propertyvalue_npi(
+				$npi, // mixed // Required // National Provider Identifier
+				array $list = array() // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+			) {
+
+				$list = uamswp_fad_schema_propertyvalue(
+					'NPI', // mixed // Optional // alternateName property value
+					null, // string // Optional // description property value
+					null, // int // Optional // maxValue property value
+					null, // mixed // Optional // measurementMethod property value
+					null, // mixed // Optional // measurementTechnique property value
+					null, // int // Optional // minValue property value
+					'National Provider Identifier', // string // Optional // name property value
+					'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
+					null, // string // Optional // unitCode property value
+					null, // string // Optional // unitText property value
+					null, // string // Optional // url property value
+					$npi, // mixed // Optional // value property value
+					null, // mixed // Optional // valueReference property value
+					$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+				);
+
+				return $list;
+				
+			}
+
 	// Add data to an array defining schema data for Language
 
 		function uamswp_fad_schema_language(
@@ -10990,20 +11018,8 @@
 
 														if ( $provider_npi ) {
 
-															$provider_identifier = uamswp_fad_schema_propertyvalue(
-																'NPI', // mixed // Optional // alternateName property value
-																null, // string // Optional // description property value
-																null, // int // Optional // maxValue property value
-																null, // mixed // Optional // measurementMethod property value
-																null, // mixed // Optional // measurementTechnique property value
-																null, // int // Optional // minValue property value
-																'National Provider Identifier', // string // Optional // name property value
-																'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
-																null, // string // Optional // unitCode property value
-																null, // string // Optional // unitText property value
-																null, // string // Optional // url property value
-																$provider_npi, // mixed // Optional // value property value
-																null, // mixed // Optional // valueReference property value
+															$provider_identifier = uamswp_fad_schema_propertyvalue_npi(
+																$provider_npi, // mixed // Required // National Provider Identifier
 																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 															);
 
@@ -16976,20 +16992,8 @@
 															
 															if ( $location_npi ) {
 
-																$location_identifier = uamswp_fad_schema_propertyvalue(
-																	'NPI', // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'National Provider Identifier', // string // Optional // name property value
-																	'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$location_npi, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
+																$location_identifier = uamswp_fad_schema_propertyvalue_npi(
+																	$location_npi, // mixed // Required // National Provider Identifier
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
