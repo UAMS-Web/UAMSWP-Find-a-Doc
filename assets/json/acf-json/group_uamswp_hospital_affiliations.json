@@ -26,44 +26,6 @@
 	"acfe_note": "",
 	"acfe_meta": "",
 	"fields": {
-		"field_affiliation_name": {
-			"key": "field_affiliation_name",
-			"label": "Name of Hospital in American Hospital Association (AHA) Records",
-			"name": "affiliation_name",
-			"type": "text",
-			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
-		"field_affiliation_id": {
-			"key": "field_affiliation_id",
-			"label": "ID of Hospital in American Hospital Association Records (AHA ID)",
-			"name": "affiliation_id",
-			"type": "text",
-			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
-			"maxlength": ""
-		},
 		"field_affiliation_location": {
 			"key": "field_affiliation_location",
 			"label": "Associated Location Profile",
