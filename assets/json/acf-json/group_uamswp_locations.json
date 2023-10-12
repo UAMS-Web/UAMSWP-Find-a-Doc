@@ -4053,7 +4053,7 @@
 		"field_location_gmb_exclude": {
 			"key": "field_location_gmb_exclude",
 			"name": "location_gmb_exclude",
-			"label": "Exclude Listing in Google My Business",
+			"label": "Should this location be excluded from any bulk imports and updates in Google My Business?",
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
@@ -4075,7 +4075,7 @@
 		"field_location_gmb_prefix": {
 			"key": "field_location_gmb_prefix",
 			"name": "location_gmb_prefix",
-			"label": "Include \"UAMS Health - \" prefix in listing name",
+			"label": "Should \"UAMS Health\" be prepended to the location name on the Google My Business listing?",
 			"type": "button_group",
 			"instructions": "",
 			"required": "1",
@@ -4105,7 +4105,7 @@
 		"field_location_gmb_cat": {
 			"key": "field_location_gmb_cat",
 			"name": "location_gmb_cat",
-			"label": "Category",
+			"label": "Google My Business Category",
 			"type": "taxonomy",
 			"instructions": "Select up to ten categories. Rearrange them so that the first item is the primary category. \"Medical Clinic\" is a good standard choice, if you cannot find a better option.</p><p class='description' style='margin-top: 0.5em;'>For reference, you can <a href='https://communications.uams.edu/web/kb/google-my-business-categories/' target='_blank'>view a list of available categories.</a>",
 			"required": "1",
