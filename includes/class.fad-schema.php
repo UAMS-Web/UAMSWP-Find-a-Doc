@@ -2378,6 +2378,12 @@
 				array $list = array() // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 			) {
 
+				if ( !$npi ) {
+
+					return $list;
+
+				}
+
 				$list = uamswp_fad_schema_propertyvalue(
 					'NPI', // mixed // Optional // alternateName property value
 					null, // string // Optional // description property value
