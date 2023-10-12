@@ -4079,7 +4079,7 @@
 			"label": "Google CID Number (hasMap, identifier)",
 			"type": "clone",
 			"instructions": "",
-			"required": 0,
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
