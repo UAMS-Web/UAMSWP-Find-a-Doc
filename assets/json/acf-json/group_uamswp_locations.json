@@ -4050,6 +4050,61 @@
 			"placement": "left",
 			"endpoint": 0
 		},
+		"field_location_schema_gmb_query": {
+			"key": "field_location_schema_gmb_query",
+			"name": "location_schema_gmb_query",
+			"label": "Does this location have a listing on Google My Business?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_schema_google_cid": {
+			"key": "field_location_schema_google_cid",
+			"name": "location_schema_google_cid",
+			"label": "Google CID Number (hasMap, identifier)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_schema_gmb_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_google_cid"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
 		"field_location_gmb_exclude": {
 			"key": "field_location_gmb_exclude",
 			"name": "location_gmb_exclude",
@@ -4526,61 +4581,6 @@
 			"acfe_permissions": "",
 			"clone": [
 				"field_schema_medicalspecialty_multiple"
-			],
-			"display": "group",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_seamless_style": 1,
-			"acfe_settings": ""
-		},
-		"field_location_schema_gmb_query": {
-			"key": "field_location_schema_gmb_query",
-			"name": "location_schema_gmb_query",
-			"label": "Does this location have a listing on Google My Business?",
-			"type": "button_group",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"choices": {
-				"0": "No",
-				"1": "Yes"
-			},
-			"allow_null": 1,
-			"default_value": "",
-			"layout": "horizontal",
-			"return_format": "value"
-		},
-		"field_location_schema_google_cid": {
-			"key": "field_location_schema_google_cid",
-			"name": "location_schema_google_cid",
-			"label": "Google CID Number (hasMap, identifier)",
-			"type": "clone",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_schema_gmb_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "uamswp-hide-clone-label",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_google_cid"
 			],
 			"display": "group",
 			"layout": "block",
