@@ -15873,37 +15873,94 @@
 
 										// Get alternateName values
 
-											if ( !isset($location_alternateName) ) {
+											// Base array
+
+												$location_alternateName = $location_alternateName ?? array();
+												$location_alternateName = is_array($location_alternateName) ? $location_alternateName : array($location_alternateName);
+
+											// alternateName repeater
 
 												// Get alternateName repeater field value
 
 													if ( !isset($location_alternateName_repeater) ) {
 
-														$location_alternateName_repeater = get_field( 'schema_alternatename', $entity ) ?: array();
+														$location_alternateName_repeater = get_field( 'schema_alternatename', $entity ) ?? array();
 
 													}
 
-													// Add each item to alternateName property values array
+												// Add each item to alternateName property values array
 
-														if ( $location_alternateName_repeater ) {
+													if ( $location_alternateName_repeater ) {
 
-															$location_alternateName = uamswp_fad_schema_alternatename(
-																$location_alternateName_repeater, // alternateName repeater field
-																'schema_alternatename_text' // alternateName item field name
-															);
+														$location_alternateName = uamswp_fad_schema_alternatename(
+															$location_alternateName_repeater, // array // Required // alternateName repeater field
+															'schema_alternatename_text', // string // Optional // alternateName item field name
+															$alternateName_schema // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+														);
 
-														}
+													}
 
-											}
+											// American Hospital Association hospital identifier (AHAID) record name
 
-										// Add to schema
+												if ( !isset($location_ahaid_name) ) {
 
-											if ( $location_alternateName ) {
+													$location_ahaid_name = get_field( 'location_hospital_aha_name', $entity ) ?? '';
 
-												$location_item_MedicalWebPage['alternateName'] = $location_alternateName;
-												$location_item_LocalBusiness['alternateName'] = $location_alternateName;
+												}
 
-											}
+												if ( $location_ahaid_name ) {
+
+													$location_alternateName = uamswp_fad_schema_merge_values(
+														$location_alternateName, // mixed // Required // Initial schema item property value
+														$location_ahaid_name // mixed // Required // Incoming schema item property value
+													);
+	
+												}
+
+											// Centers for Medicare & Medicaid Services Certification Number (CCN) record name
+
+												if ( !isset($location_cms_ccn_name) ) {
+
+													$location_cms_ccn_name = get_field( 'location_hospital_ccn_name', $entity ) ?? '';
+
+												}
+
+												if ( $location_cms_ccn_name ) {
+
+													$location_alternateName = uamswp_fad_schema_merge_values(
+														$location_alternateName, // mixed // Required // Initial schema item property value
+														$location_cms_ccn_name // mixed // Required // Incoming schema item property value
+													);
+	
+												}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'alternateName', // string // Required // Name of schema property
+													$location_alternateName, // mixed // Required // Variable to add as the property value
+													$location_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'alternateName', // string // Required // Name of schema property
+													$location_alternateName, // mixed // Required // Variable to add as the property value
+													$location_alternateName_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
 
 									}
 
