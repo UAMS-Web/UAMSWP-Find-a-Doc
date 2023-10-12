@@ -1799,8 +1799,8 @@
 	// Add data to an array defining schema data for alternateName
 
 		function uamswp_fad_schema_alternatename(
-			array $repeater, // alternateName repeater field
-			string $field_name = 'alternate_text', // alternateName item field name
+			array $repeater, // array // Required // alternateName repeater field
+			string $field_name = 'alternate_text', // string // Optional // alternateName item field name
 			$alternateName_schema = array() // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
 		) {
 
@@ -15185,9 +15185,9 @@
 
 										}
 
-									// American Heart Association Hospital Identifier (AHAID)
+									// American Hospital Association Hospital Identifier (AHAID)
 
-										// List of properties that reference American Heart Association Hospital Identifier (AHAID)
+										// List of properties that reference American Hospital Association Hospital Identifier (AHAID)
 
 											$location_ahaid_common = array(
 												'identifier'
