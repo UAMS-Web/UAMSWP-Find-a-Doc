@@ -1,6 +1,6 @@
 {
 	"key": "group_treatments_cpt",
-	"title": "Treatments Item Configuration",
+	"title": "Treatment Item Configuration",
 	"fields": {
 		"field_treatment_tab_general": {
 			"key": "field_treatment_tab_general",

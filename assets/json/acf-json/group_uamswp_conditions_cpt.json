@@ -1,6 +1,6 @@
 {
 	"key": "group_conditions_cpt",
-	"title": "Conditions Item Configuration",
+	"title": "Condition Item Configuration",
 	"fields": {
 		"field_condition_tab_general": {
 			"key": "field_condition_tab_general",
