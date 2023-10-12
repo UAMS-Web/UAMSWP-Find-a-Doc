@@ -1,7 +1,23 @@
 {
 	"key": "group_clinical_resources",
-	"title": "Resources",
+	"title": "Clinical Resource Item Configuration",
 	"fields": [
+		{
+			"key": "field_clinical_resource_tab_general",
+			"name": "",
+			"type": "tab",
+			"label": "General Details",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
 		{
 			"key": "field_clinical_resource_excerpt",
 			"label": "Short Description",
@@ -11,7 +27,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -31,7 +47,7 @@
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -61,7 +77,7 @@
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
-				"width": "75",
+				"width": "",
 				"class": "",
 				"id": ""
 			},
@@ -98,10 +114,26 @@
 			"default_value": ""
 		},
 		{
+			"key": "field_clinical_resource_tab_content",
+			"name": "",
+			"type": "tab",
+			"label": "Content",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_type",
 			"label": "Resource Type",
 			"name": "clinical_resource_type",
-			"type": "select",
+			"type": "radio",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
@@ -110,21 +142,23 @@
 				"class": "",
 				"id": ""
 			},
+			"acfe_permissions": "",
 			"choices": {
 				"text": "Article",
 				"infographic": "Infographic",
 				"video": "Video",
 				"doc": "Document"
 			},
-			"default_value": false,
-			"allow_null": 0,
+			"allow_custom": 0,
+			"default_value": [],
+			"allow_null": 1,
 			"multiple": 0,
 			"ui": 1,
 			"ajax": 0,
 			"return_format": "array",
-			"allow_custom": 0,
-			"search_placeholder": "Select one",
-			"placeholder": ""
+			"placeholder": "",
+			"acfe_settings": "",
+			"acfe_validate": ""
 		},
 		{
 			"key": "field_clinical_resource_syndicated",
@@ -542,7 +576,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "60",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -561,7 +595,7 @@
 					"required": 1,
 					"conditional_logic": 0,
 					"wrapper": {
-						"width": "40",
+						"width": "",
 						"class": "",
 						"id": ""
 					},
@@ -575,10 +609,10 @@
 			]
 		},
 		{
-			"key": "field_clinical_resource_relationships",
-			"label": "Relationships",
+			"key": "field_clinical_resource_tab_provider",
 			"name": "",
-			"type": "message",
+			"label": "Related Providers",
+			"type": "tab",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -587,9 +621,8 @@
 				"class": "",
 				"id": ""
 			},
-			"message": "",
-			"new_lines": "",
-			"esc_html": 0
+			"placement": "left",
+			"endpoint": 0
 		},
 		{
 			"key": "field_clinical_resource_providers",
@@ -621,6 +654,22 @@
 			}
 		},
 		{
+			"key": "field_clinical_resource_tab_location",
+			"name": "",
+			"label": "Related Locations",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_locations",
 			"label": "Location(s)",
 			"name": "clinical_resource_locations",
@@ -650,6 +699,22 @@
 			}
 		},
 		{
+			"key": "field_clinical_resource_tab_expertise",
+			"name": "",
+			"label": "Related Areas of Expertise",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_aoe",
 			"label": "Areas of Expertise",
 			"name": "clinical_resource_aoe",
@@ -677,6 +742,22 @@
 				"acfe_bidirectional_enabled": "1",
 				"acfe_bidirectional_related": "field_expertise_clinical_resources"
 			}
+		},
+		{
+			"key": "field_clinical_resource_tab_condition_treatment",
+			"name": "",
+			"label": "Related Conditions and Treatments",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
 		},
 		{
 			"key": "field_clinical_resource_conditions",
@@ -737,6 +818,22 @@
 			}
 		},
 		{
+			"key": "field_clinical_resource_tab_clinical_resource",
+			"name": "",
+			"label": "Related Clinical Resources",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
 			"key": "field_clinical_resource_related",
 			"label": "Related Clinical Resources",
 			"name": "clinical_resource_related",
@@ -766,6 +863,47 @@
 					"field_clinical_resource_related"
 				]
 			}
+		},
+		{
+			"key": "field_clinical_resource_tab_deprecated",
+			"name": "",
+			"label": "Deprecated Fields",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_clinical_resource_tab_deprecated",
+						"operator": "==",
+						"value": "false"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		{
+			"key": "field_clinical_resource_relationships",
+			"label": "Relationships",
+			"name": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"new_lines": "",
+			"esc_html": 0
 		}
 	],
 	"location": [
@@ -780,8 +918,8 @@
 	"menu_order": 0,
 	"position": "acf_after_title",
 	"style": "default",
-	"label_placement": "left",
-	"instruction_placement": "above_field",
+	"label_placement": "top",
+	"instruction_placement": "label",
 	"hide_on_screen": "",
 	"active": true,
 	"description": "",
