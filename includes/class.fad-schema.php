@@ -15155,6 +15155,36 @@
 
 										}
 
+									// United States Department of Veterans Affairs Station ID
+
+										// List of properties that reference National Provider Identifier (NPI)
+
+											$location_va_station_id_common = array(
+												'identifier'
+											);
+
+										if (
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_va_station_id_common
+											)
+											||
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_va_station_id_common
+											)
+										) {
+
+											// Get values
+
+												if ( !isset($location_va_station_id) ) {
+
+													$location_va_station_id = get_field( 'location_npi', $entity ) ?? '';
+
+												}
+
+										}
+
 								// name
 
 									/* 
@@ -17007,6 +17037,49 @@
 
 																$location_identifier = uamswp_fad_schema_propertyvalue_npi(
 																	$location_npi, // mixed // Required // National Provider Identifier
+																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																);
+
+															}
+
+														// United States Department of Veterans Affairs Station ID
+
+															if ( $location_va_station_id ) {
+
+																$location_identifier = uamswp_fad_schema_propertyvalue(
+																	array(
+																		'United States Department of Veterans Affairs station code',
+																		'United States Department of Veterans Affairs stationID',
+																		'United States Department of Veterans Affairs facility #',
+																		'U.S. Department of Veterans Affairs station code',
+																		'U.S. Department of Veterans Affairs stationID',
+																		'U.S. Department of Veterans Affairs station ID',
+																		'U.S. Department of Veterans Affairs facility #',
+																		'Department of Veterans Affairs station code',
+																		'Department of Veterans Affairs stationID',
+																		'Department of Veterans Affairs station ID',
+																		'Department of Veterans Affairs facility #',
+																		'Veterans Affairs station code',
+																		'Veterans Affairs stationID',
+																		'Veterans Affairs station ID',
+																		'Veterans Affairs facility #',
+																		'VA station code',
+																		'VA stationID',
+																		'VA station ID',
+																		'VA facility #'
+																	), // mixed // Optional // alternateName property value
+																	null, // string // Optional // description property value
+																	null, // int // Optional // maxValue property value
+																	null, // mixed // Optional // measurementMethod property value
+																	null, // mixed // Optional // measurementTechnique property value
+																	null, // int // Optional // minValue property value
+																	'United States Department of Veterans Affairs Station ID', // string // Optional // name property value
+																	null, // string // Optional // propertyID property value
+																	null, // string // Optional // unitCode property value
+																	null, // string // Optional // unitText property value
+																	null, // string // Optional // url property value
+																	$location_va_station_id, // mixed // Optional // value property value
+																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
 
