@@ -15187,7 +15187,7 @@
 
 									// American Heart Association Hospital Identifier (AHAID)
 
-										// List of properties that reference American Heart Association Hospital Identifier (AHAID
+										// List of properties that reference American Heart Association Hospital Identifier (AHAID)
 
 											$location_ahaid_common = array(
 												'identifier'
