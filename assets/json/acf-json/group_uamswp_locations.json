@@ -4648,7 +4648,7 @@
 			"label": "American Hospital Association Hospital Identifier (AHAID) for the Hospital",
 			"name": "location_hospital_aha_id",
 			"type": "text",
-			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
+			"instructions": "This information can be found in the hospital profile at <a href='https://www.aha.org/aha-hospital-lookup' target='_blank'>https://www.aha.org/aha-hospital-lookup</a>.",
 			"required": 1,
 			"conditional_logic": [
 				[
@@ -4675,7 +4675,7 @@
 			"label": "Name of the Hospital on the American Hospital Association Hospital Identifier (AHAID) Record",
 			"name": "location_hospital_aha_name",
 			"type": "text",
-			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
+			"instructions": "This information can be found in the hospital profile at <a href='https://www.aha.org/aha-hospital-lookup' target='_blank'>https://www.aha.org/aha-hospital-lookup</a>.",
 			"required": 1,
 			"conditional_logic": [
 				[
