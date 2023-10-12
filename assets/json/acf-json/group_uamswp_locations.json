@@ -4593,6 +4593,56 @@
 			"max": 9999999999,
 			"step": 1
 		},
+		"field_location_schema_va_query": {
+			"key": "field_location_schema_va_query",
+			"name": "location_schema_va_query",
+			"label": "Is this location a United States Department of Veterans Affairs facility?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_schema_va_station_id": {
+			"key": "field_location_schema_va_station_id",
+			"name": "location_schema_va_station_id",
+			"type": "text",
+			"label": "United States Department of Veterans Affairs Station ID",
+			"instructions": "This value can be found by searching for the location at <a href='https://www.va.gov/directory/guide/allstate.asp' target='_blank'>https://www.va.gov/directory/guide/allstate.asp</a>. Click the link for the appropriate state and then click the link for \"View Addresses.\"",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_schema_va_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
 		"field_location_schema_hospital_aha_id": {
 			"key": "field_location_schema_hospital_aha_id",
 			"label": "American Hospital Association Hospital Identifier (AHAID) for the Hospital",
