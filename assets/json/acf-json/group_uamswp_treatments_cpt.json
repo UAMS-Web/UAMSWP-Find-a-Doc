@@ -5,7 +5,7 @@
 		"field_treatment_tab_general": {
 			"key": "field_treatment_tab_general",
 			"name": "",
-			"label": "General Information",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -106,7 +106,7 @@
 		"field_treatment_procedure_tab_schema": {
 			"key": "field_treatment_procedure_tab_schema",
 			"name": "",
-			"label": "Schema Data",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -838,7 +838,7 @@
 		"field_treatment_procedure_tab_conditions": {
 			"key": "field_treatment_procedure_tab_conditions",
 			"name": "",
-			"label": "Related Conditions",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Conditions",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -887,7 +887,7 @@
 		"field_treatment_procedure_tab_expertise": {
 			"key": "field_treatment_procedure_tab_expertise",
 			"name": "",
-			"label": "Related Areas of Expertise",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -936,7 +936,7 @@
 		"field_treatment_procedure_tab_locations": {
 			"key": "field_treatment_procedure_tab_locations",
 			"name": "",
-			"label": "Related Locations",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -985,7 +985,7 @@
 		"field_treatment_procedure_tab_providers": {
 			"key": "field_treatment_procedure_tab_providers",
 			"name": "",
-			"label": "Related Providers",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,
@@ -1034,7 +1034,7 @@
 		"field_treatment_procedure_tab_clinical_resources": {
 			"key": "field_treatment_procedure_tab_clinical_resources",
 			"name": "",
-			"label": "Related Clinical Resources",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"type": "tab",
 			"instructions": "",
 			"required": 0,

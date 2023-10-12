@@ -4,7 +4,7 @@
 	"fields": {
 		"field_condition_tab_general": {
 			"key": "field_condition_tab_general",
-			"label": "General Information",
+			"label": "<i class=\"dashicons-info dashicons\"><\/i> General Details",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -105,7 +105,7 @@
 		},
 		"field_condition_tab_schema": {
 			"key": "field_condition_tab_schema",
-			"label": "Schema Data",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -399,7 +399,7 @@
 		},
 		"field_condition_tab_treatments": {
 			"key": "field_condition_tab_treatments",
-			"label": "Related Treatments",
+			"label": "<i class=\"dashicons-heart dashicons\"><\/i> Related Treatments",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -448,7 +448,7 @@
 		},
 		"field_condition_tab_expertise": {
 			"key": "field_condition_tab_expertise",
-			"label": "Related Areas of Expertise",
+			"label": "<i class=\"dashicons-superhero-alt dashicons\"><\/i> Related Areas of Expertise",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -497,7 +497,7 @@
 		},
 		"field_condition_tab_locations": {
 			"key": "field_condition_tab_locations",
-			"label": "Related Locations",
+			"label": "<i class=\"dashicons-location-alt dashicons\"><\/i> Related Locations",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -546,7 +546,7 @@
 		},
 		"field_condition_tab_providers": {
 			"key": "field_condition_tab_providers",
-			"label": "Related Providers",
+			"label": "<i class=\"dashicons-admin-users dashicons\"><\/i> Related Providers",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
@@ -595,7 +595,7 @@
 		},
 		"field_condition_tab_clinical_resources": {
 			"key": "field_condition_tab_clinical_resources",
-			"label": "Related Clinical Resources",
+			"label": "<i class=\"dashicons-book dashicons\"><\/i> Related Clinical Resources",
 			"name": "",
 			"type": "tab",
 			"instructions": "",
