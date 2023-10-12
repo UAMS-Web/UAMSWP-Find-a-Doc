@@ -2502,7 +2502,7 @@
 		},
 		"field_physician_gmb_exclude": {
 			"key": "field_physician_gmb_exclude",
-			"label": "Exclude Listing in Bulk Imports to Google My Business?",
+			"label": "Should this provider be excluded from any bulk imports and updates in Google My Business?",
 			"name": "physician_gmb_exclude",
 			"type": "button_group",
 			"instructions": "",
