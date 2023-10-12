@@ -8121,6 +8121,43 @@
 
 										}
 
+									// National Provider Identifier (NPI)
+
+										// List of properties that reference Google customer ID
+
+											$provider_npi_common = array(
+												'aggregateRating',
+												'identifier'
+											);
+
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_npi_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_npi_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
+												$provider_npi_common
+											)
+										) {
+
+											// Get values
+
+												if ( !isset($provider_npi) ) {
+
+													$provider_npi = get_field( 'physician_npi', $entity ) ?? '';
+													$provider_npi = $provider_npi ? str_pad($provider_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
+
+												}
+
+										}
+
 								// about (MedicalWebPage only)
 
 									/* 
@@ -8993,17 +9030,13 @@
 
 												if ( !isset($provider_aggregateRating_query) ) {
 
-													// Get NPI value ($npi)
-
-														if ( !isset($provider_npi) ) {
-
-															$provider_npi = get_field( 'physician_npi', $entity );
-
-														}
-
 													// Get ratings data from NRC JSON API and decode
 
-														if ( !isset($provider_aggregateRating_api) ) {
+														if (
+															$provider_npi
+															&&
+															!isset($provider_aggregateRating_api)
+														) {
 
 															$provider_aggregateRating_api = json_decode( wp_nrc_cached_api($provider_npi) );
 
@@ -10954,15 +10987,6 @@
 														}
 
 													// National Provider Identifier (NPI)
-
-														// Get values
-
-															if ( !isset($provider_npi) ) {
-
-																$provider_npi = get_field( 'physician_npi', $entity ) ?? '';
-																$provider_npi = $provider_npi ? str_pad($provider_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
-
-															}
 
 														if ( $provider_npi ) {
 
