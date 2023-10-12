@@ -2389,7 +2389,7 @@
 					'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
 					null, // string // Optional // unitCode property value
 					null, // string // Optional // unitText property value
-					null, // string // Optional // url property value
+					'https://npiregistry.cms.hhs.gov/provider-view/' . $npi, // string // Optional // url property value
 					$npi, // mixed // Optional // value property value
 					null, // mixed // Optional // valueReference property value
 					$list // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
