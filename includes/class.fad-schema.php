@@ -15076,6 +15076,37 @@
 
 										}
 
+									// National Provider Identifier (NPI)
+
+										// List of properties that reference National Provider Identifier (NPI)
+
+											$location_npi_common = array(
+												'identifier'
+											);
+
+										if (
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_npi_common
+											)
+											||
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_npi_common
+											)
+										) {
+	
+											// Get values
+
+												if ( !isset($location_npi) ) {
+
+													$location_npi = get_field( 'location_npi', $entity ) ?? '';
+													$location_npi = $location_npi ? str_pad($location_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
+
+												}
+
+										}
+
 								// name
 
 									/* 
@@ -16935,6 +16966,29 @@
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
 																	$location_google_cid, // mixed // Optional // value property value
+																	null, // mixed // Optional // valueReference property value
+																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																);
+
+															}
+
+														// National Provider Identifier (NPI)
+															
+															if ( $location_npi ) {
+
+																$location_identifier = uamswp_fad_schema_propertyvalue(
+																	'NPI', // mixed // Optional // alternateName property value
+																	null, // string // Optional // description property value
+																	null, // int // Optional // maxValue property value
+																	null, // mixed // Optional // measurementMethod property value
+																	null, // mixed // Optional // measurementTechnique property value
+																	null, // int // Optional // minValue property value
+																	'National Provider Identifier', // string // Optional // name property value
+																	'https://www.wikidata.org/wiki/Q6975101', // string // Optional // propertyID property value
+																	null, // string // Optional // unitCode property value
+																	null, // string // Optional // unitText property value
+																	null, // string // Optional // url property value
+																	$location_npi, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
