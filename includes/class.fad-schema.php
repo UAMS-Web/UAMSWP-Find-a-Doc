@@ -15185,6 +15185,36 @@
 
 										}
 
+									// American Heart Association Hospital Identifier (AHAID)
+
+										// List of properties that reference American Heart Association Hospital Identifier (AHAID
+
+											$location_ahaid_common = array(
+												'identifier'
+											);
+
+										if (
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_ahaid_common
+											)
+											||
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_ahaid_common
+											)
+										) {
+
+											// Get values
+
+												if ( !isset($location_ahaid) ) {
+
+													$location_ahaid = get_field( 'field_location_hospital_aha_id', $entity ) ?? '';
+
+												}
+
+										}
+
 								// name
 
 									/* 
@@ -17079,6 +17109,34 @@
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
 																	$location_va_station_id, // mixed // Optional // value property value
+																	null, // mixed // Optional // valueReference property value
+																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																);
+
+															}
+
+														// American Hospital Association Hospital Identifier (AHAID)
+
+															if ( $location_ahaid ) {
+
+																$location_identifier = uamswp_fad_schema_propertyvalue(
+																	array(
+																		'AHAID',
+																		'AHA hospital identifier',
+																		'AHA identification number',
+																		'AHA identifier'
+																	), // mixed // Optional // alternateName property value
+																	null, // string // Optional // description property value
+																	null, // int // Optional // maxValue property value
+																	null, // mixed // Optional // measurementMethod property value
+																	null, // mixed // Optional // measurementTechnique property value
+																	null, // int // Optional // minValue property value
+																	'American Hospital Association Hospital Identifier', // string // Optional // name property value
+																	null, // string // Optional // propertyID property value
+																	null, // string // Optional // unitCode property value
+																	null, // string // Optional // unitText property value
+																	null, // string // Optional // url property value
+																	$location_ahaid, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
