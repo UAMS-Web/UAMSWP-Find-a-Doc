@@ -4702,7 +4702,7 @@
 			"label": "Centers for Medicare &amp; Medicaid Services Certification Number (CCN) for the Hospital",
 			"name": "location_hospital_ccn_id",
 			"type": "text",
-			"instructions": "This information can be found in the hospital profile at <a href='https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool' target='_blank'>https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool.</a>",
+			"instructions": "This information can be found in the Centers for Medicare &amp; Medicaid Services \"Hospital General Information\" dataset at <a href='https://data.cms.gov/provider-data/dataset/xubh-q36u' target='_blank'>https://data.cms.gov/provider-data/dataset/xubh-q36u</a>.",
 			"required": 1,
 			"conditional_logic": [
 				[
@@ -4729,7 +4729,7 @@
 			"label": "Name of the Hospital on the Centers for Medicare &amp; Medicaid Services Certification Number (CRN) Record",
 			"name": "location_hospital_ccn_name",
 			"type": "text",
-			"instructions": "This information can be found in the hospital profile at <a href='https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool' target='_blank'>https://data.cms.gov/tools/medicare-inpatient-hospital-look-up-tool.</a>",
+			"instructions": "This information can be found in the Centers for Medicare &amp; Medicaid Services \"Hospital General Information\" dataset at <a href='https://data.cms.gov/provider-data/dataset/xubh-q36u' target='_blank'>https://data.cms.gov/provider-data/dataset/xubh-q36u</a>.",
 			"required": 1,
 			"conditional_logic": [
 				[
