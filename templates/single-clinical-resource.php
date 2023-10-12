@@ -877,7 +877,7 @@
 				}, 22 );
 
 			// Construct the Schema Data Script Tag
-	
+
 				add_action( 'genesis_after_entry', function() use (
 					$page_id,
 					$page_url,

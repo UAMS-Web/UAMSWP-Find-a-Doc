@@ -453,9 +453,9 @@
 									echo '<p class="text-callout text-callout-info">Also called: '. $keyword_text .'</p>';
 
 								endif;
-								
+
 								the_content();
-							
+
 								if ( !empty($medline_type) && 'none' != $medline_type && !empty($medline_code) ) {
 
 									echo display_medline_api_data( trim($medline_code), $medline_type );
@@ -467,7 +467,7 @@
 									echo $embed_code;
 
 								}
-								
+
 								if ( $video ) {
 
 									// Check video source
@@ -511,7 +511,7 @@
 										}
 
 								}
-								
+
 								?>
 							</div>
 						</section>

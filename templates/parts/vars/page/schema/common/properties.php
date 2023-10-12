@@ -33,19 +33,19 @@
 	// Base arrays
 
 		// Common schema properties for all types
-		
+
 			$schema_common_properties = array();
 
 		// Common schema properties for MedicalWebPage only
-		
+
 			$schema_common_properties_MedicalWebPage = array();
 
 		// Common schema properties for the main entity type
-		
+
 			$schema_common_properties_main_entity = array();
 
 		// Common schema properties for types other than MedicalWebPage
-		
+
 			$schema_common_properties_exclude_MedicalWebPage = array();
 
 	// Common values used in these properties

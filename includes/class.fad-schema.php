@@ -2402,7 +2402,7 @@
 				);
 
 				return $list;
-				
+
 			}
 
 		// Add data to an array defining schema data for Google customer ID (CID)
@@ -9016,7 +9016,7 @@
 																		array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 																	);
 
-																
+
 																}
 												}
 
@@ -10139,7 +10139,7 @@
 																	array() // array // Optional // Pre-existing list array for hospitalAffiliation to which to add additional items
 																);
 
-															
+
 															}
 											}
 
@@ -11373,7 +11373,7 @@
 									// MedicalWebPage
 
 										/*
-										
+
 											The 'isAccessibleForFree' property for MedicalWebPage has been addressed by the 
 											common properties.
 
@@ -15143,7 +15143,7 @@
 												$location_npi_common
 											)
 										) {
-	
+
 											// Get values
 
 												if ( !isset($location_npi) ) {
@@ -16998,11 +16998,11 @@
 																	$location_google_cid, // mixed // Required // Google customer ID
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
-	
+
 															}
-	
+
 														// National Provider Identifier (NPI)
-															
+
 															if ( $location_npi ) {
 
 																$location_identifier = uamswp_fad_schema_propertyvalue_npi(
@@ -17124,7 +17124,7 @@
 									 */
 
 									/*
-									
+
 										The 'isAccessibleForFree' property for MedicalWebPage has been addressed by the 
 										common properties.
 
@@ -17424,7 +17424,7 @@
 												// Get health care professional associations input value [WIP]
 
 													/*
-													
+
 														More information is needed on whether or not clinical locations are ever 
 														members of health care professional associations.
 
@@ -18600,13 +18600,13 @@
 												if ( !isset($fpage_url) ) {
 
 													$fpage_url = !empty($current_fpage) ? trailingslashit($expertise_url) . user_trailingslashit($current_fpage) : $expertise_url; // Fake subpage URL
-	
+
 												}
-		
+
 												$expertise_url = $fpage_url;
 
 											}
-		
+
 										}
 
 									// Pass the values to common schema properties template part
@@ -19281,9 +19281,9 @@
 													if ( !isset($expertise_alternateName_repeater) ) {
 
 														$expertise_alternateName_repeater = get_field( 'expertise_alternate_names', $entity ) ?? array();
-	
+
 													}
-		
+
 												// Get item values
 
 													if ( $expertise_alternateName_repeater ) {
@@ -20975,7 +20975,7 @@
 											}
 
 									}
-									
+
 								// Featured image asset info (common)
 
 									// List of properties that reference the featured image asset
@@ -21202,25 +21202,25 @@
 																if ( $clinical_resource_resource_type == 'text' ) {
 
 																	// Article
-						
+
 																		/* Do nothing */
 
 																} elseif ( $clinical_resource_resource_type == 'infographic' ) {
 
 																	// Infographic
-						
+
 																		$clinical_resource_description = get_field( 'clinical_resource_infographic_descr', $entity ) ?: '';
 
 																} elseif ( $clinical_resource_resource_type == 'video' ) {
-						
+
 																	// Video
-						
+
 																		$clinical_resource_description = get_field( 'clinical_resource_video_descr', $entity ) ?: '';
-						
+
 																} elseif ( $clinical_resource_resource_type == 'doc' ) {
-						
+
 																	// Document
-						
+
 																		$clinical_resource_description = get_field( 'clinical_resource_document_descr', $entity ) ?: '';
 
 																}
@@ -21354,11 +21354,11 @@
 														$clinical_resource_about_MedicalWebPage, // mixed // Required // Initial schema item property value
 														$clinical_resource_item_CreativeWork // mixed // Required // Incoming schema item property value
 													);
-	
+
 											// CreativeWork [WIP]
 
 												/*
-												
+
 													For CreativeWork, set the value as something like the associated areas of 
 													expertise, conditions and treatments.
 
@@ -22327,7 +22327,7 @@
 									 */
 
 									/*
-									
+
 										Indicate that the CreativeWork item is a part of the MedicalWebPage item.
 
 									*/
@@ -22343,7 +22343,7 @@
 									 */
 
 									/*
-									
+
 										Define for the 'Article' type clinical resources by using the post title.
 
 									*/
@@ -22496,7 +22496,7 @@
 									 */
 
 									/*
-									
+
 										Add input to clinical resources to indicate the language of the content.
 
 										If there is a value (or if the value is not English), override the 'inLanguage' 
@@ -22558,7 +22558,7 @@
 									 */
 
 									/*
-									
+
 										Add input to clinical resources to indicate a resource from which each clinical 
 										resource's content is derived or from which it is a modification or adaptation.
 
@@ -22866,7 +22866,7 @@
 														$clinical_resource_sameAs, // mixed // Required // Initial schema item property value
 														$clinical_resource_video // mixed // Required // Incoming schema item property value
 													);
-	
+
 												}
 
 										// Add to item values
@@ -23348,7 +23348,7 @@
 									 */
 
 									/*
-									
+
 										Use get_post_time( 'c', false, $post ), where $post is the ID of the clinical 
 										resource's media asset (i.e., infographic image, digital document file).
 
@@ -23366,7 +23366,7 @@
 									 */
 
 									/*
-									
+
 										If the clinical resource is the 'Video' type, set the property value using that 
 										clinical resource's VideoObject schema item.
 
@@ -24938,7 +24938,7 @@
 												);
 
 									}
-	
+
 								// additionalType [WIP]
 
 									/* 
@@ -25005,7 +25005,7 @@
 												);
 
 									}
-	
+
 								// associatedAnatomy [excluded]
 
 									/* 

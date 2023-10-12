@@ -238,13 +238,13 @@ get_header();
 				endif;
 
 				echo ( $content ? ''. $content . '' : '' );
-				
+
 				if ( $medline_type && 'none' != $medline_type && $medline_code ) {
 
 					echo display_medline_api_data( trim($medline_code), $medline_type );
 
 				}
-				
+
 				if ( $embed_code ) {
 
 					echo $embed_code;
@@ -294,7 +294,7 @@ get_header();
 						}
 
 				}
-				
+
 				?>
 			</div>
 		</section>
