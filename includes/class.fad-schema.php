@@ -16882,6 +16882,36 @@
 
 															}
 
+														// Google customer ID (CID)
+														
+															if ( $location_google_cid ) {
+
+																$location_identifier = uamswp_fad_schema_propertyvalue(
+																	array(
+																		'Google Ads customer ID',
+																		'Google Ads CID',
+																		'Google Maps customer ID',
+																		'Google Maps CID',
+																		'Google CID',
+																		'CID'
+																	), // mixed // Optional // alternateName property value
+																	null, // string // Optional // description property value
+																	null, // int // Optional // maxValue property value
+																	null, // mixed // Optional // measurementMethod property value
+																	null, // mixed // Optional // measurementTechnique property value
+																	null, // int // Optional // minValue property value
+																	'Google customer ID', // string // Optional // name property value
+																	'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
+																	null, // string // Optional // unitCode property value
+																	null, // string // Optional // unitText property value
+																	null, // string // Optional // url property value
+																	$location_google_cid, // mixed // Optional // value property value
+																	null, // mixed // Optional // valueReference property value
+																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																);
+
+															}
+
 												}
 
 												// Add to item values
