@@ -15215,6 +15215,36 @@
 
 										}
 
+									// Centers for Medicare & Medicaid Services Certification Number (CCN)
+
+										// List of properties that reference Centers for Medicare & Medicaid Services Certification Number (CCN)
+
+											$location_cms_ccn_common = array(
+												'identifier'
+											);
+
+										if (
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_cms_ccn_common
+											)
+											||
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_cms_ccn_common
+											)
+										) {
+
+											// Get values
+
+												if ( !isset($location_cms_ccn) ) {
+
+													$location_cms_ccn = get_field( 'location_hospital_ccn_id', $entity ) ?? '';
+
+												}
+
+										}
+
 								// name
 
 									/* 
@@ -17137,6 +17167,40 @@
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
 																	$location_ahaid, // mixed // Optional // value property value
+																	null, // mixed // Optional // valueReference property value
+																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+																);
+
+															}
+
+														// Centers for Medicare & Medicaid Services Certification Number (CCN)
+
+															if ( $location_cms_ccn ) {
+
+																$location_identifier = uamswp_fad_schema_propertyvalue(
+																	array(
+																		'CCN',
+																		'Centers for Medicare & Medicaid Services CCN',
+																		'CMS CCN',
+																		'CMS Certification Number',
+																		'Medicare Identification Number',
+																		'Medicare Provider Number',
+																		'Medicare/Medicaid Provider Number',
+																		'OSCAR Number',
+																		'OSCAR Provider Number',
+																		'Provider Number'
+																	), // mixed // Optional // alternateName property value
+																	null, // string // Optional // description property value
+																	null, // int // Optional // maxValue property value
+																	null, // mixed // Optional // measurementMethod property value
+																	null, // mixed // Optional // measurementTechnique property value
+																	null, // int // Optional // minValue property value
+																	'Centers for Medicare & Medicaid Services Certification Number', // string // Optional // name property value
+																	null, // string // Optional // propertyID property value
+																	null, // string // Optional // unitCode property value
+																	null, // string // Optional // unitText property value
+																	null, // string // Optional // url property value
+																	$location_cms_ccn, // mixed // Optional // value property value
 																	null, // mixed // Optional // valueReference property value
 																	$location_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
 																);
