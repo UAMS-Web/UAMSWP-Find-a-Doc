@@ -279,7 +279,7 @@
 			"key": "field_location_address_1",
 			"name": "location_address_1",
 			"type": "text",
-			"label": "Address",
+			"label": "Street Address",
 			"instructions": "",
 			"required": 1,
 			"conditional_logic": 0,
