@@ -2709,7 +2709,7 @@
 			"key": "field_physician_gmb_tab",
 			"name": "",
 			"type": "tab",
-			"label": "<i class=\"dashicons-location dashicons\"><\/i> Google My Business",
+			"label": "<i class=\"dashicons-google dashicons\"><\/i> Google My Business Details",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": [
