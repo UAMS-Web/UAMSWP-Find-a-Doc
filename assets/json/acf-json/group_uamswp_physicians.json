@@ -2352,75 +2352,6 @@
 				}
 			]
 		},
-		"field_physician_schema_tab": {
-			"key": "field_physician_schema_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": [
-				"super_admin",
-				"administrator",
-				"editor"
-			],
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_physician_alternatename": {
-			"key": "field_physician_alternatename",
-			"name": "physician_alternatename",
-			"label": "Alternate Names for the Provider (alternateName > Text)",
-			"type": "clone",
-			"instructions": "Do not include degrees and credentials in the alternate names.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "uamswp-hide-clone-label",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_alternatename"
-			],
-			"display": "group",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_seamless_style": 1,
-			"acfe_settings": ""
-		},
-		"field_physician_sameas": {
-			"key": "field_physician_sameas",
-			"name": "physician_sameas",
-			"label": "Reference Webpages for the Provider (sameAs > URL)",
-			"type": "clone",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "uamswp-hide-clone-label",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"clone": [
-				"field_schema_sameas"
-			],
-			"display": "group",
-			"layout": "block",
-			"prefix_label": 0,
-			"prefix_name": 0,
-			"acfe_seamless_style": 1,
-			"acfe_settings": ""
-		},
 		"field_physician_gmb_tab": {
 			"key": "field_physician_gmb_tab",
 			"name": "",
@@ -2554,6 +2485,75 @@
 			},
 			"multiple": "0",
 			"allow_null": "0"
+		},
+		"field_physician_schema_tab": {
+			"key": "field_physician_schema_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-code dashicons\"><\/i> Schema Data",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_physician_alternatename": {
+			"key": "field_physician_alternatename",
+			"name": "physician_alternatename",
+			"label": "Alternate Names for the Provider (alternateName > Text)",
+			"type": "clone",
+			"instructions": "Do not include degrees and credentials in the alternate names.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_physician_sameas": {
+			"key": "field_physician_sameas",
+			"name": "physician_sameas",
+			"label": "Reference Webpages for the Provider (sameAs > URL)",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
 		},
 		"field_physician_extra_tab": {
 			"key": "field_physician_extra_tab",
