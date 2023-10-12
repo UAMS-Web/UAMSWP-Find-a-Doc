@@ -8073,7 +8073,12 @@
 											)
 											||
 											array_intersect(
-												$provider_properties_map[$LocalBusiness_type]['properties'],
+												$provider_properties_map[$MedicalBusiness_type]['properties'],
+												$provider_google_cid_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$Person_type]['properties'],
 												$provider_google_cid_common
 											)
 										) {
