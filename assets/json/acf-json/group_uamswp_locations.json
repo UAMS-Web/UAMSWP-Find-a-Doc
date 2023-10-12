@@ -4543,7 +4543,7 @@
 		},
 		"field_location_schema_hospital_aha_name": {
 			"key": "field_location_schema_hospital_aha_name",
-			"label": "Name of Hospital in American Hospital Association (AHA) Records",
+			"label": "Name of the Hospital on the American Hospital Association Hospital Identifier (AHAID) Record",
 			"name": "location_schema_hospital_aha_name",
 			"type": "text",
 			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
@@ -4570,7 +4570,7 @@
 		},
 		"field_location_schema_hospital_aha_id": {
 			"key": "field_location_schema_hospital_aha_id",
-			"label": "ID of Hospital in American Hospital Association Records (AHA ID)",
+			"label": "American Hospital Association Hospital Identifier (AHAID) for the Hospital",
 			"name": "location_schema_hospital_aha_id",
 			"type": "text",
 			"instructions": "This information can be found in the hospital profile at <a href='https://www.ahadata.com/' target='_blank'>https://www.ahadata.com/.</a>",
