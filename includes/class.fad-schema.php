@@ -5641,7 +5641,6 @@
 								$provider_hasCredential_ref = null;
 								$provider_hasMap = null;
 								$provider_hasMap_ref = null;
-								$provider_hasMap_repeater = null;
 								$provider_hasOccupation = null;
 								$provider_hasOccupation_keywords = null;
 								$provider_hasOccupation_keywords_ref = null;
@@ -8056,6 +8055,67 @@
 
 											}
 
+								// Identifiers (common use)
+
+									// Google customer ID (CID)
+
+										// List of properties that reference Google customer ID
+
+											$provider_google_cid_common = array(
+												'identifier',
+												'hasMap'
+											);
+
+										if (
+											array_intersect(
+												$provider_properties_map[$MedicalWebPage_type]['properties'],
+												$provider_google_cid_common
+											)
+											||
+											array_intersect(
+												$provider_properties_map[$LocalBusiness_type]['properties'],
+												$provider_google_cid_common
+											)
+										) {
+
+											// Get Google customer ID repeater field value
+
+												if ( !isset($provider_google_cid_repeater) ) {
+
+													$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $entity ) ?? array();
+
+												}
+
+											// Add each item to Google customer ID value array
+
+												$provider_google_cid = array();
+
+												if ( $provider_google_cid_repeater ) {
+
+													foreach ( $provider_google_cid_repeater as $item ) {
+
+														if ( $item ) {
+
+															$provider_google_cid[] = $item['schema_google_cid_text'];
+
+														}
+
+													}
+
+												}
+
+											// Clean up Google customer ID value array
+
+												if ( $provider_google_cid ) {
+
+													$provider_google_cid = array_filter($provider_google_cid);
+													$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
+													$provider_google_cid = array_values($provider_google_cid);
+
+												}
+
+										}
+
 								// about (MedicalWebPage only)
 
 									/* 
@@ -9827,81 +9887,26 @@
 										)
 									) {
 
-										// Google Company ID (CID)
+										// Get values
 
-											// Get list of Google Customer IDs
+											if ( $provider_google_cid ) {
 
-												if ( !isset($provider_google_cid) ) {
+												// Check / define values
 
-													// Get Google Customer ID repeater field value
+													$provider_google_cid = is_array($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
+													$provider_google_cid = array_is_list($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
 
-														if ( !isset($provider_google_cid_repeater) ) {
+												foreach ( $provider_google_cid as $item ) {
 
-															$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $entity ) ?? array();
+													if ( $item ) {
 
-														}
-
-													// Add each item to Google Company ID value array
-
-														$provider_google_cid = array();
-
-														if ( $provider_google_cid_repeater ) {
-
-															foreach ( $provider_google_cid_repeater as $item ) {
-
-																if ( $item ) {
-
-																	$provider_google_cid[] = $item['schema_google_cid_text'];
-
-																}
-
-															}
-
-														}
-
-													// Clean up Google Company ID value array
-
-														if ( $provider_google_cid ) {
-
-															$provider_google_cid = array_filter($provider_google_cid);
-															$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
-															$provider_google_cid = array_values($provider_google_cid);
-
-														}
-
-												}
-
-											// Format schema values
-
-												if ( $provider_google_cid ) {
-
-													// Check / define values
-
-														$provider_google_cid = is_array($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
-														$provider_google_cid = array_is_list($provider_google_cid) ? $provider_google_cid : array($provider_google_cid);
-
-													foreach ( $provider_google_cid as $item ) {
-
-														if ( $item ) {
-
-															$provider_hasMap[] = 'https://www.google.com/maps?cid=' . $item;
-
-														}
+														$provider_hasMap[] = 'https://www.google.com/maps?cid=' . $item;
 
 													}
 
 												}
 
-												// Clean up array
-
-													if ( $provider_hasMap ) {
-
-														// If there is only one item, flatten the multi-dimensional array by one step
-
-															uamswp_fad_flatten_multidimensional_array($provider_hasMap);
-
-													}
-
+											}
 
 										// Add to item values
 
@@ -10975,87 +10980,39 @@
 
 														}
 
-													// Google Company ID (CID)
+													// Google customer ID (CID)
 
-														// Get list of Google Customer IDs
+														if ( $provider_google_cid ) {
 
-															if ( !isset($provider_google_cid) ) {
+															// If there is only one item, flatten the multi-dimensional array by one step
 
-																// Get Google Customer ID repeater field value
+																uamswp_fad_flatten_multidimensional_array($provider_google_cid);
 
-																	if ( !isset($provider_google_cid_repeater) ) {
+															$provider_identifier = uamswp_fad_schema_propertyvalue(
+																array(
+																	'Google Ads customer ID',
+																	'Google Ads CID',
+																	'Google Maps customer ID',
+																	'Google Maps CID',
+																	'Google CID',
+																	'CID'
+																), // mixed // Optional // alternateName property value
+																null, // string // Optional // description property value
+																null, // int // Optional // maxValue property value
+																null, // mixed // Optional // measurementMethod property value
+																null, // mixed // Optional // measurementTechnique property value
+																null, // int // Optional // minValue property value
+																'Google customer ID', // string // Optional // name property value
+																'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
+																null, // string // Optional // unitCode property value
+																null, // string // Optional // unitText property value
+																null, // string // Optional // url property value
+																$provider_google_cid, // mixed // Optional // value property value
+																null, // mixed // Optional // valueReference property value
+																$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
+															);
 
-																		$provider_google_cid_repeater = get_field( 'schema_google_cid_multiple', $entity ) ?? array();
-
-																	}
-
-																// Add each item to Google Company ID value array
-
-																	$provider_google_cid = array();
-
-																	if ( $provider_google_cid_repeater ) {
-
-																		foreach ( $provider_google_cid_repeater as $item ) {
-
-																			if ( $item ) {
-
-																				$provider_google_cid[] = $item['schema_google_cid_text'];
-
-																			}
-
-																		}
-
-																	}
-
-																// Clean up Google Company ID value array
-
-																	if ( $provider_google_cid ) {
-
-																		$provider_google_cid = array_filter($provider_google_cid);
-																		$provider_google_cid = array_unique( $provider_google_cid, SORT_REGULAR );
-																		$provider_google_cid = array_values($provider_google_cid);
-
-																	}
-
-															}
-
-														// Add value to identifier property value list
-
-															if ( $provider_google_cid ) {
-
-																// If there is only one item, flatten the multi-dimensional array by one step
-
-																	if ( $provider_google_cid ) {
-
-																		uamswp_fad_flatten_multidimensional_array($provider_google_cid);
-
-																	}
-
-																$provider_identifier = uamswp_fad_schema_propertyvalue(
-																	array(
-																		'Google Ads customer ID',
-																		'Google Ads CID',
-																		'Google Maps customer ID',
-																		'Google Maps CID',
-																		'Google CID',
-																		'CID'
-																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
-																	null, // int // Optional // maxValue property value
-																	null, // mixed // Optional // measurementMethod property value
-																	null, // mixed // Optional // measurementTechnique property value
-																	null, // int // Optional // minValue property value
-																	'Google customer ID', // string // Optional // name property value
-																	'https://support.google.com/google-ads/answer/29198', // string // Optional // propertyID property value
-																	null, // string // Optional // unitCode property value
-																	null, // string // Optional // unitText property value
-																	null, // string // Optional // url property value
-																	$provider_google_cid, // mixed // Optional // value property value
-																	null, // mixed // Optional // valueReference property value
-																	$provider_identifier // array // Optional // Pre-existing list array for PropertyValue to which to add additional items
-																);
-
-															}
+														}
 
 												// Add to item values
 
@@ -15057,6 +15014,39 @@
 
 									}
 
+								// Identifiers (common use)
+
+									// Google customer ID (CID)
+
+										// List of properties that reference Google customer ID
+
+											$location_google_cid_common = array(
+												'identifier',
+												'hasMap'
+											);
+
+										if (
+											array_intersect(
+												$location_properties_map[$MedicalWebPage_type]['properties'],
+												$location_google_cid_common
+											)
+											||
+											array_intersect(
+												$location_properties_map[$LocalBusiness_type]['properties'],
+												$location_google_cid_common
+											)
+										) {
+
+											// Get Google customer ID
+
+												if ( !isset($location_google_cid) ) {
+
+													$location_google_cid = get_field( 'schema_google_cid', $entity ) ?? array();
+
+												}
+
+										}
+
 								// name
 
 									/* 
@@ -16475,17 +16465,9 @@
 
 										// Get values
 
-											if ( !isset($location_hasMap) ) {
+											if ( $location_google_cid ) {
 
-												$location_hasMap = get_field( 'schema_google_cid', $entity ) ?? array();
-
-											}
-
-										// Format values
-
-											if ( $location_hasMap ) {
-
-												$location_hasMap = 'https://www.google.com/maps?cid=' . $location_hasMap;
+												$location_hasMap = 'https://www.google.com/maps?cid=' . $location_google_cid;
 
 											}
 
