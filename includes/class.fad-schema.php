@@ -15209,7 +15209,7 @@
 
 												if ( !isset($location_ahaid) ) {
 
-													$location_ahaid = get_field( 'field_location_hospital_aha_id', $entity ) ?? '';
+													$location_ahaid = get_field( 'location_hospital_aha_id', $entity ) ?? '';
 
 												}
 
