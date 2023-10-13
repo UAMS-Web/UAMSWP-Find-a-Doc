@@ -2214,7 +2214,7 @@
 					If there are several variableMeasured properties recorded for some given 
 					data object, use a PropertyValue for each variableMeasured and attach the 
 					corresponding measurementTechnique. The value can also be from an 
-					enumeration, organized as a MeasurementMetholdEnumeration.
+					enumeration, organized as a MeasurementMethodEnum.
 
 					Expected Type:
 
