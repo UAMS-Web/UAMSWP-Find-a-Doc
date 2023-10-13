@@ -1,15 +1,15 @@
 <?php
 /*
  * Template Name: Related Conditions Section Query
- * 
- * Description: A query for whether the section which lists conditions related to 
- * the current ontology item should be displayed on the profile/subsection. It 
+ *
+ * Description: A query for whether the section which lists conditions related to
+ * the current ontology item should be displayed on the profile/subsection. It
  * also returns the Query, an array of IDs and a count of the IDs.
- * 
+ *
  * Required vars:
  * 	$page_id // int
  * 	$conditions_cpt // int[]
- * 
+ *
  * Optional vars:
  * 	$condition_treatment_section_show // bool
  * 	$ontology_type // bool

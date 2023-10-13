@@ -276,7 +276,7 @@
 			// $entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
 			// $entry_title_image_desktop = ''; // Desktop breakpoint image ID
 			// $entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
-			// 
+			//
 			// add_action( 'genesis_before_content', function() use (
 			// 	$entry_title_text,
 			// 	$entry_header_style,
@@ -286,12 +286,12 @@
 			// 	$entry_title_image_desktop,
 			// 	$entry_title_image_mobile
 			// ) {
-			// 
+			//
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
-			// 
+			//
 			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
-			// 
+			//
 			// } );
 
 	// MAIN / ARTICLE
@@ -432,12 +432,12 @@
 							<div class="entry-content clearfix" itemprop="text">
 								<?php
 
-								if ( $keywords ): 
+								if ( $keywords ):
 
 									$i = 1;
 									$keyword_text = '';
 
-									foreach ( $keywords as $keyword ) { 
+									foreach ( $keywords as $keyword ) {
 
 										if ( 1 < $i ) {
 
@@ -523,7 +523,7 @@
 
 							$i = 1;
 
-							foreach( $cta_repeater as $cta ) { 
+							foreach( $cta_repeater as $cta ) {
 
 								$cta_heading = $cta['cta_bar_heading'];
 								$cta_body = $cta['cta_bar_body'];

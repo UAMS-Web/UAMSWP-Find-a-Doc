@@ -1,48 +1,48 @@
 <?php
 /*
  * Template Name: Entry Title in the Marketing Landing Page Style
- * 
- * Description: A template part that displays a page header using the Marketing 
+ *
+ * Description: A template part that displays a page header using the Marketing
  * Landing Page style.
- * 
+ *
  * The page header displays a page title.
- * 
+ *
  * Optional elements include the following:
  * 	* A lead paragraph placed after the page title
  * 	* A background image
- * 
- * The template part expects the "Fly Dynamic Image Resizer" plugin by Junaid 
+ *
+ * The template part expects the "Fly Dynamic Image Resizer" plugin by Junaid
  * Bhura to be installed.
- * 
+ *
  * Required vars:
  * 	$entry_title_text // Regular title
- * 
+ *
  * Optional vars:
  * 	$entry_title_text_body // Optional lead paragraph, placed below the entry title
  * 	$entry_title_image_desktop // Desktop breakpoint image ID
  * 	$entry_title_image_mobile // Optional mobile breakpoint image ID
- * 
+ *
  * ----------
- * 
+ *
  * Add the following to the relevant template to remove Genesis-standard post title and markup:
  * 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
  * 	remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
  * 	remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
- * 
+ *
  * Add the following to the relevant template to add this header style
  * 	add_action( 'genesis_before_content', 'uamswp_fad_post_title' );
- * 
+ *
  * ----------
- * 
+ *
  * Required Regular title ($entry_title_text)
  * 	- Character limits: 62 characters
- * 
+ *
  * Optional Lead paragraph ($entry_title_text_body)
  * 	- Character limits: 117 characters
- * 
+ *
  * Required Desktop breakpoint image ID ($entry_title_text_body)
  * 	- Minimum dimensions: 1920x600
- * 
+ *
  * Optional Mobile breakpoint image ID ($entry_title_text_body)
  * 	- Minimum dimensions: 992x806
  */

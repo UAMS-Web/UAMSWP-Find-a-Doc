@@ -1,9 +1,9 @@
 <?php
 /*
- * Template Name: System settings for text elements in general placements of 
+ * Template Name: System settings for text elements in general placements of
  * a jump links bar
- * 
- * Description: A template part that defines a series of variables related to the 
+ *
+ * Description: A template part that defines a series of variables related to the
  * navigational element containing jump links (or anchor links)
  */
 

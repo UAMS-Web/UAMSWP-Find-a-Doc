@@ -1,13 +1,13 @@
 <?php
 /*
  * Template Name: Define variables for an area of expertise card
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in an area of expertise card
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
- * 
+ *
  * Optional vars:
  * 	$expertise_card_style // string enum('basic', 'detailed') // Area of expertise card style
  */

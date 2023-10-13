@@ -24,9 +24,9 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 				function uamswp_expertise_keywords() {
 					$keywords = get_field('expertise_alternate_names');
 					$keyword_text = '';
-					if( $keywords ): 
+					if( $keywords ):
 						$i = 1;
-						foreach( $keywords as $keyword ) { 
+						foreach( $keywords as $keyword ) {
 							if ( 1 < $i ) {
 								$keyword_text .= '; ';
 							}
@@ -95,9 +95,9 @@ include( UAMS_FAD_PATH . '/templates/parts/construction/single-expertise/common/
 				add_action( 'genesis_after_entry', 'uamswp_expertise_cta', 6 );
 				function uamswp_expertise_cta() {
 					$cta_repeater = get_field('expertise_cta');
-					if( $cta_repeater ): 
+					if( $cta_repeater ):
 						$i = 1;
-						foreach( $cta_repeater as $cta ) { 
+						foreach( $cta_repeater as $cta ) {
 							$cta_heading = $cta['cta_bar_heading'];
 							$cta_body = $cta['cta_bar_body'];
 							$cta_action_type = $cta['cta_bar_action_type'];

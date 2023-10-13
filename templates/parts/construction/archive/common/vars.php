@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Archive Template Common Variables
- * 
- * Description: A template part that defines the variables used on an all archive 
+ *
+ * Description: A template part that defines the variables used on an all archive
  * templates
  */
 

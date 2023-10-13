@@ -1,10 +1,10 @@
 <?php
 /*
  * Template Name: System settings for clinical resource facet labels
- * 
- * Description: A template part that defines a series of variables related to the 
+ *
+ * Description: A template part that defines a series of variables related to the
  * system settings for clinical resource facet labels
- * 
+ *
  */
 
 // Call the function

@@ -2,7 +2,7 @@
 /**
  * Template Name: Physician Loop
  * Designed for physicians
- * 
+ *
  * Required vars:
  * 	$provider_single_name_attr // Attribute value friendly version of system setting for Providers single item name
  * 	$location_single_name // System setting for Locations single item name

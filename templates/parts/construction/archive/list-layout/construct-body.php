@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Archive Template List Layout BODY Elements
- * 
- * Description: A template part that constructs the BODY elements common to all 
+ *
+ * Description: A template part that constructs the BODY elements common to all
  * archive pages using the list layout
  */
 

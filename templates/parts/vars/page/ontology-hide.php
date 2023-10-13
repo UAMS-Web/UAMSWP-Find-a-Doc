@@ -1,18 +1,18 @@
 <?php
-/* 
- * Template Name: Page settings for conditionally suppressing ontology sections 
+/*
+ * Template Name: Page settings for conditionally suppressing ontology sections
  * based on region and service line
- * 
- * Description: A template part that defines a series of variables related to a 
- * combination of settings (region and service line) on the page and at the system 
- * level used to determine whether or not to suppress certain ontology content on 
+ *
+ * Description: A template part that defines a series of variables related to a
+ * combination of settings (region and service line) on the page and at the system
+ * level used to determine whether or not to suppress certain ontology content on
  * a given page.
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  * 	$regions // array
  * 	$service_lines // array
- * 
+ *
  * Optional vars:
  * 	$hide_medical_ontology // bool
  */

@@ -242,7 +242,7 @@ $page_id = get_the_ID();
 		if ( $provider_specialty_term ) {
 
 			// // Schema.org MedicalSpecialty Enumeration Member
-			// 
+			//
 			// 	$schema_provider_medicalSpecialty = get_field('schema_medicalspecialty_single', $provider_specialty_term);
 			// 	$schema_provider_medicalSpecialty = uamswp_attr_conversion($schema_provider_medicalSpecialty);
 
@@ -545,16 +545,16 @@ $page_id = get_the_ID();
 						);
 
 					// // (Optional) Expand ISCO-8 code to include list of ancestors
-					// 
+					//
 					// 	if ( $schema_provider_isco08_code ) {
-					// 
+					//
 					// 		$schema_provider_isco08_code = array_merge(
 					// 			$schema_provider_isco08_code,
 					// 			$isco08_values[$schema_provider_isco08_code[0]]['sameAs']
 					// 		);
-					// 
+					//
 					// 		sort($schema_provider_isco08_code);
-					// 
+					//
 					// 	}
 
 					// Array
@@ -674,13 +674,13 @@ $page_id = get_the_ID();
 
 			/*
 			 * The name of the item.
-			 * 
+			 *
 			 * Subproperty of:
-			 * 
+			 *
 			 *     - rdfs:label
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - Text
 			 */
 
@@ -714,9 +714,9 @@ $page_id = get_the_ID();
 
 			/*
 			 * A description of the item.
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - Text
 			 *     - TextObject
 			 */
@@ -818,9 +818,9 @@ $page_id = get_the_ID();
 
 			/*
 			 * URL of the item.
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - URL
 			 */
 
@@ -917,13 +917,13 @@ $page_id = get_the_ID();
 
 			/*
 			 * The name of the item.
-			 * 
+			 *
 			 * Subproperty of:
-			 * 
+			 *
 			 *     - rdfs:label
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - Text
 			 */
 
@@ -1008,14 +1008,14 @@ $page_id = get_the_ID();
 		// mainEntityOfPage
 
 			/*
-			 * Indicates a page (or other CreativeWork) for which this thing is the main 
-			 * entity being described. See background notes at 
+			 * Indicates a page (or other CreativeWork) for which this thing is the main
+			 * entity being described. See background notes at
 			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-			 * 
+			 *
 			 * Inverse-property: mainEntity
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - CreativeWork
 			 *     - URL
 			 */
@@ -1046,9 +1046,9 @@ $page_id = get_the_ID();
 
 			/*
 			 * URL of the item.
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - URL
 			 */
 
@@ -1065,19 +1065,19 @@ $page_id = get_the_ID();
 		// additionalType
 
 			/*
-			 * An additional type for the item, typically used for adding more specific types 
-			 * from external vocabularies in microdata syntax. This is a relationship between 
-			 * something and a class that the thing is in. Typically the value is a 
-			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-			 * in RDF. Text values can be used sparingly, for cases where useful information 
-			 * can be added without their being an appropriate schema to reference. In the 
+			 * An additional type for the item, typically used for adding more specific types
+			 * from external vocabularies in microdata syntax. This is a relationship between
+			 * something and a class that the thing is in. Typically the value is a
+			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+			 * in RDF. Text values can be used sparingly, for cases where useful information
+			 * can be added without their being an appropriate schema to reference. In the
 			 * case of text values, the class label should follow the schema.org style guide.
-			 * 
+			 *
 			 * Subproperty of:
 			 *     - rdf:type
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - Text
 			 *     - URL
 			 */
@@ -1118,13 +1118,13 @@ $page_id = get_the_ID();
 
 			/*
 			 * The name of the item.
-			 * 
+			 *
 			 * Subproperty of:
-			 * 
+			 *
 			 *     - rdfs:label
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - Text
 			 */
 
@@ -1338,7 +1338,7 @@ $page_id = get_the_ID();
 
 			// Add to schema
 
-				$schema_provider_Person['gender'] = $schema_provider_gender; 
+				$schema_provider_Person['gender'] = $schema_provider_gender;
 
 		// givenName
 
@@ -1402,15 +1402,15 @@ $page_id = get_the_ID();
 
 		// identifier
 
-			/* 
-			 * The identifier property represents any kind of identifier for any kind of 
-			 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-			 * properties for representing many of these, either as textual strings or as 
-			 * URL (URI) links. See background notes at 
+			/*
+			 * The identifier property represents any kind of identifier for any kind of
+			 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+			 * properties for representing many of these, either as textual strings or as
+			 * URL (URI) links. See background notes at
 			 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - PropertyValue
 			 *     - Text
 			 *     - URL
@@ -1450,9 +1450,9 @@ $page_id = get_the_ID();
 
 			/*
 			 * An image of the item. This can be a URL or a fully described ImageObject.
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - ImageObject
 			 *     - URL
 			 */
@@ -1566,12 +1566,12 @@ $page_id = get_the_ID();
 		// sameAs
 
 			/*
-			 * URL of a reference Web page that unambiguously indicates the item's identity 
-			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+			 * URL of a reference Web page that unambiguously indicates the item's identity
+			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 			 * website).
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - URL
 			 */
 
@@ -1605,11 +1605,11 @@ $page_id = get_the_ID();
 
 			/*
 			 * A CreativeWork or Event about this Thing.
-			 * 
+			 *
 			 * Inverse-property: about
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - CreativeWork
 			 *     - Event
 			 */
@@ -1628,9 +1628,9 @@ $page_id = get_the_ID();
 
 			/*
 			 * URL of the item.
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - URL
 			 */
 

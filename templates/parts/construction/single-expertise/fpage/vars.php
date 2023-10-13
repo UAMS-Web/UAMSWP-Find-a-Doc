@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Fake Area of Expertise Subpage Template Variables
- * 
- * Description: A template part that defines the variables used on a single 
+ *
+ * Description: A template part that defines the variables used on a single
  * template for a fake area of expertise subpage
  */
 

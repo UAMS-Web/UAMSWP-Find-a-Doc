@@ -1,10 +1,10 @@
 <?php
 /*
  * Template Name: Define variables for a location profile
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in a location profile
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
  */

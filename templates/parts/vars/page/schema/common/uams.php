@@ -79,7 +79,7 @@
 	// location
 
 		// // Main UAMS campus in Little Rock
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -93,9 +93,9 @@
 		// 			'streetAddress' => '4301 West Markham Street'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS East Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -109,9 +109,9 @@
 		// 			'streetAddress' => '1393 Highway 242 South'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS North Central Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -125,9 +125,9 @@
 		// 			'streetAddress' => '1993 Harrison Street'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS Northeast Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -141,9 +141,9 @@
 		// 			'streetAddress' => '311 East Matthews Street'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS Northwest Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -157,9 +157,9 @@
 		// 			'streetAddress' => '1125 North College Avenue'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS South Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -173,9 +173,9 @@
 		// 			'streetAddress' => '1617 North Washington Street'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS South Central Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -189,9 +189,9 @@
 		// 			'streetAddress' => '1601 West 40th Avenue'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS Southwest Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -205,9 +205,9 @@
 		// 			'streetAddress' => '3417 U of A Way'
 		// 		)
 		// 	);
-		// 
+		//
 		// // UAMS West Regional Campus
-		// 
+		//
 		// 	$schema_base_org_uams_location[] = array(
 		// 		'@type' => 'Place',
 		// 		'@id' => '', // Defined later
@@ -221,19 +221,19 @@
 		// 			'streetAddress' => '1301 South E Street'
 		// 		)
 		// 	);
-		// 
+		//
 		// // Dynamically add IDs to each node and capture them in a new array
-		// 
+		//
 		// 	$schema_base_org_uams_location_ref = array();
-		// 
+		//
 		// 	foreach ( $schema_base_org_uams_location as $key => $value) {
-		// 
+		//
 		// 		$location_id = $schema_base_org_uams_url . '#Location-' . str_replace(' ', '-', $schema_base_org_uams_location[$key]['name']);
 		// 		$schema_base_org_uams_location[$key]['@id'] = $location_id;
 		// 		$schema_base_org_uams_location_ref[]['@id'] = $location_id;
-		// 
+		//
 		// 	}
-		// 
+		//
 		// // Add the values to the schema array
 		// $schema_base_org_uams['location'] = $schema_base_org_uams_location;
 

@@ -1,10 +1,10 @@
 <?php
 /*
  * Template Name: Set image values for Open Graph, Twitter and Oembed
- * 
- * Description: A template part that defines a series of variables defining the 
+ *
+ * Description: A template part that defines a series of variables defining the
  * image URLs and their dimensions for use in social meta tags
- * 
+ *
  * Required vars:
  * 	$featured_image // int // ID of the featured image
  */

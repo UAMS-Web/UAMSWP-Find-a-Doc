@@ -1,12 +1,12 @@
 <?php
 /*
  * Template Name: Title tag
- * 
+ *
  * Description: A template part that constructs the value for the <title> tag
- * 
+ *
  * Required vars:
  * 	$page_title_attr // string
- * 
+ *
  * Optional vars:
  * 	$meta_title_base_addition // string // Word or phrase to use to form base meta title // Defaults to $page_title_attr
  * 	$meta_title_base_order // array // Pre-defined array for name order of base meta title // Expects one value but will accommodate any number of values

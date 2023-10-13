@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Area of Expertise Template HEAD Elements
- * 
- * Description: A template part that constructs the HEAD elements common to all 
+ *
+ * Description: A template part that constructs the HEAD elements common to all
  * area of expertise overview pages and all fake area of expertise subpages
  */
 

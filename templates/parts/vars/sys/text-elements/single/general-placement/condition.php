@@ -1,11 +1,11 @@
 <?php
 /*
- * Template Name: System settings for text elements in general placements of 
+ * Template Name: System settings for text elements in general placements of
  * conditions fake subpages (or sections)
- * 
- * Description: A template part that defines a series of variables related to the 
+ *
+ * Description: A template part that defines a series of variables related to the
  * system settings for the general placement of condition item text elements
- * 
+ *
  * Required vars:
  * 	$page_id // int
  * 	$page_titles // array // Associative array with one or more of the following keys: 'page_title', 'page_title_phrase', 'short_name', 'short_name_possessive'

@@ -1,9 +1,9 @@
 <?php
 /*
  * Template Name: System settings for general patient referral information
- * 
- * Description: A template part that defines a series of variables related to the 
- * phone numbers and URLs used for physicians to submit appointment referrals on 
+ *
+ * Description: A template part that defines a series of variables related to the
+ * phone numbers and URLs used for physicians to submit appointment referrals on
  * the behalf of patients.
  */
 

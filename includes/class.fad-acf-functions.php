@@ -6,23 +6,23 @@
 // ACF Custom Tables
 /*
  * Changes the ACF Custom Database Tables JSON directory.
- * This needs to run before the 'plugins_loaded' action hook, so 
+ * This needs to run before the 'plugins_loaded' action hook, so
  * you need to put this in a plugin or in your wp-config.php file.
  */
 define( 'ACFCDT_JSON_DIR', WP_PLUGIN_DIR .'/'. basename(dirname(dirname(__FILE__))) . '/assets/json/acf-tables' );
 
 /*
- * Disables storing of meta data values in core meta tables where a custom 
+ * Disables storing of meta data values in core meta tables where a custom
  * database table has been defined for fields. Any fields that aren't mapped
- * to a custom database table will still be stored in the core meta tables. 
+ * to a custom database table will still be stored in the core meta tables.
  */
 add_filter( 'acfcdt/settings/store_acf_values_in_core_meta', '__return_false' );
 
 /*
- * Disables storing of ACF field key references in core meta tables where a custom 
- * database table has been defined for fields. Any fields that aren't mapped to a 
- * custom database table will still have their key references stored in the core 
- * meta tables. 
+ * Disables storing of ACF field key references in core meta tables where a custom
+ * database table has been defined for fields. Any fields that aren't mapped to a
+ * custom database table will still have their key references stored in the core
+ * meta tables.
  */
 // add_filter( 'acfcdt/settings/store_acf_keys_in_core_meta', '__return_false' );
 
@@ -432,7 +432,7 @@ function update_facetwp_index( $post_id ) {
 	}
 
 	// Fire after saving data to post
-	// Change post data 
+	// Change post data
 	add_action('acf/save_post', 'location_save_post_after', 20);
 	function location_save_post_after( $post_id ) {
 		$post_type = get_post_type($post_id);
@@ -591,7 +591,7 @@ function custom_excerpt_acf() {
 	);
 
 	// Get the post type of the current page/post
-	$post_type = get_post_type( $post_id ); 
+	$post_type = get_post_type( $post_id );
 
 	// Set the post excerpt value
 	if (
@@ -762,7 +762,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 				<div class="col-12">
 					<h2 class="module-title<?php echo ('1' == $hideheading ? ' sr-only': ''); ?>" ><?php echo $heading; ?></h2>
 					<div class="">
-						<?php 
+						<?php
 						if ($prefacets) {
 							foreach ($prefacets as $prefacet) {
 								echo '<div class="text-'. $prefacet['alignment'] .'">'. facetwp_display( 'facet', $prefacet['facet_name'] ) .'</div>';
@@ -770,7 +770,7 @@ function fad_facetwp_blocks_callback( $block, $content = '', $is_preview = false
 						}
 						?>
 						<?php echo facetwp_display( 'template', $template ); ?>
-						<?php 
+						<?php
 						if ($postfacets) {
 							foreach ($postfacets as $postfacet) {
 								echo '<div class="text-'. $postfacet['alignment'] .'">'. facetwp_display( 'facet', $postfacet['facet_name'] ) .'</div>';
@@ -1060,7 +1060,7 @@ add_filter('acf/format_value/key=field_physician_select_publications_pubmed', 'p
 
 				// Add field parameters to the $relationship_ontology_type array
 				array_push(
-					$relationship_ontology_type_meta, 
+					$relationship_ontology_type_meta,
 
 					// The content type of the page/post is not defined as a Simple Content Item
 					// (0 means Simple Content Item)
@@ -1102,10 +1102,10 @@ function uamswp_mychart_scheduling_query($field) {
 add_filter('acf/prepare_field/key=field_location_scheduling_tab', 'uamswp_mychart_scheduling_query', 20);
 
 // Get all of the descendant/child post IDs for a parent post ID.
-// 
+//
 // @param  int $parent_post_id The parent post ID.
 // @return array
-// 
+//
 // Based on: https://gist.github.com/petenelson/9a2831ed33ce786db5a081da9902c19a
 function uamswp_get_all_descendants( $parent_post_id ) {
 

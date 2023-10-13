@@ -3,10 +3,10 @@
  * WP Bootstrap Pagewalker
  *
  * @package WP-Bootstrap-Pagewalker
- * 
+ *
  * @since 1.0
  * @author Todd McKee
- * 
+ *
  * Based on: https://github.com/wp-bootstrap/wp-bootstrap-navwalker
  */
 

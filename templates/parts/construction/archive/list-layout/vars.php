@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Archive Template List Layout Variables
- * 
- * Description: A template part that defines the variables used on an archive 
+ *
+ * Description: A template part that defines the variables used on an archive
  * template using the list layout
  */
 

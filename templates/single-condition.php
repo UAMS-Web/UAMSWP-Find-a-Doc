@@ -276,7 +276,7 @@
 			// $entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
 			// $entry_title_image_desktop = ''; // Desktop breakpoint image ID
 			// $entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
-			// 
+			//
 			// add_action( 'genesis_before_content', function() use (
 			// 	$entry_title_text,
 			// 	$entry_header_style,
@@ -286,12 +286,12 @@
 			// 	$entry_title_image_desktop,
 			// 	$entry_title_image_mobile
 			// ) {
-			// 
+			//
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
-			// 
+			//
 			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
-			// 
+			//
 			// } );
 
 	// MAIN / ARTICLE
@@ -437,7 +437,7 @@
 				<main id="genesis-content" class="condition-item<?php echo $condition_field_classes; ?>">
 					<?php
 
-					// Construct main info section 
+					// Construct main info section
 
 						?>
 						<section class="archive-description bg-white">
@@ -449,11 +449,11 @@
 
 								$keyword_text = '';
 
-								if( $keywords ): 
+								if( $keywords ):
 
 									$i = 1;
 
-									foreach( $keywords as $keyword ) { 
+									foreach( $keywords as $keyword ) {
 										if ( 1 < $i ) {
 											$keyword_text .= '; ';
 										}
@@ -533,7 +533,7 @@
 						if ( $cta_repeater ) {
 							$i = 1;
 
-							foreach( $cta_repeater as $cta ) { 
+							foreach( $cta_repeater as $cta ) {
 
 								$cta_heading = $cta['cta_bar_heading'];
 								$cta_body = $cta['cta_bar_body'];

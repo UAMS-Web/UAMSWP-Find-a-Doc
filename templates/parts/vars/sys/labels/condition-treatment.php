@@ -1,10 +1,10 @@
 <?php
 /*
  * Template Name: System settings for combined condition and treatment labels
- * 
- * Description: A template part that defines a series of variables related to the 
+ *
+ * Description: A template part that defines a series of variables related to the
  * system settings for combined condition and treatment labels
- * 
+ *
  */
 
 // Call the function

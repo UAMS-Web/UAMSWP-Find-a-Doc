@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Clinical Resource Posts Per Page
- * 
- * Description: A template part that defines the general maximum number of 
+ *
+ * Description: A template part that defines the general maximum number of
  * clinical resource items to display on a fake subpage (or section)
  */
 

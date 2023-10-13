@@ -1,8 +1,8 @@
 <?php
-/* 
- * 
- * 
- * 
+/*
+ *
+ *
+ *
  */
 function uamswp_add_gmb_export_page() {
 	add_submenu_page( 'fad-settings', 'UAMSWP CSV Export', 'CSV Export', 'manage_options', 'uamswp-gmb-export', 'uamswp_fad_gmb_export_page', '', 90 );
@@ -59,7 +59,7 @@ if ( isset($_GET['action'] ) && $_GET['action'] == 'download_mychart_csv' ) {
 }
 
 function doximity_csv_export() {
-	// Check for current user privileges 
+	// Check for current user privileges
 	if( !current_user_can( 'manage_options' ) ){ return false; }
 
 	// Check if we are in WP-Admin
@@ -84,7 +84,7 @@ function doximity_csv_export() {
 
 	$query = new WP_Query( $args );
 
-	if ( $query->have_posts() ) : 
+	if ( $query->have_posts() ) :
 		$table_head = array();
 		$table_head[0] = 'NPI Number';
 		$table_head[1] = 'First Name';
@@ -323,7 +323,7 @@ function doximity_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row ) 
+	foreach ( $table_body as $data_row )
 	{
 		fputcsv( $fh, $data_row, $delimiter );
 	}
@@ -332,7 +332,7 @@ function doximity_csv_export() {
 }
 
 function gmb_provider_csv_export() {
-	// Check for current user privileges 
+	// Check for current user privileges
 	if( !current_user_can( 'manage_options' ) ){ return false; }
 
 	// Check if we are in WP-Admin
@@ -763,7 +763,7 @@ function gmb_provider_csv_export() {
 
 						// Address line 1
 
-							// Parent Location 
+							// Parent Location
 							$location_post_id = $location;
 							$location_child_id = $location;
 							$location_has_parent = get_field('location_parent',$location_post_id);
@@ -771,7 +771,7 @@ function gmb_provider_csv_export() {
 							$location_parent_title = ''; // Eliminate PHP errors
 							$location_parent_url = ''; // Eliminate PHP errors
 							$location_parent_location = ''; // Eliminate PHP errors
-							if ($location_has_parent && $location_parent_id) { 
+							if ($location_has_parent && $location_parent_id) {
 								$location_parent_location = get_post( $location_parent_id );
 							}
 							// Get Post ID for Address & Image fields
@@ -799,7 +799,7 @@ function gmb_provider_csv_export() {
 								}
 							$location_suite = get_field('location_suite', $location_post_id );
 
-								// Option 1: 
+								// Option 1:
 								// Address Line 1 = Street address (covered above)
 								// Address Line 2+ = Cascading options based on presence of values...
 								// 	Building Name
@@ -825,7 +825,7 @@ function gmb_provider_csv_export() {
 								//	 $location_address_2 = $location_address_2_deprecated;
 								// }
 
-								// Option 2: 
+								// Option 2:
 								// Address Line 1 = Street address (covered above)
 								// Address Line 2+ = Cascading options based on presence of values...
 								// 	Building Name
@@ -1102,7 +1102,7 @@ function gmb_provider_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row ) 
+	foreach ( $table_body as $data_row )
 	{
 		fputcsv( $fh, $data_row, $delimiter );
 	}
@@ -1112,7 +1112,7 @@ function gmb_provider_csv_export() {
 }
 
 function gmb_location_csv_export() {
-	// Check for current user privileges 
+	// Check for current user privileges
 	if( !current_user_can( 'manage_options' ) ){ return false; }
 
 	// Check if we are in WP-Admin
@@ -1137,7 +1137,7 @@ function gmb_location_csv_export() {
 
 	$query = new WP_Query( $args );
 
-	if ( $query->have_posts() ) : 
+	if ( $query->have_posts() ) :
 		$table_head = array();
 		$table_head[0] = 'Store code';
 		$table_head[1] = 'Business name';
@@ -1435,7 +1435,7 @@ function gmb_location_csv_export() {
 
 		$table_body = array();
 		while( $query->have_posts() ) : $query->the_post();
-			// Parent Location 
+			// Parent Location
 			$location_post_id = get_the_ID();
 			$location_child_id = get_the_ID();
 			$location_has_parent = get_field('location_parent',$location_post_id);
@@ -1443,7 +1443,7 @@ function gmb_location_csv_export() {
 			$location_parent_title = ''; // Eliminate PHP errors
 			$location_parent_url = ''; // Eliminate PHP errors
 			$location_parent_location = ''; // Eliminate PHP errors
-			if ($location_has_parent && $location_parent_id) { 
+			if ($location_has_parent && $location_parent_id) {
 				$location_parent_location = get_post( $location_parent_id );
 			}
 			// Get Post ID for Address & Image fields
@@ -1479,7 +1479,7 @@ function gmb_location_csv_export() {
 				}
 			$location_suite = get_field('location_suite', $location_post_id );
 
-				// Option 1: 
+				// Option 1:
 				// Address Line 1 = Street address (covered above)
 				// Address Line 2+ = Cascading options based on presence of values...
 				// 	Building Name
@@ -1505,7 +1505,7 @@ function gmb_location_csv_export() {
 					$location_address_2 = $location_address_2_deprecated;
 				}
 
-				// Option 2: 
+				// Option 2:
 				// Address Line 1 = Street address (covered above)
 				// Address Line 2+ = Cascading options based on presence of values...
 				// 	Building Name
@@ -1864,7 +1864,7 @@ function gmb_location_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row ) 
+	foreach ( $table_body as $data_row )
 	{
 		fputcsv( $fh, $data_row, $delimiter );
 	}
@@ -1873,7 +1873,7 @@ function gmb_location_csv_export() {
 }
 
 function mychart_csv_export() {
-	// Check for current user privileges 
+	// Check for current user privileges
 	if( !current_user_can( 'manage_options' ) ){ return false; }
 
 	// Check if we are in WP-Admin
@@ -1965,7 +1965,7 @@ function mychart_csv_export() {
 	header( 'Pragma: no-cache' ); // no cache
 	header( 'Expires: 0' ); // expire date
 	fputcsv( $fh, $table_head, $delimiter );
-	foreach ( $table_body as $data_row ) 
+	foreach ( $table_body as $data_row )
 	{
 		fputcsv( $fh, $data_row, $delimiter );
 	}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Template Name: Single Provider
  */
@@ -444,15 +444,15 @@
 							strtolower($provider_occupation_title)[0],
 							array( 'a', 'e', 'i', 'o', 'u' )
 						)
-					) { 
+					) {
 
 						// If the clinical occupation title starts with a vowel, use "an"
-						$provider_occupation_title_indef_article = 'an'; 
+						$provider_occupation_title_indef_article = 'an';
 
 					} else {
 
 						// If the clinical occupation title does not start with a vowel, use "a"
-						$provider_occupation_title_indef_article = 'a'; 
+						$provider_occupation_title_indef_article = 'a';
 
 					}
 
@@ -486,7 +486,7 @@
 								// If the clinical occupation title begins with the exception key...
 
 								// Use the key's value as the indefinite article
-								$provider_occupation_title_indef_article = $indef_article; 
+								$provider_occupation_title_indef_article = $indef_article;
 
 							}
 
@@ -572,9 +572,9 @@
 	// Meta Keywords
 
 		// $keywords = '';
-		// 
+		//
 		// // Override theme's standard meta keywords settings
-		// 
+		//
 		// 	add_action( 'wp_head', function() use ( $keywords ) {
 		// 		uamswp_keyword_hook_header(
 		// 			$keywords // array
@@ -653,17 +653,17 @@
 
 		// $template_type = '';
 		// add_filter( 'body_class', function( $classes ) use ( $template_type ) {
-		// 
+		//
 		// 	// Add page template class to body class array
-		// 
+		//
 		// 		if ( $template_type ) {
-		// 
+		//
 		// 			$classes[] = 'page-template-' . $template_type;
-		// 
+		//
 		// 		}
-		// 
+		//
 		// 	return $classes;
-		// 
+		//
 		// } );
 
 	// Header
@@ -751,7 +751,7 @@
 			// $entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
 			// $entry_title_image_desktop = ''; // Desktop breakpoint image ID
 			// $entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
-			// 
+			//
 			// add_action( 'genesis_before_content', function() use (
 			// 	$entry_title_text,
 			// 	$entry_header_style,
@@ -761,12 +761,12 @@
 			// 	$entry_title_image_desktop,
 			// 	$entry_title_image_mobile
 			// ) {
-			// 
+			//
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
-			// 
+			//
 			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
-			// 
+			//
 			// } );
 
 	// MAIN / ARTICLE
@@ -1135,7 +1135,7 @@
 									<div class="col-12 col-xs p-4 py-xs-0 px-xs-4 px-sm-8 order-2 text">
 										<h1 class="page-title">
 											<span class="name"><?php echo $full_name; ?></span>
-											<?php 
+											<?php
 
 											if (
 												$provider_occupation_title
@@ -1176,7 +1176,7 @@
 											//reset global post variable. After this point, we are back to the Main Query object
 											wp_reset_postdata();
 
-										?> 
+										?>
 										<h2 class="h3">Overview</h2>
 										<dl data-sectiontitle="Overview">
 											<?php
@@ -1207,7 +1207,7 @@
 
 													?>
 													<dt>Accepting New Patients</dt>
-													<?php 
+													<?php
 
 													if ( $accept_new ) {
 
@@ -1223,7 +1223,7 @@
 
 															?>
 															<dd>Yes</dd>
-															<?php 
+															<?php
 
 														}
 
@@ -1312,7 +1312,7 @@
 												$comment_count = '';
 
 												?>
-												<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p> 
+												<p class="small"><em>Patient ratings are not available for this <?php echo strtolower($provider_single_name); ?>. <a data-toggle="modal" data-target="#why_not_modal" class="no-break" tabindex="0" href="#" aria-label="Learn why ratings are not available for this <?php echo strtolower($provider_single_name_attr); ?>" data-sectiontitle="Overview"><span aria-hidden="true">Why not?</span></a></em></p>
 												<?php
 
 											} // endif ( $rating_valid ) else
@@ -1587,7 +1587,7 @@
 										</div>
 									</div>
 								</section>
-								<?php 
+								<?php
 
 							} // endif ( $clinical_bio_section_show )
 
@@ -1826,7 +1826,7 @@
 
 												// Certifications
 
-													if ( !empty( $certifications ) ) { 
+													if ( !empty( $certifications ) ) {
 
 														?>
 														<h3 class="h4">Certifications</h3>
@@ -2040,7 +2040,7 @@
 														<dl>
 															<?php
 															$questionRatings = $rating_data->profile->questionRatings;
-															foreach( $questionRatings as $questionRating ): 
+															foreach( $questionRatings as $questionRating ):
 																if ($questionRating->questionCount > 0){ ?>
 															<dt><?php echo $questionRating->question; ?></dt>
 															<dd>
@@ -2058,7 +2058,7 @@
 														<p>(<?php echo $rating_data->profile->reviewBodyCountStr; ?>)</p>
 													</div>
 												</div>
-												<?php 
+												<?php
 												$reviews = $rating_data->reviews;
 												// if ( $reviews ) : ?>
 												<?php //print_r($rating_data); ?>
@@ -2150,8 +2150,8 @@
 						// Construct second appointment information section
 
 							if (
-								$appointment_section_show && 
-								( 
+								$appointment_section_show &&
+								(
 									$clinical_bio_section_show
 									|| $academic_section_show
 									|| $podcast_section_show

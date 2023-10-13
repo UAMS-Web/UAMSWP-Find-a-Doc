@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Template Name: Single Location
  */
@@ -329,9 +329,9 @@
 	// Meta Keywords
 
 		// $keywords = '';
-		// 
+		//
 		// // Override theme's standard meta keywords settings
-		// 
+		//
 		// 	add_action( 'wp_head', function() use ( $keywords ) {
 		// 		uamswp_keyword_hook_header(
 		// 			$keywords // array
@@ -353,17 +353,17 @@
 
 		// $template_type = '';
 		// add_filter( 'body_class', function( $classes ) use ( $template_type ) {
-		// 
+		//
 		// 	// Add page template class to body class array
-		// 
+		//
 		// 		if ( $template_type ) {
-		// 
+		//
 		// 			$classes[] = 'page-template-' . $template_type;
-		// 
+		//
 		// 		}
-		// 
+		//
 		// 	return $classes;
-		// 
+		//
 		// } );
 
 	// Header
@@ -433,7 +433,7 @@
 			// $entry_title_text_body = ''; // Optional lead paragraph, placed below the entry title
 			// $entry_title_image_desktop = ''; // Desktop breakpoint image ID
 			// $entry_title_image_mobile = ''; // Optional mobile breakpoint image ID
-			// 
+			//
 			// add_action( 'genesis_before_content', function() use (
 			// 	$entry_title_text,
 			// 	$entry_header_style,
@@ -443,12 +443,12 @@
 			// 	$entry_title_image_desktop,
 			// 	$entry_title_image_mobile
 			// ) {
-			// 
+			//
 			// 	// Check/define variables
 			// 	$entry_header_style = ( isset($entry_header_style) && !empty($entry_header_style) ) ? $entry_header_style : 'graphic';
-			// 
+			//
 			// 	include( UAMS_FAD_PATH . '/templates/parts/html/entry-title/' . $entry_header_style . '.php');
-			// 
+			//
 			// } );
 
 	// MAIN / ARTICLE
@@ -550,7 +550,7 @@
 						||
 						!$location_closing // If location closing is not toggled
 					)
-					&& 
+					&&
 					( $location_alert_title || $location_alert_text ) // If location alert title or location alert description has value
 				) {
 
@@ -982,8 +982,8 @@
 													} // endif
 
 													if (
-														$location_closing_length == 'temporary' 
-														&& $location_reopen_known == 'date' 
+														$location_closing_length == 'temporary'
+														&& $location_reopen_known == 'date'
 														&& !empty($location_reopen_date)
 														&& (new DateTime($location_reopen_date) >= new DateTime($location_closing_date))
 													) {
@@ -991,8 +991,8 @@
 														?>It is scheduled to reopen on <?php echo $location_reopen_date; ?>. <?php
 
 													} elseif (
-														$location_closing_length == 'temporary' 
-														&& $location_reopen_known == 'tbd' 
+														$location_closing_length == 'temporary'
+														&& $location_reopen_known == 'tbd'
 													) {
 
 														?>It will remain closed until further notice. <?php
@@ -1855,7 +1855,7 @@
 												<?php } else { ?>
 													<div class="carousel slide carousel-thumbnails" id="location-info-carousel" data-interval="false" data-ride="carousel">
 														<div class="carousel-inner">
-															<?php 
+															<?php
 
 															$location_carousel_slide = 1;
 
@@ -2047,13 +2047,13 @@
 
 													}
 
-													if ( $location_affiliation_section_show ) { 
+													if ( $location_affiliation_section_show ) {
 
 														if (
 															$location_about_section_show
 															||
 															$prescription_section_show
-														) { 
+														) {
 
 															echo '<h3 id="affiliation">Affiliation</h3>';
 
@@ -2063,13 +2063,13 @@
 
 													}
 
-													if ( $prescription_section_show ) { 
+													if ( $prescription_section_show ) {
 
 														if (
 															$location_about_section_show
 															||
 															$location_affiliation_section_show
-														) { 
+														) {
 
 															echo '<h3 id="prescription-info">Prescription Information</h3>';
 
@@ -2260,7 +2260,7 @@
 																<label for="schedule_options" class="lead">Available Services</label>
 																<select name="schedule_options" id="schedule_options" class="form-control">
 																	<option value="">Select an option</option>
-																	<?php foreach($location_scheduling_options as $key => $title) : 
+																	<?php foreach($location_scheduling_options as $key => $title) :
 																		$location_scheduling_item_title_nested = $title['location_scheduling_item_title_nested'];
 																		$location_scheduling_item_title_nested = ( isset($location_scheduling_item_title_nested) && !empty($location_scheduling_item_title_nested) ) ? $location_scheduling_item_title_nested : 'Schedule an Appointment Online';
 																		?>
@@ -2378,9 +2378,9 @@
 															$telemedicine_modified_text = '';
 															$telemedicine_active_start = '';
 															$telemedicine_active_end = '';
-															if ($telemedicine_modified) : 
+															if ($telemedicine_modified) :
 															?>
-															<?php 
+															<?php
 
 																$telemedicine_modified_day = ''; // Previous Day
 																$telemedicine_modified_comment = ''; // Comment on previous day

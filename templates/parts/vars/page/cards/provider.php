@@ -1,13 +1,13 @@
 <?php
 /*
  * Template Name: Define variables for a provider card
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in a provider card
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
- * 
+ *
  * Optional vars:
  * 	$provider_card_style // string enum('basic', 'detailed') // Provider card style
  */

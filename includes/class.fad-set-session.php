@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 defined('ABSPATH') or die("You can't access this file directly.");
 

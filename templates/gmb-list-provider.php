@@ -147,7 +147,7 @@ function display_provider_image() {
 					</tr>
 				</thead>
 				<tbody>
-				<?php 
+				<?php
 				while( $query->have_posts() ) : $query->the_post();
 					$post_id = get_the_ID();
 
@@ -257,7 +257,7 @@ function display_provider_image() {
 
 									// Address line 1
 
-										// Parent Location 
+										// Parent Location
 										$location_post_id = $location;
 										$location_child_id = $location;
 										$location_has_parent = get_field('location_parent',$location_post_id);
@@ -265,7 +265,7 @@ function display_provider_image() {
 										$location_parent_title = ''; // Eliminate PHP errors
 										$location_parent_url = ''; // Eliminate PHP errors
 										$location_parent_location = ''; // Eliminate PHP errors
-										if ($location_has_parent && $location_parent_id) { 
+										if ($location_has_parent && $location_parent_id) {
 											$location_parent_location = get_post( $location_parent_id );
 										}
 										// Get Post ID for Address & Image fields
@@ -293,7 +293,7 @@ function display_provider_image() {
 											}
 										$location_suite = get_field('location_suite', $location_post_id );
 
-											// Option 1: 
+											// Option 1:
 											// Address Line 1 = Street address (covered above)
 											// Address Line 2+ = Cascading options based on presence of values...
 											// 	Building Name
@@ -319,7 +319,7 @@ function display_provider_image() {
 											//	 $location_address_2 = $location_address_2_deprecated;
 											// }
 
-											// Option 2: 
+											// Option 2:
 											// Address Line 1 = Street address (covered above)
 											// Address Line 2+ = Cascading options based on presence of values...
 											// 	Building Name

@@ -1,14 +1,14 @@
-<?php 
+<?php
 /**
  * Template Name: Location Card, Basic Style
- * 
- * Description: A template part that displays a card containing basic information 
+ *
+ * Description: A template part that displays a card containing basic information
  * about a location and links to the location's profile
- * 
+ *
  * Must be used inside a loop
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Optional vars:
  * 	$location_descendant_list // bool (default: false) // Query for whether this is a list of child locations within a location
  */
@@ -139,7 +139,7 @@
 
 			?>
 		</h3>
-		<?php 
+		<?php
 
 		// Construct the location alert
 
@@ -159,7 +159,7 @@
 
 				?>
 				<p class="card-text"><?php echo $location_address_text; ?></p>
-				<?php 
+				<?php
 
 			} // endif ( $location_address_text )
 

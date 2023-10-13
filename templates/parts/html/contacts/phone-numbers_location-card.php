@@ -1,15 +1,15 @@
 <?php
 /**
  * Template Name: Location Appointment Phone Numbers List
- * 
- * Description: A template part that displays a list of appointment phone 
+ *
+ * Description: A template part that displays a list of appointment phone
  * numbers using a definition list element.
- * 
- * The output is intended to be used in secondary references to a location such as 
+ *
+ * The output is intended to be used in secondary references to a location such as
  * a location card or the primary location section of a provider profile.
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Required vars:
  * 	$location_phone_numbers // array
  * 	$location_phone_data_categorytitle // string // data-categorytitle attribute value

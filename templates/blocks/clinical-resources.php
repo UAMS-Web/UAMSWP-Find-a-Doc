@@ -1,19 +1,19 @@
 <?php
 /**
  * Template Name: Clinical Resources loop / text block
- * 
- * Description: A template part that displays a list of clinical resource items 
+ *
+ * Description: A template part that displays a list of clinical resource items
  * associated with the current page.
- * 
+ *
  * Two layouts are available: card layout and vertical text list layout.
- * 
- * If the list is limited to the four most recently published items, a card layout 
- * will be used (i.e., UAMS Stacked Image & Text Block). If there is no limit on 
- * the number of items to be displayed, a vertical text list layout will be  used 
+ *
+ * If the list is limited to the four most recently published items, a card layout
+ * will be used (i.e., UAMS Stacked Image & Text Block). If there is no limit on
+ * the number of items to be displayed, a vertical text list layout will be  used
  * (i.e., UAMS Link List Block).
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  * 	$clinical_resources // int[]
@@ -21,7 +21,7 @@
  * 	$resource_more_suppress // bool
  * 	$clinical_resource_section_more_link_key // string
  * 	$clinical_resource_section_more_link_value // string
- * 
+ *
  * Optional var:
  * 	$resource_heading_related_name // string // To what is it related?
  * 	$resource_heading // string
@@ -90,7 +90,7 @@ if ( $clinical_resource_section_show ) {
 					</div>
 					<div class="col-12">
 						<div class="card-list card-list-left">
-							<?php 
+							<?php
 							while ($clinical_resource_query->have_posts()) {
 								$clinical_resource_query->the_post();
 								include( UAMS_FAD_PATH . '/templates/parts/html/cards/clinical-resource.php' );

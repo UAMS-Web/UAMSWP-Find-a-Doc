@@ -191,7 +191,7 @@
 				);
 				$args = array(
 					'label' => 'Areas of Expertise',
-					'description' => 'UAMS Areas of Expertise', 
+					'description' => 'UAMS Areas of Expertise',
 					'labels' => $labels,
 					'supports' => array( 'title', 'editor', 'page-attributes', 'revisions' ),
 					'taxonomies' => array( 'treatment', 'condition' ),
@@ -745,7 +745,7 @@
 			// 			'rest_controller_class' => 'WP_REST_Terms_Controller',
 			// 	);
 			// 	register_taxonomy( 'specialty', array( 'provider' ), $args );
-			// 
+			//
 			// }
 
 		// Clinical Departments
@@ -802,7 +802,7 @@
 			// 		'show_in_quick_edit' => false,
 			// 	);
 			// 	register_taxonomy( 'department', array( 'provider' ), $args );
-			// 
+			//
 			// }
 
 		// Service Lines
@@ -998,7 +998,7 @@
 
 			/*
 
-				Expected taxonomy items include the items from the Health Care Provider Taxonomy 
+				Expected taxonomy items include the items from the Health Care Provider Taxonomy
 				code set.
 
 			*/
@@ -1305,7 +1305,7 @@
 		// Medical Terms
 
 			// function create_medical_terms_taxonomy() {
-			// 
+			//
 			// 	$labels = array(
 			// 		'name' => 'Medical Terms',
 			// 		'singular_name' => 'Medical Term',
@@ -1351,7 +1351,7 @@
 			// 		'capabilities' => $capabilities,
 			// 	);
 			// 	register_taxonomy( 'medical_term', array( 'provider' ), $args );
-			// 
+			//
 			// }
 
 		// Academic Position Types
@@ -2609,7 +2609,7 @@
 	add_action('admin_head', 'acf_hide_title');
 
 	function acf_hide_title() {
-		echo 
+		echo
 		'<style>
 			.acf-field.hide-acf-field {
 				display: none;
@@ -3006,13 +3006,13 @@
 			$postId = $object['id'];
 			$data['location_title'] = get_the_title( $postId );
 			$data['location_link'] = get_permalink($postId );
-			// Parent Location 
+			// Parent Location
 			$location_has_parent = get_field('location_parent',$postId);
 			$location_parent_id = get_field('location_parent_id',$postId);
 			$parent_title = ''; // Eliminate PHP errors
 			$parent_url = ''; // Eliminate PHP errors
 			$parent_location = ''; // Eliminate PHP errors
-			if ($location_has_parent && $location_parent_id) { 
+			if ($location_has_parent && $location_parent_id) {
 				$parent_location = get_post( $location_parent_id );
 			}
 			// Get Post ID for Address & Image fields

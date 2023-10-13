@@ -1,13 +1,13 @@
 <?php
 /*
  * Template Name: Define variables for an area of expertise profile
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in an area of expertise profile
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
- * 
+ *
  * Optional vars:
  * 	$current_fpage // string // Current fake subpage slug
  */

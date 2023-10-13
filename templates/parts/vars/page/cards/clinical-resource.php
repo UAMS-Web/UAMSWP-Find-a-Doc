@@ -1,13 +1,13 @@
 <?php
 /*
  * Template Name: Define variables for a clinical resource card
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in a clinical resource card
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
- * 
+ *
  * Optional vars:
  * 	$clinical_resource_card_style // string enum('basic', 'detailed') // Clinical resource card style
  */

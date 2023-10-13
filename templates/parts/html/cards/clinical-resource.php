@@ -1,12 +1,12 @@
-<?php 
+<?php
 /**
  * Template Name: Clinical Resource Card for Clinical Resource Section
- * 
- * Description: A template part that displays a clinical resource card to be 
+ *
+ * Description: A template part that displays a clinical resource card to be
  * included in a list of clinical resources associated with the current page.
- * 
+ *
  * Must be used inside a loop
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
  */
 

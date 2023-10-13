@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: Fake Area of Expertise Subpage Template HEAD Elements
- * 
- * Description: A template part that constructs the HEAD elements common to all 
+ *
+ * Description: A template part that constructs the HEAD elements common to all
  * fake area of expertise subpages
  */
 

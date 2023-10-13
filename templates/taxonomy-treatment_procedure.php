@@ -211,12 +211,12 @@ get_header();
 			<div class="entry-content clearfix" itemprop="text">
 				<?php
 
-				if( $keywords ): 
+				if( $keywords ):
 
 					$i = 1;
 					$keyword_text = '';
 
-					foreach ( $keywords as $keyword ) { 
+					foreach ( $keywords as $keyword ) {
 
 						if ( 1 < $i ) {
 
@@ -304,7 +304,7 @@ get_header();
 				</div>
 			</section>
 		<?php endif; ?>
-		<?php 
+		<?php
 			$args = (array(
 				'taxonomy' => 'condition',
 				'order' => 'ASC',
@@ -413,7 +413,7 @@ get_header();
 						<h2 class="module-title"><span class="title"><?php echo $expertise_plural_name; ?> for <?php echo $page_title; ?></span></h2>
 						<div class="card-list-container">
 							<div class="card-list card-list-expertise">
-							<?php 
+							<?php
 								while ( $expertise_query->have_posts() ) : $expertise_query->the_post();
 									$page_id = get_the_ID();
 									include( UAMS_FAD_PATH . '/templates/parts/html/cards/expertise.php' );

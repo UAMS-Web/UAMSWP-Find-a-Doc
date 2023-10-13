@@ -1,8 +1,8 @@
 <?php
 /*
  * Template Name: System settings for general patient appointment information
- * 
- * Description: A template part that defines a series of variables related to the 
+ *
+ * Description: A template part that defines a series of variables related to the
  * phone numbers and URLs used for patients to make an appointment.
  */
 

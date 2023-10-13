@@ -1,14 +1,14 @@
-<?php 
-/* 
+<?php
+/*
  * 	Creates fake subpages for a Area of Expertise custom post type
- * 
+ *
  * 	Based on: https://web.archive.org/web/20120724003555/https://www.placementedge.com/blog/create-post-sub-pages/
  * 	Based on: https://web.archive.org/web/20120304064323/https://betterwp.net/98-wordpress-create-fake-pages/
- * 
+ *
 */
 
 // Adding rewrite rules for the fake subpages under Area of Expertise pages
-function fsp_insertrules($rules) 
+function fsp_insertrules($rules)
 {
 
 	// Define an array of the permalinks and titles for the fake subpages.

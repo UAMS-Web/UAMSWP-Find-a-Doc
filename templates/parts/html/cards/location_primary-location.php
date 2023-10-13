@@ -1,17 +1,17 @@
-<?php 
+<?php
 /**
  * Template Name: Location Card, Primary Location Style
- * 
- * Description: A template part that displays information about a provider's 
+ *
+ * Description: A template part that displays information about a provider's
  * primary location
- * 
+ *
  * Must be used inside a loop
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
- * 
+ *
  * Required vars:
  * 	$location_count // int // Number of locations associated with the current item
- * 
+ *
  * Optional vars:
  * 	$location_descendant_list // bool (default: false) // Query for whether this is a list of child locations within a location
  */
@@ -54,7 +54,7 @@
 
 			?>
 			<p class="card-text"><?php echo $location_address_text; ?></p>
-			<?php 
+			<?php
 
 		} // endif ( $location_address_text )
 

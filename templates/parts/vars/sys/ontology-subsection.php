@@ -1,14 +1,14 @@
 <?php
 /*
  * Template Name: Ontology subsection values
- * 
- * Description: A template part that defines a series of variables related to the 
- * the values necessary to create the site header and the site navigation elements 
+ *
+ * Description: A template part that defines a series of variables related to the
+ * the values necessary to create the site header and the site navigation elements
  * in an ontology subsection
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current ontology item
- * 
+ *
  * Optional vars:
  * 	$ontology_type // bool (default: true) // Ontology type of the current ontology item (true is ontology type, false is content type)
  * 	$page_title // string (default: '') // Title of the current ontology item

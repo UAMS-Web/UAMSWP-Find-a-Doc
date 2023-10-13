@@ -1,10 +1,10 @@
 <?php
 /*
  * Template Name: Area of Expertise Template BODY Elements
- * 
- * Description: A template part that constructs the BODY elements common to all 
+ *
+ * Description: A template part that constructs the BODY elements common to all
  * area of expertise overview pages and all fake area of expertise subpages
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the current page
  */

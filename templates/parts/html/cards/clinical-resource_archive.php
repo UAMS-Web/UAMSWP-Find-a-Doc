@@ -1,12 +1,12 @@
-<?php 
+<?php
 /**
  * Template Name: Clinical Resource Card for Clinical Resource Archive
- * 
- * Description: A template part that displays a clinical resource card to be 
+ *
+ * Description: A template part that displays a clinical resource card to be
  * included in a clinical resource archive.
- * 
+ *
  * Must be used inside a loop
- * 
+ *
  * Designed for UAMS Health Find-a-Doc
  */
 
@@ -163,7 +163,7 @@ $clinical_resource_related_max = 3; // Set how many of each related item type to
 
 									} // endif
 
-								?> 
+								?>
 							</dl>
 							<?php
 

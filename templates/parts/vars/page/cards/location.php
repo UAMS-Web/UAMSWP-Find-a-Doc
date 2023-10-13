@@ -1,13 +1,13 @@
 <?php
 /*
  * Template Name: Define variables for a location card
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in a location card
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
- * 
+ *
  * Optional vars:
  * 	$location_card_style // string enum('basic', 'detailed', 'primary-location') // Location card style
  * 	$schema_address // array // Schema address data

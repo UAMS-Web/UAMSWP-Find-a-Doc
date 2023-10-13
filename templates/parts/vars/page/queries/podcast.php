@@ -1,15 +1,15 @@
 <?php
 /*
  * Template Name: UAMS Health Talk Podcast Section Query
- * 
- * Description: A query for whether the section which lists any episodes from the 
- * UAMS Health Talk podcast which are related to the content of the current page 
+ *
+ * Description: A query for whether the section which lists any episodes from the
+ * UAMS Health Talk podcast which are related to the content of the current page
  * should be displayed on the profile/subsection.
- * 
+ *
  * Required vars:
  * 	$page_id // int
  * 	$podcast_name // string
- * 
+ *
  * Optional vars:
  * 	$jump_link_count // int
  */

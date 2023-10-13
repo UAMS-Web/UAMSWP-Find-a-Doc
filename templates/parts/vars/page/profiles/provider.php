@@ -1,10 +1,10 @@
 <?php
 /*
  * Template Name: Define variables for a provider profile
- * 
- * Description: A template part that defines a series of variables for the fields 
+ *
+ * Description: A template part that defines a series of variables for the fields
  * needed in a provider profile
- * 
+ *
  * Required vars:
  * 	$page_id // int // ID of the profile
  */

@@ -2,7 +2,7 @@
 
 /*
  * Required vars:
- * 
+ *
  * 	$schema_common_base
  * 	$page_id
  */

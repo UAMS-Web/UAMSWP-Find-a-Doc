@@ -67,7 +67,7 @@
 
 	function uamswp_fad_schema_type_selector($input) {
 
-		/* 
+		/*
 
 		Expected formats for the array:
 

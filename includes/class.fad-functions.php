@@ -296,7 +296,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		echo "<style> .term-description-wrap { display:none; } </style>";
 	}
 
-	add_filter('manage_edit-condition_columns', function ( $columns ) 
+	add_filter('manage_edit-condition_columns', function ( $columns )
 	{
 		if( isset( $columns['description'] ) )
 			unset( $columns['description'] );
@@ -304,7 +304,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 		return $columns;
 	} );
 
-	add_filter('manage_edit-treatment_columns', function ( $columns ) 
+	add_filter('manage_edit-treatment_columns', function ( $columns )
 	{
 		if( isset( $columns['description'] ) )
 			unset( $columns['description'] );
@@ -336,7 +336,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 
 // AJAX
 
-	function uamswp_ajax_scripts() { 
+	function uamswp_ajax_scripts() {
 
 		if (
 			is_singular( 'expertise' )
@@ -724,7 +724,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 									<?php endforeach; ?>
 								</select>
 							</div>
-							<?php if ($display_region !== 'hide') { ?> 
+							<?php if ($display_region !== 'hide') { ?>
 							<div class="col-12 mb-4 col-sm-auto mb-sm-0">
 								<label class="sr-only" for="provider_region">Region</label>
 								<select name="provider_region" id="provider_region" class="form-control">
@@ -798,7 +798,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 						'field' => 'term_id',
 						'terms' => $clinical_title,
 					);
-					// Merge into full tax query 
+					// Merge into full tax query
 					$tax_query = array_merge($tax_query, $tax_query_title);
 
 				}
@@ -999,7 +999,7 @@ function limit_to_post_parent( $args, $field, $post ) {
 						'field' => 'term_id',
 						'terms' => $clinical_title,
 					);
-					// Merge into full tax query 
+					// Merge into full tax query
 					$tax_query = array_merge($tax_query, $tax_query_title);
 
 				}
@@ -1316,7 +1316,7 @@ function uamswp_fad_ontology_hide(
 
 	if ( !empty( $ontology_hide_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -1325,7 +1325,7 @@ function uamswp_fad_ontology_hide(
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -1358,7 +1358,7 @@ function uamswp_fad_ontology_hide(
 					)
 					&&
 					empty($remove_service_line)
-				) { 
+				) {
 
 					// If the remove region array is not empty
 					// and if all the item's regions are in the remove region array
@@ -1459,7 +1459,7 @@ function uamswp_fad_ontology_site_values(
 
 	if ( !empty( $ontology_site_values_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -1468,7 +1468,7 @@ function uamswp_fad_ontology_site_values(
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -1538,7 +1538,7 @@ function uamswp_fad_ontology_site_values(
 
 			if ( $ontology_type ) {
 				// If the page has the ontology type...
-				// Set the navbar-subbrand title element using the page's values 
+				// Set the navbar-subbrand title element using the page's values
 				$site_nav_id = $page_id;
 				$site_nav_title = get_the_title($site_nav_id);
 				$site_nav_title_attr = uamswp_attr_conversion($site_nav_title);
@@ -1548,7 +1548,7 @@ function uamswp_fad_ontology_site_values(
 				$navbar_subbrand_title_url = $site_nav_url;
 				if ( $ancestors_ontology_farthest ) {
 					// If a farthest ancestor with the ontology type exists
-					// Set the navbar-subbrand parent element using the that ancestor's values 
+					// Set the navbar-subbrand parent element using the that ancestor's values
 					$navbar_subbrand_parent = $ancestors_ontology_farthest_title;
 					$navbar_subbrand_parent_attr = '';
 					$navbar_subbrand_parent_url = $ancestors_ontology_farthest_url;
@@ -1782,7 +1782,7 @@ function uamswp_fad_ontology_site_values(
 
 				if ( !empty( $output ) ) {
 
-					/* 
+					/*
 					 * The transient exists.
 					 * Return the variable.
 					 */
@@ -1998,7 +1998,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $provider_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2007,7 +2007,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2093,7 +2093,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $location_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2102,7 +2102,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2208,7 +2208,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $location_descendant_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2217,7 +2217,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2300,7 +2300,7 @@ function uamswp_fad_ontology_site_values(
 		$page_id, // int
 		$expertise_descendants, // int[]
 		$content_placement = 'profile', // string // Placement of this content // Expected values: 'subsection' or 'profile'
-		$site_nav_id = '', // int 
+		$site_nav_id = '', // int
 		&$jump_link_count = 0, // int
 		$hide_medical_ontology = false // bool
 	) {
@@ -2317,7 +2317,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $expertise_descendant_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2326,7 +2326,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2513,7 +2513,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $expertise_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2522,7 +2522,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2604,7 +2604,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $clinical_resource_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2613,7 +2613,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2722,7 +2722,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $condition_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2731,7 +2731,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2827,7 +2827,7 @@ function uamswp_fad_ontology_site_values(
 
 		if ( !empty( $treatment_query_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -2836,7 +2836,7 @@ function uamswp_fad_ontology_site_values(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -2914,14 +2914,14 @@ function uamswp_fad_ontology_site_values(
 	}
 
 // Construct the meta keywords element
-function uamswp_keyword_hook_header( $keywords ) { 
+function uamswp_keyword_hook_header( $keywords ) {
 
 	if ( $keywords ) {
 
 		$i = 1;
 		$keyword_text = '';
 
-		foreach( $keywords as $keyword ) { 
+		foreach( $keywords as $keyword ) {
 
 			if ( 1 < $i ) {
 				$keyword_text .= ', ';
@@ -2963,7 +2963,7 @@ function uamswp_fad_podcast_query(
 
 	if ( !empty( $podcast_query_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -2972,7 +2972,7 @@ function uamswp_fad_podcast_query(
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -3201,7 +3201,7 @@ function uamswp_fad_fpage_text_replace(
 				$fpage_text_replacements[$placeholder_expertise_page_title] = $page_title;
 			}
 
-	return str_replace(array_keys($fpage_text_replacements), array_values($fpage_text_replacements), $string); 
+	return str_replace(array_keys($fpage_text_replacements), array_values($fpage_text_replacements), $string);
 
 }
 
@@ -3219,7 +3219,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_provider_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3228,7 +3228,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3296,7 +3296,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_location_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3305,7 +3305,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3379,7 +3379,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_location_descendant_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3388,7 +3388,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3439,7 +3439,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_expertise_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3448,7 +3448,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3526,7 +3526,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_expertise_descendant_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3535,7 +3535,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3586,7 +3586,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_clinical_resource_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3595,7 +3595,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3646,7 +3646,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_clinical_resource_facet_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3655,7 +3655,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3719,7 +3719,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_condition_treatment_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3728,7 +3728,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3779,7 +3779,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_condition_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3788,7 +3788,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3857,7 +3857,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $labels_treatment_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3866,7 +3866,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3938,7 +3938,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_text_provider_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -3947,7 +3947,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -3992,7 +3992,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_text_location_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -4001,7 +4001,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -4046,7 +4046,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_text_expertise_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -4055,7 +4055,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -4104,7 +4104,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_text_clinical_resource_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -4113,7 +4113,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -4158,7 +4158,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_text_condition_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -4167,7 +4167,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -4216,7 +4216,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_text_treatment_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -4225,7 +4225,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -4281,7 +4281,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_provider_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4290,7 +4290,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4372,7 +4372,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_location_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4381,7 +4381,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4508,7 +4508,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_expertise_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4517,7 +4517,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4644,7 +4644,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_clinical_resource_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4653,7 +4653,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4745,7 +4745,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_condition_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4754,7 +4754,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4808,7 +4808,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_treatment_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4817,7 +4817,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4873,7 +4873,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_condition_treatment_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4882,7 +4882,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -4941,7 +4941,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_provider_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -4950,7 +4950,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -5401,7 +5401,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_location_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -5410,7 +5410,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -5996,7 +5996,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_expertise_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -6005,7 +6005,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -6022,7 +6022,7 @@ function uamswp_fad_fpage_text_replace(
 
 							if ( $ontology_type ) {
 
-								// If the page is an ontology item, set the page header style as the Marketing Landing Page Header Style 
+								// If the page is an ontology item, set the page header style as the Marketing Landing Page Header Style
 								$expertise_page_title_options = 'landingpage'; // Page Header Style
 
 							} else {
@@ -6082,7 +6082,7 @@ function uamswp_fad_fpage_text_replace(
 								if ( $expertise_page_header_landingpage ) {
 
 									// Get the title value
-									$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title']; 
+									$expertise_page_title = $expertise_page_header_landingpage['page_header_landingpage_title'];
 
 									// If the title is not set or is empty, use the standard page title as the fallback value
 									$expertise_page_title = ( isset($expertise_page_title) && !empty($expertise_page_title) ) ? $expertise_page_title : $page_title;
@@ -7036,7 +7036,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_text_clinical_resource_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -7045,7 +7045,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -7573,7 +7573,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_image_provider_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -7582,7 +7582,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -7626,7 +7626,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_image_location_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -7635,7 +7635,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -7679,7 +7679,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_image_expertise_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -7688,7 +7688,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -7732,7 +7732,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $archive_image_clinical_resource_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -7741,7 +7741,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -7789,7 +7789,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_provider_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -7798,7 +7798,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -7842,7 +7842,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_location_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -7851,7 +7851,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -7907,7 +7907,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_expertise_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -7916,7 +7916,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -7972,7 +7972,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_clinical_resource_general_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -7981,7 +7981,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -8027,7 +8027,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_provider_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -8036,7 +8036,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -8123,7 +8123,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_location_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -8132,7 +8132,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -8235,7 +8235,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_expertise_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -8244,7 +8244,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -8460,7 +8460,7 @@ function uamswp_fad_fpage_text_replace(
 
 			if ( !empty( $fpage_image_clinical_resource_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -8469,7 +8469,7 @@ function uamswp_fad_fpage_text_replace(
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -8575,7 +8575,7 @@ function uamswp_fad_fpage_text_replace(
 
 		if ( !empty( $posts_per_page_clinical_resource_general_vars ) ) {
 
-			/* 
+			/*
 			 * The transient exists.
 			 * Return the variable.
 			 */
@@ -8584,7 +8584,7 @@ function uamswp_fad_fpage_text_replace(
 
 		} else {
 
-			/* 
+			/*
 			 * The transient does not exist.
 			 * Define the variable again.
 			 */
@@ -8665,7 +8665,7 @@ function uamswp_fad_appointment_patients() {
 
 	if ( !empty( $appointment_patients_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -8674,7 +8674,7 @@ function uamswp_fad_appointment_patients() {
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -8776,7 +8776,7 @@ function uamswp_fad_appointment_refer() {
 
 	if ( !empty( $appointment_refer_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -8785,7 +8785,7 @@ function uamswp_fad_appointment_refer() {
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -8855,7 +8855,7 @@ function uamswp_fad_labels_jump_links() {
 
 	if ( !empty( $labels_jump_links_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -8864,7 +8864,7 @@ function uamswp_fad_labels_jump_links() {
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -8905,7 +8905,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	if ( !empty( $meta_image_values_vars ) ) {
 
-		/* 
+		/*
 		 * The transient exists.
 		 * Return the variable.
 		 */
@@ -8914,7 +8914,7 @@ function uamswp_meta_image_values( $featured_image ) {
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variable again.
 		 */
@@ -9064,7 +9064,7 @@ function uamswp_fad_fpage_text_image_overlay(
 		!empty( $text_image_overlay_row_1 )
 	) {
 
-		/* 
+		/*
 		 * The transients exists.
 		 * Load the template part.
 		 */
@@ -9073,7 +9073,7 @@ function uamswp_fad_fpage_text_image_overlay(
 
 	} else {
 
-		/* 
+		/*
 		 * The transient does not exist.
 		 * Define the variables again.
 		 */
@@ -9307,10 +9307,10 @@ function uamswp_prevent_orphan($string) {
 
 	// If the final word is at most five characters...
 	// Replace the preceding space with a non-breaking space
-	$string = preg_replace('/\s(\S{1,5})$/', '&nbsp;$1', $string); 
+	$string = preg_replace('/\s(\S{1,5})$/', '&nbsp;$1', $string);
 
 	// Replace the space in "UAMS Health" with a non-breaking space
-	$string = preg_replace('/(UAMS)\s(Health)/', '$1&nbsp;$2', $string); 
+	$string = preg_replace('/(UAMS)\s(Health)/', '$1&nbsp;$2', $string);
 
 	return $string;
 
@@ -9325,11 +9325,11 @@ function uamswp_prevent_orphan($string) {
 			string $function = '' // Function name added to transient name for disambiguation. // Optional
 		) {
 
-			/* 
-			 * Combines various elements to avoid transient name collisions and to make the 
+			/*
+			 * Combines various elements to avoid transient name collisions and to make the
 			 * transients more easily found in a list.
-			 * 
-			 * Include __FUNCTION__ in the $function argument to include the name of the 
+			 *
+			 * Include __FUNCTION__ in the $function argument to include the name of the
 			 * current function in the transient name.
 			 */
 
@@ -9364,13 +9364,13 @@ function uamswp_prevent_orphan($string) {
 			$function = '' // Optional // Function name added to transient name for disambiguation.
 		) {
 
-			/* 
+			/*
 			 * Combines with the uamswp_fad_transient_name() function to streamline the code.
-			 * 
-			 * Arguments will be identical to those used in the uamswp_fad_set_transient() 
+			 *
+			 * Arguments will be identical to those used in the uamswp_fad_set_transient()
 			 * function.
-			 * 
-			 * Include __FUNCTION__ in the $function argument to include the name of the 
+			 *
+			 * Include __FUNCTION__ in the $function argument to include the name of the
 			 * current function in the transient name.
 			 */
 
@@ -9392,13 +9392,13 @@ function uamswp_prevent_orphan($string) {
 			string $function = '' // Optional // Function name added to transient name for disambiguation.
 		) {
 
-			/* 
+			/*
 			 * Combines with the uamswp_fad_transient_name() function to streamline the code.
-			 * 
-			 * Arguments will be identical to those used in the uamswp_fad_get_transient() 
+			 *
+			 * Arguments will be identical to those used in the uamswp_fad_get_transient()
 			 * function.
-			 * 
-			 * Include __FUNCTION__ in the $function argument to include the name of the 
+			 *
+			 * Include __FUNCTION__ in the $function argument to include the name of the
 			 * current function in the transient name.
 			 */
 
@@ -9431,7 +9431,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $provider_profile_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -9440,7 +9440,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -9470,7 +9470,7 @@ function uamswp_prevent_orphan($string) {
 
 					// Generational Suffix
 
-						$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string 
+						$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_pedigree'] = isset($provider_pedigree) ? $provider_pedigree : ''; // Add to the variables array
 
@@ -9491,25 +9491,25 @@ function uamswp_prevent_orphan($string) {
 
 					// Prefix
 
-						$provider_prefix = get_field( 'physician_prefix', $page_id ); // string 
+						$provider_prefix = get_field( 'physician_prefix', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_prefix'] = isset($provider_prefix) ? $provider_prefix : ''; // Add to the variables array
 
 					// Gender
 
-						$provider_gender = get_field( 'physician_gender', $page_id ); // string 
+						$provider_gender = get_field( 'physician_gender', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_gender'] = isset($provider_gender) ? $provider_gender : ''; // Add to the variables array
 
 					// Searchable
 
-						$provider_searchable = get_field( 'physician_searchable', $page_id ); // bool 
+						$provider_searchable = get_field( 'physician_searchable', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_searchable'] = isset($provider_searchable) ? $provider_searchable : ''; // Add to the variables array
 
 					// Full Name
 
-						$provider_full_name = get_field( 'physician_full_name', $page_id ); // string 
+						$provider_full_name = get_field( 'physician_full_name', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_full_name'] = isset($provider_full_name) ? $provider_full_name : ''; // Add to the variables array
 
@@ -9517,47 +9517,47 @@ function uamswp_prevent_orphan($string) {
 
 						$_thumbnail_id = get_field( '_thumbnail_id', $page_id ); // int
 
-						$provider_profile_fields_vars['_thumbnail_id'] = isset($_thumbnail_id) ? $_thumbnail_id : ''; // Add to the variables array 
+						$provider_profile_fields_vars['_thumbnail_id'] = isset($_thumbnail_id) ? $_thumbnail_id : ''; // Add to the variables array
 
 					// Wide Image
 
-						$provider_image_wide = get_field( 'physician_image_wide', $page_id ); // int 
+						$provider_image_wide = get_field( 'physician_image_wide', $page_id ); // int
 
 						$provider_profile_fields_vars['provider_image_wide'] = isset($provider_image_wide) ? $provider_image_wide : ''; // Add to the variables array
 
 					// Is the Provider a Resident?
 
-						$provider_resident = get_field( 'physician_resident', $page_id ); // bool 
+						$provider_resident = get_field( 'physician_resident', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_resident'] = isset($provider_resident) ? $provider_resident : ''; // Add to the variables array
 
 					// Does the Provider See Patients Via Appointments?
 
-						$provider_eligible_appointments = get_field( 'physician_eligible_appointments', $page_id ); // bool 
+						$provider_eligible_appointments = get_field( 'physician_eligible_appointments', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_eligible_appointments'] = isset($provider_eligible_appointments) ? $provider_eligible_appointments : ''; // Add to the variables array
 
 					// Is the Provider a Primary Care Provider?
 
-						$provider_primary_care = get_field( 'physician_primary_care', $page_id ); // bool 
+						$provider_primary_care = get_field( 'physician_primary_care', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_primary_care'] = isset($provider_primary_care) ? $provider_primary_care : ''; // Add to the variables array
 
 					// Is the Provider Accepting New Patients?
 
-						$provider_accepting_patients = get_field( 'physician_accepting_patients', $page_id ); // bool 
+						$provider_accepting_patients = get_field( 'physician_accepting_patients', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_accepting_patients'] = isset($provider_accepting_patients) ? $provider_accepting_patients : ''; // Add to the variables array
 
 					// Does the Provider Require a Referral for New Patients?
 
-						$provider_referral_required = get_field( 'physician_referral_required', $page_id ); // bool 
+						$provider_referral_required = get_field( 'physician_referral_required', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_referral_required'] = isset($provider_referral_required) ? $provider_referral_required : ''; // Add to the variables array
 
 					// Does the Provider Offer Second Opinions?
 
-						$provider_second_opinion = get_field( 'physician_second_opinion', $page_id ); // bool 
+						$provider_second_opinion = get_field( 'physician_second_opinion', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_second_opinion'] = isset($provider_second_opinion) ? $provider_second_opinion : ''; // Add to the variables array
 
@@ -9565,7 +9565,7 @@ function uamswp_prevent_orphan($string) {
 
 						$provider_appointment_link = get_field( 'physician_appointment_link', $page_id ); // string
 
-						$provider_profile_fields_vars['provider_appointment_link'] = isset($provider_appointment_link) ? $provider_appointment_link : ''; // Add to the variables array 
+						$provider_profile_fields_vars['provider_appointment_link'] = isset($provider_appointment_link) ? $provider_appointment_link : ''; // Add to the variables array
 
 					// Clinical Job Title (taxonomy select)
 
@@ -9657,7 +9657,7 @@ function uamswp_prevent_orphan($string) {
 
 					// Short Patient-focused Clinical Biography
 
-						$provider_short_clinical_bio = get_field( 'physician_short_clinical_bio', $page_id ); // string 
+						$provider_short_clinical_bio = get_field( 'physician_short_clinical_bio', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_short_clinical_bio'] = isset($provider_short_clinical_bio) ? $provider_short_clinical_bio : ''; // Add to the variables array
 
@@ -9696,13 +9696,13 @@ function uamswp_prevent_orphan($string) {
 
 					// Treatments & Procedures (post_object multi-select)
 
-						$provider_treatments_cpt = get_field( 'physician_treatments_cpt', $page_id ); // int[] 
+						$provider_treatments_cpt = get_field( 'physician_treatments_cpt', $page_id ); // int[]
 
 						$provider_profile_fields_vars['provider_treatments_cpt'] = isset($provider_treatments_cpt) ? $provider_treatments_cpt : ''; // Add to the variables array
 
 					// Medical Terms (Tags) (taxonomy multi-select)
 
-						$provider_medical_terms = get_field( 'physician_medical_terms', $page_id ); // int[] 
+						$provider_medical_terms = get_field( 'physician_medical_terms', $page_id ); // int[]
 
 						foreach ( $provider_medical_terms as $item ) {
 
@@ -9717,13 +9717,13 @@ function uamswp_prevent_orphan($string) {
 
 					// Locations (relationship)
 
-						$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
+						$provider_locations = get_field( 'physician_locations', $page_id ); // int[]
 
 						$provider_profile_fields_vars['provider_locations'] = isset($provider_locations) ? $provider_locations : ''; // Add to the variables array
 
 					// Region (taxonomy multi-select)
 
-						$provider_region = get_field( 'physician_region', $page_id ); // int[] 
+						$provider_region = get_field( 'physician_region', $page_id ); // int[]
 
 						foreach ( $provider_region as $item ) {
 
@@ -9786,19 +9786,19 @@ function uamswp_prevent_orphan($string) {
 
 					// Areas of Expertise (relationship)
 
-						$provider_expertise = get_field( 'physician_expertise', $page_id ); // int[] 
+						$provider_expertise = get_field( 'physician_expertise', $page_id ); // int[]
 
 						$provider_profile_fields_vars['provider_expertise'] = isset($provider_expertise) ? $provider_expertise : ''; // Add to the variables array
 
 					// Clinical Resources (relationship)
 
-						$provider_clinical_resources = get_field( 'physician_clinical_resources', $page_id ); // int[] 
+						$provider_clinical_resources = get_field( 'physician_clinical_resources', $page_id ); // int[]
 
 						$provider_profile_fields_vars['provider_clinical_resources'] = isset($provider_clinical_resources) ? $provider_clinical_resources : ''; // Add to the variables array
 
 					// Recognition Lists (taxonomy multi-select)
 
-						$provider_recognitions = get_field( 'physician_recognitions', $page_id ); // int[] 
+						$provider_recognitions = get_field( 'physician_recognitions', $page_id ); // int[]
 
 						foreach ( $provider_recognitions as $item ) {
 
@@ -9813,19 +9813,19 @@ function uamswp_prevent_orphan($string) {
 
 					// Hide from Provider List
 
-						$provider_hidden = get_field( 'physician_hidden', $page_id ); // bool 
+						$provider_hidden = get_field( 'physician_hidden', $page_id ); // bool
 
 						$provider_profile_fields_vars['provider_hidden'] = isset($provider_hidden) ? $provider_hidden : ''; // Add to the variables array
 
 					// UAMS Health Talk Podcast Guest Name
 
-						$provider_podcast_name = get_field( 'physician_podcast_name', $page_id ); // string 
+						$provider_podcast_name = get_field( 'physician_podcast_name', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_podcast_name'] = isset($provider_podcast_name) ? $provider_podcast_name : ''; // Add to the variables array
 
 					// Ajax Search Filter
 
-						$provider_asp_filter = get_field( 'physician_asp_filter', $page_id ); // string 
+						$provider_asp_filter = get_field( 'physician_asp_filter', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_asp_filter'] = isset($provider_asp_filter) ? $provider_asp_filter : ''; // Add to the variables array
 
@@ -9837,25 +9837,25 @@ function uamswp_prevent_orphan($string) {
 
 						// Is the hometown outside the U.S.?
 
-							$provider_resident_hometown_international = $provider_resident_profile_group['physician_resident_hometown_international']; // bool 
+							$provider_resident_hometown_international = $provider_resident_profile_group['physician_resident_hometown_international']; // bool
 
 							$provider_profile_fields_vars['provider_resident_hometown_international'] = isset($provider_resident_hometown_international) ? $provider_resident_hometown_international : ''; // Add to the variables array
 
 						// Hometown City
 
-							$provider_resident_hometown_city = $provider_resident_profile_group['physician_resident_hometown_city']; // string 
+							$provider_resident_hometown_city = $provider_resident_profile_group['physician_resident_hometown_city']; // string
 
 							$provider_profile_fields_vars['provider_resident_hometown_city'] = isset($provider_resident_hometown_city) ? $provider_resident_hometown_city : ''; // Add to the variables array
 
 						// Hometown State / District / Territory
 
-							$provider_resident_hometown_state = $provider_resident_profile_group['physician_resident_hometown_state']; // string 
+							$provider_resident_hometown_state = $provider_resident_profile_group['physician_resident_hometown_state']; // string
 
 							$provider_profile_fields_vars['provider_resident_hometown_state'] = isset($provider_resident_hometown_state) ? $provider_resident_hometown_state : ''; // Add to the variables array
 
 						// Hometown Country
 
-							$provider_resident_hometown_country = $provider_resident_profile_group['physician_resident_hometown_country']; // string 
+							$provider_resident_hometown_country = $provider_resident_profile_group['physician_resident_hometown_country']; // string
 
 							$provider_profile_fields_vars['provider_resident_hometown_country'] = isset($provider_resident_hometown_country) ? $provider_resident_hometown_country : ''; // Add to the variables array
 
@@ -9915,7 +9915,7 @@ function uamswp_prevent_orphan($string) {
 
 					// Academic Title
 
-						$provider_academic_title = get_field( 'physician_academic_title', $page_id ); // string 
+						$provider_academic_title = get_field( 'physician_academic_title', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_academic_title'] = isset($provider_academic_title) ? $provider_academic_title : ''; // Add to the variables array
 
@@ -9965,25 +9965,25 @@ function uamswp_prevent_orphan($string) {
 
 					// Academic Biography
 
-						$provider_academic_bio = get_field( 'physician_academic_bio', $page_id ); // string 
+						$provider_academic_bio = get_field( 'physician_academic_bio', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_academic_bio'] = isset($provider_academic_bio) ? $provider_academic_bio : ''; // Add to the variables array
 
 					// Short Academic Biography
 
-						$provider_academic_short_bio = get_field( 'physician_academic_short_bio', $page_id ); // string 
+						$provider_academic_short_bio = get_field( 'physician_academic_short_bio', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_academic_short_bio'] = isset($provider_academic_short_bio) ? $provider_academic_short_bio : ''; // Add to the variables array
 
 					// Office Location
 
-						$provider_academic_office = get_field( 'physician_academic_office', $page_id ); // string 
+						$provider_academic_office = get_field( 'physician_academic_office', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_academic_office'] = isset($provider_academic_office) ? $provider_academic_office : ''; // Add to the variables array
 
 					// Building / Map
 
-						$provider_academic_map = get_field( 'physician_academic_map', $page_id ); // string 
+						$provider_academic_map = get_field( 'physician_academic_map', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_academic_map'] = isset($provider_academic_map) ? $provider_academic_map : ''; // Add to the variables array
 
@@ -10031,31 +10031,31 @@ function uamswp_prevent_orphan($string) {
 
 					// Research Bio
 
-						$provider_research_bio = get_field( 'physician_research_bio', $page_id ); // string 
+						$provider_research_bio = get_field( 'physician_research_bio', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_research_bio'] = isset($provider_research_bio) ? $provider_research_bio : ''; // Add to the variables array
 
 					// Research Interests
 
-						$provider_research_interests = get_field( 'physician_research_interests', $page_id ); // string 
+						$provider_research_interests = get_field( 'physician_research_interests', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_research_interests'] = isset($provider_research_interests) ? $provider_research_interests : ''; // Add to the variables array
 
 					// UAMS Profiles Link
 
-						$provider_research_profiles_link = get_field( 'physician_research_profiles_link', $page_id ); // string 
+						$provider_research_profiles_link = get_field( 'physician_research_profiles_link', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_research_profiles_link'] = isset($provider_research_profiles_link) ? $provider_research_profiles_link : ''; // Add to the variables array
 
 					// Pubmed Author ID / Name
 
-						$provider_pubmed_author_id = get_field( 'physician_pubmed_author_id', $page_id ); // string 
+						$provider_pubmed_author_id = get_field( 'physician_pubmed_author_id', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_pubmed_author_id'] = isset($provider_pubmed_author_id) ? $provider_pubmed_author_id : ''; // Add to the variables array
 
 					// Number of Latest Articles to Display
 
-						$provider_author_number = get_field( 'physician_author_number', $page_id ); // string 
+						$provider_author_number = get_field( 'physician_author_number', $page_id ); // string
 
 						$provider_profile_fields_vars['provider_author_number'] = isset($provider_author_number) ? $provider_author_number : ''; // Add to the variables array
 
@@ -10131,7 +10131,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $provider_card_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				  Return the variable.
 				 */
@@ -10140,7 +10140,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -10166,7 +10166,7 @@ function uamswp_prevent_orphan($string) {
 
 						// Generational Suffix
 
-							$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string 
+							$provider_pedigree = get_field( 'physician_pedigree', $page_id ); // string
 
 						// Degree and/or Credential (taxonomy multi-select)
 
@@ -10230,7 +10230,7 @@ function uamswp_prevent_orphan($string) {
 						// Clinical Job Title (taxonomy select)
 
 							// Is the Provider a Resident?
-							$provider_resident = get_field( 'physician_resident', $page_id ) ?: false; // bool 
+							$provider_resident = get_field( 'physician_resident', $page_id ) ?: false; // bool
 
 							if ( $provider_resident ) {
 
@@ -10313,7 +10313,7 @@ function uamswp_prevent_orphan($string) {
 								}
 
 								// Add to the variables array
-								$provider_card_fields_vars['provider_headshot_url'] = isset($provider_headshot_url) ? $provider_headshot_url : ''; 
+								$provider_card_fields_vars['provider_headshot_url'] = isset($provider_headshot_url) ? $provider_headshot_url : '';
 
 						} elseif ( 'detailed' == $provider_card_style ) {
 
@@ -10371,8 +10371,8 @@ function uamswp_prevent_orphan($string) {
 
 								// Add to the variables array
 
-									$provider_card_fields_vars['provider_headshot_srcset'] = isset($provider_headshot_srcset) ? $provider_headshot_srcset : array(); 
-									$provider_card_fields_vars['provider_headshot_base_url'] = isset($provider_headshot_base_url) ? $provider_headshot_base_url : ''; 
+									$provider_card_fields_vars['provider_headshot_srcset'] = isset($provider_headshot_srcset) ? $provider_headshot_srcset : array();
+									$provider_card_fields_vars['provider_headshot_base_url'] = isset($provider_headshot_base_url) ? $provider_headshot_base_url : '';
 
 							// National Provider Identifier (NPI)
 
@@ -10401,7 +10401,7 @@ function uamswp_prevent_orphan($string) {
 
 							// Locations (relationship)
 
-								$provider_locations = get_field( 'physician_locations', $page_id ); // int[] 
+								$provider_locations = get_field( 'physician_locations', $page_id ); // int[]
 
 								// Check for valid locations
 
@@ -10456,7 +10456,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $location_profile_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -10465,7 +10465,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -10550,7 +10550,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $location_card_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -10559,7 +10559,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -11321,11 +11321,11 @@ function uamswp_prevent_orphan($string) {
 									) {
 
 										// Get appointment phone number for (new) patients
-										$location_phone_appointment_new = get_field('location_new_appointments_phone', $page_id) ?: ''; 
+										$location_phone_appointment_new = get_field('location_new_appointments_phone', $page_id) ?: '';
 
 										// Query for whether there is a separate appointment phone number for returning patients
 
-											$location_phone_appointment_returning_query = get_field('location_appointment_phone_query', $page_id) ?: false; 
+											$location_phone_appointment_returning_query = get_field('location_appointment_phone_query', $page_id) ?: false;
 
 											// Appointments Phone Number for Returning Patients
 
@@ -11463,7 +11463,7 @@ function uamswp_prevent_orphan($string) {
 									!$location_ac_query // If this is not an Arkansas Children's location...
 								) {
 
-									$location_fax = get_field('location_fax', $page_id) ?: ''; 
+									$location_fax = get_field('location_fax', $page_id) ?: '';
 
 									// Build the anchor element for the fax number
 
@@ -11649,7 +11649,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $expertise_profile_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -11658,7 +11658,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -12138,7 +12138,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $expertise_card_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -12147,7 +12147,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -12282,7 +12282,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $clinical_resource_profile_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -12291,7 +12291,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -12371,7 +12371,7 @@ function uamswp_prevent_orphan($string) {
 
 			if ( !empty( $clinical_resource_card_fields_vars ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -12380,7 +12380,7 @@ function uamswp_prevent_orphan($string) {
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -12486,7 +12486,7 @@ function uamswp_prevent_orphan($string) {
 							$clinical_resource_url = get_permalink($page_id);
 
 							// Add to the variables array
-							$clinical_resource_card_fields_vars['clinical_resource_url'] = isset($clinical_resource_url) ? $clinical_resource_url : array(); 
+							$clinical_resource_card_fields_vars['clinical_resource_url'] = isset($clinical_resource_url) ? $clinical_resource_url : array();
 
 					// Clinical Resource Card Styles
 
@@ -12543,8 +12543,8 @@ function uamswp_prevent_orphan($string) {
 
 								// Add to the variables array
 
-									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array(); 
-									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : ''; 
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array();
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : '';
 
 						} elseif ( 'detailed' == $clinical_resource_card_style ) {
 
@@ -12646,8 +12646,8 @@ function uamswp_prevent_orphan($string) {
 
 								// Add to the variables array
 
-									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array(); 
-									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : ''; 
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_srcset'] = isset($clinical_resource_featured_image_srcset) ? $clinical_resource_featured_image_srcset : array();
+									$clinical_resource_card_fields_vars['clinical_resource_featured_image_base_url'] = isset($clinical_resource_featured_image_base_url) ? $clinical_resource_featured_image_base_url : '';
 
 							// Related content
 
@@ -12678,8 +12678,8 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_provider_label'] = isset($clinical_resource_provider_label) ? $clinical_resource_provider_label : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_provider_list'] = isset($clinical_resource_provider_list) ? $clinical_resource_provider_list : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_provider_label'] = isset($clinical_resource_provider_label) ? $clinical_resource_provider_label : array();
+										$clinical_resource_card_fields_vars['clinical_resource_provider_list'] = isset($clinical_resource_provider_list) ? $clinical_resource_provider_list : array();
 
 								// Locations
 
@@ -12708,8 +12708,8 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_location_label'] = isset($clinical_resource_location_label) ? $clinical_resource_location_label : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_location_list'] = isset($clinical_resource_location_list) ? $clinical_resource_location_list : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_location_label'] = isset($clinical_resource_location_label) ? $clinical_resource_location_label : array();
+										$clinical_resource_card_fields_vars['clinical_resource_location_list'] = isset($clinical_resource_location_list) ? $clinical_resource_location_list : array();
 
 								// Areas of Expertise
 
@@ -12738,8 +12738,8 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_expertise_label'] = isset($clinical_resource_expertise_label) ? $clinical_resource_expertise_label : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_expertise_list'] = isset($clinical_resource_expertise_list) ? $clinical_resource_expertise_list : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_expertise_label'] = isset($clinical_resource_expertise_label) ? $clinical_resource_expertise_label : array();
+										$clinical_resource_card_fields_vars['clinical_resource_expertise_list'] = isset($clinical_resource_expertise_list) ? $clinical_resource_expertise_list : array();
 
 								// Conditions
 
@@ -12768,8 +12768,8 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_condition_label'] = isset($clinical_resource_condition_label) ? $clinical_resource_condition_label : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_condition_list'] = isset($clinical_resource_condition_list) ? $clinical_resource_condition_list : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_condition_label'] = isset($clinical_resource_condition_label) ? $clinical_resource_condition_label : array();
+										$clinical_resource_card_fields_vars['clinical_resource_condition_list'] = isset($clinical_resource_condition_list) ? $clinical_resource_condition_list : array();
 
 								// Treatments
 
@@ -12798,8 +12798,8 @@ function uamswp_prevent_orphan($string) {
 
 									// Add to the variables array
 
-										$clinical_resource_card_fields_vars['clinical_resource_treatment_label'] = isset($clinical_resource_treatment_label) ? $clinical_resource_treatment_label : array(); 
-										$clinical_resource_card_fields_vars['clinical_resource_treatment_list'] = isset($clinical_resource_treatment_list) ? $clinical_resource_treatment_list : array(); 
+										$clinical_resource_card_fields_vars['clinical_resource_treatment_label'] = isset($clinical_resource_treatment_label) ? $clinical_resource_treatment_label : array();
+										$clinical_resource_card_fields_vars['clinical_resource_treatment_list'] = isset($clinical_resource_treatment_list) ? $clinical_resource_treatment_list : array();
 
 						}
 
@@ -12882,11 +12882,11 @@ function uamswp_prevent_orphan($string) {
 		string $url // YouTube video URL
 	){
 
-		/* 
+		/*
 		 * Requires YouTube Lyte plugin
-		 * 
+		 *
 		 * Source: https://github.com/futtta/wp-youtube-lyte/blob/main/wp-youtube-lyte.php
-		 * 
+		 *
 		 * Additional information: https://developers.google.com/youtube/v3/docs/videos
 		 */
 

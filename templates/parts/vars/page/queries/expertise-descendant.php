@@ -1,15 +1,15 @@
 <?php
 /*
  * Template Name: Descendant Areas of Expertise Section Query
- * 
- * Description: A query for whether the section which lists descendants of the 
- * current area of expertise item should be displayed on the profile/subsection. 
+ *
+ * Description: A query for whether the section which lists descendants of the
+ * current area of expertise item should be displayed on the profile/subsection.
  * It also returns the Query, an array of IDs and a count of the IDs.
- * 
+ *
  * Required vars:
  * 	$page_id // int
  * 	$expertise_descendants // int[]
- * 
+ *
  * Optional vars:
  * 	$content_placement // string
  * 	$site_nav_id // int

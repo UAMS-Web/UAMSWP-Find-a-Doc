@@ -17,17 +17,17 @@
 			array $schema_PostalAddress = array() // array // Optional // Main address or location schema array
 		) {
 
-			/* 
+			/*
 			 * Example use:
-			 * 
+			 *
 			 * 	// address Schema Data
-			 * 
+			 *
 			 * 		// Check/define the main PostalAddress schema array
-			 * 
+			 *
 			 * 			$schema_PostalAddress = $schema_PostalAddress ?? array();
-			 * 
+			 *
 			 * 		// Add this location's details to the main address or location schema array
-			 * 
+			 *
 			 * 			$schema_address = uamswp_fad_schema_postaladdress(
 			 * 				$location_postOfficeBoxNumber, // string // Required // The street address or the post office box number for PO box addresses.
 			 * 				false, // bool // Required // Query for whether the address is a street address (as opposed to a post office box number)
@@ -394,7 +394,7 @@
 							$medicalSpecialty_select = array($medicalSpecialty_select);
 
 						}
- 
+
 				// Format value
 
 					foreach ( $medicalSpecialty_select as $item ) {
@@ -445,14 +445,14 @@
 				$alternate_name = '' // string (optional) // An alias for the item.
 			) {
 
-				/* 
+				/*
 				 * Example use:
-				 * 
+				 *
 				 * 	// MedicalSpecialty Schema Data
-				 * 
+				 *
 				 * 		// Check/define the main medicalSpecialty schema array
 				 * 		$schema_medical_specialty = ( isset($schema_medical_specialty) && is_array($schema_medical_specialty) && !empty($schema_medical_specialty) ) ? $schema_medical_specialty : array();
-				 * 
+				 *
 				 * 		// Add this location's details to the main medicalSpecialty schema array
 				 * 		$schema_medical_specialty = uamswp_fad_schema_medicalSpecialty_old(
 				 * 			$schema_medical_specialty, // array (optional) // Main medicalSpecialty schema array
@@ -943,14 +943,14 @@
 			$fax_number = '' // string (optional) // The fax number.
 		) {
 
-			/* 
+			/*
 			 * Example use:
-			 * 
+			 *
 			 * 	// FaxNumber Schema Data
-			 * 
+			 *
 			 * 		// Check/define the main faxNumber schema array
 			 * 		$schema_fax_number = ( isset($schema_fax_number) && is_array($schema_fax_number) && !empty($schema_fax_number) ) ? $schema_fax_number : array();
-			 * 
+			 *
 			 * 		// Add this location's details to the main faxNumber schema array
 			 * 		$schema_fax_number = uamswp_fad_schema_fax_number(
 			 * 			$schema_fax_number, // array (optional) // Main faxNumber schema array
@@ -995,14 +995,14 @@
 			$telephone_number = '' // string (optional) // The telephone number.
 		) {
 
-			/* 
+			/*
 			 * Example use:
-			 * 
+			 *
 			 * 	// Telephone Schema Data
-			 * 
+			 *
 			 * 		// Check/define the main telephone schema array
 			 * 		$schema_telephone = ( isset($schema_telephone) && is_array($schema_telephone) && !empty($schema_telephone) ) ? $schema_telephone : array();
-			 * 
+			 *
 			 * 		// Add this location's details to the main telephone schema array
 			 * 		$schema_telephone = uamswp_fad_schema_telephone(
 			 * 			$schema_telephone, // array (optional) // Main telephone schema array
@@ -1051,19 +1051,19 @@
 			$valid_through = '' // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 		) {
 
-			/* 
+			/*
 			 * Example use:
-			 * 
+			 *
 			 * 	// OpeningHoursSpecification Schema Data
-			 * 
+			 *
 			 * 		// Check/define the main OpeningHoursSpecification schema array
 			 * 		$schema_opening_hours_specification = ( isset($schema_opening_hours_specification) && is_array($schema_opening_hours_specification) && !empty($schema_opening_hours_specification) ) ? $schema_opening_hours_specification : array();
-			 * 
+			 *
 			 * 		// Add this location's details to the main OpeningHoursSpecification schema array
-			 * 
+			 *
 			 * 			// // Schema.org method: Add all days as an array under the dayOfWeek property
 			 * 			// // as documented by Schema.org at https://schema.org/OpeningHoursSpecification (https://archive.is/LSxMP)
-			 * 
+			 *
 			 * 			// 	$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 			 * 			// 		$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
 			 * 			// 		$schema_day_of_week, // array|string (optional) // The day of the week for which these opening hours are valid.
@@ -1072,10 +1072,10 @@
 			 * 			// 		$schema_valid_from, // string (optional) // The date when the item becomes valid.
 			 * 			// 		$schema_valid_through // string (optional) // The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
 			 * 			// 	);
-			 * 
+			 *
 			 * 			// Google method: Loop through all the days defined in the current Hours repeater row separately
 			 * 			// as documented by Google at https://developers.google.com/search/docs/appearance/structured-data/local-business (https://archive.is/pncpy)
-			 * 
+			 *
 			 * 				foreach ( $schema_day_of_week as $day) {
 			 * 					$schema_opening_hours_specification = uamswp_fad_schema_opening_hours_specification(
 			 * 						$schema_opening_hours_specification, // array (optional) // Main OpeningHoursSpecification schema array
@@ -1144,16 +1144,16 @@
 			$closes = '' // string (optional) // The closing hour of the place or service on the given day(s) of the week. // Times are specified using 24:00 format.
 		) {
 
-			/* 
+			/*
 			 * Example use:
-			 * 
+			 *
 			 * 	// OpeningHours Schema Data
-			 * 
+			 *
 			 * 		// Check/define the main OpeningHours schema array
 			 * 		$schema_opening_hours = ( isset($schema_opening_hours) && is_array($schema_opening_hours) && !empty($schema_opening_hours) ) ? $schema_opening_hours : array();
-			 * 
+			 *
 			 * 		// Add this location's details to the main OpeningHours schema array
-			 * 
+			 *
 			 * 			$schema_opening_hours = uamswp_fad_schema_opening_hours(
 			 * 				$schema_opening_hours, // array (optional) // Main OpeningHours schema array
 			 * 				$schema_day_of_week, // string (optional) // The day of the week for which these opening hours are valid. // Days are specified using their first two letters (e.g., Su)
@@ -1193,18 +1193,18 @@
 			array $schema_geo_coordinates = array() // array // Optional // Existing main GeoCoordinates schema array
 		) {
 
-			/* 
+			/*
 			 * Example use:
-			 * 
+			 *
 			 * 	// GeoCoordinates Schema Data
-			 * 
+			 *
 			 * 		// Check/define the main GeoCoordinates schema array
-			 * 
+			 *
 			 * 			$schema_geo_coordinates = $schema_geo_coordinates ?? array();
 			 * 			$schema_geo_coordinates = $schema_geo_coordinates && !is_array($schema_geo_coordinates) ?? array($schema_geo_coordinates) : $schema_geo_coordinates;
-			 * 
+			 *
 			 * 		// Add this location's details to the main GeoCoordinates schema array
-			 * 
+			 *
 			 * 			$schema_geo_coordinates = uamswp_schema_geo_coordinates(
 			 * 				$schema_latitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
 			 * 				$schema_longitude, // string // Required // The longitude of a location. For example -122.08585 (WGS 84). // The precision must be at least 5 decimal places.
@@ -1383,7 +1383,7 @@
 
 			if ( !empty( $schema ) ) {
 
-				/* 
+				/*
 				 * The transient exists.
 				 * Return the variable.
 				 */
@@ -1392,7 +1392,7 @@
 
 			} else {
 
-				/* 
+				/*
 				 * The transient does not exist.
 				 * Define the variable again.
 				 */
@@ -1864,12 +1864,12 @@
 			array $input // array of MedicineSystem values
 		) {
 
-			/* 
-			 * The system of medicine that includes this MedicalEntity 
+			/*
+			 * The system of medicine that includes this MedicalEntity
 			 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - MedicineSystem
 			 */
 
@@ -1915,13 +1915,13 @@
 			array $sameAs_schema = array() // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
 		) {
 
-			/* 
-			 * URL of a reference Web page that unambiguously indicates the item's identity 
-			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+			/*
+			 * URL of a reference Web page that unambiguously indicates the item's identity
+			 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 			 * website).
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - URL
 			 */
 
@@ -1984,20 +1984,20 @@
 			string $field_name = 'schema_additionalType_uri' // additionalType item field name
 		) {
 
-			/* 
-			 * An additional type for the item, typically used for adding more specific types 
-			 * from external vocabularies in microdata syntax. This is a relationship between 
-			 * something and a class that the thing is in. Typically the value is a 
-			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-			 * in RDF. Text values can be used sparingly, for cases where useful information 
-			 * can be added without their being an appropriate schema to reference. In the 
+			/*
+			 * An additional type for the item, typically used for adding more specific types
+			 * from external vocabularies in microdata syntax. This is a relationship between
+			 * something and a class that the thing is in. Typically the value is a
+			 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+			 * in RDF. Text values can be used sparingly, for cases where useful information
+			 * can be added without their being an appropriate schema to reference. In the
 			 * case of text values, the class label should follow the schema.org style guide.
-			 * 
+			 *
 			 * Subproperty of:
 			 *     - rdf:type
-			 * 
+			 *
 			 * Values expected to be one of these types:
-			 * 
+			 *
 			 *     - Text
 			 *     - URL
 			 */
@@ -2058,12 +2058,12 @@
 
 			/*
 
-				A property-value pair (e.g., representing a feature of a product or place). Use 
-				the 'name' property for the name of the property. If there is an additional 
+				A property-value pair (e.g., representing a feature of a product or place). Use
+				the 'name' property for the name of the property. If there is an additional
 				human-readable version of the value, put that into the 'description' property.
 
-				Always use specific schema.org properties when a) they exist and b) you can 
-				populate them. Using PropertyValue as a substitute will typically not trigger 
+				Always use specific schema.org properties when a) they exist and b) you can
+				populate them. Using PropertyValue as a substitute will typically not trigger
 				the same effect as using the original, specific property.
 
 				$name
@@ -2094,26 +2094,26 @@
 
 				$propertyID
 
-					A commonly used identifier for the characteristic represented by the 
-					property (e.g., a manufacturer or a standard code for a property). 
+					A commonly used identifier for the characteristic represented by the
+					property (e.g., a manufacturer or a standard code for a property).
 					propertyID can be:
 
-						(1) a prefixed string, mainly meant to be used with standards for product 
+						(1) a prefixed string, mainly meant to be used with standards for product
 						properties;
 
-						(2) a site-specific, non-prefixed string (e.g., the primary key of the 
+						(2) a site-specific, non-prefixed string (e.g., the primary key of the
 						property or the vendor-specific ID of the property), or
 
-						(3) a URL indicating the type of the property, either pointing to an 
-						external vocabulary, or a Web resource that describes the property 
+						(3) a URL indicating the type of the property, either pointing to an
+						external vocabulary, or a Web resource that describes the property
 						(e.g., a glossary entry).
 
-					Standards bodies should promote a standard prefix for the identifiers of 
+					Standards bodies should promote a standard prefix for the identifiers of
 					properties from their standards.
 
 					Examples:
 
-						 * 'https://www.wikidata.org/wiki/Q246386' (for Data Universal Numbering System 
+						 * 'https://www.wikidata.org/wiki/Q246386' (for Data Universal Numbering System
 						   number)
 						 * 'https://www.wikidata.org/wiki/Q6975101' (for National Provider Identifier)
 
@@ -2126,10 +2126,10 @@
 
 					The value of a property value node.
 
-					Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 
+					Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to
 					'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.
 
-					Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a 
+					Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a
 					decimal point. Avoid using these symbols as a readability separator.
 
 					Examples:
@@ -2150,7 +2150,7 @@
 
 					Examples:
 
-						 * 'https://npiregistry.cms.hhs.gov/provider-view/1841276169' (for a National 
+						 * 'https://npiregistry.cms.hhs.gov/provider-view/1841276169' (for a National
 						   Provider Identifier that is '1841276169')
 
 					Expected Type:
@@ -2159,7 +2159,7 @@
 
 				$description
 
-					If there is an additional human-readable version of the value, put that 
+					If there is an additional human-readable version of the value, put that
 					into the 'description' property.
 
 					Expected Type:
@@ -2177,7 +2177,7 @@
 
 				$measurementMethod
 
-					A subproperty of measurementTechnique that can be used for specifying 
+					A subproperty of measurementTechnique that can be used for specifying
 					specific methods, in particular via MeasurementMethodEnum.
 
 					Expected Type:
@@ -2189,31 +2189,31 @@
 
 				$measurementTechnique
 
-					A technique, method or technology used in an Observation, 
-					StatisticalVariable or Dataset (or DataDownload, DataCatalog), 
-					corresponding to the method used for measuring the corresponding 
-					variable(s) (for datasets, described using variableMeasured; for 
-					Observation, a StatisticalVariable). Often but not necessarily each 
-					variableMeasured will have an explicit representation as (or mapping to) an 
-					property such as those defined in Schema.org, or other RDF vocabularies and 
-					"knowledge graphs". In that case the subproperty of variableMeasured called 
+					A technique, method or technology used in an Observation,
+					StatisticalVariable or Dataset (or DataDownload, DataCatalog),
+					corresponding to the method used for measuring the corresponding
+					variable(s) (for datasets, described using variableMeasured; for
+					Observation, a StatisticalVariable). Often but not necessarily each
+					variableMeasured will have an explicit representation as (or mapping to) an
+					property such as those defined in Schema.org, or other RDF vocabularies and
+					"knowledge graphs". In that case the subproperty of variableMeasured called
 					measuredProperty is applicable.
 
-					The measurementTechnique property helps when extra clarification is needed 
-					about how a measuredProperty was measured. This is oriented towards 
-					scientific and scholarly dataset publication but may have broader 
-					applicability; it is not intended as a full representation of measurement, 
+					The measurementTechnique property helps when extra clarification is needed
+					about how a measuredProperty was measured. This is oriented towards
+					scientific and scholarly dataset publication but may have broader
+					applicability; it is not intended as a full representation of measurement,
 					but can often serve as a high level summary for dataset discovery.
 
-					For example, if variableMeasured is: molecule concentration, 
-					measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or 
-					"colorimetry" or "immunofluorescence". If the variableMeasured is 
-					"depression rating", the measurementTechnique could be "Zung Scale" or 
+					For example, if variableMeasured is: molecule concentration,
+					measurementTechnique could be: "mass spectrometry" or "nmr spectroscopy" or
+					"colorimetry" or "immunofluorescence". If the variableMeasured is
+					"depression rating", the measurementTechnique could be "Zung Scale" or
 					"HAM-D" or "Beck Depression Inventory".
 
-					If there are several variableMeasured properties recorded for some given 
-					data object, use a PropertyValue for each variableMeasured and attach the 
-					corresponding measurementTechnique. The value can also be from an 
+					If there are several variableMeasured properties recorded for some given
+					data object, use a PropertyValue for each variableMeasured and attach the
+					corresponding measurementTechnique. The value can also be from an
 					enumeration, organized as a MeasurementMethodEnum.
 
 					Expected Type:
@@ -2233,8 +2233,8 @@
 
 				$unitCode
 
-					The unit of measurement given using the UN/CEFACT Common Code 
-					(3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be 
+					The unit of measurement given using the UN/CEFACT Common Code
+					(3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be
 					used with a prefix followed by a colon.
 
 					Expected Type:
@@ -2244,7 +2244,7 @@
 
 				$unitText
 
-					A string or text indicating the unit of measurement. Useful if you cannot 
+					A string or text indicating the unit of measurement. Useful if you cannot
 					provide a standard unit code for unitCode.
 
 					Expected Type:
@@ -2253,7 +2253,7 @@
 
 				$valueReference
 
-					A secondary value that provides additional information on the original 
+					A secondary value that provides additional information on the original
 					value (e.g., a reference temperature or a type of measurement).
 
 					Expected Type:
@@ -2469,11 +2469,11 @@
 
 				Natural languages such as Spanish, Tamil, Hindi, English, etc.
 
-				Formal language code tags expressed in BCP 47 can be used via 
+				Formal language code tags expressed in BCP 47 can be used via
 				the alternateName property.
 
-				The Language type previously also covered programming 
-				languages such as Scheme and Lisp, which are now best represented using 
+				The Language type previously also covered programming
+				languages such as Scheme and Lisp, which are now best represented using
 				ComputerLanguage.
 
 				$name
@@ -2506,8 +2506,8 @@
 
 				$sameAs
 
-					URL of a reference Web page that unambiguously indicates the item's identity 
-					(e.g., the URL of the item's Wikipedia page, the URL of the item's Wikidata 
+					URL of a reference Web page that unambiguously indicates the item's identity
+					(e.g., the URL of the item's Wikipedia page, the URL of the item's Wikidata
 					entry, the URL of the item's official website).
 
 					Examples:
@@ -2758,7 +2758,7 @@
 
 			/*
 
-				An Organization (or ProgramMembership) to which this Person or Organization 
+				An Organization (or ProgramMembership) to which this Person or Organization
 				belongs.
 
 				Inverse-property: member
@@ -2959,8 +2959,8 @@
 
 				'EducationalOccupationalCredential' type:
 
-					An educational or occupational credential. A diploma, academic degree, 
-					certification, qualification, badge, etc., that may be awarded to a person 
+					An educational or occupational credential. A diploma, academic degree,
+					certification, qualification, badge, etc., that may be awarded to a person
 					or other entity that meets the requirements defined by the credentialer.
 
 			*/
@@ -4574,23 +4574,23 @@
 							// Get sameAs repeater field value
 
 								// $specialization_sameAs_array = get_field( 'schema_sameas', $specialization_term ) ?? array();
-								// 
+								//
 								// // Add each item to sameAs property values array
-								// 
+								//
 								// 	if ( $specialization_sameAs_array ) {
-								// 
+								//
 								// 		$specialization_sameAs = uamswp_fad_schema_sameas(
 								// 			$specialization_sameAs_array, // sameAs repeater field
 								// 			'schema_sameas_url', // sameAs item field name
 								// 			$specialization_sameAs // array // Optional // Pre-existing schema array for sameAs to which to add sameAs items
 								// 		);
-								// 
+								//
 								// 	} else {
-								// 
+								//
 								// 	// If there is only one item, flatten the multi-dimensional array by one step
-								// 
+								//
 								// 		uamswp_fad_flatten_multidimensional_array($specialization_sameAs);
-								// 
+								//
 								// }
 
 							// Add to schema item
@@ -5495,7 +5495,7 @@
 							)
 						) {
 
-							/* 
+							/*
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -5540,7 +5540,7 @@
 
 						} else {
 
-							/* 
+							/*
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -5954,11 +5954,11 @@
 
 								// url
 
-									/* 
+									/*
 									 * URL of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -6282,9 +6282,9 @@
 
 										/*
 
-											Loop through an associative array of properties common to all of our schema 
-											types, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties common to all of our schema
+											types, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -6348,9 +6348,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the MedicalWebPage 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the MedicalWebPage
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -6388,9 +6388,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the types other 
-											than the MedicalWebPage type, adding each row to this item's schema when the 
-											key matches a property valid for the type, replacing full values with only the 
+											Loop through an associative array of properties specific to the types other
+											than the MedicalWebPage type, adding each row to this item's schema when the
+											key matches a property valid for the type, replacing full values with only the
 											node identifier where appropriate.
 
 										*/
@@ -6441,9 +6441,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the main entity 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the main entity
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -6652,11 +6652,11 @@
 
 										// givenName
 
-											/* 
+											/*
 											 * Given name. In the U.S., the first name of a Person.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -6703,11 +6703,11 @@
 
 										// additionalName
 
-											/* 
+											/*
 											 * An additional name for a Person, can be used for a middle name.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -6754,11 +6754,11 @@
 
 										// familyName
 
-											/* 
+											/*
 											 * Family name. In the U.S., the last name of a Person.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -6805,11 +6805,11 @@
 
 										// legalName [WIP]
 
-											/* 
+											/*
 											 * The official name of the organization (e.g., the registered company name).
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -6864,11 +6864,11 @@
 
 										// honorificPrefix
 
-											/* 
+											/*
 											 * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -6915,11 +6915,11 @@
 
 										// honorificSuffix
 
-											/* 
+											/*
 											 * An honorific suffix following a Person's name such as M.D./PhD/MSCSW.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -6970,15 +6970,15 @@
 
 										// name
 
-											/* 
+											/*
 											 * The name of the item.
-											 * 
+											 *
 											 * Subproperty of:
-											 * 
+											 *
 											 *     - rdfs:label
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -7074,11 +7074,11 @@
 
 										// alternateName [WIP]
 
-											/* 
+											/*
 											 * An alias for the item.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -7511,12 +7511,12 @@
 
 											// location (specific property)
 
-												/* 
-												 * The location of, for example, where an event is happening, where an 
+												/*
+												 * The location of, for example, where an event is happening, where an
 												 * organization is located, or where an action takes place.
-												 * 
+												 *
 												 * Values expected to be one of these types:
-												 * 
+												 *
 												 *     - Place
 												 *     - PostalAddress
 												 *     - Text
@@ -7603,11 +7603,11 @@
 
 											// workLocation
 
-												/* 
+												/*
 												 * A contact location for a person's place of work.
-												 * 
+												 *
 												 * Values expected to be one of these types:
-												 * 
+												 *
 												 *     - ContactPoint
 												 *     - Place
 												 */
@@ -7692,10 +7692,10 @@
 
 											// containedInPlace
 
-												/* 
+												/*
 												 * The basic containment relation between a place and one that contains it.
 												 * expected to be one of these types:
-												 * 
+												 *
 												 *     - Place
 												 */
 
@@ -8051,11 +8051,11 @@
 
 										// availableService
 
-											/* 
+											/*
 											 * A medical service available from this provider.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - MedicalProcedure
 											 *     - MedicalTest
 											 */
@@ -8243,13 +8243,13 @@
 
 								// about (MedicalWebPage only)
 
-									/* 
+									/*
 									 * The subject matter of the content.
-									 * 
+									 *
 									 * Inverse-property: subjectOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -8302,7 +8302,7 @@
 								// description (common)
 
 									/*
-									 * If the common schema template part did not generate a value, get the 
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -8383,15 +8383,15 @@
 
 								// description (specific property)
 
-									/* 
+									/*
 									 * A description of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - TextObject
-									 * 
-									 * If the common schema template part did not generate a value, get the 
+									 *
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -8467,18 +8467,18 @@
 
 								// abstract
 
-									/* 
+									/*
 									 * An abstract is a short description that summarizes a CreativeWork.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
-									 * 
-									 * If the common schema template part did not generate a value, get the 
+									 *
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -8609,11 +8609,11 @@
 
 										// medicalSpecialty
 
-											/* 
+											/*
 											 * A medical specialty of the provider.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - MedicalSpecialty
 											 */
 
@@ -8660,11 +8660,11 @@
 
 										// specialty
 
-											/* 
+											/*
 											 * One of the domain specialties to which this web page's content applies.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Specialty
 											 */
 
@@ -8713,20 +8713,20 @@
 
 								// additionalType
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -8930,12 +8930,12 @@
 
 								// affiliation
 
-									/* 
-									 * An organization that this person is affiliated with. For example, a 
+									/*
+									 * An organization that this person is affiliated with. For example, a
 									 * school/university, a club, or a team.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
@@ -9078,11 +9078,11 @@
 
 								// aggregateRating [WIP]
 
-									/* 
+									/*
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - AggregateRating
 									 */
 
@@ -9288,35 +9288,35 @@
 
 								// alumniOf [WIP]
 
-									/* 
+									/*
 									 * An organization that the person is an alumni of.
-									 * 
+									 *
 									 * Inverse property: alumni
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - EducationalOrganization
 									 *     - Organization
 									 */
 
 								// award [WIP]
 
-									/* 
+									/*
 									 * An award won by or for this item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// brand
 
-									/* 
-									 * The brand(s) associated with a product or service, or the brand(s) maintained 
+									/*
+									 * The brand(s) associated with a product or service, or the brand(s) maintained
 									 * by an organization or business person.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Brand
 									 *     - Organization
 									 */
@@ -9433,17 +9433,17 @@
 
 								// currenciesAccepted [WIP]
 
-									/* 
+									/*
 									 * The currency accepted.
-									 * 
+									 *
 									 * Use standard formats:
 									 *     - ISO 4217 currency format (e.g., "USD")
 									 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
-									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other 
+									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other
 									 *       currency types (e.g., "Ithaca HOUR")
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -9527,11 +9527,11 @@
 
 								// employee
 
-									/* 
+									/*
 									 * Someone working for this organization.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Person
 									 */
 
@@ -9601,17 +9601,17 @@
 
 								// gender
 
-									/* 
-									 * Gender of something, typically a Person, but possibly also fictional 
-									 * characters, animals, etc. While https://schema.org/Male and 
-									 * https://schema.org/Female may be used, text strings are also acceptable for 
-									 * people who do not identify as a binary gender. The gender property can also be 
-									 * used in an extended sense to cover (e.g., the gender of sports teams). As with 
-									 * the gender of individuals, we do not try to enumerate all possibilities. A 
+									/*
+									 * Gender of something, typically a Person, but possibly also fictional
+									 * characters, animals, etc. While https://schema.org/Male and
+									 * https://schema.org/Female may be used, text strings are also acceptable for
+									 * people who do not identify as a binary gender. The gender property can also be
+									 * used in an extended sense to cover (e.g., the gender of sports teams). As with
+									 * the gender of individuals, we do not try to enumerate all possibilities. A
 									 * mixed-gender SportsTeam can be indicated with a text value of "Mixed".
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - GenderType
 									 *     - Text
 									 */
@@ -9737,15 +9737,15 @@
 
 								// hasCredential
 
-									/* 
+									/*
 									 * A credential awarded to the Person or Organization.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - EducationalOccupationalCredential
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
@@ -9873,11 +9873,11 @@
 
 								// hasOccupation
 
-									/* 
+									/*
 									 * The Person's occupation. For past professions, use Role for expressing dates.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Occupation
 									 */
 
@@ -9979,15 +9979,15 @@
 
 								// hasMap
 
-									/* 
+									/*
 									 * A URL to a map of the place.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Map
 									 *     - URL
-									 * 
-									 * The examples on Schema.org indicate that a URL to the location on Google Maps 
+									 *
+									 * The examples on Schema.org indicate that a URL to the location on Google Maps
 									 * is acceptable.
 									 */
 
@@ -10074,27 +10074,27 @@
 
 								// hasPart [excluded]
 
-									/* 
-									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									/*
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
-									 * 
+									 *
 									 * Inverse-property: isPartOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
-									 * 
-									 * This schema property is not relevant to providers or their webpages and will 
+									 *
+									 * This schema property is not relevant to providers or their webpages and will
 									 * not be included.
 									 */
 
 								// hospitalAffiliation
 
-									/* 
+									/*
 									 * A hospital with which the physician or office is affiliated.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Hospital
 									 */
 
@@ -10206,12 +10206,12 @@
 
 										// 'duns' property [WIP]
 
-											/* 
-											 * The Dun & Bradstreet DUNS number for identifying an organization or business 
+											/*
+											 * The Dun & Bradstreet DUNS number for identifying an organization or business
 											 * person.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10277,13 +10277,13 @@
 
 										// globalLocationNumber [WIP]
 
-											/* 
-											 * The Global Location Number (GLN, sometimes also referred to as International 
-											 * Location Number or ILN) of the respective organization, person, or place. The 
+											/*
+											 * The Global Location Number (GLN, sometimes also referred to as International
+											 * Location Number or ILN) of the respective organization, person, or place. The
 											 * GLN is a 13-digit number used to identify parties and physical locations.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10349,13 +10349,13 @@
 
 										// isicV4 [WIP]
 
-											/* 
-											 * The International Standard of Industrial Classification of All Economic 
-											 * Activities (ISIC), Revision 4 code for a particular organization, business 
+											/*
+											 * The International Standard of Industrial Classification of All Economic
+											 * Activities (ISIC), Revision 4 code for a particular organization, business
 											 * person, or place.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10421,12 +10421,12 @@
 
 										// leiCode [WIP]
 
-											/* 
-											 * An organization identifier that uniquely identifies a legal entity as defined 
+											/*
+											 * An organization identifier that uniquely identifies a legal entity as defined
 											 * in ISO 17442.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10492,12 +10492,12 @@
 
 										// naics [WIP]
 
-											/* 
-											 * The North American Industry Classification System (NAICS) code for a particular 
+											/*
+											 * The North American Industry Classification System (NAICS) code for a particular
 											 * organization or business person.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10563,12 +10563,12 @@
 
 										// taxID [WIP]
 
-											/* 
-											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US; 
+											/*
+											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US;
 											 * the CIF/NIF in Spain).
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10672,9 +10672,9 @@
 
 										// vatID [WIP]
 
-											/* 
+											/*
 											 * The Value-added Tax ID of the organization or person.
-											 * 
+											 *
 											 *     - Text
 											 */
 
@@ -10740,18 +10740,18 @@
 
 										// iso6523Code [WIP]
 
-											/* 
-											 * An organization identifier as defined in ISO 6523(-1). Note that many existing 
-											 * organization identifiers such as leiCode, duns and vatID can be expressed as an 
-											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier 
+											/*
+											 * An organization identifier as defined in ISO 6523(-1). Note that many existing
+											 * organization identifiers such as leiCode, duns and vatID can be expressed as an
+											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier
 											 * accordingly.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
-											 * 
-											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-											 * feedback and adoption from applications and websites can help improve their 
+											 *
+											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+											 * feedback and adoption from applications and websites can help improve their
 											 * definitions.
 											 */
 
@@ -10833,16 +10833,16 @@
 												$nesting_level == 0
 											) {
 
-												/* 
-												 * The identifier property represents any kind of identifier for any kind of 
-												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-												 * properties for representing many of these, either as textual strings or as 
+												/*
+												 * The identifier property represents any kind of identifier for any kind of
+												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+												 * properties for representing many of these, either as textual strings or as
 												 * URL (URI) links.
-												 * 
+												 *
 												 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
-												 * 
+												 *
 												 * Values expected to be one of these types:
-												 * 
+												 *
 												 *     - PropertyValue
 												 *     - Text
 												 *     - URL
@@ -11197,11 +11197,11 @@
 
 								// image (specific property)
 
-									/* 
+									/*
 									 * An image of the item. This can be a URL or a fully described ImageObject.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
 									 */
@@ -11272,15 +11272,15 @@
 
 								// isAcceptingNewPatients
 
-									/* 
+									/*
 									 * Whether the provider is accepting new patients.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
@@ -11362,11 +11362,11 @@
 
 								// isAccessibleForFree [WIP]
 
-									/* 
+									/*
 									 * A flag to signal that the item, event, or place is accessible for free.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
 									 */
 
@@ -11374,7 +11374,7 @@
 
 										/*
 
-											The 'isAccessibleForFree' property for MedicalWebPage has been addressed by the 
+											The 'isAccessibleForFree' property for MedicalWebPage has been addressed by the
 											common properties.
 
 										*/
@@ -11411,11 +11411,11 @@
 
 								// jobTitle
 
-									/* 
+									/*
 									 * The job title of the person (for example, Financial Manager).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DefinedTerm
 									 *     - Text
 									 */
@@ -11604,20 +11604,20 @@
 
 								// knowsAbout
 
-									/* 
-									 * Of a Person, and less typically of an Organization, to indicate a topic that is 
-									 * known about — suggesting possible expertise but not implying it. We do not 
-									 * distinguish skill levels here, or relate this to educational content, events, 
+									/*
+									 * Of a Person, and less typically of an Organization, to indicate a topic that is
+									 * known about — suggesting possible expertise but not implying it. We do not
+									 * distinguish skill levels here, or relate this to educational content, events,
 									 * objectives or JobPosting descriptions.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - Thing
 									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
@@ -11833,13 +11833,13 @@
 
 								// knowsLanguage
 
-									/* 
-									 * Of a Person, and less typically of an Organization, to indicate a known 
-									 * language. We do not distinguish skill levels or reading / writing / speaking / 
+									/*
+									 * Of a Person, and less typically of an Organization, to indicate a known
+									 * language. We do not distinguish skill levels or reading / writing / speaking /
 									 * signing here. Use language codes from the IETF BCP 47 standard.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Language
 									 *     - Text
 									 */
@@ -11940,13 +11940,13 @@
 
 								// mainEntity
 
-									/* 
+									/*
 									 * Indicates the primary entity described in some page or other CreativeWork.
-									 * 
+									 *
 									 * Inverse-property: mainEntityOfPage
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -12027,26 +12027,26 @@
 
 								// makesOffer [WIP]
 
-									/* 
+									/*
 									 * A pointer to products or services offered by the organization or person.
-									 * 
+									 *
 									 * Inverse-property: offeredBy
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Offer
 									 */
 
 								// memberOf
 
-									/* 
-									 * An Organization (or ProgramMembership) to which this Person or Organization 
+									/*
+									 * An Organization (or ProgramMembership) to which this Person or Organization
 									 * belongs.
-									 * 
+									 *
 									 * Inverse-property: member
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 *     - ProgramMembership
 									 */
@@ -12176,34 +12176,34 @@
 
 								// offers [WIP]
 
-									/* 
-									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									/*
+									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
-									 * 
-									 * Use businessFunction to indicate the kind of transaction offered 
+									 *
+									 * Use businessFunction to indicate the kind of transaction offered
 									 * (i.e., sell, lease).
-									 * 
+									 *
 									 * This property can also be used to describe a Demand.
-									 * 
-									 * While this property is listed as expected on a number of common types, it can 
-									 * be used in others. In that case, using a second type, such as Product or a 
+									 *
+									 * While this property is listed as expected on a number of common types, it can
+									 * be used in others. In that case, using a second type, such as Product or a
 									 * subtype of Product, can clarify the nature of the offer.
-									 * 
+									 *
 									 * Inverse-property: itemOffered
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Demand
 									 *     - Offer
 									 */
 
 								// parentOrganization
 
-									/* 
+									/*
 									 * The larger organization that this organization is a subOrganization of, if any.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
@@ -12311,11 +12311,11 @@
 
 								// paymentAccepted [WIP]
 
-									/* 
+									/*
 									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -12398,11 +12398,11 @@
 
 								// photo
 
-									/* 
+									/*
 									 * A photograph of this place.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - Photograph
 									 */
@@ -12473,12 +12473,12 @@
 
 								// potentialAction [WIP]
 
-									/* 
-									 * Indicates a potential Action, which describes an idealized action in which this 
+									/*
+									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Action
 									 */
 
@@ -12501,45 +12501,45 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John
 											       wrote a book)
 											 * 'endTime'
-												 * The endTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-												   actions that span a period of time, when the action was performed (e.g., John 
-												   wrote a book from January to December). For media, including audio and video, 
-												   it's the time offset of the end of a clip within a larger file. Note that Event 
-												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												 * The endTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For
+												   actions that span a period of time, when the action was performed (e.g., John
+												   wrote a book from January to December). For media, including audio and video,
+												   it's the time offset of the end of a clip within a larger file. Note that Event
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates
 												   with times. This situation may be clarified in future revisions.
 											 * 'error'
 												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
-												 * The object that helped the agent perform the action (e.g., John wrote a book 
+												 * The object that helped the agent perform the action (e.g., John wrote a book
 												with a pen).
 											 * 'location'
-												 * The location of, for example, where an event is happening, where an 
+												 * The location of, for example, where an event is happening, where an
 												   organization is located, or where an action takes place.
 											 * 'object'
-												 * The object upon which the action is carried out, whose state is kept intact or 
-												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												 * The object upon which the action is carried out, whose state is kept intact or
+												   changed. Also known as the semantic roles patient, affected or undergoer —
 												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
-												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a
 												book with Steve).
 											 * 'provider'
-												 * The service provider, service operator, or service performer; the goods 
-												   producer. Another party (a seller) may offer those services or goods on behalf 
+												 * The service provider, service operator, or service performer; the goods
+												   producer. Another party (a seller) may offer those services or goods on behalf
 												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
 												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
-												 * The startTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-												   For actions that span a period of time, when the action was performed 
-												   (e.g., John wrote a book from January to December). For media, including audio 
-												   and video, it's the time offset of the start of a clip within a larger file. 
-												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-												   describing dates with times. This situation may be clarified in future 
+												 * The startTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start.
+												   For actions that span a period of time, when the action was performed
+												   (e.g., John wrote a book from January to December). For media, including audio
+												   and video, it's the time offset of the start of a clip within a larger file.
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when
+												   describing dates with times. This situation may be clarified in future
 												   revisions.
 											 * 'target'
 												 * Indicates a target EntryPoint, or url, for an Action.
@@ -12548,43 +12548,43 @@
 
 								// primaryImageOfPage [WIP]
 
-									/* 
+									/*
 									 * Indicates the main image on the page.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 */
 
 								// relatedLink [WIP]
 
-									/* 
+									/*
 									 * A link related to this web page, for example to other related web pages.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 								// review [WIP]
 
-									/* 
+									/*
 									 * A review of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Review
 									 */
 
 								// sameAs
 
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									/*
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -12651,56 +12651,56 @@
 
 								// speakable [WIP]
 
-									/* 
-									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-									 * of being highlighted as being especially appropriate for text-to-speech 
-									 * conversion. Other sections of a page may also be usefully spoken in particular 
-									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									/*
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
+									 * of being highlighted as being especially appropriate for text-to-speech
+									 * conversion. Other sections of a page may also be usefully spoken in particular
+									 * circumstances; the 'speakable' property serves to indicate the parts most
 									 * likely to be generally useful for speech.
-									 * 
-									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 *
+									 * The speakable property can be repeated an arbitrary number of times, with three
 									 * kinds of possible 'content-locator' values:
-									 * 
-									 *     1.) id-value URL references - uses id-value of an element in the page being 
-									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 *
+									 *     1.) id-value URL references - uses id-value of an element in the page being
+									 * annotated. The simplest use of speakable has (potentially relative) URL values,
 									 * referencing identified sections of the document concerned.
-									 * 
-									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 *
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via
 									 * class attribute). Use the cssSelector property.
-									 * 
-									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 *
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the
 									 * content). Use the xpath property.
-									 * 
-									 * For more sophisticated markup of speakable sections beyond simple ID 
-									 * references, either CSS selectors or XPath expressions to pick out document 
-									 * section(s) as speakable. For this we define a supporting type, 
-									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 *
+									 * For more sophisticated markup of speakable sections beyond simple ID
+									 * references, either CSS selectors or XPath expressions to pick out document
+									 * section(s) as speakable. For this we define a supporting type,
+									 * SpeakableSpecification which is defined to be a possible value of the speakable
 									 * property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - SpeakableSpecification
 									 *     - URL
 									 */
 
 								// timeRequired [WIP]
 
-									/* 
-									 * Approximate or typical time it usually takes to work with or through the 
+									/*
+									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Duration (use ISO 8601 duration format).
 									 */
 
 								// video
 
-									/* 
+									/*
 									 * An embedded video object.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Clip
 									 *     - VideoObject
 									 */
@@ -12992,11 +12992,11 @@
 
 								// worksFor
 
-									/* 
+									/*
 									 * Organizations that the person works for.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
@@ -13108,12 +13108,12 @@
 
 								// mentions
 
-									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									/*
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -13287,12 +13287,12 @@
 
 								// significantLink
 
-									/* 
-									 * One of the more significant URLs on the page. Typically, these are the 
+									/*
+									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -13362,12 +13362,12 @@
 
 								// keywords
 
-									/* 
-									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									/*
+									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DefinedTerm
 									 *     - Text
 									 *     - URL
@@ -13707,7 +13707,7 @@
 							)
 						) {
 
-							/* 
+							/*
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -13740,7 +13740,7 @@
 
 						} else {
 
-							/* 
+							/*
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -14079,11 +14079,11 @@
 
 								// url
 
-									/* 
+									/*
 									 * URL of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -14245,9 +14245,9 @@
 
 										/*
 
-											Loop through an associative array of properties common to all of our schema 
-											types, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties common to all of our schema
+											types, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -14298,9 +14298,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the MedicalWebPage 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the MedicalWebPage
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -14338,9 +14338,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the types other 
-											than the MedicalWebPage type, adding each row to this item's schema when the 
-											key matches a property valid for the type, replacing full values with only the 
+											Loop through an associative array of properties specific to the types other
+											than the MedicalWebPage type, adding each row to this item's schema when the
+											key matches a property valid for the type, replacing full values with only the
 											node identifier where appropriate.
 
 										*/
@@ -14378,9 +14378,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the main entity 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the main entity
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -15247,15 +15247,15 @@
 
 								// name
 
-									/* 
+									/*
 									 * The name of the item.
-									 * 
+									 *
 									 * Subproperty of:
-									 * 
+									 *
 									 *     - rdfs:label
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -15311,13 +15311,13 @@
 
 								// about (MedicalWebPage only)
 
-									/* 
+									/*
 									 * The subject matter of the content.
-									 * 
+									 *
 									 * Inverse-property: subjectOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -15362,18 +15362,18 @@
 
 								// abstract
 
-									/* 
+									/*
 									 * An abstract is a short description that summarizes a CreativeWork.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
-									 * 
-									 * If the common schema template part did not generate a value, get the 
+									 *
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -15431,20 +15431,20 @@
 
 								// additionalType
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -15577,11 +15577,11 @@
 
 								// address
 
-									/* 
+									/*
 									 * Physical address of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - PostalAddress
 									 *     - Text
 									 */
@@ -15837,21 +15837,21 @@
 
 								// aggregateRating [WIP]
 
-									/* 
+									/*
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - AggregateRating
 									 */
 
 								// alternateName
 
-									/* 
+									/*
 									 * An alias for the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -15914,7 +15914,7 @@
 														$location_alternateName, // mixed // Required // Initial schema item property value
 														$location_ahaid_name // mixed // Required // Incoming schema item property value
 													);
-	
+
 												}
 
 											// Centers for Medicare & Medicaid Services Certification Number (CCN) record name
@@ -15931,7 +15931,7 @@
 														$location_alternateName, // mixed // Required // Initial schema item property value
 														$location_cms_ccn_name // mixed // Required // Incoming schema item property value
 													);
-	
+
 												}
 
 										// Add to item values
@@ -15966,11 +15966,11 @@
 
 								// availableService
 
-									/* 
+									/*
 									 * A medical service available from this provider.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalProcedure
 									 *     - MedicalTest
 									 */
@@ -16048,22 +16048,22 @@
 
 								// award [WIP]
 
-									/* 
+									/*
 									 * An award won by or for this item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// brand
 
-									/* 
-									 * The brand(s) associated with a product or service, or the brand(s) maintained 
+									/*
+									 * The brand(s) associated with a product or service, or the brand(s) maintained
 									 * by an organization or business person.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Brand
 									 *     - Organization
 									 */
@@ -16140,9 +16140,9 @@
 
 								// contactPoint [WIP]
 
-									/* 
+									/*
 									 * A contact point for a person or organization.
-									 * 
+									 *
 									 *     - ContactPoint
 									 */
 
@@ -16156,10 +16156,10 @@
 
 								// containedInPlace
 
-									/* 
+									/*
 									 * The basic containment relation between a place and one that contains it.
 									 * expected to be one of these types:
-									 * 
+									 *
 									 *     - Place
 									 */
 
@@ -16227,13 +16227,13 @@
 
 								// containsPlace
 
-									/* 
+									/*
 									 * The basic containment relation between a place and another that it contains.
-									 * 
+									 *
 									 * Inverse property: 'containedInPlace'
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Place
 									 */
 
@@ -16301,29 +16301,29 @@
 
 								// currenciesAccepted [WIP]
 
-									/* 
+									/*
 									 * The currency accepted.
-									 * 
+									 *
 									 * Use standard formats:
 									 *     - ISO 4217 currency format (e.g., "USD")
 									 *     - Ticker symbol for cryptocurrencies (e.g., "BTC")
-									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other 
+									 *     - Well-known names for Local Exchange Trading Systems (LETS) and other
 									 *       currency types (e.g., "Ithaca HOUR")
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// department
 
-									/* 
-									 * A relationship between an organization and a department of that organization, 
-									 * also described as an organization (allowing different urls, logos, opening 
+									/*
+									 * A relationship between an organization and a department of that organization,
+									 * also described as an organization (allowing different urls, logos, opening
 									 * hours). For example: a store with a pharmacy, or a bakery with a cafe.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
@@ -16391,15 +16391,15 @@
 
 								// description (specific property)
 
-									/* 
+									/*
 									 * A description of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - TextObject
-									 * 
-									 * If the common schema template part did not generate a value, get the 
+									 *
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -16457,67 +16457,67 @@
 
 								// diversityPolicy [WIP]
 
-									/* 
-									 * Statement on diversity policy by an Organization 
+									/*
+									 * Statement on diversity policy by an Organization
 									 * (e.g., a NewsMediaOrganization).
-									 * 
-									 * For a NewsMediaOrganization, a statement  describing the newsroom’s diversity 
+									 *
+									 * For a NewsMediaOrganization, a statement  describing the newsroom’s diversity
 									 * policy on both staffing and sources, typically providing staffing data.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// diversityStaffingReport [WIP]
 
-									/* 
-									 * For an Organization (often but not necessarily a NewsMediaOrganization), a 
-									 * report on staffing diversity issues. In a news context this might be for 
+									/*
+									 * For an Organization (often but not necessarily a NewsMediaOrganization), a
+									 * report on staffing diversity issues. In a news context this might be for
 									 * example ASNE or RTDNA (US) reports, or self-reported.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Article
 									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// ethicsPolicy [WIP]
 
-									/* 
-									 * Statement about ethics policy, (e.g., journalistic and publishing practices of 
+									/*
+									 * Statement about ethics policy, (e.g., journalistic and publishing practices of
 									 * a NewsMediaOrganization; food source policies of a Restaurant).
-									 * 
-									 * In the case of a NewsMediaOrganization, an ethicsPolicy is typically a 
-									 * statement describing the personal, organizational, and corporate standards of 
+									 *
+									 * In the case of a NewsMediaOrganization, an ethicsPolicy is typically a
+									 * statement describing the personal, organizational, and corporate standards of
 									 * behavior expected by the organization.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// employee
 
-									/* 
+									/*
 									 * Someone working for this organization.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Person
 									 */
 
@@ -16578,31 +16578,31 @@
 
 								// event [WIP]
 
-									/* 
+									/*
 									 * Upcoming or past event associated with this place, organization, or action.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Event
 									 */
 
 								// foundingDate [WIP]
 
-									/* 
+									/*
 									 * The date that this organization was founded.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Date
 									 */
 
 								// geo (specific property)
 
-									/* 
+									/*
 									 * The geo coordinates of the place.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - GeoCoordinates
 									 *     - GeoShape
 									 */
@@ -16662,47 +16662,47 @@
 
 								// hasCredential [WIP]
 
-									/* 
+									/*
 									 * A credential awarded to the Person or Organization.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - EducationalOccupationalCredential
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// hasDriveThroughService [WIP]
 
-									/* 
-									 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility) 
+									/*
+									 * Indicates whether some facility (e.g., FoodEstablishment, CovidTestingFacility)
 									 * offers a service that can be used by driving through in a car.
-									 * 
-									 * In the case of CovidTestingFacility such facilities could potentially help with 
+									 *
+									 * In the case of CovidTestingFacility such facilities could potentially help with
 									 * social distancing from other potentially-infected users.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// hasMap
 
-									/* 
+									/*
 									 * A URL to a map of the place.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Map
 									 *     - URL
-									 * 
-									 * The examples on Schema.org indicate that a URL to the location on Google Maps 
+									 *
+									 * The examples on Schema.org indicate that a URL to the location on Google Maps
 									 * is acceptable.
 									 */
 
@@ -16758,17 +16758,17 @@
 
 								// hasPart [excluded]
 
-									/* 
-									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									/*
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
-									 * 
+									 *
 									 * Inverse-property: isPartOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
-									 * 
-									 * This schema property is not relevant to locations or their webpages and will 
+									 *
+									 * This schema property is not relevant to locations or their webpages and will
 									 * not be included.
 									 */
 
@@ -16778,94 +16778,94 @@
 
 										// 'duns' property [WIP]
 
-											/* 
-											 * The Dun & Bradstreet DUNS number for identifying an organization or business 
+											/*
+											 * The Dun & Bradstreet DUNS number for identifying an organization or business
 											 * person.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// globalLocationNumber [WIP]
 
-											/* 
-											 * The Global Location Number (GLN, sometimes also referred to as International 
-											 * Location Number or ILN) of the respective organization, person, or place. The 
+											/*
+											 * The Global Location Number (GLN, sometimes also referred to as International
+											 * Location Number or ILN) of the respective organization, person, or place. The
 											 * GLN is a 13-digit number used to identify parties and physical locations.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// isicV4 [WIP]
 
-											/* 
-											 * The International Standard of Industrial Classification of All Economic 
-											 * Activities (ISIC), Revision 4 code for a particular organization, business 
+											/*
+											 * The International Standard of Industrial Classification of All Economic
+											 * Activities (ISIC), Revision 4 code for a particular organization, business
 											 * person, or place.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// leiCode [WIP]
 
-											/* 
-											 * An organization identifier that uniquely identifies a legal entity as defined 
+											/*
+											 * An organization identifier that uniquely identifies a legal entity as defined
 											 * in ISO 17442.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// naics [WIP]
 
-											/* 
-											 * The North American Industry Classification System (NAICS) code for a particular 
+											/*
+											 * The North American Industry Classification System (NAICS) code for a particular
 											 * organization or business person.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// taxID [WIP]
 
-											/* 
-											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US; 
+											/*
+											 * The Tax / Fiscal ID of the organization or person (e.g., the TIN in the US;
 											 * the CIF/NIF in Spain).
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// vatID [WIP]
 
-											/* 
+											/*
 											 * The Value-added Tax ID of the organization or person.
-											 * 
+											 *
 											 *     - Text
 											 */
 
 										// iso6523Code [WIP]
 
-											/* 
-											 * An organization identifier as defined in ISO 6523(-1). Note that many existing 
-											 * organization identifiers such as leiCode, duns and vatID can be expressed as an 
-											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier 
+											/*
+											 * An organization identifier as defined in ISO 6523(-1). Note that many existing
+											 * organization identifiers such as leiCode, duns and vatID can be expressed as an
+											 * ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier
 											 * accordingly.
-											 * 
+											 *
 											 * Values expected to be one of these types:
-											 * 
+											 *
 											 *     - Text
-											 * 
-											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-											 * feedback and adoption from applications and websites can help improve their 
+											 *
+											 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+											 * feedback and adoption from applications and websites can help improve their
 											 * definitions.
 											 */
 
@@ -16883,16 +16883,16 @@
 												)
 											) {
 
-												/* 
-												 * The identifier property represents any kind of identifier for any kind of 
-												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-												 * properties for representing many of these, either as textual strings or as 
+												/*
+												 * The identifier property represents any kind of identifier for any kind of
+												 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+												 * properties for representing many of these, either as textual strings or as
 												 * URL (URI) links.
-												 * 
+												 *
 												 * See https://schema.org/docs/datamodel.html#identifierBg for more details.
-												 * 
+												 *
 												 * Values expected to be one of these types:
-												 * 
+												 *
 												 *     - PropertyValue
 												 *     - Text
 												 *     - URL
@@ -17303,11 +17303,11 @@
 
 								// image (specific property)
 
-									/* 
+									/*
 									 * An image of the item. This can be a URL or a fully described ImageObject.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
 									 */
@@ -17356,66 +17356,66 @@
 
 								// isAcceptingNewPatients [WIP]
 
-									/* 
+									/*
 									 * Whether the provider is accepting new patients.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// isAccessibleForFree (LocalBusiness) [WIP]
 
-									/* 
+									/*
 									 * A flag to signal that the item, event, or place is accessible for free.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
 									 */
 
 									/*
 
-										The 'isAccessibleForFree' property for MedicalWebPage has been addressed by the 
+										The 'isAccessibleForFree' property for MedicalWebPage has been addressed by the
 										common properties.
 
-										Regarding the LocalBusiness item, more information is needed on whether or not 
+										Regarding the LocalBusiness item, more information is needed on whether or not
 										any clinical location is ever accessible for free.
 
 									*/
 
 								// knowsAbout [WIP]
 
-									/* 
-									 * Of a Person, and less typically of an Organization, to indicate a topic that is 
-									 * known about — suggesting possible expertise but not implying it. We do not 
-									 * distinguish skill levels here, or relate this to educational content, events, 
+									/*
+									 * Of a Person, and less typically of an Organization, to indicate a topic that is
+									 * known about — suggesting possible expertise but not implying it. We do not
+									 * distinguish skill levels here, or relate this to educational content, events,
 									 * objectives or JobPosting descriptions.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - Thing
 									 *     - URL
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// knowsLanguage [WIP]
 
-									/* 
-									 * Of a Person, and less typically of an Organization, to indicate a known 
-									 * language. We do not distinguish skill levels or reading / writing / speaking / 
+									/*
+									 * Of a Person, and less typically of an Organization, to indicate a known
+									 * language. We do not distinguish skill levels or reading / writing / speaking /
 									 * signing here. Use language codes from the IETF BCP 47 standard.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Language
 									 *     - Text
 									 */
@@ -17472,32 +17472,32 @@
 
 								// legalName [WIP]
 
-									/* 
+									/*
 									 * The official name of the organization (e.g., the registered company name).
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// logo [WIP]
 
-									/* 
+									/*
 									 * An associated logo.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
 									 */
 
 								// mainEntity
 
-									/* 
+									/*
 									 * Indicates the primary entity described in some page or other CreativeWork.
-									 * 
+									 *
 									 * Inverse-property: mainEntityOfPage
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -17562,33 +17562,33 @@
 
 								// makesOffer [WIP]
 
-									/* 
+									/*
 									 * A pointer to products or services offered by the organization or person.
-									 * 
+									 *
 									 * Inverse-property: offeredBy
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Offer
 									 */
 
 								// maximumAttendeeCapacity [WIP]
 
-									/* 
+									/*
 									 * The total number of individuals that may attend an event or venue.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Integer
 									 */
 
 								// medicalSpecialty (specific property)
 
-									/* 
+									/*
 									 * A medical specialty of the provider.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalSpecialty
 									 */
 
@@ -17640,18 +17640,18 @@
 
 								// memberOf [WIP]
 
-									/* 
-									 * An Organization (or ProgramMembership) to which this Person or Organization 
+									/*
+									 * An Organization (or ProgramMembership) to which this Person or Organization
 									 * belongs.
-									 * 
+									 *
 									 * Inverse-property: member
-									 * 
+									 *
 									 * Subproperty of:
-									 * 
+									 *
 									 *     - foo
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 *     - ProgramMembership
 									 */
@@ -17680,7 +17680,7 @@
 
 													/*
 
-														More information is needed on whether or not clinical locations are ever 
+														More information is needed on whether or not clinical locations are ever
 														members of health care professional associations.
 
 													*/
@@ -17758,94 +17758,94 @@
 
 								// nonprofitStatus [WIP]
 
-									/* 
-									 * nonprofitStatus indicates the legal status of a non-profit organization in its 
+									/*
+									 * nonprofitStatus indicates the legal status of a non-profit organization in its
 									 * primary place of business.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - NonprofitType
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
 								// numberOfEmployees [WIP]
 
-									/* 
+									/*
 									 * The number of employees in an organization (e.g., business).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - QuantitativeValue
 									 */
 
 								// offers [WIP]
 
-									/* 
-									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									/*
+									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
-									 * 
-									 * Use businessFunction to indicate the kind of transaction offered 
+									 *
+									 * Use businessFunction to indicate the kind of transaction offered
 									 * (i.e., sell, lease).
-									 * 
+									 *
 									 * This property can also be used to describe a Demand.
-									 * 
-									 * While this property is listed as expected on a number of common types, it can 
-									 * be used in others. In that case, using a second type, such as Product or a 
+									 *
+									 * While this property is listed as expected on a number of common types, it can
+									 * be used in others. In that case, using a second type, such as Product or a
 									 * subtype of Product, can clarify the nature of the offer.
-									 * 
+									 *
 									 * Inverse-property: itemOffered
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Demand
 									 *     - Offer
 									 */
 
 								// openingHours [WIP]
 
-									/* 
-									 * The general opening hours for a business. Opening hours can be specified as a 
-									 * weekly time range, starting with days, then times per day. Multiple days can be 
-									 * listed with commas ',' separating each day. Day or time ranges are specified 
+									/*
+									 * The general opening hours for a business. Opening hours can be specified as a
+									 * weekly time range, starting with days, then times per day. Multiple days can be
+									 * listed with commas ',' separating each day. Day or time ranges are specified
 									 * using a hyphen '-'.
-									 * 
-									 * Days are specified using the following two-letter combinations: 
+									 *
+									 * Days are specified using the following two-letter combinations:
 									 * Mo, Tu, We, Th, Fr, Sa, Su.
-									 * 
-									 * Times are specified using 24:00 format. For example, 3 p.m. is specified as 
+									 *
+									 * Times are specified using 24:00 format. For example, 3 p.m. is specified as
 									 * 15:00, 10 a.m. as 10:00.
-									 * 
-									 * Here is an example: 
+									 *
+									 * Here is an example:
 									 * <time itemprop="openingHours" datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
-									 * 
-									 * If a business is open 7 days a week, then it can be specified as 
+									 *
+									 * If a business is open 7 days a week, then it can be specified as
 									 * <time itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// openingHoursSpecification [WIP]
 
-									/* 
+									/*
 									 * The opening hours of a certain place.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - OpeningHoursSpecification
 									 */
 
 								// parentOrganization
 
-									/* 
+									/*
 									 * The larger organization that this organization is a subOrganization of, if any.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
@@ -17921,21 +17921,21 @@
 
 								// paymentAccepted [WIP]
 
-									/* 
+									/*
 									 * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// photo
 
-									/* 
+									/*
 									 * A photograph of this place.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - Photograph
 									 */
@@ -17984,12 +17984,12 @@
 
 								// potentialAction [WIP]
 
-									/* 
-									 * Indicates a potential Action, which describes an idealized action in which this 
+									/*
+									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Action
 									 */
 
@@ -18012,45 +18012,45 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John
 											       wrote a book)
 											 * 'endTime'
-												 * The endTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-												   actions that span a period of time, when the action was performed (e.g., John 
-												   wrote a book from January to December). For media, including audio and video, 
-												   it's the time offset of the end of a clip within a larger file. Note that Event 
-												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												 * The endTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For
+												   actions that span a period of time, when the action was performed (e.g., John
+												   wrote a book from January to December). For media, including audio and video,
+												   it's the time offset of the end of a clip within a larger file. Note that Event
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates
 												   with times. This situation may be clarified in future revisions.
 											 * 'error'
 												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
-												 * The object that helped the agent perform the action (e.g., John wrote a book 
+												 * The object that helped the agent perform the action (e.g., John wrote a book
 												with a pen).
 											 * 'location'
-												 * The location of, for example, where an event is happening, where an 
+												 * The location of, for example, where an event is happening, where an
 												   organization is located, or where an action takes place.
 											 * 'object'
-												 * The object upon which the action is carried out, whose state is kept intact or 
-												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												 * The object upon which the action is carried out, whose state is kept intact or
+												   changed. Also known as the semantic roles patient, affected or undergoer —
 												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
-												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a
 												book with Steve).
 											 * 'provider'
-												 * The service provider, service operator, or service performer; the goods 
-												   producer. Another party (a seller) may offer those services or goods on behalf 
+												 * The service provider, service operator, or service performer; the goods
+												   producer. Another party (a seller) may offer those services or goods on behalf
 												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
 												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
-												 * The startTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-												   For actions that span a period of time, when the action was performed 
-												   (e.g., John wrote a book from January to December). For media, including audio 
-												   and video, it's the time offset of the start of a clip within a larger file. 
-												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-												   describing dates with times. This situation may be clarified in future 
+												 * The startTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start.
+												   For actions that span a period of time, when the action was performed
+												   (e.g., John wrote a book from January to December). For media, including audio
+												   and video, it's the time offset of the start of a clip within a larger file.
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when
+												   describing dates with times. This situation may be clarified in future
 												   revisions.
 											 * 'target'
 												 * Indicates a target EntryPoint, or url, for an Action.
@@ -18059,54 +18059,54 @@
 
 								// primaryImageOfPage [WIP]
 
-									/* 
+									/*
 									 * Indicates the main image on the page.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 */
 
 								// publicAccess [WIP]
 
-									/* 
-									 * A flag to signal that the Place is open to public visitors. If this property is 
+									/*
+									 * A flag to signal that the Place is open to public visitors. If this property is
 									 * omitted there is no assumed default boolean value.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
 									 */
 
 								// relatedLink [WIP]
 
-									/* 
+									/*
 									 * A link related to this web page, for example to other related web pages.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 								// review [WIP]
 
-									/* 
+									/*
 									 * A review of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Review
 									 */
 
 								// sameAs
 
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									/*
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -18160,48 +18160,48 @@
 
 								// speakable [WIP]
 
-									/* 
-									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-									 * of being highlighted as being especially appropriate for text-to-speech 
-									 * conversion. Other sections of a page may also be usefully spoken in particular 
-									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									/*
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
+									 * of being highlighted as being especially appropriate for text-to-speech
+									 * conversion. Other sections of a page may also be usefully spoken in particular
+									 * circumstances; the 'speakable' property serves to indicate the parts most
 									 * likely to be generally useful for speech.
-									 * 
-									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 *
+									 * The speakable property can be repeated an arbitrary number of times, with three
 									 * kinds of possible 'content-locator' values:
-									 * 
-									 *     1.) id-value URL references - uses id-value of an element in the page being 
-									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 *
+									 *     1.) id-value URL references - uses id-value of an element in the page being
+									 * annotated. The simplest use of speakable has (potentially relative) URL values,
 									 * referencing identified sections of the document concerned.
-									 * 
-									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 *
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via
 									 * class attribute). Use the cssSelector property.
-									 * 
-									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 *
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the
 									 * content). Use the xpath property.
-									 * 
-									 * For more sophisticated markup of speakable sections beyond simple ID 
-									 * references, either CSS selectors or XPath expressions to pick out document 
-									 * section(s) as speakable. For this we define a supporting type, 
-									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 *
+									 * For more sophisticated markup of speakable sections beyond simple ID
+									 * references, either CSS selectors or XPath expressions to pick out document
+									 * section(s) as speakable. For this we define a supporting type,
+									 * SpeakableSpecification which is defined to be a possible value of the speakable
 									 * property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - SpeakableSpecification
 									 *     - URL
 									 */
 
 								// specialOpeningHoursSpecification
 
-									/* 
+									/*
 									 * The special opening hours of a certain place.
-									 * 
-									 * Use this to explicitly override general opening hours brought in scope by 
+									 *
+									 * Use this to explicitly override general opening hours brought in scope by
 									 * openingHoursSpecification or openingHours.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - OpeningHoursSpecification
 									 */
 
@@ -18257,11 +18257,11 @@
 
 								// specialty
 
-									/* 
+									/*
 									 * One of the domain specialties to which this web page's content applies.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Specialty
 									 */
 
@@ -18313,16 +18313,16 @@
 
 								// subOrganization
 
-									/* 
-									 * A relationship between two organizations where the first includes the second 
+									/*
+									 * A relationship between two organizations where the first includes the second
 									 * (e.g., as a subsidiary).
-									 * 
+									 *
 									 * See also: the more specific 'department' property.
-									 * 
+									 *
 									 * Inverse-property: parentOrganization
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
@@ -18390,34 +18390,34 @@
 
 								// timeRequired [WIP]
 
-									/* 
-									 * Approximate or typical time it usually takes to work with or through the 
+									/*
+									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Duration (use ISO 8601 duration format).
 									 */
 
 								// mentions [WIP]
 
-									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									/*
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
 								// significantLink
 
-									/* 
-									 * One of the more significant URLs on the page. Typically, these are the 
+									/*
+									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -18469,12 +18469,12 @@
 
 								// keywords [WIP]
 
-									/* 
-									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									/*
+									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DefinedTerm
 									 *     - Text
 									 *     - URL
@@ -18675,7 +18675,7 @@
 								)
 							) {
 
-							/* 
+							/*
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -18708,7 +18708,7 @@
 
 						} else {
 
-							/* 
+							/*
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -18831,11 +18831,11 @@
 
 								// url
 
-									/* 
+									/*
 									 * URL of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -18964,9 +18964,9 @@
 
 										/*
 
-											Loop through an associative array of properties common to all of our schema 
-											types, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties common to all of our schema
+											types, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -19017,9 +19017,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the MedicalWebPage 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the MedicalWebPage
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -19057,9 +19057,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the types other 
-											than the MedicalWebPage type, adding each row to this item's schema when the 
-											key matches a property valid for the type, replacing full values with only the 
+											Loop through an associative array of properties specific to the types other
+											than the MedicalWebPage type, adding each row to this item's schema when the
+											key matches a property valid for the type, replacing full values with only the
 											node identifier where appropriate.
 
 										*/
@@ -19097,9 +19097,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the main entity 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the main entity
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -19212,15 +19212,15 @@
 
 								// name
 
-									/* 
+									/*
 									 * The name of the item.
-									 * 
+									 *
 									 * Subproperty of:
-									 * 
+									 *
 									 *     - rdfs:label
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -19276,13 +19276,13 @@
 
 								// about (MedicalWebPage only)
 
-									/* 
+									/*
 									 * The subject matter of the content.
-									 * 
+									 *
 									 * Inverse-property: subjectOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -19327,18 +19327,18 @@
 
 								// abstract
 
-									/* 
+									/*
 									 * An abstract is a short description that summarizes a CreativeWork.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
-									 * 
-									 * If the common schema template part did not generate a value, get the 
+									 *
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -19396,20 +19396,20 @@
 
 								// additionalType
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -19490,24 +19490,24 @@
 
 								// aggregateRating [excluded]
 
-									/* 
+									/*
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - AggregateRating
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
+									 *
+									 * This schema property is not relevant to areas of expertise and will not be
 									 * included.
 									 */
 
 								// alternateName
 
-									/* 
+									/*
 									 * An alias for the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -19584,24 +19584,24 @@
 
 								// citation [WIP]
 
-									/* 
-									 * A citation or reference to another creative work, such as another publication, 
+									/*
+									 * A citation or reference to another creative work, such as another publication,
 									 * web page, scholarly article, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - Text
 									 */
 
 								// code
 
-									/* 
-									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									/*
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology
 									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalCode
 									 */
 
@@ -19674,29 +19674,29 @@
 
 								// contentLocation [excluded]
 
-									/* 
-									 * The location depicted or described in the content. For example, the location in 
+									/*
+									 * The location depicted or described in the content. For example, the location in
 									 * a photograph or painting.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Place
-									 * 
-									 * This schema property is not relevant to areas of expertise webpages and will 
+									 *
+									 * This schema property is not relevant to areas of expertise webpages and will
 									 * not be included for the MedicalWebPage schema type.
 									 */
 
 								// description (specific property)
 
-									/* 
+									/*
 									 * A description of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - TextObject
-									 * 
-									 * If the common schema template part did not generate a value, get the 
+									 *
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -19754,74 +19754,74 @@
 
 								// disambiguatingDescription [WIP]
 
-									/* 
-									 * A sub property of description. A short description of the item used to 
-									 * disambiguate from other, similar items. Information from other properties (in 
-									 * particular, name) may be necessary for the description to be useful for 
+									/*
+									 * A sub property of description. A short description of the item used to
+									 * disambiguate from other, similar items. Information from other properties (in
+									 * particular, name) may be necessary for the description to be useful for
 									 * disambiguation.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// encodingFormat [WIP]
 
-									/* 
-									 * Media type typically expressed using a MIME format (see IANA site and MDN 
-									 * reference), (e.g., application/zip for a SoftwareApplication binary, 
+									/*
+									 * Media type typically expressed using a MIME format (see IANA site and MDN
+									 * reference), (e.g., application/zip for a SoftwareApplication binary,
 									 * audio/mpeg for .mp3).
-									 * 
-									 * In cases where a CreativeWork has several media type representations, encoding 
-									 * can be used to indicate each MediaObject alongside particular encodingFormat 
+									 *
+									 * In cases where a CreativeWork has several media type representations, encoding
+									 * can be used to indicate each MediaObject alongside particular encodingFormat
 									 * information.
-									 * 
-									 * Unregistered or niche encoding and file formats can be indicated instead via 
-									 * the most appropriate URL (e.g., defining Web page, a Wikipedia/Wikidata 
+									 *
+									 * Unregistered or niche encoding and file formats can be indicated instead via
+									 * the most appropriate URL (e.g., defining Web page, a Wikipedia/Wikidata
 									 * entry).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
 
 								// guideline [WIP]
 
-									/* 
+									/*
 									 * A medical guideline related to this entity.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalGuideline
 									 */
 
 								// hasPart [excluded]
 
-									/* 
-									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									/*
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
-									 * 
+									 *
 									 * Inverse-property: isPartOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
-									 * 
-									 * This schema property is not relevant to areas of expertise or their webpages 
+									 *
+									 * This schema property is not relevant to areas of expertise or their webpages
 									 * and will not be included.
 									 */
 
 								// identifier [WIP]
 
-									/* 
-									 * The identifier property represents any kind of identifier for any kind of 
-									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-									 * properties for representing many of these, either as textual strings or as URL 
+									/*
+									 * The identifier property represents any kind of identifier for any kind of
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+									 * properties for representing many of these, either as textual strings or as URL
 									 * (URI) links. See background notes for more details.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - PropertyValue
 									 *     - Text
 									 *     - URL
@@ -19829,11 +19829,11 @@
 
 								// image
 
-									/* 
+									/*
 									 * An image of the item. This can be a URL or a fully described ImageObject.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
 									 */
@@ -19964,40 +19964,40 @@
 
 								// legalStatus [excluded]
 
-									/* 
-									 * The drug or supplement's legal status, including any controlled substance 
+									/*
+									 * The drug or supplement's legal status, including any controlled substance
 									 * schedules that apply.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DrugLegalStatus
 									 *     - MedicalEnumeration
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to areas of expertise and will not be 
+									 *
+									 * This schema property is not relevant to areas of expertise and will not be
 									 * included.
 									 */
 
 								// mainEntity [WIP]
 
-									/* 
+									/*
 									 * Indicates the primary entity described in some page or other CreativeWork.
-									 * 
+									 *
 									 * Inverse-property: mainEntityOfPage
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
 								// medicineSystem
 
-									/* 
-									 * The system of medicine that includes this MedicalEntity 
+									/*
+									 * The system of medicine that includes this MedicalEntity
 									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicineSystem
 									 */
 
@@ -20061,35 +20061,35 @@
 
 								// offers [WIP]
 
-									/* 
-									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									/*
+									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
-									 * 
-									 * Use businessFunction to indicate the kind of transaction offered 
+									 *
+									 * Use businessFunction to indicate the kind of transaction offered
 									 * (i.e., sell, lease).
-									 * 
+									 *
 									 * This property can also be used to describe a Demand.
-									 * 
-									 * While this property is listed as expected on a number of common types, it can 
-									 * be used in others. In that case, using a second type, such as Product or a 
+									 *
+									 * While this property is listed as expected on a number of common types, it can
+									 * be used in others. In that case, using a second type, such as Product or a
 									 * subtype of Product, can clarify the nature of the offer.
-									 * 
+									 *
 									 * Inverse-property: itemOffered
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Demand
 									 *     - Offer
 									 */
 
 								// potentialAction [WIP]
 
-									/* 
-									 * Indicates a potential Action, which describes an idealized action in which this 
+									/*
+									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Action
 									 */
 
@@ -20112,45 +20112,45 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John
 											       wrote a book)
 											 * 'endTime'
-												 * The endTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-												   actions that span a period of time, when the action was performed (e.g., John 
-												   wrote a book from January to December). For media, including audio and video, 
-												   it's the time offset of the end of a clip within a larger file. Note that Event 
-												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												 * The endTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For
+												   actions that span a period of time, when the action was performed (e.g., John
+												   wrote a book from January to December). For media, including audio and video,
+												   it's the time offset of the end of a clip within a larger file. Note that Event
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates
 												   with times. This situation may be clarified in future revisions.
 											 * 'error'
 												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
-												 * The object that helped the agent perform the action (e.g., John wrote a book 
+												 * The object that helped the agent perform the action (e.g., John wrote a book
 												with a pen).
 											 * 'location'
-												 * The location of, for example, where an event is happening, where an 
+												 * The location of, for example, where an event is happening, where an
 												   organization is located, or where an action takes place.
 											 * 'object'
-												 * The object upon which the action is carried out, whose state is kept intact or 
-												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												 * The object upon which the action is carried out, whose state is kept intact or
+												   changed. Also known as the semantic roles patient, affected or undergoer —
 												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
-												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a
 												book with Steve).
 											 * 'provider'
-												 * The service provider, service operator, or service performer; the goods 
-												   producer. Another party (a seller) may offer those services or goods on behalf 
+												 * The service provider, service operator, or service performer; the goods
+												   producer. Another party (a seller) may offer those services or goods on behalf
 												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
 												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
-												 * The startTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-												   For actions that span a period of time, when the action was performed 
-												   (e.g., John wrote a book from January to December). For media, including audio 
-												   and video, it's the time offset of the start of a clip within a larger file. 
-												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-												   describing dates with times. This situation may be clarified in future 
+												 * The startTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start.
+												   For actions that span a period of time, when the action was performed
+												   (e.g., John wrote a book from January to December). For media, including audio
+												   and video, it's the time offset of the start of a clip within a larger file.
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when
+												   describing dates with times. This situation may be clarified in future
 												   revisions.
 											 * 'target'
 												 * Indicates a target EntryPoint, or url, for an Action.
@@ -20159,42 +20159,42 @@
 
 								// primaryImageOfPage [WIP]
 
-									/* 
+									/*
 									 * Indicates the main image on the page.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 */
 
 								// recognizingAuthority [WIP]
 
-									/* 
-									 * If applicable, the organization that officially recognizes this entity as part 
+									/*
+									 * If applicable, the organization that officially recognizes this entity as part
 									 * of its endorsed system of medicine.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
 								// relatedLink [WIP]
 
-									/* 
+									/*
 									 * A link related to this web page, for example to other related web pages.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 								// relevantSpecialty
 
-									/* 
+									/*
 									 * If applicable, a medical specialty in which this entity is relevant.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalSpecialty
 									 */
 
@@ -20259,13 +20259,13 @@
 
 								// sameAs
 
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									/*
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -20330,120 +20330,120 @@
 
 								// speakable [WIP]
 
-									/* 
-									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-									 * of being highlighted as being especially appropriate for text-to-speech 
-									 * conversion. Other sections of a page may also be usefully spoken in particular 
-									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									/*
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
+									 * of being highlighted as being especially appropriate for text-to-speech
+									 * conversion. Other sections of a page may also be usefully spoken in particular
+									 * circumstances; the 'speakable' property serves to indicate the parts most
 									 * likely to be generally useful for speech.
-									 * 
-									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 *
+									 * The speakable property can be repeated an arbitrary number of times, with three
 									 * kinds of possible 'content-locator' values:
-									 * 
-									 *     1.) id-value URL references - uses id-value of an element in the page being 
-									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 *
+									 *     1.) id-value URL references - uses id-value of an element in the page being
+									 * annotated. The simplest use of speakable has (potentially relative) URL values,
 									 * referencing identified sections of the document concerned.
-									 * 
-									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 *
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via
 									 * class attribute). Use the cssSelector property.
-									 * 
-									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 *
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the
 									 * content). Use the xpath property.
-									 * 
-									 * For more sophisticated markup of speakable sections beyond simple ID 
-									 * references, either CSS selectors or XPath expressions to pick out document 
-									 * section(s) as speakable. For this we define a supporting type, 
-									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 *
+									 * For more sophisticated markup of speakable sections beyond simple ID
+									 * references, either CSS selectors or XPath expressions to pick out document
+									 * section(s) as speakable. For this we define a supporting type,
+									 * SpeakableSpecification which is defined to be a possible value of the speakable
 									 * property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - SpeakableSpecification
 									 *     - URL
 									 */
 
 								// specialty [WIP]
 
-									/* 
+									/*
 									 * One of the domain specialities to which this web page's content applies.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Specialty
 									 */
 
 								// study [WIP]
 
-									/* 
+									/*
 									 * A medical study or trial related to this entity.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalStudy
 									 */
 
 								// text [WIP]
 
-									/* 
+									/*
 									 * The textual content of this CreativeWork.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// timeRequired [WIP]
 
-									/* 
-									 * Approximate or typical time it usually takes to work with or through the 
+									/*
+									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Duration (use ISO 8601 duration format).
 									 */
 
 								// video [WIP]
 
-									/* 
+									/*
 									 * An embedded video object.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Clip
 									 *     - VideoObject
 									 */
 
 								// mentions [WIP]
 
-									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									/*
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
 								// significantLink [WIP]
 
-									/* 
-									 * One of the more significant URLs on the page. Typically, these are the 
+									/*
+									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 								// keywords [WIP]
 
-									/* 
-									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									/*
+									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DefinedTerm
 									 *     - Text
 									 *     - URL
@@ -20649,7 +20649,7 @@
 							)
 						) {
 
-							/* 
+							/*
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -20682,7 +20682,7 @@
 
 						} else {
 
-							/* 
+							/*
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -20853,11 +20853,11 @@
 
 								// url
 
-									/* 
+									/*
 									 * URL of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -20991,9 +20991,9 @@
 
 										/*
 
-											Loop through an associative array of properties common to all of our schema 
-											types, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties common to all of our schema
+											types, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -21044,9 +21044,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the MedicalWebPage 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the MedicalWebPage
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -21084,9 +21084,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the types other 
-											than the MedicalWebPage type, adding each row to this item's schema when the 
-											key matches a property valid for the type, replacing full values with only the 
+											Loop through an associative array of properties specific to the types other
+											than the MedicalWebPage type, adding each row to this item's schema when the
+											key matches a property valid for the type, replacing full values with only the
 											node identifier where appropriate.
 
 										*/
@@ -21124,9 +21124,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the main entity 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the main entity
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -21413,7 +21413,7 @@
 								// description (common)
 
 									/*
-									 * If the common schema template part did not generate a value, get the 
+									 * If the common schema template part did not generate a value, get the
 									 * non-excerpt fallback value specific to this entity
 									 */
 
@@ -21513,15 +21513,15 @@
 
 								// name
 
-									/* 
+									/*
 									 * The name of the item.
-									 * 
+									 *
 									 * Subproperty of:
-									 * 
+									 *
 									 *     - rdfs:label
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -21573,13 +21573,13 @@
 
 								// about [WIP]
 
-									/* 
+									/*
 									 * The subject matter of the content.
-									 * 
+									 *
 									 * Inverse-property: subjectOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
@@ -21614,7 +21614,7 @@
 
 												/*
 
-													For CreativeWork, set the value as something like the associated areas of 
+													For CreativeWork, set the value as something like the associated areas of
 													expertise, conditions and treatments.
 
 												*/
@@ -21655,15 +21655,15 @@
 
 								// abstract
 
-									/* 
+									/*
 									 * An abstract is a short description that summarizes a CreativeWork.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
@@ -21719,20 +21719,20 @@
 
 								// additionalType
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -21795,24 +21795,24 @@
 
 								// aggregateRating [excluded]
 
-									/* 
+									/*
 									 * The overall rating, based on a collection of reviews or ratings, of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - AggregateRating
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// alternateName
 
-									/* 
+									/*
 									 * An alias for the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -21882,11 +21882,11 @@
 
 								// articleBody
 
-									/* 
+									/*
 									 * The actual body of the article.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -21967,93 +21967,93 @@
 
 								// audio [excluded]
 
-									/* 
+									/*
 									 * An embedded audio object.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - AudioObject
 									 *     - Clip
 									 *     - MusicRecording
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 *
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be
 									 * included for the MedicalWebPage schema type.
-									 * 
-									 * This schema property is not currently relevant to clinical resoures and will 
+									 *
+									 * This schema property is not currently relevant to clinical resoures and will
 									 * not be included for the MedicalWebPage schema type.
 									 */
 
 								// award [excluded]
 
-									/* 
+									/*
 									 * An award won by or for this item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// bitrate (CreativeWork only) [WIP]
 
-									/* 
+									/*
 									 * The bitrate of the media object.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// caption (CreativeWork only) [WIP]
 
-									/* 
-									 * The caption for this object. For downloadable machine formats (closed caption, 
+									/*
+									 * The caption for this object. For downloadable machine formats (closed caption,
 									 * subtitles etc.) use MediaObject and indicate the encodingFormat.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MediaObject
 									 *     - Text
 									 */
 
 								// citation [excluded]
 
-									/* 
-									 * A citation or reference to another creative work, such as another publication, 
+									/*
+									 * A citation or reference to another creative work, such as another publication,
 									 * web page, scholarly article, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// contentLocation [excluded]
 
-									/* 
-									 * The location depicted or described in the content. For example, the location in 
+									/*
+									 * The location depicted or described in the content. For example, the location in
 									 * a photograph or painting.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Place
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// contentSize
 
-									/* 
+									/*
 									 * File size in (mega/kilo)bytes.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -22105,11 +22105,11 @@
 
 								// contentUrl
 
-									/* 
+									/*
 									 * Actual bytes of the media object, for example the image file or video file.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -22161,11 +22161,11 @@
 
 								// description (specific property)
 
-									/* 
+									/*
 									 * A description of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - TextObject
 									 */
@@ -22222,28 +22222,28 @@
 
 								// disambiguatingDescription [excluded]
 
-									/* 
-									 * A sub property of description. A short description of the item used to 
-									 * disambiguate from other, similar items. Information from other properties (in 
-									 * particular, name) may be necessary for the description to be useful for 
+									/*
+									 * A sub property of description. A short description of the item used to
+									 * disambiguate from other, similar items. Information from other properties (in
+									 * particular, name) may be necessary for the description to be useful for
 									 * disambiguation.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// duration
 
-									/* 
-									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date 
+									/*
+									 * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 date
 									 * format.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Duration
 									 */
 
@@ -22295,15 +22295,15 @@
 
 								// embeddedTextCaption
 
-									/* 
+									/*
 									 * Represents textual captioning from a MediaObject (e.g., text of a 'meme').
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
 
@@ -22369,13 +22369,13 @@
 
 								// embedUrl
 
-									/* 
-									 * A URL pointing to a player for a specific video. In general, this is the 
-									 * information in the src element of an embed tag and should not be the same as 
+									/*
+									 * A URL pointing to a player for a specific video. In general, this is the
+									 * information in the src element of an embed tag and should not be the same as
 									 * the content of the loc tag.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -22427,21 +22427,21 @@
 
 								// encodingFormat
 
-									/* 
-									 * Media type typically expressed using a MIME format (see IANA site and MDN 
-									 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg 
+									/*
+									 * Media type typically expressed using a MIME format (see IANA site and MDN
+									 * reference) (e.g., application/zip for a SoftwareApplication binary, audio/mpeg
 									 * for .mp3).
-									 * 
-									 * In cases where a CreativeWork has several media type representations, encoding 
-									 * can be used to indicate each MediaObject alongside particular encodingFormat 
+									 *
+									 * In cases where a CreativeWork has several media type representations, encoding
+									 * can be used to indicate each MediaObject alongside particular encodingFormat
 									 * information.
-									 * 
-									 * Unregistered or niche encoding and file formats can be indicated instead via 
-									 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata 
+									 *
+									 * Unregistered or niche encoding and file formats can be indicated instead via
+									 * the most appropriate URL (e.g., defining Web page or a Wikipedia/Wikidata
 									 * entry).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -22498,13 +22498,13 @@
 
 								// hasDigitalDocumentPermission
 
-									/* 
-									 * A permission related to the access to this document (e.g., permission to read 
+									/*
+									 * A permission related to the access to this document (e.g., permission to read
 									 * or  write an electronic document). For a public document, specify a grantee
 									 * with an  Audience with audienceType equal to "public".
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DigitalDocumentPermission
 									 */
 
@@ -22567,17 +22567,17 @@
 
 								// hasPart [WIP]
 
-									/* 
-									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork 
+									/*
+									 * Indicates an item or CreativeWork that is part of this item, or CreativeWork
 									 * (in some sense).
-									 * 
+									 *
 									 * Inverse-property: isPartOf
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
-									 * 
-									 * This schema property is not relevant to UAMSHealth.com webpages and will not be 
+									 *
+									 * This schema property is not relevant to UAMSHealth.com webpages and will not be
 									 * included for the MedicalWebPage schema type.
 									 */
 
@@ -22589,11 +22589,11 @@
 
 								// headline (CreativeWork only) [WIP]
 
-									/* 
+									/*
 									 * Headline of the article.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -22605,11 +22605,11 @@
 
 								// height
 
-									/* 
+									/*
 									 * The height of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Distance
 									 *     - QuantitativeValue
 									 */
@@ -22667,29 +22667,29 @@
 
 								// identifier [excluded]
 
-									/* 
-									 * The identifier property represents any kind of identifier for any kind of 
-									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-									 * properties for representing many of these, either as textual strings or as URL 
+									/*
+									 * The identifier property represents any kind of identifier for any kind of
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+									 * properties for representing many of these, either as textual strings or as URL
 									 * (URI) links. See background notes for more details.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - PropertyValue
 									 *     - Text
 									 *     - URL
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// image (specific property)
 
-									/* 
+									/*
 									 * An image of the item. This can be a URL or a fully described ImageObject.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
 									 */
@@ -22740,12 +22740,12 @@
 
 								// inLanguage (CreativeWork only) [WIP]
 
-									/* 
-									 * The language of the content or performance or used in an action. Please use one 
+									/*
+									 * The language of the content or performance or used in an action. Please use one
 									 * of the language codes from the IETF BCP 47 standard. See also availableLanguage.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Language
 									 *     - Text
 									 */
@@ -22754,18 +22754,18 @@
 
 										Add input to clinical resources to indicate the language of the content.
 
-										If there is a value (or if the value is not English), override the 'inLanguage' 
+										If there is a value (or if the value is not English), override the 'inLanguage'
 										schema property value for the CreativeWork item.
 
 									*/
 
 								// isAccessibleForFree (CreativeWork only)
 
-									/* 
+									/*
 									 * A flag to signal that the item, event, or place is accessible for free.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
 									 */
 
@@ -22801,12 +22801,12 @@
 
 								// isBasedOn (CreativeWork only) [WIP]
 
-									/* 
-									 * A resource from which this work is derived or from which it is a modification 
+									/*
+									 * A resource from which this work is derived or from which it is a modification
 									 * or adaptation.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - Product
 									 *     - URL
@@ -22814,7 +22814,7 @@
 
 									/*
 
-										Add input to clinical resources to indicate a resource from which each clinical 
+										Add input to clinical resources to indicate a resource from which each clinical
 										resource's content is derived or from which it is a modification or adaptation.
 
 										If there is a value, set the schema property value for the CreativeWork item.
@@ -22823,14 +22823,14 @@
 
 								// isPartOf (CreativeWork only)
 
-									/* 
-									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some 
+									/*
+									 * Indicates an item or CreativeWork that this item, or CreativeWork (in some
 									 * sense), is part of.
-									 * 
+									 *
 									 * Inverse-property: hasPart
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - URL
 									 */
@@ -22876,12 +22876,12 @@
 
 								// keywords [WIP]
 
-									/* 
-									 * Keywords or tags used to describe some item. Multiple textual entries in a 
+									/*
+									 * Keywords or tags used to describe some item. Multiple textual entries in a
 									 * keywords list are typically delimited by commas, or by repeating the property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DefinedTerm
 									 *     - Text
 									 *     - URL
@@ -22889,58 +22889,58 @@
 
 								// mainEntity [WIP]
 
-									/* 
+									/*
 									 * Indicates the primary entity described in some page or other CreativeWork.
-									 * 
+									 *
 									 * Inverse-property: mainEntityOfPage
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
 								// mentions [WIP]
 
-									/* 
-									 * Indicates that the CreativeWork contains a reference to, but is not necessarily 
+									/*
+									 * Indicates that the CreativeWork contains a reference to, but is not necessarily
 									 * about a concept.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Thing
 									 */
 
 								// offers [WIP]
 
-									/* 
-									 * An offer to provide this item—for example, an offer to sell a product, rent the 
+									/*
+									 * An offer to provide this item—for example, an offer to sell a product, rent the
 									 * DVD of a movie, perform a service, or give away tickets to an event.
-									 * 
-									 * Use businessFunction to indicate the kind of transaction offered 
+									 *
+									 * Use businessFunction to indicate the kind of transaction offered
 									 * (i.e., sell, lease).
-									 * 
+									 *
 									 * This property can also be used to describe a Demand.
-									 * 
-									 * While this property is listed as expected on a number of common types, it can 
-									 * be used in others. In that case, using a second type, such as Product or a 
+									 *
+									 * While this property is listed as expected on a number of common types, it can
+									 * be used in others. In that case, using a second type, such as Product or a
 									 * subtype of Product, can clarify the nature of the offer.
-									 * 
+									 *
 									 * Inverse-property: itemOffered
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Demand
 									 *     - Offer
 									 */
 
 								// potentialAction [WIP]
 
-									/* 
-									 * Indicates a potential Action, which describes an idealized action in which this 
+									/*
+									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Action
 									 */
 
@@ -22963,45 +22963,45 @@
 											 * 'actionStatus'
 												 * Indicates the current disposition of the Action
 											 * 'agent'
-											     * The direct performer or driver of the action — animate or inanimate (e.g., John 
+											     * The direct performer or driver of the action — animate or inanimate (e.g., John
 											       wrote a book)
 											 * 'endTime'
-												 * The endTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For 
-												   actions that span a period of time, when the action was performed (e.g., John 
-												   wrote a book from January to December). For media, including audio and video, 
-												   it's the time offset of the end of a clip within a larger file. Note that Event 
-												   uses startDate/endDate instead of startTime/endTime, even when describing dates 
+												 * The endTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to end. For
+												   actions that span a period of time, when the action was performed (e.g., John
+												   wrote a book from January to December). For media, including audio and video,
+												   it's the time offset of the end of a clip within a larger file. Note that Event
+												   uses startDate/endDate instead of startTime/endTime, even when describing dates
 												   with times. This situation may be clarified in future revisions.
 											 * 'error'
 												 * For failed actions, more information on the cause of the failure.
 											 * 'instrument'
-												 * The object that helped the agent perform the action (e.g., John wrote a book 
+												 * The object that helped the agent perform the action (e.g., John wrote a book
 												with a pen).
 											 * 'location'
-												 * The location of, for example, where an event is happening, where an 
+												 * The location of, for example, where an event is happening, where an
 												   organization is located, or where an action takes place.
 											 * 'object'
-												 * The object upon which the action is carried out, whose state is kept intact or 
-												   changed. Also known as the semantic roles patient, affected or undergoer — 
+												 * The object upon which the action is carried out, whose state is kept intact or
+												   changed. Also known as the semantic roles patient, affected or undergoer —
 												   which change their state — or theme — which doesn't (e.g., John read a book).
 											 * 'participant'
-												 * Other co-agents that participated in the action indirectly (e.g., John wrote a 
+												 * Other co-agents that participated in the action indirectly (e.g., John wrote a
 												book with Steve).
 											 * 'provider'
-												 * The service provider, service operator, or service performer; the goods 
-												   producer. Another party (a seller) may offer those services or goods on behalf 
+												 * The service provider, service operator, or service performer; the goods
+												   producer. Another party (a seller) may offer those services or goods on behalf
 												   of the provider. A provider may also serve as the seller. Supersedes carrier.
 											 * 'result'
 												 * The result produced in the action (e.g., John wrote a book).
 											 * 'startTime'
-												 * The startTime of something. For a reserved event or service 
-												   (e.g., FoodEstablishmentReservation), the time that it is expected to start. 
-												   For actions that span a period of time, when the action was performed 
-												   (e.g., John wrote a book from January to December). For media, including audio 
-												   and video, it's the time offset of the start of a clip within a larger file. 
-												   Note that Event uses startDate/endDate instead of startTime/endTime, even when 
-												   describing dates with times. This situation may be clarified in future 
+												 * The startTime of something. For a reserved event or service
+												   (e.g., FoodEstablishmentReservation), the time that it is expected to start.
+												   For actions that span a period of time, when the action was performed
+												   (e.g., John wrote a book from January to December). For media, including audio
+												   and video, it's the time offset of the start of a clip within a larger file.
+												   Note that Event uses startDate/endDate instead of startTime/endTime, even when
+												   describing dates with times. This situation may be clarified in future
 												   revisions.
 											 * 'target'
 												 * Indicates a target EntryPoint, or url, for an Action.
@@ -23010,31 +23010,31 @@
 
 								// primaryImageOfPage [WIP]
 
-									/* 
+									/*
 									 * Indicates the main image on the page.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 */
 
 								// relatedLink [WIP]
 
-									/* 
+									/*
 									 * A link related to this web page, for example to other related web pages.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 								// representativeOfPage (CreativeWork only)
 
-									/* 
+									/*
 									 * Indicates whether this image is representative of the content of the page.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Boolean
 									 */
 
@@ -23068,26 +23068,26 @@
 
 								// review [excluded]
 
-									/* 
+									/*
 									 * A review of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Review
-									 * 
-									 * This schema property is not relevant to clinical resources or their webpages, 
+									 *
+									 * This schema property is not relevant to clinical resources or their webpages,
 									 * and so it will not be included.
 									 */
 
 								// sameAs
 
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									/*
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -23156,65 +23156,65 @@
 
 								// significantLink [WIP]
 
-									/* 
-									 * One of the more significant URLs on the page. Typically, these are the 
+									/*
+									 * One of the more significant URLs on the page. Typically, these are the
 									 * non-navigation links that are clicked on the most.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 								// size [excluded]
 
-									/* 
-									 * A standardized size of a product or creative work, specified either through a 
-									 * simple textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a 
-									 * unitCode, or a comprehensive and structured SizeSpecification; in other cases, 
+									/*
+									 * A standardized size of a product or creative work, specified either through a
+									 * simple textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a
+									 * unitCode, or a comprehensive and structured SizeSpecification; in other cases,
 									 * the width, height, depth and weight properties may be more applicable.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - [insert type(s) here]
-									 * 
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation 
-									 * feedback and adoption from applications and websites can help improve their 
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
-									 * 
-									 * Standardized sizes are not relevant to clinical resources or their webpages and 
+									 *
+									 * Standardized sizes are not relevant to clinical resources or their webpages and
 									 * so this schema property will not be included.
 									 */
 
 								// speakable
 
-									/* 
-									 * Indicates sections of a Web page that are particularly 'speakable' in the sense 
-									 * of being highlighted as being especially appropriate for text-to-speech 
-									 * conversion. Other sections of a page may also be usefully spoken in particular 
-									 * circumstances; the 'speakable' property serves to indicate the parts most 
+									/*
+									 * Indicates sections of a Web page that are particularly 'speakable' in the sense
+									 * of being highlighted as being especially appropriate for text-to-speech
+									 * conversion. Other sections of a page may also be usefully spoken in particular
+									 * circumstances; the 'speakable' property serves to indicate the parts most
 									 * likely to be generally useful for speech.
-									 * 
-									 * The speakable property can be repeated an arbitrary number of times, with three 
+									 *
+									 * The speakable property can be repeated an arbitrary number of times, with three
 									 * kinds of possible 'content-locator' values:
-									 * 
-									 *     1.) id-value URL references - uses id-value of an element in the page being 
-									 * annotated. The simplest use of speakable has (potentially relative) URL values, 
+									 *
+									 *     1.) id-value URL references - uses id-value of an element in the page being
+									 * annotated. The simplest use of speakable has (potentially relative) URL values,
 									 * referencing identified sections of the document concerned.
-									 * 
-									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via 
+									 *
+									 *     2.) CSS Selectors - addresses content in the annotated page (e.g., via
 									 * class attribute). Use the cssSelector property.
-									 * 
-									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the 
+									 *
+									 *     3.) XPaths - addresses content via XPaths (assuming an XML view of the
 									 * content). Use the xpath property.
-									 * 
-									 * For more sophisticated markup of speakable sections beyond simple ID 
-									 * references, either CSS selectors or XPath expressions to pick out document 
-									 * section(s) as speakable. For this we define a supporting type, 
-									 * SpeakableSpecification which is defined to be a possible value of the speakable 
+									 *
+									 * For more sophisticated markup of speakable sections beyond simple ID
+									 * references, either CSS selectors or XPath expressions to pick out document
+									 * section(s) as speakable. For this we define a supporting type,
+									 * SpeakableSpecification which is defined to be a possible value of the speakable
 									 * property.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - SpeakableSpecification
 									 *     - URL
 									 */
@@ -23316,31 +23316,31 @@
 
 								// specialty [WIP]
 
-									/* 
+									/*
 									 * One of the domain specialties to which this web page's content applies.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Specialty
 									 */
 
 								// text [WIP]
 
-									/* 
+									/*
 									 * The textual content of this CreativeWork.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
 								// thumbnail
 
-									/* 
+									/*
 									 * Thumbnail image for an image or video.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 */
 
@@ -23392,29 +23392,29 @@
 
 								// thumbnailUrl [WIP]
 
-									/* 
+									/*
 									 * A thumbnail image relevant to the Thing.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
 									/*
 
-										Check if fallback value is needed for each clinical resource type if the post 
+										Check if fallback value is needed for each clinical resource type if the post
 										thumbnail does not exist.
 
 									*/
 
 								// timeRequired
 
-									/* 
-									 * Approximate or typical time it usually takes to work with or through the 
+									/*
+									 * Approximate or typical time it usually takes to work with or through the
 									 * content of this work for the typical or target audience.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Duration (use ISO 8601 duration format).
 									 */
 
@@ -23506,12 +23506,12 @@
 
 								// transcript
 
-									/* 
-									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that 
+									/*
+									 * If this MediaObject is an AudioObject or VideoObject, the transcript of that
 									 * object.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -23577,63 +23577,63 @@
 
 								// translator [excluded]
 
-									/* 
-									 * Organization or person who adapts a creative work to different languages, 
-									 * regional differences and technical requirements of a target market, or that 
+									/*
+									 * Organization or person who adapts a creative work to different languages,
+									 * regional differences and technical requirements of a target market, or that
 									 * translates during some event.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 *     - Person
-									 * 
-									 * We will not be identifying either the organization or the person who translates 
-									 * the clinical resources into different languages and so this schema property 
+									 *
+									 * We will not be identifying either the organization or the person who translates
+									 * the clinical resources into different languages and so this schema property
 									 * will not be included.
 									 */
 
 								// uploadDate (CreativeWork only) [WIP]
 
-									/* 
+									/*
 									 * Date when this media object was uploaded to this site.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Date
 									 */
 
 									/*
 
-										Use get_post_time( 'c', false, $post ), where $post is the ID of the clinical 
+										Use get_post_time( 'c', false, $post ), where $post is the ID of the clinical
 										resource's media asset (i.e., infographic image, digital document file).
 
 									*/
 
 								// video (MedicalWebPage only) [WIP]
 
-									/* 
+									/*
 									 * An embedded video object.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Clip
 									 *     - VideoObject
 									 */
 
 									/*
 
-										If the clinical resource is the 'Video' type, set the property value using that 
+										If the clinical resource is the 'Video' type, set the property value using that
 										clinical resource's VideoObject schema item.
 
 									*/
 
 								// videoFrameSize
 
-									/* 
+									/*
 									 * The frame size of the video.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -23685,11 +23685,11 @@
 
 								// videoQuality
 
-									/* 
+									/*
 									 * The quality of the video.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -23743,11 +23743,11 @@
 
 								// width
 
-									/* 
+									/*
 									 * The width of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Distance
 									 *     - QuantitativeValue
 									 */
@@ -23805,9 +23805,9 @@
 
 								// wordCount
 
-									/* 
+									/*
 									 * The number of words in the text of the Article.
-									 * 
+									 *
 									 * Values expected to be one of these types:
 									 *     - Integer
 									 */
@@ -24430,17 +24430,17 @@
 
 											// provider (CreativeWork, syndicated only)
 
-												/* 
-												 * The service provider, service operator, or service performer; the goods 
+												/*
+												 * The service provider, service operator, or service performer; the goods
 												 * producer.
-												 * 
-												 * Another party (a seller) may offer those services or goods on behalf of the 
+												 *
+												 * Another party (a seller) may offer those services or goods on behalf of the
 												 * provider.
-												 * 
+												 *
 												 * A provider may also serve as the seller.
-											 	 * 
+											 	 *
 												 * Values expected to be one of these types:
-												 * 
+												 *
 												 *     - Organization
 												 *     - Person
 												 */
@@ -24872,7 +24872,7 @@
 							!empty( $condition_item_MedicalCondition )
 						) {
 
-							/* 
+							/*
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -24883,7 +24883,7 @@
 
 						} else {
 
-							/* 
+							/*
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -24980,14 +24980,14 @@
 
 								// url
 
-									/* 
+									/*
 									 * URL of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
-									 * 
-									 * The condition custom post type does not have a published URL and so this schema 
+									 *
+									 * The condition custom post type does not have a published URL and so this schema
 									 * property will not be included.
 									 */
 
@@ -25036,9 +25036,9 @@
 
 										/*
 
-											Loop through an associative array of properties common to all of our schema 
-											types, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties common to all of our schema
+											types, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -25076,9 +25076,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the types other 
-											than the MedicalWebPage type, adding each row to this item's schema when the 
-											key matches a property valid for the type, replacing full values with only the 
+											Loop through an associative array of properties specific to the types other
+											than the MedicalWebPage type, adding each row to this item's schema when the
+											key matches a property valid for the type, replacing full values with only the
 											node identifier where appropriate.
 
 										*/
@@ -25116,9 +25116,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the main entity 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the main entity
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -25154,15 +25154,15 @@
 
 								// name
 
-									/* 
+									/*
 									 * The name of the item.
-									 * 
+									 *
 									 * Subproperty of:
-									 * 
+									 *
 									 *     - rdfs:label
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -25196,31 +25196,31 @@
 
 								// additionalType [WIP]
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
 
 								// alternateName
 
-									/* 
+									/*
 									 * An alias for the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -25263,36 +25263,36 @@
 
 								// associatedAnatomy [excluded]
 
-									/* 
-									 * The anatomy of the underlying organ system or structures associated with this 
+									/*
+									 * The anatomy of the underlying organ system or structures associated with this
 									 * entity.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - AnatomicalStructure
 									 *     - AnatomicalSystem
 									 *     - SuperficialAnatomy
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// additionalType
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -25340,12 +25340,12 @@
 
 								// code
 
-									/* 
-									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									/*
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology
 									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalCode
 									 */
 
@@ -25387,15 +25387,15 @@
 
 								// description [excluded]
 
-									/* 
+									/*
 									 * A description of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - TextObject
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
@@ -25409,99 +25409,99 @@
 
 								// differentialDiagnosis [excluded]
 
-									/* 
-									 * One of a set of differential diagnoses for the condition. Specifically, a 
-									 * closely-related or competing diagnosis typically considered later in the 
-									 * cognitive process whereby this medical condition is distinguished from others 
-									 * most likely responsible for a similar collection of signs and symptoms to reach 
+									/*
+									 * One of a set of differential diagnoses for the condition. Specifically, a
+									 * closely-related or competing diagnosis typically considered later in the
+									 * cognitive process whereby this medical condition is distinguished from others
+									 * most likely responsible for a similar collection of signs and symptoms to reach
 									 * the most parsimonious diagnosis or diagnoses in a patient.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DDxElement
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// disambiguatingDescription [excluded]
 
-									/* 
-									 * A sub property of description. A short description of the item used to 
-									 * disambiguate from other, similar items. Information from other properties (in 
-									 * particular, name) may be necessary for the description to be useful for 
+									/*
+									 * A sub property of description. A short description of the item used to
+									 * disambiguate from other, similar items. Information from other properties (in
+									 * particular, name) may be necessary for the description to be useful for
 									 * disambiguation.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// drug [excluded]
 
-									/* 
+									/*
 									 * Specifying a drug or medicine used in a medication procedure.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Drug
-									 * 
-									 * This schema property is not relevant to conditions and so it will not be 
+									 *
+									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
 									 */
 
 								// epidemiology [excluded]
 
-									/* 
+									/*
 									 * The characteristics of associated patients, such as age, gender, race etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// expectedPrognosis [excluded]
 
-									/* 
+									/*
 									 * The likely outcome in either the short term or long term of the medical condition.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// guideline [excluded]
 
-									/* 
+									/*
 									 * A medical guideline related to this entity.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalGuideline
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// identifier [WIP]
 
-									/* 
-									 * The identifier property represents any kind of identifier for any kind of 
-									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-									 * properties for representing many of these, either as textual strings or as URL 
+									/*
+									 * The identifier property represents any kind of identifier for any kind of
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+									 * properties for representing many of these, either as textual strings or as URL
 									 * (URI) links. See background notes for more details.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - PropertyValue
 									 *     - Text
 									 *     - URL
@@ -25509,45 +25509,45 @@
 
 								// identifyingExam [WIP]
 
-									/* 
+									/*
 									 * A physical examination that can identify this sign.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - PhysicalExam
 									 */
 
 								// identifyingTest [WIP]
 
-									/* 
+									/*
 									 * A diagnostic test that can identify this sign.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTest
 									 */
 
 								// image [excluded]
 
-									/* 
+									/*
 									 * An image of the item. This can be a URL or a fully described ImageObject.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// infectiousAgent
 
-									/* 
+									/*
 									 * The actual infectious agent, such as a specific bacterium.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -25581,11 +25581,11 @@
 
 								// infectiousAgentClass
 
-									/* 
+									/*
 									 * The class of infectious agent (bacteria, prion, etc.) that causes the disease.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - InfectiousAgentClass
 									 */
 
@@ -25619,159 +25619,159 @@
 
 								// legalStatus [excluded]
 
-									/* 
-									 * The drug or supplement's legal status, including any controlled substance 
+									/*
+									 * The drug or supplement's legal status, including any controlled substance
 									 * schedules that apply.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DrugLegalStatus
 									 *     - MedicalEnumeration
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to conditions and so it will not be 
+									 *
+									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
 									 */
 
 								// mainEntityOfPage [excluded]
 
 									/*
-									 * Indicates a page (or other CreativeWork) for which this thing is the main 
-									 * entity being described. See background notes at 
+									 * Indicates a page (or other CreativeWork) for which this thing is the main
+									 * entity being described. See background notes at
 									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-									 * 
+									 *
 									 * Inverse-property: mainEntity
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - URL
-									 * 
-									 * The condition post type does not have a published page and so this schema 
+									 *
+									 * The condition post type does not have a published page and so this schema
 									 * property will not be included.
 									 */
 
 								// medicineSystem [excluded]
 
-									/* 
-									 * The system of medicine that includes this MedicalEntity 
+									/*
+									 * The system of medicine that includes this MedicalEntity
 									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicineSystem
-									 * 
-									 * This schema property is not relevant to conditions and so it will not be 
+									 *
+									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
 									 */
 
 								// naturalProgression [excluded]
 
-									/* 
-									 * The expected progression of the condition if it is not treated and allowed to 
+									/*
+									 * The expected progression of the condition if it is not treated and allowed to
 									 * progress naturally.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// pathophysiology [excluded]
 
-									/* 
-									 * Changes in the normal mechanical, physical, and biochemical functions that are 
+									/*
+									 * Changes in the normal mechanical, physical, and biochemical functions that are
 									 * associated with this activity or condition.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// possibleComplication [excluded]
 
-									/* 
-									 * A possible unexpected and unfavorable evolution of a medical condition. 
-									 * Complications may include worsening of the signs or symptoms of the disease, 
+									/*
+									 * A possible unexpected and unfavorable evolution of a medical condition.
+									 * Complications may include worsening of the signs or symptoms of the disease,
 									 * extension of the condition to other organ systems, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// potentialAction [excluded]
 
-									/* 
-									 * Indicates a potential Action, which describes an idealized action in which this 
+									/*
+									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Action
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// recognizingAuthority [excluded]
 
-									/* 
-									 * If applicable, the organization that officially recognizes this entity as part 
+									/*
+									 * If applicable, the organization that officially recognizes this entity as part
 									 * of its endorsed system of medicine.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
-									 * 
-									 * This schema property is not relevant to conditions and so it will not be 
+									 *
+									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
 									 */
 
 								// relevantSpecialty [excluded]
 
-									/* 
+									/*
 									 * If applicable, a medical specialty in which this entity is relevant.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalSpecialty
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// riskFactor [excluded]
 
-									/* 
-									 * A modifiable or non-modifiable factor that increases the risk of a patient 
+									/*
+									 * A modifiable or non-modifiable factor that increases the risk of a patient
 									 * contracting this condition (e.g., age, coexisting condition).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalRiskFactor
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// sameAs
 
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									/*
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -25818,54 +25818,54 @@
 
 								// signOrSymptom [WIP]
 
-									/* 
-									 * A sign or symptom of this condition. Signs are objective or physically 
-									 * observable manifestations of the medical condition while symptoms are the 
+									/*
+									 * A sign or symptom of this condition. Signs are objective or physically
+									 * observable manifestations of the medical condition while symptoms are the
 									 * subjective experience of the medical condition.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalSignOrSymptom
 									 */
 
 								// stage [excluded]
 
-									/* 
+									/*
 									 * The stage of the condition, if applicable.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalConditionStage
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								// status [excluded]
 
-									/* 
+									/*
 									 * The status of the study (enumerated).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - EventStatusType
 									 *     - MedicalStudyStatus
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to conditions and so it will not be 
+									 *
+									 * This schema property is not relevant to conditions and so it will not be
 									 * included.
 									 */
 
 								// study [excluded]
 
-									/* 
+									/*
 									 * A medical study or trial related to this entity.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalStudy
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
@@ -25873,25 +25873,25 @@
 
 									/*
 									 * A CreativeWork or Event about this Thing.
-									 * 
+									 *
 									 * Inverse-property: about
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - Event
-									 * 
-									 * The condition post type does not have a published page and so this schema 
+									 *
+									 * The condition post type does not have a published page and so this schema
 									 * property will not be included.
 									 */
 
 								// possibleTreatment
 
-									/* 
+									/*
 									 * A possible treatment to address this condition, sign or symptom.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTherapy
 									 */
 
@@ -25946,12 +25946,12 @@
 
 								// primaryPrevention
 
-									/* 
-									 * A preventative therapy used to prevent an initial occurrence of the medical 
+									/*
+									 * A preventative therapy used to prevent an initial occurrence of the medical
 									 * condition, such as vaccination.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTherapy
 									 */
 
@@ -26006,12 +26006,12 @@
 
 								// secondaryPrevention
 
-									/* 
-									 * A preventative therapy used to prevent reoccurrence of the medical condition 
+									/*
+									 * A preventative therapy used to prevent reoccurrence of the medical condition
 									 * after an initial episode of the condition.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTherapy
 									 */
 
@@ -26066,25 +26066,25 @@
 
 								// transmissionMethod [excluded]
 
-									/* 
-									 * How the disease spreads, either as a route or vector, for example 
+									/*
+									 * How the disease spreads, either as a route or vector, for example
 									 * 'direct contact', 'Aedes aegypti', etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * condition schema and so it will not be included.
 									 */
 
 								 // typicalTest
 
-									/* 
+									/*
 									 * A medical test typically performed given this condition.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTest
 									 */
 
@@ -26235,7 +26235,7 @@
 
 						if ( !empty( $treatment_item_Service ) ) {
 
-							/* 
+							/*
 							 * The transient exists.
 							 * Return the variable.
 							 */
@@ -26246,7 +26246,7 @@
 
 						} else {
 
-							/* 
+							/*
 							 * The transient does not exist.
 							 * Define the variable again.
 							 */
@@ -26372,14 +26372,14 @@
 
 								// url
 
-									/* 
+									/*
 									 * URL of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
-									 * 
-									 * The treatment custom post type does not have a published URL and so this schema 
+									 *
+									 * The treatment custom post type does not have a published URL and so this schema
 									 * property will not be included.
 									 */
 
@@ -26483,9 +26483,9 @@
 
 										/*
 
-											Loop through an associative array of properties common to all of our schema 
-											types, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties common to all of our schema
+											types, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -26523,9 +26523,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the types other 
-											than the MedicalWebPage type, adding each row to this item's schema when the 
-											key matches a property valid for the type, replacing full values with only the 
+											Loop through an associative array of properties specific to the types other
+											than the MedicalWebPage type, adding each row to this item's schema when the
+											key matches a property valid for the type, replacing full values with only the
 											node identifier where appropriate.
 
 										*/
@@ -26563,9 +26563,9 @@
 
 										/*
 
-											Loop through an associative array of properties specific to the main entity 
-											type, adding each row to this item's schema when the key matches a property 
-											valid for the type, replacing full values with only the node identifier where 
+											Loop through an associative array of properties specific to the main entity
+											type, adding each row to this item's schema when the key matches a property
+											valid for the type, replacing full values with only the node identifier where
 											appropriate.
 
 										*/
@@ -26601,15 +26601,15 @@
 
 								// name
 
-									/* 
+									/*
 									 * The name of the item.
-									 * 
+									 *
 									 * Subproperty of:
-									 * 
+									 *
 									 *     - rdfs:label
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -26643,20 +26643,20 @@
 
 								// additionalType
 
-									/* 
-									 * An additional type for the item, typically used for adding more specific types 
-									 * from external vocabularies in microdata syntax. This is a relationship between 
-									 * something and a class that the thing is in. Typically the value is a 
-									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type 
-									 * in RDF. Text values can be used sparingly, for cases where useful information 
-									 * can be added without their being an appropriate schema to reference. In the 
+									/*
+									 * An additional type for the item, typically used for adding more specific types
+									 * from external vocabularies in microdata syntax. This is a relationship between
+									 * something and a class that the thing is in. Typically the value is a
+									 * URI-identified RDF class, and in this case corresponds to the use of rdf:type
+									 * in RDF. Text values can be used sparingly, for cases where useful information
+									 * can be added without their being an appropriate schema to reference. In the
 									 * case of text values, the class label should follow the schema.org style guide.
-									 * 
+									 *
 									 * Subproperty of:
 									 *     - rdf:type
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - URL
 									 */
@@ -26704,40 +26704,40 @@
 
 								// adverseOutcome [excluded]
 
-									/* 
-									 * A possible complication and/or side effect of this therapy. If it is known that 
-									 * an adverse outcome is serious (resulting in death, disability, or permanent 
-									 * damage; requiring hospitalization; or otherwise life-threatening or requiring 
+									/*
+									 * A possible complication and/or side effect of this therapy. If it is known that
+									 * an adverse outcome is serious (resulting in death, disability, or permanent
+									 * damage; requiring hospitalization; or otherwise life-threatening or requiring
 									 * immediate medical attention), tag it as a seriousAdverseOutcome instead.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalEntity
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// affectedBy [excluded]
 
-									/* 
+									/*
 									 * Drugs that affect the test's results.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Drug
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// alternateName
 
-									/* 
+									/*
 									 * An alias for the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -26784,12 +26784,12 @@
 
 								// code
 
-									/* 
-									 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+									/*
+									 * A medical code for the entity, taken from a controlled vocabulary or ontology
 									 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalCode
 									 */
 
@@ -26835,42 +26835,42 @@
 
 								// bodyLocation [excluded]
 
-									/* 
+									/*
 									 * Location in the body of the anatomical structure.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to treatments and so it will not be 
+									 *
+									 * This schema property is not relevant to treatments and so it will not be
 									 * included.
 									 */
 
 								// contraindication [excluded]
 
-									/* 
+									/*
 									 * A contraindication for this therapy.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalContraindication
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// description [excluded]
 
-									/* 
+									/*
 									 * A description of the item.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 *     - TextObject
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
@@ -26884,41 +26884,41 @@
 
 								// disambiguatingDescription [excluded]
 
-									/* 
-									 * A sub property of description. A short description of the item used to 
-									 * disambiguate from other, similar items. Information from other properties (in 
-									 * particular, name) may be necessary for the description to be useful for 
+									/*
+									 * A sub property of description. A short description of the item used to
+									 * disambiguate from other, similar items. Information from other properties (in
+									 * particular, name) may be necessary for the description to be useful for
 									 * disambiguation.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// doseSchedule [excluded]
 
-									/* 
-									 * A dosing schedule for the drug for a given population, either observed, 
+									/*
+									 * A dosing schedule for the drug for a given population, either observed,
 									 * recommended, or maximum dose based on the type used.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DoseSchedule
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// drug
 
-									/* 
+									/*
 									 * Specifying a drug or medicine used in a medication procedure.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Drug
 									 */
 
@@ -27087,11 +27087,11 @@
 
 								// duplicateTherapy
 
-									/* 
+									/*
 									 * A therapy that duplicates or overlaps this one.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTherapy
 									 */
 
@@ -27146,53 +27146,53 @@
 
 								// followup [excluded]
 
-									/* 
+									/*
 									 * Typical or recommended followup care after the procedure is performed.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// guideline [excluded]
 
-									/* 
+									/*
 									 * A medical guideline related to this entity.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalGuideline
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// howPerformed [excluded]
 
-									/* 
+									/*
 									 * How the procedure is performed.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// identifier [WIP]
 
-									/* 
-									 * The identifier property represents any kind of identifier for any kind of 
-									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated 
-									 * properties for representing many of these, either as textual strings or as URL 
+									/*
+									 * The identifier property represents any kind of identifier for any kind of
+									 * Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated
+									 * properties for representing many of these, either as textual strings or as URL
 									 * (URI) links. See background notes for more details.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - PropertyValue
 									 *     - Text
 									 *     - URL
@@ -27200,25 +27200,25 @@
 
 								// image [excluded]
 
-									/* 
+									/*
 									 * An image of the item. This can be a URL or a fully described ImageObject.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - ImageObject
 									 *     - URL
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// imagingTechnique
 
-									/* 
+									/*
 									 * Imaging technique used.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalImagingTechnique
 									 */
 
@@ -27252,12 +27252,12 @@
 
 								// legalStatus [WIP]
 
-									/* 
-									 * The drug or supplement's legal status, including any controlled substance 
+									/*
+									 * The drug or supplement's legal status, including any controlled substance
 									 * schedules that apply.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - DrugLegalStatus
 									 *     - MedicalEnumeration
 									 *     - Text
@@ -27266,82 +27266,82 @@
 								// mainEntityOfPage [excluded]
 
 									/*
-									 * Indicates a page (or other CreativeWork) for which this thing is the main 
-									 * entity being described. See background notes at 
+									 * Indicates a page (or other CreativeWork) for which this thing is the main
+									 * entity being described. See background notes at
 									 * https://schema.org/docs/datamodel.html#mainEntityBackground for details.
-									 * 
+									 *
 									 * Inverse-property: mainEntity
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - URL
-									 * 
-									 * The treatment post type does not have a published page and so this schema 
+									 *
+									 * The treatment post type does not have a published page and so this schema
 									 * property will not be included.
 									 */
 
 								// medicineSystem [WIP]
 
-									/* 
-									 * The system of medicine that includes this MedicalEntity 
+									/*
+									 * The system of medicine that includes this MedicalEntity
 									 * (e.g., 'evidence-based,' 'homeopathic,' 'chiropractic').
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicineSystem
 									 */
 
 								// normalRange [excluded]
 
-									/* 
+									/*
 									 * Range of acceptable values for a typical patient, when applicable.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalEnumeration
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// potentialAction [excluded]
 
-									/* 
-									 * Indicates a potential Action, which describes an idealized action in which this 
+									/*
+									 * Indicates a potential Action, which describes an idealized action in which this
 									 * thing would play an 'object' role.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Action
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// preparation [excluded]
 
-									/* 
-									 * Typical preparation that a patient must undergo before having the procedure 
+									/*
+									 * Typical preparation that a patient must undergo before having the procedure
 									 * performed.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalEntity
 									 *     - Text
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// procedureType
 
-									/* 
+									/*
 									 * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalProcedureType (enumeration type)
 									 *           - NoninvasiveProcedure
 									 *           - PercutaneousProcedure
@@ -27377,22 +27377,22 @@
 
 								// recognizingAuthority [WIP]
 
-									/* 
-									 * If applicable, the organization that officially recognizes this entity as part 
+									/*
+									 * If applicable, the organization that officially recognizes this entity as part
 									 * of its endorsed system of medicine.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Organization
 									 */
 
 								// relevantSpecialty
 
-									/* 
+									/*
 									 * If applicable, a medical specialty in which this entity is relevant.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalSpecialty (enumeration type)
 									 */
 
@@ -27444,13 +27444,13 @@
 
 								// sameAs
 
-									/* 
-									 * URL of a reference Web page that unambiguously indicates the item's identity 
-									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official 
+									/*
+									 * URL of a reference Web page that unambiguously indicates the item's identity
+									 * (e.g., the URL of the item's Wikipedia page, Wikidata entry, or official
 									 * website).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - URL
 									 */
 
@@ -27497,59 +27497,59 @@
 
 								// seriousAdverseOutcome [excluded]
 
-									/* 
-									 * A possible serious complication and/or serious side effect of this therapy. 
-									 * Serious adverse outcomes include those that are life-threatening; result in 
-									 * death, disability, or permanent damage; require hospitalization or prolong 
-									 * existing hospitalization; cause congenital anomalies or birth defects; or 
-									 * jeopardize the patient and may require medical or surgical intervention to 
+									/*
+									 * A possible serious complication and/or serious side effect of this therapy.
+									 * Serious adverse outcomes include those that are life-threatening; result in
+									 * death, disability, or permanent damage; require hospitalization or prolong
+									 * existing hospitalization; cause congenital anomalies or birth defects; or
+									 * jeopardize the patient and may require medical or surgical intervention to
 									 * prevent one of the outcomes in this definition.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalEntity
-									 * 
-									 * This schema property is beyond the scope of what is being included for 
+									 *
+									 * This schema property is beyond the scope of what is being included for
 									 * treatment schema and so it will not be included.
 									 */
 
 								// signDetected [WIP]
 
-									/* 
+									/*
 									 * A sign detected by the test.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalSign
 									 */
 
 								// status [excluded]
 
-									/* 
+									/*
 									 * The status of the study (enumerated).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - EventStatusType
 									 *     - MedicalStudyStatus
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to treatments and so it will not be 
+									 *
+									 * This schema property is not relevant to treatments and so it will not be
 									 * included.
 									 */
 
 								// study [excluded]
 
-									/* 
+									/*
 									 * The status of the study (enumerated).
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - EventStatusType
 									 *     - MedicalStudyStatus
 									 *     - Text
-									 * 
-									 * This schema property is not relevant to treatments and so it will not be 
+									 *
+									 * This schema property is not relevant to treatments and so it will not be
 									 * included.
 									 */
 
@@ -27557,25 +27557,25 @@
 
 									/*
 									 * A CreativeWork or Event about this Thing.
-									 * 
+									 *
 									 * Inverse-property: about
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - CreativeWork
 									 *     - Event
-									 * 
-									 * The treatment post type does not have a published page and so this schema 
+									 *
+									 * The treatment post type does not have a published page and so this schema
 									 * property will not be included.
 									 */
 
 								// subTest
 
-									/* 
+									/*
 									 * A component test of the panel.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalTest
 									 */
 
@@ -27630,11 +27630,11 @@
 
 								// tissueSample
 
-									/* 
+									/*
 									 * The type of tissue sample required for the test.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - Text
 									 */
 
@@ -27651,7 +27651,7 @@
 
 												$treatment_tissueSample = array();
 
-											// Get tissueSample repeater field value 
+											// Get tissueSample repeater field value
 
 												$treatment_tissueSample_repeater = get_field( 'schema_tissuesample', $entity ) ?: array();
 
@@ -27686,11 +27686,11 @@
 
 								// usedToDiagnose
 
-									/* 
+									/*
 									 * A condition the test is used to diagnose.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalCondition
 									 */
 
@@ -27745,11 +27745,11 @@
 
 								// usesDevice
 
-									/* 
+									/*
 									 * Device used to perform the test.
-									 * 
+									 *
 									 * Values expected to be one of these types:
-									 * 
+									 *
 									 *     - MedicalDevice
 									 */
 
@@ -27786,15 +27786,15 @@
 
 														// name
 
-															/* 
+															/*
 															 * The name of the item.
-															 * 
+															 *
 															 * Subproperty of:
-															 * 
+															 *
 															 *     - rdfs:label
-															 * 
+															 *
 															 * Values expected to be one of these types:
-															 * 
+															 *
 															 *     - Text
 															 */
 
@@ -27802,11 +27802,11 @@
 
 														// alternateName
 
-															/* 
+															/*
 															 * An alias for the item.
-															 * 
+															 *
 															 * Values expected to be one of these types:
-															 * 
+															 *
 															 *     - Text
 															 */
 
@@ -27831,12 +27831,12 @@
 
 														// code
 
-															/* 
-															 * A medical code for the entity, taken from a controlled vocabulary or ontology 
+															/*
+															 * A medical code for the entity, taken from a controlled vocabulary or ontology
 															 * such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-															 * 
+															 *
 															 * Values expected to be one of these types:
-															 * 
+															 *
 															 *     - MedicalCode
 															 */
 

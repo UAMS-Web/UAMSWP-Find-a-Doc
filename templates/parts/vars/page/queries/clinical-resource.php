@@ -1,16 +1,16 @@
 <?php
 /*
  * Template Name: Related Clinical Resources Section Query
- * 
- * Description: A query for whether the section which lists clinical resources 
- * related to the current ontology item should be displayed on the 
- * profile/subsection. It also returns the Query, an array of IDs and a count of 
+ *
+ * Description: A query for whether the section which lists clinical resources
+ * related to the current ontology item should be displayed on the
+ * profile/subsection. It also returns the Query, an array of IDs and a count of
  * the IDs.
- * 
+ *
  * Required vars:
  * 	$page_id // int
  * 	$clinical_resources // int[]
- * 
+ *
  * Optional vars:
  * 	$clinical_resource_posts_per_page // int
  * 	$jump_link_count // int

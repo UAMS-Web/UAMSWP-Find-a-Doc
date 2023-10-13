@@ -277,7 +277,7 @@ function fwp_facet_scripts() {
 						//	 // window.history.replaceState({}, '', `${location.pathname}?${params}`)
 						//	 window.location.search = `?${params}`;
 						// }
-						// QS & no location set 
+						// QS & no location set
 						else if ( facets && region && regiondata && region != regiondata ) {
 							document.cookie = 'wp_filter_region=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain='+window.location.hostname;
 						}
