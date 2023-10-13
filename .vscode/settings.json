@@ -53,5 +53,6 @@
         "whitetext",
         "widgetframe",
         "xenonym"
-    ]
+    ],
+    "files.trimTrailingWhitespace": true
 }
