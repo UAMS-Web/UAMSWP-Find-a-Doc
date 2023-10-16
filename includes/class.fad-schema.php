@@ -13945,10 +13945,10 @@
 								$location_datePublished_ref = null;
 								$location_department = null;
 								$location_department_ref = null;
+								$location_descendant_location = null;
 								$location_descendant_location_ids = null;
 								$location_descendant_location_ids_ref = null;
-								$location_descendant_locations_LocalBusiness = null;
-								$location_descendant_locations_LocalBusiness_ref = null;
+								$location_descendant_location_ref = null;
 								$location_description = null;
 								$location_description_ref = null;
 								$location_description_TextObject = null;
@@ -14657,7 +14657,7 @@
 
 														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-														$location_descendant_locations_LocalBusiness = uamswp_fad_schema_location(
+														$location_descendant_location = uamswp_fad_schema_location(
 															$location_descendant_location_ids, // List of IDs of the location items
 															$location_url, // Page URL
 															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
@@ -14668,15 +14668,15 @@
 
 												// Get URLs for significantLink property
 
-													$location_descendant_locations_LocalBusiness_significantLink = uamswp_fad_schema_property_values(
-														$location_descendant_locations_LocalBusiness, // array // Required // Property values from which to extract specific values
+													$location_descendant_location_significantLink = uamswp_fad_schema_property_values(
+														$location_descendant_location, // array // Required // Property values from which to extract specific values
 														array( 'url' ) // mixed // Required // List of properties from which to collect values
 													);
 
 												// Get names for keywords property
 
-													$location_descendant_locations_LocalBusiness_keywords = uamswp_fad_schema_property_values(
-														$location_descendant_locations_LocalBusiness, // array // Required // Property values from which to extract specific values
+													$location_descendant_location_keywords = uamswp_fad_schema_property_values(
+														$location_descendant_location, // array // Required // Property values from which to extract specific values
 														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 													);
 
@@ -16672,7 +16672,7 @@
 
 												$location_containsPlace = uamswp_fad_schema_merge_values(
 													$location_containsPlace, // mixed // Required // Initial schema item property value
-													$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
+													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
 											// Merge in associated provider MedicalBusiness value
@@ -16762,7 +16762,7 @@
 
 												$location_department = uamswp_fad_schema_merge_values(
 													$location_department, // mixed // Required // Initial schema item property value
-													$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
+													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
 											// Merge in provider MedicalBusiness value
@@ -18866,7 +18866,7 @@
 
 												$location_subOrganization = uamswp_fad_schema_merge_values(
 													$location_subOrganization, // mixed // Required // Initial schema item property value
-													$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
+													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
 											// Merge in provider MedicalBusiness value
@@ -18996,21 +18996,21 @@
 
 												$location_mentions = uamswp_fad_schema_merge_values(
 													$location_mentions, // mixed // Required // Initial schema item property value
-													$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
+													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
 												// Merge descendant locations significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
-														$location_descendant_locations_LocalBusiness_significantLink // mixed // Required // Incoming schema item property value
+														$location_descendant_location_significantLink // mixed // Required // Incoming schema item property value
 													);
 
 												// Merge descendant locations keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
-														$location_descendant_locations_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
+														$location_descendant_location_keywords // mixed // Required // Incoming schema item property value
 													);
 
 											// Merge in related areas of expertise value
