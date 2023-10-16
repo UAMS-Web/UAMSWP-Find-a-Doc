@@ -14493,6 +14493,71 @@
 
 								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
 
+									// Associated clinical resources
+
+										// List of properties that reference clinical resources
+
+											$location_clinical_resource_common = array(
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_clinical_resource_common
+												)
+												||
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_clinical_resource_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related clinical resources
+
+												if ( !isset($location_clinical_resource_list) ) {
+
+													$location_clinical_resource_list = get_field( 'location_clinical_resources', $entity ) ?? array();
+
+												}
+
+												if ( !isset($location_clinical_resource_list_max) ) {
+
+													include( UAMS_FAD_PATH . '/templates/parts/vars/sys/posts-per-page/clinical-resource.php' ); // General maximum number of clinical resource items to display on a fake subpage (or section)
+													$location_clinical_resource_list_max = $clinical_resource_posts_per_page_section;
+
+												}
+
+											// Format values
+
+												if ( $location_clinical_resource_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$location_clinical_resource = uamswp_fad_schema_clinical_resource(
+														$location_clinical_resource_list, // List of IDs of the clinical resource items
+														$location_url, // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$location_clinical_resource_significantLink = uamswp_fad_schema_property_values(
+													$location_clinical_resource, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+										}
+
 									// Associated conditions
 
 										// List of properties that reference conditions
