@@ -2212,7 +2212,7 @@
 
 			}
 
-		// Location Types
+		// Types of Locations
 
 			/*
 
@@ -2238,7 +2238,7 @@
 				$labels = array(
 					'name' => 'Location Types',
 					'singular_name' => 'Location Type',
-					'menu_name' => 'Location Types',
+					'menu_name' => 'Types of Locations',
 					'all_items' => 'All Location Types',
 					'parent_item' => 'Parent Location Type',
 					'parent_item_colon' => 'Parent Location Type:',
