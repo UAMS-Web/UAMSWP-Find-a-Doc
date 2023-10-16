@@ -19272,6 +19272,32 @@
 
 												$location_keywords[] = 'location';
 
+											// Address values
+
+												if ( $location_address ) {
+
+													if (
+														isset($location_address['addressLocality'])
+														&&
+														!empty($location_address['addressLocality'])
+													) {
+
+														$location_keywords[] = $location_address['addressLocality'];
+
+													}
+
+													if (
+														isset($location_address['addressRegion'])
+														&&
+														!empty($location_address['addressRegion'])
+													) {
+
+														$location_keywords[] = $location_address['addressRegion'];
+
+													}
+
+												}
+
 											// Clean up list array
 
 												if ( $location_keywords ) {
