@@ -14493,6 +14493,74 @@
 
 								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
 
+									// Associated areas of expertise
+
+										// List of properties that reference areas of expertise
+
+											$location_expertise_common = array(
+												'knowsAbout',
+												'mentions',
+												'relatedLink',
+												'significantLink'
+											);
+
+										if (
+											(
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_clinical_resource_common
+												)
+												||
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_clinical_resource_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related areas of expertise
+
+												if ( !isset($location_expertise_list) ) {
+
+													$location_expertise_list = get_field( 'location_expertise', $entity ) ?? array();
+
+												}
+
+											// Format values
+
+												if ( $location_expertise_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$location_expertise = uamswp_fad_schema_expertise(
+														$location_expertise_list, // List of IDs of the area of expertise items
+														'', // string // Required // Page or fake subpage URL
+														true, // bool // Required // Query for the ontology type of the post (true is ontology type, false is content type)
+														'', // string // Required // Fake subpage slug
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ) // Nesting level within the main schema
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$location_expertise_significantLink = uamswp_fad_schema_property_values(
+													$location_expertise, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											// Get names for keywords property
+
+												$location_expertise_keywords = uamswp_fad_schema_property_values(
+													$location_expertise, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+												);
+
+										}
+
 									// Associated clinical resources
 
 										// List of properties that reference clinical resources
