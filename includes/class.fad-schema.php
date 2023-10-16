@@ -15391,7 +15391,7 @@
 									 *     - Thing
 									 */
 
-									 if (
+									if (
 										in_array(
 											'about',
 											$location_properties_map[$MedicalWebPage_type]['properties']
@@ -18480,7 +18480,7 @@
 									 *     - URL
 									 */
 
-									 if (
+									if (
 										(
 											in_array(
 												'significantLink',
