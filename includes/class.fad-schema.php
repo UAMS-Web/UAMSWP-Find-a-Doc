@@ -1530,8 +1530,8 @@
 	// Add data to an array defining schema data for code (MedicalCode)
 
 		function uamswp_fad_schema_code(
-			array $code_repeater = array(), // code repeater field
-			array $nucc = array() // Health Care Provider Taxonomy Code Set taxonomy field
+			array $code_repeater = array(), // array // Optional // code repeater field
+			array $nucc = array() // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
 		) {
 
 			// Base list array
@@ -20503,8 +20503,8 @@
 											// Get item values
 
 												$expertise_code = uamswp_fad_schema_code(
-													$expertise_code_repeater, // code repeater field
-													$expertise_nucc_array // Health Care Provider Taxonomy Code Set taxonomy field
+													$expertise_code_repeater, // array // Optional // code repeater field
+													$expertise_nucc_array // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
 												);
 
 										// Add to item values
@@ -26230,7 +26230,7 @@
 											// Add each item to code property values array
 
 												$condition_code = uamswp_fad_schema_code(
-													$condition_code_repeater // code repeater field
+													$condition_code_repeater // array // Optional // code repeater field
 												);
 
 										// Add to item values
@@ -27676,7 +27676,7 @@
 												if ( $treatment_code_repeater ) {
 
 													$treatment_code = uamswp_fad_schema_code(
-														$treatment_code_repeater // code repeater field
+														$treatment_code_repeater // array // Optional // code repeater field
 													);
 
 												}
@@ -28712,7 +28712,7 @@
 																// Add each item to code property value array
 
 																	$treatment_usesDevice_item_code = uamswp_fad_schema_code(
-																		$treatment_usesDevice_item_code_repeater // code repeater field
+																		$treatment_usesDevice_item_code_repeater // array // Optional // code repeater field
 																	);
 
 															// Add to usesDevice property value item array
