@@ -4566,9 +4566,9 @@
 		},
 		"field_location_npi": {
 			"key": "field_location_npi",
-			"name": "location_npi",
-			"type": "number",
 			"label": "National Provider Identifier (NPI)",
+			"name": "location_npi",
+			"type": "repeater",
 			"instructions": "This value can be found by searching for the location in the <a href='https://npiregistry.cms.hhs.gov/search' target='_blank'>NPPES NPI Registry</a>.",
 			"required": 1,
 			"conditional_logic": [
@@ -4585,13 +4585,35 @@
 				"class": "",
 				"id": ""
 			},
-			"default_value": "",
-			"placeholder": "",
-			"prepend": "",
-			"append": "",
+			"acfe_permissions": "",
+			"collapsed": "field_location_npi_item",
 			"min": 0,
-			"max": 9999999999,
-			"step": 1
+			"max": 10,
+			"layout": "block",
+			"button_label": "Add National Provider Identifier",
+			"sub_fields": [
+				{
+					"key": "field_location_npi_item",
+					"label": "Individual National Provider Identifier",
+					"name": "location_npi_item",
+					"type": "number",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"min": 0,
+					"max": 9999999999,
+					"step": 1
+				}
+			]
 		},
 		"field_location_va_query": {
 			"key": "field_location_va_query",

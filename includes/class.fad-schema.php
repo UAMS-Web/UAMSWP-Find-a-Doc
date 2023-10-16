@@ -15572,8 +15572,76 @@
 
 												if ( !isset($location_npi) ) {
 
-													$location_npi = get_field( 'location_npi', $entity ) ?? '';
-													$location_npi = $location_npi ? str_pad($location_npi, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
+													// Base array
+
+														$location_npi = array();
+
+													// Get the NPI repeater value
+
+														$location_npi_repeater = get_field( 'location_npi', $entity ) ?? array();
+														$location_npi_repeater = is_array($location_npi_repeater) ? $location_npi_repeater : array();
+
+													// Add each repeater row to the list array
+
+														if (
+															$location_npi_repeater
+															&&
+															is_array($location_npi_repeater)
+														) {
+
+															foreach ( $location_npi_repeater as $item ) {
+
+																$location_npi_item = null;
+
+																if (
+																	$item
+																	&&
+																	isset($item['location_npi_item'])
+																	&&
+																	!empty($item['location_npi_item'])
+																) {
+
+																	$location_npi_item = $item['location_npi_item'];
+
+																}
+
+																// Format value
+
+																	if ( $location_npi_item ) {
+
+																		$location_npi_item = $location_npi_item ? str_pad($location_npi_item, 10, '0', STR_PAD_LEFT) : ''; // Add enough leading zeroes to reach 10 digits
+
+																	}
+
+																// Add the value to the list array
+
+																	if ( $location_npi_item ) {
+
+																		$location_npi[] = $item['location_npi_item'];
+
+																	}
+
+															} // endforeach
+
+														} // endif
+
+													// Clean up the list array
+
+														if ( $location_npi ) {
+
+															$location_npi = array_filter($location_npi);
+															$location_npi = array_unique( $location_npi, SORT_REGULAR );
+														}
+
+														if ( $location_npi ) {
+
+															$location_npi = array_values($location_npi);
+
+															// If there is only one item, flatten the multi-dimensional array by one step
+
+																uamswp_fad_flatten_multidimensional_array($location_npi);
+
+														}
 
 												}
 
