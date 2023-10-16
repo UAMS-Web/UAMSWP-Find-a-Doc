@@ -562,7 +562,7 @@
 							'HearingImpairedSupported',
 							'TollFree'
 						),
-						'contactType' => 'appointment scheduing for new and existing patients',
+						'contactType' => 'appointment scheduling for new and existing patients',
 						'email' => '',
 						'faxNumber' => '',
 						'telephone' => '+1 8008675309',
@@ -576,7 +576,7 @@
 							)
 						),
 						'contactOption' => '',
-						'contactType' => 'appointment scheduing for new and existing patients',
+						'contactType' => 'appointment scheduling for new and existing patients',
 						'email' => '',
 						'faxNumber' => '',
 						'telephone' => '+1 5015551111',
@@ -590,7 +590,7 @@
 							)
 						),
 						'contactOption' => '',
-						'contactType' => 'appointment scheduing for new and existing patients',
+						'contactType' => 'appointment scheduling for new and existing patients',
 						'email' => '',
 						'faxNumber' => '',
 						'telephone' => '+1 5015552222',
