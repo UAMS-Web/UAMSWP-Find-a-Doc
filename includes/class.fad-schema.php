@@ -20502,10 +20502,14 @@
 
 											// Get item values
 
-												$expertise_code = uamswp_fad_schema_code(
-													$expertise_code_repeater, // array // Optional // code repeater field
-													$expertise_nucc_array // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
-												);
+												if ( $expertise_code_repeater ) {
+
+													$expertise_code = uamswp_fad_schema_code(
+														$expertise_code_repeater, // array // Optional // code repeater field
+														$expertise_nucc_array // array // Optional // Health Care Provider Taxonomy Code Set taxonomy field
+													);
+
+												}
 
 										// Add to item values
 
@@ -26229,9 +26233,13 @@
 
 											// Add each item to code property values array
 
-												$condition_code = uamswp_fad_schema_code(
-													$condition_code_repeater // array // Optional // code repeater field
-												);
+												if ( $condition_code_repeater ) {
+
+													$condition_code = uamswp_fad_schema_code(
+														$condition_code_repeater // array // Optional // code repeater field
+													);
+
+												}
 
 										// Add to item values
 
@@ -28711,9 +28719,13 @@
 
 																// Add each item to code property value array
 
-																	$treatment_usesDevice_item_code = uamswp_fad_schema_code(
-																		$treatment_usesDevice_item_code_repeater // array // Optional // code repeater field
-																	);
+																	if ( $treatment_usesDevice_item_code_repeater ) {
+
+																		$treatment_usesDevice_item_code = uamswp_fad_schema_code(
+																			$treatment_usesDevice_item_code_repeater // array // Optional // code repeater field
+																		);
+
+																	}
 
 															// Add to usesDevice property value item array
 
