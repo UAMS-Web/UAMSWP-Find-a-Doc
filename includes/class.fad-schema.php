@@ -14493,6 +14493,180 @@
 
 								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
 
+									// Associated providers
+
+										// List of properties that reference associated providers
+
+											$location_provider_common = array(
+												'containsPlace',
+												'department',
+												'employee',
+												'mentions',
+												'relatedLink',
+												'significantLink',
+												'subOrganization'
+											);
+
+										if (
+											(
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_provider_common
+												)
+												||
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_provider_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												// Get list of associated providers
+
+													if ( !isset($location_provider_ids) ) {
+
+														$location_provider_ids = array();
+
+														$providers = get_field( 'physician_locations', $entity );
+														include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
+														$location_provider_ids = $provider_ids;
+
+														// Reset variables from Related Providers Section Query template part
+
+															$providers = null;
+															$provider_query = null;
+															$provider_section_show = null;
+															$provider_ids = null;
+															$provider_count = null;
+															$jump_link_count = null;
+
+													}
+
+												// Format values
+
+													if ( $location_provider_ids ) {
+
+														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+														$location_providers = uamswp_fad_schema_provider(
+															$location_provider_ids, // List of IDs of the provider items
+															$location_url, // Page URL
+															$node_identifier_list_temp, // array // Required // List of node identifiers (@id) already defined in the schema
+															($nesting_level + 1) // Nesting level within the main schema
+														);
+
+														// MedicalBusiness and subtypes
+
+															$location_providers_MedicalBusiness = $location_providers['MedicalBusiness'];
+
+															// Get URLs for significantLink property
+
+																$location_providers_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																	$location_providers_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															// Get names for keywords property
+
+																$location_providers_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																	$location_providers_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
+														// Person
+
+															$location_providers_Person = $location_providers['Person'];
+
+													}
+
+										}
+
+									// Descendant locations
+
+										// List of properties that reference descendant locations
+
+											$location_descendant_location_common = array(
+												'containsPlace',
+												'department',
+												'employee',
+												'mentions',
+												'relatedLink',
+												'significantLink',
+												'subOrganization'
+											);
+
+										if (
+											(
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_descendant_location_common
+												)
+												||
+												array_intersect(
+													$location_properties_map[$LocalBusiness_type]['properties'],
+													$location_descendant_location_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get values
+
+												// Get list of descendant locations
+
+													if ( !isset($location_descendant_location_ids) ) {
+
+														$location_descendant_locations_query_vars = uamswp_fad_location_descendant_query(
+															$entity, // int
+															get_pages(
+																array(
+																	'child_of' => $entity,
+																	'post_status' => 'publish',
+																	'post_type' => 'location',
+																)
+															) // WP_Post
+														);
+
+														$location_descendant_location_ids = $location_descendant_locations_query_vars['location_descendant_ids'];
+
+													}
+
+												// Format values (LocalBusiness and subtypes)
+
+													if ( $location_descendant_location_ids ) {
+
+														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+														$location_descendant_locations_LocalBusiness = uamswp_fad_schema_location(
+															$location_descendant_location_ids, // List of IDs of the location items
+															$location_url, // Page URL
+															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+															($nesting_level + 1) // Nesting level within the main schema
+														)['LocalBusiness'] ?? array();
+
+													}
+
+												// Get URLs for significantLink property
+
+													$location_descendant_locations_LocalBusiness_significantLink = uamswp_fad_schema_property_values(
+														$location_descendant_locations_LocalBusiness, // array // Required // Property values from which to extract specific values
+														array( 'url' ) // mixed // Required // List of properties from which to collect values
+													);
+
+												// Get names for keywords property
+
+													$location_descendant_locations_LocalBusiness_keywords = uamswp_fad_schema_property_values(
+														$location_descendant_locations_LocalBusiness, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+													);
+
+										}
+
 									// Associated areas of expertise
 
 										// List of properties that reference areas of expertise
@@ -14903,115 +15077,6 @@
 													}
 
 												}
-
-									}
-
-								// Descendant entities (common use)
-
-									// List of properties that reference descendant entities
-
-										$location_descendant_entity_common = array(
-											'containsPlace',
-											'department',
-											'employee',
-											'subOrganization'
-										);
-
-									if (
-										(
-											array_intersect(
-												$location_properties_map[$MedicalWebPage_type]['properties'],
-												$location_descendant_entity_common
-											)
-											||
-											array_intersect(
-												$location_properties_map[$LocalBusiness_type]['properties'],
-												$location_descendant_entity_common
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Get list of descendant locations
-
-												if ( !isset($location_descendant_location_ids) ) {
-
-													$location_descendant_locations_query_vars = uamswp_fad_location_descendant_query(
-														$entity, // int
-														get_pages(
-															array(
-																'child_of' => $entity,
-																'post_status' => 'publish',
-																'post_type' => 'location',
-															)
-														) // WP_Post
-													);
-
-													$location_descendant_location_ids = $location_descendant_locations_query_vars['location_descendant_ids'];
-
-												}
-
-												// Format values (LocalBusiness and subtypes)
-
-													if ( $location_descendant_location_ids ) {
-
-														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-														$location_descendant_locations_LocalBusiness = uamswp_fad_schema_location(
-															$location_descendant_location_ids, // List of IDs of the location items
-															$location_url, // Page URL
-															$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-															($nesting_level + 1) // Nesting level within the main schema
-														)['LocalBusiness'] ?? array();
-
-													}
-
-											// Get list of associated providers
-
-												if ( !isset($location_provider_ids) ) {
-
-													$location_provider_ids = array();
-
-													$providers = get_field( 'physician_locations', $entity );
-													include( UAMS_FAD_PATH . '/templates/parts/vars/page/queries/provider.php' );
-													$location_provider_ids = $provider_ids;
-
-													// Reset variables from Related Providers Section Query template part
-
-														$providers = null;
-														$provider_query = null;
-														$provider_section_show = null;
-														$provider_ids = null;
-														$provider_count = null;
-														$jump_link_count = null;
-
-												}
-
-												// Format values
-
-													if ( $location_provider_ids ) {
-
-														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-														$location_providers = uamswp_fad_schema_provider(
-															$location_provider_ids, // List of IDs of the provider items
-															$location_url, // Page URL
-															$node_identifier_list_temp, // array // Required // List of node identifiers (@id) already defined in the schema
-															($nesting_level + 1) // Nesting level within the main schema
-														);
-
-														// MedicalBusiness and subtypes
-
-															$location_providers_MedicalBusiness = $location_providers['MedicalBusiness'];
-
-														// Person
-
-															$location_providers_Person = $location_providers['Person'];
-
-													}
 
 									}
 
