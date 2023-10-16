@@ -14045,10 +14045,10 @@
 								$location_provider_ids = null;
 								$location_provider_ids_ref = null;
 								$location_provider_ref = null;
-								$location_providers_MedicalBusiness = null;
-								$location_providers_MedicalBusiness_ref = null;
-								$location_providers_Person = null;
-								$location_providers_Person_ref = null;
+								$location_provider_MedicalBusiness = null;
+								$location_provider_MedicalBusiness_ref = null;
+								$location_provider_Person = null;
+								$location_provider_Person_ref = null;
 								$location_publisher = null;
 								$location_publisher_ref = null;
 								$location_relatedLink = null;
@@ -14553,7 +14553,7 @@
 
 														$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
 
-														$location_providers = uamswp_fad_schema_provider(
+														$location_provider = uamswp_fad_schema_provider(
 															$location_provider_ids, // List of IDs of the provider items
 															$location_url, // Page URL
 															$node_identifier_list_temp, // array // Required // List of node identifiers (@id) already defined in the schema
@@ -14562,37 +14562,37 @@
 
 														// MedicalBusiness and subtypes
 
-															$location_providers_MedicalBusiness = $location_providers['MedicalBusiness'];
+															$location_provider_MedicalBusiness = $location_provider['MedicalBusiness'];
 
 															// Get URLs for significantLink property
 
-																$location_providers_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
-																	$location_providers_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																$location_provider_MedicalBusiness_significantLink = uamswp_fad_schema_property_values(
+																	$location_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
 																	array( 'url' ) // mixed // Required // List of properties from which to collect values
 																);
 
 															// Get names for keywords property
 
-																$location_providers_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
-																	$location_providers_MedicalBusiness, // array // Required // Property values from which to extract specific values
+																$location_provider_MedicalBusiness_keywords = uamswp_fad_schema_property_values(
+																	$location_provider_MedicalBusiness, // array // Required // Property values from which to extract specific values
 																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 																);
 
 														// Person
 
-															$location_providers_Person = $location_providers['Person'];
+															$location_provider_Person = $location_provider['Person'];
 
 															// Get URLs for significantLink property
 
-																$location_providers_Person_significantLink = uamswp_fad_schema_property_values(
-																	$location_providers_Person, // array // Required // Property values from which to extract specific values
+																$location_provider_Person_significantLink = uamswp_fad_schema_property_values(
+																	$location_provider_Person, // array // Required // Property values from which to extract specific values
 																	array( 'url' ) // mixed // Required // List of properties from which to collect values
 																);
 
 															// Get names for keywords property
 
-																$location_providers_Person_keywords = uamswp_fad_schema_property_values(
-																	$location_providers_Person, // array // Required // Property values from which to extract specific values
+																$location_provider_Person_keywords = uamswp_fad_schema_property_values(
+																	$location_provider_Person, // array // Required // Property values from which to extract specific values
 																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
 																);
 
@@ -16679,7 +16679,7 @@
 
 												$location_containsPlace = uamswp_fad_schema_merge_values(
 													$location_containsPlace, // mixed // Required // Initial schema item property value
-													$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
+													$location_provider_MedicalBusiness // mixed // Required // Incoming schema item property value
 												);
 
 										// Add to item values
@@ -16769,7 +16769,7 @@
 
 												$location_department = uamswp_fad_schema_merge_values(
 													$location_department, // mixed // Required // Initial schema item property value
-													$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
+													$location_provider_MedicalBusiness // mixed // Required // Incoming schema item property value
 												);
 
 										// Add to item values
@@ -16956,7 +16956,7 @@
 
 												$location_employee = uamswp_fad_schema_merge_values(
 													$location_employee, // mixed // Required // Initial schema item property value
-													$location_providers_Person // mixed // Required // Incoming schema item property value
+													$location_provider_Person // mixed // Required // Incoming schema item property value
 												);
 
 										// Add to item values
@@ -18873,7 +18873,7 @@
 
 												$location_subOrganization = uamswp_fad_schema_merge_values(
 													$location_subOrganization, // mixed // Required // Initial schema item property value
-													$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
+													$location_provider_MedicalBusiness // mixed // Required // Incoming schema item property value
 												);
 
 										// Add to item values
@@ -18954,42 +18954,42 @@
 
 												$location_mentions = uamswp_fad_schema_merge_values(
 													$location_mentions, // mixed // Required // Initial schema item property value
-													$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
+													$location_provider_MedicalBusiness // mixed // Required // Incoming schema item property value
 												);
 
 												// Merge providers (MedicalBusiness) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
-														$location_providers_MedicalBusiness_significantLink // mixed // Required // Incoming schema item property value
+														$location_provider_MedicalBusiness_significantLink // mixed // Required // Incoming schema item property value
 													);
 
 												// Merge providers (MedicalBusiness) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
-														$location_providers_MedicalBusiness_keywords // mixed // Required // Incoming schema item property value
+														$location_provider_MedicalBusiness_keywords // mixed // Required // Incoming schema item property value
 													);
 
 											// Merge in related providers (Person) value
 
 												$location_mentions = uamswp_fad_schema_merge_values(
 													$location_mentions, // mixed // Required // Initial schema item property value
-													$location_providers_Person // mixed // Required // Incoming schema item property value
+													$location_provider_Person // mixed // Required // Incoming schema item property value
 												);
 
 												// Merge providers (Person) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
-														$location_providers_Person_significantLink // mixed // Required // Incoming schema item property value
+														$location_provider_Person_significantLink // mixed // Required // Incoming schema item property value
 													);
 
 												// Merge providers (Person) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
-														$location_providers_Person_keywords // mixed // Required // Incoming schema item property value
+														$location_provider_Person_keywords // mixed // Required // Incoming schema item property value
 													);
 
 											// Merge in descendant locations value
