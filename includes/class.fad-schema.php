@@ -7445,6 +7445,7 @@
 											$provider_location_common = array(
 												'containedInPlace',
 												'location',
+												'significantLink',
 												'workLocation'
 											);
 
@@ -7785,7 +7786,8 @@
 
 											$provider_expertise_common = array(
 												'knowsAbout',
-												'mentions'
+												'mentions',
+												'significantLink'
 											);
 
 										if (
@@ -7851,7 +7853,8 @@
 										// List of properties that reference clinical resources
 
 											$provider_clinical_resource_common = array(
-												'mentions'
+												'mentions',
+												'significantLink'
 											);
 
 										if (
