@@ -15671,7 +15671,7 @@
 
 												if ( !isset($location_va_station_id) ) {
 
-													$location_va_station_id = get_field( 'location_npi', $entity ) ?? '';
+													$location_va_station_id = get_field( 'location_va_station_id', $entity ) ?? '';
 
 												}
 
