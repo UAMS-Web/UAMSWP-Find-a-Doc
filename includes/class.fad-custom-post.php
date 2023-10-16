@@ -510,6 +510,10 @@
 
 			add_action( 'init', 'create_languages_taxonomy', 0 );
 
+		// Parent Organizations
+
+			add_action( 'init', 'create_parent_organization_taxonomy', 0 );
+
 		// Patient Types
 
 			add_action( 'init', 'create_patient_type_taxonomy', 0 );
@@ -2445,6 +2449,80 @@
 					'show_in_quick_edit' => false,
 				);
 				register_taxonomy( 'building', array( 'location' ), $args );
+
+			}
+
+		// Parent Organizations
+
+			/*
+
+				The taxonomy is intended to define values for organizations like UAMS,
+				UAMS Health, primary third-party clinical organizations
+				(e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System).
+
+				It should be limited to UAMS, UAMS Health, and any third-party organizations at
+				which we have clinical oversight — or within which there are clinical locations
+				at which we have clinical oversight.
+
+
+				Expected taxonomy items:
+
+					 * UAMS (Slug: 'uams')
+						 * UAMS Health (Slug: 'uamshealth')
+					 * Arkansas Children's (Slug: 'arkansas-childrens')
+					 * Baptist Health (Slug: 'arkansas-childrens')
+					 * United States Department of Veterans Affairs (Slug: 'va')
+						 * Central Arkansas Veterans Healthcare System (Slug: 'cavhs')
+
+			*/
+
+			function create_parent_organization_taxonomy() {
+				$labels = array(
+					'name' => 'Parent Organizations',
+					'singular_name' => 'Parent Organization',
+					'menu_name' => 'Parent Organizations',
+					'all_items' => 'All Parent Organizations',
+					'parent_item' => 'Parent Organization',
+					'parent_item_colon' => 'Parent Organization:',
+					'new_item_name' => 'New Parent Organization',
+					'add_new_item' => 'Add New Parent Organization',
+					'edit_item' => 'Edit Parent Organization',
+					'update_item' => 'Update Parent Organization',
+					'view_item' => 'View Parent Organization',
+					'separate_items_with_commas' => 'Separate Parent Organizations With Commas',
+					'add_or_remove_items' => 'Add or Remove Parent Organizations',
+					'choose_from_most_used' => 'Choose from the most used',
+					'popular_items' => 'Popular Parent Organizations',
+					'search_items' => 'Search Parent Organizations',
+					'not_found' => 'Not Found',
+					'no_terms' => 'No Parent Organizations',
+					'items_list' => 'Parent Organizations List',
+					'items_list_navigation' => 'Parent Organizations List Navigation',
+				);
+				$rewrite = array(
+					'slug' => 'parent_organization',
+					'with_front' => false,
+					'hierarchical' => true,
+				);
+				$capabilities = array(
+					'manage_terms' => 'manage_options',
+					'edit_terms' => 'manage_options',
+					'delete_terms' => 'manage_options',
+					'assign_terms' => 'edit_physicians',
+				);
+				$args = array(
+					'labels' => $labels,
+					'hierarchical' => true,
+					'public' => false,
+					'show_ui' => true,
+					'show_admin_column' => false,
+					'show_in_nav_menus' => false,
+					'show_tagcloud' => false,
+					'rewrite' => $rewrite,
+					'capabilities' => $capabilities,
+					'show_in_quick_edit' => false,
+				);
+				register_taxonomy( 'parent_organization', array( 'location', 'provider' ), $args );
 
 			}
 
