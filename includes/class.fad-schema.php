@@ -7445,6 +7445,7 @@
 											$provider_location_common = array(
 												'containedInPlace',
 												'location',
+												'relatedLink',
 												'significantLink',
 												'workLocation'
 											);
@@ -7787,6 +7788,7 @@
 											$provider_expertise_common = array(
 												'knowsAbout',
 												'mentions',
+												'relatedLink',
 												'significantLink'
 											);
 
@@ -7854,6 +7856,7 @@
 
 											$provider_clinical_resource_common = array(
 												'mentions',
+												'relatedLink',
 												'significantLink'
 											);
 
@@ -12562,16 +12565,6 @@
 									 *     - ImageObject
 									 */
 
-								// relatedLink [WIP]
-
-									/*
-									 * A link related to this web page, for example to other related web pages.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - URL
-									 */
-
 								// review [WIP]
 
 									/*
@@ -13284,6 +13277,80 @@
 													'mentions', // string // Required // Name of schema property
 													$provider_mentions, // mixed // Required // Variable to add as the property value
 													$provider_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// relatedLink
+
+									/*
+									 * A link related to this web page, for example to other related web pages.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'relatedLink',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'relatedLink',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'relatedLink',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$provider_significantLink, // mixed // Required // Variable to add as the property value
+													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$provider_significantLink, // mixed // Required // Variable to add as the property value
+													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// Person
+
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$provider_significantLink, // mixed // Required // Variable to add as the property value
+													$provider_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
@@ -18211,16 +18278,6 @@
 									 *     - Boolean
 									 */
 
-								// relatedLink [WIP]
-
-									/*
-									 * A link related to this web page, for example to other related web pages.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - URL
-									 */
-
 								// review [WIP]
 
 									/*
@@ -18582,6 +18639,62 @@
 													'mentions', // string // Required // Name of schema property
 													$location_mentions, // mixed // Required // Variable to add as the property value
 													$location_mentions_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
+
+								// relatedLink
+
+									/*
+									 * A link related to this web page, for example to other related web pages.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - URL
+									 */
+
+									if (
+										(
+											in_array(
+												'relatedLink',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'relatedLink',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$location_significantLink, // mixed // Required // Variable to add as the property value
+													$location_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'significantLink', // string // Required // Name of schema property
+													$location_significantLink, // mixed // Required // Variable to add as the property value
+													$location_significantLink_ref, // mixed // Required // Variable to reference the list of @id in the full property value
 													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
