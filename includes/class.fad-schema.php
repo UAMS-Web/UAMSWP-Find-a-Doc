@@ -17801,7 +17801,7 @@
 
 									*/
 
-								// knowsAbout [WIP]
+								// knowsAbout
 
 									/*
 									 * Of a Person, and less typically of an Organization, to indicate a topic that is
@@ -17819,6 +17819,121 @@
 									 * feedback and adoption from applications and websites can help improve their
 									 * definitions.
 									 */
+
+									if (
+										(
+											in_array(
+												'knowsAbout',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$location_knowsAbout = array();
+
+											// Merge in related areas of expertise value
+
+												$location_knowsAbout = uamswp_fad_schema_merge_values(
+													$location_knowsAbout, // mixed // Required // Initial schema item property value
+													$location_expertise // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge areas of expertise significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_expertise_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge areas of expertise keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_expertise_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related conditions value
+
+												$location_knowsAbout = uamswp_fad_schema_merge_values(
+													$location_knowsAbout, // mixed // Required // Initial schema item property value
+													$location_condition // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge conditions significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_condition_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge conditions keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_condition_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related treatments value
+
+												$location_knowsAbout = uamswp_fad_schema_merge_values(
+													$location_knowsAbout, // mixed // Required // Initial schema item property value
+													$location_availableService // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge availableService significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_availableService_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge availableService keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_availableService_keywords // mixed // Required // Incoming schema item property value
+													);
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$location_knowsAbout, // mixed // Required // Variable to add as the property value
+													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$location_knowsAbout, // mixed // Required // Variable to add as the property value
+													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// knowsLanguage [WIP]
 
