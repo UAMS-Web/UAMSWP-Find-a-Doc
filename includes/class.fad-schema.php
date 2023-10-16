@@ -11431,235 +11431,6 @@
 
 									}
 
-								// knowsAbout
-
-									/*
-									 * Of a Person, and less typically of an Organization, to indicate a topic that is
-									 * known about — suggesting possible expertise but not implying it. We do not
-									 * distinguish skill levels here, or relate this to educational content, events,
-									 * objectives or JobPosting descriptions.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 *     - Thing
-									 *     - URL
-									 *
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-									 * feedback and adoption from applications and websites can help improve their
-									 * definitions.
-									 */
-
-									if (
-										(
-											in_array(
-												'knowsAbout',
-												$provider_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'knowsAbout',
-												$provider_properties_map[$MedicalBusiness_type]['properties']
-											)
-											||
-											in_array(
-												'knowsAbout',
-												$provider_properties_map[$Person_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$provider_knowsAbout = array();
-
-											// Get clinical specializations
-
-												// Get ID of clinical specialization
-
-													if ( !isset($provider_clinical_specialization) ) {
-
-														$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? array();
-
-													}
-
-												// Add ancestors to the list of ID values
-
-													if ( !isset($provider_clinical_specialization_ancestors) ) {
-
-														if ( $provider_clinical_specialization ) {
-
-															$provider_clinical_specialization = is_array($provider_clinical_specialization) ? $provider_clinical_specialization : array($provider_clinical_specialization);
-															$provider_clinical_specialization_ancestors = $provider_clinical_specialization;
-
-															foreach ( $provider_clinical_specialization as $item ) {
-
-																if ( $item ) {
-
-																	$provider_clinical_specialization_ancestors = array_merge(
-																		$provider_clinical_specialization_ancestors,
-																		get_ancestors(
-																			$item, // $object_id  // int // Optional // The ID of the object // Default: 0
-																			'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
-																			'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
-																		)
-																	);
-
-																}
-
-															} // endforeach
-
-														}
-
-													}
-
-													// Clean up list of ID values
-
-														if ( $provider_clinical_specialization_ancestors ) {
-
-															$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
-															$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
-															$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
-
-														}
-
-												// Get attributes of the clinical specializations
-
-													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set(
-														$provider_clinical_specialization_ancestors // mixed // Required // List of clinical specialization IDs
-													);
-
-												// Add to knowsAbout list array
-
-													$provider_knowsAbout = uamswp_fad_schema_merge_values(
-														$provider_knowsAbout, // mixed // Required // Initial schema item property value
-														$provider_clinical_specialization_knowsAbout // mixed // Required // Incoming schema item property value
-													);
-
-												// Get values for keywords property
-
-													$provider_clinical_specialization_keywords = uamswp_fad_schema_property_values(
-														$provider_clinical_specialization_knowsAbout, // array // Required // Property values from which to extract specific values
-														array( 'name', 'alternateName', 'codeValue' ) // mixed // Required // List of properties from which to collect values
-													);
-
-													// Merge clinical specializations keywords value into keywords
-
-														$provider_keywords = uamswp_fad_schema_merge_values(
-															$provider_keywords, // mixed // Required // Initial schema item property value
-															$provider_clinical_specialization_keywords // mixed // Required // Incoming schema item property value
-														);
-
-											// Merge in related areas of expertise value
-
-												$provider_knowsAbout = uamswp_fad_schema_merge_values(
-													$provider_knowsAbout, // mixed // Required // Initial schema item property value
-													$provider_expertise // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge areas of expertise significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_expertise_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge areas of expertise keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_expertise_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related conditions value
-
-												$provider_knowsAbout = uamswp_fad_schema_merge_values(
-													$provider_knowsAbout, // mixed // Required // Initial schema item property value
-													$provider_condition // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge conditions significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_condition_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge conditions keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_condition_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related treatments value
-
-												$provider_knowsAbout = uamswp_fad_schema_merge_values(
-													$provider_knowsAbout, // mixed // Required // Initial schema item property value
-													$provider_availableService // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge availableService significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge availableService keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_availableService_keywords // mixed // Required // Incoming schema item property value
-													);
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'knowsAbout', // string // Required // Name of schema property
-													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
-													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// MedicalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalBusiness_type, // string // Required // The @type value for the schema item
-													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'knowsAbout', // string // Required // Name of schema property
-													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
-													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// Person
-
-												uamswp_fad_schema_add_to_item_values(
-													$Person_type, // string // Required // The @type value for the schema item
-													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-													'knowsAbout', // string // Required // Name of schema property
-													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
-													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
-
 								// knowsLanguage
 
 									/*
@@ -13102,6 +12873,235 @@
 												$provider_keywords = uamswp_fad_schema_merge_values(
 													$provider_keywords, // mixed // Required // Initial schema item property value
 													$provider_worksFor_keywords // mixed // Required // Incoming schema item property value
+												);
+
+									}
+
+								// knowsAbout
+
+									/*
+									 * Of a Person, and less typically of an Organization, to indicate a topic that is
+									 * known about — suggesting possible expertise but not implying it. We do not
+									 * distinguish skill levels here, or relate this to educational content, events,
+									 * objectives or JobPosting descriptions.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 *     - Thing
+									 *     - URL
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'knowsAbout',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$provider_knowsAbout = array();
+
+											// Get clinical specializations
+
+												// Get ID of clinical specialization
+
+													if ( !isset($provider_clinical_specialization) ) {
+
+														$provider_clinical_specialization = get_field( 'physician_title', $entity ) ?? array();
+
+													}
+
+												// Add ancestors to the list of ID values
+
+													if ( !isset($provider_clinical_specialization_ancestors) ) {
+
+														if ( $provider_clinical_specialization ) {
+
+															$provider_clinical_specialization = is_array($provider_clinical_specialization) ? $provider_clinical_specialization : array($provider_clinical_specialization);
+															$provider_clinical_specialization_ancestors = $provider_clinical_specialization;
+
+															foreach ( $provider_clinical_specialization as $item ) {
+
+																if ( $item ) {
+
+																	$provider_clinical_specialization_ancestors = array_merge(
+																		$provider_clinical_specialization_ancestors,
+																		get_ancestors(
+																			$item, // $object_id  // int // Optional // The ID of the object // Default: 0
+																			'clinical_title', // $object_type // string // Optional // The type of object for which we'll be retrieving ancestors. Accepts a post type or a taxonomy name. // Default: ''
+																			'taxonomy' // $resource_type // string // Optional // Type of resource $object_type is. Accepts 'post_type' or 'taxonomy'. // Default: ''
+																		)
+																	);
+
+																}
+
+															} // endforeach
+
+														}
+
+													}
+
+													// Clean up list of ID values
+
+														if ( $provider_clinical_specialization_ancestors ) {
+
+															$provider_clinical_specialization_ancestors = array_filter($provider_clinical_specialization_ancestors);
+															$provider_clinical_specialization_ancestors = array_unique( $provider_clinical_specialization_ancestors, SORT_REGULAR );
+															$provider_clinical_specialization_ancestors = array_values($provider_clinical_specialization_ancestors);
+
+														}
+
+												// Get attributes of the clinical specializations
+
+													$provider_clinical_specialization_knowsAbout = uamswp_fad_schema_nucc_code_set(
+														$provider_clinical_specialization_ancestors // mixed // Required // List of clinical specialization IDs
+													);
+
+												// Add to knowsAbout list array
+
+													$provider_knowsAbout = uamswp_fad_schema_merge_values(
+														$provider_knowsAbout, // mixed // Required // Initial schema item property value
+														$provider_clinical_specialization_knowsAbout // mixed // Required // Incoming schema item property value
+													);
+
+												// Get values for keywords property
+
+													$provider_clinical_specialization_keywords = uamswp_fad_schema_property_values(
+														$provider_clinical_specialization_knowsAbout, // array // Required // Property values from which to extract specific values
+														array( 'name', 'alternateName', 'codeValue' ) // mixed // Required // List of properties from which to collect values
+													);
+
+													// Merge clinical specializations keywords value into keywords
+
+														$provider_keywords = uamswp_fad_schema_merge_values(
+															$provider_keywords, // mixed // Required // Initial schema item property value
+															$provider_clinical_specialization_keywords // mixed // Required // Incoming schema item property value
+														);
+
+											// Merge in related areas of expertise value
+
+												$provider_knowsAbout = uamswp_fad_schema_merge_values(
+													$provider_knowsAbout, // mixed // Required // Initial schema item property value
+													$provider_expertise // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge areas of expertise significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_expertise_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge areas of expertise keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_expertise_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related conditions value
+
+												$provider_knowsAbout = uamswp_fad_schema_merge_values(
+													$provider_knowsAbout, // mixed // Required // Initial schema item property value
+													$provider_condition // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge conditions significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_condition_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge conditions keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_condition_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related treatments value
+
+												$provider_knowsAbout = uamswp_fad_schema_merge_values(
+													$provider_knowsAbout, // mixed // Required // Initial schema item property value
+													$provider_availableService // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge availableService significantLink value into significantLink
+
+													$provider_significantLink = uamswp_fad_schema_merge_values(
+														$provider_significantLink, // mixed // Required // Initial schema item property value
+														$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge availableService keywords value into keywords
+
+													$provider_keywords = uamswp_fad_schema_merge_values(
+														$provider_keywords, // mixed // Required // Initial schema item property value
+														$provider_availableService_keywords // mixed // Required // Incoming schema item property value
+													);
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
+													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
+													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// Person
+
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$provider_knowsAbout, // mixed // Required // Variable to add as the property value
+													$provider_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
 												);
 
 									}
@@ -16651,15 +16651,19 @@
 									 */
 
 									if (
-										in_array(
-											'containsPlace',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											in_array(
+												'containsPlace',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'containsPlace',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
-										||
-										in_array(
-											'containsPlace',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -16769,15 +16773,19 @@
 									 */
 
 									if (
-										in_array(
-											'department',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											in_array(
+												'department',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'department',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
-										||
-										in_array(
-											'department',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -16991,15 +16999,19 @@
 									 */
 
 									if (
-										in_array(
-											'employee',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											in_array(
+												'employee',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'employee',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
-										||
-										in_array(
-											'employee',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -17870,140 +17882,6 @@
 										any clinical location is ever accessible for free.
 
 									*/
-
-								// knowsAbout
-
-									/*
-									 * Of a Person, and less typically of an Organization, to indicate a topic that is
-									 * known about — suggesting possible expertise but not implying it. We do not
-									 * distinguish skill levels here, or relate this to educational content, events,
-									 * objectives or JobPosting descriptions.
-									 *
-									 * Values expected to be one of these types:
-									 *
-									 *     - Text
-									 *     - Thing
-									 *     - URL
-									 *
-									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
-									 * feedback and adoption from applications and websites can help improve their
-									 * definitions.
-									 */
-
-									if (
-										(
-											in_array(
-												'knowsAbout',
-												$location_properties_map[$MedicalWebPage_type]['properties']
-											)
-											||
-											in_array(
-												'knowsAbout',
-												$location_properties_map[$LocalBusiness_type]['properties']
-											)
-										)
-										&&
-										$nesting_level == 0
-									) {
-
-										// Get values
-
-											// Base array
-
-												$location_knowsAbout = array();
-
-											// Merge in related area of expertise (MedicalEntity) value
-
-												$location_knowsAbout = uamswp_fad_schema_merge_values(
-													$location_knowsAbout, // mixed // Required // Initial schema item property value
-													$location_expertise // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge related area of expertise (MedicalEntity) significantLink value into significantLink
-
-													$location_significantLink = uamswp_fad_schema_merge_values(
-														$location_significantLink, // mixed // Required // Initial schema item property value
-														$location_expertise_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge related area of expertise (MedicalEntity) keywords value into keywords
-
-													$location_keywords = uamswp_fad_schema_merge_values(
-														$location_keywords, // mixed // Required // Initial schema item property value
-														$location_expertise_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related condition (MedicalCondition) value
-
-												$location_knowsAbout = uamswp_fad_schema_merge_values(
-													$location_knowsAbout, // mixed // Required // Initial schema item property value
-													$location_condition // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge related condition (MedicalCondition) significantLink value into significantLink
-
-													$location_significantLink = uamswp_fad_schema_merge_values(
-														$location_significantLink, // mixed // Required // Initial schema item property value
-														$location_condition_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge related condition (MedicalCondition) keywords value into keywords
-
-													$location_keywords = uamswp_fad_schema_merge_values(
-														$location_keywords, // mixed // Required // Initial schema item property value
-														$location_condition_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											// Merge in related treatment (availableService) value
-
-												$location_knowsAbout = uamswp_fad_schema_merge_values(
-													$location_knowsAbout, // mixed // Required // Initial schema item property value
-													$location_availableService // mixed // Required // Incoming schema item property value
-												);
-
-												// Merge related treatment (availableService) significantLink value into significantLink
-
-													$location_significantLink = uamswp_fad_schema_merge_values(
-														$location_significantLink, // mixed // Required // Initial schema item property value
-														$location_availableService_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge related treatment (availableService) keywords value into keywords
-
-													$location_keywords = uamswp_fad_schema_merge_values(
-														$location_keywords, // mixed // Required // Initial schema item property value
-														$location_availableService_keywords // mixed // Required // Incoming schema item property value
-													);
-
-										// Add to item values
-
-											// MedicalWebPage
-
-												uamswp_fad_schema_add_to_item_values(
-													$MedicalWebPage_type, // string // Required // The @type value for the schema item
-													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-													'knowsAbout', // string // Required // Name of schema property
-													$location_knowsAbout, // mixed // Required // Variable to add as the property value
-													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-											// LocalBusiness
-
-												uamswp_fad_schema_add_to_item_values(
-													$LocalBusiness_type, // string // Required // The @type value for the schema item
-													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
-													'knowsAbout', // string // Required // Name of schema property
-													$location_knowsAbout, // mixed // Required // Variable to add as the property value
-													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
-													($nesting_level + 1) // int // Required // Current nesting level value
-												);
-
-									}
 
 								// knowsLanguage [WIP]
 
@@ -18915,15 +18793,19 @@
 									 */
 
 									if (
-										in_array(
-											'subOrganization',
-											$location_properties_map[$MedicalWebPage_type]['properties']
+										(
+											in_array(
+												'subOrganization',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'subOrganization',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
 										)
-										||
-										in_array(
-											'subOrganization',
-											$location_properties_map[$LocalBusiness_type]['properties']
-										)
+										&&
+										$nesting_level == 0
 									) {
 
 										// Get values
@@ -19014,6 +18896,140 @@
 									 *
 									 *     - Duration (use ISO 8601 duration format).
 									 */
+
+								// knowsAbout
+
+									/*
+									 * Of a Person, and less typically of an Organization, to indicate a topic that is
+									 * known about — suggesting possible expertise but not implying it. We do not
+									 * distinguish skill levels here, or relate this to educational content, events,
+									 * objectives or JobPosting descriptions.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - Text
+									 *     - Thing
+									 *     - URL
+									 *
+									 * As of 1 Sep 2023, this term is in the "new" area of Schema.org. Implementation
+									 * feedback and adoption from applications and websites can help improve their
+									 * definitions.
+									 */
+
+									if (
+										(
+											in_array(
+												'knowsAbout',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'knowsAbout',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$location_knowsAbout = array();
+
+											// Merge in related area of expertise (MedicalEntity) value
+
+												$location_knowsAbout = uamswp_fad_schema_merge_values(
+													$location_knowsAbout, // mixed // Required // Initial schema item property value
+													$location_expertise // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge related area of expertise (MedicalEntity) significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_expertise_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge related area of expertise (MedicalEntity) keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_expertise_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related condition (MedicalCondition) value
+
+												$location_knowsAbout = uamswp_fad_schema_merge_values(
+													$location_knowsAbout, // mixed // Required // Initial schema item property value
+													$location_condition // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge related condition (MedicalCondition) significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_condition_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge related condition (MedicalCondition) keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_condition_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related treatment (availableService) value
+
+												$location_knowsAbout = uamswp_fad_schema_merge_values(
+													$location_knowsAbout, // mixed // Required // Initial schema item property value
+													$location_availableService // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge related treatment (availableService) significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_availableService_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge related treatment (availableService) keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_availableService_keywords // mixed // Required // Incoming schema item property value
+													);
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$location_knowsAbout, // mixed // Required // Variable to add as the property value
+													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'knowsAbout', // string // Required // Name of schema property
+													$location_knowsAbout, // mixed // Required // Variable to add as the property value
+													$location_knowsAbout_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 								// mentions
 
