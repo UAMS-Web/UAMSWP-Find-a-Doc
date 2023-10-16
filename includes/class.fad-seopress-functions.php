@@ -166,3 +166,42 @@
 		return $meta_title_vars;
 
 	}
+
+// Remove meta boxes
+
+	// Content Analysis
+
+		/*
+
+			Source: https://www.seopress.org/support/guides/disable-content-analysis-metabox/
+
+		*/
+
+		function sp_metaboxe_content_analysis($seopress_get_post_types) {
+
+			/*
+
+				Define a post types array for which post types on which to display the
+				SEOPress Content Analysis meta box (e.g., post and page).
+
+				The documentation at
+				https://www.seopress.org/support/guides/disable-content-analysis-metabox/
+				says "Hook to remove the content analysis metabox by post type" which implies
+				that the array should contain the post types for which to remove the meta box.
+				However, in practice, it is the opposite.
+
+				Notice the array_flip to convert values to keys.
+
+			*/
+
+			$seopress_get_post_types = array_flip(
+				array(
+					'post',
+					'page'
+				)
+			);
+
+			return $seopress_get_post_types;
+
+		}
+		add_filter('seopress_metaboxe_content_analysis', 'sp_metaboxe_content_analysis');
