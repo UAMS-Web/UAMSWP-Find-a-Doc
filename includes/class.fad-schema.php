@@ -14423,6 +14423,72 @@
 
 								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
 
+									// Associated conditions
+
+										// List of properties that reference conditions
+
+											$location_condition_common = array(
+												'knowsAbout',
+												'mentions'
+											);
+
+										if (
+											(
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_condition_common
+												)
+												||
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_condition_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related conditions
+
+												if ( !isset($location_condition_list) ) {
+
+													$location_condition_list = get_field( 'location_conditions_cpt', $entity ) ?? array();
+
+												}
+
+											// Format values
+
+												if ( $location_condition_list ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$location_condition = uamswp_fad_schema_condition(
+														$location_condition_list, // array // Required // List of IDs of the MedicalCondition items
+														$location_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$MedicalCondition_i, // int // Optional // Iteration counter for condition-as-MedicalCondition
+														$Service_i // int // Optional // Iteration counter for treatment-as-Service
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$location_condition_significantLink = uamswp_fad_schema_property_values(
+													$location_condition, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											// Get names for keywords property
+
+												$location_condition_keywords = uamswp_fad_schema_property_values(
+													$location_condition, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+												);
+
+										}
+
 									// Associated treatments and procedures
 
 										// List of properties that reference treatments and procedures
