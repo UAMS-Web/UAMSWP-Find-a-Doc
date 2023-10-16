@@ -14582,6 +14582,20 @@
 
 															$location_providers_Person = $location_providers['Person'];
 
+															// Get URLs for significantLink property
+
+																$location_providers_Person_significantLink = uamswp_fad_schema_property_values(
+																	$location_providers_Person, // array // Required // Property values from which to extract specific values
+																	array( 'url' ) // mixed // Required // List of properties from which to collect values
+																);
+
+															// Get names for keywords property
+
+																$location_providers_Person_keywords = uamswp_fad_schema_property_values(
+																	$location_providers_Person, // array // Required // Property values from which to extract specific values
+																	array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+																);
+
 													}
 
 										}
