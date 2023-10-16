@@ -7945,7 +7945,7 @@
 
 												if ( !isset($provider_condition_list) ) {
 
-													$provider_condition_list = get_field( 'physician_treatments_cpt', $entity ) ?: array();
+													$provider_condition_list = get_field( 'physician_conditions_cpt', $entity ) ?: array();
 
 												}
 
