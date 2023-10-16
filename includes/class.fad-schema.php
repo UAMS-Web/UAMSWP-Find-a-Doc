@@ -19233,7 +19233,7 @@
 
 									}
 
-								// keywords [WIP]
+								// keywords
 
 									/*
 									 * Keywords or tags used to describe some item. Multiple textual entries in a
