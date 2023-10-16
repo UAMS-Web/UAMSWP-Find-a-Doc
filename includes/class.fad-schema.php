@@ -2849,8 +2849,8 @@
 								if ( $association_alternateName_array ) {
 
 									$association_alternateName = uamswp_fad_schema_alternatename(
-										$association_alternateName_array, // alternateName repeater field
-										'schema_alternatename_text' // alternateName item field name
+										$association_alternateName_array, // array // Required // alternateName repeater field
+										'schema_alternatename_text' // string // Optional // alternateName item field name
 									);
 
 								}
@@ -3653,8 +3653,8 @@
 											if ( $credential_alternateName_repeater ) {
 
 												$credential_alternateName = uamswp_fad_schema_alternatename(
-													$credential_alternateName_repeater, // alternateName repeater field
-													$credential_alternateName_arg_field, // alternateName item field name
+													$credential_alternateName_repeater, // array // Required // alternateName repeater field
+													$credential_alternateName_arg_field, // string // Optional // alternateName item field name
 													$credential_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
 												);
 
@@ -3804,8 +3804,8 @@
 																		if ( $item_alternatename_repeater ) {
 
 																			$item_alternatename = uamswp_fad_schema_alternatename(
-																				$item_alternatename_repeater, // alternateName repeater field
-																				$credential_recognizedBy_field_alternateName_arg // alternateName item field name
+																				$item_alternatename_repeater, // array // Required // alternateName repeater field
+																				$credential_recognizedBy_field_alternateName_arg // string // Optional // alternateName item field name
 																			);
 
 																		}
@@ -4185,8 +4185,8 @@
 								if ( $specialization_alternateName_array ) {
 
 									$specialization_alternateName = uamswp_fad_schema_alternatename(
-										$specialization_alternateName_array, // alternateName repeater field
-										'schema_alternatename_text', // alternateName item field name
+										$specialization_alternateName_array, // array // Required // alternateName repeater field
+										'schema_alternatename_text', // string // Optional // alternateName item field name
 										$specialization_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
 									);
 
@@ -7288,8 +7288,8 @@
 																if ( $provider_alternateName_additional_repeater ) {
 
 																	$provider_alternateName_additional = uamswp_fad_schema_alternatename(
-																		$provider_alternateName_additional_repeater, // alternateName repeater field
-																		'alternate_text' // alternateName item field name
+																		$provider_alternateName_additional_repeater, // array // Required // alternateName repeater field
+																		'alternate_text' // string // Optional // alternateName item field name
 																	);
 
 																}
@@ -20409,8 +20409,8 @@
 													if ( $expertise_alternateName_repeater ) {
 
 														$expertise_alternateName = uamswp_fad_schema_alternatename(
-															$expertise_alternateName_repeater, // alternateName repeater field
-															'alternate_text' // alternateName item field name
+															$expertise_alternateName_repeater, // array // Required // alternateName repeater field
+															'alternate_text' // string // Optional // alternateName item field name
 														);
 
 													}
@@ -26109,8 +26109,8 @@
 											// Add each item to alternateName property values array
 
 												$condition_alternateName = uamswp_fad_schema_alternatename(
-													$condition_alternateName_repeater, // alternateName repeater field
-													'alternate_text' // alternateName item field name
+													$condition_alternateName_repeater, // array // Required // alternateName repeater field
+													'alternate_text' // string // Optional // alternateName item field name
 												);
 
 										// Add to item values
@@ -27632,8 +27632,8 @@
 												if ( $treatment_alternateName_repeater ) {
 
 													$treatment_alternateName = uamswp_fad_schema_alternatename(
-														$treatment_alternateName_repeater, // alternateName repeater field
-														'alternate_text' // alternateName item field name
+														$treatment_alternateName_repeater, // array // Required // alternateName repeater field
+														'alternate_text' // string // Optional // alternateName item field name
 													);
 
 												}
@@ -28690,8 +28690,8 @@
 																// Add each item to alternateName property value array
 
 																	$treatment_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
-																		$treatment_alternateName_repeater, // alternateName repeater field
-																		'schema_alternatename_text' // alternateName item field name
+																		$treatment_alternateName_repeater, // array // Required // alternateName repeater field
+																		'schema_alternatename_text' // string // Optional // alternateName item field name
 																	);
 
 															// Add to usesDevice property value item array
