@@ -13921,6 +13921,8 @@
 								$location_isFamilyFriendly_ref = null;
 								$location_isPartOf = null;
 								$location_isPartOf_ref = null;
+								$location_keywords = null;
+								$location_keywords_ref = null;
 								$location_lastReviewed = null;
 								$location_lastReviewed_ref = null;
 								$location_mainContentOfPage = null;
@@ -18479,6 +18481,79 @@
 									 *     - Text
 									 *     - URL
 									 */
+
+									if (
+										(
+											in_array(
+												'keywords',
+												$location_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'keywords',
+												$location_properties_map[$LocalBusiness_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Get values
+
+											// Base array
+
+												$location_keywords = $location_keywords ?? array();
+
+											// Common values
+
+												$location_keywords[] = 'location';
+
+											// Clean up list array
+
+												if ( $location_keywords ) {
+
+													$location_keywords = array_filter($location_keywords);
+													$location_keywords = array_unique( $location_keywords, SORT_REGULAR );
+													$location_keywords = array_values($location_keywords);
+													uamswp_fad_flatten_multidimensional_array($location_keywords);
+
+													if ( is_array($location_keywords) ) {
+
+														sort( $location_keywords, SORT_NATURAL | SORT_FLAG_CASE );
+
+													}
+
+												}
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$location_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'keywords', // string // Required // Name of schema property
+													$location_keywords, // mixed // Required // Variable to add as the property value
+													$location_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// LocalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$LocalBusiness_type, // string // Required // The @type value for the schema item
+													$location_item_LocalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'keywords', // string // Required // Name of schema property
+													$location_keywords, // mixed // Required // Variable to add as the property value
+													$location_keywords_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+									}
 
 							// Sort arrays
 
