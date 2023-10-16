@@ -8049,95 +8049,6 @@
 
 										}
 
-										// availableService
-
-											/*
-											 * A medical service available from this provider.
-											 *
-											 * Values expected to be one of these types:
-											 *
-											 *     - MedicalProcedure
-											 *     - MedicalTest
-											 */
-
-											if (
-												(
-													in_array(
-														'availableService',
-														$provider_properties_map[$MedicalWebPage_type]['properties']
-													)
-													||
-													in_array(
-														'availableService',
-														$provider_properties_map[$MedicalBusiness_type]['properties']
-													)
-													||
-													in_array(
-														'availableService',
-														$provider_properties_map[$Person_type]['properties']
-													)
-												)
-												&&
-												$nesting_level == 0
-											) {
-
-												// Add to item values
-
-													// MedicalWebPage
-
-														uamswp_fad_schema_add_to_item_values(
-															$MedicalWebPage_type, // string // Required // The @type value for the schema item
-															$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
-															'availableService', // string // Required // Name of schema property
-															$provider_availableService, // mixed // Required // Variable to add as the property value
-															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-															($nesting_level + 1) // int // Required // Current nesting level value
-														);
-
-													// MedicalBusiness
-
-														uamswp_fad_schema_add_to_item_values(
-															$MedicalBusiness_type, // string // Required // The @type value for the schema item
-															$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
-															'availableService', // string // Required // Name of schema property
-															$provider_availableService, // mixed // Required // Variable to add as the property value
-															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-															($nesting_level + 1) // int // Required // Current nesting level value
-														);
-
-													// Person
-
-														uamswp_fad_schema_add_to_item_values(
-															$Person_type, // string // Required // The @type value for the schema item
-															$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
-															'availableService', // string // Required // Name of schema property
-															$provider_availableService, // mixed // Required // Variable to add as the property value
-															$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
-															$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
-															$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
-															($nesting_level + 1) // int // Required // Current nesting level value
-														);
-
-												// Merge availableService significantLink value into significantLink
-
-													$provider_significantLink = uamswp_fad_schema_merge_values(
-														$provider_significantLink, // mixed // Required // Initial schema item property value
-														$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
-													);
-
-												// Merge availableService keywords value into keywords
-
-													$provider_keywords = uamswp_fad_schema_merge_values(
-														$provider_keywords, // mixed // Required // Initial schema item property value
-														$provider_availableService_keywords // mixed // Required // Incoming schema item property value
-													);
-
-											}
-
 								// Identifiers (common use)
 
 									// Google customer ID (CID)
@@ -8296,6 +8207,95 @@
 													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
+
+									}
+
+								// availableService
+
+									/*
+									 * A medical service available from this provider.
+									 *
+									 * Values expected to be one of these types:
+									 *
+									 *     - MedicalProcedure
+									 *     - MedicalTest
+									 */
+
+									if (
+										(
+											in_array(
+												'availableService',
+												$provider_properties_map[$MedicalWebPage_type]['properties']
+											)
+											||
+											in_array(
+												'availableService',
+												$provider_properties_map[$MedicalBusiness_type]['properties']
+											)
+											||
+											in_array(
+												'availableService',
+												$provider_properties_map[$Person_type]['properties']
+											)
+										)
+										&&
+										$nesting_level == 0
+									) {
+
+										// Add to item values
+
+											// MedicalWebPage
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalWebPage_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalWebPage, // array // Required // The list array for the schema item to which to add the property value
+													'availableService', // string // Required // Name of schema property
+													$provider_availableService, // mixed // Required // Variable to add as the property value
+													$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// MedicalBusiness
+
+												uamswp_fad_schema_add_to_item_values(
+													$MedicalBusiness_type, // string // Required // The @type value for the schema item
+													$provider_item_MedicalBusiness, // array // Required // The list array for the schema item to which to add the property value
+													'availableService', // string // Required // Name of schema property
+													$provider_availableService, // mixed // Required // Variable to add as the property value
+													$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+											// Person
+
+												uamswp_fad_schema_add_to_item_values(
+													$Person_type, // string // Required // The @type value for the schema item
+													$provider_item_Person, // array // Required // The list array for the schema item to which to add the property value
+													'availableService', // string // Required // Name of schema property
+													$provider_availableService, // mixed // Required // Variable to add as the property value
+													$provider_availableService_ref, // mixed // Required // Variable to reference the list of @id in the full property value
+													$node_identifier_list, // array // Required // List of node identifiers (@id) already defined in the schema
+													$provider_properties_map, // array // Required // Map array to match schema types with allowed properties
+													($nesting_level + 1) // int // Required // Current nesting level value
+												);
+
+										// Merge availableService significantLink value into significantLink
+
+											$provider_significantLink = uamswp_fad_schema_merge_values(
+												$provider_significantLink, // mixed // Required // Initial schema item property value
+												$provider_availableService_significantLink // mixed // Required // Incoming schema item property value
+											);
+
+										// Merge availableService keywords value into keywords
+
+											$provider_keywords = uamswp_fad_schema_merge_values(
+												$provider_keywords, // mixed // Required // Initial schema item property value
+												$provider_availableService_keywords // mixed // Required // Incoming schema item property value
+											);
 
 									}
 
