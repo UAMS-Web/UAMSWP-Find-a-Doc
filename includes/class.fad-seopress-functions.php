@@ -205,3 +205,35 @@
 
 		}
 		add_filter('seopress_metaboxe_content_analysis', 'uamswp_fad_metabox_seopress_content_analysis');
+
+	// SEO
+
+		/*
+
+			Based on documentation for removing Content Analysis meta box (found at
+			https://www.seopress.org/support/guides/disable-content-analysis-metabox/)
+			and the code in the wp-seopress-public GitHub repository at
+			https://github.com/wp-seopress/wp-seopress-public/blob/master/inc/admin/metaboxes/admin-metaboxes.php
+
+		*/
+
+		function uamswp_fad_metabox_seopress_cpt($seopress_get_post_types) {
+
+			/*
+
+				Define a post types array for which post types on which to display the
+				SEOPress SEO meta box (e.g., post and page).
+
+			*/
+
+			$seopress_get_post_types = array_flip(
+				array(
+					'post',
+					'page'
+				)
+			);
+
+			return $seopress_get_post_types;
+
+		}
+		add_filter('seopress_metaboxe_seo', 'uamswp_fad_metabox_seopress_cpt');
