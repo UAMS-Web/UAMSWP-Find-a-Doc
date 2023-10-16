@@ -7784,6 +7784,7 @@
 										// List of properties that reference areas of expertise
 
 											$provider_expertise_common = array(
+												'knowsAbout',
 												'mentions'
 											);
 
@@ -7921,6 +7922,7 @@
 										// List of properties that reference conditions
 
 											$provider_condition_common = array(
+												'knowsAbout',
 												'mentions'
 											);
 
@@ -7988,6 +7990,7 @@
 
 											$provider_treatment_common = array(
 												'availableService',
+												'knowsAbout',
 												'mentions'
 											);
 
