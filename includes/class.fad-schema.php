@@ -7445,6 +7445,7 @@
 											$provider_location_common = array(
 												'containedInPlace',
 												'location',
+												'mentions',
 												'relatedLink',
 												'significantLink',
 												'workLocation'
