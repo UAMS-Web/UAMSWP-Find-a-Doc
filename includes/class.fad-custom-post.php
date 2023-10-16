@@ -854,7 +854,7 @@
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
 					'show_in_quick_edit' => false,
 				);
-				register_taxonomy( 'service_line', array( 'provider', 'location' ), $args );
+				register_taxonomy( 'service_line', array( 'location', 'provider' ), $args );
 
 			}
 
@@ -986,7 +986,7 @@
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
 					'show_in_quick_edit' => false,
 				);
-				register_taxonomy( 'patient_type', array( 'provider', 'location' ), $args );
+				register_taxonomy( 'patient_type', array( 'location', 'provider' ), $args );
 
 			}
 
@@ -1294,7 +1294,7 @@
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
 					'show_in_quick_edit' => false,
 				);
-				register_taxonomy( 'language', array( 'provider', 'location' ), $args );
+				register_taxonomy( 'language', array( 'location', 'provider' ), $args );
 
 			}
 
@@ -1920,7 +1920,7 @@
 					'rest_controller_class' => 'WP_REST_Terms_Controller',
 					'show_in_quick_edit' => false,
 				);
-				register_taxonomy( 'portal', array( 'provider', 'location' ), $args );
+				register_taxonomy( 'portal', array( 'location', 'provider' ), $args );
 
 			}
 
