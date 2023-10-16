@@ -14416,6 +14416,74 @@
 
 										}
 
+								// Associated ontology items (e.g., providers, areas of expertise, clinical resources, conditions, treatments)
+
+									// Associated treatments and procedures
+
+										// List of properties that reference treatments and procedures
+
+											$location_treatment_common = array(
+												'availableService',
+												'mentions'
+											);
+
+										if (
+											(
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_treatment_common
+												)
+												||
+												array_intersect(
+													$location_properties_map[$MedicalWebPage_type]['properties'],
+													$location_treatment_common
+												)
+											)
+											&&
+											$nesting_level == 0
+										) {
+
+											// Get related treatments
+
+												if ( !isset($location_treatments) ) {
+
+													$location_treatments = get_field( 'location_treatments_cpt', $entity ) ?? array();
+
+												}
+
+											// Format values
+
+												if ( $location_treatments ) {
+
+													$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
+
+													$location_availableService = uamswp_fad_schema_treatment(
+														$location_treatments, // array // Required // List of IDs of the service items
+														$location_url, // string // Required // Page URL
+														$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
+														( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
+														$Service_i, // int // Optional // Iteration counter for treatment-as-Service
+														$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
+													);
+
+												}
+
+											// Get URLs for significantLink property
+
+												$location_availableService_significantLink = uamswp_fad_schema_property_values(
+													$location_availableService, // array // Required // Property values from which to extract specific values
+													array( 'url' ) // mixed // Required // List of properties from which to collect values
+												);
+
+											// Get names for keywords property
+
+												$location_availableService_keywords = uamswp_fad_schema_property_values(
+													$location_availableService, // array // Required // Property values from which to extract specific values
+													array( 'name', 'alternateName' ) // mixed // Required // List of properties from which to collect values
+												);
+
+										}
+
 								// Parent location attributes (common use)
 
 									// List of properties that reference parent locations
@@ -15993,31 +16061,6 @@
 										$nesting_level == 0
 									) {
 
-										// Get related treatments
-
-											if ( !isset($location_treatments) ) {
-
-												$location_treatments = get_field( 'location_treatments_cpt', $entity ) ?? array();
-
-											}
-
-										// Format values
-
-											if ( $location_treatments ) {
-
-												$node_identifier_list_temp = array(); // Temporary array that will not impact the main list of node identifiers already identified in the schema
-
-												$location_availableService = uamswp_fad_schema_treatment(
-													$location_treatments, // array // Required // List of IDs of the service items
-													$location_url, // string // Required // Page URL
-													$node_identifier_list_temp, // array // Optional // List of node identifiers (@id) already defined in the schema
-													( $nesting_level + 1 ), // int // Optional // Nesting level within the main schema
-													$Service_i, // int // Optional // Iteration counter for treatment-as-Service
-													$MedicalCondition_i // int // Optional // Iteration counter for condition-as-MedicalCondition
-												);
-
-											}
-
 										// Add to item values
 
 											// MedicalWebPage
@@ -16045,6 +16088,20 @@
 													$location_properties_map, // array // Required // Map array to match schema types with allowed properties
 													($nesting_level + 1) // int // Required // Current nesting level value
 												);
+
+										// Merge availableService significantLink value into significantLink
+
+											$location_significantLink = uamswp_fad_schema_merge_values(
+												$location_significantLink, // mixed // Required // Initial schema item property value
+												$location_availableService_significantLink // mixed // Required // Incoming schema item property value
+											);
+
+										// Merge availableService keywords value into keywords
+
+											$location_keywords = uamswp_fad_schema_merge_values(
+												$location_keywords, // mixed // Required // Initial schema item property value
+												$location_availableService_keywords // mixed // Required // Incoming schema item property value
+											);
 
 									}
 
