@@ -8612,7 +8612,7 @@
 
 																		if ( is_object($provider_clinical_specialization_term) ) {
 
-																			$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $item_term ) ?? '';
+																			$provider_additionalType_clinical_specialization = get_field( 'clinical_specialization_wikidata_url_occupation', $provider_clinical_specialization_term ) ?? '';
 
 																		}
 
