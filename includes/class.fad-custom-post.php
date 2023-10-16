@@ -1418,7 +1418,7 @@
 
 			}
 
-		// Institute Affiliations
+		// UAMS Colleges
 
 			/*
 
