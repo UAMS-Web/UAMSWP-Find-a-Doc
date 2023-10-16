@@ -17728,11 +17728,6 @@
 
 																$location_identifier = uamswp_fad_schema_propertyvalue(
 																	array(
-																		'United States Department of Veterans Affairs station code',
-																		'United States Department of Veterans Affairs stationID',
-																		'United States Department of Veterans Affairs facility #',
-																		'U.S. Department of Veterans Affairs station code',
-																		'U.S. Department of Veterans Affairs stationID',
 																		'U.S. Department of Veterans Affairs station ID',
 																		'U.S. Department of Veterans Affairs facility #',
 																		'Department of Veterans Affairs station code',
@@ -17753,7 +17748,7 @@
 																	null, // mixed // Optional // measurementMethod property value
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
-																	'United States Department of Veterans Affairs Station ID', // string // Optional // name property value
+																	'STA6A', // string // Optional // name property value
 																	null, // string // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
