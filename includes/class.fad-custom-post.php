@@ -450,133 +450,129 @@
 
 		*/
 
-		// Provider Taxonomies
+		// Affiliations, Hospital
 
-			// Affiliations, Hospital
+			add_action( 'init', 'create_affiliations_taxonomy', 0 );
 
-				add_action( 'init', 'create_affiliations_taxonomy', 0 );
+		// Affiliations, Institute
 
-			// Affiliations, Institute
+			add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
 
-				add_action( 'init', 'create_institute_affiliations_taxonomy', 0 );
+		// Associations, Professional
 
-			// Associations, Professional
+			add_action( 'init', 'create_associations_taxonomy', 0 );
 
-				add_action( 'init', 'create_associations_taxonomy', 0 );
+		// Buildings
 
-			// Certifications —  Certifying Bodies
+			add_action( 'init', 'create_building_taxonomy', 0 );
 
-				add_action( 'init', 'create_certifying_body_taxonomy', 0 );
+		// Certifications —  Certifying Bodies
 
-			// Certification — Specialty and Subspecialty Certificates
+			add_action( 'init', 'create_certifying_body_taxonomy', 0 );
 
-				add_action( 'init', 'create_boards_taxonomy', 0 );
+		// Certification — Specialty and Subspecialty Certificates
 
-			// Colleges, UAMS
+			add_action( 'init', 'create_boards_taxonomy', 0 );
 
-				add_action( 'init', 'create_academic_college_taxonomy', 0 );
+		// Colleges, UAMS
 
-			// Clinical Specializations
+			add_action( 'init', 'create_academic_college_taxonomy', 0 );
 
-				add_action( 'init', 'create_clinical_title_taxonomy', 0 );
+		// Clinical Specializations
 
-			// Degrees and Credentials
+			add_action( 'init', 'create_clinical_title_taxonomy', 0 );
 
-				add_action( 'init', 'create_degrees_taxonomy', 0 );
+		// Degrees and Credentials
 
-			// Departments, Academic
+			add_action( 'init', 'create_degrees_taxonomy', 0 );
 
-				add_action( 'init', 'create_academic_departments_taxonomy', 0 );
+		// Departments, Academic
 
-			// Education and Training Organizations
+			add_action( 'init', 'create_academic_departments_taxonomy', 0 );
 
-				add_action( 'init', 'create_schools_taxonomy', 0 );
+		// Education and Training Organizations
 
-			// Education and Training Types
+			add_action( 'init', 'create_schools_taxonomy', 0 );
 
-				add_action( 'init', 'create_education_taxonomy', 0 );
+		// Education and Training Types
 
-			// Google My Business Categories
+			add_action( 'init', 'create_education_taxonomy', 0 );
 
-				add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
+		// Google My Business Categories for Providers
 
-			// Languages
+			add_action( 'init', 'create_gmb_cat_provider_taxonomy', 0 );
 
-				add_action( 'init', 'create_languages_taxonomy', 0 );
+		// Google My Business Categories for Locations
 
-			// Patient Types
+			add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
 
-				add_action( 'init', 'create_patient_type_taxonomy', 0 );
+		// Languages
 
-			// Portals
+			add_action( 'init', 'create_languages_taxonomy', 0 );
 
-				add_action( 'init', 'create_portal_taxonomy', 0 );
+		// Patient Types
 
-			// Position Types, Academic
+			add_action( 'init', 'create_patient_type_taxonomy', 0 );
 
-				add_action( 'init', 'create_academic_position_taxonomy', 0 );
+		// Portals
 
-			// Recognition Lists
+			add_action( 'init', 'create_portal_taxonomy', 0 );
 
-				add_action( 'init', 'create_recognition_taxonomy', 0 );
+		// Position Types, Academic
 
-			// Residency Years
+			add_action( 'init', 'create_academic_position_taxonomy', 0 );
 
-				add_action( 'init', 'create_residency_years_taxonomy', 0 );
+		// Recognition Lists
 
-			// Service Lines
+			add_action( 'init', 'create_recognition_taxonomy', 0 );
 
-				add_action( 'init', 'create_service_line_taxonomy', 0 );
+		// Regions
 
-			// Titles, Academic Administrative
+			add_action( 'init', 'create_region_taxonomy', 0 );
 
-				add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
+		// Residency Years
 
-			// Titles, Clinical Administrative
+			add_action( 'init', 'create_residency_years_taxonomy', 0 );
 
-				add_action( 'init', 'create_clinical_admin_title_taxonomy', 0 );
+		// Service Lines
 
-			// Titles, Faculty
+			add_action( 'init', 'create_service_line_taxonomy', 0 );
 
-				add_action( 'init', 'create_academic_title_taxonomy', 0 );
+		// Titles, Academic Administrative
 
-			// Conditions
+			add_action( 'init', 'create_academic_admin_title_taxonomy', 0 );
 
-				// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
+		// Titles, Clinical Administrative
 
-			// Departments, Clinical
+			add_action( 'init', 'create_clinical_admin_title_taxonomy', 0 );
 
-				// add_action( 'init', 'create_departments_taxonomy', 0 );
+		// Titles, Faculty
 
-			// Medical Specialties
+			add_action( 'init', 'create_academic_title_taxonomy', 0 );
 
-				// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
+		// Types of Locations
 
-			// Medical Terms
+			add_action( 'init', 'create_location_type_taxonomy', 0 );
 
-				// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
+		// Conditions
 
-			// Treatments and Procedures
+			// add_action( 'init', 'create_clinical_conditions_taxonomy', 0 );
 
-				// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
+		// Departments, Clinical
 
-		// Locations Taxonomies
+			// add_action( 'init', 'create_departments_taxonomy', 0 );
 
-			// Buildings
+		// Medical Specialties
 
-				add_action( 'init', 'create_building_taxonomy', 0 );
+			// add_action( 'init', 'create_medical_specialties_taxonomy', 0 ); // Disabled
 
-			// Google My Business Categories
+		// Medical Terms
 
-				add_action( 'init', 'create_gmb_cat_location_taxonomy', 0 );
+			// add_action( 'init', 'create_medical_terms_taxonomy', 0 ); // Disabled
 
-			// Regions
+		// Treatments and Procedures
 
-				add_action( 'init', 'create_region_taxonomy', 0 );
-
-			// Types
-
-				add_action( 'init', 'create_location_type_taxonomy', 0 );
+			// add_action( 'init', 'create_clinical_treatments_taxonomy', 0 );
 
 	// Taxonomy Functions
 
