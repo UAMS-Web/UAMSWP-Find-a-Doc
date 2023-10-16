@@ -14697,12 +14697,12 @@
 											(
 												array_intersect(
 													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_clinical_resource_common
+													$location_expertise_common
 												)
 												||
 												array_intersect(
 													$location_properties_map[$MedicalWebPage_type]['properties'],
-													$location_clinical_resource_common
+													$location_expertise_common
 												)
 											)
 											&&
