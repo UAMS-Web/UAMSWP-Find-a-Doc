@@ -177,7 +177,7 @@
 
 		*/
 
-		function sp_metaboxe_content_analysis($seopress_get_post_types) {
+		function uamswp_fad_metabox_seopress_content_analysis($seopress_get_post_types) {
 
 			/*
 
@@ -204,4 +204,4 @@
 			return $seopress_get_post_types;
 
 		}
-		add_filter('seopress_metaboxe_content_analysis', 'sp_metaboxe_content_analysis');
+		add_filter('seopress_metaboxe_content_analysis', 'uamswp_fad_metabox_seopress_content_analysis');
