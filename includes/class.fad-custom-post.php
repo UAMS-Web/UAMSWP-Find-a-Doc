@@ -2657,7 +2657,7 @@
 		}
 		add_action( 'admin_init', 'add_theme_caps');
 
-// Remove the taxonomy metabox [slugnamediv]
+// Remove the taxonomy meta boxes [slugnamediv]
 
 	function remove_provider_meta() {
 
