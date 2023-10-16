@@ -18944,6 +18944,152 @@
 										$nesting_level == 0
 									) {
 
+										// Get values
+
+											// Base array
+
+												$location_mentions = array();
+
+											// Merge in related providers (MedicalBusiness) value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_providers_MedicalBusiness // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge providers (MedicalBusiness) significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_providers_MedicalBusiness_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge providers (MedicalBusiness) keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_providers_MedicalBusiness_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related providers (Person) value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_providers_Person // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge providers (Person) significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_providers_Person_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge providers (Person) keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_providers_Person_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in descendant locations value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_descendant_locations_LocalBusiness // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge descendant locations significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_descendant_locations_LocalBusiness_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge descendant locations keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_descendant_locations_LocalBusiness_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related areas of expertise value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_expertise // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge areas of expertise significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_expertise_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge areas of expertise keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_expertise_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related clinical resources value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_clinical_resource // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge clinical resources significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_clinical_resource_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related conditions value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_condition // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge conditions significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_condition_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge conditions keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_condition_keywords // mixed // Required // Incoming schema item property value
+													);
+
+											// Merge in related treatments value
+
+												$location_mentions = uamswp_fad_schema_merge_values(
+													$location_mentions, // mixed // Required // Initial schema item property value
+													$location_availableService // mixed // Required // Incoming schema item property value
+												);
+
+												// Merge availableService significantLink value into significantLink
+
+													$location_significantLink = uamswp_fad_schema_merge_values(
+														$location_significantLink, // mixed // Required // Initial schema item property value
+														$location_availableService_significantLink // mixed // Required // Incoming schema item property value
+													);
+
+												// Merge availableService keywords value into keywords
+
+													$location_keywords = uamswp_fad_schema_merge_values(
+														$location_keywords, // mixed // Required // Initial schema item property value
+														$location_availableService_keywords // mixed // Required // Incoming schema item property value
+													);
+
 										// Add to item values
 
 											// MedicalWebPage
