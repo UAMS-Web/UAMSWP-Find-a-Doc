@@ -7808,7 +7808,7 @@
 
 												if ( !isset($provider_expertise_list) ) {
 
-													$provider_expertise_list = get_field( 'physician_expertise', $entity ) ?: array();
+													$provider_expertise_list = get_field( 'physician_expertise', $entity ) ?? array();
 
 												}
 
@@ -7874,7 +7874,7 @@
 
 												if ( !isset($provider_clinical_resource_list) ) {
 
-													$provider_clinical_resource_list = get_field( 'physician_clinical_resources', $entity ) ?: array();
+													$provider_clinical_resource_list = get_field( 'physician_clinical_resources', $entity ) ?? array();
 
 												}
 
@@ -7945,7 +7945,7 @@
 
 												if ( !isset($provider_condition_list) ) {
 
-													$provider_condition_list = get_field( 'physician_conditions_cpt', $entity ) ?: array();
+													$provider_condition_list = get_field( 'physician_conditions_cpt', $entity ) ?? array();
 
 												}
 
@@ -8012,7 +8012,7 @@
 
 												if ( !isset($provider_treatment) ) {
 
-													$provider_treatment = get_field( 'physician_treatments_cpt', $entity ) ?: array();
+													$provider_treatment = get_field( 'physician_treatments_cpt', $entity ) ?? array();
 
 												}
 
@@ -15995,7 +15995,7 @@
 
 											if ( !isset($location_treatments) ) {
 
-												$location_treatments = get_field( 'location_treatments_cpt', $entity ) ?: array();
+												$location_treatments = get_field( 'location_treatments_cpt', $entity ) ?? array();
 
 											}
 
@@ -18130,7 +18130,7 @@
 
 													if ( !isset($location_sameAs_repeater) ) {
 
-														$location_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+														$location_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?? array();
 
 													}
 
@@ -19623,7 +19623,7 @@
 
 												if ( !isset($expertise_code_repeater) ) {
 
-													$expertise_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+													$expertise_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? array();
 
 												}
 
@@ -19631,7 +19631,7 @@
 
 												if ( !isset($expertise_nucc_array) ) {
 
-													$expertise_nucc_array = get_field( 'schema_nucc_multiple', $entity ) ?: array();
+													$expertise_nucc_array = get_field( 'schema_nucc_multiple', $entity ) ?? array();
 
 												}
 
@@ -25235,7 +25235,7 @@
 
 											// Get alternateName repeater field value
 
-												$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?: array();
+												$condition_alternateName_repeater = get_field( 'condition_alternate', $entity ) ?? array();
 
 											// Add each item to alternateName property values array
 
@@ -25360,7 +25360,7 @@
 
 											// Get code repeater field value
 
-												$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+												$condition_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? array();
 
 											// Add each item to code property values array
 
@@ -25786,7 +25786,7 @@
 
 											// Get sameAs repeater field value
 
-												$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+												$condition_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?? array();
 
 											// Add each item to sameAs property values array
 
@@ -25908,7 +25908,7 @@
 
 											// Get possibleTreatment relationship field value
 
-												$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?: array();
+												$condition_possibleTreatment_relationship = get_field( 'condition_schema_possibletreatment', $entity ) ?? array();
 
 											// Add each item to possibleTreatment property values array
 
@@ -25968,7 +25968,7 @@
 
 											// Get primaryPrevention relationship field value
 
-												$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?: array();
+												$condition_primaryPrevention_relationship = get_field( 'condition_schema_primaryprevention', $entity ) ?? array();
 
 											// Add each item to primaryPrevention property values array
 
@@ -26028,7 +26028,7 @@
 
 											// Get secondaryPrevention relationship field value
 
-												$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?: array();
+												$condition_secondaryPrevention_relationship = get_field( 'condition_schema_secondaryprevention', $entity ) ?? array();
 
 											// Add each item to secondaryPrevention property values array
 
@@ -26101,7 +26101,7 @@
 
 											// Get typicalTest relationship field value
 
-												$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?: array();
+												$condition_typicalTest_relationship = get_field( 'condition_schema_typicaltest', $entity ) ?? array();
 
 											// Add each item to typicalTest property values array
 
@@ -26752,7 +26752,7 @@
 
 											// Get alternateName repeater field value
 
-												$treatment_alternateName_repeater = get_field( 'treatment_procedure_alternate', $entity ) ?: array();
+												$treatment_alternateName_repeater = get_field( 'treatment_procedure_alternate', $entity ) ?? array();
 
 											// Add each item to alternateName property values array
 
@@ -26804,7 +26804,7 @@
 
 											// Get code repeater field value
 
-												$treatment_code_repeater = get_field( 'schema_medicalcode', $entity ) ?: array();
+												$treatment_code_repeater = get_field( 'schema_medicalcode', $entity ) ?? array();
 
 											// Add each item to code property values array
 
@@ -27108,7 +27108,7 @@
 
 											// Get duplicateTherapy relationship repeater value (clones 'field_schema_medicaltherapy')
 
-												$treatment_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $entity ) ?: array();
+												$treatment_duplicateTherapy_relationship = get_field( 'treatment_procedure_schema_duplicatetherapy_schema_medicaltherapy', $entity ) ?? array();
 
 											// Add each item to duplicateTherapy property values array
 
@@ -27411,7 +27411,7 @@
 
 											// Get relevantSpecialty multi-select field value (clone of 'field_schema_medicalspecialty_multiple')
 
-												$treatment_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $entity ) ?: array();
+												$treatment_relevantSpecialty_multiselect = get_field( 'treatment_procedure_schema_relevantspecialty_schema_medicalspecialty_multiple', $entity ) ?? array();
 
 											// Add each item to relevantSpecialty property values array
 
@@ -27465,7 +27465,7 @@
 
 											// Get sameAs repeater field value
 
-												$treatment_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?: array();
+												$treatment_sameAs_repeater = get_field( 'schema_sameas', $entity ) ?? array();
 
 											// Add each item to sameAs property values array
 
@@ -27592,7 +27592,7 @@
 
 											// Get subTest relationship field value (clone field referencing 'field_schema_medicaltest')
 
-												$treatment_subTest_relationship = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $entity ) ?: array();
+												$treatment_subTest_relationship = get_field( 'treatment_procedure_schema_subtest_schema_medicaltest', $entity ) ?? array();
 
 											// Add each item to subTest property values array
 
@@ -27653,7 +27653,7 @@
 
 											// Get tissueSample repeater field value
 
-												$treatment_tissueSample_repeater = get_field( 'schema_tissuesample', $entity ) ?: array();
+												$treatment_tissueSample_repeater = get_field( 'schema_tissuesample', $entity ) ?? array();
 
 											// Add each item to tissueSample property values array
 
@@ -27707,7 +27707,7 @@
 
 											// Get usedToDiagnose relationship field value (clone of 'field_schema_medicalcondition')
 
-												$treatment_usedToDiagnose_relationship = get_field( 'treatment_procedure_schema_usedtodiagnose_schema_medicalcondition', $entity ) ?: array();
+												$treatment_usedToDiagnose_relationship = get_field( 'treatment_procedure_schema_usedtodiagnose_schema_medicalcondition', $entity ) ?? array();
 
 											// Add each item to usedToDiagnose property values array
 
@@ -27768,7 +27768,7 @@
 
 											// Get usesDevice repeater field value
 
-												$treatment_usesDevice_repeater = get_field( 'schema_medicaldevice', $entity ) ?: array();
+												$treatment_usesDevice_repeater = get_field( 'schema_medicaldevice', $entity ) ?? array();
 
 											// Add each item to usesDevice property values array
 
