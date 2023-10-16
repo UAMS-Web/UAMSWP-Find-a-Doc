@@ -16319,7 +16319,7 @@
 														$location_alternateName = uamswp_fad_schema_alternatename(
 															$location_alternateName_repeater, // array // Required // alternateName repeater field
 															'schema_alternatename_text', // string // Optional // alternateName item field name
-															$alternateName_schema // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
+															$location_alternateName // mixed // Optional // Pre-existing schema array for alternateName to which to add alternateName items
 														);
 
 													}
