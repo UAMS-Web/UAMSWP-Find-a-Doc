@@ -15760,7 +15760,7 @@
 
 												$location_about = array();
 
-											// Merge in location LocalBusiness value
+											// Merge in location (LocalBusiness) value
 
 												$location_about = uamswp_fad_schema_merge_values(
 													$location_about, // mixed // Required // Initial schema item property value
@@ -16594,7 +16594,7 @@
 
 												$location_containedInPlace = array();
 
-											// Merge in parent location LocalBusiness value
+											// Merge in parent location (LocalBusiness) value
 
 												$location_containedInPlace = uamswp_fad_schema_merge_values(
 													$location_containedInPlace, // mixed // Required // Initial schema item property value
@@ -16668,14 +16668,14 @@
 
 												$location_containsPlace = array();
 
-											// Merge in descendant location LocalBusiness value
+											// Merge in descendant location (LocalBusiness) value
 
 												$location_containsPlace = uamswp_fad_schema_merge_values(
 													$location_containsPlace, // mixed // Required // Initial schema item property value
 													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
-											// Merge in associated provider MedicalBusiness value
+											// Merge in related provider (MedicalBusiness) value
 
 												$location_containsPlace = uamswp_fad_schema_merge_values(
 													$location_containsPlace, // mixed // Required // Initial schema item property value
@@ -16758,14 +16758,14 @@
 
 												$location_department = array();
 
-											// Merge in location LocalBusiness value
+											// Merge in location (LocalBusiness) value
 
 												$location_department = uamswp_fad_schema_merge_values(
 													$location_department, // mixed // Required // Initial schema item property value
 													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
-											// Merge in provider MedicalBusiness value
+											// Merge in provider (MedicalBusiness) value
 
 												$location_department = uamswp_fad_schema_merge_values(
 													$location_department, // mixed // Required // Initial schema item property value
@@ -17842,63 +17842,63 @@
 
 												$location_knowsAbout = array();
 
-											// Merge in related areas of expertise value
+											// Merge in related area of expertise (MedicalEntity) value
 
 												$location_knowsAbout = uamswp_fad_schema_merge_values(
 													$location_knowsAbout, // mixed // Required // Initial schema item property value
 													$location_expertise // mixed // Required // Incoming schema item property value
 												);
 
-												// Merge areas of expertise significantLink value into significantLink
+												// Merge related area of expertise (MedicalEntity) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
 														$location_expertise_significantLink // mixed // Required // Incoming schema item property value
 													);
 
-												// Merge areas of expertise keywords value into keywords
+												// Merge related area of expertise (MedicalEntity) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
 														$location_expertise_keywords // mixed // Required // Incoming schema item property value
 													);
 
-											// Merge in related conditions value
+											// Merge in related condition (MedicalCondition) value
 
 												$location_knowsAbout = uamswp_fad_schema_merge_values(
 													$location_knowsAbout, // mixed // Required // Initial schema item property value
 													$location_condition // mixed // Required // Incoming schema item property value
 												);
 
-												// Merge conditions significantLink value into significantLink
+												// Merge related condition (MedicalCondition) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
 														$location_condition_significantLink // mixed // Required // Incoming schema item property value
 													);
 
-												// Merge conditions keywords value into keywords
+												// Merge related condition (MedicalCondition) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
 														$location_condition_keywords // mixed // Required // Incoming schema item property value
 													);
 
-											// Merge in related treatments value
+											// Merge in related treatment (availableService) value
 
 												$location_knowsAbout = uamswp_fad_schema_merge_values(
 													$location_knowsAbout, // mixed // Required // Initial schema item property value
 													$location_availableService // mixed // Required // Incoming schema item property value
 												);
 
-												// Merge availableService significantLink value into significantLink
+												// Merge related treatment (availableService) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
 														$location_availableService_significantLink // mixed // Required // Incoming schema item property value
 													);
 
-												// Merge availableService keywords value into keywords
+												// Merge related treatment (availableService) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
@@ -18862,14 +18862,14 @@
 
 												$location_subOrganization = array();
 
-											// Merge in location LocalBusiness value
+											// Merge in location (LocalBusiness) value
 
 												$location_subOrganization = uamswp_fad_schema_merge_values(
 													$location_subOrganization, // mixed // Required // Initial schema item property value
 													$location_descendant_location // mixed // Required // Incoming schema item property value
 												);
 
-											// Merge in provider MedicalBusiness value
+											// Merge in provider (MedicalBusiness) value
 
 												$location_subOrganization = uamswp_fad_schema_merge_values(
 													$location_subOrganization, // mixed // Required // Initial schema item property value
@@ -18950,42 +18950,42 @@
 
 												$location_mentions = array();
 
-											// Merge in related providers (MedicalBusiness) value
+											// Merge in related provider (MedicalBusiness) value
 
 												$location_mentions = uamswp_fad_schema_merge_values(
 													$location_mentions, // mixed // Required // Initial schema item property value
 													$location_provider_MedicalBusiness // mixed // Required // Incoming schema item property value
 												);
 
-												// Merge providers (MedicalBusiness) significantLink value into significantLink
+												// Merge related provider (MedicalBusiness) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
 														$location_provider_MedicalBusiness_significantLink // mixed // Required // Incoming schema item property value
 													);
 
-												// Merge providers (MedicalBusiness) keywords value into keywords
+												// Merge related provider (MedicalBusiness) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
 														$location_provider_MedicalBusiness_keywords // mixed // Required // Incoming schema item property value
 													);
 
-											// Merge in related providers (Person) value
+											// Merge in related provider (Person) value
 
 												$location_mentions = uamswp_fad_schema_merge_values(
 													$location_mentions, // mixed // Required // Initial schema item property value
 													$location_provider_Person // mixed // Required // Incoming schema item property value
 												);
 
-												// Merge providers (Person) significantLink value into significantLink
+												// Merge related provider (Person) significantLink value into significantLink
 
 													$location_significantLink = uamswp_fad_schema_merge_values(
 														$location_significantLink, // mixed // Required // Initial schema item property value
 														$location_provider_Person_significantLink // mixed // Required // Incoming schema item property value
 													);
 
-												// Merge providers (Person) keywords value into keywords
+												// Merge related provider (Person) keywords value into keywords
 
 													$location_keywords = uamswp_fad_schema_merge_values(
 														$location_keywords, // mixed // Required // Initial schema item property value
