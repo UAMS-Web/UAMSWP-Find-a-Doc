@@ -2660,20 +2660,143 @@
 // Remove the taxonomy metabox [slugnamediv]
 
 	function remove_provider_meta() {
-		remove_meta_box( 'conditiondiv', 'provider', 'side' );
-		remove_meta_box( 'specialtydiv', 'provider', 'side' );
-		remove_meta_box( 'departmentdiv', 'provider', 'side' );
-		remove_meta_box( 'patient_typediv', 'provider', 'side' );
-		remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
-		remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
-		remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
-		remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
-		remove_meta_box( 'gmb_cat_providerdiv', 'provider', 'side' );
-		// Location
-		remove_meta_box( 'regiondiv', 'location', 'side' );
-		remove_meta_box( 'location_typediv', 'location', 'side' );
-		remove_meta_box( 'buildingdiv', 'location', 'side' );
-		remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
+
+		// Conditions
+
+			remove_meta_box( 'conditiondiv', 'provider', 'side' );
+
+		// Treatments and Procedures
+
+			remove_meta_box( 'treatmentdiv', 'provider', 'side' );
+
+		// Medical Specialties
+
+			remove_meta_box( 'specialtydiv', 'provider', 'side' );
+
+		// Clinical Departments
+
+			remove_meta_box( 'departmentdiv', 'provider', 'side' );
+
+		// Service Lines
+
+			remove_meta_box( 'service_linediv', array( 'location', 'provider' ), 'side' );
+
+		// Degrees and Credentials
+
+			remove_meta_box( 'degreediv', 'provider', 'side' );
+
+		// Patient Types
+
+			remove_meta_box( 'patient_typediv', array( 'location', 'provider' ), 'side' );
+
+		// Clinical Specializations
+
+			remove_meta_box( 'clinical_titlediv', 'provider', 'side' );
+
+		// Clinical Administrative Title
+
+			remove_meta_box( 'clinical_admin_titlediv', 'provider', 'side' );
+
+		// Hospital Affiliations
+
+			remove_meta_box( 'affiliationdiv', 'provider', 'side' );
+
+		// Institute Affiliations
+
+			remove_meta_box( 'institute_affiliationdiv', 'provider', 'side' );
+
+		// Languages
+
+			remove_meta_box( 'languagediv', array( 'location', 'provider' ), 'side' );
+
+		// Medical Terms
+
+			remove_meta_box( 'medical_termsdiv', 'provider', 'side' );
+			remove_meta_box( 'medical_termdiv', 'provider', 'side' );
+
+		// Academic Position Types
+
+			remove_meta_box( 'academic_positiondiv', 'provider', 'side' );
+
+		// Academic Position Types
+
+			remove_meta_box( 'academic_collegediv', 'provider', 'side' );
+
+		// Education and Training Organizations
+
+			remove_meta_box( 'schooldiv', 'provider', 'side' );
+
+		// Residency Years
+
+			remove_meta_box( 'residency_yeardiv', 'provider', 'side' );
+
+		// Academic Departments
+
+			remove_meta_box( 'academic_departmentdiv', 'provider', 'side' );
+
+		// Specialty and Subspecialty Certificates
+
+			remove_meta_box( 'boarddiv', 'provider', 'side' );
+
+		// Certifying Bodies
+
+			remove_meta_box( 'certifying_bodydiv', 'provider', 'side' );
+
+		// Health Care Professional Associations
+
+			remove_meta_box( 'associationdiv', 'provider', 'side' );
+
+		// Education and Training Types
+
+			remove_meta_box( 'educationtypediv', 'provider', 'side' );
+
+		// Portals
+
+			remove_meta_box( 'portaldiv', array( 'location', 'provider' ), 'side' );
+
+		// Faculty Titles
+
+			remove_meta_box( 'academic_titlediv', 'provider', 'side' );
+
+		// Academic Administrative Titles
+
+			remove_meta_box( 'academic_admin_titlediv', 'provider', 'side' );
+
+		// Recognition Lists
+
+			remove_meta_box( 'recognitiondiv', 'provider', 'side' );
+			remove_meta_box( 'tagsdiv-recognition', 'provider', 'side' );
+
+		// Regions
+
+			remove_meta_box( 'regiondiv', 'location', 'side' );
+
+		// Types of Locations
+
+			remove_meta_box( 'location_typediv', 'location', 'side' );
+
+		// Google My Business Categories for Providers
+
+			remove_meta_box( 'gmb_cat_providerdiv', 'location', 'side' );
+
+		// Google My Business Categories for Locations
+
+			remove_meta_box( 'gmb_cat_locationdiv', 'location', 'side' );
+
+		// Buildings
+
+			remove_meta_box( 'buildingdiv', 'location', 'side' );
+
+		// Parent Organizations
+
+			remove_meta_box( 'parent_organizationdiv', array( 'location', 'provider' ), 'side' );
+
+		// Other
+
+			remove_meta_box( 'tagsdiv-medical_procedures', 'provider', 'side' );
+
+			remove_meta_box( 'custom-post-type-onomies-locations', 'provider', 'side');
+
 	}
 
 	add_action( 'admin_menu' , 'remove_provider_meta' );
