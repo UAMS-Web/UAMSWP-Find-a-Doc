@@ -17743,7 +17743,7 @@
 																		'VA station ID',
 																		'VA facility #'
 																	), // mixed // Optional // alternateName property value
-																	null, // string // Optional // description property value
+																	'STA6A is a six-character length variable that identifies the United States Department of Veterans Affairs substation where the patient\'s health care encounter occurred. The first three characters are digits that typically indicate the parent station (e.g., VA hospital, VA Medical Center [STA3N]). An appended three alphabetic characters may also be present as a suffix to specify a care unit. This variable has 3,503 distinct values as of February 2015, and is frequently updated.', // string // Optional // description property value
 																	null, // int // Optional // maxValue property value
 																	null, // mixed // Optional // measurementMethod property value
 																	null, // mixed // Optional // measurementTechnique property value
