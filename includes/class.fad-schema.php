@@ -26108,10 +26108,14 @@
 
 											// Add each item to alternateName property values array
 
-												$condition_alternateName = uamswp_fad_schema_alternatename(
-													$condition_alternateName_repeater, // array // Required // alternateName repeater field
-													'alternate_text' // string // Optional // alternateName item field name
-												);
+												if ( $condition_alternateName_repeater ) {
+
+													$condition_alternateName = uamswp_fad_schema_alternatename(
+														$condition_alternateName_repeater, // array // Required // alternateName repeater field
+														'alternate_text' // string // Optional // alternateName item field name
+													);
+
+												}
 
 										// Add to item values
 
@@ -28689,10 +28693,14 @@
 
 																// Add each item to alternateName property value array
 
-																	$treatment_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
-																		$treatment_alternateName_repeater, // array // Required // alternateName repeater field
-																		'schema_alternatename_text' // string // Optional // alternateName item field name
-																	);
+																	if ( $treatment_alternateName_repeater ) {
+
+																		$treatment_usesDevice_item_alternateName = uamswp_fad_schema_alternatename(
+																			$treatment_alternateName_repeater, // array // Required // alternateName repeater field
+																			'schema_alternatename_text' // string // Optional // alternateName item field name
+																		);
+
+																	}
 
 															// Add to usesDevice property value item array
 
