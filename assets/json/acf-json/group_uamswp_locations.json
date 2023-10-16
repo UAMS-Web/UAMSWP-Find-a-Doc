@@ -4642,8 +4642,8 @@
 			"key": "field_location_va_station_id",
 			"name": "location_va_station_id",
 			"type": "text",
-			"label": "United States Department of Veterans Affairs Station ID",
-			"instructions": "This value can be found by searching for the location at <a href='https://www.va.gov/directory/guide/allstate.asp' target='_blank'>https://www.va.gov/directory/guide/allstate.asp</a>. Click the link for the appropriate state and then click the link for \"View Addresses.\"",
+			"label": "United States Department of Veterans Affairs Substation Identifier (STA6A)",
+			"instructions": "This three- to six-character value can be found by searching for the location at <a href='https://www.va.gov/directory/guide/allstate.asp' target='_blank'>https://www.va.gov/directory/guide/allstate.asp</a>. Click the link for the appropriate state and then click the link for \"View Addresses.\" The STA6A will be listed in the \"Station ID\" column.",
 			"required": 1,
 			"conditional_logic": [
 				[
