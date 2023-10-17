@@ -5041,8 +5041,8 @@
 			"key": "field_location_address_2",
 			"name": "location_address_2",
 			"type": "text",
-			"label": "Address (2)",
-			"instructions": "<strong>Deprecated</strong>. Move information to Building, Building Floor, Suite fields.",
+			"label": "Address (2) (Deprecated)",
+			"instructions": "Move information to Building, Building Floor, Suite fields.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -5060,7 +5060,7 @@
 			"key": "field_location_abbreviation",
 			"name": "location_abbreviation",
 			"type": "text",
-			"label": "Abbreviation",
+			"label": "Abbreviation (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -5079,7 +5079,7 @@
 			"key": "field_location_description",
 			"name": "location_description",
 			"type": "text",
-			"label": "Location Description",
+			"label": "Location Description (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -5098,8 +5098,8 @@
 			"key": "field_location_email",
 			"name": "location_email",
 			"type": "maskfield",
-			"label": "Email",
-			"instructions": "[Deprecated]",
+			"label": "Email (Deprecated)",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -5131,7 +5131,7 @@
 			"key": "field_location_medical_specialties",
 			"name": "location_medical_specialties",
 			"type": "taxonomy",
-			"label": "Medical Specialties Offered",
+			"label": "Medical Specialties Offered (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -5156,7 +5156,7 @@
 			"key": "field_location_medical_terms",
 			"name": "location_medical_terms",
 			"type": "taxonomy",
-			"label": "Medical Terms",
+			"label": "Medical Terms (Deprecated)",
 			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
@@ -5181,8 +5181,8 @@
 			"key": "field_location_clinic",
 			"name": "location_clinic",
 			"type": "true_false",
-			"label": "Clinic",
-			"instructions": "[Deprecated]",
+			"label": "Clinic (Deprecated)",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -5200,8 +5200,8 @@
 			"key": "field_location_facility",
 			"name": "location_facility",
 			"type": "true_false",
-			"label": "Facility",
-			"instructions": "[Deprecated]",
+			"label": "Facility (Deprecated)",
+			"instructions": "",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -5236,7 +5236,7 @@
 		},
 		"field_location_contact_message": {
 			"key": "field_location_contact_message",
-			"label": "",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
@@ -5253,27 +5253,12 @@
 		},
 		"field_location_clinic_phone_query_spacer": {
 			"key": "field_location_clinic_phone_query_spacer",
-			"label": "",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
-					}
-				],
-				[
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -5286,25 +5271,12 @@
 		},
 		"field_location_appointment_phone_query_spacer": {
 			"key": "field_location_appointment_phone_query_spacer",
-			"label": "",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_ac_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_location_appointments_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -5317,20 +5289,12 @@
 		},
 		"field_phone_spacer": {
 			"key": "field_phone_spacer",
-			"label": "",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_appointment_phone_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -5343,7 +5307,7 @@
 		},
 		"field_location_about_message": {
 			"key": "field_location_about_message",
-			"label": "",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
@@ -5361,19 +5325,11 @@
 		"field_location_spacer_2": {
 			"key": "field_location_spacer_2",
 			"label": "hidden",
-			"name": "",
+			"name": "(Deprecated)",
 			"type": "message",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "0"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -5386,20 +5342,12 @@
 		},
 		"field_location_spacer_3": {
 			"key": "field_location_spacer_3",
-			"label": "hidden",
+			"label": "hidden (Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -5412,7 +5360,7 @@
 		},
 		"field_location_appointment_message": {
 			"key": "field_location_appointment_message",
-			"label": "",
+			"label": "(Deprecated)",
 			"name": "",
 			"type": "message",
 			"instructions": "",
@@ -5429,7 +5377,7 @@
 		},
 		"field_details_other_message": {
 			"key": "field_details_other_message",
-			"name": "",
+			"name": "(Deprecated)",
 			"type": "message",
 			"label": "",
 			"instructions": "",
