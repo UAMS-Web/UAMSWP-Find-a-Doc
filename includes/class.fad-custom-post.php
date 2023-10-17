@@ -2536,13 +2536,15 @@
 				oversight — or within which there are clinical locations at which we have
 				clinical oversight.
 
+				Prefix slugs for any nested third-party brand organization terms with the
+				top-level term's slug preceded and followed by an underscore.
 
 				Expected taxonomy items:
 
 					 * Arkansas Children's (Slug: 'arkansas-childrens')
 					 * Baptist Health (Slug: 'baptist-health')
 					 * United States Department of Veterans Affairs (Slug: 'va')
-						 * Central Arkansas Veterans Healthcare System (Slug: 'cavhs')
+						 * Central Arkansas Veterans Healthcare System (Slug: '_va_cavhs')
 
 			*/
 
