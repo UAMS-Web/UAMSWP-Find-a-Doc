@@ -4466,7 +4466,7 @@
 			"label": "Should this location be excluded from any bulk imports and updates in Google My Business?",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": "0",
 			"wrapper": {
 				"width": "",
@@ -4488,7 +4488,7 @@
 			"label": "Should \"UAMS Health\" be prepended to the location name on the Google My Business listing?",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4551,7 +4551,7 @@
 			"label": "Accessibility: Wheelchair accessible elevator (for patients)",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4582,7 +4582,7 @@
 			"label": "Accessibility: Wheelchair accessible entrance (for patients)",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4613,7 +4613,7 @@
 			"label": "Accessibility: Wheelchair accessible restroom (for patients)",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4644,7 +4644,7 @@
 			"label": "Amenities: Restroom (for patients)",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4675,7 +4675,7 @@
 			"label": "Health and safety: Appointment required",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4706,7 +4706,7 @@
 			"label": "Health and safety: Temperature check required (for patients)",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4737,7 +4737,7 @@
 			"label": "Health and safety: Mask required (for patients)",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4768,7 +4768,7 @@
 			"label": "Health and safety: Staff get temperature checks",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
@@ -4799,7 +4799,7 @@
 			"label": "Health and safety: Staff wear masks",
 			"type": "button_group",
 			"instructions": "",
-			"required": "1",
+			"required": 1,
 			"conditional_logic": [
 				[
 					{
