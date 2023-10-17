@@ -17824,7 +17824,7 @@
 																	null, // mixed // Optional // measurementTechnique property value
 																	null, // int // Optional // minValue property value
 																	'STA6A', // string // Optional // name property value
-																	null, // string // Optional // propertyID property value
+																	'https://www.wikidata.org/wiki/Property:P8755', // string // Optional // propertyID property value
 																	null, // string // Optional // unitCode property value
 																	null, // string // Optional // unitText property value
 																	null, // string // Optional // url property value
