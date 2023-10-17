@@ -782,9 +782,9 @@
 			"conditional_logic": [
 				[
 					{
-						"field": "field_schema_brandorg",
-						"operator": "!=",
-						"value": "arkansas-childrens"
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "0"
 					},
 					{
 						"field": "field_location_appointments_query",
@@ -794,9 +794,18 @@
 				],
 				[
 					{
-						"field": "field_location_ac_query",
+						"field": "field_schema_brandorg_query",
 						"operator": "==",
-						"value": "0"
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=",
+						"value": "arkansas-childrens"
 					},
 					{
 						"field": "field_location_appointments_query",
@@ -826,14 +835,14 @@
 			"conditional_logic": [
 				[
 					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
 						"field": "field_schema_brandorg",
 						"operator": "==",
 						"value": "arkansas-childrens"
-					},
-					{
-						"field": "field_location_ac_query",
-						"operator": "!=",
-						"value": "0"
 					},
 					{
 						"field": "field_location_appointments_query",
@@ -875,12 +884,22 @@
 			"conditional_logic": [
 				[
 					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "0"
+					},
+					{
 						"field": "field_location_clinic_phone_query",
 						"operator": "==",
 						"value": "1"
 					}
 				],
 				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
 					{
 						"field": "field_schema_brandorg",
 						"operator": "==",
@@ -1018,6 +1037,22 @@
 			"conditional_logic": [
 				[
 					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "0"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=empty"
+					},
+					{
 						"field": "field_schema_brandorg",
 						"operator": "!=",
 						"value": "arkansas-childrens"
@@ -1045,6 +1080,22 @@
 			"required": 0,
 			"conditional_logic": [
 				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "0"
+					}
+				],
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_schema_brandorg",
+						"operator": "!=empty"
+					},
 					{
 						"field": "field_schema_brandorg",
 						"operator": "!=",
