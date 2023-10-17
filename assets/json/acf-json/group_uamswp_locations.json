@@ -710,6 +710,312 @@
 			"media_upload": 1,
 			"delay": 0
 		},
+		"field_location_details_tab": {
+			"key": "field_location_details_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_about": {
+			"key": "field_location_about",
+			"name": "location_about",
+			"type": "wysiwyg",
+			"label": "About \/ Description",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		"field_location_short_desc": {
+			"key": "field_location_short_desc",
+			"name": "location_short_desc",
+			"type": "textarea",
+			"label": "Short Description",
+			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": 160,
+			"rows": 4,
+			"new_lines": ""
+		},
+		"field_location_youtube_link": {
+			"key": "field_location_youtube_link",
+			"name": "location_youtube_link",
+			"type": "url",
+			"label": "Featured Video",
+			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this location and that supports the content of this page. Include the full URL, including https:\/\/",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		"field_location_affiliation": {
+			"key": "field_location_affiliation",
+			"name": "location_affiliation",
+			"type": "wysiwyg",
+			"label": "Affiliation",
+			"instructions": "Affiliations with other medical centers or clinics",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 0,
+			"delay": 0
+		},
+		"field_location_prescription_query": {
+			"key": "field_location_prescription_query",
+			"name": "location_prescription_query",
+			"label": "Include information about prescription refills?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 0,
+			"default_value": 0,
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_prescription_type": {
+			"key": "field_location_prescription_type",
+			"name": "location_prescription_type",
+			"label": "Which prescription information would you like to include?",
+			"type": "radio",
+			"instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_prescription_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"pharm": "Preset text instructing patients to call their pharmacy",
+				"clinic": "Preset text instructing patients to call the clinic",
+				"custom": "Custom text"
+			},
+			"allow_null": 0,
+			"other_choice": 0,
+			"default_value": "pharm",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		"field_location_current_prescription_clinic": {
+			"key": "field_location_current_prescription_clinic",
+			"name": "location_current_prescription_clinic",
+			"label": "Current prescription information instructing patients to call the clinic",
+			"type": "acfe_dynamic_message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_prescription_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_prescription_type",
+						"operator": "==",
+						"value": "clinic"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": ""
+		},
+		"field_location_current_prescription_pharm": {
+			"key": "field_location_current_prescription_pharm",
+			"name": "location_current_prescription_pharm",
+			"label": "Current prescription information instructing patients to call their pharmacy",
+			"type": "acfe_dynamic_message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_prescription_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_prescription_type",
+						"operator": "==",
+						"value": "pharm"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": ""
+		},
+		"field_location_prescription": {
+			"key": "field_location_prescription",
+			"name": "location_prescription",
+			"type": "wysiwyg",
+			"label": "Custom Prescription Refills Information",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_prescription_query",
+						"operator": "==",
+						"value": "1"
+					},
+					{
+						"field": "field_location_prescription_type",
+						"operator": "==",
+						"value": "custom"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 0,
+			"delay": 0
+		},
+		"field_location_appointment_info_tab": {
+			"key": "field_location_appointment_info_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_appointment": {
+			"key": "field_location_appointment",
+			"name": "location_appointment",
+			"type": "wysiwyg",
+			"label": "Information on setting up an appointment",
+			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		"field_location_appointment_bring": {
+			"key": "field_location_appointment_bring",
+			"name": "location_appointment_bring",
+			"type": "wysiwyg",
+			"label": "What to Bring to Your Appointment",
+			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		"field_location_appointment_expect": {
+			"key": "field_location_appointment_expect",
+			"name": "location_appointment_expect",
+			"type": "wysiwyg",
+			"label": "What to Expect at Your Appointment",
+			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "hide-acf-border",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
 		"field_location_contact_tab": {
 			"key": "field_location_contact_tab",
 			"name": "",
@@ -1172,312 +1478,6 @@
 					"maxlength": ""
 				}
 			]
-		},
-		"field_location_details_tab": {
-			"key": "field_location_details_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Description of the Location",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_location_about": {
-			"key": "field_location_about",
-			"name": "location_about",
-			"type": "wysiwyg",
-			"label": "About \/ Description",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
-		},
-		"field_location_short_desc": {
-			"key": "field_location_short_desc",
-			"name": "location_short_desc",
-			"type": "textarea",
-			"label": "Short Description",
-			"instructions": "This will be the description included for this page when it appears in search results.</p><p class='description' style='margin-top: 0.5em;'>Write a short description that generally informs and interests users with a short, relevant summary of what this page is about. Think of it like a pitch that convinces the user that this page is exactly what they're looking for.</p><p class='description' style='margin-top: 0.5em;'>The text will be limited to 160 characters. The preferred length is at least 110 characters.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": "",
-			"maxlength": 160,
-			"rows": 4,
-			"new_lines": ""
-		},
-		"field_location_youtube_link": {
-			"key": "field_location_youtube_link",
-			"name": "location_youtube_link",
-			"type": "url",
-			"label": "Featured Video",
-			"instructions": "Select a video from the UAMS YouTube or Vimeo accounts that features this location and that supports the content of this page. Include the full URL, including https:\/\/",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"placeholder": ""
-		},
-		"field_location_affiliation": {
-			"key": "field_location_affiliation",
-			"name": "location_affiliation",
-			"type": "wysiwyg",
-			"label": "Affiliation",
-			"instructions": "Affiliations with other medical centers or clinics",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 0,
-			"delay": 0
-		},
-		"field_location_prescription_query": {
-			"key": "field_location_prescription_query",
-			"name": "location_prescription_query",
-			"label": "Include information about prescription refills?",
-			"type": "button_group",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"choices": {
-				"0": "No",
-				"1": "Yes"
-			},
-			"allow_null": 0,
-			"default_value": 0,
-			"layout": "horizontal",
-			"return_format": "value"
-		},
-		"field_location_prescription_type": {
-			"key": "field_location_prescription_type",
-			"name": "location_prescription_type",
-			"label": "Which prescription information would you like to include?",
-			"type": "radio",
-			"instructions": "Administrators can change the preset text in Find-a-Doc Settings > Clinical Locations.",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"choices": {
-				"pharm": "Preset text instructing patients to call their pharmacy",
-				"clinic": "Preset text instructing patients to call the clinic",
-				"custom": "Custom text"
-			},
-			"allow_null": 0,
-			"other_choice": 0,
-			"default_value": "pharm",
-			"layout": "vertical",
-			"return_format": "value",
-			"save_other_choice": 0
-		},
-		"field_location_current_prescription_clinic": {
-			"key": "field_location_current_prescription_clinic",
-			"name": "location_current_prescription_clinic",
-			"label": "Current prescription information instructing patients to call the clinic",
-			"type": "acfe_dynamic_message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_location_prescription_type",
-						"operator": "==",
-						"value": "clinic"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": ""
-		},
-		"field_location_current_prescription_pharm": {
-			"key": "field_location_current_prescription_pharm",
-			"name": "location_current_prescription_pharm",
-			"label": "Current prescription information instructing patients to call their pharmacy",
-			"type": "acfe_dynamic_message",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_location_prescription_type",
-						"operator": "==",
-						"value": "pharm"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": ""
-		},
-		"field_location_prescription": {
-			"key": "field_location_prescription",
-			"name": "location_prescription",
-			"type": "wysiwyg",
-			"label": "Custom Prescription Refills Information",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_prescription_query",
-						"operator": "==",
-						"value": "1"
-					},
-					{
-						"field": "field_location_prescription_type",
-						"operator": "==",
-						"value": "custom"
-					}
-				]
-			],
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 0,
-			"delay": 0
-		},
-		"field_location_appointment_info_tab": {
-			"key": "field_location_appointment_info_tab",
-			"name": "",
-			"type": "tab",
-			"label": "<i class=\"dashicons-editor-alignleft dashicons\"><\/i> Appointment Information",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"placement": "left",
-			"endpoint": 0
-		},
-		"field_location_appointment": {
-			"key": "field_location_appointment",
-			"name": "location_appointment",
-			"type": "wysiwyg",
-			"label": "Information on setting up an appointment",
-			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
-		},
-		"field_location_appointment_bring": {
-			"key": "field_location_appointment_bring",
-			"name": "location_appointment_bring",
-			"type": "wysiwyg",
-			"label": "What to Bring to Your Appointment",
-			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
-		},
-		"field_location_appointment_expect": {
-			"key": "field_location_appointment_expect",
-			"name": "location_appointment_expect",
-			"type": "wysiwyg",
-			"label": "What to Expect at Your Appointment",
-			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"default_value": "",
-			"tabs": "all",
-			"toolbar": "full",
-			"media_upload": 1,
-			"delay": 0
 		},
 		"field_location_photos_tab": {
 			"key": "field_location_photos_tab",
