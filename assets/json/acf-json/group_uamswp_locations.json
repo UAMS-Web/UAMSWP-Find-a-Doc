@@ -122,25 +122,6 @@
 			"acfe_update": "",
 			"multiple": 0
 		},
-		"field_location_ac_query": {
-			"key": "field_location_ac_query",
-			"name": "location_ac_query",
-			"type": "true_false",
-			"label": "Is this an Arkansas Children's location?",
-			"instructions": "",
-			"required": 0,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "hide-acf-border",
-				"id": ""
-			},
-			"message": "",
-			"default_value": 0,
-			"ui": 1,
-			"ui_on_text": "",
-			"ui_off_text": ""
-		},
 		"field_location_appointments_query": {
 			"key": "field_location_appointments_query",
 			"name": "location_appointments_query",
@@ -250,6 +231,141 @@
 				"acfe_bidirectional_enabled": "0"
 			},
 			"multiple": 0
+		},
+		"field_location_brand_tab": {
+			"key": "field_location_brand_tab",
+			"name": "",
+			"type": "tab",
+			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_parent",
+						"operator": "!=",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": [
+				"super_admin",
+				"administrator",
+				"editor"
+			],
+			"placement": "left",
+			"endpoint": 0
+		},
+		"field_location_brandorg_query": {
+			"key": "field_location_brandorg_query",
+			"label": "Primary Brand Organizations for This Location",
+			"name": "location_brandorg_query",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg_query"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_location_brandorg": {
+			"key": "field_location_brandorg",
+			"label": "Third-Party Brand Organizations",
+			"name": "location_brandorg",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=empty"
+					},
+					{
+						"field": "field_schema_brandorg_query",
+						"operator": "!=",
+						"value": "0"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_brandorg"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		"field_location_ac_query": {
+			"key": "field_location_ac_query",
+			"name": "location_ac_query",
+			"type": "button_group",
+			"label": "Is this an Arkansas Children's location?",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		"field_location_va_query": {
+			"key": "field_location_va_query",
+			"name": "location_va_query",
+			"label": "Is this location a United States Department of Veterans Affairs facility?",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
 		},
 		"field_location_address_tab": {
 			"key": "field_location_address_tab",
@@ -4614,29 +4730,6 @@
 					"step": 1
 				}
 			]
-		},
-		"field_location_va_query": {
-			"key": "field_location_va_query",
-			"name": "location_va_query",
-			"label": "Is this location a United States Department of Veterans Affairs facility?",
-			"type": "button_group",
-			"instructions": "",
-			"required": 1,
-			"conditional_logic": 0,
-			"wrapper": {
-				"width": "",
-				"class": "",
-				"id": ""
-			},
-			"acfe_permissions": "",
-			"choices": {
-				"0": "No",
-				"1": "Yes"
-			},
-			"allow_null": 1,
-			"default_value": "",
-			"layout": "horizontal",
-			"return_format": "value"
 		},
 		"field_location_va_station_id": {
 			"key": "field_location_va_station_id",
