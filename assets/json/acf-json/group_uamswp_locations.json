@@ -326,7 +326,7 @@
 			"name": "location_ac_query",
 			"type": "button_group",
 			"label": "Is this an Arkansas Children's location?",
-			"instructions": "",
+			"instructions": "This field is being deprecated. Make the appropriate selections in the brand organization fields.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -349,7 +349,7 @@
 			"name": "location_va_query",
 			"label": "Is this location a United States Department of Veterans Affairs facility?",
 			"type": "button_group",
-			"instructions": "",
+			"instructions": "This field is being deprecated. Make the appropriate selections in the brand organization fields.",
 			"required": 1,
 			"conditional_logic": 0,
 			"wrapper": {
