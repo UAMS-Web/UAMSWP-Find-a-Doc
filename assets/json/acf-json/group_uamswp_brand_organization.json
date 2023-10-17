@@ -710,7 +710,15 @@
 			"type": "radio",
 			"instructions": "Whether the organization is accepting new patients.",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_brandorg_organization_subtype",
+						"operator": "==",
+						"value": "MedicalOrganization"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "",
@@ -735,7 +743,15 @@
 			"type": "clone",
 			"instructions": "",
 			"required": 1,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_brandorg_organization_subtype",
+						"operator": "==",
+						"value": "MedicalOrganization"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "uamswp-hide-clone-label",
