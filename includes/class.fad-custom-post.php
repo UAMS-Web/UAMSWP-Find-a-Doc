@@ -462,6 +462,10 @@
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
+		// Brand Organizations
+
+			add_action( 'init', 'create_brand_organization_taxonomy', 0 );
+
 		// Buildings
 
 			add_action( 'init', 'create_building_taxonomy', 0 );
@@ -509,10 +513,6 @@
 		// Languages
 
 			add_action( 'init', 'create_languages_taxonomy', 0 );
-
-		// Parent Organizations
-
-			add_action( 'init', 'create_parent_organization_taxonomy', 0 );
 
 		// Patient Types
 
@@ -2452,7 +2452,7 @@
 
 			}
 
-		// Parent Organizations
+		// Brand Organizations
 
 			/*
 
@@ -2476,31 +2476,31 @@
 
 			*/
 
-			function create_parent_organization_taxonomy() {
+			function create_brand_organization_taxonomy() {
 				$labels = array(
-					'name' => 'Parent Organizations',
-					'singular_name' => 'Parent Organization',
-					'menu_name' => 'Parent Organizations',
-					'all_items' => 'All Parent Organizations',
-					'parent_item' => 'Parent Organization',
-					'parent_item_colon' => 'Parent Organization:',
-					'new_item_name' => 'New Parent Organization',
-					'add_new_item' => 'Add New Parent Organization',
-					'edit_item' => 'Edit Parent Organization',
-					'update_item' => 'Update Parent Organization',
-					'view_item' => 'View Parent Organization',
-					'separate_items_with_commas' => 'Separate Parent Organizations With Commas',
-					'add_or_remove_items' => 'Add or Remove Parent Organizations',
+					'name' => 'Brand Organizations',
+					'singular_name' => 'Brand Organization',
+					'menu_name' => 'Brand Organizations',
+					'all_items' => 'All Brand Organizations',
+					'parent_item' => 'Parent Brand Organization',
+					'parent_item_colon' => 'Parent Brand Organization:',
+					'new_item_name' => 'New Brand Organization',
+					'add_new_item' => 'Add New Brand Organization',
+					'edit_item' => 'Edit Brand Organization',
+					'update_item' => 'Update Brand Organization',
+					'view_item' => 'View Brand Organization',
+					'separate_items_with_commas' => 'Separate Brand Organizations With Commas',
+					'add_or_remove_items' => 'Add or Remove Brand Organizations',
 					'choose_from_most_used' => 'Choose from the most used',
-					'popular_items' => 'Popular Parent Organizations',
-					'search_items' => 'Search Parent Organizations',
+					'popular_items' => 'Popular Brand Organizations',
+					'search_items' => 'Search Brand Organizations',
 					'not_found' => 'Not Found',
-					'no_terms' => 'No Parent Organizations',
-					'items_list' => 'Parent Organizations List',
-					'items_list_navigation' => 'Parent Organizations List Navigation',
+					'no_terms' => 'No Brand Organizations',
+					'items_list' => 'Brand Organizations List',
+					'items_list_navigation' => 'Brand Organizations List Navigation',
 				);
 				$rewrite = array(
-					'slug' => 'parent_organization',
+					'slug' => 'brand_organization',
 					'with_front' => false,
 					'hierarchical' => true,
 				);
@@ -2522,7 +2522,7 @@
 					'capabilities' => $capabilities,
 					'show_in_quick_edit' => false,
 				);
-				register_taxonomy( 'parent_organization', array( 'location', 'provider' ), $args );
+				register_taxonomy( 'brand_organization', array( 'location', 'provider' ), $args );
 
 			}
 
@@ -2787,9 +2787,9 @@
 
 			remove_meta_box( 'buildingdiv', 'location', 'side' );
 
-		// Parent Organizations
+		// Brand Organizations
 
-			remove_meta_box( 'parent_organizationdiv', array( 'location', 'provider' ), 'side' );
+			remove_meta_box( 'brand_organizationdiv', array( 'location', 'provider' ), 'side' );
 
 		// Other
 
