@@ -966,7 +966,15 @@
 			"label": "Information on setting up an appointment",
 			"instructions": "This section should ideally not contain headings. But if it does, use Heading 3 and down.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "hide-acf-border",
@@ -985,7 +993,15 @@
 			"label": "What to Bring to Your Appointment",
 			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Expect at Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "hide-acf-border",
@@ -1004,7 +1020,15 @@
 			"label": "What to Expect at Your Appointment",
 			"instructions": "This section should ideally not contain headings. But if it does ...</p><p class='description' style='margin-top: 0.5em;'>If \"Information on setting up an appointment\" or \"What to Bring to Your Appointment\" has text, use Heading 4 and down. Otherwise, use Heading 3 and down.",
 			"required": 0,
-			"conditional_logic": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_location_appointments_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
 			"wrapper": {
 				"width": "",
 				"class": "hide-acf-border",
