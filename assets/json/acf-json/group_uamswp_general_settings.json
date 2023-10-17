@@ -39,6 +39,31 @@
 			"prepend": "",
 			"append": "",
 			"maxlength": ""
+		},
+		{
+			"key": "field_fad_default_brandorg",
+			"label": "Default Brand Organizations",
+			"name": "fad_default_brandorg",
+			"type": "taxonomy",
+			"instructions": "Select the brand organizations to associate with every provider and location in schema data by default.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "brand_organization",
+			"field_type": "multi_select",
+			"allow_null": 1,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"acfe_bidirectional": {
+				"acfe_bidirectional_enabled": "0"
+			},
+			"multiple": 0
 		}
 	],
 	"location": [
