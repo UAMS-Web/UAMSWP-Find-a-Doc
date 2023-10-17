@@ -1,0 +1,1409 @@
+{
+	"key": "group_brandorg",
+	"title": "Brand Organization Item Configuration",
+	"fields": [
+		{
+			"key": "field_brandorg_name",
+			"label": "Name for Schema (name > Text)",
+			"name": "brandorg_name",
+			"type": "text",
+			"instructions": "Name of the organization",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_legalname",
+			"label": "Legal Name (legalName > Text)",
+			"name": "brandorg_legalname",
+			"type": "text",
+			"instructions": "The official name of the organization, e.g. the registered company name.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_alternatename",
+			"label": "Alternate Name (alternateName > Text)",
+			"name": "brandorg_alternatename",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_alternatename"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_brandorg_organization_subtype",
+			"label": "Specific Organization Subtype",
+			"name": "brandorg_organization_subtype",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "None &mdash; No available option is relevant to this organization",
+				"Airline": "Airline",
+				"Consortium": "Consortium",
+				"Corporation": "Corporation",
+				"EducationalOrganization": "Educational Organization",
+				"FundingScheme": "Funding Scheme",
+				"GovernmentOrganization": "Government Organization",
+				"LibrarySystem": "Library System",
+				"LocalBusiness": "Local Business",
+				"MedicalOrganization": "Medical Organization",
+				"NGO": "Non-Governmental Organization",
+				"NewsMediaOrganization": "News Media Organization",
+				"OnlineBusiness": "Online Business",
+				"PerformingGroup": "PerformingGroup",
+				"PoliticalParty": "Political Party",
+				"Project": "Project",
+				"ResearchOrganization": "Research Organization",
+				"SearchRescueOrganization": "Search Rescue Organization",
+				"SportsOrganization": "Sports Organization",
+				"WorkersUnion": "Workers Union"
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"ajax": 0
+		},
+		{
+			"key": "field_brandorg_educationalorganization_subtype",
+			"label": "Specific Educational Organization Subtype",
+			"name": "brandorg_educationalorganization_subtype",
+			"type": "select",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_brandorg_organization_subtype",
+						"operator": "==",
+						"value": "EducationalOrganization"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "None &mdash; No available option is relevant to this organization",
+				"CollegeOrUniversity": "College or University",
+				"ElementarySchool": "Elementary School",
+				"HighSchool": "High School",
+				"MiddleSchool": "Middle School",
+				"Preschool": "Preschool",
+				"School": "School"
+			},
+			"default_value": false,
+			"allow_null": 1,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"placeholder": "",
+			"ajax": 0
+		},
+		{
+			"key": "field_brandorg_additionaltype",
+			"label": "Additional Type (additionalType > URL)",
+			"name": "brandorg_additionaltype",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_additionalType"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_brandorg_description",
+			"label": "Description for Schema (description > Text)",
+			"name": "brandorg_description",
+			"type": "textarea",
+			"instructions": "A description of the organization",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_brandorg_disambiguatingdescription",
+			"label": "Disambiguating Description (disambiguatingDescription > Text)",
+			"name": "brandorg_disambiguatingdescription",
+			"type": "textarea",
+			"instructions": "A sub property of description. A short description of the organization used to disambiguate from other, similar organization. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"maxlength": "",
+			"rows": "",
+			"new_lines": "",
+			"acfe_textarea_code": 0
+		},
+		{
+			"key": "field_brandorg_slogan",
+			"label": "Slogan (slogan > Text)",
+			"name": "brandorg_slogan",
+			"type": "text",
+			"instructions": "A slogan or motto associated with the organization.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_logo",
+			"label": "Logo (logo > URL)",
+			"name": "brandorg_logo",
+			"type": "text",
+			"instructions": "Logo for the organization",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_image",
+			"label": "Image (image > URL)",
+			"name": "brandorg_image",
+			"type": "text",
+			"instructions": "An image of the organization",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_contactpoint_postaladdress",
+			"label": "Address (contactPoint > PostalAddress)",
+			"name": "brandorg_contactpoint_postaladdress",
+			"type": "repeater",
+			"instructions": "Make the first repeater row the primary address.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_brandorg_contactpoint_postaladdress_contacttype",
+					"label": "Address Type (contactType > Text)",
+					"name": "brandorg_contactpoint_postaladdress_contacttype",
+					"type": "text",
+					"instructions": "A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_streetaddress_query",
+					"label": "Street Address or Post Office Box?",
+					"name": "brandorg_streetaddress_query",
+					"type": "radio",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"1": "Street Address",
+						"0": "Post Office Box"
+					},
+					"allow_null": 0,
+					"other_choice": 0,
+					"default_value": "",
+					"layout": "vertical",
+					"return_format": "value",
+					"save_other_choice": 0
+				},
+				{
+					"key": "field_brandorg_streetaddress",
+					"label": "Street Address (streetAddress > Text)",
+					"name": "brandorg_streetaddress",
+					"type": "text",
+					"instructions": "The street address. For example, 1600 Amphitheatre Pkwy.",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_brandorg_streetaddress_query",
+								"operator": "==",
+								"value": "1"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_postofficeboxnumber",
+					"label": "Post Office Box Number (postOfficeBoxNumber > Text)",
+					"name": "brandorg_postofficeboxnumber",
+					"type": "text",
+					"instructions": "The post office box number for PO box addresses.",
+					"required": 1,
+					"conditional_logic": [
+						[
+							{
+								"field": "field_brandorg_streetaddress_query",
+								"operator": "==",
+								"value": "0"
+							}
+						]
+					],
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_addresslocality",
+					"label": "City or Other Locality (addressLocality > Text)",
+					"name": "brandorg_addresslocality",
+					"type": "text",
+					"instructions": "The locality in which the street address is, and which is in the region. For example, Mountain View.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_addressregion",
+					"label": "State or Other Region (addressRegion > Text)",
+					"name": "brandorg_addressregion",
+					"type": "text",
+					"instructions": "The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_addresscountry",
+					"label": "Country (addressCountry > Country or Text)",
+					"name": "brandorg_addresscountry",
+					"type": "text",
+					"instructions": "The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
+		{
+			"key": "field_brandorg_contactpoint_telephone",
+			"label": "Phone Number (contactPoint > ContactPoint)",
+			"name": "brandorg_contactpoint_telephone",
+			"type": "repeater",
+			"instructions": "Make the first repeater row the primary phone number.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_brandorg_contactpoint_telephone_contacttype",
+					"label": "Individual Telephone Number Type (contactType > Text)",
+					"name": "brandorg_contactpoint_telephone_contacttype",
+					"type": "text",
+					"instructions": "A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_contactpoint_telephone_text",
+					"label": "Individual Telephone Number (telephone > Text)",
+					"name": "brandorg_contactpoint_telephone_text",
+					"type": "text",
+					"instructions": "The telephone number.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_contactpoint_telephone_contactoption",
+					"label": "Individual Telephone Number Option (contactOption > ContactPointOption)",
+					"name": "brandorg_contactpoint_telephone_contactoption",
+					"type": "radio",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"0": "None",
+						"HearingImpairedSupported": "Hearing Aid Supported — Uses devices to support users with hearing impairments.",
+						"TollFree": "Toll-Free — The associated telephone number is toll free."
+					},
+					"allow_null": 0,
+					"other_choice": 0,
+					"default_value": "",
+					"layout": "vertical",
+					"return_format": "value",
+					"save_other_choice": 0
+				}
+			]
+		},
+		{
+			"key": "field_brandorg_contactpoint_faxnumber",
+			"label": "Fax Number (contactPoint > ContactPoint)",
+			"name": "brandorg_contactpoint_faxnumber",
+			"type": "repeater",
+			"instructions": "Make the first repeater row the primary fax number.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_brandorg_contactpoint_faxnumber_contacttype",
+					"label": "Individual Fax Number Type (contactType > Text)",
+					"name": "brandorg_contactpoint_faxnumber_contacttype",
+					"type": "text",
+					"instructions": "A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_contactpoint_faxnumber_text",
+					"label": "Individual Fax Number (faxNumber > Text)",
+					"name": "brandorg_contactpoint_faxnumber_text",
+					"type": "text",
+					"instructions": "The fax number.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
+		{
+			"key": "field_brandorg_contactpoint_email",
+			"label": "Email Address (contactPoint > ContactPoint)",
+			"name": "brandorg_contactpoint_email",
+			"type": "repeater",
+			"instructions": "Make the first repeater row the primary email address.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_brandorg_contactpoint_email_contacttype",
+					"label": "Individual Email Address Type (contactType > Text)",
+					"name": "brandorg_contactpoint_email_contacttype",
+					"type": "text",
+					"instructions": "A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_contactpoint_email_text",
+					"label": "Individual Email Address (email > Text)",
+					"name": "brandorg_contactpoint_email_text",
+					"type": "text",
+					"instructions": "Email address.",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
+		{
+			"key": "field_brandorg_url",
+			"label": "URL (url > URL)",
+			"name": "brandorg_url",
+			"type": "url",
+			"instructions": "URL of the organization",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_mainentityofpage",
+			"label": "Main Entity of Page (mainEntityOfPage > URL)",
+			"name": "brandorg_mainentityofpage",
+			"type": "url",
+			"instructions": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_sameas",
+			"label": "Organization Reference Webpages (sameAs > URL)",
+			"name": "brandorg_sameas",
+			"type": "clone",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_sameas"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_brandorg_isacceptingnewpatients",
+			"label": "Is Accepting New Patients (isAcceptingNewPatients > Boolean)",
+			"name": "brandorg_isacceptingnewpatients",
+			"type": "radio",
+			"instructions": "Whether the organization is accepting new patients.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"True": "True",
+				"False": "False",
+				"0": "Not relevant"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		},
+		{
+			"key": "field_brandorg_medicalspecialty",
+			"label": "Medical Specialty (medicalSpecialty > MedicalSpecialty)",
+			"name": "brandorg_medicalspecialty",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_medicalspecialty_multiple"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_brandorg_actionablefeedbackpolicy",
+			"label": "Actionable Feedback Policy (actionableFeedbackPolicy > URL)",
+			"name": "brandorg_actionablefeedbackpolicy",
+			"type": "url",
+			"instructions": "For a NewsMediaOrganization or other news-related Organization, a statement about public engagement activities (for news media, the newsroom’s), including involving the public - digitally or otherwise -- in coverage decisions, reporting and activities after publication.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_correctionspolicy",
+			"label": "Corrections Policy (correctionsPolicy > URL)",
+			"name": "brandorg_correctionspolicy",
+			"type": "url",
+			"instructions": "For an Organization (e.g. NewsMediaOrganization), a statement describing (in news media, the newsroom’s) disclosure and correction policy for errors.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_diversitypolicy",
+			"label": "Diversity Policy (diversityPolicy > URL)",
+			"name": "brandorg_diversitypolicy",
+			"type": "url",
+			"instructions": "Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources, typically providing staffing data.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_diversitystaffingreport",
+			"label": "Diversity Staffing Report (diversityStaffingReport > URL)",
+			"name": "brandorg_diversitystaffingreport",
+			"type": "url",
+			"instructions": "Statement on diversity policy by an Organization e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources, typically providing staffing data.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_ethicspolicy",
+			"label": "Ethics Policy (ethicsPolicy > URL)",
+			"name": "brandorg_ethicspolicy",
+			"type": "url",
+			"instructions": "Statement about ethics policy, e.g. of a NewsMediaOrganization regarding journalistic and publishing practices, or of a Restaurant, a page describing food source policies. In the case of a NewsMediaOrganization, an ethicsPolicy is typically a statement describing the personal, organizational, and corporate standards of behavior expected by the organization.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_ownershipfundinginfo",
+			"label": "Ownership Funding Information (ownershipFundingInfo > URL)",
+			"name": "brandorg_ownershipfundinginfo",
+			"type": "url",
+			"instructions": "For an Organization (often but not necessarily a NewsMediaOrganization), a description of organizational ownership structure; funding and grants. In a news\/media setting, this is with particular reference to editorial independence. Note that the funder is also available and can be used to make basic funder information machine-readable.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_publishingprinciples",
+			"label": "Publishing Principles (publishingPrinciples > URL)",
+			"name": "brandorg_publishingprinciples",
+			"type": "url",
+			"instructions": "The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual, e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork.\r\n\r\nWhile such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a funder) can be expressed using schema.org terminology.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_unnamedsourcespolicy",
+			"label": "Unnamed Sources Policy (unnamedSourcesPolicy > URL)",
+			"name": "brandorg_unnamedsourcespolicy",
+			"type": "url",
+			"instructions": "For an Organization (typically a NewsMediaOrganization), a statement about policy on use of unnamed sources and the decision process required.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": ""
+		},
+		{
+			"key": "field_brandorg_healthplannetworkid",
+			"label": "Health Plan Network ID (healthPlanNetworkId > Text)",
+			"name": "brandorg_healthplannetworkid",
+			"type": "text",
+			"instructions": "Name or unique ID of network. (Networks are often reused across different insurance plans.)",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_tickersymbol",
+			"label": "Ticker Symbol (tickerSymbol > Text)",
+			"name": "brandorg_tickersymbol",
+			"type": "text",
+			"instructions": "The exchange traded instrument associated with a Corporation object. The tickerSymbol is expressed as an exchange and an instrument name separated by a space character. For the exchange component of the tickerSymbol attribute, we recommend using the controlled vocabulary of Market Identifier Codes (MIC) specified in ISO 15022.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_duns",
+			"label": "Dun & Bradstreet Data Universal Numbering System (DUNS) Number (duns > Text)",
+			"name": "brandorg_duns",
+			"type": "text",
+			"instructions": "The Dun & Bradstreet DUNS number for identifying an organization or business person.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_globallocationnumber",
+			"label": "Global Location Number (globalLocationNumber > Text)",
+			"name": "brandorg_globallocationnumber",
+			"type": "text",
+			"instructions": "The Global Location Number — a.k.a. GLN, International Location Number or ILN — of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_isicv4",
+			"label": "International Standard of Industrial Classification of All Economic Activities, Revision 4 Code (isicV4 > Text)",
+			"name": "brandorg_isicv4",
+			"type": "text",
+			"instructions": "ISIC Rev. 4 code for a particular organization, business person, or place.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_iso6523code",
+			"label": "International Organization for Standardization 6523 Code (iso6523Code > Text)",
+			"name": "brandorg_iso6523code",
+			"type": "text",
+			"instructions": "An organization identifier as defined in ISO 6523(-1). Note that many existing organization identifiers such as leiCode, duns and vatID can be expressed as an ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier accordingly.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_leicode",
+			"label": "Legal Entity Identifier (leiCode > Text)",
+			"name": "brandorg_leicode",
+			"type": "text",
+			"instructions": "An organization identifier that uniquely identifies a legal entity as defined in ISO 17442.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_naics",
+			"label": "North American Industry Classification System Code (naics > Text)",
+			"name": "brandorg_naics",
+			"type": "text",
+			"instructions": "The NAICS code for a particular organization or business person.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_taxid",
+			"label": "Tax \/ Fiscal ID (taxID > Text)",
+			"name": "brandorg_taxid",
+			"type": "text",
+			"instructions": "The Tax \/ Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF\/NIF in Spain.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_vatid",
+			"label": "Value-Added Tax Identification Number (vatID > Text)",
+			"name": "brandorg_vatid",
+			"type": "text",
+			"instructions": "The Value-added Tax ID of the organization or person.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_brandorg_google_cid_query",
+			"label": "Does this organization have a listing on Google My Business?",
+			"name": "brandorg_google_cid_query",
+			"type": "button_group",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"choices": {
+				"0": "No",
+				"1": "Yes"
+			},
+			"allow_null": 1,
+			"default_value": "",
+			"layout": "horizontal",
+			"return_format": "value"
+		},
+		{
+			"key": "field_brandorg_google_cid",
+			"label": "Google CID Number (identifier > PropertyValue)",
+			"name": "brandorg_google_cid",
+			"type": "clone",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_brandorg_google_cid_query",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "uamswp-hide-clone-label",
+				"id": ""
+			},
+			"acfe_permissions": "",
+			"clone": [
+				"field_schema_google_cid"
+			],
+			"display": "group",
+			"layout": "block",
+			"prefix_label": 0,
+			"prefix_name": 0,
+			"acfe_seamless_style": 1,
+			"acfe_settings": ""
+		},
+		{
+			"key": "field_brandorg_identifier",
+			"label": "Other Identifier (identifier > PropertyValue)",
+			"name": "brandorg_identifier",
+			"type": "repeater",
+			"instructions": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"acfe_repeater_stylised_button": 0,
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "block",
+			"button_label": "",
+			"sub_fields": [
+				{
+					"key": "field_brandorg_identifier_name",
+					"label": "Identifier Name (name > Text)",
+					"name": "brandorg_identifier_name",
+					"type": "text",
+					"instructions": "The name of the identifier property",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_identifier_value",
+					"label": "Identifier Value (value > Boolean or Number or Text)",
+					"name": "brandorg_identifier_value",
+					"type": "text",
+					"instructions": "The value of the identifier property",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_identifier_alternatename",
+					"name": "brandorg_identifier_alternatename",
+					"label": "Identifier Property Alternate Name (alternateName > Text)",
+					"type": "clone",
+					"instructions": "",
+					"required": 1,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "uamswp-hide-clone-label",
+						"id": ""
+					},
+					"acfe_permissions": "",
+					"clone": [
+						"field_schema_alternatename"
+					],
+					"display": "group",
+					"layout": "block",
+					"prefix_label": 0,
+					"prefix_name": 1,
+					"acfe_seamless_style": 1,
+					"acfe_settings": ""
+				},
+				{
+					"key": "field_brandorg_identifier_maxvalue",
+					"label": "Identifier Maximum Value (maxValue > Number)",
+					"name": "brandorg_identifier_maxvalue",
+					"type": "number",
+					"instructions": "The upper value of the identifier property",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"min": "",
+					"max": "",
+					"step": ""
+				},
+				{
+					"key": "field_brandorg_identifier_minvalue",
+					"label": "Identifier Minimum Value (minValue > Number)",
+					"name": "brandorg_identifier_minvalue",
+					"type": "number",
+					"instructions": "The lower value of the identifier property",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"min": "",
+					"max": "",
+					"step": ""
+				},
+				{
+					"key": "field_brandorg_identifier_propertyid",
+					"label": "Identifier Property Identifier (propertyID > URL)",
+					"name": "brandorg_identifier_propertyid",
+					"type": "url",
+					"instructions": "A commonly used identifier for the characteristic represented by the property (e.g., a manufacturer or a standard code for a property). propertyID can be (1) a prefixed string, mainly meant to be used with standards for product properties; (2) a site-specific, non-prefixed string (e.g. the primary key of the property or the vendor-specific ID of the property), or (3) a URL indicating the type of the property, either pointing to an external vocabulary, or a Web resource that describes the property (e.g., a glossary entry). Standards bodies should promote a standard prefix for the identifiers of properties from their standards.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": ""
+				},
+				{
+					"key": "field_brandorg_identifier_unitcode",
+					"label": "Identifier Unit Code (unitCode > Text or URL)",
+					"name": "brandorg_identifier_unitcode",
+					"type": "text",
+					"instructions": "The unit of measurement given using the UN\/CEFACT Common Code (3 characters) or a URL. Codes other than the UN\/CEFACT Common Code may be used with a prefix followed by a colon.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_identifier_unittext",
+					"label": "Identifier Unit Text (unitText > Text)",
+					"name": "brandorg_identifier_unittext",
+					"type": "text",
+					"instructions": "A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				},
+				{
+					"key": "field_brandorg_identifier_url",
+					"label": "Identifier URL (url > URL)",
+					"name": "brandorg_identifier_url",
+					"type": "text",
+					"instructions": "URL of the identifier property value",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": ""
+				}
+			]
+		},
+		{
+			"key": "field_brandorg_nonprofitstatus",
+			"label": "Nonprofit Status (nonprofitStatus > USNonprofitType)",
+			"name": "brandorg_nonprofitstatus",
+			"type": "radio",
+			"instructions": "nonprofitStatus indicates the legal status of a nonprofit organization in its primary place of business.",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"0": "None",
+				"Nonprofit501a": "501(a)",
+				"Nonprofit501c1": "501(c)(1)",
+				"Nonprofit501c10": "501(c)(10)",
+				"Nonprofit501c11": "501(c)(11)",
+				"Nonprofit501c12": "501(c)(12)",
+				"Nonprofit501c13": "501(c)(13)",
+				"Nonprofit501c14": "501(c)(14)",
+				"Nonprofit501c15": "501(c)(15)",
+				"Nonprofit501c16": "501(c)(16)",
+				"Nonprofit501c17": "501(c)(17)",
+				"Nonprofit501c18": "501(c)(18)",
+				"Nonprofit501c19": "501(c)(19)",
+				"Nonprofit501c2": "501(c)(2)",
+				"Nonprofit501c20": "501(c)(20)",
+				"Nonprofit501c21": "501(c)(21)",
+				"Nonprofit501c22": "501(c)(22)",
+				"Nonprofit501c23": "501(c)(23)",
+				"Nonprofit501c24": "501(c)(24)",
+				"Nonprofit501c25": "501(c)(25)",
+				"Nonprofit501c26": "501(c)(26)",
+				"Nonprofit501c27": "501(c)(27)",
+				"Nonprofit501c28": "501(c)(28)",
+				"Nonprofit501c3": "501(c)(3)",
+				"Nonprofit501c4": "501(c)(4)",
+				"Nonprofit501c5": "501(c)(5)",
+				"Nonprofit501c6": "501(c)(6)",
+				"Nonprofit501c7": "501(c)(7)",
+				"Nonprofit501c8": "501(c)(8)",
+				"Nonprofit501c9": "501(c)(9)",
+				"Nonprofit501d": "501(d)",
+				"Nonprofit501e": "501(e)",
+				"Nonprofit501f": "501(f)",
+				"Nonprofit501k": "501(k)",
+				"Nonprofit501n": "501(n)",
+				"Nonprofit501q": "501(q)",
+				"Nonprofit527": "527"
+			},
+			"allow_null": 1,
+			"other_choice": 0,
+			"default_value": "",
+			"layout": "vertical",
+			"return_format": "value",
+			"save_other_choice": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "brand_organization"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_form": 0,
+	"acfe_meta": "",
+	"acfe_note": ""
+}
