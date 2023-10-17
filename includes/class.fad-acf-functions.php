@@ -1138,3 +1138,39 @@ function uamswp_get_all_descendants( $parent_post_id ) {
 
 	return $child_post_ids;
 }
+
+
+// Populate the ACF field with terms from the custom taxonomy Third-Party Brand Organizations type
+
+add_filter(
+	'acf/load_field/key=field_schema_brandorg',
+	function ( $field ) {
+
+		// Get all taxonomy terms
+
+			$brand_organizations = get_terms(
+				array(
+					'taxonomy' => 'brand_organization',
+					'hide_empty' => false
+				)
+			);
+
+		// Add each term to the choices array.
+
+			/*
+
+				Example: $field['choices']['review'] = Review
+
+			*/
+
+			foreach ( $brand_organizations as $item ) {
+
+				$field['choices'][$item->slug] = $item->name;
+
+			}
+
+		return $field;
+
+	}
+
+);
