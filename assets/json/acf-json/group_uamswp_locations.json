@@ -263,7 +263,7 @@
 		},
 		"field_location_brandorg_query": {
 			"key": "field_location_brandorg_query",
-			"label": "Primary Brand Organizations for This Location",
+			"label": "Primary Brand Organization for This Location",
 			"name": "location_brandorg_query",
 			"type": "clone",
 			"instructions": "",
@@ -287,7 +287,7 @@
 		},
 		"field_location_brandorg": {
 			"key": "field_location_brandorg",
-			"label": "Third-Party Brand Organizations",
+			"label": "Third-Party Brand Organization",
 			"name": "location_brandorg",
 			"type": "clone",
 			"instructions": "",

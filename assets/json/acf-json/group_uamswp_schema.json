@@ -1340,7 +1340,7 @@
 		},
 		"field_schema_brandorg_query": {
 			"key": "field_schema_brandorg_query",
-			"label": "Modification to Default UAMS Brand Organizations for This Entity",
+			"label": "Primary Brand Organization for This Entity",
 			"name": "schema_brandorg_query",
 			"type": "radio",
 			"instructions": "",
@@ -1353,8 +1353,8 @@
 			},
 			"acfe_permissions": "",
 			"choices": {
-				"0": "Use the Default UAMS Brand Organizations",
-				"1": "Replace the Default UAMS Brand Organizations with Third-Party Brand Organizations"
+				"0": "Use the Default UAMS Brand Organization",
+				"1": "Replace the Default UAMS Brand Organization With a Third-Party Brand Organization"
 			},
 			"allow_null": 0,
 			"other_choice": 0,
@@ -1365,10 +1365,10 @@
 		},
 		"field_schema_brandorg": {
 			"key": "field_schema_brandorg",
-			"label": "Brand Organizations",
+			"label": "Third-Party Brand Organization",
 			"name": "schema_brandorg",
-			"type": "checkbox",
-			"instructions": "Select the most specific third-party brand organizations to associate with this entity.",
+			"type": "radio",
+			"instructions": "Select the most specific third-party brand organization to associate with this entity.",
 			"required": 0,
 			"conditional_logic": 0,
 			"wrapper": {
@@ -1377,12 +1377,12 @@
 				"id": ""
 			},
 			"choices": [],
-			"allow_custom": 0,
+			"allow_null": 1,
+			"other_choice": 0,
 			"default_value": [],
 			"layout": "vertical",
-			"toggle": 0,
 			"return_format": "value",
-			"save_custom": 0
+			"save_other_choice": 0
 		}
 	},
 	"location": "",

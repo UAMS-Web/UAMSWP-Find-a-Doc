@@ -42,7 +42,7 @@
 		},
 		{
 			"key": "field_fad_default_brandorg",
-			"label": "Default UAMS Brand Organizations",
+			"label": "Default UAMS Brand Organization",
 			"name": "fad_default_brandorg",
 			"type": "taxonomy",
 			"instructions": "Select the most specific UAMS brand organizations to associate with every provider and location in schema data by default.",
