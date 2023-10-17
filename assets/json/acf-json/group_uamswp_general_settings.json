@@ -1,0 +1,66 @@
+{
+	"key": "group_uams_fad_settings",
+	"title": "General Settings",
+	"fields": [
+		{
+			"key": "field_fad_google_key",
+			"label": "Google Maps API Key",
+			"name": "fad_google_key",
+			"type": "text",
+			"instructions": "",
+			"required": 1,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		},
+		{
+			"key": "field_fad_jump_links_title",
+			"label": "Jump Links Title",
+			"name": "fad_jump_links_title",
+			"type": "text",
+			"instructions": "When a page has a list of jump links (a.k.a. anchor links), this title defines the text used in the list\"s heading. If you leave this blank, the default title will be used.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"placeholder": "Content",
+			"prepend": "",
+			"append": "",
+			"maxlength": ""
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "fad-settings"
+			}
+		]
+	],
+	"menu_order": 5,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"acfe_display_title": "",
+	"acfe_autosync": "",
+	"acfe_form": 0,
+	"acfe_meta": "",
+	"acfe_note": ""
+}
