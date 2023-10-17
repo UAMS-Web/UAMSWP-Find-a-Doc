@@ -1391,6 +1391,13 @@
 				"operator": "==",
 				"value": "brand_organization"
 			}
+		],
+		[
+			{
+				"param": "taxonomy",
+				"operator": "==",
+				"value": "brand_organization_uams"
+			}
 		]
 	],
 	"menu_order": 0,

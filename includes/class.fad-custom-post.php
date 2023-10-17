@@ -462,9 +462,13 @@
 
 			add_action( 'init', 'create_associations_taxonomy', 0 );
 
-		// Brand Organizations
+		// Brand Organizations — Third-Party
 
 			add_action( 'init', 'create_brand_organization_taxonomy', 0 );
+
+		// Brand Organizations — UAMS
+
+			add_action( 'init', 'create_brand_organization_uams_taxonomy', 0 );
 
 		// Buildings
 
@@ -2452,25 +2456,91 @@
 
 			}
 
-		// Brand Organizations
+		// Brand Organizations — UAMS
 
 			/*
 
-				The taxonomy is intended to define values for organizations like UAMS,
-				UAMS Health, primary third-party clinical organizations
-				(e.g., Arkansas Children's, Central Arkansas Veterans Healthcare System).
+				The taxonomy is intended to define values for organizations like UAMS and
+				UAMS Health.
 
-				It should be limited to UAMS, UAMS Health, and any third-party organizations at
-				which we have clinical oversight — or within which there are clinical locations
-				at which we have clinical oversight.
+				It should be limited to UAMS, UAMS Health, and any other clinical organizations
+				within UAMS.
 
 
 				Expected taxonomy items:
 
 					 * UAMS (Slug: 'uams')
 						 * UAMS Health (Slug: 'uamshealth')
+
+			*/
+
+			function create_brand_organization_uams_taxonomy() {
+				$labels = array(
+					'name' => 'UAMS Brand Organizations',
+					'singular_name' => 'UAMS Brand Organization',
+					'menu_name' => 'Brand Organizations, UAMS',
+					'all_items' => 'All UAMS Brand Organizations',
+					'parent_item' => 'Parent UAMS Brand Organization',
+					'parent_item_colon' => 'Parent UAMS Brand Organization:',
+					'new_item_name' => 'New UAMS Brand Organization',
+					'add_new_item' => 'Add New UAMS Brand Organization',
+					'edit_item' => 'Edit UAMS Brand Organization',
+					'update_item' => 'Update UAMS Brand Organization',
+					'view_item' => 'View UAMS Brand Organization',
+					'separate_items_with_commas' => 'Separate UAMS Brand Organizations With Commas',
+					'add_or_remove_items' => 'Add or Remove UAMS Brand Organizations',
+					'choose_from_most_used' => 'Choose from the most used',
+					'popular_items' => 'Popular UAMS Brand Organizations',
+					'search_items' => 'Search UAMS Brand Organizations',
+					'not_found' => 'Not Found',
+					'no_terms' => 'No UAMS Brand Organizations',
+					'items_list' => 'UAMS Brand Organizations List',
+					'items_list_navigation' => 'UAMS Brand Organizations List Navigation',
+				);
+				$rewrite = array(
+					'slug' => 'brand_organization_uams',
+					'with_front' => false,
+					'hierarchical' => true,
+				);
+				$capabilities = array(
+					'manage_terms' => 'manage_options',
+					'edit_terms' => 'manage_options',
+					'delete_terms' => 'manage_options',
+					'assign_terms' => 'edit_physicians',
+				);
+				$args = array(
+					'labels' => $labels,
+					'hierarchical' => true,
+					'public' => false,
+					'show_ui' => true,
+					'show_admin_column' => false,
+					'show_in_nav_menus' => false,
+					'show_tagcloud' => false,
+					'rewrite' => $rewrite,
+					'capabilities' => $capabilities,
+					'show_in_quick_edit' => false,
+				);
+				register_taxonomy( 'brand_organization_uams', array( 'location', 'provider' ), $args );
+
+			}
+
+		// Brand Organizations — Third-Party
+
+			/*
+
+				The taxonomy is intended to define values for primary third-party clinical
+				organizations (e.g., Arkansas Children's, Central Arkansas Veterans Healthcare
+				System).
+
+				It should be limited to third-party organizations at which we have clinical
+				oversight — or within which there are clinical locations at which we have
+				clinical oversight.
+
+
+				Expected taxonomy items:
+
 					 * Arkansas Children's (Slug: 'arkansas-childrens')
-					 * Baptist Health (Slug: 'arkansas-childrens')
+					 * Baptist Health (Slug: 'baptist-health')
 					 * United States Department of Veterans Affairs (Slug: 'va')
 						 * Central Arkansas Veterans Healthcare System (Slug: 'cavhs')
 
@@ -2478,26 +2548,26 @@
 
 			function create_brand_organization_taxonomy() {
 				$labels = array(
-					'name' => 'Brand Organizations',
-					'singular_name' => 'Brand Organization',
-					'menu_name' => 'Brand Organizations',
-					'all_items' => 'All Brand Organizations',
-					'parent_item' => 'Parent Brand Organization',
-					'parent_item_colon' => 'Parent Brand Organization:',
-					'new_item_name' => 'New Brand Organization',
-					'add_new_item' => 'Add New Brand Organization',
-					'edit_item' => 'Edit Brand Organization',
-					'update_item' => 'Update Brand Organization',
-					'view_item' => 'View Brand Organization',
-					'separate_items_with_commas' => 'Separate Brand Organizations With Commas',
-					'add_or_remove_items' => 'Add or Remove Brand Organizations',
+					'name' => 'Third-Party Brand Organizations',
+					'singular_name' => 'Third-Party Brand Organization',
+					'menu_name' => 'Brand Organizations, Third-Party',
+					'all_items' => 'All Third-Party Brand Organizations',
+					'parent_item' => 'Parent Third-Party Brand Organization',
+					'parent_item_colon' => 'Parent Third-Party Brand Organization:',
+					'new_item_name' => 'New Third-Party Brand Organization',
+					'add_new_item' => 'Add New Third-Party Brand Organization',
+					'edit_item' => 'Edit Third-Party Brand Organization',
+					'update_item' => 'Update Third-Party Brand Organization',
+					'view_item' => 'View Third-Party Brand Organization',
+					'separate_items_with_commas' => 'Separate Third-Party Brand Organizations With Commas',
+					'add_or_remove_items' => 'Add or Remove Third-Party Brand Organizations',
 					'choose_from_most_used' => 'Choose from the most used',
-					'popular_items' => 'Popular Brand Organizations',
-					'search_items' => 'Search Brand Organizations',
+					'popular_items' => 'Popular Third-Party Brand Organizations',
+					'search_items' => 'Search Third-Party Brand Organizations',
 					'not_found' => 'Not Found',
-					'no_terms' => 'No Brand Organizations',
-					'items_list' => 'Brand Organizations List',
-					'items_list_navigation' => 'Brand Organizations List Navigation',
+					'no_terms' => 'No Third-Party Brand Organizations',
+					'items_list' => 'Third-Party Brand Organizations List',
+					'items_list_navigation' => 'Third-Party Brand Organizations List Navigation',
 				);
 				$rewrite = array(
 					'slug' => 'brand_organization',
