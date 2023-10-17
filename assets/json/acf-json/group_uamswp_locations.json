@@ -239,15 +239,7 @@
 			"label": "<i class=\"dashicons-networking dashicons\"><\/i> Brand",
 			"instructions": "",
 			"required": 0,
-			"conditional_logic": [
-				[
-					{
-						"field": "field_location_parent",
-						"operator": "!=",
-						"value": "1"
-					}
-				]
-			],
+			"conditional_logic": 0,
 			"wrapper": {
 				"width": "",
 				"class": "",
