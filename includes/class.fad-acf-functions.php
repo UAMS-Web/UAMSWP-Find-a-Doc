@@ -355,13 +355,13 @@
 				$filter_list = $expertise_list . ', ' . $condition_list . ', ' . $treatment_list;
 				$_POST['acf']['field_physician_asp_filter'] = $filter_list;
 
-				// Add region and portal values from the associated locations
+				// Add values from the associated locations
 
 					// Get the list of locations associated with the provider
 
 						$locations = $_POST['acf']['field_physician_locations'];
 
-					// Get the region and portal values from each associated location
+					// Get the desired values from each associated location
 
 						if ( $locations ) {
 
@@ -369,16 +369,41 @@
 
 								$region = array();
 								$portal = array();
+								$brand_organization = array();
 
 							foreach ( $locations as $location ) {
 
-								// Region
+								// Get the values
 
-									$region[] = get_field( 'location_region', $location);
+									// Region
 
-								// Portal
+										$location_region = get_field( 'location_region', $location ) ?? null;
 
-									$portal[] = get_field( 'location_portal', $location);
+										if ( $location_region ) {
+
+											$region[] = $location_region;
+
+										}
+
+									// Portal
+
+										$location_portal = get_field( 'location_portal', $location ) ?? null;
+
+										if ( $location_portal ) {
+
+											$portal[] = $location_portal;
+
+										}
+
+									// Third-Party Brand Organization
+
+										$location_brand_organization = get_field( 'schema_brandorg', $location ) ?? null;
+
+										if ( $location_brand_organization ) {
+
+											$brand_organization[] = $location_brand_organization;
+
+										}
 
 								// Break the loop after first iteration (optional)
 
@@ -387,7 +412,7 @@
 										The first location in the list of the provider's associated locations should be
 										the provider's primary location.
 
-										If the region and portal values of the provider's primary location are all that
+										If the relevant values of the provider's primary location are all that
 										matter, break the loop here.
 
 									*/
@@ -416,6 +441,10 @@
 							*/
 
 							$_POST['acf']['field_physician_portal'] = $portal[0];
+
+						// Third-Party Brand Organization
+
+							$_POST['acf']['field_schema_brandorg_multiple'] = $brand_organization;
 
 			}
 
